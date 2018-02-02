@@ -3,6 +3,7 @@
     --img-header-login: url('https://dev-cloud-ihr.s3.amazonaws.com/uploads/company/5/background_login/1.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180202%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180202T142545Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=5656105eeb700a6c36e3b82b2be2fbc6e57896bc59832efab8788afda5663e3d');
     --btn-primary: #52af4d;
     --btn-primary-hover: #3b7c38; 
+    --color-alert: rgba(218, 73, 73, 0.7);
 }
 
 @keyframes slideInFromLeft {
@@ -23,6 +24,15 @@
     }   
 }
 
+@keyframes slideInFromStart {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }   
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: rgb(172, 172, 172) !important;
     font-size: 14px !important;
@@ -39,6 +49,25 @@
     color: rgb(172, 172, 172) !important;
     font-size: 14px !important;
 }
+
+.classname {
+    transition:All 1s ease;
+    -webkit-transition:All 1s ease;
+    -moz-transition:All 1s ease;
+    -o-transition:All 1s ease;
+    transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
+    -webkit-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
+    -moz-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
+    -o-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
+    -ms-transform: rotate(4deg) scale(1) skew(1deg) translate(10px);
+    }
+    .classname:hover{
+    transform: rotate(0deg) scale(0.1) skew(1deg) translate(0px);
+    -webkit-transform: rotate(0deg) scale(0.1) skew(1deg) translate(0px);
+    -moz-transform: rotate(0deg) scale(0.1) skew(1deg) translate(0px);
+    -o-transform: rotate(0deg) scale(0.1) skew(1deg) translate(0px);
+    -ms-transform: rotate(0deg) scale(0.1) skew(1deg) translate(0px);
+    }
 
 .row-hr {
     display: -webkit-box;
@@ -137,6 +166,13 @@ header{
     color: white;
 }
 
+.img-user {
+    width: 180px;
+    height: 180px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .company-logo {
     width: 320px;
     height: 160px;
@@ -152,6 +188,11 @@ header{
 .transition-bg-reset {
     /* This section calls the slideInFromLeft animation we defined above */
     animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+.transition-bg-locked {
+    /* This section calls the slideInFromLeft animation we defined above */
+    animation: 1s ease-out 0s 1 slideInFromStart;
 }
 
 .bg-login {    
@@ -208,6 +249,27 @@ header{
 
 .font-controls-login {
     font-size: 1rem !important;
+}
+
+.modal-content {   
+    background-color: var(--color-alert) !important;
+    border: 1px solid rgba(0,0,0,.2) !important;
+    border-radius: 0 !important;
+    -webkit-box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
+    box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgb(110, 110, 110) !important;
+}
+
+.modal-footer {
+    border-top: 1px solid rgb(110, 110, 110) !important;
+}
+
+#modal-alert {
+    color: #FFFFFF !important;
 }
 
 @media (min-width: 1300px)  and (min-height: 1000px) {
@@ -302,7 +364,6 @@ header{
     :-moz-placeholder { /* Firefox 18- */
         font-size: 1.4rem !important;
     }
-
     .form-control {
         height: 48px !important;
     }
@@ -455,6 +516,13 @@ header{
     }
     :-moz-placeholder { /* Firefox 18- */
         font-size: 0.9rem !important;
+    }
+
+    .img-user {
+        width: 120px;
+        height: 120px;
+        margin-left: auto;
+        margin-right: auto;
     }
 }
 

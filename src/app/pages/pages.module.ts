@@ -5,6 +5,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from '../components/components.module';
 import { ServicesModule } from '../services/services.module';
 import { A2tUiModule } from 'angular2-token';
+import { FormsModule } from '@angular/forms';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -15,12 +16,14 @@ import { LoginComponent } from './authentication/login/login.component';
 import { ResetAccountComponent } from './authentication/reset-account/reset-account.component';
 import { LockedScreenComponent } from './authentication/locked-screen/locked-screen.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
     ComponentsModule,
-    A2tUiModule 
+    A2tUiModule,
+    FormsModule
   ],
   declarations: [
     LoginComponent,

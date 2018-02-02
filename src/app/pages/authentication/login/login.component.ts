@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 // services
 import { Angular2TokenService } from 'angular2-token';
-import { environment } from '../../../../environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { AlertsService } from '../../../services/shared/alerts/alerts.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
+
+// models
 
 
 @Component({
@@ -12,8 +16,13 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  public txtEmail: string = '';
+  public txtPassword: string = '';
 
-  constructor(private tokenService: Angular2TokenService, router: Router, route: ActivatedRoute) {
+  constructor(private tokenService: Angular2TokenService,
+    router: Router,
+    route: ActivatedRoute,
+    public alert: AlertsService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -60,10 +69,21 @@ export class LoginComponent implements OnInit {
   }
 
   singInSession() {
-    this.tokenService.signIn({
-      email: 'nicolas.vargas@hrinteractive.co',
-      password: '123456789iHR'
-    }).subscribe(res => {console.log(res)}, error => {console.log(error)});
+    if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
+      this.tokenService.signIn({
+        email: this.txtEmail,
+        password: this.txtPassword
+      }).subscribe(
+        res => {
+          console.log(res)
+        },
+        error => {
+          const alertError: Alerts[] = [{ type: 'danger', title: 'Advertencia', message: 'Identidad o contraseña no válida.' }];
+          this.alert.setAlert(alertError[0]);
+        });
+    } else {
+      const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'El email y contraseña son obligatorios.' }];
+      this.alert.setAlert(alertWarning[0]);
+    }
   }
-
 }
