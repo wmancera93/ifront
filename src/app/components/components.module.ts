@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 
 // components
 import { HeaderComponent } from './layout/header/header.component';
-import { AlertsComponent } from './alerts/alerts.component';
+import { AlertsComponent } from './common/alerts/alerts.component';
 
 @NgModule({
   imports: [
