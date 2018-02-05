@@ -25,8 +25,10 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    document.documentElement.style.setProperty(`--color`, `#5B5A4A`);
-    document.documentElement.style.setProperty(`--background-color`, `#F5ED0A`);
+    document.documentElement.style.setProperty(`--btn-primary`, `#EADB39`);
+    document.documentElement.style.setProperty(`--btn-primary-hover`, `#D8C812`);
+    document.documentElement.style.setProperty(`--primary`, `#EADB39`);
+    
   }
 
 
