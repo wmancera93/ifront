@@ -5,12 +5,12 @@ import { environment } from '../../../../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-import { Alerts } from '../../../models/common/alerts/alerts';
-import { User } from '../../../models/user';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
+import { MainService } from '../../../services/main/main.service';
 
 // models
-
+import { Alerts } from '../../../models/common/alerts/alerts';
+import { User } from '../../../models/user';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertsService,
-    public userSharedService: UserSharedService) {
+    public userSharedService: UserSharedService,
+    private mainService: MainService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -48,39 +49,81 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.mainService.getDataEnterprise()
+      .subscribe((data:any) => { console.log(data.data) })
   }
 
   singInSession() {
-
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
-      this.tokenService.signIn({
-        email: this.txtEmail,
-        password: this.txtPassword
-      }).subscribe(
-        res => {
-          let result: User;
-          if (res.status === 200) {
-            result = res.json().data;           
-            this.userSharedService.setUser(result);  
-            localStorage.setItem("user", JSON.stringify(result));
-            this.router.navigate(['/Pages/Dashboard']);         
+      let expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
+      if (expressionRegular.test(this.txtPassword)) {
+        this.tokenService.signIn({
+          email: this.txtEmail,
+          password: this.txtPassword
+        }).subscribe(
+          res => {
+            let result: User;
+            if (res.status === 200) {
+              result = res.json().data;
+              this.userSharedService.setUser(result);
+              localStorage.setItem("user", JSON.stringify(result));
+              this.router.navigate(['/Pages/Dashboard']);
+            }
+          },
+          error => {
+            let resultError: any;
+            let typeAlert: string = 'danger';
+            if (error.status === 401) {
+              typeAlert = 'warning';
+            }
+            localStorage.setItem("user", JSON.stringify(''));
+            resultError = error.json();
+            const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
+            this.alert.setAlert(alertWarning[0]);
           }
-        },
-        error => {
-          let resultError: any;
-          let typeAlert: string = 'danger';
-          if (error.status === 401) {
-            typeAlert = 'warning';
-          }
-          resultError = error.json();
-          const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
-          this.alert.setAlert(alertWarning[0]);
-        }
-        )
+          )
+      } else {
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
+        }];
+        this.alert.setAlert(alertWarning[0]);        
+      }
     } else {
-      const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'El email y contraseña son obligatorios.' }];
-      this.alert.setAlert(alertWarning[0]);
+      const alertWarning: Alerts[] = [{ 
+        type: 'warning', 
+        title: 'Advertencia', 
+        message: 'El email y contraseña son obligatorios.' }];
+      this.alert.setAlert(alertWarning[0]);     
+    }
+  }
+
+
+  // events
+  overEyePassword() {
+    (<HTMLInputElement>document.getElementById('password')).type = 'text';
+  }
+
+  leaveEyePassword() {
+    (<HTMLInputElement>document.getElementById('password')).type = 'password';
+  }
+
+  lowercasePassword() {
+    this.txtEmail = this.txtEmail.toLowerCase();
+  }
+
+  blurEmail() {
+    let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    if (this.txtEmail !== '') {
+      if (!expressionRegular.test(this.txtEmail)) {
+        const alertWarning: Alerts[] = [{ 
+          type: 'danger', 
+          title: 'Advertencia', 
+          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx' }];
+        this.alert.setAlert(alertWarning[0]);
+        this.txtEmail = '';
+      }
     }
   }
 }

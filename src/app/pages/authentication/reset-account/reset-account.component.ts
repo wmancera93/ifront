@@ -36,4 +36,22 @@ export class ResetAccountComponent implements OnInit {
     }
   }
 
+  // events
+  lowercasePassword() {
+    this.txtEmail = this.txtEmail.toLowerCase();
+  }
+  blurEmail() {
+    let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    if (this.txtEmail !== '') {
+      if (!expressionRegular.test(this.txtEmail)) {
+        const alertWarning: Alerts[] = [{ 
+          type: 'danger', 
+          title: 'Advertencia', 
+          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx' }];
+        this.alert.setAlert(alertWarning[0]);
+        this.txtEmail = '';
+      }
+    }
+  }
+
 }

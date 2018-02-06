@@ -21,10 +21,11 @@
             <div class="row align-self-end">
                 <div class="col-12 top-form">
                     <div class="form-group float-general-login width-input-login">
-                        <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email">
+                        <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email" (keyup)='lowercasePassword()' maxlength="50" (blur)="blurEmail()">
                     </div>
                     <div class="form-group float-general-login width-input-login">
-                        <input [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Contraseña">
+                        <input id="password" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Contraseña" maxlength="20">
+                        <i *ngIf="txtPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover='overEyePassword()' on-mouseleave='leaveEyePassword()'></i>
                     </div>
                     <div class="float-general-login">
                         <div class="btn btn-primary btn-block font-controls-login" (click)='singInSession()'>Iniciar</div>
@@ -34,7 +35,7 @@
                     </div>
                     <div class="fooder-login">
                         <p class="text-center">
-                            <small>HR Solutions SAS - Interactive HR | 2018</small>                           
+                            <small>HR Solutions SAS - Interactive HR | 2018</small>
                         </p>
                     </div>
                 </div>

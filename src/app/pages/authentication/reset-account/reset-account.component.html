@@ -20,7 +20,7 @@
       <div class="row align-self-end">
         <div class="col-12 top-form">
           <div class="form-group float-general-login">
-            <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email" required="">
+            <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email"  (keyup)='lowercasePassword()' maxlength="50" (blur)="blurEmail()">
           </div>
           <div class="text-center">
             <p>Ingrese la cuenta correo a restablecer para iniciar el proceso.</p>

@@ -13,7 +13,7 @@
       </div>
       <div class="row">
         <div class="col-12 text-center top">
-          <h3>Wilmer Mancera</h3>
+          <h3>{{userAuthenticated.employee.short_name}}</h3>
         </div>
         <div class="col-12 text-center top">
           <p>Ingrese la cuenta correo a restablecer para iniciar el proceso.</p>
@@ -22,7 +22,8 @@
       <div class="row align-self-end">
         <div class="col-12 top-form">
           <div class="form-group float-general-login">
-            <input [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Contraseña">
+            <input id="passwordLocked" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Contraseña">
+            <i *ngIf="txtPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover='overEyePassword()' on-mouseleave='leaveEyePassword()'></i>
           </div>
           <div class="float-general-login top">
             <div class="btn btn-primary btn-block font-controls-login" (click)='singInSession()'>Iniciar</div>
