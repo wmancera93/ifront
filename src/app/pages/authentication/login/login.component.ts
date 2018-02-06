@@ -10,7 +10,8 @@ import { MainService } from '../../../services/main/main.service';
 
 // models
 import { Alerts } from '../../../models/common/alerts/alerts';
-import { User } from '../../../models/user';
+import { User } from '../../../models/general/user';
+import { Enterprise } from '../../../models/general/enterprise';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +21,13 @@ import { User } from '../../../models/user';
 export class LoginComponent implements OnInit {
   public txtEmail: string = '';
   public txtPassword: string = '';
+  public dataEnterprise: Enterprise;
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertsService,
-    public userSharedService: UserSharedService,
-    private mainService: MainService) {
+    public userSharedService: UserSharedService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -48,9 +49,8 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit() {
-    this.mainService.getDataEnterprise()
-      .subscribe((data:any) => { console.log(data.data) })
+  ngOnInit() {    
+    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
   }
 
   singInSession() {

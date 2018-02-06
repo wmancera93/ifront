@@ -4,6 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { Enterprise } from '../../../models/general/enterprise';
+import { environment } from '../../../../environments/environment';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-reset-account',
@@ -12,10 +15,34 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 })
 export class ResetAccountComponent implements OnInit {
   public txtEmail: string = '';
+  public dataEnterprise: Enterprise;
 
-  constructor(public alert: AlertsService, private tokenService: Angular2TokenService) { }
+  constructor(public alert: AlertsService, 
+    private tokenService: Angular2TokenService,
+    public router: Router) {
+    this.tokenService.init(
+      {
+        apiBase: environment.apiBaseHr,
+        apiPath: 'api/v2',
+        signInPath: 'auth/sign_in',
+        signOutPath: 'auth/sign_out',
+        validateTokenPath: 'auth/validate_token',
+        signOutFailedValidate: false,
+        registerAccountPath: 'auth/password/new',
+        updatePasswordPath: 'auth/password',
+        resetPasswordPath: 'auth/password',
+        globalOptions: {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      }
+    );
+  }
 
   ngOnInit() {
+    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
   }
 
   restartSession() {
@@ -24,10 +51,25 @@ export class ResetAccountComponent implements OnInit {
         email: this.txtEmail
       }).subscribe(
         res => {
-          console.log(res)
+          if (res.status === 200) {
+            const alertWarning: Alerts[] = [{
+              type: 'success',
+              title: 'Advertencia',
+              message: res.json().message
+            }];
+            this.alert.setAlert(alertWarning[0]);
+            this.txtEmail = '';
+          }
+
         },
         error => {
-          const alertError: Alerts[] = [{ type: 'danger', title: 'Advertencia', message: 'Identidad o contraseña no válida.' }];
+          let resultError: any;
+          resultError = error.json();
+          const alertError: Alerts[] = [{
+            type: 'danger',
+            title: 'Advertencia',
+            message: resultError.errors[0]
+          }];
           this.alert.setAlert(alertError[0]);
         });
     } else {
@@ -44,10 +86,11 @@ export class ResetAccountComponent implements OnInit {
     let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     if (this.txtEmail !== '') {
       if (!expressionRegular.test(this.txtEmail)) {
-        const alertWarning: Alerts[] = [{ 
-          type: 'danger', 
-          title: 'Advertencia', 
-          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx' }];
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx'
+        }];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
       }

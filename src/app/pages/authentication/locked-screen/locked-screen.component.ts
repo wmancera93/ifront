@@ -5,7 +5,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
-import { User } from '../../../models/user';
+import { User } from '../../../models/general/user';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { Router } from '@angular/router';
 
