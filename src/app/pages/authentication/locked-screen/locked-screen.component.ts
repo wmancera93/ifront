@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Alerts } from '../../../models/common/alerts/alerts';
 
 // service
-import { AlertsService } from '../../../services/shared/alerts/alerts.service';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
 

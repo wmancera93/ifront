@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 // services
 import { Alerts } from '../../../models/common/alerts/alerts';
-import { AlertsService } from '../../../services/shared/alerts/alerts.service';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
 
 @Component({

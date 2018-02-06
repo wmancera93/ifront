@@ -15,6 +15,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { LoginComponent } from './authentication/login/login.component';
 import { ResetAccountComponent } from './authentication/reset-account/reset-account.component';
 import { LockedScreenComponent } from './authentication/locked-screen/locked-screen.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { LockedScreenComponent } from './authentication/locked-screen/locked-scr
     LoginComponent,
     ResetAccountComponent,
     LockedScreenComponent,
+    DashboardComponent,
   ],
   providers:[
     Angular2TokenService
