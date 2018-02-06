@@ -5,7 +5,7 @@ import { A2tUiModule } from 'angular2-token';
 
 // services
 import { AlertsService } from './shared/common/alerts/alerts.service';
-import { DashboardSharedService } from './shared/dashboard/dashboard-shared.service';
+import { UserSharedService } from './shared/common/user/user-shared.service';
 
 @NgModule({
   imports: [
@@ -14,7 +14,7 @@ import { DashboardSharedService } from './shared/dashboard/dashboard-shared.serv
   declarations: [],
   providers: [
     AlertsService,
-    DashboardSharedService
+    UserSharedService
   ]
 })
 export class ServicesModule { }

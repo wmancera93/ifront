@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { User } from '../../../models/user';
-import { Router } from '@angular/router';
+import { User } from '../../../../models/user';
 
 @Injectable()
-export class DashboardSharedService {
+export class UserSharedService {
   exportDataUser: Subject<any> = new Subject<any>();
+  constructor() { }
 
-  constructor(public router: Router) { }
-
-  getUser() {        
-    //this.router.navigate(['/Pages/Dashboard']);
+  getUser() {            
     return this.exportDataUser;
   }
 

@@ -7,7 +7,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { User } from '../../../models/user';
-import { DashboardSharedService } from '../../../services/shared/dashboard/dashboard-shared.service';
+import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 
 // models
 
@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertsService,
-    public dashboardShared: DashboardSharedService) {
+    public userSharedService: UserSharedService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -61,10 +61,10 @@ export class LoginComponent implements OnInit {
         res => {
           let result: User;
           if (res.status === 200) {
-            result = res.json().data;
-            this.dashboardShared.setUser(result);
+            result = res.json().data;           
+            this.userSharedService.setUser(result);  
             localStorage.setItem("user", JSON.stringify(result));
-            this.router.navigate(['/Pages/Dashboard']);
+            this.router.navigate(['/Pages/Dashboard']);         
           }
         },
         error => {
