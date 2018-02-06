@@ -1,6 +1,6 @@
 :root {
     /*--img-header-login: url('https://dev-cloud-ihr.s3.amazonaws.com/uploads/company/5/background_login/background_login.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180131%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180131T191321Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=43439cd7a23845e311d9426533ebf64af6efdd7b04f440c5c99a4b899b61f5d8');*/
-    --img-header-login: url('https://dev-cloud-ihr.s3.amazonaws.com/uploads/company/5/background_login/1.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180202%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180202T142545Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=5656105eeb700a6c36e3b82b2be2fbc6e57896bc59832efab8788afda5663e3d');
+    --img-header-login: url('');
     --primary: #52af4d;
     --btn-primary: #52af4d;
     --btn-primary-hover: #3b7c38; 
@@ -67,6 +67,7 @@ body {
     font-size: 13px !important;
     color: #676a6c !important;
     overflow-x: hidden !important;
+    margin-top: 70px !important;
 }
 
 p {
@@ -162,6 +163,12 @@ header{
     margin-right: auto;
 }
 
+.company-logo-header {
+    width: 100px;
+    height: 48px;
+   
+}
+
 .transition-bg-login {
     /* This section calls the slideInFromLeft animation we defined above */
     animation: 1s ease-out 0s 1 slideInFromLeft;
@@ -253,7 +260,25 @@ header{
 #modal-alert {
     color: #FFFFFF !important;
 }
-
+/*Header Style*/
+nav{
+    /* background:  #f3f3f4 !important;   */
+     background: linear-gradient(top, rgb(165, 165, 165), white);
+     -webkit-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+     -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+     box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+ }
+ 
+ 
+ .li {
+     box-sizing: border-box;
+ }
+ 
+ .title{
+     color: #666363 !important;
+     font-size: 25px;    
+ }
+/* ---*/
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{
         background-position: center top !important;
@@ -579,3 +604,6 @@ header{
     }
 }
 
+
+
+  
