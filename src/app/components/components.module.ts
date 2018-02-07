@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 // components
 import { HeaderComponent } from './layout/header/header.component';
 import { AlertsComponent } from './common/alerts/alerts.component';
-import { ManuNavigationComponent } from './layout/manu-navigation/manu-navigation.component';
+import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigation.component';
 
 @NgModule({
   imports: [
@@ -14,12 +14,12 @@ import { ManuNavigationComponent } from './layout/manu-navigation/manu-navigatio
   declarations: [
     HeaderComponent,
     AlertsComponent,
-    ManuNavigationComponent
+    MenuNavigationComponent
   ],
   exports: [
     HeaderComponent,
     AlertsComponent,
-    ManuNavigationComponent
+    MenuNavigationComponent
   ],
   providers:[
   ]
