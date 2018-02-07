@@ -1,10 +1,18 @@
 :root {
+<<<<<<< HEAD
     /*--img-header-login: url('https://dev-cloud-ihr.s3.amazonaws.com/uploads/company/5/background_login/background_login.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180131%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180131T191321Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=43439cd7a23845e311d9426533ebf64af6efdd7b04f440c5c99a4b899b61f5d8');*/
     --img-header-login: url('');
     --primary: #52af4d;
     --btn-primary: #52af4d;
     --btn-primary-hover: #3b7c38; 
     --color-alert: rgba(218, 73, 73, 0.7);
+=======
+    --img-header-login: ;
+    --primary: ;
+    --btn-primary: ;
+    --btn-primary-hover: ; 
+    --color-alert:;
+>>>>>>> 7e1ae34afc6f5f6cdf62a787ccf7399b771f55c7
 }
 
 @keyframes slideInFromLeft {
@@ -137,6 +145,24 @@ button, input, optgroup, select, textarea {
 .form-control {
     height: 34px !important;
     border-radius: inherit !important;
+}
+
+.pasword-input-icon {
+    margin-left: 93% !important;
+    background-color: transparent;
+    border: none;
+    margin-top: -24px !important;
+    float: left;
+}
+
+.icon-eye {
+    color: rgb(172, 172, 172);
+    cursor: pointer;
+}
+
+.icon-eye:hover {
+    color: rgb(71, 71, 71);
+    cursor: pointer;
 }
 
 header{
@@ -334,6 +360,12 @@ nav{
     .form-control {
         height: 48px !important;
     }
+
+    .pasword-input-icon {
+        margin-left: 90% !important;
+        margin-top: -40px !important;
+        font-size: 29px !important;
+    }
 }
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
@@ -381,6 +413,15 @@ nav{
     }
     .form-control {
         height: 48px !important;
+    }
+    .pasword-input-icon {
+        margin-left: 88% !important;
+    }
+
+    .pasword-input-icon {
+        margin-left: 90% !important;
+        margin-top: -40px !important;
+        font-size: 29px !important;
     }
 }
 
@@ -537,6 +578,10 @@ nav{
         margin-left: auto;
         margin-right: auto;
     }
+
+    .pasword-input-icon {
+        margin-left: 88% !important;
+    }
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
@@ -601,7 +646,7 @@ nav{
 
     .fooder-login{
         margin-top: 20px !important;
-    }
+    }    
 }
 
 

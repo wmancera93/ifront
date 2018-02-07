@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user';
+import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';

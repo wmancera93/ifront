@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { User } from '../../../../models/user';
+import { User } from '../../../../models/general/user';
 
 @Injectable()
 export class UserSharedService {
