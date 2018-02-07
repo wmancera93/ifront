@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         signOutFailedValidate: false,
         registerAccountPath: 'auth/password/new',
         updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password/edit',
+        resetPasswordPath: 'auth/password',
         globalOptions: {
           headers: {
             'Content-Type': 'application/json',

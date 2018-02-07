@@ -21,7 +21,7 @@ export class AppComponent {
         if (event.urlAfterRedirects === '/Pages/Login' || 
         event.urlAfterRedirects === '/Pages/ResetAccount' || 
         event.urlAfterRedirects === '/Pages/LockedScreen' ||
-        event.urlAfterRedirects === '/Pages/ConfirmResetAccount') {
+        event.urlAfterRedirects.split('?')[0] === '/Pages/ConfirmResetAccount') {
           this.showComponents = false;
         } else {
           this.showComponents = true;

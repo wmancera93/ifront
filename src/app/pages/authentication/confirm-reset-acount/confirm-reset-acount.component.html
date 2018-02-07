@@ -19,13 +19,13 @@
         <div class="col-12 top-form">
           <div class="form-group float-general-login width-input-login">
             <input id="password" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Nueva contraseña"
-              maxlength="20">
-            <i *ngIf="txtPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover="overEyePassword('password')"
+              maxlength="20" (keyup)='keyupPassword()' (blur)="blurPasword()">
+            <i *ngIf="txtPassword.length > 0 && eyePasswordVisible" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover="overEyePassword('password')"
               on-mouseleave="leaveEyePassword('password')"></i>
           </div>
           <div class="form-group float-general-login width-input-login">
             <input id="passwordConfirm" [(ngModel)]="txtConfirmPassword" type="password" class="form-control font-controls-login" placeholder="Confirmar nueva contraseña"
-              maxlength="20" (keyup)='keyupConfirmPassword()'>
+              maxlength="20" (keyup)='keyupConfirmPassword()' (blur)="blurConfirmPasword()">
             <i *ngIf="txtConfirmPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover="overEyePassword('passwordConfirm')"
               on-mouseleave="leaveEyePassword('passwordConfirm')"></i>
           </div>
