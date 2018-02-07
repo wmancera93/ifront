@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
     (<HTMLInputElement>document.getElementById('password')).type = 'password';
   }
 
-  lowercasePassword() {
+  lowercaseEmail() {
     this.txtEmail = this.txtEmail.toLowerCase();
   }
 

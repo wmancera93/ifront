@@ -18,7 +18,10 @@ export class AppComponent {
   constructor(public router: Router, private mainService: MainService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/Pages/Login' || event.urlAfterRedirects === '/Pages/ResetAccount' || event.urlAfterRedirects === '/Pages/LockedScreen') {
+        if (event.urlAfterRedirects === '/Pages/Login' || 
+        event.urlAfterRedirects === '/Pages/ResetAccount' || 
+        event.urlAfterRedirects === '/Pages/LockedScreen' ||
+        event.urlAfterRedirects === '/Pages/ConfirmResetAccount') {
           this.showComponents = false;
         } else {
           this.showComponents = true;
