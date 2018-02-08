@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 // services
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { debug } from 'util';
 
 
 @Component({
@@ -13,8 +14,9 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 export class AlertsComponent implements OnInit {
   public bodyAlert: Alerts = { type: '', title: '', message: '' };
   public icon: string;
-
+  
   constructor(public alert: AlertsService) {
+  
     this.alert.getAlert().subscribe((data) => {
       this.bodyAlert = data;
       if (this.bodyAlert.type === 'primary') {

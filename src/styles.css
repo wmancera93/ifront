@@ -317,12 +317,35 @@ header{
     display: block;
  }
 /* ---*/
+/*Footer Style*/
+.general-footer{
+    background: linear-gradient(top, rgb(165, 165, 165), white);  
+   position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  padding-bottom: 32px;
+  background-color: #efefef;
+  height: 15px;
+  text-align:right;  
+}  
+/*------*/
+
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{
         background-position: center top !important;
         height: 769px !important;
         padding: 100px 0 150px;
     }   
+}
+@media (min-width: 1800px) and (min-height: 800px) 
+{
+    header {
+        background-position: center top !important;
+        height: 973px !important;
+        padding: 100px 0 150px;
+    }
 }
 
 @media (min-width: 1300px)  and (min-height: 1000px) {
