@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './layout/header/header.component';
 import { AlertsComponent } from './common/alerts/alerts.component';
 import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigation.component';
+import { FooterComponent } from './layout/footer/footer.component';
 
 @NgModule({
   imports: [
@@ -15,11 +16,13 @@ import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigatio
     HeaderComponent,
     AlertsComponent,
     MenuNavigationComponent
+    FooterComponent
   ],
   exports: [
     HeaderComponent,
     AlertsComponent,
     MenuNavigationComponent
+    FooterComponent
   ],
   providers:[
   ]
