@@ -22,7 +22,7 @@ export class AlertsComponent implements OnInit {
       if (this.bodyAlert.type === 'primary') {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165, 0.7)`);
         this.icon = 'fa-check';
-      }
+      }    
       if (this.bodyAlert.type === 'success') {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(92, 184, 92, 0.7)`);
         this.icon = 'fa-check';

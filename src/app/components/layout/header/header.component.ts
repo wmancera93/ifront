@@ -22,8 +22,8 @@ export class HeaderComponent implements OnInit {
   title: string = 'Mis datos';
   constructor(private userSharedService: UserSharedService,
     public router: Router,
-     private tokenService: Angular2TokenService,
-     public alert: AlertsService) {
+    private tokenService: Angular2TokenService,
+    public alert: AlertsService) {
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -56,26 +56,27 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  LogOut()  {
-    
-      this.tokenService.signOut().subscribe(
-        (res:any) => {
-          let userData: User;
-          this.userSharedService.setUser(userData);
-          localStorage.setItem("user", '');
-          this.router.navigate(['/Pages/Login']);
-        },
-        (error:any) => {
-          let resultError: any;
-          resultError = error.json();
-          const alertWarning: Alerts[] = [{ 
-            type: 'danger',
-            title: 'Advertencia', 
-            message: resultError.errors[0] 
-          }];
-            //this.alert.setAlert(alertWarning[0]);
-            this.router.navigate(['/Pages/Login']);
-        });
+  LogOut() {
+
+    this.tokenService.signOut().subscribe(
+      (res: any) => {
+        let userData: User;
+        this.userSharedService.setUser(userData);
+        localStorage.setItem("user", '');
+        this.router.navigate(['/Pages/Login']);
+      },
+      (error: any) => {
+        let resultError: any;
+        resultError = error.json();
+        const alertWarning: Alerts[] = [{
+          type: 'primary',
+          title: 'Confirmación',
+          message: resultError.errors[0],
+          confirmation: true,
+          redirect: { url: '/Pages/Login'}
+        }];
+        this.alert.setAlert(alertWarning[0]);
+      });
 
   }
 
