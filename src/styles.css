@@ -175,10 +175,10 @@ header{
     margin-right: auto;
 }
 .img-zoom {
-    -webkit-transition:all .9s ease; /* Safari y Chrome */
-    -moz-transition:all .9s ease; /* Firefox */
-    -o-transition:all .9s ease; /* IE 9 */
-    -ms-transition:all .9s ease; /* Opera */
+    /*-webkit-transition:all .9s ease;  Safari y Chrome */
+    /*-moz-transition:all .9s ease;  Firefox */
+    /*-o-transition:all .9s ease;  IE 9 */
+    /*-ms-transition:all .9s ease; Opera */
     width:100%;
     }
     .img-zoom:hover {
@@ -293,16 +293,52 @@ header{
     color: #FFFFFF !important;
 }
 /*Header Style*/
+#page-wrapper {
+    position: inherit !important;
+    margin: 0 0 0 220px !important;
+    min-height: 100vh !important;
+}
 
- .nav-header{
-     /* background:  #f3f3f4 !important;   */
+.fixed-top {
+    position: inherit !important;
+}
+
+.nav-header{
+    /* background:  #f3f3f4 !important;   */
      background: linear-gradient(top, rgb(165, 165, 165), white);
-     -webkit-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+     -webkit-box-shadow: c1px 6px 5px 0px rgba(0,0,0,0.75);
      -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
      box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
      height: 70px !important;
  }
+
+ .nav-header-menu {
+    padding: 33px 25px !important;
+    background-color: #2f4050 !important;
+    background-image: url(assets/themes/patterns/header-profile.png);
+}
  
+.navbar-static-side {
+    z-index: 2001;
+    position: absolute;
+    width: 220px;
+}
+
+.navbar-default {
+    background-color: transparent;
+    border-color: #2f4050;
+}
+
+#page-wrapper, .pace-done .footer {
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+
+.gray-bg {
+    background-color: #f3f3f4;
+}
  
  .li {
      box-sizing: border-box;
@@ -317,18 +353,93 @@ header{
     display: block;
  }
 /* ---*/
+
+.metismenu .plus-minus, .metismenu .plus-times {
+    float: right
+  }
+  
+  .metismenu .arrow {
+    float: right;
+    line-height: 1.42857
+  }
+  
+  .metismenu .glyphicon.arrow:before {
+    content: "\e079"
+  }
+  
+  .metismenu .active > a > .glyphicon.arrow:before {
+    content: "\e114"
+  }
+  
+  .metismenu .fa.arrow:before {
+    content: "\f104"
+  }
+  
+  .metismenu .active > a > .fa.arrow:before {
+    content: "\f107"
+  }
+  
+  .metismenu .ion.arrow:before {
+    content: "\f3d2"
+  }
+  
+  .metismenu .active > a > .ion.arrow:before {
+    content: "\f3d0"
+  }
+  
+  .metismenu .fa.plus-minus:before, .metismenu .fa.plus-times:before {
+    content: "\f067"
+  }
+  
+  .metismenu .active > a > .fa.plus-times {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg)
+  }
+  
+  .metismenu .active > a > .fa.plus-minus:before {
+    content: "\f068"
+  }
+  
+  .metismenu .collapse {
+    display: none
+  }
+  
+  .metismenu .collapse.in {
+    display: block
+  }
+  
+  .metismenu .collapsing {
+    position: relative;
+    height: 0;
+    overflow: hidden;
+    -webkit-transition-timing-function: ease;
+    transition-timing-function: ease;
+    -webkit-transition-duration: .35s;
+    transition-duration: .35s;
+    -webkit-transition-property: height, visibility;
+    transition-property: height, visibility
+  }
+  
+  /* .mini-navbar {
+    .metismenu .collapse { opacity: 0; }
+    .metismenu .collapse.in { opacity: 1; }
+    .metismenu .collapse a { display: none }
+    .metismenu .collapse.in a { display: block }
+  } */
+  
 /*Footer Style*/
 .general-footer{
     background: linear-gradient(top, rgb(165, 165, 165), white);  
-   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  padding-bottom: 32px;
-  background-color: #efefef;
-  height: 15px;
-  text-align:right;  
+    position: inherit;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    padding-bottom: 32px;
+    background-color: #efefef;
+    height: 15px;
+    text-align:right;  
 }  
 /*------*/
 
@@ -701,6 +812,22 @@ header{
         display: none !important;
      }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

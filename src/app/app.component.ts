@@ -14,14 +14,20 @@ import { MainService } from './services/main/main.service';
 export class AppComponent {
   public showComponents: boolean = false;
   public dataEnterprise: Enterprise;
+  public pageWrapper: string;
 
   constructor(public router: Router, private mainService: MainService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/Pages/Login' || event.urlAfterRedirects === '/Pages/ResetAccount' || event.urlAfterRedirects === '/Pages/LockedScreen') {
+        if (event.urlAfterRedirects === '/Pages/Login' || 
+        event.urlAfterRedirects === '/Pages/ResetAccount' || 
+        event.urlAfterRedirects === '/Pages/LockedScreen' ||
+        event.urlAfterRedirects.split('?')[0] === '/Pages/ConfirmResetAccount') {
           this.showComponents = false;
+          this.pageWrapper = '';
         } else {
           this.showComponents = true;
+          this.pageWrapper = 'page-wrapper';
         }
       }
     });
