@@ -12,6 +12,7 @@ import { environment } from '../../../environments/environment';
 })
 export class DashboardComponent implements OnInit {
   public userAuthenticated: User = null;
+  public authdata: any;
 
   constructor(private tokenService: Angular2TokenService,
     public userSharedService: UserSharedService,
@@ -50,11 +51,13 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authdata = this.tokenService.currentAuthData;
+    console.log(this.tokenService);
     this.getDataLocalStorage();
-    this.tokenService.validateToken().subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    );
+    // this.tokenService.validateToken().subscribe(
+    //   res => console.log(res),
+    //   error => console.log(error)
+    // );
   }
 
 }

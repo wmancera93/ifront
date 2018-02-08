@@ -17,8 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private userSharedService: UserSharedService) {
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
-    });
-   
+    });   
   }
 
 
