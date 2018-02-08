@@ -7,6 +7,7 @@ import { error } from 'selenium-webdriver';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Router } from '@angular/router';
+import { Enterprise } from '../../../models/general/enterprise';
 
 
 
@@ -20,10 +21,13 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   private dataUser: User = null;
   title: string = 'Mis datos';
+  public dataEnterprise: Enterprise;
+  public logoHeader: string;
+
   constructor(private userSharedService: UserSharedService,
     public router: Router,
-     private tokenService: Angular2TokenService,
-     public alert: AlertsService) {
+    private tokenService: Angular2TokenService,
+    public alert: AlertsService) {
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -53,30 +57,29 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-
+    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    this.logoHeader = this.dataEnterprise.logo_inside.url;
   }
 
-  LogOut()  {
-    
-      this.tokenService.signOut().subscribe(
-        (res:any) => {
-          let userData: User;
-          this.userSharedService.setUser(userData);
-          localStorage.setItem("user", '');
-          this.router.navigate(['/Pages/Login']);
-        },
-        (error:any) => {
-          let resultError: any;
-          resultError = error.json();
-          const alertWarning: Alerts[] = [{ 
-            type: 'danger',
-            title: 'Advertencia', 
-            message: resultError.errors[0] 
-          }];
-            //this.alert.setAlert(alertWarning[0]);
-            this.router.navigate(['/Pages/Login']);
-        });
-
+  LogOut() {
+    this.tokenService.signOut().subscribe(
+      (res: any) => {
+        let userData: User;
+        this.userSharedService.setUser(userData);
+        localStorage.setItem("user", '');
+        this.router.navigate(['/Pages/Login']);
+      },
+      (error: any) => {
+        let resultError: any;
+        resultError = error.json();
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: resultError.errors[0]
+        }];
+        //this.alert.setAlert(alertWarning[0]);
+        this.router.navigate(['/Pages/Login']);
+      });
   }
 
 

@@ -3,7 +3,8 @@
     --primary: ;
     --btn-primary: ;
     --btn-primary-hover: ; 
-    --color-alert:
+    --color-alert: ;
+    --img-header-menu: 
 }
 
 @keyframes slideInFromLeft {
@@ -312,10 +313,18 @@ header{
      height: 70px !important;
  }
 
- .nav-header-menu {
-    padding: 33px 25px !important;
+.nav-header-menu {
+    padding: 13px 25px !important;
     background-color: #2f4050 !important;
-    background-image: url(assets/themes/patterns/header-profile.png);
+    background-image: var(--img-header-menu);
+}
+
+.nav-header-menu a {
+    color: #DFE4ED !important;
+}
+
+.nav-header-menu .text-muted {
+    color: #8095a8 !important;
 }
  
 .navbar-static-side {
@@ -354,79 +363,6 @@ header{
  }
 /* ---*/
 
-.metismenu .plus-minus, .metismenu .plus-times {
-    float: right
-  }
-  
-  .metismenu .arrow {
-    float: right;
-    line-height: 1.42857
-  }
-  
-  .metismenu .glyphicon.arrow:before {
-    content: "\e079"
-  }
-  
-  .metismenu .active > a > .glyphicon.arrow:before {
-    content: "\e114"
-  }
-  
-  .metismenu .fa.arrow:before {
-    content: "\f104"
-  }
-  
-  .metismenu .active > a > .fa.arrow:before {
-    content: "\f107"
-  }
-  
-  .metismenu .ion.arrow:before {
-    content: "\f3d2"
-  }
-  
-  .metismenu .active > a > .ion.arrow:before {
-    content: "\f3d0"
-  }
-  
-  .metismenu .fa.plus-minus:before, .metismenu .fa.plus-times:before {
-    content: "\f067"
-  }
-  
-  .metismenu .active > a > .fa.plus-times {
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg)
-  }
-  
-  .metismenu .active > a > .fa.plus-minus:before {
-    content: "\f068"
-  }
-  
-  .metismenu .collapse {
-    display: none
-  }
-  
-  .metismenu .collapse.in {
-    display: block
-  }
-  
-  .metismenu .collapsing {
-    position: relative;
-    height: 0;
-    overflow: hidden;
-    -webkit-transition-timing-function: ease;
-    transition-timing-function: ease;
-    -webkit-transition-duration: .35s;
-    transition-duration: .35s;
-    -webkit-transition-property: height, visibility;
-    transition-property: height, visibility
-  }
-  
-  /* .mini-navbar {
-    .metismenu .collapse { opacity: 0; }
-    .metismenu .collapse.in { opacity: 1; }
-    .metismenu .collapse a { display: none }
-    .metismenu .collapse.in a { display: block }
-  } */
   
 /*Footer Style*/
 .general-footer{
@@ -442,6 +378,27 @@ header{
     text-align:right;  
 }  
 /*------*/
+/*Menu Navigate*/
+.menu-img-user {
+    width: 100px;
+    height: 100px;
+    background-color: var(--btn-primary);
+    border-radius: 50%;
+    -webkit-box-shadow: -11px 15px 32px -5px rgba(0,0,0,0.75);
+    -moz-box-shadow: -11px 15px 32px -5px rgba(0,0,0,0.75);
+    box-shadow: -11px 15px 32px -5px rgba(0,0,0,0.75);
+}
+
+.menu-img-responsive{
+    width: 96% !important; 
+    height: 96% !important;
+    margin-top:2px
+}
+/*------*/
+
+.height-content-type {
+    min-height: 493px !important;
+}
 
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{

@@ -13,6 +13,11 @@ export interface User {
 export interface Employee {
     email: string,
     pernr: number,
+    image: Url,
     posicion: string,
     short_name: string,  
+}
+
+export interface Url {
+    url: string
 }
