@@ -131,6 +131,9 @@ button, input, optgroup, select, textarea {
     color: #FFFFFF !important;
     cursor: pointer;
 }
+.cursor-general{            
+        cursor: pointer; 
+}
 
 .form-control {
     height: 34px !important;
@@ -171,6 +174,20 @@ header{
     margin-left: auto;
     margin-right: auto;
 }
+.img-zoom {
+    -webkit-transition:all .9s ease; /* Safari y Chrome */
+    -moz-transition:all .9s ease; /* Firefox */
+    -o-transition:all .9s ease; /* IE 9 */
+    -ms-transition:all .9s ease; /* Opera */
+    width:100%;
+    }
+    .img-zoom:hover {
+    -webkit-transform:scale(1.15);
+    -moz-transform:scale(1.15);
+    -ms-transform:scale(1.15);
+    -o-transform:scale(1.15);
+    transform:scale(1.15);
+    }
 
 .company-logo {
     width: 320px;
@@ -181,8 +198,7 @@ header{
 
 .company-logo-header {
     width: 100px;
-    height: 48px;
-   
+    height: 48px;    
 }
 
 .transition-bg-login {
@@ -277,6 +293,7 @@ header{
     color: #FFFFFF !important;
 }
 /*Header Style*/
+<<<<<<< HEAD
 #page-wrapper {
     position: inherit !important;
     margin: 0 0 0 220px !important;
@@ -289,10 +306,16 @@ header{
 
 .nav-header{
     /* background:  #f3f3f4 !important;   */
+=======
+
+ .nav-header{
+     /* background:  #f3f3f4 !important;   */
+>>>>>>> 76e69efdabf041ccf23db8aef5c472be000cf6cf
      background: linear-gradient(top, rgb(165, 165, 165), white);
      -webkit-box-shadow: c1px 6px 5px 0px rgba(0,0,0,0.75);
      -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
      box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+     height: 70px !important;
  }
 
  .nav-header-menu {
@@ -330,6 +353,10 @@ header{
  .title{
      color: #666363 !important;
      font-size: 25px;    
+ }
+
+ .hideText {
+    display: block;
  }
 /* ---*/
 
@@ -421,8 +448,8 @@ header{
         background-position: center top !important;
         height: 915px !important;
         padding: 150px 0 150px !important;
-    }
-
+    }   
+    
     .top {
         margin-top: 40px !important;
     }
@@ -476,8 +503,8 @@ header{
         background-position: center top !important;
         height: 690px !important;
         padding: 300px 0 150px !important;
-    }
-
+    }    
+   
     .top {
         margin-top: 40px !important;
     }
@@ -526,6 +553,18 @@ header{
         margin-top: -40px !important;
         font-size: 29px !important;
     }
+    .nav-header{
+        /* background:  #f3f3f4 !important;   */
+        background: linear-gradient(top, rgb(165, 165, 165), white);
+        -webkit-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+        -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+        box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
+        height: 110px !important;
+    }
+    .font-size-responsive{
+        font-size: 1.5rem !important;
+    }
+  
 }
 
 @media (max-width: 1100px)  and (max-height: 800px) {
@@ -534,7 +573,7 @@ header{
         height: 683px !important;
         padding: 55px 0 150px !important;
     }
-
+   
     .top {
         margin-top: 30px !important;
     }
@@ -558,7 +597,7 @@ header{
     .font-controls-login {
         font-size: 1.5rem !important;
     }
-
+    
     ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
         font-size: 1.1rem !important;
     }
@@ -579,7 +618,6 @@ header{
         height: 637px !important;
         padding: 220px 0 150px !important;
     }
-
     .top {
         margin-top: 30px !important;
     }
@@ -628,9 +666,9 @@ header{
     .company-logo {
         width: 160px;
         height: 80px;
-    }
-
-    .bg-login {
+    }  
+       
+     .bg-login {
         padding-top: 1pc;
     }  
     
@@ -685,6 +723,7 @@ header{
     .pasword-input-icon {
         margin-left: 88% !important;
     }
+
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
@@ -729,7 +768,10 @@ header{
     }
     :-moz-placeholder { /* Firefox 18- */
         font-size: 0.9rem !important;
-    }
+    }    
+    .hideText {
+        display: none !important;
+     }
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 800px) {
@@ -749,7 +791,10 @@ header{
 
     .fooder-login{
         margin-top: 20px !important;
-    }    
+    }   
+    .hideText {
+        display: none !important;
+     }
 }
 
 
