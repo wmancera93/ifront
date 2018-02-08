@@ -15,13 +15,13 @@ import { FooterComponent } from './layout/footer/footer.component';
   declarations: [
     HeaderComponent,
     AlertsComponent,
-    MenuNavigationComponent
+    MenuNavigationComponent,
     FooterComponent
   ],
   exports: [
     HeaderComponent,
     AlertsComponent,
-    MenuNavigationComponent
+    MenuNavigationComponent,
     FooterComponent
   ],
   providers:[
