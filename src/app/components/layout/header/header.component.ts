@@ -3,7 +3,7 @@ import { UserSharedService } from '../../../services/shared/common/user/user-sha
 import { User } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
-import { error } from 'selenium-webdriver';
+import { error, Alert } from 'selenium-webdriver';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Router } from '@angular/router';
@@ -24,6 +24,8 @@ export class HeaderComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public logoHeader: string;
 
+  private alertWarning: Alerts[];
+ 
   constructor(private userSharedService: UserSharedService,
     public router: Router,
     private tokenService: Angular2TokenService,
@@ -71,14 +73,18 @@ export class HeaderComponent implements OnInit {
       },
       (error: any) => {
         let resultError: any;
+        let typeAlert: string = 'confirmation';
+
         resultError = error.json();
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: 'Advertencia',
-          message: resultError.errors[0]
+        this.alertWarning = [{
+          type: 'confirmation',
+          title: 'Confirmación',
+          message: resultError.errors[0],
+          confirmation: true,
+          redirect: { url: '/Pages/Login' }
         }];
-        //this.alert.setAlert(alertWarning[0]);
-        this.router.navigate(['/Pages/Login']);
+        
+        this.alert.setAlert(this.alertWarning[0]);
       });
   }
 
