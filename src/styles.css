@@ -198,7 +198,7 @@ header{
 
 .company-logo-header {
     width: 100px;
-    height: 48px;    
+    height: 37px;    
 }
 
 .transition-bg-login {
@@ -308,8 +308,8 @@ header{
      background: linear-gradient(top, rgb(165, 165, 165), white);
      -webkit-box-shadow: c1px 6px 5px 0px rgba(0,0,0,0.75);
      -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
-     box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
-     height: 70px !important;
+     box-shadow: 1px 3px 15px 0px rgba(0,0,0,0.75);
+     height: 50px !important;
  }
 
  .nav-header-menu {
