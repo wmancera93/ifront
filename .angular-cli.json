@@ -22,7 +22,8 @@
         "styles.css",
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
-        "./assets/themes/pace-css/pace-theme-flash.css"       
+        "./assets/themes/pace-css/pace-theme-flash.css" ,
+        "../node_modules/angular2-toaster/toaster.css"      
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",

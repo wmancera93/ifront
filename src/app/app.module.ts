@@ -9,7 +9,6 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
-
 // components
 import { AppComponent } from './app.component';
 
@@ -25,7 +24,7 @@ import { AppComponent } from './app.component';
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule   
   ],
   providers: [
     
