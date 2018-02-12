@@ -1,4 +1,8 @@
-<nav class="navbar-default navbar-static-side" role="navigation">
+<!-- <button class="navbar-toggler text-filter  navbar-toggler-center btn-filters" type="button" data-toggle="collapse" data-target="#navMenu">
+  Filtros
+  <i class="fa fa-fw fa-filter color-icon-toogler"></i>
+</button> -->
+<nav id="navMenu" class="navbar-default navbar-static-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav in flex-column" id="side-menu">
       <li class="nav-header-menu">
@@ -22,33 +26,182 @@
           </div>
         </div>
       </li>
-      <li class="active">
-        <a class="nav-link" href="index.html">
+      <li id="liIndex" class="active">
+        <a id="aIndex" class="nav-link bg-menu active" data-toggle="collapse" href="#dashboard" (click)="clickOptionMenu('liIndex','aIndex', '')">
           <i class="fa fa-th-large"></i>
-          <span class="nav-label">Dashboards</span>
-          <span class="fa arrow"></span>
+          <span class="nav-label">Inicio</span>
         </a>
-        <ul class="nav nav-second-level collapse in flex-column" aria-expanded="false">
-          <li>
-            <a class="nav-link active" href="index.html">Dashboard v.1</a>
-          </li>
-          <li>
-            <a class="nav-link" href="dashboard_2.html">Dashboard v.2</a>
-          </li>
-          <li>
-            <a class="nav-link" href="dashboard_3.html">Dashboard v.3</a>
-          </li>
-          <li>
-            <a class="nav-link" href="dashboard_4_1.html">Dashboard v.4</a>
-          </li>
-          <li>
-            <a class="nav-link" href="dashboard_5.html">Dashboard v.5 </a>
-          </li>
-        </ul>
+      </li>
+      <li id="liOrganizationChart">
+        <a id="aOrganizationChart" class="nav-link bg-menu" (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
+          <i class="fa fa-sitemap"></i>
+          <span class="nav-label">Organigrama</span>
+        </a>
+      </li>
+      <li id="liMyData">
+        <a id="aMyData" class="nav-link bg-menu" (click)="clickOptionMenu('liMyData','aMyData', '')">
+          <i class="fa fa-user"></i>
+          <span class="nav-label">Mis Datos</span>
+        </a>
+      </li>
+      <li id="liAutoService">
+        <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
+          <i class="fa fa-file"></i>
+          <span class="nav-label">Autoservicio</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="selfService" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aWorkCertificate" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
+            </li>
+            <li class="bg-li">
+              <a id="aHolidayLetter" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aPayrollReceipts" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
+            </li>
+            <li class="bg-li">
+              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="liQuery">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#query" (click)="clickOptionMenu('liQuery','toggle-Quiery', 'query')">
+          <i class="fa fa-paste"></i>
+          <span class="nav-label">Consultas</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="query" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aIncomeWithholdings" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIncomeWithholdings', 'query')">Ingresos y retenciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aPaymentsDeductions" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">Pagos y deducciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aEmbargos" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Embargos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aPaydayLoans" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">Prestamos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aVacationEnjoyed" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones disfrutadas</a>
+            </li>
+            <li class="bg-li">
+              <a id="aCompensatedVacations" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">Vacaciones compensadas</a>
+            </li>
+            <li class="bg-li">
+              <a id="aVacationBalance" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationBalance', 'query')">Saldo de vacaciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aPermits" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">Permisos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aDisabilities" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">Incapacidades</a>
+            </li>
+            <li class="bg-li">
+              <a id="aExtraHours" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">Horas extras</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="liMyTeam">
+        <a id="aMyTeam" class="nav-link bg-menu" (click)="clickOptionMenu('liMyTeam','aMyTeam', '')">
+          <i class="fa fa-group"></i>
+          <span class="nav-label">Mis Equipo</span>
+        </a>
+      </li>
+      <li id="liManagerialService">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#managerialService" (click)="clickOptionMenu('liManagerialService','toggle-ManagerialService', 'managerialService')">
+          <i class="fa fa-area-chart"></i>
+          <span class="nav-label">Servicio Gerencial</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="managerialService" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aDemographicData" class="nav-link bg-menu" (click)="clickOptionMenu('liManagerialService','aDemographicData', 'managerialService')">Datos demograficos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aReportOfRequests" class="nav-link bg-menu" (click)="clickOptionMenu('liManagerialService','aReportOfRequests', 'managerialService')">Reporte de solicitudes</a>
+            </li>
+            <li class="bg-li">
+              <a id="aUserPermits" class="nav-link bg-menu" (click)="clickOptionMenu('liManagerialService','aUserPermits', 'managerialService')">Permisos de usuario</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="liBillboard">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#billboard" (click)="clickOptionMenu('liBillboard','toggle-Billboard', 'billboard')">
+          <i class="fa fa-bullhorn"></i>
+          <span class="nav-label">Cartelera</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="billboard" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aNews" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aNews', 'billboard')">Noticias</a>
+            </li>
+            <li class="bg-li">
+              <a id="aMyPublications" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aMyPublications', 'billboard')">Mis publicaciones</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="LiRequested">
+        <a id="aRequested" class="nav-link bg-menu" (click)="clickOptionMenu('LiRequested','aRequested', '')">
+          <i class="fa fa-edit"></i>
+          <span class="nav-label">Solicitudes</span>
+        </a>
+      </li>
+      <li id="liApprovals">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#approvals" (click)="clickOptionMenu('liApprovals','toggle-Approvals', 'approvals')">
+          <i class="fa fa-circle-o-notch"></i>
+          <span class="nav-label">Aprobaciones</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="approvals" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aAprovals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aAprovals', 'approvals')">Aprobaciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aManaged" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aManaged', 'approvals')">Gestionadas</a>
+            </li>
+            <li class="bg-li">
+              <a id="aConsultationsApprovals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aConsultationsApprovals', 'approvals')">Consultas y aprobaciones</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li id="liBanners">
+        <a id="aBanners" class="nav-link bg-menu" (click)="clickOptionMenu('liBanners','aBanners', '')">
+          <i class="fa fa-slideshare"></i>
+          <span class="nav-label">Banners</span>
+        </a>
+      </li>
+      <li id="liCorporateDocuments">
+        <a id="aCorporateDocuments" class="nav-link bg-menu" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
+          <i class="fa fa-folder-open-o"></i>
+          <span class="nav-label">Docs. Corporativos</span>
+        </a>
+      </li>
+      <li id="liHelp">
+        <a id="aHelp" class="nav-link bg-menu" (click)="clickOptionMenu('liHelp','aHelp', '')">
+          <i class="fa fa-question-circle"></i>
+          <span class="nav-label">Ayuda</span>
+        </a>
       </li>
     </ul>
-
   </div>
 </nav>
 
-          
+<div class="nav-hide" (click)="clickHideMenu()">
+  <i class="fa fa-angle-left"></i>
+</div>
+<div class="nav-show" (click)="clickShowMenu()">
+  <i class="fa fa-angle-right"></i>
+</div>

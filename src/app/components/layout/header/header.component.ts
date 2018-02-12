@@ -23,9 +23,10 @@ export class HeaderComponent implements OnInit {
   title: string = 'Mis datos';
   public dataEnterprise: Enterprise;
   public logoHeader: string;
+  public showMenu: boolean = true;
 
   private alertWarning: Alerts[];
- 
+
   constructor(private userSharedService: UserSharedService,
     public router: Router,
     private tokenService: Angular2TokenService,
@@ -83,11 +84,20 @@ export class HeaderComponent implements OnInit {
           confirmation: true,
           redirect: { url: '/Pages/Login' }
         }];
-        
+
         this.alert.setAlert(this.alertWarning[0]);
       });
   }
 
+  clickHideMenuMobile() {
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
+    this.showMenu = false;
+  }
+
+  clickShowMenuMobile() {
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
+    this.showMenu = true;
+  }
 
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {

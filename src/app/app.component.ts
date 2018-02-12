@@ -1,5 +1,5 @@
 // component
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 
 // common
 import { Router, NavigationEnd } from '@angular/router';
@@ -19,10 +19,10 @@ export class AppComponent {
   constructor(public router: Router, private mainService: MainService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/Pages/Login' || 
-        event.urlAfterRedirects === '/Pages/ResetAccount' || 
-        event.urlAfterRedirects === '/Pages/LockedScreen' ||
-        event.urlAfterRedirects.split('?')[0] === '/Pages/ConfirmResetAccount') {
+        if (event.urlAfterRedirects === '/Pages/Login' ||
+          event.urlAfterRedirects === '/Pages/ResetAccount' ||
+          event.urlAfterRedirects === '/Pages/LockedScreen' ||
+          event.urlAfterRedirects.split('?')[0] === '/Pages/ConfirmResetAccount') {
           this.showComponents = false;
           this.pageWrapper = '';
         } else {
@@ -41,11 +41,26 @@ export class AppComponent {
         document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
         document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
         document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
-        localStorage.setItem("enterprise", JSON.stringify(result.data));        
+        localStorage.setItem("enterprise", JSON.stringify(result.data));
       })
+
+    document.documentElement.style.setProperty(`--top-content-type`, '1366px');
   }
 
-
-
+  @HostListener('window:scroll') onScroll() {
+    if (document.getElementById("navMenu").clientHeight > document.getElementById("page-wrapper").clientHeight) {
+      document.documentElement.style.setProperty(`--top-content-type`, (document.getElementById("page-wrapper").clientHeight + (document.getElementById("navMenu").clientHeight - document.getElementById("page-wrapper").clientHeight)).toString() + 'px');
+    } else {
+      if (document.getElementById("page-wrapper").clientHeight >= 500 && document.getElementById("page-wrapper").clientHeight <= 999) {
+        document.documentElement.style.setProperty(`--top-content-type`, '700px');
+      }
+      if (document.getElementById("page-wrapper").clientHeight >= 1000 && document.getElementById("page-wrapper").clientHeight <= 1200) {
+        document.documentElement.style.setProperty(`--top-content-type`, '1024px');
+      }
+      if (document.getElementById("page-wrapper").clientHeight >= 1201 && document.getElementById("page-wrapper").clientHeight <= 1500) {
+        document.documentElement.style.setProperty(`--top-content-type`, '1360px');
+      }
+    }
+  }
 
 }

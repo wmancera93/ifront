@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 export class AlertsComponent implements OnInit {
   public bodyAlert: Alerts = { type: '', title: '', message: '' };
   public icon: string;
-  private confirmationShow: boolean = false;
+  public confirmationShow: boolean = false;
 
 
   constructor(public alert: AlertsService, public route: Router) {
