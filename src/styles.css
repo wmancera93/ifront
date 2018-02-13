@@ -307,7 +307,7 @@ header{
 .nav-header{
     /* background:  #f3f3f4 !important;   */
      background: linear-gradient(top, rgb(165, 165, 165), white);
-     -webkit-box-shadow: c1px 6px 5px 0px rgba(0,0,0,0.75);
+     -webkit-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
      -moz-box-shadow: 1px 6px 5px 0px rgba(0,0,0,0.75);
      box-shadow: 1px 3px 15px 0px rgba(0,0,0,0.75);
      height: 50px !important;
@@ -414,9 +414,70 @@ header{
     margin-top:2px
 }
 /*------*/
+/*Contacts List*/
+.even { background: #D8D8D8; }
+.odd { background: #BDBDBD; }
+
+.roundPhoto{
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  margin-top: 7px;
+}
+
+.container-contacts{
+    width: 295px !important;
+    height: 100%;
+    position: absolute !important;
+    margin-left: 899px !important;
+    margin-top: -13px;
+    background-color: #676a6c;
+    color: #000000;
+    -webkit-box-shadow: -6px 6px 21px 1px rgba(0,0,0,0.24);
+    -moz-box-shadow: -6px 6px 21px 1px rgba(0,0,0,0.24);
+    box-shadow: -6px 6px 21px 1px rgba(0,0,0,0.24);
+}
+
+.nav-tabs
+{
+border-bottom: 1px solid  #dddd;
+}
+.nav-edit
+{
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+.active{
+ color: #676a6c !important;
+}
+.Search-bar{
+
+    background: #f9f9f9f9;
+    width: 241px !important;
+    padding: 20px;
+    border-bottom: 1px solid #e7eaec;
+}
+.starIcon{
+    margin-top: 5px;
+}
+.icon-search {
+    color: #acacac;
+    }
+    
+.search-input-icon {
+    margin-left: 88% !important;
+    background-color: transparent;
+    border: none;
+    margin-top: -24px !important;
+    float: left;
+}
+
+
+/* ----------*/
 
 .height-content-type {
-    min-height: 513px !important;
+    min-height: 538px !important;
 }
 
 @media (min-width: 1500px)  and (min-height: 600px) {
@@ -439,7 +500,7 @@ header{
     }
 
     .height-content-type {
-        min-height: 625px !important;
+        min-height: 850px !important;
     }
 }
 

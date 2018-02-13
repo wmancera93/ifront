@@ -1,0 +1,38 @@
+<div class="container-contacts">
+  <ul class="nav nav-tabs row">
+    <li class="nav-item col-6">
+      <a class="nav-link active" href="#">
+        <strong>Contactos</strong>
+      </a>
+    </li>
+    <li class="nav-item col-6">
+      <a class="nav-link" href="#">
+        <strong>Chats</strong>
+      </a>
+    </li>
+  </ul>
+  <div class="Search-bar">
+      <div class="form-group">
+          <input id="busqueda"  type="text" class="form-control" placeholder="Buscar amigos">
+          <i class="search-input-icon fa fa-search icon-search"></i>
+      </div>          
+ </div>
+   <div *ngFor="let contacto of Contacts;let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+    <a class="row">
+      <a class="col-md-2" col-4>
+        <img src="{{contacto.photo}}" class="roundPhoto">
+        <br>
+      </a>
+      <a class="col-md-10" col-8>
+        {{contacto.name}}
+        <br>{{contacto.info}}
+        <br> {{contacto.date}}
+        <div class="starIcon">
+          <span>
+            <i class="fa fa-star-o text-warning"></i>
+          </span>
+        </div>
+      </a>
+    </a>
+  </div>
+</div>

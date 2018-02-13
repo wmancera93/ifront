@@ -10,6 +10,7 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { ToasterContainerComponent } from './common/toaster-container/toaster-container.component';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 
 @NgModule({
   imports: [
@@ -22,14 +23,16 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     AlertsComponent,
     MenuNavigationComponent,
     FooterComponent,
-    ToasterContainerComponent
+    ToasterContainerComponent,
+    ContactsListComponent
   ],
   exports: [
     HeaderComponent,
     AlertsComponent,
     MenuNavigationComponent,
     FooterComponent,
-    ToasterContainerComponent
+    ToasterContainerComponent,
+    ContactsListComponent
   ],
   providers:[
     // ToasterService

@@ -11,6 +11,7 @@ import { Enterprise } from '../../../models/general/enterprise';
 
 
 
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -21,6 +22,7 @@ import { Enterprise } from '../../../models/general/enterprise';
 export class HeaderComponent implements OnInit {
   private dataUser: User = null;
   title: string = 'Mis datos';
+  private x;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
 
@@ -88,6 +90,17 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+  
+  ContactList()
+  {     
+    this.x = document.getElementById("contactList");  
+  if (this.x.style.display === "none") {
+   
+        this.x.style.display = "block";
+    } else {
+       this.x.style.display = "none";
+    }
+  }
 
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
