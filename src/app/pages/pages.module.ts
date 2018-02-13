@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from '../components/components.module';
 import { ServicesModule } from '../services/services.module';
-import { A2tUiModule } from 'angular2-token';
 import { FormsModule } from '@angular/forms';
 
 // components
@@ -24,7 +23,6 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
     CommonModule,
     PagesRoutingModule,
     ComponentsModule,
-    A2tUiModule,
     FormsModule
   ],
   declarations: [

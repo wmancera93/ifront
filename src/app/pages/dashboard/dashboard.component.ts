@@ -51,8 +51,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.authdata = this.tokenService.currentAuthData;
-    console.log(this.tokenService);
+    // this.authdata = this.tokenService.currentAuthData;
+    // console.log(this.tokenService);
     this.getDataLocalStorage();
     // this.tokenService.validateToken().subscribe(
     //   res => console.log(res),

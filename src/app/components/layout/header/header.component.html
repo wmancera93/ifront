@@ -1,19 +1,29 @@
 <nav id="mainNav" class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3">
     <div class="col-12">
         <div class="row justify-content-between">
-            <div class="col-md-4  col-lg-2 col-xl-1 col-3  align-self-center">
+            <div class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
+                <div class="row">
+                    <div *ngIf="showMenu" class="nav-mobile-hide" (click)="clickHideMenuMobile()">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                    <div *ngIf="!showMenu" class="nav-mobile-show" (click)="clickShowMenuMobile()">
+                        <i class="fa fa-bars"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2  col-lg-2 col-xl-1 col-4  align-self-center">
                 <div class="row">
                     <div class="col-12 company-logo-header cursor-general img-zoom">
                         <img src="{{logoHeader}}" style="width: 100%; height: 100%" />
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-lg-6 col-xl-9 col-6 align-self-center title">
+            <div class="hideText col-md-6 col-lg-6 col-xl-9 col-6 align-self-center title">
                 <div class="hideText font-size-responsive">
                     {{title}}
                 </div>
             </div>
-            <div class="col-md-2 col-lg-4 col-xl-2 col-3 align-self-center">
+            <div class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center">
                 <div class="row justify-content-end">
                     <div class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)=' ContactList()'>
                         <i class="fa fa-fw fa-users fa-lg"></i>

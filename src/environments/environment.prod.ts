@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiBaseHr: 'http://apihr-development.hrinteractive.co'
 };

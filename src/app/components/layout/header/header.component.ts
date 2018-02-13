@@ -25,9 +25,10 @@ export class HeaderComponent implements OnInit {
   private x;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
+  public showMenu: boolean = true;
 
   private alertWarning: Alerts[];
- 
+
   constructor(private userSharedService: UserSharedService,
     public router: Router,
     private tokenService: Angular2TokenService,
@@ -85,21 +86,30 @@ export class HeaderComponent implements OnInit {
           confirmation: true,
           redirect: { url: '/Pages/Login' }
         }];
-        
+
         this.alert.setAlert(this.alertWarning[0]);
       });
   }
 
-  
-  ContactList()
-  {     
-    this.x = document.getElementById("contactList");  
-  if (this.x.style.display === "none") {
-   
-        this.x.style.display = "block";
+
+  ContactList() {
+    this.x = document.getElementById("contactList");
+    if (this.x.style.display === "none") {
+
+      this.x.style.display = "block";
     } else {
-       this.x.style.display = "none";
+      this.x.style.display = "none";
     }
+
+  }
+  clickHideMenuMobile() {
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
+    this.showMenu = false;
+  }
+
+  clickShowMenuMobile() {
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
+    this.showMenu = true;
   }
 
   getDataLocalStorage() {

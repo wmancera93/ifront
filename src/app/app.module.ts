@@ -11,6 +11,7 @@ import { HttpModule } from '@angular/http';
 
 // components
 import { AppComponent } from './app.component';
+import { A2tUiModule } from 'angular2-token';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,7 @@ import { AppComponent } from './app.component';
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule   
+    HttpModule
   ],
   providers: [
     
