@@ -17,6 +17,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
+    document.documentElement.style.setProperty(`--top-content-type`, document.getElementById("page-wrapper").clientHeight.toString() + 'px');
   }
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {

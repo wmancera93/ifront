@@ -2,7 +2,9 @@
     <app-menu-navigation *ngIf="showComponents"></app-menu-navigation>
     <div id="{{pageWrapper}}" class="gray-bg">
         <app-header *ngIf="showComponents"></app-header>
-        <router-outlet></router-outlet>
+        <div id="contentGeneral">
+            <router-outlet></router-outlet>
+        </div>
         <app-footer *ngIf="showComponents"></app-footer>
     </div>
 </div>

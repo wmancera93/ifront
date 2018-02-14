@@ -62,6 +62,12 @@ export class HeaderComponent implements OnInit {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
+
+    if(this.showMenu === true){
+      (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
+      // document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
+    }
   }
 
   LogOut() {
@@ -91,12 +97,17 @@ export class HeaderComponent implements OnInit {
 
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
-    this.showMenu = false;
+    this.showMenu = false;   
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'block';
+    (<HTMLInputElement>document.getElementById('contentGeneral')).classList.remove('heigth-content-general');
   }
 
   clickShowMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     this.showMenu = true;
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
+    (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
+    document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
   }
 
   getDataLocalStorage() {

@@ -12,8 +12,13 @@
     --left-hide-menu: -12px;
     --left-show-menu-hover: -12px;
     --left-hide-menu-hover: -12px;
-    --top-content-type: 513px;
-    --margin-left-mobile: 0px
+    --top-content-type: 0px;
+    --margin-left-mobile: 0px;
+    --heigth-content-general:
+}
+
+.heigth-content-general{
+    min-height: var(--heigth-content-general)
 }
 
 @keyframes slideInFromLeft {
@@ -399,8 +404,8 @@ header{
     color: var(--btn-primary);
     width: 45px;
     height: 35px;
-    padding-left: 15px;
-    padding-top: 3px;
+    padding-left: 14px;
+    padding-top: 4px;
     cursor: pointer;
     font-size: 17px;
     border-radius: 3px;
@@ -878,6 +883,39 @@ header{
         margin-left: 88% !important;
     }
 
+    .hideText {
+        display: none !important;
+     }
+
+    #page-wrapper {
+        margin: 0px !important;
+    }
+
+    .navbar-default {
+        background-color: #2f4050;
+        border-color: #2f4050;
+        width: 310px;
+    }
+
+    .menu-img-user {
+        margin-left: 35px;
+    }
+
+    .nav-hide, .nav-show {
+        display: none;
+    }
+
+    .mobile{
+        display: block;
+    }
+    
+    .nav-mobile-hide, .nav-mobile-show {
+        display: block;
+    }
+
+    .navbar-static-side {
+        margin-top: 51px
+    }
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
@@ -927,7 +965,7 @@ header{
         display: none !important;
      }
 
-     #page-wrapper {
+    #page-wrapper {
         margin: 0px !important;
     }
 
@@ -951,6 +989,10 @@ header{
     
     .nav-mobile-hide, .nav-mobile-show {
         display: block;
+    }
+
+    .navbar-static-side {
+        margin-top: 51px
     }
 }
 
