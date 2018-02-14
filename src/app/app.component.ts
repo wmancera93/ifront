@@ -19,10 +19,10 @@ export class AppComponent {
   constructor(public router: Router, private mainService: MainService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/Pages/Login' ||
-          event.urlAfterRedirects === '/Pages/ResetAccount' ||
-          event.urlAfterRedirects === '/Pages/LockedScreen' ||
-          event.urlAfterRedirects.split('?')[0] === '/Pages/ConfirmResetAccount') {
+        if (event.urlAfterRedirects === '/ihr/login' ||
+          event.urlAfterRedirects === '/ihr/reset_account' ||
+          event.urlAfterRedirects === '/ihr/locked_screen' ||
+          event.urlAfterRedirects.split('?')[0] === '/ihr/confirm_reset_account') {
           this.showComponents = false;
           this.pageWrapper = '';
         } else {
@@ -34,25 +34,20 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    // this.mainService.getDataEnterprise()
-    //   .subscribe((result: any) => {
-    //     this.dataEnterprise = result.data;
-    //     document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-    //     document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-    //     document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-    //     document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
-    //     localStorage.setItem("enterprise", JSON.stringify(result.data));
-    //   })
-
+    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+    document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+    document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+    document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     document.documentElement.style.setProperty(`--top-content-type`, '1366px');
   }
   public heightContenGeneral: number = 0;
   @HostListener('window:scroll') onScroll() {
-    if(document.getElementById("navMenu").clientHeight > 0){
+    if (document.getElementById("navMenu").clientHeight > 0) {
       this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
     }
-    else{
-      if(this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight){
+    else {
+      if (this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight) {
         this.heightContenGeneral = document.getElementById("page-wrapper").clientHeight - this.heightContenGeneral;
       }
     }

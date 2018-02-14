@@ -97,7 +97,7 @@ export class ConfirmResetAcountComponent implements OnInit {
             this.txtConfirmPassword = '';
             setTimeout(() => {
               document.getElementById('closeModal').click();
-              this.router.navigate(['/Pages/Login']);
+              this.router.navigate(['/ihr/login']);
             }, 2000);
           }
         },

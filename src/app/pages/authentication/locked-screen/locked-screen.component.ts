@@ -67,7 +67,7 @@ export class LockedScreenComponent implements OnInit {
               result = res.json().data;
               this.userSharedService.setUser(result);
               localStorage.setItem("user", JSON.stringify(result));
-              this.router.navigate(['/Pages/Dashboard']);
+              this.router.navigate(['/ihr/index']);
             }
           },
           error => {

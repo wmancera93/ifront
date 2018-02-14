@@ -78,7 +78,7 @@ export class HeaderComponent implements OnInit {
         let userData: User;
         this.userSharedService.setUser(userData);
         localStorage.setItem("user", '');
-        this.router.navigate(['/Pages/Login']);
+        this.router.navigate(['/ihr/login']);
       },
       (error: any) => {
         let resultError: any;
@@ -90,7 +90,7 @@ export class HeaderComponent implements OnInit {
           title: 'Confirmación',
           message: resultError.errors[0],
           confirmation: true,
-          redirect: { url: '/Pages/Login' }
+          redirect: { url: '/ihr/login' }
         }];
 
         this.alert.setAlert(this.alertWarning[0]);
