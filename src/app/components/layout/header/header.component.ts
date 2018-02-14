@@ -74,10 +74,14 @@ export class HeaderComponent implements OnInit {
       }
     }
 
-    if (document.getElementById("navMenu").clientHeight > 0) {
-      if(document.getElementById("navMenu").clientHeight > 1000) {
+    if (document.getElementById("navMenu").clientHeight > 0) {      
+      if(document.getElementById("navMenu").clientHeight > 800 && document.getElementById("navMenu").clientHeight <= 879) {
         this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 161;
-      }else{
+      }
+      if(document.getElementById("navMenu").clientHeight > 880) {
+        this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 280;
+      }
+      if(document.getElementById("navMenu").clientHeight < 800) {
         this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
       }      
     }
