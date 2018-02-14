@@ -1,14 +1,14 @@
-<div id="right-sidebar" class="animated sidebar-open sidebar-top container-contacts">
+<div id="right-sidebar" class="sidebar-open sidebar-top container-contacts">
   <div class="sidebar-container" style=" overflow: hidden;width: auto;  height: 100%;">
     <div class="scrollbar scrollbar-success force-overflow ">
-      <ul class="nav nav-tabs row">
-        <li id="litab1" class="nav-item ">
-          <a id="atab1" class="nav-link bg-tabs active" data-toggle="tab" href="#tab-1" >
+      <ul class="nav nav-tabs">
+        <li id="litab1" class="nav-item" style="width: 50%">
+          <a id="atab1" class="nav-link a-contacts bg-tabs active" data-toggle="tab" href="#tab-1">
             Contactos
           </a>
         </li>
-        <li id="litab2" class="nav-item ">
-          <a id="atab2" class="nav-link bg-tabs" data-toggle="tab" href="#tab-2" >
+        <li id="litab2" class="nav-item" style="width: 50%">
+          <a id="atab2" class="nav-link a-contacts bg-tabs" data-toggle="tab" href="#tab-2">
             Chats
           </a>
         </li>
@@ -16,10 +16,8 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <div class="form-group">
-              <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
-              <i class="search-input-icon fa fa-search icon-search"></i>
-            </div>
+            <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
+            <i class="search-input-icon fa fa-search icon-search"></i>
           </div>
           <div *ngFor="let contacto of Contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
             <a class="row justify-content-center">
@@ -50,12 +48,22 @@
               <a class="col-md-6" col-8>
                 {{item.name}}
                 <br>{{item.conver}}
-                <br> {{item.status}}
               </a>
               <a class="col-md-3 ">
-                  <i class="fa fa-circle icon-active" aria-hidden="true"></i>
-                </a>
+                <div>
+                  <button id="closeChat" type="button" class="close" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div>
+                  <i class="fa fa-circle icon-active" *ngIf="item.status" aria-hidden="true"></i>
+                  <i class="fa fa-circle icon-disabled" *ngIf="!item.status" aria-hidden="true"></i>
+                </div>
+              </a>
             </a>
+          </div>
+          <div class="bg-white">
+            No tienes más conversaciones
           </div>
         </div>
       </div>
