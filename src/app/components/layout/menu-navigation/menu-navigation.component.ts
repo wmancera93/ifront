@@ -86,13 +86,22 @@ export class MenuNavigationComponent implements OnInit {
       }
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
-    }
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
-      window.scroll({
-        top: 180, 
-        left: 0, 
-        behavior: 'smooth' 
-      });
+      if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
+        document.getElementById('btnHideMenu').click()
+        window.scroll({
+          top: 1,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
+    } else {
+      if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
+        window.scroll({
+          top: 180,
+          left: 0,
+          behavior: 'smooth'
+        });
+      }
     }
   }
 }
