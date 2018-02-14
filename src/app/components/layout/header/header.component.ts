@@ -26,6 +26,7 @@ export class HeaderComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public logoHeader: string;
   public showMenu: boolean = true;
+  public heightContenGeneral: number;
 
   private alertWarning: Alerts[];
 
@@ -65,10 +66,28 @@ export class HeaderComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
 
-    if(this.showMenu === true){
-      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
-      document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+    } else {
+      if (this.showMenu === true) {
+        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';    
+      }
     }
+
+    if (document.getElementById("navMenu").clientHeight > 0) {
+      if(document.getElementById("navMenu").clientHeight > 1000) {
+        this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 161;
+      }else{
+        this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
+      }      
+    }
+    else {
+      if (this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight) {
+        this.heightContenGeneral = document.getElementById("page-wrapper").clientHeight - this.heightContenGeneral;
+      }
+    }
+
+    document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
   }
 
   LogOut() {
@@ -98,7 +117,7 @@ export class HeaderComponent implements OnInit {
 
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
-    this.showMenu = false;   
+    this.showMenu = false;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 

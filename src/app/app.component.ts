@@ -35,18 +35,22 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    if(localStorage.getItem("enterprise") !== null){
+    if (localStorage.getItem("enterprise") !== null) {
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
       document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
       document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
       document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
       document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
-    }   
+    }
   }
 
   @HostListener('window:scroll') onScroll() {
     if (document.getElementById("navMenu").clientHeight > 0) {
-      this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
+      if(document.getElementById("navMenu").clientHeight > 1000) {
+        this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 161;
+      }else{
+        this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
+      }   
     }
     else {
       if (this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight) {
