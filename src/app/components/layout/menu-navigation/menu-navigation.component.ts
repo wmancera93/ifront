@@ -15,6 +15,7 @@ export class MenuNavigationComponent implements OnInit {
   public liActive: string = 'liIndex';
   public aActive: string = 'aIndex';
   public showCollapse: string = '';
+  public heightContenGeneral: number = 0;
 
   constructor(private userSharedService: UserSharedService) {
     this.userSharedService.getUser().subscribe((data) => {
@@ -31,6 +32,8 @@ export class MenuNavigationComponent implements OnInit {
     document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
     document.documentElement.style.setProperty(`--visible-menu`, `block`);
+    document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
+    document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 
@@ -83,6 +86,13 @@ export class MenuNavigationComponent implements OnInit {
       }
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
+    }
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
+      window.scroll({
+        top: 180, 
+        left: 0, 
+        behavior: 'smooth' 
+      });
     }
   }
 }
