@@ -46,20 +46,23 @@ export class ConfirmResetAcountComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (JSON.parse(localStorage.getItem("enterprise")) === '') {
+    if (localStorage.getItem("enterprise") === null) {
       this.mainService.getDataEnterprise()
         .subscribe((result: any) => {
-          this.dataEnterprise = result.data;         
+          this.dataEnterprise = result.data;
+          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+          document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+          document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+          document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
           localStorage.setItem("enterprise", JSON.stringify(result.data));
         })
     } else {
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+      document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+      document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+      document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     }
-
-    document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-    document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-    document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-    document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     this.route.queryParams.subscribe(params => {
       this.urlTokenPassword = params.reset_password_token;
     });
@@ -112,7 +115,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           this.txtPassword = '';
           this.txtConfirmPassword = '';
         }
-        );
+      );
     }
   }
 
