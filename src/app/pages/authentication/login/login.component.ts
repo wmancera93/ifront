@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertsService,
-    public userSharedService: UserSharedService) {
+    public userSharedService: UserSharedService,
+    private mainService: MainService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -49,8 +50,21 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  ngOnInit() {    
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+  ngOnInit() {
+    if (JSON.parse(localStorage.getItem("enterprise")) === '') {
+      this.mainService.getDataEnterprise()
+        .subscribe((result: any) => {
+          this.dataEnterprise = result.data;         
+          localStorage.setItem("enterprise", JSON.stringify(result.data));
+        })
+    } else {
+      this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    }
+
+    document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+    document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+    document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+    document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
   }
 
   singInSession() {
@@ -81,21 +95,22 @@ export class LoginComponent implements OnInit {
             const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
             this.alert.setAlert(alertWarning[0]);
           }
-          )
+        )
       } else {
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
           message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
         }];
-        this.alert.setAlert(alertWarning[0]);        
+        this.alert.setAlert(alertWarning[0]);
       }
     } else {
-      const alertWarning: Alerts[] = [{ 
-        type: 'warning', 
-        title: 'Advertencia', 
-        message: 'El email y contraseña son obligatorios.' }];
-      this.alert.setAlert(alertWarning[0]);     
+      const alertWarning: Alerts[] = [{
+        type: 'warning',
+        title: 'Advertencia',
+        message: 'El email y contraseña son obligatorios.'
+      }];
+      this.alert.setAlert(alertWarning[0]);
     }
   }
 
@@ -117,10 +132,11 @@ export class LoginComponent implements OnInit {
     let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     if (this.txtEmail !== '') {
       if (!expressionRegular.test(this.txtEmail)) {
-        const alertWarning: Alerts[] = [{ 
-          type: 'danger', 
-          title: 'Advertencia', 
-          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx' }];
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx'
+        }];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
       }

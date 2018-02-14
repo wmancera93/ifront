@@ -5,6 +5,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MainService } from '../../../services/main/main.service';
 
 @Component({
   selector: 'app-confirm-reset-acount',
@@ -21,7 +22,8 @@ export class ConfirmResetAcountComponent implements OnInit {
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     private route: ActivatedRoute,
-    public router: Router) {
+    public router: Router,
+    private mainService: MainService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -44,7 +46,20 @@ export class ConfirmResetAcountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    if (JSON.parse(localStorage.getItem("enterprise")) === '') {
+      this.mainService.getDataEnterprise()
+        .subscribe((result: any) => {
+          this.dataEnterprise = result.data;         
+          localStorage.setItem("enterprise", JSON.stringify(result.data));
+        })
+    } else {
+      this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    }
+
+    document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+    document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+    document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+    document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     this.route.queryParams.subscribe(params => {
       this.urlTokenPassword = params.reset_password_token;
     });

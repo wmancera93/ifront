@@ -1,0 +1,64 @@
+<div id="right-sidebar" class="animated sidebar-open sidebar-top container-contacts">
+  <div class="sidebar-container" style=" overflow: hidden;width: auto;  height: 100%;">
+    <div class="scrollbar scrollbar-success force-overflow ">
+      <ul class="nav nav-tabs row">
+        <li id="litab1" class="nav-item ">
+          <a id="atab1" class="nav-link bg-tabs active" data-toggle="tab" href="#tab-1" >
+            Contactos
+          </a>
+        </li>
+        <li id="litab2" class="nav-item ">
+          <a id="atab2" class="nav-link bg-tabs" data-toggle="tab" href="#tab-2" >
+            Chats
+          </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div id="tab-1" class="tab-pane active">
+          <div class="Search-bar">
+            <div class="form-group">
+              <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
+              <i class="search-input-icon fa fa-search icon-search"></i>
+            </div>
+          </div>
+          <div *ngFor="let contacto of Contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+            <a class="row justify-content-center">
+              <a class="col-md-3" col-4>
+                <img src="{{contacto.photo}}" class="roundPhoto">
+                <br>
+              </a>
+              <a class="col-md-9" col-8>
+                {{contacto.name}}
+                <br>{{contacto.info}}
+                <br> {{contacto.date}}
+                <div class="starIcon">
+                  <span>
+                    <i class="fa fa-star-o text-warning"></i>
+                  </span>
+                </div>
+              </a>
+            </a>
+          </div>
+        </div>
+        <div id="tab-2" class="tab-pane">
+          <div *ngFor="let item of Chats; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+            <a class="row">
+              <a class="col-md-3" col-4>
+                <img src="{{item.photo}}" class="roundPhoto">
+                <br>
+              </a>
+              <a class="col-md-6" col-8>
+                {{item.name}}
+                <br>{{item.conver}}
+                <br> {{item.status}}
+              </a>
+              <a class="col-md-3 ">
+                  <i class="fa fa-circle icon-active" aria-hidden="true"></i>
+                </a>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
