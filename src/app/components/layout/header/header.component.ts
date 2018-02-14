@@ -97,17 +97,6 @@ export class HeaderComponent implements OnInit {
       });
   }
 
-
-  ContactList() {
-    this.x = document.getElementById("contactList");
-    if (this.x.style.display === "none") {
-
-      this.x.style.display = "block";
-    } else {
-      this.x.style.display = "none";
-    }
-
-  }
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
     this.showMenu = false;   
