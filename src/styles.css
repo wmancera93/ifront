@@ -579,10 +579,6 @@ transition-duration:.3s;
     -moz-box-shadow: -6px 6px 21px 1px rgba(0,0,0,0.24);
     box-shadow: -6px 6px 21px 1px rgba(0,0,0,0.24);
 }
-.bg-white
-{
-    
-}
 .nav-tabs
 {
 border-bottom: 1px solid  #dddd;
