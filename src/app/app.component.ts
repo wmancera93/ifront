@@ -34,15 +34,15 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    this.mainService.getDataEnterprise()
-      .subscribe((result: any) => {
-        this.dataEnterprise = result.data;
-        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-        document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-        document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-        document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
-        localStorage.setItem("enterprise", JSON.stringify(result.data));
-      })
+    // this.mainService.getDataEnterprise()
+    //   .subscribe((result: any) => {
+    //     this.dataEnterprise = result.data;
+    //     document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+    //     document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+    //     document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+    //     document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+    //     localStorage.setItem("enterprise", JSON.stringify(result.data));
+    //   })
 
     document.documentElement.style.setProperty(`--top-content-type`, '1366px');
   }
