@@ -492,11 +492,15 @@ header{
     cursor: pointer;
 }
 
+.a-contacts {
+    padding: 7px 20px 9px 25px !important;
+}
+
 .fa-angle-down {
     float: right !important;
 }
 
-#page-wrapper, .pace-done .footer, nav {
+#page-wrapper, .pace-done .footer, nav  {
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;
     -o-transition: all 0.4s;
@@ -562,7 +566,19 @@ header{
 
 /*Contacts List*/
 .even { background: #D8D8D8; }
+.even:hover {
+    background: #676a6c !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+
+}
+
 .odd { background: #BDBDBD; }
+.odd:hover {
+    background: #676a6c !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+}
 
 .roundPhoto{
   width: 50px;
@@ -594,21 +610,24 @@ border-bottom: 1px solid  #dddd;
     margin-bottom: 0;
     list-style: none;
 }
-.Search-bar{
-
+.Search-bar
+{
     background: #f9f9f9f9;
     width: auto !important;
-    padding: 20px;
+    padding: 10px;
     border-bottom: 1px solid #e7eaec;
 }
-.starIcon{
+.starIcon
+{
     margin-top: 5px;
 }
-.icon-search {
+.icon-search
+{
     color: #acacac;
-    }
+}
     
-.search-input-icon {
+.search-input-icon
+ {
     margin-left: 88% !important;
     background-color: transparent;
     border: none;
@@ -616,10 +635,12 @@ border-bottom: 1px solid  #dddd;
     float: left;
 }
 
-#right-sidebar.sidebar-open {
+#right-sidebar.sidebar-open 
+{
     right: 0;
 }
-#right-sidebar {
+#right-sidebar 
+{
     background-color: #fff;
     border-left: 1px solid #e7eaec;
     border-top: 1px solid #e7eaec;
@@ -631,20 +652,33 @@ border-bottom: 1px solid  #dddd;
     bottom: 0;
     right: -260px;
 }
-.animated {
+.animated 
+{
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
 }
 
-.sidebar-container ul.nav-tabs {
+.sidebar-container ul.nav-tabs 
+{
     border: none;
 }
 .icon-active
 {
-    color: var(--btn-primary);
+    color: greenyellow;
     margin-top: 21px !important;
+}
+.icon-disabled
+{
+    color: red;
+    margin-top: 21px !important;
+}
+.bg-white
+{
+    background: #FFFFFF !important;
+    color: #acacac;
+    text-align: center;
 }
 
 

@@ -1,7 +1,7 @@
 <nav id="mainNav" class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3">
     <div class="col-12">
         <div class="row justify-content-between">
-            <div class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
+            <div id="btnMobile" class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
                 <div class="row">
                     <div *ngIf="showMenu" class="nav-mobile-hide" (click)="clickHideMenuMobile()">
                         <i class="fa fa-bars"></i>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center">
                 <div class="row justify-content-end">
-                    <div class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)=' ContactList()'>
+                    <div class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" data-toggle="collapse" href="#contactList">
                         <i class="fa fa-fw fa-users fa-lg"></i>
                         <span class="hideText font-size-responsive ">Compañeros</span>
                     </div>
@@ -39,6 +39,6 @@
     </div>
 </nav>
 <app-alerts></app-alerts>
-<div id="contactList">
+<div id="contactList" class="collapse">
 <app-contacts-list></app-contacts-list>
 </div>
