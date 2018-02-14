@@ -66,9 +66,8 @@ export class HeaderComponent implements OnInit {
     this.logoHeader = this.dataEnterprise.logo_inside.url;
 
     if(this.showMenu === true){
-      (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
-      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
-      // document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
+      document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
     }
   }
 
@@ -101,25 +100,22 @@ export class HeaderComponent implements OnInit {
   ContactList() {
     this.x = document.getElementById("contactList");
     if (this.x.style.display === "none") {
-
       this.x.style.display = "block";
     } else {
       this.x.style.display = "none";
     }
-
   }
+
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
     this.showMenu = false;   
-    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'block';
-    (<HTMLInputElement>document.getElementById('contentGeneral')).classList.remove('heigth-content-general');
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 
   clickShowMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     this.showMenu = true;
-    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
-    (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
   }
 
