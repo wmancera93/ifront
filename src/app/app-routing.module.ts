@@ -3,12 +3,12 @@ import { NgModule } from '@angular/core'
 
 const appRoutes: Routes = [
     {
-        path: 'Pages',
+        path: 'ihr',
         loadChildren: 'app/pages/pages.module#PagesModule'
     },
     {
         path: '',
-        redirectTo: '/Pages/Login',
+        redirectTo: '/ihr/login',
         pathMatch: 'full'
     }
 ];

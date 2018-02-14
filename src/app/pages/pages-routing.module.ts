@@ -11,23 +11,23 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 
 const routes: Routes = [
     {
-        path: 'Login',
+        path: 'login',
         component: LoginComponent
     },
     {
-        path: 'ResetAccount',
+        path: 'reset_account',
         component: ResetAccountComponent
     },
     {
-        path: 'LockedScreen',
+        path: 'locked_screen',
         component: LockedScreenComponent
     },
     {
-        path: 'ConfirmResetAccount',
+        path: 'confirm_reset_account',
         component: ConfirmResetAcountComponent
     },
     {
-        path: 'Dashboard',
+        path: 'index',
         component: DashboardComponent
     }
 ];

@@ -30,9 +30,7 @@ export class MenuNavigationComponent implements OnInit {
     document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
     document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
-    window.onload = function () {
-      document.documentElement.style.setProperty(`--visible-menu`, `block`)
-    }
+    document.documentElement.style.setProperty(`--visible-menu`, `block`)
   }
 
   getDataLocalStorage() {

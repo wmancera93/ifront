@@ -20,6 +20,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
+    document.documentElement.style.setProperty(`--top-content-type`, document.getElementById("page-wrapper").clientHeight.toString() + 'px');
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.nameEnterprise = this.dataEnterprise.name;
     
