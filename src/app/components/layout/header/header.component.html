@@ -1,9 +1,9 @@
 <nav id="mainNav" class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3">
     <div class="col-12">
         <div class="row justify-content-between">
-            <div class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
+            <div id="btnMobile" class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
                 <div class="row">
-                    <div *ngIf="showMenu" class="nav-mobile-hide" (click)="clickHideMenuMobile()">
+                    <div id="btnHideMenu" *ngIf="showMenu" class="nav-mobile-hide" (click)="clickHideMenuMobile()">
                         <i class="fa fa-bars"></i>
                     </div>
                     <div *ngIf="!showMenu" class="nav-mobile-show" (click)="clickShowMenuMobile()">

@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   public txtEmail: string = '';
   public txtPassword: string = '';
   public dataEnterprise: Enterprise;
+  public heightContenGeneral: number = 0;
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -68,6 +69,9 @@ export class LoginComponent implements OnInit {
       document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
       document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     }
+
+    this.heightContenGeneral = document.getElementById("headerLogin").clientHeight - this.heightContenGeneral;
+    document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
   }
 
   singInSession() {
