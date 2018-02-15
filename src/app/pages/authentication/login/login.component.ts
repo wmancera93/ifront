@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 
 // services
 import { Angular2TokenService } from 'angular2-token';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute,NavigationEnd } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { MainService } from '../../../services/main/main.service';
@@ -12,6 +12,9 @@ import { MainService } from '../../../services/main/main.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { User } from '../../../models/general/user';
 import { Enterprise } from '../../../models/general/enterprise';
+import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+
+declare const ga: any;
 
 @Component({
   selector: 'app-login',
@@ -29,7 +32,8 @@ export class LoginComponent implements OnInit {
     public route: ActivatedRoute,
     public alert: AlertsService,
     public userSharedService: UserSharedService,
-    private mainService: MainService) {
+    private mainService: MainService,
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -49,6 +53,13 @@ export class LoginComponent implements OnInit {
         }
       }
     );
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
   }
 
   ngOnInit() {
@@ -89,6 +100,7 @@ export class LoginComponent implements OnInit {
               this.userSharedService.setUser(result);
               localStorage.setItem("user", JSON.stringify(result));
               this.router.navigate(['/ihr/index']);
+              this.googleAnalyticsEventsService.emitEvent("authentication", "singInSession", "Sing in session", 1);
             }
           },
           error => {
@@ -101,6 +113,7 @@ export class LoginComponent implements OnInit {
             resultError = error.json();
             const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
             this.alert.setAlert(alertWarning[0]);
+            this.googleAnalyticsEventsService.emitEvent("login", "errorSingInSession", "Error sing in session", 1);
           }
         )
       } else {

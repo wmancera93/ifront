@@ -22,10 +22,10 @@ import { Enterprise } from '../../../models/general/enterprise';
 export class HeaderComponent implements OnInit {
   private dataUser: User = null;
   title: string = 'Mis datos';
-  private x;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
   public showMenu: boolean = true;
+  public showCollapse: string = '';
   public heightContenGeneral: number;
 
   private alertWarning: Alerts[];
@@ -119,17 +119,36 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+ clickPartnersIcon(toggle: string) {
+  
+   if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none')
+   {
+    if (this.showCollapse !== toggle) {
+      this.clickHideMenuMobile();
+    }
+   }
+    
+  }
+
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
     this.showMenu = false;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 
-  clickShowMenuMobile() {
+  clickShowMenuMobile() {    
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
+  
+    if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block')
+    {
+      if(document.getElementById('contactList').classList[1] === 'show'){
+        document.getElementById('contactList').classList.remove('show')
+      }
+      
+    }
   }
 
   getDataLocalStorage() {

@@ -7,6 +7,7 @@ import { A2tUiModule } from 'angular2-token';
 import { AlertsService } from './shared/common/alerts/alerts.service';
 import { UserSharedService } from './shared/common/user/user-shared.service';
 import { MainService } from './main/main.service';
+import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { MainService } from './main/main.service';
   providers: [
     AlertsService,
     UserSharedService,
-    MainService
+    MainService,
+    GoogleAnalyticsEventsService
   ]
 })
 export class ServicesModule { }
