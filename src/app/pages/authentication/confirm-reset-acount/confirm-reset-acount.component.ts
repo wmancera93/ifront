@@ -4,8 +4,11 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MainService } from '../../../services/main/main.service';
+import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+
+declare const ga: any;
 
 @Component({
   selector: 'app-confirm-reset-acount',
@@ -23,7 +26,9 @@ export class ConfirmResetAcountComponent implements OnInit {
     private tokenService: Angular2TokenService,
     private route: ActivatedRoute,
     public router: Router,
-    private mainService: MainService) {
+    private mainService: MainService,
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService
+  ) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -43,7 +48,14 @@ export class ConfirmResetAcountComponent implements OnInit {
         }
       }
     );
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
   }
+  
 
   ngOnInit() {
     if (localStorage.getItem("enterprise") === null) {
@@ -102,6 +114,7 @@ export class ConfirmResetAcountComponent implements OnInit {
               document.getElementById('closeModal').click();
               this.router.navigate(['/ihr/login']);
             }, 2000);
+            this.googleAnalyticsEventsService.emitEvent("authentication", "ConfirmResetPassword", "Reset Password Account", 1);
           }
         },
         (error) => {
@@ -116,7 +129,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           this.txtConfirmPassword = '';
         }
       );
-    }
+    }    
   }
 
   // events

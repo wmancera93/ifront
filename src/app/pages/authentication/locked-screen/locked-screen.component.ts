@@ -7,7 +7,10 @@ import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
 import { User } from '../../../models/general/user';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
-import { Router } from '@angular/router';
+import { Router,NavigationEnd } from '@angular/router';
+import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+
+declare const ga: any;
 
 @Component({
   selector: 'app-locked-screen',
@@ -21,7 +24,9 @@ export class LockedScreenComponent implements OnInit {
   constructor(private tokenService: Angular2TokenService,
     public alert: AlertsService,
     public userSharedService: UserSharedService,
-    public router: Router) {
+    public router: Router,
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService
+  ) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -41,6 +46,12 @@ export class LockedScreenComponent implements OnInit {
         }
       }
     );
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
   }
 
   ngOnInit() {
@@ -68,6 +79,7 @@ export class LockedScreenComponent implements OnInit {
               this.userSharedService.setUser(result);
               localStorage.setItem("user", JSON.stringify(result));
               this.router.navigate(['/ihr/index']);
+              this.googleAnalyticsEventsService.emitEvent("authentication", "RestartSession", "Restart Session", 1);
             }
           },
           error => {
