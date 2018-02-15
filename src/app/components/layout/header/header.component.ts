@@ -22,11 +22,10 @@ import { Enterprise } from '../../../models/general/enterprise';
 export class HeaderComponent implements OnInit {
   private dataUser: User = null;
   title: string = 'Mis datos';
-  private x;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
   public showMenu: boolean = true;
-
+  public showCollapse: string = '';
   private alertWarning: Alerts[];
 
   constructor(private userSharedService: UserSharedService,
@@ -65,7 +64,7 @@ export class HeaderComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
 
-    if(this.showMenu === true){
+    if (this.showMenu === true) {
       (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
       // document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
@@ -97,9 +96,19 @@ export class HeaderComponent implements OnInit {
       });
   }
 
+ clickPartnersIcon(toggle: string) {
+   if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none')
+   {
+    if (this.showCollapse !== toggle) {
+      this.clickHideMenuMobile();
+    }
+   }
+    
+  }
+
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
-    this.showMenu = false;   
+    this.showMenu = false;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'block';
     (<HTMLInputElement>document.getElementById('contentGeneral')).classList.remove('heigth-content-general');
   }
@@ -110,6 +119,7 @@ export class HeaderComponent implements OnInit {
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[0]).style.display = 'none';
     (<HTMLInputElement>document.getElementById('contentGeneral')).className = 'heigth-content-general';
     document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
+
   }
 
   getDataLocalStorage() {

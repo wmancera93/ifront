@@ -647,6 +647,7 @@ border-bottom: 1px solid  #dddd;
     overflow: hidden;
     position: fixed;
     top: 48px;
+    height: 60%;
     width: 260px !important;
     z-index: 1009;
     bottom: 0;
@@ -1168,6 +1169,19 @@ border-bottom: 1px solid  #dddd;
     .bg-login {
         max-width: 400px !important;
     }
+    #right-sidebar {
+        background-color: #fff;
+        border-left: 1px solid #e7eaec;
+        border-top: 1px solid #e7eaec;
+        overflow: hidden;
+        position: fixed;
+        top: 48px;
+        width: 260px !important;
+        height: 75%;
+        z-index: 1009;
+        bottom: 0;
+        right: -260px;
+    }
 
     header{
         background-position: center top !important;
@@ -1215,6 +1229,7 @@ border-bottom: 1px solid  #dddd;
     .navbar-static-side {
         margin-top: 51px
     }
+   
 }
 
 
