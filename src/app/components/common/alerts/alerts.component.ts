@@ -30,10 +30,6 @@ export class AlertsComponent implements OnInit {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(92, 184, 92, 0.7)`);
         this.icon = 'fa-check';
       }
-      if (this.bodyAlert.type === 'confirmation') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165, 0.7)`);
-        this.icon = 'fa-check';
-      }
       if (this.bodyAlert.type === 'danger') {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(217, 83, 79, 0.7)`);
         this.icon = 'fa-exclamation-triangle';
@@ -48,6 +44,7 @@ export class AlertsComponent implements OnInit {
       }
 
       document.getElementById("btnModal").click();
+      document.getElementById("bodyGeneral").removeAttribute('style');
     })
   }
 
@@ -56,8 +53,8 @@ export class AlertsComponent implements OnInit {
   }
 
   clickConfirmate(){
+    this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
     document.getElementById('closeModal').click();
-    this.route.navigate([this.bodyAlert.redirect.url]);
   }
 
 }

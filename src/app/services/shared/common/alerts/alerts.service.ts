@@ -5,6 +5,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 @Injectable()
 export class AlertsService {
   exportAlert: Subject<any> = new Subject<any>();
+  actionConfirm: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -16,4 +17,11 @@ export class AlertsService {
     return this.exportAlert.next(objectAlert);
   }
 
+  getActionConfirm() {
+    return this.actionConfirm;
+  }
+
+  setActionConfirm(action:string) {
+    return this.actionConfirm.next(action);
+  }
 }
