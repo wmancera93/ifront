@@ -6,7 +6,10 @@ import { Angular2TokenService } from 'angular2-token';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { Enterprise } from '../../../models/general/enterprise';
 import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+
+declare const ga: any;
 
 @Component({
   selector: 'app-reset-account',
@@ -19,7 +22,8 @@ export class ResetAccountComponent implements OnInit {
 
   constructor(public alert: AlertsService, 
     private tokenService: Angular2TokenService,
-    public router: Router) {
+    public router: Router,
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -39,6 +43,13 @@ export class ResetAccountComponent implements OnInit {
         }
       }
     );
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
   }
 
   ngOnInit() {
@@ -59,6 +70,7 @@ export class ResetAccountComponent implements OnInit {
             }];
             this.alert.setAlert(alertWarning[0]);
             this.txtEmail = '';
+            this.googleAnalyticsEventsService.emitEvent("authentication", "restartAccount", "Restart Account", 1);
           }
 
         },
