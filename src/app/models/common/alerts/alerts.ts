@@ -3,7 +3,8 @@ export interface Alerts {
     title: string,
     message: string,
     confirmation?: boolean,
-    redirect?: Redirect
+    typeConfirmation?: string
+
 }
 
 export interface Redirect {

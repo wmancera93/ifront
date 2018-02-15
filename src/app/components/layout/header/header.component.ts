@@ -58,6 +58,15 @@ export class HeaderComponent implements OnInit {
       }
     );
 
+    this.alert.getActionConfirm().subscribe(
+      (data: any) => {        
+        if (data === "logout") {
+          localStorage.setItem('user',null);          
+          this.router.navigate(['/ihr/login']);          
+        }
+      }
+    )
+
   }
 
 
@@ -70,20 +79,20 @@ export class HeaderComponent implements OnInit {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
     } else {
       if (this.showMenu === true) {
-        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';    
+        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
       }
     }
 
-    if (document.getElementById("navMenu").clientHeight > 0) {      
-      if(document.getElementById("navMenu").clientHeight > 800 && document.getElementById("navMenu").clientHeight <= 879) {
+    if (document.getElementById("navMenu").clientHeight > 0) {
+      if (document.getElementById("navMenu").clientHeight > 800 && document.getElementById("navMenu").clientHeight <= 879) {
         this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 161;
       }
-      if(document.getElementById("navMenu").clientHeight > 880) {
+      if (document.getElementById("navMenu").clientHeight > 880) {
         this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 280;
       }
-      if(document.getElementById("navMenu").clientHeight < 800) {
+      if (document.getElementById("navMenu").clientHeight < 800) {
         this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
-      }      
+      }
     }
     else {
       if (this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight) {
@@ -95,39 +104,59 @@ export class HeaderComponent implements OnInit {
   }
 
   LogOut() {
-    this.tokenService.signOut().subscribe(
-      (res: any) => {
-        let userData: User;
-        this.userSharedService.setUser(userData);
-        localStorage.setItem("user", '');
-        this.router.navigate(['/ihr/login']);
-      },
-      (error: any) => {
-        let resultError: any;
-        let typeAlert: string = 'confirmation';
 
-        resultError = error.json();
-        this.alertWarning = [{
-          type: 'confirmation',
-          title: 'Confirmación',
-          message: resultError.errors[0],
-          confirmation: true,
-          redirect: { url: '/ihr/login' }
-        }];
+    this.alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea cerrar la sesión?',
+      confirmation: true,
+      typeConfirmation: 'logout'
+    }];
 
-        this.alert.setAlert(this.alertWarning[0]);
-      });
+    this.alert.setAlert(this.alertWarning[0]);
+
+    // this.tokenService.signOut().subscribe(
+    //   (res: any) => {
+    //     let userData: User;
+    //     this.userSharedService.setUser(userData);
+    //     localStorage.setItem("user", '');
+    //     this.router.navigate(['/ihr/login']);
+
+    //     this.alertWarning = [{
+    //       type: 'warning',
+    //       title: 'Confirmación',
+    //       message: '¿Desea cerrar la sesión?',
+    //       confirmation: true,
+    //       typeConfirmation: 'logout'
+    //     }];
+
+    //     this.alert.setAlert(this.alertWarning[0]);
+    //   },
+    //   (error: any) => {
+    //     let resultError: any;
+    //     let typeAlert: string = 'confirmation';
+
+    //     resultError = error.json();
+    //     this.alertWarning = [{
+    //       type: 'confirmation',
+    //       title: 'Confirmación',
+    //       message: resultError.errors[0],
+    //       confirmation: true,
+    //       typeConfirmation: 'logout'
+    //     }];
+
+    //     this.alert.setAlert(this.alertWarning[0]);
+    //   });
   }
 
- clickPartnersIcon(toggle: string) {
-  
-   if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none')
-   {
-    if (this.showCollapse !== toggle) {
-      this.clickHideMenuMobile();
+  clickPartnersIcon(toggle: string) {
+
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {
+      if (this.showCollapse !== toggle) {
+        this.clickHideMenuMobile();
+      }
     }
-   }
-    
+
   }
 
   clickHideMenuMobile() {
@@ -136,18 +165,17 @@ export class HeaderComponent implements OnInit {
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 
-  clickShowMenuMobile() {    
+  clickShowMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
-  
-    if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block')
-    {
-      if(document.getElementById('contactList').classList[1] === 'show'){
+
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
+      if (document.getElementById('contactList').classList[1] === 'show') {
         document.getElementById('contactList').classList.remove('show')
       }
-      
+
     }
   }
 
