@@ -120,6 +120,7 @@ export class HeaderComponent implements OnInit {
   }
 
  clickPartnersIcon(toggle: string) {
+  
    if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none')
    {
     if (this.showCollapse !== toggle) {
@@ -135,12 +136,19 @@ export class HeaderComponent implements OnInit {
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
   }
 
-  clickShowMenuMobile() {
+  clickShowMenuMobile() {    
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
-
+  
+    if(window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block')
+    {
+      if(document.getElementById('contactList').classList[1] === 'show'){
+        document.getElementById('contactList').classList.remove('show')
+      }
+      
+    }
   }
 
   getDataLocalStorage() {

@@ -6,7 +6,7 @@
                     <div id="btnHideMenu" *ngIf="showMenu" class="nav-mobile-hide" (click)="clickHideMenuMobile()">
                         <i class="fa fa-bars"></i>
                     </div>
-                    <div *ngIf="!showMenu" class="nav-mobile-show" (click)="clickShowMenuMobile()">
+                    <div id="btnShowMenu" *ngIf="!showMenu" class="nav-mobile-show" (click)="clickShowMenuMobile()">
                         <i class="fa fa-bars"></i>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center">
                 <div class="row justify-content-end">
-                    <div id="togglePartners" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" data-toggle="collapse" href="#contactList" (cllic)="clickPartnersIcon('togglePartners')">
+                    <div id="togglePartners" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" data-toggle="collapse" href="#contactList" (click)="clickPartnersIcon('togglePartners')">
                         <i class="fa fa-fw fa-users fa-lg"></i>
                         <span class="hideText font-size-responsive ">Compañeros</span>
                     </div>
