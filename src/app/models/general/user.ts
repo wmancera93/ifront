@@ -16,22 +16,22 @@ export interface Employee {
     image: Url,
     posicion: string,
     short_name: string, 
-    id: (number);
-    name: (string);
-    lastname: (string);
-    name_complete:  (string);
-    favorite: (boolean);
-    phone:(number);
-    unidad_org:  (string);
-    area:  (string);
-    division_per: (string);
-    subdivision_per:  (string);
-    fecha_nac: (number);
-    fecha_ing: (number);
-    personal_phone: (number);
-    contract_type:  (string);
-    my_boss_employee:Boss;
-    address:(string);
+    id?: number;
+    name?: string;
+    lastname?: string;
+    name_complete?:  string;
+    favorite?: boolean;
+    phone?:number;
+    unidad_org?:string;
+    area?:  string;
+    division_per?: string;
+    subdivision_per?:  string;
+    fecha_nac?: number;
+    fecha_ing?: number;
+    personal_phone?:number;
+    contract_type?: string;
+   // my_boss_employee:Boss;
+    address?:string;
 
 }
 export interface Boss{

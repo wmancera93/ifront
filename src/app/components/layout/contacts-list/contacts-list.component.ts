@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Employee } from '../../../models/general/user';
 
 @Component({
   selector: 'app-contacts-list',
@@ -6,6 +7,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./contacts-list.component.css']
 })
 export class ContactsListComponent implements OnInit {
+/*public InfoContacts: Employee={email: '',
+  pernr: 0,
+  image: ,
+  posicion: '',
+  short_name: '', 
+  id:0,
+  name: '',
+  lastname: (''),
+  name_complete:  (''),
+  favorite:true,
+  phone:0,
+  unidad_org:  (''),
+  area:  (''),
+  division_per: (''),
+  subdivision_per:  (''),
+  fecha_nac: 0,
+  fecha_ing: 0,
+  personal_phone:0,
+  contract_type: (''),
+  address:('')};
+*/
 Contacts: any=[];
 Chats: any=[];
 statusItem : string;
