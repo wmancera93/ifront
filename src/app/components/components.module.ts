@@ -13,6 +13,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 import { ContactInformationComponent } from './layout/contact-information/contact-information.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -27,6 +28,7 @@ import { ContactInformationComponent } from './layout/contact-information/contac
     ToasterContainerComponent,
     ContactsListComponent,
     ContactInformationComponent
+    
   ],
   exports: [
     HeaderComponent,

@@ -59,9 +59,10 @@ export class HeaderComponent implements OnInit {
     );
 
     this.alert.getActionConfirm().subscribe(
-      (data: any) => {        
+      (data: any) => { 
         if (data === "logout") {
-          localStorage.setItem('user',null);          
+          localStorage.setItem('user',null);   
+          this.userSharedService.setUser(null);
           this.router.navigate(['/ihr/login']);          
         }
       }
@@ -74,7 +75,7 @@ export class HeaderComponent implements OnInit {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
-
+   
     if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
     } else {
@@ -114,39 +115,7 @@ export class HeaderComponent implements OnInit {
     }];
 
     this.alert.setAlert(this.alertWarning[0]);
-
-    // this.tokenService.signOut().subscribe(
-    //   (res: any) => {
-    //     let userData: User;
-    //     this.userSharedService.setUser(userData);
-    //     localStorage.setItem("user", '');
-    //     this.router.navigate(['/ihr/login']);
-
-    //     this.alertWarning = [{
-    //       type: 'warning',
-    //       title: 'Confirmación',
-    //       message: '¿Desea cerrar la sesión?',
-    //       confirmation: true,
-    //       typeConfirmation: 'logout'
-    //     }];
-
-    //     this.alert.setAlert(this.alertWarning[0]);
-    //   },
-    //   (error: any) => {
-    //     let resultError: any;
-    //     let typeAlert: string = 'confirmation';
-
-    //     resultError = error.json();
-    //     this.alertWarning = [{
-    //       type: 'confirmation',
-    //       title: 'Confirmación',
-    //       message: resultError.errors[0],
-    //       confirmation: true,
-    //       typeConfirmation: 'logout'
-    //     }];
-
-    //     this.alert.setAlert(this.alertWarning[0]);
-    //   });
+    
   }
 
   clickPartnersIcon(toggle: string) {

@@ -175,13 +175,21 @@ button, input, optgroup, select, textarea {
 
 header{
     background-color: #2f4050 !important;
-    background-image: var(--img-header-login);
+    background-image: var(--img-header-login);    
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;   
     height: 662px !important;
     padding: 40px 0 150px;
     color: white;
+}
+
+.errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center;
+    
 }
 
 .img-user {
@@ -217,6 +225,11 @@ header{
     height: 37px;    
 }
 
+.company-logo-error {
+    width: 100%;
+    margin-top: 50px;
+    display: block;
+}
 .transition-bg-login {
     /* This section calls the slideInFromLeft animation we defined above */
     animation: 1s ease-out 0s 1 slideInFromLeft;
@@ -308,6 +321,66 @@ header{
 #modal-alert {
     color: #FFFFFF !important;
 }
+/*Error Message */
+.errorMessage {
+    margin-top: 80px;
+}
+
+.errorMessage-container {
+    text-align: center;
+}
+.fontMessage-error
+{
+    margin-top: 20px;
+    color: #fff;
+    font-size: 1.5rem;
+}
+.fontlink-error
+{
+    margin-top: 20px;
+    color:var(--btn-primary);
+    font-size: 1.0rem;
+}
+.fontTitle-error{
+    color:#676a6c !important;
+     font-size:3.5rem !important;
+}
+.buttonError{
+   
+    background-color:var(--btn-primary);
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 30px;
+    width: 100%;
+    margin-top: 30px;
+    /**/
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+}
+.buttonError:hover{       
+        cursor: pointer;        
+        color:var(--btn-primary-hover);   
+        /*box-shadow: 0px 0px 100px #000000;*/
+        z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.05);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.05);   
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.05);
+        transition: all 200ms ease-in;
+        transform: scale(1.05); 
+}
+
+
+/*--------*/
+
 /*Header Style*/
 #page-wrapper {
     position: inherit !important;
@@ -802,6 +875,28 @@ border-bottom: 1px solid  #dddd;
     .nav>li>a {
         font-size: 17px !important;
     } 
+    .errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    height: 1024px !important;
+    
+   
+}
+.errorMessage {
+    margin-top: -20px;
+}
+
+.fontTitle-error{
+     
+    margin-top: 20px;
+}
+.company-logo-error {
+    width: 100%;
+    margin-top: 6px;
+    display: block;
+}
 }
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
@@ -896,6 +991,28 @@ border-bottom: 1px solid  #dddd;
     bottom: 0;
     right: -260px;
 }
+.errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    height: 1366px !important;
+    
+   
+}
+.errorMessage {
+    margin-top: 60px;
+}
+
+.fontTitle-error{
+     
+    margin-top: 20px;
+}
+.company-logo-error {
+    width: 100%;
+    margin-top: 6px;
+    display: block;
+}
 }
 
 @media (max-width: 1100px)  and (max-height: 800px) {
@@ -941,6 +1058,30 @@ border-bottom: 1px solid  #dddd;
     :-moz-placeholder { /* Firefox 18- */
         font-size: 1.1rem !important;
     }
+ 
+.errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    height: 768px !important;
+    
+   
+}
+.errorMessage {
+    margin-top: -20px;
+}
+
+.fontTitle-error{
+     
+    margin-top: 20px;
+}
+.company-logo-error {
+    width: 100%;
+    margin-top: 6px;
+    display: block;
+}
+
 }
 
 @media (max-width: 800px)  and (max-height: 1100px) {
@@ -949,6 +1090,7 @@ border-bottom: 1px solid  #dddd;
         height: 637px !important;
         padding: 220px 0 150px !important;
     }
+   
     .top {
         margin-top: 30px !important;
     }
@@ -1010,7 +1152,29 @@ border-bottom: 1px solid  #dddd;
     bottom: 0;
     right: -260px;
 }
+.errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    height: 1035px !important;
+   
 }
+.errorMessage {
+    margin-top: -20px;
+}
+
+.fontTitle-error{
+     
+    margin-top: 20px;
+}
+.company-logo-error {
+    width: 100%;
+    margin-top: 6px;
+    display: block;
+}
+}
+
 
 @media only screen and (max-width: 830px)  and (max-height: 500px) {
     header{
@@ -1113,6 +1277,37 @@ border-bottom: 1px solid  #dddd;
     .navbar-static-side {
         margin-top: 51px
     }
+    .fontTitle-error{
+        color:#676a6c !important;
+        font-size:1.2rem !important;
+        margin-top: 10px;
+    }
+    
+    .fontMessage-error{
+        margin-top: 20px;
+        color: #fff;
+        font-size: 0.8rem !important;
+    }
+    .buttonError {
+        background-color: var(--btn-primary);
+        padding-top: 5px;
+        padding-bottom: 1px;
+        border-radius: 30px;
+        width: 100%;
+        margin-top: 30px;
+        }
+        .errorImg
+        {
+            background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+            background-repeat: no-repeat;
+            background-position: center !important;
+            height: 415px !important;
+           
+        }
+        .errorMessage {
+            margin-top: 20px;
+        }
+      
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
@@ -1191,6 +1386,35 @@ border-bottom: 1px solid  #dddd;
     .navbar-static-side {
         margin-top: 51px
     }
+    .fontMessage-error{
+        margin-top: 20px;
+        color: #fff;
+        font-size: 0.8rem !important;
+    }
+    
+    .fontTitle-error{
+        color:#676a6c !important;
+        font-size:1.2rem !important;
+    }
+    .buttonError {
+        background-color: var(--btn-primary);
+        padding-top: 5px;
+        padding-bottom: 1px;
+        border-radius: 30px;
+        width: 100%;
+        margin-top: 30px;
+    }
+    .errorImg
+    {
+        background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+        background-repeat: no-repeat;
+        background-position: center !important;
+        height: 900px !important; 
+    }
+    .errorMessage {
+        margin-top: 130px;
+    }
+
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 800px) {
@@ -1210,12 +1434,43 @@ border-bottom: 1px solid  #dddd;
         bottom: 0;
         right: -260px;
     }
+    .fontMessage-error
+{
+    margin-top: 20px;
+    color: #fff;
+    font-size: 0.7rem !important;
+}
+
+    .fontTitle-error{
+    color:#676a6c !important;
+    font-size:1.2rem !important;
+}
+.buttonError {
+    background-color: var(--btn-primary);
+    padding-top: 5px;
+    padding-bottom: 1px;
+    border-radius: 30px;
+    width: 100%;
+    margin-top: 30px;
+    }
+
 
     header{
         background-position: center top !important;
-        height: 637px !important;
+        height: 637px !important;       
         padding: 30px 5px 40px !important;
     }
+    .errorImg
+{
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+    background-repeat: no-repeat;
+    background-position: center !important;
+    height: 750px !important; 
+}
+.errorMessage {
+    margin-top: 120px;
+}
+  
 
     .top {
         margin-top: 15px !important;
@@ -1257,6 +1512,7 @@ border-bottom: 1px solid  #dddd;
     .navbar-static-side {
         margin-top: 51px
     }
+
    
 }
 
