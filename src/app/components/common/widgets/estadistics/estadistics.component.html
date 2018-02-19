@@ -1,0 +1,23 @@
+<div [ngStyle]="{'background-color': objectWidget.background}" class="widget wg-hover-general wg-hover-bg navy-bg">
+  <div class="row">
+    <div class="col-4">
+      <span id="severances" style="width: 100px" class="m-l-n-sm">
+        <canvas width="66" height="65" style="display: inline-block; width: 66px; height: 65px; vertical-align: top;"></canvas>
+      </span>
+    </div>
+    <div class="col-8 text-white text-right">
+      <div class="row">
+        <div class="col-12">
+          <strong [ngStyle]="{'color': objectWidget.color}" class="font-size-12   m-l-n-md"> {{objectWidget.title}} </strong>
+        </div>
+        <div class="col-12">
+          <p [ngStyle]="{'color': objectWidget.color}" class="font-size-12   m-l-n-md"> {{objectWidget.comment}} </p>
+        </div>
+        <div class="col-12">
+          <strong [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n-lg m-t-n-xs font-size-20" id="info_severances">
+            <i [ngStyle]="{'color': objectWidget.color}" class="fa fa-arrow-up"></i> {{objectWidget.number}} % </strong>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
