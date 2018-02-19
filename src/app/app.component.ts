@@ -43,9 +43,14 @@ export class AppComponent {
           this.showComponents = true;
           this.pageWrapper = 'page-wrapper';
 
-          if (this.dataUser === null) {
-            this.router.navigate(['/ihr/error']);
-          }
+
+
+          if (this.dataUser === null || this.dataUser === undefined) {
+            this.dataUser = JSON.parse(localStorage.getItem("user"));
+            if (this.dataUser === null) {
+              this.router.navigate(['/ihr/error']);
+            }
+          }         
         }
       }
     });
@@ -54,7 +59,7 @@ export class AppComponent {
     // } else {
     //   alert('no ok');
     // }
-    
+
   }
 
   ngOnInit() {
