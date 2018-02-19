@@ -32,17 +32,12 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
     FooterComponent,
     ToasterContainerComponent,
     ContactsListComponent,
-<<<<<<< HEAD
     ContactInformationComponent,
     CalendarComponent,
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
     NotificationSecundaryComponent
-=======
-    ContactInformationComponent
-    
->>>>>>> d4582bcd061d4198f25d089de59696c652552488
   ],
   exports: [
     HeaderComponent,
