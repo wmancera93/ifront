@@ -30,7 +30,7 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
     ResetAccountComponent,
     LockedScreenComponent,
     DashboardComponent,
-    ConfirmResetAcountComponent,
+    ConfirmResetAcountComponent
   ],
   providers:[
     Angular2TokenService

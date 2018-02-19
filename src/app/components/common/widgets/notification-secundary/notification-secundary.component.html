@@ -1,0 +1,15 @@
+<div [ngStyle]="{'background-color': objectWidget.background}" class="widget wg-hover-general wg-hover-bg widget-height-notification p-lg text-center">
+  <div>
+    <span class="fa-stack" style="height: 53px; font-size: 2.7em;">
+      <i [ngStyle]="{'color': objectWidget.colorIconPrimary}" class="{{objectWidget.iconPrimary}} fa-stack-2x " style="margin-top:-10px"></i>
+      <i [ngStyle]="{'color': objectWidget.colorIconSecundary}" class="{{objectWidget.iconSecundary}} fa-stack-1x "></i>
+    </span>
+
+    <h1 [ngStyle]="{'color': objectWidget.color}" class="m-xs">{{objectWidget.number}}</h1>
+
+    <small [ngStyle]="{'color': objectWidget.color}" class="m-l-n" style="margin-right: -22px">{{objectWidget.comment}}</small>
+    <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
+        {{objectWidget.title}}
+    </h3>
+  </div>
+</div>

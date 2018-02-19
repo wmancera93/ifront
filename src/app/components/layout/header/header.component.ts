@@ -59,10 +59,10 @@ export class HeaderComponent implements OnInit {
     );
 
     this.alert.getActionConfirm().subscribe(
-      (data: any) => {        
+      (data: any) => {
         if (data === "logout") {
-          localStorage.setItem('user',null);          
-          this.router.navigate(['/ihr/login']);          
+          localStorage.setItem('user', null);
+          this.router.navigate(['/ihr/login']);
         }
       }
     )
@@ -162,7 +162,9 @@ export class HeaderComponent implements OnInit {
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
     this.showMenu = false;
-    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+    setTimeout(() => {
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+    }, 300);
   }
 
   clickShowMenuMobile() {
