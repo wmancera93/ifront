@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
+import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar } from '../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,6 +12,15 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
+
+  @Output() objectRequest: NotificationPrimary;
+  @Output() objectVacations: NotificationSecundary;
+  @Output() objectMyLayoffs: Estadistics;
+  @Output() objectMyInterestsLayoffs: Estadistics;
+  @Output() objectIncome: Estadistics;
+  @Output() objectDeductions: Estadistics;
+  @Output() objectCalendar: Calendar;
+  
   public userAuthenticated: User = null;
   public authdata: any;
 
@@ -42,6 +52,7 @@ export class DashboardComponent implements OnInit {
         this.getDataLocalStorage();
       }
     })
+
   }
 
   getDataLocalStorage() {
@@ -51,6 +62,86 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit() {
+    const request: NotificationPrimary[] = [];
+    request.push({ 
+      title: 'Solicitudes', 
+      number: '1', 
+      comment: 'por gestionar', 
+      icon: 'fa fa-thumbs-up', 
+      colorIcon: '#FFFFFF',      
+      background: '#de7e35',
+      color: '#FFFFFF' });
+    this.objectRequest = request[0];
+
+    const vacations: NotificationSecundary[] = [];
+    vacations.push({
+      title: 'Vacaciones',
+      number: '15',
+      comment: 'Mis dias de',
+      iconPrimary: 'fa fa-globe',
+      iconSecundary: 'fa fa-plane',
+      colorIconPrimary: '#33446e',
+      colorIconSecundary: '#de7e35',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    this.objectVacations = vacations[0];
+
+    const myLayoffs: Estadistics[] = [];
+    myLayoffs.push({
+      title: 'Mis cesantías',     
+      number: '66.67',
+      comment: 'Aumento cesantías',
+      canvas: {},
+      color: '#FFFFFF',
+      background: '#33446e'
+    });
+    this.objectMyLayoffs = myLayoffs[0];
+
+    const myInterestsLayoffs: Estadistics[] = [];
+    myInterestsLayoffs.push({
+      title: 'Mis intereses de cesantías',
+      number: '177.77',
+      comment: 'Aumento intereses',
+      canvas: {},
+      color: '#FFFFFF',
+      background: '#33446e'
+    });
+    this.objectMyInterestsLayoffs = myInterestsLayoffs[0];
+
+    const income: Estadistics[] = [];
+    income.push({
+      title: 'Total ingresos',
+      number: '0',
+      comment: 'Ultimos 3 periodos',
+      canvas: {},
+      color: '#FFFFFF',
+      background: '#de7e35'
+    });
+    this.objectIncome = income[0];
+
+    const deductions: Estadistics[] = [];
+    deductions.push({
+      title: 'Total ingresos',
+      number: '126.95',
+      comment: 'Ultimos 3 periodos',
+      canvas: {},
+      color: '#FFFFFF',
+      background: '#de7e35'
+    });
+    this.objectDeductions = deductions[0];
+
+    const calendar: Calendar[] = [];
+    calendar.push({
+      nameDay: 'Lunes',
+      numberDay: '19',
+      namemonth: 'Febrero',
+      numberYear: '2018',
+      color: '#FFFFFF',
+      background: '#de7e35'
+    });
+    this.objectCalendar = calendar[0];
+
     // this.authdata = this.tokenService.currentAuthData;
     // console.log(this.tokenService);
     this.getDataLocalStorage();

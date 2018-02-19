@@ -1,0 +1,16 @@
+<div [ngStyle]="{'background-color': objectWidget.background}" class="widget widget-calendar wg-hover-general wg-hover-bg text-center">
+  <div class="m-lg">
+    <i [ngStyle]="{'color': objectWidget.color}" class="fa fa-calendar fa-7x"></i>
+    <div class="m-lg">
+      <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
+        {{objectWidget.nameDay}}
+      </h3>
+      <h1 [ngStyle]="{'color': objectWidget.color}">{{objectWidget.numberDay}}</h1>
+
+      <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
+        {{objectWidget.namemonth}}
+      </h3>
+      <small [ngStyle]="{'color': objectWidget.color}" style="margin-left: -22px;margin-right: -30px;">{{objectWidget.numberYear}}</small>
+    </div>
+  </div>
+</div>

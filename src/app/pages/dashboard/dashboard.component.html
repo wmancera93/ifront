@@ -1,147 +1,24 @@
 <div class="heigth-content-general">
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <!-- <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-  <p>
-    {{userAuthenticated.id}}
-  </p>
-  <p>
-    {{userAuthenticated.active}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.short_name}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.posicion}}
-  </p>
-  <p>
-    {{userAuthenticated.employee.email}}
-  </p>
-  <p>
-    {{authdata}}
-  </p>
-   -->
+  <div class="row-hr-container">
+    <div class="row">      
+      <app-notification-primary [notificationPrimary]="objectRequest" class="col-xl-2 col-6"></app-notification-primary>
+      <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-2 col-6"></app-notification-secundary>
+      <div class="col-xl-4 col-12">
+        <div class="row">
+          <app-estadistics [estadistics]="objectMyLayoffs" class="col-12"></app-estadistics>
+          <app-estadistics [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
+        </div>
+      </div>
+      <div class="col-xl-4 col-12">
+        <div class="row">
+          <app-estadistics [estadistics]="objectIncome" class="col-12"></app-estadistics>
+          <app-estadistics [estadistics]="objectDeductions" class="col-12"></app-estadistics>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <app-newspaper class="col-xl-9 col-12"></app-newspaper>
+      <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
+    </div>
+  </div>
 </div>

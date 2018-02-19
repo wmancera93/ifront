@@ -15,7 +15,28 @@ export interface Employee {
     pernr: number,
     image: Url,
     posicion: string,
-    short_name: string,  
+    short_name: string, 
+    id: (number);
+    name: (string);
+    lastname: (string);
+    name_complete:  (string);
+    favorite: (boolean);
+    phone:(number);
+    unidad_org:  (string);
+    area:  (string);
+    division_per: (string);
+    subdivision_per:  (string);
+    fecha_nac: (number);
+    fecha_ing: (number);
+    personal_phone: (number);
+    contract_type:  (string);
+    my_boss_employee:Boss;
+    address:(string);
+
+}
+export interface Boss{
+    name_complete: string;
+    area: string;
 }
 
 export interface Url {
