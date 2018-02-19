@@ -18,6 +18,7 @@ import { EstadisticsComponent } from './common/widgets/estadistics/estadistics.c
 import { NotificationPrimaryComponent } from './common/widgets/notification-primary/notification-primary.component';
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -31,12 +32,17 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
     FooterComponent,
     ToasterContainerComponent,
     ContactsListComponent,
+<<<<<<< HEAD
     ContactInformationComponent,
     CalendarComponent,
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
     NotificationSecundaryComponent
+=======
+    ContactInformationComponent
+    
+>>>>>>> d4582bcd061d4198f25d089de59696c652552488
   ],
   exports: [
     HeaderComponent,
