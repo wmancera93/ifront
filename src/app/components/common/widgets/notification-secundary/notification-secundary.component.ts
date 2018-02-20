@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NotificationPrimary } from '../../../../models/common/widgets/widgets';
+import { NotificationPrimary, NotificationSecundary } from '../../../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-notification-secundary',
@@ -8,7 +8,7 @@ import { NotificationPrimary } from '../../../../models/common/widgets/widgets';
 })
 export class NotificationSecundaryComponent implements OnInit {
   @Input() notificationSecundary: any;
-  public objectWidget: NotificationPrimary;
+  public objectWidget: NotificationSecundary;
   
   constructor() { }
 
