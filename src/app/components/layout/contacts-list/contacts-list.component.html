@@ -16,8 +16,8 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
-            <i class="search-input-icon fa fa-search icon-search"></i>
+            <input id="busqueda" [(ngModel)]="nameEmployee" type="text" class="form-control" placeholder="Buscar amigos" (keyup.enter)="searchByName()" >
+            <i class="search-input-icon fa fa-search icon-search cursor general" (click)='searchByName()'></i>
           </div>
           <div *ngFor="let contact of contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
             <div class="row justify-content-center">
@@ -26,7 +26,7 @@
                 <br>
               </div>
               <div class="col-9">
-                {{contact.name}}
+                {{contact.name_complete}}
                 <br>{{contact.posicion}}
                 <br> {{contact.phone}}
                 <div class="starIcon">

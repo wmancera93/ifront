@@ -16,11 +16,13 @@ import { NewspaperComponent } from './common/widgets/newspaper/newspaper.compone
 import { EstadisticsComponent } from './common/widgets/estadistics/estadistics.component';
 import { NotificationPrimaryComponent } from './common/widgets/notification-primary/notification-primary.component';
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule
     // BrowserAnimationsModule, 
     // ToasterModule.forRoot(),
   ],
