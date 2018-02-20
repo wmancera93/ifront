@@ -19,16 +19,16 @@
             <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
             <i class="search-input-icon fa fa-search icon-search"></i>
           </div>
-          <div *ngFor="let contacto of Contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+          <div *ngFor="let contact of contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
             <div class="row justify-content-center">
               <div class="col-3">
-                <img src="{{contacto.photo}}" class="roundPhoto">
+                <img src="{{contact.image.url}}" class="roundPhoto">
                 <br>
               </div>
               <div class="col-9">
-                {{contacto.name}}
-                <br>{{contacto.info}}
-                <br> {{contacto.date}}
+                {{contact.name}}
+                <br>{{contact.posicion}}
+                <br> {{contact.phone}}
                 <div class="starIcon">
                   <span>
                     <i class="fa fa-star-o text-warning"></i>
