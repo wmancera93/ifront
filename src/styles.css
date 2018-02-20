@@ -1464,6 +1464,10 @@ a.close-canvas-menu:hover {
     overflow-x: hidden;
 }
 
+.col-img-newspaper  {
+    height: 210px;
+}
+
 .footer-newspaper {
     margin-top: 15px;
 }

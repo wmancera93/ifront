@@ -149,7 +149,7 @@ export class DashboardComponent implements OnInit {
       title: 'Los trabajadores independientes también pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país'
         + 'necesidades y problemas específicos en los diversos sectores productivos.',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1318/noticia.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180219T124647Z&amp;X-Amz-Expires=900&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a6f762aaa38d42d9f6497200d2b41211a0099bc26a3b8a7c8432582d256cb641' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' }
@@ -159,7 +159,7 @@ export class DashboardComponent implements OnInit {
       title: 'Pueden ahorrar sus Cesantías',
       description: 'Exige estrategias que den soluciones a'
         + 'necesidades y problemas específicos en los diversos sectores productivos.',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1309/independientes-1200x545_c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=992c30503804d2ac4d0b8191a85dd23f2431d2c9a43f91b2b19cb7498b5554dc' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -169,7 +169,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -180,7 +180,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -191,7 +191,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -202,7 +202,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
