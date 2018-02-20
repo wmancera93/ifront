@@ -26,11 +26,11 @@ export interface Employee {
     area?:  string;
     division_per?: string;
     subdivision_per?:  string;
-    fecha_nac?: number;
-    fecha_ing?: number;
+    fecha_nac?: Date;
+    fecha_ing?: Date;
     personal_phone?:number;
     contract_type?: string;
-   // my_boss_employee:Boss;
+    my_boss_employee?:Boss;
     address?:string;
 
 }
