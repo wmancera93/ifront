@@ -17,6 +17,7 @@ import { EstadisticsComponent } from './common/widgets/estadistics/estadistics.c
 import { NotificationPrimaryComponent } from './common/widgets/notification-primary/notification-primary.component';
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
 import { FormsModule } from '@angular/forms';
+import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
-    NotificationSecundaryComponent
+    NotificationSecundaryComponent,
+    EventsEmployeesComponent
   ],
   exports: [
     HeaderComponent,
