@@ -4,7 +4,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
-import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar } from '../../models/common/widgets/widgets';
+import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar, Newspaper } from '../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-dashboard',
@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   @Output() objectIncome: Estadistics;
   @Output() objectDeductions: Estadistics;
   @Output() objectCalendar: Calendar;
-  
+  @Output() objectNewspaper: Newspaper[];
+
   public userAuthenticated: User = null;
   public authdata: any;
 
@@ -63,14 +64,15 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     const request: NotificationPrimary[] = [];
-    request.push({ 
-      title: 'Solicitudes', 
-      number: '1', 
-      comment: 'por gestionar', 
-      icon: 'fa fa-thumbs-up', 
-      colorIcon: '#FFFFFF',      
+    request.push({
+      title: 'Solicitudes',
+      number: '1',
+      comment: 'por gestionar',
+      icon: 'fa fa-thumbs-up',
+      colorIcon: '#FFFFFF',
       background: '#de7e35',
-      color: '#FFFFFF' });
+      color: '#FFFFFF'
+    });
     this.objectRequest = request[0];
 
     const vacations: NotificationSecundary[] = [];
@@ -89,7 +91,7 @@ export class DashboardComponent implements OnInit {
 
     const myLayoffs: Estadistics[] = [];
     myLayoffs.push({
-      title: 'Mis cesantías',     
+      title: 'Mis cesantías',
       number: '66.67',
       comment: 'Aumento cesantías',
       canvas: {},
@@ -141,6 +143,74 @@ export class DashboardComponent implements OnInit {
       background: '#de7e35'
     });
     this.objectCalendar = calendar[0];
+
+    const newspaper: Newspaper[] = [];
+    newspaper.push({
+      title: 'Los trabajadores independientes también pueden ahorrar sus Cesantías',
+      description: 'El contexto económico actual de nuestro país'
+        + 'necesidades y problemas específicos en los diversos sectores productivos.',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1318/noticia.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180219T124647Z&amp;X-Amz-Expires=900&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a6f762aaa38d42d9f6497200d2b41211a0099bc26a3b8a7c8432582d256cb641' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' }
+      ]
+    });
+    newspaper.push({
+      title: 'Pueden ahorrar sus Cesantías',
+      description: 'Exige estrategias que den soluciones a'
+        + 'necesidades y problemas específicos en los diversos sectores productivos.',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1309/independientes-1200x545_c.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=992c30503804d2ac4d0b8191a85dd23f2431d2c9a43f91b2b19cb7498b5554dc' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' },
+        { description: 'prueba 3' }
+      ]
+    });
+    newspaper.push({
+      title: 'También pueden ahorrar sus Cesantías',
+      description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' },
+        { description: 'prueba 3' },
+        { description: 'prueba 4' }
+      ]
+    });
+    newspaper.push({
+      title: 'También pueden ahorrar sus Cesantías',
+      description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' },
+        { description: 'prueba 3' },
+        { description: 'prueba 4' }
+      ]
+    });
+    newspaper.push({
+      title: 'También pueden ahorrar sus Cesantías',
+      description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' },
+        { description: 'prueba 3' },
+        { description: 'prueba 4' }
+      ]
+    });
+    newspaper.push({
+      title: 'También pueden ahorrar sus Cesantías',
+      description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
+      image: { url: 'https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1307/sdfsd.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180219T184020Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=d537997a62ec4be02357e6a6a197d1d78bc9e9d57ac457bf94f5a0f5dcc4cf83' },
+      themes: [
+        { description: 'prueba' },
+        { description: 'prueba 2' },
+        { description: 'prueba 3' },
+        { description: 'prueba 4' }
+      ]
+    });
+    this.objectNewspaper = newspaper;
 
     // this.authdata = this.tokenService.currentAuthData;
     // console.log(this.tokenService);

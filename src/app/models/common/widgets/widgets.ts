@@ -41,10 +41,15 @@ export interface Calendar {
 export interface Newspaper {
     title: string,
     description: string,
-    image: string,
+    image: Url,
     themes: ThemesNewspaper[]
 }
 
-export interface ThemesNewspaper {
-    descripcion: string
+interface ThemesNewspaper {
+    description: string
 }
+
+interface Url {
+    url: string
+}
+

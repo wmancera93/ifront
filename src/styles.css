@@ -813,17 +813,18 @@ border-bottom: 1px solid  #dddd;
     padding: 14px 20px;
     margin-bottom: 10px;
     margin-top: 10px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
-    cursor: pointer;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);    
     transition:all .5s ease-in-out;
 }
 
 .wg-hover-general{
     transition:all .5s ease-in-out;
+    cursor: pointer;
 }
 
 .wg-hover-bg{
     transition: all 2s ease;
+    cursor: pointer;
 }
 
 .wg-hover-general:hover{
@@ -834,6 +835,11 @@ border-bottom: 1px solid  #dddd;
 .wg-hover-bg:hover{
     filter: grayscale(80%);
     transition: all 1s ease !important;
+}
+
+.newspaper-hover:hover{
+    cursor: pointer;
+    color: var(--primary)
 }
 
   .widget-height-notification{
@@ -1434,6 +1440,16 @@ a.close-canvas-menu:hover {
    font-size: 17px
 }
 
+.row-title-newspaper {
+    height: 39px !important;
+    margin-top: 30px !important;
+}
+
+.active-caurusel{
+    background-color: #FFFFFF !important;
+    color: #676a6c !important;
+}
+
 .body-title-newspaper {
     margin-top: 15px;
     font-size: 16px;
@@ -1470,6 +1486,32 @@ a.close-canvas-menu:hover {
 
 .fa-newspaper {
     color: var(--btn-primary-hover)
+}
+
+.carousel-control-prev {
+    width: auto !important;
+    left: -20px !important;
+    color: var(--btn-primary-hover) !important;
+    cursor: pointer;
+}
+
+.carousel-control-next {
+    width: auto !important;
+    right: -20px !important;
+    color: var(--btn-primary-hover) !important;
+    cursor: pointer;
+}
+
+.carousel-indicators {
+    bottom: -26px !important;
+}
+
+.carousel-indicators li {
+    background-color: var(--btn-primary-hover) !important;
+}
+
+.carousel-indicators .active {
+    background-color: var(--primary) !important;
 }
 
 .fa-7x{
@@ -1788,6 +1830,8 @@ a.close-canvas-menu:hover {
     display: block;
 }
 
+  
+
 }
 
 @media (max-width: 800px)  and (max-height: 1100px) {
@@ -1862,27 +1906,28 @@ a.close-canvas-menu:hover {
     .body-newspaper {
         height: 60px;
     }
-.errorImg
-{
-    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
-    background-repeat: no-repeat;
-    background-position: center !important;
-    height: 1035px !important;
-   
-}
-.errorMessage {
-    margin-top: -20px;
-}
+    .errorImg
+    {
+        background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+        background-repeat: no-repeat;
+        background-position: center !important;
+        height: 1035px !important;
+    
+    }
+    .errorMessage {
+        margin-top: -20px;
+    }
 
-.fontTitle-error{
-     
-    margin-top: 20px;
-}
-.company-logo-error {
-    width: 100%;
-    margin-top: 6px;
-    display: block;
-}
+    .fontTitle-error{
+        
+        margin-top: 20px;
+    }
+    .company-logo-error {
+        width: 100%;
+        margin-top: 6px;
+        display: block;
+    }
+   
 }
 
 
@@ -2009,19 +2054,20 @@ a.close-canvas-menu:hover {
         border-radius: 30px;
         width: 100%;
         margin-top: 30px;
-        }
-        .errorImg
-        {
-            background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
-            background-repeat: no-repeat;
-            background-position: center !important;
-            height: 415px !important;
-           
-        }
-        .errorMessage {
-            margin-top: 20px;
-        }
-      
+    }
+    .errorImg
+    {
+        background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+        background-repeat: no-repeat;
+        background-position: center !important;
+        height: 415px !important;
+        
+    }
+    .errorMessage {
+        margin-top: 20px;
+    }
+
+   
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
@@ -2133,6 +2179,11 @@ a.close-canvas-menu:hover {
         margin-top: 130px;
     }
 
+    .row-title-newspaper {
+        height: 50px !important;
+        margin-top: 30px !important;
+    }
+
 }
 
 @media only screen and (max-width: 450px)  and (max-height: 800px) {
@@ -2153,17 +2204,17 @@ a.close-canvas-menu:hover {
         right: -260px;
     }
     .fontMessage-error
-{
-    margin-top: 20px;
-    color: #fff;
-    font-size: 0.7rem !important;
-}
+    {
+        margin-top: 20px;
+        color: #fff;
+        font-size: 0.7rem !important;
+    }
 
-    .fontTitle-error{
-    color:#676a6c !important;
-    font-size:1.2rem !important;
-}
-.buttonError {
+        .fontTitle-error{
+        color:#676a6c !important;
+        font-size:1.2rem !important;
+    }
+    .buttonError {
     background-color: var(--btn-primary);
     padding-top: 5px;
     padding-bottom: 1px;
@@ -2179,16 +2230,16 @@ a.close-canvas-menu:hover {
         padding: 30px 5px 40px !important;
     }
     .errorImg
-{
-    background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
-    background-repeat: no-repeat;
-    background-position: center !important;
-    height: 750px !important; 
-}
-.errorMessage {
-    margin-top: 120px;
-}
-  
+    {
+        background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
+        background-repeat: no-repeat;
+        background-position: center !important;
+        height: 750px !important; 
+    }
+    .errorMessage {
+        margin-top: 120px;
+    }
+    
 
     .top {
         margin-top: 15px !important;
@@ -2234,7 +2285,8 @@ a.close-canvas-menu:hover {
     .body-newspaper {
         height: 77px;
     }
-   
+
+    
 }
 
 
