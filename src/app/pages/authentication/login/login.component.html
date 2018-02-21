@@ -1,10 +1,10 @@
-<header id="headerLogin">
+<header id="headerLogin" *ngIf='dataEnterprise.length > 0'>
     <div class="row-hr justify-content-center">
         <div class="col-10 col-lg-6 col-md-8 bg-login transition-bg-login">
             <div class="row">
                 <div class="col-12">
                     <div class="company-logo">
-                        <img src="{{dataEnterprise.logo_inside.url}}"
+                        <img src="{{dataEnterprise[0].logo_inside.url}}"
                             alt="Smiley face" style="width: 100%; height: 100%">
                     </div>
                 </div>
