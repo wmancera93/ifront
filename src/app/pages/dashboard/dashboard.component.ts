@@ -4,7 +4,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
-import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar, Newspaper } from '../../models/common/widgets/widgets';
+import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar, Newspaper, EventsEmployess } from '../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +21,9 @@ export class DashboardComponent implements OnInit {
   @Output() objectDeductions: Estadistics;
   @Output() objectCalendar: Calendar;
   @Output() objectNewspaper: Newspaper[];
+  @Output() objectBirthDay: EventsEmployess[];
+  @Output() objectAnniversay: EventsEmployess[];
+  @Output() objectNewEmployee: EventsEmployess[];
 
   public userAuthenticated: User = null;
   public authdata: any;
@@ -151,8 +154,7 @@ export class DashboardComponent implements OnInit {
         + 'necesidades y problemas específicos en los diversos sectores productivos.',
       image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
       themes: [
-        { description: 'prueba' },
-        { description: 'prueba 2' }
+        { description: 'prueba' }
       ]
     });
     newspaper.push({
@@ -212,6 +214,104 @@ export class DashboardComponent implements OnInit {
     });
     this.objectNewspaper = newspaper;
 
+    const birthDay: EventsEmployess[] = [];
+    birthDay.push({
+      name: 'Wilmer Mancera',
+      event: 'Cumpleaños',
+      posicion: 'Director',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-birthday-cake',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    birthDay.push({
+      name: 'Alexis Duque',
+      event: 'Cumpleaños',
+      posicion: 'Director',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-birthday-cake',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    birthDay.push({
+      name: 'Laura Beltran',
+      event: 'Cumpleaños',
+      posicion: 'Director',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-birthday-cake',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    birthDay.push({
+      name: 'Juan Contreras',
+      event: 'Cumpleaños',
+      posicion: 'Director',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-birthday-cake',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    this.objectBirthDay = birthDay;
+
+    const anniversary: EventsEmployess[] = [];
+    anniversary.push({
+      name: 'Nicolas Vargas',
+      event: 'Aniversario en RCNTV',
+      posicion: 'Operador Video Y Vtr',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-calendar',
+      description: 'Ya casi 5 año(s)',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    anniversary.push({
+      name: 'Jesus Duque',
+      event: 'Aniversario en RCNTV',
+      posicion: 'Operador Video Y Vtr',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-calendar',
+      description: 'Ya casi 5 año(s)',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    this.objectAnniversay = anniversary;
+
+    const newEmployee: EventsEmployess[] = [];
+    newEmployee.push({
+      name: 'Enrique Beltran',
+      event: 'Nuev@ Compañer@',
+      posicion: 'Auxiliar de microondas',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-users',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    newEmployee.push({
+      name: 'David Calderon',
+      event: 'Nuev@ Compañer@',
+      posicion: 'Auxiliar de microondas',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-users',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    newEmployee.push({
+      name: 'Pablo Vargas',
+      event: 'Nuev@ Compañer@',
+      posicion: 'Auxiliar de microondas',
+      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      icon: 'fa fa-users',
+      description: '20 de febrero',
+      color: '#33446e',
+      background: '#FFFFFF'
+    });
+    this.objectNewEmployee = newEmployee;
     // this.authdata = this.tokenService.currentAuthData;
     // console.log(this.tokenService);
     this.getDataLocalStorage();

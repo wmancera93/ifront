@@ -1,12 +1,8 @@
 <div class="widget white-bg">
   <div id="newspaper" class="carousel slide" data-ride="carousel">
-
-    <!-- Indicators -->
     <ul class="carousel-indicators">
       <li data-target="#newspaper" [attr.data-slide-to]="i" [ngClass]="{'active': i=='0'}" *ngFor="let newspaper of objectWidget;let i = index"></li>
     </ul>
-
-    <!-- The slideshow -->
     <div class="row">
       <div class="col-12 header-newspaper">
         <i class="fa fa-newspaper fa-fw fa-newspaper-o fa-lg "></i>
