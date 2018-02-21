@@ -50,7 +50,9 @@ export class ContactsListComponent implements OnInit {
     }
 
   }
-
-
-
+  scrollEvent()
+  {
+    console.log('SCROLL FUNCIONA');
+  
+  }
 }
