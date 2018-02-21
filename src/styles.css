@@ -827,6 +827,11 @@ border-bottom: 1px solid  #dddd;
     cursor: pointer;
 }
 
+.wg-hoverImg-bg:hover{
+    transition: all 2s ease;
+    cursor: pointer;
+}
+
 .wg-hover-general:hover{
     transition:all .5s ease-in-out;
     -webkit-transform:scale(1.1);transform:scale(1.1);
@@ -834,6 +839,11 @@ border-bottom: 1px solid  #dddd;
 
 .wg-hover-bg:hover{
     filter: grayscale(80%);
+    transition: all 1s ease !important;
+}
+
+.wg-hoverImg-bg:hover{
+    filter: saturate(180%);
     transition: all 1s ease !important;
 }
 
@@ -869,6 +879,12 @@ border-bottom: 1px solid  #dddd;
   .widget .flot-chart {
     height: 100px;
   }
+  .widget-img-responsive{    
+        width: 96% !important; 
+        height: 96% !important;
+        margin-top:2px;
+        margin-left:2px
+    }
   .vertical-align div {
     display: inline-block;
     vertical-align: middle;

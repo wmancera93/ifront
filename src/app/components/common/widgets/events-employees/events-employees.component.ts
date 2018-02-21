@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { EventsEmployess } from '../../../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-events-employees',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./events-employees.component.css']
 })
 export class EventsEmployeesComponent implements OnInit {
+  @Input() eventsEmployee: any
+  public objectWidget: EventsEmployess[];
 
-  constructor() { }
+  constructor() {
 
-  ngOnInit() {
   }
 
+  ngOnInit() {
+    this.objectWidget = this.eventsEmployee;
+  }
 }

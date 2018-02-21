@@ -39,7 +39,7 @@
           </div>
         </div>
         <div id="tab-2" class="tab-pane">
-          <div *ngFor="let item of Chats; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+          <div *ngFor="let item of chats; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
             <div class="row">
               <div class="col-3">
                 <img src="{{item.photo}}" class="roundPhoto">

@@ -52,7 +52,8 @@ import { EventsEmployeesComponent } from './common/widgets/events-employees/even
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
-    NotificationSecundaryComponent
+    NotificationSecundaryComponent,
+    EventsEmployeesComponent
   ],
   providers: [
     // ToasterService

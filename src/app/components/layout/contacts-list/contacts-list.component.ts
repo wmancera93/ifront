@@ -13,8 +13,13 @@ export class ContactsListComponent implements OnInit {
   public searchListContacts: Employee[] = [];
   public nameEmployee: string = '';
   public numberPage: number = 1;
+  public chats: any=[];
 
   constructor(public employeeDate: EmployeeService) {
+    this.chats[0]={name:"Laura",photo:"../../../assets/themes/patterns/icon-user-negative.png",conver: "Hola", status: true};
+    this.chats[1]={name:"Wilmer",photo:"../../../assets/themes/patterns/icon-user-negative.png",conver: "Hola", status: true };
+    this.chats[2]={name:"Laura",photo:"../../../assets/themes/patterns/icon-user-negative.png",conver: "Hola", status: false };
+    this.chats[3]={name:"Wilmer",photo:"../../../assets/themes/patterns/icon-user-negative.png",conver: "Hola", status: true };
   }
   ngOnInit() {
     this.numberPage = 1;
