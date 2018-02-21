@@ -16,19 +16,19 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input id="busqueda" type="text" class="form-control" placeholder="Buscar amigos">
-            <i class="search-input-icon fa fa-search icon-search"></i>
+            <input id="busqueda" [(ngModel)]="nameEmployee" type="text" class="form-control" placeholder="Buscar amigos" (keyup.enter)="searchByName()" >
+            <i class="search-input-icon fa fa-search icon-search cursor general" (click)='searchByName()'></i>
           </div>
-          <div *ngFor="let contacto of Contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
+          <div *ngFor="let contact of contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
             <div class="row justify-content-center">
               <div class="col-3">
-                <img src="{{contacto.photo}}" class="roundPhoto">
+                <img src="{{contact.image.url}}" class="roundPhoto">
                 <br>
               </div>
               <div class="col-9">
-                {{contacto.name}}
-                <br>{{contacto.info}}
-                <br> {{contacto.date}}
+                {{contact.name_complete}}
+                <br>{{contact.posicion}}
+                <br> {{contact.phone}}
                 <div class="starIcon">
                   <span>
                     <i class="fa fa-star-o text-warning"></i>
