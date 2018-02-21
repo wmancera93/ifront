@@ -1,60 +1,75 @@
 <div class="widget white-bg">
-  <div class="row">
-    <div class="col-12 header-newspaper">
-      <i class="fa fa-newspaper fa-fw fa-newspaper-o fa-lg "></i>
-      <span class="">
-        Noticias
-      </span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-xl-5 col-12">
-      <div class="row body-title-newspaper">
-        <div class="col-12">
-          Los trabajadores independientes también pueden ahorrar sus Cesantías
-        </div>
-      </div>
-      <div class="row body-newspaper scrollbar-success">
-        <div class="col-12">
-          El contexto económico actual de nuestro país – luego de 3 años de desaceleración- exige estrategias que den soluciones a
-          necesidades y problemas específicos en los diversos sectores productivos.
-        </div>
+  <div id="newspaper" class="carousel slide" data-ride="carousel">
+    <ul class="carousel-indicators">
+      <li data-target="#newspaper" [attr.data-slide-to]="i" [ngClass]="{'active': i=='0'}" *ngFor="let newspaper of objectWidget;let i = index"></li>
+    </ul>
+    <div class="row">
+      <div class="col-12 header-newspaper">
+        <i class="fa fa-newspaper fa-fw fa-newspaper-o fa-lg "></i>
+        <span class="">
+          Noticias
+        </span>
       </div>
     </div>
-    <div class="col-xl-7 col-12">
-      <img alt="image" class="img-rounded m-t-xs" src="https://staging-ihr.s3.amazonaws.com/uploads/article/imagen/1318/noticia.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAJNRPF7XYVHZ2TSMQ%2F20180219%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180219T124647Z&amp;X-Amz-Expires=900&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a6f762aaa38d42d9f6497200d2b41211a0099bc26a3b8a7c8432582d256cb641"
-        style="height: 100%; width: 100%">
-    </div>
-  </div>
-  <div class="row footer-newspaper">
-    <div class="col-xl-1 col-md-2 col-3">
-      Temas:
-    </div>
-    <div class="col-xl-8 col-md-6 col-9">
-      <div class="row">
-        <div class="col-xl-3 col-md-6 col-12 padding-themes-newspaper">
-          <div class="themes-newspaper">
-            Gestion Humana
+    <div class="carousel-inner">
+      <div [ngClass]="{'active': k=='0'}" class="carousel-item  active-caurusel" *ngFor="let newspaper of objectWidget;let k = index">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-xl-5 col-12">
+              <div class="row row-title-newspaper body-title-newspaper">
+                <div class="col-12 newspaper-hover">
+                  {{newspaper.title}}
+                </div>
+              </div>
+              <div class="row body-newspaper scrollbar-success">
+                <div class="col-12">
+                  {{newspaper.description}}
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-7 col-12 col-img-newspaper">
+              <img alt="image" class="img-rounded m-t-xs" src="{{newspaper.image.url}}" style="height: 100%; width: 100%">
+            </div>
+          </div>
+          <div class="row footer-newspaper">
+            <div class="col-xl-1 col-md-2 col-3">
+              Temas:
+            </div>
+            <div class="col-xl-8 col-md-6 col-9">
+              <div class="row">
+                <div class="col-xl-3 col-md-6 col-12 padding-themes-newspaper" *ngFor="let theme of newspaper.themes">
+                  <div class="themes-newspaper">
+                      {{theme.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-4 col-12">
+              <div class="row">
+                <div class="col-12 text-right">
+                  <i class="fa fa-newspaper fa-fw fa-comments-o fa-sm"></i>
+                  2 Comentarios
+                </div>
+                <div class="col-12 text-right">
+                  <i class="fa fa-newspaper fa-fw fa-eye fa-sm"></i>
+                  12 Visitas
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="col-xl-3 col-md-6 col-12 padding-themes-newspaper">
-          <div class="themes-newspaper">
-            Temas
-          </div>
-        </div>
       </div>
     </div>
-    <div class="col-xl-3 col-md-4 col-12">
-      <div class="row">
-        <div class="col-12 text-right">
-          <i class="fa fa-newspaper fa-fw fa-comments-o fa-sm"></i>
-          2 Comentarios
-        </div>
-        <div class="col-12 text-right">
-          <i class="fa fa-newspaper fa-fw fa-eye fa-sm"></i>
-          12 Visitas
-        </div>
-      </div>
+
+    <!-- Left and right controls -->
+    <div class="carousel-control-prev" href="#newspaper" data-slide="prev">
+      <i class="fa fa-angle-left fa-3x"></i>
     </div>
+    <div class="carousel-control-next" href="#newspaper" data-slide="next">
+      <i class="fa fa-angle-right fa-3x"></i>
+    </div>
+
   </div>
+  <!-- 
+  -->
 </div>

@@ -16,11 +16,14 @@ import { NewspaperComponent } from './common/widgets/newspaper/newspaper.compone
 import { EstadisticsComponent } from './common/widgets/estadistics/estadistics.component';
 import { NotificationPrimaryComponent } from './common/widgets/notification-primary/notification-primary.component';
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
+import { FormsModule } from '@angular/forms';
+import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule
     // BrowserAnimationsModule, 
     // ToasterModule.forRoot(),
   ],
@@ -35,7 +38,8 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
-    NotificationSecundaryComponent
+    NotificationSecundaryComponent,
+    EventsEmployeesComponent
   ],
   exports: [
     HeaderComponent,
@@ -48,7 +52,8 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
     NewspaperComponent,
     EstadisticsComponent,
     NotificationPrimaryComponent,
-    NotificationSecundaryComponent
+    NotificationSecundaryComponent,
+    EventsEmployeesComponent
   ],
   providers: [
     // ToasterService

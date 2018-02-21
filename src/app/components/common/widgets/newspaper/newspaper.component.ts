@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Newspaper } from '../../../../models/common/widgets/widgets';
 
 @Component({
   selector: 'app-newspaper',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./newspaper.component.css']
 })
 export class NewspaperComponent implements OnInit {
-
+  @Input() newspaper: any;
+  public objectWidget: Newspaper[];
+  
   constructor() { }
 
   ngOnInit() {
+    this.objectWidget = this.newspaper;
   }
 
 }

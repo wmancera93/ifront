@@ -1,0 +1,39 @@
+<div [ngStyle]="{'background-color': objectWidget[0].background}" class="widget wg-hover-general wg-hoverImg-bg navy-bg">
+  <div class="row">
+    <div class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div [ngClass]="{'active': k=='0'}" class="carousel-item  active-caurusel" *ngFor="let eventEmployee of objectWidget;let k = index">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-4">
+                <div class="menu-img-user">
+                  <img alt="image" class="rounded-circle widget-img-responsive" src="https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&amp;X-Amz-Date=20180220T220458Z&amp;X-Amz-Expires=900&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5">
+                </div>
+              </div>
+              <div class="col-8 text-white text-center">
+                <div class="row">
+                  <div class="col-12 text-center">
+                    <i [ngStyle]="{'color': eventEmployee.color}" class="{{eventEmployee.icon}} fa-3x"></i>
+                  </div>
+                  <div class="col-12 text-center">
+                    <strong [ngStyle]="{'color': eventEmployee.color}" class="font-size-12"> {{eventEmployee.event}} </strong>
+                  </div>
+                  <div class="col-12 text-center">
+                    <p [ngStyle]="{'color': eventEmployee.color}" class="font-size-12"> {{eventEmployee.description}} </p>
+                  </div>
+                  <div class="col-12 text-center">
+                    <strong [ngStyle]="{'color': eventEmployee.color}" class="font-bold font-size-20" id="info_severances">
+                      {{eventEmployee.name}} </strong>
+                  </div>
+                  <div class="col-12 text-center">
+                    <strong [ngStyle]="{'color': eventEmployee.color}" class="font-size-12"> {{eventEmployee.posicion}} </strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
