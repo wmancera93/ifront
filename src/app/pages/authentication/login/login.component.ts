@@ -63,7 +63,8 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem("enterprise") === null) {
+    let objectEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
+    if (objectEnterprise.background_login.url === null || objectEnterprise.logo_inside.url === null) {
       this.mainService.getDataEnterprise()
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
