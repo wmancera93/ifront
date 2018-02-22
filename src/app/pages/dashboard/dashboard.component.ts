@@ -1,10 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { User } from '../../models/general/user';
+import { User, Employee } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
 import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar, Newspaper, EventsEmployess } from '../../models/common/widgets/widgets';
+import { Enterprise } from '../../models/general/enterprise';
 
 @Component({
   selector: 'app-dashboard',
@@ -57,6 +58,18 @@ export class DashboardComponent implements OnInit {
       }
     })
 
+    setTimeout(() => {
+      setInterval(() => {
+        debugger
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
+      }, 3000)
+      setInterval(() => {
+        debugger
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
+      }, 10000)
+    }, 10000)
   }
 
   getDataLocalStorage() {
@@ -147,21 +160,21 @@ export class DashboardComponent implements OnInit {
     });
     this.objectCalendar = calendar[0];
 
+    let objctUser: User = JSON.parse(localStorage.getItem("user"))
+    let objctEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
+
     const newspaper: Newspaper[] = [];
     newspaper.push({
       title: 'Los trabajadores independientes también pueden ahorrar sus Cesantías',
-      description: 'El contexto económico actual de nuestro país'
-        + 'necesidades y problemas específicos en los diversos sectores productivos.',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
-      themes: [
-        { description: 'prueba' }
-      ]
+      description: 'El contexto económico actual de nuestro país',
+      image: { url: objctEnterprise.background_login.url },
+      themes: [{ description: 'prueba' }]
     });
     newspaper.push({
       title: 'Pueden ahorrar sus Cesantías',
       description: 'Exige estrategias que den soluciones a'
         + 'necesidades y problemas específicos en los diversos sectores productivos.',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
+      image: { url: objctEnterprise.background_login.url },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -171,7 +184,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
+      image: { url: objctEnterprise.background_login.url },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -182,7 +195,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
+      image: { url: objctEnterprise.background_login.url },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -193,7 +206,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
+      image: { url: objctEnterprise.background_login.url },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -204,7 +217,7 @@ export class DashboardComponent implements OnInit {
     newspaper.push({
       title: 'También pueden ahorrar sus Cesantías',
       description: 'El contexto económico actual de nuestro país – luego de 3 años de desaceleración- ',
-      image: { url: 'https\:\/\/dev-cloud-ihr\.s3\.amazonaws\.com\/uploads\/company\/4\/background_login\/login_hrs\.jpg\?X-Amz-Algorithm\=AWS4-HMAC-SHA256\&X-Amz-Credential\=AKIAITTHOW2J2HFQ5LEA\%2F20180214\%2Fus-east-1\%2Fs3\%2Faws4_request\&X-Amz-Date\=20180214T234318Z\&X-Amz-Expires\=900\&X-Amz-SignedHeaders\=host\&X-Amz-Signature\=731c93b4b265d5139327136af57454ac87fa1bc1bd50e902214c51326fdbc8a2' },
+      image: { url: objctEnterprise.background_login.url },
       themes: [
         { description: 'prueba' },
         { description: 'prueba 2' },
@@ -216,40 +229,44 @@ export class DashboardComponent implements OnInit {
 
     const birthDay: EventsEmployess[] = [];
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Wilmer Mancera',
       event: 'Cumpleaños',
       posicion: 'Director',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-birthday-cake',
       description: '20 de febrero',
       color: '#33446e',
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Alexis Duque',
       event: 'Cumpleaños',
       posicion: 'Director',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-birthday-cake',
       description: '20 de febrero',
       color: '#33446e',
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Laura Beltran',
       event: 'Cumpleaños',
       posicion: 'Director',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-birthday-cake',
       description: '20 de febrero',
       color: '#33446e',
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Juan Contreras',
       event: 'Cumpleaños',
       posicion: 'Director',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-birthday-cake',
       description: '20 de febrero',
       color: '#33446e',
@@ -259,20 +276,22 @@ export class DashboardComponent implements OnInit {
 
     const anniversary: EventsEmployess[] = [];
     anniversary.push({
+      nameEvent: 'aniversario',
       name: 'Nicolas Vargas',
       event: 'Aniversario en RCNTV',
       posicion: 'Operador Video Y Vtr',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-calendar',
       description: 'Ya casi 5 año(s)',
       color: '#33446e',
       background: '#FFFFFF'
     });
     anniversary.push({
+      nameEvent: 'aniversario',
       name: 'Jesus Duque',
       event: 'Aniversario en RCNTV',
       posicion: 'Operador Video Y Vtr',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-calendar',
       description: 'Ya casi 5 año(s)',
       color: '#33446e',
@@ -282,30 +301,33 @@ export class DashboardComponent implements OnInit {
 
     const newEmployee: EventsEmployess[] = [];
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'Enrique Beltran',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-users',
       description: '20 de febrero',
       color: '#33446e',
       background: '#FFFFFF'
     });
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'David Calderon',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-users',
       description: '20 de febrero',
       color: '#33446e',
       background: '#FFFFFF'
     });
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'Pablo Vargas',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
-      image: { url: 'https://dev-cloud-ihr.s3.amazonaws.com/uploads/employee/image/1589/perfil.jpeg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAITTHOW2J2HFQ5LEA%2F20180220%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20180220T220458Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=2b791b27e9f23d9429349ebc0f084edf0b9d9f8e2f7b823c69f4b53a07a8d5e5' },
+      image: { url: objctUser.employee.image.url },
       icon: 'fa fa-users',
       description: '20 de febrero',
       color: '#33446e',
@@ -319,6 +341,7 @@ export class DashboardComponent implements OnInit {
     //   res => console.log(res),
     //   error => console.log(error)
     // );
+       
   }
 
 }

@@ -3,7 +3,7 @@ import { environment } from '../../../../environments/environment';
 
 // services
 import { Angular2TokenService } from 'angular2-token';
-import { Router, ActivatedRoute,NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { MainService } from '../../../services/main/main.service';
@@ -24,7 +24,7 @@ declare const ga: any;
 export class LoginComponent implements OnInit {
   public txtEmail: string = '';
   public txtPassword: string = '';
-  public dataEnterprise: Enterprise;
+  public dataEnterprise: Enterprise[] = [];
   public heightContenGeneral: number = 0;
 
   constructor(private tokenService: Angular2TokenService,
@@ -63,26 +63,19 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem("enterprise") === null) {
-      this.mainService.getDataEnterprise()
-        .subscribe((result: any) => {
-          this.dataEnterprise = result.data;
-          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-          document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-          document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-          document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
-          localStorage.setItem("enterprise", JSON.stringify(result.data));
-        })
-    } else {
-      this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-      document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-      document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-      document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+    this.mainService.getDataEnterprise()
+      .subscribe((result: any) => {
+        this.dataEnterprise[0] = result.data;
+        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);
+        document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
+        document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
+        document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+        localStorage.setItem("enterprise", JSON.stringify(result.data));
+      })
+    if (this.dataEnterprise.length > 0) {
+      this.heightContenGeneral = document.getElementById("headerLogin").clientHeight - this.heightContenGeneral;
+      document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
     }
-
-    this.heightContenGeneral = document.getElementById("headerLogin").clientHeight - this.heightContenGeneral;
-    document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
   }
 
   singInSession() {
