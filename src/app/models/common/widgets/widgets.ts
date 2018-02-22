@@ -50,6 +50,7 @@ interface ThemesNewspaper {
 }
 
 export interface EventsEmployess {
+    nameEvent: string,
     name: string,
     event: string,
     posicion: string,

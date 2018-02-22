@@ -58,6 +58,18 @@ export class DashboardComponent implements OnInit {
       }
     })
 
+    setTimeout(() => {
+      setInterval(() => {
+        debugger
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
+      }, 3000)
+      setInterval(() => {
+        debugger
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
+        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
+      }, 10000)
+    }, 10000)
   }
 
   getDataLocalStorage() {
@@ -147,19 +159,16 @@ export class DashboardComponent implements OnInit {
       background: '#de7e35'
     });
     this.objectCalendar = calendar[0];
+
     let objctUser: User = JSON.parse(localStorage.getItem("user"))
     let objctEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
-    console.log(objctUser)
-    console.log(objctEnterprise)
+
     const newspaper: Newspaper[] = [];
     newspaper.push({
       title: 'Los trabajadores independientes también pueden ahorrar sus Cesantías',
-      description: 'El contexto económico actual de nuestro país'
-        + 'necesidades y problemas específicos en los diversos sectores productivos.',
+      description: 'El contexto económico actual de nuestro país',
       image: { url: objctEnterprise.background_login.url },
-      themes: [
-        { description: 'prueba' }
-      ]
+      themes: [{ description: 'prueba' }]
     });
     newspaper.push({
       title: 'Pueden ahorrar sus Cesantías',
@@ -220,6 +229,7 @@ export class DashboardComponent implements OnInit {
 
     const birthDay: EventsEmployess[] = [];
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Wilmer Mancera',
       event: 'Cumpleaños',
       posicion: 'Director',
@@ -230,6 +240,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Alexis Duque',
       event: 'Cumpleaños',
       posicion: 'Director',
@@ -240,6 +251,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Laura Beltran',
       event: 'Cumpleaños',
       posicion: 'Director',
@@ -250,6 +262,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     birthDay.push({
+      nameEvent: 'cumpleaños',
       name: 'Juan Contreras',
       event: 'Cumpleaños',
       posicion: 'Director',
@@ -263,6 +276,7 @@ export class DashboardComponent implements OnInit {
 
     const anniversary: EventsEmployess[] = [];
     anniversary.push({
+      nameEvent: 'aniversario',
       name: 'Nicolas Vargas',
       event: 'Aniversario en RCNTV',
       posicion: 'Operador Video Y Vtr',
@@ -273,6 +287,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     anniversary.push({
+      nameEvent: 'aniversario',
       name: 'Jesus Duque',
       event: 'Aniversario en RCNTV',
       posicion: 'Operador Video Y Vtr',
@@ -286,6 +301,7 @@ export class DashboardComponent implements OnInit {
 
     const newEmployee: EventsEmployess[] = [];
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'Enrique Beltran',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
@@ -296,6 +312,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'David Calderon',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
@@ -306,6 +323,7 @@ export class DashboardComponent implements OnInit {
       background: '#FFFFFF'
     });
     newEmployee.push({
+      nameEvent: 'nuevoEmpleado',
       name: 'Pablo Vargas',
       event: 'Nuev@ Compañer@',
       posicion: 'Auxiliar de microondas',
@@ -323,6 +341,7 @@ export class DashboardComponent implements OnInit {
     //   res => console.log(res),
     //   error => console.log(error)
     // );
+       
   }
 
 }
