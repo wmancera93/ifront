@@ -595,7 +595,8 @@ header{
  
  .title{
      color: #666363 !important;
-     font-size: 25px;    
+     font-size: 25px;  
+     padding-left: 0px !important;   
  }
 
  .hideText {

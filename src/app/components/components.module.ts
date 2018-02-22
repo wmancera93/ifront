@@ -1,6 +1,7 @@
 // modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // components
 import { HeaderComponent } from './layout/header/header.component';
@@ -23,9 +24,8 @@ import { EventsEmployeesComponent } from './common/widgets/events-employees/even
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
-    // BrowserAnimationsModule, 
-    // ToasterModule.forRoot(),
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     HeaderComponent,

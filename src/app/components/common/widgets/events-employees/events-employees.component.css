@@ -1,3 +1,14 @@
 .carousel-item {
     transition: 2s ease-out;
 }
+
+@media only screen and (max-height: 850px) and (max-width: 450px){
+    .menu-img-user {
+        margin-left: 2px;
+    }
+}
+@media only screen and (max-height: 800px) and (max-width: 450px){
+    .menu-img-user {
+        margin-left: 3px !important;
+    }
+}

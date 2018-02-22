@@ -1,41 +1,27 @@
 <div class="heigth-content-general">
   <div class="row-hr-container">
-    <div class="row">
-      <app-notification-primary [notificationPrimary]="objectRequest" class="col-xl-2 col-6"></app-notification-primary>
-      <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-2 col-6"></app-notification-secundary>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-estadistics [estadistics]="objectMyLayoffs" class="col-12"></app-estadistics>
-          <app-estadistics [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
-        </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-estadistics [estadistics]="objectIncome" class="col-12"></app-estadistics>
-          <app-estadistics [estadistics]="objectDeductions" class="col-12"></app-estadistics>
-        </div>
-      </div>
+    <div class="col-8 title">
+      Inicio
     </div>
-    <div class="row">
-      <app-newspaper [newspaper]="objectNewspaper" class="col-xl-9 col-12"></app-newspaper>
-      <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
-    </div>
-    <div class="row">
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectBirthDay" class="col-12"></app-events-employees>
-        </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectAnniversay" class="col-12"></app-events-employees>
-        </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectNewEmployee" class="col-12"></app-events-employees>
+    <div class="col-3">
+      <div class="row">
+        <input type="radio" name="interruptor" id="prendido">
+        <input type="radio" name="interruptor" id="apagado" checked>
+        <div class="interruptor-cuerpo">
+          <div class="interruptor-tecla">
+            <label for="prendido" title="Desactivado" (click)="vieweDashboardEmployee()"></label>
+            <label for="apagado" title="Activado" (click)="vieweDashboardManager()"></label>
+          </div>
         </div>
       </div>
     </div>
   </div>
+  <div *ngIf="roleEmployee">
+    <app-employees></app-employees>
+  </div>
+  <div *ngIf="!roleEmployee">
+    <app-managerial></app-managerial>
+  </div>
+
+
 </div>
