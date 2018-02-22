@@ -52,7 +52,6 @@ export class ContactsListComponent implements OnInit {
       console.log(this.nameEmployee);
     }
     this.numberLengthLetter = this.nameEmployee.length;
-
   
   }
   searchByName() {
@@ -62,19 +61,19 @@ export class ContactsListComponent implements OnInit {
     this.contacts = this.searchListContacts;
 
     this.contacts = this.contacts.filter(
-      (prod: any) => prod.name.toLowerCase().indexOf(this.nameEmployee) >= 0);    
+      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);    
     if (this.contacts.length === 0 || this.contacts.length < 10) {
       this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
         .subscribe((result: any) => {
+          
           if (result.success === true) {
-
             numberContacts += result.data.length;
             for (let i = 0; i < result.data.length; i++) {
               this.searchListContacts.push(result.data[i]);
-              this.contacts = this.searchListContacts;
-              this.contacts = this.contacts.filter(
-                (prod: any) => prod.name.toLowerCase().indexOf(this.nameEmployee) >= 0);
+              this.contacts = this.searchListContacts;             
             }           
+            this.contacts = this.contacts.filter(
+              (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
           }
         });
       this.numberPage++;
@@ -105,7 +104,7 @@ export class ContactsListComponent implements OnInit {
         if (this.nameEmployee !== '') {
           let numberContacts: number = 0;
           this.contacts = this.contacts.filter(
-            (prod: any) => prod.name.toLowerCase().indexOf(this.nameEmployee) >= 0);
+            (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
 
         //  if (this.contacts.length === 0 || this.contacts.length < 10) {
             this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
@@ -116,7 +115,7 @@ export class ContactsListComponent implements OnInit {
                     this.searchListContacts.push(result.data[i]);
                     this.contacts = this.searchListContacts;
                     this.contacts = this.contacts.filter(
-                      (prod: any) => prod.name.toLowerCase().indexOf(this.nameEmployee) >= 0);
+                      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
                   }
                 }
                 this.numberPage++;
