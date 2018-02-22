@@ -1,6 +1,9 @@
 <div [ngStyle]="{'background-color': objectWidget[0].background}" class="widget wg-hover-general wg-hoverImg-bg navy-bg">
   <div class="row">
-    <div class="carousel slide" data-ride="carousel">
+    <div id="{{cauruselIdGeneral}}" class="carousel slide" data-ride="carousel">
+      <ul class="carousel-indicators" style="display:none">
+        <li [attr.data-target]="cauruselId" [attr.data-slide-to]="i" [ngClass]="{'active': i=='0'}" *ngFor="let eventEmployee of objectWidget;let i = index"></li>
+      </ul>
       <div class="carousel-inner">
         <div [ngClass]="{'active': k=='0'}" class="carousel-item  active-caurusel" *ngFor="let eventEmployee of objectWidget;let k = index">
           <div class="col-12">
@@ -33,6 +36,9 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="carousel-control-next" [attr.href]="cauruselId" data-slide="next" style="display:none">
+        <i class="fa fa-angle-right fa-3x"></i>
       </div>
     </div>
   </div>
