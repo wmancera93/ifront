@@ -1,6 +1,6 @@
 <div id="right-sidebar" class="sidebar-open sidebar-top container-contacts">
   <div class="sidebar-container" style=" overflow: hidden;width: auto;  height: 100%;">
-    <div class="scrollbar scrollbar-success force-overflow "(scroll)="scrollEvent()">
+    <div id="scrollbarAction" class="scrollbar scrollbar-success force-overflow " (scroll)="detectScrollAction()">
       <ul class="nav nav-tabs">
         <li id="litab1" class="nav-item" style="width: 50%">
           <a id="atab1" class="nav-link a-contacts bg-tabs active" data-toggle="tab" href="#tab-1">
@@ -16,7 +16,7 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input id="busqueda" [(ngModel)]="nameEmployee" type="text" class="form-control" placeholder="Buscar amigos" (keyup.enter)="searchByName()" >
+            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="Buscar amigos" (keyup.enter)="searchByName()" (keyup)="nameEmployeePrueba()" >
             <i class="search-input-icon fa fa-search icon-search cursor general" (click)='searchByName()'></i>
           </div>
           <div *ngFor="let contact of contacts; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
@@ -35,8 +35,11 @@
                   </span>
                 </div>
               </div>
-            </div>
-          </div>
+            </div>           
+          </div>       
+        </div>
+        <div *ngIf="!validateError">
+          {{error}}
         </div>
         <div id="tab-2" class="tab-pane">
           <div *ngFor="let item of chats; let index=index; let odd=odd; let even=even;" [ngClass]="{ odd: odd, even: even }">
