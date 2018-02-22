@@ -10,8 +10,10 @@ export class EmployeeService {
   constructor(private http: HttpClient) { }
 
   getEmployeeByNameByPage(termSearch:string,numberPage:string):Observable<any>{
+    termSearch = termSearch.replace(' ', '_')
+    console.log(termSearch)
     return this.http.get(environment.apiBaseHr+'/api/v2/coworkers_list/search/'+termSearch+'/'+numberPage)
-    .map((response:Observable<any>)=>response);
+    .map((response:Observable<any>)=> response);
 
   }
 
