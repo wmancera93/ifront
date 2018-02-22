@@ -60,11 +60,11 @@ export class DashboardComponent implements OnInit {
 
     setTimeout(() => {
       setInterval(() => {
-        debugger
+       
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
       }, 3000)
       setInterval(() => {
-        debugger
+       
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
