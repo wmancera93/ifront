@@ -25,10 +25,14 @@
             </div>
             <div class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center">
                 <div class="row justify-content-end">
-                    <div id="togglePartners" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" data-toggle="collapse" href="#contactList" (click)="clickPartnersIcon('togglePartners')">
+                    <div *ngIf="showContactsList" id="togglePartners" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)="clickPartnersIcon()">
                         <i class="fa fa-fw fa-users fa-lg"></i>
                         <span class="hideText font-size-responsive ">Compañeros</span>
                     </div>
+                    <div *ngIf="!showContactsList" id="togglePartnersHide" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)="clickPartnersIconHide()">
+                            <i class="fa fa-fw fa-users fa-lg"></i>
+                            <span class="hideText font-size-responsive ">Compañeros</span>
+                        </div>
                     <div class="col-md-4 col-lg-6 col-xl-5  col-6 text-center cursor-general img-zoom" (click)='LogOut()'>
                         <i class="fa fa-fw fa-sign-out fa-lg"></i>
                         <span class="hideText font-size-responsive">Salir</span>
@@ -39,6 +43,6 @@
     </div>
 </nav>
 <app-alerts></app-alerts>
-<div id="contactList" class="collapse">
+<div id="contactList" class="hide">
 <app-contacts-list></app-contacts-list>
 </div>
