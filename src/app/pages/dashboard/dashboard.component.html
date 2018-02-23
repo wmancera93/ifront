@@ -1,41 +1,39 @@
 <div class="heigth-content-general">
   <div class="row-hr-container">
-    <div class="row">
-      <app-notification-primary [notificationPrimary]="objectRequest" class="col-xl-2 col-6"></app-notification-primary>
-      <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-2 col-6"></app-notification-secundary>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-estadistics [estadistics]="objectMyLayoffs" class="col-12"></app-estadistics>
-          <app-estadistics [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-6 col-5 title">
+          <i class="fa fa-fw fa-th-large fa-x1"></i>
+          Inicio
         </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-estadistics [estadistics]="objectIncome" class="col-12"></app-estadistics>
-          <app-estadistics [estadistics]="objectDeductions" class="col-12"></app-estadistics>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <app-newspaper [newspaper]="objectNewspaper" class="col-xl-9 col-12"></app-newspaper>
-      <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
-    </div>
-    <div class="row">
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectBirthDay" class="col-12"></app-events-employees>
-        </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectAnniversay" class="col-12"></app-events-employees>
-        </div>
-      </div>
-      <div class="col-xl-4 col-12">
-        <div class="row">
-          <app-events-employees [eventsEmployee]="objectNewEmployee" class="col-12"></app-events-employees>
+        <div class="col-xl-4 col-md-6 col-7">
+          <div class="row">
+            <div class="col-xl-10 col-md-9 col-8 text-right">
+              <div class="top-title-dbgerencial">
+                Dashbord Gerencial
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-3 col-4 text-right">
+              <div class="top-interruptor">
+                <input type="radio" name="interruptor" id="prendido">
+                <input type="radio" name="interruptor" id="apagado" checked>
+                <div class="interruptor-cuerpo">
+                  <div class="interruptor-tecla">
+                    <label for="prendido" (click)="vieweDashboardEmployee()"></label>
+                    <label for="apagado" (click)="vieweDashboardManager()"></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+  </div>
+  <div *ngIf="roleEmployee">
+    <app-employees></app-employees>
+  </div>
+  <div *ngIf="!roleEmployee">
+    <app-managerial></app-managerial>
   </div>
 </div>
