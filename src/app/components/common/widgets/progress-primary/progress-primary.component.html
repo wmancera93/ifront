@@ -1,0 +1,33 @@
+<div class="widget white-bg wg-hover-general wg-hover-bg p-lg">
+  <div class="row">
+    <div class="col-12">
+      <strong>
+        {{objectWidget[0].title}}
+      </strong>
+    </div>
+  </div>
+  <div class="row" *ngFor="let queryCompany of objectWidget; let bgprimary=odd; let bginfo=even;">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-8 text-left">
+              <i class="fa-fw {{queryCompany.iconProgress}}"></i>
+              {{queryCompany.nameProgress}}
+            </div>
+            <div class="col-4 text-right">
+              {{queryCompany.percentProgress}}
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="progress">
+            <div [ngClass]="{ bgprimary: bgprimary, bginfo: bginfo }" class="progress-bar progress-bar-striped progress-bar-animated"
+              role="progressbar" [ngStyle]="{'width':queryCompany.percentProgress }" [attr.aria-valuenow]="queryCompany.numberProgress"
+              aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
