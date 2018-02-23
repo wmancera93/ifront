@@ -958,6 +958,20 @@ border-bottom: 1px solid  #dddd;
   }
 
   /* BACKGROUNDS */
+ 
+  .bgprimary {
+    background: var(--primary) !important; 
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+    background-size: 1rem 1rem !important;
+    animation: progress-bar-stripes 1s linear infinite !important;
+  }
+  .bginfo {
+    background: var(--btn-primary-hover) !important; 
+    background-image: linear-gradient(45deg,rgba(255,255,255,.15) 25%,transparent 25%,transparent 50%,rgba(255,255,255,.15) 50%,rgba(255,255,255,.15) 75%,transparent 75%,transparent) !important;
+    background-size: 1rem 1rem !important;
+    animation: progress-bar-stripes 1s linear infinite !important;
+  }
+
 .gray-bg,
 .bg-muted {
   background-color: #f3f3f4;

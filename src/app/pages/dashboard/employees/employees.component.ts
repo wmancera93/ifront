@@ -25,13 +25,13 @@ export class EmployeesComponent implements OnInit {
     setTimeout(() => {
       setInterval(() => {
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-      }, 3000)
+      }, 5000)
       setInterval(() => {
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
         (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
       }, 10000)
-    }, 10000)
+    }, 8000)
   }
 
   ngOnInit() {

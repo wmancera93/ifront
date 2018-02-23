@@ -64,3 +64,12 @@ export interface EventsEmployess {
 interface Url {
     url: string
 }
+
+
+export interface ProgressPrimary {
+    title: string,
+    nameProgress: string,
+    numberProgress: string,
+    percentProgress: string, 
+    iconProgress: string   
+}
