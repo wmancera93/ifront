@@ -25,6 +25,9 @@ export class ContactsListComponent implements OnInit {
   public scrollbarAction: any;
   public error: string;
   public validateError: boolean;
+  public searchIconActive: boolean;
+  public hideCollapse: string = '';
+  public showContactsList:boolean = true;
 
 
   constructor(public employeeDate: EmployeeService,
@@ -44,34 +47,38 @@ export class ContactsListComponent implements OnInit {
         }
       });
   }
-  nameEmployeePrueba() {
-    
-    this.nameEmployee = this.searchByLetter;        
-    if(this.numberLengthLetter !== this.nameEmployee.length){
-      this.numberPage = 1;   
-      console.log(this.nameEmployee);
+  enterNameEmployee() {
+    this.searchIconActive = true;
+    this.nameEmployee = this.searchByLetter;
+
+    if (this.nameEmployee.length == 0) {
+      this.searchIconActive = false;
+    }
+    if (this.numberLengthLetter !== this.nameEmployee.length) {
+      this.numberPage = 1;
     }
     this.numberLengthLetter = this.nameEmployee.length;
-  
+
+
   }
   searchByName() {
     let numberContacts: number = 0;
     let filterContacts: number = 0;
-    
+
     this.contacts = this.searchListContacts;
 
     this.contacts = this.contacts.filter(
-      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);    
+      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
     if (this.contacts.length === 0 || this.contacts.length < 10) {
       this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
         .subscribe((result: any) => {
-          
+
           if (result.success === true) {
             numberContacts += result.data.length;
             for (let i = 0; i < result.data.length; i++) {
               this.searchListContacts.push(result.data[i]);
-              this.contacts = this.searchListContacts;             
-            }           
+              this.contacts = this.searchListContacts;
+            }
             this.contacts = this.contacts.filter(
               (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
           }
@@ -100,40 +107,40 @@ export class ContactsListComponent implements OnInit {
     if (this.scrollState == undefined) {
 
     } else
-      if (this.scrollState == true) {      
+      if (this.scrollState == true) {
         if (this.nameEmployee !== '') {
           let numberContacts: number = 0;
           this.contacts = this.contacts.filter(
             (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
 
-        //  if (this.contacts.length === 0 || this.contacts.length < 10) {
-            this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
-              .subscribe((result: any) => {
-                if (result.success === true) {
-                  numberContacts += result.data.length;
-                  for (let i = 0; i < result.data.length; i++) {
-                    this.searchListContacts.push(result.data[i]);
-                    this.contacts = this.searchListContacts;
-                    this.contacts = this.contacts.filter(
-                      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
-                  }
+          //  if (this.contacts.length === 0 || this.contacts.length < 10) {
+          this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
+            .subscribe((result: any) => {
+              if (result.success === true) {
+                numberContacts += result.data.length;
+                for (let i = 0; i < result.data.length; i++) {
+                  this.searchListContacts.push(result.data[i]);
+                  this.contacts = this.searchListContacts;
+                  this.contacts = this.contacts.filter(
+                    (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
                 }
-                this.numberPage++;
-              },
-                (error) => {
+              }
+              this.numberPage++;
+            },
+              (error) => {
 
-                  this.error = error.error.errors[0];
-                  this.validateError = error.error.success;
-                  console.log(error.error.success)
-                  console.log(error.error.errors[0])
+                this.error = error.error.errors[0];
+                this.validateError = error.error.success;
+                console.log(error.error.success)
+                console.log(error.error.errors[0])
 
-                }
-              );
+              }
+            );
 
-         // }
-          
-        
-         } else {
+          // }
+
+
+        } else {
           let numberContacts: number = 0;
           this.employeeDate.getAllEmployees(this.numberPageScroll.toString())
             .subscribe((result: any) => {
@@ -151,6 +158,10 @@ export class ContactsListComponent implements OnInit {
 
       }
 
-  }
+  } 
 
+  clickPartnersIconHide()
+  {
+    document.getElementById('togglePartnersHide').click();
+  }
 }

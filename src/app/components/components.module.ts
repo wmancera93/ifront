@@ -1,6 +1,7 @@
 // modules
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 // components
 import { HeaderComponent } from './layout/header/header.component';
@@ -18,14 +19,14 @@ import { NotificationPrimaryComponent } from './common/widgets/notification-prim
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
 import { FormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
+import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
-    // BrowserAnimationsModule, 
-    // ToasterModule.forRoot(),
+    FormsModule,
+    RouterModule
   ],
   declarations: [
     HeaderComponent,
@@ -39,7 +40,8 @@ import { EventsEmployeesComponent } from './common/widgets/events-employees/even
     EstadisticsComponent,
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
-    EventsEmployeesComponent
+    EventsEmployeesComponent,
+    ProgressPrimaryComponent
   ],
   exports: [
     HeaderComponent,
@@ -53,7 +55,8 @@ import { EventsEmployeesComponent } from './common/widgets/events-employees/even
     EstadisticsComponent,
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
-    EventsEmployeesComponent
+    EventsEmployeesComponent,
+    ProgressPrimaryComponent
   ],
   providers: [
     // ToasterService
