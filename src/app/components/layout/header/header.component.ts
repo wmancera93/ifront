@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   public showMenu: boolean = true;
   public showCollapse: string = '';
   public heightContenGeneral: number;
+  public showContactsList:boolean = true;
 
   private alertWarning: Alerts[];
 
@@ -118,14 +119,31 @@ export class HeaderComponent implements OnInit {
     
   }
 
-  clickPartnersIcon(toggle: string) {
-
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {
-      if (this.showCollapse !== toggle) {
-        this.clickHideMenuMobile();
-      }
+  clickPartnersIcon() {
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {     
+        this.clickHideMenuMobile()      
     }
+       
+    if(document.getElementById("contactList").className === 'hide')
+    {
+      document.getElementById("contactList").className = 'show';
+      this.showContactsList = false;
+    }
+    else{
+      document.getElementById("contactList").className = 'show';
+      this.showContactsList = false;
+    }
+   
+  }
 
+  clickPartnersIconHide() {  
+    
+      document.getElementById('contactList').classList.remove('show')     
+      document.getElementById("contactList").className = 'hide';
+      this.showContactsList = true;
+    
+   
+      
   }
 
   clickHideMenuMobile() {
