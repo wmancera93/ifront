@@ -55,6 +55,7 @@ export class LockedScreenComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     this.getDataLocalStorage();
   }
 

@@ -55,9 +55,10 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     });
   }
-  
+
 
   ngOnInit() {
+    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     if (localStorage.getItem("enterprise") === null) {
       this.mainService.getDataEnterprise()
         .subscribe((result: any) => {
@@ -129,7 +130,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           this.txtConfirmPassword = '';
         }
       );
-    }    
+    }
   }
 
   // events
