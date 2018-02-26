@@ -53,6 +53,7 @@ export class ResetAccountComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
   }
 
