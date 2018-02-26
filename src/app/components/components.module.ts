@@ -20,6 +20,7 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
 import { FormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
+import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
 
 
 @NgModule({
@@ -41,7 +42,9 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
-    ProgressPrimaryComponent
+    ProgressPrimaryComponent,
+    EmployeeInfoComponent
+  
   ],
   exports: [
     HeaderComponent,
@@ -56,7 +59,8 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
-    ProgressPrimaryComponent
+    ProgressPrimaryComponent,
+    EmployeeInfoComponent
   ],
   providers: [
     // ToasterService

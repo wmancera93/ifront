@@ -24,4 +24,10 @@ getAllEmployees(numberPage:string):Observable<any>
   .map((data:Observable<any>)=>data)
 }
 
+getEmployeeById(id:string):Observable<any>
+{
+  return this.http.get(environment.apiBaseHr+'/api/v2/employees/'+id)
+  .map((data:Observable<any>)=>data)
+}
+
 }
