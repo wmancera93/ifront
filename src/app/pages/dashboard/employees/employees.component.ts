@@ -21,17 +21,19 @@ export class EmployeesComponent implements OnInit {
   @Output() objectAnniversay: EventsEmployess[];
   @Output() objectNewEmployee: EventsEmployess[];
 
-  constructor() { 
-    setTimeout(() => {
-      setInterval(() => {
-        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-      }, 5000)
-      setInterval(() => {
-        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
-        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
-        (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
-      }, 10000)
-    }, 8000)
+  constructor() {
+    setInterval(() => {
+      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
+    }, 20000)
+    setInterval(() => {
+      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
+    }, 30000)
+    setInterval(() => {
+      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
+    }, 40000)
+    setInterval(() => {
+      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
+    }, 50000)
   }
 
   ngOnInit() {
@@ -290,7 +292,7 @@ export class EmployeesComponent implements OnInit {
       background: '#FFFFFF'
     });
     this.objectNewEmployee = newEmployee;
-       
+
   }
 
 }

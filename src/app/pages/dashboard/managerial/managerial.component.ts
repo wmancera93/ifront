@@ -14,15 +14,12 @@ export class ManagerialComponent implements OnInit {
   @Output() objectMyTeam: EventsEmployess[];
   @Output() objectReports: NotificationPrimary;
   @Output() objectWoman: NotificationPrimary;
-  @Output() objectMen: NotificationPrimary;  
+  @Output() objectMen: NotificationPrimary;
   @Output() objectAbsenteeism: Estadistics;
   @Output() objectQueryCompany: ProgressPrimary[];
-  @Output() objectPermissionsUsers: ProgressPrimary[];  
+  @Output() objectPermissionsUsers: ProgressPrimary[];
 
   constructor() {
-    setInterval(() => {
-      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-    }, 5000)
   }
 
   ngOnInit() {

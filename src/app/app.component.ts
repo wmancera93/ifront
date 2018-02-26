@@ -54,12 +54,6 @@ export class AppComponent {
         }
       }
     });
-    // if (confirm('Dese salir de esta pagina.')) {
-    //   alert('ok');
-    // } else {
-    //   alert('no ok');
-    // }
-
   }
 
   ngOnInit() {
