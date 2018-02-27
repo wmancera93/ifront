@@ -9,6 +9,8 @@ import { Employee } from '../../../../models/general/user';
 export class EmployeeInfoComponent implements OnInit {
   public employeeInfo: Employee[] = [];
   public flagShowModal: boolean = false;
+  public isBoss : boolean = false;
+  public validateRol: boolean;
 
   constructor(public employeeSharedService: EmployeeInfoService) {
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {      
@@ -20,6 +22,18 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
+  validateRolInfoEmployee()
+  {  
+  if(this.isBoss == true)
+  {
+    this.validateRol == true;
+  }
+  else
+  {
+    this.validateRol == false;
+  }
+}
 
 }

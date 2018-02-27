@@ -1,28 +1,25 @@
 <button id="btn-modalOpenInfoEmployee" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-employeeInfo"
-  style="display:none;">
+  style="display:none;" (click)="validateRolInfoEmployee()">
 </button>
 <div class="modal fade" id="modal-employeeInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf='flagShowModal'>
-      <div class="modal-header">
-        <div class="col-2">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <div class="col-4 col-lg-2">
           <div class="menu-img-employee">
             <img src="{{employeeInfo.image.url}}" class="roundPhoto-employee">
             <br>
           </div>
         </div>
-        <div class="col-10 text-left">
-          <button id="btn-closeModalInfoEmployee" type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h4 class="modal-title titleColor">{{employeeInfo.name_complete}}</h4>
+        <div class="col-12 col-lg-10 text-center text-lg-left">
+          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.name_complete}}</h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
         <div>
-          <h5 class="titleColor">INFORMACIÓN LABORAL</h5>
-          <div class="row">
-            <div class="col-6">
+          <h5 class="titleColor text-shadow">INFORMACIÓN LABORAL</h5>
+          <div class="row bodyColorInfo">
+            <div class="col-12 col-lg-6">
               <i class="fa fa-at paddingInfo"></i>
               <strong> E-mail:</strong> {{employeeInfo.email}}
               <br>
@@ -30,42 +27,58 @@
               <strong>Teléfono:</strong>&nbsp;{{employeeInfo.phone}}
               <br>
               <i class="fa fa-users paddingInfo"></i>
-              <strong>&nbsp;Posición:</strong>&nbsp;{{employeeInfo.posicion}}
+              <strong>&nbsp;Posición:</strong>&nbsp;
+              <span class="text-capitalize">
+                {{employeeInfo.posicion | lowercase}}
+              </span>
               <br>
               <i class="fa fa-building paddingInfo"></i>
-              <strong>&nbsp;Unidad Organizacional:</strong>&nbsp;{{employeeInfo.unidad_org}}
+              <strong>&nbsp;Unidad Organizacional:</strong>&nbsp;
+              <span class="text-capitalize">                
+                  {{employeeInfo.unidad_org | lowercase}}
+                </span>             
               <br>
               <i class="fa fa-puzzle-piece paddingInfo"></i>
-              <strong>&nbsp;Área:</strong>&nbsp;{{employeeInfo.area}}
+              <strong>&nbsp;Área:</strong>&nbsp;
+              <span class="text-capitalize">                
+                  {{employeeInfo.area| lowercase}}
+              </span>               
               <br>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
               <i class="fa fa-male paddingInfo"></i>
               <strong>&nbsp;Jefe:</strong>&nbsp;{{employeeInfo.my_boss_employee}}
               <br>
               <i class="fa fa-id-badge paddingInfo"></i>
-              <strong>&nbsp;División:</strong>&nbsp;{{employeeInfo.division_per}}
+              <strong>&nbsp;División:</strong>&nbsp;
+              <span class="text-capitalize">                
+                  {{employeeInfo.division_per| lowercase}}
+              </span>  
               <br>
               <i class="fa fa-bars paddingInfo"></i>
-              <strong>&nbsp;Sub-División:</strong>&nbsp;{{employeeInfo.subdivision_per}}
+              <strong>&nbsp;Sub-División:</strong>&nbsp;
+              <span class="text-capitalize">                
+                  {{employeeInfo.subdivision_per| lowercase}}
+              </span> 
               <br>
               <i class="fa fa-calendar paddingInfo"></i>
               <strong>&nbsp;Fecha Ingreso:</strong>&nbsp;{{employeeInfo.fecha_ingreso}}
               <br>
+              <div *ngIf="validateRol">
               <i class="fa fa-file paddingInfo"></i>
               <strong>&nbsp;Tipo de contrato:</strong>&nbsp;{{employeeInfo.contract_type}}
+            </div>
               <br>
             </div>
           </div>
         </div>
-        <br>
-        <br>
-        <div class="end-line"></div>
-        <div>
+        <br>       
+        <div class="end-line" *ngIf="validateRol"></div>       
           <br>
-          <h5 class="titleColor">INFORMACIÓN PERSONAL</h5>
-          <div class="row">
-            <div class="col-6">
+         <div id="personalInformationEmployee" *ngIf="validateRol">
+          <h5 class="titleColor text-shadow">INFORMACIÓN PERSONAL</h5>
+          <div class="row bodyColorInfo">
+            <div class="col-12 col-lg-6">
               <i class="fa fa-birthday-cake paddingInfo"></i>
               <strong>&nbsp;Fecha de nacimiento:</strong>&nbsp;{{employeeInfo.fecha_nac}}
               <br>
@@ -73,7 +86,7 @@
               <strong>&nbsp;Número de identificación:</strong>&nbsp;{{employeeInfo.number_document}}
               <br>
             </div>
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
               <i class="fa fa-mobile paddingInfo"></i>
               <strong>&nbsp;Teléfono personal:</strong>&nbsp;{{employeeInfo.personal_phone}}
               <br>
@@ -82,10 +95,10 @@
               <br>
             </div>
           </div>
-        </div>
+        </div>        
       </div>
       <!-- Modal footer -->
-      <div class="modal-footerInfo">
+      <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseEmployee text-center" data-dismiss="modal">
           <h6> Cerrar </h6>
         </div>
