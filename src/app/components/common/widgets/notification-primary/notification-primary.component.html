@@ -1,10 +1,18 @@
-<div class="widget wg-hover-general wg-hover-bg widget-height-notification p-lg text-center" [ngStyle]="{'background-color': objectWidget.background}">
+<div *ngIf="objectWidget" class="widget wg-hover-general wg-hover-bg widget-height-notification p-lg text-center" [ngStyle]="{'background-color': objectWidget.background}">
   <div>
-    <i [ngStyle]="{'color': objectWidget.colorIcon}" class="fa {{objectWidget.icon}} fa-4x"></i>
+    <i [ngStyle]="{'color': objectWidget.color_icon}" class="fa {{objectWidget.icon}} fa-4x"></i>
     <h1 [ngStyle]="{'color': objectWidget.color}" class="m-xs">{{objectWidget.number}}</h1>
     <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
       {{objectWidget.title}}
     </h3>
     <small [ngStyle]="{'color': objectWidget.color}" style="margin-left: -22px;margin-right: -30px;"> {{objectWidget.comment}}</small>
+  </div>
+</div>
+<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg widget-height-notification p-lg text-center">
+  <div>
+    <i class="fa fa-exclamation fa-4x"></i>
+    <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
+      No se encontraron datos disponibles.
+    </h3>
   </div>
 </div>

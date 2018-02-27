@@ -7,7 +7,7 @@ import { EventsEmployess } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./events-employees.component.css']
 })
 export class EventsEmployeesComponent implements OnInit {
-  @Input() eventsEmployee: any
+  @Input('eventsEmployee') eventsEmployee: any
   public objectWidget: EventsEmployess[];
   public cauruselIdGeneral: string = '';
   public cauruselId: string = '';
@@ -17,8 +17,10 @@ export class EventsEmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.objectWidget = this.eventsEmployee;
-    this.cauruselIdGeneral = this.objectWidget[0].nameEvent;
-    this.cauruselId = '#' + this.objectWidget[0].nameEvent;
+    this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
+      this.objectWidget = data;
+      this.cauruselIdGeneral = this.objectWidget[0].name_event;
+      this.cauruselId = '#' + this.objectWidget[0].name_event;
+    })
   }
 }

@@ -63,6 +63,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     this.mainService.getDataEnterprise()
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;

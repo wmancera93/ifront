@@ -1,6 +1,6 @@
-<div [ngStyle]="{'background-color': objectWidget[0].background}" class="widget wg-hover-general wg-hoverImg-bg navy-bg">
+<div *ngIf="objectWidget" [ngStyle]="{'background-color': objectWidget[0].background}" class="widget wg-hover-general wg-hoverImg-bg navy-bg">
   <div class="row">
-    <div id="{{cauruselIdGeneral}}" class="carousel slide" data-ride="carousel">
+    <div id="{{cauruselIdGeneral}}" class="carousel slide" data-ride="carousel" data-interval="false">
       <ul class="carousel-indicators" style="display:none">
         <li [attr.data-target]="cauruselId" [attr.data-slide-to]="i" [ngClass]="{'active': i=='0'}" *ngFor="let eventEmployee of objectWidget;let i = index"></li>
       </ul>
@@ -26,10 +26,13 @@
                   </div>
                   <div class="col-12 text-center">
                     <strong [ngStyle]="{'color': eventEmployee.color}" class="font-bold font-size-20" id="info_severances">
-                      {{eventEmployee.name}} </strong>
+                      {{eventEmployee.short_name}} </strong>
                   </div>
                   <div class="col-12 text-center">
-                    <strong [ngStyle]="{'color': eventEmployee.color}" class="font-size-12"> {{eventEmployee.posicion}} </strong>
+                    <strong [ngStyle]="{'color': eventEmployee.color}" class="font-size-12"> 
+                        {{eventEmployee.posicion | slice: 0:20}}
+                        <span [hidden]="eventEmployee.posicion < 20">...</span>  
+                    </strong>
                   </div>
                 </div>
               </div>
@@ -41,5 +44,14 @@
         <i class="fa fa-angle-right fa-3x"></i>
       </div>
     </div>
+  </div>
+</div>
+
+<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg navy-bg">
+  <div>
+    <i class="fa fa-exclamation fa-3x"></i>
+    <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
+      No se encontraron datos disponibles.
+    </h3>
   </div>
 </div>

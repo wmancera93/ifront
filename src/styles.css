@@ -1665,10 +1665,7 @@ a.close-canvas-menu:hover {
         height: 769px !important;
         padding: 100px 0 150px;
     }   
-
-    .widget-calendar {
-        padding: 43px 20px;
-    }   
+     
 }
 @media (min-width: 1800px) and (min-height: 800px) 
 {

@@ -10,6 +10,8 @@ import { MainService } from './main/main.service';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { EmployeeService } from './common/employee/employee.service';
 import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
+import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
+import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
 
 @NgModule({
   imports: [
@@ -22,7 +24,9 @@ import { EmployeeInfoService } from './shared/common/employee/employee-info.serv
     MainService,
     GoogleAnalyticsEventsService,
     EmployeeService,
-    EmployeeInfoService
+    EmployeeInfoService,
+    DashboardEmployeeService,
+    DashboardManagerialService
   ]
 })
 export class ServicesModule { }
