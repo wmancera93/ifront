@@ -7,13 +7,15 @@ import { NotificationPrimary, NotificationSecundary } from '../../../../models/c
   styleUrls: ['./notification-secundary.component.css']
 })
 export class NotificationSecundaryComponent implements OnInit {
-  @Input() notificationSecundary: any;
+  @Input('notificationSecundary') notificationSecundary: any;
   public objectWidget: NotificationSecundary;
   
   constructor() { }
 
   ngOnInit() {
-    this.objectWidget = this.notificationSecundary;
+    this.notificationSecundary.subscribe((data:NotificationSecundary) => {
+      this.objectWidget = data;
+    })
   }
 
 }

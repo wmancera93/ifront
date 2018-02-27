@@ -7,8 +7,7 @@ import { NotificationPrimary } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./notification-primary.component.css']
 })
 export class NotificationPrimaryComponent implements OnInit {
-
-  @Input() notificationPrimary: any;
+  @Input('notificationPrimary') notificationPrimary: any;
   public objectWidget: NotificationPrimary;
 
   constructor() {
@@ -16,7 +15,9 @@ export class NotificationPrimaryComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.objectWidget = this.notificationPrimary;
+    this.notificationPrimary.subscribe((data: NotificationPrimary) => {
+      this.objectWidget = data;
+    })
   }
 
 }

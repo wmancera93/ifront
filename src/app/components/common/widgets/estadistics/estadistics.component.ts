@@ -7,7 +7,7 @@ import { Estadistics } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./estadistics.component.css']
 })
 export class EstadisticsComponent implements OnInit {
-  @Input() estadistics: any
+  @Input('estadistics') estadistics: any
   public objectWidget: Estadistics;
 
   constructor() {
@@ -15,6 +15,9 @@ export class EstadisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.objectWidget = this.estadistics;
+    this.estadistics.subscribe((data:Estadistics) => {
+      this.objectWidget = data;
+    })
+    
   }
 }
