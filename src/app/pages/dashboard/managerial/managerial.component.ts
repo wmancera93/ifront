@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NotificationSecundary, EventsEmployess, NotificationPrimary, Estadistics, ProgressPrimary } from '../../../models/common/widgets/widgets';
 import { User } from '../../../models/general/user';
+import { DashboardManagerialService } from '../../../services/dashboard/managerial/dashboard-managerial.service';
 
 @Component({
   selector: 'app-managerial',
@@ -15,34 +16,52 @@ export class ManagerialComponent implements OnInit {
   @Output() objectReports: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectWoman: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectMen: EventEmitter<NotificationPrimary> = new EventEmitter();
-  @Output() objectAbsenteeism: EventEmitter<Estadistics> = new EventEmitter();
+  @Output() objectAbsenteeism: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectQueryCompany: EventEmitter<ProgressPrimary[]> = new EventEmitter();
   @Output() objectPermissionsUsers: EventEmitter<ProgressPrimary[]> = new EventEmitter();
-
-  constructor() {
+   public validateMyTeam : string;
+  constructor(public dasboardManagerialService: DashboardManagerialService) {
   }
 
   ngOnInit() {
-    const vacations: NotificationSecundary[] = [];
-    this.objectVacations.emit(vacations[0]);
+    this.dasboardManagerialService.getWidgetEmployeeOnVacations()
+      .subscribe((data: any) => {
+        this.objectVacations.emit(data.data);
+      });
+
+    this.dasboardManagerialService.getWidgetEmployeeOnPermition()
+    .subscribe((data:any)=>{
+      this.objectPermissions.emit(data.data);      
+    });
+
+    this.dasboardManagerialService.getwidgetEmployeeOnAbsences()
+    .subscribe((data:any)=>{
+      this.objectAbsenteeism.emit(data.data);
+    });
+
+    this.dasboardManagerialService.getWidgetMyteam()
+    .subscribe((data:any)=>{    
+         this.objectMyTeam.emit(data.data);
+         console.log(data.data);
+        //  this.validateMyTeam == data.data;
+        //  console.log(this.validateMyTeam);
+    });
+    
+    this.dasboardManagerialService.getWidgetCompanyrequest()
+    .subscribe((data:any)=>{     
+      this.objectQueryCompany.emit(data.data);      
+    });
+    
+    this.dasboardManagerialService.getWidgetPermissionsUser()
+    .subscribe((data:any)=>{
+      this.objectPermissionsUsers.emit(data.data);
+    });
 
     const incapacityes: NotificationSecundary[] = [];
     this.objectIncapacityes.emit(incapacityes[0]);
 
-    const permissions: NotificationSecundary[] = [];
-    this.objectPermissions.emit(permissions[0]);
-
-    const myTeam: EventsEmployess[] = [];
-    this.objectMyTeam.emit(myTeam);
-
     const reports: NotificationPrimary[] = [];
     this.objectReports.emit(reports[0]);
-
-    const myQuerysCompany: ProgressPrimary[] = [];
-    this.objectQueryCompany.emit(myQuerysCompany);
-
-    const myPermissionsUsers: ProgressPrimary[] = [];
-    this.objectPermissionsUsers.emit(myPermissionsUsers);
 
     const men: NotificationPrimary[] = [];
     this.objectMen.emit(men[0]);

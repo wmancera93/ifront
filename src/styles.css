@@ -1105,6 +1105,12 @@ border-bottom: 1px solid  #dddd;
 .white-bg {
   background-color: #ffffff;
 }
+.iconColor-primary{
+    color: var(--btn-primary) !important;
+}
+.letterColor-primary{
+    color: var(--btn-primary-hover) !important;
+}
 .blue-bg,
 .bg-success {
   background-color: #1c84c6;

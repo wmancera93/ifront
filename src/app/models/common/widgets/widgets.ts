@@ -1,8 +1,10 @@
 import { Employee } from "../../general/user";
+import { Data } from "@angular/router";
 
 export interface NotificationPrimary {
     title: string,
     number: string,
+    percentage: string,
     comment: string,
     icon: string,
     color_icon: string,
@@ -67,7 +69,7 @@ export interface EventsEmployess {
     color: string,
     background: string,
     short_name: string,
-    description: string
+    //description: string
 }
 
 interface Url {
@@ -77,8 +79,14 @@ interface Url {
 
 export interface ProgressPrimary {
     title: string,
-    nameProgress: string,
-    numberProgress: string,
-    percentProgress: string,
-    iconProgress: string
+    data: data
+  
+    
+}
+
+interface data {
+    title: string,
+    icon: string,
+    value: string,
+    percentage_value: string,
 }

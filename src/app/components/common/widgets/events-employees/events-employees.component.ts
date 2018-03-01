@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventsEmployess } from '../../../../models/common/widgets/widgets';
 
 @Component({
@@ -11,6 +11,8 @@ export class EventsEmployeesComponent implements OnInit {
   public objectWidget: EventsEmployess[];
   public cauruselIdGeneral: string = '';
   public cauruselId: string = '';
+  public nohaveTeam:boolean;
+
 
   constructor() {
 
@@ -19,8 +21,17 @@ export class EventsEmployeesComponent implements OnInit {
   ngOnInit() {
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
-      this.cauruselIdGeneral = this.objectWidget[0].name_event;
+      console.log(data);
+      if(data.length === 0)
+      {
+        this.nohaveTeam = true;
+      }
+      else{
+      this.nohaveTeam = false; 
+      this.cauruselIdGeneral = this.objectWidget[0].name_event;   
       this.cauruselId = '#' + this.objectWidget[0].name_event;
+    }
     })
+  
   }
 }
