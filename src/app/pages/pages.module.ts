@@ -19,6 +19,7 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
+import { MyTeamComponent } from './my-team/my-team.component';
 
 
 
@@ -37,7 +38,8 @@ import { ManagerialComponent } from './dashboard/managerial/managerial.component
     ConfirmResetAcountComponent,
     ErrorPageComponent,
     EmployeesComponent,
-    ManagerialComponent
+    ManagerialComponent,
+    MyTeamComponent
   ],
   providers:[
     Angular2TokenService

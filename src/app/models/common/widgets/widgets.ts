@@ -29,8 +29,11 @@ export interface Estadistics {
     number: string,
     comment: string,
     canvas: any,
-    background: string;
-    color: string
+    background: string,
+    color: string,
+    label: string[],
+    value: number[],
+    gradient: string[]
 }
 
 export interface Calendar {
