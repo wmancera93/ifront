@@ -41,12 +41,17 @@ export class EmployeesComponent implements OnInit {
     this.dashboardEmployeeService.getRequest()
       .subscribe((data: any) => {
         this.objectRequest.emit(data.data)
-      })
+      });
 
     this.dashboardEmployeeService.getVacations()
       .subscribe((data: any) => {
         this.objectVacations.emit(data.data)
-      })
+      });
+
+      this.dashboardEmployeeService.getCalendar()
+      .subscribe((data: any) => {
+        this.objectCalendar.emit(data.data)
+      });
 
     const myLayoffs: Estadistics[] = [];
     this.objectMyLayoffs.emit(myLayoffs[0]);
@@ -75,10 +80,7 @@ export class EmployeesComponent implements OnInit {
           this.objectNewEmployee.emit(data.data[0].new_employees);
         }
       });
-
-    const calendar: Calendar[] = [];
-
-    this.objectCalendar.emit(calendar[0]);
+  
   }
 
 }

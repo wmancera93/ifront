@@ -38,5 +38,15 @@ getWidgetPermissionsUser()
   return this.http.get(environment.apiBaseHr+'/api/v2/dashboards/roles_and_permissions_widget')
   .map((data:Observable<any>)=>data);
 }
+getWidgetMalePercent()
+{
+  return this.http.get(environment.apiBaseHr+'/api/v2/dashboards/total_males_widget')
+  .map((data:Observable<any>)=>data);
+}
+getWidgetFemalePercent()
+{
+  return this.http.get(environment.apiBaseHr+'/api/v2/dashboards/total_females_widget')
+  .map((data:Observable<any>)=>data);
+}
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Estadistics } from '../../../../models/common/widgets/widgets';
 
+
 @Component({
   selector: 'app-estadistics',
   templateUrl: './estadistics.component.html',
@@ -8,11 +9,15 @@ import { Estadistics } from '../../../../models/common/widgets/widgets';
 })
 export class EstadisticsComponent implements OnInit {
   @Input('estadistics') estadistics: any
-  public objectWidget: Estadistics;
+  public objectWidget: Estadistics;  
+ 
+  public doughnutChartLabels:string[] = ['Enero', 'Febrero', 'Marzo'];
+  public doughnutChartData:number[] = [350, 355, 340];
+  public doughnutChartType:string = 'doughnut';
+  public showChartLegend : boolean = false ; 
+  private doughnutChartColors: any[] = [{ backgroundColor: ["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"] }];
 
-  constructor() {
-
-  }
+  constructor() {  }
 
   ngOnInit() {
     this.estadistics.subscribe((data:Estadistics) => {

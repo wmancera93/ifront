@@ -21,11 +21,12 @@ import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 
 
+
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ComponentsModule,
+    ComponentsModule,    
     FormsModule
   ],
   declarations: [

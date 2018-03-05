@@ -21,13 +21,14 @@ import { FormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
-
+import {ChartsModule} from 'ng2-charts/ng2-charts';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule
   ],
   declarations: [
     HeaderComponent,

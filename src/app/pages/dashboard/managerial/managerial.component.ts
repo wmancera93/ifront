@@ -57,16 +57,22 @@ export class ManagerialComponent implements OnInit {
       this.objectPermissionsUsers.emit(data.data);
     });
 
+    this.dasboardManagerialService.getWidgetMalePercent()
+    .subscribe((data:any)=>{
+      this.objectMen.emit(data.data);
+    });
+
+    this.dasboardManagerialService.getWidgetFemalePercent()
+    .subscribe((data:any)=>{
+      this.objectWoman.emit(data.data);
+    });
+
     const incapacityes: NotificationSecundary[] = [];
     this.objectIncapacityes.emit(incapacityes[0]);
 
     const reports: NotificationPrimary[] = [];
     this.objectReports.emit(reports[0]);
 
-    const men: NotificationPrimary[] = [];
-    this.objectMen.emit(men[0]);
-
-    const woman: NotificationPrimary[] = [];
-    this.objectWoman.emit(woman[0]);
+    
   }
 }

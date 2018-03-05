@@ -1,4 +1,39 @@
-<div *ngIf="objectWidget" [ngStyle]="{'background-color': objectWidget.background}" class="widget wg-hover-general wg-hover-bg navy-bg">
+<div  style="background-color:white;" class="widget wg-hover-general wg-hover-bg navy-bg">
+  <div class="row">
+    <div class="col-6">      
+          
+        <div style="display: block">        
+            <canvas baseChart
+                        [data]="doughnutChartData"
+                        [legend]="showChartLegend"                       
+                        [labels]="doughnutChartLabels" 
+                        [colors]="doughnutChartColors"                       
+                        [chartType]="doughnutChartType"></canvas>
+                        
+          </div> 
+          </div> 
+    <div class="col-6 text-right">
+        <div class="row">
+            <div class="col-12">
+              <strong  class="font-size-12   m-l-n-md"> Cesantías </strong>
+            </div>
+            <div class="col-12">
+              <p  class="font-size-12   m-l-n-md"> Ganancias </p>
+            </div>
+            <div class="col-12">
+              <strong  class="font-bold m-l-n-lg m-t-n-xs font-size-20" id="info_severances">
+                <i  class="fa fa-arrow-up"></i> 15% </strong>
+            </div>
+          </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <div *ngIf="objectWidget" [ngStyle]="{'background-color': objectWidget.background}" class="widget wg-hover-general wg-hover-bg navy-bg">
   <div class="row">
     <div class="col-4">
       <span id="severances" style="width: 100px" class="m-l-n-sm">
@@ -29,4 +64,4 @@
       No se encontraron datos disponibles.
     </h3>
   </div>
-</div>
+</div> -->

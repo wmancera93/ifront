@@ -27,5 +27,9 @@ export class DashboardEmployeeService {
     return this.http.get(environment.apiBaseHr + '/api/v2/dashboards/total_days_vacations_widget')
       .map((data: Observable<any>) => data);
   }
+  getCalendar(){
+    return this.http.get(environment.apiBaseHr + '/api/v2/dashboards/calendar_time_widget')
+    .map((data: Observable<any>) => data);
+  }
 
 }
