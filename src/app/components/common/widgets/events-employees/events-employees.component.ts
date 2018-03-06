@@ -21,7 +21,6 @@ export class EventsEmployeesComponent implements OnInit {
   ngOnInit() {
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
-      console.log(data);
       if(data.length === 0)
       {
         this.nohaveTeam = true;
