@@ -8,7 +8,7 @@ import { Newspaper } from '../../../../models/common/widgets/widgets';
 })
 export class NewspaperComponent implements OnInit {
   @Input('newspaper') newspaper: any;
-  public objectWidget: Newspaper[];
+  public objectWidget: Newspaper[]=[];
 
   constructor() { }
 
