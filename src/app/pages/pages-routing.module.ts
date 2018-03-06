@@ -9,6 +9,7 @@ import { LockedScreenComponent } from './authentication/locked-screen/locked-scr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acount/confirm-reset-acount.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { MyTeamComponent } from './my-team/my-team.component';
 
 const routes: Routes = [
     {
@@ -34,6 +35,10 @@ const routes: Routes = [
     {
         path: 'error',
         component: ErrorPageComponent
+    },
+    {
+        path:'my_team',
+        component: MyTeamComponent
     }
 ];
 

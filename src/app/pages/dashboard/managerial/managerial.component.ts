@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NotificationSecundary, EventsEmployess, NotificationPrimary, Estadistics, ProgressPrimary } from '../../../models/common/widgets/widgets';
 import { User } from '../../../models/general/user';
 import { DashboardManagerialService } from '../../../services/dashboard/managerial/dashboard-managerial.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-managerial',
@@ -20,7 +21,8 @@ export class ManagerialComponent implements OnInit {
   @Output() objectQueryCompany: EventEmitter<ProgressPrimary[]> = new EventEmitter();
   @Output() objectPermissionsUsers: EventEmitter<ProgressPrimary[]> = new EventEmitter();
    public validateMyTeam : string;
-  constructor(public dasboardManagerialService: DashboardManagerialService) {
+  constructor(public dasboardManagerialService: DashboardManagerialService,
+  public router:Router) {
   }
 
   ngOnInit() {
@@ -42,7 +44,6 @@ export class ManagerialComponent implements OnInit {
     this.dasboardManagerialService.getWidgetMyteam()
     .subscribe((data:any)=>{    
          this.objectMyTeam.emit(data.data);
-         console.log(data.data);
         //  this.validateMyTeam == data.data;
         //  console.log(this.validateMyTeam);
     });
@@ -74,5 +75,9 @@ export class ManagerialComponent implements OnInit {
     this.objectReports.emit(reports[0]);
 
     
+  }
+
+  goToMyTeam(){
+    this.router.navigate(['/ihr/my_team']);
   }
 }
