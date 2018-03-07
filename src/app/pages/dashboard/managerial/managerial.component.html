@@ -9,7 +9,12 @@
   <div class="row">
     <div class="col-xl-6 col-md-12 col-12">
       <div class="row">
-        <app-events-employees [eventsEmployee]="objectMyTeam" class="col-12" (click)="goToMyTeam()"></app-events-employees>
+        <div (click)="goToMyTeam()" class="col-12">
+          <div class="row">
+            <app-events-employees [eventsEmployee]="objectMyTeam" class="col-12"></app-events-employees>
+          </div>
+        </div>
+
         <app-progress-primary [progressPrimary]="objectPermissionsUsers" class="col-12"></app-progress-primary>
       </div>
     </div>

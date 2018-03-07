@@ -43,7 +43,7 @@ export class ManagerialComponent implements OnInit {
 
     this.dasboardManagerialService.getWidgetMyteam()
     .subscribe((data:any)=>{    
-         this.objectMyTeam.emit(data.data);
+         this.objectMyTeam.emit(data.data);      
         //  this.validateMyTeam == data.data;
         //  console.log(this.validateMyTeam);
     });

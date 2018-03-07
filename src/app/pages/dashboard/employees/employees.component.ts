@@ -1,8 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { NotificationPrimary, NotificationSecundary, Estadistics, Calendar, Newspaper, EventsEmployess } from '../../../models/common/widgets/widgets';
 import { Enterprise } from '../../../models/general/enterprise';
 import { User } from '../../../models/general/user';
 import { DashboardEmployeeService } from '../../../services/dashboard/employee/dashboard-employee.service';
+import { Router, NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-employees',
@@ -22,19 +23,26 @@ export class EmployeesComponent implements OnInit {
   @Output() objectAnniversay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();
 
-  constructor(public dashboardEmployeeService: DashboardEmployeeService) {
-    setInterval(() => {
-      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-    }, 20000)
-    setInterval(() => {
-      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
-    }, 30000)
-    setInterval(() => {
-      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
-    }, 40000)
-    setInterval(() => {
-      (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
-    }, 50000)
+
+  constructor(public dashboardEmployeeService: DashboardEmployeeService, public router: Router, ) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {      
+        if (event.urlAfterRedirects === '/index') {
+          setInterval(() => {
+            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
+          }, 20000)
+          setInterval(() => {
+            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
+          }, 30000)
+          setInterval(() => {
+            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
+          }, 40000)
+          setInterval(() => {
+            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
+          }, 50000)
+        }  
+      }
+    })
   }
 
   ngOnInit() {
@@ -48,7 +56,7 @@ export class EmployeesComponent implements OnInit {
         this.objectVacations.emit(data.data)
       });
 
-      this.dashboardEmployeeService.getCalendar()
+    this.dashboardEmployeeService.getCalendar()
       .subscribe((data: any) => {
         this.objectCalendar.emit(data.data)
       });
@@ -56,14 +64,14 @@ export class EmployeesComponent implements OnInit {
     const myLayoffs: Estadistics[] = [];
     this.objectMyLayoffs.emit(myLayoffs[0]);
 
-    const myInterestsLayoffs: Estadistics[] = [];    
+    const myInterestsLayoffs: Estadistics[] = [];
     this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
 
     const income: Estadistics[] = [];
     this.objectIncome.emit(income[0]);
 
     const deductions: Estadistics[] = [];
-    this.objectDeductions.emit(deductions[0]);    
+    this.objectDeductions.emit(deductions[0]);
 
     this.dashboardEmployeeService.getNewspaper()
       .subscribe((data: any) => {
@@ -80,7 +88,7 @@ export class EmployeesComponent implements OnInit {
           this.objectNewEmployee.emit(data.data[0].new_employees);
         }
       });
-  
+
   }
 
 }

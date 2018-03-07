@@ -19,6 +19,7 @@ export class EstadisticsComponent implements OnInit {
   public doughnutChartData:number[] = [350, 450, 100];
   public doughnutChartType:string = 'doughnut';
   public showChartLegend : boolean = false ; 
+  public hovered: boolean;
   public doughnutChartColors: any[] = [{ backgroundColor: ["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"] }];
 
   constructor() {  }
@@ -26,7 +27,16 @@ export class EstadisticsComponent implements OnInit {
   ngOnInit() {
     this.estadistics.subscribe((data:Estadistics) => {
       this.objectWidget = data;
-    })
+    });
     
+  }
+  
+
+  public chartClicked(e:any){
+   //console.log(e)
+  }
+
+  chartHovered(e: any): void{
+   // console.log(e);
   }
 }

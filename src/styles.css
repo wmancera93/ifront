@@ -372,6 +372,128 @@ header{
         transform: translate(0, 0);
 
 }
+/* My Team */
+
+.marginLeft{
+    margin-left: 15px;
+}
+.employee-height-notification{
+    height: 280px !important;
+  }
+.shadowRoundMoreInfo{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    -webkit-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
+    -moz-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
+    box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
+  
+}
+
+.roundMoreInfo{
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    color: #fff;
+    background: var(--btn-primary);
+    padding-top: 10px;
+    text-decoration: none;     
+    transition: all 500ms ease;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+}
+
+.roundMoreInfo:hover{
+background: #ffff;
+color: var(--btn-primary);
+-webkit-transform: rotate(360deg);
+-moz-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+cursor: pointer;
+}
+.colorEmployeeSecundary { 
+    background: #D8D8D8;
+    color: #676a6c !important;
+}
+
+/* .colorEmployeeSecundary:hover {
+    background: #BDBDBD !important;
+    color: navy !important;
+    cursor: pointer;
+} */
+
+
+.colorEmployeePrimary {
+    background: #676a6c !important;
+    color: #FFFFFF !important;   
+}
+/* .colorEmployeePrimary:hover { 
+    background: #BDBDBD !important; 
+    color: navy !important;
+    cursor: pointer;
+} */
+
+.ajustSizePhoto{
+    width: 70px;
+    height: 70px;
+}
+.roundPhotoMyTeam{
+    width: 100px;
+    height: 100px;
+  border-radius: 50px;
+  margin-top: 2px;
+  margin-left: 2px;
+}
+.menu-img-myTeam {
+    width: 105px;
+    height: 105px;
+    background-color: var(--btn-primary);
+    border-radius: 50%;  
+    -webkit-box-shadow: -17px 12px 37px -8px rgba(0,0,0,0.61);
+    -moz-box-shadow: -17px 12px 37px -8px rgba(0,0,0,0.61);
+    box-shadow: -17px 12px 37px -8px rgba(0,0,0,0.61);
+}
+.borderLine-myTeam
+    {
+    border-bottom: 3px solid var(--btn-primary) !important;
+   
+    } 
+    .buttonBack{
+   
+        background-color:var(--btn-primary);       
+        padding-bottom: 15px;
+        border-radius: 30px;
+        width: 100%;
+       
+        /**/
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
+    }
+    .buttonBack:hover{       
+            cursor: pointer;        
+            color:var(--btn-primary-hover);   
+            /*box-shadow: 0px 0px 100px #000000;*/
+            z-index: 2;
+            -webkit-transition: all 200ms ease-in;
+            -webkit-transform: scale(1.05);
+            -ms-transition: all 200ms ease-in;
+            -ms-transform: scale(1.05);   
+            -moz-transition: all 200ms ease-in;
+            -moz-transform: scale(1.05);
+            transition: all 200ms ease-in;
+            transform: scale(1.05); 
+    }
+
 
 /* Modal Contact Information*/
 
@@ -987,6 +1109,7 @@ border-bottom: 1px solid  #dddd;
   .widget-height-notification{
     height: 210px !important;
   }
+  
 
   .widget.style1 h2 {
     font-size: 30px;
@@ -2117,9 +2240,9 @@ a.close-canvas-menu:hover {
 
     .borderLine-title
     {
-border-bottom: 3px solid var(--btn-primary) !important; 
-height: 155px;   
-    }
+    border-bottom: 3px solid var(--btn-primary) !important; 
+    height: 155px;   
+    }   
 .font-controls-login {
         font-size: 1rem !important;
     }

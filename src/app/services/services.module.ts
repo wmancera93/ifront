@@ -12,6 +12,8 @@ import { EmployeeService } from './common/employee/employee.service';
 import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
 import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
 import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
+import {MyTeamInfoService} from './my-team/my-team-info.service';
+import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 
 @NgModule({
   imports: [
@@ -26,7 +28,9 @@ import { DashboardManagerialService } from './dashboard/managerial/dashboard-man
     EmployeeService,
     EmployeeInfoService,
     DashboardEmployeeService,
-    DashboardManagerialService
+    DashboardManagerialService,
+    MyTeamInfoService,
+    MyTeamReportService
   ]
 })
 export class ServicesModule { }

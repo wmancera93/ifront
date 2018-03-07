@@ -8,7 +8,10 @@
                         [legend]="showChartLegend"                       
                         [labels]="doughnutChartLabels" 
                         [colors]="doughnutChartColors"                       
-                        [chartType]="doughnutChartType"></canvas>
+                        [chartType]="doughnutChartType"
+                        (mouseover)="chartHovered($event)"
+                        (chartClick)="chartClicked($event)"
+                        ></canvas>
                         
           </div> 
           </div> 
@@ -28,40 +31,3 @@
     </div>
   </div>
 </div>
-
-
-
-
-
-<!-- <div *ngIf="objectWidget" [ngStyle]="{'background-color': objectWidget.background}" class="widget wg-hover-general wg-hover-bg navy-bg">
-  <div class="row">
-    <div class="col-4">
-      <span id="severances" style="width: 100px" class="m-l-n-sm">
-        <canvas width="66" height="65" style="display: inline-block; width: 66px; height: 65px; vertical-align: top;"></canvas>
-      </span>
-    </div>
-    <div class="col-8 text-white text-right">
-      <div class="row">
-        <div class="col-12">
-          <strong [ngStyle]="{'color': objectWidget.color}" class="font-size-12   m-l-n-md"> {{objectWidget.title}} </strong>
-        </div>
-        <div class="col-12">
-          <p [ngStyle]="{'color': objectWidget.color}" class="font-size-12   m-l-n-md"> {{objectWidget.comment}} </p>
-        </div>
-        <div class="col-12">
-          <strong [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n-lg m-t-n-xs font-size-20" id="info_severances">
-            <i [ngStyle]="{'color': objectWidget.color}" class="fa fa-arrow-up"></i> {{objectWidget.number}} </strong>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg navy-bg">
-  <div>
-    <i class="fa fa-exclamation fa-3x"></i>
-    <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
-      No se encontraron datos disponibles.
-    </h3>
-  </div>
-</div> -->

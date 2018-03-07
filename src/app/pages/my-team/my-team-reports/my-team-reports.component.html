@@ -1,0 +1,37 @@
+<div class="heigth-content-general">
+    <div *ngIf="reportsMyTeamInfo && !flagReturnBack">
+        <div class="row-hr-container">
+            <div class="col-12">
+                <div class="row align-items-center">
+                    <div class=" col-10 title">
+                        <i class="fa fa-file"></i>
+                        Información del empleado
+                    </div>
+                    <div class="col-2 text-center cursor-general img-zoom" style="padding-top:5px;">
+                        <div class="buttonBack" (click)="returnBackPage()">
+                            <i class="fa fa-fw fa-angle-left fa-lg"></i>Atrás
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-hr-container">
+            <div class="col-12 text-center widget bg-white">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="menu-img-employee">
+                            <img src="{{reportsMyTeamInfo.image.url}}" class="roundPhoto-employee">
+                            <br>
+                        </div>
+                    </div>
+                    <!-- <div class="col-10 text-center">
+                    <h4 class="modal-title titleColor text-shadow">{{reportsMyTeamInfo.name_complete}} </h4>
+                </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="flagReturnBack">
+        <app-my-team></app-my-team>
+    </div>
+</div>

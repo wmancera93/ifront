@@ -20,6 +20,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { MyTeamComponent } from './my-team/my-team.component';
+import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
 
 
 
@@ -39,7 +40,8 @@ import { MyTeamComponent } from './my-team/my-team.component';
     ErrorPageComponent,
     EmployeesComponent,
     ManagerialComponent,
-    MyTeamComponent
+    MyTeamComponent,
+    MyTeamReportsComponent
   ],
   providers:[
     Angular2TokenService

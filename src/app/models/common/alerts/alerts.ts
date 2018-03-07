@@ -4,9 +4,4 @@ export interface Alerts {
     message: string,
     confirmation?: boolean,
     typeConfirmation?: string
-
-}
-
-export interface Redirect {
-    url: string
 }

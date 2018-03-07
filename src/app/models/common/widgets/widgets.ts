@@ -1,5 +1,5 @@
 import { Employee } from "../../general/user";
-import { Data } from "@angular/router";
+import { Url } from "../url/url";
 
 export interface NotificationPrimary {
     title: string,
@@ -74,11 +74,6 @@ export interface EventsEmployess {
     short_name: string,
     //description: string
 }
-
-interface Url {
-    url: string
-}
-
 
 export interface ProgressPrimary {
     title: string,

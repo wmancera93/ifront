@@ -1,3 +1,5 @@
+import { Url } from "../common/url/url";
+
 export interface User {
     id: number,
     email: string,
@@ -37,8 +39,4 @@ export interface Employee {
 export interface Boss{
     name_complete: string;
     area: string;
-}
-
-export interface Url {
-    url: string
 }
