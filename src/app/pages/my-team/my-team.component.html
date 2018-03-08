@@ -1,4 +1,4 @@
-<div class="heigth-content-general" >
+<div class="heigth-content-general">
   <div *ngIf="flagHideMyteam">
     <div class="row-hr-container">
       <div class="col-12">
@@ -11,25 +11,30 @@
       </div>
     </div>
     <div class="row-hr-container justify-content-center">
-      <div class="col-lg-12 text-center widget bg-white">
-        <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]">
-          <div class="col-lg-3" *ngFor="let employee of employeesInMyTeam[0].subordinates_list; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;">
-            <div class="widget employee-height-notification text-center row justify-content-center " [ngClass]="{  colorEmployeePrimary:  colorEmployeePrimary, colorEmployeeSecundary: colorEmployeeSecundary}">
-              <div class="col-7 ">
-                <div class="menu-img-myTeam">
-                  <img src="{{employee.image.url}}" class=" roundPhotoMyTeam">
+      <div class="col-12 widget bg-white">
+        <!-- <div class="row justify-content-center"> -->
+          <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]"> 
+           <div class="col-2" *ngFor="let employee of employeesInMyTeam[0].subordinates_list; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;">
+          <!-- <div class="col-2" *ngFor="let employee of employeePrueba; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;"> -->
+            <div class="widget employee-height-notification" [ngClass]="{  colorEmployeePrimary:  colorEmployeePrimary, colorEmployeeSecundary: colorEmployeeSecundary}">
+              <div class="row justify-content-center">
+                <div class="col-11">
+                  <div class="menu-img-myTeam">
+                    <img src="{{employee.image.url}}" class=" roundPhotoMyTeam">
+                  </div>
                 </div>
               </div>
-              <div class="col-12" style="padding-top:10px;">
-                <h4 class="font-bold m-l-n">
+
+              <div class="col-12 fontName" >
+                <h5 class="font-bold">
                   {{employee.name}} {{employee.lastname}}
-                </h4>
+                </h5>
               </div>
               <div class="col-12">
-                <span class="text-capitalize">
-                  <h5>
-                    {{employee.posicion | lowercase}}
-                  </h5>
+                <span class="text-capitalize">   
+                  <h6>
+                    {{employee.posicion | lowercase}}  
+                  </h6>                               
                 </span>
               </div>
               <div class="col-12">
@@ -40,13 +45,16 @@
                 </span>
 
               </div>
-              <div class="col-4" style="padding-top:5px;">
-                <div class="shadowRoundMoreInfo">
-                  <div class="roundMoreInfo" (click)="goToMyTeamReports(employee)">
-                    <i class="fa fa-plus"></i>
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <div class="shadowRoundMoreInfo">
+                    <div class="roundMoreInfo" (click)="goToMyTeamReports(employee)">
+                      <i class="fa fa-plus"></i>
+                    </div>
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>

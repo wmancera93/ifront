@@ -16,15 +16,17 @@ export class MyTeamReportsComponent implements OnInit {
     this.myTeamSharedService.getReportMyTeam().subscribe(
       (data: any) => {
         this.reportsMyTeamInfo = data;
-             })     
+              })
   }
 
   ngOnInit() {
   }
-  
-  returnBackPage()
-  {
+
+  returnBackPage() {
     this.flagReturnBack = true;
-    console.log( this.flagReturnBack)
+  }
+
+  validateReport(i:number) {
+    console.log(i);
   }
 }

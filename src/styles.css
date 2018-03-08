@@ -378,7 +378,7 @@ header{
     margin-left: 15px;
 }
 .employee-height-notification{
-    height: 280px !important;
+    height: 295px !important;
   }
 .shadowRoundMoreInfo{
     width: 40px;
@@ -442,15 +442,14 @@ cursor: pointer;
     height: 70px;
 }
 .roundPhotoMyTeam{
-    width: 100px;
-    height: 100px;
+    width: 96px;
+    height: 96px;
   border-radius: 50px;
   margin-top: 2px;
-  margin-left: 2px;
 }
 .menu-img-myTeam {
-    width: 105px;
-    height: 105px;
+    width: 100px;
+    height: 100px;
     background-color: var(--btn-primary);
     border-radius: 50%;  
     -webkit-box-shadow: -17px 12px 37px -8px rgba(0,0,0,0.61);
@@ -459,7 +458,7 @@ cursor: pointer;
 }
 .borderLine-myTeam
     {
-    border-bottom: 3px solid var(--btn-primary) !important;
+    border-bottom: 3px solid var(--btn-primary) !important;   
    
     } 
     .buttonBack{
@@ -467,7 +466,9 @@ cursor: pointer;
         background-color:var(--btn-primary);       
         padding-bottom: 15px;
         border-radius: 30px;
-        width: 100%;
+        width: 75%;
+        height: 80%;
+        color: #ffff;
        
         /**/
         -webkit-transition: all 200ms ease-in;
@@ -485,15 +486,30 @@ cursor: pointer;
             /*box-shadow: 0px 0px 100px #000000;*/
             z-index: 2;
             -webkit-transition: all 200ms ease-in;
-            -webkit-transform: scale(1.05);
+            -webkit-transform: scale(1.01);
             -ms-transition: all 200ms ease-in;
-            -ms-transform: scale(1.05);   
+            -ms-transform: scale(1.01);   
             -moz-transition: all 200ms ease-in;
-            -moz-transform: scale(1.05);
+            -moz-transform: scale(1.01);
             transition: all 200ms ease-in;
-            transform: scale(1.05); 
+            transform: scale(1.01); 
     }
-
+    .center-block {
+        margin-left:auto;
+        margin-right:auto;
+        display:block;
+     }
+     
+     /*Navs for Reports -----*/
+     .navtab-vertical{
+        border-bottom: none;
+	
+		display: flex;
+		flex-flow: column nowrap;
+     }
+     .navtab-left{
+        margin: 0 15px;
+     }
 
 /* Modal Contact Information*/
 
@@ -785,6 +801,16 @@ cursor: pointer;
     color: #FFFFFF!important;
 }
 
+.active-report{
+    background: var(--btn-primary)!important;
+    color: #FFFFFF!important;
+     width: 125% !important;   
+    /* -ms-transform: skewX(-20deg);
+    -webkit-transform: skewX(-20deg);
+    transform: skewX(-20deg); */
+  
+}
+
 .nav>li>a, .active {
     color: #FFFFFF !important;
 }
@@ -1060,6 +1086,22 @@ border-bottom: 1px solid  #dddd;
     margin-top: var(--top-content-type) !important;
 }
 
+/* Navs -------*/
+.navReport{
+    padding-top: 10px;
+    width: 100%;
+}
+.tabReport {
+    color: white;
+    background-color: var(--btn-primary-hover);
+    text-align: center;    
+    padding: 5px 10px;
+    margin: 10px;
+    display: inline-block;
+  }
+  .tabReport:hover{
+    background-color: #919191;
+  }
 
 /* WIDGETS */
 .widget {

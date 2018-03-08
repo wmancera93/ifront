@@ -2,31 +2,47 @@
     <div *ngIf="reportsMyTeamInfo && !flagReturnBack">
         <div class="row-hr-container">
             <div class="col-12">
-                <div class="row align-items-center">
+                <div class="row justify-content-center">
                     <div class=" col-10 title">
                         <i class="fa fa-file"></i>
                         Información del empleado
                     </div>
-                    <div class="col-2 text-center cursor-general img-zoom" style="padding-top:5px;">
+                    <div class="col-2 text-center cursor-general img-zoom">
                         <div class="buttonBack" (click)="returnBackPage()">
-                            <i class="fa fa-fw fa-angle-left fa-lg"></i>Atrás
+                            <div style="padding-top:5px;">
+                                <i class="fa fa-fw fa-angle-left fa-lg"></i>
+                                <span>
+                                    Atrás
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row-hr-container">
-            <div class="col-12 text-center widget bg-white">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="menu-img-employee">
+            <div class="col-12 text-center widget bg-white ">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="menu-img-employee center-block">
                             <img src="{{reportsMyTeamInfo.image.url}}" class="roundPhoto-employee">
                             <br>
                         </div>
                     </div>
-                    <!-- <div class="col-10 text-center">
-                    <h4 class="modal-title titleColor text-shadow">{{reportsMyTeamInfo.name_complete}} </h4>
-                </div> -->
+                    <div class="col-10 text-center">
+                        <h4 class="modal-title titleColor text-shadow" style="padding-top:10px;">{{reportsMyTeamInfo.name_complete}} </h4>
+                    </div>
+                </div>
+                <div class=" borderLine-myTeam">
+                    <br>
+                </div>
+                <div class="d-flex flex-row mt-2">
+                    <div class="nav nav-tabs navtab-vertical navtab-left" role="navigation" *ngIf="reportsMyTeamInfo">
+                        <div class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let report of reportsMyTeamInfo.work_team_reports; let i=index;"
+                            (click)="validateReport(i)">
+                            <i class="{{report.icon}}"></i> {{report.title}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
