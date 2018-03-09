@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
-import { MyTeam } from '../../../models/common/myteam/myteam';
-import { Router, ActivatedRoute } from '@angular/router';
+import { EspecificMyTeam } from '../../../models/common/myteam/myteam';
+import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
+
 
 @Component({
   selector: 'app-my-team-reports',
@@ -9,14 +10,16 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./my-team-reports.component.css']
 })
 export class MyTeamReportsComponent implements OnInit {
-  public reportsMyTeamInfo: MyTeam;
+  public reportsMyTeamInfo: EspecificMyTeam;
   public flagReturnBack: boolean = false;
 
-  constructor(public myTeamSharedService: MyTeamReportService, public router: Router, private route: ActivatedRoute) {
+  constructor(public myTeamSharedService: MyTeamReportService,
+      public myTeamService:MyTeamInfoService
+     ) {
     this.myTeamSharedService.getReportMyTeam().subscribe(
-      (data: any) => {
+      (data) => {
         this.reportsMyTeamInfo = data;
-              })
+      })
   }
 
   ngOnInit() {
@@ -26,7 +29,15 @@ export class MyTeamReportsComponent implements OnInit {
     this.flagReturnBack = true;
   }
 
-  validateReport(i:number) {
-    console.log(i);
+  validateReport(i: string, idReport:number) {
+    console.log(idReport);
+    document.getElementById('listReports').getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(i + 'reports').className = 'nav-item navReport tabReport active-report';
+    this.myTeamService.getReportWorkTeam('absences_by_employee',idReport.toString()).subscribe(
+      (data)=>{
+        console.log(data);
+      }
+    );
+
   }
 }

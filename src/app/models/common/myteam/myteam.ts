@@ -6,7 +6,7 @@ current_boss :EspecificMyTeam,
 subordinates_list: EspecificMyTeam[]
 }
 
-interface EspecificMyTeam {
+export interface EspecificMyTeam {
     id: number,
     name: string,
     lastname: string,

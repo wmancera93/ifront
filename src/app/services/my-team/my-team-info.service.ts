@@ -8,12 +8,15 @@ export class MyTeamInfoService {
 
   constructor(public http: HttpClient) { }
 
-getMyTeamData()
-{
-  return this.http.get(environment.apiBaseHr + '/api/v2/work_team')
-  .map((data: Observable<any>) => data);
-}
+  getMyTeamData() {
+    return this.http.get(environment.apiBaseHr + '/api/v2/work_team')
+      .map((data: Observable<any>) => data);
+  }
 
+  getReportWorkTeam(controller: string, id: string) {
+    return this.http.get(environment.apiBaseHr + '/api/v2/work_team/' + controller + '/' + id)
+      .map((data: Observable<any>) => data);
+  }
 
 
 }
