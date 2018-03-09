@@ -35,3 +35,37 @@ interface WorkTeamReports{
     icon: string
 }
 
+export interface InfoWorkTeamReport{
+    title: string,
+    labels: string[],
+    data: Data[]
+}
+
+interface Data{
+    id: string,
+    type_absence?: string,
+    description_absence?: string,
+    start_absence?: string,
+    end_absence?: string,
+    days_payroll?: number,
+    days_natural?: number,
+    description_payroll?:string,
+    type_accumulation?:string,
+    previous_amount?: number,
+    current_amount?: number,
+    difference_amount?: number,
+    percentage_difference?: number,
+    field_0?:string,
+    field_1?: string,
+    field_2?:string,
+    field_3?: string,
+    field_4?: number,
+    begda?: string,
+    endda?: string,
+    position?:number,
+    amount_accrued?:number,
+    type_rotation?:string,
+    denomination_class?:string,
+    denomination_motive?: string
+}
+

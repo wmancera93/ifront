@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
-import { EspecificMyTeam } from '../../../models/common/myteam/myteam';
+import { EspecificMyTeam, InfoWorkTeamReport} from '../../../models/common/myteam/myteam';
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
 
 
@@ -11,7 +11,9 @@ import { MyTeamInfoService } from '../../../services/my-team/my-team-info.servic
 })
 export class MyTeamReportsComponent implements OnInit {
   public reportsMyTeamInfo: EspecificMyTeam;
+  public specificReportMyTeam:InfoWorkTeamReport;
   public flagReturnBack: boolean = false;
+ 
 
   constructor(public myTeamSharedService: MyTeamReportService,
       public myTeamService:MyTeamInfoService
@@ -29,13 +31,14 @@ export class MyTeamReportsComponent implements OnInit {
     this.flagReturnBack = true;
   }
 
-  validateReport(i: string, idReport:number) {
-    console.log(idReport);
+  validateReport(i: string, idReport:number) {   
     document.getElementById('listReports').getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(i + 'reports').className = 'nav-item navReport tabReport active-report';
     this.myTeamService.getReportWorkTeam('absences_by_employee',idReport.toString()).subscribe(
-      (data)=>{
-        console.log(data);
+      (data:any)=>{
+        this.specificReportMyTeam = data.data;
+       
+        
       }
     );
 
