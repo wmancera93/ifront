@@ -41,7 +41,7 @@ export interface InfoWorkTeamReport{
     data: Data[]
 }
 
-interface Data{
+ export interface Data{
     id: string,
     type_absence?: string,
     description_absence?: string,

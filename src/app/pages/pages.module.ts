@@ -24,12 +24,16 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
 
 
 
+
+
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
     ComponentsModule,    
     FormsModule
+   
+   
   ],
   declarations: [
     LoginComponent,

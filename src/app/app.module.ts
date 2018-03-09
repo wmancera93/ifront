@@ -16,13 +16,15 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { A2tUiModule } from 'angular2-token';
 import { CommonModule } from '@angular/common';
+import { DataTablePipe } from './pipes/common/data-table.pipe';
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DataTablePipe
   ],
-  imports: [  
-   
+  imports: [     
     CommonModule,
     BrowserModule,     
     PagesModule,  

@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
-import { EspecificMyTeam, InfoWorkTeamReport} from '../../../models/common/myteam/myteam';
+import { EspecificMyTeam, InfoWorkTeamReport, Data} from '../../../models/common/myteam/myteam';
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
+import { DataTableResource } from 'angular-4-data-table';
 
-
-@Component({
+@Component({ 
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
   styleUrls: ['./my-team-reports.component.css']
@@ -12,6 +12,8 @@ import { MyTeamInfoService } from '../../../services/my-team/my-team-info.servic
 export class MyTeamReportsComponent implements OnInit {
   public reportsMyTeamInfo: EspecificMyTeam;
   public specificReportMyTeam:InfoWorkTeamReport;
+  public dataReportTeam: Data;
+  public rowsOnPage = 5;
   public flagReturnBack: boolean = false;
  
 
@@ -37,8 +39,8 @@ export class MyTeamReportsComponent implements OnInit {
     this.myTeamService.getReportWorkTeam('absences_by_employee',idReport.toString()).subscribe(
       (data:any)=>{
         this.specificReportMyTeam = data.data;
-       
-        
+        this.dataReportTeam =this.specificReportMyTeam[0].data;
+       console.log(this.dataReportTeam)        
       }
     );
 
