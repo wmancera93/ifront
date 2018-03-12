@@ -164,6 +164,14 @@ button, input, optgroup, select, textarea {
     cursor: pointer;
 }
 
+.toast-success {
+    background-color: var(--btn-primary) !important;
+}
+
+#toast-container > div {
+    border-radius: 2px !important;
+}
+
 .btn-primary:hover, 
 .btn-primary:focus, 
 .btn-primary:active, 

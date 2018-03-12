@@ -32,8 +32,6 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
     PagesRoutingModule,
     ComponentsModule,    
     FormsModule
-   
-   
   ],
   declarations: [
     LoginComponent,

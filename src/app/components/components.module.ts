@@ -10,7 +10,7 @@ import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigatio
 import { FooterComponent } from './layout/footer/footer.component';
 import { ToasterContainerComponent } from './common/toaster-container/toaster-container.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 import { CalendarComponent } from './common/widgets/calendar/calendar.component';
 import { NewspaperComponent } from './common/widgets/newspaper/newspaper.component';
@@ -28,7 +28,8 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
     CommonModule,
     FormsModule,
     RouterModule,
-    ChartsModule
+    ChartsModule,    
+    ToasterModule.forRoot()  
   ],
   declarations: [
     HeaderComponent,
