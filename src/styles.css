@@ -61,9 +61,8 @@
     font-size: 14px !important;
 }
 
-
 .heigth-content-general{
-    min-height: var(--heigth-content-general);
+    min-height: calc(100vh - 20px);;
     transition: all 1s ease !important;
 }
 
@@ -686,6 +685,11 @@ cursor: pointer;
 .navbar-default {
     background-color: transparent;
     border-color: #2f4050;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 1019;
+    height: calc(100vh - 10px);
 }
 
 .nav>li.active {
@@ -1080,6 +1084,19 @@ border-bottom: 1px solid  #dddd;
   background-color: #F5F5F5;
   
  } 
+
+ .scrollbar-success-nav::-webkit-scrollbar {
+    width: 3px;
+    background-color: #2f4050;
+    
+   } 
+
+   
+.scrollbar-success-nav::-webkit-scrollbar-thumb {
+    border-radius: 9px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: var(--btn-primary)
+   }  
 
 .scrollbar-success::-webkit-scrollbar-thumb {
   border-radius: 9px;
@@ -2437,6 +2454,12 @@ a.close-canvas-menu:hover {
     .errorMessage {
         margin-top: 20px;
     }
+    
+     .heigth-content-general {
+        min-height: calc(69vh - 0px);
+        -webkit-transition: all 1s ease !important;
+        transition: all 1s ease !important;
+    }
 
     .borderLine-title
     {
@@ -2563,6 +2586,13 @@ height: 165px;
         height: 50px !important;
         margin-top: 30px !important;
     }
+    
+      .heigth-content-general {
+        min-height: calc(86vh - 0px);
+        -webkit-transition: all 1s ease !important;
+        transition: all 1s ease !important;
+    }
+    
     .borderLine-title
         {
     border-bottom: 3px solid var(--btn-primary) !important; 
@@ -2738,6 +2768,11 @@ height: 165px;
 
     .body-newspaper {
         height: 77px;
+    }
+.heigth-content-general {
+        min-height: calc(82vh - 0px);
+        -webkit-transition: all 1s ease !important;
+        transition: all 1s ease !important;
     }
     
 }
