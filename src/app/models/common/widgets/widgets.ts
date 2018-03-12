@@ -26,14 +26,37 @@ export interface NotificationSecundary {
 
 export interface Estadistics {
     title: string,
-    number: string,
+    number: number,
     comment: string,
-    canvas: any,
+    canvasType: string,
     background: string,
     color: string,
-    label: string[],
-    value: number[],
-    gradient: string[]
+    doughnutChartLabels?: string[],
+    doughnutChartData?: number[],
+    doughnutChartColors?: string[],
+    lineChartLabels?: string[],
+    lineChartData?: number[],
+    lineChartColors?:ColorLineChart,
+    barChartLabels?: string[],
+    barChartData?: BarCharData;
+    barChartColors?:Colors;
+}
+
+export interface ColorLineChart{
+    backgroundColor?: string,
+    borderColor?: string,
+    pointBackgroundColor?: string,
+    pointBorderColor?: string,
+    pointHoverBackgroundColor?: string,
+    pointHoverBorderColor?: string
+}
+export interface BarCharData{
+data: number[],
+label:string
+}
+
+export interface Colors{
+    backgroundColor: string[]
 }
 
 export interface Calendar {
