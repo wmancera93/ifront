@@ -33,7 +33,7 @@ export class MenuNavigationComponent implements OnInit {
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
     document.documentElement.style.setProperty(`--visible-menu`, `block`);
     document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
-    document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);    
+    document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
   }
 
   getDataLocalStorage() {
@@ -63,7 +63,7 @@ export class MenuNavigationComponent implements OnInit {
       document.documentElement.style.setProperty(`--visible-menu`, `block`);
       document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
       document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
-    }, 400);    
+    }, 400);
   }
 
   clickOptionMenu(li: string, a: string, toggle: string) {
@@ -85,19 +85,7 @@ export class MenuNavigationComponent implements OnInit {
       this.aActive = a;
       if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
         document.getElementById('btnHideMenu').click()
-        window.scroll({
-          top: 1,
-          left: 0,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
-        window.scroll({
-          top: 180,
-          left: 0,
-          behavior: 'smooth'
-        });
+
       }
     }
   }
