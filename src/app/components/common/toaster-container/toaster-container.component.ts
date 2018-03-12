@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
 // import { ToasterService } from 'angular2-toaster';
 
 @Component({
@@ -7,12 +8,29 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./toaster-container.component.css']
 })
 export class ToasterContainerComponent implements OnInit {
+  @Input('toast') toast: any
+  public objectToast: Toast;
 
-  constructor() {
+  private toasterService: ToasterService;
+
+  constructor(toasterService: ToasterService) {
+    this.toasterService = toasterService;
   }
 
+  public config: ToasterConfig =
+    new ToasterConfig({
+      showCloseButton: true,
+      tapToDismiss: false,
+      timeout: 5000,
+      animation: 'fade',
+      mouseoverTimerStop: true,
+    });
+
   ngOnInit() {
-    //this.toasterService.pop('success', 'Args Title', 'Args Body');
+    this.toast.subscribe((data: Toast) => {
+      this.objectToast = data;
+      this.toasterService.pop(this.objectToast);
+    })
   }
 
 }

@@ -67,7 +67,7 @@ export class HeaderComponent implements OnInit {
           this.router.navigate(['/ihr/login']);          
         }
       }
-    ) 
+    )
 
   }
 
@@ -85,24 +85,6 @@ export class HeaderComponent implements OnInit {
       }
     }
 
-    if (document.getElementById("navMenu").clientHeight > 0) {
-      if (document.getElementById("navMenu").clientHeight > 800 && document.getElementById("navMenu").clientHeight <= 879) {
-        this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 161;
-      }
-      if (document.getElementById("navMenu").clientHeight > 880) {
-        this.heightContenGeneral = document.getElementById("navMenu").clientHeight + 280;
-      }
-      if (document.getElementById("navMenu").clientHeight < 800) {
-        this.heightContenGeneral = document.getElementById("navMenu").clientHeight - 15;
-      }
-    }
-    else {
-      if (this.heightContenGeneral !== document.getElementById("page-wrapper").clientHeight) {
-        this.heightContenGeneral = document.getElementById("page-wrapper").clientHeight - this.heightContenGeneral;
-      }
-    }
-
-    document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
   }
 
   LogOut() {
@@ -148,6 +130,8 @@ export class HeaderComponent implements OnInit {
 
   clickHideMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = false;
     setTimeout(() => {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
@@ -156,10 +140,11 @@ export class HeaderComponent implements OnInit {
 
   clickShowMenuMobile() {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
+    document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
-    document.documentElement.style.setProperty(`--heigth-content-general`, document.getElementById("navMenu").clientHeight - 15 + 'px');
-
+    
     if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
       if (document.getElementById('contactList').classList[1] === 'show') {
         document.getElementById('contactList').classList.remove('show')
