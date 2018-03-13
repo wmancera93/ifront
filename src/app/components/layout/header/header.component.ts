@@ -77,11 +77,14 @@ export class HeaderComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
    
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {    
+      this.showMenu = false;  
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+      document.getElementById('footer_general').style.display = 'block';      
     } else {
       if (this.showMenu === true) {
         (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
+        document.getElementById('footer_general').style.display = 'none';
       }
     }
 
@@ -135,6 +138,7 @@ export class HeaderComponent implements OnInit {
     this.showMenu = false;
     setTimeout(() => {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+      document.getElementById('footer_general').style.display = 'block';
     }, 300);
   }
 
@@ -144,6 +148,7 @@ export class HeaderComponent implements OnInit {
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
+    document.getElementById('footer_general').style.display = 'none';
     
     if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
       if (document.getElementById('contactList').classList[1] === 'show') {
