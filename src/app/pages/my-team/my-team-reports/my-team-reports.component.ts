@@ -2,8 +2,6 @@ import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
 import { EspecificMyTeam, InfoWorkTeamReport, Data} from '../../../models/common/myteam/myteam';
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
-import { DataTableResource } from 'angular-4-data-table';
-
 @Component({ 
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
