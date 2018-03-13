@@ -12,49 +12,40 @@
     </div>
     <div class="row-hr-container justify-content-center">
       <div class="col-12 widget bg-white">
-        <!-- <div class="row justify-content-center"> -->
-          <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]"> 
-           <div class="col-2" *ngFor="let employee of employeesInMyTeam[0].subordinates_list; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;">
-          <!-- <div class="col-2" *ngFor="let employee of employeePrueba; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;"> -->
+        <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]">
+          <div class="col-xl-2 col-lg-3 col-md-6 col-12" *ngFor="let employee of employeesInMyTeam[0].subordinates_list; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;">
             <div class="widget employee-height-notification" [ngClass]="{  colorEmployeePrimary:  colorEmployeePrimary, colorEmployeeSecundary: colorEmployeeSecundary}">
               <div class="row justify-content-center">
-                <div class="col-11">
+                <div class="col-12" style="padding-left: 50%; padding-right: 50%">
                   <div class="menu-img-myTeam">
                     <img src="{{employee.image.url}}" class=" roundPhotoMyTeam">
                   </div>
                 </div>
-              </div>
-
-              <div class="col-12 fontName" >
-                <h5 class="font-bold">
-                  {{employee.name}} {{employee.lastname}}
-                </h5>
-              </div>
-              <div class="col-12">
-                <span class="text-capitalize">   
-                  <h6>
-                    {{employee.posicion | lowercase}}  
-                  </h6>                               
-                </span>
-              </div>
-              <div class="col-12">
-                <span class="text-capitalize">
-                  <h6>
-                    {{employee.unidad_org|lowercase}}
-                  </h6>
-                </span>
-
+                <div class="col-12 fontName top-general-p" style="color: #e0e0e0;font-size: 18px;">
+                  <strong class="font-bold text-shadow">
+                    {{employee.name}} {{employee.lastname}}
+                  </strong>
+                </div>
+                <div class="col-12 top-general-p">
+                  <span class="text-capitalize" style="font-size: 16px;">
+                    {{employee.posicion | lowercase}}
+                  </span>
+                </div>
+                <div class="col-12 top-general-p">
+                  <span class="text-capitalize"  style="font-size: 14px;">
+                      {{employee.unidad_org|lowercase}}
+                  </span>
+                </div>
               </div>
               <div class="row justify-content-center">
-                <div class="col-6">
-                  <div class="shadowRoundMoreInfo">
+                <div class="col-12 top-general-p" style="padding-left: 50%; padding-right: 50%">
+                  <div class="shadowRoundMoreInfo" style="margin-left: -20px;">
                     <div class="roundMoreInfo" (click)="goToMyTeamReports(employee)">
                       <i class="fa fa-plus"></i>
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
           </div>
         </div>
