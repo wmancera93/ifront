@@ -57,11 +57,15 @@
                                         <th *ngFor="let label of specificReportMyTeam[0].labels; let i=index;" class="text-center">{{label}}</th>
                                     </tr>
                                 </thead>
-                                <tbody class="">
+                                <tbody>
                                     <tr *ngFor="let items of dataReportTeam; let i=index;">
-                                        <td *ngFor="let key of items[i]; let j=index;" class="text-rigth">
-                                          {{key[j]}}
-                                        </td>
+                                        
+                                            <td *ngFor="let key of items[i]; let j=index;" class="text-rigth">
+                                               {{key[j]}}
+                                            </td>
+                                       
+
+
                                     </tr>
                                 </tbody>
                             </table>
