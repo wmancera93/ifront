@@ -87,6 +87,6 @@ export class MenuNavigationComponent implements OnInit {
         document.getElementById('btnHideMenu').click()
 
       }
-    }
+    }   
   }
 }

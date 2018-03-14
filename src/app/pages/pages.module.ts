@@ -21,6 +21,7 @@ import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 
 
 
@@ -43,7 +44,8 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
     EmployeesComponent,
     ManagerialComponent,
     MyTeamComponent,
-    MyTeamReportsComponent
+    MyTeamReportsComponent,
+    HierarchicalChartComponent
   ],
   providers:[
     Angular2TokenService

@@ -11,6 +11,7 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 
 const routes: Routes = [
     {
@@ -46,6 +47,10 @@ const routes: Routes = [
         path:'my_team_reports',
         component: MyTeamReportsComponent,
     },
+    {
+        path:'hierarchical-chart',
+        component:HierarchicalChartComponent,
+    }
 ];
 
 @NgModule({
