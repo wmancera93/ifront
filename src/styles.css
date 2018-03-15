@@ -228,7 +228,7 @@ header{
     background-repeat: no-repeat;
     background-position: center;
     background-size: 100%;   
-    height: calc(100vh - 20px) !important;
+    height: calc(100vh) !important;
     padding: 40px 0 150px;
     color: white;
 }
@@ -1902,6 +1902,24 @@ a.close-canvas-menu:hover {
 
 .widget-calendar {
     padding: 17px 20px;
+}
+
+.pagination-previous, .pagination-next {
+    border: none !important;
+    color: #ffffff !important;
+    background-color: var(--primary)
+}
+
+.pagination-previous:hover, .pagination-next:hover {
+    border: none !important;
+    color: #ffffff !important;
+    background-color:  var(--btn-primary-hover)!important;
+}
+
+.pagination-previous.disabled, .pagination-next.disabled {
+    border: none !important;
+    color: #ffffff !important;
+    background-color: var(--btn-primary-hover)!important;
 }
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{

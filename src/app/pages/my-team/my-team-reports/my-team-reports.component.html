@@ -40,30 +40,14 @@
                     <div class="col-xl-3 col-md-4 col-12">
                         <div id="listReports" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation" *ngIf="reportsMyTeamInfo">
                             <div id="{{i}}reports" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let report of reportsMyTeamInfo.work_team_reports; let i=index;"
-                                (click)="validateReport(i,reportsMyTeamInfo.id)">
+                                (click)="validateReport(i,reportsMyTeamInfo.id, report)">
                                 <i class="{{report.icon}}"></i> {{report.title}}
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-9 col-md-8 col-12">
-                        <div class="table-responsive top-general-p" *ngIf="specificReportMyTeam">
-                            <table class="table table-sm table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th [attr.colspan]="specificReportMyTeam[0].labels.length" class="text-center">{{specificReportMyTeam[0].title}}</th>
-                                    </tr>
-                                    <tr>
-                                        <th *ngFor="let label of specificReportMyTeam[0].labels; let i=index;" class="text-center">{{label}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let items of dataReportTeam; let i=index;">
-                                        <td class="text-rigth">
-                                            
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="table-responsive top-general-p">
+                           <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
                         </div>
                     </div>
                 </div>

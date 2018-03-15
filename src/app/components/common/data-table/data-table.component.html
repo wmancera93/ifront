@@ -1,0 +1,16 @@
+<div class="table-responsive">
+  <table class="table">
+    <caption *ngIf="title"> {{title}} </caption>
+    <thead>
+      <tr>
+        <th class="text-center" *ngFor="let key of keys"> {{key}} </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: 10, currentPage: p }">
+        <td *ngFor="let key of keys"> {{record [key]}} </td>
+      </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
