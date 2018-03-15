@@ -13,7 +13,7 @@ export class MyTeamReportsComponent implements OnInit {
   public flagReturnBack: boolean = false;
 
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'test'
+  public nameReport: string = '';
 
 
   constructor(public myTeamSharedService: MyTeamReportService,
@@ -29,7 +29,11 @@ export class MyTeamReportsComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
   returnBackPage() {
@@ -41,6 +45,7 @@ export class MyTeamReportsComponent implements OnInit {
     document.getElementById(i + 'reports').className = 'nav-item navReport tabReport active-report';
     this.myTeamService.getReportWorkTeam(report.url, idReport.toString()).subscribe(
       (data: any) => {
+        this.nameReport = data.data[0].title;
         this.objectReport.emit(data);
       }
     );

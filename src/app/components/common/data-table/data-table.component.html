@@ -1,16 +1,54 @@
-<div class="table-responsive">
-  <table class="table">
-    <caption *ngIf="title"> {{title}} </caption>
-    <thead>
-      <tr>
-        <th class="text-center" *ngFor="let key of keys"> {{key}} </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: 10, currentPage: p }">
-        <td *ngFor="let key of keys"> {{record [key]}} </td>
-      </tr>
-    </tbody>
-  </table>
-  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+<div class="row">
+  <div class="col-12">
+    <div class="row" *ngIf="show">
+      <div class="col-4">
+        <div class="form-group row">
+          <label class="col-7 text-left align-self-center">Registros a mostrar:</label>
+          <div class="col-5">
+            <select class="form-control" [(ngModel)]="size_table">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="!show">
+      <div class="col-8 text-center"  style="min-height: 370px;">
+        <div class="alert alert-warning" role="alert">
+          No hay reportes de&nbsp;
+          <strong>{{title}}</strong>&nbsp;para el empleado
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="show">
+      <div class="col-12" style="min-height: 370px;">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-bordered table-hover">
+            <thead>
+              <tr>
+                <th class="text-center" [attr.colspan]="keys.length"> {{title}} </th>
+              </tr>
+              <tr>
+                <th class="text-center" *ngFor="let key of keys"> {{key}} </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
+                <td *ngFor="let key of keys"> {{record [key]}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="show">
+      <div class="col-12">
+        <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
+          nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+      </div>
+    </div>
+  </div>
 </div>

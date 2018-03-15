@@ -45,6 +45,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getDataLocalStorage() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
       this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
       let toast: Toast = {

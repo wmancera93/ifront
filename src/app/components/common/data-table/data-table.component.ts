@@ -13,24 +13,25 @@ export interface ColumnSetting {
   styleUrls: ['./data-table.component.css']
 })
 export class DataTableComponent implements OnInit {
+  public show: boolean = true;
   @Input() records: any;
   @Input() recordsPrint: any[] = [];
   @Input() title: any;
   public keys: any[] = [];
   public p: number = 1;
+  public size_table: number = 10;
+
   constructor() { }
 
   ngOnInit() {
     this.records.subscribe((data) => {
-      // this.key = data.data[0].labels;
-      console.log(data.data[0].data[0]);
-      this.keys = Object.keys(data.data[0].data[0]);
-      this.recordsPrint = data.data[0].data;
+      if (data.data[0].data.length > 0) {
+        this.show = true;
+        this.keys = Object.keys(data.data[0].data[0]);
+        this.recordsPrint = data.data[0].data;
+      } else {
+        this.show = false;
+      }
     });
   }
-
-  // ngOnChanges() {
-  //   this.keys = Object.keys(this.records[0]);
-  // }
-
 }

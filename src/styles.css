@@ -1903,24 +1903,85 @@ a.close-canvas-menu:hover {
 .widget-calendar {
     padding: 17px 20px;
 }
-
+/* pagintation data table */
 .pagination-previous, .pagination-next {
-    border: none !important;
-    color: #ffffff !important;
-    background-color: var(--primary)
+    cursor: pointer !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid #eceeef !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
+}
+
+.ngx-pagination li {
+    cursor: pointer !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid #eceeef !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
 }
 
 .pagination-previous:hover, .pagination-next:hover {
-    border: none !important;
-    color: #ffffff !important;
-    background-color:  var(--btn-primary-hover)!important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid rgb(192, 192, 192) !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
+}
+
+.ngx-pagination li:hover {
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid rgb(192, 192, 192) !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
+}
+
+.ngx-pagination .current {
+    padding: 5px 10px !important;
+    background: var(--primary)  !important;
+    color: #fefefe  !important;
 }
 
 .pagination-previous.disabled, .pagination-next.disabled {
-    border: none !important;
-    color: #ffffff !important;
-    background-color: var(--btn-primary-hover)!important;
+    color: #cacaca !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid #ddd !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
 }
+
+.pagination-previous.disabled:hover, .pagination-next.disabled:hover {
+    color: #cacaca !important;
+    padding: 5px 10px !important;
+    text-decoration: none !important;
+    transition: background-color .3s !important;
+    border: 1px solid #ddd !important;
+    border-radius: 2px !important;
+    margin: 0 4px !important;
+}
+
+.ngx-pagination a, .ngx-pagination button {
+    color: #acacac !important;
+    display: block;
+    padding: 0 0 0 0!important;
+    border-radius: 0;
+}
+
+.ngx-pagination a:hover, .ngx-pagination button:hover {
+    background: transparent !important;
+    text-decoration: none !important;
+}
+
+/* .pagination a:hover:not(.active) {background-color: #ddd;} */
+
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{
         background-position: center top !important;

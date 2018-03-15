@@ -17,6 +17,11 @@ export class ErrorPageComponent implements OnInit {
    }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     if(localStorage.getItem("enterprise") === null){
       this.mainService.getDataEnterprise()
       .subscribe((result:any)=>{
