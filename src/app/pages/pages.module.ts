@@ -21,15 +21,12 @@ import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
-<<<<<<< HEAD
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
-=======
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 
 
 
 
->>>>>>> d4a06b7bc977f352c6c8952960c63f1bf9e53c21
 
 @NgModule({
   imports: [
@@ -49,11 +46,8 @@ import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-ch
     ManagerialComponent,
     MyTeamComponent,
     MyTeamReportsComponent,
-<<<<<<< HEAD
-    DisabilitiesComponent
-=======
+    DisabilitiesComponent,
     HierarchicalChartComponent
->>>>>>> d4a06b7bc977f352c6c8952960c63f1bf9e53c21
   ],
   providers:[
     Angular2TokenService
