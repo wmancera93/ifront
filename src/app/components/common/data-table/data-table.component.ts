@@ -34,7 +34,7 @@ export class DataTableComponent implements OnInit {
 
         this.keys.forEach((element) => {
           let label = data.data[0].labels[element]
-          this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });          
+          this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });           
         })
         
       } else {

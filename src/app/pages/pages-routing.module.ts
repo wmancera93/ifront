@@ -52,7 +52,7 @@ const routes: Routes = [
         component: DisabilitiesComponent
     },
     {        
-        path:'hierarchical-chart',
+        path:'hierarchical_chart',
         component:HierarchicalChartComponent,
     }
 ];
