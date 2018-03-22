@@ -12,6 +12,7 @@ import { ErrorPageComponent } from './error-page/error-page.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
+import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 
 const routes: Routes = [
     {
@@ -49,6 +50,10 @@ const routes: Routes = [
     {
         path: 'disabilities',
         component: DisabilitiesComponent
+    },
+    {        
+        path:'hierarchical-chart',
+        component:HierarchicalChartComponent,
     }
 ];
 

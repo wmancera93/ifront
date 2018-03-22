@@ -66,8 +66,11 @@
 }
 
 .heigth-content-general{
-    min-height: calc(100vh - 20px);;
+    min-height: calc(100vh - 20px);
     transition: all 1s ease !important;
+}
+.minHeight{
+    min-height: calc(100vh - 20px) !important;
 }
 
 #prendido:checked ~ .interruptor-cuerpo{
@@ -507,6 +510,7 @@ cursor: pointer;
         margin-right:auto;
         display:block;
      }
+    
      
      /*Navs for Reports -----*/
      .navtab-vertical{
