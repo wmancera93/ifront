@@ -37,7 +37,7 @@
                     <br>
                 </div>
                 <div class="row justify-content-between">
-                    <div class="col-xl-3 col-md-4 col-12">
+                    <div class="col-xl-3 col-md-12 col-12">
                         <div id="listReports" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation" *ngIf="reportsMyTeamInfo">
                             <div id="{{i}}reports" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let report of reportsMyTeamInfo.work_team_reports; let i=index;"
                                 (click)="validateReport(i,reportsMyTeamInfo.id, report)">
@@ -45,9 +45,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-9 col-md-8 col-12">
+                    <div class="col-xl-9 col-md-12 col-12">
                         <div class="top-general-p">
-                           <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
+                            <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
                         </div>
                     </div>
                 </div>

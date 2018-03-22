@@ -1,10 +1,10 @@
 <div class="row">
   <div class="col-12">
     <div class="row" *ngIf="show">
-      <div class="col-4">
+      <div class="col-xl-4 col-12">
         <div class="form-group row">
-          <label class="col-7 text-left align-self-center">Registros a mostrar:</label>
-          <div class="col-5">
+          <label class="col-xl-7 col-6 text-left align-self-center">Registros a mostrar:</label>
+          <div class="col-xl-5 col-6">
             <select class="form-control" [(ngModel)]="size_table">
               <option value="5">5</option>
               <option value="10">10</option>
@@ -16,7 +16,7 @@
       </div>
     </div>
     <div class="row justify-content-center" *ngIf="!show">
-      <div class="col-8 text-center"  style="min-height: 370px;">
+      <div class="col-8 text-center" style="min-height: 370px;">
         <div class="alert alert-warning" role="alert">
           No hay reportes de&nbsp;
           <strong>{{title}}</strong>&nbsp;para el empleado
@@ -28,11 +28,18 @@
         <div class="table-responsive">
           <table class="table table-sm table-striped table-bordered table-hover">
             <thead>
-              <tr>
+              <tr *ngIf="title != ''">
                 <th class="text-center" [attr.colspan]="keys.length"> {{title}} </th>
               </tr>
               <tr>
-                <th class="text-center" *ngFor="let key of keys"> {{key}} </th>
+                <th class="text-center" *ngFor="let label of labels">
+                  <div style="width: 80%; float: left;">
+                    {{label.value}}
+                  </div>
+                  <div *ngIf="label.sort" style="width: 20%; float: left;">
+                    <i id="{{label.id}}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
+                  </div>
+                </th>
               </tr>
             </thead>
             <tbody>

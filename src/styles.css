@@ -2226,8 +2226,19 @@ a.close-canvas-menu:hover {
         padding-top: 20px;
     }
 
+    .active-report {
+        width: 100% !important;
+    }
+
+    .tabReport {
+        margin: 10px 0px;
+    }
+    .navtab-left {
+        margin: 0 0px !important;
+    }
 }
 
+/* ipad horizontal */
 @media (max-width: 1100px)  and (max-height: 800px) {
     header{
         background-position: center top !important;
@@ -2297,9 +2308,18 @@ a.close-canvas-menu:hover {
         margin-top: 6px;
         display: block;
     } 
+    .active-report {
+        width: 100% !important;
+    }
+    .tabReport {
+        margin: 10px 0px;
+    }
+    .navtab-left {
+        margin: 0 0px !important;
+    }
 
 }
-
+/* ipad vertical */
 @media (max-width: 800px)  and (max-height: 1100px) {
     header{
         background-position: center top !important;
@@ -2426,8 +2446,16 @@ a.close-canvas-menu:hover {
         padding-top: 5px;
         padding-bottom: 45px
     }
-}
 
+    .navtab-left {
+        margin: 0 0px !important;
+    }
+
+    .active-report {
+        width: 100% !important;
+    }
+}
+/* mobile horizontal */
 @media only screen and (max-width: 830px)  and (max-height: 500px) {
     header{
         background-position: center top !important;
@@ -2587,7 +2615,7 @@ a.close-canvas-menu:hover {
         width: 100% !important;
     }
 }
-
+/* mobile vertical hd */
 @media only screen and (max-width: 450px)  and (max-height: 850px) {
     .bg-login {
         max-width: 400px !important;
@@ -2740,7 +2768,7 @@ a.close-canvas-menu:hover {
         padding-bottom: 0px;
     }
 }
-
+/* mobile vertical */
 @media only screen and (max-width: 450px)  and (max-height: 800px) {
     .bg-login {
         max-width: 400px !important;
