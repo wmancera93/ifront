@@ -9,9 +9,16 @@ export class HierarchicalChartService {
 
   constructor(public http: HttpClient) { }
 
-  getMyWorkTeam(){
-    return this.http.get(environment.apiBaseHr + '/api/v2/organization_charts/show_list')
+  getMyWorkTeam(pernrSend:number, actualPage:number){
+
+    return this.http.post(environment.apiBaseHr + '/api/v2/organization_charts/show_list',{pernr:pernrSend, page:actualPage})
     .map((data: Observable<any>) => data);
+  }
+  getSearchWorkTeam(letterSearch:string){
+    
+    return this.http.get(environment.apiBaseHr + '/api/v2/organization_charts/search/'+letterSearch)
+    .map((data:Observable<any>)=>data);
+
   }
 }
  

@@ -1,7 +1,7 @@
-<button id="btn-modalOpenInfoEmployee" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-employeeInfo"
+<button [attr.id]="button" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="target"
   style="display:none;" (click)="validateRolInfoEmployee()">
 </button>
-<div class="modal fade" id="modal-employeeInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" [attr.id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf='flagShowModal'>
       <div class="modal-header borderLine-title row-hr justify-content-center">
@@ -47,7 +47,10 @@
             </div>
             <div class="col-12 col-lg-6">
               <i class="fa fa-male paddingInfo"></i>
-              <strong>&nbsp;Jefe:</strong>&nbsp;{{employeeInfo.my_boss_employee}}
+              <strong>&nbsp;Jefe:</strong>
+              <span class="text-capitalize">                
+                {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname | lowercase}}
+              </span>                
               <br>
               <i class="fa fa-id-badge paddingInfo"></i>
               <strong>&nbsp;División:</strong>&nbsp;

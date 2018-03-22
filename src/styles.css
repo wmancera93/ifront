@@ -1,3 +1,4 @@
+
 :root {
     --img-header-login: ;
     --primary: ;
@@ -44,6 +45,18 @@
     }   
 }
 
+.animated {
+    -webkit-animation-duration: 3s !important;
+    animation-duration: 3s !important;
+}
+.animate-bounce{
+    -webkit-animation-duration: 0.1s !important;
+    animation-duration: 2s !important;
+}
+
+.font-icon{
+    font-size: 20px;
+}
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: rgb(172, 172, 172) !important;
     font-size: 14px !important;
@@ -522,6 +535,10 @@ cursor: pointer;
      .navtab-left{
         margin: 0 15px;
      }
+     .text-center{
+        text-align: center;
+     }
+    
 
 /* Modal Contact Information*/
 
@@ -1291,6 +1308,15 @@ border-bottom: 1px solid  #dddd;
   .glyphicon.fa {
     font-family: "FontAwesome";
   }
+  /*WORK TEAM*/
+
+.searchInput{
+    margin-left: -50px;
+}
+
+
+
+  /*-------------------------*/
 
   /* BACKGROUNDS */
  
@@ -2102,6 +2128,9 @@ a.close-canvas-menu:hover {
 {
     padding-top: 20px;
 }
+.fontSize-chart{
+    font-size: 1rem !important;
+}
 }
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
@@ -2320,6 +2349,10 @@ a.close-canvas-menu:hover {
     }
     .navtab-left {
         margin: 0 0px !important;
+    }
+
+    .divisionTop{
+        padding-top: 0px !important;
     }
 
 }
@@ -2606,6 +2639,11 @@ a.close-canvas-menu:hover {
     .font-controls-login {
         font-size: 1rem !important;
     }
+    
+    .divisionTop{
+        padding-top: 0px !important;
+    }
+
    
     .tabReport {
         margin: 10px 0px;
@@ -2942,6 +2980,15 @@ a.close-canvas-menu:hover {
         -webkit-transition: all 1s ease !important;
         transition: all 1s ease !important;
     }
+
+    .divisionTop{
+        padding-top: 0px !important;
+    }
+    .searchInput{
+        margin-left: 0px !important;
+    }
+    
+    
     .buttonBack {
         width: 70%;
         height: 40%;

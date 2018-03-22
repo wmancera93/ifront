@@ -32,4 +32,9 @@ export class DashboardEmployeeService {
     .map((data: Observable<any>) => data);
   }
 
+  getSeverancesData(){
+    return this.http.get(environment.apiBaseHr + '/api/v2/dashboards/my_severances_widget')
+    .map((data:Observable<any>)=>data);
+  }
+
 }
