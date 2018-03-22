@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { User } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
@@ -20,6 +20,7 @@ import { Enterprise } from '../../../models/general/enterprise';
 
 
 export class HeaderComponent implements OnInit {
+  @Output() name: string = 'contactList';
   private dataUser: User = null;
   title: string = 'Mis datos';
   public dataEnterprise: Enterprise;

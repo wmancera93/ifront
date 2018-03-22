@@ -48,7 +48,7 @@ const routes: Routes = [
         component: MyTeamReportsComponent,
     },
     {
-        path:'hierarchical-chart',
+        path:'hierarchical_chart',
         component:HierarchicalChartComponent,
     }
 ];

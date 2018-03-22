@@ -1,10 +1,12 @@
 import { Url } from "../url/url";
 
 export interface MyPosition{
+    id?: number;
     email: string,
     pernr: number,
     posicion: string,
     short_name: string,
+    name_complete? : string,
     relationship:number,    
     image: Url,
     work_team?: Work_team[]

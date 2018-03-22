@@ -11,87 +11,156 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row justify-content-center">
-        <div class="col-3 cardEmployee btn-widget position" *ngFor="let employee of topEmployee">
+      <div class="row justify-content-left">
+        <div class="col-12">
           <div class="row">
-            <div class=" drawLine col-12 firstLevel">
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col-6" style="padding-top: 30px;">
-              <div style="width:55px; height:55px;">
-                <img src="../../../assets/themes/patterns/icon-user-negative.png" class="roundPhotoChart">
+            <div class="col-1" style="margin-top:10px;">
+              <div class="bg-button-search" (click)="clickSearchIcon()">
+                <div class="text-center cursor-general img-zoom">
+                  <i class="fa fa-fw fa-search fa-lg"></i>
+                </div>
               </div>
             </div>
-            <div class="col-6">
-              <span>
-                nivel 1
-              </span>
+            <div class="col-3 align-items-left searchInput" *ngIf="activateSearch">
+              <div class="workTeam-search animate-bounce  bounceInLeft">
+                <div>
+                  <input id="auto_c" ng2-auto-complete [source]="searchEmployee" placeholder="  Ingrese nombre" [(ngModel)]="searchByLetter"
+                    value-property-name="pernr" list-formatter="short_name" type="text" (keyup)="enterNameEmployee()" maxlength="25">
+                  <br>{{searchByLetter| json}}
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div class="row justify-content-center">
-        <div class="col-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee[0].work_team">
+        <div class="col-10 col-xl-2 cardEmployee btn-widget position" *ngIf="topEmployee" (click)='showInfoEmployee(topEmployee)'>
+          <div class="row">
+            <div class=" col-12 firstLevel">
+            </div>
+          </div>
+          <div class="row align-items-center">
+            <div class="col-4" style="padding-top: 10px;">
+              <div style="width:60px; height:60px;">
+                <img src="{{topEmployee.image.url}}" class="roundPhotoChart">
+              </div>
+            </div>
+            <div class="col-8">
+              {{topEmployee.posicion|slice: 0:30}}
+              <span [hidden]="topEmployee.posicion > 30">...</span>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" col-12 divisionTop">
+              <div class="text-shadow" style="color:#ffff;">
+                <strong>{{topEmployee.short_name}}</strong>
+              </div>
+              {{topEmployee.email}}
+            </div>
+          </div>
+        </div>        
+          <div class="col-xl-3 btn-widget cardLegend">
+          </div>        
+      </div>
+      <div class="row justify-content-center" *ngIf="topEmployee">
+        <div class="col-10 col-xl-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee.work_team" (click)='showInfoEmployee(employee)'>
           <div class="row">
             <div class="col-12 secondLevel">
             </div>
           </div>
           <div class="row align-items-center">
-            <div class="col-6" style="padding-top: 30px;">
-              <div style="width:55px; height:55px;">
-                <img src="../../../assets/themes/patterns/icon-user-negative.png" class="roundPhotoChart">
+            <div class="col-4" style="padding-top: 10px;">
+              <div style="width:60px; height:60px;">
+                <img src="{{employee.image.url}}" class="roundPhotoChart">
               </div>
             </div>
-            <div class="col-6">
-              <span>
-                nivel 2
-              </span>
+            <div class="col-8 align-items-center">
+              {{employee.posicion|slice: 0:20}}
+              <span [hidden]="employee.posicion > 30">...</span>
+
             </div>
           </div>
-          <div class="row justify-content-center" *ngIf="employee.total_work_team && !flag">         
-              <div class="navigateButton"  (click)="downLevelTeam(employee)">
-                <i class="fa fa-angle-double-down downAnimation"></i>
-              </div>            
+          <div class="row">
+            <div class=" col-12 divisionTop">
+              <div class="text-shadow" style="color:#ffff;">
+                <strong>{{employee.short_name}}</strong>
+              </div>
+              {{employee.email}}
+            </div>
+          </div>
+
+          <div class="row justify-content-center" *ngIf="employee.total_work_team && !flagActivatethirdLevel && !activeArrowUp">
+            <div class="navigateButton animated infinite flash font-icon" (click)="downLevelTeam(employee)">
+              <i class="fa fa-chevron-down " aria-hidden="true"></i>
+            </div>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center" *ngIf="flag">
-        <div class="col-2 cardEmployee btn-widget position" *ngFor="let employee of topEmployee[0].work_team[0].work_team">
-          <div class="row">
-            <div class="col-12 thirdLevel">
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-6" style="padding-top: 30px;">
-              <div style="width:55px; height:55px;">
-                <img src="../../../assets/themes/patterns/icon-user-negative.png" class="roundPhotoChart">
+      <div *ngIf="topEmployee">
+        <div class="row justify-content-center" *ngIf="!flagActivatethirdLevel">
+          <div class="row justify-content-center" *ngIf="activeArrowLeft">
+            <div class="col-1">
+              <div class="navigateButton animated infinite flash font-icon" (click)="goToPreviousPage()">
+                <i class="fa fa-chevron-left " aria-hidden="true"></i>
               </div>
             </div>
-            <div class="col-6">
-              <span>
-                nivel 3
-              </span>
-            </div>
           </div>
-        </div>
-        <div class="col-12">
-            <div class="row justify-content-center" > 
+          <div class="col-10 col-xl-2 cardEmployee btn-widget position" *ngFor="let employee of topEmployee.work_team[0].work_team">
+            <div class="row">
+              <div class="col-12" (click)='showInfoEmployee(employee)'>
+                <div class="row">
+                  <div class="col-12 thirdLevel">
+                  </div>
+                </div>
+                <div class="row  align-items-center">
+                  <div class="col-4" style="padding-top: 10px;">
+                    <div style="width:60px; height:60px;">
+                      <img src="{{employee.image.url}}" class="roundPhotoChart">
+                    </div>
+                  </div>
+                  <div class="col-8">
+                    {{employee.posicion | slice: 0:20}}
+                    <span [hidden]="employee.posicion > 30">...</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 divisionTop">
+                    <div class="text-shadow" style="color:#ffff;">
+                      <strong>{{employee.short_name}}</strong>
+                    </div>
+                    {{employee.email}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf="activeArrowDown && employee.relationship == 111">
               <div class="col-2">
-                <div class="navigateButton" style="margin-top:0px !important;" (click)="upLevelTeam()">
-                  <i class="fa fa-angle-double-up downAnimation"></i>
-                </div>        
-              </div>        
-            </div>
-          <!-- <div class="row justify-content-center">
-            <div class="col-2">
-              <div class="btn btn-sm btn-block btn-success" (click)="upLevelTeam()">
-                <i class="fa fa-angle-double-up"></i>
+                <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="downLevelTeam(employee)">
+                  <i class="fa fa-chevron-down"></i>
+                </div>
               </div>
             </div>
-          </div> -->
+          </div>
+          <div class="row justify-content-start" *ngIf="activeArrowRight">
+            <div class="col-1">
+              <div class="navigateButton animated infinite flash font-icon" (click)="goToNextPage(page)">
+                <i class="fa fa-chevron-right " aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row justify-content-center" *ngIf="activeArrowUp">
+              <div class="col-2">
+                <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="upLevelTeam()">
+                  <i class="fa fa-chevron-up"></i>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </div>
 </div>
+<app-employee-info [nameModal]='name'></app-employee-info>

@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output } from '@angular/core';
 import { Employee } from '../../../models/general/user';
 import { EmployeeService } from '../../../services/common/employee/employee.service';
 import { EmployeeInfoService } from '../../../services/shared/common/employee/employee-info.service';
@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 })
 
 export class ContactsListComponent implements OnInit {
+  
   public contacts: Employee[] = [];
   public searchListContacts: Employee[] = [];
   public nameEmployee: string = '';
@@ -30,7 +31,7 @@ export class ContactsListComponent implements OnInit {
   public searchIconActive: boolean;
   public hideCollapse: string = '';
   public showContactsList: boolean = true;
-  public infoEmployee: Employee;   
+  public infoEmployee: Employee;
 
 
   constructor(public employeeService: EmployeeService,
@@ -136,8 +137,6 @@ export class ContactsListComponent implements OnInit {
 
                 this.error = error.error.errors[0];
                 this.validateError = error.error.success;
-                console.log(error.error.success)
-                console.log(error.error.errors[0])
 
               }
             );
@@ -168,15 +167,16 @@ export class ContactsListComponent implements OnInit {
   clickPartnersIconHide() {
     document.getElementById('togglePartnersHide').click();
   }
-  
+
   openInfoEmployee(idEmployee: string) {
     this.employeeService.getEmployeeById(idEmployee).subscribe(
-      (data: any) => {            
+      (data: any) => {
         if (data.success === true) {
-          this.infoEmployee = data.data;          
-          this.employeeSharedService.setInfoEmployee(this.infoEmployee);          
+          this.infoEmployee = data.data;
+          this.infoEmployee.modal = 'contactList';
+          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
         }
       }
-    );    
+    );
   }
 }
