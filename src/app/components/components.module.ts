@@ -21,15 +21,18 @@ import { FormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
-import {ChartsModule} from 'ng2-charts/ng2-charts';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DataTableComponent } from './common/data-table/data-table.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     RouterModule,
-    ChartsModule,    
-    ToasterModule.forRoot()  
+    ChartsModule,
+    NgxPaginationModule,
+    ToasterModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
@@ -45,8 +48,8 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
     ProgressPrimaryComponent,
-    EmployeeInfoComponent
-  
+    EmployeeInfoComponent,
+    DataTableComponent
   ],
   exports: [
     HeaderComponent,
@@ -62,7 +65,8 @@ import {ChartsModule} from 'ng2-charts/ng2-charts';
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
     ProgressPrimaryComponent,
-    EmployeeInfoComponent
+    EmployeeInfoComponent,
+    DataTableComponent
   ],
   providers: [
     // ToasterService

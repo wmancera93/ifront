@@ -15,6 +15,7 @@ import { DashboardManagerialService } from './dashboard/managerial/dashboard-man
 import {MyTeamInfoService} from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
+import { QueriesService } from './queries/queries.service';
 
 @NgModule({
   imports: [
@@ -32,7 +33,8 @@ import { HierarchicalChartService } from './hierarchical-chart/hierarchical-char
     DashboardManagerialService,
     MyTeamInfoService,
     MyTeamReportService,
-    HierarchicalChartService
+    HierarchicalChartService,
+    QueriesService
   ]
 })
 export class ServicesModule { }

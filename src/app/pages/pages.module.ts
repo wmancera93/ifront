@@ -21,6 +21,7 @@ import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
@@ -46,6 +47,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     ManagerialComponent,
     MyTeamComponent,
     MyTeamReportsComponent,
+    DisabilitiesComponent,
     HierarchicalChartComponent
   ],
   providers:[

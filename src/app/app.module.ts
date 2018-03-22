@@ -16,14 +16,12 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { A2tUiModule } from 'angular2-token';
 import { CommonModule } from '@angular/common';
-import { DataTablePipe } from './pipes/common/data-table.pipe';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    DataTablePipe
+    AppComponent
   ],
   imports: [     
     CommonModule,

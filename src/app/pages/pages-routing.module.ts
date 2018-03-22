@@ -11,6 +11,7 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 
 const routes: Routes = [
@@ -39,16 +40,19 @@ const routes: Routes = [
         component: ErrorPageComponent
     },
     {
-        path:'my_team',
+        path: 'my_team',
         component: MyTeamComponent
     },
-    
     {
-        path:'my_team_reports',
+        path: 'my_team_reports',
         component: MyTeamReportsComponent,
     },
     {
-        path:'hierarchical_chart',
+        path: 'disabilities',
+        component: DisabilitiesComponent
+    },
+    {        
+        path:'hierarchical-chart',
         component:HierarchicalChartComponent,
     }
 ];
