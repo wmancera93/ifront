@@ -39,7 +39,7 @@ export class HierarchicalChartComponent implements OnInit {
   public roundTotalPages: number;
   public pagePosition: number;
   // searchBar
-  public id_empleado: number = 696;
+  public id_empleado: number;
   public searchEmployee: MyPosition[] = [];
   public id_shared: string;
   public infoEmployee: Employee;
@@ -51,15 +51,15 @@ export class HierarchicalChartComponent implements OnInit {
     public http: HttpClient) { }
 
   ngOnInit() {
+    this.id_empleado = 696;
     this.getHierarchical(this.id_empleado);
-
   }
 
   getHierarchical(pernr_empleado: number) {
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
       this.beforeTopEmployee = this.topEmployee;
-      if (this.topEmployee.work_team[0].total_work_team > 5) {
+      if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
         this.pagePosition = this.page + 1;
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
@@ -68,6 +68,7 @@ export class HierarchicalChartComponent implements OnInit {
       }
       else {
         this.activeArrowRight = false;
+        this.activeArrowUp = true;
       }
     })
   }
@@ -83,7 +84,7 @@ export class HierarchicalChartComponent implements OnInit {
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
     this.flagActivatethirdLevel = false;
-    this.activeArrowUp = true;
+    this.activeArrowUp = true;    
     this.activeArrowDown = false;
   }
 
@@ -141,9 +142,6 @@ export class HierarchicalChartComponent implements OnInit {
       }
     }
   }
-  searchByName() {
-    //this.enterNameEmployee();
-  }
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
@@ -154,11 +152,15 @@ export class HierarchicalChartComponent implements OnInit {
           document.getElementById('auto_c').blur()
           document.getElementById('auto_c').focus()
         })           
-      }
-   
+      }   
     else {
       this.searchEmployee = [];
     }
+  }
+
+  returnObjectSearch(ObjectSearch:any){  
+    this.id_empleado = ObjectSearch.pernr;  
+    this.getHierarchical(this.id_empleado);
   }
 
 

@@ -50,8 +50,8 @@
     animation-duration: 3s !important;
 }
 .animate-bounce{
-    -webkit-animation-duration: 1s !important;
-    animation-duration: 3s !important;
+    -webkit-animation-duration: 0.1s !important;
+    animation-duration: 2s !important;
 }
 
 .font-icon{
@@ -535,6 +535,10 @@ cursor: pointer;
      .navtab-left{
         margin: 0 15px;
      }
+     .text-center{
+        text-align: center;
+     }
+    
 
 /* Modal Contact Information*/
 
@@ -1305,9 +1309,7 @@ border-bottom: 1px solid  #dddd;
     font-family: "FontAwesome";
   }
   /*WORK TEAM*/
-.divisionTop{
-    padding-top: 15px;
-}
+
 .searchInput{
     margin-left: -50px;
 }
@@ -2126,6 +2128,9 @@ a.close-canvas-menu:hover {
 {
     padding-top: 20px;
 }
+.fontSize-chart{
+    font-size: 1rem !important;
+}
 }
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
@@ -2344,6 +2349,10 @@ a.close-canvas-menu:hover {
     }
     .navtab-left {
         margin: 0 0px !important;
+    }
+
+    .divisionTop{
+        padding-top: 0px !important;
     }
 
 }

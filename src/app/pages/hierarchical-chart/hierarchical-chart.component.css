@@ -5,6 +5,7 @@
     text-align: center;
 }
 
+
 .secondLevel{
     background-color: blue;
     width: 100%;
@@ -18,7 +19,15 @@
     height: 10px;
     text-align: center;
 }
-
+iconFirstLevel{
+    color: red !important;
+ }
+ iconSecondLevel{
+     color: blue !important;
+  }
+  iconThirdLevel{
+     color: green !important;
+  }
 
 .navigateButton{
    
