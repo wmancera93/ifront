@@ -3,8 +3,8 @@
     <div class="row justify-content-between" *ngIf="show">
       <div class="col-xl-3 col-12">
         <div class="form-group row">
-          <label class="col-xl-7 col-6 text-left align-self-center">Registros a mostrar:</label>
-          <div class="col-xl-5 col-6">
+          <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+          <div class="col-xl-5 col-md-3 col-lg-3 col-6">
             <select class="form-control" [(ngModel)]="size_table">
               <option value="5">5</option>
               <option value="10">10</option>
@@ -14,32 +14,32 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-2 col-12">
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
         <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
           <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
           PDF
         </div>
       </div>
-      <div class="col-xl-2 col-12">
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
         <div class="btn btn-block btn-outline-success cursor-general">
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           Excel
         </div>
       </div>
-      <div class="col-xl-2 col-12">
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
         <div class="btn btn-block btn-outline-secondary cursor-general">
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           CSV
         </div>
       </div>
-      <div class="col-xl-2 col-12">
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
         <div class="btn btn-block btn-outline-warning cursor-general">
           <i class="fa fa-print" aria-hidden="true"></i>
-          Imprimir
+          Print
         </div>
       </div>
     </div>
-    <div class="row justify-content-center" *ngIf="!show">
+    <div class="row justify-content-center top-containter" *ngIf="!show">
       <div class="col-8 text-center" style="min-height: 370px;">
         <div class="alert alert-warning" role="alert">
           No hay reportes de&nbsp;
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="show">
+    <div class="row top-containter" *ngIf="show">
       <div class="col-12" style="min-height: 370px;">
         <div class="table-responsive">
           <table class="table table-sm table-striped table-bordered table-hover">
@@ -57,18 +57,20 @@
               </tr>
               <tr>
                 <th class="text-center" *ngFor="let label of labels">
-                  <div style="width: 80%; float: left;">
-                    {{label.value}}
-                  </div>
-                  <div *ngIf="label.sort" style="width: 20%; float: left;">
-                    <i id="{{label.id}}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
+                  <div style="width: 100%">
+                    <div class="name-table">
+                      {{label.value}}
+                    </div>
+                    <div *ngIf="label.sort" class="sort-by">
+                      <i id="{{label.id}}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
+                    </div>
                   </div>
                 </th>
               </tr>
               <tr>
                 <th class="text-center" *ngFor="let label of labels">
                   <div>
-                    <input type="text" class="form-control" placeholder="Filtrar..."/>
+                    <input type="text" class="form-control input-filter" placeholder="Filtrar..." />
                   </div>
                 </th>
               </tr>
