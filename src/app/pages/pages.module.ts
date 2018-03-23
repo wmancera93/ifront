@@ -24,7 +24,10 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
-import { AutoServicesComponent } from './auto-services/auto-services.component';
+import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
+import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
+import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
 
 
 
@@ -50,7 +53,10 @@ import { AutoServicesComponent } from './auto-services/auto-services.component';
     MyTeamReportsComponent,
     DisabilitiesComponent,
     HierarchicalChartComponent,
-    AutoServicesComponent
+    LaborCertificatesComponent,
+    CertificateIncomeWithholdingComponent,
+    PayrollReceiptsComponent,
+    HolidayLetterComponent
   ],
   providers:[
     Angular2TokenService
