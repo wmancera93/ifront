@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, Output } from '@angular/core';
+import { Component, OnInit, DebugElement, Output, Input } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -58,14 +58,22 @@ export class HierarchicalChartComponent implements OnInit {
   }
 
   getHierarchical(pernr_empleado: number) {
+
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
-      this.beforeTopEmployee = this.topEmployee;
+      this.beforeTopEmployee = this.topEmployee;      
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
-        this.pagePosition = this.page + 1;
+        // this.pagePosition = this.page + 1;
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
-        this.activeArrowRight = true;
+      
+        if(this.page >= this.roundTotalPages){
+          this.activeArrowRight = false;
+        }else
+        {
+          this.activeArrowRight = true;
+        }
+        
         this.beforeTopEmployeeWorkTeam = this.topEmployee.work_team[0].work_team;
       }
       else {
@@ -81,8 +89,10 @@ export class HierarchicalChartComponent implements OnInit {
       this.pernrUser = this.dataUser.employee.pernr;
     }
   }
-
+public aa: any = 0;
   downLevelTeam(employeeObject: Work_team) {
+    this.aa = this.page;
+    this.page = 1;    
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
     this.flagActivatethirdLevel = false;
@@ -92,12 +102,12 @@ export class HierarchicalChartComponent implements OnInit {
 
   upLevelTeam() {
     this.id_empleado = this.topEmployee.pernr;
+    this.page = this.aa == 0 ? this.page : this.aa;
     this.getHierarchical(this.id_empleado);
-    this.topEmployee = null;
     this.flagActivatethirdLevel = false;
     this.activeArrowUp = false;
     this.activeArrowDown = true;
-
+    
   }
 
 
@@ -169,7 +179,7 @@ export class HierarchicalChartComponent implements OnInit {
                 <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
                   <b style='width:100%'>${data.short_name}</b>
                 </div>`;
-    
+
     return html;
   }
 

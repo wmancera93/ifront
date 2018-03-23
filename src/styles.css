@@ -1314,6 +1314,9 @@ border-bottom: 1px solid  #dddd;
     margin-left: -50px;
 }
 
+.AjustArrowDown{
+    padding-top:20px;
+}
 
 
   /*-------------------------*/
@@ -2882,9 +2885,7 @@ a.close-canvas-menu:hover {
             -webkit-box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
             box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
         }
-.borderImg{
-border-radius: 50% !important;
-}
+  
         .buttonCloseEmployee{
    
             background-color:var(--btn-primary);
@@ -3013,6 +3014,17 @@ border-radius: 50% !important;
     .padding-back {
         padding-top: 5px;
         padding-bottom: 0px;
+    }
+    .ajustArrow {
+        margin-top:-455px;
+    }
+    .AjustArrowDown{
+        padding-top:0px;
+    }
+    .AjustArrowLeft {
+        margin-top:50%;
+        position: absolute;
+        margin-left: -10px;
     }
 }
 
