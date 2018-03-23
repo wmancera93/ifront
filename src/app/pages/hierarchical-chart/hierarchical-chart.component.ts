@@ -8,6 +8,7 @@ import { EmployeeService } from '../../services/common/employee/employee.service
 import { EmployeeInfoService } from '../../services/shared/common/employee/employee-info.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class HierarchicalChartComponent implements OnInit {
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
-    public http: HttpClient) { }
+    public http: HttpClient,
+    private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.id_empleado = 696;
@@ -84,7 +86,7 @@ export class HierarchicalChartComponent implements OnInit {
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
     this.flagActivatethirdLevel = false;
-    this.activeArrowUp = true;    
+    this.activeArrowUp = true;
     this.activeArrowDown = false;
   }
 
@@ -145,21 +147,34 @@ export class HierarchicalChartComponent implements OnInit {
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
+    console.log(this.nameEmployee)
     if (this.nameEmployee.length > 0) {
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;
           document.getElementById('auto_c').blur()
           document.getElementById('auto_c').focus()
-        })           
-      }   
+        })
+    }
     else {
       this.searchEmployee = [];
     }
   }
+  myListEmployee(data: any) {
+    let html = `<div class="row">
+                  <div class="col-2">
+                    <img style="width:10% !important; height:10% !important; border-radius:50px !important;"  src="${data.image.url}"> 
+                  </div>                  
+                </div>
+                <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
+                  <b style='width:100%'>${data.short_name}</b>
+                </div>`;
+    
+    return html;
+  }
 
-  returnObjectSearch(ObjectSearch:any){  
-    this.id_empleado = ObjectSearch.pernr;  
+  returnObjectSearch(ObjectSearch: any) {
+    this.id_empleado = ObjectSearch.pernr;
     this.getHierarchical(this.id_empleado);
   }
 

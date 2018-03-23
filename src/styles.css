@@ -2882,7 +2882,9 @@ a.close-canvas-menu:hover {
             -webkit-box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
             box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
         }
-
+.borderImg{
+border-radius: 50% !important;
+}
         .buttonCloseEmployee{
    
             background-color:var(--btn-primary);
