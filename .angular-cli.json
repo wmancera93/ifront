@@ -30,7 +30,10 @@
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "./assets/javascript/pace.js"
+        "./assets/javascript/pace.js",
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf/dist/jspdf.debug.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {
