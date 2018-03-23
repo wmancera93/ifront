@@ -1,0 +1,60 @@
+<div class="heigth-content-general">
+    <div *ngIf="reportsMyTeamInfo && !flagReturnBack">
+        <div class="row-hr-container">
+            <div class="col-12">
+                <div class="row justify-content-center">
+                    <div class="col-xl-10 col-md-8 col-7 title">
+                        <i class="fa fa-file"></i>
+                        Información del empleado
+                    </div>
+                    <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+                        <div class="buttonBack img-zoom" (click)="returnBackPage()">
+                            <div class="padding-back">
+                                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                                <span>
+                                    Atrás
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row-hr-container">
+            <div class="col-12 text-center widget bg-white minHeight">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <div class="menu-img-employee center-block">
+                            <img src="{{reportsMyTeamInfo.image.url}}" class="roundPhoto-employee">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-10 text-center">
+                        <h4 class="modal-title titleColor text-shadow" style="padding-top:10px; color: #eeeeee !important">{{reportsMyTeamInfo.name_complete}} </h4>
+                    </div>
+                </div>
+                <div class="borderLine-myTeam">
+                    <br>
+                </div>
+                <div class="row justify-content-between">
+                    <div class="col-xl-3 col-md-12 col-12">
+                        <div id="listReports" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation" *ngIf="reportsMyTeamInfo">
+                            <div id="{{i}}reports" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let report of reportsMyTeamInfo.work_team_reports; let i=index;"
+                                (click)="validateReport(i,reportsMyTeamInfo.id, report)">
+                                <i class="{{report.icon}}"></i> {{report.title}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-md-12 col-12">
+                        <div class="top-general-p">
+                            <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="flagReturnBack">
+        <app-my-team></app-my-team>
+    </div>
+</div>

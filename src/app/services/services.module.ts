@@ -9,6 +9,13 @@ import { UserSharedService } from './shared/common/user/user-shared.service';
 import { MainService } from './main/main.service';
 import { GoogleAnalyticsEventsService } from './google-analytics-events.service';
 import { EmployeeService } from './common/employee/employee.service';
+import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
+import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
+import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
+import {MyTeamInfoService} from './my-team/my-team-info.service';
+import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
+import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
+import { QueriesService } from './queries/queries.service';
 
 @NgModule({
   imports: [
@@ -20,7 +27,14 @@ import { EmployeeService } from './common/employee/employee.service';
     UserSharedService,
     MainService,
     GoogleAnalyticsEventsService,
-    EmployeeService
+    EmployeeService,
+    EmployeeInfoService,
+    DashboardEmployeeService,
+    DashboardManagerialService,
+    MyTeamInfoService,
+    MyTeamReportService,
+    HierarchicalChartService,
+    QueriesService
   ]
 })
 export class ServicesModule { }

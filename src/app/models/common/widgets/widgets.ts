@@ -1,9 +1,13 @@
+import { Employee } from "../../general/user";
+import { Url } from "../url/url";
+
 export interface NotificationPrimary {
     title: string,
     number: string,
+    percentage: string,
     comment: string,
     icon: string,
-    colorIcon: string,
+    color_icon: string,
     background: string,
     color: string
 }
@@ -12,21 +16,47 @@ export interface NotificationSecundary {
     title: string,
     number: string,
     comment: string,
-    iconPrimary: string,
-    iconSecundary: string,
-    colorIconPrimary: string,
-    colorIconSecundary: string,
+    icon_primary: string,
+    icon_secundary: string,
+    color_iconPrimary: string,
+    color_icon_secundary: string,
     background: string;
     color: string
 }
 
 export interface Estadistics {
     title: string,
-    number: string,
+    number: number,
     comment: string,
-    canvas: any,
-    background: string;
-    color: string
+    canvasType: string,
+    background: string,
+    color: string,
+    doughnutChartLabels?: string[],
+    doughnutChartData?: number[],
+    doughnutChartColors?: string[],
+    lineChartLabels?: string[],
+    lineChartData?: number[],
+    lineChartColors?:ColorLineChart,
+    barChartLabels?: string[],
+    barChartData?: BarCharData;
+    barChartColors?:Colors;
+}
+
+export interface ColorLineChart{
+    backgroundColor?: string,
+    borderColor?: string,
+    pointBackgroundColor?: string,
+    pointBorderColor?: string,
+    pointHoverBackgroundColor?: string,
+    pointHoverBorderColor?: string
+}
+export interface BarCharData{
+data: number[],
+label:string
+}
+
+export interface Colors{
+    backgroundColor: string[]
 }
 
 export interface Calendar {
@@ -39,37 +69,45 @@ export interface Calendar {
 }
 
 export interface Newspaper {
-    title: string,
-    description: string,
-    image: Url,
-    themes: ThemesNewspaper[]
-}
-
-interface ThemesNewspaper {
-    description: string
+    id: number,
+    titulo: string,
+    imagen: Url,
+    cuerpo: string,
+    ini: string,
+    publicado: boolean,
+    created_at: Date,
+    themes: string[],
+    total_views: number,
+    total_comments: number,
+    created_by: Employee,
 }
 
 export interface EventsEmployess {
-    nameEvent: string,
+    id: Number,
     name: string,
-    event: string,
-    posicion: string,
+    lastname: string
     image: Url,
+    posicion: string,
+    fecha_ingreso: Date,
+    name_event: string,
+    event: string,
     icon: string,
-    description: string,
     color: string,
-    background: string
+    background: string,
+    short_name: string,
+    //description: string
 }
-
-interface Url {
-    url: string
-}
-
 
 export interface ProgressPrimary {
     title: string,
-    nameProgress: string,
-    numberProgress: string,
-    percentProgress: string, 
-    iconProgress: string   
+    data: data
+  
+    
+}
+
+interface data {
+    title: string,
+    icon: string,
+    value: string,
+    percentage_value: string,
 }

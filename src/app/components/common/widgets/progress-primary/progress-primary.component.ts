@@ -7,12 +7,14 @@ import { ProgressPrimary } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./progress-primary.component.css']
 })
 export class ProgressPrimaryComponent implements OnInit {
-  @Input() progressPrimary: any;
+  @Input('progressPrimary') progressPrimary: any;
   public objectWidget: ProgressPrimary[] = [];
   
   constructor() { }
 
   ngOnInit() {
-    this.objectWidget = this.progressPrimary;
+    this.progressPrimary.subscribe((data: ProgressPrimary[]) => {
+      this.objectWidget = data;
+    })
   }
 }

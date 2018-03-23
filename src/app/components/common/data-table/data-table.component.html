@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row justify-content-between" *ngIf="show">
+      <div class="col-xl-3 col-12">
+        <div class="form-group row">
+          <label class="col-xl-7 col-6 text-left align-self-center">Registros a mostrar:</label>
+          <div class="col-xl-5 col-6">
+            <select class="form-control" [(ngModel)]="size_table">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-12">
+        <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
+          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+          PDF
+        </div>
+      </div>
+      <div class="col-xl-2 col-12">
+        <div class="btn btn-block btn-outline-success cursor-general">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          Excel
+        </div>
+      </div>
+      <div class="col-xl-2 col-12">
+        <div class="btn btn-block btn-outline-secondary cursor-general">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          CSV
+        </div>
+      </div>
+      <div class="col-xl-2 col-12">
+        <div class="btn btn-block btn-outline-warning cursor-general">
+          <i class="fa fa-print" aria-hidden="true"></i>
+          Imprimir
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" *ngIf="!show">
+      <div class="col-8 text-center" style="min-height: 370px;">
+        <div class="alert alert-warning" role="alert">
+          No hay reportes de&nbsp;
+          <strong>{{title}}</strong>&nbsp;para el empleado
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="show">
+      <div class="col-12" style="min-height: 370px;">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-bordered table-hover">
+            <thead>
+              <tr *ngIf="title != ''">
+                <th class="text-center" [attr.colspan]="keys.length"> {{title}} </th>
+              </tr>
+              <tr>
+                <th class="text-center" *ngFor="let label of labels">
+                  <div style="width: 80%; float: left;">
+                    {{label.value}}
+                  </div>
+                  <div *ngIf="label.sort" style="width: 20%; float: left;">
+                    <i id="{{label.id}}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
+                  </div>
+                </th>
+              </tr>
+              <tr>
+                <th class="text-center" *ngFor="let label of labels">
+                  <div>
+                    <input type="text" class="form-control" placeholder="Filtrar..."/>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
+                <td *ngFor="let key of keys"> {{record [key]}} </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="show">
+      <div class="col-12">
+        <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
+          nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

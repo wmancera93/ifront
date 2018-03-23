@@ -19,14 +19,26 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
+import { MyTeamComponent } from './my-team/my-team.component';
+import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
+import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
+import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
+import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
+
+
 
 
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ComponentsModule,
-    FormsModule
+    ComponentsModule,    
+    FormsModule,
+    Ng2AutoCompleteModule
   ],
   declarations: [
     LoginComponent,
@@ -36,7 +48,15 @@ import { ManagerialComponent } from './dashboard/managerial/managerial.component
     ConfirmResetAcountComponent,
     ErrorPageComponent,
     EmployeesComponent,
-    ManagerialComponent
+    ManagerialComponent,
+    MyTeamComponent,
+    MyTeamReportsComponent,
+    DisabilitiesComponent,
+    HierarchicalChartComponent,
+    LaborCertificatesComponent,
+    CertificateIncomeWithholdingComponent,
+    PayrollReceiptsComponent,
+    HolidayLetterComponent
   ],
   providers:[
     Angular2TokenService

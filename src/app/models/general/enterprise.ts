@@ -1,3 +1,5 @@
+import { Url } from "../common/url/url";
+
 export interface Enterprise {
     id: number,
     name: string,
@@ -11,8 +13,4 @@ export interface Enterprise {
     background_login: Url,
     background_lockscreen: Url,
     background_header_menu: Url
-}
-
-export interface Url {
-    url: string
 }
