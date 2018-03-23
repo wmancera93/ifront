@@ -10,7 +10,7 @@ import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigatio
 import { FooterComponent } from './layout/footer/footer.component';
 import { ToasterContainerComponent } from './common/toaster-container/toaster-container.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 import { CalendarComponent } from './common/widgets/calendar/calendar.component';
 import { NewspaperComponent } from './common/widgets/newspaper/newspaper.component';
@@ -20,13 +20,19 @@ import { NotificationSecundaryComponent } from './common/widgets/notification-se
 import { FormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
-
+import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { DataTableComponent } from './common/data-table/data-table.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule
+    RouterModule,
+    ChartsModule,
+    NgxPaginationModule,
+    ToasterModule.forRoot()
   ],
   declarations: [
     HeaderComponent,
@@ -41,7 +47,9 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
-    ProgressPrimaryComponent
+    ProgressPrimaryComponent,
+    EmployeeInfoComponent,
+    DataTableComponent
   ],
   exports: [
     HeaderComponent,
@@ -56,7 +64,9 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
     NotificationPrimaryComponent,
     NotificationSecundaryComponent,
     EventsEmployeesComponent,
-    ProgressPrimaryComponent
+    ProgressPrimaryComponent,
+    EmployeeInfoComponent,
+    DataTableComponent
   ],
   providers: [
     // ToasterService

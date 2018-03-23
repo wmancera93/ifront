@@ -1,9 +1,11 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output } from '@angular/core';
 import { Employee } from '../../../models/general/user';
 import { EmployeeService } from '../../../services/common/employee/employee.service';
+import { EmployeeInfoService } from '../../../services/shared/common/employee/employee-info.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
-/*@HostListener("window.scroll",[])*/
+
 
 @Component({
   selector: 'app-contacts-list',
@@ -12,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 })
 
 export class ContactsListComponent implements OnInit {
+  
   public contacts: Employee[] = [];
   public searchListContacts: Employee[] = [];
   public nameEmployee: string = '';
@@ -27,10 +30,13 @@ export class ContactsListComponent implements OnInit {
   public validateError: boolean;
   public searchIconActive: boolean;
   public hideCollapse: string = '';
-  public showContactsList:boolean = true;
+  public showContactsList: boolean = true;
+  public infoEmployee: Employee;
 
 
-  constructor(public employeeDate: EmployeeService,
+  constructor(public employeeService: EmployeeService,
+    public router: Router,
+    public employeeSharedService: EmployeeInfoService,
   ) {
     this.chats[0] = { name: "Laura", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: true };
     this.chats[1] = { name: "Wilmer", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: true };
@@ -39,7 +45,7 @@ export class ContactsListComponent implements OnInit {
   }
   ngOnInit() {
     this.numberPage = 1;
-    this.employeeDate.getAllEmployees(this.numberPage.toString())
+    this.employeeService.getAllEmployees(this.numberPage.toString())
       .subscribe((result: any) => {
         if (result.success === true) {
           this.contacts = result.data;
@@ -70,7 +76,7 @@ export class ContactsListComponent implements OnInit {
     this.contacts = this.contacts.filter(
       (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
     if (this.contacts.length === 0 || this.contacts.length < 10) {
-      this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
+      this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
         .subscribe((result: any) => {
 
           if (result.success === true) {
@@ -114,7 +120,7 @@ export class ContactsListComponent implements OnInit {
             (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
 
           //  if (this.contacts.length === 0 || this.contacts.length < 10) {
-          this.employeeDate.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
+          this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
             .subscribe((result: any) => {
               if (result.success === true) {
                 numberContacts += result.data.length;
@@ -131,8 +137,6 @@ export class ContactsListComponent implements OnInit {
 
                 this.error = error.error.errors[0];
                 this.validateError = error.error.success;
-                console.log(error.error.success)
-                console.log(error.error.errors[0])
 
               }
             );
@@ -142,7 +146,7 @@ export class ContactsListComponent implements OnInit {
 
         } else {
           let numberContacts: number = 0;
-          this.employeeDate.getAllEmployees(this.numberPageScroll.toString())
+          this.employeeService.getAllEmployees(this.numberPageScroll.toString())
             .subscribe((result: any) => {
               if (result.success === true) {
                 numberContacts += result.data.length;
@@ -158,10 +162,21 @@ export class ContactsListComponent implements OnInit {
 
       }
 
-  } 
+  }
 
-  clickPartnersIconHide()
-  {
+  clickPartnersIconHide() {
     document.getElementById('togglePartnersHide').click();
+  }
+
+  openInfoEmployee(idEmployee: string) {
+    this.employeeService.getEmployeeById(idEmployee).subscribe(
+      (data: any) => {
+        if (data.success === true) {
+          this.infoEmployee = data.data;
+          this.infoEmployee.modal = 'contactList';
+          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+        }
+      }
+    );
   }
 }

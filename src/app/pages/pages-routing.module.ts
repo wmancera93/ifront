@@ -9,6 +9,15 @@ import { LockedScreenComponent } from './authentication/locked-screen/locked-scr
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acount/confirm-reset-acount.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
+import { MyTeamComponent } from './my-team/my-team.component';
+import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
+import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
+import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
+import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
+import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
+import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
+
 
 const routes: Routes = [
     {
@@ -34,7 +43,40 @@ const routes: Routes = [
     {
         path: 'error',
         component: ErrorPageComponent
+    },
+    {
+        path: 'my_team',
+        component: MyTeamComponent
+    },
+    {
+        path: 'my_team_reports',
+        component: MyTeamReportsComponent,
+    },
+    {
+        path: 'disabilities',
+        component: DisabilitiesComponent
+    },
+    {        
+        path:'hierarchical_chart',
+        component:HierarchicalChartComponent,
+    },
+    {        
+        path:'holiday-letter',
+        component:HolidayLetterComponent,
+    },
+    {        
+        path:'work-certificate',
+        component:LaborCertificatesComponent,
+    },
+    {        
+        path:'payroll-receipts',
+        component:PayrollReceiptsComponent,
+    },
+    {        
+        path:'certificate-income-withholding',
+        component:CertificateIncomeWithholdingComponent,
     }
+   
 ];
 
 @NgModule({

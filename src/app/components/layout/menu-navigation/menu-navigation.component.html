@@ -1,4 +1,4 @@
-<nav id="navMenu" class="navbar-default navbar-static-side" role="navigation">
+<nav id="navMenu" class="navbar-default scrollbar-success-nav navbar-static-side" role="navigation">
   <div class="sidebar-collapse">
     <ul class="nav in flex-column" id="side-menu">
       <li class="nav-header-menu">
@@ -23,13 +23,13 @@
         </div>
       </li>
       <li id="liIndex" class="active">
-        <a id="aIndex" routerLink="/index" routerLinkActive="active" class="nav-link bg-menu active" data-toggle="collapse" (click)="clickOptionMenu('liIndex','aIndex', '')">
+        <a id="aIndex" routerLink="/ihr/index" routerLinkActive="active" class="nav-link bg-menu" data-toggle="collapse" (click)="clickOptionMenu('liIndex','aIndex', '')">
           <i class="fa fa-th-large"></i>
           <span class="nav-label">Inicio</span>
         </a>
       </li>
       <li id="liOrganizationChart">
-        <a id="aOrganizationChart" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
+        <a id="aOrganizationChart" routerLink="/ihr/hierarchical_chart" routerLinkActive="active" class="nav-link bg-menu"  (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
           <i class="fa fa-sitemap"></i>
           <span class="nav-label">Organigrama</span>
         </a>
@@ -41,7 +41,7 @@
         </a>
       </li>
       <li id="liAutoService">
-        <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
+        <a id='toggleAutoService' class="nav-link bg-menu"  data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
           <i class="fa fa-file"></i>
           <span class="nav-label">Autoservicio</span>
           <span class="fa fa-angle-down"></span>
@@ -49,16 +49,16 @@
         <div id="selfService" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
             <li>
-              <a id="aWorkCertificate" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
+              <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work-certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
             </li>
             <li class="bg-li">
-              <a id="aHolidayLetter" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
+              <a id="aHolidayLetter" class="nav-link bg-menu"  routerLink="/ihr/holiday-letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
             </li>
             <li class="bg-li">
-              <a id="aPayrollReceipts" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
+              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll-receipts"  (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
             </li>
             <li class="bg-li">
-              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
+              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate-income-withholding"   (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
             </li>
           </ul>
         </div>
@@ -96,7 +96,7 @@
               <a id="aPermits" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">Permisos</a>
             </li>
             <li class="bg-li">
-              <a id="aDisabilities" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">Incapacidades</a>
+              <a id="aDisabilities" routerLink="/ihr/disabilities" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">Incapacidades</a>
             </li>
             <li class="bg-li">
               <a id="aExtraHours" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">Horas extras</a>

@@ -7,13 +7,15 @@ import { Newspaper } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./newspaper.component.css']
 })
 export class NewspaperComponent implements OnInit {
-  @Input() newspaper: any;
-  public objectWidget: Newspaper[];
-  
+  @Input('newspaper') newspaper: any;
+  public objectWidget: Newspaper[]=[];
+
   constructor() { }
 
   ngOnInit() {
-    this.objectWidget = this.newspaper;
+    this.newspaper.subscribe((data: Newspaper[]) => {
+      this.objectWidget = data
+    })
   }
 
 }
