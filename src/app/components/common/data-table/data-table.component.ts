@@ -57,8 +57,74 @@ export class DataTableComponent implements OnInit {
     });
   }
 
+  pdfExport() {
+    let title: string = this.title;
+    var today = new Date();
+    let dd: number = today.getDate();
+    let mm: number = today.getMonth() + 1;
+    let yyyy: number = today.getFullYear();
+    let ddNew: string = dd.toString();
+    let mmNew: string = mm.toString();
+
+    if (dd.toString().length === 1) {
+      ddNew = '0' + dd.toString();
+    }
+    if (mm.toString().length === 1) {
+      mmNew = '0' + mm.toString();
+    }
+
+    let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
+    let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
+    var doc = new jsPDF('p', 'pt');
+    doc.page = 1;
+    doc.autoTable(this.columnsPdf, this.recordsPrint, {
+      theme: 'striped',
+      styles: {
+        cellPadding: 5,
+        fontSize: 10,
+        font: "helvetica",
+        fontStyle: 'normal',
+        overflow: 'hidden',
+        textColor: 20,
+        halign: 'left',
+        valign: 'middle',
+        columnWidth: 'auto',
+      },
+      headerStyles: {
+        fillColor: [91, 105, 110],
+        fontStyle: 'bold',
+        halign: 'center',
+        textColor: 250,
+      },
+      margin: { top: 110 },
+      addPageContent: function (data) {
+        doc.setFontSize(16)
+        doc.text(40, 60, title)
+        // doc.setFontSize(12)
+        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
+        doc.setFontSize(12)
+        doc.text(40, 95, 'Generado el ' + dateNow)
+        doc.setFontSize(10)
+        doc.text(500, 60, 'pagina ' + doc.page);
+        doc.page++;
+      }
+    });
+
+    doc.save(title + '.pdf')
+  }
+
   sortable(label: any) {
     let descending: boolean = true;
+    let idPrevius: string = '';
+    if (document.getElementsByClassName('fa-chevron-up').length > 0) {
+      idPrevius = (<HTMLInputElement>document.getElementsByClassName('fa-chevron-up')[0]).id
+      if (idPrevius !== label.id) {
+        document.getElementById(idPrevius).classList.remove('fa');
+        document.getElementById(idPrevius).classList.remove('fa-chevron-up');
+        document.getElementById(idPrevius).classList.remove('cursor-general');
+        document.getElementById(idPrevius).className = 'fa fa-chevron-down cursor-general';
+      }
+    }
 
     if (document.getElementById(label.id).classList[1] === 'fa-chevron-down') {
       document.getElementById(label.id).classList.remove('fa');
@@ -128,64 +194,7 @@ export class DataTableComponent implements OnInit {
     }
   }
 
-  pdfExport() {
-    let title: string = this.title;
-    var today = new Date();
-    let dd: number = today.getDate();
-    let mm: number = today.getMonth() + 1;
-    let yyyy: number = today.getFullYear();
-    let ddNew: string = dd.toString();
-    let mmNew: string = mm.toString();
-
-    if (dd.toString().length === 1) {
-      ddNew = '0' + dd.toString();
-    }
-    if (mm.toString().length === 1) {
-      mmNew = '0' + mm.toString();
-    }
-
-    let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
-    let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
-    var doc = new jsPDF('p', 'pt');
-    doc.page = 1;
-    doc.autoTable(this.columnsPdf, this.recordsPrint, {
-      theme: 'striped',
-      styles: {
-        cellPadding: 5,
-        fontSize: 10,
-        font: "helvetica",
-        fontStyle: 'normal',
-        overflow: 'hidden',
-        textColor: 20,
-        halign: 'left',
-        valign: 'middle',
-        columnWidth: 'auto',
-      },
-      headerStyles: {
-        fillColor: [91, 105, 110],
-        fontStyle: 'bold',
-        halign: 'center',
-        textColor: 250,
-      },
-      margin: { top: 110 },
-      addPageContent: function (data) {
-        doc.setFontSize(16)
-        doc.text(40, 60, title)
-        // doc.setFontSize(12)
-        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
-        doc.setFontSize(12)
-        doc.text(40, 95, 'Generado el ' + dateNow)
-        doc.setFontSize(10)
-        doc.text(500, 60, 'pagina ' + doc.page);
-        doc.page++;
-      }
-    });
-
-    doc.save(title + '.pdf')
-  }
-
   filterByCell(value: any, label: any) {
-    document.getElementsByClassName('input-filter')
     for (let i = 0; i < document.getElementsByClassName('input-filter').length; i++) {
       if (i != value) {
         (<HTMLInputElement>document.getElementsByClassName('input-filter')[i]).value = '';
