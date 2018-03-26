@@ -28,6 +28,17 @@ import { LaborCertificatesComponent } from './auto-services/labor-certificates/l
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
+import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
+import { EmbargoesComponent } from './queries/embargoes/embargoes.component';
+import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
+import { ExtraHoursComponent } from './queries/extra-hours/extra-hours.component';
+import { PaymentsDeductionsComponent } from './queries/payments-deductions/payments-deductions.component';
+import { PermissionsComponent } from './queries/permissions/permissions.component';
+import { LoansComponent } from './queries/loans/loans.component';
+import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-enjoyed.component';
+import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
+import { SeverancesComponent } from './queries/severances/severances.component';
+import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 
 
 
@@ -56,7 +67,18 @@ import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-l
     LaborCertificatesComponent,
     CertificateIncomeWithholdingComponent,
     PayrollReceiptsComponent,
-    HolidayLetterComponent
+    HolidayLetterComponent,
+    IncomeWithholdingsComponent,
+    EmbargoesComponent,
+    CompnsatedVacationsComponent,
+    ExtraHoursComponent,
+    PaymentsDeductionsComponent,
+    PermissionsComponent,
+    LoansComponent,
+    VacationEnjoyedComponent,
+    VacationBalanceComponent,
+    SeverancesComponent,
+    AniversaryComponent
   ],
   providers:[
     Angular2TokenService

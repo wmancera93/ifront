@@ -17,6 +17,17 @@ import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-l
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
+import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
+import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
+import { EmbargoesComponent } from './queries/embargoes/embargoes.component';
+import { ExtraHoursComponent } from './queries/extra-hours/extra-hours.component';
+import { LoansComponent } from './queries/loans/loans.component';
+import { PaymentsDeductionsComponent } from './queries/payments-deductions/payments-deductions.component';
+import { PermissionsComponent } from './queries/permissions/permissions.component';
+import { SeverancesComponent } from './queries/severances/severances.component';
+import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
+import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-enjoyed.component';
+import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 
 
 const routes: Routes = [
@@ -61,22 +72,65 @@ const routes: Routes = [
         component:HierarchicalChartComponent,
     },
     {        
-        path:'holiday-letter',
+        path:'holiday_letter',
         component:HolidayLetterComponent,
     },
     {        
-        path:'work-certificate',
+        path:'work_certificate',
         component:LaborCertificatesComponent,
     },
     {        
-        path:'payroll-receipts',
+        path:'payroll_receipts',
         component:PayrollReceiptsComponent,
     },
     {        
-        path:'certificate-income-withholding',
+        path:'certificate_income_withholding',
         component:CertificateIncomeWithholdingComponent,
-    }
-   
+    },
+    {
+        path:'income_withholdings',
+        component: IncomeWithholdingsComponent,
+    },
+    {
+        path:'compensated_vacations',
+        component: CompnsatedVacationsComponent,
+    },
+    {
+        path:'embargoes',
+        component: EmbargoesComponent,
+    },
+    {
+        path:'extra_hours',
+        component: ExtraHoursComponent,
+    },
+    {
+        path:'loans',
+        component: LoansComponent,
+    },
+    {
+        path:'payments_deductions',
+        component: PaymentsDeductionsComponent,
+    },
+    {
+        path:'permissions',
+        component: PermissionsComponent,
+    },
+    {
+        path:'vacation_balance',
+        component: VacationBalanceComponent,
+    },
+    {
+        path:'vacation_enjoyed',
+        component: VacationEnjoyedComponent,
+    },
+    {
+        path:'aniversary',
+        component: AniversaryComponent,
+    },
+    {
+        path:'severances',
+        component: SeverancesComponent,
+    },
 ];
 
 @NgModule({

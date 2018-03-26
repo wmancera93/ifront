@@ -22,7 +22,7 @@
           </div>
         </div>
       </li>
-      <li id="liIndex" class="active">
+      <li id="liIndex">
         <a id="aIndex" routerLink="/ihr/index" routerLinkActive="active" class="nav-link bg-menu" data-toggle="collapse" (click)="clickOptionMenu('liIndex','aIndex', '')">
           <i class="fa fa-th-large"></i>
           <span class="nav-label">Inicio</span>
@@ -72,34 +72,40 @@
         <div id="query" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
             <li>
-              <a id="aIncomeWithholdings" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIncomeWithholdings', 'query')">Ingresos y retenciones</a>
+              <a id="aIncomeWithholdings" routerLink="/ihr/income_withholdings" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIncomeWithholdings', 'query')">Ingresos y retenciones</a>
             </li>
             <li class="bg-li">
-              <a id="aPaymentsDeductions" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">Pagos y deducciones</a>
+              <a id="aPaymentsDeductions"  routerLink="/ihr/payments_deductions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">Pagos y deducciones</a>
             </li>
             <li class="bg-li">
-              <a id="aEmbargos" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Embargos</a>
+              <a id="aHistoricalSeverances" routerLink="/ihr/severances" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalSeverances', 'query')">Historico de cesantias</a>
             </li>
             <li class="bg-li">
-              <a id="aPaydayLoans" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">Prestamos</a>
+              <a id="aEmbargos" routerLink="/ihr/embargoes" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Embargos</a>
             </li>
             <li class="bg-li">
-              <a id="aVacationEnjoyed" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones disfrutadas</a>
+              <a id="aPaydayLoans" routerLink="/ihr/loans" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">Prestamos</a>
             </li>
             <li class="bg-li">
-              <a id="aCompensatedVacations" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">Vacaciones compensadas</a>
+              <a id="aVacationEnjoyed" routerLink="/ihr/vacation_enjoyed" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones disfrutadas</a>
             </li>
             <li class="bg-li">
-              <a id="aVacationBalance" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationBalance', 'query')">Saldo de vacaciones</a>
+              <a id="aCompensatedVacations" routerLink="/ihr/compensated_vacations" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">Vacaciones compensadas</a>
             </li>
             <li class="bg-li">
-              <a id="aPermits" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">Permisos</a>
+              <a id="aVacationBalance" routerLink="/ihr/vacation_balance" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationBalance', 'query')">Saldo de vacaciones</a>
+            </li>
+            <li class="bg-li">
+              <a id="aPermits" routerLink="/ihr/permissions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">Permisos</a>
             </li>
             <li class="bg-li">
               <a id="aDisabilities" routerLink="/ihr/disabilities" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">Incapacidades</a>
             </li>
             <li class="bg-li">
-              <a id="aExtraHours" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">Horas extras</a>
+              <a id="aExtraHours" routerLink="/ihr/extra_hours" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">Horas extras</a>
+            </li>
+            <li class="bg-li">
+              <a id="aAniversary" routerLink="/ihr/aniversary" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aAniversary', 'query')">Aniversario de los empleados</a>
             </li>
           </ul>
         </div>
