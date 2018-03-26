@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, Output } from '@angular/core';
+import { Component, OnInit, DebugElement, Output, Input } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -8,6 +8,7 @@ import { EmployeeService } from '../../services/common/employee/employee.service
 import { EmployeeInfoService } from '../../services/shared/common/employee/employee-info.service';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
+import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 
 
 @Component({
@@ -48,7 +49,8 @@ export class HierarchicalChartComponent implements OnInit {
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
-    public http: HttpClient) { }
+    public http: HttpClient,
+    private domSanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.id_empleado = 696;
@@ -56,14 +58,22 @@ export class HierarchicalChartComponent implements OnInit {
   }
 
   getHierarchical(pernr_empleado: number) {
+
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
-      this.beforeTopEmployee = this.topEmployee;
+      this.beforeTopEmployee = this.topEmployee;      
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
-        this.pagePosition = this.page + 1;
+        // this.pagePosition = this.page + 1;
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
-        this.activeArrowRight = true;
+      
+        if(this.page >= this.roundTotalPages){
+          this.activeArrowRight = false;
+        }else
+        {
+          this.activeArrowRight = true;
+        }
+        
         this.beforeTopEmployeeWorkTeam = this.topEmployee.work_team[0].work_team;
       }
       else {
@@ -79,23 +89,25 @@ export class HierarchicalChartComponent implements OnInit {
       this.pernrUser = this.dataUser.employee.pernr;
     }
   }
-
+public aa: any = 0;
   downLevelTeam(employeeObject: Work_team) {
+    this.aa = this.page;
+    this.page = 1;    
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
     this.flagActivatethirdLevel = false;
-    this.activeArrowUp = true;    
+    this.activeArrowUp = true;
     this.activeArrowDown = false;
   }
 
   upLevelTeam() {
     this.id_empleado = this.topEmployee.pernr;
+    this.page = this.aa == 0 ? this.page : this.aa;
     this.getHierarchical(this.id_empleado);
-    this.topEmployee = null;
     this.flagActivatethirdLevel = false;
     this.activeArrowUp = false;
     this.activeArrowDown = true;
-
+    
   }
 
 
@@ -145,21 +157,34 @@ export class HierarchicalChartComponent implements OnInit {
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
+    console.log(this.nameEmployee)
     if (this.nameEmployee.length > 0) {
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;
           document.getElementById('auto_c').blur()
           document.getElementById('auto_c').focus()
-        })           
-      }   
+        })
+    }
     else {
       this.searchEmployee = [];
     }
   }
+  myListEmployee(data: any) {
+    let html = `<div class="row">
+                  <div class="col-2">
+                    <img style="width:10% !important; height:10% !important; border-radius:50px !important;"  src="${data.image.url}"> 
+                  </div>                  
+                </div>
+                <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
+                  <b style='width:100%'>${data.short_name}</b>
+                </div>`;
 
-  returnObjectSearch(ObjectSearch:any){  
-    this.id_empleado = ObjectSearch.pernr;  
+    return html;
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.id_empleado = ObjectSearch.pernr;
     this.getHierarchical(this.id_empleado);
   }
 

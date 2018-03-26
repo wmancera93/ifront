@@ -23,7 +23,8 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DataTableComponent } from './common/data-table/data-table.component';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import {NgxPaginationModule} from 'ngx-pagination';
+import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component'; 
 
 @NgModule({
   imports: [
@@ -49,7 +50,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
     EventsEmployeesComponent,
     ProgressPrimaryComponent,
     EmployeeInfoComponent,
-    DataTableComponent
+    DataTableComponent,
+    AutoCompleteComponent
   ],
   exports: [
     HeaderComponent,
