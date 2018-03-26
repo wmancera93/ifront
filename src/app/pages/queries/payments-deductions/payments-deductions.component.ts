@@ -8,7 +8,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 })
 export class PaymentsDeductionsComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = '';
+  public nameReport: string = 'Pagos y deducciones';
 
   constructor(public queriesService: QueriesService) { }
 

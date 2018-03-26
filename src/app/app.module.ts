@@ -35,8 +35,6 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     FormsModule,
     HttpClientModule,
     HttpModule,
-    
-
   ],
   providers: [
     

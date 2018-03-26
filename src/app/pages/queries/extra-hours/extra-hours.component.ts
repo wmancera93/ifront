@@ -8,7 +8,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 })
 export class ExtraHoursComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = '';
+  public nameReport: string = 'Horas extras';
 
   constructor(public queriesService: QueriesService) { }
 

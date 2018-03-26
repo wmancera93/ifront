@@ -68,20 +68,33 @@
                 </th>
               </tr>
               <tr>
-                <th class="text-center" *ngFor="let label of labels">
+                <th class="text-center" *ngFor="let label of labels; let i = index">
                   <div>
-                    <input type="text" class="form-control input-filter" placeholder="Filtrar..." />
+                    <input [attr.id]="i+label.label" type="text" class="form-control input-filter" placeholder="Filtrar..." (keyup)="filterByCell(i, label)"
+                    />
                   </div>
                 </th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
-                <td *ngFor="let key of keys"> {{record [key]}} </td>
+                <td *ngFor="let key of keys">
+                  <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                    {{record[key]}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
+                    {{record[key]}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
+                    {{record[key] | currency}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
+                    {{record[key]}}
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
-          
         </div>
       </div>
     </div>

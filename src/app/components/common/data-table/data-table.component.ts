@@ -25,33 +25,39 @@ export class DataTableComponent implements OnInit {
   public p: number = 1;
   public size_table: number = 10;
 
+  public labelsCell: any[] = [];
+
   public columnsPdf: any[] = [];
-  public rowsPdf: any[] = [];
+  public rowsColsPdf: any[] = [];
+
+  public recordsStatic: any[] = [];
 
   constructor() { }
 
   ngOnInit() {
     this.records.subscribe((data) => {
-      if (data.data[0].data.length > 0) {
-        this.show = true;
-        this.keys = Object.keys(data.data[0].labels);
-        this.recordsPrint = data.data[0].data;
-
-        this.keys.forEach((element) => {
-          let label = data.data[0].labels[element]
-          this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
-
-          this.columnsPdf.push({ title: label.value, dataKey: element });
-
-        })
-
+      if (data.data.length > 0) {
+        if (data.data[0].data.length > 0) {
+          this.show = true;
+          this.labelsCell = data.data[0].labels;
+          this.keys = Object.keys(this.labelsCell);
+          this.recordsPrint = data.data[0].data;
+          this.recordsStatic = this.recordsPrint;
+          this.keys.forEach((element) => {
+            let label = data.data[0].labels[element]
+            this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
+            this.columnsPdf.push({ title: label.value, dataKey: element });
+          })
+        } else {
+          this.show = false;
+        }
       } else {
         this.show = false;
       }
     });
   }
 
-  sortable(label) {
+  sortable(label: any) {
     let descending: boolean = true;
 
     if (document.getElementById(label.id).classList[1] === 'fa-chevron-down') {
@@ -123,14 +129,14 @@ export class DataTableComponent implements OnInit {
   }
 
   pdfExport() {
-
+    let title: string = this.title;
     var today = new Date();
     let dd: number = today.getDate();
-    let mm: number = today.getMonth() + 1; 
+    let mm: number = today.getMonth() + 1;
     let yyyy: number = today.getFullYear();
-    let ddNew: string =  dd.toString();
+    let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
-    
+
     if (dd.toString().length === 1) {
       ddNew = '0' + dd.toString();
     }
@@ -164,9 +170,9 @@ export class DataTableComponent implements OnInit {
       margin: { top: 110 },
       addPageContent: function (data) {
         doc.setFontSize(16)
-        doc.text(40, 60, 'Incapacidades')
-        doc.setFontSize(12)
-        doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
+        doc.text(40, 60, title)
+        // doc.setFontSize(12)
+        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
         doc.setFontSize(12)
         doc.text(40, 95, 'Generado el ' + dateNow)
         doc.setFontSize(10)
@@ -175,6 +181,19 @@ export class DataTableComponent implements OnInit {
       }
     });
 
-    doc.save('Incapacidades.pdf')
+    doc.save(title + '.pdf')
+  }
+
+  filterByCell(value: any, label: any) {
+    document.getElementsByClassName('input-filter')
+    for (let i = 0; i < document.getElementsByClassName('input-filter').length; i++) {
+      if (i != value) {
+        (<HTMLInputElement>document.getElementsByClassName('input-filter')[i]).value = '';
+      }
+    }
+    let input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
+    let parameter = label.label;
+    this.recordsPrint = this.recordsStatic.filter((prod: any) => prod[parameter].toString().toUpperCase().indexOf(input.toUpperCase()) >= 0);
+
   }
 }
