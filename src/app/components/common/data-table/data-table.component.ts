@@ -115,18 +115,18 @@ export class DataTableComponent implements OnInit {
     doc.save(title + '.pdf')
   }
 
-  excelExport(){
+  excelExport() {
     this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
   }
 
-  csvExport(){
+  csvExport() {
     this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.csv');
   }
 
-  printTable(){
-    this.printDataTableService.setNamePrint(this.title);
-    this.printDataTableService.setLabelsObjectForPrint(this.labelsCell);
-    this.printDataTableService.setObjectForPrint(this.recordsPrint);   
+  printTable() {
+    let objectTable: any[] = [];
+    objectTable.push({title: this.title, labels: this.labelsCell, cells: this.recordsPrint})
+    this.printDataTableService.setObjectForPrint(objectTable);
   }
 
   sortable(label: any) {

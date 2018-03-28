@@ -14,19 +14,18 @@ export class PrintDataTableComponent implements OnInit {
   public labelsCell: any[] = [];
 
   constructor(public printDataTableService: PrintDataTableService) {
-    this.printDataTableService.getNamePrint().subscribe(data => {
-      this.title = data;
-    })
-    this.printDataTableService.getLabelsObjectForPrint().subscribe(data => {
-      this.labelsCell = data;
+    this.printDataTableService.getObjectForPrint().subscribe(data => {
+      debugger
+      this.title = data[0].title;
+      this.labelsCell = data[0].labels;
+      this.recordsPrint = data[0].cells;
+      
       this.keys = Object.keys(this.labelsCell);
       this.keys.forEach((element) => {
-        let label = data[element]
+        let label = data[0].labels[element]
         this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
       })
-    })
-    this.printDataTableService.getObjectForPrint().subscribe(data => {
-      this.recordsPrint = data;
+
       document.getElementById("data_table").style.display = 'none';
       document.getElementById("printGeneral").removeAttribute('style');
       document.getElementById("printGeneral").style.display = 'block';
@@ -36,14 +35,14 @@ export class PrintDataTableComponent implements OnInit {
         document.getElementById("data_table").style.display = 'block';
         document.getElementById("printGeneral").removeAttribute('style');
         document.getElementById("printGeneral").style.display = 'none';
-      }, 50);
+      }, 200);
       setTimeout(() => {
         this.title = '';
         this.keys = [];
         this.labels = [];
         this.recordsPrint = [];
         this.labelsCell = [];
-      }, 100);
+      }, 300);
     })
   }
 
