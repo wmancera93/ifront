@@ -1,0 +1,56 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-table"></i>
+          Permisos de usuarios
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12 widget bg-white">
+      <div class="row">
+        <div class="col-12" style="min-height: 370px;">
+          <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered table-hover">
+              <thead>
+                <tr *ngIf="title != ''">
+                  <th class="text-center" [attr.colspan]="keys.length"> {{title}} </th>
+                </tr>
+                <tr>
+                  <th class="text-center" *ngFor="let label of labels">
+                    <div style="width: 100%">
+                      <div class="name-table">
+                        {{label.value}}
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of recordsPrint">
+                  <td *ngFor="let key of keys">
+                    <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                      {{record[key]}}
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
+                      {{record[key]}}
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
+                      {{record[key] | currency}}
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
+                      {{record[key]}}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

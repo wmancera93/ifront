@@ -24,7 +24,8 @@ import { EmployeeInfoComponent } from './common/employee/employee-info/employee-
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DataTableComponent } from './common/data-table/data-table.component';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component'; 
+import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
+import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component'; 
 
 @NgModule({
   imports: [
@@ -51,7 +52,8 @@ import { AutoCompleteComponent } from './common/auto-complete/auto-complete.comp
     ProgressPrimaryComponent,
     EmployeeInfoComponent,
     DataTableComponent,
-    AutoCompleteComponent
+    AutoCompleteComponent,
+    PrintDataTableComponent
   ],
   exports: [
     HeaderComponent,
@@ -68,7 +70,8 @@ import { AutoCompleteComponent } from './common/auto-complete/auto-complete.comp
     EventsEmployeesComponent,
     ProgressPrimaryComponent,
     EmployeeInfoComponent,
-    DataTableComponent
+    DataTableComponent,
+    PrintDataTableComponent
   ],
   providers: [
     // ToasterService

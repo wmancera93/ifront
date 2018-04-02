@@ -110,6 +110,23 @@
           </ul>
         </div>
       </li>
+      <li id="liReportsRH">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#reportsRH" (click)="clickOptionMenu('liReportsRH','toggle-reportsRH', 'reportsRH')">
+          <i class="fa fa-table"></i>
+          <span class="nav-label">Reportes RH</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="reportsRH" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aReportsQueries" routerLink="/ihr/reports_requests" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aReportsQueries', 'reportsRH')">Reporte de solicitudes</a>
+            </li>
+            <li class="bg-li">
+              <a id="aUsersPermisions" routerLink="/ihr/users_permisions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aUsersPermisions', 'reportsRH')">Permisos de usuarios</a>
+            </li>
+          </ul>
+        </div>
+      </li>      
       <li id="liBillboard">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#billboard" (click)="clickOptionMenu('liBillboard','toggle-Billboard', 'billboard')">
           <i class="fa fa-bullhorn"></i>

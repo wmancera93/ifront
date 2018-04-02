@@ -1,4 +1,4 @@
-<div class="row">
+<div id="data_table" class="row">
   <div class="col-12">
     <div class="row justify-content-between" *ngIf="show">
       <div class="col-xl-3 col-12">
@@ -21,26 +21,26 @@
         </div>
       </div>
       <div class="col-xl-2 col-md-3 col-6 top-containter">
-        <div class="btn btn-block btn-outline-success cursor-general">
+        <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           Excel
         </div>
       </div>
       <div class="col-xl-2 col-md-3 col-6 top-containter">
-        <div class="btn btn-block btn-outline-secondary cursor-general">
+        <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           CSV
         </div>
       </div>
       <div class="col-xl-2 col-md-3 col-6 top-containter">
-        <div class="btn btn-block btn-outline-warning cursor-general">
+        <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
           <i class="fa fa-print" aria-hidden="true"></i>
           Print
         </div>
       </div>
     </div>
     <div class="row justify-content-center top-containter" *ngIf="!show">
-      <div class="col-8 text-center" style="min-height: 370px;">
+      <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
         <div class="alert alert-warning" role="alert">
           No hay reportes de&nbsp;
           <strong>{{title}}</strong>&nbsp;para el empleado
@@ -83,7 +83,7 @@
                     {{record[key]}}
                   </div>
                   <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
-                    {{record[key]}}
+                     {{record[key]}}
                   </div>
                   <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
                     {{record[key] | currency}}
@@ -106,3 +106,5 @@
     </div>
   </div>
 </div>
+
+<app-print-data-table></app-print-data-table>

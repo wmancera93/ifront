@@ -39,9 +39,8 @@ import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-en
 import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
 import { SeverancesComponent } from './queries/severances/severances.component';
 import { AniversaryComponent } from './queries/aniversary/aniversary.component';
-
-
-
+import { RequestsComponent } from './reports-rh/requests/requests.component';
+import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 
 @NgModule({
   imports: [
@@ -78,7 +77,9 @@ import { AniversaryComponent } from './queries/aniversary/aniversary.component';
     VacationEnjoyedComponent,
     VacationBalanceComponent,
     SeverancesComponent,
-    AniversaryComponent
+    AniversaryComponent,
+    RequestsComponent,
+    PermisionsUsersComponent
   ],
   providers:[
     Angular2TokenService

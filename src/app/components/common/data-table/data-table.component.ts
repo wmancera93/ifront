@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { element } from 'protractor';
 import { Enterprise } from '../../../models/general/enterprise';
+import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
+import { ExcelService } from '../../../services/common/excel/excel.service';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -32,7 +34,7 @@ export class DataTableComponent implements OnInit {
 
   public recordsStatic: any[] = [];
 
-  constructor() { }
+  constructor(public printDataTableService: PrintDataTableService, public excelService: ExcelService) { }
 
   ngOnInit() {
     this.records.subscribe((data) => {
@@ -111,6 +113,20 @@ export class DataTableComponent implements OnInit {
     });
 
     doc.save(title + '.pdf')
+  }
+
+  excelExport() {
+    this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
+  }
+
+  csvExport() {
+    this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.csv');
+  }
+
+  printTable() {
+    let objectTable: any[] = [];
+    objectTable.push({title: this.title, labels: this.labelsCell, cells: this.recordsPrint})
+    this.printDataTableService.setObjectForPrint(objectTable);
   }
 
   sortable(label: any) {

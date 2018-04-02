@@ -16,6 +16,9 @@ import {MyTeamInfoService} from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
 import { QueriesService } from './queries/queries.service';
+import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
+import { ExcelService } from './common/excel/excel.service';
+import { ReportsHrService } from './reports-rh/reports-hr.service';
 
 @NgModule({
   imports: [
@@ -34,7 +37,10 @@ import { QueriesService } from './queries/queries.service';
     MyTeamInfoService,
     MyTeamReportService,
     HierarchicalChartService,
-    QueriesService
+    QueriesService,
+    PrintDataTableService,
+    ExcelService,
+    ReportsHrService
   ]
 })
 export class ServicesModule { }
