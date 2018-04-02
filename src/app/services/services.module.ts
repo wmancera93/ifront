@@ -18,6 +18,7 @@ import { HierarchicalChartService } from './hierarchical-chart/hierarchical-char
 import { QueriesService } from './queries/queries.service';
 import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from './common/excel/excel.service';
+import { ReportsHrService } from './reports-rh/reports-hr.service';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { ExcelService } from './common/excel/excel.service';
     HierarchicalChartService,
     QueriesService,
     PrintDataTableService,
-    ExcelService
+    ExcelService,
+    ReportsHrService
   ]
 })
 export class ServicesModule { }

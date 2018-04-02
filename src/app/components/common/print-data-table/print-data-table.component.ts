@@ -15,11 +15,10 @@ export class PrintDataTableComponent implements OnInit {
 
   constructor(public printDataTableService: PrintDataTableService) {
     this.printDataTableService.getObjectForPrint().subscribe(data => {
-      debugger
       this.title = data[0].title;
       this.labelsCell = data[0].labels;
       this.recordsPrint = data[0].cells;
-      
+
       this.keys = Object.keys(this.labelsCell);
       this.keys.forEach((element) => {
         let label = data[0].labels[element]
@@ -35,14 +34,14 @@ export class PrintDataTableComponent implements OnInit {
         document.getElementById("data_table").style.display = 'block';
         document.getElementById("printGeneral").removeAttribute('style');
         document.getElementById("printGeneral").style.display = 'none';
-      }, 200);
+      }, 500);
       setTimeout(() => {
         this.title = '';
         this.keys = [];
         this.labels = [];
         this.recordsPrint = [];
         this.labelsCell = [];
-      }, 300);
+      }, 600);
     })
   }
 
