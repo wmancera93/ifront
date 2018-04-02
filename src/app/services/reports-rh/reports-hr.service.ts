@@ -14,7 +14,7 @@ export class ReportsHrService {
   }
 
   getReportEmployeeRolesByStatus(status: string) {
-    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/show_employee_roles/' + status)
+    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/employee_roles/' + status)
       .map((data: Observable<any>) => data);
   }
 }

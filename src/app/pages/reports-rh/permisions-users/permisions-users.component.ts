@@ -22,7 +22,8 @@ export class PermisionsUsersComponent implements OnInit {
     this.reportsHrService.getReportEmployeeRoles()
       .subscribe((data: any) => {
         if(data.success){
-          this.permisionsUsers = data.data;
+          console.log(data.data);
+          this.permisionsUsers = data.data[0];
           
           this.title = this.permisionsUsers.title_table;
           this.labelsCell = this.permisionsUsers.labels[0];
