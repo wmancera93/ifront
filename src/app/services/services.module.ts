@@ -19,6 +19,7 @@ import { QueriesService } from './queries/queries.service';
 import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from './common/excel/excel.service';
 import { ReportsHrService } from './reports-rh/reports-hr.service';
+import { AutoServicesService} from './auto-services/auto-services.service'
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { ReportsHrService } from './reports-rh/reports-hr.service';
     QueriesService,
     PrintDataTableService,
     ExcelService,
-    ReportsHrService
+    ReportsHrService,
+    AutoServicesService
   ]
 })
 export class ServicesModule { }
