@@ -89,9 +89,9 @@ export class HierarchicalChartComponent implements OnInit {
       this.pernrUser = this.dataUser.employee.pernr;
     }
   }
-public aa: any = 0;
+  public pageValue: any = 0;
   downLevelTeam(employeeObject: Work_team) {
-    this.aa = this.page;
+    this.pageValue = this.page;
     this.page = 1;    
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
@@ -102,7 +102,7 @@ public aa: any = 0;
 
   upLevelTeam() {
     this.id_empleado = this.topEmployee.pernr;
-    this.page = this.aa == 0 ? this.page : this.aa;
+    this.page = this.pageValue == 0 ? this.page : this.pageValue;
     this.getHierarchical(this.id_empleado);
     this.flagActivatethirdLevel = false;
     this.activeArrowUp = false;

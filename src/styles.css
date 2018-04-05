@@ -964,6 +964,23 @@ cursor: pointer;
     text-align:right;  
 }  
 /*------*/
+
+/* AutoServices */
+.tabDate {
+    color: white;
+    background-color: var(--btn-primary-hover);
+    text-align: center;    
+    padding: 5px 10px;
+    margin: 5px;
+    display: inline-block;
+  }
+  .tabDate:hover{
+    background-color: #919191;
+  }
+
+
+
+/*------------------------*/
 /*Menu Navigate*/
 .menu-img-user {
     width: 100px;
@@ -1252,10 +1269,10 @@ border-bottom: 1px solid  #dddd;
 }
 
   .widget-height-notification{
-    height: 210px !important;
+    height: 265px !important;
+    margin-bottom: 10px;
   }
-  
-
+ 
   .widget.style1 h2 {
     font-size: 30px;
   }
@@ -1362,6 +1379,28 @@ border-bottom: 1px solid  #dddd;
 
 
   /*-------------------------*/
+
+  /*Frames */
+  .frameFullSize{
+      width:100%;
+      height: 1000px;
+  }
+
+  .wrapper{
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    padding-top: 25px;
+    height: 0;
+  }
+
+  .wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+  /*------*/
 
   /* BACKGROUNDS */
  
@@ -2146,7 +2185,7 @@ a.close-canvas-menu:hover {
     }
 
     .widget-height-notification {
-        height: 232px !important;
+        height: 290px !important;
     }
     .errorImg
 {
@@ -3071,6 +3110,16 @@ a.close-canvas-menu:hover {
         margin-top:50%;
         position: absolute;
         margin-left: -10px;
+    }
+    .embedContainer{
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    }
+    .frameFullSize{
+        width:100%;
+        height: 630px;
     }
 }
 

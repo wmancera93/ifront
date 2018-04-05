@@ -22,7 +22,10 @@ export class EmployeesComponent implements OnInit {
   @Output() objectNewspaper: EventEmitter<Newspaper[]> = new EventEmitter();
   @Output() objectBirthDay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectAnniversay: EventEmitter<EventsEmployess[]> = new EventEmitter();
-  @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();  
+  @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter(); 
+ // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
+  public layoffsChartType: EventEmitter<string> = new EventEmitter(); 
+  
  
 
 
@@ -63,45 +66,20 @@ export class EmployeesComponent implements OnInit {
         this.objectCalendar.emit(data.data)
       });      
 
+    this.dashboardEmployeeService.getSeverancesData() 
+    .subscribe((data: any) => {
+       this.objectMyLayoffs.emit({graph_type: data.data.graph_type,properties: data.data.severances });       
+     this.objectMyInterestsLayoffs.emit( {graph_type: data.data.graph_type,properties: data.data.severances_interests});   
+      
 
-    const myLayoffs : Estadistics[]= [{title:'Cesantias', number:15, comment: 'Ganancias', canvasType:'doughnut',
-     background:'#FFFF', color:'red',doughnutChartLabels: ['Enero', 'Febrero', 'Marzo'], 
-     doughnutChartData:[350, 450, 100], doughnutChartColors:["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"]
-      }];
-  
+    });   
     
-
-    const myInterestsLayoffs: Estadistics[] = [
-      {title:'Deducciones', number:5, comment: 'Ganancias', canvasType:'bar',
-     background:'#FFFF', color:'red',barChartLabels:['2006', '2007', '2008', '2009', '2010', '2011', '2012'], 
-     barChartData:{data:[65, 59, 80, 81, 56, 55, 40],label:'Serie 1'}, barChartColors:{backgroundColor:["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"]}
-      }
-    ];
-   
-
-    const income: Estadistics[] = [
-      {title:'Income', number:40, comment: 'Ganancias', canvasType:'doughnut',
-     background:'#FFFF', color:'red',doughnutChartLabels: ['Enero', 'Febrero', 'Marzo'],
-     doughnutChartData:[350, 450, 100], doughnutChartColors:["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"]
-      }
-    ];
-   
-
-    const deductions: Estadistics[] = [
-      {title:'Interes Cesantias', number:60, comment: 'Ganancias', canvasType:'bar',
-     background:'#FFFF', color:'red',barChartLabels:['2006', '2007', '2008', '2009', '2010', '2011', '2012'], 
-     barChartData:{data:[ 81, 56, 55, 40,65, 59, 80],label:'Serie 1'}, barChartColors:{backgroundColor:["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"]}
-      }
-    ];
-    
-
-
-    setTimeout(() => {
-      this.objectMyLayoffs.emit(myLayoffs[0]);
-      this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
-      this.objectIncome.emit(income[0]);
-      this.objectDeductions.emit(deductions[0]);
-    },200)     
+    // setTimeout(() => {
+    //   this.objectMyLayoffs.emit(myLayoffs[0]);
+    //   this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
+    //   this.objectIncome.emit(income[0]);
+    //   this.objectDeductions.emit(deductions[0]);
+    // },200)     
 
     this.dashboardEmployeeService.getNewspaper()
       .subscribe((data: any) => {

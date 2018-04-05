@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+import 'chart.piecelabel.js';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
 import { FormsModule } from '@angular/forms';
