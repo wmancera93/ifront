@@ -3,6 +3,7 @@ import { element } from 'protractor';
 import { Enterprise } from '../../../models/general/enterprise';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
+import { Router, NavigationEnd } from '@angular/router';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -34,7 +35,12 @@ export class DataTableComponent implements OnInit {
 
   public recordsStatic: any[] = [];
 
-  constructor(public printDataTableService: PrintDataTableService, public excelService: ExcelService) { }
+  public objectTable: any[] = [];
+
+  constructor(public printDataTableService: PrintDataTableService,
+    public excelService: ExcelService,
+    public router: Router) {   
+  }
 
   ngOnInit() {
     this.records.subscribe((data) => {
@@ -124,9 +130,9 @@ export class DataTableComponent implements OnInit {
   }
 
   printTable() {
-    let objectTable: any[] = [];
-    objectTable.push({title: this.title, labels: this.labelsCell, cells: this.recordsPrint})
-    this.printDataTableService.setObjectForPrint(objectTable);
+    this.objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint })
+    this.printDataTableService.setObjectForPrint(this.objectTable);
+    this.objectTable = [];
   }
 
   sortable(label: any) {

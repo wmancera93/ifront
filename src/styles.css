@@ -74,6 +74,10 @@
     font-size: 14px !important;
 }
 
+.top-containter {
+    padding-bottom: 10px ;
+}
+
 .top-general-p {
     margin-top: 10px;
 }
@@ -179,6 +183,13 @@ button, input, optgroup, select, textarea {
 .btn-primary {
     background-color: var(--btn-primary) !important;
     border-color: var(--btn-primary) !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+}
+
+.btn-primary-second {
+    background-color: var(--btn-primary-hover) !important;
+    border-color: var(--btn-primary-hover) !important;
     color: #FFFFFF !important;
     cursor: pointer;
 }
@@ -1164,6 +1175,37 @@ border-bottom: 1px solid  #dddd;
     background-color: #919191;
   }
 
+  /* FILTERS REPORTS */
+.filters-reports {
+    border-radius: 2px;
+    padding: 14px 20px; 
+    transition:all .5s ease-in-out;    
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);   
+    background-color: #eee;
+    color: gray
+}
+.filters-reports:hover {
+    color:#ffffff;
+    background-color: var(--btn-primary);
+}
+
+.filters-reports-active {
+    color:#ffffff !important;
+    border-radius: 2px;
+    padding: 14px 20px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);    
+    transition:all .5s ease-in-out;
+    color:var(--btn-primary-hover);
+    background-color: var(--btn-primary);
+    font-size: 15px
+}
+
+.filters-reports:active {
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+
 /* WIDGETS */
 .widget {
     border-radius: 2px;
@@ -2011,6 +2053,10 @@ a.close-canvas-menu:hover {
 .ngx-pagination a:hover, .ngx-pagination button:hover {
     background: transparent !important;
     text-decoration: none !important;
+}
+
+.font-size-07 {
+    font-size: 7px;
 }
 
 /* .pagination a:hover:not(.active) {background-color: #ddd;} */

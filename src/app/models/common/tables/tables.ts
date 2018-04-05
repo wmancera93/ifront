@@ -1,4 +1,4 @@
-export interface Tables {
+export interface TablesPermisions {
     title: string,
     title_table: string,
     labels: any[],

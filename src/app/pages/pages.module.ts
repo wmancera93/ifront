@@ -41,6 +41,7 @@ import { SeverancesComponent } from './queries/severances/severances.component';
 import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisio
     PagesRoutingModule,
     ComponentsModule,    
     FormsModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    NgxPaginationModule,
   ],
   declarations: [
     LoginComponent,

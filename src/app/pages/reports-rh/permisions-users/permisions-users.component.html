@@ -9,8 +9,187 @@
       </div>
     </div>
   </div>
-  <div class="row-hr-container justify-content-center">
+  <div id="data_table"  class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
+      <div class="row">
+        <div class="col-12 text-left top-containter">
+          <b>
+            Filtros de consulta
+          </b>
+        </div>
+      </div>
+      <div class="row" *ngIf="permisionsUsers[0]">
+        <div class="col-4 top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general filters-reports-active" (click)="filter('with_permits')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-check-circle text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Con Permisos
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_with_permits}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general" (click)="filter('new_cont')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-bullhorn text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Crear Contenido
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_new_cont}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general" (click)="filter('see_organ')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-sitemap text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Ver Organigrama
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_see_organ}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general" (click)="filter('without_permits ')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-ban text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Sin Permisos
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_without_permits}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general" (click)="filter('see_rpgen')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-users text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Reporte Gerencial
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_see_rpgen}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-4  top-containter">
+          <div class="row">
+            <div class="col-12">
+              <div class="filters-reports cursor-general" (click)="filter('is_admin')">
+                <div class="row align-items-center">
+                  <div class="col-3">
+                    <p class="btn btn-primary-second fa fa-user-circle text-white" type="button"></p>
+                  </div>
+                  <div class="col-6">
+                    Administrador
+                  </div>
+                  <div class="col-3">
+                    <b>
+                      {{permisionsUsers[0].total_is_admin}}
+                    </b>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row top-general-p justify-content-center" *ngIf="show">
+        <div class="col-xl-4 col-12">
+          <div class="form-group row">
+            <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+            <div class="col-xl-7 col-md-3 col-lg-3 col-6">
+              <select class="form-control" [(ngModel)]="size_table">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3 col-6 top-containter">
+          <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+            PDF
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3 col-6 top-containter">
+          <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+            Excel
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3 col-6 top-containter">
+          <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+            CSV
+          </div>
+        </div>
+        <div class="col-xl-2 col-md-3 col-6 top-containter">
+          <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
+            <i class="fa fa-print" aria-hidden="true"></i>
+            Print
+          </div>
+        </div>
+        <div class="col-xl-4 col-12">
+          <div class="form-group">
+            <input class="form-control" placeholder="Buscar por Nombre y Apellido...">
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-12" style="min-height: 370px;">
           <div class="table-responsive">
@@ -30,13 +209,25 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let record of recordsPrint">
+                <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
                   <td *ngFor="let key of keys">
                     <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
                       {{record[key]}}
                     </div>
-                    <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
-                      {{record[key]}}
+                    <div *ngIf="labelsCell[key].type == 'string'">
+                      <div style="text-align:center" *ngIf="record[key] == 'true'">
+                        <i class="fa fa-lg fa-check-circle text-primary">
+                          <span class="font-size-07"> SI</span>
+                        </i>
+                      </div>
+                      <div style="text-align:center" *ngIf="record[key] == 'false'">
+                        <i class="fa  fa-lg fa-ban text-danger">
+                          <span class="font-size-07"> No</span>
+                        </i>
+                      </div>
+                      <div style="text-align:left" *ngIf="record[key] != 'false' && record[key] != 'true'">
+                        {{record[key]}}
+                      </div>
                     </div>
                     <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
                       {{record[key] | currency}}
@@ -51,6 +242,13 @@
           </div>
         </div>
       </div>
+      <div class="row" *ngIf="show">
+        <div class="col-12">
+          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
+            nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+      </div>
     </div>
   </div>
+  <app-print-data-table></app-print-data-table>
 </div>
