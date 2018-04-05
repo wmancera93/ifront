@@ -122,6 +122,7 @@ export class ContactsListComponent implements OnInit {
           //  if (this.contacts.length === 0 || this.contacts.length < 10) {
           this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
             .subscribe((result: any) => {
+              console.log(result.data)
               if (result.success === true) {
                 numberContacts += result.data.length;
                 for (let i = 0; i < result.data.length; i++) {
@@ -173,8 +174,10 @@ export class ContactsListComponent implements OnInit {
       (data: any) => {
         if (data.success === true) {
           this.infoEmployee = data.data;
-          this.infoEmployee.modal = 'contactList';
-          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+          if(data.data.length >0){
+            this.infoEmployee.modal = 'contactList';
+            this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+          }
         }
       }
     );

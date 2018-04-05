@@ -2,11 +2,10 @@
   <div *ngIf="objectWidget[0]">
        <div class="row">
       <div class="col-6" *ngIf="activeDoughnutChartType">
-        <div style="display: block">
-          <canvas baseChart [data]="doughnutChartData" [legend]="showChartLegend" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
-            [chartType]="doughnutChartType" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+        <div style="display: block; width:200px; height:96px;">
+          <canvas baseChart id="doughnutChartHov" [data]="doughnutChartData" [legend]="showChartLegend" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
+            [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
-
       </div>
       <!-- <div class="col-6" *ngIf="activeBarChartType">
         <div style="display: block">

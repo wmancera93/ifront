@@ -1227,10 +1227,10 @@ border-bottom: 1px solid  #dddd;
 }
 
   .widget-height-notification{
-    height: 210px !important;
+    height: 265px !important;
+    margin-bottom: 10px;
   }
-  
-
+ 
   .widget.style1 h2 {
     font-size: 30px;
   }
@@ -2139,7 +2139,7 @@ a.close-canvas-menu:hover {
     }
 
     .widget-height-notification {
-        height: 232px !important;
+        height: 290px !important;
     }
     .errorImg
 {
