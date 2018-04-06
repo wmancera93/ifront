@@ -52,18 +52,15 @@ export class HierarchicalChartComponent implements OnInit {
     public http: HttpClient,
     private domSanitizer: DomSanitizer) { }
 
-  ngOnInit() {
-    this.id_empleado = 696;
-    this.getHierarchical(this.id_empleado);
+  ngOnInit() {    
+    this.getHierarchical(null);
   }
 
-  getHierarchical(pernr_empleado: number) {
-
+  getHierarchical(pernr_empleado: number) {    
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
-      this.beforeTopEmployee = this.topEmployee;      
+      this.beforeTopEmployee = this.topEmployee; 
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
-        // this.pagePosition = this.page + 1;
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
       
@@ -78,8 +75,8 @@ export class HierarchicalChartComponent implements OnInit {
       }
       else {
         this.activeArrowRight = false;
-        this.activeArrowUp = true;
       }
+    
     })
   }
 
@@ -102,7 +99,7 @@ export class HierarchicalChartComponent implements OnInit {
 
   upLevelTeam() {
     this.id_empleado = this.topEmployee.pernr;
-    this.page = this.pageValue == 0 ? this.page : this.pageValue;
+    this.page = this.pageValue == 0 ? this.page : this.pageValue;    
     this.getHierarchical(this.id_empleado);
     this.flagActivatethirdLevel = false;
     this.activeArrowUp = false;
@@ -205,7 +202,6 @@ export class HierarchicalChartComponent implements OnInit {
     this.employeeService.getEmployeeById(this.id_shared).subscribe(
       (data: any) => {
         if (data.success === true) {
-          // this.infoEmployee = data.data.json().result;
           this.infoEmployee = data.data;
           this.infoEmployee.modal = this.name;
           this.employeeSharedService.setInfoEmployee(this.infoEmployee);
