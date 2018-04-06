@@ -69,10 +69,15 @@ export class EmployeesComponent implements OnInit {
     this.dashboardEmployeeService.getSeverancesData() 
     .subscribe((data: any) => {
        this.objectMyLayoffs.emit({graph_type: data.data.graph_type,properties: data.data.severances });       
-     this.objectMyInterestsLayoffs.emit( {graph_type: data.data.graph_type,properties: data.data.severances_interests});   
-      
+     this.objectMyInterestsLayoffs.emit( {graph_type: data.data.graph_type,properties: data.data.severances_interests});       
 
     });   
+
+    this.dashboardEmployeeService.getIncomesData()
+    .subscribe((data:any)=>{
+      this.objectIncome.emit({graph_type: data.data.graph_type,properties:data.data.total_incomes});
+      this.objectDeductions.emit({graph_type:data.data.graph_type, properties:data.data.total_deductions}); 
+    })
     
     // setTimeout(() => {
     //   this.objectMyLayoffs.emit(myLayoffs[0]);

@@ -27,7 +27,7 @@
                   <div class="workTeam-search animate-bounce  bounceInLeft">
                     <form name="searchAutoComplete">
                       <p>
-                        <input id="auto_c" type="text" name="text1"  [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
+                        <input id="auto_c" type="text" name="text1" [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
                       </p>
                     </form>
                   </div>
@@ -39,7 +39,7 @@
                 <div class="col-xl-6 col-12  align-items-center" style="text-align:left;">
                   <div>
                     <i class="fa fa-square" style="color:red;"> </i> Superior &nbsp;
-                    <i class="fa fa-square" style="color:blue;"></i> Yo &nbsp;
+                    <i class="fa fa-square" style="color:blue;"></i> Mi posición &nbsp;
                     <i class="fa fa-square" style="color:green;"></i> Subordinados
                   </div>
                 </div>
@@ -70,41 +70,45 @@
               <div class="text-shadow fontSize-chart" style="color:#ffff;">
                 <strong>{{topEmployee.short_name}}</strong>
               </div>
-              {{topEmployee.email}}
+              {{topEmployee.email|slice: 0:20}}
+              <span [hidden]="topEmployee.email > 30">...</span>
+
             </div>
           </div>
         </div>
       </div>
       <div class="row justify-content-center" *ngIf="topEmployee">
-        <div class="col-10 col-xl-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee.work_team" (click)='showInfoEmployee(employee)'>
+        <div class="col-10 col-xl-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee.work_team" >
           <div class="row">
-            <div class="col-12 secondLevel">
-            </div>
-          </div>
-          <div class="row align-items-center">
-            <div class="col-4" style="padding-top: 10px;">
-              <div style="width:60px; height:60px;">
-                <img src="{{employee.image.url}}" class="roundPhotoChart">
+            <div class="col-12" (click)='showInfoEmployee(employee)'>
+              <div class="row">
+                <div class="col-12 secondLevel">
+                </div>
+              </div>
+              <div class="row align-items-center">
+                <div class="col-4" style="padding-top: 10px;">
+                  <div style="width:60px; height:60px;">
+                    <img src="{{employee.image.url}}" class="roundPhotoChart">
+                  </div>
+                </div>
+                <div class="col-8 align-items-center">
+                  {{employee.posicion|slice: 0:20}}
+                  <span [hidden]="employee.posicion > 30">...</span>
+                </div>
+              </div>
+              <div class="row">
+                <div class=" col-12 divisionTop">
+                  <div class="text-shadow fontSize-chart" style="color:#ffff;">
+                    <strong>{{employee.short_name}}</strong>
+                  </div>
+                  {{employee.email|slice: 0:20}}
+                  <span [hidden]="employee.email > 30">...</span>
+                </div>
               </div>
             </div>
-            <div class="col-8 align-items-center">
-              {{employee.posicion|slice: 0:20}}
-              <span [hidden]="employee.posicion > 30">...</span>
-
-            </div>
           </div>
-          <div class="row">
-            <div class=" col-12 divisionTop">
-              <div class="text-shadow fontSize-chart" style="color:#ffff;">
-                <strong>{{employee.short_name}}</strong>
-              </div>
-              {{employee.email|slice: 0:20}}
-              <span [hidden]="employee.email > 30">...</span>
-            </div>
-          </div>
-
-          <div class="row justify-content-center" *ngIf="employee.total_work_team && flagActivatethirdLevel == true">
-            <div class="navigateButton animated infinite flash font-icon" (click)="downLevelTeam(employee)">
+          <div class="row justify-content-center" *ngIf="activeArrowDown && employee.relationship == 111">
+            <div class="navigateButton animated infinite flash font-icon m-t-h"  (click)="downLevelTeam(employee)">
               <i class="fa fa-chevron-down " aria-hidden="true"></i>
             </div>
           </div>
@@ -150,7 +154,9 @@
                     <div class="text-shadow fontSize-chart" style="color:#ffff;">
                       <strong>{{employee.short_name}}</strong>
                     </div>
-                    {{employee.email}}
+                    {{employee.email |slice: 0:20}}
+                    <span [hidden]="employee.email > 30">...</span>
+
                   </div>
                 </div>
               </div>

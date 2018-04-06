@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Estadistics, Colors, DataEstadistics, Properties } from '../../../../models/common/widgets/widgets';
 import { Color } from 'ng2-charts';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-estadistics',
@@ -44,7 +45,7 @@ export class EstadisticsComponent implements OnInit {
       this.objectWidget[0] = data.properties;
       this.typeGraph = data.graph_type;
       let newChartData: Array<any> = [];
-      // newChartData.push(this.objectWidget[0].barChartData);
+     //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
         //Doughnut 
@@ -58,7 +59,8 @@ export class EstadisticsComponent implements OnInit {
           pieceLabel: {
            
             render: function (args) {
-              return '$' + args.value;
+             return '$' + args.value;
+           //  return args.label;
             },
             fontSize: 9,
             fontColor: '#000',
@@ -68,21 +70,36 @@ export class EstadisticsComponent implements OnInit {
         };
 
       } else
-        if (this.chartType === 'bar') {
+        if (this.typeGraph === 'Bar') {          
           // Bar Chart
-          // this.barChartLabels = this.objectWidget[0].barChartLabels;
-          this.barChartData = newChartData;
-          this.barChartColors = [{ backgroundColor: ["#00C660", "#67EDA8", "#B4F0D1 ", "#a4add3"] }];
-          // this.barChartColors = this.objectWidget[0].barChartColors;  
+          this.activeBarChartType = true;
+          this.barChartType = 'bar';
+          this.barChartLabels = this.objectWidget[0].data.names;
+          this.barChartData = [123000,982123,865345];
+          //this.barChartData = this.objectWidget[0].data.values;
+          this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }]; 
+          this.barChartOptions = {
+            responsive: true,
+            scales: {
+              xAxes: [{
+                display: false,
+                  stacked: true
+              }],
+              yAxes: [{
+                display: false,
+                  stacked: true
+              }]
+          }
+          }
 
 
         }
-      if (this.chartType === 'bar') {
+      if (this.chartType === 'Bar') {
 
         this.activeBarChartType = true;
         this.activeDoughnutChartType = false;
       }
-      if (this.chartType === 'doughnut') {
+      if (this.chartType === 'Doughnut') {
         this.activeDoughnutChartType = true;
         this.activeBarChartType = false;
       }

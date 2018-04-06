@@ -7,12 +7,12 @@
             [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
       </div>
-      <!-- <div class="col-6" *ngIf="activeBarChartType">
-        <div style="display: block">
-          <canvas baseChart  [chartType]="barChartType"  [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend"
+      <div class="col-6" *ngIf="activeBarChartType">
+        <div style="display: block;width:150px; height:96px;">
+          <canvas baseChart  [chartType]="barChartType"  [data]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend"
           (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
-      </div> -->
+      </div>
       <div class="col-6 text-right">
         <div class="row">
           <div class="col-12">
