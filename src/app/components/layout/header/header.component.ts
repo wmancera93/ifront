@@ -122,14 +122,10 @@ export class HeaderComponent implements OnInit {
    
   }
 
-  clickPartnersIconHide() {  
-    
+  clickPartnersIconHide() {      
       document.getElementById('contactList').classList.remove('show')     
       document.getElementById("contactList").className = 'hide';
-      this.showContactsList = true;
-    
-   
-      
+      this.showContactsList = true;     
   }
 
   clickHideMenuMobile() {

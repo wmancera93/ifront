@@ -82,6 +82,10 @@
     margin-top: 10px;
 }
 
+.border-botton-general {
+    border-bottom: 1px solid #e0e0e0
+}
+
 .heigth-content-general{
     min-height: calc(100vh - 20px);
     transition: all 1s ease !important;
@@ -205,6 +209,22 @@ button, input, optgroup, select, textarea {
 #toast-container > div {
     border-radius: 2px !important;
 }
+
+.icon-collapse {
+    color: var(--btn-primary-hover) !important;
+    border-radius: 50%;
+    border: 2px solid var(--btn-primary-hover) !important;
+    margin-left: 5px;
+}
+
+.icon-collapse:hover {
+    background-color: var(--btn-primary-hover) !important;
+    color: #FFFFFF !important;
+    border-radius: 50%;
+    border: 2px solid var(--btn-primary-hover) !important;
+    margin-left: 5px;
+}
+
 
 .btn-primary:hover, 
 .btn-primary:focus, 
