@@ -9,9 +9,270 @@
       </div>
     </div>
   </div>
-  <div class="row-hr-container justify-content-center">
+  <div id="data_table" class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
-       
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-2 col-lg-4 col-12 text-left">
+            <b>
+              Filtros de consulta
+            </b>
+            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(true)"></i>
+            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(false)"></i>
+          </div>
+        </div>
+      </div>
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
+        <div class="row" *ngIf="requests[0]">
+          <div class="col-lg-4 col-md-6 col-12 top-containter">
+            <div class="row">
+              <div class="col-12">
+                <div id="all" class="filters-reports cursor-general filters-reports-active" (click)="filter('all')">
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <p class="btn btn-primary-second fa fa-table text-white" type="button"></p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-6">
+                      Todos
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-3">
+                      <b>
+                        {{requests[0].total_requests}}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12  top-containter">
+            <div class="row">
+              <div class="col-12">
+                <div id="process" class="filters-reports cursor-general" (click)="filter('process')">
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <p class="btn btn-primary-second fa fa-cog text-white" type="button"></p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-6">
+                      En proceso
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-3">
+                      <b>
+                        {{requests[0].total_process}}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12 top-containter">
+            <div class="row">
+              <div class="col-12">
+                <div id="cancel" class="filters-reports cursor-general" (click)="filter('cancel')">
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <p class="btn btn-primary-second fa fa-ban text-white" type="button"></p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-6">
+                      Cancelado
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-3">
+                      <b>
+                        {{requests[0].total_cancel}}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12  top-containter">
+            <div class="row">
+              <div class="col-12">
+                <div id="pending" class="filters-reports cursor-general" (click)="filter('pending')">
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <p class="btn btn-primary-second fa fa-hourglass-start text-white" type="button"></p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-6">
+                      Pendiente
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-3">
+                      <b>
+                        {{requests[0].total_pending}}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12  top-containter">
+            <div class="row">
+              <div class="col-12">
+                <div id="aproved" class="filters-reports cursor-general" (click)="filter('aproved')">
+                  <div class="row align-items-center">
+                    <div class="col-3">
+                      <p class="btn btn-primary-second fa fa-check-circle text-white" type="button"></p>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-6">
+                      Aprobado
+                    </div>
+                    <div class="col-lg-3 col-md-2 col-3">
+                      <b>
+                        {{requests[0].total_aproved}}
+                      </b>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="border-botton-general">
+        <div class="row top-general-p" *ngIf="show">
+          <div class="col-xl-4 col-12 ">
+            <div class="form-group row">
+              <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+              <div class="col-xl-7 col-md-3 col-lg-3 col-6">
+                <select class="form-control" [(ngModel)]="size_table">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="20">20</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-3 col-6 top-containter">
+            <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
+              <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+              PDF
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-3 col-6 top-containter">
+            <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
+              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+              Excel
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-3 col-6 top-containter">
+            <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
+              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+              CSV
+            </div>
+          </div>
+          <div class="col-xl-2 col-md-3 col-6 top-containter">
+            <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
+              <i class="fa fa-print" aria-hidden="true"></i>
+              Print
+            </div>
+          </div>
+          <div class="col-xl-4 col-12 top-containter align-self-center text-left">
+            <b>
+              {{title}}
+            </b>
+          </div>
+          <div class="col-xl-4 col-12 top-containter align-self-center text-rigth">
+            <input [(ngModel)]="value_search" class="form-control" placeholder="Buscar por Nombre y Apellido..." (keyup)="searcheByName()">
+          </div>
+        </div>
+      </div>
+      <div class="row top-general-p">
+        <div class="col-12" style="min-height: 370px;">
+          <div class="table-responsive">
+            <table class="table table-sm table-striped table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-center" *ngFor="let label of labels">
+                    <div style="width: 100%">
+                      <div class="name-table">
+                        {{label.value}}
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
+                  <td *ngFor="let key of keys">
+                    <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                      {{record[key]}}
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'string'">
+                      <div style="text-align:center" *ngIf="record[key] == 'true'">
+                        <i class="fa fa-lg fa-check-circle text-primary">
+                          <span class="font-size-07"> SI</span>
+                        </i>
+                      </div>
+                      <div style="text-align:center" *ngIf="record[key] == 'false'">
+                        <i class="fa  fa-lg fa-ban text-danger">
+                          <span class="font-size-07"> No</span>
+                        </i>
+                      </div>
+                      <div style="text-align:left; margin-top: 5px" *ngIf="record[key] == 'Pendiente'">
+                        <span class="badge badge badge-default" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
+                          {{record[key]}}
+                        </span>
+                      </div>
+                      <div style="text-align:left" *ngIf="record[key] == 'Aprobado'">
+                        <span class="badge badge-primary">
+                          {{record[key]}}
+                        </span>
+                      </div>
+                      <div style="text-align:left" *ngIf="record[key] == 'En proceso'">
+                        <span class="badge badge-success">
+                          {{record[key]}}
+                        </span>
+                      </div>
+                      <div style="text-align:left" *ngIf="record[key] == 'Cancelado'">
+                        <span class="badge badge-danger">
+                          {{record[key]}}
+                        </span>
+                      </div>
+                      <div style="text-align:left" *ngIf="record[key] != 'Pendiente'
+                      && record[key] != 'Aprobado'
+                      && record[key] != 'Cancelado'
+                      && record[key] != 'En proceso'">
+                        <div *ngIf="(record[key] | split:'-':'1') != ''">
+                          <p>
+                            <b>{{record[key] | split:'-':'1'}}</b>
+                          </p>
+                          <p>
+                            <b>#{{record[key] | split:'-':'0'}}</b>
+                          </p>
+                        </div>
+                        <div *ngIf="(record[key] | split:'-':'1') == ''">
+                          <p>
+                            {{record[key] | split:'-':'0'}}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
+                      {{record[key] | currency}}
+                    </div>
+                    <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
+                      {{record[key]}}
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="show">
+        <div class="col-12">
+          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
+            nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+        </div>
+      </div>
     </div>
   </div>
+  <app-print-data-table></app-print-data-table>
 </div>

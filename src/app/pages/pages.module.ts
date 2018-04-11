@@ -44,6 +44,7 @@ import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisio
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
 import { NewsComponent } from './billboard/news/news.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { NewsComponent } from './billboard/news/news.component';
     FormsModule,
     Ng2AutoCompleteModule,
     NgxPaginationModule,
+    PipesModule
   ],
   declarations: [
     LoginComponent,

@@ -5,15 +5,17 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Enterprise } from '../../../models/general/enterprise';
 
+
 declare var jsPDF: any;
 
 @Component({
   selector: 'app-permisions-users',
   templateUrl: './permisions-users.component.html',
-  styleUrls: ['./permisions-users.component.css']
+  styleUrls: ['./permisions-users.component.css'],
 })
 export class PermisionsUsersComponent implements OnInit {
   public permisionsUsers: TablesPermisions[] = [];
+  public recordsStatic: TablesPermisions[] = [];
   public title: string = '';
   public keys: any[] = [];
   public labels: any[] = [];
@@ -25,6 +27,11 @@ export class PermisionsUsersComponent implements OnInit {
   public p: number = 1;
   public size_table: number = 10;
   public show: boolean = true;
+
+  public filter_active: string = 'with_permits';
+  public value_search: string = '';
+
+  public is_collapse: boolean = false;
 
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,
@@ -38,6 +45,7 @@ export class PermisionsUsersComponent implements OnInit {
           this.title = this.permisionsUsers[0].title_table;
           this.labelsCell = this.permisionsUsers[0].labels[0];
           this.recordsPrint = this.permisionsUsers[0].data;
+          this.recordsStatic = this.recordsPrint;
           this.keys = Object.keys(this.labelsCell);
           this.keys.forEach((element) => {
             let label = this.permisionsUsers[0].labels[0][element];
@@ -56,20 +64,40 @@ export class PermisionsUsersComponent implements OnInit {
           this.title = '';
           this.labelsCell = [];
           this.recordsPrint = [];
+          this.recordsStatic = [];
           this.labels = [];
           this.columnsPdf = [];
           this.permisionsUsers = data.data;
           this.title = this.permisionsUsers[0].title_table;
           this.labelsCell = this.permisionsUsers[0].labels[0];
           this.recordsPrint = this.permisionsUsers[0].data;
+          this.recordsStatic = this.recordsPrint;
           this.keys = Object.keys(this.labelsCell);
           this.keys.forEach((element) => {
             let label = this.permisionsUsers[0].labels[0][element];
             this.labels.push({ value: label.value, type: label.type, label: element });
             this.columnsPdf.push({ title: label.value, dataKey: element });
           })
+          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+          document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
+          document.getElementById(parameter).className = 'filters-reports-active';
+          this.filter_active = parameter;
         };
       })
+  }
+
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
+  }
+
+  searcheByName() {
+    let parameter = "field_6";
+
+    if (this.value_search !== '') {
+      this.recordsPrint = this.recordsStatic.filter((prod: any) => prod[parameter].toString().toUpperCase().indexOf(this.value_search.toUpperCase()) >= 0);
+    } else {
+      this.recordsPrint = this.recordsStatic;
+    }
   }
 
   pdfExport() {
