@@ -24,7 +24,7 @@
           </div>
         </div>
       </div>
-      <div class="collapse show top-general-p border-botton-general" id="collapseExample">
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
         <div class="row" *ngIf="permisionsUsers[0]">
           <div class="col-lg-4 col-md-6 col-12 top-containter">
             <div class="row">
@@ -225,18 +225,30 @@
                       {{record[key]}}
                     </div>
                     <div *ngIf="labelsCell[key].type == 'string'">
-                      <div style="text-align:center" *ngIf="record[key] == 'true'">
+                      <div style="text-align:center" *ngIf="record[key] == 'true'" style="margin-top: 6px;">
                         <i class="fa fa-lg fa-check-circle text-primary">
                           <span class="font-size-07"> SI</span>
                         </i>
                       </div>
-                      <div style="text-align:center" *ngIf="record[key] == 'false'">
+                      <div style="text-align:center" *ngIf="record[key] == 'false'" style="margin-top: 6px;">
                         <i class="fa  fa-lg fa-ban text-danger">
                           <span class="font-size-07"> No</span>
                         </i>
                       </div>
                       <div style="text-align:left" *ngIf="record[key] != 'false' && record[key] != 'true'">
-                        {{record[key]}}
+                        <div *ngIf="(record[key] | split:'-':'1') != ''">
+                          <p>
+                            <b>{{record[key] | split:'-':'1'}}</b>
+                          </p>
+                          <p>
+                            <b>#{{record[key] | split:'-':'0'}}</b>
+                          </p>
+                        </div>
+                        <div *ngIf="(record[key] | split:'-':'1') == ''">
+                          <p>
+                            {{record[key] | split:'-':'0'}}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">

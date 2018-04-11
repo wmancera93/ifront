@@ -9,15 +9,11 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Router } from '@angular/router';
 import { Enterprise } from '../../../models/general/enterprise';
 
-
-
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-
 
 export class HeaderComponent implements OnInit {
   @Output() name: string = 'contactList';
@@ -88,11 +84,9 @@ export class HeaderComponent implements OnInit {
         document.getElementById('footer_general').style.display = 'none';
       }
     }
-
   }
 
   LogOut() {
-
     this.alertWarning = [{
       type: 'warning',
       title: 'Confirmación',
@@ -100,14 +94,12 @@ export class HeaderComponent implements OnInit {
       confirmation: true,
       typeConfirmation: 'logout'
     }];
-
-    this.alert.setAlert(this.alertWarning[0]);
-    
+    this.alert.setAlert(this.alertWarning[0]);    
   }
 
   clickPartnersIcon() {
     if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {     
-        this.clickHideMenuMobile()      
+        this.clickHideMenuMobile();      
     }
        
     if(document.getElementById("contactList").className === 'hide')

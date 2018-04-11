@@ -5,12 +5,13 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Enterprise } from '../../../models/general/enterprise';
 
+
 declare var jsPDF: any;
 
 @Component({
   selector: 'app-permisions-users',
   templateUrl: './permisions-users.component.html',
-  styleUrls: ['./permisions-users.component.css']
+  styleUrls: ['./permisions-users.component.css'],
 })
 export class PermisionsUsersComponent implements OnInit {
   public permisionsUsers: TablesPermisions[] = [];
@@ -30,7 +31,7 @@ export class PermisionsUsersComponent implements OnInit {
   public filter_active: string = 'with_permits';
   public value_search: string = '';
 
-  public is_collapse: boolean = true;
+  public is_collapse: boolean = false;
 
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,

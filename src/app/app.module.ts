@@ -19,7 +19,6 @@ import { A2tUiModule } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -35,7 +34,7 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule,
+    HttpModule
   ],
   providers: [
     

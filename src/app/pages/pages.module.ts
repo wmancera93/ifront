@@ -42,6 +42,7 @@ import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -51,6 +52,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FormsModule,
     Ng2AutoCompleteModule,
     NgxPaginationModule,
+    PipesModule
   ],
   declarations: [
     LoginComponent,
