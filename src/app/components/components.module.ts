@@ -25,7 +25,8 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DataTableComponent } from './common/data-table/data-table.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
-import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component'; 
+import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
+import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
 
 @NgModule({
   imports: [
@@ -53,7 +54,8 @@ import { PrintDataTableComponent } from './common/print-data-table/print-data-ta
     EmployeeInfoComponent,
     DataTableComponent,
     AutoCompleteComponent,
-    PrintDataTableComponent
+    PrintDataTableComponent,
+    NewArticleFormComponent
   ],
   exports: [
     HeaderComponent,
@@ -71,7 +73,8 @@ import { PrintDataTableComponent } from './common/print-data-table/print-data-ta
     ProgressPrimaryComponent,
     EmployeeInfoComponent,
     DataTableComponent,
-    PrintDataTableComponent
+    PrintDataTableComponent,
+    NewArticleFormComponent
   ],
   providers: [
     // ToasterService

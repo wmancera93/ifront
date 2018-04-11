@@ -42,6 +42,8 @@ import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
+import { NewsComponent } from './billboard/news/news.component';
 
 @NgModule({
   imports: [
@@ -81,7 +83,9 @@ import { NgxPaginationModule } from 'ngx-pagination';
     SeverancesComponent,
     AniversaryComponent,
     RequestsComponent,
-    PermisionsUsersComponent
+    PermisionsUsersComponent,
+    MyPublicationsComponent,
+    NewsComponent
   ],
   providers:[
     Angular2TokenService

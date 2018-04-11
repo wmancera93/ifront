@@ -30,6 +30,8 @@ import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-en
 import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
+import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
+import { NewsComponent } from './billboard/news/news.component';
 
 
 const routes: Routes = [
@@ -140,7 +142,19 @@ const routes: Routes = [
     {
         path: 'users_permisions',
         component: PermisionsUsersComponent,
+    },
+    {
+        
+        path: 'my_publications',
+        component: MyPublicationsComponent,
+    },
+    {
+        
+        path: 'news',
+        component: NewsComponent,
     }
+   
+
 ];
 
 @NgModule({

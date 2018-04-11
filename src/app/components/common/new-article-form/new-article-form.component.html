@@ -1,0 +1,37 @@
+<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;">
+</button>
+<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <h4 class="modal-title titleColor text-shadow">Formulario noticia</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <div class="row">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-3 text-center">
+                <label for="title">Título* :</label>
+              </div>
+              <div class="col-9">
+                <input type="text" id="title" name="title" style="width:100% !important;" class="input-border">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-3 text-center">
+                <label for="resume">Resumen* :</label>
+              </div>
+              <div class="col-9">
+                <input type="text" id="resume" name="resume" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
