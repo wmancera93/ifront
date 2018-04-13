@@ -4,7 +4,10 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from '../components/components.module';
 import { ServicesModule } from '../services/services.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -45,16 +48,21 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
 import { NewsComponent } from './billboard/news/news.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ComponentsModule,    
+    ComponentsModule,
     FormsModule,
     Ng2AutoCompleteModule,
     NgxPaginationModule,
-    PipesModule
+    PipesModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule,
+
   ],
   declarations: [
     LoginComponent,
@@ -87,9 +95,10 @@ import { PipesModule } from '../pipes/pipes.module';
     RequestsComponent,
     PermisionsUsersComponent,
     MyPublicationsComponent,
-    NewsComponent
+    NewsComponent,
+    RequestsRhComponent
   ],
-  providers:[
+  providers: [
     Angular2TokenService
   ]
 })

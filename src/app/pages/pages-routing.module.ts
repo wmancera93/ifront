@@ -32,6 +32,7 @@ import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisio
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
 import { NewsComponent } from './billboard/news/news.component';
+import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 
 
 const routes: Routes = [
@@ -144,17 +145,23 @@ const routes: Routes = [
         component: PermisionsUsersComponent,
     },
     {
-        
+
         path: 'my_publications',
         component: MyPublicationsComponent,
     },
     {
-        
+
         path: 'news',
         component: NewsComponent,
+    },
+    {
+        path: 'requests',
+        component: RequestsComponent
+    },
+    {
+        path: 'requests_rh',
+        component: RequestsRhComponent        
     }
-   
-
 ];
 
 @NgModule({
