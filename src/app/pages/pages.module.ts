@@ -46,6 +46,7 @@ import { MyPublicationsComponent } from './billboard/my-publications/my-publicat
 import { NewsComponent } from './billboard/news/news.component';
 import { PipesModule } from '../pipes/pipes.module';
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -54,7 +55,7 @@ import { PipesModule } from '../pipes/pipes.module';
     FormsModule,
     Ng2AutoCompleteModule,
     NgxPaginationModule,
-    PipesModule
+    PipesModule    
   ],
   declarations: [
     LoginComponent,

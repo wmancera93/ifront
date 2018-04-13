@@ -10,27 +10,66 @@
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-            <div class="row">
-              <div class="col-3 text-center">
-                <label for="title">Título* :</label>
+            <form #f='ngForm' (ngSubmit)="onSubmit(f.value)" enctype="multipart/form-data">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <label for="title">Título* :</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" id="titleInput" placeholder="Titulo de la noticia" name="title" style="width:100% !important;" class="input-border"
+                    ngModel/>
+                </div>
               </div>
-              <div class="col-9">
-                <input type="text" id="title" name="title" style="width:100% !important;" class="input-border">
+              <div class="row">
+                <div class="col-3 text-center">
+                  <label for="resume">Resumen* :</label>
+                </div>
+                <div class="col-9">
+                  <input type="text" id="summaryInput" name="summary" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
+                    ngModel/>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-3 text-center">
-                <label for="resume">Resumen* :</label>
+              <div class="row">
+                <div class="col-3 text-center">
+                  <label for="resume">Tema* :</label>
+                </div>
+                <div class="col-9">
+                  <tag-input theme=' dark ' name="tags" placeholder="Escriba un tema + enter" style="width:100% !important;" ngModel></tag-input>
+                </div>
               </div>
-              <div class="col-9">
-                <input type="text" id="resume" name="resume" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;">
+              <div class="row">
+                <div class="col-3 text-center ">
+                  <label for="resume">Cargar archivos* :</label>
+                </div>
+                <div class="col-9 " style="font-size:1rem !important">
+                  <input type="file" name="image" ng2FileSelect [uploader]="uploader" style="width:100% !important;" ngModel/>
+                  <div>
+                    Progreso:
+                    <div class="progress">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                    </div>
+                  </div>
+                  <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                    <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir
+                  </button>
+                  <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                    <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
+                  </button>
+                  <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                    <i class="fa fa-trash" aria-hidden="true"></i> Remover
+                  </button>
+                </div>
               </div>
-            </div>
+              <div class="row">
+                <div class="col-12" style="padding-top: 20px">
+                  <ckeditor debounce="500" name="body" ngModel>
+                  </ckeditor>
+                </div>
+              </div>
+              <input type="submit" class="btn btn-primary" value="enviar" />
+            </form>
           </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Guardar</button>
       </div>
     </div>
   </div>
