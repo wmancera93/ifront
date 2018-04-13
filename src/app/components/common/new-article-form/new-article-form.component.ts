@@ -43,7 +43,7 @@ export class NewArticleFormComponent implements OnInit {
 
   onSubmit(value: any): void{
     console.log(this.uploader)
-    value.image = JSON.stringify(this.uploader.queue[0]);
+    value.image = JSON.stringify(this.uploader.queue[0].file);
     console.log(value)
     console.log(JSON.stringify(value))
     // this.createArticleService.sendDataNotice(value).subscribe((data:any)=>{
