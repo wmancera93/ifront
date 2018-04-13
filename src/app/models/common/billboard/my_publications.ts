@@ -13,7 +13,7 @@ export interface PublicArticle{
  body: string,
  summary: string,
  publish: boolean,
- themes: string[],
+ themes: string,
  total_comments: number,
  total_views: number,
  created_by: image,
