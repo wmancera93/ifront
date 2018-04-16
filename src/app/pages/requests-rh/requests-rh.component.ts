@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
+import { RequestsRhService } from '../../services/requests-rh/requests-rh.service';
+import { RequestsRh } from '../../models/common/requests-rh/requests-rh';
 
 @Component({
   selector: 'app-requests-rh',
@@ -8,8 +10,16 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
   styleUrls: ['./requests-rh.component.css']
 })
 export class RequestsRhComponent implements OnInit {
+  public requests: RequestsRh[] = [];
 
-  constructor() { }
+  constructor(private requestsRhService: RequestsRhService) {
+    this.requestsRhService.getAllRequests().subscribe((data: any) => {
+      if(data.success){
+        this.requests = data.data[0];
+        console.log(this.requests)
+      }      
+    })
+  }
 
   ngOnInit() {
     window.scroll({

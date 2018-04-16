@@ -59,15 +59,11 @@ import { RequestsRhComponent } from './requests-rh/requests-rh.component';
     FormsModule,
     Ng2AutoCompleteModule,
     NgxPaginationModule,
-<<<<<<< HEAD
     PipesModule,
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
 
-=======
-    PipesModule    
->>>>>>> 154ca10167af00777af15f70e342161306c0a9c5
   ],
   declarations: [
     LoginComponent,

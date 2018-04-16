@@ -9,7 +9,95 @@
       </div>
     </div>
   </div>
-  <div id="data_table" class="row-hr-container justify-content-center">
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="row justify-content-center top-containter">
+        <div class="col-lg-4 col-12">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fa fa-plus"></i>
+                Crear nueva solicitud
+              </a>
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
+                <div *ngFor="let request of requests.request_types; let i = index">
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general">{{request.name | lowercase}}</a>
+                  <div *ngIf="requests.request_types.length !== (i + 1)" class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-2 col-lg-4 col-12 text-left">
+            <b>
+              Mis Solicitudes
+            </b>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-containter">
+        <div class="col-12">
+          <div class="widget bg-white-1x" *ngFor="let request of requests.my_requests_list">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Tiket #{{request.id}}
+                  </span>
+                </h5>
+                <p>
+                  <i class="fa fa-clock-o"></i>
+                  Creada el {{request.created}}
+                </p>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+                <h3 class="font-color-default">
+                  {{request.type_requests_name}}
+                </h3>
+              </div>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                <p class="font-title-general">
+                  Estado:
+                </p>
+                <h6>
+                  <span class="badge badge-default">
+                    {{request.status}}
+                  </span>
+                </h6>
+              </div>
+              <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  {{request.next_approver_to_json.approver_employee.short_name}}
+                </p>
+                <p class="">
+                  {{request.next_approver_to_json.approver_employee.posicion}}
+                </p>
+                <p class="">
+                  Aprobador {{request.next_approver_to_json.level}}
+                </p>
+              </div>
+              <div class="col-lg-2 col-md-3 col-12 text-center top-p">
+                <p class="font-title-general">
+                  Acción
+                </p>
+                <button class="btn btn-sm btn-secondary" [attr.title]="request.action_employee_requets_index_view[0].title" [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" [attr.title]="request.action_employee_requets_index_view[1].title" [attr.disabled]="request.action_employee_requets_index_view[1].is_active == true ? null : true">
+                  <i class="fa fa-trash" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
       <form [formGroup]="form" (ngSubmit)="submit(model)">
         <formly-form [form]="form" [fields]="fields" [model]="model">
@@ -18,4 +106,5 @@
       </form>
     </div>
   </div>
+  <app-time-line-approvers></app-time-line-approvers>
 </div>
