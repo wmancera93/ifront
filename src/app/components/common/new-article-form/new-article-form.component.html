@@ -42,9 +42,9 @@
                   <label for="resume">Cargar archivos* :</label>
                 </div>
                 <div class="col-9 " style="font-size:1rem !important">
-                    <input type="file" (change)="onChange($event)"/>
-                  <!-- <input type="file" name="image" ng2FileSelect [uploader]="uploader" style="width:100% !important;" ngModel/> -->
-                  <!-- <div>
+                  <input type="file" (change)="fileEvent($event)" name="image" ng2FileSelect [uploader]="uploader" style="width:100% !important;"
+                    ngModel/>
+                  <div>
                     Progreso:
                     <div class="progress">
                       <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
@@ -58,7 +58,7 @@
                   </button>
                   <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
                     <i class="fa fa-trash" aria-hidden="true"></i> Remover
-                  </button> -->
+                  </button>
                 </div>
               </div>
               <div class="row">
