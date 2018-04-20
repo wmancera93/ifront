@@ -9,7 +9,7 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 })
 export class MyPublicationsComponent implements OnInit {
 
-  public myPublications : PublicArticle;
+  public myPublications : PublicArticle[] = [];
 
   constructor(public myPublicationsService : MyPublicationsService) { }
 

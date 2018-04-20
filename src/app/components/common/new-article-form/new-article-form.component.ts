@@ -6,8 +6,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Http, RequestOptions } from '@angular/http';
 
-
-// const URL = 'https://evening-anchorage-3159.herokuapp.com/api/';
 const formData = new FormData();
 
 @Component({
@@ -43,14 +41,16 @@ export class NewArticleFormComponent implements OnInit {
  
   }  
   onSubmit(value: any): void {
+    debugger
     let input = new FormData();
     input.append('title', value.title);
     input.append('summary', value.summary);
     input.append('body', value.body);
     input.append('tags', value.tags);
     input.append('image', this.image);
-
+    console.log(input)
     this.createArticleService.sendDataNotice(input).subscribe((data: any) => {
+      console.log(data)
       
     })
   }
