@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
+import { PublicArticle } from '../../../models/common/billboard/my_publications';
 
 @Component({
   selector: 'app-my-publications',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyPublicationsComponent implements OnInit {
 
-  constructor() { }
+  public myPublications : PublicArticle;
+
+  constructor(public myPublicationsService : MyPublicationsService) { }
 
   ngOnInit() {
+
+    this.myPublicationsService.getMyArticles().subscribe((data:any)=>{
+      this.myPublications = data.data;
+      console.log(this.myPublications)
+    })
   }
   goToForm(){
     document.getElementById('btn-newArt').click();

@@ -23,6 +23,7 @@ import { AutoServicesService} from './auto-services/auto-services.service'
 import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
 import { RequestsRhService } from './requests-rh/requests-rh.service';
 import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
+import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
 
 @NgModule({
   imports: [
@@ -48,7 +49,8 @@ import { AproversRequestsService } from './shared/common/aprovers-requestes/apro
     AutoServicesService,
     MyPublicationsService,
     RequestsRhService,
-    AproversRequestsService
+    AproversRequestsService,
+    CorporateDocsService
   ]
 })
 export class ServicesModule { }

@@ -49,6 +49,7 @@ import { MyPublicationsComponent } from './billboard/my-publications/my-publicat
 import { NewsComponent } from './billboard/news/news.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
+import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { RequestsRhComponent } from './requests-rh/requests-rh.component';
     PermisionsUsersComponent,
     MyPublicationsComponent,
     NewsComponent,
-    RequestsRhComponent
+    RequestsRhComponent,
+    CorporateDocumentsComponent
   ],
   providers: [
     Angular2TokenService
