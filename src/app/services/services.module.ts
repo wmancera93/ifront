@@ -24,6 +24,7 @@ import {MyPublicationsService} from './billboard/my-publications/my-publications
 import { RequestsRhService } from './requests-rh/requests-rh.service';
 import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
 import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
+import { DownloadFilesService } from './download-files/download-files.service';
 
 @NgModule({
   imports: [
@@ -50,7 +51,8 @@ import { CorporateDocsService } from './corporate-documents/corporate-docs.servi
     MyPublicationsService,
     RequestsRhService,
     AproversRequestsService,
-    CorporateDocsService
+    CorporateDocsService,
+    DownloadFilesService
   ]
 })
 export class ServicesModule { }
