@@ -38,6 +38,11 @@ export class PermisionsUsersComponent implements OnInit {
     public excelService: ExcelService) { }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.reportsHrService.getReportEmployeeRoles()
       .subscribe((data: any) => {
         if (data.success) {
