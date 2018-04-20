@@ -160,6 +160,15 @@ a {
     color: var(--btn-primary);
 }
 
+/* .panel-primary {
+    border-color: var(--btn-primary) !important;
+}
+
+.panel-primary>.panel-heading {
+    background-color: var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+} */
+
 .font-color-default {
     color: #2f4050;
 }

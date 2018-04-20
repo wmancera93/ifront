@@ -22,6 +22,7 @@ import { ReportsHrService } from './reports-rh/reports-hr.service';
 import { AutoServicesService} from './auto-services/auto-services.service'
 import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
 import { RequestsRhService } from './requests-rh/requests-rh.service';
+import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { RequestsRhService } from './requests-rh/requests-rh.service';
     ReportsHrService,
     AutoServicesService,
     MyPublicationsService,
-    RequestsRhService
+    RequestsRhService,
+    AproversRequestsService
   ]
 })
 export class ServicesModule { }

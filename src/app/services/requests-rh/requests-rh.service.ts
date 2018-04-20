@@ -13,4 +13,10 @@ export class RequestsRhService {
       .map((data: Observable<any>) => data);
   }
 
+  getRequestDetailById(ticket: number) {
+    return this.http.get(environment.apiBaseHr + '/api/v2/employee_requets/' + ticket)
+      .map((data: Observable<any>) => data);
+  }
+
+
 }

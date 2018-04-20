@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../services/requests-rh/requests-rh.service';
-import { RequestsRh } from '../../models/common/requests-rh/requests-rh';
+import { RequestsRh, ListRequests } from '../../models/common/requests-rh/requests-rh';
+import { AproversRequestsService } from '../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 
 @Component({
   selector: 'app-requests-rh',
@@ -12,12 +13,12 @@ import { RequestsRh } from '../../models/common/requests-rh/requests-rh';
 export class RequestsRhComponent implements OnInit {
   public requests: RequestsRh[] = [];
 
-  constructor(private requestsRhService: RequestsRhService) {
+  constructor(private requestsRhService: RequestsRhService,
+    private aproversRequestsService: AproversRequestsService) {
     this.requestsRhService.getAllRequests().subscribe((data: any) => {
-      if(data.success){
+      if (data.success) {
         this.requests = data.data[0];
-        console.log(this.requests)
-      }      
+      }
     })
   }
 
@@ -74,6 +75,10 @@ export class RequestsRhComponent implements OnInit {
 
   submit(model) {
     console.log(model);
+  }
+
+  modalAprovers(request: ListRequests) {
+    this.aproversRequestsService.setRequests(request);
   }
 
 }
