@@ -14,6 +14,12 @@ export class MyPublicationsService {
       .map((data: Observable<any>) => data);
   }
 
+  getMyArticles()
+  {
+    return this.http.get(environment.apiBaseHr + '/api/v2/articles/my_articles')
+    .map((data: Observable<any>) => data);
+  }
+
 
 }
 

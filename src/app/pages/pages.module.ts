@@ -45,6 +45,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
 import { NewsComponent } from './billboard/news/news.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 
 
 @NgModule({
@@ -88,7 +89,8 @@ import { PipesModule } from '../pipes/pipes.module';
     RequestsComponent,
     PermisionsUsersComponent,
     MyPublicationsComponent,
-    NewsComponent
+    NewsComponent,
+    CorporateDocumentsComponent
   ],
   providers:[
     Angular2TokenService

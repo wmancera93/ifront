@@ -31,10 +31,10 @@ export class NewArticleFormComponent implements OnInit {
 
   constructor(public createArticleService: MyPublicationsService, private fb: FormBuilder) {
     this.myForm = this.fb.group({
-      'title': ['dfgdg'],
-      'summary': ['dfg'],
-      'body': ['dfg'],
-      'tags': ['dfg'],
+      'title': [''],
+      'summary': [''],
+      'body': [''],
+      'tags': [''],
       'image': ['']
     });
   }
@@ -51,9 +51,10 @@ export class NewArticleFormComponent implements OnInit {
     input.append('image', this.image);
 
     this.createArticleService.sendDataNotice(input).subscribe((data: any) => {
-      console.log(data)
+      
     })
   }
+
   fileEvent(e) {
     this.image = e.target.files[0];
   }
