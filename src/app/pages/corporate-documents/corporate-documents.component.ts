@@ -29,14 +29,10 @@ export class CorporateDocumentsComponent implements OnInit {
   }
   downloadPDF(doc: any) {
     this.urlPDF = this.urlDocs + doc.url;
-
+    window.open(this.urlPDF, "_blank");
     // this.downloadFilesService.getFile().subscribe((data));
 
   }
-
-
-
-
   
   showButton(idBtn: string) {
       document.getElementById(idBtn).removeAttribute('style');
