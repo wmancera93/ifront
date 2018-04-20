@@ -27,10 +27,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
 import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
 import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
-import { FileSelectDirective } from 'ng2-file-upload';
+
 import {CKEditorModule} from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { TimeLineApproversComponent } from './common/time-line-approvers/time-line-approvers.component';
+
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -42,7 +44,8 @@ import { TimeLineApproversComponent } from './common/time-line-approvers/time-li
     CKEditorModule,
     NgxPaginationModule,
     ToasterModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FileUploadModule
   ],
   declarations: [
     HeaderComponent,
@@ -62,8 +65,7 @@ import { TimeLineApproversComponent } from './common/time-line-approvers/time-li
     DataTableComponent,
     AutoCompleteComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent,
-    FileSelectDirective,
+    NewArticleFormComponent,   
     TimeLineApproversComponent
   ],
   exports: [
