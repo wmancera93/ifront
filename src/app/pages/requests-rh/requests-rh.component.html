@@ -21,7 +21,7 @@
                 Crear nueva solicitud
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
-                <div *ngFor="let request of requests.request_types; let i = index">
+                <div *ngFor="let request of requests[0].request_types; let i = index">
                   <a class="dropdown-item color-font-gree text-capitalize cursor-general">{{request.name | lowercase}}</a>
                   <div *ngIf="requests.request_types.length !== (i + 1)" class="dropdown-divider"></div>
                 </div>
@@ -41,7 +41,7 @@
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let request of requests.my_requests_list">
+          <div class="widget bg-white-1x" *ngFor="let request of requests[0].my_requests_list">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
