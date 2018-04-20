@@ -17,7 +17,6 @@ export class MyPublicationsComponent implements OnInit {
 
     this.myPublicationsService.getMyArticles().subscribe((data:any)=>{
       this.myPublications = data.data;
-      console.log(this.myPublications)
     })
   }
   goToForm(){

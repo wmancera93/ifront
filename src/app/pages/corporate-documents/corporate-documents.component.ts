@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CorporateDocsService } from '../../services/corporate-documents/corporate-docs.service';
 import { Documents, TypeDocuments } from '../../models/common/corporate_documents/corporate_documents';
+import { RequestOptions, ResponseContentType } from '@angular/http';
+import { DownloadFilesService } from '../../services/download-files/download-files.service';
 
 @Component({
   selector: 'app-corporate-documents',
@@ -11,16 +13,15 @@ export class CorporateDocumentsComponent implements OnInit {
   public docsType: TypeDocuments;
   public infoDocs: Documents;
   public urlDocs: string;
-  public urlPDF : string;
-  constructor(public corporateDocsService: CorporateDocsService) { }
+  public urlPDF: string;
+  constructor(public corporateDocsService: CorporateDocsService,
+    public downloadFilesService: DownloadFilesService) { }
 
   ngOnInit() {
     this.corporateDocsService.getDocuments().subscribe((data: any) => {
 
       this.infoDocs = data.data[0].documents;
       this.urlDocs = data.data[0].base_url;
-      console.log(this.infoDocs)
-      console.log(this.urlDocs)
       this.docsType = data.data[0].type_documents;
 
     })
@@ -28,7 +29,24 @@ export class CorporateDocumentsComponent implements OnInit {
   }
   downloadPDF(doc: any) {
     this.urlPDF = this.urlDocs + doc.url;
-    console.log(this.urlPDF)
+    window.open(this.urlPDF, "_blank");
+    // this.downloadFilesService.getFile().subscribe((data));
+
+  }
+  
+  showButton(idBtn: string) {
+      document.getElementById(idBtn).removeAttribute('style');
+      document.getElementById(idBtn).setAttribute('style', 'display:block;');
+  }
+  hiddenButton(idBtn: string) {
+    document.getElementById(idBtn).removeAttribute('style');
+    document.getElementById(idBtn).setAttribute('style', 'display:none;');
+  }
+
+  selectedObject(type : any){
+    this.corporateDocsService.getDocumentsByType(type.id).subscribe((data:any)=>{
+      this.infoDocs = data.data[0].documents;
+    })
   }
 
 }

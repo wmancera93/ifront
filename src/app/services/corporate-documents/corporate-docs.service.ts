@@ -13,6 +13,11 @@ getDocuments(){
   return this.http.get(environment.apiBaseHr + '/api/v2/corporate_documents')
     .map((data: Observable<any>) => data); 
 }
+
+getDocumentsByType(numType : number){
+  return this.http.get(environment.apiBaseHr + '/api/v2/corporate_documents/select_document/'+numType)
+    .map((data: Observable<any>) => data); 
+}
 }
 
 
