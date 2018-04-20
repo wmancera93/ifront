@@ -17,7 +17,7 @@ import { NewspaperComponent } from './common/widgets/newspaper/newspaper.compone
 import { EstadisticsComponent } from './common/widgets/estadistics/estadistics.component';
 import { NotificationPrimaryComponent } from './common/widgets/notification-primary/notification-primary.component';
 import { NotificationSecundaryComponent } from './common/widgets/notification-secundary/notification-secundary.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EventsEmployeesComponent } from './common/widgets/events-employees/events-employees.component';
 import { ProgressPrimaryComponent } from './common/widgets/progress-primary/progress-primary.component';
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
@@ -27,15 +27,21 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
 import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
 import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
+import { FileSelectDirective } from 'ng2-file-upload';
+import {CKEditorModule} from 'ng2-ckeditor';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   imports: [
+    TagInputModule, 
     CommonModule,
     FormsModule,
     RouterModule,
     ChartsModule,
+    CKEditorModule,
     NgxPaginationModule,
-    ToasterModule.forRoot()
+    ToasterModule.forRoot(),
+    ReactiveFormsModule
   ],
   declarations: [
     HeaderComponent,
@@ -55,7 +61,8 @@ import { NewArticleFormComponent } from './common/new-article-form/new-article-f
     DataTableComponent,
     AutoCompleteComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent
+    NewArticleFormComponent,
+    FileSelectDirective
   ],
   exports: [
     HeaderComponent,

@@ -17,7 +17,7 @@ export class HolidayLetterComponent implements OnInit {
 
   ngOnInit() {
     this.autoServiceService.getHolidayLetter().subscribe((data: any) => {
-      this.holidayLetter = data.data;
+      this.holidayLetter = data.data;      
       if (this.holidayLetter.length === 0) {
         this.flagEmpty = true;
       }

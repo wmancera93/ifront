@@ -16,6 +16,44 @@
           <i class="fa fa-plus"></i> &nbsp;&nbsp; Crear nueva noticia
         </div>
       </div>
+      <div class="row">
+        <div class="col-12">
+          <div class="row">
+            <div class="col-9 notice-title">
+              <strong> Mis noticias</strong>
+            </div>
+            <div class="col-3">
+              Total de noticias: {{myPublications.length}}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" *ngFor="let publication of myPublications; let index=index; let colorContactPrimary = odd; let colorContactSecundary = even;" [ngClass]="{  colorContactPrimary:  colorContactPrimary, colorContactSecundary: colorContactSecundary}">
+              <div class="row">
+                <div class="col-1">
+                  <div class="checkbox checkbox-success">
+                    <input id="checkbox3" type="checkbox">
+                    <label for="checkbox3">
+                      Publicar
+                    </label>
+                  </div>
+                </div>
+                <div class="col-7">
+                  {{publication.title}} {{publication.summary}}
+                </div>
+                <div class="col-1">
+                  {{publication.total_views}}
+                </div>
+                <div class="col-1">
+                  {{publication.total_comments}}
+                </div>
+                <div class="col-1">
+                  editar
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
