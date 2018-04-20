@@ -32,6 +32,7 @@ import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisio
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
 import { NewsComponent } from './billboard/news/news.component';
+import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 
 
 const routes: Routes = [
@@ -152,6 +153,11 @@ const routes: Routes = [
         
         path: 'news',
         component: NewsComponent,
+    },
+    {
+        
+        path: 'corporate_documents',
+        component: CorporateDocumentsComponent,
     }
    
 

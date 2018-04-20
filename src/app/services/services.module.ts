@@ -20,6 +20,8 @@ import { PrintDataTableService } from './shared/common/print-data-table/print-da
 import { ExcelService } from './common/excel/excel.service';
 import { ReportsHrService } from './reports-rh/reports-hr.service';
 import { AutoServicesService} from './auto-services/auto-services.service'
+import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
+import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
 
 @NgModule({
   imports: [
@@ -42,7 +44,9 @@ import { AutoServicesService} from './auto-services/auto-services.service'
     PrintDataTableService,
     ExcelService,
     ReportsHrService,
-    AutoServicesService
+    AutoServicesService,
+    MyPublicationsService,
+    CorporateDocsService
   ]
 })
 export class ServicesModule { }
