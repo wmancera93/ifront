@@ -30,6 +30,7 @@ import { NewArticleFormComponent } from './common/new-article-form/new-article-f
 import { FileSelectDirective } from 'ng2-file-upload';
 import {CKEditorModule} from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
+import { TimeLineApproversComponent } from './common/time-line-approvers/time-line-approvers.component';
 
 @NgModule({
   imports: [
@@ -62,7 +63,8 @@ import { TagInputModule } from 'ngx-chips';
     AutoCompleteComponent,
     PrintDataTableComponent,
     NewArticleFormComponent,
-    FileSelectDirective
+    FileSelectDirective,
+    TimeLineApproversComponent
   ],
   exports: [
     HeaderComponent,
@@ -81,7 +83,8 @@ import { TagInputModule } from 'ngx-chips';
     EmployeeInfoComponent,
     DataTableComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent
+    NewArticleFormComponent,
+    TimeLineApproversComponent
   ],
   providers: [
     // ToasterService
