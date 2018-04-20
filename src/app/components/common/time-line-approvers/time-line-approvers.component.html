@@ -1,0 +1,175 @@
+<button id="btn_aprovers_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#aprovers_requests"
+  style="display:none;">
+</button>
+<div class="modal fade" id="aprovers_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="viewModal">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <div class="col-12 col-lg-10 text-center text-lg-left">
+          <h4 class="modal-title titleColor text-shadow">{{detailRequets[0].title}}</h4>
+        </div>
+      </div>
+      <div class="modal-body font-controls-login">
+        <div class="container">
+          <div class="timeline">
+            <div class="line text-muted"></div>
+            <div class="separator text-muted">
+            </div>
+
+            <article class="panel panel-success panel">
+              <div class="panel-heading icon">
+                <i class="fa fa-file-text"></i>
+              </div>
+              <div class="panel-heading">
+                <h2 class="panel-title text-capitalize">Solicitud de {{detailRequets[0].request.type_requests_name | lowercase}}</h2>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="widget bg-white">
+                    <div class="row">
+                      <div class="col-12 col-md-4 col-lg-2">
+                        <div class="menu-img-employee">
+                          <img src="{{detailRequets[0].request.employee.image.url}}" class="roundPhoto-employee">
+                          <br>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-10">
+                        <div class="row">
+                          <div class="col-12">
+                            <h3 class="font-color-default">
+                              {{detailRequets[0].request.employee.name_complete}}
+                            </h3>
+                          </div>
+                          <div class="col-12">
+                            <p class="font-title-general">
+                              {{detailRequets[0].request.employee.posicion}}
+                            </p>
+                          </div>
+                          <div class="col-12 text-left">
+                            <div class="row">
+                              <div class="col-12 text-left">
+                                <p class="font-title-general">
+                                  <i class=" font-color-default fa fa-fw fa-calendar"></i>
+                                  Fecha Inicial:
+                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.date_begin}}</span>
+                                </p>
+                              </div>
+                              <div class="col-12 text-left">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa-calendar"></i>
+                                  Fecha Final:
+                                  <span style="font-weight: 100 !important"> {{detailRequets[0].request.date_end}}</span>
+                                </p>
+                              </div>
+                              <div class="col-12 text-left">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa-sun-o"></i>
+                                  Dias Solicitados:
+                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.days_request}}</span>
+                                </p>
+                              </div>
+                              <div class="col-12 text-left">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa fa-comment"></i>
+                                  Observaciones:
+                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.observation_request}}</span>
+                                </p>
+                              </div>
+                              <div class="col-12 text-left">
+                                <p class="font-title-general">
+                                  Creada:
+                                  <time class="font-color-default">{{detailRequets[0].request.created_at}}</time>
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <div class="separator text-muted">
+            </div>
+
+            <article class="panel panel-danger">
+              <div class="panel-heading icon">
+                <i class="fa fa-question"></i>
+              </div>
+              <div class="panel-heading">
+                <h2 class="panel-title">Aprobador 1</h2>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <div class="widget bg-white">
+                    <div class="row">
+                      <div class="col-12 col-md-4 col-lg-2">
+                        <div class="menu-img-employee">
+                          <img src="{{detailRequets[0].pending_level_approver.approver_employee.image.url}}" class="roundPhoto-employee">
+                          <br>
+                        </div>
+                      </div>
+                      <div class="col-12 col-md-8 col-lg-10">
+                        <div class="row">
+                          <div class="col-12">
+                            <h3 class="font-color-default">
+                              {{detailRequets[0].pending_level_approver.approver_employee.name_complete}}
+                            </h3>
+                          </div>
+                          <div class="col-12">
+                            <p class="font-title-general">
+                              {{detailRequets[0].pending_level_approver.approver_employee.posicion}}
+                            </p>
+                          </div>
+                          <div class="col-12 text-left">
+                            <div class="row justify-content-center">
+                              <div class="col-3 text-left">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa-question-circle"></i>
+                                  Estado:
+                                </p>
+                              </div>
+                              <div class="col-2 text-left">
+                                <h6>
+                                  <span class="badge badge-default">
+                                    Pendiente
+                                  </span>
+                                </h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- <div class="separator text-muted">
+              <time class="titleColor">{{detailRequets[0].request.created_at}}</time>
+            </div>
+
+            <article class="panel panel-danger panel">
+              <div class="panel-heading icon">
+                <i class="fa fa-question"></i>
+              </div>
+              <div class="panel-heading">
+                <h2 class="panel-title">Aprobador 2</h2>
+              </div>
+              <div class="panel-body">
+                That is all.
+              </div>
+            </article> -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footerInfo justify-content-center">
+        <div class="buttonCloseEmployee text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>
