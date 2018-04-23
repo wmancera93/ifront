@@ -1,0 +1,26 @@
+<button id="btn_form_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#form_requests" style="display:none;">
+</button>
+<div class="modal fade" id="form_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="formRequests != null">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <div class="col-12 col-lg-10 text-center text-lg-left">
+          <h4 class="modal-title titleColor text-shadow">Solicitud de {{formRequests.name | lowercase}}</h4>
+        </div>
+      </div>
+      <div class="modal-body font-controls-login">
+        <div class="row-hr-container justify-content-center">
+          <form [formGroup]="form" (ngSubmit)="submit(model)">
+            <formly-form [form]="form" [fields]="fields" [model]="model">
+              <button type="submit" class="btn btn-primary">Generar</button>
+            </formly-form>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footerInfo justify-content-center">
+        <div class="buttonCloseEmployee text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>
