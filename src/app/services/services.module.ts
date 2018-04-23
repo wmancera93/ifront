@@ -25,6 +25,7 @@ import { RequestsRhService } from './requests-rh/requests-rh.service';
 import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
 import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
 import { DownloadFilesService } from './download-files/download-files.service';
+import { FormsRequestsService } from './shared/forms-requests/forms-requests.service';
 
 @NgModule({
   imports: [
@@ -52,7 +53,8 @@ import { DownloadFilesService } from './download-files/download-files.service';
     RequestsRhService,
     AproversRequestsService,
     CorporateDocsService,
-    DownloadFilesService
+    DownloadFilesService,
+    FormsRequestsService
   ]
 })
 export class ServicesModule { }

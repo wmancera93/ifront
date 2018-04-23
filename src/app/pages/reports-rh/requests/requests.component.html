@@ -220,24 +220,24 @@
                         </span>
                       </div>
                       <div style="text-align:left" *ngIf="record[key] == 'Aprobado'">
-                        <span class="badge badge-primary">
+                        <span class="badge badge-primary" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'En proceso'">
-                        <span class="badge badge-success">
+                      <div style="text-align:left" *ngIf="record[key] == 'En Proceso'">
+                        <span class="badge badge-success" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
                       <div style="text-align:left" *ngIf="record[key] == 'Cancelado'">
-                        <span class="badge badge-danger">
+                        <span class="badge badge-danger" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
                       <div style="text-align:left" *ngIf="record[key] != 'Pendiente'
                       && record[key] != 'Aprobado'
                       && record[key] != 'Cancelado'
-                      && record[key] != 'En proceso'">
+                      && record[key] != 'En Proceso'">
                         <div *ngIf="(record[key] | split:'-':'1') != ''">
                           <p>
                             <b>{{record[key] | split:'-':'1'}}</b>

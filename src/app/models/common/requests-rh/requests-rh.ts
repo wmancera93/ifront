@@ -48,43 +48,28 @@ export interface DetailRequest {
     title: string
 }
 
-
 export interface Request {
-    id: number,
-    date_begin: string,
-    date_end: string,
-    created_at: string,
     observation_request: string,
     days_request: number,
     id_activity: string,
-    file_support: Url,
-    name_applicant: string,
+    file_support: Url
     is_finished: boolean,
-    posicion_applicant: string,
+    ticket: number,
     type_requests_name: string,
-    employee: EmployeeRequest
-    answers: object[]
+    date_begin_format: string,
+    date_end_format: string,
+    employee_applicant_to_json: EmployeeRequest,
+    answers_to_json: AnswersToJson[],
+    created_date: string
 }
 
 export interface EmployeeRequest {
-    id: number,
-    name: string,
-    lastname: string,
-    phone: string,
-    pernr: number,
-    image: Url,
     posicion: string,
-    unidad_org: string,
-    area: string,
     division_per: string,
     subdivision_per: string,
-    fecha_nac: string,
-    fecha_ingreso: string,
-    name_complete: string,
-    number_document: string,
-    personal_phone: string,
-    contract_type: string,
-    address: string,
+    image: Url,
+    short_name: string,
+    personal_code: number
 }
 
 export interface PendingLevelApprover {
@@ -92,12 +77,19 @@ export interface PendingLevelApprover {
     approver_employee: ApproverEmployee
 }
 
+export interface AnswersToJson {
+    description: string,
+    approver_to_json: ApproverEmployee
+    created_date: string,
+}
+
 export interface ApproverEmployee {
     name: string,
     lastname: string,
-    pernr: number,
+    personal_code: number,
     image: Url,
-    posicion: string,
+    position: string,
     name_complete: string,
-    short_name: string
+    short_name: string,
+    level?: number
 }

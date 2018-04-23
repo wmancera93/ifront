@@ -20,7 +20,6 @@ export class TimeLineApproversComponent implements OnInit {
           .subscribe((detail: any) => {
             if (detail.success) {
               this.detailRequets = detail.data;
-              console.log(this.detailRequets)
               document.getElementById('btn_aprovers_requests').click();
               document.getElementById("bodyGeneral").removeAttribute('style');
               this.viewModal = true;
