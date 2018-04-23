@@ -115,3 +115,24 @@
 .timeline .panel-outline .panel-footer {
     display: none;
 }
+
+@media only screen and (max-width: 830px)  and (max-height: 500px) {
+    .center-img-employee {
+        padding-left: 35%; 
+        padding-right: 40%
+    }
+}
+
+@media only screen and (max-width: 450px)  and (max-height: 850px) {
+    .center-img-employee {
+        padding-left: 35%; 
+        padding-right: 40%
+    }
+}
+
+@media only screen and (max-width: 450px)  and (max-height: 800px) {
+    .center-img-employee {
+        padding-left: 35%; 
+        padding-right: 40%
+    }
+}

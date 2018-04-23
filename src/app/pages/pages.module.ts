@@ -50,6 +50,7 @@ import { NewsComponent } from './billboard/news/news.component';
 import { PipesModule } from '../pipes/pipes.module';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
+import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
 
 
 @NgModule({
@@ -99,7 +100,8 @@ import { CorporateDocumentsComponent } from './corporate-documents/corporate-doc
     MyPublicationsComponent,
     NewsComponent,
     RequestsRhComponent,
-    CorporateDocumentsComponent
+    CorporateDocumentsComponent,
+    FormsRequestsComponent
   ],
   providers: [
     Angular2TokenService

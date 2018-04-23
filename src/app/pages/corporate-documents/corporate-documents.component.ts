@@ -32,9 +32,10 @@ export class CorporateDocumentsComponent implements OnInit {
     })
 
   }
-  downloadPDF(doc: any) {
+  downloadPDF(doc: any, idBtn:string) {
     this.urlPDF = this.urlDocs + doc.url;
     this.downloadName = doc.name;
+<<<<<<< HEAD
     const headers = new Headers();
     headers.append('Accept', 'pdf');
 
@@ -49,6 +50,10 @@ export class CorporateDocumentsComponent implements OnInit {
     })
     // window.open(this.urlPDF, "_blank");
 
+=======
+    window.open(this.urlPDF, "_blank"); 
+    
+>>>>>>> a570829f2f9b2bcf740b3f6c3b98f832966ce327
   }
 
   private saveToFileSystem(response: any) {
