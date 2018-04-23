@@ -32,15 +32,11 @@ export class CorporateDocumentsComponent implements OnInit {
     })
 
   }
-  downloadPDF(doc: any) {
+  downloadPDF(doc: any, idBtn:string) {
     this.urlPDF = this.urlDocs + doc.url;
     this.downloadName = doc.name;
-    let FileSaver = require('file-saver');
-    window.open(this.urlPDF, "_blank");
-    //let blob = new Blob(this.urlPDF);
-  //  let file = new File(["Hello, world!"], "hello world.txt", { type: "text/plain;charset=utf-8" });
-  //  FileSaver.saveAs(blob);
-    // this.downloadFilesService.getFile().subscribe((data));
+    window.open(this.urlPDF, "_blank"); 
+    
   }
   
 

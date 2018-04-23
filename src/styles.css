@@ -1147,7 +1147,7 @@ cursor: pointer;
 }
 
 .roundPhotoDocs{
-    width: 150px;
+    width: 130px;
     height: 85px;
     margin-left: 0px !important;
     
@@ -1165,7 +1165,7 @@ cursor: pointer;
     z-index: 1000;
     position: absolute;
     margin-top: -51px !important;
-    margin-left: 35px !important;
+    margin-left: 20px !important;
     background-color:var(--btn-primary);
     border-radius: 30px;
     color:white !important;

@@ -26,18 +26,19 @@
             <div class="col-12 col-xl-3" *ngFor="let document of infoDocs; let i = index">
               <div class="widgetDocs docs-height-notification">
                 <div class="imageDocs" (mouseover)="showButton('buttonDownload'+i)" (mouseleave)="hiddenButton('buttonDownload'+i)">
-                  <img src="https://s3.amazonaws.com/hrsolutions/document_management/company/default_file_image.jpg" class="roundPhotoDocs" >                
-                  <input style="display: none;" [attr.id]="'buttonDownload'+i" type="submit" class="btn-primary buttonDocs" value="Descargar" (click)="downloadPDF(document)" />                  
+                  <img src="https://s3.amazonaws.com/hrsolutions/document_management/company/default_file_image.jpg" class="roundPhotoDocs">
+                  <input style="display: none;" [attr.id]="'buttonDownload'+i" type="submit" class="btn-primary buttonDocs" value="Descargar"
+                    (click)="downloadPDF(document)" />
                 </div>
-                <div class="col-12 fontDocs">
-                  <strong>{{document.name |slice: 0:25}}</strong>
-                  <span [hidden]="document.name > 30">...</span>
+                <div class="col-12 fontDocs" style="height: 25px;">
+                  <strong>{{document.name |slice: 0:20}}</strong>
+                  <span [hidden]="document.name > 20">...</span>
                 </div>
                 <div class="col-12" style="margin-top:20px;">
                   {{document.added}}
                 </div>
                 <div class="col-12" style="font-size: 1.5rem;">
-                  <i class="fa fa-file-pdf-o"></i>                  
+                  <i class="fa fa-file-pdf-o"></i>                
                 </div>
               </div>
             </div>
