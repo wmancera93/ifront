@@ -18,9 +18,14 @@ export class RequestsRhService {
       .map((data: Observable<any>) => data);
   }
 
-  postRequests(object:any[]){
+  postRequests(object: any) {
     return this.http.post(environment.apiBaseHr + '/api/v2/employee_requets', object)
-    .map((data: Observable<any>) => data);
+      .map((data: Observable<any>) => data);
+  }
+
+  deleteRequests(id: number) {
+    return this.http.delete(environment.apiBaseHr + '/api/v2/employee_requets/' + id)
+      .map((data: Observable<any>) => data);
   }
 
 }

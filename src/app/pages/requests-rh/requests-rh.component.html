@@ -103,7 +103,7 @@
                   (click)="modalAprovers(request)">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>
-                <button class="btn btn-sm btn-danger" [attr.title]="request.action_employee_requets_index_view[1].title" [attr.disabled]="request.action_employee_requets_index_view[1].is_active == true ? null : true">
+                <button class="btn btn-sm btn-danger" (click)="deleteRequest(request.ticket)" [attr.title]="request.action_employee_requets_index_view[1].title" [attr.disabled]="request.action_employee_requets_index_view[1].is_active == true ? null : true">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
               </div>

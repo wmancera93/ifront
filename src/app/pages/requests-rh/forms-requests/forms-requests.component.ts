@@ -4,6 +4,8 @@ import { TypesRequests } from '../../../models/common/requests-rh/requests-rh';
 import { FormGroup } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-forms-requests',
@@ -13,16 +15,19 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
 
-  form = new FormGroup({});
+  form: any;
   model = {};
   fields: FormlyFieldConfig[] = [];
 
-  constructor(private requestsRhService: RequestsRhService, public formsRequestsService: FormsRequestsService) {
+  constructor(private requestsRhService: RequestsRhService,
+    public formsRequestsService: FormsRequestsService,
+    public alert: AlertsService) {
     this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
+      this.form = new FormGroup({});
       this.formRequests = data;
       this.model = {};
       this.fields = [];
-      console.log(this.formRequests.id_activity);
+
       switch (this.formRequests.id_activity) {
         case 'VACA':
           this.model = { request_type_id: this.formRequests.id, date_begin: '', date_end: '', observation_request: '' };
@@ -61,7 +66,7 @@ export class FormsRequestsComponent implements OnInit {
           this.model = { request_type_id: this.formRequests.id, days_request: '', observation_request: '' };
           this.fields = [{
             key: 'days_request',
-            type: 'number',
+            type: 'input',
             templateOptions: {
               type: 'number',
               label: 'Dias a solicitar',
@@ -104,7 +109,7 @@ export class FormsRequestsComponent implements OnInit {
           },
           {
             key: 'file_support',
-            type: 'file',
+            type: 'input',
             templateOptions: {
               type: 'file',
               label: 'Adjuntar archivo de soporte',
@@ -142,14 +147,20 @@ export class FormsRequestsComponent implements OnInit {
 
   }
 
-
-
   submit(model) {
-    console.log(model);
     this.requestsRhService.postRequests(model)
-      .subscribe((data: any) => {
-        console.log(data)
-      });
+      .subscribe(
+        (data: any) => {
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud guardada correctamente' }];
+          this.alert.setAlert(alertWarning[0]);
+        },
+        (error: any) => {
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString() }];
+          this.alert.setAlert(alertWarning[0]);
+        },
+    );
   }
 
 

@@ -53,8 +53,8 @@ export class AlertsComponent implements OnInit {
   }
 
   clickConfirmate(){
-    this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
     document.getElementById('closeModal').click();
+    this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);    
   }
 
 }
