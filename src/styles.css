@@ -1622,6 +1622,31 @@ border-bottom: 1px solid  #dddd;
 }
   /*------*/
 
+  /* Billboard */
+  .bg-white-b {
+    background: #f1f1f1 !important;
+    color: #acacac;
+    text-align: center;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.bg-white-b:hover {
+    
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+    cursor: pointer;
+}
+
+.hoverColor:hover{
+    color:var(--btn-primary) !important;
+}
+
+
+
   /* BACKGROUNDS */
  
   .bgprimary {
