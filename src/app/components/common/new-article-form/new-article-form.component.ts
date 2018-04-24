@@ -38,7 +38,8 @@ export class NewArticleFormComponent implements OnInit {
   }
 
   ngOnInit() {
- 
+    document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style','height:20px !important; ');
+   
   }  
   onSubmit(value: any): void {
     let input = new FormData();

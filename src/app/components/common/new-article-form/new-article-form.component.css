@@ -29,20 +29,51 @@
 
 
 input:focus { 
-   border:1px solid var(--btn-primary)!important;
+   border:0.1px solid var(--btn-primary)!important;
    outline:0px;      
    transition:all .5s ease-in-out;
 }
 input{
+    background-color: transparent !important;
     -webkit-appearance: textfield;
-    background-color: white;
     -webkit-rtl-ordering: logical;
+    border-width: 1px !important;
     cursor: text;
-    padding: 1px;
-    border-width: 2px;
+    padding: 1px;   
     border-style: inset;
     border-color: initial;
     border-image: initial;
 }
 
 
+
+.buttonCloseForm{
+   
+    background-color:var(--btn-primary) !important;             
+    border-color: transparent;
+    width: 100%;
+    color:white !important;
+    padding-top: 5px;
+    /**/
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+}
+.buttonCloseForm:hover{       
+        cursor: pointer !important;        
+        color: var(--btn-primary-hover);    
+        z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.05);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.05);   
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.05);
+        transition: all 200ms ease-in;
+        transform: scale(1.05); 
+}
