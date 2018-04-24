@@ -35,13 +35,13 @@ export class RequestsRhComponent implements OnInit {
         if (data === "deletRequest") {
           this.requestsRhService.deleteRequests(this.idDelete)
             .subscribe(
-              (data: any) => {
-                console.log(data);
-                this.requests.my_requests_list.splice(this.requests.my_requests_list.findIndex(request => request.ticket === this.idDelete), 1)
+              (data: any) => {               
+                this.getObjectRequests();
+                const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Se elimino correctamente.', confirmation: false }];
+                this.alert.setAlert(alertWarning[0]);
               },
               (error: any) => {
-                console.log(error);
-                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString() }];
+                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               }
             )
@@ -85,7 +85,7 @@ export class RequestsRhComponent implements OnInit {
     this.alertWarning = [{
       type: 'warning',
       title: 'Confirmación',
-      message: '¿Desea eliminar la solicitud con ticket ' + id.toString() + '?',
+      message: '¿Desea eliminar la solicitud con ticket #' + id.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deletRequest'
     }];

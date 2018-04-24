@@ -229,6 +229,20 @@ button, input, optgroup, select, textarea {
     cursor: pointer;
 }
 
+.btn-outline-primary {
+    color: var(--btn-primary)  !important;
+    background-image: none !important;
+    background-color: transparent !important;
+    border-color: var(--btn-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+}
+
 .btn-primary-second {
     background-color: var(--btn-primary-hover) !important;
     border-color: var(--btn-primary-hover) !important;
@@ -1789,6 +1803,9 @@ border-bottom: 1px solid  #dddd;
 }
 .text-primary {
   color: inherit;
+}
+.text-primary-hr {
+    color: var(--btn-primary) !important
 }
 .text-success {
   color: #1c84c6;

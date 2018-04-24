@@ -21,6 +21,7 @@ export class AlertsComponent implements OnInit {
   constructor(public alert: AlertsService, public route: Router) {
 
     this.alert.getAlert().subscribe((data) => {
+      document.getElementById('closeModal').click();
       this.bodyAlert = data;
       if (this.bodyAlert.type === 'primary') {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165, 0.7)`);
@@ -39,7 +40,7 @@ export class AlertsComponent implements OnInit {
         this.icon = 'fa-exclamation-triangle';
       }
 
-      if (this.bodyAlert.confirmation) {
+      if (this.bodyAlert.confirmation !== null) {
         this.confirmationShow = this.bodyAlert.confirmation;
       }
 
