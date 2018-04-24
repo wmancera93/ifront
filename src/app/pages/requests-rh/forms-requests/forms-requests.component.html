@@ -1,6 +1,6 @@
 <button id="btn_form_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#form_requests" style="display:none;">
 </button>
-<div class="modal fade" id="form_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="form_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="formRequests != null">
       <div class="modal-header borderLine-title row-hr justify-content-center">
@@ -9,22 +9,53 @@
         </div>
       </div>
       <div class="modal-body font-controls-login">
-        <div class="row-hr-container justify-content-center">
-          <div class="col-12 col-md-6">
-            <div class="widget bg-white">
-              asd
-            </div>
-          </div>
-          <div class="col-12 col-md-6">
-            <div class="row">
-              <div class="col-12">
-                <form [formGroup]="form" (ngSubmit)="newRquest(model)">
-                  <formly-form [form]="form" [fields]="fields" [model]="model">
-                    <button type="submit" class="btn btn-primary">Generar</button>
-                  </formly-form>
-                </form>
+        <div class="row justify-content-center">
+          <div class="col-12 col-lg-4">
+            <div class="widget bg-white top-containter" style="margin-top: 0px !important">
+              <div class="col align-self-center">
+                <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+                  <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
+                  <i class="fa fa-plane fa-stack-1x text-origin"></i>
+                </span>
+
+                <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
+
+                <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+                  Dias disponibles
+                </h3>
+                <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+                  Dia disponible
+                </h3>
               </div>
             </div>
+          </div>
+          <div class="col-12 col-lg-8">
+            <form [formGroup]="formVaca" class="row justify-content-end" (ngSubmit)="newRequest(formVaca.value)">
+              <div class="col-md-6 top-containter">
+                <label for="dateBegin" class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Fecha Inicial *
+                </label>
+                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" />
+              </div>
+              <div class="col-md-6 top-containter">
+                <label for="dateEnd" class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Fecha Final *
+                </label>
+                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" />
+              </div>
+              <div class="col-md-12 top-containter">
+                <label for="celulaInput" class="font-title-general">
+                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                  Observaciones
+                </label>
+                <textarea type="text" rows="4" name="observation_request" class="form-control" [formControl]="formVaca.controls['observation_request']"></textarea>
+              </div>
+              <div class="col-md-4 top-containter">
+                <input type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+              </div>
+            </form>
           </div>
         </div>
         <app-alerts></app-alerts>
