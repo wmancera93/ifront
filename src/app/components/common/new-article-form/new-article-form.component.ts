@@ -5,6 +5,8 @@ import { MyPublicationsService } from '../../../services/billboard/my-publicatio
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Http, RequestOptions } from '@angular/http';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
 
 const formData = new FormData();
 
@@ -14,7 +16,7 @@ const formData = new FormData();
   styleUrls: ['./new-article-form.component.css']
 })
 export class NewArticleFormComponent implements OnInit {
-  public uploader: FileUploader = new FileUploader({ });
+  public uploader: FileUploader = new FileUploader({});
   public hasBaseDropZoneOver: boolean = false;
   public hasAnotherDropZoneOver: boolean = false;
   public title: string;
@@ -25,9 +27,9 @@ export class NewArticleFormComponent implements OnInit {
 
   myForm: FormGroup;
   fileToUpload: File = null;
-  
 
-  constructor(public createArticleService: MyPublicationsService, private fb: FormBuilder) {
+
+  constructor(public createArticleService: MyPublicationsService, private fb: FormBuilder, public alert: AlertsService) {
     this.myForm = this.fb.group({
       'title': [''],
       'summary': [''],
@@ -38,28 +40,32 @@ export class NewArticleFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style','height:20px !important; ');
-   
-  }  
-  onSubmit(value: any): void {
-    let input = new FormData();
+    document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
+
+  }
+  onSubmit(value: any): void {      
+    const selectedItems = value.tags.map(({ display }) => display);
+    let input = new FormData();    
     input.append('title', value.title);
     input.append('summary', value.summary);
     input.append('body', value.body);
-    input.append('tags', value.tags);
+    input.append('tags', selectedItems);
     input.append('image', this.image);
-    this.createArticleService.sendDataNotice(input).subscribe((data: any) => {   
-      
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+    const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
+    this.alert.setAlert(alertConfirmation[0]);
+    this.createArticleService.sendDataNotice(input).subscribe((data: any) => {
+
     })
   }
 
   fileEvent(e) {
     this.image = e.target.files[0];
   }
-  
-    }
-   
-  
+
+}
+
+
 
 
 

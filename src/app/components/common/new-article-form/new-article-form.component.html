@@ -1,4 +1,4 @@
-<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;">
+<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewArt" style="display:none;">
 </button>
 <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog modal-lg" role="document">
@@ -34,7 +34,7 @@
                   <label for="resume">Tema* :</label>
                 </div>
                 <div class="col-9">
-                  <tag-input  name="tags" placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                  <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>
                 </div>
               </div>
               <div class="row">
@@ -44,29 +44,7 @@
                 <div class="col-9 " style="font-size:1rem !important">
                   <input type="file" (change)="fileEvent($event)" name="image" ng2FileSelect [uploader]="uploader" style="width:100% !important;"
                     ngModel required/>
-                  <div>
-                    Progreso:
-                    <div class="progress">
-                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-                    </div>
-                  </div>
-                  <div class="row justify-content-center" style="margin-top: 10px;">
-                    <div class="col-4">
-                      <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
-                        <i class="fa fa-arrow-circle-up" aria-hidden="true"></i> Subir
-                      </button>
-                    </div>
-                    <div class="col-4">
-                      <button type="button" class="btn btn-warning btn-s" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
-                        <i class="fa fa-ban" aria-hidden="true"></i> Cancelar
-                      </button>
-                    </div>
-                    <div class="col-4">
-                      <button type="button" class="btn btn-danger btn-s" (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-                        <i class="fa fa-trash" aria-hidden="true"></i> Remover
-                      </button>
-                    </div>
-                  </div>
+
                 </div>
               </div>
               <div class="row">
@@ -76,8 +54,15 @@
                 </div>
               </div>
               <div class="row justify-content-center" style="margin-top:10px;">
-                <div class="col-3">
-                  <input type="submit" class="buttonCloseForm" value="Enviar" />
+                <div class="col-2">
+                  <input type="submit" class="buttonSubmitForm" value="Guardar" />
+                </div>
+              </div>
+              <div class="border-footer justify-content-end">
+                <div class="col-2">
+                  <div class="buttonCloseForm text-center" data-dismiss="modal">
+                    <h6> Cerrar </h6>
+                  </div>
                 </div>
               </div>
             </form>
