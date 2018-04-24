@@ -20,9 +20,17 @@ export class MyPublicationsService {
     .map((data: Observable<any>) => data);
   }
 
-  sendPublishNews(objectId:any){
-    return this.http.post(environment.apiBaseHr + '/api/v2/articles/publish_or_hide', objectId)
+ putPublishNews(id:any){
+    return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+id+'/publish_or_hide',{})
     .map((data: Observable<any>) => data);
+  }
+
+  deleteArticles(objectID: number)
+  {
+    return this.http.delete(environment.apiBaseHr + '/api/v2/articles/'+objectID)
+    .map((data: Observable<any>) => data);
+
+    
   }
 
 }

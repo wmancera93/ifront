@@ -12,18 +12,18 @@
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
-        <div class="col-3 cursor-general tabDate" (click)="goToForm()">
+        <div class="col-10 col-xl-3 cursor-general tabDate" (click)="goToForm()">
           <i class="fa fa-plus"></i> &nbsp;&nbsp; Crear nueva noticia
         </div>
       </div>
-      <div class="row ">
+      <div class="row">
         <div class="col-12">
           <div class="border-botton-general">
             <div class="row top-containter">
-              <div class="col-9 text-left">
+              <div class="col-12 col-xl-9 text-left">
                 <strong> Mis noticias</strong>
               </div>
-              <div class="col-3">
+              <div class="col-12 col-xl-3">
                 Total de noticias: {{myPublications.length}}
               </div>
             </div>
@@ -31,10 +31,10 @@
           <div class="row justify-content-center top-containter">
             <div class="col-12">
               <div class="widget bg-white-b" *ngFor="let publication of myPublications;">
-                <div class="row">
-                  <div class="col-2">
+                <div class="row justify-content-center">
+                  <div class="col-lg-2 col-4">
                     <div class="row">
-                      <div class="col-12 number-size" >
+                      <div class="col-12 number-size">
                         <div *ngIf="publication.publish"  class="text-warning" (click)="hideArticle(publication)">
                           <i class="fa fa-square-o"></i>
                         </div>
@@ -42,14 +42,14 @@
                           <i class="fa fa-check-square-o"></i>
                         </div>
                       </div>
-                      <div class="col-12 ">
+                      <div class="col-12">
                         Ocultar publicación
                       </div>
                     </div>
                   </div>
-                  <div class="col-6 text-center top-p">
+                  <div class="col-12 col-xl-6 text-center top-p">
                     <div class="row justify-content-center">
-                      <div class="col-12 font-color-default text-lg-left title-size">
+                      <div class="col-12 font-color-default text-lg-left title-size" (click)="viewDetailNew(publication)">
                         <strong>{{publication.title |uppercase}} </strong>
                       </div>
                       <div class="col-12 text-lg-left">
@@ -57,7 +57,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-1 hoverColor">
+                  <div class="col-3 col-xl-1 hoverColor">
                     <div class="row">
                       <div class="col-12 number-size ">
                         {{publication.total_views}}
@@ -67,7 +67,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-1 hoverColor">
+                  <div class="col-3 col-xl-1 hoverColor">
                     <div class="row">
                       <div class="col-12 number-size">
                         {{publication.total_comments}}
@@ -77,9 +77,9 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-1">
+                  <div class="col-3 col-xl-1">
                     <div class="row">
-                      <div class="col-12 number-size text-info">
+                      <div class="col-12 number-size text-info" (click)="EditNew(publication)">
                         <i class="fa fa-pencil"></i>
                       </div>
                       <div class="col-12">
@@ -87,11 +87,14 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-1">
+                  <div class="col-3 col-xl-1">
                     <div class="row">
-                      <div class="col-12 number-size text-danger">
+                      <div  id="hideDan" *ngIf="!publication.publish"  class="col-12 number-size text-danger" style="cursor: pointer;" (click)="deleteNew(publication)">
                         <i class="fa fa-ban"></i>
                       </div>
+                      <div  id="hideDan" *ngIf="publication.publish" class="col-12 number-size " style="cursor: no-drop;">
+                          <i class="fa fa-ban"></i>
+                        </div>
                       <div class="col-12">
                         Eliminar
                       </div>
