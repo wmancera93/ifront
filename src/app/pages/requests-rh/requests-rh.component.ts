@@ -23,13 +23,20 @@ export class RequestsRhComponent implements OnInit {
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService) {
 
+    this.formsRequestsService.getRestartObject()
+      .subscribe((restart) => {
+        if (restart) {
+          this.getObjectRequests();
+        }
+      })
+
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
         if (data === "deletRequest") {
           this.requestsRhService.deleteRequests(this.idDelete)
             .subscribe(
               (data: any) => {
-                console.log(data);               
+                console.log(data);
                 this.requests.my_requests_list.splice(this.requests.my_requests_list.findIndex(request => request.ticket === this.idDelete), 1)
               },
               (error: any) => {
@@ -51,6 +58,10 @@ export class RequestsRhComponent implements OnInit {
       behavior: 'smooth'
     });
 
+    this.getObjectRequests();
+  }
+
+  getObjectRequests() {
     this.requestsRhService.getAllRequests().subscribe((data: any) => {
       if (data.success) {
         this.requests = data.data[0];
@@ -59,7 +70,6 @@ export class RequestsRhComponent implements OnInit {
         this.viewContainer = false;
       }
     })
-
   }
 
   modalAprovers(request: ListRequests) {

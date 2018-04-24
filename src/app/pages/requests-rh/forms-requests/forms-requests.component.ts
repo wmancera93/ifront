@@ -147,13 +147,14 @@ export class FormsRequestsComponent implements OnInit {
 
   }
 
-  submit(model) {
+  newRquest(model) {
     this.requestsRhService.postRequests(model)
       .subscribe(
         (data: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud guardada correctamente' }];
+          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente' }];
           this.alert.setAlert(alertWarning[0]);
+          this.formsRequestsService.setRestartObject(true);
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
