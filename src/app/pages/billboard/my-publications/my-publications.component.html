@@ -16,38 +16,87 @@
           <i class="fa fa-plus"></i> &nbsp;&nbsp; Crear nueva noticia
         </div>
       </div>
-      <div class="row">
+      <div class="row ">
         <div class="col-12">
-          <div class="row">
-            <div class="col-9 notice-title">
-              <strong> Mis noticias</strong>
-            </div>
-            <div class="col-3">
-              Total de noticias: {{myPublications.length}}
+          <div class="border-botton-general">
+            <div class="row top-containter">
+              <div class="col-9 text-left">
+                <strong> Mis noticias</strong>
+              </div>
+              <div class="col-3">
+                Total de noticias: {{myPublications.length}}
+              </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12" *ngFor="let publication of myPublications; let index=index; let colorContactPrimary = odd; let colorContactSecundary = even;" [ngClass]="{  colorContactPrimary:  colorContactPrimary, colorContactSecundary: colorContactSecundary}">
-              <div class="row">
-                <div class="col-1">
-                  <div class="checkbox checkbox-success">
-                    <input id="checkbox3" type="checkbox">
-                    <label for="checkbox3">
-                      Publicar
-                    </label>
+          <div class="row justify-content-center top-containter">
+            <div class="col-12">
+              <div class="widget bg-white-b" *ngFor="let publication of myPublications;">
+                <div class="row">
+                  <div class="col-2">
+                    <div class="row">
+                      <div class="col-12 number-size" >
+                        <div *ngIf="publication.publish"  class="text-warning" (click)="hideArticle(publication)">
+                          <i class="fa fa-square-o"></i>
+                        </div>
+                        <div *ngIf="!publication.publish" class="text-success" (click)="publishArticle(publication)">
+                          <i class="fa fa-check-square-o"></i>
+                        </div>
+                      </div>
+                      <div class="col-12 ">
+                        Ocultar publicación
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div class="col-7">
-                  {{publication.title}} {{publication.summary}}
-                </div>
-                <div class="col-1">
-                  {{publication.total_views}}
-                </div>
-                <div class="col-1">
-                  {{publication.total_comments}}
-                </div>
-                <div class="col-1">
-                  editar
+                  <div class="col-6 text-center top-p">
+                    <div class="row justify-content-center">
+                      <div class="col-12 font-color-default text-lg-left title-size">
+                        <strong>{{publication.title |uppercase}} </strong>
+                      </div>
+                      <div class="col-12 text-lg-left">
+                        {{publication.summary}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1 hoverColor">
+                    <div class="row">
+                      <div class="col-12 number-size ">
+                        {{publication.total_views}}
+                      </div>
+                      <div class="col-12 ">
+                        Visitas
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1 hoverColor">
+                    <div class="row">
+                      <div class="col-12 number-size">
+                        {{publication.total_comments}}
+                      </div>
+                      <div class="col-12">
+                        Comentarios
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="row">
+                      <div class="col-12 number-size text-info">
+                        <i class="fa fa-pencil"></i>
+                      </div>
+                      <div class="col-12">
+                        Editar
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-1">
+                    <div class="row">
+                      <div class="col-12 number-size text-danger">
+                        <i class="fa fa-ban"></i>
+                      </div>
+                      <div class="col-12">
+                        Eliminar
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

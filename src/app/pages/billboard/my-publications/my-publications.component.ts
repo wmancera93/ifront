@@ -9,19 +9,35 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 })
 export class MyPublicationsComponent implements OnInit {
 
-  public myPublications : PublicArticle[] = [];
+  public myPublications: PublicArticle[] = [];
+  public totalNews: number = 0;
 
-  constructor(public myPublicationsService : MyPublicationsService) { }
+  constructor(public myPublicationsService: MyPublicationsService) { }
 
   ngOnInit() {
 
-    this.myPublicationsService.getMyArticles().subscribe((data:any)=>{
-      this.myPublications = data.data;
+    this.myPublicationsService.getMyArticles().subscribe((data: any) => {
+      this.myPublications = data.data;   
+
     })
   }
-  goToForm(){
+  goToForm() {
     document.getElementById('btn-newArt').click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+    document.getElementById("bodyGeneral").removeAttribute('style');
+  }
+
+  publishArticle(infoPub: PublicArticle) {
+    let parameter = { id: infoPub.id }
+    this.myPublicationsService.sendPublishNews(parameter).subscribe((data: any) => {
+      infoPub.publish = data.data[0].publish;
+    })
+
+  }
+  hideArticle(infoPub: PublicArticle) {
+    let parameter = { id: infoPub.id }
+    this.myPublicationsService.sendPublishNews(parameter).subscribe((data: any) => {
+      infoPub.publish = data.data[0].publish;
+    })
   }
 
 }
