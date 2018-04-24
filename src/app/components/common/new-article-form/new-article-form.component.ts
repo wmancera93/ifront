@@ -45,16 +45,16 @@ export class NewArticleFormComponent implements OnInit {
   }
   onSubmit(value: any): void {      
     const selectedItems = value.tags.map(({ display }) => display);
-    let input = new FormData();    
-    input.append('title', value.title);
-    input.append('summary', value.summary);
-    input.append('body', value.body);
-    input.append('tags', selectedItems);
-    input.append('image', this.image);
+    let newArticleForm = new FormData();    
+    newArticleForm.append('title', value.title);
+    newArticleForm.append('summary', value.summary);
+    newArticleForm.append('body', value.body);
+    newArticleForm.append('tags', selectedItems);
+    newArticleForm.append('image', this.image);
     (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
     const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
     this.alert.setAlert(alertConfirmation[0]);
-    this.createArticleService.sendDataNotice(input).subscribe((data: any) => {
+    this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
 
     })
   }
