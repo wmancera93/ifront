@@ -16,6 +16,9 @@ export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
 
   formVaca: any;
+  formVacaComp: any;
+  formPerm: any;
+
   model = {};
   fields: FormlyFieldConfig[] = [];
 
@@ -25,6 +28,9 @@ export class FormsRequestsComponent implements OnInit {
     private fb: FormBuilder) {
     this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
       this.formVaca = new FormGroup({});
+      this.formVacaComp = new FormGroup({});
+      this.formPerm = new FormGroup({});
+
       this.formRequests = data;
       this.model = {};
       this.fields = [];
@@ -40,70 +46,21 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'VCCP':
-          this.model = { request_type_id: this.formRequests.id, days_request: '', observation_request: '' };
-          this.fields = [{
-            key: 'days_request',
-            type: 'input',
-            templateOptions: {
-              type: 'number',
-              label: 'Dias a solicitar',
-              cols: 12,
-              required: true,
-            }
-          },
-          {
-            key: 'observation_request',
-            type: 'textarea',
-            templateOptions: {
-              type: 'date',
-              label: 'Observaciones',
-              cols: 12,
-              required: true,
-            }
-          }];
+          this.formVacaComp = fb.group({
+            request_type_id: this.formRequests.id,
+            days_request: '',
+            observation_request: '',
+          });
+
           break;
         case 'PERM':
-          this.model = { request_type_id: this.formRequests.id, date_begin: '', date_end: '', file_support: '', observation_request: '' };
-          this.fields = [{
-            key: 'date_begin',
-            type: 'input',
-            templateOptions: {
-              type: 'date',
-              label: 'Fecha Inicial',
-              cols: 12,
-              required: true,
-            }
-          },
-          {
-            key: 'date_end',
-            type: 'input',
-            templateOptions: {
-              type: 'date',
-              label: 'Fecha Final',
-              cols: 12,
-              required: true,
-            }
-          },
-          {
-            key: 'file_support',
-            type: 'input',
-            templateOptions: {
-              type: 'file',
-              label: 'Adjuntar archivo de soporte',
-              cols: 12,
-              required: true,
-            }
-          },
-          {
-            key: 'observation_request',
-            type: 'textarea',
-            templateOptions: {
-              type: 'date',
-              label: 'Observaciones',
-              cols: 12,
-              required: true,
-            }
-          }];
+          this.formPerm = fb.group({
+            request_type_id: this.formRequests.id,
+            date_begin: '',
+            date_end: '',
+            file_support: '',
+            observation_request: '',
+          });
           break;
         case 'CESA':
 
@@ -123,8 +80,21 @@ export class FormsRequestsComponent implements OnInit {
   ngOnInit() {
 
   }
+  public file: any;
+  fileEvent(e) {
+    this.file = e.target.files[0];
+  }
 
   newRequest(model) {
+    if (this.formRequests.id_activity === 'PERM') {
+      let modelFromdata = new FormData();
+      modelFromdata.append('request_type_id', model.request_type_id);
+      modelFromdata.append('date_begin', model.date_begin);
+      modelFromdata.append('date_end', model.date_end);
+      modelFromdata.append('file_support', this.file);
+      modelFromdata.append('observation_request', model.observation_request);
+      model = modelFromdata;
+    }
     this.requestsRhService.postRequests(model)
       .subscribe(
         (data: any) => {
