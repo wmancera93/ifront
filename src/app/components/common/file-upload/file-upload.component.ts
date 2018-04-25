@@ -8,10 +8,16 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 })
 export class FileUploadComponent implements OnInit {
   @Input() nameFile: string = '';
+  @Input() extensions?: string = '';
+
+  public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
   constructor(public fileUploadService:FileUploadService) { }
 
   ngOnInit() {
+    if(this.extensions !== ''){
+      this.acceptExtensions = this.extensions;
+    }
   }
 
   public progressBar: string = '0%';

@@ -9,7 +9,7 @@
         <span [hidden]="textFileUpload < 30">...</span>
       </div>
     </div>
-    <input [attr.id]="nameFile" type="file" class="form-control-file"
+    <input [attr.id]="nameFile" type="file" class="form-control-file" [attr.accept]="acceptExtensions"
       (change)="fileEvent($event)" />
   </div>
   <div class="col-12">

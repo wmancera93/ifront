@@ -18,13 +18,14 @@ export class FormsRequestsComponent implements OnInit {
 
   public file: any;
   public filePermisionMarriage: string = 'fileMarriage';
+  public extensions:string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
-  formVaca: any;
-  formVacaComp: any;
-  formPerm: any;
+  public formVaca: any;
+  public formVacaComp: any;
+  public formPerm: any;
 
-  model = {};
-  fields: FormlyFieldConfig[] = [];
+  public model = {};
+  public fields: FormlyFieldConfig[] = [];
 
   constructor(private requestsRhService: RequestsRhService,
     public formsRequestsService: FormsRequestsService,
@@ -35,7 +36,6 @@ export class FormsRequestsComponent implements OnInit {
     this.fileUploadService.getObjetFile()
       .subscribe((object) => {
         this.file = object;
-        console.log(this.file)
       })
 
     this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
@@ -84,8 +84,11 @@ export class FormsRequestsComponent implements OnInit {
           break;
       }
 
-      document.getElementById('btn_form_requests').click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+      if (document.getElementById('form_requests').className !== 'modal show') {
+        document.getElementById('btn_form_requests').click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
+
     });
   }
 
