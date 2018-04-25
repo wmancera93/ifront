@@ -55,9 +55,10 @@
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
                   <div class="col-md-5 col-12">
-                    <input *ngIf="showSubmit" type="submit" value="Guardar" class="btn btn-secondary btn-block cursor-general" />
-                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
-                    />
+                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                   </div>
                 </div>
               </div>
@@ -103,9 +104,10 @@
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
                   <div class="col-md-5 col-12">
-                    <input *ngIf="showSubmit" type="submit" value="Guardar" class="btn btn-secondary btn-block cursor-general" />
-                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
-                    />
+                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                   </div>
                 </div>
               </div>
@@ -146,9 +148,10 @@
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
                   <div class="col-lg-3 col-md-4 col-12">
-                    <input *ngIf="showSubmit" type="submit" value="Guardar" class="btn btn-secondary btn-block cursor-general" />
-                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
-                    />
+                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                   </div>
                 </div>
               </div>
