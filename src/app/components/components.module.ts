@@ -33,6 +33,7 @@ import { TagInputModule } from 'ngx-chips';
 import { TimeLineApproversComponent } from './common/time-line-approvers/time-line-approvers.component';
 
 import { FileUploadModule } from 'ng2-file-upload';
+import { FileUploadComponent } from './common/file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     AutoCompleteComponent,
     PrintDataTableComponent,
     NewArticleFormComponent,   
-    TimeLineApproversComponent
+    TimeLineApproversComponent, 
+    FileUploadComponent
   ],
   exports: [
     HeaderComponent,
@@ -86,7 +88,8 @@ import { FileUploadModule } from 'ng2-file-upload';
     DataTableComponent,
     PrintDataTableComponent,
     NewArticleFormComponent,
-    TimeLineApproversComponent
+    TimeLineApproversComponent,
+    FileUploadComponent
   ],
   providers: [
     // ToasterService
