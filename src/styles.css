@@ -1100,6 +1100,16 @@ cursor: pointer;
     padding-left: 5px !important;
     padding-right: 5px !important;
 }
+
+.search-news-icon{
+   
+    margin-left: 95% !important;
+    background-color: transparent;
+    border: none;
+    margin-top: -24px !important;
+    float: left;
+
+}
 /* -------------------------------------- */
 
 /* Corporate Docs    */
@@ -2693,6 +2703,15 @@ a.close-canvas-menu:hover {
     .m-t-h {
         margin-top: 5px !important;
     }
+    .search-news-icon{
+   
+        margin-left: 95% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -29px !important;
+        float: left;
+    
+    }
 }
 
 /* ipad horizontal */
@@ -3253,6 +3272,15 @@ a.close-canvas-menu:hover {
     .m-t-h {
         margin-top: 3px !important;
     }
+    .search-news-icon{
+   
+        margin-left: 90% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -24px !important;
+        float: left;
+    
+    }
 
 }
 /* mobile vertical */
@@ -3489,6 +3517,15 @@ a.close-canvas-menu:hover {
     .text-center-publish{
         text-align: center !important;
      }
+     .search-news-icon{
+   
+        margin-left: 90% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -24px !important;
+        float: left;
+    
+    }
 }
 
 
