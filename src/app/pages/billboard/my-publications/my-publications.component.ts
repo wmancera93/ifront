@@ -4,6 +4,7 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
+import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 
 @Component({
   selector: 'app-my-publications',
@@ -20,7 +21,9 @@ export class MyPublicationsComponent implements OnInit {
 
   constructor(public myPublicationsService: MyPublicationsService,
     public alert: AlertsService,
-    public billboardSharedService: BillboardService) {
+    public billboardSharedService: BillboardService,
+  public editEditSharedService : EditArticleService) {
+
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
       if (data == true) {
         this.getDataPublications();
@@ -86,6 +89,12 @@ export class MyPublicationsComponent implements OnInit {
     console.log(infoPub)
   }
 
+  editNew(infoPub: PublicArticle){    
+    this.editEditSharedService.setEditNew(infoPub);
+    document.getElementById('btn-newArt').click();
+    document.getElementById("bodyGeneral").removeAttribute('style');
+  }
+
   deleteNew(infoPub: PublicArticle) {
 
     this.idDelete = infoPub.id;
@@ -97,8 +106,6 @@ export class MyPublicationsComponent implements OnInit {
       typeConfirmation: 'deleteArticle'
     }];
     this.alert.setAlert(this.alertWarning[0]);
-
-
   }
 
 }

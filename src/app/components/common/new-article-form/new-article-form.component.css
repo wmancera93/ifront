@@ -33,16 +33,7 @@ input:focus {
    outline:0px;      
    transition:all .5s ease-in-out;
 }
-input{
-    -webkit-appearance: textfield;
-    -webkit-rtl-ordering: logical;
-    border-width: 1px !important;
-    cursor: text;
-    padding: 1px;   
-    border-style: inset;
-    border-color: initial;
-    border-image: initial;
-}
+
 
 
 

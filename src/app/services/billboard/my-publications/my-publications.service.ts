@@ -24,13 +24,16 @@ export class MyPublicationsService {
     return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+id+'/publish_or_hide',{})
     .map((data: Observable<any>) => data);
   }
+  putEditArticles(objectID: number,objectEdit: any)
+  {
+    return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+objectID,{objectEdit})
+    .map((data: Observable<any>) => data);    
+  }
 
   deleteArticles(objectID: number)
   {
     return this.http.delete(environment.apiBaseHr + '/api/v2/articles/'+objectID)
-    .map((data: Observable<any>) => data);
-
-    
+    .map((data: Observable<any>) => data);    
   }
 
 }

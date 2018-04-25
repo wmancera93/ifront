@@ -5,60 +5,86 @@
     <div class="modal-content">
       <div class="modal-header borderLine-title row-hr justify-content-center">
         <h4 class="modal-title titleColor text-shadow">Formulario noticia</h4>
-
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-            <form #f='ngForm' (ngSubmit)="onSubmit(f.value)" enctype="multipart/form-data">
+            <form [formGroup]='formNewArticle' (ngSubmit)="onSubmitNewArticle(formNewArticle.value)">
               <div class="row">
-                <div class="col-3 text-center">
-                  <label for="title">Título* :</label>
+                <div class="col-3 text-left">
+                  <label for="title" class="font-title-general">
+                    <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*</label>
                 </div>
                 <div class="col-9">
-                  <input type="text" id="titleInput" placeholder="Título de la noticia" name="title" style="width:100% !important;" ngModel
-                    required/>
+                  <input type="text" placeholder="Título de la noticia" name="title" style="width:100% !important;" [formControl]="formNewArticle.controls['title']"
+                  />
                 </div>
               </div>
               <div class="row">
-                <div class="col-3 text-center">
-                  <label for="resume">Resumen* :</label>
+                <div class="col-3 text-left">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-bars text-primary-hr"></i>
+                    Resumen*
+                  </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" id="summaryInput" name="summary" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
-                    ngModel required/>
+                  <textarea name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
+                    [formControl]="formNewArticle.controls['summary']">                 
+                    </textarea>
                 </div>
               </div>
               <div class="row">
-                <div class="col-3 text-center">
-                  <label for="resume">Tema* :</label>
+                <div class="col-3 text-left">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema* </label>
                 </div>
-                <div class="col-9">
-                  <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                <div *ngIf="!activeShowThemes">
+                  <div class="col-9 text-left">
+                    <tag-input  theme='dark' placeholder="Escriba un tema + enter" ></tag-input>
+                  </div>
+                </div>
+                <div *ngIf="activeShowThemes">
+                  <div class="col-xl-9 col-md-6 col-12 padding-themes-newspaper" *ngFor="let theme of showLabelTheme">
+                    <div class="themes-newspaper">
+                      {{theme}}
+                    </div>
+                  </div>
+                  <div class="col-9 text-left">
+                    <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter"></tag-input>
+                  </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-3 text-center ">
-                  <label for="resume">Cargar archivos* :</label>
-                </div>
-                <div class="col-9 " style="font-size:1rem !important">
+                <div class="col-3 text-left">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*</label>
+                </div>               
+                  <div class="col-9 " *ngIf="!activeEditImage" style="font-size:1rem !important">
+                    <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
+                  </div>                
+                <div class="col-9 " *ngIf="activeEditImage" style="font-size:1rem !important">
+                  <label for="resume" class="font-title-general">
+                    {{nameImage}} </label>
                   <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12" style="padding-top: 20px">
-                  <ckeditor debounce="500" name="body" ngModel required>
+                  <ckeditor debounce="500" name="body">
                   </ckeditor>
                 </div>
               </div>
               <div class="row justify-content-center" style="margin-top:10px;">
-                <div class="col-2">
+                <div class="col-12 col-lg-2" *ngIf="!activeButtonEdit">
+                  <input type="submit" class="buttonSubmitForm" value="Guardar" />
+                </div>
+                <div class="col-12 col-lg-2" *ngIf="activeButtonEdit">
                   <input type="submit" class="buttonSubmitForm" value="Guardar" />
                 </div>
               </div>
               <div class="border-footer justify-content-end">
-                <div class="col-2">
-                  <div class="buttonCloseForm text-center" data-dismiss="modal">
+                <div class="col-12 col-lg-2">
+                  <div class="buttonCloseForm btn-close-modals text-center" data-dismiss="modal">
                     <h6> Cerrar </h6>
                   </div>
                 </div>
