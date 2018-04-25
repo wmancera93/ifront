@@ -1649,36 +1649,6 @@ border-bottom: 1px solid  #dddd;
 }
 
 
-.buttonCloseForm{
-   
-    background-color:var(--btn-primary) !important;             
-    border-color: transparent;
-    width: 100%;
-    color:white !important;
-    padding: 1px 2px;
-    /**/
-    -webkit-transition: all 200ms ease-in;
-    -webkit-transform: scale(1); 
-    -ms-transition: all 200ms ease-in;
-    -ms-transform: scale(1); 
-    -moz-transition: all 200ms ease-in;
-    -moz-transform: scale(1);
-    transition: all 200ms ease-in;
-    transform: scale(1);   
-}
-.buttonCloseForm:hover{       
-        cursor: pointer !important;        
-        color: var(--btn-primary-hover);    
-        z-index: 2;
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1.05);
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1.05);   
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1.05);
-        transition: all 200ms ease-in;
-        transform: scale(1.05); 
-}
 
 .buttonSubmitForm{
    
