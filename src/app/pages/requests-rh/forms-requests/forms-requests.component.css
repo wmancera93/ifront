@@ -25,37 +25,3 @@
 {
     padding-top: 10px;
 }
-
-
-.buttonCloseRequest{
-    cursor: pointer; 
-    background-color:var(--btn-primary);
-      border-radius: 2px;
-    width: 15%;  
-    color:white !important;
-    padding-top: 5px;
-    /**/
-    -webkit-transition: all 200ms ease-in;
-    -webkit-transform: scale(1); 
-    -ms-transition: all 200ms ease-in;
-    -ms-transform: scale(1); 
-    -moz-transition: all 200ms ease-in;
-    -moz-transform: scale(1);
-    transition: all 200ms ease-in;
-    transform: scale(1);   
-}
-.buttonCloseRequest:hover{       
-        cursor: pointer;        
-        background-color:var(--btn-primary-hover);   
-        /*box-shadow: 0px 0px 100px #000000;*/
-        z-index: 2;
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1.05);
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1.05);   
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1.05);
-        transition: all 200ms ease-in;
-        transform: scale(1.05); 
-}
-
