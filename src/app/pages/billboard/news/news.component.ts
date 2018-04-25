@@ -21,8 +21,7 @@ public newList : PublicArticle[] = [];
     });
 
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
-      this.newList = data.data;   
-      console.log(this.newList)
+      this.newList = data.data;  
     })
   }
 

@@ -170,7 +170,7 @@ a {
 } */
 
 .font-color-default {
-    color: #2f4050;
+    color: #2f4050 !important;
 }
 
 .font-title-general {
