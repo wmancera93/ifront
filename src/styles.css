@@ -254,6 +254,39 @@ button, input, optgroup, select, textarea {
     cursor: pointer;
 }
 
+.btn-close-modals{
+    cursor: pointer; 
+    background-color:var(--btn-primary);
+      border-radius: 2px;
+    width: 15%;  
+    color:white !important;
+    padding-top: 5px;
+    /**/
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
+}
+.btn-close-modals:hover{       
+        cursor: pointer;        
+        background-color:var(--btn-primary-hover);   
+        /*box-shadow: 0px 0px 100px #000000;*/
+        z-index: 2;
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1.05);
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1.05);   
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1.05);
+        transition: all 200ms ease-in;
+        transform: scale(1.05); 
+}
+
+
 .padding-back{
     padding-top: 5px;
 }
@@ -634,37 +667,6 @@ cursor: pointer;
 
 /* Modal Contact Information*/
 
-.buttonCloseEmployee{
-   
-    background-color:var(--btn-primary);
-      border-radius: 30px;
-    width: 15%;  
-    color:white !important;
-    padding-top: 5px;
-    /**/
-    -webkit-transition: all 200ms ease-in;
-    -webkit-transform: scale(1); 
-    -ms-transition: all 200ms ease-in;
-    -ms-transform: scale(1); 
-    -moz-transition: all 200ms ease-in;
-    -moz-transform: scale(1);
-    transition: all 200ms ease-in;
-    transform: scale(1);   
-}
-.buttonCloseEmployee:hover{       
-        cursor: pointer;        
-        color:var(--btn-primary-hover);   
-        /*box-shadow: 0px 0px 100px #000000;*/
-        z-index: 2;
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1.05);
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1.05);   
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1.05);
-        transition: all 200ms ease-in;
-        transform: scale(1.05); 
-}
 .borderLine-title
 {
     border-bottom: 3px solid var(--btn-primary) !important;   

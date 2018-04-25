@@ -22,8 +22,12 @@ export class TimeLineApproversComponent implements OnInit {
             if (detail.success) {
               this.detailRequets = detail.data;
               this.fileSupport = this.detailRequets[0].request.file_support.url;
-              document.getElementById('btn_aprovers_requests').click();
-              document.getElementById("bodyGeneral").removeAttribute('style');
+
+              if (document.getElementById('aprovers_requests').className !== 'modal show') {
+                document.getElementById('btn_aprovers_requests').click();
+                document.getElementById("bodyGeneral").removeAttribute('style');
+              }
+
               this.viewModal = true;
             }
           })
