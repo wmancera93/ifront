@@ -9,8 +9,12 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 })
 export class NewsComponent implements OnInit {
 
+public titleNew: string;
 public newList : PublicArticle[] = [];
-public searchNotice : string;
+public uploadNewList : PublicArticle[] = [];
+public searchNotice : string = '' ;
+public validateNoData : boolean = false;
+
 
   constructor(public myPublicationsService: MyPublicationsService) { }
 
@@ -21,11 +25,25 @@ public searchNotice : string;
       behavior: 'smooth'
     });
 
-    console.log(this.searchNotice)
-
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
       this.newList = data.data;  
     })
+  }
+
+  enterTitleNew()
+  { 
+    this.searchNotice = this.titleNew;
+  }
+
+  goToSearchTitleNew()
+  { 
+    console.log(this.searchNotice)
+    this.uploadNewList = this.newList;
+    this.newList = this.newList.filter((pub: any)=>pub.title.toLowerCase().indexOf(this.searchNotice)>=0);
+   if(this.newList.length == 0)
+   {
+     this.validateNoData = true;
+   }
   }
 
 }
