@@ -6,6 +6,7 @@ import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 
 @Component({
   selector: 'app-forms-requests',
@@ -14,6 +15,9 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 })
 export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
+
+  public file: any;
+  public filePermisionMarriage: string = 'fileMarriage';
 
   formVaca: any;
   formVacaComp: any;
@@ -25,7 +29,15 @@ export class FormsRequestsComponent implements OnInit {
   constructor(private requestsRhService: RequestsRhService,
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public fileUploadService: FileUploadService) {
+
+    this.fileUploadService.getObjetFile()
+      .subscribe((object) => {
+        this.file = object;
+        console.log(this.file)
+      })
+
     this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
@@ -79,10 +91,6 @@ export class FormsRequestsComponent implements OnInit {
 
   ngOnInit() {
 
-  }
-  public file: any;
-  fileEvent(e) {
-    this.file = e.target.files[0];
   }
 
   newRequest(model) {

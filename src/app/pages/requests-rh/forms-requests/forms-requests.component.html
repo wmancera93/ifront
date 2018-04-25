@@ -109,7 +109,7 @@
           </div>
         </div>
         <div *ngIf="formRequests.id_activity == 'PERM'" class="row justify-content-left">
-          <div class="col-12 col-lg-12" *ngIf="formRequests.available_days != 0">
+          <div class="col-12 col-lg-12">
             <form [formGroup]="formPerm" class="row justify-content-left" (ngSubmit)="newRequest(formPerm.value)">
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
@@ -125,12 +125,12 @@
                 </label>
                 <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" />
               </div>
-              <div class="col-md-6 col-12 top-containter">
+              <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Adjuntar soporte *
                 </label>
-                <input type="file" name="file_support" class="form-control" [formControl]="formPerm.controls['file_support']" (change)="fileEvent($event)"/>
+                <app-file-upload [nameFile]='filePermisionMarriage'></app-file-upload>
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
