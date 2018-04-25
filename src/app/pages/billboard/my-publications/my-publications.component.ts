@@ -13,30 +13,39 @@ import { BillboardService } from '../../../services/shared/common/billboard/bill
 export class MyPublicationsComponent implements OnInit {
 
   public myPublications: PublicArticle[] = [];
-  public totalNews: number = 0;  
+  public totalNews: number = 0;
   private alertWarning: Alerts[];
-  public idDelete : number = 0;
-  
+  public idDelete: number = 0;
 
-  constructor(public myPublicationsService: MyPublicationsService, 
+
+  constructor(public myPublicationsService: MyPublicationsService,
     public alert: AlertsService,
-    public billboardSharedService: BillboardService ) {
-    this.billboardSharedService.getUpdateNew().subscribe((data:any)=>{
-      if(data == true)
-      {
-        this.getDataPublications()
+    public billboardSharedService: BillboardService) {
+    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
+      if (data == true) {
+        this.getDataPublications();
       }
-    })  
-    this.alert.getActionConfirm().subscribe((data:any)=>{
-      if(data == "deleteArticle"){
+    })
+    this.alert.getActionConfirm().subscribe((data: any) => {
+
+      if (data == "deleteArticle") {
         this.myPublicationsService.deleteArticles(this.idDelete)
-        .subscribe((data:any)=>{        
-        })
-        this.myPublicationsService.getMyArticles().subscribe((data:any)=>{          
-        })
+          .subscribe((data: any) => {
+            if(data.success == true){
+            this.getDataPublications();
+            this.alertWarning = [{
+              type: 'success',
+              title: 'Confirmación',
+              message: 'Artículo eliminado exitosamente',
+              confirmation: false,
+              typeConfirmation: ''
+            }];
+            this.alert.setAlert(this.alertWarning[0]);
+            }
+          })
       }
-    }) 
-   }
+    })
+  }
 
   ngOnInit() {
     window.scroll({
@@ -45,18 +54,14 @@ export class MyPublicationsComponent implements OnInit {
       behavior: 'smooth'
     });
 
-this.getDataPublications();
-    
-  
-
+    this.getDataPublications();
   }
 
-getDataPublications()
-{
-  this.myPublicationsService.getMyArticles().subscribe((data: any) => {
-    this.myPublications = data.data;   
-  })
-}
+  getDataPublications() {
+    this.myPublicationsService.getMyArticles().subscribe((data: any) => {
+      this.myPublications = data.data;
+    })
+  }
 
   goToForm() {
     document.getElementById('btn-newArt').click();
@@ -64,27 +69,26 @@ getDataPublications()
   }
 
   publishArticle(infoPub: PublicArticle) {
-    let parameter =  infoPub.id;
+    let parameter = infoPub.id;
     this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
       infoPub.publish = data.data[0].publish;
     })
 
   }
   hideArticle(infoPub: PublicArticle) {
-    let parameter =  infoPub.id;
+    let parameter = infoPub.id;
     this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
       infoPub.publish = data.data[0].publish;
     })
   }
 
-  viewDetailNew(infoPub : PublicArticle)  { 
+  viewDetailNew(infoPub: PublicArticle) {
     console.log(infoPub)
   }
 
-  deleteNew(infoPub: PublicArticle)
-  {
-    
-      this.idDelete = infoPub.id;    
+  deleteNew(infoPub: PublicArticle) {
+
+    this.idDelete = infoPub.id;
     this.alertWarning = [{
       type: 'warning',
       title: 'Confirmación',
@@ -93,8 +97,8 @@ getDataPublications()
       typeConfirmation: 'deleteArticle'
     }];
     this.alert.setAlert(this.alertWarning[0]);
-  
-    
+
+
   }
 
 }

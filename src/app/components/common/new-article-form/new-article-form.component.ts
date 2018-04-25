@@ -26,7 +26,8 @@ export class NewArticleFormComponent implements OnInit {
   public themes: string[];
   public notice: string;
   public image: string;
-  public uploadListNews : boolean;
+  public uploadListNews : boolean;  
+  public extensions:string = '.gif, .png, .jpeg, .jpg '; 
 
   public fileImageNew: string = 'fileImageNew';
 

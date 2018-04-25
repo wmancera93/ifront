@@ -14,14 +14,23 @@
       <div class="row justify-content-center top-containter">
         <div class="col-10 col-xl-6 cursor-general">
           <div class="searchBar-new">
-            <input  [(ngModel)]="searchNotice" type="text" class="form-control" placeholder="Buscar noticia..." maxlength="25" >
-            <i class="search-news-icon fa fa-search icon-search  detectLetter general-cursor"></i>
+            <input  [(ngModel)]="titleNew" type="text" class="form-control"  (keyup)="enterTitleNew()" 
+            placeholder="Buscar noticia..." maxlength="25"  (keyup.enter)="goToSearchTitleNew()">
+            <i class="search-news-icon fa fa-search icon-search  detectLetter general-cursor" (click)="goToSearchTitleNew()"></i>
           </div>
         </div>
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12">
-          <div class="widget bg-white-b" *ngFor="let new of newList;">
+            <div class="row justify-content-center top-containter" *ngIf="validateNoData">
+                <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+                  <div class="alert alert-warning" role="alert">
+                    No existe 
+                    <strong>Noticia</strong>&nbsp;con su búsqueda
+                  </div>
+                </div>
+              </div>
+          <div class="widget bg-white-b" *ngFor="let new of newList;">            
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
                 <img alt="image" class="img-rounded m-t-xs" src="{{new.image.url}}" style="height: 100px; width: 100px">
@@ -69,10 +78,10 @@
                     {{new.total_comments}} Comentarios
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
