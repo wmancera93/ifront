@@ -9,6 +9,8 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 export class FileUploadComponent implements OnInit {
   @Input() nameFile: string = '';
   @Input() extensions?: string = '';
+  public progressBar: string = '0%';
+  public textFileUpload: string = '';
 
   public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
@@ -16,12 +18,13 @@ export class FileUploadComponent implements OnInit {
 
   ngOnInit() {
     if(this.extensions !== ''){
-      this.acceptExtensions = this.extensions;
+      this.acceptExtensions = this.extensions;      
     }
-  }
 
-  public progressBar: string = '0%';
-  public textFileUpload: string = '';
+    this.progressBar = '0%';
+    this.textFileUpload = '';
+  
+  }  
 
   clickFile() {
     document.getElementById(this.nameFile).click();
