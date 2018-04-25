@@ -174,7 +174,7 @@ a {
 } */
 
 .font-color-default {
-    color: #2f4050;
+    color: #2f4050 !important;
 }
 
 .font-title-general {
@@ -1084,6 +1084,32 @@ cursor: pointer;
     padding: 7px;
     border-top: 1px solid #eceeef;
 }
+
+.themes-news {
+    text-align: center;
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 3px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    width: 80%;
+    margin-bottom: 3px;
+}
+
+.padding-themes-news {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.search-news-icon{
+   
+    margin-left: 95% !important;
+    background-color: transparent;
+    border: none;
+    margin-top: -24px !important;
+    float: left;
+
+}
 /* -------------------------------------- */
 
 /* Corporate Docs    */
@@ -1241,7 +1267,7 @@ border-bottom: 1px solid  #dddd;
     transition: transform .2s;
 }
 .detectLetter{   
-    color: var(--btn-primary-hover) !important;
+    color: var(--btn-primary) !important;
     cursor: pointer;
     transform: scale(1.2);
 }
@@ -1683,6 +1709,12 @@ border-bottom: 1px solid  #dddd;
         -moz-transform: scale(1.05);
         transition: all 200ms ease-in;
         transform: scale(1.05); 
+}
+
+.searchBar-new
+{
+    width: auto !important;
+    padding: 10px;
 }
 
   /* BACKGROUNDS */
@@ -2671,6 +2703,15 @@ a.close-canvas-menu:hover {
     .m-t-h {
         margin-top: 5px !important;
     }
+    .search-news-icon{
+   
+        margin-left: 95% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -29px !important;
+        float: left;
+    
+    }
 }
 
 /* ipad horizontal */
@@ -3231,6 +3272,15 @@ a.close-canvas-menu:hover {
     .m-t-h {
         margin-top: 3px !important;
     }
+    .search-news-icon{
+   
+        margin-left: 90% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -24px !important;
+        float: left;
+    
+    }
 
 }
 /* mobile vertical */
@@ -3467,6 +3517,15 @@ a.close-canvas-menu:hover {
     .text-center-publish{
         text-align: center !important;
      }
+     .search-news-icon{
+   
+        margin-left: 90% !important;
+        background-color: transparent;
+        border: none;
+        margin-top: -24px !important;
+        float: left;
+    
+    }
 }
 
 

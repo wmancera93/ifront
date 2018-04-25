@@ -3,6 +3,7 @@ import { MyPublicationsService } from '../../../services/billboard/my-publicatio
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 
 @Component({
   selector: 'app-my-publications',
@@ -17,8 +18,15 @@ export class MyPublicationsComponent implements OnInit {
   public idDelete : number = 0;
   
 
-  constructor(public myPublicationsService: MyPublicationsService, public alert: AlertsService) {
-    
+  constructor(public myPublicationsService: MyPublicationsService, 
+    public alert: AlertsService,
+    public billboardSharedService: BillboardService ) {
+    this.billboardSharedService.getUpdateNew().subscribe((data:any)=>{
+      if(data == true)
+      {
+        this.getDataPublications()
+      }
+    })  
     this.alert.getActionConfirm().subscribe((data:any)=>{
       if(data == "deleteArticle"){
         this.myPublicationsService.deleteArticles(this.idDelete)
@@ -37,13 +45,19 @@ export class MyPublicationsComponent implements OnInit {
       behavior: 'smooth'
     });
 
-
-    this.myPublicationsService.getMyArticles().subscribe((data: any) => {
-      this.myPublications = data.data;   
-    })
+this.getDataPublications();
+    
   
 
   }
+
+getDataPublications()
+{
+  this.myPublicationsService.getMyArticles().subscribe((data: any) => {
+    this.myPublications = data.data;   
+  })
+}
+
   goToForm() {
     document.getElementById('btn-newArt').click();
     document.getElementById("bodyGeneral").removeAttribute('style');

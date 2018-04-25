@@ -1,4 +1,4 @@
-<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewArt" style="display:none;">
+<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;">
 </button>
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog modal-lg" role="document">
@@ -42,8 +42,7 @@
                   <label for="resume">Cargar archivos* :</label>
                 </div>
                 <div class="col-9 " style="font-size:1rem !important">
-                  <input type="file" (change)="fileEvent($event)" name="image" ng2FileSelect [uploader]="uploader" style="width:100% !important;"
-                    ngModel required/>
+                  <app-file-upload [nameFile]="fileImageNew"></app-file-upload>
                 </div>
               </div>
               <div class="row">
