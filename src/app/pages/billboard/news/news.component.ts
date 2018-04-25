@@ -10,6 +10,7 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 export class NewsComponent implements OnInit {
 
 public newList : PublicArticle[] = [];
+public searchNotice : string;
 
   constructor(public myPublicationsService: MyPublicationsService) { }
 
@@ -19,6 +20,8 @@ public newList : PublicArticle[] = [];
       left: 0,
       behavior: 'smooth'
     });
+
+    console.log(this.searchNotice)
 
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
       this.newList = data.data;  

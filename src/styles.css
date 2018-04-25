@@ -1080,6 +1080,22 @@ cursor: pointer;
     padding: 7px;
     border-top: 1px solid #eceeef;
 }
+
+.themes-news {
+    text-align: center;
+    background-color: var(--primary);
+    color: #fff;
+    border-radius: 3px;
+    padding-top: 2px;
+    padding-bottom: 3px;
+    width: 80%;
+    margin-bottom: 3px;
+}
+
+.padding-themes-news {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
 /* -------------------------------------- */
 
 /* Corporate Docs    */
@@ -1237,7 +1253,7 @@ border-bottom: 1px solid  #dddd;
     transition: transform .2s;
 }
 .detectLetter{   
-    color: var(--btn-primary-hover) !important;
+    color: var(--btn-primary) !important;
     cursor: pointer;
     transform: scale(1.2);
 }
@@ -1679,6 +1695,12 @@ border-bottom: 1px solid  #dddd;
         -moz-transform: scale(1.05);
         transition: all 200ms ease-in;
         transform: scale(1.05); 
+}
+
+.searchBar-new
+{
+    width: auto !important;
+    padding: 10px;
 }
 
   /* BACKGROUNDS */
