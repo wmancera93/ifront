@@ -7,6 +7,8 @@ import { Observable } from 'rxjs/Observable';
 import { Http, RequestOptions } from '@angular/http';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
+import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 
 const formData = new FormData();
 
@@ -24,12 +26,24 @@ export class NewArticleFormComponent implements OnInit {
   public themes: string[];
   public notice: string;
   public image: string;
+  public uploadListNews : boolean;
+
+  public fileImageNew: string = 'fileImageNew';
 
   myForm: FormGroup;
   fileToUpload: File = null;
 
 
-  constructor(public createArticleService: MyPublicationsService, private fb: FormBuilder, public alert: AlertsService) {
+  constructor(public createArticleService: MyPublicationsService, 
+    private fb: FormBuilder, 
+    public alert: AlertsService, 
+    public fileUploadService: FileUploadService,
+    public billboardSharedService: BillboardService ) {
+
+this.fileUploadService.getObjetFile().subscribe((data:any)=>{
+  this.image = data;
+})
+
     this.myForm = this.fb.group({
       'title': [''],
       'summary': [''],
@@ -55,13 +69,14 @@ export class NewArticleFormComponent implements OnInit {
     const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
     this.alert.setAlert(alertConfirmation[0]);
     this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-
+     if(data.success == true)
+     {
+       this.uploadListNews = true;
+       this.billboardSharedService.setUpdateNew(this.uploadListNews);
+     }
     })
   }
 
-  fileEvent(e) {
-    this.image = e.target.files[0];
-  }
 
 }
 

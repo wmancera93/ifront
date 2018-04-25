@@ -27,6 +27,7 @@ import { CorporateDocsService } from './corporate-documents/corporate-docs.servi
 import { DownloadFilesService } from './download-files/download-files.service';
 import { FormsRequestsService } from './shared/forms-requests/forms-requests.service';
 import { FileUploadService } from './shared/common/file-upload/file-upload.service';
+import { BillboardService } from './shared/common/billboard/billboard.service';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { FileUploadService } from './shared/common/file-upload/file-upload.servi
     CorporateDocsService,
     DownloadFilesService,
     FormsRequestsService,
-    FileUploadService
+    FileUploadService,
+    BillboardService
   ]
 })
 export class ServicesModule { }
