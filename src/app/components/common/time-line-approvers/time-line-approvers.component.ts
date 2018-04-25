@@ -10,7 +10,8 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 })
 export class TimeLineApproversComponent implements OnInit {
   public detailRequets: DetailRequest[] = [];
-  public viewModal:boolean = false;
+  public fileSupport: string = '';
+  public viewModal: boolean = false;
 
   constructor(private aproversRequestsService: AproversRequestsService,
     private requestsRhService: RequestsRhService) {
@@ -20,6 +21,7 @@ export class TimeLineApproversComponent implements OnInit {
           .subscribe((detail: any) => {
             if (detail.success) {
               this.detailRequets = detail.data;
+              this.fileSupport = this.detailRequets[0].request.file_support.url;
               document.getElementById('btn_aprovers_requests').click();
               document.getElementById("bodyGeneral").removeAttribute('style');
               this.viewModal = true;
@@ -32,6 +34,10 @@ export class TimeLineApproversComponent implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  viewSupport() {
+    window.open(this.fileSupport);
   }
 
 }

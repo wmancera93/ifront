@@ -15,6 +15,7 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 })
 export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
+  public showSubmit: boolean = true; 
 
   public file: any;
   public filePermisionMarriage: string = 'fileMarriage';
@@ -97,6 +98,7 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   newRequest(model) {
+    this.showSubmit = false;
     if (this.formRequests.id_activity === 'PERM') {
       let modelFromdata = new FormData();
       modelFromdata.append('request_type_id', model.request_type_id);
@@ -112,11 +114,13 @@ export class FormsRequestsComponent implements OnInit {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
           const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
+          this.showSubmit = true;
           this.formsRequestsService.setRestartObject(true);
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+          this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
         },
     );

@@ -54,8 +54,10 @@
               </div>
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
-                  <div class="col-md-3 col-12">
-                    <input type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                  <div class="col-md-5 col-12">
+                    <input *ngIf="showSubmit" type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
+                    />
                   </div>
                 </div>
               </div>
@@ -100,8 +102,10 @@
               </div>
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
-                  <div class="col-md-3 col-12">
-                    <input type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                  <div class="col-md-5 col-12">
+                    <input *ngIf="showSubmit" type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
+                    />
                   </div>
                 </div>
               </div>
@@ -127,7 +131,7 @@
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
                   Adjuntar soporte *
                 </label>
                 <app-file-upload [nameFile]='filePermisionMarriage' [extensions]="extensions"></app-file-upload>
@@ -142,7 +146,9 @@
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
                   <div class="col-md-3 col-12">
-                    <input type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                    <input *ngIf="showSubmit" type="submit" value="Generar" class="btn btn-secondary btn-block cursor-general" />
+                    <input *ngIf="!showSubmit" type="button" value="Cargando..." class="btn btn-secondary btn-block cursor-general" disabled="disabled"
+                    />
                   </div>
                 </div>
               </div>
