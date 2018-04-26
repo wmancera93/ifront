@@ -40,7 +40,7 @@
                 </div>
                 <div *ngIf="!activeShowThemes">
                   <div class="col-9 text-left">
-                    <tag-input  theme='dark' placeholder="Escriba un tema + enter" ></tag-input>
+                    <tag-input theme='dark' placeholder="Escriba un tema + enter"></tag-input>
                   </div>
                 </div>
                 <div *ngIf="activeShowThemes">
@@ -58,10 +58,10 @@
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
                     <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*</label>
-                </div>               
-                  <div class="col-9 " *ngIf="!activeEditImage" style="font-size:1rem !important">
-                    <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
-                  </div>                
+                </div>
+                <div class="col-9 " *ngIf="!activeEditImage" style="font-size:1rem !important">
+                  <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
+                </div>
                 <div class="col-9 " *ngIf="activeEditImage" style="font-size:1rem !important">
                   <label for="resume" class="font-title-general">
                     {{nameImage}} </label>
@@ -74,19 +74,21 @@
                   </ckeditor>
                 </div>
               </div>
-              <div class="row justify-content-center" style="margin-top:10px;">
-                <div class="col-12 col-lg-2" *ngIf="!activeButtonEdit">
-                  <input type="submit" class="buttonSubmitForm" value="Guardar" />
-                </div>
-                <div class="col-12 col-lg-2" *ngIf="activeButtonEdit">
-                  <input type="submit" class="buttonSubmitForm" value="Guardar" />
+              <div class="row justify-content-center" style="margin-top:10px;">               
+                <div class="col-md-12 top-containter">
+                  <div class="row justify-content-end">
+                    <div class="col-lg-3 col-md-4 col-12">
+                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                        <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                        <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="border-footer justify-content-end">
-                <div class="col-12 col-lg-2">
-                  <div class="buttonCloseForm  btn-close-modals text-center" data-dismiss="modal">
-                    <h6> Cerrar </h6>
-                  </div>
+              <div class="modal-footerInfo justify-content-center">
+                <div class="buttonCloseForm btn-close-modals text-center" data-dismiss="modal">
+                  <h6> Cerrar </h6>
                 </div>
               </div>
             </form>

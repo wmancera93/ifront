@@ -1,0 +1,81 @@
+<button id="btn_show_article" type="button" class="btn btn-primary" data-toggle="modal" data-target="#show_article" style="display:none;">
+</button>
+<div class="modal" id="show_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="viewModal">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <div class="col-12 col-lg-10 text-center ">
+          <h4 class="modal-title titleColor text-shadow"> {{infoArticle.title |uppercase}}</h4>
+        </div>
+      </div>
+      <div class="modal-body font-controls-login">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="font-color-date">
+                <i class="fa fa-calendar"></i>
+                {{infoArticle.creation_date}}
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-6">
+                  <img class="radius-image" src="{{infoArticle.image.url}}" width="100%" height="350px">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 10px;">
+            <div class="col-12">
+              <div class="row">
+                <div class=" col-3">
+                  Temas:
+                </div>
+                &nbsp;&nbsp; &nbsp;&nbsp;
+                <div class=" col-4 padding-themes-news" *ngFor="let theme of infoArticle.themes">
+                  <div class="themes-news">
+                    <strong>{{theme}}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="height: 200px !important; margin-top: 5px; ">
+              <div id="scrollbarAction" class="scrollbarBody scrollbarBody-success ">
+                <div [innerHtml]="infoArticle.body"></div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="margin-top: 10px;">
+              <div style="color:white;">
+                <h6>COMENTARIOS</h6>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" *ngIf="numberComments != 0">
+              Lista de comentarios
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="margin-top: 10px;">             
+                <textarea [(ngModel)]="comment"  id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>             
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-lg-3 col-md-4 col-12">
+              <button *ngIf="showSubmit" class="btn btn-success btn-block" (click)="sendComment()">
+                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footerInfo justify-content-center">
+        <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>

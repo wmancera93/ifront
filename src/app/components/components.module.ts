@@ -34,6 +34,7 @@ import { TimeLineApproversComponent } from './common/time-line-approvers/time-li
 
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
+import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
     PrintDataTableComponent,
     NewArticleFormComponent,   
     TimeLineApproversComponent, 
-    FileUploadComponent
+    FileUploadComponent, 
+    CommentArticleComponent
   ],
   exports: [
     HeaderComponent,
@@ -89,7 +91,8 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
     PrintDataTableComponent,
     NewArticleFormComponent,
     TimeLineApproversComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    CommentArticleComponent
   ],
   providers: [
     // ToasterService

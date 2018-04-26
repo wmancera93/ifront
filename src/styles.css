@@ -522,12 +522,12 @@ header{
 #modal-alert {
     color: #FFFFFF !important;
 }
-.modal.fade .modal-dialog {
+/* .modal.fade .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0); 
         transform: translate(0, 0);
 
-}
+} */
 /* My Team */
 
 .marginLeft{
@@ -1111,6 +1111,13 @@ cursor: pointer;
     margin-top: -24px !important;
     float: left;
 
+}
+
+.radius-image{   
+    border-radius: 5%;
+}
+.font-color-date{
+  color:  var(--btn-primary) !important;
 }
 /* -------------------------------------- */
 

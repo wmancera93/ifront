@@ -30,13 +30,8 @@ export class NewArticleFormComponent implements OnInit {
   public image: string;
   public uploadListNews: boolean;
   public extensions: string = '.gif, .png, .jpeg, .jpg ';
-  public activeEditImage: boolean = false;
-  public showLabelImage: string;
-  public nameImage: string;
-  public showLabelTheme: string[];
-  public activeShowThemes: boolean = false;
   public fileImageNew: string = 'fileImageNew';
-  public activeButtonEdit: boolean = false;
+  public showSubmit: boolean = true;
 
   formNewArticle: FormGroup;
   fileToUpload: File = null;
@@ -59,71 +54,31 @@ export class NewArticleFormComponent implements OnInit {
       tags: '',
       image: ''
     });
-    this.activeEditImage = false;
-    this.editEditSharedService.getEditNew().subscribe((data: any) => {
-
-      this.activeEditImage = true;
-      this.activeButtonEdit = true;
-      this.showLabelImage = data.image.url;
-      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
-      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
-
-      this.activeShowThemes = true;
-      this.showLabelTheme = data.themes;
-      this.formNewArticle = this.fb.group({
-        title: data.title,
-        summary: data.summary,
-        body: data.body,
-        tags: data.tags,
-        image: ''
-      });
-
-    })
-
   }
 
   ngOnInit() {
-    document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
+    //document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
 
   }
   onSubmitNewArticle(value: any): void {
-
-    if (this.activeButtonEdit == false) {
-      const selectedItems = value.tags.map(({ display }) => display);
-      let newArticleForm = new FormData();
-      newArticleForm.append('title', value.title);
-      newArticleForm.append('summary', value.summary);
-      newArticleForm.append('body', value.body);
-      newArticleForm.append('tags', selectedItems);
-      newArticleForm.append('image', this.image);
-      (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-      const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
-      this.alert.setAlert(alertConfirmation[0]);
-      this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-        if (data.success == true) {
-          this.uploadListNews = true;
-          this.billboardSharedService.setUpdateNew(this.uploadListNews);
-        }
-      })
-    }
-    else
-    if(this.activeButtonEdit == true)
-    {
-      console.log(value)
-      // const selectedItems = value.tags.map(({ display }) => display);
-      // let newArticleForm = new FormData();
-      // newArticleForm.append('title', value.title);
-      // newArticleForm.append('summary', value.summary);
-      // newArticleForm.append('body', value.body);
-      // newArticleForm.append('tags', selectedItems);
-      // newArticleForm.append('image', this.image);
-      // (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-      // const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia actualizada' }];
-      // this.alert.setAlert(alertConfirmation[0]);
-      
-
-    }
-
+    this.showSubmit = false;
+    const selectedItems = value.tags.map(({ display }) => display);
+    let newArticleForm = new FormData();
+    newArticleForm.append('title', value.title);
+    newArticleForm.append('summary', value.summary);
+    newArticleForm.append('body', value.body);
+    newArticleForm.append('tags', selectedItems);
+    newArticleForm.append('image', this.image);
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+    const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
+    this.alert.setAlert(alertConfirmation[0]);
+    this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
+      if (data.success == true) {
+        this.showSubmit = true;
+        this.uploadListNews = true;
+        this.billboardSharedService.setUpdateNew(this.uploadListNews);
+      }
+    })
   }
 
 

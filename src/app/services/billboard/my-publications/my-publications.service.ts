@@ -36,5 +36,11 @@ export class MyPublicationsService {
     .map((data: Observable<any>) => data);    
   }
 
+  postComment(id:number,comment:string)
+  {
+    return this.http.post(environment.apiBaseHr + '/api/v2/articles/'+id+'/create_comment', {comment_text:comment})
+    .map((data: Observable<any>) => data);
+  }
+
 }
 
