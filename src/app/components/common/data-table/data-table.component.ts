@@ -40,6 +40,8 @@ export class DataTableComponent implements OnInit {
   constructor(public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
     public router: Router) {   
+      document.getElementById("loginId").style.display = 'block'
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -76,6 +78,12 @@ export class DataTableComponent implements OnInit {
         }
       } else {
         this.show = false;
+      }
+      if (data.success) {
+        setTimeout(() => {
+          document.getElementById("loginId").style.display = 'none';
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        }, 1500)
       }
     });
   }

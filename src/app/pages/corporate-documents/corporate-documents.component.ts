@@ -21,18 +21,31 @@ export class CorporateDocumentsComponent implements OnInit {
   public urlDocs: string;
   public urlPDF: any;
   constructor(public corporateDocsService: CorporateDocsService,
-    public downloadFilesService: DownloadFilesService, public http: Http) { }
+    public downloadFilesService: DownloadFilesService, public http: Http) {
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+  }
 
-  ngOnInit() {    
-   
+  ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.corporateDocsService.getDocuments().subscribe((data: any) => {
       this.infoDocs = data.data[0].documents;
       this.urlDocs = data.data[0].base_url;
       this.docsType = data.data[0].type_documents;
+      if (data.success) {
+        setTimeout(() => {
+          document.getElementById("loginId").style.display = 'none'
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        }, 3000)
+      }
     })
 
   }
-  downloadPDF(doc: any, idBtn:string) {
+  downloadPDF(doc: any, idBtn: string) {
     this.urlPDF = this.urlDocs + doc.url;
     this.downloadName = doc.name;
     const headers = new Headers();
@@ -41,7 +54,7 @@ export class CorporateDocumentsComponent implements OnInit {
     this.http.get(this.urlPDF).subscribe((data: any) => {
       console.log(data._body)
       let FileSaver = require('file-saver');
-      let blob = new Blob([data._body], {type: "application/pdf;charset=utf-8"});
+      let blob = new Blob([data._body], { type: "application/pdf;charset=utf-8" });
       FileSaver.saveAs(blob, "hello world.pdf");
 
       // var file = new File([data._body], "hello world.pdf", { type: "application/pdf;charset=utf-8" });

@@ -13,9 +13,17 @@ export class HolidayLetterComponent implements OnInit {
   public urlPDF: string = '';
   public flagEmpty: boolean;
 
-  constructor(public autoServiceService: AutoServicesService, public sanitizer: DomSanitizer) { }
+  constructor(public autoServiceService: AutoServicesService, public sanitizer: DomSanitizer) {
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+   }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.autoServiceService.getHolidayLetter().subscribe((data: any) => {
       this.holidayLetter = data.data;      
       if (this.holidayLetter.length === 0) {
@@ -25,7 +33,12 @@ export class HolidayLetterComponent implements OnInit {
         this.flagEmpty = false;
         this.urlPDF = this.holidayLetter[0].file.url;
       }
-
+      if (data.success) {
+        setTimeout(() => {
+          document.getElementById("loginId").style.display = 'none'
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        }, 3000)
+      }
 
     })
   }

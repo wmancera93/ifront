@@ -23,6 +23,9 @@ export class RequestsRhComponent implements OnInit {
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService) {
 
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+
     this.formsRequestsService.getRestartObject()
       .subscribe((restart) => {
         if (restart) {
@@ -35,7 +38,7 @@ export class RequestsRhComponent implements OnInit {
         if (data === "deletRequest") {
           this.requestsRhService.deleteRequests(this.idDelete)
             .subscribe(
-              (data: any) => {               
+              (data: any) => {
                 this.getObjectRequests();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Se elimino correctamente.', confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
@@ -69,6 +72,11 @@ export class RequestsRhComponent implements OnInit {
       } else {
         this.viewContainer = false;
       }
+
+      setTimeout(() => {
+        document.getElementById("loginId").style.display = 'none'
+        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      }, 1000)
     })
   }
 

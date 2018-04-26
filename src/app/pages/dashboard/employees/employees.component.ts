@@ -22,16 +22,16 @@ export class EmployeesComponent implements OnInit {
   @Output() objectNewspaper: EventEmitter<Newspaper[]> = new EventEmitter();
   @Output() objectBirthDay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectAnniversay: EventEmitter<EventsEmployess[]> = new EventEmitter();
-  @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter(); 
- // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
-  public layoffsChartType: EventEmitter<string> = new EventEmitter(); 
-  
- 
+  @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();
+  // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
+  public layoffsChartType: EventEmitter<string> = new EventEmitter();
+
+
 
 
   constructor(public dashboardEmployeeService: DashboardEmployeeService, public router: Router, ) {
     this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {      
+      if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/index') {
           setInterval(() => {
             (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
@@ -45,12 +45,20 @@ export class EmployeesComponent implements OnInit {
           setInterval(() => {
             (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
           }, 50000)
-        }  
+        }
       }
     })
+
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.dashboardEmployeeService.getRequest()
       .subscribe((data: any) => {
         this.objectRequest.emit(data.data)
@@ -64,21 +72,21 @@ export class EmployeesComponent implements OnInit {
     this.dashboardEmployeeService.getCalendar()
       .subscribe((data: any) => {
         this.objectCalendar.emit(data.data)
-      });      
+      });
 
-    this.dashboardEmployeeService.getSeverancesData() 
-    .subscribe((data: any) => {
-       this.objectMyLayoffs.emit({graph_type: data.data.graph_type,properties: data.data.severances });       
-     this.objectMyInterestsLayoffs.emit( {graph_type: data.data.graph_type,properties: data.data.severances_interests});       
+    this.dashboardEmployeeService.getSeverancesData()
+      .subscribe((data: any) => {
+        this.objectMyLayoffs.emit({ graph_type: data.data.graph_type, properties: data.data.severances });
+        this.objectMyInterestsLayoffs.emit({ graph_type: data.data.graph_type, properties: data.data.severances_interests });
 
-    });   
+      });
 
     this.dashboardEmployeeService.getIncomesData()
-    .subscribe((data:any)=>{
-      this.objectIncome.emit({graph_type: data.data.graph_type,properties:data.data.total_incomes});
-      this.objectDeductions.emit({graph_type:data.data.graph_type, properties:data.data.total_deductions}); 
-    })
-    
+      .subscribe((data: any) => {
+        this.objectIncome.emit({ graph_type: data.data.graph_type, properties: data.data.total_incomes });
+        this.objectDeductions.emit({ graph_type: data.data.graph_type, properties: data.data.total_deductions });
+      })
+
     // setTimeout(() => {
     //   this.objectMyLayoffs.emit(myLayoffs[0]);
     //   this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
@@ -102,6 +110,10 @@ export class EmployeesComponent implements OnInit {
         }
       });
 
+    setTimeout(() => {
+      document.getElementById("loginId").style.display = 'none'
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+    }, 1000)
   }
 
 }
