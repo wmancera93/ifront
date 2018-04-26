@@ -51,6 +51,10 @@ import { PipesModule } from '../pipes/pipes.module';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
+import { PendingsComponent } from './approver-requests/pendings/pendings.component';
+import { ManagedComponent } from './approver-requests/managed/managed.component';
+import { ApproveComponent } from './approver-requests/pendings/approve/approve.component';
+import { ConsultationsApprovalsComponent } from './approver-requests/consultations-approvals/consultations-approvals.component';
 
 
 @NgModule({
@@ -101,7 +105,11 @@ import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-reque
     NewsComponent,
     RequestsRhComponent,
     CorporateDocumentsComponent,
-    FormsRequestsComponent
+    FormsRequestsComponent,
+    PendingsComponent,
+    ManagedComponent,
+    ApproveComponent,
+    ConsultationsApprovalsComponent
   ],
   providers: [
     Angular2TokenService

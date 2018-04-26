@@ -161,7 +161,7 @@ input[type="file"] {
 }
 
 .top-containter {
-    padding-bottom: 10px ;
+    padding-bottom: 10px !important;
 }
 
 .top-general-p {

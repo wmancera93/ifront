@@ -34,6 +34,9 @@ import { MyPublicationsComponent } from './billboard/my-publications/my-publicat
 import { NewsComponent } from './billboard/news/news.component';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
+import { ManagedComponent } from './approver-requests/managed/managed.component';
+import { PendingsComponent } from './approver-requests/pendings/pendings.component';
+import { ConsultationsApprovalsComponent } from './approver-requests/consultations-approvals/consultations-approvals.component';
 
 
 const routes: Routes = [
@@ -161,11 +164,23 @@ const routes: Routes = [
     },
     {
         path: 'requests_rh',
-        component: RequestsRhComponent        
+        component: RequestsRhComponent
     },
-    {  
+    {
         path: 'corporate_documents',
         component: CorporateDocumentsComponent,
+    },
+    {
+        path: 'pending_approvers',
+        component: PendingsComponent
+    },
+    {
+        path: 'managed_approvers',
+        component: ManagedComponent
+    },
+    {
+        path: 'consultations_approvals',
+        component: ConsultationsApprovalsComponent
     }
 ];
 
