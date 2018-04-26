@@ -15,11 +15,11 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 })
 export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
-  public showSubmit: boolean = true; 
+  public showSubmit: boolean = true;
 
   public file: any;
   public filePermisionMarriage: string = 'fileMarriage';
-  public extensions:string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public formVaca: any;
   public formVacaComp: any;
@@ -98,6 +98,8 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   newRequest(model) {
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (this.formRequests.id_activity === 'PERM') {
       let modelFromdata = new FormData();
@@ -116,12 +118,22 @@ export class FormsRequestsComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
           this.formsRequestsService.setRestartObject(true);
+
+          setTimeout(() => {
+            document.getElementById("loginId").style.display = 'none'
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          }, 2000)
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
+
+          setTimeout(() => {
+            document.getElementById("loginId").style.display = 'none'
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          }, 1000)
         },
     );
   }

@@ -30,6 +30,11 @@ export class ManagerialComponent implements OnInit {
   }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.dasboardManagerialService.getWidgetEmployeeOnVacations()
       .subscribe((data: any) => {
         this.objectVacations.emit(data.data);
@@ -84,7 +89,7 @@ export class ManagerialComponent implements OnInit {
     setTimeout(() => {
       document.getElementById("loginId").style.display = 'none'
       document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    }, 2000)
+    }, 1000)
   }
 
   goToMyTeam() {

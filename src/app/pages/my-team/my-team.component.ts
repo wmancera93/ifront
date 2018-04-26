@@ -37,7 +37,7 @@ export class MyTeamComponent implements OnInit {
           setTimeout(() => {
             document.getElementById("loginId").style.display = 'none'
             document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 2000)
+          }, 1000)
         }
       })
   }
