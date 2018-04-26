@@ -19,14 +19,8 @@ export class MyTeamComponent implements OnInit {
   constructor(public myTeamInfoService: MyTeamInfoService,
     public myTeamSharedService: MyTeamReportService,
     public router: Router) { 
-    this.employeePrueba[0] = { name: "Laura", lastname:"Beltrán", image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    this.employeePrueba[1] = { name: "Wilmer", lastname:"Beltrán",image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    this.employeePrueba[2] = { name: "Laura",lastname:"Beltrán", image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    this.employeePrueba[3] = { name: "Wilmer", lastname:"Beltrán",image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    this.employeePrueba[4] = { name: "Wilmer", lastname:"Beltrán",image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    this.employeePrueba[5] = { name: "Wilmer", lastname:"Beltrán",image: "../../../assets/themes/patterns/icon-user-negative.png", posicion: "Hola", unidad_org: "HR" };
-    
-
+      document.getElementById("loginId").style.display = 'block'
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
      }
 
   ngOnInit() {
@@ -39,7 +33,12 @@ export class MyTeamComponent implements OnInit {
     this.myTeamInfoService.getMyTeamData()
       .subscribe((data: any) => {
         this.employeesInMyTeam = data.data;
-        
+        if (data.success) {
+          setTimeout(() => {
+            document.getElementById("loginId").style.display = 'none'
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          }, 2000)
+        }
       })
   }
 

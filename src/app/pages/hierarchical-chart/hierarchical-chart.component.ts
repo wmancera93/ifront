@@ -50,33 +50,43 @@ export class HierarchicalChartComponent implements OnInit {
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
     public http: HttpClient,
-    private domSanitizer: DomSanitizer) { }
+    private domSanitizer: DomSanitizer) {
+    document.getElementById("loginId").style.display = 'block';
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+  }
 
-  ngOnInit() {    
+  ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.getHierarchical(null);
   }
 
-  getHierarchical(pernr_empleado: number) {    
+  getHierarchical(pernr_empleado: number) {
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
-      this.beforeTopEmployee = this.topEmployee; 
+      this.beforeTopEmployee = this.topEmployee;
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
-      
-        if(this.page >= this.roundTotalPages){
+
+        if (this.page >= this.roundTotalPages) {
           this.activeArrowRight = false;
-        }else
-        {
+        } else {
           this.activeArrowRight = true;
         }
-        
+
         this.beforeTopEmployeeWorkTeam = this.topEmployee.work_team[0].work_team;
       }
       else {
         this.activeArrowRight = false;
       }
-    
+      setTimeout(() => {
+        document.getElementById("loginId").style.display = 'none';
+        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      }, 2000)
     })
   }
 
@@ -89,7 +99,7 @@ export class HierarchicalChartComponent implements OnInit {
   public pageValue: any = 0;
   downLevelTeam(employeeObject: Work_team) {
     this.pageValue = this.page;
-    this.page = 1;    
+    this.page = 1;
     this.id_empleado = employeeObject.pernr;
     this.getHierarchical(employeeObject.pernr);
     this.flagActivatethirdLevel = false;
@@ -99,12 +109,12 @@ export class HierarchicalChartComponent implements OnInit {
 
   upLevelTeam() {
     this.id_empleado = this.topEmployee.pernr;
-    this.page = this.pageValue == 0 ? this.page : this.pageValue;    
+    this.page = this.pageValue == 0 ? this.page : this.pageValue;
     this.getHierarchical(this.id_empleado);
     this.flagActivatethirdLevel = false;
     this.activeArrowUp = false;
     this.activeArrowDown = true;
-    
+
   }
 
 

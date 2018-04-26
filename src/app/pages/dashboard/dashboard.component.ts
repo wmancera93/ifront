@@ -41,7 +41,6 @@ export class DashboardComponent implements OnInit {
         }
       }
     );
-
   }
 
   getDataLocalStorage() {
@@ -58,8 +57,8 @@ export class DashboardComponent implements OnInit {
         body: 'Bienvenido'
       };
       setTimeout(() => {
-        this.objectToast.emit(toast)
-      }, 200);
+        this.objectToast.emit(toast)       
+      }, 200);     
     }
   }
 
