@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
+import { ApproverRequestsService } from '../../../services/approver-requests/approver-requests.service';
+import { DetailAproverRequest } from '../../../models/common/approver-requests/approver_requests';
 
 @Component({
   selector: 'app-approvals-details',
@@ -6,10 +9,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./approvals-details.component.css']
 })
 export class ApprovalsDetailsComponent implements OnInit {
+  public approvals: DetailAproverRequest[] = []
 
-  constructor() { }
+  constructor(public approverRequestsService: ApproverRequestsService,
+    public aproversRequestsService: AproversRequestsService) {
+
+    this.aproversRequestsService.getAprovalsRequests()
+      .subscribe((data: any) => {
+        this.approverRequestsService.getDetailApprovalsRequests(data.id)
+        .subscribe((request:any) => {
+          this.approvals[0] = request.data[0].request;
+          console.log(this.approvals[0])
+        })
+
+        document.getElementById('btn_approvals_requests').click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      })
+  }
 
   ngOnInit() {
+
   }
 
 }

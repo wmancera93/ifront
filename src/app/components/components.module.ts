@@ -71,7 +71,8 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     NewArticleFormComponent,   
     TimeLineApproversComponent, 
     FileUploadComponent, 
-    LoadingComponent, ApprovalsDetailsComponent
+    LoadingComponent, 
+    ApprovalsDetailsComponent
   ],
   exports: [
     HeaderComponent,
@@ -93,7 +94,8 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     NewArticleFormComponent,
     TimeLineApproversComponent,
     FileUploadComponent,
-    LoadingComponent
+    LoadingComponent,
+    ApprovalsDetailsComponent
   ],
   providers: [
     // ToasterService

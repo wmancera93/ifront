@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApproverRequestsService } from '../../../services/approver-requests/approver-requests.service';
-import { AproverRequests } from '../../../models/common/approver-requests/approver_requests';
+import { AproverRequests, Requests } from '../../../models/common/approver-requests/approver_requests';
+import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 
 @Component({
   selector: 'app-pendings',
@@ -8,18 +9,24 @@ import { AproverRequests } from '../../../models/common/approver-requests/approv
   styleUrls: ['./pendings.component.css']
 })
 export class PendingsComponent implements OnInit {
-  public pendings: AproverRequests = null;
+  public pendings: Requests[] = [];
 
-  constructor(public approverRequestsService: ApproverRequestsService) {
+  constructor(public approverRequestsService: ApproverRequestsService,
+    public aproversRequestsService: AproversRequestsService) {
     document.getElementById("loginId").style.display = 'block'
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     this.approverRequestsService.getApprovalsRequestsPending()
       .subscribe((data: any) => {
         if (data.success) {
-          this.pendings = data.data[0];
+          this.pendings = data.data[0].requests;
         }
 
         setTimeout(() => {
@@ -27,6 +34,10 @@ export class PendingsComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
         }, 1000)
       });
+  }
+
+  modalAprovers(request: Requests) {
+    this.aproversRequestsService.setAprovalsRequests({id:request.ticket, edit: true});
   }
 
 }
