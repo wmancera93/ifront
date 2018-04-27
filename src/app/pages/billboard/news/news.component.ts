@@ -44,8 +44,7 @@ export class NewsComponent implements OnInit {
     }
   }
   viewDetailNew(article: any) {
-    this.billboardSharedService.setUpdateNew(article);
-    document.getElementById('btn_show_article').click();
+    this.billboardSharedService.setUpdateNew(article);    
   }
 
 }

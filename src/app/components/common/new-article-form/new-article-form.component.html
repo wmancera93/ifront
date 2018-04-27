@@ -9,14 +9,16 @@
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-            <form #f='formNewArticle' (ngSubmit)="onSubmitNewArticle(formNewArticle.value)">
+            <form #f='ngForm' (ngSubmit)="onSubmitNewArticle(f.value)">
               <div class="row">
-                <div class="col-3 text-left">
+                <div class="col-3 text-center">
                   <label for="title" class="font-title-general">
-                    <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*</label>
+                    <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*
+                  </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" placeholder="Título de la noticia" name="title" style="width:100% !important;" />
+                  <input type="text" id="titleInput" placeholder="Título de la noticia" name="title" style="width:100% !important;" ngModel
+                    required/>
                 </div>
               </div>
               <div class="row">
@@ -27,48 +29,33 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;">                 
-                    </textarea>
+                  <textarea name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;" ngModel
+                  required></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema* </label>
+                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema*
+                  </label>
                 </div>
-                <div>
-                  <div class="col-9 text-left">
-                    <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel></tag-input>
-                  </div>
+                <div class="col-9">
+                  <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>
                 </div>
-                <!-- <div *ngIf="activeShowThemes">
-                  <div class="col-xl-9 col-md-6 col-12 padding-themes-newspaper" *ngFor="let theme of showLabelTheme">
-                    <div class="themes-newspaper">
-                      {{theme}}
-                    </div>
-                  </div>
-                  <div class="col-9 text-left">
-                    <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter"></tag-input>
-                  </div>
-                </div> -->
               </div>
               <div class="row">
-                <div class="col-3 text-left">
+                <div class="col-3 text-left ">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*</label>
+                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*
+                  </label>
                 </div>
                 <div class="col-9 " style="font-size:1rem !important">
                   <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
                 </div>
-                <!-- <div class="col-9 " *ngIf="activeEditImage" style="font-size:1rem !important">
-                  <label for="resume" class="font-title-general">
-                    {{nameImage}} </label>
-                  <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
-                </div> -->
               </div>
               <div class="row">
                 <div class="col-12" style="padding-top: 20px">
-                  <ckeditor debounce="500" name="body">
+                  <ckeditor debounce="500" name="body" ngModel required>
                   </ckeditor>
                 </div>
               </div>

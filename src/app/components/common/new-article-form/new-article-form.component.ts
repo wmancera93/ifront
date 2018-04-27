@@ -10,7 +10,6 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
-import { DefaultUrlHandlingStrategy } from '@angular/router/src/url_handling_strategy';
 
 const formData = new FormData();
 
@@ -48,11 +47,11 @@ export class NewArticleFormComponent implements OnInit {
       this.image = data;
     })
     this.formNewArticle = this.fb.group({
-      title: '',
-      summary: '',
-      body: '',
-      tags: '',
-      image: ''
+      'title': [''],
+      'summary': [''],
+      'body': [''],
+      'tags': [''],
+      'image': ['']
     });
   }
 
