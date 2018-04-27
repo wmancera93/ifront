@@ -14,6 +14,12 @@ export class MyPublicationsService {
       .map((data: Observable<any>) => data);
   }
 
+  getArticles(id:number){
+    
+    return this.http.get(environment.apiBaseHr + '/api/v2/articles/'+id)
+      .map((data: Observable<any>) => data);
+  }
+
   getMyArticles()
   {
     return this.http.get(environment.apiBaseHr + '/api/v2/articles/my_articles')
@@ -40,6 +46,11 @@ export class MyPublicationsService {
   {
     return this.http.post(environment.apiBaseHr + '/api/v2/articles/'+id+'/create_comment', {comment_text:comment})
     .map((data: Observable<any>) => data);
+  }
+
+  deleteComment(id:number,id_comment:number){
+    return this.http.delete(environment.apiBaseHr + '/api/v2/articles/'+id+'/destroy_comment/'+id_comment)
+    .map((data: Observable<any>) => data);    
   }
 
 }

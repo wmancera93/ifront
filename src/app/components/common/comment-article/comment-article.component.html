@@ -12,8 +12,8 @@
         <div class="container">
           <div class="row">
             <div class="col-12">
-              <div class="font-color-date">
-                <i class="fa fa-calendar"></i>
+              <div class="font-title-general">
+                <i class="fa fa-calendar font-color-date"></i>
                 {{infoArticle.creation_date}}
               </div>
               <div class="row justify-content-center">
@@ -26,7 +26,7 @@
           <div class="row" style="padding-top: 10px;">
             <div class="col-12">
               <div class="row">
-                <div class=" col-3">
+                <div class=" col-3 font-title-general">
                   Temas:
                 </div>
                 &nbsp;&nbsp; &nbsp;&nbsp;
@@ -45,21 +45,57 @@
               </div>
             </div>
           </div>
-          <div class="row">
-            <div class="col-12" style="margin-top: 10px;">
-              <div style="color:white;">
-                <h6>COMENTARIOS</h6>
+          <div class="border-botton-general">
+            <div class="row">
+              <div class="col-1" style="margin-top: 10px;">
+                <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse-comment fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                  aria-expanded="false" (click)="collapse(true)"></i>
+                <i *ngIf="is_collapse" class="fa fa-fw icon-collapse-comment fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                  aria-expanded="false" (click)="collapse(false)"></i>
+              </div>
+              <div class="col-7 text-center" style="margin-top: 10px;">
+                <div style="color:white;">
+                  <h6>COMENTARIOS</h6>
+                </div>
+              </div>
+              <div class="col-4 text-center font-title-general" style="margin-top: 10px;">
+                <i class="fa fa-eye"></i>
+                {{infoArticle.total_views}} Vistas
+                <i class="fa fa-comments-o"></i>
+                {{infoArticle.total_comments}} Comentarios
+              </div>
+            </div>
+          </div>
+          <div class="row collapse" id="collapseExample">
+            <div class="col-12" *ngIf="numberComments != 0">
+              <div class="widget bg-white-1x" *ngFor="let comment of commentsList;">
+                <div class="row">
+                  <div class="col-2">
+                    <div class=" menu-img-employee">
+                      <img src="{{comment.created_by.image.url}}" class="roundPhoto-employee">
+                    </div>
+                  </div>
+                  <div class="col-8 text-lg-left">
+                    <strong>{{comment.created_by.short_name}}</strong> el día {{comment.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
+                    <div>
+                      {{comment.comment_text}}
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <button class="btn btn-sm btn-secondary" (click)="editComment(comment)">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteComment(comment)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-12" *ngIf="numberComments != 0">
-              Lista de comentarios
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12" style="margin-top: 10px;">             
-                <textarea [(ngModel)]="comment"  id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>             
+            <div class="col-12" style="margin-top: 10px;">
+              <textarea [(ngModel)]="comment" id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>
             </div>
           </div>
           <div class="row justify-content-end">
@@ -73,7 +109,7 @@
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+        <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal">
           <h6> Cerrar </h6>
         </div>
       </div>
