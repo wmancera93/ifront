@@ -53,7 +53,6 @@ import { CorporateDocumentsComponent } from './corporate-documents/corporate-doc
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
 import { ManagedComponent } from './approver-requests/managed/managed.component';
-import { ApproveComponent } from './approver-requests/pendings/approve/approve.component';
 import { ConsultationsApprovalsComponent } from './approver-requests/consultations-approvals/consultations-approvals.component';
 
 
@@ -69,7 +68,6 @@ import { ConsultationsApprovalsComponent } from './approver-requests/consultatio
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
-
   ],
   declarations: [
     LoginComponent,
@@ -108,7 +106,6 @@ import { ConsultationsApprovalsComponent } from './approver-requests/consultatio
     FormsRequestsComponent,
     PendingsComponent,
     ManagedComponent,
-    ApproveComponent,
     ConsultationsApprovalsComponent
   ],
   providers: [

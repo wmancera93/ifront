@@ -35,6 +35,7 @@ import { TimeLineApproversComponent } from './common/time-line-approvers/time-li
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
 import { LoadingComponent } from './common/loading/loading.component';
+import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
 
 @NgModule({
   imports: [
@@ -70,7 +71,7 @@ import { LoadingComponent } from './common/loading/loading.component';
     NewArticleFormComponent,   
     TimeLineApproversComponent, 
     FileUploadComponent, 
-    LoadingComponent
+    LoadingComponent, ApprovalsDetailsComponent
   ],
   exports: [
     HeaderComponent,

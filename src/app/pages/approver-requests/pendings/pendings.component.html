@@ -13,50 +13,56 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
         <div class="row top-containter">
-          <div class="col-12 text-left">
+          <div class="col-12 text-left" *ngIf="pendings.requests.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene 1 Solicitud pendiente
+              Usted tiene {{pendings.requests.length}} solicitud pendiente
             </h3>
           </div>
-          <!-- <div class="col-xl-6 col-lg-4 col-12 text-left">
+          <div class="col-12 text-left" *ngIf="pendings.requests.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendings.requests.length}} solicitudes pendientes
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendings.requests.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
               Usted no tiene solicitudes pendientes
             </h3>
-          </div> -->
+          </div>
         </div>
       </div>
-      <!-- <div class="row justify-content-center top-general-p">
+      <div class="row justify-content-center top-general-p" *ngIf="pendings.requests.length == 0">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
             No se encontrearon registros para mostrar
           </div>
         </div>
-      </div> -->
-      <div class="row justify-content-center top-containter">
+      </div>
+      <div class="row justify-content-center top-containter" *ngIf="pendings.requests.length > 0">
         <div class="col-12">
-          <div class="widget bg-white-1x">
+          <div class="widget bg-white-1x" *ngFor="let pending of pendings.requests">
             <div class="row align-items-center">
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket # 566
+                    Ticket # {{pending.ticket}}
                   </span>
                 </h5>
               </div>
               <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  VACACIONES
+                  {{pending.type_request_to_json.description}}
                 </h3>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Nivel de aprobacion
+                  {{pending.level_answer_description}}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
-                  1
+                  {{pending.level_answer}}
                 </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -65,7 +71,7 @@
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
-                  Laura Beltran
+                  {{pending.employee_applicant_to_json.short_name}}
                 </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -74,15 +80,15 @@
                 </p>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
-                  24/10/2012 -
-                  <i class="fa fa-fw fa-clock-o font-color-default"></i>2 dias
+                  {{pending.created_date}} -
+                  <i class="fa fa-fw fa-clock-o font-color-default"></i>{{pending.antiquity}}
                 </p>
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p">
                 <p class="font-title-general">
                   Acción
                 </p>
-                <button class="btn btn-sm btn-secondary" (click)="modalAprovers(request)">
+                <button class="btn btn-sm btn-secondary cursor-general" title="Ver" (click)="modalAprovers(request)">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>
               </div>
