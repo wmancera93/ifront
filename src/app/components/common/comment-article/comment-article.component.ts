@@ -27,7 +27,7 @@ export class CommentArticleComponent implements OnInit {
   private alertWarning: Alerts[];
   public is_collapse: boolean = false;
   public flagEditComment: boolean = false;
-  public commentEdit : string;
+  public commentEdit: string;
 
 
 
@@ -66,6 +66,7 @@ export class CommentArticleComponent implements OnInit {
   chargeComments() {
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
       this.infoArticle = data;
+      console.log(this.infoArticle)
       this.idArticle = data.id;
       this.numberComments = data.total_comments;
       this.viewModal = true;
@@ -88,32 +89,49 @@ export class CommentArticleComponent implements OnInit {
     document.getElementById("loginId").style.display = 'block'
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-    this.myPublicationService.postComment(this.idArticle, this.comment)
-      .subscribe(
+    if (this.flagEditComment == true) {
+      this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
         (data: any) => {
-          this.showSubmit = true;
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-          this.getDetailArticle();
+          this.showSubmit = true;
+          this.numberComments = data.total_comments;
           this.comment = '';
-
+          this.getDetailArticle();
           setTimeout(() => {
             document.getElementById("loginId").style.display = 'none'
             document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
           }, 1000)
+        });
+      this.flagEditComment = false;
+    }
+    else {
+      this.myPublicationService.postComment(this.idArticle, this.comment)
+        .subscribe(
+          (data: any) => {
+            this.showSubmit = true;
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+            this.getDetailArticle();
+            this.comment = '';
+            this.numberComments = data.total_comments;
+            setTimeout(() => {
+              document.getElementById("loginId").style.display = 'none'
+              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            }, 1000)
 
-        },
-        (error: any) => {
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
+          },
+          (error: any) => {
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
 
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
-        }
-      )
+            setTimeout(() => {
+              document.getElementById("loginId").style.display = 'none'
+              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            }, 1000)
+          }
+        )
+    }
   }
 
   deleteComment(commentObject: any) {
@@ -129,10 +147,11 @@ export class CommentArticleComponent implements OnInit {
     this.alert.setAlert(this.alertWarning[0]);
   }
 
-  editComment(commentObject: any) {
+  editComment(commentObjectEdit: any) {
     this.flagEditComment = true;
-    console.log(commentObject)
-
+    (<HTMLInputElement>document.getElementById('comment')).disabled = true;
+    this.idArticle = commentObjectEdit.article_id;
+    this.idComment = commentObjectEdit.id;
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;

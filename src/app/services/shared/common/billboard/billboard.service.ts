@@ -7,7 +7,7 @@ export class BillboardService {
   constructor() { }
 
   getUpdateNew()
-  {    
+  {  
     return this.exportUpdateNew;
   }
 

@@ -53,5 +53,10 @@ export class MyPublicationsService {
     .map((data: Observable<any>) => data);    
   }
 
+  editComment (id:number,id_comment:number,comment_text:string){
+    return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+id+'/edit_comment/'+id_comment,{comment_text :comment_text})
+    .map((data: Observable<any>) => data); 
+  }
+
 }
 

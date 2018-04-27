@@ -94,7 +94,10 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-12" style="margin-top: 10px;">
+            <div class="col-12" style="margin-top: 10px;" *ngIf="flagEditComment">
+              <textarea [(ngModel)]="commentEdit" id="commentEdit" rows="2" cols="50" placeholder="Edite su comentario..." style="width:100% !important;"></textarea>
+            </div>
+            <div id="insertComment" class="col-12" style="margin-top: 10px;">
               <textarea [(ngModel)]="comment" id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>
             </div>
           </div>
