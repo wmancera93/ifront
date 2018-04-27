@@ -7,7 +7,9 @@ import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-
+import {CKEditorModule} from 'ng2-ckeditor';
+import { TagInputModule } from 'ngx-chips';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -51,6 +53,7 @@ import { PipesModule } from '../pipes/pipes.module';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
+import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
 
 
 @NgModule({
@@ -65,6 +68,9 @@ import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-reque
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
+    CKEditorModule,
+    TagInputModule,
+    FileUploadModule
 
   ],
   declarations: [
@@ -101,7 +107,8 @@ import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-reque
     NewsComponent,
     RequestsRhComponent,
     CorporateDocumentsComponent,
-    FormsRequestsComponent
+    FormsRequestsComponent,
+    EditPublicationComponent
   ],
   providers: [
     Angular2TokenService

@@ -92,13 +92,12 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   viewDetailArticle(infoPub: any) {    
-    this.billboardSharedService.setUpdateNew(infoPub);   
+    this.billboardSharedService.setUpdateNew(infoPub); 
+      
   }
 
   editNew(infoPub: PublicArticle){    
     this.editEditSharedService.setEditNew(infoPub);
-    document.getElementById('btn-newArt').click();
-    document.getElementById("bodyGeneral").removeAttribute('style');
   }
 
   deleteNew(infoPub: PublicArticle) {

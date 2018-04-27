@@ -26,7 +26,11 @@ export class NewsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+    this.consultAllArticles();
 
+  }
+
+  consultAllArticles() {
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
       this.newList = data.data;
     })
@@ -38,13 +42,27 @@ export class NewsComponent implements OnInit {
 
   goToSearchTitleNew() {
     this.uploadNewList = this.newList;
-    this.newList = this.newList.filter((pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0);
-    if (this.newList.length == 0) {
-      this.validateNoData = true;
+    console.log(this.searchNotice)
+    if (this.searchNotice == '') {
+      this.consultAllArticles();
+    }
+    else {
+      this.newList = this.newList.filter((pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0);
+      if (this.newList.length == 0) {
+        this.validateNoData = true;
+      }
+      this.searchNotice = '';
     }
   }
   viewDetailNew(article: any) {
-    this.billboardSharedService.setUpdateNew(article);    
+
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    this.billboardSharedService.setUpdateNew(article);
+    setTimeout(() => {
+      document.getElementById("loginId").style.display = 'none'
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+    }, 1000)
   }
 
 }
