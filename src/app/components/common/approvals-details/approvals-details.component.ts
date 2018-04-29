@@ -17,13 +17,16 @@ export class ApprovalsDetailsComponent implements OnInit {
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
         this.approverRequestsService.getDetailApprovalsRequests(data.id)
-        .subscribe((request:any) => {
-          this.approvals[0] = request.data[0].request;
-          console.log(this.approvals[0])
-        })
+          .subscribe((request: any) => {
+            this.approvals[0] = request.data[0].request;
+            console.log(this.approvals[0])
+          })
 
-        document.getElementById('btn_approvals_requests').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        if (document.getElementById('approvals_requests').className !== 'modal show') {
+          document.getElementById('btn_approvals_requests').click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+        }
+
       })
   }
 
