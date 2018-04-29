@@ -54,6 +54,7 @@ import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
 import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 @NgModule({
@@ -108,7 +109,8 @@ import { EditPublicationComponent } from './billboard/my-publications/edit-publi
     RequestsRhComponent,
     CorporateDocumentsComponent,
     FormsRequestsComponent,
-    EditPublicationComponent
+    EditPublicationComponent,
+    MasterDataComponent
   ],
   providers: [
     Angular2TokenService

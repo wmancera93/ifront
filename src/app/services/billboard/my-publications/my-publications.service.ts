@@ -32,7 +32,9 @@ export class MyPublicationsService {
   }
   putEditArticles(objectID: number,objectEdit: any)
   {
-    return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+objectID,{objectEdit})
+    console.log(objectID)
+    console.log(objectEdit)
+    return this.http.put(environment.apiBaseHr + '/api/v2/articles/'+objectID,objectEdit)
     .map((data: Observable<any>) => data);    
   }
 

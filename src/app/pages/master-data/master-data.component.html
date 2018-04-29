@@ -1,0 +1,70 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class=" col-12 title">
+          <i class="fa fa-address-card-o"></i>
+          Mis datos
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container">
+    <div class="col-12 text-center widget bg-white minHeight">
+      <div class="row">
+        <div class="col-12 col-xl-3">
+          <div id="listData" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
+            <div id="PersonalData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showPersonalData()">
+              <i class="fa fa-id-badge"></i> Datos personales
+            </div>
+            <div id="listContactData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showContactData()">
+              <i class="fa fa-phone"></i> Datos de contacto
+            </div>
+            <div id="listFamilyData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showFamilyData()">
+              <i class="fa fa-users"></i> Datos familiares
+            </div>
+            <div id="listAcademicData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showAcademicData()">
+              <i class="fa fa-graduation-cap"></i> Datos académicos
+            </div>
+            <div id="listEnterpriseData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showEnterpiseData()">
+              <i class="fa fa-industry"></i> Datos empresariales
+            </div>
+            <div id="listBankData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showBankData()">
+              <i class="fa fa-money"></i> Datos bancarios
+            </div>
+            <div id="listBeneficData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showBeneficData()">
+              <i class="fa fa-file-text-o"></i> Datos de los beneficiarios
+            </div>
+            <div id="listSoSecurityData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showSoSecurityData()">
+              <i class="fa fa-shield"></i> Seguridad social
+            </div>
+            <div id="listReteFuentData" class="nav-item navReport tabReport text-left" [ngClass]="{'active-report': i=='0'}" (click)="showReteFuentData()">
+              <i class="fa fa-line-chart"></i> Retención en la fuente
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-xl-9">
+          <div class="row widget bg-white-1x" *ngFor="let data of dataMaster;">
+            <div *ngIf="lengthArray > 1">
+              <div class="row " *ngFor="let item of data">
+                  <div class="col-4 font-color-default text-left">
+                      <strong>{{item.title}}</strong>
+                    </div>
+                    <div class="col-8 text-left">
+                      {{item.value}}
+                    </div>
+              </div>
+            </div>
+            <div class="col-4 font-color-default text-left">
+              <strong>{{data.title}}</strong>
+            </div>
+            <div class="col-8 text-left">
+              {{data.value}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

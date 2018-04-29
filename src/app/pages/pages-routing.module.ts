@@ -34,6 +34,7 @@ import { MyPublicationsComponent } from './billboard/my-publications/my-publicat
 import { NewsComponent } from './billboard/news/news.component';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 const routes: Routes = [
@@ -166,6 +167,10 @@ const routes: Routes = [
     {  
         path: 'corporate_documents',
         component: CorporateDocumentsComponent,
+    },
+    {
+        path : 'master_data',
+        component: MasterDataComponent
     }
 ];
 
