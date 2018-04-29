@@ -9,6 +9,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
+import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 
 const formData = new FormData();
 
@@ -26,26 +27,26 @@ export class NewArticleFormComponent implements OnInit {
   public themes: string[];
   public notice: string;
   public image: string;
-  public uploadListNews : boolean;  
-  public extensions:string = '.gif, .png, .jpeg, .jpg '; 
-
+  public uploadListNews: boolean;
+  public extensions: string = '.gif, .png, .jpeg, .jpg ';
   public fileImageNew: string = 'fileImageNew';
+  public showSubmit: boolean = true;
 
-  myForm: FormGroup;
+  formNewArticle: FormGroup;
   fileToUpload: File = null;
 
 
-  constructor(public createArticleService: MyPublicationsService, 
-    private fb: FormBuilder, 
-    public alert: AlertsService, 
+  constructor(public createArticleService: MyPublicationsService,
+    private fb: FormBuilder,
+    public alert: AlertsService,
     public fileUploadService: FileUploadService,
-    public billboardSharedService: BillboardService ) {
+    public billboardSharedService: BillboardService,
+    public editEditSharedService: EditArticleService) {
 
-this.fileUploadService.getObjetFile().subscribe((data:any)=>{
-  this.image = data;
-})
-
-    this.myForm = this.fb.group({
+    this.fileUploadService.getObjetFile().subscribe((data: any) => {
+      this.image = data;
+    })
+    this.formNewArticle = this.fb.group({
       'title': [''],
       'summary': [''],
       'body': [''],
@@ -55,12 +56,13 @@ this.fileUploadService.getObjetFile().subscribe((data:any)=>{
   }
 
   ngOnInit() {
-    document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
+    //document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
 
   }
-  onSubmit(value: any): void {      
+  onSubmitNewArticle(value: any): void {
+    this.showSubmit = false;
     const selectedItems = value.tags.map(({ display }) => display);
-    let newArticleForm = new FormData();    
+    let newArticleForm = new FormData();
     newArticleForm.append('title', value.title);
     newArticleForm.append('summary', value.summary);
     newArticleForm.append('body', value.body);
@@ -70,11 +72,11 @@ this.fileUploadService.getObjetFile().subscribe((data:any)=>{
     const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
     this.alert.setAlert(alertConfirmation[0]);
     this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-     if(data.success == true)
-     {
-       this.uploadListNews = true;
-       this.billboardSharedService.setUpdateNew(this.uploadListNews);
-     }
+      if (data.success == true) {
+        this.showSubmit = true;
+        this.uploadListNews = true;
+        this.billboardSharedService.setUpdateNew(this.uploadListNews);
+      }
     })
   }
 

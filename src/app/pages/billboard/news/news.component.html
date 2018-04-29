@@ -30,14 +30,14 @@
                   </div>
                 </div>
               </div>
-          <div class="widget bg-white-b" *ngFor="let new of newList;">            
+          <div class="widget bg-white-1x" *ngFor="let new of newList;">            
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
-                <img alt="image" class="img-rounded m-t-xs" src="{{new.image.url}}" style="height: 100px; width: 100px">
+                <img alt="image" class="radius-image m-t-xs" src="{{new.image.url}}" style="height: 100px; width: 100px">
               </div>
               <div class="col-12 col-lg-7">
                 <div class="row justify-content-center">
-                  <div class="col-12 font-color-default text-lg-left title-size" (click)="viewDetailNew(publication)">
+                  <div class="col-12 font-color-default text-lg-left hoverTitle" (click)="viewDetailNew(new)">
                     <strong>{{new.title |uppercase}} </strong>
                   </div>
                   <div class="col-12 text-lg-left">
@@ -65,7 +65,7 @@
                 </div>
               </div>
               <div class="col-12 col-lg-2">
-                <div class="row">
+                <div class="row text-lg-left">
                   <div class="col-12" style="font-size: 1rem;">
                     <strong> Estadisticas</strong>
                   </div>
@@ -87,3 +87,4 @@
     </div>
   </div>
 </div>
+<app-comment-article></app-comment-article>

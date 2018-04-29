@@ -164,7 +164,6 @@ export class HierarchicalChartComponent implements OnInit {
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
-    console.log(this.nameEmployee)
     if (this.nameEmployee.length > 0) {
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {

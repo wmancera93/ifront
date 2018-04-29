@@ -7,7 +7,9 @@ import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-
+import {CKEditorModule} from 'ng2-ckeditor';
+import { TagInputModule } from 'ngx-chips';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -53,6 +55,8 @@ import { CorporateDocumentsComponent } from './corporate-documents/corporate-doc
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
 import { ManagedComponent } from './approver-requests/managed/managed.component';
+import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 @NgModule({
@@ -67,6 +71,10 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
     ReactiveFormsModule,
     FormlyModule.forRoot(),
     FormlyBootstrapModule,
+    CKEditorModule,
+    TagInputModule,
+    FileUploadModule
+
   ],
   declarations: [
     LoginComponent,
@@ -104,7 +112,9 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
     CorporateDocumentsComponent,
     FormsRequestsComponent,
     PendingsComponent,
-    ManagedComponent
+    ManagedComponent,
+    EditPublicationComponent,
+    MasterDataComponent
   ],
   providers: [
     Angular2TokenService

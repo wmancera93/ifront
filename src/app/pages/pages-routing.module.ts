@@ -36,6 +36,7 @@ import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 import { ManagedComponent } from './approver-requests/managed/managed.component';
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 const routes: Routes = [
@@ -176,6 +177,10 @@ const routes: Routes = [
     {
         path: 'managed_approvers',
         component: ManagedComponent
+    },
+    {        
+        path : 'master_data',
+        component: MasterDataComponent
     }
 ];
 

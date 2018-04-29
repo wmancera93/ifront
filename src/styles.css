@@ -604,12 +604,12 @@ header{
 #modal-alert {
     color: #FFFFFF !important;
 }
-.modal.fade .modal-dialog {
+/* .modal.fade .modal-dialog {
     -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0); 
         transform: translate(0, 0);
 
-}
+} */
 /* My Team */
 
 .marginLeft{
@@ -1194,6 +1194,16 @@ cursor: pointer;
     float: left;
 
 }
+
+.radius-image{   
+    border-radius: 2%;
+    -webkit-box-shadow: -5px 6px 35px -7px rgba(184,184,184,1);
+-moz-box-shadow: -5px 6px 35px -7px rgba(184,184,184,1);
+box-shadow: -5px 6px 35px -7px rgba(184,184,184,1);
+}
+.font-color-date{
+  color:  var(--btn-primary) !important;
+}
 /* -------------------------------------- */
 
 /* Corporate Docs    */
@@ -1733,36 +1743,6 @@ border-bottom: 1px solid  #dddd;
 }
 
 
-.buttonCloseForm{
-   
-    background-color:var(--btn-primary) !important;             
-    border-color: transparent;
-    width: 100%;
-    color:white !important;
-    padding: 1px 2px;
-    /**/
-    -webkit-transition: all 200ms ease-in;
-    -webkit-transform: scale(1); 
-    -ms-transition: all 200ms ease-in;
-    -ms-transform: scale(1); 
-    -moz-transition: all 200ms ease-in;
-    -moz-transform: scale(1);
-    transition: all 200ms ease-in;
-    transform: scale(1);   
-}
-.buttonCloseForm:hover{       
-        cursor: pointer !important;        
-        color: var(--btn-primary-hover);    
-        z-index: 2;
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1.05);
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1.05);   
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1.05);
-        transition: all 200ms ease-in;
-        transform: scale(1.05); 
-}
 
 .buttonSubmitForm{
    
@@ -1800,6 +1780,9 @@ border-bottom: 1px solid  #dddd;
     width: auto !important;
     padding: 10px;
 }
+.hoverTitle:hover{
+    color: var(--btn-primary) !important;
+   }
 
   /* BACKGROUNDS */
  
@@ -2331,6 +2314,10 @@ a.close-canvas-menu:hover {
 
 .header-newspaper {
     border-bottom: 1px solid #dddddd
+}
+
+.header-newspaper:hover{
+    cursor: pointer;
 }
 
 .header-newspaper>span {

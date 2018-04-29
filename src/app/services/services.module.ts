@@ -29,6 +29,8 @@ import { FormsRequestsService } from './shared/forms-requests/forms-requests.ser
 import { FileUploadService } from './shared/common/file-upload/file-upload.service';
 import { BillboardService } from './shared/common/billboard/billboard.service';
 import { ApproverRequestsService } from './approver-requests/approver-requests.service';
+import { EditArticleService } from './shared/common/edit-article/edit-article.service';
+import { MasterDataService } from './master-data/master-data.service';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { ApproverRequestsService } from './approver-requests/approver-requests.s
     FormsRequestsService,
     FileUploadService,
     BillboardService,
-    ApproverRequestsService
+    ApproverRequestsService,
+    EditArticleService,
+    MasterDataService
   ]
 })
 export class ServicesModule { }

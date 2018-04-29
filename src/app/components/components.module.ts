@@ -34,8 +34,10 @@ import { TimeLineApproversComponent } from './common/time-line-approvers/time-li
 
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
+import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
+
 
 @NgModule({
   imports: [
@@ -71,8 +73,9 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     NewArticleFormComponent,   
     TimeLineApproversComponent, 
     FileUploadComponent, 
-    LoadingComponent, 
-    ApprovalsDetailsComponent
+    ApprovalsDetailsComponent,
+    CommentArticleComponent,
+    LoadingComponent
   ],
   exports: [
     HeaderComponent,
@@ -94,8 +97,9 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     NewArticleFormComponent,
     TimeLineApproversComponent,
     FileUploadComponent,
-    LoadingComponent,
-    ApprovalsDetailsComponent
+    ApprovalsDetailsComponent,
+    CommentArticleComponent,
+    LoadingComponent
   ],
   providers: [
     // ToasterService
