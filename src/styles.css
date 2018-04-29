@@ -1204,6 +1204,11 @@ box-shadow: -5px 6px 35px -7px rgba(184,184,184,1);
 .font-color-date{
   color:  var(--btn-primary) !important;
 }
+
+.img-size{
+    width: 100%;
+    height:350px;
+}
 /* -------------------------------------- */
 
 /* Corporate Docs    */
@@ -3597,6 +3602,11 @@ a.close-canvas-menu:hover {
         float: left;
     
     }
+    
+.img-size{
+    width: 100% !important;
+    height:200px !important;
+}
 }
 
 

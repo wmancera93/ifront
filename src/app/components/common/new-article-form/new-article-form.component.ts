@@ -68,7 +68,7 @@ export class NewArticleFormComponent implements OnInit {
     newArticleForm.append('body', value.body);
     newArticleForm.append('tags', selectedItems);
     newArticleForm.append('image', this.image);
-    (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
     const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
     this.alert.setAlert(alertConfirmation[0]);
     this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {

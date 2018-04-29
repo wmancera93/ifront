@@ -91,7 +91,7 @@ export class MyPublicationsComponent implements OnInit {
     })
   }
 
-  viewDetailArticle(infoPub: any) {    
+  viewDetailArticle(infoPub: any) {   
     this.billboardSharedService.setUpdateNew(infoPub); 
       
   }
