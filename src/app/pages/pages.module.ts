@@ -53,6 +53,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { RequestsRhComponent } from './requests-rh/requests-rh.component';
 import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
 import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
+import { PendingsComponent } from './approver-requests/pendings/pendings.component';
+import { ManagedComponent } from './approver-requests/managed/managed.component';
 import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 
@@ -109,6 +111,8 @@ import { MasterDataComponent } from './master-data/master-data.component';
     RequestsRhComponent,
     CorporateDocumentsComponent,
     FormsRequestsComponent,
+    PendingsComponent,
+    ManagedComponent,
     EditPublicationComponent,
     MasterDataComponent
   ],

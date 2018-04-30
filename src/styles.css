@@ -161,7 +161,7 @@ input[type="file"] {
 }
 
 .top-containter {
-    padding-bottom: 10px ;
+    padding-bottom: 10px !important;
 }
 
 .top-general-p {
@@ -1948,7 +1948,7 @@ border-bottom: 1px solid  #dddd;
   color: #ed5565;
 }
 .text-muted {
-  color: #888888;
+  color: #888888  !important
 }
 .text-white {
   color: #ffffff;

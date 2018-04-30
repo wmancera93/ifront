@@ -28,6 +28,7 @@ import { DownloadFilesService } from './download-files/download-files.service';
 import { FormsRequestsService } from './shared/forms-requests/forms-requests.service';
 import { FileUploadService } from './shared/common/file-upload/file-upload.service';
 import { BillboardService } from './shared/common/billboard/billboard.service';
+import { ApproverRequestsService } from './approver-requests/approver-requests.service';
 import { EditArticleService } from './shared/common/edit-article/edit-article.service';
 import { MasterDataService } from './master-data/master-data.service';
 
@@ -61,6 +62,7 @@ import { MasterDataService } from './master-data/master-data.service';
     FormsRequestsService,
     FileUploadService,
     BillboardService,
+    ApproverRequestsService,
     EditArticleService,
     MasterDataService
   ]

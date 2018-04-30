@@ -159,14 +159,14 @@
         <div id="approvals" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
             <li>
-              <a id="aAprovals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aAprovals', 'approvals')">Aprobaciones</a>
+              <a id="aAprovals" routerLink="/ihr/pending_approvers" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aAprovals', 'approvals')">Pendientes</a>
             </li>
             <li class="bg-li">
-              <a id="aManaged" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aManaged', 'approvals')">Gestionadas</a>
+              <a id="aManaged" routerLink="/ihr/managed_approvers" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aManaged', 'approvals')">Gestionadas</a>
             </li>
-            <li class="bg-li">
-              <a id="aConsultationsApprovals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aConsultationsApprovals', 'approvals')">Consultas y aprobaciones</a>
-            </li>
+            <!-- <li class="bg-li">
+              <a id="aConsultationsApprovals" routerLink="/ihr/consultations_approvals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aConsultationsApprovals', 'approvals')">Consultas y aprobaciones</a>
+            </li> -->
           </ul>
         </div>
       </li>

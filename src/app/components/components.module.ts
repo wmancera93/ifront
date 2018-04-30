@@ -36,6 +36,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploadComponent } from './common/file-upload/file-upload.component';
 import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
+import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { LoadingComponent } from './common/loading/loading.component';
     NewArticleFormComponent,   
     TimeLineApproversComponent, 
     FileUploadComponent, 
+    ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent
   ],
@@ -95,6 +97,7 @@ import { LoadingComponent } from './common/loading/loading.component';
     NewArticleFormComponent,
     TimeLineApproversComponent,
     FileUploadComponent,
+    ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent
   ],

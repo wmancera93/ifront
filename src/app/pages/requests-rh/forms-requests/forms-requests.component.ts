@@ -98,7 +98,7 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   newRequest(model) {
-    document.getElementById("loginId").style.display = 'block'
+    document.getElementById("loginId").style.display = 'block';
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (this.formRequests.id_activity === 'PERM') {
