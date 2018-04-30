@@ -46,7 +46,7 @@
             </div>
           </div>
           <div class="border-botton-general">
-            <div class="row">
+            <div class="row justify-content-center">
               <div class="col-lg-1 col-2" style="margin-top: 10px;" *ngIf="numberComments != 0">
                 <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse-comment fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
                   aria-expanded="false" (click)="collapse(true)"></i>
@@ -58,7 +58,7 @@
                   <h6>COMENTARIOS</h6>
                 </div>
               </div>
-              <div class="col-lg-5 col-12 text-center font-title-general" style="margin-top: 10px;">
+              <div class="col-lg-4 col-12 text-center font-title-general" style="margin-top: 10px;">
                 <i class="fa fa-eye"></i>
                 {{infoArticle.total_views}} Vistas
                 <i class="fa fa-comments-o"></i>

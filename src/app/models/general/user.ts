@@ -35,6 +35,11 @@ export interface Employee {
     contract_type?: string;
     my_boss_employee?:Boss;
     address?:string;
+    see_organ?: string;
+    see_rpgen?:string,
+    is_admin?: string,
+    new_cont?: string,
+    is_approver?: boolean
 }
 export interface Boss{
     name_complete: string;
