@@ -20,10 +20,14 @@ export class EmployeeInfoComponent implements OnInit {
 
   constructor(public employeeSharedService: EmployeeInfoService) {
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
+      this.employeeInfo = null;
       this.employeeInfo = data;
       this.flagShowModal = true;  
-      document.getElementById('btn-' + this.employeeInfo.modal).click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+      
+      if (document.getElementById("modal-" + this.employeeInfo.modal).className !== 'modal show') {
+        document.getElementById('btn-' + this.employeeInfo.modal).click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
     })
   }
 
