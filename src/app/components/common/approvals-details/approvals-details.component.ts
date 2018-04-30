@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { ApproverRequestsService } from '../../../services/approver-requests/approver-requests.service';
 import { DetailAproverRequest } from '../../../models/common/approver-requests/approver_requests';
+import { Alerts } from '../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-approvals-details',
@@ -17,7 +19,8 @@ export class ApprovalsDetailsComponent implements OnInit {
   public description: string = "";
 
   constructor(public approverRequestsService: ApproverRequestsService,
-    public aproversRequestsService: AproversRequestsService) {
+    public aproversRequestsService: AproversRequestsService,
+    public alert: AlertsService) {
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
@@ -61,6 +64,8 @@ export class ApprovalsDetailsComponent implements OnInit {
   }
 
   saveApproval() {
+    document.getElementById("loginId").style.display = 'block'
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.approverRequestsService.postApprovalsRequest(
       {
         request_id: this.approvals[0].ticket,
@@ -69,10 +74,17 @@ export class ApprovalsDetailsComponent implements OnInit {
       })
       .subscribe(
         (data: any) => {
-          console.log(data);
+          this.aproversRequestsService.setConfirmApproval("true");
         },
         (error: any) => {
-          console.log(error);
+          (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.error.errors.toString(), confirmation: false }];
+          this.alert.setAlert(alertWarning[0]);
+
+          setTimeout(() => {
+            document.getElementById("loginId").style.display = 'none'
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          }, 1000)
         })
   }
 

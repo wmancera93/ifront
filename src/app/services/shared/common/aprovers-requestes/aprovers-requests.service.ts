@@ -6,6 +6,7 @@ import { ListRequests } from '../../../../models/common/requests-rh/requests-rh'
 export class AproversRequestsService {
   requests: Subject<any> = new Subject<any>();
   approvalsRequests: Subject<any> = new Subject<any>();
+  confirmApproval: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -23,5 +24,13 @@ export class AproversRequestsService {
 
   setAprovalsRequests(objectRequest: any) {
     return this.approvalsRequests.next(objectRequest);
+  }
+
+  getConfirmApproval() {
+    return this.confirmApproval;
+  }
+
+  setConfirmApproval(confirm: any) {
+    return this.confirmApproval.next(confirm);
   }
 }
