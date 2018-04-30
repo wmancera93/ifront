@@ -23,7 +23,7 @@ export class ManagedComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.approverRequestsService.getApprovalsRequestsManaged()
+    this.approverRequestsService.getApprovalsRequestsPending()
       .subscribe((data: any) => {
         if (data.success) {
           this.managed = data.data[0].requests;
@@ -37,7 +37,7 @@ export class ManagedComponent implements OnInit {
   }
 
   modalAprovers(request: Requests) {
-    this.aproversRequestsService.setAprovalsRequests({id:request.ticket, edit: true});
+    this.aproversRequestsService.setAprovalsRequests({id:request.ticket, edit: false});
   }
 
 }

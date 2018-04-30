@@ -165,14 +165,59 @@
                     </ul>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="tab-content">
-                    <div id="Approval" class="tab-pane" [ngClass]="{'active': edit}">
-                      <div class="col-12" >
-                        prueba
+                <div class="row top-general">
+                  <div class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                    <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
+                      <div class="row">
+                        <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
+                          <div class="row justify-content-center">
+                            <div class="col-12">
+                              {{approvals[0].type_request_to_json.prerequisites}}
+                            </div>
+                            <div class="col-md-4 col-12">
+                              <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
+                                <i class="fa fa-fw fa-check"></i>
+                                Aceptar
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-12 tops" *ngIf="!prerequisit">
+                          <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-8 text-left">
+                              <h3 class="font-color-default">
+                                Aprobación {{switch}}
+                              </h3>
+                            </div>
+                            <div class="col-lg-8 col-md-6 col-4">
+                              <div class="top-interruptor">
+                                <input type="radio" name="interruptor" id="prendido">
+                                <input type="radio" name="interruptor" id="apagado" checked>
+                                <div class="interruptor-cuerpo">
+                                  <div class="interruptor-tecla">
+                                    <label for="prendido" (click)="onAprovlas()"></label>
+                                    <label for="apagado" (click)="offAprovlas()"></label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-12 text-left">
+                              Descripción
+                            </div>
+                            <div class="col-12">
+                              <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
+                            </div>
+                            <div class="col-md-4 col-12">
+                              <div class="btn btn-success top-general-p cursor-general btn-block" (click)="saveApproval()">
+                                <i class="fa fa-fw fa-save"></i>
+                                Guardar
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div id="Detail" class="tab-pane" [ngClass]="{'active': !edit}">
+                    <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !edit}" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
                         pruebbbb
                       </div>

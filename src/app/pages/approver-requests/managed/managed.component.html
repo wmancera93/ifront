@@ -20,31 +20,31 @@
         </div>
       <div class="row justify-content-center top-containter" *ngIf="managed.length > 0">
         <div class="col-12">
-          <div class="widget bg-white-1x">
+          <div class="widget bg-white-1x" *ngFor="let managed of managed">
             <div class="row align-items-center">
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{pending.ticket}}
+                    Ticket #{{managed.ticket}}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
-                  Creada el {{pending.created_date}}
+                  Creada el {{managed.created_date}}
                 </p>
               </div>
               <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  {{pending.level_answer_description}}
+                  {{managed.level_answer_description}}
                 </h3>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  {{pending.level_answer_description}}
+                  {{managed.level_answer_description}}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
-                  {{pending.level_answer}}
+                  {{managed.level_answer}}
                 </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -53,7 +53,7 @@
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
-                  {{pending.employee_applicant_to_json.short_name}}
+                  {{managed.employee_applicant_to_json.short_name}}
                 </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -70,7 +70,7 @@
                 <p class="font-title-general">
                   Acción
                 </p>
-                <button class="btn btn-sm btn-secondary" (click)="modalAprovers(request)">
+                <button class="btn btn-sm btn-secondary" (click)="modalAprovers(managed)">
                   <i class="fa fa-eye" aria-hidden="true"></i>
                 </button>
               </div>
@@ -81,3 +81,5 @@
     </div>
   </div>
 </div>
+
+<app-approvals-details></app-approvals-details>

@@ -1943,7 +1943,7 @@ border-bottom: 1px solid  #dddd;
   color: #ed5565;
 }
 .text-muted {
-  color: #888888;
+  color: #888888  !important
 }
 .text-white {
   color: #ffffff;
