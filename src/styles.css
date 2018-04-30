@@ -2616,28 +2616,7 @@ a.close-canvas-menu:hover {
     /* .fontSize-chart{
         font-size: 1rem !important;
     } */
-/* 
-    .buttonDocs{
-        border: 1px solid transparent;
-        padding: .5rem 1rem;
-        z-index: 1000;
-        position: absolute;
-        margin-top: -61px !important;
-        margin-left: -41px !important;
-        background-color:var(--btn-primary);
-        border-radius: 30px;
-        color:white !important;
-        padding-top: 5px;
-       
-        -webkit-transition: all 200ms ease-in;
-        -webkit-transform: scale(1); 
-        -ms-transition: all 200ms ease-in;
-        -ms-transform: scale(1); 
-        -moz-transition: all 200ms ease-in;
-        -moz-transform: scale(1);
-        transition: all 200ms ease-in;
-        transform: scale(1);   
-    } */
+
 }
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
@@ -2787,6 +2766,27 @@ a.close-canvas-menu:hover {
         margin-top: -29px !important;
         float: left;
     
+    }
+    .buttonDocs{
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        z-index: 1000;
+        position: absolute;
+        margin-top: -51px !important;
+        margin-left: 307px !important;
+        background-color:var(--btn-primary);
+        border-radius: 30px;
+        color:white !important;
+        padding-top: 5px;
+        /**/
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
     }
 }
 
@@ -3016,6 +3016,27 @@ a.close-canvas-menu:hover {
     .m-t-h {
         margin-top: 3px !important;
     }
+    .buttonDocs{
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        z-index: 1000;
+        position: absolute;
+        margin-top: -51px !important;
+        margin-left: 175px !important;
+        background-color:var(--btn-primary);
+        border-radius: 30px;
+        color:white !important;
+        padding-top: 5px;
+        /**/
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
+    }
 }
 /* mobile horizontal */
 @media only screen and (max-width: 830px)  and (max-height: 500px) {
@@ -3102,7 +3123,7 @@ a.close-canvas-menu:hover {
         z-index: 1000;
         position: absolute;
         margin-top: -51px !important;
-        margin-left: 20px !important;
+        margin-left: 225px !important;
         background-color:var(--btn-primary);
         border-radius: 30px;
         color:white !important;
@@ -3379,6 +3400,28 @@ a.close-canvas-menu:hover {
     
     }
 
+    .buttonDocs{
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        z-index: 1000;
+        position: absolute;
+        margin-top: -51px !important;
+        margin-left: 113px !important;
+        background-color:var(--btn-primary);
+        border-radius: 30px;
+        color:white !important;
+        padding-top: 5px;
+        /**/
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
+    }
+
 }
 /* mobile vertical */
 @media only screen and (max-width: 450px)  and (max-height: 800px) {
@@ -3634,7 +3677,7 @@ a.close-canvas-menu:hover {
     z-index: 1000;
     position: absolute;
     margin-top: -51px !important;
-    margin-left: 85px !important;
+    margin-left: 90px !important;
     background-color:var(--btn-primary);
     border-radius: 30px;
     color:white !important;
