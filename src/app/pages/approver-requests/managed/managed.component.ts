@@ -23,7 +23,7 @@ export class ManagedComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.approverRequestsService.getApprovalsRequestsPending()
+    this.approverRequestsService.getApprovalsRequestsManaged()
       .subscribe((data: any) => {
         if (data.success) {
           this.managed = data.data[0].requests;
