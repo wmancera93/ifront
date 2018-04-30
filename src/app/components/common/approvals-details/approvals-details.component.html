@@ -184,12 +184,18 @@
                         </div>
                         <div class="col-12 tops" *ngIf="!prerequisit">
                           <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-6 col-8 text-left">
+                            <div class="col-lg-6 col-md-6 col-8 text-left">
                               <h3 class="font-color-default">
-                                Aprobación {{switch}}
+                                Solicitud a
+                                <span *ngIf="switch == 'on'">
+                                  Aprobar
+                                </span>
+                                <span *ngIf="switch == 'off'">
+                                  Cancelar
+                                </span>
                               </h3>
                             </div>
-                            <div class="col-lg-8 col-md-6 col-4">
+                            <div class="col-lg-6 col-md-6 col-4">
                               <div class="top-interruptor">
                                 <input type="radio" name="interruptor" id="prendido">
                                 <input type="radio" name="interruptor" id="apagado" checked>
@@ -219,17 +225,33 @@
                     </div>
                     <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !edit}" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
-                        <div class="row justify-content-center">
-                          <div class="col-12 text-left">
-                            <h3 class="font-color-default">
-                              Solicitud Aprobada
-                            </h3>
+                        <div *ngIf="approvals[0].answers_to_json.length > 0" class="border-botton-general">
+                          <div class="row justify-content-center" *ngFor="let details of approvals[0].answers_to_json">
+                            <div class="col-12 text-left">
+                              Nivel de aprobación {{details.approver_to_json.level}}
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3 class="font-color-default">
+                                {{details.status}} por {{details.approver_to_json.name}}
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3 class="font-color-default">
+                                Descripción:
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              {{details.description}}
+                            </div>
                           </div>
-                          <div class="col-12 text-left">
-                            Descripción
-                          </div>
-                          <div class="col-12 text-left">
-                            Prueba de detalles de la solicitud
+                        </div>
+                        <div *ngIf="approvals[0].answers_to_json.length == 0">
+                          <div class="row justify-content-center">
+                            <div class="col-12 text-center top-general">
+                              <h3 class="font-color-default">
+                                Aun no hay detalles
+                              </h3>
+                            </div>
                           </div>
                         </div>
                       </div>
