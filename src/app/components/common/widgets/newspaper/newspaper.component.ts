@@ -22,7 +22,6 @@ export class NewspaperComponent implements OnInit {
 
   viewDetailArticle(objectArticle:any)
   {   
-    
     document.getElementById("loginId").style.display = 'block'
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
     this.billboardSharedService.setUpdateNew(objectArticle);

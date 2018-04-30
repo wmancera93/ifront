@@ -26,6 +26,7 @@ export interface Enterprise {
     show_demographics_data?: boolean,
     show_document_management?:boolean,
     show_embargoes?: boolean,
+    show_help?: boolean,
     show_hoex?: boolean,
     show_income_and_withholdings?: boolean,
     show_indebtedness_levels?: boolean,
@@ -33,6 +34,7 @@ export interface Enterprise {
     show_labor?:boolean
     show_licenses?: boolean,
     show_loans?: boolean,
+    show_my_data?: boolean,
     show_new_employees?: boolean,
     show_organizate_chart?: boolean,
     show_payments_and_deductions?: boolean,

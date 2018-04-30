@@ -41,11 +41,12 @@ export class MenuNavigationComponent implements OnInit {
   public showRHReports: boolean;
   public showBillboard: boolean;
   public showMyPublications: boolean;
-  public showRequest : boolean;
+  public showRequest: boolean;
   public showApprovals: boolean;
-  public showBanners : boolean;
-  public showDocuments : boolean;
-
+  public showBanners: boolean;
+  public showDocuments: boolean;
+  public showMyData: boolean;
+  public showHelp: boolean;
 
   constructor(private userSharedService: UserSharedService,
     public companieService: MainService) {
@@ -274,42 +275,51 @@ export class MenuNavigationComponent implements OnInit {
     }
 
     //REQUEST
-    if(this.dataEnterprise.make_request == true)
-    {
+    if (this.dataEnterprise.make_request == true) {
       this.showRequest = true;
     }
-    else 
-    {
+    else {
       this.showRequest = false;
     }
 
     //APROVERS
-    console.log(this.dataEnterprise.make_approvals,this.dataUser.employee.is_approver)
-    if(this.dataEnterprise.make_approvals == true && this.dataUser.employee.is_approver == true)
-    {
-      this.showApprovals = true;    
+    if (this.dataEnterprise.make_approvals == true && this.dataUser.employee.is_approver == true) {
+      this.showApprovals = true;
     }
-    else 
-    { 
+    else {
       this.showApprovals = false;
     }
-    
+
     //BANNERS
-    if(this.dataEnterprise.show_banners == true && this.dataUser.employee.is_admin == "true")
-    {
-    this.showBanners = true;
+    if (this.dataEnterprise.show_banners == true && this.dataUser.employee.is_admin == "true") {
+      this.showBanners = true;
     }
-    else{
+    else {
       this.showBanners = false;
     }
 
     //CORPORATE DOCUMENTS
-    if(this.dataEnterprise.show_document_management == true)
-    {
+    if (this.dataEnterprise.show_document_management == true) {
       this.showDocuments = true;
     }
-    else{
+    else {
       this.showDocuments = false;
+    }
+
+    //HELP
+    if (this.dataEnterprise.show_help == true) {
+      this.showHelp = true;
+    }
+    else {
+      this.showHelp = false;
+    }
+
+    // MY DATA 
+    if (this.dataEnterprise.show_my_data == true) {
+      this.showMyData = true;
+    }
+    else {
+      this.showMyData = false;
     }
 
   }

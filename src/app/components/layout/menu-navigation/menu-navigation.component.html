@@ -34,7 +34,7 @@
           <span class="nav-label">Organigrama</span>
         </a>
       </li>
-      <li id="liMyData">
+      <li id="liMyData" *ngIf="showMyData">
         <a id="aMyData" class="nav-link bg-menu"  routerLink="/ihr/master_data" (click)="clickOptionMenu('liMyData','aMyData', '')">
           <i class="fa fa-user"></i>
           <span class="nav-label">Mis Datos</span>
@@ -182,7 +182,7 @@
           <span class="nav-label">Docs. Corporativos</span>
         </a>
       </li>
-      <li id="liHelp">
+      <li id="liHelp" *ngIf="showHelp">
         <a id="aHelp" class="nav-link bg-menu" (click)="clickOptionMenu('liHelp','aHelp', '')">
           <i class="fa fa-question-circle"></i>
           <span class="nav-label">Ayuda</span>

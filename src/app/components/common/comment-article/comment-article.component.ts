@@ -77,6 +77,7 @@ export class CommentArticleComponent implements OnInit {
   getDetailArticle() {
     this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
       this.infoArticle = res.data;
+      console.log(this.infoArticle)
       this.commentsList = res.data.comments_articles;
     })
 

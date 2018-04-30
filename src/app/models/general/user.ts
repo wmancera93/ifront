@@ -42,6 +42,6 @@ export interface Employee {
     is_approver?: boolean
 }
 export interface Boss{
-    name_complete: string;
-    area: string;
+    name_complete?: string;
+    area?: string;
 }
