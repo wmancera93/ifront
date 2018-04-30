@@ -24,7 +24,7 @@ export class ApproverRequestsService {
   }
 
   postApprovalsRequest(objectApprovals: any) {
-    return this.http.post(environment.apiBaseHr + '/api/v2/employee_requets/', objectApprovals)
+    return this.http.post(environment.apiBaseHr + '/api/v2/approvals_employee_requests/', objectApprovals)
       .map((data: Observable<any>) => data);
   }
   
