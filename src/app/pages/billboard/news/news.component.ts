@@ -56,13 +56,13 @@ export class NewsComponent implements OnInit {
   }
   viewDetailNew(article: any) {
 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.billboardSharedService.setUpdateNew(article);
-    setTimeout(() => {
-      document.getElementById("loginId").style.display = 'none'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    }, 1000)
+    // setTimeout(() => {
+    //   document.getElementById("loginId").style.display = 'none'
+    //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+    // }, 1000)
   }
 
 }

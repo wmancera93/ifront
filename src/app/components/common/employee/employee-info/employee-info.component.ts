@@ -21,8 +21,8 @@ export class EmployeeInfoComponent implements OnInit {
   constructor(public employeeSharedService: EmployeeInfoService) {
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
       this.employeeInfo = data;
-      this.flagShowModal = true;
-      
+      this.flagShowModal = true;      
+      console.log(this.nameModal)
       document.getElementById('btn-' + this.employeeInfo.modal).click();
       document.getElementById("bodyGeneral").removeAttribute('style');
     })

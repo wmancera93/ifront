@@ -210,9 +210,9 @@ export class HierarchicalChartComponent implements OnInit {
     this.id_shared = (employeeObject.id).toString();
     this.employeeService.getEmployeeById(this.id_shared).subscribe(
       (data: any) => {
-        if (data.success === true) {
+        if (data.success == true) {
           this.infoEmployee = data.data;
-          this.infoEmployee.modal = this.name;
+          this.infoEmployee.modal = this.name;          
           this.employeeSharedService.setInfoEmployee(this.infoEmployee);
         }
       }
