@@ -19,6 +19,7 @@ export class TimeLineApproversComponent implements OnInit {
       (data: any) => {
         this.requestsRhService.getRequestDetailById(data.ticket)
           .subscribe((detail: any) => {
+            this.detailRequets = [];
             if (detail.success) {
               this.detailRequets = detail.data;
               this.fileSupport = this.detailRequets[0].request.file_support.url;
