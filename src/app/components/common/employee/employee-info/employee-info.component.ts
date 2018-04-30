@@ -28,7 +28,6 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.target)
     this.target = '#modal-' + this.nameModal;
     this.button = 'btn-' + this.nameModal;
     this.id = "modal-" + this.nameModal;

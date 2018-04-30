@@ -66,7 +66,6 @@ export class CommentArticleComponent implements OnInit {
   chargeComments() {
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {     
       this.idArticle = data.id;
-      console.log(this.idArticle)
       this.numberComments = data.total_comments;
       this.viewModal = true;
       this.getDetailArticle();
@@ -76,7 +75,6 @@ export class CommentArticleComponent implements OnInit {
   getDetailArticle() {
     this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {      
       this.infoArticle = res.data;
-      console.log(this.infoArticle)
       this.commentsList = res.data.comments_articles;
     })
 
