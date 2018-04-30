@@ -1267,7 +1267,7 @@ box-shadow: -5px 6px 35px -7px rgba(184,184,184,1);
     z-index: 1000;
     position: absolute;
     margin-top: -51px !important;
-    margin-left: 20px !important;
+    margin-left: 40px !important;
     background-color:var(--btn-primary);
     border-radius: 30px;
     color:white !important;
@@ -3096,6 +3096,27 @@ a.close-canvas-menu:hover {
     #page-wrapper {
         margin: 0px !important;       
     }
+    .buttonDocs{
+        border: 1px solid transparent;
+        padding: .5rem 1rem;
+        z-index: 1000;
+        position: absolute;
+        margin-top: -51px !important;
+        margin-left: 20px !important;
+        background-color:var(--btn-primary);
+        border-radius: 30px;
+        color:white !important;
+        padding-top: 5px;
+        /**/
+        -webkit-transition: all 200ms ease-in;
+        -webkit-transform: scale(1); 
+        -ms-transition: all 200ms ease-in;
+        -ms-transform: scale(1); 
+        -moz-transition: all 200ms ease-in;
+        -moz-transform: scale(1);
+        transition: all 200ms ease-in;
+        transform: scale(1);   
+    }
 
     .navbar-default {
         background-color: #2f4050;
@@ -3606,6 +3627,27 @@ a.close-canvas-menu:hover {
 .img-size{
     width: 100% !important;
     height:200px !important;
+}
+.buttonDocs{
+    border: 1px solid transparent;
+    padding: .5rem 1rem;
+    z-index: 1000;
+    position: absolute;
+    margin-top: -51px !important;
+    margin-left: 85px !important;
+    background-color:var(--btn-primary);
+    border-radius: 30px;
+    color:white !important;
+    padding-top: 5px;
+    /**/
+    -webkit-transition: all 200ms ease-in;
+    -webkit-transform: scale(1); 
+    -ms-transition: all 200ms ease-in;
+    -ms-transform: scale(1); 
+    -moz-transition: all 200ms ease-in;
+    -moz-transform: scale(1);
+    transition: all 200ms ease-in;
+    transform: scale(1);   
 }
 }
 

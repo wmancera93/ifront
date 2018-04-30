@@ -21,14 +21,14 @@ export class EmployeeInfoComponent implements OnInit {
   constructor(public employeeSharedService: EmployeeInfoService) {
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
       this.employeeInfo = data;
-      this.flagShowModal = true;      
-      console.log(this.nameModal)
+      this.flagShowModal = true;  
       document.getElementById('btn-' + this.employeeInfo.modal).click();
       document.getElementById("bodyGeneral").removeAttribute('style');
     })
   }
 
   ngOnInit() {
+    console.log(this.target)
     this.target = '#modal-' + this.nameModal;
     this.button = 'btn-' + this.nameModal;
     this.id = "modal-" + this.nameModal;

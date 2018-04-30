@@ -20,6 +20,9 @@ export class CorporateDocumentsComponent implements OnInit {
   public infoDocs: Documents;
   public urlDocs: string;
   public urlPDF: any;
+  public urlSplit : string;
+  public namePDF : string;
+
   constructor(public corporateDocsService: CorporateDocsService,
     public downloadFilesService: DownloadFilesService, public http: Http) {
     document.getElementById("loginId").style.display = 'block'
@@ -52,10 +55,15 @@ export class CorporateDocumentsComponent implements OnInit {
     headers.append('Accept', 'pdf');
 
     this.http.get(this.urlPDF).subscribe((data: any) => {
-      console.log(data._body)
-      let FileSaver = require('file-saver');
+      
+      this.urlSplit = data.url;
+       this.namePDF = this.urlSplit.split('/')[this.urlSplit.split('/').length - 1];
+       console.log(this.namePDF)
+
+            let FileSaver = require('file-saver');
       let blob = new Blob([data._body], { type: "application/pdf;charset=utf-8" });
-      FileSaver.saveAs(blob, "hello world.pdf");
+      window.open(this.urlPDF, "_blank");      
+      // FileSaver.saveAs(blob, this.namePDF);
 
       // var file = new File([data._body], "hello world.pdf", { type: "application/pdf;charset=utf-8" });
       // FileSaver.saveAs(file);
