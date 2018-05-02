@@ -16,6 +16,21 @@ import {MyTeamInfoService} from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
 import { QueriesService } from './queries/queries.service';
+import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
+import { ExcelService } from './common/excel/excel.service';
+import { ReportsHrService } from './reports-rh/reports-hr.service';
+import { AutoServicesService} from './auto-services/auto-services.service'
+import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
+import { RequestsRhService } from './requests-rh/requests-rh.service';
+import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
+import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
+import { DownloadFilesService } from './download-files/download-files.service';
+import { FormsRequestsService } from './shared/forms-requests/forms-requests.service';
+import { FileUploadService } from './shared/common/file-upload/file-upload.service';
+import { BillboardService } from './shared/common/billboard/billboard.service';
+import { ApproverRequestsService } from './approver-requests/approver-requests.service';
+import { EditArticleService } from './shared/common/edit-article/edit-article.service';
+import { MasterDataService } from './master-data/master-data.service';
 
 @NgModule({
   imports: [
@@ -34,7 +49,22 @@ import { QueriesService } from './queries/queries.service';
     MyTeamInfoService,
     MyTeamReportService,
     HierarchicalChartService,
-    QueriesService
+    QueriesService,
+    PrintDataTableService,
+    ExcelService,
+    ReportsHrService,
+    AutoServicesService,
+    MyPublicationsService,
+    RequestsRhService,
+    AproversRequestsService,
+    CorporateDocsService,
+    DownloadFilesService,
+    FormsRequestsService,
+    FileUploadService,
+    BillboardService,
+    ApproverRequestsService,
+    EditArticleService,
+    MasterDataService
   ]
 })
 export class ServicesModule { }

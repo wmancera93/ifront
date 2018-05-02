@@ -2,6 +2,7 @@ import { Component, OnInit, Pipe, PipeTransform, EventEmitter } from '@angular/c
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
 import { EspecificMyTeam, InfoWorkTeamReport, Data } from '../../../models/common/myteam/myteam';
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
+import { EILSEQ } from 'constants';
 @Component({
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
@@ -21,7 +22,7 @@ export class MyTeamReportsComponent implements OnInit {
   ) {
     this.myTeamSharedService.getReportMyTeam().subscribe(
       (data) => {
-        this.reportsMyTeamInfo = data;        
+        this.reportsMyTeamInfo = data;
         setTimeout(() => {
           document.getElementById('0reports').click();
         }, 5)
@@ -45,8 +46,13 @@ export class MyTeamReportsComponent implements OnInit {
     document.getElementById(i + 'reports').className = 'nav-item navReport tabReport active-report';
     this.myTeamService.getReportWorkTeam(report.url, idReport.toString()).subscribe(
       (data: any) => {
-        this.nameReport = data.data[0].title;
-        this.objectReport.emit(data);
+        if (data.data.length > 0) {
+          this.nameReport = data.data[0].title;
+          this.objectReport.emit(data);
+        } else {
+          this.nameReport = '';
+          this.objectReport.emit(data);
+        }
       }
     );
   }

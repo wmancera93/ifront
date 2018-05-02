@@ -36,5 +36,9 @@ export class DashboardEmployeeService {
     return this.http.get(environment.apiBaseHr + '/api/v2/dashboards/my_severances_widget')
     .map((data:Observable<any>)=>data);
   }
+  getIncomesData(){
+    return this.http.get(environment.apiBaseHr+'/api/v2/dashboards/total_incomes_deductions')
+    .map((data:Observable<any>)=>data);
+  }
 
 }

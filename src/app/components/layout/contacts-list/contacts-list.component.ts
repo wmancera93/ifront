@@ -168,13 +168,13 @@ export class ContactsListComponent implements OnInit {
     document.getElementById('togglePartnersHide').click();
   }
 
-  openInfoEmployee(idEmployee: string) {
+  openInfoEmployee(idEmployee: string) {    
     this.employeeService.getEmployeeById(idEmployee).subscribe(
       (data: any) => {
         if (data.success === true) {
           this.infoEmployee = data.data;
-          this.infoEmployee.modal = 'contactList';
-          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+            this.infoEmployee.modal = 'contactList';
+            this.employeeSharedService.setInfoEmployee(this.infoEmployee);
         }
       }
     );

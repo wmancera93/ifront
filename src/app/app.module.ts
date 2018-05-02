@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
 import {ChartsModule} from 'ng2-charts/ng2-charts';
+import 'chart.piecelabel.js';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,6 @@ import { AppComponent } from './app.component';
 import { A2tUiModule } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 
 @NgModule({
   declarations: [
@@ -34,9 +34,7 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule,
-    
-
+    HttpModule
   ],
   providers: [
     
