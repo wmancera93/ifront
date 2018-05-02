@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { User } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
@@ -16,7 +16,6 @@ import { Enterprise } from '../../../models/general/enterprise';
 })
 
 export class HeaderComponent implements OnInit {
-  @Output() name: string = 'contactList';
   private dataUser: User = null;
   title: string = 'Mis datos';
   public dataEnterprise: Enterprise;
@@ -24,7 +23,7 @@ export class HeaderComponent implements OnInit {
   public showMenu: boolean = true;
   public showCollapse: string = '';
   public heightContenGeneral: number;
-  public showContactsList:boolean = true;
+  public showContactsList: boolean = true;
 
   private alertWarning: Alerts[];
 
@@ -57,11 +56,11 @@ export class HeaderComponent implements OnInit {
     );
 
     this.alert.getActionConfirm().subscribe(
-      (data: any) => { 
+      (data: any) => {
         if (data === "logout") {
-          localStorage.setItem('user',null);   
+          localStorage.setItem('user', null);
           this.userSharedService.setUser(null);
-          this.router.navigate(['/ihr/login']);          
+          this.router.navigate(['/ihr/login']);
         }
       }
     )
@@ -73,11 +72,11 @@ export class HeaderComponent implements OnInit {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
     this.logoHeader = this.dataEnterprise.logo_inside.url;
-   
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {    
-      this.showMenu = false;  
+
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
+      this.showMenu = false;
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
-      document.getElementById('footer_general').style.display = 'block';      
+      document.getElementById('footer_general').style.display = 'block';
     } else {
       if (this.showMenu === true) {
         (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
@@ -94,30 +93,29 @@ export class HeaderComponent implements OnInit {
       confirmation: true,
       typeConfirmation: 'logout'
     }];
-    this.alert.setAlert(this.alertWarning[0]);    
+    this.alert.setAlert(this.alertWarning[0]);
   }
 
   clickPartnersIcon() {
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {     
-        this.clickHideMenuMobile();      
+    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') !== 'none') {
+      this.clickHideMenuMobile();
     }
-       
-    if(document.getElementById("contactList").className === 'hide')
-    {
+
+    if (document.getElementById("contactList").className === 'hide') {
       document.getElementById("contactList").className = 'show';
       this.showContactsList = false;
     }
-    else{
+    else {
       document.getElementById("contactList").className = 'show';
       this.showContactsList = false;
-    }
-   
+    }  
+
   }
 
-  clickPartnersIconHide() {      
-      document.getElementById('contactList').classList.remove('show')     
-      document.getElementById("contactList").className = 'hide';
-      this.showContactsList = true;     
+  clickPartnersIconHide() {
+    document.getElementById('contactList').classList.remove('show')
+    document.getElementById("contactList").className = 'hide';
+    this.showContactsList = true;
   }
 
   clickHideMenuMobile() {
@@ -138,7 +136,7 @@ export class HeaderComponent implements OnInit {
     this.showMenu = true;
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.getElementById('footer_general').style.display = 'none';
-    
+
     if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
       if (document.getElementById('contactList').classList[1] === 'show') {
         document.getElementById('contactList').classList.remove('show')
