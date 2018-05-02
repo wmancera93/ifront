@@ -35,26 +35,6 @@ export class HeaderComponent implements OnInit {
       this.dataUser = data;
     });
 
-    this.tokenService.init(
-      {
-        apiBase: environment.apiBaseHr,
-        apiPath: 'api/v2',
-        signInPath: 'auth/sign_in',
-        signOutPath: 'auth/sign_out',
-        validateTokenPath: 'auth/validate_token',
-        signOutFailedValidate: false,
-        registerAccountPath: 'auth/password/new',
-        updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password/edit',
-        globalOptions: {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      }
-    );
-
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
         if (data === "logout") {
