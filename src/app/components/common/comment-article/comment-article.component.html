@@ -1,8 +1,9 @@
-<button id="btn_show_article" type="button" class="btn btn-primary" data-toggle="modal" data-target="#show_article" style="display:none;">
+<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal" style="display:none;">
 </button>
-<div class="modal" id="show_article" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:none;">
+<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display:none;">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" *ngIf="viewModal">
+    <div class="modal-content" *ngIf="infoArticle != null">
       <div class="modal-header borderLine-title row-hr justify-content-center">
         <div class="col-12 col-lg-10 text-center ">
           <h4 class="modal-title titleColor text-shadow"> {{infoArticle.title |uppercase}}</h4>
@@ -18,7 +19,7 @@
               </div>
               <div class="row justify-content-center">
                 <div class="col-9 col-lg-6">
-                  <img class="radius-image img-size" src="{{infoArticle.image.url}}" >
+                  <img class="radius-image img-size" src="{{infoArticle.image.url}}">
                 </div>
               </div>
             </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
@@ -9,6 +9,7 @@ import { BillboardService } from '../../../services/shared/common/billboard/bill
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
+  @Output() newModal: EventEmitter<string> = new EventEmitter();
 
   public titleNew: string;
   public newList: PublicArticle[] = [];
@@ -18,7 +19,9 @@ export class NewsComponent implements OnInit {
 
 
   constructor(public myPublicationsService: MyPublicationsService,
-    public billboardSharedService: BillboardService) { }
+    public billboardSharedService: BillboardService) {
+
+  }
 
   ngOnInit() {
     window.scroll({
@@ -42,7 +45,6 @@ export class NewsComponent implements OnInit {
 
   goToSearchTitleNew() {
     this.uploadNewList = this.newList;
-    console.log(this.searchNotice)
     if (this.searchNotice == '') {
       this.consultAllArticles();
     }
@@ -55,14 +57,11 @@ export class NewsComponent implements OnInit {
     }
   }
   viewDetailNew(article: any) {
+    this.newModal.emit('newModal');
 
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.billboardSharedService.setUpdateNew(article);
-    // setTimeout(() => {
-    //   document.getElementById("loginId").style.display = 'none'
-    //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    // }, 1000)
+    setTimeout(() => {
+      this.billboardSharedService.setUpdateNew({ objectPublication: article, modal: 'newModal' });
+    }, 500);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, Output, Input } from '@angular/core';
+import { Component, OnInit, DebugElement, Output, Input, EventEmitter } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -17,7 +17,8 @@ import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./hierarchical-chart.component.css']
 })
 export class HierarchicalChartComponent implements OnInit {
-  @Output() name: string = 'hierarhical';
+  // @Output() name: string = 'hierarhical';
+  @Output() name: EventEmitter<string> = new EventEmitter();
 
   public flagActivatethirdLevel: boolean = false;
   public topEmployee: MyPosition;
@@ -212,8 +213,12 @@ export class HierarchicalChartComponent implements OnInit {
       (data: any) => {
         if (data.success == true) {
           this.infoEmployee = data.data;
-          this.infoEmployee.modal = 'nameModal';          
-          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+          this.infoEmployee.modal = 'hierarchical';
+          this.name.emit('hierarchical');    
+          setTimeout(() => {
+            this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+          }, 500);    
+          
         }
       }
     );
