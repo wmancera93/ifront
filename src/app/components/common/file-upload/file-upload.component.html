@@ -1,0 +1,20 @@
+<div class="row">
+  <div class="col-12">
+    <div class="file-upload btn btn-primary" (click)="clickFile()">
+      <div *ngIf="textFileUpload == ''">
+        <i class="fa fa-cloud-upload"></i> Subir Archivo
+      </div>
+      <div *ngIf="textFileUpload != ''">
+        {{textFileUpload | slice: 0:30}}
+        <span [hidden]="textFileUpload < 30">...</span>
+      </div>
+    </div>
+    <input [attr.id]="nameFile" type="file" class="form-control-file" [attr.accept]="acceptExtensions"
+      (change)="fileEvent($event)" />
+  </div>
+  <div class="col-12">
+    <div class="progress top-form" *ngIf="progressBar != '0%'">
+      <div class="bginfo progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width':progressBar }">{{progressBar}}</div>
+    </div>
+  </div>
+</div>

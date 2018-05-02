@@ -1,3 +1,29 @@
-<p>
-  holiday-letter works!
-</p>
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-file-pdf-o"></i>
+          Carta de Vacaciones
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div class="alert alert-warning" role="alert">
+            No hay carta de
+            <strong>Vacaciones</strong>&nbsp;para el empleado
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" *ngIf="!flagEmpty">
+          <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:1000px;"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,12 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from '../components/components.module';
 import { ServicesModule } from '../services/services.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormlyModule } from '@ngx-formly/core';
+import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
+import {CKEditorModule} from 'ng2-ckeditor';
+import { TagInputModule } from 'ngx-chips';
+import { FileUploadModule } from 'ng2-file-upload';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -28,17 +33,48 @@ import { LaborCertificatesComponent } from './auto-services/labor-certificates/l
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
-
-
+import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
+import { EmbargoesComponent } from './queries/embargoes/embargoes.component';
+import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
+import { ExtraHoursComponent } from './queries/extra-hours/extra-hours.component';
+import { PaymentsDeductionsComponent } from './queries/payments-deductions/payments-deductions.component';
+import { PermissionsComponent } from './queries/permissions/permissions.component';
+import { LoansComponent } from './queries/loans/loans.component';
+import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-enjoyed.component';
+import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
+import { SeverancesComponent } from './queries/severances/severances.component';
+import { AniversaryComponent } from './queries/aniversary/aniversary.component';
+import { RequestsComponent } from './reports-rh/requests/requests.component';
+import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
+import { NewsComponent } from './billboard/news/news.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { RequestsRhComponent } from './requests-rh/requests-rh.component';
+import { CorporateDocumentsComponent } from './corporate-documents/corporate-documents.component';
+import { FormsRequestsComponent } from './requests-rh/forms-requests/forms-requests.component';
+import { PendingsComponent } from './approver-requests/pendings/pendings.component';
+import { ManagedComponent } from './approver-requests/managed/managed.component';
+import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
+import { MasterDataComponent } from './master-data/master-data.component';
 
 
 @NgModule({
   imports: [
     CommonModule,
     PagesRoutingModule,
-    ComponentsModule,    
+    ComponentsModule,
     FormsModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
+    NgxPaginationModule,
+    PipesModule,
+    ReactiveFormsModule,
+    FormlyModule.forRoot(),
+    FormlyBootstrapModule,
+    CKEditorModule,
+    TagInputModule,
+    FileUploadModule
+
   ],
   declarations: [
     LoginComponent,
@@ -56,9 +92,31 @@ import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-l
     LaborCertificatesComponent,
     CertificateIncomeWithholdingComponent,
     PayrollReceiptsComponent,
-    HolidayLetterComponent
+    HolidayLetterComponent,
+    IncomeWithholdingsComponent,
+    EmbargoesComponent,
+    CompnsatedVacationsComponent,
+    ExtraHoursComponent,
+    PaymentsDeductionsComponent,
+    PermissionsComponent,
+    LoansComponent,
+    VacationEnjoyedComponent,
+    VacationBalanceComponent,
+    SeverancesComponent,
+    AniversaryComponent,
+    RequestsComponent,
+    PermisionsUsersComponent,
+    MyPublicationsComponent,
+    NewsComponent,
+    RequestsRhComponent,
+    CorporateDocumentsComponent,
+    FormsRequestsComponent,
+    PendingsComponent,
+    ManagedComponent,
+    EditPublicationComponent,
+    MasterDataComponent
   ],
-  providers:[
+  providers: [
     Angular2TokenService
   ]
 })

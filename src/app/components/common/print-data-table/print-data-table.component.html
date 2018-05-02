@@ -1,0 +1,40 @@
+<div id="printGeneral" class="print-general" style="display: none">
+  <div class="modal-content">
+    <div class="modal-body font-controls-login">
+      <h4 style="color: #b5b4b4; text-align: left;">
+        {{title}}
+      </h4>
+      <table class="table table-sm table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center" *ngFor="let label of labels">
+              <div style="width: 100%">
+                <div class="name-table">
+                  {{label.value}}
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let record of recordsPrint">
+            <td *ngFor="let key of keys">
+              <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                {{record[key]}}
+              </div>
+              <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
+                {{record[key]}}
+              </div>
+              <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
+                {{record[key] | currency}}
+              </div>
+              <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
+                {{record[key]}}
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

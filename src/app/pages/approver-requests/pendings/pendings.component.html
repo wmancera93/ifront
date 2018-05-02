@@ -1,0 +1,103 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-circle-o-notch"></i>
+          Aprobaciones Pendientes
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-12 text-left" *ngIf="pendings.length == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendings.length}} solicitud pendiente
+            </h3>
+          </div>
+          <div class="col-12 text-left" *ngIf="pendings.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendings.length}} solicitudes pendientes
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendings.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no tiene solicitudes pendientes
+            </h3>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-general-p" *ngIf="pendings.length == 0">
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div class="alert alert-warning" role="alert">
+            No se encontrarón registros para mostrar
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-containter" *ngIf="pendings.length > 0">
+        <div class="col-12">
+          <div class="widget bg-white-1x" *ngFor="let pending of pendings">
+            <div class="row align-items-center">
+              <div class="col-xl-2 col-lg-2 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Ticket #{{pending.ticket}}
+                  </span>
+                </h5>
+              </div>
+              <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+                <h3 class="font-color-default">
+                  {{pending.type_request_to_json.description}}
+                </h3>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  {{pending.level_answer_description}}
+                </p>
+                <p class="">
+                  <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
+                  {{pending.level_answer}}
+                </p>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Solicitante
+                </p>
+                <p class="">
+                  <i class="fa fa-user fa-fw text-primary-hr"></i>
+                  {{pending.employee_applicant_to_json.short_name}}
+                </p>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Creada el
+                </p>
+                <p>
+                  <i class="fa fa-calendar fa-fw text-primary-hr"></i>
+                  {{pending.created_date}} -
+                  <i class="fa fa-fw fa-clock-o font-color-default"></i>{{pending.antiquity}}
+                </p>
+              </div>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p">
+                <p class="font-title-general">
+                  Acción
+                </p>
+                <button class="btn btn-sm btn-secondary cursor-general" title="Ver" (click)="modalAprovers(pending)">
+                  <i class="fa fa-eye" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-approvals-details></app-approvals-details>

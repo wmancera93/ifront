@@ -25,34 +25,26 @@ export interface NotificationSecundary {
 }
 
 export interface Estadistics {
+    graph_type: string,
+    properties:Properties,   
+    
+}
+export interface Properties {
     title: string,
-    number: number,
+    subtitle: string,
+    number: string,
     comment: string,
-    canvasType: string,
     background: string,
     color: string,
-    doughnutChartLabels?: string[],
-    doughnutChartData?: number[],
-    doughnutChartColors?: string[],
-    lineChartLabels?: string[],
-    lineChartData?: number[],
-    lineChartColors?:ColorLineChart,
-    barChartLabels?: string[],
-    barChartData?: BarCharData;
-    barChartColors?:Colors;
+    data: DataEstadistics
 }
 
-export interface ColorLineChart{
-    backgroundColor?: string,
-    borderColor?: string,
-    pointBackgroundColor?: string,
-    pointBorderColor?: string,
-    pointHoverBackgroundColor?: string,
-    pointHoverBorderColor?: string
-}
-export interface BarCharData{
-data: number[],
-label:string
+
+
+export interface DataEstadistics{
+ names: string[],
+ values: number[],
+ colors: string[]
 }
 
 export interface Colors{

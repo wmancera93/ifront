@@ -19,5 +19,4 @@ export class CalendarComponent implements OnInit {
       this.objectWidget = data;
     })
   }
-
 }

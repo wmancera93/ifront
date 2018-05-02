@@ -1,0 +1,90 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-newspaper-o"></i>
+          Noticias
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="row justify-content-center top-containter">
+        <div class="col-10 col-xl-6 cursor-general">
+          <div class="searchBar-new">
+            <input  [(ngModel)]="titleNew" type="text" class="form-control"  (keyup)="enterTitleNew()" 
+            placeholder="Buscar noticia..." maxlength="25"  (keyup.enter)="goToSearchTitleNew()">
+            <i class="search-news-icon fa fa-search icon-search  detectLetter general-cursor" (click)="goToSearchTitleNew()"></i>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-containter">
+        <div class="col-12">
+            <div class="row justify-content-center top-containter" *ngIf="validateNoData">
+                <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+                  <div class="alert alert-warning" role="alert">
+                    No existe 
+                    <strong>Noticia</strong>&nbsp;con su búsqueda
+                  </div>
+                </div>
+              </div>
+          <div class="widget bg-white-1x" *ngFor="let new of newList;">            
+            <div class="row justify-content-center">
+              <div class="col-6 col-lg-3">
+                <img alt="image" class="radius-image m-t-xs" src="{{new.image.url}}" style="height: 100px; width: 100px">
+              </div>
+              <div class="col-12 col-lg-7">
+                <div class="row justify-content-center">
+                  <div class="col-12 font-color-default text-lg-left hoverTitle" (click)="viewDetailNew(new)">
+                    <strong>{{new.title |uppercase}} </strong>
+                  </div>
+                  <div class="col-12 text-lg-left">
+                    {{new.summary}}
+                  </div>
+                  <div class="col-12">
+                    <div class="row footer-newspaper">
+                      <div class="col-xl-1 col-md-2 col-3">
+                        Temas: 
+                      </div>
+                      &nbsp;&nbsp; &nbsp;&nbsp;
+                      <div class="col-xl-3 col-md-6 col-4 padding-themes-news" *ngFor="let theme of new.themes">
+                        <div class="themes-news">
+                         {{theme}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 text-lg-left">
+                    <strong>
+                        <i class="fa fa-calendar"></i>
+                        {{new.creation_date}}
+                    </strong>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-2">
+                <div class="row text-lg-left">
+                  <div class="col-12" style="font-size: 1rem;">
+                    <strong> Estadisticas</strong>
+                  </div>
+                  <div class="col-12">
+                    <i class="fa fa-eye"></i>
+                    {{new.total_views}} Vistas
+                  </div>
+                  <div class="col-12">
+                    <i class="fa fa-comments-o"></i>
+                    {{new.total_comments}} Comentarios
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-comment-article></app-comment-article>

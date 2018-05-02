@@ -1,7 +1,7 @@
-<button [attr.id]="button" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="target"
-  style="display:none;" (click)="validateRolInfoEmployee()">
+<button [attr.id]="button" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="target" style="display:none;"
+  (click)="validateRolInfoEmployee()">
 </button>
-<div class="modal fade" [attr.id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" [attr.id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf='flagShowModal'>
       <div class="modal-header borderLine-title row-hr justify-content-center">
@@ -20,65 +20,74 @@
           <h5 class="titleColor text-shadow">INFORMACIÓN LABORAL</h5>
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
-              <i class="fa fa-at paddingInfo"></i>
-              <strong> E-mail:</strong> {{employeeInfo.email}}
-              <br>
-              <i class="fa fa-phone paddingInfo"></i>
-              <strong>Teléfono:</strong>&nbsp;{{employeeInfo.phone}}
-              <br>
-              <i class="fa fa-users paddingInfo"></i>
-              <strong>&nbsp;Posición:</strong>&nbsp;
-              <span class="text-capitalize">
-                {{employeeInfo.posicion | lowercase}}
-              </span>
-              <br>
-              <i class="fa fa-building paddingInfo"></i>
-              <strong>&nbsp;Unidad Organizacional:</strong>&nbsp;
-              <span class="text-capitalize">                
+              <div *ngIf="employeeInfo.email">
+                <i class="fa fa-at paddingInfo"></i>
+                <strong> E-mail:</strong> {{employeeInfo.email}}
+              </div>
+              <div *ngIf="employeeInfo.phone">
+                <i class="fa fa-phone paddingInfo"></i>
+                <strong>Teléfono:</strong>&nbsp;{{employeeInfo.phone}}
+              </div>
+              <div *ngIf="employeeInfo.posicion">
+                <i class="fa fa-users paddingInfo"></i>
+                <strong>&nbsp;Posición:</strong>&nbsp;
+                <span class="text-capitalize">
+                  {{employeeInfo.posicion | lowercase}}
+                </span>
+              </div>
+              <div *ngIf="employeeInfo.unidad_org">
+                <i class="fa fa-building paddingInfo"></i>
+                <strong>&nbsp;Unidad Organizacional:</strong>&nbsp;
+                <span class="text-capitalize">
                   {{employeeInfo.unidad_org | lowercase}}
-                </span>             
-              <br>
-              <i class="fa fa-puzzle-piece paddingInfo"></i>
-              <strong>&nbsp;Área:</strong>&nbsp;
-              <span class="text-capitalize">                
+                </span>
+              </div>
+              <div *ngIf="employeeInfo.area">
+                <i class="fa fa-puzzle-piece paddingInfo"></i>
+                <strong>&nbsp;Área:</strong>&nbsp;
+                <span class="text-capitalize">
                   {{employeeInfo.area| lowercase}}
-              </span>               
-              <br>
+                </span>
+              </div>
             </div>
             <div class="col-12 col-lg-6">
-              <i class="fa fa-male paddingInfo"></i>
-              <strong>&nbsp;Jefe:</strong>
-              <span class="text-capitalize">                
-                {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname | lowercase}}
-              </span>                
-              <br>
-              <i class="fa fa-id-badge paddingInfo"></i>
-              <strong>&nbsp;División:</strong>&nbsp;
-              <span class="text-capitalize">                
+              <div>
+                <i class="fa fa-male paddingInfo"></i>
+                <strong>&nbsp;Jefe:</strong>
+                <span class="text-capitalize">
+                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname | lowercase}}
+                </span>
+              </div>
+              <div *ngIf="employeeInfo.division_per">
+                <i class="fa fa-id-badge paddingInfo"></i>
+                <strong>&nbsp;División:</strong>&nbsp;
+                <span class="text-capitalize">
                   {{employeeInfo.division_per| lowercase}}
-              </span>  
-              <br>
-              <i class="fa fa-bars paddingInfo"></i>
-              <strong>&nbsp;Sub-División:</strong>&nbsp;
-              <span class="text-capitalize">                
+                </span>
+              </div>
+              <div *ngIf="employeeInfo.subdivision_per">
+                <i class="fa fa-bars paddingInfo"></i>
+                <strong>&nbsp;Sub-División:</strong>&nbsp;
+                <span class="text-capitalize">
                   {{employeeInfo.subdivision_per| lowercase}}
-              </span> 
-              <br>
+                </span>
+              </div>
+              <div *ngIf="employeeInfo.fecha_ingreso">
               <i class="fa fa-calendar paddingInfo"></i>
               <strong>&nbsp;Fecha Ingreso:</strong>&nbsp;{{employeeInfo.fecha_ingreso}}
-              <br>
-              <div *ngIf="validateRol">
-              <i class="fa fa-file paddingInfo"></i>
-              <strong>&nbsp;Tipo de contrato:</strong>&nbsp;{{employeeInfo.contract_type}}
             </div>
+              <div *ngIf="validateRol">
+                <i class="fa fa-file paddingInfo"></i>
+                <strong>&nbsp;Tipo de contrato:</strong>&nbsp;{{employeeInfo.contract_type}}
+              </div>
               <br>
             </div>
           </div>
         </div>
-        <br>       
-        <div class="end-line" *ngIf="validateRol"></div>       
-          <br>
-         <div id="personalInformationEmployee" *ngIf="validateRol">
+        <br>
+        <div class="end-line" *ngIf="validateRol"></div>
+        <br>
+        <div id="personalInformationEmployee" *ngIf="validateRol">
           <h5 class="titleColor text-shadow">INFORMACIÓN PERSONAL</h5>
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
@@ -98,17 +107,14 @@
               <br>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
       <!-- Modal footer -->
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseEmployee text-center" data-dismiss="modal">
+        <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
           <h6> Cerrar </h6>
         </div>
         <!-- <button id="btn-closeInfoEmployee" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
       </div>
-
-
-
     </div>
   </div>
