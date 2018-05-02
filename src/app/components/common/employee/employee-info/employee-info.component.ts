@@ -23,7 +23,6 @@ export class EmployeeInfoComponent implements OnInit {
       this.employeeInfo = null;
       this.employeeInfo = data;
       this.flagShowModal = true;  
-      
       if (document.getElementById("modal-" + this.employeeInfo.modal).className !== 'modal show') {
         document.getElementById('btn-' + this.employeeInfo.modal).click();
         document.getElementById("bodyGeneral").removeAttribute('style');

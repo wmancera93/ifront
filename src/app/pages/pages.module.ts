@@ -57,6 +57,7 @@ import { PendingsComponent } from './approver-requests/pendings/pendings.compone
 import { ManagedComponent } from './approver-requests/managed/managed.component';
 import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
 import { MasterDataComponent } from './master-data/master-data.component';
+import { HelpComponent } from './help/help.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { MasterDataComponent } from './master-data/master-data.component';
     PendingsComponent,
     ManagedComponent,
     EditPublicationComponent,
-    MasterDataComponent
+    MasterDataComponent,
+    HelpComponent
   ],
   providers: [
     Angular2TokenService
