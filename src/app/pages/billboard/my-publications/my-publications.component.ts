@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { Alerts } from '../../../models/common/alerts/alerts';
@@ -12,6 +12,7 @@ import { EditArticleService } from '../../../services/shared/common/edit-article
   styleUrls: ['./my-publications.component.css']
 })
 export class MyPublicationsComponent implements OnInit {
+  @Output() myPublicationModal: EventEmitter<string> = new EventEmitter();
 
   public myPublications: PublicArticle[] = [];
   public totalNews: number = 0;
@@ -22,7 +23,7 @@ export class MyPublicationsComponent implements OnInit {
   constructor(public myPublicationsService: MyPublicationsService,
     public alert: AlertsService,
     public billboardSharedService: BillboardService,
-  public editEditSharedService : EditArticleService) {
+    public editEditSharedService: EditArticleService) {    
 
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
       if (data == true) {
@@ -36,16 +37,16 @@ export class MyPublicationsComponent implements OnInit {
         document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
         this.myPublicationsService.deleteArticles(this.idDelete)
           .subscribe((data: any) => {
-            if(data.success == true){
-            this.getDataPublications();
-            this.alertWarning = [{
-              type: 'success',
-              title: 'Confirmación',
-              message: 'Artículo eliminado exitosamente',
-              confirmation: false,
-              typeConfirmation: ''
-            }];
-            this.alert.setAlert(this.alertWarning[0]);
+            if (data.success == true) {
+              this.getDataPublications();
+              this.alertWarning = [{
+                type: 'success',
+                title: 'Confirmación',
+                message: 'Artículo eliminado exitosamente',
+                confirmation: false,
+                typeConfirmation: ''
+              }];
+              this.alert.setAlert(this.alertWarning[0]);
             }
             setTimeout(() => {
               document.getElementById("loginId").style.display = 'none'
@@ -91,12 +92,14 @@ export class MyPublicationsComponent implements OnInit {
     })
   }
 
-  viewDetailArticle(infoPub: any) {   
-    this.billboardSharedService.setUpdateNew(infoPub); 
-      
+  viewDetailArticle(infoPub: any) {
+    this.myPublicationModal.emit('myPublicationModal');
+     setTimeout(() => {
+      this.billboardSharedService.setUpdateNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
+    }, 500);    
   }
 
-  editNew(infoPub: PublicArticle){    
+  editNew(infoPub: PublicArticle) {
     this.editEditSharedService.setEditNew(infoPub);
   }
 

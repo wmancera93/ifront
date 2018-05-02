@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Output } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { Employee } from '../../../models/general/user';
 import { EmployeeService } from '../../../services/common/employee/employee.service';
 import { EmployeeInfoService } from '../../../services/shared/common/employee/employee-info.service';
@@ -14,7 +14,9 @@ import { Router } from '@angular/router';
 })
 
 export class ContactsListComponent implements OnInit {
-  
+  @Output() name: EventEmitter<string> = new EventEmitter();
+
+
   public contacts: Employee[] = [];
   public searchListContacts: Employee[] = [];
   public nameEmployee: string = '';
@@ -38,10 +40,6 @@ export class ContactsListComponent implements OnInit {
     public router: Router,
     public employeeSharedService: EmployeeInfoService,
   ) {
-    this.chats[0] = { name: "Laura", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: true };
-    this.chats[1] = { name: "Wilmer", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: true };
-    this.chats[2] = { name: "Laura", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: false };
-    this.chats[3] = { name: "Wilmer", photo: "../../../assets/themes/patterns/icon-user-negative.png", conver: "Hola", status: true };
   }
   ngOnInit() {
     this.numberPage = 1;
@@ -168,13 +166,16 @@ export class ContactsListComponent implements OnInit {
     document.getElementById('togglePartnersHide').click();
   }
 
-  openInfoEmployee(idEmployee: string) {    
+  openInfoEmployee(idEmployee: string) {
+    this.name.emit('contactList');
     this.employeeService.getEmployeeById(idEmployee).subscribe(
       (data: any) => {
         if (data.success === true) {
           this.infoEmployee = data.data;
-            this.infoEmployee.modal = 'contactList';
+          this.infoEmployee.modal = 'contactList';
+          setTimeout(() => {
             this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+          }, 500);
         }
       }
     );
