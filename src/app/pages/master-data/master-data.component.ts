@@ -23,10 +23,10 @@ export class MasterDataComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.showPersonalData(this.idType);
+    this.showPersonalData();
   }
 
-  showPersonalData(id: any) {
+  showPersonalData() {
     this.dataMaster = [];
     this.titleData = 'Datos personales';
     document.getElementById("loginId").style.display = 'block'
@@ -41,7 +41,7 @@ export class MasterDataComponent implements OnInit {
     })
   }
 
-  showContactData(id: any) {
+  showContactData() {
     this.titleData = 'Datos de contacto';
     this.dataMaster = [];
     document.getElementById("loginId").style.display = 'block'
