@@ -7,7 +7,7 @@ import { Calendar } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  @Input() calendar: any
+  @Input('calendar') calendar: any
   public objectWidget: Calendar;
 
   constructor() {
@@ -15,7 +15,8 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.objectWidget = this.calendar;
+    this.calendar.subscribe((data: Calendar) => {
+      this.objectWidget = data;
+    })
   }
-
 }

@@ -1,0 +1,121 @@
+<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal" style="display:none;">
+</button>
+<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+  style="display:none;">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="infoArticle != null">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
+        <div class="col-12 col-lg-10 text-center ">
+          <h4 class="modal-title titleColor text-shadow"> {{infoArticle.title |uppercase}}</h4>
+        </div>
+      </div>
+      <div class="modal-body font-controls-login">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="font-title-general">
+                <i class="fa fa-calendar font-color-date"></i>
+                {{infoArticle.creation_date}}
+              </div>
+              <div class="row justify-content-center">
+                <div class="col-9 col-lg-6">
+                  <img class="radius-image img-size" src="{{infoArticle.image.url}}">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" style="padding-top: 10px;">
+            <div class="col-12">
+              <div class="row">
+                <div class=" col-3 font-title-general">
+                  Temas:
+                </div>
+                &nbsp;&nbsp; &nbsp;&nbsp;
+                <div class=" col-4 padding-themes-news" *ngFor="let theme of infoArticle.themes">
+                  <div class="themes-news">
+                    <strong>{{theme}}</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="height: 200px !important; margin-top: 5px; ">
+              <div id="scrollbarAction" class="scrollbarBody scrollbarBody-success ">
+                <div [innerHtml]="infoArticle.body"></div>
+              </div>
+            </div>
+          </div>
+          <div class="border-botton-general">
+            <div class="row justify-content-center">
+              <div class="col-lg-1 col-2" style="margin-top: 10px;" *ngIf="numberComments != 0">
+                <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse-comment fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                  aria-expanded="false" (click)="collapse(true)"></i>
+                <i *ngIf="is_collapse" class="fa fa-fw icon-collapse-comment fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                  aria-expanded="false" (click)="collapse(false)"></i>
+              </div>
+              <div class="col-10 col-lg-7 text-center" style="margin-top: 10px;">
+                <div style="color:white;">
+                  <h6>COMENTARIOS</h6>
+                </div>
+              </div>
+              <div class="col-lg-4 col-12 text-center font-title-general" style="margin-top: 10px;">
+                <i class="fa fa-eye"></i>
+                {{infoArticle.total_views}} Vistas
+                <i class="fa fa-comments-o"></i>
+                {{infoArticle.total_comments}} Comentarios
+              </div>
+            </div>
+          </div>
+          <div class="row collapse" id="collapseExample">
+            <div class="col-12" *ngIf="numberComments != 0">
+              <div class="widget bg-white-1x" *ngFor="let comment of commentsList;">
+                <div class="row">
+                  <div class="col-4 col-lg-2">
+                    <div class=" menu-img-employee">
+                      <img src="{{comment.created_by.image.url}}" class="roundPhoto-employee">
+                    </div>
+                  </div>
+                  <div class="col-8 col-lg-8 text-lg-left">
+                    <strong>{{comment.created_by.short_name}}</strong> el día {{comment.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
+                    <div>
+                      {{comment.comment_text}}
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-2">
+                    <button class="btn btn-sm btn-secondary" (click)="editComment(comment)">
+                      <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" (click)="deleteComment(comment)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12" style="margin-top: 10px;" *ngIf="flagEditComment">
+              <textarea [(ngModel)]="commentEdit" id="commentEdit" rows="2" cols="50" placeholder="Edite su comentario..." style="width:100% !important;"></textarea>
+            </div>
+            <div id="insertComment" class="col-12" style="margin-top: 10px;">
+              <textarea [(ngModel)]="comment" id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>
+            </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-lg-3 col-md-4 col-12">
+              <button *ngIf="showSubmit" class="btn btn-success btn-block" (click)="sendComment()">
+                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footerInfo justify-content-center">
+        <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>

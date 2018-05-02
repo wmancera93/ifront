@@ -23,13 +23,17 @@
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
         "../node_modules/font-awesome/css/font-awesome.min.css",
         "./assets/themes/pace-css/pace-theme-flash.css" ,
-        "../node_modules/angular2-toaster/toaster.css"      
+        "../node_modules/angular2-toaster/toaster.min.css",
+        "../node_modules/animate.css/animate.min.css"     
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
         "../node_modules/tether/dist/js/tether.min.js",
         "../node_modules/bootstrap/dist/js/bootstrap.min.js",
-        "./assets/javascript/pace.js"
+        "./assets/javascript/pace.js",
+        "../node_modules/jspdf/dist/jspdf.min.js",
+        "../node_modules/jspdf/dist/jspdf.debug.js",
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

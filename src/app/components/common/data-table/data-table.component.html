@@ -1,0 +1,110 @@
+<div id="data_table" class="row">
+  <div class="col-12">
+    <div class="row justify-content-between" *ngIf="show">
+      <div class="col-xl-3 col-12">
+        <div class="form-group row">
+          <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+          <div class="col-xl-5 col-md-3 col-lg-3 col-6">
+            <select class="form-control" [(ngModel)]="size_table">
+              <option value="5">5</option>
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="50">50</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
+          <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+          PDF
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          Excel
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          CSV
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
+          <i class="fa fa-print" aria-hidden="true"></i>
+          Print
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center top-containter" *ngIf="!show">
+      <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+        <div class="alert alert-warning" role="alert">
+          No hay reportes de&nbsp;
+          <strong>{{title}}</strong>&nbsp;para el empleado
+        </div>
+      </div>
+    </div>
+    <div class="row top-containter" *ngIf="show">
+      <div class="col-12" style="min-height: 370px;">
+        <div class="table-responsive">
+          <table class="table table-sm table-striped table-bordered table-hover">
+            <thead>
+              <tr *ngIf="title != ''">
+                <th class="text-center" [attr.colspan]="keys.length"> {{title}} </th>
+              </tr>
+              <tr>
+                <th class="text-center" *ngFor="let label of labels">
+                  <div style="width: 100%">
+                    <div class="name-table">
+                      {{label.value}}
+                    </div>
+                    <div *ngIf="label.sort" class="sort-by">
+                      <i id="{{label.id}}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+              <tr>
+                <th class="text-center" *ngFor="let label of labels; let i = index">
+                  <div>
+                    <input [attr.id]="i+label.label" type="text" class="form-control input-filter" placeholder="Filtrar..." (keyup)="filterByCell(i, label)"
+                    />
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
+                <td *ngFor="let key of keys">
+                  <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                    {{record[key]}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
+                     {{record[key]}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
+                    {{record[key] | currency}}
+                  </div>
+                  <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
+                    {{record[key]}}
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="show">
+      <div class="col-12">
+        <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
+          nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-print-data-table></app-print-data-table>

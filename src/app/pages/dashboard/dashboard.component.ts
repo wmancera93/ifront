@@ -1,9 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User, Employee } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
+import { Toast } from 'angular2-toaster';
+import { MainService } from '../../services/main/main.service';
 
 
 @Component({
@@ -15,10 +17,15 @@ export class DashboardComponent implements OnInit {
   public userAuthenticated: User = null;
   public authdata: any;
   public roleEmployee: boolean = true;
+  public showServiceManagement : boolean;
+  public showButtonDashManagement: boolean = true;
+  public validateRoleManagement: string;
+
+  @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
 
   constructor(private tokenService: Angular2TokenService,
     public userSharedService: UserSharedService,
-    public router: Router) {
+    public router: Router, public companieService : MainService ) {
     this.tokenService.init(
       {
         apiBase: environment.apiBaseHr,
@@ -37,22 +44,46 @@ export class DashboardComponent implements OnInit {
           }
         }
       }
-    );
-    this.userSharedService.getUser().subscribe((data) => {
-      this.userAuthenticated = data;
-      if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
-        this.getDataLocalStorage();
-      }
-    })
+    );      
   }
 
   getDataLocalStorage() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
     if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
-      this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+      this.userAuthenticated = JSON.parse(localStorage.getItem("user"));      
+      let toast: Toast = {
+        type: 'success',
+        title: this.userAuthenticated.employee.short_name,
+        body: 'Bienvenido'
+      };
+      setTimeout(() => {
+        this.objectToast.emit(toast)       
+      }, 200);     
     }
+
+   
   }
 
   ngOnInit() {
+    this.getDataLocalStorage();
+    this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
+    this.companieService.getDataEnterprise().subscribe((data:any)=>{
+      this.showServiceManagement = data.data.show_services_management;
+      if(this.showServiceManagement == true && this.validateRoleManagement == "true")
+      {           
+        this.showButtonDashManagement = true;
+      }
+      else 
+      { 
+        this.showButtonDashManagement = false;
+      }
+      })  
+ 
+    
   }
 
   vieweDashboardEmployee() {

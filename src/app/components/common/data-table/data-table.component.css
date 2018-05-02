@@ -1,0 +1,33 @@
+table {
+    color: #9a9a9a !important;
+}
+
+.input-filter{
+    min-width: 150px !important;
+}
+
+.name-table{
+    width: 80%; 
+    float: left;
+}
+
+.sort-by {
+    width: 20%; 
+    float: left;
+}
+
+.top-containter {
+    padding-bottom: 10px ;
+}
+
+@media only screen and (max-width: 450px)  and (max-height: 850px) {
+    .name-table{
+        width: 100%; 
+        float: left;
+    }
+    
+    .sort-by {
+        width: 100%; 
+        float: left;
+    }
+}
