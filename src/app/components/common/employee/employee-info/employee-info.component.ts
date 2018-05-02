@@ -7,23 +7,26 @@ import { Employee } from '../../../../models/general/user';
   styleUrls: ['./employee-info.component.css']
 })
 export class EmployeeInfoComponent implements OnInit {
-  @Input() nameModal: string;
+  @Input('nameModal') nameModal: any;
 
   public target: string = '';
   public button: string = '';
   public id: string = '';
 
-  public employeeInfo: Employee;
+  public employeeInfo: Employee = null;
   public flagShowModal: boolean = false;
   public isBoss: boolean = false;
   public validateRol: boolean;
 
   constructor(public employeeSharedService: EmployeeInfoService) {
+
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
-      this.employeeInfo = null;
-      this.employeeInfo = data;
-      this.flagShowModal = true;  
-      
+      this.employeeInfo = data;      
+      if (this.employeeInfo !== null) {
+        this.flagShowModal = true;
+      } else {
+        this.flagShowModal = false;
+      }
       if (document.getElementById("modal-" + this.employeeInfo.modal).className !== 'modal show') {
         document.getElementById('btn-' + this.employeeInfo.modal).click();
         document.getElementById("bodyGeneral").removeAttribute('style');
@@ -32,9 +35,11 @@ export class EmployeeInfoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.target = '#modal-' + this.nameModal;
-    this.button = 'btn-' + this.nameModal;
-    this.id = "modal-" + this.nameModal;
+    this.nameModal.subscribe((data: any) => {
+      this.target = '#modal-' + data;
+      this.button = 'btn-' + data;
+      this.id = "modal-" + data;
+    })
   }
   validateRolInfoEmployee() {
     if (this.isBoss == true) {

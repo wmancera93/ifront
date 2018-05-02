@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { FormGroup } from '@angular/forms';
@@ -13,15 +13,19 @@ import { Alerts } from '../../../models/common/alerts/alerts';
   styleUrls: ['./comment-article.component.css']
 })
 export class CommentArticleComponent implements OnInit {
+  @Input('nameModal') nameModal: any
+  public targetModal: string = '';
+  public btnModal: string = '';
+  public nameThisModal: string = '';
 
-  public infoArticle: PublicArticle;
+  public infoArticle: PublicArticle = null;
 
   public commentsList: PublicArticle;
   public newComment: PublicArticle;
-  public viewModal: boolean = false;
+  public viewModal: boolean = true;
   public showSubmit: boolean = true;
-  public idArticle: number;
-  public numberComments: number;
+  public idArticle: number = null;
+  public numberComments: number = null;
   public comment: string;
   public idComment: number;
   private alertWarning: Alerts[];
@@ -35,10 +39,13 @@ export class CommentArticleComponent implements OnInit {
     public alert: AlertsService,
     public myPublicationService: MyPublicationsService) {
 
-    this.chargeComments();
+    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
+      this.idArticle = data.objectPublication.id;
+      this.numberComments = data.objectPublication.total_comments;
+      this.getDetailArticle(data.modal);
+    })
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-
       if (data == "deleteComment") {
         document.getElementById("loginId").style.display = 'block'
         document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -60,26 +67,25 @@ export class CommentArticleComponent implements OnInit {
   }
 
   ngOnInit() {
-
-  }
-
-  chargeComments() {
-    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {     
-      this.idArticle = data.id;
-      this.numberComments = data.total_comments;     
-      this.getDetailArticle();
+    this.nameModal.subscribe((data: any) => {
+      this.targetModal = '#' + data;
+      this.btnModal = 'btn-' + data;
+      this.nameThisModal = data;
     })
+
   }
 
-  getDetailArticle() {
-    this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {      
+
+  getDetailArticle(modal?: string) {
+    this.infoArticle = null;
+    this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
       this.infoArticle = res.data;
       this.commentsList = res.data.comments_articles;
-      this.viewModal = true;
+      if (document.getElementById(modal).className !== 'modal show') {
+        document.getElementById('btn-' + modal).click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
     })
-
-    document.getElementById('btn_show_article').click();
-    document.getElementById("bodyGeneral").removeAttribute('style');
   }
 
   sendComment() {

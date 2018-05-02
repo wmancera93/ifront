@@ -3,17 +3,16 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class BillboardService {
-  exportUpdateNew: Subject<any> = new Subject<any>();  
-  constructor() { }
+  exportUpdateNew: Subject<any> = new Subject<any>();
+  constructor() {
+   }
 
-  getUpdateNew()
-  {  
+  getUpdateNew() {
     return this.exportUpdateNew;
   }
 
-  setUpdateNew(newPublish:any)
-  {    
-    return this.exportUpdateNew.next(newPublish);    
+  setUpdateNew(newPublish: any) {
+    return this.exportUpdateNew.next(newPublish);
   }
 
 }
