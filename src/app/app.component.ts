@@ -32,7 +32,7 @@ export class AppComponent {
     public tokenService: Angular2TokenService, ) {
 
     let url = window.location.href;
-    let splitTwoPoint = url.split(":");
+    let splitTwoPoint = url.split("localhost");
     let ambient;
     let splitLine;
 

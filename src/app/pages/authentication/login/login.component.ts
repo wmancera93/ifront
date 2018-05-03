@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
 
     let url = window.location.href;
-    let splitTwoPoint = url.split(":");
+    let splitTwoPoint = url.split("localhost");
     let ambient;
     let splitLine;
 

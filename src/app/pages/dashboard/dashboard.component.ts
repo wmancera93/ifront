@@ -71,7 +71,7 @@ export class DashboardComponent implements OnInit {
     this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
 
     let url = window.location.href;
-    let splitTwoPoint = url.split(":");
+    let splitTwoPoint = url.split("localhost");
     let ambient;
     let splitLine;
 

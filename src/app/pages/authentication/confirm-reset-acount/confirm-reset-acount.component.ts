@@ -42,7 +42,7 @@ export class ConfirmResetAcountComponent implements OnInit {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
-      let splitTwoPoint = url.split(":");
+      let splitTwoPoint = url.split("localhost");
       let ambient;
       let splitLine;
 
