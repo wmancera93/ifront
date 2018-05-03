@@ -13,12 +13,13 @@ export class LaborCertificatesComponent implements OnInit {
   public typeCertificate: string;
   public laboralType: Certificate;
   public urlPDF: string = '';
+  public urlPDFSecure : any;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   
   constructor(public autoServiceService: AutoServicesService,
-     sanitizer: DomSanitizer,
+     public domSanitizer: DomSanitizer,
      private tokenService: Angular2TokenService) {
  
      this.tokenService.validateToken()
@@ -47,6 +48,7 @@ export class LaborCertificatesComponent implements OnInit {
     this.autoServiceService.getLaboralCertificate().subscribe((data: any) => {
       this.laboralType = data.data;
       this.urlPDF = this.laboralType[0].file.url;
+      this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(this.urlPDF);
       if (data.success) {
         // setTimeout(() => {
         //   document.getElementById("loginId").style.display = 'none'
