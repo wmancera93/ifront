@@ -9,18 +9,18 @@ import { EventsEmployess } from '../../../models/common/widgets/widgets';
 })
 export class ShowEventsComponent implements OnInit {
 
-  @Input('nameModal') nameModal: any;  
+  @Input('nameModal') nameModal: any;
 
   public targetModal: string = '';
   public btnModal: string = '';
   public nameThisModal: string = '';
-  public objectInfoEvents : any;
-  public titleEvent : string;
-  public eventIcon : string;
+  public objectInfoEvents: any;
+  public titleEvent: string;
+  public eventIcon: string;
 
-  constructor(public infoEventEmployee : EventsEmployeeService) { 
-    this.infoEventEmployee.getInfoEventEmployee().subscribe((data:any)=>{
-      this.objectInfoEvents = data.objectInfo; 
+  constructor(public infoEventEmployee: EventsEmployeeService) {
+    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
+      this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
       this.getShowInfo(data.modal);
@@ -37,13 +37,13 @@ export class ShowEventsComponent implements OnInit {
 
   }
 
-  getShowInfo(modal?:any)
-      {
-      if (document.getElementById(modal).className !== 'modal show') {
-        document.getElementById('btn-' + modal).click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-      }
-  
+  getShowInfo(modal?: any)
+  {
+    if (document.getElementById(modal).className !== 'modal show') {
+      document.getElementById('btn-' + modal).click();
+      document.getElementById("bodyGeneral").removeAttribute('style');
+    }
+
   }
 
 }

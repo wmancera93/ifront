@@ -51,22 +51,22 @@ export class EstadisticsComponent implements OnInit {
         //Doughnut 
         this.activeDoughnutChartType = true;
         this.doughnutChartType = 'doughnut';
-        this.doughnutChartLabels = this.objectWidget[0].data.names;
+        this.doughnutChartLabels = this.objectWidget[0].data.names;        
         this.doughnutChartData = this.objectWidget[0].data.values;
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
           responsive: true,
-          pieceLabel: {
+          // pieceLabel: {
 
-            render: function (args) {
-              return '$' + args.value;
-              //  return args.label;
-            },
-            fontSize: 9,
-            fontColor: '#000',
-            overlap: true,
-            arc: true
-          },
+          //   render: function (args) {
+          //     return '$' + args.value;
+          //     //  return args.label;
+          //   },
+          //   fontSize: 9,
+          //   fontColor: '#000',
+          //   overlap: true,
+          //   arc: true
+          // },
         };
 
       } else

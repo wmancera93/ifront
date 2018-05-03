@@ -38,6 +38,7 @@ import { CommentArticleComponent } from './common/comment-article/comment-articl
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
 import { ShowEventsComponent } from './common/show-events/show-events.component';
+import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { ShowEventsComponent } from './common/show-events/show-events.component'
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
-    ShowEventsComponent
+    ShowEventsComponent,
+    GerencialModalComponent
   ],
   exports: [
     HeaderComponent,

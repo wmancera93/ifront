@@ -46,6 +46,7 @@ export class NewsComponent implements OnInit {
   goToSearchTitleNew() {
     this.uploadNewList = this.newList;
     if (this.searchNotice == '') {
+      this.validateNoData = false;
       this.consultAllArticles();
     }
     else {
