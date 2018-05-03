@@ -13,8 +13,8 @@ export class ManagedComponent implements OnInit {
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService) {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -29,10 +29,10 @@ export class ManagedComponent implements OnInit {
           this.managed = data.data[0].requests;
         }
 
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 1000)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none'
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 1000)
       });
   }
 
