@@ -15,7 +15,7 @@ import { HttpModule } from '@angular/http';
 
 // components
 import { AppComponent } from './app.component';
-import { A2tUiModule, Angular2TokenService } from 'angular2-token';
+import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -34,8 +34,7 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule,
-    A2tUiModule
+    HttpModule
   ],
   providers: [
     Angular2TokenService
