@@ -37,6 +37,7 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
 import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
+import { ShowEventsComponent } from './common/show-events/show-events.component';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     FileUploadComponent, 
     ApprovalsDetailsComponent,
     CommentArticleComponent,
-    LoadingComponent
+    LoadingComponent,
+    ShowEventsComponent
   ],
   exports: [
     HeaderComponent,

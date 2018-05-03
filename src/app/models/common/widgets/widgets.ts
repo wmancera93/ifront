@@ -87,6 +87,7 @@ export interface EventsEmployess {
     color: string,
     background: string,
     short_name: string,
+    modal?: string
     //description: string
 }
 

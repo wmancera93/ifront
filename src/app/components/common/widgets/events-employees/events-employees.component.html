@@ -6,7 +6,7 @@
       </ul>
       <div class="carousel-inner">
         <div [ngClass]="{'active': k=='0'}" class="carousel-item  active-caurusel" *ngFor="let eventEmployee of objectWidget;let k = index">
-          <div class="col-12">
+          <div class="col-12" (click)="showEventList(eventEmployee)">
             <div class="row">
               <div class="col-4">
                 <div class="menu-img-user">
@@ -64,3 +64,4 @@
     </h3>
   </div>
 </div>
+<app-show-events [nameModal]='modalInfoEvent'></app-show-events>
