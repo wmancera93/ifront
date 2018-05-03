@@ -69,7 +69,24 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.getDataLocalStorage();
     this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
-    this.companieService.getDataEnterprise().subscribe((data: any) => {
+
+    let url = window.location.href;
+    let splitTwoPoint = url.split(":");
+    let ambient;
+    let splitLine;
+
+    if (splitTwoPoint.length === 0) {
+      splitLine = url.split("-");
+      if (splitLine.length > 0) {
+        ambient = splitLine[0];
+      } else {
+        ambient = 'production'
+      }
+    } else {
+      ambient = 'development'
+    }
+    
+    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
       if (this.showServiceManagement == true && this.validateRoleManagement == "true") {
         this.showButtonDashManagement = true;

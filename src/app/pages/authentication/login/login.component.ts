@@ -45,7 +45,24 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
-    this.mainService.getDataEnterprise()
+
+    let url = window.location.href;
+    let splitTwoPoint = url.split(":");
+    let ambient;
+    let splitLine;
+
+    if (splitTwoPoint.length === 0) {
+      splitLine = url.split("-");
+      if (splitLine.length > 0) {
+        ambient = splitLine[0];
+      } else {
+        ambient = 'production'
+      }
+    } else {
+      ambient = 'development'
+    }
+
+    this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;
         document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);

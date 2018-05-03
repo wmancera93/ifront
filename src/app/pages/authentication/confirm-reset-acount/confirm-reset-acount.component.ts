@@ -41,7 +41,24 @@ export class ConfirmResetAcountComponent implements OnInit {
   ngOnInit() {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     if (localStorage.getItem("enterprise") === null) {
-      this.mainService.getDataEnterprise()
+      let url = window.location.href;
+      let splitTwoPoint = url.split(":");
+      let ambient;
+      let splitLine;
+
+      if (splitTwoPoint.length === 0) {
+        splitLine = url.split("-");
+        if (splitLine.length > 0) {
+          ambient = splitLine[0];
+        } else {
+          ambient = 'production'
+        }
+      } else {
+        ambient = 'development'
+      }
+
+
+      this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
           document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);

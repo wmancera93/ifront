@@ -24,13 +24,49 @@ export class AppComponent {
   public heightContenGeneral: number = 0;
   public dataUser: User = null;
 
+  public baseUrl: string;
+
   constructor(public router: Router,
     public mainService: MainService,
     public userSharedService: UserSharedService,
-    public tokenService: Angular2TokenService) {
+    public tokenService: Angular2TokenService, ) {
+
+    let url = window.location.href;
+    let splitTwoPoint = url.split(":");
+    let ambient;
+    let splitLine;
+
+    if (splitTwoPoint.length === 0) {
+      splitLine = url.split("-");
+      if (splitLine.length > 0) {
+        ambient = splitLine[0];
+      } else {
+        ambient = 'production'
+      }
+    } else {
+      ambient = 'develoment'
+    }
+
+    switch (ambient) {
+      case 'production':
+        this.baseUrl = environment.apiBaseHr_producction;
+        break;
+      case 'develoment':
+        this.baseUrl = environment.apiBaseHr_development;
+        break;
+      case 'staging':
+        this.baseUrl = environment.apiBaseHr_stagin;
+        break;
+
+      default:
+        this.baseUrl = environment.apiBaseHr_development;
+        break;
+    }
+
+
     this.tokenService.init(
       {
-        apiBase: environment.apiBaseHr,
+        apiBase: this.baseUrl,
         apiPath: 'api/v2',
         signInPath: 'auth/sign_in',
         signOutPath: 'auth/sign_out',
