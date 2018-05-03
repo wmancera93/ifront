@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
     let ambient;
     let splitLine;
 
-    if (splitTwoPoint.length === 0) {
+    if (splitTwoPoint.length === 1) {
       splitLine = url.split("-");
       if (splitLine.length > 0) {
         ambient = splitLine[0];
@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     } else {
       ambient = 'development'
     }
-
+    
     this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;

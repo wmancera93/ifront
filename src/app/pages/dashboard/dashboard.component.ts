@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
     let ambient;
     let splitLine;
 
-    if (splitTwoPoint.length === 0) {
+    if (splitTwoPoint.length === 1) {
       splitLine = url.split("-");
       if (splitLine.length > 0) {
         ambient = splitLine[0];
