@@ -10,51 +10,46 @@ import { Router } from '@angular/router';
 })
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
-  
 
-  constructor(   private mainService: MainService,  public router: Router) {
-    
-   }
+
+  constructor(private mainService: MainService, public router: Router) {
+
+  }
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
       behavior: 'smooth'
-    });    
-    if(localStorage.getItem("enterprise") === null){
+    });
+    if (localStorage.getItem("enterprise") === null) {
 
       let url = window.location.href;
-      let splitTwoPoint = url.split("localhost");
       let ambient;
-      let splitLine;
-  
-      if (splitTwoPoint.length === 1) {
-        splitLine = url.split("-");
-        if (splitLine.length > 0) {
-          ambient = splitLine[0];
+
+      if (url.split("localhost").length === 1) {
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
         } else {
-          ambient = 'production'
+          ambient = 'production';
         }
       } else {
-        ambient = 'development'
+        ambient = 'development';
       }
 
       this.mainService.getDataEnterprise(ambient)
-      .subscribe((result:any)=>{
-        this.dataEnterprise =result.data;
-        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-      })      
+        .subscribe((result: any) => {
+          this.dataEnterprise = result.data;
+          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+        })
     }
-    else
-    {
+    else {
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
       document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
     }
   }
-  RedirectInit()
-  {
-   this.router.navigate(['/ihr/login']);
+  RedirectInit() {
+    this.router.navigate(['/ihr/login']);
   }
 
 }

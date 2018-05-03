@@ -71,21 +71,18 @@ export class DashboardComponent implements OnInit {
     this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
 
     let url = window.location.href;
-    let splitTwoPoint = url.split("localhost");
     let ambient;
-    let splitLine;
 
-    if (splitTwoPoint.length === 1) {
-      splitLine = url.split("-");
-      if (splitLine.length > 0) {
-        ambient = splitLine[0];
+    if (url.split("localhost").length === 1) {
+      if (url.split("-").length > 1) {
+        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
       } else {
-        ambient = 'production'
+        ambient = 'production';
       }
     } else {
-      ambient = 'development'
+      ambient = 'development';
     }
-    
+
     this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
       if (this.showServiceManagement == true && this.validateRoleManagement == "true") {

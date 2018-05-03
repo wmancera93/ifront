@@ -42,19 +42,16 @@ export class ConfirmResetAcountComponent implements OnInit {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
-      let splitTwoPoint = url.split("localhost");
       let ambient;
-      let splitLine;
 
-      if (splitTwoPoint.length === 1) {
-        splitLine = url.split("-");
-        if (splitLine.length > 0) {
-          ambient = splitLine[0];
+      if (url.split("localhost").length === 1) {
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
         } else {
-          ambient = 'production'
+          ambient = 'production';
         }
       } else {
-        ambient = 'development'
+        ambient = 'development';
       }
 
 
