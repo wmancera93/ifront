@@ -19,8 +19,8 @@ export class MyTeamComponent implements OnInit {
   constructor(public myTeamInfoService: MyTeamInfoService,
     public myTeamSharedService: MyTeamReportService,
     public router: Router) { 
-      document.getElementById("loginId").style.display = 'block'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+      // document.getElementById("loginId").style.display = 'block'
+      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
      }
 
   ngOnInit() {
@@ -34,10 +34,10 @@ export class MyTeamComponent implements OnInit {
       .subscribe((data: any) => {
         this.employeesInMyTeam = data.data;
         if (data.success) {
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 1000)
         }
       })
   }

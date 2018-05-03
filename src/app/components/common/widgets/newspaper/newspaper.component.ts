@@ -27,17 +27,17 @@ export class NewspaperComponent implements OnInit {
 
   viewDetailArticle(objectArticle:any)
   { 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
     this.newspaperModal.emit('newspaperModal');
     setTimeout(() => {
       this.billboardSharedService.setUpdateNew({ objectPublication: objectArticle, modal: 'newspaperModal' });
     }, 500);   
     
-    setTimeout(() => {
-      document.getElementById("loginId").style.display = 'none'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    }, 1000)
+    // setTimeout(() => {
+    //   document.getElementById("loginId").style.display = 'none'
+    //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+    // }, 1000)
   }
 
   

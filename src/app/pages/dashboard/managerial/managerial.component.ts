@@ -25,8 +25,8 @@ export class ManagerialComponent implements OnInit {
 
   constructor(public dasboardManagerialService: DashboardManagerialService,
     public router: Router) {
-      document.getElementById("loginId").style.display = 'block'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+      // document.getElementById("loginId").style.display = 'block'
+      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -86,10 +86,10 @@ export class ManagerialComponent implements OnInit {
     const reports: NotificationPrimary[] = [];
     this.objectReports.emit(reports[0]);
 
-    setTimeout(() => {
-      document.getElementById("loginId").style.display = 'none'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    }, 1000)
+    // setTimeout(() => {
+    //   document.getElementById("loginId").style.display = 'none'
+    //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+    // }, 1000)
   }
 
   goToMyTeam() {

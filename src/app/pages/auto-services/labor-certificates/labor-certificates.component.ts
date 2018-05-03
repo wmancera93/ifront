@@ -13,8 +13,8 @@ export class LaborCertificatesComponent implements OnInit {
   public laboralType: Certificate;
   public urlPDF: string = '';
   constructor(public autoServiceService: AutoServicesService, public sanitizer: DomSanitizer) { 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -27,10 +27,10 @@ export class LaborCertificatesComponent implements OnInit {
       this.laboralType = data.data;
       this.urlPDF = this.laboralType[0].file.url;
       if (data.success) {
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 3000)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none'
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 3000)
       }
     })
   }

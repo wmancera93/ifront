@@ -25,8 +25,8 @@ export class CorporateDocumentsComponent implements OnInit {
 
   constructor(public corporateDocsService: CorporateDocsService,
     public downloadFilesService: DownloadFilesService, public http: Http) {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -40,10 +40,10 @@ export class CorporateDocumentsComponent implements OnInit {
       this.urlDocs = data.data[0].base_url;
       this.docsType = data.data[0].type_documents;
       if (data.success) {
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 3000)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none'
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 3000)
       }
     })
 

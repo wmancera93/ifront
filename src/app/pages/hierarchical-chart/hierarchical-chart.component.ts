@@ -52,8 +52,8 @@ export class HierarchicalChartComponent implements OnInit {
     public employeeSharedService: EmployeeInfoService,
     public http: HttpClient,
     private domSanitizer: DomSanitizer) {
-    document.getElementById("loginId").style.display = 'block';
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block';
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -84,10 +84,10 @@ export class HierarchicalChartComponent implements OnInit {
       else {
         this.activeArrowRight = false;
       }
-      setTimeout(() => {
-        document.getElementById("loginId").style.display = 'none';
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      }, 2000)
+      // setTimeout(() => {
+      //   document.getElementById("loginId").style.display = 'none';
+      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // }, 2000)
     })
   }
 
