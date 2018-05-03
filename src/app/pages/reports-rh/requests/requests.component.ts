@@ -34,8 +34,8 @@ export class RequestsComponent implements OnInit {
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,
     public excelService: ExcelService) {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -61,10 +61,10 @@ export class RequestsComponent implements OnInit {
         }
 
         if (data.success) {
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 2000)
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 2000)
         }
       })
   }

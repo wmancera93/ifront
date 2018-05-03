@@ -16,8 +16,8 @@ export class PendingsComponent implements OnInit {
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
     public alert: AlertsService,) {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.aproversRequestsService.getConfirmApproval()
       .subscribe((data: any) => {
@@ -46,10 +46,10 @@ export class PendingsComponent implements OnInit {
           this.pendings = data.data[0].requests;
         }
 
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 1000)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none'
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 1000)
       });
   }
 

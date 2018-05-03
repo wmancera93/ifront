@@ -49,8 +49,8 @@ export class EmployeesComponent implements OnInit {
       }
     })
 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -111,8 +111,8 @@ export class EmployeesComponent implements OnInit {
       });
 
     setTimeout(() => {
-      document.getElementById("loginId").style.display = 'none'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // document.getElementById("loginId").style.display = 'none'
+      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
     }, 1000)
   }
 

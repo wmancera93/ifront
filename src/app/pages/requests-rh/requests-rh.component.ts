@@ -23,8 +23,8 @@ export class RequestsRhComponent implements OnInit {
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService) {
 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.formsRequestsService.getRestartObject()
       .subscribe((restart) => {
@@ -73,10 +73,10 @@ export class RequestsRhComponent implements OnInit {
         this.viewContainer = false;
       }
 
-      setTimeout(() => {
-        document.getElementById("loginId").style.display = 'none'
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      }, 1000)
+      // setTimeout(() => {
+      //   document.getElementById("loginId").style.display = 'none'
+      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // }, 1000)
     })
   }
 
