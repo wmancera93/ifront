@@ -21,7 +21,6 @@ export class ShowEventsComponent implements OnInit {
   constructor(public infoEventEmployee : EventsEmployeeService) { 
     this.infoEventEmployee.getInfoEventEmployee().subscribe((data:any)=>{
       this.objectInfoEvents = data.objectInfo; 
-         console.log(this.objectInfoEvents)
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
       this.getShowInfo(data.modal);
