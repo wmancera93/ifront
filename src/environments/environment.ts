@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiBaseHr_producction: 'http://apihr-staging.hrinteractive.co',
-  apiBaseHr_stagin: 'http://apihr.hrinteractive.co',
+  apiBaseHr_staging: 'http://apihr-staging.hrinteractive.co',
+  apiBaseHr_production: 'http://apihr.hrinteractive.co',
   apiBaseHr_development: 'http://apihr-development.hrinteractive.co'
 };

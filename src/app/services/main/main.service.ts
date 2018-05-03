@@ -14,13 +14,13 @@ export class MainService {
     let baseUrl: string;
     switch (ambient) {
       case 'production':
-        baseUrl = environment.apiBaseHr_producction;
+        baseUrl = environment.apiBaseHr_production;
         break;
       case 'development':
         baseUrl = environment.apiBaseHr_development;
         break;
       case 'staging':
-        baseUrl = environment.apiBaseHr_stagin;
+        baseUrl = environment.apiBaseHr_staging;
         break;
 
       default:

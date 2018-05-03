@@ -44,18 +44,18 @@ export class AppComponent {
         ambient = 'production'
       }
     } else {
-      ambient = 'develoment'
+      ambient = 'development'
     }
 
     switch (ambient) {
       case 'production':
-        this.baseUrl = environment.apiBaseHr_producction;
+        this.baseUrl = environment.apiBaseHr_production;
         break;
-      case 'develoment':
+      case 'development':
         this.baseUrl = environment.apiBaseHr_development;
         break;
       case 'staging':
-        this.baseUrl = environment.apiBaseHr_stagin;
+        this.baseUrl = environment.apiBaseHr_staging;
         break;
 
       default:
