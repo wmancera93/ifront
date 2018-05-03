@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="col-9 col-xl-9">
-          <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)'  width="100% !important;" height="1000">
+          <iframe [src]='urlPDF | safeHtml'  width="100% !important;" height="1000">
           </iframe>
         </div>
 
