@@ -13,7 +13,7 @@ export class DashboardEmployeeService {
   }
 
   getNewspaper() {
-    return this.tokenService.get('dashboards/aticles_widget')
+    return this.tokenService.get('dashboards/articles_widget')
       .map((data) => data.json());
   }
 
