@@ -8,6 +8,8 @@ import { MainService } from './services/main/main.service';
 import { User } from './models/general/user';
 import { UserSharedService } from './services/shared/common/user/user-shared.service';
 import { PlatformLocation } from '@angular/common';
+import { environment } from '../environments/environment';
+import { Angular2TokenService } from 'angular2-token';
 
 
 @Component({
@@ -24,7 +26,27 @@ export class AppComponent {
 
   constructor(public router: Router,
     public mainService: MainService,
-    public userSharedService: UserSharedService) {
+    public userSharedService: UserSharedService,
+    public tokenService: Angular2TokenService) {
+    this.tokenService.init(
+      {
+        apiBase: environment.apiBaseHr,
+        apiPath: 'api/v2',
+        signInPath: 'auth/sign_in',
+        signOutPath: 'auth/sign_out',
+        validateTokenPath: 'auth/validate_token',
+        signOutFailedValidate: false,
+        registerAccountPath: 'auth/password/new',
+        updatePasswordPath: 'auth/password',
+        resetPasswordPath: 'auth/password',
+        globalOptions: {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      }
+    );
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -50,7 +72,7 @@ export class AppComponent {
             if (this.dataUser === null) {
               this.router.navigate(['/ihr/error']);
             }
-          }         
+          }
         }
       }
     });
@@ -62,7 +84,7 @@ export class AppComponent {
       document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
       document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
       document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);      
+      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
     }
   }
 

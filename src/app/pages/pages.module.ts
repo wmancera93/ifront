@@ -119,7 +119,7 @@ import { HelpComponent } from './help/help.component';
     HelpComponent
   ],
   providers: [
-    Angular2TokenService
+    
   ]
 })
 export class PagesModule { }

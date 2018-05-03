@@ -34,26 +34,7 @@ export class LoginComponent implements OnInit {
     public userSharedService: UserSharedService,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
-    this.tokenService.init(
-      {
-        apiBase: environment.apiBaseHr,
-        apiPath: 'api/v2',
-        signInPath: 'auth/sign_in',
-        signOutPath: 'auth/sign_out',
-        validateTokenPath: 'auth/validate_token',
-        signOutFailedValidate: false,
-        registerAccountPath: 'auth/password/new',
-        updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password',
-        globalOptions: {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      }
-    );
-
+   
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);

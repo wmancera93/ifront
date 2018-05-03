@@ -37,16 +37,17 @@ export class HeaderComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
-        if (data === "logout") {
-          localStorage.setItem('user', null);
-          this.userSharedService.setUser(null);
-          this.router.navigate(['/ihr/login']);
+        if (data === "logout") {        
+          this.tokenService.signOut()
+          .subscribe((data) => {
+            localStorage.setItem('user', null);
+            this.userSharedService.setUser(null);
+            this.router.navigate(['/ihr/login']);
+          })          
         }
       }
     )
-
   }
-
 
   ngOnInit() {
     this.getDataLocalStorage();
