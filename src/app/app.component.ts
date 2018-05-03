@@ -31,21 +31,18 @@ export class AppComponent {
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService, ) {
 
-    let url = window.location.href;
-    let splitTwoPoint = url.split("localhost");
-    let ambient;
-    let splitLine;
-
-    if (splitTwoPoint.length === 0) {
-      splitLine = url.split("-");
-      if (splitLine.length > 0) {
-        ambient = splitLine[0];
+      let url = window.location.href;
+      let ambient;
+  
+      if (url.split("localhost").length === 1) {
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+        } else {
+          ambient = 'production';
+        }
       } else {
-        ambient = 'production'
+        ambient = 'development';
       }
-    } else {
-      ambient = 'development'
-    }
 
     switch (ambient) {
       case 'production':
