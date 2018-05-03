@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AutoServicesService } from '../../../services/auto-services/auto-services.service'
 import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-certificate-income-withholding',
@@ -13,7 +14,27 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   public urlPDF: string = '';
   public flagEmpty: boolean;
 
-  constructor(public autoServiceService: AutoServicesService, public sanitizer: DomSanitizer) {
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
+  constructor(
+    public autoServiceService: AutoServicesService, 
+    public sanitizer: DomSanitizer,
+    public tokenService: Angular2TokenService) {
+
+      this.tokenService.validateToken()
+        .subscribe(
+          (res) => {
+            this.token = false;
+          },
+          (error) => {
+            this.objectToken.emit({
+              title: error.status.toString(),
+              message: error.json().errors[0].toString()
+            });
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+            this.token = true;
+          })
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }

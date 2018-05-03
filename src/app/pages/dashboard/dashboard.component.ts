@@ -26,9 +26,9 @@ export class DashboardComponent implements OnInit {
 
   @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
 
-  constructor(private tokenService: Angular2TokenService,
-    public userSharedService: UserSharedService,
-    public router: Router, public companieService: MainService) {
+  constructor(public userSharedService: UserSharedService,
+    public router: Router, public companieService: MainService,
+    private tokenService: Angular2TokenService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -40,6 +40,7 @@ export class DashboardComponent implements OnInit {
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
   }

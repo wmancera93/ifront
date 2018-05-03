@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TablesPermisions } from '../../../models/common/tables/tables';
 import { ReportsHrService } from '../../../services/reports-rh/reports-hr.service';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
+import { Angular2TokenService } from 'angular2-token';
 
 declare var jsPDF: any;
 @Component({
@@ -31,9 +32,27 @@ export class RequestsComponent implements OnInit {
 
   public is_collapse: boolean = false;
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,
-    public excelService: ExcelService) {
+    public excelService: ExcelService,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }

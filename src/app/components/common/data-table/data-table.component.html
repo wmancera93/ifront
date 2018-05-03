@@ -1,4 +1,7 @@
-<div id="data_table" class="row">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+<div id="data_table" *ngIf="!token" class="row">
   <div class="col-12">
     <div class="row justify-content-between" *ngIf="show">
       <div class="col-xl-3 col-12">
@@ -107,4 +110,4 @@
   </div>
 </div>
 
-<app-print-data-table></app-print-data-table>
+<app-print-data-table *ngIf="!token"></app-print-data-table>

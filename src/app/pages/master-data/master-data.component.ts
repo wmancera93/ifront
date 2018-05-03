@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
 import { DataMaster } from '../../models/common/data-master/data-master';
+import { Angular2TokenService } from 'angular2-token';
 
 
 @Component({
@@ -15,7 +16,26 @@ export class MasterDataComponent implements OnInit {
   public idType: string = 'PersonalData';
   public titleData: string = 'Datos personales';
 
-  constructor(public getDataMaster: MasterDataService) { }
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
+  constructor(public getDataMaster: MasterDataService,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
+  }
 
   ngOnInit() {
     window.scroll({

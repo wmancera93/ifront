@@ -11,47 +11,47 @@ export class MasterDataService {
     private tokenService: Angular2TokenService) { }
 
   getDataBussiness() {
-    return this.tokenService.get('my_data/business')
+    return this.tokenService.get('master_data_types/business')
       .map((data: any) => data.json());
   }
 
   getDataBanking() {
-    return this.tokenService.get('my_data/banking')
+    return this.tokenService.get('master_data_types/banking')
       .map((data: any) => data.json());
   }
 
   getDataStudies() {
-    return this.tokenService.get('my_data/studies')
+    return this.tokenService.get('master_data_types/studies')
       .map((data: any) => data.json());
   }
 
   getDataPersonal() {
-    return this.tokenService.get('my_data/personal')
+    return this.tokenService.get('master_data_types/personal')
       .map((data: any) => data.json());
   }
 
   getDataContact() {
-    return this.tokenService.get('my_data/contact')
+    return this.tokenService.get('master_data_types/contact')
       .map((data: any) => data.json());
   }
 
   getDataFamily() {
-    return this.tokenService.get('my_data/family')
+    return this.tokenService.get('master_data_types/family')
       .map((data: any) => data.json());
   }
 
   getDataBeneficiaries() {
-    return this.tokenService.get('my_data/beneficiaries')
+    return this.tokenService.get('master_data_types/beneficiaries')
       .map((data: any) => data.json());
   }
 
   getDataSocialSecurity() {
-    return this.tokenService.get('my_data/social_security')
+    return this.tokenService.get('master_data_types/social_security')
       .map((data: any) => data.json());
   }
 
   getDataReteFuente() {
-    return this.tokenService.get('my_data/retefuente')
+    return this.tokenService.get('master_data_types/retefuente')
       .map((data: any) => data.json());
   }
 

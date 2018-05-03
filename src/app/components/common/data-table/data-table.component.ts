@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { element } from 'protractor';
 import { Enterprise } from '../../../models/general/enterprise';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -37,9 +38,27 @@ export class DataTableComponent implements OnInit {
 
   public objectTable: any[] = [];
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   constructor(public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
-    public router: Router) {   
+    public router: Router,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })  
       // document.getElementById("loginId").style.display = 'block'
       // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }

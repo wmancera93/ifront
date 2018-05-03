@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { CorporateDocsService } from '../../services/corporate-documents/corporate-docs.service';
 import { Documents, TypeDocuments } from '../../models/common/corporate_documents/corporate_documents';
 import { RequestOptions, ResponseContentType } from '@angular/http';
@@ -7,6 +7,7 @@ import { saveAs } from 'file-saver/FileSaver.js';
 import { Observable } from 'rxjs/Observable';
 import { Http, Headers } from '@angular/http';
 import { timeout } from 'q';
+import { Angular2TokenService } from 'angular2-token';
 
 
 @Component({
@@ -23,8 +24,27 @@ export class CorporateDocumentsComponent implements OnInit {
   public urlSplit : string;
   public namePDF : string;
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   constructor(public corporateDocsService: CorporateDocsService,
-    public downloadFilesService: DownloadFilesService, public http: Http) {
+    public downloadFilesService: DownloadFilesService, 
+    public http: Http,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
