@@ -37,10 +37,8 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
 import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
-
-
-
-
+import { ShowEventsComponent } from './common/show-events/show-events.component';
+import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
 
 
@@ -81,10 +79,9 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
-
-
-
-    ErrorPageHttpComponent
+    ErrorPageHttpComponent,
+    ShowEventsComponent,
+    GerencialModalComponent
   ],
   exports: [
     HeaderComponent,
