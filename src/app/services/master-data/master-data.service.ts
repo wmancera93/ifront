@@ -2,64 +2,57 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class MasterDataService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
-  getDataBussiness()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/business')
-    .map((data: Observable<any>) => data); 
+  getDataBussiness() {
+    return this.tokenService.get('my_data/business')
+      .map((data: any) => data.json());
   }
 
-  getDataBanking()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/banking')
-    .map((data: Observable<any>) => data); 
+  getDataBanking() {
+    return this.tokenService.get('my_data/banking')
+      .map((data: any) => data.json());
   }
 
-  getDataStudies()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/studies')
-    .map((data: Observable<any>) => data); 
+  getDataStudies() {
+    return this.tokenService.get('my_data/studies')
+      .map((data: any) => data.json());
   }
 
-  getDataPersonal()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/personal')
-    .map((data: Observable<any>) => data); 
+  getDataPersonal() {
+    return this.tokenService.get('my_data/personal')
+      .map((data: any) => data.json());
   }
 
-  getDataContact()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/contact')
-    .map((data: Observable<any>) => data); 
+  getDataContact() {
+    return this.tokenService.get('my_data/contact')
+      .map((data: any) => data.json());
   }
 
-  getDataFamily()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/family')
-    .map((data: Observable<any>) => data); 
+  getDataFamily() {
+    return this.tokenService.get('my_data/family')
+      .map((data: any) => data.json());
   }
 
-  getDataBeneficiaries()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/beneficiaries')
-    .map((data: Observable<any>) => data); 
+  getDataBeneficiaries() {
+    return this.tokenService.get('my_data/beneficiaries')
+      .map((data: any) => data.json());
   }
 
-  getDataSocialSecurity()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/social_security')
-    .map((data: Observable<any>) => data);
+  getDataSocialSecurity() {
+    return this.tokenService.get('my_data/social_security')
+      .map((data: any) => data.json());
   }
 
-  getDataReteFuente()
-  {
-    return this.http.get(environment.apiBaseHr + '/api/v2/my_data/retefuente')
-    .map((data: Observable<any>) => data);
+  getDataReteFuente() {
+    return this.tokenService.get('my_data/retefuente')
+      .map((data: any) => data.json());
   }
 
 }

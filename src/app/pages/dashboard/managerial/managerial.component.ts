@@ -3,6 +3,7 @@ import { NotificationSecundary, EventsEmployess, NotificationPrimary, Estadistic
 import { User } from '../../../models/general/user';
 import { DashboardManagerialService } from '../../../services/dashboard/managerial/dashboard-managerial.service';
 import { Router } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-managerial',
@@ -24,9 +25,20 @@ export class ManagerialComponent implements OnInit {
   public dataMyTeam: boolean = true;
 
   constructor(public dasboardManagerialService: DashboardManagerialService,
-    public router: Router) {
-      // document.getElementById("loginId").style.display = 'block'
-      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    public router: Router,
+    private tokenService: Angular2TokenService) {
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          console.log(res)
+        },
+        (error) => {
+          console.log(error)
+        })
+
   }
 
   ngOnInit() {

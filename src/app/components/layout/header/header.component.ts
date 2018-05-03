@@ -37,13 +37,17 @@ export class HeaderComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
-        if (data === "logout") {        
-          this.tokenService.signOut()
-          .subscribe((data) => {
-            localStorage.setItem('user', null);
-            this.userSharedService.setUser(null);
-            this.router.navigate(['/ihr/login']);
-          })          
+        if (data === "logout") {
+          
+          this.tokenService.signOut().subscribe(
+            (result) => {
+              localStorage.setItem('user', null);
+              this.userSharedService.setUser(null);
+              this.router.navigate(['/ihr/login'])
+            },
+            (error) => {
+              console.log(error);
+            })
         }
       }
     )
@@ -74,6 +78,7 @@ export class HeaderComponent implements OnInit {
       confirmation: true,
       typeConfirmation: 'logout'
     }];
+
     this.alert.setAlert(this.alertWarning[0]);
   }
 
@@ -89,7 +94,7 @@ export class HeaderComponent implements OnInit {
     else {
       document.getElementById("contactList").className = 'show';
       this.showContactsList = false;
-    }  
+    }
 
   }
 

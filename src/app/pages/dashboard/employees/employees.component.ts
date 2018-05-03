@@ -5,6 +5,7 @@ import { User } from '../../../models/general/user';
 import { DashboardEmployeeService } from '../../../services/dashboard/employee/dashboard-employee.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { EstadisticsComponent } from '../../../components/common/widgets/estadistics/estadistics.component';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-employees',
@@ -26,10 +27,11 @@ export class EmployeesComponent implements OnInit {
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
 
+  constructor(
+    public dashboardEmployeeService: DashboardEmployeeService,
+    public router: Router,){
+   
 
-
-
-  constructor(public dashboardEmployeeService: DashboardEmployeeService, public router: Router, ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/index') {

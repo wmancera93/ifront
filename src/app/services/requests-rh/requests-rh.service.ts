@@ -2,30 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class RequestsRhService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
   getAllRequests() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/employee_requets')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('employee_requets')
+      .map((data: any) => data.json());
   }
 
   getRequestDetailById(ticket: number) {
-    return this.http.get(environment.apiBaseHr + '/api/v2/employee_requets/' + ticket)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('employee_requets/' + ticket)
+      .map((data: any) => data.json());
   }
 
   postRequests(object: any) {
-    return this.http.post(environment.apiBaseHr + '/api/v2/employee_requets', object)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.post('employee_requets', object)
+      .map((data: any) => data.json());
   }
 
   deleteRequests(id: number) {
-    return this.http.delete(environment.apiBaseHr + '/api/v2/employee_requets/' + id)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.delete('employee_requets/' + id)
+      .map((data: any) => data.json());
   }
 
 }
