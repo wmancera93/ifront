@@ -37,6 +37,10 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
 import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
+
+
+
+
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
 
 
@@ -77,6 +81,9 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
+
+
+
     ErrorPageHttpComponent
   ],
   exports: [
@@ -102,6 +109,9 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
+
+
+
     ErrorPageHttpComponent
   ],
   providers: [
