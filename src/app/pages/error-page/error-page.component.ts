@@ -25,7 +25,7 @@ export class ErrorPageComponent implements OnInit {
     if(localStorage.getItem("enterprise") === null){
 
       let url = window.location.href;
-      let splitTwoPoint = url.split(":");
+      let splitTwoPoint = url.split("localhost");
       let ambient;
       let splitLine;
   
