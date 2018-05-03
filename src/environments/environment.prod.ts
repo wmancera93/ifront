@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseHr: 'http://apihr-development.hrinteractive.co'
+  apiBaseHr: 'http://apihr-staging.herokuapp.com'
+  // apiBaseHr: 'http://apihr-development.hrinteractive.co'
 };
