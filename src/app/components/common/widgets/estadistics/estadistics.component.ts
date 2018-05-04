@@ -74,9 +74,8 @@ export class EstadisticsComponent implements OnInit {
           // Bar Chart
           this.activeBarChartType = true;
           this.barChartType = 'bar';
-          this.barChartLabels = this.objectWidget[0].data.names;
-          this.barChartData = [123000, 982123, 865345];
-          //this.barChartData = this.objectWidget[0].data.values;
+          this.barChartLabels = this.objectWidget[0].data.names;          
+          this.barChartData = this.objectWidget[0].data.values;
           this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
           this.barChartOptions = {
             responsive: true,
