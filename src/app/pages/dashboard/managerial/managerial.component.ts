@@ -4,6 +4,7 @@ import { User } from '../../../models/general/user';
 import { DashboardManagerialService } from '../../../services/dashboard/managerial/dashboard-managerial.service';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
+import { ManagerialDataService } from '../../../services/shared/common/managerial-data/managerial-data.service';
 
 @Component({
   selector: 'app-managerial',
@@ -12,6 +13,7 @@ import { Angular2TokenService } from 'angular2-token';
 })
 export class ManagerialComponent implements OnInit {
   @Output() objectVacations: EventEmitter<NotificationSecundary> = new EventEmitter();
+  @Output() objectDataVacations: EventEmitter<any> = new EventEmitter();
   @Output() objectIncapacityes: EventEmitter<NotificationSecundary> = new EventEmitter();
   @Output() objectPermissions: EventEmitter<NotificationSecundary> = new EventEmitter();
   @Output() objectMyTeam: EventEmitter<EventsEmployess[]> = new EventEmitter();
@@ -21,22 +23,26 @@ export class ManagerialComponent implements OnInit {
   @Output() objectAbsenteeism: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectQueryCompany: EventEmitter<ProgressPrimary[]> = new EventEmitter();
   @Output() objectPermissionsUsers: EventEmitter<ProgressPrimary[]> = new EventEmitter();
+  @Output() modalDataManagerial: EventEmitter<string> = new EventEmitter();
+
   public validateMyTeam: string;
   public dataMyTeam: boolean = true;
+  public dataManagerial: any;
 
   constructor(public dasboardManagerialService: DashboardManagerialService,
     public router: Router,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public managerialDataShared: ManagerialDataService) {
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
-          console.log(res)
+          // console.log(res)
         },
         (error) => {
-          console.log(error)
+          // console.log(error)
         })
 
   }
@@ -60,6 +66,11 @@ export class ManagerialComponent implements OnInit {
     this.dasboardManagerialService.getwidgetEmployeeOnAbsences()
       .subscribe((data: any) => {
         this.objectAbsenteeism.emit(data.data);
+      });
+
+    this.dasboardManagerialService.getwidgetEmployeeOnIncapacities()
+      .subscribe((data: any) => {
+        this.objectIncapacityes.emit(data.data);
       });
 
     this.dasboardManagerialService.getWidgetMyteam()
@@ -92,21 +103,61 @@ export class ManagerialComponent implements OnInit {
         this.objectWoman.emit(data.data);
       });
 
-    const incapacityes: NotificationSecundary[] = [];
-    this.objectIncapacityes.emit(incapacityes[0]);
+    // const incapacityes: NotificationSecundary[] = [];
+    // this.objectIncapacityes.emit(incapacityes[0]);
 
     const reports: NotificationPrimary[] = [];
     this.objectReports.emit(reports[0]);
+
+
 
     // setTimeout(() => {
     //   document.getElementById("loginId").style.display = 'none'
     //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
     // }, 1000)
   }
+  detailVacations() {
+    this.modalDataManagerial.emit('modalDataVacations');
+    this.dasboardManagerialService.getDataVacationsSubordinates()
+      .subscribe((data: any) => {
+        this.dataManagerial = data;
+      });
+    setTimeout(() => {
+      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataVacations' });
+    }, 1000)
+
+  }
+
+  detailPermitions() {
+    this.modalDataManagerial.emit('modalDataPermitions');
+    this.dasboardManagerialService.getDataConsultationsSubordinates()
+      .subscribe((data: any) => {
+        this.dataManagerial = data;
+      });
+    setTimeout(() => {
+      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataPermitions' });
+    }, 1000)
+  }
+
+  detailIncapacities() {
+    this.modalDataManagerial.emit('modalDataIncapacities');
+    this.dasboardManagerialService.getDataIncapacitiesSubordinates()
+      .subscribe((data: any) => {
+        this.dataManagerial = data;
+      });
+    setTimeout(() => {
+      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataIncapacities' });
+    }, 1000)
+  }
+
 
   goToMyTeam() {
     if (this.dataMyTeam) {
       this.router.navigate(['/ihr/my_team']);
     }
+
+
   }
 }
+
+

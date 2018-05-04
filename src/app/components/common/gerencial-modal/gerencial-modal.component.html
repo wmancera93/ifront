@@ -3,10 +3,11 @@
   <div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
     style="display:none;">
     <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
+      <div class="modal-content" *ngIf="dataManagerial != undefined">
         <div class="modal-header borderLine-title row-hr justify-content-center">
           <div class="col-12 col-lg-10 text-center ">
             <h4 class="modal-title titleColor text-shadow">
+              {{titleDataManagerial}}
             </h4>
           </div>
         </div>
@@ -15,7 +16,7 @@
             <div class="row">
               <div class="col-12 " >
                 <div class="row justify-content-center">
-                  <!-- <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table> -->
+                  <app-data-table [records]="objectDatatable" [title]="nameManagerial"></app-data-table>
                 </div>
               </div>
             </div>

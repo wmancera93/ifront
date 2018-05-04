@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotificationPrimary, NotificationSecundary } from '../../../../models/common/widgets/widgets';
+import { ManagerialDataService } from '../../../../services/shared/common/managerial-data/managerial-data.service';
+import { DashboardManagerialService } from '../../../../services/dashboard/managerial/dashboard-managerial.service';
 
 @Component({
   selector: 'app-notification-secundary',
@@ -8,13 +10,19 @@ import { NotificationPrimary, NotificationSecundary } from '../../../../models/c
 })
 export class NotificationSecundaryComponent implements OnInit {
   @Input('notificationSecundary') notificationSecundary: any;
+
   public objectWidget: NotificationSecundary;
-  
-  constructor() { }
+  public dataMangerial: any;
+  public dataTitle: string;
+  public sendDataMangerial: any;
+
+  constructor(public managerialDataShared: ManagerialDataService,
+    public dasboardManagerialService: DashboardManagerialService) { }
 
   ngOnInit() {
-    this.notificationSecundary.subscribe((data:NotificationSecundary) => {
+    this.notificationSecundary.subscribe((data: NotificationSecundary) => {
       this.objectWidget = data;
+      this.dataTitle = this.objectWidget.title;
     })
   }
 

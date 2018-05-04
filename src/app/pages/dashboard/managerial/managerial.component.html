@@ -1,8 +1,8 @@
 <div class="row-hr-container">
   <div class="row">
-    <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
-    <app-notification-secundary [notificationSecundary]="objectPermissions" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
-    <app-notification-secundary [notificationSecundary]="objectIncapacityes" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-secundary>
+    <app-notification-secundary [notificationSecundary]="objectVacations" (click)="detailVacations()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
+    <app-notification-secundary [notificationSecundary]="objectPermissions"   (click)="detailPermitions()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
+    <app-notification-secundary [notificationSecundary]="objectIncapacityes"  (click)="detailIncapacities()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-secundary>
     <app-notification-primary [notificationPrimary]="objectAbsenteeism" routerLink="/ihr/reports_requests" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-primary>
     <!-- <app-notification-primary [notificationPrimary]="objectReports" class="col-xl-3 col-md-6 col-6"></app-notification-primary> -->
   </div>
@@ -25,5 +25,6 @@
         <app-notification-primary [notificationPrimary]="objectWoman" class="col-xl-6 col-md-6 col-12 widget-height-notification-primary" ></app-notification-primary>
       </div>
     </div>
-  </div>
+  </div>  
 </div>
+<app-gerencial-modal [nameModal]='modalDataManagerial'></app-gerencial-modal>

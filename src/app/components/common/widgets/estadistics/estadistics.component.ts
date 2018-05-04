@@ -52,7 +52,7 @@ export class EstadisticsComponent implements OnInit {
         this.activeDoughnutChartType = true;
         this.doughnutChartType = 'doughnut';
         this.doughnutChartLabels = this.objectWidget[0].data.names;        
-        this.doughnutChartData = this.objectWidget[0].data.values;
+        this.doughnutChartData = this.objectWidget[0].data.values;        
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
           responsive: true,
@@ -74,19 +74,25 @@ export class EstadisticsComponent implements OnInit {
           // Bar Chart
           this.activeBarChartType = true;
           this.barChartType = 'bar';
-          this.barChartLabels = this.objectWidget[0].data.names;          
-          this.barChartData = this.objectWidget[0].data.values;
+          this.barChartLabels = this.objectWidget[0].data.names;                    
+          this.barChartData = this.objectWidget[0].data.values;      
           this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
           this.barChartOptions = {
             responsive: true,
             scales: {
               xAxes: [{
                 display: false,
-                stacked: true
+                stacked: true,
+              
+                
               }],
               yAxes: [{
                 display: false,
-                stacked: true
+                stacked: true,
+                ticks: {
+                  fontSize: 13,
+                  fontStyle: 'normal',
+                }
               }],
 
             },

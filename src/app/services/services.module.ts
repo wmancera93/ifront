@@ -32,6 +32,7 @@ import { ApproverRequestsService } from './approver-requests/approver-requests.s
 import { EditArticleService } from './shared/common/edit-article/edit-article.service';
 import { MasterDataService } from './master-data/master-data.service';
 import { EventsEmployeeService } from './shared/common/events-employee/events-employee.service';
+import { ManagerialDataService } from './shared/common/managerial-data/managerial-data.service';
 
 @NgModule({
   imports: [
@@ -66,7 +67,8 @@ import { EventsEmployeeService } from './shared/common/events-employee/events-em
     ApproverRequestsService,
     EditArticleService,
     MasterDataService,
-    EventsEmployeeService
+    EventsEmployeeService,
+    ManagerialDataService
   ]
 })
 export class ServicesModule { }

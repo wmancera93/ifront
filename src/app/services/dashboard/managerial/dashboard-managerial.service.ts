@@ -21,7 +21,11 @@ export class DashboardManagerialService {
   }
 
   getwidgetEmployeeOnAbsences() {
-    return this.tokenService.get('dashboards/total_employees_in_absences_widget')
+    return this.tokenService.get('dashboards/total_requests_to_manage_widget')
+      .map((data: any) => data.json());
+  }
+  getwidgetEmployeeOnIncapacities() {
+    return this.tokenService.get('dashboards/total_employees_in_incapacities_widget')
       .map((data: any) => data.json());
   }
   getWidgetMyteam() {
@@ -43,6 +47,25 @@ export class DashboardManagerialService {
   getWidgetFemalePercent() {
     return this.tokenService.get('dashboards/total_females_widget')
       .map((data: any) => data.json());
+  }
+
+  getDataVacationsSubordinates()
+  {
+    return this.tokenService.get('consultations/vacations_subordinates')
+    .map((data: any) => data.json());
+  }
+
+  getDataConsultationsSubordinates()
+  {
+    return this.tokenService.get('consultations/permissions_subordinates')
+    .map((data: any) => data.json());    
+  }
+
+  getDataIncapacitiesSubordinates()
+  {
+    return this.tokenService.get('consultations/incapacities_subordinates')
+    .map((data: any) => data.json());  
+    
   }
 }
 
