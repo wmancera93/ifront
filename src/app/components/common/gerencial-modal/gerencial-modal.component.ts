@@ -21,8 +21,7 @@ export class GerencialModalComponent implements OnInit {
   public titleDataManagerial: string;
 
   constructor(public mangerialDataShared: ManagerialDataService) {
-    this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {
-      
+    this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {      
       this.dataManagerial = dataM.objectInfo;
             this.titleDataManagerial = this.dataManagerial.data[0].title;
       if (this.dataManagerial.data[0].data.length > 0) {
