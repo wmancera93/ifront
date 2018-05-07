@@ -213,15 +213,11 @@
                             <div class="col-12">
                               <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
                             </div>
-                            <div class="col-md-12 top-containter">
-                              <div class="row justify-content-center">
-                                <div class="col-md-4 col-12">
-                                  <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                                    <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
-                                  <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                                    <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
-                                </div>
-                              </div>
+                            <div class="col-md-4 col-12">
+                              <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
+                                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                             </div>
                           </div>
                         </div>
