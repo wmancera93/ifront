@@ -43,6 +43,23 @@ export class DashboardComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
+
+        // this.router.events.subscribe(event => {
+        //   if(event instanceof NavigationEnd)
+        //   {
+        //     if(event.urlAfterRedirects === '/ihr/login')
+        //     {
+        //       let toast: Toast = {
+        //         type: 'success',
+        //         title: this.userAuthenticated.employee.short_name,
+        //         body: 'Bienvenido'
+        //       };
+        //       setTimeout(() => {
+        //         this.objectToast.emit(toast)
+        //       }, 100);
+        //     }
+        //   }
+        // })
   }
 
   getDataLocalStorage() {
@@ -51,7 +68,7 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
+    if (this.userAuthenticated === null || this.userAuthenticated === undefined) {     
       this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
       let toast: Toast = {
         type: 'success',
@@ -60,7 +77,7 @@ export class DashboardComponent implements OnInit {
       };
       setTimeout(() => {
         this.objectToast.emit(toast)
-      }, 200);
+      }, 100);
     }
 
 

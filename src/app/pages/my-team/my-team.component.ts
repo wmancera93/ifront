@@ -16,6 +16,7 @@ export class MyTeamComponent implements OnInit {
   public employeePrueba: any []=[];
   public ajustWidth: boolean;
   public flagHideMyteam: boolean = true;
+  public flagReturnBack: boolean = false;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -64,5 +65,8 @@ export class MyTeamComponent implements OnInit {
   goToMyTeamReports(employeesInMyTeam) {
     this.flagHideMyteam = false;    
     this.myTeamSharedService.setReportMyteam(employeesInMyTeam);  
+  }
+  returnBackPage() {
+    this.flagReturnBack = true;
   }
 }

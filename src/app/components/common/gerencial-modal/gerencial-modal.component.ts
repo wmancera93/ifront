@@ -15,24 +15,24 @@ export class GerencialModalComponent implements OnInit {
   public targetModal: string = '';
   public btnModal: string = '';
   public nameThisModal: string = '';
-  public dataManagerial: any ;
+  public dataManagerial: any;
   public objectDatatable: EventEmitter<any> = new EventEmitter();
-  public nameManagerial: string ;
+  public nameManagerial: string;
   public titleDataManagerial: string;
+  public flagNoData: boolean = false;
 
   constructor(public mangerialDataShared: ManagerialDataService) {
-    this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {      
+    this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {
       this.dataManagerial = dataM.objectInfo;
-            this.titleDataManagerial = this.dataManagerial.data[0].title;
+      this.titleDataManagerial = this.dataManagerial.data[0].title;
       if (this.dataManagerial.data[0].data.length > 0) {
-
         this.nameManagerial = this.dataManagerial.data[0].title;
         this.objectDatatable.emit(this.dataManagerial);
       }
-
       else {
+        this.flagNoData = true;
         this.nameManagerial = this.dataManagerial.data[0].title;
-        this.objectDatatable.emit(this.dataManagerial);
+        // this.objectDatatable.emit(this.dataManagerial);
       }
       this.getShowInfo(dataM.modal);
     })
