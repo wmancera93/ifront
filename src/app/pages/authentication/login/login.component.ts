@@ -66,12 +66,12 @@ export class LoginComponent implements OnInit {
         document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
         document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
         document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
-
+debugger
         var link = document.createElement('link'),
           oldLink = document.getElementById('fa_icon');
         link.id = 'fa_icon';
         link.rel = 'shortcut icon';
-        link.href = this.dataEnterprise[0].logo_dashboard.toString();
+        link.href = this.dataEnterprise[0].logo_dashboard.url.toString();
         if (oldLink) {
           document.head.removeChild(oldLink);
         }
