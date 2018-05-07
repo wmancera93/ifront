@@ -105,11 +105,10 @@ export class EstadisticsComponent implements OnInit {
                   return tooltipItem.yLabel;
                 }
               },
-              
-            scaleLabel:
-              function (barChartLabels) {
-                return barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              }
+              scaleLabel:
+                function (barChartLabels) {
+                  return barChartLabels.datasetLabel + ': ' + barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+                }
             }
           }
 
