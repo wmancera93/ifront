@@ -56,17 +56,24 @@ export class EstadisticsComponent implements OnInit {
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
           responsive: true,
-          // pieceLabel: {
+          tooltips:
+          {
+            enabled: true,  
+            mode: 'single',
+            callbacks:{
+              label: function(tooltipItem, data) {
+                console.log(tooltipItem,data);
+                let label = data.labels[tooltipItem.index];
+                let datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return label + ': ' + datasetLabel.toLocaleString();
+              }
+            }         
+             
+            
+          }
+            
 
-          //   render: function (args) {
-          //     return '$' + args.value;
-          //     //  return args.label;
-          //   },
-          //   fontSize: 9,
-          //   fontColor: '#000',
-          //   overlap: true,
-          //   arc: true
-          // },
+
         };
 
       } else
@@ -100,16 +107,19 @@ export class EstadisticsComponent implements OnInit {
               display: false
             },
             tooltips: {
+              enabled: true,
               callbacks: {
-                label: function (tooltipItem) {
-                  return tooltipItem.yLabel;
-                }
+                label: function (tooltipItems) {
+                  return tooltipItems.yLabel.toLocaleString();
+                },
+                // label: function (tooltipItem) {
+                //   return tooltipItem.yLabel;
+                // }
               },
-              
-            scaleLabel:
-              function (barChartLabels) {
-                return barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-              }
+              // scaleLabel:
+              //   function (barChartLabels) {
+              //     return barChartLabels.datasetLabel + ': ' + barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+              //   }
             }
           }
 
