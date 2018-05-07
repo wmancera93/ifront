@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
     public userSharedService: UserSharedService,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
-   
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
     } else {
       ambient = 'development';
     }
-    
+
     this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;
@@ -66,6 +66,17 @@ export class LoginComponent implements OnInit {
         document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
         document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
         document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+
+        var link = document.createElement('link'),
+          oldLink = document.getElementById('fa_icon');
+        link.id = 'fa_icon';
+        link.rel = 'shortcut icon';
+        link.href = this.dataEnterprise[0].logo_dashboard.toString();
+        if (oldLink) {
+          document.head.removeChild(oldLink);
+        }
+        document.head.appendChild(link)
+
         localStorage.setItem("enterprise", JSON.stringify(result.data));
       })
     if (this.dataEnterprise.length > 0) {
