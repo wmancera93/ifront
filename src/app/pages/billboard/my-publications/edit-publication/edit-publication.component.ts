@@ -87,8 +87,8 @@ export class EditPublicationComponent implements OnInit {
   }
 
   onSubmitSaveChanges() {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
 
     this.sendObjectEdit = {
@@ -101,8 +101,8 @@ export class EditPublicationComponent implements OnInit {
       (data: any) => {
         this.showSubmit = true;
         setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // document.getElementById("loginId").style.display = 'none'
+          // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
         }, 1000);
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
@@ -112,8 +112,8 @@ export class EditPublicationComponent implements OnInit {
         
         this.showSubmit = true;
         setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // document.getElementById("loginId").style.display = 'none'
+          // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
         }, 1000);  
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();    
         const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.error.errors.toString(), confirmation: false }];

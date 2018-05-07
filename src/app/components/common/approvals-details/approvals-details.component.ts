@@ -64,8 +64,8 @@ export class ApprovalsDetailsComponent implements OnInit {
   }
 
   saveApproval() {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.approverRequestsService.postApprovalsRequest(
       {
         request_id: this.approvals[0].ticket,
@@ -81,10 +81,10 @@ export class ApprovalsDetailsComponent implements OnInit {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.error.errors.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
 
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 1000)
         })
   }
 
