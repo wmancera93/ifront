@@ -53,7 +53,7 @@ export class EstadisticsComponent implements OnInit {
         this.doughnutChartType = 'doughnut';
         this.doughnutChartLabels = this.objectWidget[0].data.names;
         this.doughnutChartData = this.objectWidget[0].data.values;
-        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
+        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors}];
         this.doughnutOptions = {
           responsive: true,
           tooltips:
@@ -62,10 +62,10 @@ export class EstadisticsComponent implements OnInit {
             mode: 'single',
             callbacks:{
               label: function(tooltipItem, data) {
-                console.log(tooltipItem,data);
                 let label = data.labels[tooltipItem.index];
                 let datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                return label + ': ' + datasetLabel.toLocaleString();
+                let dataNumber = new Number(datasetLabel);
+                return label + ': ' + dataNumber.toLocaleString();
               }
             }         
              
