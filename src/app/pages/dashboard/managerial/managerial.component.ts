@@ -124,7 +124,7 @@ export class ManagerialComponent implements OnInit {
       });
     setTimeout(() => {
       this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataVacations' });
-    }, 1000)
+    }, 500)
 
   }
 
@@ -136,7 +136,7 @@ export class ManagerialComponent implements OnInit {
       });
     setTimeout(() => {
       this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataPermitions' });
-    }, 1000)
+    }, 500)
   }
 
   detailIncapacities() {
@@ -147,17 +147,17 @@ export class ManagerialComponent implements OnInit {
       });
     setTimeout(() => {
       this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataIncapacities' });
-    }, 1000)
+    }, 500)
   }
 
 
-  goToMyTeam() {
-    if (this.dataMyTeam) {
-      this.router.navigate(['/ihr/my_team']);
-    }
+  // goToMyTeam() {
+  //   if (this.dataMyTeam) {
+  //     this.router.navigate(['/ihr/my_team']);
+  //   }
 
 
-  }
+  // }
 }
 
 

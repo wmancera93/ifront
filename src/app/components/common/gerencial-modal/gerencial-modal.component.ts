@@ -28,11 +28,12 @@ export class GerencialModalComponent implements OnInit {
       if (this.dataManagerial.data[0].data.length > 0) {
         this.nameManagerial = this.dataManagerial.data[0].title;
         this.objectDatatable.emit(this.dataManagerial);
+        console.log(this.dataManagerial)
       }
       else {
         this.flagNoData = true;
         this.nameManagerial = this.dataManagerial.data[0].title;
-        // this.objectDatatable.emit(this.dataManagerial);
+        this.objectDatatable.emit(this.dataManagerial);
       }
       this.getShowInfo(dataM.modal);
     })

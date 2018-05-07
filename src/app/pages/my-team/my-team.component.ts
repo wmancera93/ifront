@@ -13,7 +13,7 @@ import { Angular2TokenService } from 'angular2-token';
 })
 export class MyTeamComponent implements OnInit {
   public employeesInMyTeam: MyTeam[] = [];
-  public employeePrueba: any []=[];
+  public employeePrueba: any[] = [];
   public ajustWidth: boolean;
   public flagHideMyteam: boolean = true;
   public flagReturnBack: boolean = false;
@@ -39,9 +39,9 @@ export class MyTeamComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
-      // document.getElementById("loginId").style.display = 'block'
-      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-     }
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+  }
 
   ngOnInit() {
     window.scroll({
@@ -63,10 +63,11 @@ export class MyTeamComponent implements OnInit {
   }
 
   goToMyTeamReports(employeesInMyTeam) {
-    this.flagHideMyteam = false;    
-    this.myTeamSharedService.setReportMyteam(employeesInMyTeam);  
+    this.flagHideMyteam = false;
+
+    this.myTeamSharedService.setReportMyteam(employeesInMyTeam);
   }
   returnBackPage() {
-    this.flagReturnBack = true;
+    this.router.navigate(['ihr/index']);
   }
 }

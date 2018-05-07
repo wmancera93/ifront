@@ -1,11 +1,12 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { User, Employee } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
 import { Toast } from 'angular2-toaster';
 import { MainService } from '../../services/main/main.service';
+import 'rxjs/add/operator/pairwise';
 
 
 @Component({
@@ -20,9 +21,11 @@ export class DashboardComponent implements OnInit {
   public showServiceManagement: boolean;
   public showButtonDashManagement: boolean = true;
   public validateRoleManagement: string;
-  public isAdmin : boolean;
-
+  public isAdmin: boolean;
   public token: boolean;
+  public previousUrl: string;
+
+  public aa: string = "";
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
@@ -30,6 +33,15 @@ export class DashboardComponent implements OnInit {
   constructor(public userSharedService: UserSharedService,
     public router: Router, public companieService: MainService,
     private tokenService: Angular2TokenService) {
+    this.router.events
+      .filter(e => e instanceof RoutesRecognized)
+      .pairwise()
+      .subscribe((event: any[]) => {
+        this.aa = event[0].urlAfterRedirects.toString();
+        if (this.aa === '/ihr/my_team') {
+          this.roleEmployee = false;
+        }
+      });
 
     this.tokenService.validateToken()
       .subscribe(
@@ -45,22 +57,6 @@ export class DashboardComponent implements OnInit {
           this.token = true;
         })
 
-        // this.router.events.subscribe(event => {
-        //   if(event instanceof NavigationEnd)
-        //   {
-        //     if(event.urlAfterRedirects === '/ihr/login')
-        //     {
-        //       let toast: Toast = {
-        //         type: 'success',
-        //         title: this.userAuthenticated.employee.short_name,
-        //         body: 'Bienvenido'
-        //       };
-        //       setTimeout(() => {
-        //         this.objectToast.emit(toast)
-        //       }, 100);
-        //     }
-        //   }
-        // })
   }
 
   getDataLocalStorage() {
@@ -69,25 +65,47 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    if (this.userAuthenticated === null || this.userAuthenticated === undefined) {     
+    if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
       this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-      let toast: Toast = {
-        type: 'success',
-        title: this.userAuthenticated.employee.short_name,
-        body: 'Bienvenido'
-      };
-      setTimeout(() => {
-        this.objectToast.emit(toast)
-      }, 100);
+
+      this.router.events.filter(e => e instanceof RoutesRecognized)
+        .pairwise()
+        .subscribe((event: any[]) => {
+          if (event[0].urlAfterRedirects === '/ihr/login') {
+            let toast: Toast = {
+              type: 'success',
+              title: this.userAuthenticated.employee.short_name,
+              body: 'Bienvenido'
+            };
+            setTimeout(() => {
+              this.objectToast.emit(toast)
+            }, 100);
+          }
+        })
+      // this.router.events.subscribe(event => {
+      //   if (event instanceof NavigationEnd) {
+      //     if (event.urlAfterRedirects === '/ihr/login') {
+      //       let toast: Toast = {
+      //         type: 'success',
+      //         title: this.userAuthenticated.employee.short_name,
+      //         body: 'Bienvenido'
+      //       };
+      //       setTimeout(() => {
+      //         this.objectToast.emit(toast)
+      //       }, 100);
+      //     }
+      //   }
+      // })
     }
 
 
   }
 
   ngOnInit() {
+
+
     this.getDataLocalStorage();
     this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
-
     let url = window.location.href;
     let ambient;
 
@@ -104,20 +122,17 @@ export class DashboardComponent implements OnInit {
     this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
       this.isAdmin = data.data.isAdmin;
-      if(this.showServiceManagement == true)
-      {
+      if (this.showServiceManagement == true) {
         if (this.isAdmin == true || this.validateRoleManagement == "true") {
 
           this.showButtonDashManagement = true;
         }
       }
-     
+
       else {
         this.showButtonDashManagement = false;
       }
     })
-
-
   }
 
   vieweDashboardEmployee() {
