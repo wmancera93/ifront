@@ -24,3 +24,6 @@
     border-top: 1px solid  gray !important;    
     padding: 5px; 
 }
+.modal-lg{
+    max-width: 1200px !important;
+}

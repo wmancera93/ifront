@@ -23,19 +23,23 @@ export class GerencialModalComponent implements OnInit {
 
   constructor(public mangerialDataShared: ManagerialDataService) {
     this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {
+      this.getShowInfo(dataM.modal);
       this.dataManagerial = dataM.objectInfo;
       this.titleDataManagerial = this.dataManagerial.data[0].title;
-      if (this.dataManagerial.data[0].data.length > 0) {
-        this.nameManagerial = this.dataManagerial.data[0].title;
-        this.objectDatatable.emit(this.dataManagerial);
-        console.log(this.dataManagerial)
-      }
-      else {
-        this.flagNoData = true;
-        this.nameManagerial = this.dataManagerial.data[0].title;
-        this.objectDatatable.emit(this.dataManagerial);
-      }
-      this.getShowInfo(dataM.modal);
+      setTimeout(() => {
+        if (this.dataManagerial.data[0].data.length > 0) {
+          this.nameManagerial = this.dataManagerial.data[0].title;
+
+          this.objectDatatable.emit(this.dataManagerial);
+        }
+        else {
+          this.flagNoData = true;
+          this.nameManagerial = this.dataManagerial.data[0].title;
+          this.objectDatatable.emit(this.dataManagerial);
+        }
+      }, 500);
+
+
     })
   }
 
