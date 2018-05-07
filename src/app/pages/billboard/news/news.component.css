@@ -1,0 +1,16 @@
+.bg-white-1x-news {
+    background: #f1f1f1 !important;
+    color: #acacac;
+    text-align: center;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}
+.bg-white-1x-news:hover {
+    background: #e9e9e9 !important;
+    -webkit-transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -o-transition: all 0.4s;
+    transition: all 0.4s;
+}

@@ -42,7 +42,8 @@ export class PayrollReceiptsComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
-      this.listPayRoll = data.data;
+      this.listPayRoll = data.data;      
+      this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
       this.urlPDF = this.listPayRoll[0].file.url;
 
       if (data.success) {

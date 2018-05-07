@@ -58,36 +58,35 @@ export class DataTableComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
-        })  
-      // document.getElementById("loginId").style.display = 'block'
-      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+        })
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
-    this.records.subscribe((data) => {     
+    this.records.subscribe((data) => {
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
           this.labels = [];
           this.columnsPdf = [];
           this.show = true;
-         
-          if(data.data[0].labels[0] === undefined){
+
+          if (data.data[0].labels[0] === undefined) {
             this.labelsCell = data.data[0].labels;
-          }else {
+          } else {
             this.labelsCell = data.data[0].labels[0];
           }
 
-          this.keys = Object.keys(this.labelsCell); 
-          
+          this.keys = Object.keys(this.labelsCell);
           this.recordsPrint = data.data[0].data;
           this.recordsStatic = this.recordsPrint;
           this.keys.forEach((element) => {
             let label: any;
-            if(data.data[0].labels[0] === undefined){
+            if (data.data[0].labels[0] === undefined) {
               label = data.data[0].labels[element];
-            }else {
+            } else {
               label = data.data[0].labels[0][element];
-            }          
+            }
 
             this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
             this.columnsPdf.push({ title: label.value, dataKey: element });

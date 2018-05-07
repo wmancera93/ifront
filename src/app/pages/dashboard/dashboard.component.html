@@ -23,8 +23,8 @@
                 <input type="radio" name="interruptor" id="apagado" checked>
                 <div class="interruptor-cuerpo">
                   <div class="interruptor-tecla">
-                    <label for="prendido" (click)="vieweDashboardEmployee()"></label>
-                    <label for="apagado" (click)="vieweDashboardManager()"></label>
+                    <label id="buttonDashEmployee" for="prendido" (click)="vieweDashboardEmployee()"></label>
+                    <label id="buttonDashManagerial" for="apagado" (click)="vieweDashboardManager()"></label>
                   </div>
                 </div>
               </div>
@@ -41,5 +41,4 @@
     <app-managerial></app-managerial>
   </div>
 </div>
-
 <app-toaster-container *ngIf="!token" [toast]="objectToast"></app-toaster-container>

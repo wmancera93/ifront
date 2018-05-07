@@ -23,12 +23,12 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DataTableComponent } from './common/data-table/data-table.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
 import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
 import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
 
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { TimeLineApproversComponent } from './common/time-line-approvers/time-line-approvers.component';
 
@@ -44,7 +44,7 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
 
 @NgModule({
   imports: [
-    TagInputModule, 
+    TagInputModule,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -73,9 +73,9 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     DataTableComponent,
     AutoCompleteComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent,   
-    TimeLineApproversComponent, 
-    FileUploadComponent, 
+    NewArticleFormComponent,
+    TimeLineApproversComponent,
+    FileUploadComponent,
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
@@ -106,9 +106,7 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     ApprovalsDetailsComponent,
     CommentArticleComponent,
     LoadingComponent,
-
-
-
+    GerencialModalComponent,
     ErrorPageHttpComponent
   ],
   providers: [

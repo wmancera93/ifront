@@ -51,7 +51,7 @@ export class EstadisticsComponent implements OnInit {
         //Doughnut 
         this.activeDoughnutChartType = true;
         this.doughnutChartType = 'doughnut';
-        this.doughnutChartLabels = this.objectWidget[0].data.names;        
+        this.doughnutChartLabels = this.objectWidget[0].data.names;
         this.doughnutChartData = this.objectWidget[0].data.values;
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
@@ -72,35 +72,45 @@ export class EstadisticsComponent implements OnInit {
       } else
         if (this.typeGraph === 'Bar') {
           // Bar Chart
+
           this.activeBarChartType = true;
           this.barChartType = 'bar';
           this.barChartLabels = this.objectWidget[0].data.names;
-          this.barChartData = [123000, 982123, 865345];
-          //this.barChartData = this.objectWidget[0].data.values;
+          this.barChartData = this.objectWidget[0].data.values;
           this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
           this.barChartOptions = {
             responsive: true,
             scales: {
               xAxes: [{
                 display: false,
-                stacked: true
+                stacked: true,
+
               }],
               yAxes: [{
                 display: false,
-                stacked: true
+                stacked: true,
+                ticks: {
+                  fontSize: 13,
+                  fontStyle: 'normal',
+                }
               }],
 
             },
             legend: {
               display: false
-          },
-          tooltips: {
+            },
+            tooltips: {
               callbacks: {
-                 label: function(tooltipItem) {
-                        return tooltipItem.yLabel;
-                 }
+                label: function (tooltipItem) {
+                  return tooltipItem.yLabel;
+                }
+              },
+              
+            scaleLabel:
+              function (barChartLabels) {
+                return barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
               }
-          }
+            }
           }
 
 

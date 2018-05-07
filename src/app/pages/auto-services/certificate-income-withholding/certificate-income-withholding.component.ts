@@ -46,7 +46,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getIncomeWithHolding().subscribe((data: any) => {
-      this.incomingCertificate = data.data;
+      this.incomingCertificate = data.data;     
       if (this.incomingCertificate.length === 0) {
         this.flagEmpty = true;
       }
