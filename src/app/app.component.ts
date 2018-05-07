@@ -113,11 +113,22 @@ export class AppComponent {
 
   ngOnInit() {
     if (localStorage.getItem("enterprise") !== null) {
+
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
       document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
       document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
       document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
       document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+
+      var link = document.createElement('link'),
+        oldLink = document.getElementById('fa_icon');
+      link.id = 'fa_icon';
+      link.rel = 'shortcut icon';
+      link.href = this.dataEnterprise.logo_inside.url.toString();
+      if (oldLink) {
+        document.head.removeChild(oldLink);
+      }
+      document.head.appendChild(link)
     }
   }
 
