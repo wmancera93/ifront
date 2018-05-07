@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   public showServiceManagement: boolean;
   public showButtonDashManagement: boolean = true;
   public validateRoleManagement: string;
+  public isAdmin : boolean;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -102,9 +103,15 @@ export class DashboardComponent implements OnInit {
 
     this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
-      if (this.showServiceManagement == true && this.validateRoleManagement == "true") {
-        this.showButtonDashManagement = true;
+      this.isAdmin = data.data.isAdmin;
+      if(this.showServiceManagement == true)
+      {
+        if (this.isAdmin == true || this.validateRoleManagement == "true") {
+
+          this.showButtonDashManagement = true;
+        }
       }
+     
       else {
         this.showButtonDashManagement = false;
       }

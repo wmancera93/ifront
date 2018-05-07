@@ -251,10 +251,12 @@ export class MenuNavigationComponent implements OnInit {
     }
 
     // RH QUERIES 
-
-    if (this.dataEnterprise.show_reports_rh == true && this.dataUser.employee.is_admin == "true") {
-      this.showRHReports = true;
+    if (this.dataEnterprise.show_reports_rh == true) {
+      if (this.dataUser.employee.is_admin == "true" || this.dataUser.employee.see_rpgen == "true") {
+        this.showRHReports = true;
+      }
     }
+
     else {
       this.showRHReports = false;
     }
