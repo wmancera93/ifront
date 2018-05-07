@@ -14,6 +14,8 @@ export class ApprovalsDetailsComponent implements OnInit {
   public approvals: DetailAproverRequest[] = []
   public edit: boolean = false;
 
+  public showSubmit: boolean = true;
+
   public prerequisit: boolean = true;
   public switch: string = "off";
   public description: string = "";
@@ -64,6 +66,7 @@ export class ApprovalsDetailsComponent implements OnInit {
   }
 
   saveApproval() {
+    this.showSubmit = false;
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.approverRequestsService.postApprovalsRequest(
@@ -75,12 +78,13 @@ export class ApprovalsDetailsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.aproversRequestsService.setConfirmApproval("true");
+          this.showSubmit = true;
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.error.errors.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
-
+          this.showSubmit = true;
           // setTimeout(() => {
           //   document.getElementById("loginId").style.display = 'none'
           //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");

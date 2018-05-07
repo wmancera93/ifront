@@ -98,8 +98,8 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   newRequest(model) {
-    document.getElementById("loginId").style.display = 'block';
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block';
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (this.formRequests.id_activity === 'PERM') {
       let modelFromdata = new FormData();
@@ -119,10 +119,10 @@ export class FormsRequestsComponent implements OnInit {
           this.showSubmit = true;
           this.formsRequestsService.setRestartObject(true);
 
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 2000)
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 2000)
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
@@ -130,10 +130,10 @@ export class FormsRequestsComponent implements OnInit {
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
 
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 1000)
         },
     );
   }
