@@ -33,15 +33,35 @@ export class DashboardComponent implements OnInit {
   constructor(public userSharedService: UserSharedService,
     public router: Router, public companieService: MainService,
     private tokenService: Angular2TokenService) {
-    this.router.events
-      .filter(e => e instanceof RoutesRecognized)
+
+    this.router.events.filter(e => e instanceof RoutesRecognized)
       .pairwise()
       .subscribe((event: any[]) => {
-        this.aa = event[0].urlAfterRedirects.toString();
-        if (this.aa === '/ihr/my_team') {
-          this.roleEmployee = false;
+
+        if (event[0].urlAfterRedirects === '/ihr/login') {
+
+          let toast: Toast = {
+            type: 'success',
+            title: this.userAuthenticated.employee.short_name,
+            body: 'Bienvenido'
+          };
+          setTimeout(() => {
+            if (document.getElementsByClassName('toast').length === 0) {
+              this.objectToast.emit(toast)
+            }
+          }, 100);
+
+
         }
-      });
+
+        setTimeout(() => {
+          this.aa = event[0].urlAfterRedirects.toString();
+          if (this.aa === '/ihr/my_team') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
+      })
 
     this.tokenService.validateToken()
       .subscribe(
@@ -65,23 +85,9 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
     if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
       this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-
-      this.router.events.filter(e => e instanceof RoutesRecognized)
-        .pairwise()
-        .subscribe((event: any[]) => {
-          if (event[0].urlAfterRedirects === '/ihr/login') {
-            let toast: Toast = {
-              type: 'success',
-              title: this.userAuthenticated.employee.short_name,
-              body: 'Bienvenido'
-            };
-            setTimeout(() => {
-              this.objectToast.emit(toast)
-            }, 100);
-          }
-        })
       // this.router.events.subscribe(event => {
       //   if (event instanceof NavigationEnd) {
       //     if (event.urlAfterRedirects === '/ihr/login') {

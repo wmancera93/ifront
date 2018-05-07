@@ -11,7 +11,6 @@ import { GoogleAnalyticsEventsService } from './google-analytics-events.service'
 import { EmployeeService } from './common/employee/employee.service';
 import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
 import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
-import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
 import {MyTeamInfoService} from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
@@ -33,6 +32,7 @@ import { EditArticleService } from './shared/common/edit-article/edit-article.se
 import { MasterDataService } from './master-data/master-data.service';
 import { EventsEmployeeService } from './shared/common/events-employee/events-employee.service';
 import { ManagerialDataService } from './shared/common/managerial-data/managerial-data.service';
+import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
 
 @NgModule({
   imports: [

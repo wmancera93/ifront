@@ -79,7 +79,6 @@ export class DataTableComponent implements OnInit {
 
           this.keys = Object.keys(this.labelsCell);
           this.recordsPrint = data.data[0].data;
-          console.log(data)
           this.recordsStatic = this.recordsPrint;
           this.keys.forEach((element) => {
             let label: any;
