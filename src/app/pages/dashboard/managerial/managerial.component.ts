@@ -121,10 +121,8 @@ export class ManagerialComponent implements OnInit {
     this.dasboardManagerialService.getDataVacationsSubordinates()
       .subscribe((data: any) => {
         this.dataManagerial = data;
+        this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataVacations' });
       });
-    setTimeout(() => {
-      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataVacations' });
-    }, 500)
 
   }
 
@@ -133,10 +131,8 @@ export class ManagerialComponent implements OnInit {
     this.dasboardManagerialService.getDataConsultationsSubordinates()
       .subscribe((data: any) => {
         this.dataManagerial = data;
+        this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataPermitions' });
       });
-    setTimeout(() => {
-      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataPermitions' });
-    }, 500)
   }
 
   detailIncapacities() {
@@ -144,20 +140,10 @@ export class ManagerialComponent implements OnInit {
     this.dasboardManagerialService.getDataIncapacitiesSubordinates()
       .subscribe((data: any) => {
         this.dataManagerial = data;
+        this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataIncapacities' });
       });
-    setTimeout(() => {
-      this.managerialDataShared.setDataManagerial({ objectInfo: this.dataManagerial, modal: 'modalDataIncapacities' });
-    }, 500)
   }
 
-
-  // goToMyTeam() {
-  //   if (this.dataMyTeam) {
-  //     this.router.navigate(['/ihr/my_team']);
-  //   }
-
-
-  // }
 }
 
 
