@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   public roleEmployee: boolean = true;
   public showServiceManagement: boolean;
   public showButtonDashManagement: boolean = true;
-  public validateRoleManagement: string;
+  public validateRoleManagement: boolean;
   public isAdmin: boolean;
   public token: boolean;
   public previousUrl: string;
@@ -129,7 +129,7 @@ export class DashboardComponent implements OnInit {
       this.showServiceManagement = data.data.show_services_management;
       this.isAdmin = data.data.isAdmin;
       if (this.showServiceManagement == true) {
-        if (this.isAdmin == true || this.validateRoleManagement == "true") {
+        if (this.isAdmin || this.validateRoleManagement) {
 
           this.showButtonDashManagement = true;
         }

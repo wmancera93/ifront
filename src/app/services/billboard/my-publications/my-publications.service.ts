@@ -21,6 +21,11 @@ export class MyPublicationsService {
       .map((data: any) => data.json()); 
   }
 
+  getAllArticles(){    
+    return this.tokenService.get('articles')
+      .map((data: any) => data.json()); 
+  }
+
   getMyArticles(){
     return this.tokenService.get('articles/my_articles')
       .map((data: any) => data.json()); 

@@ -60,6 +60,14 @@ export class NewArticleFormComponent implements OnInit {
 
   }
   onSubmitNewArticle(value: any): void {
+    console.log(value)
+    if(value.title == "" || value.summary == ""|| value.body == "" )
+    {
+      (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
+      this.showSubmit = true;
+      this.alert.setAlert(alertWarning[0]);
+    }
     this.showSubmit = false;
     const selectedItems = value.tags.map(({ display }) => display);
     let newArticleForm = new FormData();
@@ -68,16 +76,28 @@ export class NewArticleFormComponent implements OnInit {
     newArticleForm.append('body', value.body);
     newArticleForm.append('tags', selectedItems);
     newArticleForm.append('image', this.image);
-    (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
-    const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
-    this.alert.setAlert(alertConfirmation[0]);
+
     this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
+     console.log(data)
       if (data.success == true) {
+      
+        (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
+        const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
+        this.alert.setAlert(alertConfirmation[0]);
         this.showSubmit = true;
         this.uploadListNews = true;
         this.billboardSharedService.setUpdateNew(this.uploadListNews);
+       
       }
-    })
+    },
+  (error:any)=>{
+    console.log(error);
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+    const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+    this.showSubmit = true;
+    this.alert.setAlert(alertWarning[0]);
+
+  })
   }
 
 

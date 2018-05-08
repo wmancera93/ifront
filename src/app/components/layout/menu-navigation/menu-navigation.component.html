@@ -28,37 +28,37 @@
           <span class="nav-label">Inicio</span>
         </a>
       </li>
-      <li id="liOrganizationChart" *ngIf="showOrganizationChart">
-        <a id="aOrganizationChart" routerLink="/ihr/hierarchical_chart" routerLinkActive="active" class="nav-link bg-menu"  (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
+      <li id="liOrganizationChart" *ngIf="dataEnterprise.show_organizate_chart && dataUser.employee.see_organ == 'true'">
+        <a id="aOrganizationChart" routerLink="/ihr/hierarchical_chart" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
           <i class="fa fa-sitemap"></i>
           <span class="nav-label">Organigrama</span>
         </a>
       </li>
-      <li id="liMyData" *ngIf="showMyData">
-        <a id="aMyData" class="nav-link bg-menu"  routerLink="/ihr/master_data" (click)="clickOptionMenu('liMyData','aMyData', '')">
+      <li id="liMyData" *ngIf="dataEnterprise.show_my_data">
+        <a id="aMyData" class="nav-link bg-menu" routerLink="/ihr/master_data" (click)="clickOptionMenu('liMyData','aMyData', '')">
           <i class="fa fa-user"></i>
           <span class="nav-label">Mis Datos</span>
         </a>
       </li>
-      <li id="liAutoService" *ngIf="showAutoServices">
-        <a id='toggleAutoService' class="nav-link bg-menu"  data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
+      <li id="liAutoService" *ngIf="!dataEnterprise.show_certificates_labor && !dataEnterprise.show_certificates_vacations && !dataEnterprise.show_certificates_payroll && !dataEnterprise.show_certificates_income">
+        <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
           <i class="fa fa-file"></i>
           <span class="nav-label">Autoservicio</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="selfService" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
-            <li *ngIf="showAutoServicesLabor">
+            <li *ngIf="dataEnterprise.show_certificates_labor">
               <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
             </li>
-            <li class="bg-li" *ngIf="showAutoServicesVacations">
-              <a id="aHolidayLetter" class="nav-link bg-menu"  routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
+            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
+              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
             </li>
-            <li class="bg-li" *ngIf="showAutoServicesPayroll">
-              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts"  (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
+            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_payroll">
+              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
             </li>
-            <li class="bg-li" *ngIf="showAutoServicesIncome">
-              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding"   (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
+            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_income">
+              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
             </li>
           </ul>
         </div>
@@ -71,46 +71,47 @@
         </a>
         <div id="query" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
-            <li *ngIf="showIncomeWithholdings">
+            <li *ngIf="dataEnterprise.show_income_and_withholdings">
               <a id="aIncomeWithholdings" routerLink="/ihr/income_withholdings" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIncomeWithholdings', 'query')">Ingresos y retenciones</a>
             </li>
-            <li class="bg-li" *ngIf="showPaymentsDeductions">
-              <a id="aPaymentsDeductions"  routerLink="/ihr/payments_deductions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">Pagos y deducciones</a>
+            <li class="bg-li" *ngIf="dataEnterprise.show_payments_and_deductions">
+              <a id="aPaymentsDeductions" routerLink="/ihr/payments_deductions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">Pagos y deducciones</a>
             </li>
-            <li class="bg-li" *ngIf="showSeverances">
+            <li class="bg-li" *ngIf="dataEnterprise.show_severances">
               <a id="aHistoricalSeverances" routerLink="/ihr/severances" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalSeverances', 'query')">Historico de cesantias</a>
             </li>
-            <li class="bg-li" *ngIf="showEmbargoes">
+            <li class="bg-li" *ngIf="dataEnterprise.show_embargoes">
               <a id="aEmbargos" routerLink="/ihr/embargoes" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Embargos</a>
             </li>
-            <li class="bg-li" *ngIf="showLoans">
+            <li class="bg-li" *ngIf="dataEnterprise.show_loans">
               <a id="aPaydayLoans" routerLink="/ihr/loans" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">Prestamos</a>
             </li>
-            <li class="bg-li" *ngIf="showVacations">
+            <li class="bg-li" *ngIf="dataEnterprise.show_vacations">
               <a id="aVacationEnjoyed" routerLink="/ihr/vacation_enjoyed" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones disfrutadas</a>
             </li>
-            <li class="bg-li" *ngIf="showVacationsC">
-              <a id="aCompensatedVacations" routerLink="/ihr/compensated_vacations" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">Vacaciones compensadas</a>
+            <li class="bg-li" *ngIf="dataEnterprise.show_vacations_c">
+              <a id="aCompensatedVacations" routerLink="/ihr/compensated_vacations" routerLinkActive="active" class="nav-link bg-menu"
+                (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">Vacaciones compensadas</a>
             </li>
-            <li class="bg-li" *ngIf="showVacationBalance">
+            <li class="bg-li" *ngIf="dataEnterprise.show_vacation_balance">
               <a id="aVacationBalance" routerLink="/ihr/vacation_balance" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationBalance', 'query')">Saldo de vacaciones</a>
             </li>
-            <li class="bg-li" *ngIf="showLicenses">
+            <li class="bg-li" *ngIf="dataEnterprise.show_licenses">
               <a id="aPermits" routerLink="/ihr/permissions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">Permisos</a>
             </li>
-            <li class="bg-li" *ngIf="showInhabilities">
+            <li class="bg-li" *ngIf="dataEnterprise.show_inhabilities">
               <a id="aDisabilities" routerLink="/ihr/disabilities" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">Incapacidades</a>
             </li>
-            <li class="bg-li" *ngIf="showExtraHours">
+            <li class="bg-li" *ngIf="dataEnterprise.show_hoex">
               <a id="aExtraHours" routerLink="/ihr/extra_hours" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">Horas extras</a>
             </li>
-            <li class="bg-li" *ngIf="showAniversary">
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
               <a id="aAniversary" routerLink="/ihr/aniversary" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aAniversary', 'query')">Aniversario de los empleados</a>
             </li>
           </ul>
         </div>
       </li>
-      <li id="liReportsRH" *ngIf="showRHReports">
+      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && (this.dataUser.employee.is_admin  == 'true'  || this.dataUser.employee.see_rpgen  == 'true' )">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#reportsRH" (click)="clickOptionMenu('liReportsRH','toggle-reportsRH', 'reportsRH')">
           <i class="fa fa-table"></i>
           <span class="nav-label">Reportes RH</span>
@@ -126,8 +127,8 @@
             </li>
           </ul>
         </div>
-      </li>      
-      <li id="liBillboard" *ngIf="showBillboard">
+      </li>
+      <li id="liBillboard" *ngIf="dataEnterprise.show_articles">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#billboard" (click)="clickOptionMenu('liBillboard','toggle-Billboard', 'billboard')">
           <i class="fa fa-bullhorn"></i>
           <span class="nav-label">Cartelera</span>
@@ -138,19 +139,19 @@
             <li>
               <a id="aNews" routerLink="/ihr/news" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aNews', 'billboard')">Noticias</a>
             </li>
-            <li class="bg-li" *ngIf="showMyPublications">
+            <li class="bg-li" *ngIf="dataUser.employee.new_cont  == 'true'">
               <a id="aMyPublications" routerLink="/ihr/my_publications" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aMyPublications', 'billboard')">Mis publicaciones</a>
             </li>
           </ul>
         </div>
       </li>
-      <li id="LiRequested" *ngIf="showRequest">
-        <a id="aRequested" routerLink="/ihr/requests_rh" class="nav-link bg-menu"  (click)="clickOptionMenu('LiRequested','aRequested', '')">
+      <li id="LiRequested" *ngIf="dataEnterprise.make_request ">
+        <a id="aRequested" routerLink="/ihr/requests_rh" class="nav-link bg-menu" (click)="clickOptionMenu('LiRequested','aRequested', '')">
           <i class="fa fa-edit"></i>
           <span class="nav-label">Solicitudes</span>
         </a>
       </li>
-      <li id="liApprovals" *ngIf="showApprovals">
+      <li id="liApprovals" *ngIf="dataEnterprise.make_approvals && dataUser.employee.is_approver">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#approvals" (click)="clickOptionMenu('liApprovals','toggle-Approvals', 'approvals')">
           <i class="fa fa-circle-o-notch"></i>
           <span class="nav-label">Aprobaciones</span>
@@ -170,20 +171,20 @@
           </ul>
         </div>
       </li>
-      <li id="liBanners" *ngIf="showBanners">
+      <li id="liBanners" *ngIf="dataEnterprise.show_banners  && dataUser.employee.is_admin == 'true'">
         <a id="aBanners" class="nav-link bg-menu" (click)="clickOptionMenu('liBanners','aBanners', '')">
           <i class="fa fa-slideshare"></i>
           <span class="nav-label">Banners</span>
         </a>
       </li>
-      <li id="liCorporateDocuments" *ngIf="showDocuments">
-        <a id="aCorporateDocuments" class="nav-link bg-menu"  routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
+      <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
+        <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
           <i class="fa fa-folder-open-o"></i>
           <span class="nav-label">Docs. Corporativos</span>
         </a>
       </li>
-      <li id="liHelp" *ngIf="showHelp">
-        <a id="aHelp" class="nav-link bg-menu" routerLink="/ihr/help"  (click)="clickOptionMenu('liHelp','aHelp', '')">
+      <li id="liHelp" *ngIf="dataEnterprise.show_help">
+        <a id="aHelp" class="nav-link bg-menu" routerLink="/ihr/help" (click)="clickOptionMenu('liHelp','aHelp', '')">
           <i class="fa fa-question-circle"></i>
           <span class="nav-label">Ayuda</span>
         </a>
