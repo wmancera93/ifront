@@ -51,7 +51,7 @@ export class NewsComponent implements OnInit {
   }
 
   consultAllArticles() {
-    this.myPublicationsService.getMyArticles().subscribe((data: any) => {
+    this.myPublicationsService.getAllArticles().subscribe((data: any) => {
       this.newList = data.data;
     })
   }
