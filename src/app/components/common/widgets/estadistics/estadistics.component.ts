@@ -45,7 +45,7 @@ export class EstadisticsComponent implements OnInit {
       this.objectWidget[0] = data.properties;
       this.typeGraph = data.graph_type;
       let newChartData: Array<any> = [];
-     //newChartData.push(this.objectWidget[0].data.values);
+      //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
         //Doughnut 
@@ -53,43 +53,74 @@ export class EstadisticsComponent implements OnInit {
         this.doughnutChartType = 'doughnut';
         this.doughnutChartLabels = this.objectWidget[0].data.names;
         this.doughnutChartData = this.objectWidget[0].data.values;
-        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
+        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors}];
         this.doughnutOptions = {
           responsive: true,
-          pieceLabel: {
-           
-            render: function (args) {
-             return '$' + args.value;
-           //  return args.label;
-            },
-            fontSize: 9,
-            fontColor: '#000',
-            overlap: true,
-            arc: true
-          },
+          tooltips:
+          {
+            enabled: true,  
+            mode: 'single',
+            callbacks:{
+              label: function(tooltipItem, data) {
+                let label = data.labels[tooltipItem.index];
+                let datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                let dataNumber = new Number(datasetLabel);
+                return label + ': ' + dataNumber.toLocaleString();
+              }
+            }         
+             
+            
+          }
+            
+
+
         };
 
       } else
-        if (this.typeGraph === 'Bar') {          
+        if (this.typeGraph === 'Bar') {
           // Bar Chart
+
           this.activeBarChartType = true;
           this.barChartType = 'bar';
           this.barChartLabels = this.objectWidget[0].data.names;
-          this.barChartData = [123000,982123,865345];
-          //this.barChartData = this.objectWidget[0].data.values;
-          this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }]; 
+          this.barChartData = this.objectWidget[0].data.values;
+          this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
           this.barChartOptions = {
             responsive: true,
             scales: {
               xAxes: [{
                 display: false,
-                  stacked: true
+                stacked: true,
+
               }],
               yAxes: [{
                 display: false,
-                  stacked: true
-              }]
-          }
+                stacked: true,
+                ticks: {
+                  fontSize: 13,
+                  fontStyle: 'normal',
+                }
+              }],
+
+            },
+            legend: {
+              display: false
+            },
+            tooltips: {
+              enabled: true,
+              callbacks: {
+                label: function (tooltipItems) {
+                  return tooltipItems.yLabel.toLocaleString();
+                },
+                // label: function (tooltipItem) {
+                //   return tooltipItem.yLabel;
+                // }
+              },
+              // scaleLabel:
+              //   function (barChartLabels) {
+              //     return barChartLabels.datasetLabel + ': ' + barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+              //   }
+            }
           }
 
 
@@ -107,20 +138,9 @@ export class EstadisticsComponent implements OnInit {
   }
 
   chartHovered(a: any): void {
-    // if (e.active.length > 0){
-    //   const chart = e.active[0]._chart;
-    //   const activePoints = chart.getElementAtEvent(e.event);
-    //   if ( activePoints.length > 0){
-    //     const clickedElementIndex = activePoints[0]._index;
-    //     const label = chart.data.labels[clickedElementIndex];
-    //     const value = chart.data.datasets[0].data[clickedElementIndex];
-    //     console.log(label,value)
-    //   }
-    // }
   }
 
   chartClicked(e: any): void {
-    console.log(e)
     if (e.active.length > 0) {
       const chart = e.active[0]._chart;
       const activePoints = chart.getElementAtEvent(e.event);

@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -14,23 +18,23 @@
       <div class="row justify-content-center top-containter">
         <div class="col-10 col-xl-6 cursor-general">
           <div class="searchBar-new">
-            <input  [(ngModel)]="titleNew" type="text" class="form-control"  (keyup)="enterTitleNew()" 
-            placeholder="Buscar noticia..." maxlength="25"  (keyup.enter)="goToSearchTitleNew()">
+            <input [(ngModel)]="titleNew" type="text" class="form-control" (keyup)="enterTitleNew()" placeholder="Buscar noticia..."
+              maxlength="25" (keyup.enter)="goToSearchTitleNew()">
             <i class="search-news-icon fa fa-search icon-search  detectLetter general-cursor" (click)="goToSearchTitleNew()"></i>
           </div>
         </div>
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12">
-            <div class="row justify-content-center top-containter" *ngIf="validateNoData">
-                <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
-                  <div class="alert alert-warning" role="alert">
-                    No existe 
-                    <strong>Noticia</strong>&nbsp;con su búsqueda
-                  </div>
-                </div>
+          <div class="row justify-content-center top-containter" *ngIf="validateNoData">
+            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+              <div class="alert alert-warning" role="alert">
+                No existe
+                <strong>Noticia</strong>&nbsp;con su búsqueda
               </div>
-          <div class="widget bg-white-1x" *ngFor="let new of newList;">            
+            </div>
+          </div>
+          <div class="widget bg-white-1x-news" *ngFor="let new of newList;">
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
                 <img alt="image" class="radius-image m-t-xs" src="{{new.image.url}}" style="height: 100px; width: 100px">
@@ -46,20 +50,20 @@
                   <div class="col-12">
                     <div class="row footer-newspaper">
                       <div class="col-xl-1 col-md-2 col-3">
-                        Temas: 
+                        Temas:
                       </div>
                       &nbsp;&nbsp; &nbsp;&nbsp;
                       <div class="col-xl-3 col-md-6 col-4 padding-themes-news" *ngFor="let theme of new.themes">
                         <div class="themes-news">
-                         {{theme}}
+                          {{theme}}
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-12 text-lg-left">
                     <strong>
-                        <i class="fa fa-calendar"></i>
-                        {{new.creation_date}}
+                      <i class="fa fa-calendar"></i>
+                      {{new.creation_date}}
                     </strong>
                   </div>
                 </div>
@@ -81,10 +85,10 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-comment-article [nameModal]='newModal'></app-comment-article>
+<app-comment-article *ngIf="!token" [nameModal]='newModal'></app-comment-article>

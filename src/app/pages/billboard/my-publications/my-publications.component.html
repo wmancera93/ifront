@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -109,6 +113,6 @@
     </div>
   </div>
 </div>
-<app-new-article-form></app-new-article-form>
-<app-comment-article [nameModal]='myPublicationModal'></app-comment-article>
-<app-edit-publication></app-edit-publication>
+<app-new-article-form *ngIf="!token"></app-new-article-form>
+<app-comment-article *ngIf="!token" [nameModal]='myPublicationModal'></app-comment-article>
+<app-edit-publication *ngIf="!token"></app-edit-publication>

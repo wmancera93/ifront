@@ -10,6 +10,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
+import { debug } from 'util';
 
 const formData = new FormData();
 
@@ -60,24 +61,44 @@ export class NewArticleFormComponent implements OnInit {
 
   }
   onSubmitNewArticle(value: any): void {
-    this.showSubmit = false;
-    const selectedItems = value.tags.map(({ display }) => display);
-    let newArticleForm = new FormData();
-    newArticleForm.append('title', value.title);
-    newArticleForm.append('summary', value.summary);
-    newArticleForm.append('body', value.body);
-    newArticleForm.append('tags', selectedItems);
-    newArticleForm.append('image', this.image);
-    (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
-    const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
-    this.alert.setAlert(alertConfirmation[0]);
-    this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-      if (data.success == true) {
-        this.showSubmit = true;
-        this.uploadListNews = true;
-        this.billboardSharedService.setUpdateNew(this.uploadListNews);
-      }
-    })
+
+    if (value.title == "" || value.summary == "" || value.body == "") {
+      (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
+      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
+      this.showSubmit = true;
+      this.alert.setAlert(alertWarning[0]);
+    }
+    else {
+      this.showSubmit = false;
+      const selectedItems = value.tags.map(({ display }) => display);
+      let newArticleForm = new FormData();
+      newArticleForm.append('title', value.title);
+      newArticleForm.append('summary', value.summary);
+      newArticleForm.append('body', value.body);
+      newArticleForm.append('tags', selectedItems);
+      newArticleForm.append('image', this.image);
+      this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
+        if (data.success == true) {  
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
+          const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
+          this.alert.setAlert(alertConfirmation[0]);
+          this.showSubmit = true;
+          this.uploadListNews = true;
+          this.billboardSharedService.setUpdateNew(this.uploadListNews);
+  
+        }
+      },
+        (error: any) => {
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+          this.showSubmit = true;
+          this.alert.setAlert(alertWarning[0]);
+  
+        })
+    }
+
+
+ 
   }
 
 

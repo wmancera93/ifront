@@ -5,6 +5,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-my-publications',
@@ -19,11 +20,28 @@ export class MyPublicationsComponent implements OnInit {
   private alertWarning: Alerts[];
   public idDelete: number = 0;
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public myPublicationsService: MyPublicationsService,
     public alert: AlertsService,
     public billboardSharedService: BillboardService,
-    public editEditSharedService: EditArticleService) {    
+    public editEditSharedService: EditArticleService,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })   
 
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
       if (data == true) {

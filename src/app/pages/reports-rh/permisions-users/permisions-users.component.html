@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -156,43 +160,48 @@
       </div>
       <div class="border-botton-general">
         <div class="row top-general-p" *ngIf="show">
-          <div class="col-xl-4 col-12 ">
-            <div class="form-group row">
-              <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
-              <div class="col-xl-7 col-md-3 col-lg-3 col-6">
-                <select class="form-control" [(ngModel)]="size_table">
-                  <option value="5">5</option>
-                  <option value="10">10</option>
-                  <option value="20">20</option>
-                  <option value="50">50</option>
-                </select>
+          <div class="col-12">
+            <div class="row justify-content-between">
+              <div class="col-xl-4 col-12 ">
+                <div class="form-group row">
+                  <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+                  <div class="col-xl-7 col-md-3 col-lg-3 col-6">
+                    <select class="form-control" [(ngModel)]="size_table">
+                      <option value="5">5</option>
+                      <option value="10">10</option>
+                      <option value="20">20</option>
+                      <option value="50">50</option>
+                    </select>
+                  </div>
+                </div>
               </div>
+              <div class="col-xl-2 col-md-3 col-6 top-containter">
+                <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
+                  <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                  PDF
+                </div>
+              </div>
+              <!-- <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          Excel
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
+          <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+          CSV
+        </div>
+      </div>
+      <div class="col-xl-2 col-md-3 col-6 top-containter">
+        <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
+          <i class="fa fa-print" aria-hidden="true"></i>
+          Print
+        </div>
+      </div> -->
             </div>
           </div>
-          <div class="col-xl-2 col-md-3 col-6 top-containter">
-            <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
-              <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-              PDF
-            </div>
-          </div>
-          <div class="col-xl-2 col-md-3 col-6 top-containter">
-            <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
-              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-              Excel
-            </div>
-          </div>
-          <div class="col-xl-2 col-md-3 col-6 top-containter">
-            <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
-              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-              CSV
-            </div>
-          </div>
-          <div class="col-xl-2 col-md-3 col-6 top-containter">
-            <div class="btn btn-block btn-outline-warning cursor-general" (click)="printTable()">
-              <i class="fa fa-print" aria-hidden="true"></i>
-              Print
-            </div>
-          </div>
+
           <div class="col-xl-4 col-12 top-containter align-self-center text-left">
             <b>
               {{title}}

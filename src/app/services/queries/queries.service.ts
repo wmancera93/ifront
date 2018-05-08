@@ -2,66 +2,68 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class QueriesService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
   getDisabilities() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/disabilities')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/disabilities')
+      .map((data: any) => data.json());
   }
 
   getEmbargoes() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/embargoes')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/embargoes')
+      .map((data: any) => data.json());
   }
 
   getCompensatedVacations() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/compensated_vacations')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/compensated_vacations')
+      .map((data: any) => data.json());
   }
 
   getExtraHours() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/extra_hours')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/extra_hours')
+      .map((data: any) => data.json());
   }
 
   getIncomeWithholdings() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/income_and_withholdings')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/income_and_withholdings')
+      .map((data: any) => data.json());
   }
 
   getPaymentsDeductions() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/payments_and_deductions')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/payments_and_deductions')
+      .map((data: any) => data.json());
   }
 
   getPermissions() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/permissions')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/permissions')
+      .map((data: any) => data.json());
   }
 
   getLoans() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/loans')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/loans')
+      .map((data: any) => data.json());
   }
 
   getVacationEnjoyed() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/vacation_enjoyed')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/vacation_enjoyed')
+      .map((data: any) => data.json());
   }
   getVacationBalance() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/vacation_balance')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/vacation_balance')
+      .map((data: any) => data.json());
   }
   getSeverances() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/severances')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/severances')
+      .map((data: any) => data.json());
   }
   getAniversary() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/consultations/aniversary')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('consultations/aniversary')
+      .map((data: any) => data.json());
   }
 }

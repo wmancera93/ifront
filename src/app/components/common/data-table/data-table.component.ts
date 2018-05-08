@@ -1,9 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { element } from 'protractor';
 import { Enterprise } from '../../../models/general/enterprise';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router, NavigationEnd } from '@angular/router';
+import { Angular2TokenService } from 'angular2-token';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -37,38 +38,55 @@ export class DataTableComponent implements OnInit {
 
   public objectTable: any[] = [];
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   constructor(public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
-    public router: Router) {   
-      document.getElementById("loginId").style.display = 'block'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    public router: Router,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
-    this.records.subscribe((data) => {     
+    this.records.subscribe((data) => {
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
           this.labels = [];
           this.columnsPdf = [];
           this.show = true;
-         
-          if(data.data[0].labels[0] === undefined){
+
+          if (data.data[0].labels[0] === undefined) {
             this.labelsCell = data.data[0].labels;
-          }else {
+          } else {
             this.labelsCell = data.data[0].labels[0];
           }
 
-          this.keys = Object.keys(this.labelsCell); 
-          
+          this.keys = Object.keys(this.labelsCell);
           this.recordsPrint = data.data[0].data;
           this.recordsStatic = this.recordsPrint;
           this.keys.forEach((element) => {
             let label: any;
-            if(data.data[0].labels[0] === undefined){
+            if (data.data[0].labels[0] === undefined) {
               label = data.data[0].labels[element];
-            }else {
+            } else {
               label = data.data[0].labels[0][element];
-            }          
+            }
 
             this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
             this.columnsPdf.push({ title: label.value, dataKey: element });
@@ -80,10 +98,10 @@ export class DataTableComponent implements OnInit {
         this.show = false;
       }
       if (data.success) {
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none';
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 1500)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none';
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 1500)
       }
     });
   }

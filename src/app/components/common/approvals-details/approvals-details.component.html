@@ -214,10 +214,10 @@
                               <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
                             </div>
                             <div class="col-md-4 col-12">
-                              <div class="btn btn-success top-general-p cursor-general btn-block" (click)="saveApproval()">
-                                <i class="fa fa-fw fa-save"></i>
-                                Guardar
-                              </div>
+                              <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
+                                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                             </div>
                           </div>
                         </div>

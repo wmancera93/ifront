@@ -21,6 +21,7 @@ export class EmployeeInfoComponent implements OnInit {
   constructor(public employeeSharedService: EmployeeInfoService) {
 
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
+      this.employeeInfo = null;
       this.employeeInfo = data;      
       if (this.employeeInfo !== null) {
         this.flagShowModal = true;

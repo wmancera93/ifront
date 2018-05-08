@@ -40,6 +40,7 @@ export interface Employee {
     is_admin?: string,
     new_cont?: string,
     is_approver?: boolean
+    
 }
 export interface Boss{
     name_complete?: string;

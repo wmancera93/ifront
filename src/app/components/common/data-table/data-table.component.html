@@ -1,4 +1,7 @@
-<div id="data_table" class="row">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+<div id="data_table" *ngIf="!token" class="row">
   <div class="col-12">
     <div class="row justify-content-between" *ngIf="show">
       <div class="col-xl-3 col-12">
@@ -20,7 +23,7 @@
           PDF
         </div>
       </div>
-      <div class="col-xl-2 col-md-3 col-6 top-containter">
+      <!-- <div class="col-xl-2 col-md-3 col-6 top-containter">
         <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
           <i class="fa fa-file-excel-o" aria-hidden="true"></i>
           Excel
@@ -37,7 +40,7 @@
           <i class="fa fa-print" aria-hidden="true"></i>
           Print
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="row justify-content-center top-containter" *ngIf="!show">
       <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
@@ -107,4 +110,4 @@
   </div>
 </div>
 
-<app-print-data-table></app-print-data-table>
+<app-print-data-table *ngIf="!token"></app-print-data-table>

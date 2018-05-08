@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">

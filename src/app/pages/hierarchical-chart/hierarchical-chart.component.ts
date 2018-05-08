@@ -9,6 +9,7 @@ import { EmployeeInfoService } from '../../services/shared/common/employee/emplo
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
+import { Angular2TokenService } from 'angular2-token';
 
 
 @Component({
@@ -46,14 +47,33 @@ export class HierarchicalChartComponent implements OnInit {
   public id_shared: string;
   public infoEmployee: Employee;
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
 
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
     public http: HttpClient,
-    private domSanitizer: DomSanitizer) {
-    document.getElementById("loginId").style.display = 'block';
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    private domSanitizer: DomSanitizer,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
+  
+    // document.getElementById("loginId").style.display = 'block';
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -84,10 +104,10 @@ export class HierarchicalChartComponent implements OnInit {
       else {
         this.activeArrowRight = false;
       }
-      setTimeout(() => {
-        document.getElementById("loginId").style.display = 'none';
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      }, 2000)
+      // setTimeout(() => {
+      //   document.getElementById("loginId").style.display = 'none';
+      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // }, 2000)
     })
   }
 
