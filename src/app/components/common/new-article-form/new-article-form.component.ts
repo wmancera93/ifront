@@ -60,8 +60,7 @@ export class NewArticleFormComponent implements OnInit {
 
   }
   onSubmitNewArticle(value: any): void {
-    console.log(value)
-    if(value.title == "" || value.summary == ""|| value.body == "" )
+    if(value.title == "" || value.summary == "" || value.body == "" )
     {
       (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
       const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
@@ -78,7 +77,6 @@ export class NewArticleFormComponent implements OnInit {
     newArticleForm.append('image', this.image);
 
     this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-     console.log(data)
       if (data.success == true) {
       
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
@@ -91,7 +89,6 @@ export class NewArticleFormComponent implements OnInit {
       }
     },
   (error:any)=>{
-    console.log(error);
     (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
     const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
     this.showSubmit = true;
