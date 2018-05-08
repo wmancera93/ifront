@@ -8,6 +8,7 @@ export interface Enterprise {
     text_primary_color: string,
     body_text: string,
     background_wrapper_color: string,
+    login_ldap: boolean,
     logo_inside: Url,
     logo_dashboard: Url,
     background_login: Url,
