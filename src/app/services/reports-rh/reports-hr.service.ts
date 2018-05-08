@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class ReportsHrService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
   getReportEmployeeRoles() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/employee_roles')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('hr_reports/employee_roles')
+      .map((data: any) => data.json());
   }
 
   getReportEmployeeRolesByStatus(status: string) {
-    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/employee_roles/' + status)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('hr_reports/employee_roles/' + status)
+      .map((data: any) => data.json());
   }
 
   getRequestsAll() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/requests')
-      .map((data: Observable<any>) => data);
-  }  
+    return this.tokenService.get('hr_reports/requests')
+      .map((data: any) => data.json());
+  }
 
   getRequestsByStatus(status: string) {
-    return this.http.get(environment.apiBaseHr + '/api/v2/hr_reports/requests/' + status)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('hr_reports/requests/' + status)
+      .map((data: any) => data.json());
   }
 }

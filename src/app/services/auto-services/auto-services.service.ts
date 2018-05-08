@@ -2,29 +2,31 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class AutoServicesService {
 
-  constructor(public http: HttpClient) { }
+  constructor(public http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
-  getLaboralCertificate(){
-    return this.http.get(environment.apiBaseHr + '/api/v2/selfservices/labor_certificates')
-    .map((data: Observable<any>) => data);
+  getLaboralCertificate() {
+    return this.tokenService.get('selfservices/labor_certificates')
+      .map((data: any) => data.json());
   }
 
-  getHolidayLetter(){
-    return this.http.get(environment.apiBaseHr + '/api/v2/selfservices/holiday_letter')
-    .map((data: Observable<any>) => data);
+  getHolidayLetter() {
+    return this.tokenService.get('selfservices/holiday_letter')
+      .map((data: any) => data.json());
   }
-  getPayRollReceipts(){
-    return this.http.get(environment.apiBaseHr + '/api/v2/selfservices/payroll_receipts')
-    .map((data: Observable<any>) => data);
+  getPayRollReceipts() {
+    return this.tokenService.get('selfservices/payroll_receipts')
+      .map((data: any) => data.json());
   }
 
-  getIncomeWithHolding(){
-    return this.http.get(environment.apiBaseHr + '/api/v2/selfservices/certificate_income_withholding')
-    .map((data: Observable<any>) => data);
+  getIncomeWithHolding() {
+    return this.tokenService.get('selfservices/certificate_income_withholding')
+      .map((data: any) => data.json());
   }
 
 }

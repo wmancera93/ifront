@@ -23,12 +23,12 @@ import { ProgressPrimaryComponent } from './common/widgets/progress-primary/prog
 import { EmployeeInfoComponent } from './common/employee/employee-info/employee-info.component';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { DataTableComponent } from './common/data-table/data-table.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
 import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
 import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
 
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { TimeLineApproversComponent } from './common/time-line-approvers/time-line-approvers.component';
 
@@ -37,11 +37,14 @@ import { FileUploadComponent } from './common/file-upload/file-upload.component'
 import { CommentArticleComponent } from './common/comment-article/comment-article.component';
 import { LoadingComponent } from './common/loading/loading.component';
 import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-details.component';
+import { ShowEventsComponent } from './common/show-events/show-events.component';
+import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
+import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
 
 
 @NgModule({
   imports: [
-    TagInputModule, 
+    TagInputModule,
     CommonModule,
     FormsModule,
     RouterModule,
@@ -70,12 +73,15 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     DataTableComponent,
     AutoCompleteComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent,   
-    TimeLineApproversComponent, 
-    FileUploadComponent, 
+    NewArticleFormComponent,
+    TimeLineApproversComponent,
+    FileUploadComponent,
     ApprovalsDetailsComponent,
     CommentArticleComponent,
-    LoadingComponent
+    LoadingComponent,
+    ErrorPageHttpComponent,
+    ShowEventsComponent,
+    GerencialModalComponent
   ],
   exports: [
     HeaderComponent,
@@ -99,7 +105,9 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
     FileUploadComponent,
     ApprovalsDetailsComponent,
     CommentArticleComponent,
-    LoadingComponent
+    LoadingComponent,
+    GerencialModalComponent,
+    ErrorPageHttpComponent
   ],
   providers: [
     // ToasterService

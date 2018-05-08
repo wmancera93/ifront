@@ -10,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
-  
 
-  constructor(   private mainService: MainService,  public router: Router) {
-    
-   }
+
+  constructor(private mainService: MainService, public router: Router) {
+
+  }
 
   ngOnInit() {
     window.scroll({
@@ -22,22 +22,34 @@ export class ErrorPageComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    if(localStorage.getItem("enterprise") === null){
-      this.mainService.getDataEnterprise()
-      .subscribe((result:any)=>{
-        this.dataEnterprise =result.data;
-        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-      })      
+    if (localStorage.getItem("enterprise") === null) {
+
+      let url = window.location.href;
+      let ambient;
+
+      if (url.split("localhost").length === 1) {
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+        } else {
+          ambient = 'production';
+        }
+      } else {
+        ambient = 'development';
+      }
+
+      this.mainService.getDataEnterprise(ambient)
+        .subscribe((result: any) => {
+          this.dataEnterprise = result.data;
+          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+        })
     }
-    else
-    {
+    else {
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
       document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
     }
   }
-  RedirectInit()
-  {
-   this.router.navigate(['/ihr/login']);
+  RedirectInit() {
+    this.router.navigate(['/ihr/login']);
   }
 
 }

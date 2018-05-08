@@ -3,30 +3,29 @@ import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../../../../environments/environment.prod';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class EmployeeService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
-  getEmployeeByNameByPage(termSearch:string,numberPage:string):Observable<any>{
-    termSearch = termSearch.replace(' ', '_')  
-    return this.http.get(environment.apiBaseHr+'/api/v2/coworkers_list/search/'+termSearch+'/'+numberPage)
-    .map((response:Observable<any>)=> response);
+  getEmployeeByNameByPage(termSearch: string, numberPage: string): Observable<any> {
+    termSearch = termSearch.replace(' ', '_')
+    return this.tokenService.get('coworkers_list/search/' + termSearch + '/' + numberPage)
+      .map((data: any) => data.json());
 
   }
 
+  getAllEmployees(numberPage: string): Observable<any> {
+    return this.tokenService.get('coworkers_list/all/' + numberPage)
+      .map((data: any) => data.json());
+  }
 
-getAllEmployees(numberPage:string):Observable<any>
-{
-  return this.http.get(environment.apiBaseHr+'/api/v2/coworkers_list/all/'+numberPage)
-  .map((data:Observable<any>)=>data)
-}
-
-getEmployeeById(id:string):Observable<any>
-{
-  return this.http.get(environment.apiBaseHr+'/api/v2/employees/'+id)
-  .map((data:Observable<any>)=>data)
-}
+  getEmployeeById(id: string): Observable<any> {
+    return this.tokenService.get('employees/' + id)
+      .map((data: any) => data.json());
+  }
 
 }

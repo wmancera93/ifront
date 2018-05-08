@@ -1,29 +1,30 @@
 <div class="row-hr-container">
   <div class="row">
-    <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
-    <app-notification-secundary [notificationSecundary]="objectPermissions" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
-    <app-notification-secundary [notificationSecundary]="objectIncapacityes" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-secundary>
-    <app-notification-primary [notificationPrimary]="objectAbsenteeism" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-primary>
+    <app-notification-secundary [notificationSecundary]="objectVacations" (click)="detailVacations()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
+    <app-notification-secundary [notificationSecundary]="objectPermissions"   (click)="detailPermitions()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary" ></app-notification-secundary>
+    <app-notification-secundary [notificationSecundary]="objectIncapacityes"  (click)="detailIncapacities()" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-secundary>
+    <app-notification-primary [notificationPrimary]="objectAbsenteeism" routerLink="/ihr/pending_approvers" class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"></app-notification-primary>
     <!-- <app-notification-primary [notificationPrimary]="objectReports" class="col-xl-3 col-md-6 col-6"></app-notification-primary> -->
   </div>
   <div class="row">
     <div class="col-xl-6 col-md-12 col-12">
       <div class="row">
-        <div (click)="goToMyTeam()" class="col-12">
+        <div routerLink ="/ihr/my_team" class="col-12">
           <div class="row">
             <app-events-employees [eventsEmployee]="objectMyTeam" class="col-12"></app-events-employees>
           </div>
         </div>
 
-        <app-progress-primary [progressPrimary]="objectPermissionsUsers" class="col-12"></app-progress-primary>
+        <app-progress-primary [progressPrimary]="objectPermissionsUsers" routerLink="/ihr/users_permisions"  class="col-12"></app-progress-primary>
       </div>
     </div>
     <div class="col-xl-6 col-md-12 col-12">
       <div class="row">
-        <app-progress-primary [progressPrimary]="objectQueryCompany" class="col-12"></app-progress-primary>
+        <app-progress-primary [progressPrimary]="objectQueryCompany"  routerLink="/ihr/reports_requests"  class="col-12"></app-progress-primary>
         <app-notification-primary [notificationPrimary]="objectMen" class="col-xl-6 col-md-6 col-12 widget-height-notification-primary" ></app-notification-primary>
         <app-notification-primary [notificationPrimary]="objectWoman" class="col-xl-6 col-md-6 col-12 widget-height-notification-primary" ></app-notification-primary>
       </div>
     </div>
-  </div>
+  </div>  
 </div>
+<app-gerencial-modal [nameModal]='modalDataManagerial'></app-gerencial-modal>

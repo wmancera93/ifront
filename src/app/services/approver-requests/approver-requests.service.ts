@@ -2,30 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class ApproverRequestsService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+    private tokenService: Angular2TokenService) { }
 
   getApprovalsRequestsPending() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/approvals_employee_requests')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('approvals_employee_requests')
+      .map((data: any) => data.json());
   }
 
   getApprovalsRequestsManaged() {
-    return this.http.get(environment.apiBaseHr + '/api/v2/approvals_employee_requests/managed')
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('approvals_employee_requests/managed')
+      .map((data: any) => data.json());
   }
 
   getDetailApprovalsRequests(ticket: number) {
-    return this.http.get(environment.apiBaseHr + '/api/v2/approvals_employee_requests/' + ticket)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.get('approvals_employee_requests/' + ticket)
+      .map((data: any) => data.json());
   }
 
   postApprovalsRequest(objectApprovals: any) {
-    return this.http.post(environment.apiBaseHr + '/api/v2/approvals_employee_requests/', objectApprovals)
-      .map((data: Observable<any>) => data);
+    return this.tokenService.post('approvals_employee_requests/', objectApprovals)
+      .map((data: any) => data.json());
   }
-  
+
 }

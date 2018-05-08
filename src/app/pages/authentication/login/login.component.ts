@@ -34,25 +34,6 @@ export class LoginComponent implements OnInit {
     public userSharedService: UserSharedService,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
-    this.tokenService.init(
-      {
-        apiBase: environment.apiBaseHr,
-        apiPath: 'api/v2',
-        signInPath: 'auth/sign_in',
-        signOutPath: 'auth/sign_out',
-        validateTokenPath: 'auth/validate_token',
-        signOutFailedValidate: false,
-        registerAccountPath: 'auth/password/new',
-        updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password',
-        globalOptions: {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      }
-    );
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -64,13 +45,38 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
-    this.mainService.getDataEnterprise()
+
+    let url = window.location.href;
+    let ambient;
+
+    if (url.split("localhost").length === 1) {
+      if (url.split("-").length > 1) {
+        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+      } else {
+        ambient = 'production';
+      }
+    } else {
+      ambient = 'development';
+    }
+
+    this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;
         document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);
         document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
         document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
         document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+
+        var link = document.createElement('link'),
+          oldLink = document.getElementById('fa_icon');
+        link.id = 'fa_icon';
+        link.rel = 'shortcut icon';
+        link.href = this.dataEnterprise[0].logo_inside.url.toString();
+        if (oldLink) {
+          document.head.removeChild(oldLink);
+        }
+        document.head.appendChild(link)
+
         localStorage.setItem("enterprise", JSON.stringify(result.data));
       })
     if (this.dataEnterprise.length > 0) {

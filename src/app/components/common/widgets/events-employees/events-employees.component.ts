@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventsEmployess } from '../../../../models/common/widgets/widgets';
+import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
 
 @Component({
   selector: 'app-events-employees',
@@ -7,14 +8,15 @@ import { EventsEmployess } from '../../../../models/common/widgets/widgets';
   styleUrls: ['./events-employees.component.css']
 })
 export class EventsEmployeesComponent implements OnInit {
-  @Input('eventsEmployee') eventsEmployee: any
+  @Input('eventsEmployee') eventsEmployee: any;
+  @Output() modalInfoEvent: EventEmitter<string> = new EventEmitter();
   public objectWidget: EventsEmployess[];
   public cauruselIdGeneral: string = '';
   public cauruselId: string = '';
   public nohaveTeam:boolean;
 
 
-  constructor() {
+  constructor(public infoEventEmployee : EventsEmployeeService ) {
 
   }
 
@@ -32,5 +34,15 @@ export class EventsEmployeesComponent implements OnInit {
     }
     })
   
+  }
+
+  showEventList()
+  {
+    this.modalInfoEvent.emit('modalInfoEvent');
+    setTimeout(() => {
+      this.infoEventEmployee.setInfoEventEmployee({ objectInfo:  this.objectWidget, modal: 'modalInfoEvent' });
+    }, 500); 
+ 
+    
   }
 }

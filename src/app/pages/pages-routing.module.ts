@@ -37,6 +37,7 @@ import { CorporateDocumentsComponent } from './corporate-documents/corporate-doc
 import { ManagedComponent } from './approver-requests/managed/managed.component';
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
 import { MasterDataComponent } from './master-data/master-data.component';
+import { HelpComponent } from './help/help.component';
 
 
 const routes: Routes = [
@@ -181,6 +182,10 @@ const routes: Routes = [
     {        
         path : 'master_data',
         component: MasterDataComponent
+    },
+    {        
+        path : 'help',
+        component: HelpComponent
     }
 ];
 

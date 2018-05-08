@@ -1787,6 +1787,7 @@ border-bottom: 1px solid  #dddd;
 }
 .hoverTitle:hover{
     color: var(--btn-primary) !important;
+    cursor: pointer !important;
    }
 
   /* BACKGROUNDS */
