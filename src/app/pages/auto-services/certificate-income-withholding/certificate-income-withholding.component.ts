@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AutoServicesService } from '../../../services/auto-services/auto-services.service'
 import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-certificate-income-withholding',
@@ -13,9 +14,29 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   public urlPDF: string = '';
   public flagEmpty: boolean;
 
-  constructor(public autoServiceService: AutoServicesService, public sanitizer: DomSanitizer) {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
+  constructor(
+    public autoServiceService: AutoServicesService, 
+    public sanitizer: DomSanitizer,
+    public tokenService: Angular2TokenService) {
+
+      this.tokenService.validateToken()
+        .subscribe(
+          (res) => {
+            this.token = false;
+          },
+          (error) => {
+            this.objectToken.emit({
+              title: error.status.toString(),
+              message: error.json().errors[0].toString()
+            });
+            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+            this.token = true;
+          })
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -25,7 +46,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getIncomeWithHolding().subscribe((data: any) => {
-      this.incomingCertificate = data.data;
+      this.incomingCertificate = data.data;     
       if (this.incomingCertificate.length === 0) {
         this.flagEmpty = true;
       }
@@ -34,10 +55,10 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
         this.urlPDF = this.incomingCertificate[0].file.url;
       }
       if (data.success) {
-        setTimeout(() => {
-          document.getElementById("loginId").style.display = 'none'
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 3000)
+        // setTimeout(() => {
+        //   document.getElementById("loginId").style.display = 'none'
+        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+        // }, 3000)
       }
     })
   }

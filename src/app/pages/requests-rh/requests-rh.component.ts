@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RequestsRhService } from '../../services/requests-rh/requests-rh.service';
 import { RequestsRh, ListRequests, TypesRequests } from '../../models/common/requests-rh/requests-rh';
 import { AproversRequestsService } from '../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { FormsRequestsService } from '../../services/shared/forms-requests/forms-requests.service';
 import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../models/common/alerts/alerts';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-requests-rh',
@@ -18,13 +19,31 @@ export class RequestsRhComponent implements OnInit {
   private alertWarning: Alerts[];
   public idDelete: number = 0;
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   constructor(private requestsRhService: RequestsRhService,
     private aproversRequestsService: AproversRequestsService,
     public formsRequestsService: FormsRequestsService,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    private tokenService: Angular2TokenService) {
 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
+
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.formsRequestsService.getRestartObject()
       .subscribe((restart) => {
@@ -73,10 +92,10 @@ export class RequestsRhComponent implements OnInit {
         this.viewContainer = false;
       }
 
-      setTimeout(() => {
-        document.getElementById("loginId").style.display = 'none'
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      }, 1000)
+      // setTimeout(() => {
+      //   document.getElementById("loginId").style.display = 'none'
+      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // }, 1000)
     })
   }
 

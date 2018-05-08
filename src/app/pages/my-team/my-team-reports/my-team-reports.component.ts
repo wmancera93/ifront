@@ -1,8 +1,9 @@
-import { Component, OnInit, Pipe, PipeTransform, EventEmitter } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform, EventEmitter, Output } from '@angular/core';
 import { MyTeamReportService } from '../../../services/shared/common/my-team/my-team-report.service';
 import { EspecificMyTeam, InfoWorkTeamReport, Data } from '../../../models/common/myteam/myteam';
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
 import { EILSEQ } from 'constants';
+import { Angular2TokenService } from 'angular2-token';
 @Component({
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
@@ -16,10 +17,26 @@ export class MyTeamReportsComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = '';
 
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public myTeamSharedService: MyTeamReportService,
-    public myTeamService: MyTeamInfoService
-  ) {
+    public myTeamService: MyTeamInfoService,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
     this.myTeamSharedService.getReportMyTeam().subscribe(
       (data) => {
         this.reportsMyTeamInfo = data;

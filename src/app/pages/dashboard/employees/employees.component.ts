@@ -5,6 +5,7 @@ import { User } from '../../../models/general/user';
 import { DashboardEmployeeService } from '../../../services/dashboard/employee/dashboard-employee.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { EstadisticsComponent } from '../../../components/common/widgets/estadistics/estadistics.component';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-employees',
@@ -26,10 +27,11 @@ export class EmployeesComponent implements OnInit {
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
 
+  constructor(
+    public dashboardEmployeeService: DashboardEmployeeService,
+    public router: Router,){
+   
 
-
-
-  constructor(public dashboardEmployeeService: DashboardEmployeeService, public router: Router, ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/index') {
@@ -49,8 +51,8 @@ export class EmployeesComponent implements OnInit {
       }
     })
 
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -111,8 +113,8 @@ export class EmployeesComponent implements OnInit {
       });
 
     setTimeout(() => {
-      document.getElementById("loginId").style.display = 'none'
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+      // document.getElementById("loginId").style.display = 'none'
+      // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
     }, 1000)
   }
 

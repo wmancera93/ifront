@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
     <div class="row-hr-container">
       <div class="col-12">
         <div class="row align-items-center">
@@ -25,7 +29,7 @@
                     <div class="row">
                       <div class="col-10 cursor-general tabDate">
                           <i class="fa fa-file-pdf-o"></i>
-                        {{certificate.pdf_type_ident}}
+                        {{certificate.pdf_name2}}
                       </div>
                     </div>
                   </div>

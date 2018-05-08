@@ -8,7 +8,9 @@ export interface Certificate{
     pdf_type_ident: string,
     begda: string,
     company_id: number,
-    priority: string
+    priority: string,
+    pdf_name:string,
+    pdf_name2:string
    
 
 }

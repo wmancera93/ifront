@@ -14,6 +14,8 @@ export class ApprovalsDetailsComponent implements OnInit {
   public approvals: DetailAproverRequest[] = []
   public edit: boolean = false;
 
+  public showSubmit: boolean = true;
+
   public prerequisit: boolean = true;
   public switch: string = "off";
   public description: string = "";
@@ -64,8 +66,9 @@ export class ApprovalsDetailsComponent implements OnInit {
   }
 
   saveApproval() {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    this.showSubmit = false;
+    // document.getElementById("loginId").style.display = 'block'
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.approverRequestsService.postApprovalsRequest(
       {
         request_id: this.approvals[0].ticket,
@@ -75,16 +78,17 @@ export class ApprovalsDetailsComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.aproversRequestsService.setConfirmApproval("true");
+          this.showSubmit = true;
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.error.errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.json().errors.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
-
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+          this.showSubmit = true;
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 1000)
         })
   }
 

@@ -1,4 +1,8 @@
-<div class="heigth-content-general">
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -14,7 +18,7 @@
       <div class="row ">
         <div class="col-12">
           <div class="row">
-            <div class="col-12 col-xl-6">
+            <!-- <div class="col-12 col-xl-6">
               <div class="row">
                 <div class="col-2" style="margin-top:10px;">
                   <div class="bg-button-search" (click)="clickSearchIcon()">
@@ -33,10 +37,10 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
             <div class="col-12 col-xl-6  align-items-center" style="padding-top:15px;">
               <div class="row justify-content-center">
-                <div class="col-xl-6 col-12  align-items-center" style="text-align:left;">
+                <div class="col-xl-8 col-12  align-items-center" style="text-align:left;">
                   <div>
                     <i class="fa fa-square" style="color:red;"> </i> Superior &nbsp;
                     <i class="fa fa-square" style="color:blue;"></i> Mi posición &nbsp;
@@ -191,4 +195,4 @@
     </div>
   </div>
 </div>
-<app-employee-info [nameModal]='name'></app-employee-info>
+<app-employee-info *ngIf="!token" [nameModal]='name'></app-employee-info>

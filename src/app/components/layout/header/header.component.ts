@@ -35,38 +35,23 @@ export class HeaderComponent implements OnInit {
       this.dataUser = data;
     });
 
-    this.tokenService.init(
-      {
-        apiBase: environment.apiBaseHr,
-        apiPath: 'api/v2',
-        signInPath: 'auth/sign_in',
-        signOutPath: 'auth/sign_out',
-        validateTokenPath: 'auth/validate_token',
-        signOutFailedValidate: false,
-        registerAccountPath: 'auth/password/new',
-        updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password/edit',
-        globalOptions: {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      }
-    );
-
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
         if (data === "logout") {
-          localStorage.setItem('user', null);
-          this.userSharedService.setUser(null);
-          this.router.navigate(['/ihr/login']);
+          
+          this.tokenService.signOut().subscribe(
+            (result) => {
+              localStorage.setItem('user', null);
+              this.userSharedService.setUser(null);
+              this.router.navigate(['/ihr/login'])
+            },
+            (error) => {
+              console.log(error);
+            })
         }
       }
     )
-
   }
-
 
   ngOnInit() {
     this.getDataLocalStorage();
@@ -93,6 +78,7 @@ export class HeaderComponent implements OnInit {
       confirmation: true,
       typeConfirmation: 'logout'
     }];
+
     this.alert.setAlert(this.alertWarning[0]);
   }
 
@@ -108,7 +94,7 @@ export class HeaderComponent implements OnInit {
     else {
       document.getElementById("contactList").className = 'show';
       this.showContactsList = false;
-    }  
+    }
 
   }
 
