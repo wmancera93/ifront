@@ -5,10 +5,20 @@
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
-      <div class="row align-items-center">
-        <div class="col-xl-8 col-md-12 col-12 title">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-table"></i>
           Permisos de usuarios
+        </div>
+        <div  class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atrás
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

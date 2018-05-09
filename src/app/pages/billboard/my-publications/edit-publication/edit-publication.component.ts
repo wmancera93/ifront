@@ -67,6 +67,7 @@ export class EditPublicationComponent implements OnInit {
       this.summary = this.infoMyPublication.summary;
       this.body = this.infoMyPublication.body;
       this.tags = this.infoMyPublication.themes;
+      this.image = this.infoMyPublication.image;
 
       this.showLabelTheme = this.infoMyPublication.themes;
       this.showLabelImage = this.infoMyPublication.image.url;
@@ -87,40 +88,33 @@ export class EditPublicationComponent implements OnInit {
   }
 
   onSubmitSaveChanges() {
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-
     this.sendObjectEdit = {
       id: this.idEdit,
-      title: this.title, summary: this.summary, body: this.body, themes: this.tags,
+      title: this.title,
+      summary: this.summary,
+      body: this.body,
+      themes: this.tags,    
       image: this.image
-    };
-    
+    };    
+
     this.editMyPublicationService.putEditArticles(this.idEdit, this.sendObjectEdit).subscribe(
       (data: any) => {
         this.showSubmit = true;
-        setTimeout(() => {
-          // document.getElementById("loginId").style.display = 'none'
-          // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 1000);
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
         this.alert.setAlert(alertConfirmation[0]);
+
       },
       (error: any) => {
-        
+        console.log(error)
         this.showSubmit = true;
-        setTimeout(() => {
-          // document.getElementById("loginId").style.display = 'none'
-          // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        }, 1000);  
-        (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();    
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.error.errors.toString(), confirmation: false }];
+        (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.json().errors.toString(), confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
     );
-  
+
   }
 
 

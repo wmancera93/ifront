@@ -40,7 +40,7 @@
           <span class="nav-label">Mis Datos</span>
         </a>
       </li>
-      <li id="liAutoService" *ngIf="!dataEnterprise.show_certificates_labor && !dataEnterprise.show_certificates_vacations && !dataEnterprise.show_certificates_payroll && !dataEnterprise.show_certificates_income">
+      <li id="liAutoService" *ngIf="dataEnterprise.show_certificates_labor && dataEnterprise.show_certificates_vacations && dataEnterprise.show_certificates_payroll && dataEnterprise.show_certificates_income">
         <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
           <i class="fa fa-file"></i>
           <span class="nav-label">Autoservicio</span>

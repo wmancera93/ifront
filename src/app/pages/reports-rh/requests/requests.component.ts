@@ -5,6 +5,7 @@ import { ReportsHrService } from '../../../services/reports-rh/reports-hr.servic
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Angular2TokenService } from 'angular2-token';
+import { Router, RoutesRecognized } from '@angular/router';
 
 declare var jsPDF: any;
 @Component({
@@ -27,18 +28,22 @@ export class RequestsComponent implements OnInit {
   public size_table: number = 10;
   public show: boolean = true;
 
+
   public filter_active: string = 'all';
   public value_search: string = '';
 
   public is_collapse: boolean = false;
 
   public token: boolean;
+  public showButtonReturn: boolean;
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public router: Router) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -52,7 +57,18 @@ export class RequestsComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
-        })
+        });
+
+        this.router.events.filter(data => data instanceof RoutesRecognized)
+        .pairwise()
+        .subscribe((event: any[]) => {
+          setTimeout(() => {
+            if (event[0].urlAfterRedirects.toString() === '/ihr/index') {
+  
+              this.showButtonReturn = true;
+            }
+          }, 100);
+        });
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -204,5 +220,8 @@ export class RequestsComponent implements OnInit {
     let objectTable: any[] = [];
     objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint })
     this.printDataTableService.setObjectForPrint(objectTable);
+  }
+  returnBackPage() {
+    this.router.navigate(['ihr/index']);
   }
 }
