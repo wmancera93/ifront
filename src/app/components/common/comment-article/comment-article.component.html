@@ -32,7 +32,7 @@
                 </div>
                 &nbsp;&nbsp; &nbsp;&nbsp;
                 <div class=" col-lg-4 col-6 padding-themes-news" *ngFor="let theme of infoArticle.themes">
-                  <div class="themes-news">
+                  <div class="themes-news badge-default">
                     <strong>{{theme}}</strong>
                   </div>
                 </div>
@@ -48,18 +48,36 @@
           </div>
           <div class="border-botton-general">
             <div class="row justify-content-center">
-              <div class="col-lg-1 col-2" style="margin-top: 10px;" *ngIf="numberComments != 0">
-                <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse-comment fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
-                  aria-expanded="false" (click)="collapse(true)"></i>
-                <i *ngIf="is_collapse" class="fa fa-fw icon-collapse-comment fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
-                  aria-expanded="false" (click)="collapse(false)"></i>
-              </div>
-              <div class="col-10 col-lg-7 text-center" style="margin-top: 10px;">
-                <div style="color:white;">
-                  <h6>COMENTARIOS</h6>
+
+              <div class="col-lg-6 col-12" style="margin-top: 10px;" *ngIf="numberComments != 0">
+                <div class="row">
+                  <div>
+                    <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse-comment fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                      aria-expanded="false" (click)="collapse(true)"></i>
+                    <i *ngIf="is_collapse" class="fa fa-fw icon-collapse-comment fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+                      aria-expanded="false" (click)="collapse(false)"></i>&nbsp;&nbsp;
+                  </div>
+                  <div>
+                    <div *ngIf="!is_collapse" style="color:white;">
+                      Ver comentarios
+                    </div>
+                    <div *ngIf="is_collapse" style="color:white;">
+                      Ocultar comentarios
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="col-lg-4 col-12 text-center font-title-general" style="margin-top: 10px;">
+
+
+              <!-- <div class="col-10 col-lg-7 text-left" style="margin-top: 10px;">
+                <div *ngIf="!is_collapse" style="color:white;">
+                  Ver comentarios
+                </div>
+                <div *ngIf="is_collapse" style="color:white;">
+                  Ocultar comentarios
+                </div>
+              </div> -->
+              <div class="col-lg-6 col-12 text-center font-title-general" style="margin-top: 10px;">
                 <i class="fa fa-eye"></i>
                 {{infoArticle.total_views}} Vistas
                 <i class="fa fa-comments-o"></i>

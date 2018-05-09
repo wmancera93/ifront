@@ -34,7 +34,6 @@ export class CommentArticleComponent implements OnInit {
   public commentEdit: string;
 
 
-
   constructor(public billboardSharedService: BillboardService,
     public alert: AlertsService,
     public myPublicationService: MyPublicationsService) {
@@ -47,8 +46,6 @@ export class CommentArticleComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data == "deleteComment") {
-        document.getElementById("loginId").style.display = 'block'
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
         this.myPublicationService.deleteComment(this.idArticle, this.idComment)
           .subscribe((data: any) => {
@@ -56,10 +53,7 @@ export class CommentArticleComponent implements OnInit {
             }
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             this.getDetailArticle()
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 2000)
+            
           })
       }
     })
@@ -89,8 +83,6 @@ export class CommentArticleComponent implements OnInit {
   }
 
   sendComment() {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (this.flagEditComment == true) {
       this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
@@ -100,10 +92,7 @@ export class CommentArticleComponent implements OnInit {
           this.numberComments = data.total_comments;
           this.comment = '';
           this.getDetailArticle();
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+        
         });
       this.flagEditComment = false;
     }
@@ -111,27 +100,30 @@ export class CommentArticleComponent implements OnInit {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
-            this.showSubmit = true;
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+            this.showSubmit = true;            
             this.getDetailArticle();
             this.comment = '';
             this.numberComments = data.total_comments;
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 1000)
+            const alertWarning: Alerts[] = [{ 
+            type: 'success',
+            title: 'Confirmación',
+            message: 'Comentario guardado exitosamente',
+            confirmation: false,
+            typeConfirmation: ''}];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
 
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ 
+              type: 'danger',
+              title: 'Solicitud Denegada',
+              message: error.error.errors.toString(),
+              confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
-
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 1000)
+   
           }
         )
     }
