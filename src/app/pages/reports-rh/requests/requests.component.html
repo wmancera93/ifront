@@ -268,6 +268,11 @@
                     <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
                       {{record[key]}}
                     </div>
+                    <div *ngIf="record[key].title != null">
+                      <button type="button" class="btn btn-sm btn-secondary cursor-general" [attr.title]="record[key].title">
+                          <i class="fa fa-eye" aria-hidden="true"></i>
+                      </button>
+                    </div>
                   </td>
                 </tr>
               </tbody>
@@ -285,3 +290,5 @@
   </div>
   <app-print-data-table></app-print-data-table>
 </div>
+
+<app-time-line-approvers *ngIf="!token"></app-time-line-approvers>

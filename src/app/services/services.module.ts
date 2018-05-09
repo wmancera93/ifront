@@ -33,6 +33,7 @@ import { MasterDataService } from './master-data/master-data.service';
 import { EventsEmployeeService } from './shared/common/events-employee/events-employee.service';
 import { ManagerialDataService } from './shared/common/managerial-data/managerial-data.service';
 import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
+import { FormDataService } from './common/form-data/form-data.service';
 
 @NgModule({
   imports: [
@@ -68,7 +69,8 @@ import { DashboardManagerialService } from './dashboard/managerial/dashboard-man
     EditArticleService,
     MasterDataService,
     EventsEmployeeService,
-    ManagerialDataService
+    ManagerialDataService,
+    FormDataService
   ]
 })
 export class ServicesModule { }

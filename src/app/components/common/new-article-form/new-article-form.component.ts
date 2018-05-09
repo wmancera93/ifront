@@ -11,6 +11,7 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 import { debug } from 'util';
+import { FormDataService } from '../../../services/common/form-data/form-data.service';
 
 const formData = new FormData();
 
@@ -42,7 +43,8 @@ export class NewArticleFormComponent implements OnInit {
     public alert: AlertsService,
     public fileUploadService: FileUploadService,
     public billboardSharedService: BillboardService,
-    public editEditSharedService: EditArticleService) {
+    public editEditSharedService: EditArticleService,
+    public formDataService: FormDataService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.image = data;
@@ -77,15 +79,15 @@ export class NewArticleFormComponent implements OnInit {
       newArticleForm.append('body', value.body);
       newArticleForm.append('tags', selectedItems);
       newArticleForm.append('image', this.image);
-      this.createArticleService.sendDataNotice(newArticleForm).subscribe((data: any) => {
-        if (data.success == true) {  
+      this.formDataService.postNoticeFormData(newArticleForm).subscribe((data: any) => {
+        if (data.success == true) {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
           const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
           this.alert.setAlert(alertConfirmation[0]);
           this.showSubmit = true;
           this.uploadListNews = true;
           this.billboardSharedService.setUpdateNew(this.uploadListNews);
-  
+
         }
       },
         (error: any) => {
@@ -93,15 +95,10 @@ export class NewArticleFormComponent implements OnInit {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
-  
+
         })
     }
-
-
- 
   }
-
-
 }
 
 
