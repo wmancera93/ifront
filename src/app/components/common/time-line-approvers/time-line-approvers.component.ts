@@ -17,7 +17,6 @@ export class TimeLineApproversComponent implements OnInit {
     private requestsRhService: RequestsRhService) {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
-        debugger
         this.requestsRhService.getRequestDetailById(data.ticket)
           .subscribe((detail: any) => {
             this.detailRequets = [];
