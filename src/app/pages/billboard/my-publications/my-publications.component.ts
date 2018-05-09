@@ -113,7 +113,7 @@ export class MyPublicationsComponent implements OnInit {
   viewDetailArticle(infoPub: any) {
     this.myPublicationModal.emit('myPublicationModal');
      setTimeout(() => {
-      this.billboardSharedService.setUpdateNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
+      this.billboardSharedService.setShowCommentNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
     }, 500);    
   }
 
