@@ -4,6 +4,9 @@ import { AproverRequests, Requests } from '../../../models/common/approver-reque
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { Router, RoutesRecognized } from '@angular/router';
+import { debug } from 'util';
+import { ButtonReturnService } from '../../../services/shared/common/managerial-data/button-return/button-return.service';
 
 @Component({
   selector: 'app-pendings',
@@ -12,12 +15,12 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 })
 export class PendingsComponent implements OnInit {
   public pendings: Requests[] = [];
-
+  public urlBefore: string = "";
+  public showButtonBack: boolean = false;
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
-    public alert: AlertsService,) {
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    public alert: AlertsService, public router: Router) {
+
 
     this.aproversRequestsService.getConfirmApproval()
       .subscribe((data: any) => {
@@ -27,7 +30,7 @@ export class PendingsComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
           this.getApprovals();
         }
-      })
+      });
   }
 
   ngOnInit() {
@@ -36,6 +39,15 @@ export class PendingsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+    this.router.events.filter(data => data instanceof RoutesRecognized)
+      .pairwise()
+      .subscribe((event: any[]) => {
+        setTimeout(() => {
+          if (event[0].urlAfterRedirects.toString() === '/ihr/index') {
+            this.showButtonBack = true;
+          }
+        }, 100);
+      });
     this.getApprovals();
   }
 
@@ -46,11 +58,11 @@ export class PendingsComponent implements OnInit {
           this.pendings = data.data[0].requests;
         }
 
-        // setTimeout(() => {
-        //   document.getElementById("loginId").style.display = 'none'
-        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        // }, 1000)
       });
+  }
+
+  returnBackPage() {
+    this.router.navigate(['ihr/index']);
   }
 
   modalAprovers(request: Requests) {
