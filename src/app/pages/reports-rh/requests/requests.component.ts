@@ -63,7 +63,6 @@ export class RequestsComponent implements OnInit {
         .pairwise()
         .subscribe((event: any[]) => {
           setTimeout(() => {
-            debugger
             if (event[0].urlAfterRedirects.toString() === '/ihr/index') {
   
               this.showButtonReturn = true;
