@@ -6,6 +6,7 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized } from '@angular/router';
+import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 
 declare var jsPDF: any;
 @Component({
@@ -43,7 +44,8 @@ export class RequestsComponent implements OnInit {
     public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
     private tokenService: Angular2TokenService,
-    public router: Router) {
+    public router: Router,
+    public aproversRequestsService: AproversRequestsService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -59,16 +61,16 @@ export class RequestsComponent implements OnInit {
           this.token = true;
         });
 
-        this.router.events.filter(data => data instanceof RoutesRecognized)
-        .pairwise()
-        .subscribe((event: any[]) => {
-          setTimeout(() => {
-            if (event[0].urlAfterRedirects.toString() === '/ihr/index') {
-  
-              this.showButtonReturn = true;
-            }
-          }, 100);
-        });
+    this.router.events.filter(data => data instanceof RoutesRecognized)
+      .pairwise()
+      .subscribe((event: any[]) => {
+        setTimeout(() => {
+          if (event[0].urlAfterRedirects.toString() === '/ihr/index') {
+
+            this.showButtonReturn = true;
+          }
+        }, 100);
+      });
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -223,5 +225,9 @@ export class RequestsComponent implements OnInit {
   }
   returnBackPage() {
     this.router.navigate(['ihr/index']);
+  }
+
+  viewDetail(id: any) {
+    this.aproversRequestsService.setRequests({ ticket: id })
   }
 }

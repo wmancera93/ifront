@@ -51,8 +51,8 @@ export class MyPublicationsComponent implements OnInit {
     this.alert.getActionConfirm().subscribe((data: any) => {
 
       if (data == "deleteArticle") {
-        document.getElementById("loginId").style.display = 'block'
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+        // document.getElementById("loginId").style.display = 'block'
+        // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
         this.myPublicationsService.deleteArticles(this.idDelete)
           .subscribe((data: any) => {
             if (data.success == true) {
@@ -66,10 +66,10 @@ export class MyPublicationsComponent implements OnInit {
               }];
               this.alert.setAlert(this.alertWarning[0]);
             }
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 2000)
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 2000)
           })
       }
     })

@@ -279,7 +279,7 @@
                       {{record[key]}}
                     </div>
                     <div *ngIf="record[key].title != null">
-                      <button type="button" class="btn btn-sm btn-secondary cursor-general" [attr.title]="record[key].title">
+                      <button type="button" class="btn btn-sm btn-secondary cursor-general" [attr.title]="record[key].title" (click)="viewDetail(record[key].id)">
                           <i class="fa fa-eye" aria-hidden="true"></i>
                       </button>
                     </div>
