@@ -71,7 +71,7 @@ export class HierarchicalChartComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
-  
+
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -189,26 +189,25 @@ export class HierarchicalChartComponent implements OnInit {
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;
-          document.getElementById('auto_c').blur()
-          document.getElementById('auto_c').focus()
+          document.getElementById('auto_c').blur();
+          document.getElementById('auto_c').focus();
+          // this.myListEmployee(this.searchEmployee);
         })
     }
     else {
       this.searchEmployee = [];
     }
   }
-  myListEmployee(data: any) {
-    let html = `<div class="row">
-                  <div class="col-2">
-                    <img style="width:10% !important; height:10% !important; border-radius:50px !important;"  src="${data.image.url}"> 
-                  </div>                  
-                </div>
-                <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
-                  <b style='width:100%'>${data.short_name}</b>
-                </div>`;
 
-    return html;
-  }
+
+  // myListEmployee(data: any) {
+  //   let html = `
+  //               <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
+  //                 <b style='width:100%'>{{data.short_name}}</b>
+  //               </div>`;
+
+  //   return html;
+  // }
 
   returnObjectSearch(ObjectSearch: any) {
     this.id_empleado = ObjectSearch.pernr;
@@ -234,11 +233,11 @@ export class HierarchicalChartComponent implements OnInit {
         if (data.success == true) {
           this.infoEmployee = data.data;
           this.infoEmployee.modal = 'hierarchical';
-          this.name.emit('hierarchical');    
+          this.name.emit('hierarchical');
           setTimeout(() => {
             this.employeeSharedService.setInfoEmployee(this.infoEmployee);
-          }, 500);    
-          
+          }, 500);
+
         }
       }
     );
