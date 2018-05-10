@@ -46,6 +46,7 @@ export class HierarchicalChartComponent implements OnInit {
   public searchEmployee: MyPosition[] = [];
   public id_shared: string;
   public infoEmployee: Employee;
+  public showListAutoC : boolean = false;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -185,29 +186,26 @@ export class HierarchicalChartComponent implements OnInit {
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
-    if (this.nameEmployee.length > 0) {
+    if (this.nameEmployee.length > 0) {      
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;
-          document.getElementById('auto_c').blur();
-          document.getElementById('auto_c').focus();
-          // this.myListEmployee(this.searchEmployee);
+          console.log(this.searchEmployee)
+          this.showListAutoC = true;
+          
         })
     }
     else {
       this.searchEmployee = [];
+      this.getHierarchical(this.pernrUser);
     }
   }
 
+  goToStorageEmployee(){
+    this.getHierarchical(this.pernrUser);
+  }
 
-  // myListEmployee(data: any) {
-  //   let html = `
-  //               <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
-  //                 <b style='width:100%'>{{data.short_name}}</b>
-  //               </div>`;
 
-  //   return html;
-  // }
 
   returnObjectSearch(ObjectSearch: any) {
     this.id_empleado = ObjectSearch.pernr;

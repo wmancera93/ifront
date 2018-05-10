@@ -20,26 +20,32 @@
           <div class="row">
             <div class="col-12 col-xl-6">
               <div class="row">
-                <div class="col-2" style="margin-top:10px;">
+                <div class=" col-xl-2 col-2" style="margin-top:10px;">
                   <div class="bg-button-search" (click)="clickSearchIcon()">
                     <div class="text-center cursor-general img-zoom">
                       <i class="fa fa-fw fa-search fa-lg"></i>
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-3 col-sm-3 col-10 align-items-left searchInput" *ngIf="activateSearch">
+                <div class="col-xl-10 col-10 align-items-left searchInput" *ngIf="activateSearch">
                   <div class="workTeam-search animate-bounce  bounceInLeft">
                     <form name="searchAutoComplete">
                       <p>
-                        <!-- <input ng4-auto-complete id="searchEmployee" class="form-control" [(ngModel)]="searchByLetter" placeholder="Buscar empleado" ngModel name="event" #event="ngModel" [source]="searchEmployee"
-                          display-property-name="name" (valueChanged)="onSelect($event)" /> {{searchEmployee}} -->
-                        <!-- <input class="form-control input-list" ng2-auto-complete  [(ngModel)]="searchByLetter" ngModel placeholder="Buscar empleado" [source]="searchEmployee"
-                          list-formatter="myListFormatter" path-to-data="" value-property-name=null display-property-name="name"
-                          min-chars="1" /> -->
-                        <!-- <input ng2-auto-complete id="auto_c"  type="text" name="employeeList"  [source]="searchEmployee" value-property-name=null
-                        display-property-name="name" [(ngModel)]="searchByLetter" ngModel (keyup)="enterNameEmployee()"> -->
+                        <input id="searchByAutoComplete" type="text" name="employeeList" [(ngModel)]="searchByLetter" ngModel (keyup)="enterNameEmployee()" (keyup.enter)="goToStorageEmployee()">
                       </p>
                     </form>
+                    <div id="searchByAutoComplete" *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
+                      <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
+                        <div class="row align-items-center">
+                          <div class="col-4">
+                            <img src="{{employee.image.url}}" class="roundPhotoChart">
+                          </div>
+                          <div class="col-8 text-left">
+                           <i class="fa fa-user-o"></i> {{employee.short_name}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
