@@ -14,7 +14,7 @@ export class AproversRequestsService {
     return this.requests;
   }
 
-  setRequests(objectRequests: ListRequests) {
+  setRequests(objectRequests: any) {
     return this.requests.next(objectRequests);
   }
 

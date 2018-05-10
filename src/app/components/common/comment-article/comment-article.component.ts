@@ -39,7 +39,7 @@ export class CommentArticleComponent implements OnInit {
     public alert: AlertsService,
     public myPublicationService: MyPublicationsService) {
 
-    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
+    this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
       this.getDetailArticle(data.modal);

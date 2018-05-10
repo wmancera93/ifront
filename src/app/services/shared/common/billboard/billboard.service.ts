@@ -4,6 +4,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class BillboardService {
   exportUpdateNew: Subject<any> = new Subject<any>();
+  exportCommentNew: Subject<any> = new Subject<any>();
   constructor() {
    }
 
@@ -13,6 +14,14 @@ export class BillboardService {
 
   setUpdateNew(newPublish: any) {
     return this.exportUpdateNew.next(newPublish);
+  }
+
+  getShowCommentNew() {
+    return this.exportCommentNew;
+  }
+
+  setShowCommentNew(objectNew: any) {
+    return this.exportCommentNew.next(objectNew);
   }
 
 }
