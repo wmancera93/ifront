@@ -191,6 +191,7 @@ export class HierarchicalChartComponent implements OnInit {
           this.searchEmployee = data.data;
           document.getElementById('auto_c').blur()
           document.getElementById('auto_c').focus()
+          this.myListEmployee(this.searchEmployee);
         })
     }
     else {
@@ -198,13 +199,10 @@ export class HierarchicalChartComponent implements OnInit {
     }
   }
   myListEmployee(data: any) {
-    let html = `<div class="row">
-                  <div class="col-2">
-                    <img style="width:10% !important; height:10% !important; border-radius:50px !important;"  src="${data.image.url}"> 
-                  </div>                  
-                </div>
+    console.log(data)
+    let html = `
                 <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
-                  <b style='width:100%'>${data.short_name}</b>
+                  <b style='width:100%'>{{data[0].short_name}}</b>
                 </div>`;
 
     return html;
