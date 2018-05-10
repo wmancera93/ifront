@@ -7,6 +7,7 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
+import { FormDataService } from '../../../services/common/form-data/form-data.service';
 
 @Component({
   selector: 'app-forms-requests',
@@ -32,7 +33,8 @@ export class FormsRequestsComponent implements OnInit {
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService,
     private fb: FormBuilder,
-    public fileUploadService: FileUploadService) {
+    public fileUploadService: FileUploadService,
+    public formDataService: FormDataService) {
 
     this.fileUploadService.getObjetFile()
       .subscribe((object) => {
@@ -109,33 +111,60 @@ export class FormsRequestsComponent implements OnInit {
       modelFromdata.append('file_support', this.file);
       modelFromdata.append('observation_request', model.observation_request);
       model = modelFromdata;
+
+      this.formDataService.postRequestsFormData(model)
+        .subscribe(
+          (data: any) => {
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.formsRequestsService.setRestartObject(true);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 2000)
+          },
+          (error: any) => {
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 1000)
+          })
+    } else {
+      this.requestsRhService.postRequests(model)
+        .subscribe(
+          (data: any) => {
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.formsRequestsService.setRestartObject(true);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 2000)
+          },
+          (error: any) => {
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 1000)
+          },
+      );
     }
-    this.requestsRhService.postRequests(model)
-      .subscribe(
-        (data: any) => {
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
-          this.alert.setAlert(alertWarning[0]);
-          this.showSubmit = true;
-          this.formsRequestsService.setRestartObject(true);
-
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 2000)
-        },
-        (error: any) => {
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
-
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 1000)
-        },
-    );
   }
 
 

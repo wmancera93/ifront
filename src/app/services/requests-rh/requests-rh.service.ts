@@ -22,7 +22,7 @@ export class RequestsRhService {
 
   postRequests(object: any) {
     return this.tokenService.post('employee_requets', object)
-      .map((data: any) => data.json());
+      .map((data: any) => data);
   }
 
   deleteRequests(id: number) {

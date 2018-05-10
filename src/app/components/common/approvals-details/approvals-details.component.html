@@ -225,9 +225,10 @@
                     </div>
                     <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !edit}" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
-                        <div *ngIf="approvals[0].answers_to_json.length > 0" class="border-botton-general">
-                          <div class="row justify-content-center" *ngFor="let details of approvals[0].answers_to_json">
+                        <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
+                          <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
                             <div class="col-12 text-left">
+                                <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
                               Nivel de aprobación {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">

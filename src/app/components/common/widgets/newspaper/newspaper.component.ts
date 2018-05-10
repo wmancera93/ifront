@@ -31,7 +31,7 @@ export class NewspaperComponent implements OnInit {
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
     this.newspaperModal.emit('newspaperModal');
     setTimeout(() => {
-      this.billboardSharedService.setUpdateNew({ objectPublication: objectArticle, modal: 'newspaperModal' });
+      this.billboardSharedService.setShowCommentNew({ objectPublication: objectArticle, modal: 'newspaperModal' });
     }, 500);   
     
     // setTimeout(() => {
