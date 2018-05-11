@@ -106,8 +106,7 @@ export class HierarchicalChartComponent implements OnInit {
   getHierarchical(pernr_empleado: number) {
 
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
-      this.topEmployee = data.data;
-   
+      this.topEmployee = data.data;   
       this.beforeTopEmployee = this.topEmployee;
       this.showListAutoC = false;
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
@@ -201,13 +200,12 @@ export class HierarchicalChartComponent implements OnInit {
   }
 
   enterNameEmployee() {
-    this.nameEmployee = this.searchByLetter;
-   
-    if(this.nameEmployee === null) {
+    this.nameEmployee = this.searchByLetter;       
+    if(this.searchByLetter == null) {
       this.searchEmployee = [];
       this.goToStorageEmployee();
     }
-    if (this.nameEmployee.length > 0) {      
+    if (this.nameEmployee !== null) {      
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;         
@@ -217,7 +215,8 @@ export class HierarchicalChartComponent implements OnInit {
      
   }
 
-  goToStorageEmployee(){   
+  goToStorageEmployee(){      
+    this.getDataLocalStorage();
     this.getHierarchical(this.pernrUser);
   }
 
@@ -239,6 +238,7 @@ export class HierarchicalChartComponent implements OnInit {
       this.flagLabelButton = true;
     }
     else {
+      
       this.activateSearch = true;
     }
   }
