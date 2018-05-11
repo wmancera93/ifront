@@ -57,6 +57,7 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
 import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
+import { NewArticleFormComponent } from './billboard/my-publications/new-article-form/new-article-form.component';
 
 
 @NgModule({
@@ -114,7 +115,8 @@ import { HelpComponent } from './help/help.component';
     ManagedComponent,
     EditPublicationComponent,
     MasterDataComponent,
-    HelpComponent
+    HelpComponent,
+    NewArticleFormComponent
   ],
   providers: [
     

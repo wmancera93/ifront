@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, DebugElement, Output, Input, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -20,6 +20,10 @@ import { Angular2TokenService } from 'angular2-token';
 export class HierarchicalChartComponent implements OnInit {
   // @Output() name: string = 'hierarhical';
   @Output() name: EventEmitter<string> = new EventEmitter();
+ 
+
+
+ 
 
   public flagActivatethirdLevel: boolean = false;
   public topEmployee: MyPosition;
@@ -47,18 +51,17 @@ export class HierarchicalChartComponent implements OnInit {
   public id_shared: string;
   public infoEmployee: Employee;
   public showListAutoC : boolean = false;
-
+  public text : string;
   public token: boolean;
-  @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();  
 
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
     public http: HttpClient,
     private domSanitizer: DomSanitizer,
-    private tokenService: Angular2TokenService) {
-
+    private tokenService: Angular2TokenService,
+    private eRef: ElementRef) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -72,9 +75,6 @@ export class HierarchicalChartComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
-
-    // document.getElementById("loginId").style.display = 'block';
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -83,13 +83,33 @@ export class HierarchicalChartComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+   
     this.getHierarchical(null);
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+     if(document.getElementById('buttonSearchHierarchical') == event.target || document.getElementById('searchByAutoComplete') == event.target )
+     {
+      this.text = "click en el boton";
+      this.showListAutoC = true;
+     }
+     else {
+      this.searchByLetter = null;
+      this.showListAutoC = false;
+     }
+    } 
+  }
+ 
+
   getHierarchical(pernr_empleado: number) {
+
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
       this.topEmployee = data.data;
+   
       this.beforeTopEmployee = this.topEmployee;
+      this.showListAutoC = false;
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
@@ -105,10 +125,6 @@ export class HierarchicalChartComponent implements OnInit {
       else {
         this.activeArrowRight = false;
       }
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none';
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 2000)
     })
   }
 
@@ -186,21 +202,22 @@ export class HierarchicalChartComponent implements OnInit {
 
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
+   
+    if(this.nameEmployee === null) {
+      this.searchEmployee = [];
+      this.goToStorageEmployee();
+    }
     if (this.nameEmployee.length > 0) {      
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
           this.searchEmployee = data.data;         
-          this.showListAutoC = true;
-          
+          this.showListAutoC = true;         
         })
     }
-    else {
-      this.searchEmployee = [];
-      this.getHierarchical(this.pernrUser);
-    }
+     
   }
 
-  goToStorageEmployee(){
+  goToStorageEmployee(){   
     this.getHierarchical(this.pernrUser);
   }
 
@@ -209,6 +226,8 @@ export class HierarchicalChartComponent implements OnInit {
   returnObjectSearch(ObjectSearch: any) {
     this.id_empleado = ObjectSearch.pernr;
     this.getHierarchical(this.id_empleado);
+    this.searchByLetter = null;
+    this.searchEmployee = [];
   }
 
 
