@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { debug } from 'util';
 
 
 @Component({
@@ -32,6 +33,7 @@ export class CommentArticleComponent implements OnInit {
   public is_collapse: boolean = false;
   public flagEditComment: boolean = false;
   public commentEdit: string;
+  public modalName : string = "";
 
 
   constructor(public billboardSharedService: BillboardService,
@@ -41,7 +43,8 @@ export class CommentArticleComponent implements OnInit {
     this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
-      this.getDetailArticle(data.modal);
+      this.modalName = data.modal;
+          this.getDetailArticle(data.modal);
     })
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -71,15 +74,29 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
-    this.infoArticle = null;
-    this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
-      this.infoArticle = res.data;
-      this.commentsList = res.data.comments_articles;
-      if (document.getElementById(modal).className !== 'modal show') {
-        document.getElementById('btn-' + modal).click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-      }
-    })
+    if(modal !== undefined){
+      this.infoArticle = null;
+      this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
+        this.infoArticle = res.data;
+        this.commentsList = res.data.comments_articles;
+        if (document.getElementById(modal).className !== 'modal show') {
+          document.getElementById('btn-' + modal).click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+        }
+      })
+    }
+    else{
+      this.infoArticle = null;
+      this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
+        this.infoArticle = res.data;
+        this.commentsList = res.data.comments_articles;
+        if (document.getElementById(this.modalName).className !== 'modal show') {
+          document.getElementById('btn-' + this.modalName).click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+        }
+      })
+    }
+  
   }
 
   sendComment() {
