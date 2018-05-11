@@ -107,7 +107,6 @@ export class EditPublicationComponent implements OnInit {
 
       },
       (error: any) => {
-        console.log(error)
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.json().errors.toString(), confirmation: false }];
