@@ -100,8 +100,7 @@ export class HierarchicalChartComponent implements OnInit {
       this.showListAutoC = false;
      }
     } 
-  }
- 
+  } 
 
   getHierarchical(pernr_empleado: number) {
 
@@ -238,7 +237,7 @@ export class HierarchicalChartComponent implements OnInit {
       this.flagLabelButton = true;
     }
     else {
-      
+
       this.activateSearch = true;
     }
   }

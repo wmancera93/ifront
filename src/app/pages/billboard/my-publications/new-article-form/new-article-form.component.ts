@@ -64,7 +64,6 @@ export class NewArticleFormComponent implements OnInit {
 
   }
   onSubmitNewArticle(value: any): void {
-
     if (value.title == "" || value.summary == "" || value.body == "") {
       (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
       const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];

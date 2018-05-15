@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -15,7 +16,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 })
 export class EditPublicationComponent implements OnInit {
 
-  public idEdit: any;
+  public idEdit: number;
   public infoMyPublication: any;
   public showSubmit: boolean = true;
   public title: string;
@@ -29,6 +30,8 @@ export class EditPublicationComponent implements OnInit {
   public sendObjectEdit: any;
   public extensions: string = '.gif, .png, .jpeg, .jpg ';
   public fileImageEdit: string = 'fileImageEdit';
+  public labelTags: string = "";
+  public newImage: any;
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -37,10 +40,11 @@ export class EditPublicationComponent implements OnInit {
     private fb: FormBuilder,
     public editMyPublicationService: MyPublicationsService,
     public fileUploadService: FileUploadService,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    public formDataService: FormDataService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
-      this.image = data;
+      this.newImage = data;
     })
 
     this.getEditArticle();
@@ -87,32 +91,58 @@ export class EditPublicationComponent implements OnInit {
 
   }
 
-  onSubmitSaveChanges() {
-    this.showSubmit = false;
-    this.sendObjectEdit = {
-      id: this.idEdit,
-      title: this.title,
-      summary: this.summary,
-      body: this.body,
-      themes: this.tags,    
-      image: this.image
-    };    
+  deleteTag(theme: any) {
+    let index = this.showLabelTheme.indexOf(theme);
+    if (index > -1) {
+      this.showLabelTheme.splice(index, 1);
+    }
+  }
 
-    this.editMyPublicationService.putEditArticles(this.idEdit, this.sendObjectEdit).subscribe(
-      (data: any) => {
+  onSubmitSaveChanges(value: any): void {
+    this.showSubmit = false;
+    if (value.tags !== "") {
+      let selectedItems: any[] = value.tags.map(({ display }) => display);
+      selectedItems.forEach((element) => {
+        if (selectedItems.length === 0) {
+          this.labelTags = element;
+        }
+        else {
+          if (this.labelTags === "" && this.tags === []) {
+            this.labelTags = element;
+          }
+          else if (this.labelTags === "" && this.tags !== []) {
+            this.labelTags += this.labelTags + ',' + element;
+          }
+          else {
+            this.labelTags = this.labelTags + ',' + element;
+          }
+
+        }
+      });
+    }
+
+    let editArticleForm = new FormData();
+    editArticleForm.append('title', this.title);
+    editArticleForm.append('summary', this.summary);
+    editArticleForm.append('body', this.body);
+    editArticleForm.append('tags', this.tags + this.labelTags);
+    editArticleForm.append('image', this.newImage);
+
+    this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
+      if (response.success == true) {
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
         this.alert.setAlert(alertConfirmation[0]);
-
-      },
+      }
+    },
       (error: any) => {
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.json().errors.toString(), confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
-      }
-    );
+      })
+
 
   }
 
