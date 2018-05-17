@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FileUploader } from 'ng2-file-upload';
 import { CKEditorModule } from 'ng2-ckeditor';
-import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Http, RequestOptions } from '@angular/http';
-import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-import { Alerts } from '../../../models/common/alerts/alerts';
-import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
-import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
-import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 import { debug } from 'util';
-import { FormDataService } from '../../../services/common/form-data/form-data.service';
+import { MyPublicationsService } from '../../../../services/billboard/my-publications/my-publications.service';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
+import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
+import { EditArticleService } from '../../../../services/shared/common/edit-article/edit-article.service';
+import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+
 
 const formData = new FormData();
 
@@ -63,7 +64,6 @@ export class NewArticleFormComponent implements OnInit {
 
   }
   onSubmitNewArticle(value: any): void {
-
     if (value.title == "" || value.summary == "" || value.body == "") {
       (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
       const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
@@ -92,7 +92,7 @@ export class NewArticleFormComponent implements OnInit {
       },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
 
