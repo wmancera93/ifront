@@ -28,7 +28,6 @@ import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
-import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
@@ -58,6 +57,7 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
 import { EditPublicationComponent } from './billboard/my-publications/edit-publication/edit-publication.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
+import { NewArticleFormComponent } from './billboard/my-publications/new-article-form/new-article-form.component';
 
 
 @NgModule({
@@ -66,7 +66,6 @@ import { HelpComponent } from './help/help.component';
     PagesRoutingModule,
     ComponentsModule,
     FormsModule,
-    Ng2AutoCompleteModule,
     NgxPaginationModule,
     PipesModule,
     ReactiveFormsModule,
@@ -116,7 +115,8 @@ import { HelpComponent } from './help/help.component';
     ManagedComponent,
     EditPublicationComponent,
     MasterDataComponent,
-    HelpComponent
+    HelpComponent,
+    NewArticleFormComponent
   ],
   providers: [
     
