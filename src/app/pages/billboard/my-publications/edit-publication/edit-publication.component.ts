@@ -8,6 +8,7 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -32,6 +33,7 @@ export class EditPublicationComponent implements OnInit {
   public fileImageEdit: string = 'fileImageEdit';
   public labelTags: string = "";
   public newImage: any;
+  public flagRefresh : boolean = false;
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -41,7 +43,8 @@ export class EditPublicationComponent implements OnInit {
     public editMyPublicationService: MyPublicationsService,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, 
+    public billboardService : BillboardService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
@@ -134,6 +137,8 @@ export class EditPublicationComponent implements OnInit {
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
         this.alert.setAlert(alertConfirmation[0]);
+        this.flagRefresh = true;
+        this.billboardService.setRefreshEditNew(this.flagRefresh);
       }
     },
       (error: any) => {
