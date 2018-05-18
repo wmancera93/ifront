@@ -13,29 +13,31 @@ export class FormDataService extends Angular2TokenService {
         this.url = window.location.href;
         if (this.url.split("localhost").length === 1) {
             if (this.url.split("-").length > 1) {
-                this.ambient = this.url.split("-")[0].split("/")[this.url.split("-")[0].split("/").length - 1];
-            } else {
-                this.ambient = 'production';
+              this.ambient = this.url.split("-")[0].split("/")[this.url.split("-")[0].split("/").length - 1];
             }
-        } else {
+          } else {
             this.ambient = 'development';
-        }
-
-        switch (this.ambient) {
-            case 'production':
-                this.baseUrl = environment.apiBaseHr_production;
-                break;
+          }
+      
+          switch (this.ambient) {
             case 'development':
-                this.baseUrl = environment.apiBaseHr_development;
-                break;
+              this.baseUrl = environment.apiBaseHr_development;
+              break;
+            case 'dev':
+              this.baseUrl = environment.apiBaseHr_development;
+              break;
             case 'staging':
-                this.baseUrl = environment.apiBaseHr_staging;
-                break;
-
+              this.baseUrl = environment.apiBaseHr_staging;
+              break;
+            case 'demo':
+              this.baseUrl = environment.apiBaseHr_staging;
+              break;
+      
+      
             default:
-                this.baseUrl = environment.apiBaseHr_development;
-                break;
-        }
+              this.baseUrl = environment.apiBaseHr_production;
+              break;
+          }
 
         this.init({
             apiBase: this.baseUrl,
