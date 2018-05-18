@@ -38,6 +38,7 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
+import { PendingsEvalComponent } from './evaluations/pendings-eval/pendings-eval.component';
 
 
 const routes: Routes = [
@@ -186,7 +187,13 @@ const routes: Routes = [
     {        
         path : 'help',
         component: HelpComponent
+    },
+    {        
+        path : 'pending_eval',
+        component: PendingsEvalComponent
     }
+
+    
 ];
 
 @NgModule({

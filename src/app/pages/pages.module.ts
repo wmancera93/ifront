@@ -58,6 +58,7 @@ import { EditPublicationComponent } from './billboard/my-publications/edit-publi
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { NewArticleFormComponent } from './billboard/my-publications/new-article-form/new-article-form.component';
+import { PendingsEvalComponent } from './evaluations/pendings-eval/pendings-eval.component';
 
 
 @NgModule({
@@ -116,7 +117,8 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
     EditPublicationComponent,
     MasterDataComponent,
     HelpComponent,
-    NewArticleFormComponent
+    NewArticleFormComponent,
+    PendingsEvalComponent
   ],
   providers: [
     
