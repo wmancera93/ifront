@@ -9,93 +9,104 @@
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-            <div class="row">
-              <div class="col-3 text-left">
-                <label for="title" class="font-title-general">
-                  <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*
-                </label>
+            <form #f='ngForm' (ngSubmit)="onSubmitSaveChanges(f.value)">
+              <div class="row">
+                <div class="col-3 text-left">
+                  <label for="title" class="font-title-general">
+                    <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*
+                  </label>
+                </div>
+                <div class="col-9">
+                  <input type="text" [(ngModel)]="title" id="title" placeholder="Título de la noticia" name="title" style="width:100% !important;"
+                    required/>
+                </div>
               </div>
-              <div class="col-9">
-                <input type="text" [(ngModel)]="title" id="title" placeholder="Título de la noticia" name="title" style="width:100% !important;"
-                  required/>
+              <div class="row">
+                <div class="col-3 text-left">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-bars text-primary-hr"></i>
+                    Resumen*
+                  </label>
+                </div>
+                <div class="col-9">
+                  <textarea [(ngModel)]='summary' name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
+                    required></textarea>
+                </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-3 text-left">
-                <label for="resume" class="font-title-general">
-                  <i class="fa fa-fw fa-bars text-primary-hr"></i>
-                  Resumen*
-                </label>
-              </div>
-              <div class="col-9">
-                <textarea [(ngModel)]='summary' name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
-                  required></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-3 text-left">
-                <label for="resume" class="font-title-general">
-                  <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema*
-                </label>
-              </div>
-              <div class="col-9">
-                <div class="row">
-                  <div class="col-12">
-                    <div class="col-4 padding-themes-newspaper" *ngFor="let theme of showLabelTheme">
-                      <div class="themes-newspaper">
-                        {{theme}}
+              <div class="row">
+                <div class="col-3 text-left">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema*
+                  </label>
+                </div>
+                <div class="col-9">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="col-4 padding-themes-newspaper" *ngFor="let theme of showLabelTheme">
+                        <div class="themes-newspaper">
+                          <div class="row">
+                            <div class="col-10">
+                              {{theme}}
+                            </div>
+                            <div class="col-2">
+                              <button type="button" class="close" (click)="deleteTag(theme)">&times;</button>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <!-- <div class="col-12">
+                    <div class="col-12">
+                      <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                    </div>
+                    <!-- <div class="col-12">
                     <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter"></tag-input>
                   </div> -->
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-3 text-left ">
-                <label for="resume" class="font-title-general">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*
-                </label>
-              </div>
-              <div class="col-9 " style="font-size:1rem !important">
-                <div class="row">
-                  <div class="col-12">
-                    <label for="resume" class="font-title-general">
-                      {{nameImage}} </label>
-                  </div>
-                  <div class="col-12">
-                    <app-file-upload [nameFile]="fileImageEdit" [extensions]="extensions"></app-file-upload>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="row">
-              <div class="col-12" style="padding-top: 20px">
-                <ckeditor debounce="500" name="body" [(ngModel)]="body" required>
-                  <div [innerHtml]="body"></div>
-                </ckeditor>
-              </div>
-            </div>
-            <div class="row justify-content-center" style="margin-top:10px;">
-              <div class="col-md-12 top-containter">
-                <div class="row justify-content-end">
-                  <div class="col-lg-3 col-md-4 col-12">
-                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block" (click)=onSubmitSaveChanges()>
-                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
-                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+              <div class="row">
+                <div class="col-3 text-left ">
+                  <label for="resume" class="font-title-general">
+                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*
+                  </label>
+                </div>
+                <div class="col-9 " style="font-size:1rem !important">
+                  <div class="row">
+                    <div class="col-12">
+                      <label for="resume" class="font-title-general">
+                        {{nameImage}} </label>
+                    </div>
+                    <div class="col-12">
+                      <app-file-upload [nameFile]="fileImageEdit" [extensions]="extensions"></app-file-upload>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="modal-footerInfo justify-content-center">
-              <div class="col-12 col-lg-3 buttonCloseForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
-                <h6> Cerrar </h6>
+              <div class="row">
+                <div class="col-12" style="padding-top: 20px">
+                  <ckeditor debounce="500" name="body" [(ngModel)]="body" required>
+                    <div [innerHtml]="body"></div>
+                  </ckeditor>
+                </div>
               </div>
-            </div>
-
+              <div class="row justify-content-center" style="margin-top:10px;">
+                <div class="col-md-12 top-containter">
+                  <div class="row justify-content-end">
+                    <div class="col-lg-3 col-md-4 col-12">
+                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                        <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                        <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footerInfo justify-content-center">
+                <div class="col-12 col-lg-3 buttonCloseForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
+                  <h6> Cerrar </h6>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
