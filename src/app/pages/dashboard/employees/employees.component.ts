@@ -26,11 +26,12 @@ export class EmployeesComponent implements OnInit {
   @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
+  public dataEnterprise: Enterprise = null;
 
   constructor(
     public dashboardEmployeeService: DashboardEmployeeService,
-    public router: Router,){
-   
+    public router: Router, ) {
+
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -61,6 +62,9 @@ export class EmployeesComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
+    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+
     this.dashboardEmployeeService.getRequest()
       .subscribe((data: any) => {
         this.objectRequest.emit(data.data)
