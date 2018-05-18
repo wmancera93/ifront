@@ -16,13 +16,13 @@ export class RequestsRhService {
   }
 
   getRequestDetailById(ticket: number) {
-    return this.tokenService.get('employee_requets/' + ticket)
+    return this.tokenService.get('employee_requets/show_by_company/' + ticket)
       .map((data: any) => data.json());
   }
 
   postRequests(object: any) {
     return this.tokenService.post('employee_requets', object)
-      .map((data: any) => data.json());
+      .map((data: any) => data);
   }
 
   deleteRequests(id: number) {

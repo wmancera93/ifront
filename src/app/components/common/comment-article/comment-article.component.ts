@@ -5,6 +5,7 @@ import { FormGroup } from '@angular/forms';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { debug } from 'util';
 
 
 @Component({
@@ -32,23 +33,22 @@ export class CommentArticleComponent implements OnInit {
   public is_collapse: boolean = false;
   public flagEditComment: boolean = false;
   public commentEdit: string;
-
+  public modalName : string = "";
 
 
   constructor(public billboardSharedService: BillboardService,
     public alert: AlertsService,
     public myPublicationService: MyPublicationsService) {
 
-    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
+    this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
-      this.getDetailArticle(data.modal);
+      this.modalName = data.modal;
+          this.getDetailArticle(data.modal);
     })
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data == "deleteComment") {
-        document.getElementById("loginId").style.display = 'block'
-        document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
         this.myPublicationService.deleteComment(this.idArticle, this.idComment)
           .subscribe((data: any) => {
@@ -56,10 +56,7 @@ export class CommentArticleComponent implements OnInit {
             }
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             this.getDetailArticle()
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 2000)
+            
           })
       }
     })
@@ -77,20 +74,32 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
-    this.infoArticle = null;
-    this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
-      this.infoArticle = res.data;
-      this.commentsList = res.data.comments_articles;
-      if (document.getElementById(modal).className !== 'modal show') {
-        document.getElementById('btn-' + modal).click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-      }
-    })
+    if(modal !== undefined){
+      this.infoArticle = null;
+      this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
+        this.infoArticle = res.data;
+        this.commentsList = res.data.comments_articles;
+        if (document.getElementById(modal).className !== 'modal show') {
+          document.getElementById('btn-' + modal).click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+        }
+      })
+    }
+    else{
+      this.infoArticle = null;
+      this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
+        this.infoArticle = res.data;
+        this.commentsList = res.data.comments_articles;
+        if (document.getElementById(this.modalName).className !== 'modal show') {
+          document.getElementById('btn-' + this.modalName).click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+        }
+      })
+    }
+  
   }
 
   sendComment() {
-    document.getElementById("loginId").style.display = 'block'
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (this.flagEditComment == true) {
       this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
@@ -100,10 +109,7 @@ export class CommentArticleComponent implements OnInit {
           this.numberComments = data.total_comments;
           this.comment = '';
           this.getDetailArticle();
-          setTimeout(() => {
-            document.getElementById("loginId").style.display = 'none'
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          }, 1000)
+        
         });
       this.flagEditComment = false;
     }
@@ -111,27 +117,30 @@ export class CommentArticleComponent implements OnInit {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
-            this.showSubmit = true;
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+            this.showSubmit = true;            
             this.getDetailArticle();
             this.comment = '';
             this.numberComments = data.total_comments;
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 1000)
+            const alertWarning: Alerts[] = [{ 
+            type: 'success',
+            title: 'Confirmación',
+            message: 'Comentario guardado exitosamente',
+            confirmation: false,
+            typeConfirmation: ''}];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
 
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ 
+              type: 'danger',
+              title: 'Solicitud Denegada',
+              message: error.error.errors.toString(),
+              confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
-
-            setTimeout(() => {
-              document.getElementById("loginId").style.display = 'none'
-              document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            }, 1000)
+   
           }
         )
     }

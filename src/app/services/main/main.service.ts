@@ -12,19 +12,25 @@ export class MainService {
 
   getDataEnterprise(ambient) {
     let baseUrl: string;
+   
+
     switch (ambient) {
-      case 'production':
-        baseUrl = environment.apiBaseHr_production;
-        break;
       case 'development':
+        baseUrl = environment.apiBaseHr_development;
+        break;
+      case 'dev':
         baseUrl = environment.apiBaseHr_development;
         break;
       case 'staging':
         baseUrl = environment.apiBaseHr_staging;
         break;
+      case 'demo':
+        baseUrl = environment.apiBaseHr_staging;
+        break;
+
 
       default:
-        baseUrl = environment.apiBaseHr_development;
+        baseUrl = environment.apiBaseHr_production;
         break;
     }
     return this.http.get(baseUrl + '/api/v2/companies/whoami')

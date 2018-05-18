@@ -37,26 +37,28 @@ export class AppComponent {
     if (url.split("localhost").length === 1) {
       if (url.split("-").length > 1) {
         ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
-      } else {
-        ambient = 'production';
       }
     } else {
       ambient = 'development';
     }
 
     switch (ambient) {
-      case 'production':
-        this.baseUrl = environment.apiBaseHr_production;
-        break;
       case 'development':
+        this.baseUrl = environment.apiBaseHr_development;
+        break;
+      case 'dev':
         this.baseUrl = environment.apiBaseHr_development;
         break;
       case 'staging':
         this.baseUrl = environment.apiBaseHr_staging;
         break;
+      case 'demo':
+        this.baseUrl = environment.apiBaseHr_staging;
+        break;
+
 
       default:
-        this.baseUrl = environment.apiBaseHr_development;
+        this.baseUrl = environment.apiBaseHr_production;
         break;
     }
 
