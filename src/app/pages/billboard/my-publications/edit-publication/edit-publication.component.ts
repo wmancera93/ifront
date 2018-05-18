@@ -129,7 +129,7 @@ export class EditPublicationComponent implements OnInit {
     editArticleForm.append('image', this.newImage);
 
     this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
-      if (response.success == true) {
+      if (response.success == true) {        
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
