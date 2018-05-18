@@ -1,4 +1,4 @@
-import { Component, OnInit, DebugElement, Output, Input, EventEmitter } from '@angular/core';
+import { Component, OnInit, DebugElement, Output, Input, EventEmitter, HostListener, ElementRef } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -20,6 +20,10 @@ import { Angular2TokenService } from 'angular2-token';
 export class HierarchicalChartComponent implements OnInit {
   // @Output() name: string = 'hierarhical';
   @Output() name: EventEmitter<string> = new EventEmitter();
+ 
+
+
+ 
 
   public flagActivatethirdLevel: boolean = false;
   public topEmployee: MyPosition;
@@ -46,18 +50,18 @@ export class HierarchicalChartComponent implements OnInit {
   public searchEmployee: MyPosition[] = [];
   public id_shared: string;
   public infoEmployee: Employee;
-
+  public showListAutoC : boolean = false;
+  public text : string;
   public token: boolean;
-  @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();  
 
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
     public http: HttpClient,
     private domSanitizer: DomSanitizer,
-    private tokenService: Angular2TokenService) {
-
+    private tokenService: Angular2TokenService,
+    private eRef: ElementRef) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -71,9 +75,6 @@ export class HierarchicalChartComponent implements OnInit {
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
         })
-  
-    // document.getElementById("loginId").style.display = 'block';
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
@@ -82,13 +83,31 @@ export class HierarchicalChartComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+   
     this.getHierarchical(null);
   }
 
+  @HostListener('document:click', ['$event'])
+  clickout(event) {
+    if(this.eRef.nativeElement.contains(event.target)) {
+     if(document.getElementById('buttonSearchHierarchical') == event.target || document.getElementById('searchByAutoComplete') == event.target )
+     {
+      this.text = "click en el boton";
+      this.showListAutoC = true;
+     }
+     else {
+      this.searchByLetter = null;
+      this.showListAutoC = false;
+     }
+    } 
+  } 
+
   getHierarchical(pernr_empleado: number) {
+
     this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
-      this.topEmployee = data.data;
+      this.topEmployee = data.data;   
       this.beforeTopEmployee = this.topEmployee;
+      this.showListAutoC = false;
       if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
         this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
         this.roundTotalPages = (parseFloat(this.totalPages.toFixed(0)) < this.totalPages) ? parseFloat(this.totalPages.toFixed(0)) + 1 : parseFloat(this.totalPages.toFixed(0));
@@ -104,10 +123,6 @@ export class HierarchicalChartComponent implements OnInit {
       else {
         this.activeArrowRight = false;
       }
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none';
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 2000)
     })
   }
 
@@ -184,35 +199,33 @@ export class HierarchicalChartComponent implements OnInit {
   }
 
   enterNameEmployee() {
-    this.nameEmployee = this.searchByLetter;
-    if (this.nameEmployee.length > 0) {
+    this.nameEmployee = this.searchByLetter;       
+    if(this.searchByLetter == null) {
+      this.searchEmployee = [];
+      this.goToStorageEmployee();
+    }
+    if (this.nameEmployee !== null) {      
       this.workTeamService.getSearchWorkTeam(this.nameEmployee)
         .subscribe((data: any) => {
-          this.searchEmployee = data.data;
-          document.getElementById('auto_c').blur()
-          document.getElementById('auto_c').focus()
+          this.searchEmployee = data.data;         
+          this.showListAutoC = true;         
         })
     }
-    else {
-      this.searchEmployee = [];
-    }
+     
   }
-  myListEmployee(data: any) {
-    let html = `<div class="row">
-                  <div class="col-2">
-                    <img style="width:10% !important; height:10% !important; border-radius:50px !important;"  src="${data.image.url}"> 
-                  </div>                  
-                </div>
-                <div style="float:left !important; padding-right:10px !important; width:90% !important; height:5px;">
-                  <b style='width:100%'>${data.short_name}</b>
-                </div>`;
 
-    return html;
+  goToStorageEmployee(){      
+    this.getDataLocalStorage();
+    this.getHierarchical(this.pernrUser);
   }
+
+
 
   returnObjectSearch(ObjectSearch: any) {
     this.id_empleado = ObjectSearch.pernr;
     this.getHierarchical(this.id_empleado);
+    this.searchByLetter = null;
+    this.searchEmployee = [];
   }
 
 
@@ -224,6 +237,7 @@ export class HierarchicalChartComponent implements OnInit {
       this.flagLabelButton = true;
     }
     else {
+
       this.activateSearch = true;
     }
   }
@@ -234,11 +248,11 @@ export class HierarchicalChartComponent implements OnInit {
         if (data.success == true) {
           this.infoEmployee = data.data;
           this.infoEmployee.modal = 'hierarchical';
-          this.name.emit('hierarchical');    
+          this.name.emit('hierarchical');
           setTimeout(() => {
             this.employeeSharedService.setInfoEmployee(this.infoEmployee);
-          }, 500);    
-          
+          }, 500);
+
         }
       }
     );

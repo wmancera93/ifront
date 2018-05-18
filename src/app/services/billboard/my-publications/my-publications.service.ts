@@ -36,7 +36,7 @@ export class MyPublicationsService {
       .map((data: any) => data.json()); 
   }
   putEditArticles(objectID: number,objectEdit: any){
-    return this.tokenService.put('articles/'+objectID,objectEdit)
+    return this.tokenService.put('articles/'+ objectID,objectEdit)
       .map((data: any) => data.json());   
   }
 

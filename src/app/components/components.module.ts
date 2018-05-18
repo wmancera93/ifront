@@ -26,7 +26,6 @@ import { DataTableComponent } from './common/data-table/data-table.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AutoCompleteComponent } from './common/auto-complete/auto-complete.component';
 import { PrintDataTableComponent } from './common/print-data-table/print-data-table.component';
-import { NewArticleFormComponent } from './common/new-article-form/new-article-form.component';
 
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
@@ -73,7 +72,6 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     DataTableComponent,
     AutoCompleteComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent,
     TimeLineApproversComponent,
     FileUploadComponent,
     ApprovalsDetailsComponent,
@@ -100,7 +98,6 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     EmployeeInfoComponent,
     DataTableComponent,
     PrintDataTableComponent,
-    NewArticleFormComponent,
     TimeLineApproversComponent,
     FileUploadComponent,
     ApprovalsDetailsComponent,

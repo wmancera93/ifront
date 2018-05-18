@@ -52,8 +52,6 @@ export class LoginComponent implements OnInit {
     if (url.split("localhost").length === 1) {
       if (url.split("-").length > 1) {
         ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
-      } else {
-        ambient = 'production';
       }
     } else {
       ambient = 'development';

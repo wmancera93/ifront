@@ -78,7 +78,7 @@ export class NewsComponent implements OnInit {
     this.newModal.emit('newModal');
 
     setTimeout(() => {
-      this.billboardSharedService.setUpdateNew({ objectPublication: article, modal: 'newModal' });
+      this.billboardSharedService.setShowCommentNew({ objectPublication: article, modal: 'newModal' });
     }, 500);
   }
 

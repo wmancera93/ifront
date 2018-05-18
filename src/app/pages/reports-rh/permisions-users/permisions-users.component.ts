@@ -5,6 +5,7 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Enterprise } from '../../../models/general/enterprise';
 import { Angular2TokenService } from 'angular2-token';
+import { Router } from '@angular/router';
 
 
 declare var jsPDF: any;
@@ -40,7 +41,8 @@ export class PermisionsUsersComponent implements OnInit {
   constructor(public reportsHrService: ReportsHrService,
     public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public router: Router) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -201,5 +203,8 @@ export class PermisionsUsersComponent implements OnInit {
     let objectTable: any[] = [];
     objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint })
     this.printDataTableService.setObjectForPrint(objectTable);
+  }
+  returnBackPage() {
+    this.router.navigate(['ihr/index']);
   }
 }

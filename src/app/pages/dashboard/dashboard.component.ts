@@ -24,8 +24,10 @@ export class DashboardComponent implements OnInit {
   public isAdmin: boolean;
   public token: boolean;
   public previousUrl: string;
+  public urlBeforeMyteam: string = ""; 
+  public urlBeforePending: string = ""; 
+  public urlBeforeReports: string = ""; 
 
-  public aa: string = "";
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
@@ -51,12 +53,34 @@ export class DashboardComponent implements OnInit {
             }
           }, 100);
 
-
         }
 
         setTimeout(() => {
-          this.aa = event[0].urlAfterRedirects.toString();
-          if (this.aa === '/ihr/my_team') {
+          this.urlBeforeMyteam = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforeMyteam === '/ihr/my_team') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
+        setTimeout(() => {
+          this.urlBeforeReports = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforeMyteam === '/ihr/reports_requests') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
+        setTimeout(() => {
+         
+          this.urlBeforePending = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforePending === '/ihr/pending_approvers') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
+        setTimeout(() => {
+         
+          this.urlBeforePending = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforePending === '/ihr/users_permisions') {
             document.getElementById('buttonDashEmployee').click();
           }
         }, 100);
