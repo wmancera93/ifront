@@ -9,9 +9,6 @@
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-              <tag-input [(ngModel)]='items' [editable]='true'></tag-input>
-            
-            <form #f='ngForm' (ngSubmit)="onSubmitSaveChanges(f.value)">
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="title" class="font-title-general">
@@ -19,7 +16,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" [(ngModel)]="title" id="title" placeholder="Título de la noticia" name="title" style="width:100% !important;"
+                  <input type="text" [(ngModel)]="title" id="title" placeholder="Título de la noticia" style="width:100% !important;"
                     required/>
                 </div>
               </div>
@@ -31,7 +28,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea [(ngModel)]='summary' name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
+                  <textarea [(ngModel)]='summary' rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
                     required></textarea>
                 </div>
               </div>
@@ -42,27 +39,10 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <div class="row">
+                  <div class="row">                    
                     <div class="col-12">
-                      <div class="col-4 padding-themes-newspaper" *ngFor="let theme of showLabelTheme">
-                        <div class="themes-newspaper">
-                          <div class="row">
-                            <div class="col-10">
-                              {{theme}}
-                            </div>
-                            <div class="col-2">
-                              <button type="button" class="close" (click)="deleteTag(theme)">&times;</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
+                      <tag-input [theme]="'dark'" [(ngModel)]='tags' [editable]='true'></tag-input>
                     </div>
-                    <div class="col-12">
-                      <tag-input name="tags"  theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>                    
-                    </div>
-                    <!-- <div class="col-12">
-                    <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter"></tag-input>
-                  </div> -->
                   </div>
                 </div>
               </div>
@@ -95,7 +75,7 @@
                 <div class="col-md-12 top-containter">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                      <button type="submit" *ngIf="showSubmit" (click)="onSubmitSaveChanges()" class="btn btn-success btn-block">
                         <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
                       <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
                         <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
@@ -108,7 +88,6 @@
                   <h6> Cerrar </h6>
                 </div>
               </div>
-            </form>
           </div>
         </div>
       </div>
