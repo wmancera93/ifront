@@ -77,9 +77,7 @@ export class EditPublicationComponent implements OnInit {
         'tags': [this.tags],
         'image': [this.image]
       });
-    })
-
-   
+    })  
 
   }
 

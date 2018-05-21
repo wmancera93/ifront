@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12" *ngIf="!flagEmpty">
+        <div class="col-12"  *ngIf="!flagEmpty" >
           <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:1000px;"></iframe>
         </div>
       </div>
