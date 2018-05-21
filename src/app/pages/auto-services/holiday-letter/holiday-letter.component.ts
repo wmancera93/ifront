@@ -53,12 +53,6 @@ export class HolidayLetterComponent implements OnInit {
         this.flagEmpty = false;
         this.urlPDF = this.holidayLetter[0].file.url;
       }
-      if (data.success) {
-        // setTimeout(() => {
-        //   document.getElementById("loginId").style.display = 'none'
-        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        // }, 3000)
-      }
 
     })
   }
