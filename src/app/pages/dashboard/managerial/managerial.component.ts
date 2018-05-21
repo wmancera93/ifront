@@ -29,13 +29,13 @@ export class ManagerialComponent implements OnInit {
   public validateMyTeam: string;
   public dataMyTeam: boolean = true;
   public dataManagerial: any;
-  public activeButton : boolean = true;
+  public activeButton: boolean = true;
 
   constructor(public dasboardManagerialService: DashboardManagerialService,
     public router: Router,
     private tokenService: Angular2TokenService,
     public managerialDataShared: ManagerialDataService,
-     public buttonReturnService: ButtonReturnService) {
+    public buttonReturnService: ButtonReturnService) {
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
@@ -93,7 +93,20 @@ export class ManagerialComponent implements OnInit {
 
     this.dasboardManagerialService.getWidgetPermissionsUser()
       .subscribe((data: any) => {
-        this.objectPermissionsUsers.emit(data.data);
+        if (data.success) {
+          this.objectPermissionsUsers.emit(data.data);
+        } else {
+          this.objectPermissionsUsers.emit([]);
+        }
+       
+      },
+      (error: any) => {
+        if (error.success) {
+          this.objectPermissionsUsers.emit(error.data);
+        } else {
+          this.objectPermissionsUsers.emit([]);
+        }
+       
       });
 
     this.dasboardManagerialService.getWidgetMalePercent()
@@ -147,8 +160,7 @@ export class ManagerialComponent implements OnInit {
       });
   }
 
-  sendDataButton()
-  {
+  sendDataButton() {
     this.buttonReturnService.setButtonReturn(this.activeButton);
   }
 
