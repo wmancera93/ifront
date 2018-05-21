@@ -47,7 +47,14 @@ export class MyPublicationsComponent implements OnInit {
       if (data == true) {
         this.getDataPublications();
       }
-    })
+    });
+
+    this.billboardSharedService.getRefreshEditNew().subscribe((response: any) => {
+      if (response == true) {
+        this.getDataPublications();
+      }
+    });
+
     this.alert.getActionConfirm().subscribe((data: any) => {
 
       if (data == "deleteArticle") {

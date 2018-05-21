@@ -20,17 +20,17 @@
     <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
   </div>
   <div class="row">
-    <div class="col-xl-4 col-12">
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_birthday">
       <div class="row">
         <app-events-employees [eventsEmployee]="objectBirthDay" class="col-12"></app-events-employees>
       </div>
     </div>
-    <div class="col-xl-4 col-12">
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_labor">
       <div class="row">
         <app-events-employees [eventsEmployee]="objectAnniversay" class="col-12"></app-events-employees>
       </div>
     </div>
-    <div class="col-xl-4 col-12">
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_new_employees">
       <div class="row">
         <app-events-employees [eventsEmployee]="objectNewEmployee" class="col-12"></app-events-employees>
       </div>

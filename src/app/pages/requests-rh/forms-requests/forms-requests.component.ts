@@ -26,6 +26,8 @@ export class FormsRequestsComponent implements OnInit {
   public formVacaComp: any;
   public formPerm: any;
 
+  public detectLetter : string = "";
+
   public model = {};
   public fields: FormlyFieldConfig[] = [];
 
@@ -167,5 +169,17 @@ export class FormsRequestsComponent implements OnInit {
     }
   }
 
+  noAcceptMinus()
+{
+  if(this.detectLetter == null)
+  {
+    this.formVacaComp = this.fb.group({
+      request_type_id: this.formRequests.id,
+      days_request: '',
+      observation_request: '',
+    });
+
+  }
+}
 
 }

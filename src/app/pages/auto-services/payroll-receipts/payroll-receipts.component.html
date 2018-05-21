@@ -7,7 +7,7 @@
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
-          <i class="fa fa-file-pdf-o"></i>
+          <i class="fa fa-file"></i>
           Recibo de Nómina
         </div>
       </div>
@@ -15,7 +15,15 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row">
+        <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
+            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+              <div class="alert alert-warning" role="alert">
+                No hay 
+                <strong>recibo de nómina</strong>&nbsp;para el empleado
+              </div>
+            </div>
+          </div>
+      <div class="row" *ngIf="!flagEmpty">
         <div class="col-3">           
           <div *ngFor="let certificate of listPayRoll" (click)="selectedObject(certificate)">
             <div class="row">

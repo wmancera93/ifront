@@ -24,4 +24,12 @@ export class BillboardService {
     return this.exportCommentNew.next(objectNew);
   }
 
+  getRefreshEditNew() {
+    return this.exportCommentNew;
+  }
+
+  setRefreshEditNew(objectEdit: any) {
+    return this.exportCommentNew.next(objectEdit);
+  }
+
 }

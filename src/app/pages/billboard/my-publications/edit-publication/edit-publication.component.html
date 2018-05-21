@@ -9,6 +9,8 @@
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
+              <tag-input [(ngModel)]='items' [editable]='true'></tag-input>
+            
             <form #f='ngForm' (ngSubmit)="onSubmitSaveChanges(f.value)">
               <div class="row">
                 <div class="col-3 text-left">
@@ -56,7 +58,7 @@
                       </div>
                     </div>
                     <div class="col-12">
-                      <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                      <tag-input name="tags"  theme='dark' placeholder="Escriba un tema + enter" ngModel required></tag-input>                    
                     </div>
                     <!-- <div class="col-12">
                     <tag-input name="tags" theme='dark' placeholder="Escriba un tema + enter"></tag-input>

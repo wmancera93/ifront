@@ -14,6 +14,7 @@ export class LaborCertificatesComponent implements OnInit {
   public laboralType: Certificate;
   public urlPDF: string = '';
   public urlPDFSecure : any;
+  public flagEmpty: boolean;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -47,8 +48,15 @@ export class LaborCertificatesComponent implements OnInit {
     });
     this.autoServiceService.getLaboralCertificate().subscribe((data: any) => {
       this.laboralType = data.data;
-      this.urlPDF = this.laboralType[0].file.url;
-      this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(this.urlPDF);
+      if (data.data.length === 0) {
+        this.flagEmpty = true;
+      }
+      else {
+        this.flagEmpty = false;
+        this.urlPDF = this.laboralType[0].file.url;
+        this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(this.urlPDF);
+      }
+      
       if (data.success) {
         // setTimeout(() => {
         //   document.getElementById("loginId").style.display = 'none'

@@ -9,7 +9,7 @@ import { ProgressPrimary } from '../../../../models/common/widgets/widgets';
 export class ProgressPrimaryComponent implements OnInit {
   @Input('progressPrimary') progressPrimary: any;
   public objectWidget: ProgressPrimary[] = [];
-  
+
   constructor() { }
 
   ngOnInit() {

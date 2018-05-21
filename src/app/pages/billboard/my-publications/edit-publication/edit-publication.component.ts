@@ -8,6 +8,7 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -32,6 +33,9 @@ export class EditPublicationComponent implements OnInit {
   public fileImageEdit: string = 'fileImageEdit';
   public labelTags: string = "";
   public newImage: any;
+  public flagRefresh : boolean = false;
+
+  items
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -41,21 +45,39 @@ export class EditPublicationComponent implements OnInit {
     public editMyPublicationService: MyPublicationsService,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, 
+    public billboardService : BillboardService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
     })
+ 
+    this.EditSharedService.getEditNew().subscribe((data: any) => {
+     
+      console.log(data)
+      this.infoMyPublication = data;
+      this.items = this.infoMyPublication.themes
+      this.idEdit = this.infoMyPublication.id;
+      this.title = this.infoMyPublication.title;
+      this.summary = this.infoMyPublication.summary;
+      this.body = this.infoMyPublication.body;
+      this.tags = ['dfsdfsdf'];
+      this.image = this.infoMyPublication.image;
+     
+      this.showLabelTheme = this.infoMyPublication.themes;
+      this.showLabelImage = this.infoMyPublication.image.url;
+      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
+      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
 
-    this.getEditArticle();
-
-    this.ngForm = this.fb.group({
-      'title': [this.title],
-      'summary': [this.summary],
-      'body': [this.body],
-      'tags': [this.tags],
-      'image': [this.image]
-    });
+      this.showEditArticle();
+      this.ngForm = this.fb.group({
+        'title': [this.title],
+        'summary': [this.summary],
+        'body': [this.body],
+        'tags': [this.tags],
+        'image': [this.image]
+      });
+    })  
 
   }
 
@@ -64,22 +86,7 @@ export class EditPublicationComponent implements OnInit {
   }
 
   getEditArticle() {
-    this.EditSharedService.getEditNew().subscribe((data: any) => {
-      this.infoMyPublication = data;
-      this.idEdit = this.infoMyPublication.id;
-      this.title = this.infoMyPublication.title;
-      this.summary = this.infoMyPublication.summary;
-      this.body = this.infoMyPublication.body;
-      this.tags = this.infoMyPublication.themes;
-      this.image = this.infoMyPublication.image;
-
-      this.showLabelTheme = this.infoMyPublication.themes;
-      this.showLabelImage = this.infoMyPublication.image.url;
-      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
-      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
-
-      this.showEditArticle();
-    })
+  
   }
 
   showEditArticle() {
@@ -129,11 +136,13 @@ export class EditPublicationComponent implements OnInit {
     editArticleForm.append('image', this.newImage);
 
     this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
-      if (response.success == true) {
+      if (response.success == true) {        
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
         this.alert.setAlert(alertConfirmation[0]);
+        this.flagRefresh = true;
+        this.billboardService.setRefreshEditNew(this.flagRefresh);
       }
     },
       (error: any) => {
