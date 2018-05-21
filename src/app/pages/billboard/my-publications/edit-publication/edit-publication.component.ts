@@ -35,6 +35,8 @@ export class EditPublicationComponent implements OnInit {
   public newImage: any;
   public flagRefresh : boolean = false;
 
+  items
+
   ngForm: FormGroup;
   fileToUpload: File = null;
 
@@ -49,16 +51,35 @@ export class EditPublicationComponent implements OnInit {
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
     })
+ 
+    this.EditSharedService.getEditNew().subscribe((data: any) => {
+     
+      console.log(data)
+      this.infoMyPublication = data;
+      this.items = this.infoMyPublication.themes
+      this.idEdit = this.infoMyPublication.id;
+      this.title = this.infoMyPublication.title;
+      this.summary = this.infoMyPublication.summary;
+      this.body = this.infoMyPublication.body;
+      this.tags = ['dfsdfsdf'];
+      this.image = this.infoMyPublication.image;
+     
+      this.showLabelTheme = this.infoMyPublication.themes;
+      this.showLabelImage = this.infoMyPublication.image.url;
+      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
+      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
 
-    this.getEditArticle();
+      this.showEditArticle();
+      this.ngForm = this.fb.group({
+        'title': [this.title],
+        'summary': [this.summary],
+        'body': [this.body],
+        'tags': [this.tags],
+        'image': [this.image]
+      });
+    })
 
-    this.ngForm = this.fb.group({
-      'title': [this.title],
-      'summary': [this.summary],
-      'body': [this.body],
-      'tags': [this.tags],
-      'image': [this.image]
-    });
+   
 
   }
 
@@ -67,22 +88,7 @@ export class EditPublicationComponent implements OnInit {
   }
 
   getEditArticle() {
-    this.EditSharedService.getEditNew().subscribe((data: any) => {
-      this.infoMyPublication = data;
-      this.idEdit = this.infoMyPublication.id;
-      this.title = this.infoMyPublication.title;
-      this.summary = this.infoMyPublication.summary;
-      this.body = this.infoMyPublication.body;
-      this.tags = this.infoMyPublication.themes;
-      this.image = this.infoMyPublication.image;
-
-      this.showLabelTheme = this.infoMyPublication.themes;
-      this.showLabelImage = this.infoMyPublication.image.url;
-      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
-      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
-
-      this.showEditArticle();
-    })
+  
   }
 
   showEditArticle() {

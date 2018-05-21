@@ -12,6 +12,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class PayrollReceiptsComponent implements OnInit {
   public listPayRoll: Certificate;
   public urlPDF: string = '';
+  public flagEmpty: boolean;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -43,8 +44,14 @@ export class PayrollReceiptsComponent implements OnInit {
     });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
       this.listPayRoll = data.data;      
-      this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
-      this.urlPDF = this.listPayRoll[0].file.url;
+      if ( data.data.length === 0) {
+        this.flagEmpty = true;
+      }
+      else {
+        this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
+        this.urlPDF = this.listPayRoll[0].file.url;
+      }
+     
 
       if (data.success) {
         // setTimeout(() => {
