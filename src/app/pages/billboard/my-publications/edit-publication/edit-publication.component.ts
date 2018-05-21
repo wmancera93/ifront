@@ -33,7 +33,7 @@ export class EditPublicationComponent implements OnInit {
   public fileImageEdit: string = 'fileImageEdit';
   public labelTags: string = "";
   public newImage: any;
-  public flagRefresh : boolean = false;
+  public flagRefresh: boolean = false;
 
   items
 
@@ -45,39 +45,29 @@ export class EditPublicationComponent implements OnInit {
     public editMyPublicationService: MyPublicationsService,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
-    public formDataService: FormDataService, 
-    public billboardService : BillboardService) {
+    public formDataService: FormDataService,
+    public billboardService: BillboardService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
     })
- 
+
     this.EditSharedService.getEditNew().subscribe((data: any) => {
-     
-      console.log(data)
       this.infoMyPublication = data;
-      this.items = this.infoMyPublication.themes
+      this.tags = this.infoMyPublication.themes
       this.idEdit = this.infoMyPublication.id;
       this.title = this.infoMyPublication.title;
       this.summary = this.infoMyPublication.summary;
       this.body = this.infoMyPublication.body;
-      this.tags = ['dfsdfsdf'];
       this.image = this.infoMyPublication.image;
-     
+
       this.showLabelTheme = this.infoMyPublication.themes;
       this.showLabelImage = this.infoMyPublication.image.url;
       this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
       this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
 
       this.showEditArticle();
-      this.ngForm = this.fb.group({
-        'title': [this.title],
-        'summary': [this.summary],
-        'body': [this.body],
-        'tags': [this.tags],
-        'image': [this.image]
-      });
-    })  
+    })
 
   }
 
@@ -85,17 +75,9 @@ export class EditPublicationComponent implements OnInit {
 
   }
 
-  getEditArticle() {
-  
-  }
-
   showEditArticle() {
-    this.editMyPublicationService.getArticles(this.idEdit).subscribe((res: any) => {
-
-    })
     document.getElementById('btn_editNew').click();
     document.getElementById("bodyGeneral").removeAttribute('style');
-
   }
 
   deleteTag(theme: any) {
@@ -105,25 +87,17 @@ export class EditPublicationComponent implements OnInit {
     }
   }
 
-  onSubmitSaveChanges(value: any): void {
+  onSubmitSaveChanges(): void {
+    this.labelTags = "";
     this.showSubmit = false;
-    if (value.tags !== "") {
-      let selectedItems: any[] = value.tags.map(({ display }) => display);
-      selectedItems.forEach((element) => {
-        if (selectedItems.length === 0) {
-          this.labelTags = element;
+    if (this.tags.length > 0) {
+      
+      this.tags.forEach((element:any) => {
+        if (element.length !== undefined) {
+          this.labelTags += element + ',' ;
         }
         else {
-          if (this.labelTags === "" && this.tags === []) {
-            this.labelTags = element;
-          }
-          else if (this.labelTags === "" && this.tags !== []) {
-            this.labelTags += this.labelTags + ',' + element;
-          }
-          else {
-            this.labelTags = this.labelTags + ',' + element;
-          }
-
+            this.labelTags += element.value + ',';
         }
       });
     }
@@ -132,11 +106,11 @@ export class EditPublicationComponent implements OnInit {
     editArticleForm.append('title', this.title);
     editArticleForm.append('summary', this.summary);
     editArticleForm.append('body', this.body);
-    editArticleForm.append('tags', this.tags + this.labelTags);
+    editArticleForm.append('tags', this.labelTags);
     editArticleForm.append('image', this.newImage);
 
     this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
-      if (response.success == true) {        
+      if (response.success == true) {
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
