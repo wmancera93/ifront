@@ -23,7 +23,7 @@
               </div>
             </div>
           </div>
-      <div class="row">
+      <div class="row" *ngIf="!flagEmpty">
         <div class="col-12 col-xl-3">
           <div *ngFor="let certificate of laboralType" (click)="selectedObject(certificate)">
             <div class="row">
@@ -38,7 +38,6 @@
           <iframe [src]='urlPDF | safeHtml'  width="100% !important;" height="1000">
           </iframe>
         </div>
-
       </div>
     </div>
   </div>

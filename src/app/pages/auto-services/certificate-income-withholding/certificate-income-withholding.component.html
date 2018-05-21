@@ -23,7 +23,7 @@
                   </div>
                 </div>
               </div>
-            <div class="row">
+            <div class="row"  *ngIf="!flagEmpty" >
                 <div class="col-3">           
                   <div *ngFor="let certificate of incomingCertificate" (click)="selectedObject(certificate)">
                     <div class="row">
@@ -34,7 +34,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-9"  *ngIf="!flagEmpty" > 
+                <div class="col-9"> 
                   <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:1000px;"></iframe>    
                 </div>
               </div>
