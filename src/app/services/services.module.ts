@@ -35,6 +35,7 @@ import { ManagerialDataService } from './shared/common/managerial-data/manageria
 import { DashboardManagerialService } from './dashboard/managerial/dashboard-managerial.service';
 import { FormDataService } from './common/form-data/form-data.service';
 import { ButtonReturnService } from './shared/common/managerial-data/button-return/button-return.service';
+import { EvaluationsService } from './evaluations/evaluations.service';
 
 @NgModule({
   imports: [
@@ -72,7 +73,8 @@ import { ButtonReturnService } from './shared/common/managerial-data/button-retu
     EventsEmployeeService,
     ManagerialDataService,
     FormDataService,
-    ButtonReturnService
+    ButtonReturnService,
+    EvaluationsService
   ]
 })
 export class ServicesModule { }

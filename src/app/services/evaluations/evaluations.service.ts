@@ -10,7 +10,6 @@ export class EvaluationsService {
   constructor( private tokenService: Angular2TokenService) { }
 
   getEvaluationList() {
-
     return this.tokenService.get('evaluations')
       .map((data: any) => data.json());
   }
