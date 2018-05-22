@@ -38,7 +38,7 @@ import { ManagedComponent } from './approver-requests/managed/managed.component'
 import { PendingsComponent } from './approver-requests/pendings/pendings.component';
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
-import { PendingsEvalComponent } from './evaluations/pendings-eval/pendings-eval.component';
+import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 
 
 const routes: Routes = [
@@ -189,8 +189,8 @@ const routes: Routes = [
         component: HelpComponent
     },
     {        
-        path : 'pending_eval',
-        component: PendingsEvalComponent
+        path : 'evaluated',
+        component: EvaluatedComponent
     }
 
     

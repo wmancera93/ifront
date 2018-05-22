@@ -36,6 +36,7 @@ import { DashboardManagerialService } from './dashboard/managerial/dashboard-man
 import { FormDataService } from './common/form-data/form-data.service';
 import { ButtonReturnService } from './shared/common/managerial-data/button-return/button-return.service';
 import { EvaluationsService } from './evaluations/evaluations.service';
+import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { EvaluationsService } from './evaluations/evaluations.service';
     ManagerialDataService,
     FormDataService,
     ButtonReturnService,
-    EvaluationsService
+    EvaluationsService,
+    EvaluationsSharedService
   ]
 })
 export class ServicesModule { }

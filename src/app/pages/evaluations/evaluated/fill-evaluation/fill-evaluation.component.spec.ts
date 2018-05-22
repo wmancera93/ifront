@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PendingsEvalComponent } from './pendings-eval.component';
+import { FillEvaluationComponent } from './fill-evaluation.component';
 
-describe('PendingsEvalComponent', () => {
-  let component: PendingsEvalComponent;
-  let fixture: ComponentFixture<PendingsEvalComponent>;
+describe('FillEvaluationComponent', () => {
+  let component: FillEvaluationComponent;
+  let fixture: ComponentFixture<FillEvaluationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PendingsEvalComponent ]
+      declarations: [ FillEvaluationComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PendingsEvalComponent);
+    fixture = TestBed.createComponent(FillEvaluationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

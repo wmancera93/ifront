@@ -14,5 +14,10 @@ export class EvaluationsService {
       .map((data: any) => data.json());
   }
 
+  getDataEvaluationById(id : number) {
+    return this.tokenService.get('evaluations/'+id)
+      .map((data: any) => data.json());
+  }
+
 }
 
