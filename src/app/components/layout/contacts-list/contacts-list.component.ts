@@ -68,27 +68,24 @@ export class ContactsListComponent implements OnInit {
   searchByName() {
     let numberContacts: number = 0;
     let filterContacts: number = 0;
+    this.contacts = [];
 
-    this.contacts = this.searchListContacts;
-
-    this.contacts = this.contacts.filter(
-      (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
-    if (this.contacts.length === 0 || this.contacts.length < 10) {
-      this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
+    if (this.nameEmployee == '') {
+      this.employeeService.getAllEmployees(this.numberPage.toString())
         .subscribe((result: any) => {
-
           if (result.success === true) {
-            numberContacts += result.data.length;
-            for (let i = 0; i < result.data.length; i++) {
-              this.searchListContacts.push(result.data[i]);
-              this.contacts = this.searchListContacts;
-            }
-            this.contacts = this.contacts.filter(
-              (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
+            this.contacts = result.data;
           }
         });
-      this.numberPage++;
     }
+    else {
+      this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (1).toString())
+        .subscribe((result: any) => {
+
+          this.contacts = result.data;
+        });
+    }
+
 
   }
   searchByNameIntro(key: any) {
