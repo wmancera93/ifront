@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
   public dataEnterprise: Enterprise[] = [];
   public heightContenGeneral: number = 0;
 
+
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
     public route: ActivatedRoute,
@@ -44,6 +45,17 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    let rememeberObject = JSON.parse(localStorage.getItem("remember"));
+
+    this.txtEmail = rememeberObject == null ? '' : rememeberObject[0].email;
+    this.txtPassword = rememeberObject == null ? '' : rememeberObject[0].password;
+
+    if (this.txtEmail !== '' && this.txtPassword !== '') {
+      setTimeout(() => {
+        (<HTMLInputElement>document.getElementById('chk_remember')).checked = true;
+      }, 200);
+    }
+
     document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
 
     let url = window.location.href;
@@ -160,4 +172,26 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+
+  rememberMe() {
+    if (this.txtEmail !== '' && this.txtPassword !== '') {
+      let objectRemember: any[] = []
+      if ((<HTMLInputElement>document.getElementById('chk_remember')).checked) {
+        objectRemember.push({ email: this.txtEmail, password: this.txtPassword })
+      } else {
+        objectRemember.push({ email: '', password: '' })
+      }
+
+      localStorage.setItem("remember", JSON.stringify(objectRemember));
+    } else {
+      const alertWarning: Alerts[] = [{
+        type: 'warning',
+        title: 'Advertencia',
+        message: 'Debe ingresar usuario y contraseña para poder recordar.'
+      }];
+      this.alert.setAlert(alertWarning[0]);
+      (<HTMLInputElement>document.getElementById('chk_remember')).checked = false;
+    }
+  }
+
 }
