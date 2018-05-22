@@ -98,90 +98,94 @@
               </div>
             </article>
 
-            <div class="separator text-muted" *ngIf="detailRequets[0].request.answers_to_json[0]">
-            </div>
+            <div *ngIf="detailRequets[0].request.answers_to_json">
+              <div *ngFor="let answer of detailRequets[0].request.answers_to_json">
+                <div class="separator text-muted">
+                </div>
 
-            <article class="panel panel-success" *ngIf="detailRequets[0].request.answers_to_json[0]">
-              <div class="panel-heading icon">
-                <i class="fa fa-check"></i>
-              </div>
-              <div class="panel-heading">
-                <h2 class="panel-title">Aprobador {{detailRequets[0].request.answers_to_json[0].approver_to_json.level}}</h2>
-              </div>
-              <div class="row">
-                <div class="col-12">
-                  <div class="widget bg-white">
-                    <div class="row">
-                      <div class="col-12 col-md-4 col-lg-2 center-img-employee">
-                        <div class="menu-img-employee">
-                          <img src="{{detailRequets[0].request.answers_to_json[0].approver_to_json.image.url}}" class="roundPhoto-employee">
-                          <br>
-                        </div>
-                      </div>
-                      <div class="col-12 col-md-8 col-lg-10">
+                <article class="panel panel-success">
+                  <div class="panel-heading icon">
+                    <i class="fa fa-check"></i>
+                  </div>
+                  <div class="panel-heading">
+                    <h2 class="panel-title">Aprobador {{answer.approver_to_json.level}}</h2>
+                  </div>
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="widget bg-white">
                         <div class="row">
-                          <div class="col-12">
-                            <h3 class="font-color-default">
-                              {{detailRequets[0].request.answers_to_json[0].approver_to_json.name_complete}}
-                            </h3>
+                          <div class="col-12 col-md-4 col-lg-2 center-img-employee">
+                            <div class="menu-img-employee">
+                              <img src="{{answer.approver_to_json.image.url}}" class="roundPhoto-employee">
+                              <br>
+                            </div>
                           </div>
-                          <div class="col-12">
-                            <p class="font-title-general">
-                              {{detailRequets[0].request.answers_to_json[0].approver_to_json.position}}
-                            </p>
-                          </div>
-                          <div class="col-12 text-left">
-                            <div class="row justify-content-center">
-                              <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
+                          <div class="col-12 col-md-8 col-lg-10">
+                            <div class="row">
+                              <div class="col-12">
+                                <h3 class="font-color-default">
+                                  {{answer.approver_to_json.name_complete}}
+                                </h3>
+                              </div>
+                              <div class="col-12">
                                 <p class="font-title-general">
-                                  <i class="font-color-default fa fa-fw fa-question-circle"></i>
-                                  Estado:
+                                  {{answer.approver_to_json.position}}
                                 </p>
                               </div>
-                              <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                <h6 class="col-4" *ngIf="detailRequets[0].request.answers_to_json[0].status == 'Aprobado'">
-                                  <span class="badge badge-primary" style="margin-top: 5px;">
-                                    {{detailRequets[0].request.answers_to_json[0].status}}
-                                  </span>
-                                </h6>
-                                <h6 class="col-4" *ngIf="detailRequets[0].request.answers_to_json[0].status == 'Cancelado'">
-                                  <span class="badge badge-danger" style="margin-top: 5px;">
-                                    {{detailRequets[0].request.answers_to_json[0].status}}
-                                  </span>
-                                </h6>
-                                <h6 class="col-4" *ngIf="detailRequets[0].request.answers_to_json[0].status == 'En Proceso'">
-                                  <span class="badge badge-success" style="margin-top: 5px;">
-                                    {{detailRequets[0].request.answers_to_json[0].status}}
-                                  </span>
-                                </h6>
-                                <h6 class="col-4" *ngIf="detailRequets[0].request.answers_to_json[0].status == 'Pendiente'">
-                                  <span class="badge badge-default" style="margin-top: 5px;">
-                                    {{detailRequets[0].request.answers_to_json[0].status}}
-                                  </span>
-                                </h6>
+                              <div class="col-12 text-left">
+                                <div class="row justify-content-center">
+                                  <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
+                                    <p class="font-title-general">
+                                      <i class="font-color-default fa fa-fw fa-question-circle"></i>
+                                      Estado:
+                                    </p>
+                                  </div>
+                                  <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
+                                    <h6 class="col-4" *ngIf="answer.status == 'Aprobado'">
+                                      <span class="badge badge-primary" style="margin-top: 5px;">
+                                        {{answer.status}}
+                                      </span>
+                                    </h6>
+                                    <h6 class="col-4" *ngIf="answer.status == 'Cancelado'">
+                                      <span class="badge badge-danger" style="margin-top: 5px;">
+                                        {{answer.status}}
+                                      </span>
+                                    </h6>
+                                    <h6 class="col-4" *ngIf="answer.status == 'En Proceso'">
+                                      <span class="badge badge-success" style="margin-top: 5px;">
+                                        {{answer.status}}
+                                      </span>
+                                    </h6>
+                                    <h6 class="col-4" *ngIf="answer.status == 'Pendiente'">
+                                      <span class="badge badge-default" style="margin-top: 5px;">
+                                        {{answer.status}}
+                                      </span>
+                                    </h6>
+                                  </div>
+                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null">
+                                    <p class="font-title-general text-center">
+                                      <i class="font-color-default fa fa-fw fa fa-comment"></i>
+                                      Observaciones:
+                                      <span style="font-weight: 100 !important">{{answer.description}}</span>
+                                    </p>
+                                  </div>
+                                </div>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.answers_to_json[0].description !== null">
-                                <p class="font-title-general text-center">
-                                  <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                  Observaciones:
-                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.answers_to_json[0].description}}</span>
+                              <div class="col-12 text-center">
+                                <p class="font-title-general">
+                                  Creada:
+                                  <time class="font-color-default">{{answer.created_date}}</time>
                                 </p>
                               </div>
                             </div>
-                          </div>
-                          <div class="col-12 text-center">
-                            <p class="font-title-general">
-                              Creada:
-                              <time class="font-color-default">{{detailRequets[0].request.answers_to_json[0].created_date}}</time>
-                            </p>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                </article>
               </div>
-            </article>
+            </div>
 
             <div *ngIf="detailRequets[0].pending_level_approver">
               <div class="separator text-muted">
