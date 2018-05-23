@@ -9,14 +9,16 @@ import { Evaluations } from '../../../models/common/evaluations/evaluations';
   styleUrls: ['./evaluated.component.css']
 })
 export class EvaluatedComponent implements OnInit {
-  public evaluationsListPendind: Evaluations;
-  public evaluationsListSubmitted: Evaluations;
+  public evaluationsListPendind: Evaluations[]=[];
+  public evaluationsListSubmitted: Evaluations[]=[];
 
   constructor(public evaluationService: EvaluationsService,
     public evaluationSharedService: EvaluationsSharedService) {
     this.evaluationService.getEvaluationList().subscribe((res: any) => {
+      setTimeout(() => {        
       this.evaluationsListPendind = res.data[0].pendind;
       this.evaluationsListSubmitted = res.data[0].submitted;
+      }, 100);
     })
   }
 

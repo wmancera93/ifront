@@ -8,22 +8,41 @@
         <h4 class="modal-title titleColor text-shadow">{{infoEvaluation.title}}</h4>
       </div>
       <div class="modal-body bodyColorInfo">
+      
         <div class="row justify-content-center">
           <div class="col-12">
             {{infoEvaluation.description}}
           </div>
         </div>
-        <div class="row borderLine-question justify-content-center" *ngFor="let question of questions; let index = index;" style="margin-top: 15px;">
+        <div class="row border-botton-general justify-content-center" *ngFor="let question of questions; let index = index;" style="margin-top: 15px;">
 
           <div class="col-12">
             {{question.description}}
           </div>
           <div class="col-12" *ngFor="let answer of question.answer_options;">
             <label class="container custom-control custom-radio"> {{answer.description}}
-              <input type="radio" [attr.name]="index">
+              <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id)">
               <span class="checkmark"></span>
             </label>
           </div>
+        </div>
+        <div class="row justify-content-center" style="margin-top:10px;">
+          <div class="col-md-12 top-containter">
+            <div class="row justify-content-end">
+              <div class="col-lg-3 col-md-4 col-12">
+                <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                  <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="modal-footerInfo justify-content-center">
+        <div class="col-12 col-lg-3 buttonCloseForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
+          <h6> Cerrar </h6>
         </div>
       </div>
     </div>

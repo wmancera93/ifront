@@ -25,7 +25,7 @@
         </div>
       </div>
       <div class="row justify-content-center top-containter">
-        <div class="col-12" >
+        <div class="col-12" *ngIf="evaluationsListPendind">
           <div class="row justify-content-center top-containter" *ngIf="evaluationsListPendind.length === 0" style="margin-top:25px;">
             <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
@@ -47,7 +47,7 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                   <div class="row">
                     <div class="col-12 number-size text-info" (click)="fillEvaluation(evaluation)">
                       <i class="fa fa-pencil"></i>
@@ -56,17 +56,7 @@
                       Presentar
                     </div>
                   </div>
-                </div>
-                <div class="col-1">
-                  <div class="row">
-                    <div id="seeEval" class="col-12 number-size">
-                      <i class="fa fa-eye"></i>
-                    </div>
-                    <div class="col-12">
-                      Ver
-                    </div>
-                  </div>
-                </div>
+                </div>               
               </div>
             </div>
           </div>
@@ -94,7 +84,7 @@
           <div *ngIf="evaluationsListSubmitted.length !== 0">
             <div class="widget bg-white-1x" *ngFor="let evaluationSub of evaluationsListSubmitted">
               <div class="row justify-content-center">
-                <div class="col-10 text-center top-p">
+                <div class="col-12 col-xl-10 text-center top-p">
                   <div class="row justify-content-center">
                     <div class="col-12 font-color-default text-lg-left title-size hoverTitle">
                       <strong>{{evaluationSub.title |uppercase}} </strong>
@@ -103,18 +93,8 @@
                       {{evaluationSub.description}}
                     </div>
                   </div>
-                </div>
-                <div class="col-1">
-                  <div class="row">
-                    <div class="col-12 number-size text-info">
-                      <i class="fa fa-pencil"></i>
-                    </div>
-                    <div class="col-12">
-                      Presentar
-                    </div>
-                  </div>
-                </div>
-                <div class="col-1">
+                </div>                
+                <div class="col-xl-2 col-12">
                   <div class="row">
                     <div id="seeEval" class="col-12 number-size">
                       <i class="fa fa-eye"></i>
