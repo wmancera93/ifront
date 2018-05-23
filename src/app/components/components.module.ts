@@ -39,6 +39,7 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
 import { ShowEventsComponent } from './common/show-events/show-events.component';
 import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
+import { ViewEvaluationComponent } from './common/view-evaluation/view-evaluation.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     LoadingComponent,
     ErrorPageHttpComponent,
     ShowEventsComponent,
-    GerencialModalComponent
+    GerencialModalComponent,
+    ViewEvaluationComponent
   ],
   exports: [
     HeaderComponent,
