@@ -64,9 +64,24 @@
                 <p class="font-title-general">
                   Estado
                 </p>
-                <h6>
+                <h6 *ngIf="managed.status == 'Aprobado'">
                   <span class="badge badge-primary">
-                    Aprobado
+                    {{managed.status}}
+                  </span>
+                </h6>
+                <h6 *ngIf="managed.status == 'Cancelado'">
+                  <span class="badge badge-danger">
+                    {{managed.status}}
+                  </span>
+                </h6>
+                <h6 *ngIf="managed.status == 'En Proceso'">
+                  <span class="badge badge-success">
+                    {{managed.status}}
+                  </span>
+                </h6>
+                <h6 *ngIf="managed.status == 'Pendiente'">
+                  <span class="badge badge-default">
+                    {{managed.status}}
                   </span>
                 </h6>
               </div>
