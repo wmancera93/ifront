@@ -3,7 +3,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class EvaluationsSharedService {
-  infoEvaluation: Subject<any> = new Subject<any>(); 
+  infoEvaluation: Subject<any> = new Subject<any>();   
+  infoViewEvaluation: Subject<any> = new Subject<any>(); 
 
   constructor() { }
 
@@ -13,6 +14,14 @@ export class EvaluationsSharedService {
 
   setInfoEvaluation(Evaluation: any) {
     return this.infoEvaluation.next(Evaluation);
+  }
+
+  getInfoViewEvaluation() {
+    return this.infoViewEvaluation;
+  }
+
+  setInfoViewEvaluation(viewEval: any) {
+    return this.infoViewEvaluation.next(viewEval);
   }
 
 }

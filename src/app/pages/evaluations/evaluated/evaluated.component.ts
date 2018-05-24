@@ -17,7 +17,7 @@ export class EvaluatedComponent implements OnInit {
     this.evaluationService.getEvaluationList().subscribe((res: any) => {
       setTimeout(() => {        
       this.evaluationsListPendind = res.data[0].pendind;
-      this.evaluationsListSubmitted = res.data[0].submitted;
+      this.evaluationsListSubmitted = res.data[0].pendind;
       }, 100);
     })
   }
@@ -36,6 +36,12 @@ export class EvaluatedComponent implements OnInit {
   fillEvaluation(dataEval: any) {
     this.evaluationSharedService.setInfoEvaluation(dataEval);
     //Enviar el id
+  }
+
+  seeEvaluation (viewData : any)
+  {
+    this.evaluationSharedService.setInfoViewEvaluation(viewData);
+    console.log(viewData)
   }
 
 }
