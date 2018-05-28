@@ -48,7 +48,7 @@ export class EventsEmployeesComponent implements OnInit {
             (<HTMLInputElement>document.getElementById("my_team").childNodes[3]).style.width = '500px';
           }
         }
-      }, 300);
+      }, 1000);
 
     })
 
