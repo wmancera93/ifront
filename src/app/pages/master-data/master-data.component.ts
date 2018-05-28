@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
 import { DataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class MasterDataComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public getDataMaster: MasterDataService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -44,6 +46,9 @@ export class MasterDataComponent implements OnInit {
       behavior: 'smooth'
     });
     this.showPersonalData();
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 2000);
   }
 
   showPersonalData() {

@@ -6,6 +6,7 @@ import { DashboardEmployeeService } from '../../../services/dashboard/employee/d
 import { Router, NavigationEnd } from '@angular/router';
 import { EstadisticsComponent } from '../../../components/common/widgets/estadistics/estadistics.component';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-employees',
@@ -30,9 +31,9 @@ export class EmployeesComponent implements OnInit {
 
   constructor(
     public dashboardEmployeeService: DashboardEmployeeService,
-    public router: Router, ) {
-
-
+    public router: Router,
+    public stylesExplorerService: StylesExplorerService) {
+     
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/index') {
@@ -115,6 +116,10 @@ export class EmployeesComponent implements OnInit {
           this.objectNewEmployee.emit(data.data[0].new_employees);
         }
       });
+
+      setTimeout(() => {
+        this.stylesExplorerService.addStylesCommon();
+      }, 3000);
 
     setTimeout(() => {
       // document.getElementById("loginId").style.display = 'none'

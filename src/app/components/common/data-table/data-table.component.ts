@@ -5,6 +5,7 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -44,7 +45,8 @@ export class DataTableComponent implements OnInit {
   constructor(public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
     public router: Router,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -104,6 +106,10 @@ export class DataTableComponent implements OnInit {
         // }, 1500)
       }
     });
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 4000);
   }
 
   pdfExport() {

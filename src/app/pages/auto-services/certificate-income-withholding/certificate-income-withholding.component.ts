@@ -3,6 +3,7 @@ import { AutoServicesService } from '../../../services/auto-services/auto-servic
 import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-certificate-income-withholding',
@@ -20,7 +21,8 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   constructor(
     public autoServiceService: AutoServicesService, 
     public sanitizer: DomSanitizer,
-    public tokenService: Angular2TokenService) {
+    public tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
       this.tokenService.validateToken()
         .subscribe(
@@ -61,6 +63,10 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
         // }, 3000)
       }
     })
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
   selectedObject(select: Certificate) {
     this.urlPDF = select.file.url;

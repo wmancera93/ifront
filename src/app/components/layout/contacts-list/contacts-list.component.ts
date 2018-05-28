@@ -4,6 +4,7 @@ import { EmployeeService } from '../../../services/common/employee/employee.serv
 import { EmployeeInfoService } from '../../../services/shared/common/employee/employee-info.service';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 
 
@@ -39,6 +40,7 @@ export class ContactsListComponent implements OnInit {
   constructor(public employeeService: EmployeeService,
     public router: Router,
     public employeeSharedService: EmployeeInfoService,
+    public stylesExplorerService: StylesExplorerService
   ) {
   }
   ngOnInit() {
@@ -50,6 +52,10 @@ export class ContactsListComponent implements OnInit {
           this.searchListContacts = this.contacts;
         }
       });
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 600);
   }
   enterNameEmployee() {
     this.searchIconActive = true;

@@ -7,6 +7,7 @@ import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized } from '@angular/router';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 declare var jsPDF: any;
 @Component({
@@ -45,7 +46,8 @@ export class RequestsComponent implements OnInit {
     public excelService: ExcelService,
     private tokenService: Angular2TokenService,
     public router: Router,
-    public aproversRequestsService: AproversRequestsService) {
+    public aproversRequestsService: AproversRequestsService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -104,6 +106,18 @@ export class RequestsComponent implements OnInit {
           // }, 2000)
         }
       })
+
+    setTimeout(() => {
+      if (this.stylesExplorerService.validateBrowser()) {
+        let dataEnterprise: Enterprise;
+        dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+        document.getElementById('all').style.backgroundColor = dataEnterprise.primary_color;
+      }
+    }, 600);
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 300);
   }
 
   filter(parameter: string) {
@@ -132,16 +146,38 @@ export class RequestsComponent implements OnInit {
             this.labels.push({ value: label.value, type: label.type, label: element });
             this.columnsPdf.push({ title: label.value, dataKey: element });
           })
-          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
-          document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
-          document.getElementById(parameter).className = 'filters-reports-active';
+
+          if (this.stylesExplorerService.validateBrowser()) {
+            let dataEnterprise: Enterprise;
+            document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+            dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+            document.getElementById('all').removeAttribute('style');
+            document.getElementById('process').removeAttribute('style');
+            document.getElementById('cancel').removeAttribute('style');
+            document.getElementById('pending').removeAttribute('style');
+            document.getElementById('aproved').removeAttribute('style');
+            document.getElementById(parameter).style.backgroundColor = dataEnterprise.primary_color;
+            document.getElementById(parameter).style.fontSize = "15px";
+            document.getElementById(parameter).style.color = "#fff";
+          } else {
+            document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+            document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
+            document.getElementById(parameter).className = 'filters-reports-active';
+          }
           this.filter_active = parameter;
+
         };
       })
+
+    this.stylesExplorerService.addStylesCommon();
   }
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 100);
   }
 
   searcheByName() {

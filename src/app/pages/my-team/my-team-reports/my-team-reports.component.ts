@@ -4,6 +4,7 @@ import { EspecificMyTeam, InfoWorkTeamReport, Data } from '../../../models/commo
 import { MyTeamInfoService } from '../../../services/my-team/my-team-info.service';
 import { EILSEQ } from 'constants';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 @Component({
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
@@ -22,7 +23,8 @@ export class MyTeamReportsComponent implements OnInit {
 
   constructor(public myTeamSharedService: MyTeamReportService,
     public myTeamService: MyTeamInfoService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -52,6 +54,10 @@ export class MyTeamReportsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 200);
   }
 
   returnBackPage() {

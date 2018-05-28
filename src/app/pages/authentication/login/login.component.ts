@@ -13,6 +13,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { User } from '../../../models/general/user';
 import { Enterprise } from '../../../models/general/enterprise';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 declare const ga: any;
 
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     public alert: AlertsService,
     public userSharedService: UserSharedService,
     private mainService: MainService,
-    public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -56,8 +58,6 @@ export class LoginComponent implements OnInit {
       }, 200);
     }
 
-    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
-
     let url = window.location.href;
     let ambient;
 
@@ -72,10 +72,23 @@ export class LoginComponent implements OnInit {
     this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;
-        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);
-        document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
-        document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
-        document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+        if (!this.stylesExplorerService.validateBrowser()) {
+          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);
+          document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
+          document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
+          document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+        } else {
+          document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
+          setTimeout(() => {
+            this.stylesExplorerService.stylesInExplorerOrEdge(
+              this.dataEnterprise[0].background_login.url,
+              this.dataEnterprise[0].primary_color,
+              this.dataEnterprise[0].primary_color,
+              this.dataEnterprise[0].body_text, '', '',
+              '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
+            )
+          }, 200);
+        }
 
         var link = document.createElement('link'),
           oldLink = document.getElementById('fa_icon');
@@ -91,7 +104,6 @@ export class LoginComponent implements OnInit {
       })
     if (this.dataEnterprise.length > 0) {
       this.heightContenGeneral = document.getElementById("headerLogin").clientHeight - this.heightContenGeneral;
-      document.documentElement.style.setProperty(`--heigth-content-general`, this.heightContenGeneral + 'px');
     }
   }
 

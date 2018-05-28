@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { ManagerialDataService } from '../../../services/shared/common/managerial-data/managerial-data.service';
 import { ButtonReturnService } from '../../../services/shared/common/managerial-data/button-return/button-return.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-managerial',
@@ -35,7 +36,9 @@ export class ManagerialComponent implements OnInit {
     public router: Router,
     private tokenService: Angular2TokenService,
     public managerialDataShared: ManagerialDataService,
-    public buttonReturnService: ButtonReturnService) {
+    public buttonReturnService: ButtonReturnService,
+    public stylesExplorerService: StylesExplorerService) {
+    
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
@@ -126,7 +129,9 @@ export class ManagerialComponent implements OnInit {
     this.objectReports.emit(reports[0]);
 
 
-
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 3000);
     // setTimeout(() => {
     //   document.getElementById("loginId").style.display = 'none'
     //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");

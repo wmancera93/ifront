@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MyTeamReportService } from '../../services/shared/common/my-team/my-team-report.service';
 import { timeout } from 'q';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-my-team',
@@ -24,7 +25,8 @@ export class MyTeamComponent implements OnInit {
   constructor(public myTeamInfoService: MyTeamInfoService,
     public myTeamSharedService: MyTeamReportService,
     public router: Router,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -60,6 +62,10 @@ export class MyTeamComponent implements OnInit {
           // }, 1000)
         }
       })
+
+      setTimeout(() => {
+        this.stylesExplorerService.addStylesCommon();
+      }, 1000);
   }
 
   goToMyTeamReports(employeesInMyTeam) {
