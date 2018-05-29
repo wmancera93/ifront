@@ -6,6 +6,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-my-publications',
@@ -27,7 +28,8 @@ export class MyPublicationsComponent implements OnInit {
     public alert: AlertsService,
     public billboardSharedService: BillboardService,
     public editEditSharedService: EditArticleService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -90,6 +92,10 @@ export class MyPublicationsComponent implements OnInit {
     });
 
     this.getDataPublications();
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
   getDataPublications() {

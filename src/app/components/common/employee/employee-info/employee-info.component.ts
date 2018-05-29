@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EmployeeInfoService } from '../../../../services/shared/common/employee/employee-info.service';
 import { Employee } from '../../../../models/general/user';
+import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -18,7 +19,8 @@ export class EmployeeInfoComponent implements OnInit {
   public isBoss: boolean = false;
   public validateRol: boolean;
 
-  constructor(public employeeSharedService: EmployeeInfoService) {
+  constructor(public employeeSharedService: EmployeeInfoService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
       this.employeeInfo = null;
@@ -31,6 +33,9 @@ export class EmployeeInfoComponent implements OnInit {
       if (document.getElementById("modal-" + this.employeeInfo.modal).className !== 'modal show') {
         document.getElementById('btn-' + this.employeeInfo.modal).click();
         document.getElementById("bodyGeneral").removeAttribute('style');
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 500);
       }
     })
   }

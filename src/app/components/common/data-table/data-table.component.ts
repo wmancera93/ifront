@@ -5,6 +5,7 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -44,7 +45,8 @@ export class DataTableComponent implements OnInit {
   constructor(public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
     public router: Router,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -104,6 +106,10 @@ export class DataTableComponent implements OnInit {
         // }, 1500)
       }
     });
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 4000);
   }
 
   pdfExport() {
@@ -115,6 +121,9 @@ export class DataTableComponent implements OnInit {
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
 
+   let alineation = '';
+   let positionPage = 0;
+
     if (dd.toString().length === 1) {
       ddNew = '0' + dd.toString();
     }
@@ -124,8 +133,17 @@ export class DataTableComponent implements OnInit {
 
     let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
     let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
-    var doc = new jsPDF('p', 'pt');
+    if (this.columnsPdf.length > 5) {
+      alineation = 'l';
+      positionPage = 740;
+    }else{
+      alineation = 'p';
+      positionPage = 500;
+    }
+
+    var doc = new jsPDF(alineation, 'pt');
     doc.page = 1;
+
     doc.autoTable(this.columnsPdf, this.recordsPrint, {
       theme: 'striped',
       styles: {
@@ -154,11 +172,10 @@ export class DataTableComponent implements OnInit {
         doc.setFontSize(12)
         doc.text(40, 95, 'Generado el ' + dateNow)
         doc.setFontSize(10)
-        doc.text(500, 60, 'pagina ' + doc.page);
+        doc.text(positionPage, 60, 'pagina ' + doc.page);
         doc.page++;
       }
     });
-
     doc.save(title + '.pdf')
   }
 

@@ -6,6 +6,7 @@ import { MyPublicationsService } from '../../../services/billboard/my-publicatio
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { debug } from 'util';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 
 @Component({
@@ -38,7 +39,8 @@ export class CommentArticleComponent implements OnInit {
 
   constructor(public billboardSharedService: BillboardService,
     public alert: AlertsService,
-    public myPublicationService: MyPublicationsService) {
+    public myPublicationService: MyPublicationsService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
@@ -70,6 +72,9 @@ export class CommentArticleComponent implements OnInit {
       this.nameThisModal = data;
     })
 
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
 

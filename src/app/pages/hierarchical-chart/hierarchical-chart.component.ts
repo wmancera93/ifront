@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 import { SafeHtml, DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 
 
 @Component({
@@ -61,7 +62,8 @@ export class HierarchicalChartComponent implements OnInit {
     public http: HttpClient,
     private domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    private eRef: ElementRef) {
+    private eRef: ElementRef,
+    public stylesExplorerService: StylesExplorerService) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -85,6 +87,9 @@ export class HierarchicalChartComponent implements OnInit {
     });
    
     this.getHierarchical(null);
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 3000);
   }
 
   @HostListener('document:click', ['$event'])

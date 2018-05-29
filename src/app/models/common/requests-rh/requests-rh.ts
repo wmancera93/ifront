@@ -42,6 +42,7 @@ export interface AproverEmployee {
 }
 
 export interface DetailRequest {
+    message_pending_level_approver?: string,
     pending_level_approver: PendingLevelApprover,
     request: Request,
     total_request_answers: number,

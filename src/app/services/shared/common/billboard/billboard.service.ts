@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 export class BillboardService {
   exportUpdateNew: Subject<any> = new Subject<any>();
   exportCommentNew: Subject<any> = new Subject<any>();
+  exportEditNew: Subject<any> = new Subject<any>();
   constructor() {
    }
 
@@ -25,11 +26,11 @@ export class BillboardService {
   }
 
   getRefreshEditNew() {
-    return this.exportCommentNew;
+    return this.exportEditNew;
   }
 
   setRefreshEditNew(objectEdit: any) {
-    return this.exportCommentNew.next(objectEdit);
+    return this.exportEditNew.next(objectEdit);
   }
 
 }
