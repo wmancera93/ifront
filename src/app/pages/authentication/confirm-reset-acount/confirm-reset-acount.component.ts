@@ -41,7 +41,6 @@ export class ConfirmResetAcountComponent implements OnInit {
 
 
   ngOnInit() {
-    debugger
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
       let ambient;
@@ -162,8 +161,17 @@ export class ConfirmResetAcountComponent implements OnInit {
 
   blurPasword() {
     if (this.txtPassword !== '') {
-      let expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
-      if (!expressionRegular.test(this.txtPassword)) {
+      let expressionRegular
+      let validatePasword
+      if(this.dataEnterprise.login_ldap){
+        expressionRegular = true;
+        validatePasword = expressionRegular;
+      } else {
+        expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
+        validatePasword = expressionRegular.test(this.txtPassword)
+      }
+      
+      if (!validatePasword) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',

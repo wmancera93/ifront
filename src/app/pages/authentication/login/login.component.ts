@@ -109,8 +109,17 @@ export class LoginComponent implements OnInit {
 
   singInSession() {
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
-      let expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
-      if (expressionRegular.test(this.txtPassword)) {
+      let expressionRegular
+      let validatePasword
+      if(this.dataEnterprise[0].login_ldap){
+        expressionRegular = true;
+        validatePasword = expressionRegular;
+      } else {
+        expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
+        validatePasword = expressionRegular.test(this.txtPassword)
+      }
+      
+      if (validatePasword) {
         this.tokenService.signIn({
           email: this.txtEmail,
           password: this.txtPassword
