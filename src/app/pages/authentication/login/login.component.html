@@ -28,7 +28,7 @@
                     <div class="float-general-login">
                         <div class="btn btn-primary btn-block font-controls-login" (click)='singInSession()'>Iniciar</div>
                     </div>
-                    <div class="form-group float-general-login width-input-login text-center">
+                    <div *ngIf="!dataEnterprise[0].login_ldap" class="form-group float-general-login width-input-login text-center">
                         <input id="chk_remember" type="checkbox" [attr.checked]="remember" (click)="rememberMe()">
                         Recuerdame
                     </div>
