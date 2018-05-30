@@ -22,9 +22,15 @@
                 <div class="col-6 titleColor align-self-center text-center">
                   {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
                 </div>
-                <div class="col-3 titleColor align-self-center text-center">
+                <div *ngIf="" class="col-3 titleColor align-self-center text-center">
                   <strong>{{employeeList.fecha_ingreso}}</strong>
                 </div>
+                <!-- <div *ngIf="" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.fecha_ingreso}}</strong>
+                </div>
+                <div *ngIf="" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.fecha_ingreso}}</strong>
+                </div> -->
               </div>
             </div>
           </div>
