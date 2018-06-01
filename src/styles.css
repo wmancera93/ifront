@@ -186,6 +186,20 @@ input[type="file"] {
     color: var(--primary)
 }
 
+thead{
+    background-color: #2f4050;
+    color: #fff
+}
+
+.filter-table{
+    background-color: #fff;
+}
+
+/* th> div> input {
+    background-color: #9a9a9a !important;
+    color: #fff !important;
+} */
+
 .row-hr {
     display: -webkit-box;
     display: -ms-flexbox;
