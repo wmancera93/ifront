@@ -21,16 +21,16 @@
                 </div>
                 <div class="col-6 titleColor align-self-center text-center">
                   {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
+                  <div style="color: #bbbbbb;">
+                    {{employeeList.posicion}}
+                  </div>
                 </div>
-                <div *ngIf="" class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.fecha_ingreso}}</strong>
+                <div *ngIf="flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.time_birthday}}</strong>
                 </div>
-                <!-- <div *ngIf="" class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.fecha_ingreso}}</strong>
+                <div *ngIf="!flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.time_anniversary}}</strong>
                 </div>
-                <div *ngIf="" class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.fecha_ingreso}}</strong>
-                </div> -->
               </div>
             </div>
           </div>
