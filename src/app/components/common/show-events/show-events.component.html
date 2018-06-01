@@ -22,7 +22,9 @@
                 <div class="col-6 titleColor align-self-center text-center">
                   {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
                   <div style="color: #bbbbbb;">
-                    {{employeeList.posicion}}
+                    <span class="text-capitalize">
+                      {{employeeList.posicion | lowercase}}
+                    </span>
                   </div>
                 </div>
                 <div *ngIf="flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
