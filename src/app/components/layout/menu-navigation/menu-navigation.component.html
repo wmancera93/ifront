@@ -51,14 +51,14 @@
             <li *ngIf="dataEnterprise.show_certificates_labor">
               <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
-              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
-            </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_payroll">
               <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_income">
               <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
+            </li>
+            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
+              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
             </li>
           </ul>
         </div>

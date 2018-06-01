@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
         validatePasword = expressionRegular;
       } else {
         expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
-        validatePasword = expressionRegular.test(this.txtPassword)
+        validatePasword = expressionRegular.test(this.txtPassword);
       }
       
       if (validatePasword) {

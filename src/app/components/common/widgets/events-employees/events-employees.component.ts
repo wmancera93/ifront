@@ -55,10 +55,7 @@ export class EventsEmployeesComponent implements OnInit {
           }
         }, 3000);
       };
-
-    })
-
-
+    });
   }
 
   showEventList() {
@@ -66,7 +63,6 @@ export class EventsEmployeesComponent implements OnInit {
     setTimeout(() => {
       this.infoEventEmployee.setInfoEventEmployee({ objectInfo: this.objectWidget, modal: 'modalInfoEvent' });
     }, 500);
-
-
   }
+
 }

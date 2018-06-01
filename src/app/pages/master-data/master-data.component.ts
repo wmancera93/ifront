@@ -54,136 +54,90 @@ export class MasterDataComponent implements OnInit {
   showPersonalData() {
     this.dataMaster = [];
     this.titleData = 'Datos personales';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data;
       this.lengthArray = personal.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
     })
   }
 
-  showContactData() {
-    this.titleData = 'Datos de contacto';
-    this.dataMaster = [];
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataContact().subscribe((contact: any) => {
-      this.dataMaster = contact.data;
-      this.lengthArray = contact.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
+  showData(idTag: string) {
+    document.getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(idTag).className = 'nav-item navReport tabReport active-report text-left';
 
+    switch (idTag) {
+      case 'PersonalData':
+        this.showPersonalData();
+        break;
 
-    })
-  }
+      case 'listContactData':
+        this.titleData = 'Datos de contacto';
+        this.dataMaster = [];
+        this.getDataMaster.getDataContact().subscribe((contact: any) => {
+          this.dataMaster = contact.data;
+          this.lengthArray = contact.data.length;
+        })
+        break;
+      case 'listFamilyData':
+        this.dataMaster = [];
+        this.titleData = 'Datos familiares';
+        this.getDataMaster.getDataFamily().subscribe((family: any) => {
+          this.dataMaster = family.data;
+          this.lengthArray = family.data.length;
+        })
+        break;
+      case 'listAcademicData':
+        this.dataMaster = [];
+        this.titleData = 'Datos académicos';
+        this.getDataMaster.getDataStudies().subscribe((studies: any) => {
+          this.dataMaster = studies.data;
+          this.lengthArray = studies.data.length;
+        })
+        break;
+      case 'listEnterpriseData':
+        this.dataMaster = [];
+        this.titleData = 'Datos empresariales';
+        this.getDataMaster.getDataBussiness().subscribe((enterprise: any) => {
+          this.dataMaster = enterprise.data;
+          this.lengthArray = enterprise.data.length;
+        })
+        break;
+      case 'listBankData':
+        this.dataMaster = [];
+        this.titleData = 'Datos bancarios';
+        this.getDataMaster.getDataBanking().subscribe((bank: any) => {
+          this.dataMaster = bank.data;
+          this.lengthArray = bank.data.length;
+        })
+        break;
+      case 'listBeneficData':
+        this.dataMaster = [];
+        this.titleData = 'Datos de los beneficiaros';
+        this.getDataMaster.getDataBeneficiaries().subscribe((beneficiaries: any) => {
+          this.dataMaster = beneficiaries.data;
+          this.lengthArray = beneficiaries.data.length;
+        })
+        break;
+      case 'listSoSecurityData':
+        this.dataMaster = [];
+        this.titleData = 'Seguridad social';
+        this.getDataMaster.getDataSocialSecurity().subscribe((social: any) => {
+          this.dataMaster = social.data;
+          this.lengthArray = social.data.length;
+        })
+        break;
+      case 'listReteFuentData':
+        this.dataMaster = [];
+        this.titleData = 'Retención en la fuente';
+        this.getDataMaster.getDataReteFuente().subscribe((retefuente: any) => {
+          this.dataMaster = retefuente.data;
+          this.lengthArray = retefuente.data.length;
+        })
+        break;
 
-  showFamilyData() {
-    this.dataMaster = [];
-    this.titleData = 'Datos familiares';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataFamily().subscribe((family: any) => {
-      this.dataMaster = family.data;
-      this.lengthArray = family.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
+      default:
+        break;
+    }
 
-  showAcademicData() {
-    this.dataMaster = [];
-    this.titleData = 'Datos académicos';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataStudies().subscribe((studies: any) => {
-      this.dataMaster = studies.data;
-      this.lengthArray = studies.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
-  showEnterpiseData() {
-    this.dataMaster = [];
-    this.titleData = 'Datos empresariales';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataBussiness().subscribe((enterprise: any) => {
-      this.dataMaster = enterprise.data;
-      this.lengthArray = enterprise.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
-
-  showBankData() {
-    this.dataMaster = [];
-    this.titleData = 'Datos bancarios';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataBanking().subscribe((bank: any) => {
-      this.dataMaster = bank.data;
-      this.lengthArray = bank.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
-
-  showBeneficData() {
-    this.dataMaster = [];
-    this.titleData = 'Datos de los beneficiaros';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataBeneficiaries().subscribe((beneficiaries: any) => {
-      this.dataMaster = beneficiaries.data;
-      this.lengthArray = beneficiaries.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
-  showSoSecurityData() {
-    this.dataMaster = [];
-    this.titleData = 'Seguridad social';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataSocialSecurity().subscribe((social: any) => {
-      this.dataMaster = social.data;
-      this.lengthArray = social.data.length;
-
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
-  }
-  showReteFuentData() {
-    this.dataMaster = [];
-    this.titleData = 'Retención en la fuente';
-    // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-    this.getDataMaster.getDataReteFuente().subscribe((retefuente: any) => {
-      this.dataMaster = retefuente.data;
-      this.lengthArray = retefuente.data.length;
-      // setTimeout(() => {
-      //   document.getElementById("loginId").style.display = 'none'
-      //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-      // }, 1000)
-    })
   }
 
 }
