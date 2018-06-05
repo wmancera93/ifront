@@ -138,11 +138,11 @@
                     </div>
                     <div class="row justify-content-between">
                       <div class="col-md-3 col-6 center-img-aprovers tops" *ngFor="let approvers of approvals[0].approvers_to_json">
-                        <div class="img-approvers">
+                        <div class="img-approvers" *ngIf="approvers.image != null">
                           <img src="{{approvers.image.url}}" class="img-employee">
                           <br>
                         </div>
-                        <p class="paddingInfo text-left text-md-center" style="font-weight: 100 !important">
+                        <p *ngIf="approvers.short_name != null" class="paddingInfo text-left text-md-center" style="font-weight: 100 !important">
                           {{approvers.short_name}}
                         </p>
                       </div>
@@ -171,8 +171,7 @@
                       <div class="row">
                         <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
                           <div class="row justify-content-center">
-                            <div class="col-12">
-                              {{approvals[0].type_request_to_json.prerequisites}}
+                            <div class="col-12" [innerHTML]="approvals[0].type_request_to_json.prerequisites">
                             </div>
                             <div class="col-md-4 col-12">
                               <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
@@ -228,7 +227,7 @@
                         <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
                             <div class="col-12 text-left">
-                                <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
+                              <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
                               Nivel de aprobación {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">
@@ -241,7 +240,8 @@
                                 Descripción:
                               </h3>
                             </div>
-                            <div class="col-12 text-left" [innerHTML]="details.description">
+                            <div class="col-12 text-left">
+                              {{details.description}}
                             </div>
                           </div>
                         </div>
@@ -270,3 +270,4 @@
       </div>
     </div>
   </div>
+</div>
