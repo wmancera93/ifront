@@ -177,22 +177,11 @@
           <span class="nav-label">Banners</span>
         </a>
       </li>
-      <li id="liEvaluations" >
-        <a class="nav-link bg-menu" data-toggle="collapse" href="#evaluations" (click)="clickOptionMenu('liEvaluations','toggle-Evaluations', 'evaluations')">
+      <li id="liEvaluations" *ngIf="dataEnterprise.show_evaluations">
+        <a class="nav-link bg-menu" routerLink="/ihr/evaluated" (click)="clickOptionMenu('liEvaluations','toggle-Evaluations', 'evaluations')">
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones</span>
-          <span class="fa fa-angle-down"></span>
         </a>
-        <div id="evaluations" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
-            <li>
-              <a id="aEvaluatedEval" class="nav-link bg-menu"  routerLink="/ihr/evaluated" (click)="clickOptionMenu('liEvaluations','aEvaluatedEval', 'evaluations')">Evaluado</a>
-            </li>
-            <li class="bg-li">
-              <a id="aManagedEval" class="nav-link bg-menu" (click)="clickOptionMenu('liEvaluations','aManagedEval', 'evaluations')">Calificador</a>
-            </li>
-          </ul>
-        </div>
       </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">

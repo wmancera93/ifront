@@ -9,16 +9,16 @@ import { Evaluations } from '../../../models/common/evaluations/evaluations';
   styleUrls: ['./evaluated.component.css']
 })
 export class EvaluatedComponent implements OnInit {
-  public evaluationsListPendind: Evaluations[]=[];
-  public evaluationsListSubmitted: Evaluations[]=[];
+  public evaluationsListPendind: Evaluations[] = [];
+  public evaluationsListSubmitted: Evaluations[] = [];
 
   constructor(public evaluationService: EvaluationsService,
     public evaluationSharedService: EvaluationsSharedService) {
-    this.evaluationService.getEvaluationList().subscribe((res: any) => {
-      setTimeout(() => {        
-      this.evaluationsListPendind = res.data[0].pendind;
-      this.evaluationsListSubmitted = res.data[0].pendind;
-      }, 100);
+    this.getDataEvaluation();
+    this.evaluationSharedService.getRefreshEvaluationData().subscribe((refresh: any) => {
+      if (refresh == true) {
+        this.getDataEvaluation();
+      }
     })
   }
 
@@ -32,16 +32,21 @@ export class EvaluatedComponent implements OnInit {
 
   }
 
-
-  fillEvaluation(dataEval: any) {
-    this.evaluationSharedService.setInfoEvaluation(dataEval);
-    //Enviar el id
+  getDataEvaluation() {
+    this.evaluationService.getEvaluationList().subscribe((res: any) => {
+      setTimeout(() => {
+        this.evaluationsListPendind = res.data[0].pendind;
+        this.evaluationsListSubmitted = res.data[0].submitted;
+      }, 100);
+    })
   }
 
-  seeEvaluation (viewData : any)
-  {
+  fillEvaluation(dataEval: any) {
+    this.evaluationSharedService.setInfoEvaluation(dataEval.id);
+  }
+
+  seeEvaluation(viewData: any) {
     this.evaluationSharedService.setInfoViewEvaluation(viewData);
-    console.log(viewData)
   }
 
 }

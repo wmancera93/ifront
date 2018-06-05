@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 export class EvaluationsSharedService {
   infoEvaluation: Subject<any> = new Subject<any>();   
   infoViewEvaluation: Subject<any> = new Subject<any>(); 
+  refreshEvaluation: Subject<any> = new Subject<any>(); 
 
   constructor() { }
 
@@ -22,6 +23,14 @@ export class EvaluationsSharedService {
 
   setInfoViewEvaluation(viewEval: any) {
     return this.infoViewEvaluation.next(viewEval);
+  }
+
+  getRefreshEvaluationData() {
+    return this.refreshEvaluation;
+  }
+
+  setRefreshEvaluationData(refresh: any) {
+    return this.refreshEvaluation.next(refresh);
   }
 
 }

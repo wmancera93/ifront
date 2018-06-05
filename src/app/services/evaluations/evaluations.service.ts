@@ -19,5 +19,16 @@ export class EvaluationsService {
       .map((data: any) => data.json());
   }
 
+  getShowEvaluation(id : number) {
+    return this.tokenService.get('evaluations/see_detail/'+id)
+      .map((data: any) => data.json());
+  }
+
+  postDataEvaluation (objectData : any)  
+  {
+    return this.tokenService.post('evaluations', objectData)
+    .map((data: any) => data.json()); 
+  }
+
 }
 
