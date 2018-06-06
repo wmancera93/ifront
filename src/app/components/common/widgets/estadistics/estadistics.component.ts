@@ -87,6 +87,7 @@ export class EstadisticsComponent implements OnInit {
           this.barChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
           this.barChartOptions = {
             responsive: true,
+            maintainAspectRatio: false,
             scales: {
               xAxes: [{
                 display: false,
@@ -97,7 +98,7 @@ export class EstadisticsComponent implements OnInit {
                 display: false,
                 stacked: true,
                 ticks: {
-                  fontSize: 13,
+                  fontSize: 8,
                   fontStyle: 'normal',
                 }
               }],
