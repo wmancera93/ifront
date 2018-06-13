@@ -17,6 +17,8 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDFSecure: any;
   public flagEmpty: boolean;
 
+  public certificated_qr: boolean = false;
+
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -75,7 +77,12 @@ export class LaborCertificatesComponent implements OnInit {
   selectedObject(idTag: any, select: Certificate) {
     document.getElementById('listCertificates').getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
-    this.urlPDF = select.file.url;
+
+    if (idTag === 'qr') {
+      this.certificated_qr = true;
+    } else {
+      this.urlPDF = select.file.url;
+    }
   }
 
 }

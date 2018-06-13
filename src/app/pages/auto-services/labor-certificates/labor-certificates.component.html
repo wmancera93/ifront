@@ -31,11 +31,38 @@
               <i class="fa fa-file-pdf-o"></i>
               {{certificate.pdf_name2}}
             </div>
+            <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)">
+              <i class="fa fa-qrcode"></i>
+              Certificado laboral con código de verificación
+            </div>
           </div>
         </div>
-        <div class="col-9 col-xl-9">
+        <div class="col-9 col-xl-9" *ngIf="!certificated_qr">
           <iframe [src]='urlPDF | safeHtml' width="100% !important;" height="1000">
           </iframe>
+        </div>
+        <div class="col-9 col-xl-9" *ngIf="certificated_qr">
+          <div class="widget widget-calendar wg-hover-general wg-hover-bg text-center">
+            <div class="row">
+              <div class="col-12">
+
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-4">
+                <div class="btn btn-block btn-primary">
+                  <i class="fa fa-fw fa-check"></i>
+                  Aceptar
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="btn btn-block btn-primary">
+                  <i class="fa fa-fw fa-times"></i>
+                  Cancelar
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
