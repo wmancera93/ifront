@@ -49,9 +49,8 @@ export class ApprovalsDetailsComponent implements OnInit {
         }
 
         setTimeout(() => {
-          debugger
           this.stylesExplorerService.addStylesCommon();
-        }, 3000);
+        }, 1000);
 
       })
   }
