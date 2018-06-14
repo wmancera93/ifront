@@ -17,12 +17,21 @@ export class ShowEventsComponent implements OnInit {
   public objectInfoEvents: any;
   public titleEvent: string;
   public eventIcon: string;
+  public flagTypeOfEvent : boolean ; 
 
   constructor(public infoEventEmployee: EventsEmployeeService) {
-    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
+    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {     
       this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
+      if(this.titleEvent  === "Cumpleaños")
+      {
+        this.flagTypeOfEvent = true;
+      }
+      else 
+      {
+        this.flagTypeOfEvent = false;
+      }
       this.getShowInfo(data.modal);
     })
 

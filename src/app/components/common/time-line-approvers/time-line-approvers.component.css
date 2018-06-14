@@ -9,13 +9,13 @@
 
 
 .end-line {
-    border-bottom: 1px solid var(--btn-primary) !important;
+    border-bottom: 1px solid var(--btn-primary);
     margin-bottom: 10px;
 }
 
 .titleColor
 {
-    color: #ffff !important;
+    color: #ffffff;
 }
 .bodyColorInfo{
     color:#b5b4b4 !important;

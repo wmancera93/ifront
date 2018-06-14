@@ -4,6 +4,7 @@ import { UserSharedService } from '../../../services/shared/common/user/user-sha
 import { Enterprise } from '../../../models/general/enterprise';
 import { MainService } from '../../../services/main/main.service';
 import { truncate } from 'fs';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-menu-navigation',
@@ -20,7 +21,8 @@ export class MenuNavigationComponent implements OnInit {
   public heightContenGeneral: number = 0;
 
   constructor(private userSharedService: UserSharedService,
-    public companieService: MainService) {
+    public companieService: MainService,
+    public stylesExplorerService: StylesExplorerService) {
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -29,46 +31,86 @@ export class MenuNavigationComponent implements OnInit {
   ngOnInit() {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-    document.documentElement.style.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
-    document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
-    document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
-    document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
-    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
-    document.documentElement.style.setProperty(`--visible-menu`, `block`);
-    document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
-    document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
+
+    if (!this.stylesExplorerService.validateBrowser()) {
+      document.documentElement.style.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
+      document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
+      document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
+      document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
+      document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
+      document.documentElement.style.setProperty(`--visible-menu`, `block`);
+      document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
+      document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
+    } else {
+      setTimeout(() => {
+        this.stylesExplorerService.stylesInExplorerOrEdge(
+          '',
+          this.dataEnterprise.primary_color,
+          this.dataEnterprise.primary_color,
+          this.dataEnterprise.body_text,
+          '',
+          this.dataEnterprise.background_header_menu.url
+          , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
+        )
+      }, 400);
+     
+    }
 
   }
 
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
       this.dataUser = JSON.parse(localStorage.getItem("user"));
-   
+
     }
   }
 
   clickHideMenu() {
-    document.documentElement.style.setProperty(`--visible-menu`, `none`);
-    document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 0`);
-    document.documentElement.style.setProperty(`--width-nav-menu`, `0px`);
-    document.documentElement.style.setProperty(`--left-hide-menu`, `-12px`);
-    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-12px`);
-    setTimeout(() => {
-      document.documentElement.style.setProperty(`--left-show-menu`, `-1px`);
-      document.documentElement.style.setProperty(`--left-show-menu-hover`, `0px`);
-    }, 400);
+    if (!this.stylesExplorerService.validateBrowser()) {
+      document.documentElement.style.setProperty(`--visible-menu`, `none`);
+      document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 0`);
+      document.documentElement.style.setProperty(`--width-nav-menu`, `0px`);
+      document.documentElement.style.setProperty(`--left-hide-menu`, `-12px`);
+      document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-12px`);
+      setTimeout(() => {
+        document.documentElement.style.setProperty(`--left-show-menu`, `-1px`);
+        document.documentElement.style.setProperty(`--left-show-menu-hover`, `0px`);
+      }, 400);
+    } else {
+      this.stylesExplorerService.stylesInExplorerOrEdge(
+        '',
+        this.dataEnterprise.primary_color,
+        this.dataEnterprise.primary_color,
+        this.dataEnterprise.body_text,
+        '',
+        this.dataEnterprise.background_header_menu.url
+        , '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
+      )
+    }
   }
 
   clickShowMenu() {
-    document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
-    document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
-    document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);;
-    document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
-    setTimeout(() => {
-      document.documentElement.style.setProperty(`--visible-menu`, `block`);
-      document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
-      document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
-    }, 400);
+    if (!this.stylesExplorerService.validateBrowser()) {
+      document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
+      document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
+      document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);;
+      document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
+      setTimeout(() => {
+        document.documentElement.style.setProperty(`--visible-menu`, `block`);
+        document.documentElement.style.setProperty(`--left-hide-menu`, `219px`);
+        document.documentElement.style.setProperty(`--left-hide-menu-hover`, `218px`);
+      }, 400);
+    } else {
+      this.stylesExplorerService.stylesInExplorerOrEdge(
+        '',
+        this.dataEnterprise.primary_color,
+        this.dataEnterprise.primary_color,
+        this.dataEnterprise.body_text,
+        '',
+        this.dataEnterprise.background_header_menu.url
+        , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
+      )
+    }
   }
 
   clickOptionMenu(li: string, a: string, toggle: string) {

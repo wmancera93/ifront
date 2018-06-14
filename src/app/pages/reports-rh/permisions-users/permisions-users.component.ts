@@ -6,6 +6,7 @@ import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Enterprise } from '../../../models/general/enterprise';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 
 declare var jsPDF: any;
@@ -42,8 +43,9 @@ export class PermisionsUsersComponent implements OnInit {
     public printDataTableService: PrintDataTableService,
     public excelService: ExcelService,
     private tokenService: Angular2TokenService,
-    public router: Router) {
-
+    public router: Router,
+    public stylesExplorerService: StylesExplorerService) {
+   
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -89,6 +91,19 @@ export class PermisionsUsersComponent implements OnInit {
           // }, 2000)
         }
       })
+
+      setTimeout(() => {
+        if (this.stylesExplorerService.validateBrowser()) {
+          let dataEnterprise: Enterprise;
+          dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+          document.getElementById('with_permits').style.backgroundColor = dataEnterprise.primary_color;
+        }
+      }, 600);
+   
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 400);
   }
 
   filter(parameter: string) {
@@ -113,9 +128,25 @@ export class PermisionsUsersComponent implements OnInit {
             this.labels.push({ value: label.value, type: label.type, label: element });
             this.columnsPdf.push({ title: label.value, dataKey: element });
           })
-          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
-          document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
-          document.getElementById(parameter).className = 'filters-reports-active';
+          if (this.stylesExplorerService.validateBrowser()) {
+            let dataEnterprise: Enterprise;
+            document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+            dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+            document.getElementById('with_permits').removeAttribute('style');
+            document.getElementById('new_cont').removeAttribute('style');
+            document.getElementById('see_organ').removeAttribute('style');
+            document.getElementById('without_permits').removeAttribute('style');
+            document.getElementById('see_rpgen').removeAttribute('style');
+            document.getElementById('is_admin').removeAttribute('style');
+            document.getElementById(parameter).style.backgroundColor = dataEnterprise.primary_color;
+            document.getElementById(parameter).style.fontSize = "15px";
+            document.getElementById(parameter).style.color = "#fff";
+          } else {
+            document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+            document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
+            document.getElementById(parameter).className = 'filters-reports-active';
+          }
+
           this.filter_active = parameter;
         };
       })
@@ -123,6 +154,9 @@ export class PermisionsUsersComponent implements OnInit {
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 100);
   }
 
   searcheByName() {

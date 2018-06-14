@@ -3,6 +3,7 @@ import { AutoServicesService } from '../../../services/auto-services/auto-servic
 import { Certificate } from '../../../models/common/auto_services/auto_services';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-payroll-receipts',
@@ -12,13 +13,15 @@ import { Angular2TokenService } from 'angular2-token';
 export class PayrollReceiptsComponent implements OnInit {
   public listPayRoll: Certificate;
   public urlPDF: string = '';
+  public flagEmpty: boolean;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public autoServiceService: AutoServicesService,
     public sanitizer: DomSanitizer,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -42,9 +45,15 @@ export class PayrollReceiptsComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
-      this.listPayRoll = data.data;      
-      this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
-      this.urlPDF = this.listPayRoll[0].file.url;
+      this.listPayRoll = data.data;
+      if (data.data.length === 0) {
+        this.flagEmpty = true;
+      }
+      else {
+        this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
+        this.urlPDF = this.listPayRoll[0].file.url;
+      }
+
 
       if (data.success) {
         // setTimeout(() => {
@@ -53,9 +62,15 @@ export class PayrollReceiptsComponent implements OnInit {
         // }, 3000)
       }
     })
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
-  selectedObject(select: Certificate) {
+  selectedObject(idTag: any, select: Certificate) {
+    document.getElementById('listCertificates').getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
     this.urlPDF = select.file.url;
   }
 

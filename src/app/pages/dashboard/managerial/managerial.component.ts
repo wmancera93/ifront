@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { ManagerialDataService } from '../../../services/shared/common/managerial-data/managerial-data.service';
 import { ButtonReturnService } from '../../../services/shared/common/managerial-data/button-return/button-return.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-managerial',
@@ -29,13 +30,15 @@ export class ManagerialComponent implements OnInit {
   public validateMyTeam: string;
   public dataMyTeam: boolean = true;
   public dataManagerial: any;
-  public activeButton : boolean = true;
+  public activeButton: boolean = true;
 
   constructor(public dasboardManagerialService: DashboardManagerialService,
     public router: Router,
     private tokenService: Angular2TokenService,
     public managerialDataShared: ManagerialDataService,
-     public buttonReturnService: ButtonReturnService) {
+    public buttonReturnService: ButtonReturnService,
+    public stylesExplorerService: StylesExplorerService) {
+    
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
@@ -93,7 +96,20 @@ export class ManagerialComponent implements OnInit {
 
     this.dasboardManagerialService.getWidgetPermissionsUser()
       .subscribe((data: any) => {
-        this.objectPermissionsUsers.emit(data.data);
+        if (data.success) {
+          this.objectPermissionsUsers.emit(data.data);
+        } else {
+          this.objectPermissionsUsers.emit([]);
+        }
+       
+      },
+      (error: any) => {
+        if (error.success) {
+          this.objectPermissionsUsers.emit(error.data);
+        } else {
+          this.objectPermissionsUsers.emit([]);
+        }
+       
       });
 
     this.dasboardManagerialService.getWidgetMalePercent()
@@ -113,7 +129,9 @@ export class ManagerialComponent implements OnInit {
     this.objectReports.emit(reports[0]);
 
 
-
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 3000);
     // setTimeout(() => {
     //   document.getElementById("loginId").style.display = 'none'
     //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
@@ -147,8 +165,7 @@ export class ManagerialComponent implements OnInit {
       });
   }
 
-  sendDataButton()
-  {
+  sendDataButton() {
     this.buttonReturnService.setButtonReturn(this.activeButton);
   }
 

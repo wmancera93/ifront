@@ -3,6 +3,7 @@ import { ApproverRequestsService } from '../../../services/approver-requests/app
 import { AproverRequests, Requests } from '../../../models/common/approver-requests/approver_requests';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-managed',
@@ -17,7 +18,8 @@ export class ManagedComponent implements OnInit {
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
       this.tokenService.validateToken()
         .subscribe(
@@ -48,6 +50,10 @@ export class ManagedComponent implements OnInit {
         if (data.success) {
           this.managed = data.data[0].requests;
         }
+
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 3000);
 
         // setTimeout(() => {
         //   document.getElementById("loginId").style.display = 'none'

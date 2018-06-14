@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventsEmployess } from '../../../../models/common/widgets/widgets';
 import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
+import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-events-employees',
@@ -13,36 +14,55 @@ export class EventsEmployeesComponent implements OnInit {
   public objectWidget: EventsEmployess[];
   public cauruselIdGeneral: string = '';
   public cauruselId: string = '';
-  public nohaveTeam:boolean;
+  public nohaveTeam: boolean;
 
 
-  constructor(public infoEventEmployee : EventsEmployeeService ) {
+  constructor(public infoEventEmployee: EventsEmployeeService,
+    public stylesExplorerService: StylesExplorerService) {
 
   }
 
   ngOnInit() {
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
-      if(data.length === 0)
-      {
+      if (data.length === 0) {
         this.nohaveTeam = true;
       }
-      else{
-      this.nohaveTeam = false; 
-      this.cauruselIdGeneral = this.objectWidget[0].name_event;   
-      this.cauruselId = '#' + this.objectWidget[0].name_event;
-    }
-    })
-  
+      else {
+        this.nohaveTeam = false;
+        this.cauruselIdGeneral = this.objectWidget[0].name_event;
+        this.cauruselId = '#' + this.objectWidget[0].name_event;
+
+        setTimeout(() => {
+          if (this.stylesExplorerService.validateBrowser()) {
+            switch (this.cauruselIdGeneral) {
+              case "birthdays":
+                (<HTMLInputElement>document.getElementById(this.cauruselIdGeneral).childNodes[3]).style.width = '330px';
+                break;
+              case "anniversaries":
+                (<HTMLInputElement>document.getElementById(this.cauruselIdGeneral).childNodes[3]).style.width = '330px';
+                break;
+              case "new_employees":
+                (<HTMLInputElement>document.getElementById(this.cauruselIdGeneral).childNodes[3]).style.width = '330px';
+                break;
+              case "my_team":
+                (<HTMLInputElement>document.getElementById(this.cauruselIdGeneral).childNodes[3]).style.width = '500px';
+                break;
+
+              default:
+                break;
+            }
+          }
+        }, 3000);
+      };
+    });
   }
 
-  showEventList()
-  {
+  showEventList() {
     this.modalInfoEvent.emit('modalInfoEvent');
     setTimeout(() => {
-      this.infoEventEmployee.setInfoEventEmployee({ objectInfo:  this.objectWidget, modal: 'modalInfoEvent' });
-    }, 500); 
- 
-    
+      this.infoEventEmployee.setInfoEventEmployee({ objectInfo: this.objectWidget, modal: 'modalInfoEvent' });
+    }, 500);
   }
+
 }

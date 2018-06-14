@@ -6,6 +6,7 @@ import { FormsRequestsService } from '../../services/shared/forms-requests/forms
 import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../models/common/alerts/alerts';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-requests-rh',
@@ -26,7 +27,8 @@ export class RequestsRhComponent implements OnInit {
     private aproversRequestsService: AproversRequestsService,
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -81,6 +83,10 @@ export class RequestsRhComponent implements OnInit {
     });
 
     this.getObjectRequests();
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
   getObjectRequests() {

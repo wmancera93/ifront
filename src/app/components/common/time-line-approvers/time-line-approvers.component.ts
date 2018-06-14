@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { RequestsRh, ListRequests, DetailRequest } from '../../../models/common/requests-rh/requests-rh';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -14,7 +15,8 @@ export class TimeLineApproversComponent implements OnInit {
   public viewModal: boolean = false;
 
   constructor(private aproversRequestsService: AproversRequestsService,
-    private requestsRhService: RequestsRhService) {
+    private requestsRhService: RequestsRhService,
+    public stylesExplorerService: StylesExplorerService) {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
         this.requestsRhService.getRequestDetailById(data.ticket)
@@ -38,7 +40,9 @@ export class TimeLineApproversComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 400);
   }
 
   viewSupport() {
