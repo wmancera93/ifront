@@ -42,21 +42,31 @@
           </iframe>
         </div>
         <div class="col-9 col-xl-9" *ngIf="certificated_qr">
-          <div class="widget widget-calendar wg-hover-general wg-hover-bg text-center">
+          <div class="widget  text-center" style="background-color: #eee">
             <div class="row">
-              <div class="col-12">
-
+              <div class="col-12" style="margin-top: 60px">
+                <h1>
+                  Esta a punto de generar un código de verificación
+                </h1>
+              </div>
+              <div class="col-12 text-left" style="margin-top: 60px">
+                <i class="fa fa-fw fa-check"></i>
+                Si ya tiene un código de verificación activo, este se remplazara por el que está a punto generar.
+              </div>
+              <div class="col-12 text-left" style="margin-top: 30px">
+                <i class="fa fa-fw fa-check"></i>
+                Recuerde que este código es único e intransferible.
               </div>
             </div>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="margin-top: 60px">
               <div class="col-4">
-                <div class="btn btn-block btn-primary">
+                <div class="btn btn-block btn-primary" (click)="acceptCertificateQR()">
                   <i class="fa fa-fw fa-check"></i>
                   Aceptar
                 </div>
               </div>
               <div class="col-4">
-                <div class="btn btn-block btn-primary">
+                <div class="btn btn-block btn-primary-second" (click)="declineCertificateQR()">
                   <i class="fa fa-fw fa-times"></i>
                   Cancelar
                 </div>

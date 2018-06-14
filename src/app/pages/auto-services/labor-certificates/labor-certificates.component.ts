@@ -17,6 +17,8 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDFSecure: any;
   public flagEmpty: boolean;
 
+  public idCertificate: number = 0;
+
   public certificated_qr: boolean = false;
 
   public token: boolean;
@@ -81,8 +83,22 @@ export class LaborCertificatesComponent implements OnInit {
     if (idTag === 'qr') {
       this.certificated_qr = true;
     } else {
+      this.idCertificate = idTag;
+      this.certificated_qr = false;
       this.urlPDF = select.file.url;
     }
+  }
+
+  acceptCertificateQR() {
+    this.autoServiceService.getLaboralCertificateQR(this.laboralType[this.idCertificate].id.toString())
+      .subscribe((data: any) => {
+        this.urlPDF = data.data.file.url;
+        this.certificated_qr = false;
+      });
+  }
+
+  declineCertificateQR() {
+    document.getElementById(this.idCertificate + 'certificate').click()
   }
 
 }
