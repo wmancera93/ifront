@@ -7,6 +7,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Router, RoutesRecognized } from '@angular/router';
 import { debug } from 'util';
 import { ButtonReturnService } from '../../../services/shared/common/managerial-data/button-return/button-return.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-pendings',
@@ -19,7 +20,8 @@ export class PendingsComponent implements OnInit {
   public showButtonBack: boolean = false;
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
-    public alert: AlertsService, public router: Router) {
+    public alert: AlertsService, public router: Router,
+    public stylesExplorerService: StylesExplorerService) {
 
 
     this.aproversRequestsService.getConfirmApproval()
@@ -49,6 +51,9 @@ export class PendingsComponent implements OnInit {
         }, 100);
       });
     this.getApprovals();
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
   getApprovals() {

@@ -8,6 +8,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-forms-requests',
@@ -26,6 +27,8 @@ export class FormsRequestsComponent implements OnInit {
   public formVacaComp: any;
   public formPerm: any;
 
+  public detectLetter: string = "";
+
   public model = {};
   public fields: FormlyFieldConfig[] = [];
 
@@ -34,7 +37,8 @@ export class FormsRequestsComponent implements OnInit {
     public alert: AlertsService,
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.fileUploadService.getObjetFile()
       .subscribe((object) => {
@@ -90,13 +94,17 @@ export class FormsRequestsComponent implements OnInit {
       if (document.getElementById('form_requests').className !== 'modal show') {
         document.getElementById('btn_form_requests').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
+
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 300);
       }
 
     });
   }
 
   ngOnInit() {
-
+   
   }
 
   newRequest(model) {
@@ -167,5 +175,15 @@ export class FormsRequestsComponent implements OnInit {
     }
   }
 
+  noAcceptMinus() {
+    if (this.detectLetter == null) {
+      this.formVacaComp = this.fb.group({
+        request_type_id: this.formRequests.id,
+        days_request: '',
+        observation_request: '',
+      });
+
+    }
+  }
 
 }

@@ -16,7 +16,7 @@
                 <strong class="font-bold text-shadow">{{dataUser.employee.short_name}}</strong>
               </a>
             </div>
-            <div class="col-12 text-center text-muted">
+            <div id="position_logged" class="col-12 text-center text-muted">
               {{dataUser.employee.posicion}}
             </div>
           </div>
@@ -40,7 +40,7 @@
           <span class="nav-label">Mis Datos</span>
         </a>
       </li>
-      <li id="liAutoService" *ngIf="dataEnterprise.show_certificates_labor && dataEnterprise.show_certificates_vacations && dataEnterprise.show_certificates_payroll && dataEnterprise.show_certificates_income">
+      <li id="liAutoService" *ngIf="dataEnterprise.show_certificates_labor || dataEnterprise.show_certificates_vacations || dataEnterprise.show_certificates_payroll || dataEnterprise.show_certificates_income">
         <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
           <i class="fa fa-file"></i>
           <span class="nav-label">Autoservicio</span>
@@ -51,14 +51,14 @@
             <li *ngIf="dataEnterprise.show_certificates_labor">
               <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
-              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
-            </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_payroll">
               <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_income">
               <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
+            </li>
+            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
+              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">Carta de vacaciones</a>
             </li>
           </ul>
         </div>

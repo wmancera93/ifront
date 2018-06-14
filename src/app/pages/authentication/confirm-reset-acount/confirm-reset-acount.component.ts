@@ -7,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MainService } from '../../../services/main/main.service';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 declare const ga: any;
 
@@ -27,7 +28,8 @@ export class ConfirmResetAcountComponent implements OnInit {
     private route: ActivatedRoute,
     public router: Router,
     private mainService: MainService,
-    public googleAnalyticsEventsService: GoogleAnalyticsEventsService
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
+    public stylesExplorerService: StylesExplorerService
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -39,7 +41,6 @@ export class ConfirmResetAcountComponent implements OnInit {
 
 
   ngOnInit() {
-    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
       let ambient;
@@ -47,29 +48,50 @@ export class ConfirmResetAcountComponent implements OnInit {
       if (url.split("localhost").length === 1) {
         if (url.split("-").length > 1) {
           ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
-        } else {
-          ambient = 'production';
         }
       } else {
         ambient = 'development';
       }
 
-
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
-          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-          document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-          document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-          document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+          if (!this.stylesExplorerService.validateBrowser()) {
+            document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+            document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+            document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+            document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+          } else {
+            setTimeout(() => {
+              this.stylesExplorerService.stylesInExplorerOrEdge(
+                this.dataEnterprise.background_login.url,
+                this.dataEnterprise.primary_color,
+                this.dataEnterprise.primary_color,
+                this.dataEnterprise.body_text, '', '',
+                '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
+              )
+            }, 200);
+          }
           localStorage.setItem("enterprise", JSON.stringify(result.data));
         })
     } else {
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-      document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-      document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-      document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+      if (!this.stylesExplorerService.validateBrowser()) {
+        document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+        document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+        document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+        document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+      } else {
+        setTimeout(() => {
+          this.stylesExplorerService.stylesInExplorerOrEdge(
+            this.dataEnterprise.background_login.url,
+            this.dataEnterprise.primary_color,
+            this.dataEnterprise.primary_color,
+            this.dataEnterprise.body_text,
+            '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
+          )
+        }, 200);
+      }
     }
     this.route.queryParams.subscribe(params => {
       this.urlTokenPassword = params.reset_password_token;
@@ -139,8 +161,17 @@ export class ConfirmResetAcountComponent implements OnInit {
 
   blurPasword() {
     if (this.txtPassword !== '') {
-      let expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
-      if (!expressionRegular.test(this.txtPassword)) {
+      let expressionRegular
+      let validatePasword
+      if(this.dataEnterprise.login_ldap){
+        expressionRegular = true;
+        validatePasword = expressionRegular;
+      } else {
+        expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
+        validatePasword = expressionRegular.test(this.txtPassword)
+      }
+      
+      if (!validatePasword) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',

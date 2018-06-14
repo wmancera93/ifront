@@ -8,6 +8,8 @@ import { Enterprise } from '../../../models/general/enterprise';
 import { environment } from '../../../../environments/environment';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { MainService } from '../../../services/main/main.service';
 
 declare const ga: any;
 
@@ -20,11 +22,13 @@ export class ResetAccountComponent implements OnInit {
   public txtEmail: string = '';
   public dataEnterprise: Enterprise;
 
-  constructor(public alert: AlertsService, 
+  constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     public router: Router,
-    public googleAnalyticsEventsService: GoogleAnalyticsEventsService) {
-   
+    private mainService: MainService,
+    public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
+    public stylesExplorerService: StylesExplorerService) {
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -34,8 +38,34 @@ export class ResetAccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.documentElement.style.setProperty(`--heigth-content-general`, '0px')
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    if (this.stylesExplorerService.validateBrowser()) {
+      let url = window.location.href;
+      let ambient;
+
+      if (url.split("localhost").length === 1) {
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+        }
+      } else {
+        ambient = 'development';
+      }
+      this.mainService.getDataEnterprise(ambient)
+        .subscribe((result: any) => {
+          this.dataEnterprise[0] = result.data;
+
+          document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
+          setTimeout(() => {
+            this.stylesExplorerService.stylesInExplorerOrEdge(
+              this.dataEnterprise[0].background_login.url,
+              this.dataEnterprise[0].primary_color,
+              this.dataEnterprise[0].primary_color,
+              this.dataEnterprise[0].body_text, '', '',
+              '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
+            )
+          }, 200);
+        });
+    }
   }
 
   restartSession() {

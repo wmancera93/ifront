@@ -8,6 +8,7 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -32,6 +33,9 @@ export class EditPublicationComponent implements OnInit {
   public fileImageEdit: string = 'fileImageEdit';
   public labelTags: string = "";
   public newImage: any;
+  public flagRefresh: boolean = false;
+
+  items
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -41,36 +45,20 @@ export class EditPublicationComponent implements OnInit {
     public editMyPublicationService: MyPublicationsService,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService,
+    public billboardService: BillboardService) {
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
     })
 
-    this.getEditArticle();
-
-    this.ngForm = this.fb.group({
-      'title': [this.title],
-      'summary': [this.summary],
-      'body': [this.body],
-      'tags': [this.tags],
-      'image': [this.image]
-    });
-
-  }
-
-  ngOnInit() {
-
-  }
-
-  getEditArticle() {
     this.EditSharedService.getEditNew().subscribe((data: any) => {
       this.infoMyPublication = data;
+      this.tags = this.infoMyPublication.themes
       this.idEdit = this.infoMyPublication.id;
       this.title = this.infoMyPublication.title;
       this.summary = this.infoMyPublication.summary;
       this.body = this.infoMyPublication.body;
-      this.tags = this.infoMyPublication.themes;
       this.image = this.infoMyPublication.image;
 
       this.showLabelTheme = this.infoMyPublication.themes;
@@ -80,15 +68,16 @@ export class EditPublicationComponent implements OnInit {
 
       this.showEditArticle();
     })
+
+  }
+
+  ngOnInit() {
+
   }
 
   showEditArticle() {
-    this.editMyPublicationService.getArticles(this.idEdit).subscribe((res: any) => {
-
-    })
     document.getElementById('btn_editNew').click();
     document.getElementById("bodyGeneral").removeAttribute('style');
-
   }
 
   deleteTag(theme: any) {
@@ -98,25 +87,17 @@ export class EditPublicationComponent implements OnInit {
     }
   }
 
-  onSubmitSaveChanges(value: any): void {
+  onSubmitSaveChanges(): void {
+    this.labelTags = "";
     this.showSubmit = false;
-    if (value.tags !== "") {
-      let selectedItems: any[] = value.tags.map(({ display }) => display);
-      selectedItems.forEach((element) => {
-        if (selectedItems.length === 0) {
-          this.labelTags = element;
+    if (this.tags.length > 0) {
+      
+      this.tags.forEach((element:any) => {
+        if (element.length !== undefined) {
+          this.labelTags += element + ',' ;
         }
         else {
-          if (this.labelTags === "" && this.tags === []) {
-            this.labelTags = element;
-          }
-          else if (this.labelTags === "" && this.tags !== []) {
-            this.labelTags += this.labelTags + ',' + element;
-          }
-          else {
-            this.labelTags = this.labelTags + ',' + element;
-          }
-
+            this.labelTags += element.value + ',';
         }
       });
     }
@@ -125,7 +106,7 @@ export class EditPublicationComponent implements OnInit {
     editArticleForm.append('title', this.title);
     editArticleForm.append('summary', this.summary);
     editArticleForm.append('body', this.body);
-    editArticleForm.append('tags', this.tags + this.labelTags);
+    editArticleForm.append('tags', this.labelTags);
     editArticleForm.append('image', this.newImage);
 
     this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
@@ -134,6 +115,8 @@ export class EditPublicationComponent implements OnInit {
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
         const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
         this.alert.setAlert(alertConfirmation[0]);
+        this.flagRefresh = true;
+        this.billboardService.setRefreshEditNew(this.flagRefresh);
       }
     },
       (error: any) => {

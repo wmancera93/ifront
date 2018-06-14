@@ -3,6 +3,7 @@ import { MyPublicationsService } from '../../../services/billboard/my-publicatio
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { Angular2TokenService } from 'angular2-token';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-news',
@@ -23,7 +24,8 @@ export class NewsComponent implements OnInit {
 
   constructor(public myPublicationsService: MyPublicationsService,
     public billboardSharedService: BillboardService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -47,7 +49,9 @@ export class NewsComponent implements OnInit {
       behavior: 'smooth'
     });
     this.consultAllArticles();
-
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
   consultAllArticles() {

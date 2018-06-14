@@ -21,9 +21,17 @@
                 </div>
                 <div class="col-6 titleColor align-self-center text-center">
                   {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
+                  <div style="color: #bbbbbb;">
+                    <span class="text-capitalize">
+                      {{employeeList.posicion | lowercase}}
+                    </span>
+                  </div>
                 </div>
-                <div class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.fecha_ingreso}}</strong>
+                <div *ngIf="flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.time_birthday}}</strong>
+                </div>
+                <div *ngIf="!flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
+                  <strong>{{employeeList.time_anniversary}}</strong>
                 </div>
               </div>
             </div>

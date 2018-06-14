@@ -10,36 +10,36 @@ import { Router } from '@angular/router';
 })
 export class NewspaperComponent implements OnInit {
   @Input('newspaper') newspaper: any;
-  
+
   @Output() newspaperModal: EventEmitter<string> = new EventEmitter();
 
-  public objectWidget: Newspaper[]=[];
+  public objectWidget: Newspaper[] = [];
 
-  constructor(public billboardSharedService:BillboardService,public router: Router) {
-  
+  constructor(public billboardSharedService: BillboardService,
+    public router: Router){
+    
   }
 
   ngOnInit() {
     this.newspaper.subscribe((data: Newspaper[]) => {
       this.objectWidget = data
-    })
+    });   
   }
 
-  viewDetailArticle(objectArticle:any)
-  { 
+  viewDetailArticle(objectArticle: any) {
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
     this.newspaperModal.emit('newspaperModal');
     setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({ objectPublication: objectArticle, modal: 'newspaperModal' });
-    }, 500);   
-    
+    }, 500);
+
     // setTimeout(() => {
     //   document.getElementById("loginId").style.display = 'none'
     //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
     // }, 1000)
   }
 
-  
+
 
 }
