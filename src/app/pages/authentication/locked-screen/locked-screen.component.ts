@@ -81,8 +81,17 @@ export class LockedScreenComponent implements OnInit {
   }
 
   singInSession() {
-    let expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
-    if (expressionRegular.test(this.txtPassword)) {
+    let expressionRegular
+    let validatePasword
+    if(this.dataEnterprise[0].login_ldap){
+      expressionRegular = true;
+      validatePasword = expressionRegular;
+    } else {
+      expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
+      validatePasword = expressionRegular.test(this.txtPassword)
+    }
+    
+    if (validatePasword) {
       if (this.txtPassword.length !== 0) {
         this.tokenService.signIn({
           email: this.userAuthenticated.email,

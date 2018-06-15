@@ -31,17 +31,18 @@
                   <div class="workTeam-search animate-bounce  bounceInLeft">
                     <form name="searchAutoComplete">
                       <p>
-                        <input id="searchByAutoComplete" type="text" name="employeeList" [(ngModel)]="searchByLetter" ngModel (keyup)="enterNameEmployee()" (keyup.enter)="goToStorageEmployee()">
+                        <input id="searchByAutoComplete" type="text" name="employeeList" [(ngModel)]="searchByLetter" ngModel (keyup)="enterNameEmployee()"
+                          (keyup.enter)="goToStorageEmployee()">
                       </p>
                     </form>
-                    <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;" >
+                    <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
                       <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
                         <div class="row align-items-center">
                           <div class="col-4">
                             <img src="{{employee.image.url}}" class="roundPhotoChart">
                           </div>
                           <div class="col-8 text-left">
-                           <i class="fa fa-user-o"></i> {{employee.short_name}}
+                            <i class="fa fa-user-o"></i> {{employee.short_name}}
                           </div>
                         </div>
                       </div>
@@ -52,11 +53,17 @@
             </div>
             <div class="col-12 col-xl-6  align-items-center" style="padding-top:15px;">
               <div class="row justify-content-center">
-                <div class="col-xl-8 col-12  align-items-center" style="text-align:left;">
-                  <div>
-                    <i class="fa fa-square" style="color:red;"> </i> Superior &nbsp;
-                    <i class="fa fa-square" style="color:blue;"></i> Mi posición &nbsp;
-                    <i class="fa fa-square" style="color:green;"></i> Subordinados
+                <div class="col-xl-10 col-12  align-items-center" style="text-align:left;">
+                  <div class="row">
+                    <div class="col-4">
+                      <i class="fa fa-square iconFirstLevel"> </i> Superior
+                    </div>
+                    <div class="col-4">
+                      <i class="fa fa-square iconSecondLevel"></i> Mi posición
+                    </div>
+                    <div class="col-4">
+                      <i class="fa fa-square iconThirdLevel"></i> Subordinados
+                    </div>
                   </div>
                 </div>
               </div>

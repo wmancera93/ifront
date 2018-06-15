@@ -15,28 +15,64 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-        <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
-              <div class="alert alert-warning" role="alert">
-                No hay carta de
-                <strong>certificado laboral</strong>&nbsp;para el empleado
-              </div>
-            </div>
+      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div class="alert alert-warning" role="alert">
+            No hay carta de
+            <strong>certificado laboral</strong>&nbsp;para el empleado
           </div>
+        </div>
+      </div>
       <div class="row" *ngIf="!flagEmpty">
         <div class="col-12 col-xl-3">
-          <div *ngFor="let certificate of laboralType" (click)="selectedObject(certificate)">
-            <div class="row">
-              <div class="col-10 cursor-general tabDate">
-                <i class="fa fa-file-pdf-o"></i>
-                {{certificate.pdf_name2}}
-              </div>
+          <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
+            <div id="{{i}}certificate" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let certificate of laboralType; let i=index"
+              (click)="selectedObject(i, certificate)">
+              <i class="fa fa-file-pdf-o"></i>
+              {{certificate.pdf_name2}}
+            </div>
+            <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)" *ngIf="block_certificate">
+              <i class="fa fa-qrcode"></i>
+              Certificado laboral con código de verificación
             </div>
           </div>
         </div>
-        <div class="col-9 col-xl-9">
-          <iframe [src]='urlPDF | safeHtml'  width="100% !important;" height="1000">
+        <div class="col-9 col-xl-9" *ngIf="!certificated_qr">
+          <iframe [src]='urlPDF | safeHtml' width="100% !important;" height="1000">
           </iframe>
+        </div>
+        <div class="col-9 col-xl-9" *ngIf="certificated_qr">
+          <div class="widget  text-center" style="background-color: #eee">
+            <div class="row">
+              <div class="col-12" style="margin-top: 60px">
+                <h1>
+                  Esta a punto de generar un código de verificación
+                </h1>
+              </div>
+              <div class="col-12 text-left" style="margin-top: 60px">
+                <i class="fa fa-fw fa-check"></i>
+                Si ya tiene un código de verificación activo, este se remplazara por el que está a punto generar.
+              </div>
+              <div class="col-12 text-left" style="margin-top: 30px">
+                <i class="fa fa-fw fa-check"></i>
+                Recuerde que este código es único e intransferible.
+              </div>
+            </div>
+            <div class="row justify-content-center" style="margin-top: 60px">
+              <div class="col-4">
+                <div class="btn btn-block btn-primary" (click)="acceptCertificateQR()">
+                  <i class="fa fa-fw fa-check"></i>
+                  Aceptar
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="btn btn-block btn-primary-second" (click)="declineCertificateQR()">
+                  <i class="fa fa-fw fa-times"></i>
+                  Cancelar
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

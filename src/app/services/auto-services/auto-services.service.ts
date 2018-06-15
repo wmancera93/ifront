@@ -29,4 +29,10 @@ export class AutoServicesService {
       .map((data: any) => data.json());
   }
 
+  getLaboralCertificateQR(id: string) {
+    return this.tokenService.get('selfservices/pdf_with_verification_code/' + id)
+      .map((data: any) => data.json());
+  }
+
+
 }

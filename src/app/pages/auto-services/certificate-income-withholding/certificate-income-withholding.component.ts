@@ -68,7 +68,9 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
       this.stylesExplorerService.addStylesCommon();
     }, 1000);
   }
-  selectedObject(select: Certificate) {
+  selectedObject(idTag: any, select: Certificate) {
+    document.getElementById('listCertificates').getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
     this.urlPDF = select.file.url;
   }
 

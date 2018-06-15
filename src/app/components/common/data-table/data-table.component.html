@@ -71,7 +71,7 @@
                 </th>
               </tr>
               <tr>
-                <th class="text-center" *ngFor="let label of labels; let i = index">
+                <th class="text-center filter-table" *ngFor="let label of labels; let i = index">
                   <div>
                     <input [attr.id]="i+label.label" type="text" class="form-control input-filter" placeholder="Filtrar..." (keyup)="filterByCell(i, label)"
                     />

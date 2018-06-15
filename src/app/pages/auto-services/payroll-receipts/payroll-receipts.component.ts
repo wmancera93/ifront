@@ -45,15 +45,15 @@ export class PayrollReceiptsComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
-      this.listPayRoll = data.data;      
-      if ( data.data.length === 0) {
+      this.listPayRoll = data.data;
+      if (data.data.length === 0) {
         this.flagEmpty = true;
       }
       else {
         this.listPayRoll.pdf_name == "" ? this.listPayRoll.pdf_name2 : this.listPayRoll.pdf_name;
         this.urlPDF = this.listPayRoll[0].file.url;
       }
-     
+
 
       if (data.success) {
         // setTimeout(() => {
@@ -68,7 +68,9 @@ export class PayrollReceiptsComponent implements OnInit {
     }, 1000);
   }
 
-  selectedObject(select: Certificate) {
+  selectedObject(idTag: any, select: Certificate) {
+    document.getElementById('listCertificates').getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
     this.urlPDF = select.file.url;
   }
 
