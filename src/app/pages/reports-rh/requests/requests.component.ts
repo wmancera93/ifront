@@ -199,6 +199,9 @@ export class RequestsComponent implements OnInit {
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
 
+    let alineation = '';
+    let positionPage = 0;
+
     if (dd.toString().length === 1) {
       ddNew = '0' + dd.toString();
     }
@@ -208,9 +211,27 @@ export class RequestsComponent implements OnInit {
 
     let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
     let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
-    var doc = new jsPDF('p', 'pt');
+    if (this.columnsPdf.length > 5) {
+      alineation = 'l';
+      positionPage = 740;
+    } else {
+      alineation = 'p';
+      positionPage = 500;
+    }
+
+    var doc = new jsPDF(alineation, 'pt');
     doc.page = 1;
-    doc.autoTable(this.columnsPdf, this.recordsPrint, {
+
+    let column = [];
+
+    this.columnsPdf.forEach((data: any) => {
+      if (data.title !== 'Acción') {
+        column.push(data)
+      }
+
+    })
+
+    doc.autoTable(column, this.recordsPrint, {
       theme: 'striped',
       styles: {
         cellPadding: 5,
@@ -238,11 +259,10 @@ export class RequestsComponent implements OnInit {
         doc.setFontSize(12)
         doc.text(40, 95, 'Generado el ' + dateNow)
         doc.setFontSize(10)
-        doc.text(500, 60, 'pagina ' + doc.page);
+        doc.text(positionPage, 60, 'pagina ' + doc.page);
         doc.page++;
       }
     });
-
     doc.save(title + '.pdf')
   }
 
