@@ -191,7 +191,7 @@ export class RequestsComponent implements OnInit {
   }
 
   pdfExport() {
-    let title: string = this.title;
+    let title: string = this.title === null ? 'Reporte de solicitudes' : this.title === undefined ? 'Reporte de solicitudes' : this.title === '' ? 'Reporte de solicitudes' : this.title;
     var today = new Date();
     let dd: number = today.getDate();
     let mm: number = today.getMonth() + 1;
