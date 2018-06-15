@@ -31,7 +31,7 @@
               <i class="fa fa-file-pdf-o"></i>
               {{certificate.pdf_name2}}
             </div>
-            <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)">
+            <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)" *ngIf="block_certificate">
               <i class="fa fa-qrcode"></i>
               Certificado laboral con código de verificación
             </div>

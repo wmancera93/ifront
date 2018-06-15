@@ -20,6 +20,9 @@ export class LaborCertificatesComponent implements OnInit {
   public idCertificate: number = 0;
 
   public certificated_qr: boolean = false;
+  public block_certificate: boolean;
+
+  companyAuthenticated: any;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -28,6 +31,9 @@ export class LaborCertificatesComponent implements OnInit {
     public domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService) {
+
+    this.companyAuthenticated = JSON.parse(localStorage.getItem("enterprise"));
+    this.block_certificate = this.companyAuthenticated.show_verification_code_pdf;
 
     this.tokenService.validateToken()
       .subscribe(
