@@ -130,6 +130,13 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-12 text-left" *ngIf="approvals[0].observation_request != null">
+                    <p class="font-title-general">
+                      <i class="fa fa-fw fa-comment font-color-default"></i>
+                      Observaciones:
+                      <span style="font-weight: 100 !important">{{approvals[0].observation_request}}</span>
+                    </p>
+                  </div>
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
@@ -154,12 +161,12 @@
                     <ul class="nav nav-tabs">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab" href="#Approval">
-                          Aprobar
+                          Gestionar solicitud
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab" href="#Detail">
-                          Detalles
+                          Ver detalles
                         </a>
                       </li>
                     </ul>

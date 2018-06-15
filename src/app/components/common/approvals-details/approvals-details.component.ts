@@ -4,6 +4,7 @@ import { ApproverRequestsService } from '../../../services/approver-requests/app
 import { DetailAproverRequest } from '../../../models/common/approver-requests/approver_requests';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-approvals-details',
@@ -22,7 +23,8 @@ export class ApprovalsDetailsComponent implements OnInit {
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
@@ -46,11 +48,15 @@ export class ApprovalsDetailsComponent implements OnInit {
           document.getElementById("bodyGeneral").removeAttribute('style');
         }
 
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 1000);
+
       })
   }
 
   ngOnInit() {
-
+    
   }
 
   aceptPrerequisit() {

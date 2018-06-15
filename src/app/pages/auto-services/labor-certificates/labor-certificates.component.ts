@@ -17,6 +17,13 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDFSecure: any;
   public flagEmpty: boolean;
 
+  public idCertificate: number = 0;
+
+  public certificated_qr: boolean = false;
+  public block_certificate: boolean;
+
+  companyAuthenticated: any;
+
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -24,6 +31,9 @@ export class LaborCertificatesComponent implements OnInit {
     public domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService) {
+
+    this.companyAuthenticated = JSON.parse(localStorage.getItem("enterprise"));
+    this.block_certificate = this.companyAuthenticated.show_verification_code_pdf;
 
     this.tokenService.validateToken()
       .subscribe(
@@ -75,7 +85,26 @@ export class LaborCertificatesComponent implements OnInit {
   selectedObject(idTag: any, select: Certificate) {
     document.getElementById('listCertificates').getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
-    this.urlPDF = select.file.url;
+
+    if (idTag === 'qr') {
+      this.certificated_qr = true;
+    } else {
+      this.idCertificate = idTag;
+      this.certificated_qr = false;
+      this.urlPDF = select.file.url;
+    }
+  }
+
+  acceptCertificateQR() {
+    this.autoServiceService.getLaboralCertificateQR(this.laboralType[this.idCertificate].id.toString())
+      .subscribe((data: any) => {
+        this.urlPDF = data.data.file.url;
+        this.certificated_qr = false;
+      });
+  }
+
+  declineCertificateQR() {
+    document.getElementById(this.idCertificate + 'certificate').click()
   }
 
 }
