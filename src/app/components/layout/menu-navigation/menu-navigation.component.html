@@ -177,6 +177,12 @@
           <span class="nav-label">Banners</span>
         </a>
       </li>
+      <li id="liEvaluations" *ngIf="dataEnterprise.show_evaluations">
+        <a class="nav-link bg-menu" routerLink="/ihr/evaluated" (click)="clickOptionMenu('liEvaluations','toggle-Evaluations', 'evaluations')">
+          <i class="fa fa-line-chart"></i>
+          <span class="nav-label">Evaluaciones</span>
+        </a>
+      </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
           <i class="fa fa-folder-open-o"></i>

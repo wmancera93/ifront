@@ -36,14 +36,14 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Inicial *
                 </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" />
+                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" placeholder="dd/mm/yyyy" />
               </div>
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Final *
                 </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" />
+                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" placeholder="dd/mm/yyyy"/>
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
@@ -89,7 +89,7 @@
             <form [formGroup]="formVacaComp" class="row justify-content-left" (ngSubmit)="newRequest(formVacaComp.value)">
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
                   Dias requeridos *
                 </label>
                 <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter" (keyup)="noAcceptMinus()" [formControl]="formVacaComp.controls['days_request']" />
@@ -122,14 +122,14 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Inicial *
                 </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']" />
+                <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']"  placeholder="dd/mm/yyyy"/>
               </div>
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Final *
                 </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" />
+                <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" placeholder="dd/mm/yyyy"/>
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
