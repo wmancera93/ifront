@@ -91,7 +91,7 @@
           <div class="row">
             <div class=" col-12 divisionTop">
               <div class="fontSize-chart" style="color:#ffff;">
-                <strong>{{topEmployee.short_name}}</strong>
+                <strong class="color-strong">{{topEmployee.short_name}}</strong>
               </div>
               {{topEmployee.email|slice: 0:20}}
               <span [hidden]="topEmployee.email > 30">...</span>
@@ -122,7 +122,7 @@
               <div class="row">
                 <div class=" col-12 divisionTop">
                   <div class="fontSize-chart" style="color:#ffff;">
-                    <strong>{{employee.short_name}}</strong>
+                    <strong class="color-strong">{{employee.short_name}}</strong>
                   </div>
                   {{employee.email|slice: 0:20}}
                   <span [hidden]="employee.email > 30">...</span>
@@ -175,7 +175,7 @@
                 <div class="row">
                   <div class="col-12 divisionTop">
                     <div class="fontSize-chart" style="color:#ffff;">
-                      <strong>{{employee.short_name}}</strong>
+                      <strong class="color-strong">{{employee.short_name}}</strong>
                     </div>
                     {{employee.email |slice: 0:20}}
                     <span [hidden]="employee.email > 30">...</span>
