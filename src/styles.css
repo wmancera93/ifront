@@ -3232,6 +3232,11 @@ a.close-canvas-menu:hover {
         height: 165px;   
     }
 
+    borderLine-question{
+        border-bottom: 1px solid var(--btn-primary) !important;   
+        height: 100px;
+    }
+
     /* .font-controls-login {
         font-size: 1rem !important;
     } */
