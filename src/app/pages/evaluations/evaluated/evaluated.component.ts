@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { EvaluationsService } from '../../../services/evaluations/evaluations.service';
 import { EvaluationsSharedService } from '../../../services/shared/common/evaluations/evaluations-shared.service';
 import { Evaluations } from '../../../models/common/evaluations/evaluations';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-evaluated',
@@ -11,9 +12,26 @@ import { Evaluations } from '../../../models/common/evaluations/evaluations';
 export class EvaluatedComponent implements OnInit {
   public evaluationsListPendind: Evaluations[] = [];
   public evaluationsListSubmitted: Evaluations[] = [];
+  public token: boolean;
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public evaluationService: EvaluationsService,
-    public evaluationSharedService: EvaluationsSharedService) {
+    public evaluationSharedService: EvaluationsSharedService,
+    private tokenService: Angular2TokenService) {
+
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
     this.getDataEvaluation();
     this.evaluationSharedService.getRefreshEvaluationData().subscribe((refresh: any) => {
       if (refresh == true) {
