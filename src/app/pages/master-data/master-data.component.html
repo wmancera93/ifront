@@ -59,31 +59,9 @@
                   <strong>{{titleData}}</strong>&nbsp;disponibles
                 </div>
               </div>
-            </div>
+            </div>        
             <div *ngFor="let data of dataMaster;">
-              <div class="row align-items-end">
-                <div class="col-12">
-                  <div class="row">
-                    <div class="col-10 text-right">
-                      <div class="top-title-dbgerencial">
-                        Editar
-                      </div>
-                    </div>
-                    <div class="col-2 text-right">
-                      <div class="top-interruptor">
-                        <input type="radio" name="interruptor" id="prendido">
-                        <input type="radio" name="interruptor" id="apagado" checked>
-                        <div class="interruptor-cuerpo">
-                          <div class="interruptor-tecla">
-                            <label id="buttonDashEmployee" for="prendido" (click)="editDataMaster()"></label>
-                            <label id="buttonDashManagerial" for="apagado" (click)="noEditDataMaster()"></label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              
               <!-- <div class=" col-12 widget bg-white-1x" *ngIf="data.length > 1">
                 <div class="row" *ngFor="let item of data;">
                   <div class="col-12 col-lg-4 font-color-default text-left" style="padding-top:2px;">
