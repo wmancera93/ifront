@@ -80,8 +80,7 @@ import { ViewEvaluationComponent } from './common/view-evaluation/view-evaluatio
     LoadingComponent,
     ErrorPageHttpComponent,
     ShowEventsComponent,
-    GerencialModalComponent,
-    ViewEvaluationComponent
+    GerencialModalComponent
   ],
   exports: [
     HeaderComponent,
