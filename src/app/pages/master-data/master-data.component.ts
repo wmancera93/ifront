@@ -55,7 +55,7 @@ export class MasterDataComponent implements OnInit {
     this.dataMaster = [];
     this.titleData = 'Datos personales';
     this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
-      this.dataMaster = personal.data;
+      this.dataMaster = personal.data[0];
       this.lengthArray = personal.data.length;
     })
   }
@@ -137,6 +137,13 @@ export class MasterDataComponent implements OnInit {
       default:
         break;
     }
+
+  }
+
+  editDataMaster() {
+   
+  }
+  noEditDataMaster() {
 
   }
 
