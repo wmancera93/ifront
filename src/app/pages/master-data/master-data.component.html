@@ -51,7 +51,7 @@
           <b style="margin-left: 28px;">
             {{titleData}}
           </b>
-          <div class="row-hr-container justify-content-center widget bg-white-1x">
+          <div class="row-hr-container  widget bg-white-1x">
             <div class="row justify-content-center top-containter" *ngIf="lengthArray == 0  ">
               <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
                 <div class="alert alert-warning" role="alert">
@@ -59,20 +59,30 @@
                   <strong>{{titleData}}</strong>&nbsp;disponibles
                 </div>
               </div>
-            </div>        
-            <div *ngFor="let data of dataMaster;">
-              
-              <!-- <div class=" col-12 widget bg-white-1x" *ngIf="data.length > 1">
-                <div class="row" *ngFor="let item of data;">
-                  <div class="col-12 col-lg-4 font-color-default text-left" style="padding-top:2px;">
-                    <strong>{{item.title}}</strong>
-                  </div>
-                  <div class="col-12 col-lg-8">
-                    {{item.value}}
+            </div>
+            <div class="col-12" *ngIf="lengthArray !== 0 && showButton">
+              <div class="row">
+                <div class="col-xl-10 col-md-9 col-8 text-right">
+                  <div class="top-title-dbgerencial">
+                    Editar
                   </div>
                 </div>
-              </div> -->
-              <div class="col-12">
+                <div class="col-xl-2 col-md-3 col-4 text-right">
+                  <div class="top-interruptor">
+                    <input type="radio" name="interruptor" id="prendido">
+                    <input type="radio" name="interruptor" id="apagado" checked>
+                    <div class="interruptor-cuerpo">
+                      <div class="interruptor-tecla">
+                        <label id="buttonDashEmployee" for="prendido" (click)="isEdit()"></label>
+                        <label id="buttonDashManagerial" for="apagado" (click)="noEdit()"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngFor="let data of dataMaster;">
+              <div class="col-12" *ngIf="!canEditData">
                 <div class="row">
                   <div class="col-12 col-lg-4 font-color-default text-left text-style">
                     <strong>{{data.title |lowercase}}</strong>
@@ -82,6 +92,19 @@
                   </div>
                 </div>
               </div>
+              <div class="col-12" *ngIf="canEditData">
+                <form>
+                  <div class="row">
+                    <div class="col-12 col-lg-4 font-color-default text-left text-style">
+                      <strong>{{data.title |lowercase}}</strong>
+                    </div>
+                    <div class="col-12 col-lg-8 text-left" *ngIf="data.is_editable">
+                      <input autocomplete="off" type="text" id="titleInput" placeholder="Editar campo" name="title" style="width:100% !important;"
+                        ngModel required/>
+                    </div>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -89,4 +112,3 @@
     </div>
   </div>
 </div>
-<app-dynamic-form></app-dynamic-form>

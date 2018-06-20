@@ -4,7 +4,6 @@ import { DataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 
-
 @Component({
   selector: 'app-master-data',
   templateUrl: './master-data.component.html',
@@ -16,6 +15,9 @@ export class MasterDataComponent implements OnInit {
   public lengthArray: number;
   public idType: string = 'PersonalData';
   public titleData: string = 'Datos personales';
+  public canEditData: boolean = false;
+  public detectCanEdit: any = null;
+  public showButton: boolean = false;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -51,13 +53,30 @@ export class MasterDataComponent implements OnInit {
     }, 2000);
   }
 
+  activeEditButton(){
+    this.detectCanEdit = this.dataMaster.filter(edit => edit.is_editable === true);
+    if(this.detectCanEdit.length !== 0)
+    {
+      this.showButton = true;
+    }  
+  }
+
   showPersonalData() {
     this.dataMaster = [];
     this.titleData = 'Datos personales';
     this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data[0];
+      this.activeEditButton();   
       this.lengthArray = personal.data.length;
     })
+  }
+
+  isEdit() {    
+    this.canEditData = true;
+  }
+
+  noEdit() {
+    this.canEditData = false;
   }
 
   showData(idTag: string) {
@@ -73,7 +92,9 @@ export class MasterDataComponent implements OnInit {
         this.titleData = 'Datos de contacto';
         this.dataMaster = [];
         this.getDataMaster.getDataContact().subscribe((contact: any) => {
-          this.dataMaster = contact.data;
+          console.log(contact)
+          this.dataMaster = contact.data[0];
+          this.activeEditButton();   
           this.lengthArray = contact.data.length;
         })
         break;
@@ -140,11 +161,5 @@ export class MasterDataComponent implements OnInit {
 
   }
 
-  editDataMaster() {
-   
-  }
-  noEditDataMaster() {
-
-  }
 
 }
