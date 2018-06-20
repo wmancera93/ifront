@@ -21,14 +21,14 @@ export class CorporateDocumentsComponent implements OnInit {
   public infoDocs: Documents;
   public urlDocs: string;
   public urlPDF: any;
-  public urlSplit : string;
-  public namePDF : string;
+  public urlSplit: string;
+  public namePDF: string;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public corporateDocsService: CorporateDocsService,
-    public downloadFilesService: DownloadFilesService, 
+    public downloadFilesService: DownloadFilesService,
     public http: Http,
     private tokenService: Angular2TokenService) {
 
@@ -75,14 +75,13 @@ export class CorporateDocumentsComponent implements OnInit {
     headers.append('Accept', 'pdf');
 
     this.http.get(this.urlPDF).subscribe((data: any) => {
-      
-      this.urlSplit = data.url;
-       this.namePDF = this.urlSplit.split('/')[this.urlSplit.split('/').length - 1];
-       console.log(this.namePDF)
 
-            let FileSaver = require('file-saver');
+      this.urlSplit = data.url;
+      this.namePDF = this.urlSplit.split('/')[this.urlSplit.split('/').length - 1];
+
+      let FileSaver = require('file-saver');
       let blob = new Blob([data._body], { type: "application/pdf;charset=utf-8" });
-      window.open(this.urlPDF, "_blank");      
+      window.open(this.urlPDF, "_blank");
       // FileSaver.saveAs(blob, this.namePDF);
 
       // var file = new File([data._body], "hello world.pdf", { type: "application/pdf;charset=utf-8" });
