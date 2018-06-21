@@ -29,4 +29,8 @@ export class ReportsHrService {
     return this.tokenService.get('hr_reports/requests/' + status)
       .map((data: any) => data.json());
   }
+  getExcelRequestsByStatus(status: string) {
+    return this.tokenService.get('hr_reports/requests_export_file/' + status+ '.xls')
+      .map((data: any) => data.json());
+  }
 }

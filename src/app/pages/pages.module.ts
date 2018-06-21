@@ -58,6 +58,9 @@ import { EditPublicationComponent } from './billboard/my-publications/edit-publi
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { NewArticleFormComponent } from './billboard/my-publications/new-article-form/new-article-form.component';
+import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
+import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
+import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
 
 
 @NgModule({
@@ -116,7 +119,10 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
     EditPublicationComponent,
     MasterDataComponent,
     HelpComponent,
-    NewArticleFormComponent
+    NewArticleFormComponent,
+    EvaluatedComponent,
+    FillEvaluationComponent,
+    ShowEvaluationComponent
   ],
   providers: [
     
