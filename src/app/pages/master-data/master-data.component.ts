@@ -65,6 +65,7 @@ export class MasterDataComponent implements OnInit {
   }
 
   activeEditButton() {
+    debugger
     this.detectCanEdit = this.dataMaster.filter(edit => edit.is_editable === true);
     if (this.detectCanEdit.length !== 0) {
       this.showButton = true;
