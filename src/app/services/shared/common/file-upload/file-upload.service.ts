@@ -11,7 +11,7 @@ export class FileUploadService {
   }
 
   setObjectFile(object: any) {
-    return this.objectFile.next(object)
+    return this.objectFile.next(object);
   }
 
 }

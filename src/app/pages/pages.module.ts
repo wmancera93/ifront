@@ -29,6 +29,7 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
@@ -61,6 +62,7 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
+import { CopyrequestComponent } from './reports-rh/copyrequest/copyrequest.component';
 
 
 @NgModule({
@@ -122,10 +124,11 @@ import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation
     NewArticleFormComponent,
     EvaluatedComponent,
     FillEvaluationComponent,
-    ShowEvaluationComponent
+    ShowEvaluationComponent,
+    CopyrequestComponent
   ],
   providers: [
-    
+
   ]
 })
 export class PagesModule { }
