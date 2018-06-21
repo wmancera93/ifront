@@ -24,9 +24,10 @@ export class DashboardComponent implements OnInit {
   public isAdmin: boolean;
   public token: boolean;
   public previousUrl: string;
-  public urlBeforeMyteam: string = ""; 
-  public urlBeforePending: string = ""; 
-  public urlBeforeReports: string = ""; 
+  public urlBeforeMyteam: string = "";
+  public urlBeforePending: string = "";
+  public urlBeforeReports: string = "";
+  public toast: Toast;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -40,20 +41,29 @@ export class DashboardComponent implements OnInit {
       .pairwise()
       .subscribe((event: any[]) => {
 
-        if (event[0].urlAfterRedirects === '/ihr/login') {
+        if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
+          this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
-          let toast: Toast = {
-            type: 'success',
-            title: this.userAuthenticated.employee.short_name,
-            body: 'Bienvenido'
-          };
-          setTimeout(() => {
-            if (document.getElementsByClassName('toast').length === 0) {
-              this.objectToast.emit(toast)
-            }
-          }, 100);
+          if (event[0].urlAfterRedirects === '/ihr/login') {
 
+            setTimeout(() => {
+              this.toast = {
+                type: 'success',
+                title: this.userAuthenticated.employee.short_name,
+                body: 'Bienvenido'
+              };
+            }, 100);
+
+
+            setTimeout(() => {
+              if (document.getElementsByClassName('toast').length === 0) {
+                this.objectToast.emit(this.toast)
+              }
+            }, 100);
+
+          }
         }
+
 
         setTimeout(() => {
           this.urlBeforeMyteam = event[0].urlAfterRedirects.toString();
@@ -70,7 +80,7 @@ export class DashboardComponent implements OnInit {
         }, 100);
 
         setTimeout(() => {
-         
+
           this.urlBeforePending = event[0].urlAfterRedirects.toString();
           if (this.urlBeforePending === '/ihr/pending_approvers') {
             document.getElementById('buttonDashEmployee').click();
@@ -78,7 +88,7 @@ export class DashboardComponent implements OnInit {
         }, 100);
 
         setTimeout(() => {
-         
+
           this.urlBeforePending = event[0].urlAfterRedirects.toString();
           if (this.urlBeforePending === '/ihr/users_permisions') {
             document.getElementById('buttonDashEmployee').click();
@@ -109,24 +119,7 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-
-    if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
-      this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-      // this.router.events.subscribe(event => {
-      //   if (event instanceof NavigationEnd) {
-      //     if (event.urlAfterRedirects === '/ihr/login') {
-      //       let toast: Toast = {
-      //         type: 'success',
-      //         title: this.userAuthenticated.employee.short_name,
-      //         body: 'Bienvenido'
-      //       };
-      //       setTimeout(() => {
-      //         this.objectToast.emit(toast)
-      //       }, 100);
-      //     }
-      //   }
-      // })
-    }
+    
 
 
   }
@@ -135,7 +128,10 @@ export class DashboardComponent implements OnInit {
 
 
     this.getDataLocalStorage();
-    this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
+    if (this.userAuthenticated !== null) {
+      this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
+    }
+
     let url = window.location.href;
     let ambient;
 
