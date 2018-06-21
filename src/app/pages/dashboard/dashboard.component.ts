@@ -119,7 +119,6 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    
 
 
   }
