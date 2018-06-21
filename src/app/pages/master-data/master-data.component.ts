@@ -71,28 +71,18 @@ export class MasterDataComponent implements OnInit {
     }
   }
 
-  fillForm(object: any) {
-    // console.log(object)
-    // object.forEach(element => {
-    //   console.log(element)
-    //   element.forEach(data => {
-    //     console.log(data)
-    //     console.log(object.values(data))
-    //     this.formEditDataMaster = this.fb.group({
-         
-    //     });
-    //     });
-
-    // });
-
-  }
 
   showPersonalData() {
     this.dataMaster = [];
+    this.canEditData = false;
+    if (document.getElementById("buttonDashManagerial")) {
+      document.getElementById("buttonDashManagerial").click();
+      this.activeEditButton();
+    }
+
     this.titleData = 'Datos personales';
     this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data[0];
-      this.fillForm(this.dataMaster);
       this.activeEditButton();
       this.lengthArray = personal.data.length;
     })
@@ -112,7 +102,7 @@ export class MasterDataComponent implements OnInit {
   showData(idTag: string) {
     document.getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(idTag).className = 'nav-item navReport tabReport active-report text-left';
-
+    console.log(idTag)
     switch (idTag) {
       case 'PersonalData':
         this.showPersonalData();
@@ -122,9 +112,7 @@ export class MasterDataComponent implements OnInit {
         this.titleData = 'Datos de contacto';
         this.dataMaster = [];
         this.getDataMaster.getDataContact().subscribe((contact: any) => {
-          console.log(contact)
           this.dataMaster = contact.data[0];
-          this.fillForm(this.dataMaster);
           this.activeEditButton();
           this.lengthArray = contact.data.length;
         })
