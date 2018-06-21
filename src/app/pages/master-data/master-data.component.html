@@ -92,20 +92,10 @@
                   </div>
                 </div>
               </div>
-              <div class="col-12" *ngIf="canEditData">
-                <form>
-                  <div class="row">
-                    <div class="col-12 col-lg-4 font-color-default text-left text-style">
-                      <strong>{{data.title |lowercase}}</strong>
-                    </div>
-                    <div class="col-12 col-lg-8 text-left" *ngIf="data.is_editable">
-                      <input autocomplete="off" type="text" id="titleInput" placeholder="Editar campo" name="title" style="width:100% !important;"
-                        ngModel required/>
-                    </div>
-                  </div>
-                </form>
-              </div>
             </div>
+            <div class="col-12" *ngIf="canEditData">
+              <app-dynamic-form></app-dynamic-form>
+            </div>           
           </div>
         </div>
       </div>

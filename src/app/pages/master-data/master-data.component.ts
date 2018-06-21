@@ -3,6 +3,7 @@ import { MasterDataService } from '../../services/master-data/master-data.servic
 import { DataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-master-data',
@@ -18,13 +19,16 @@ export class MasterDataComponent implements OnInit {
   public canEditData: boolean = false;
   public detectCanEdit: any = null;
   public showButton: boolean = false;
+  public formEditDataMaster: any;
+  public showSubmit = true;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public getDataMaster: MasterDataService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService,
+    private fb: FormBuilder) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -38,7 +42,14 @@ export class MasterDataComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
-        })
+        });
+
+    this.formEditDataMaster = this.fb.group({
+      id: '',
+      title: '',
+      is_editable: '',
+      value: ''
+    });
   }
 
   ngOnInit() {
@@ -53,12 +64,27 @@ export class MasterDataComponent implements OnInit {
     }, 2000);
   }
 
-  activeEditButton(){
+  activeEditButton() {
     this.detectCanEdit = this.dataMaster.filter(edit => edit.is_editable === true);
-    if(this.detectCanEdit.length !== 0)
-    {
+    if (this.detectCanEdit.length !== 0) {
       this.showButton = true;
-    }  
+    }
+  }
+
+  fillForm(object: any) {
+    // console.log(object)
+    // object.forEach(element => {
+    //   console.log(element)
+    //   element.forEach(data => {
+    //     console.log(data)
+    //     console.log(object.values(data))
+    //     this.formEditDataMaster = this.fb.group({
+         
+    //     });
+    //     });
+
+    // });
+
   }
 
   showPersonalData() {
@@ -66,17 +92,21 @@ export class MasterDataComponent implements OnInit {
     this.titleData = 'Datos personales';
     this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data[0];
-      this.activeEditButton();   
+      this.fillForm(this.dataMaster);
+      this.activeEditButton();
       this.lengthArray = personal.data.length;
     })
   }
 
-  isEdit() {    
+  isEdit() {
     this.canEditData = true;
   }
 
   noEdit() {
     this.canEditData = false;
+  }
+  detectChange() {
+    document.getElementById("savebutton").removeAttribute('disabled');
   }
 
   showData(idTag: string) {
@@ -94,7 +124,8 @@ export class MasterDataComponent implements OnInit {
         this.getDataMaster.getDataContact().subscribe((contact: any) => {
           console.log(contact)
           this.dataMaster = contact.data[0];
-          this.activeEditButton();   
+          this.fillForm(this.dataMaster);
+          this.activeEditButton();
           this.lengthArray = contact.data.length;
         })
         break;
