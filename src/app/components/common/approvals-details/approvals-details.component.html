@@ -130,6 +130,13 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-12 text-left" *ngIf="approvals[0].observation_request != null">
+                    <p class="font-title-general">
+                      <i class="fa fa-fw fa-comment font-color-default"></i>
+                      Observaciones:
+                      <span style="font-weight: 100 !important">{{approvals[0].observation_request}}</span>
+                    </p>
+                  </div>
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
@@ -154,12 +161,12 @@
                     <ul class="nav nav-tabs">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab" href="#Approval">
-                          Aprobar
+                          Gestionar solicitud
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab" href="#Detail">
-                          Detalles
+                          Ver detalles
                         </a>
                       </li>
                     </ul>
@@ -183,7 +190,7 @@
                         </div>
                         <div class="col-12 tops" *ngIf="!prerequisit">
                           <div class="row justify-content-center">
-                            <div class="col-lg-6 col-md-6 col-8 text-left">
+                            <div class="col-12 text-cent">
                               <h3 class="font-color-default">
                                 Solicitud a
                                 <span *ngIf="switch == 'on'">
@@ -194,10 +201,19 @@
                                 </span>
                               </h3>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-4">
+                            <div class="col-lg-6 col-md-6 col-8">
+                              Deslizar para
+                              <span *ngIf="switch == 'off'">
+                                Aprobar
+                              </span>
+                              <span *ngIf="switch == 'on'">
+                                Cancelar
+                              </span>
+                            </div>
+                            <div class="col-4">
                               <div class="top-interruptor">
-                                <input type="radio" name="interruptor" id="prendido">
-                                <input type="radio" name="interruptor" id="apagado" checked>
+                                <input type="radio" name="interruptor" id="prendido" checked>
+                                <input type="radio" name="interruptor" id="apagado">
                                 <div class="interruptor-cuerpo">
                                   <div class="interruptor-tecla">
                                     <label for="prendido" (click)="onAprovlas()"></label>
