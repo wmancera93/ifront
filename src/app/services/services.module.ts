@@ -38,6 +38,7 @@ import { ButtonReturnService } from './shared/common/managerial-data/button-retu
 import { StylesExplorerService } from './common/styles-explorer/styles-explorer.service';
 import { EvaluationsService } from './evaluations/evaluations.service';
 import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
+import { LizethService } from './shared/lizeth/lizeth.service';
 
 @NgModule({
   imports: [
@@ -78,6 +79,7 @@ import { EvaluationsSharedService } from './shared/common/evaluations/evaluation
     ButtonReturnService,
     StylesExplorerService,
     EvaluationsService,
+    LizethService,
     EvaluationsSharedService
   ]
 })

@@ -39,6 +39,7 @@ import { PendingsComponent } from './approver-requests/pendings/pendings.compone
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
+import { LizethComponent } from './lizeth/lizeth.component';
 
 
 const routes: Routes = [
@@ -191,6 +192,10 @@ const routes: Routes = [
     {        
         path : 'evaluated',
         component: EvaluatedComponent
+    },
+    {        
+        path : 'Lizeth',
+        component: LizethComponent
     }
 
     
