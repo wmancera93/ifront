@@ -36,6 +36,7 @@ import { DashboardManagerialService } from './dashboard/managerial/dashboard-man
 import { FormDataService } from './common/form-data/form-data.service';
 import { ButtonReturnService } from './shared/common/managerial-data/button-return/button-return.service';
 import { StylesExplorerService } from './common/styles-explorer/styles-explorer.service';
+import { DataMasterSharedService } from './shared/common/data-master/data-master-shared.service';
 
 @NgModule({
   imports: [
@@ -74,7 +75,8 @@ import { StylesExplorerService } from './common/styles-explorer/styles-explorer.
     ManagerialDataService,
     FormDataService,
     ButtonReturnService,
-    StylesExplorerService
+    StylesExplorerService,
+    DataMasterSharedService
   ]
 })
 export class ServicesModule { }

@@ -4,6 +4,9 @@ import { DataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { FormBuilder } from '@angular/forms';
+import { DataMasterSharedService } from '../../services/shared/common/data-master/data-master-shared.service';
+import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
+import { Alerts } from '../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-master-data',
@@ -21,6 +24,7 @@ export class MasterDataComponent implements OnInit {
   public showButton: boolean = false;
   public formEditDataMaster: any;
   public showSubmit = true;
+  public dataPrueba: any;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -28,7 +32,9 @@ export class MasterDataComponent implements OnInit {
   constructor(public getDataMaster: MasterDataService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    public dataMasterSharedService: DataMasterSharedService,
+    public alert: AlertsService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -44,12 +50,6 @@ export class MasterDataComponent implements OnInit {
           this.token = true;
         });
 
-    this.formEditDataMaster = this.fb.group({
-      id: '',
-      title: '',
-      is_editable: '',
-      value: ''
-    });
   }
 
   ngOnInit() {
@@ -58,23 +58,73 @@ export class MasterDataComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
+
     this.showPersonalData();
+
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 2000);
+    this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
+      const alertWarning: Alerts[] = [{ 
+        type: 'success',
+        title: 'Confirmación',
+        message: 'Datos guardados exitosamente',
+        confirmation: false,
+        typeConfirmation: ''}];        
+        this.alert.setAlert(alertWarning[0]);
+        if (document.getElementById("buttonDashManagerial")) {
+          document.getElementById("buttonDashManagerial").click();
+          this.activeEditButton();
+        }     
+    })
   }
 
   activeEditButton() {
-    debugger
-    this.detectCanEdit = this.dataMaster.filter(edit => edit.is_editable === true);
+    this.detectCanEdit = this.dataPrueba.filter(edit => edit.control !== 'label');
     if (this.detectCanEdit.length !== 0) {
       this.showButton = true;
     }
+    else {
+      this.showButton = false;
+    }
   }
+  // emitDataForm() {
+  //   this.dataMasterSharedService.setDataFormDynamic(this.dataMaster);
+  // }
 
 
   showPersonalData() {
     this.dataMaster = [];
+    this.dataPrueba = [{
+      id: '1',
+      name_control: "name",
+      name_label: "Nombre",
+      value: "Laura",
+      option: [],
+      control: "input",
+      type: "text",
+      required: true,
+      order: 1,
+      class_label: "col-4 font-color-default text-left text-style",
+      class_input: "col-8 text-left",
+      place_holder: ""
+    },
+    {
+      id: '2',
+      name_control: "last_name",
+      name_label: "Apellido",
+      value: "Beltran",
+      option: [],
+      control: "label",
+      type: "text",
+      required: true,
+      order: 2,
+      class_label: "col-4 font-color-default text-left text-style",
+      class_input: "col-8 text-left",
+      place_holder: ""
+    }];
+
     this.canEditData = false;
     if (document.getElementById("buttonDashManagerial")) {
       document.getElementById("buttonDashManagerial").click();
@@ -82,55 +132,176 @@ export class MasterDataComponent implements OnInit {
     }
 
     this.titleData = 'Datos personales';
-    this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
-      this.dataMaster = personal.data[0];
-      this.activeEditButton();
-      this.lengthArray = personal.data.length;
-    })
+    this.activeEditButton();
+    // this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
+    this.dataMaster = this.dataPrueba;
+    this.lengthArray = this.dataPrueba.length;
+
+
+
+    // this.emitDataForm();
+
+
+    // })
   }
 
   isEdit() {
     this.canEditData = true;
+
+    setTimeout(() => {
+      this.dataMasterSharedService.setDataFormDynamic(this.dataMaster)
+    }, 50);
+
   }
 
   noEdit() {
     this.canEditData = false;
-  }
-  detectChange() {
-    document.getElementById("savebutton").removeAttribute('disabled');
+
   }
 
   showData(idTag: string) {
     document.getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(idTag).className = 'nav-item navReport tabReport active-report text-left';
-    console.log(idTag)
     switch (idTag) {
       case 'PersonalData':
         this.showPersonalData();
         break;
 
       case 'listContactData':
+
         this.titleData = 'Datos de contacto';
         this.dataMaster = [];
-        this.getDataMaster.getDataContact().subscribe((contact: any) => {
-          this.dataMaster = contact.data[0];
+        this.dataPrueba = [{
+          id: 1,
+          name_control: "phone",
+          name_label: "Teléfono",
+          value: "3192265778",
+          option: [],
+          control: "label",
+          type: "number",
+          required: true,
+          order: 1,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        },
+        {
+          id: 2,
+          name_control: "address",
+          name_label: "Dirección",
+          value: "Calle 127 4 ",
+          option: [],
+          control: "label",
+          type: "text",
+          required: true,
+          order: 2,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        },
+        {
+          id: 3,
+          name_control: "cedula",
+          name_label: "cedula",
+          value: "1022393422 ",
+          option: [],
+          control: "label",
+          type: "number",
+          required: true,
+          order: 2,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        }];
+        // this.getDataMaster.getDataContact().subscribe((contact: any) => {
+        this.dataMaster = this.dataPrueba;
+        this.canEditData = false;
+        this.activeEditButton();
+        if (document.getElementById("buttonDashManagerial")) {
+          document.getElementById("buttonDashManagerial").click();
           this.activeEditButton();
-          this.lengthArray = contact.data.length;
-        })
+        }
+        this.lengthArray = this.dataPrueba.length;
+        // })
+
+
         break;
       case 'listFamilyData':
+
         this.dataMaster = [];
+        this.dataPrueba = [{
+          id: 1,
+          name_control: "father",
+          name_label: "Padre",
+          value: "nombre de padre",
+          option: [],
+          control: "input",
+          type: "text",
+          required: true,
+          order: 1,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        },
+        {
+          id: 2,
+          name_control: "mother",
+          name_label: "Madre",
+          value: "Nombre de madre",
+          option: [],
+          control: "input",
+          type: "text",
+          required: true,
+          order: 2,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        },
+        {
+          id: 3,
+          name_control: "son",
+          name_label: "Hijo",
+          value: "nombre del hijo ",
+          option: [],
+          control: "input",
+          type: "text",
+          required: true,
+          order: 2,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        },
+        {
+          id: 4,
+          name_control: "son2",
+          name_label: "Hijo",
+          value: "nombre del hijo ",
+          option: [],
+          control: "input",
+          type: "text",
+          required: true,
+          order: 2,
+          class_label: "col-4 font-color-default text-left text-style",
+          class_input: "col-8 text-left",
+          place_holder: ""
+        }];
         this.titleData = 'Datos familiares';
-        this.getDataMaster.getDataFamily().subscribe((family: any) => {
-          this.dataMaster = family.data;
-          this.lengthArray = family.data.length;
-        })
+        // this.getDataMaster.getDataFamily().subscribe((family: any) => {
+        this.dataMaster = this.dataPrueba;
+        this.canEditData = false;
+        this.activeEditButton();
+        if (document.getElementById("buttonDashManagerial")) {
+          document.getElementById("buttonDashManagerial").click();
+          this.activeEditButton();
+        }
+        this.lengthArray = this.dataPrueba.length;
+        // })
         break;
       case 'listAcademicData':
         this.dataMaster = [];
         this.titleData = 'Datos académicos';
         this.getDataMaster.getDataStudies().subscribe((studies: any) => {
-          this.dataMaster = studies.data;
+          this.dataMaster = studies.data[0];
           this.lengthArray = studies.data.length;
         })
         break;

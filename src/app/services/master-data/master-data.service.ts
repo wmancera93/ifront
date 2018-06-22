@@ -29,6 +29,7 @@ export class MasterDataService {
     return this.tokenService.get('master_data_types/personal')
       .map((data: any) => data.json());
   }
+  
 
   getDataContact() {
     return this.tokenService.get('master_data_types/contact')

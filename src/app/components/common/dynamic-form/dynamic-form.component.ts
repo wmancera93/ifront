@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -11,108 +12,66 @@ export class DynamicFormComponent implements OnInit {
   objectForm: any[] = [];
   public questionModel: any;
   public showSubmit: boolean = true;
+  public showForm: boolean = false;
+  public id: any;
+  public name: any;
 
 
 
-  constructor(public fb: FormBuilder) { }
+  constructor(public fb: FormBuilder,
+    public dataMasterSharedService: DataMasterSharedService) {
+
+    this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
+      this.objectForm = data;
+    })
+  }
 
 
   ngOnInit() {
-    this.objectForm.push(
-      {
-        name_control: 'address',
-        name_label: 'Dirección de residencia',
-        value: 'Calle 144 # 48-29',
-        option: [],
-        control: 'input',
-        type: 'text',
-        required: true,
-        order: 1,
-        class_label: 'col-4 font-color-default text-left text-style',
-        class_input: 'col-8 text-left',
-        place_holder: ''
-      },
-      {
-        name_control: 'phone',
-        name_label: 'Número de teléfono',
-        value: '3232143',
-        option: [],
-        control: 'input',
-        type: 'number',
-        required: true,
-        order: 2,
-        class_label: 'col-4 font-color-default text-left text-style',
-        class_input: 'col-8 text-left',
-        place_holder: ''
-      }
-      // {
-      //   name_control: 'phone',
-      //   name_label: 'Telefono',
-      //   value: '3205468565',
-      //   option: [],
-      //   control: 'input',
-      //   type: 'number',
-      //   required: true,
-      //   order: 5,
-      //   class_label: 'col-4 font-color-default text-left text-style',
-      //   class_input: 'col-8 text-left',
-      //   place_holder: 'prueba'
-      // },
-      // {
-      //   name_control: 'gender',
-      //   name_label: 'Genero',
-      //   value: '3',
-      //   options: [
-      //     { id: 1, name: 'Masculino' },
-      //     { id: 2, name: 'Femenino' },
-      //     { id: 3, name: 'Masculino' },
-      //   ],
-      //   control: 'input',
-      //   type: 'select',
-      //   required: true,
-      //   order: 6,
-      //   class_label: 'col-4 font-color-default text-left text-style',
-      //   class_input: 'col-8 text-left',
-      //   place_holder: ''
-      // },
-      // {
-      //   name_control: 'birthday',
-      //   name_label: 'Fecha de Nacimiento',
-      //   value: '20/06/2018',
-      //   option: [],
-      //   control: 'input',
-      //   type: 'date',
-      //   required: true,
-      //   order: 3,
-      //   class_label: 'col-4 font-color-default text-left text-style',
-      //   class_input: 'col-8 text-left',
-      //   place_holder: 'dd/mm/yyyy'
-      // },
-      // {
-      //   name_control: 'hour',
-      //   name_label: 'Hora',
-      //   value: '03:00',
-      //   option: [],
-      //   control: 'input',
-      //   type: 'time',
-      //   required: true,
-      //   order: 4,
-      //   class_label: 'col-4 font-color-default text-left text-style',
-      //   class_input: 'col-4 text-left',
-      //   place_holder: 'HH:mm'
-      // },
+    setTimeout(() => {
+      this.form = this.createGroup();
+      this.showForm = true;
+    }, 100);
 
-    )
 
-    this.form = this.createGroup();
-
-    console.log(this.form)
   }
 
   createGroup() {
     const group = this.fb.group({});
-    this.objectForm.forEach(control => group.addControl(control.name_control, this.fb.control(control.value)));
+    this.objectForm.forEach(control => group.addControl(control.id, this.fb.control(control.value)));
     return group;
+  }
+  public idSend;
+  public valueSend;
+
+  sendDynamicForm(form) {
+    let objectSend: any[] = [];
+
+
+    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().length - 1).split(',')
+
+    for (let index = 0; index < recorrer.length; index++) {
+
+      if (((index / 2) % 1) === 0) {
+        this.idSend = recorrer[index];
+      }
+      else {
+        this.valueSend = recorrer[index];
+        objectSend.push({
+          id: this.idSend,
+          value_to_change: this.valueSend
+        })
+        
+        this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
+        this.idSend = "";
+        this.valueSend = "";
+      }
+    }
+    
+  }
+
+  detectChange() {
+    document.getElementById("savebutton").removeAttribute('disabled');
   }
 
 }
