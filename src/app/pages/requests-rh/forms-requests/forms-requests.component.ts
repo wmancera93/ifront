@@ -21,11 +21,13 @@ export class FormsRequestsComponent implements OnInit {
 
   public file: any;
   public filePermisionMarriage: string = 'fileMarriage';
+  public fileInability: string = 'fileInability';
   public extensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public formVaca: any;
   public formVacaComp: any;
   public formPerm: any;
+  public formInca: any;
 
   public detectLetter: string = "";
 
@@ -85,7 +87,14 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'INCA':
+        this.formInca = fb.group({
+          request_type_id: this.formRequests.id,
+          date_begin: '',
+          date_end: '',
+          file_sopport: '',
+          observation_request: '',
 
+        });
           break;
         default:
           break;
@@ -108,10 +117,12 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   newRequest(model) {
+
+
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-    if (this.formRequests.id_activity === 'PERM') {
+    if (this.formRequests.id_activity === 'PERM' || this.formRequests.id_activity === 'INCA') {
       let modelFromdata = new FormData();
       modelFromdata.append('request_type_id', model.request_type_id);
       modelFromdata.append('date_begin', model.date_begin);
