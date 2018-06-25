@@ -66,17 +66,18 @@ export class MasterDataComponent implements OnInit {
       this.stylesExplorerService.addStylesCommon();
     }, 2000);
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
-      const alertWarning: Alerts[] = [{ 
+      const alertWarning: Alerts[] = [{
         type: 'success',
         title: 'Confirmación',
         message: 'Datos guardados exitosamente',
         confirmation: false,
-        typeConfirmation: ''}];        
-        this.alert.setAlert(alertWarning[0]);
-        if (document.getElementById("buttonDashManagerial")) {
-          document.getElementById("buttonDashManagerial").click();
-          this.activeEditButton();
-        }     
+        typeConfirmation: ''
+      }];
+      this.alert.setAlert(alertWarning[0]);
+      if (document.getElementById("buttonDashManagerial")) {
+        document.getElementById("buttonDashManagerial").click();
+        this.activeEditButton();
+      }
     })
   }
 
@@ -133,16 +134,12 @@ export class MasterDataComponent implements OnInit {
 
     this.titleData = 'Datos personales';
     this.activeEditButton();
-    // this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
-    this.dataMaster = this.dataPrueba;
-    this.lengthArray = this.dataPrueba.length;
+    this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
+      this.dataMaster = personal.data[0];
+      this.lengthArray = this.dataMaster.length;
 
 
-
-    // this.emitDataForm();
-
-
-    // })
+    })
   }
 
   isEdit() {
@@ -168,61 +165,17 @@ export class MasterDataComponent implements OnInit {
         break;
 
       case 'listContactData':
-
-        this.titleData = 'Datos de contacto';
-        this.dataMaster = [];
-        this.dataPrueba = [{
-          id: 1,
-          name_control: "phone",
-          name_label: "Teléfono",
-          value: "3192265778",
-          option: [],
-          control: "label",
-          type: "number",
-          required: true,
-          order: 1,
-          class_label: "col-4 font-color-default text-left text-style",
-          class_input: "col-8 text-left",
-          place_holder: ""
-        },
-        {
-          id: 2,
-          name_control: "address",
-          name_label: "Dirección",
-          value: "Calle 127 4 ",
-          option: [],
-          control: "label",
-          type: "text",
-          required: true,
-          order: 2,
-          class_label: "col-4 font-color-default text-left text-style",
-          class_input: "col-8 text-left",
-          place_holder: ""
-        },
-        {
-          id: 3,
-          name_control: "cedula",
-          name_label: "cedula",
-          value: "1022393422 ",
-          option: [],
-          control: "label",
-          type: "number",
-          required: true,
-          order: 2,
-          class_label: "col-4 font-color-default text-left text-style",
-          class_input: "col-8 text-left",
-          place_holder: ""
-        }];
-        // this.getDataMaster.getDataContact().subscribe((contact: any) => {
-        this.dataMaster = this.dataPrueba;
-        this.canEditData = false;
-        this.activeEditButton();
-        if (document.getElementById("buttonDashManagerial")) {
-          document.getElementById("buttonDashManagerial").click();
+        this.getDataMaster.getDataContact().subscribe((contact: any) => {
           this.activeEditButton();
-        }
-        this.lengthArray = this.dataPrueba.length;
-        // })
+          this.dataMaster = contact.data[0];          
+          this.canEditData = false;
+
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+            this.activeEditButton();
+          }
+          this.lengthArray = this.dataMaster.length;
+        })
 
 
         break;
@@ -286,16 +239,16 @@ export class MasterDataComponent implements OnInit {
           place_holder: ""
         }];
         this.titleData = 'Datos familiares';
-        // this.getDataMaster.getDataFamily().subscribe((family: any) => {
-        this.dataMaster = this.dataPrueba;
-        this.canEditData = false;
-        this.activeEditButton();
-        if (document.getElementById("buttonDashManagerial")) {
-          document.getElementById("buttonDashManagerial").click();
+        this.getDataMaster.getDataFamily().subscribe((family: any) => {
+          this.dataMaster = family.data[0];
+          this.canEditData = false;
           this.activeEditButton();
-        }
-        this.lengthArray = this.dataPrueba.length;
-        // })
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+            this.activeEditButton();
+          }
+          this.lengthArray = this.dataMaster.length;
+        })
         break;
       case 'listAcademicData':
         this.dataMaster = [];
