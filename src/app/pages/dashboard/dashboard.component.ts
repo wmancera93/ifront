@@ -152,6 +152,8 @@ export class DashboardComponent implements OnInit {
         if (this.isAdmin || this.validateRoleManagement == 'true') {
 
           this.showButtonDashManagement = true;
+        } else {
+          this.showButtonDashManagement = false;
         }
       }
 

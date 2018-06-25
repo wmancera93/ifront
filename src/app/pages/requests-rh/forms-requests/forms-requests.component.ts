@@ -51,7 +51,8 @@ export class FormsRequestsComponent implements OnInit {
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
-
+      this.formInca = new FormGroup({});
+      
       this.formRequests = data;
       this.model = {};
       this.fields = [];
@@ -75,6 +76,7 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'PERM':
+          this.fileUploadService.setCleanUpload(true)
           this.formPerm = fb.group({
             request_type_id: this.formRequests.id,
             date_begin: '',
@@ -87,14 +89,15 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'INCA':
-        this.formInca = fb.group({
-          request_type_id: this.formRequests.id,
-          date_begin: '',
-          date_end: '',
-          file_sopport: '',
-          observation_request: '',
+          this.fileUploadService.setCleanUpload(true)
+          this.formInca = fb.group({
+            request_type_id: this.formRequests.id,
+            date_begin: '',
+            date_end: '',
+            file_sopport: '',
+            observation_request: '',
 
-        });
+          });
           break;
         default:
           break;
@@ -113,7 +116,7 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   newRequest(model) {
@@ -135,7 +138,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);

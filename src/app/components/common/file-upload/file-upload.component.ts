@@ -14,7 +14,20 @@ export class FileUploadComponent implements OnInit {
 
   public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
-  constructor(public fileUploadService:FileUploadService) { }
+  constructor(public fileUploadService:FileUploadService) {
+
+    this.fileUploadService.getCleanUpload()
+    .subscribe((clean) => {
+      if(clean){
+        this.progressBar = '0%';
+      this.textFileUpload = '';
+      }
+    })
+
+   }
+
+
+
 
   ngOnInit() {
     if(this.extensions !== ''){
