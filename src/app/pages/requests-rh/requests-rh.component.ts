@@ -16,10 +16,10 @@ import { FileUploadService } from '../../services/shared/common/file-upload/file
 })
 export class RequestsRhComponent implements OnInit {
   public requests: RequestsRh;
-  public viewContainer: boolean = false;
+  public viewContainer = false;
 
   private alertWarning: Alerts[];
-  public idDelete: number = 0;
+  public idDelete = 0;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -42,9 +42,9 @@ export class RequestsRhComponent implements OnInit {
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        })
+        });
 
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -54,27 +54,29 @@ export class RequestsRhComponent implements OnInit {
         if (restart) {
           this.getObjectRequests();
         }
-      })
+      });
 
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
-        if (data === "deletRequest") {
+        if (data === 'deletRequest') {
           this.requestsRhService.deleteRequests(this.idDelete)
             .subscribe(
               (data: any) => {
                 this.getObjectRequests();
+                // tslint:disable-next-line:max-line-length
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Se elimino correctamente.', confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               },
               (error: any) => {
+                // tslint:disable-next-line:max-line-length
                 const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               }
-            )
+            );
         }
       }
-    )
- 
+    );
+
   }
 
   ngOnInit() {
@@ -104,7 +106,7 @@ export class RequestsRhComponent implements OnInit {
       //   document.getElementById("loginId").style.display = 'none'
       //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
       // }, 1000)
-    })
+    });
   }
 
   modalAprovers(request: ListRequests) {
