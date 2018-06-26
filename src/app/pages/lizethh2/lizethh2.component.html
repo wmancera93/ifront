@@ -1,0 +1,39 @@
+<div class="row-hr-container">
+  <div class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-xl-10 col-md-8 col-7 text-left title">
+        <i class="fa fa-table"></i>
+        Reporte de solicitudes
+      </div>
+      <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+        <div class="buttonBack img-zoom" (click)="regresarInicio()">
+          <div class="padding-back">
+            <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+            <span>
+              Inicio
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row top-general-p">
+    <div class="col-12" style="min-height: 370px;">
+      <div class="table-responsive">
+        <table class="table table-sm table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th class="text-center" *ngFor="let encabezado of encabezados">
+                <div style="width: 100%">
+                  <div class="name-table">
+                    {{encabezado.value}}
+                  </div>
+                </div>
+              </th>
+            </tr>
+          </thead>
+          
+        </table>
+      </div>
+    </div>
+  </div>

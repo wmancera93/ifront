@@ -40,6 +40,8 @@ import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { LizethComponent } from './lizeth/lizeth.component';
+import { Lizethh2Component } from './lizethh2/lizethh2.component';
+import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
 
 
 const routes: Routes = [
@@ -196,8 +198,15 @@ const routes: Routes = [
     {        
         path : 'Lizeth',
         component: LizethComponent
+    },
+    {        
+        path : 'lizeth2',
+        component: Lizethh2Component
+    },
+    {        
+        path : 'historical_posts',
+        component: HistoricalPostsComponent
     }
-
     
 ];
 

@@ -80,6 +80,8 @@ export class FormsRequestsComponent implements OnInit {
             file_support: '',
             observation_request: '',
           });
+
+          this.fileUploadService.setInitializeFile(true);
           break;
         case 'CESA':
 
@@ -104,7 +106,7 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   newRequest(model) {
@@ -123,8 +125,9 @@ export class FormsRequestsComponent implements OnInit {
       this.formDataService.postRequestsFormData(model)
         .subscribe(
           (data: any) => {
+
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);

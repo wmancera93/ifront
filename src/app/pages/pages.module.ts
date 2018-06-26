@@ -62,6 +62,8 @@ import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component'
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
 import { LizethComponent } from './lizeth/lizeth.component';
+import { Lizethh2Component } from './lizethh2/lizethh2.component';
+import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
 
 
 @NgModule({
@@ -124,7 +126,9 @@ import { LizethComponent } from './lizeth/lizeth.component';
     EvaluatedComponent,
     FillEvaluationComponent,
     ShowEvaluationComponent,
-    LizethComponent
+    LizethComponent,
+    Lizethh2Component,
+    HistoricalPostsComponent
   ],
   providers: [
     

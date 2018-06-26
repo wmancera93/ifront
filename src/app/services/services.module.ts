@@ -39,6 +39,7 @@ import { StylesExplorerService } from './common/styles-explorer/styles-explorer.
 import { EvaluationsService } from './evaluations/evaluations.service';
 import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
 import { LizethService } from './shared/lizeth/lizeth.service';
+import { ExerciseService } from './lizethII/exercise.service';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { LizethService } from './shared/lizeth/lizeth.service';
     StylesExplorerService,
     EvaluationsService,
     LizethService,
-    EvaluationsSharedService
+    EvaluationsSharedService,
+    ExerciseService,    
   ]
 })
 export class ServicesModule { }
