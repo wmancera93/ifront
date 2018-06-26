@@ -40,24 +40,6 @@
           <span class="nav-label">Mis Datos</span>
         </a>
       </li>
-      <li id="liLizeth" >
-        <a id='toggleLizeth' class="nav-link bg-menu" data-toggle="collapse" href="#ejercices" (click)="clickOptionMenu('liLizeth','toggle-Lizeth', 'selfService')">
-          <i class="fa fa-file"></i>
-          <span class="nav-label">Lizeth</span>
-          <span class="fa fa-angle-down"></span>
-        </a>
-        <div id="ejercices" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
-            
-            <li class="bg-li">
-              <a id="aEjercices1" class="nav-link bg-menu" routerLink="/ihr/Lizeth" (click)="clickOptionMenu('liLizeth','aEjercices1', 'ejercices')">Ejercicio 1</a>
-            </li>
-            <li class="bg-li">
-              <a id="aEjercices2" class="nav-link bg-menu" routerLink="/ihr/lizeth2" (click)="clickOptionMenu('liLizeth','aEjercices2', 'ejercices')">Ejercicio 2</a>
-            </li>
-          </ul>
-        </div>
-      </li>
       <li id="liAutoService" *ngIf="dataEnterprise.show_certificates_labor || dataEnterprise.show_certificates_vacations || dataEnterprise.show_certificates_payroll || dataEnterprise.show_certificates_income">
         <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
           <i class="fa fa-file"></i>
@@ -217,7 +199,7 @@
         </a>
       </li>
       <li style="height: 20px !important;">
-      
+
       </li>
     </ul>
   </div>
