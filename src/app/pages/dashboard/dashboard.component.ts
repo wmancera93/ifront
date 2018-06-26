@@ -24,9 +24,9 @@ export class DashboardComponent implements OnInit {
   public isAdmin: boolean;
   public token: boolean;
   public previousUrl: string;
-  public urlBeforeMyteam: string = ""; 
-  public urlBeforePending: string = ""; 
-  public urlBeforeReports: string = ""; 
+  public urlBeforeMyteam: string = "";
+  public urlBeforePending: string = "";
+  public urlBeforeReports: string = "";
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -70,7 +70,7 @@ export class DashboardComponent implements OnInit {
         }, 100);
 
         setTimeout(() => {
-         
+
           this.urlBeforePending = event[0].urlAfterRedirects.toString();
           if (this.urlBeforePending === '/ihr/pending_approvers') {
             document.getElementById('buttonDashEmployee').click();
@@ -78,7 +78,7 @@ export class DashboardComponent implements OnInit {
         }, 100);
 
         setTimeout(() => {
-         
+
           this.urlBeforePending = event[0].urlAfterRedirects.toString();
           if (this.urlBeforePending === '/ihr/users_permisions') {
             document.getElementById('buttonDashEmployee').click();
@@ -152,10 +152,13 @@ export class DashboardComponent implements OnInit {
     this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
       this.isAdmin = data.data.isAdmin;
-      if (this.showServiceManagement == true) {
-        if (this.isAdmin || this.validateRoleManagement == 'true') {
+      if (this.showServiceManagement === true) {
+        if (this.isAdmin.toString() === 'true' || this.validateRoleManagement === 'true') {
 
           this.showButtonDashManagement = true;
+        }
+        else {
+          this.showButtonDashManagement = false;
         }
       }
 

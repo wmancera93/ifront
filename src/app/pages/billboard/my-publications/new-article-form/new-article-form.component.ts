@@ -34,6 +34,7 @@ export class NewArticleFormComponent implements OnInit {
   public extensions: string = '.gif, .png, .jpeg, .jpg ';
   public fileImageNew: string = 'fileImageNew';
   public showSubmit: boolean = true;
+  public tags : any;
 
   formNewArticle: FormGroup;
   fileToUpload: File = null;
@@ -71,7 +72,7 @@ export class NewArticleFormComponent implements OnInit {
       this.alert.setAlert(alertWarning[0]);
     }
     else {
-      this.showSubmit = false;
+      this.showSubmit = false;      
       const selectedItems = value.tags.map(({ display }) => display);
       let newArticleForm = new FormData();
       newArticleForm.append('title', value.title);

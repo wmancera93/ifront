@@ -90,10 +90,10 @@
                   <div class="col-12 col-lg-8 text-left">
                     {{data.value}}
                   </div>
-                </div>
+                </div>                
               </div>
             </div>
-            <div class="col-12" *ngIf="canEditData">
+            <div class="col-12" *ngIf=" lengthArray !== 0 && canEditData">
               <app-dynamic-form></app-dynamic-form>
             </div>           
           </div>

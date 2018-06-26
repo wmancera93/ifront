@@ -56,6 +56,12 @@ export class MasterDataService {
       .map((data: any) => data.json());
   }
 
+  putEditDataMaster(editDataMaster : any)
+  {
+    return this.tokenService.put('master_data_types/update_master_data',editDataMaster)
+    .map((data: any) => data.json()); 
+  }
+
 
   
 

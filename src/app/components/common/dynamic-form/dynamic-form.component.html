@@ -4,16 +4,16 @@
             <strong [ngClass]="config.class_label">{{ config.name_label}}</strong>
             <label [ngClass]="config.class_input" *ngIf="config.control === 'label'">{{config.value}}</label>
             <div [ngClass]="config.class_input" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
-                <input class="form-control" *ngSwitchCase="'text'" (keyup)="detectChange()" type="text" [formControlName]="config.id"
+                <input class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)" type="text" [formControlName]="config.id"
                     [attr.placeHolder]="config.place_holder" />
-                <input class="form-control" *ngSwitchCase="'number'" (keyup)="detectChange()" type="number" [formControlName]="config.id"
+                <input class="form-control" *ngSwitchCase="'number'" (blur)="detectChange(config)" type="number" [formControlName]="config.id"
                     [attr.placeHolder]="config.place_holder" />
-                <input class="form-control" *ngSwitchCase="'date'" (keyup)="detectChange()" type="date" [formControlName]="config.id"
+                <input class="form-control" *ngSwitchCase="'date'" (blur)="detectChange(config)" type="date" [formControlName]="config.id"
                     [attr.placeHolder]="config.place_holder" />
-                <input class="form-control" *ngSwitchCase="'time'" (keyup)="detectChange()" type="time" [formControlName]="config.id"
+                <input class="form-control" *ngSwitchCase="'time'" (blur)="detectChange(config)" type="time" [formControlName]="config.id"
                     [attr.placeHolder]="config.place_holder" />
-                <select class="form-control" *ngSwitchCase="'select'" [formControlName]="config.id">
-                    <option *ngFor="let option of config.options" [value]="option.id">{{option.name}}</option>
+                <select class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config)" [formControlName]="config.id">
+                    <option *ngFor="let option of config.option"  [value]="option.code">{{option.description}}</option>
                 </select>
             </div>
         </div>

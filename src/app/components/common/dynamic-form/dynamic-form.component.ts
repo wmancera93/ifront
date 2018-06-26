@@ -15,14 +15,17 @@ export class DynamicFormComponent implements OnInit {
   public showForm: boolean = false;
   public id: any;
   public name: any;
+  public idEdit: any[] = [];
+  public objectEditBlur: any[] = [];
+
 
 
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService) {
-
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       this.objectForm = data;
+
     })
   }
 
@@ -32,7 +35,6 @@ export class DynamicFormComponent implements OnInit {
       this.form = this.createGroup();
       this.showForm = true;
     }, 100);
-
 
   }
 
@@ -45,8 +47,7 @@ export class DynamicFormComponent implements OnInit {
   public valueSend;
 
   sendDynamicForm(form) {
-    let objectSend: any[] = [];
-
+    let objectForm: any[] = [];
 
     let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().length - 1).split(',')
 
@@ -57,21 +58,43 @@ export class DynamicFormComponent implements OnInit {
       }
       else {
         this.valueSend = recorrer[index];
-        objectSend.push({
+        objectForm.push({
           id: this.idSend,
           value_to_change: this.valueSend
         })
-        
-        this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
-        this.idSend = "";
-        this.valueSend = "";
       }
     }
-    
+    let objectSend: any[] = [];
+    objectForm.forEach(data => {
+      this.objectEditBlur.forEach(element => {
+        if (data.id.toString() === element.id.toString()) {
+          if (data.value_to_change.toString() !== element.value.toString()) {
+            objectSend.push({
+              id: data.id,
+              value_to_change: data.value_to_change
+            })
+          }
+
+        }
+      });
+    })
+    this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
+    this.idSend = "";
+    this.valueSend = "";
   }
 
-  detectChange() {
+  detectChange(params: any) {
+    
+    if(this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0)
+    {
+      this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
+     
+    }
+    this.objectEditBlur.push(params);  
+    
     document.getElementById("savebutton").removeAttribute('disabled');
   }
+
+
 
 }
