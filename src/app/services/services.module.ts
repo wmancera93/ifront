@@ -38,6 +38,7 @@ import { ButtonReturnService } from './shared/common/managerial-data/button-retu
 import { StylesExplorerService } from './common/styles-explorer/styles-explorer.service';
 import { EvaluationsService } from './evaluations/evaluations.service';
 import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
+import { DataMasterSharedService } from './shared/common/data-master/data-master-shared.service';
 
 @NgModule({
   imports: [
@@ -79,6 +80,7 @@ import { EvaluationsSharedService } from './shared/common/evaluations/evaluation
     StylesExplorerService,
     EvaluationsService,
     EvaluationsSharedService,
+    DataMasterSharedService
   ]
 })
 export class ServicesModule { }

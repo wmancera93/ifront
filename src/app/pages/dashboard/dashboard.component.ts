@@ -120,7 +120,6 @@ export class DashboardComponent implements OnInit {
     });
 
 
-
   }
 
   ngOnInit() {
@@ -152,7 +151,7 @@ export class DashboardComponent implements OnInit {
           this.showButtonDashManagement = true;
         } else {
           this.showButtonDashManagement = false;
-        }
+        }       
       }
       else {
         this.showButtonDashManagement = false;

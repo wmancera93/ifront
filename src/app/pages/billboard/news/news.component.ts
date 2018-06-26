@@ -39,6 +39,10 @@ export class NewsComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
+        });
+
+        this.billboardSharedService.getRefreshEditNew().subscribe((data:any)=>{
+          this.consultAllArticles();
         })
   }
 
