@@ -30,7 +30,13 @@ export class ReportsHrService {
       .map((data: any) => data.json());
   }
   getExcelRequestsByStatus(status: string) {
-    return this.tokenService.get('hr_reports/requests_export_file/' + status+ '.xls')
+    return this.tokenService.get('hr_reports/requests_export_file/' + status + '.xls')
+      .map((data: any) => data.json());
+  }
+  getHistoricalPosts() {
+    return this.tokenService.get('hr_reports/historical_positions')
       .map((data: any) => data.json());
   }
 }
+  
+

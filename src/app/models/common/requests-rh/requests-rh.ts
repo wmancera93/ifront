@@ -11,7 +11,9 @@ export interface TypesRequests {
     id: number,
     id_activity: string,
     name: string,
-    available_days: number
+    available_days: number,
+    maximun_days: number,
+    minimun_days: number
 }
 
 export interface ListRequests {
