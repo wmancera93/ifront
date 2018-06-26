@@ -17,7 +17,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" id="titleInput" placeholder="Título de la noticia" name="title" style="width:100% !important;" ngModel
+                  <input type="text" [(ngModel)]='title_form' placeholder="Título de la noticia" name="title" style="width:100% !important;" ngModel
                     required/>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea name="summary" rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;" ngModel
+                  <textarea name="summary" [(ngModel)]='summary' rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;" ngModel
                   required></textarea>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <tag-input name="tags" theme='dark' secondaryPlaceholder="Escriba un tema + enter" placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                  <tag-input name="tags" [(ngModel)]='tags' theme='dark' secondaryPlaceholder="Escriba un tema + enter" placeholder="Escriba un tema + enter" ngModel required></tag-input>
                 </div>
               </div>
               <div class="row">
@@ -55,7 +55,7 @@
               </div>
               <div class="row">
                 <div class="col-12" style="padding-top: 20px">
-                  <ckeditor debounce="500" name="body" ngModel required>
+                  <ckeditor [(ngModel)]="text_form" debounce="500" name="body" ngModel required>
                   </ckeditor>
                 </div>
               </div>

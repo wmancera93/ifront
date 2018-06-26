@@ -21,11 +21,13 @@ export class FormsRequestsComponent implements OnInit {
 
   public file: any;
   public filePermisionMarriage: string = 'fileMarriage';
+  public fileInability: string = 'fileInability';
   public extensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public formVaca: any;
   public formVacaComp: any;
   public formPerm: any;
+  public formInca: any;
 
   public detectLetter: string = "";
 
@@ -49,7 +51,8 @@ export class FormsRequestsComponent implements OnInit {
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
-
+      this.formInca = new FormGroup({});
+      
       this.formRequests = data;
       this.model = {};
       this.fields = [];
@@ -73,6 +76,7 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'PERM':
+          this.fileUploadService.setCleanUpload(true)
           this.formPerm = fb.group({
             request_type_id: this.formRequests.id,
             date_begin: '',
@@ -85,7 +89,15 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'INCA':
+          this.fileUploadService.setCleanUpload(true)
+          this.formInca = fb.group({
+            request_type_id: this.formRequests.id,
+            date_begin: '',
+            date_end: '',
+            file_sopport: '',
+            observation_request: '',
 
+          });
           break;
         default:
           break;
@@ -104,14 +116,16 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   ngOnInit() {
-   
+
   }
 
   newRequest(model) {
+
+
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-    if (this.formRequests.id_activity === 'PERM') {
+    if (this.formRequests.id_activity === 'PERM' || this.formRequests.id_activity === 'INCA') {
       let modelFromdata = new FormData();
       modelFromdata.append('request_type_id', model.request_type_id);
       modelFromdata.append('date_begin', model.date_begin);
@@ -124,7 +138,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);

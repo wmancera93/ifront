@@ -37,13 +37,12 @@ export class DashboardComponent implements OnInit {
     public router: Router, public companieService: MainService,
     private tokenService: Angular2TokenService) {
 
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+
     this.router.events.filter(e => e instanceof RoutesRecognized)
       .pairwise()
       .subscribe((event: any[]) => {
-
         if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
-          this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-
           if (event[0].urlAfterRedirects === '/ihr/login') {
 
             setTimeout(() => {
@@ -128,7 +127,7 @@ export class DashboardComponent implements OnInit {
 
 
     this.getDataLocalStorage();
-    if (this.userAuthenticated !== null) {
+    if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
 
@@ -145,16 +144,16 @@ export class DashboardComponent implements OnInit {
       ambient = 'development';
     }
 
-    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
+    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {      
       this.showServiceManagement = data.data.show_services_management;
-      this.isAdmin = data.data.isAdmin;
-      if (this.showServiceManagement == true) {
-        if (this.isAdmin || this.validateRoleManagement == 'true') {
 
+      if (this.showServiceManagement == true) {
+        if (this.validateRoleManagement === 'true') {
           this.showButtonDashManagement = true;
+        } else {
+          this.showButtonDashManagement = false;
         }
       }
-
       else {
         this.showButtonDashManagement = false;
       }
