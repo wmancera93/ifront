@@ -4,6 +4,7 @@ import { ApproverRequestsService } from '../../../services/approver-requests/app
 import { DetailAproverRequest } from '../../../models/common/approver-requests/approver_requests';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-approvals-details',
@@ -17,16 +18,17 @@ export class ApprovalsDetailsComponent implements OnInit {
   public showSubmit: boolean = true;
 
   public prerequisit: boolean = true;
-  public switch: string = "off";
+  public switch: string = "on";
   public description: string = "";
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    public stylesExplorerService: StylesExplorerService) {
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
-        this.switch = 'off';
+        this.switch = 'on';
         this.description = '';
         this.approvals = [];
         this.edit = data.edit;
@@ -46,11 +48,15 @@ export class ApprovalsDetailsComponent implements OnInit {
           document.getElementById("bodyGeneral").removeAttribute('style');
         }
 
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 1000);
+
       })
   }
 
   ngOnInit() {
-
+    
   }
 
   aceptPrerequisit() {

@@ -54,4 +54,5 @@ export interface Enterprise {
     show_work_schedules?:boolean,
     make_request?: boolean,
     make_approvals?: boolean,
+    show_evaluations?: boolean
 }

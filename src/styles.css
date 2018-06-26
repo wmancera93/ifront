@@ -16,6 +16,10 @@
     --margin-left-mobile: 0px;
 }
 
+.color-strong {
+   color: #656464 !important
+}
+
 @keyframes slideInFromLeft {
     0% {
         transform: translateX(-100%);
@@ -1444,7 +1448,7 @@ border-bottom: 1px solid  #dddd;
 .bg-white
 {
     background: #FFFFFF !important;
-    color: #acacac;
+    color: #7b7b88;
     text-align: center;
 }
 .bg-white-1x {
@@ -3226,6 +3230,11 @@ a.close-canvas-menu:hover {
     {
         border-bottom: 3px solid var(--btn-primary) !important; 
         height: 165px;   
+    }
+
+    borderLine-question{
+        border-bottom: 1px solid var(--btn-primary) !important;   
+        height: 100px;
     }
 
     /* .font-controls-login {

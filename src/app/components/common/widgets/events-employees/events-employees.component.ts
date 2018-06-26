@@ -22,7 +22,7 @@ export class EventsEmployeesComponent implements OnInit {
 
   }
 
-  ngOnInit() {
+  ngOnInit() {   
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
       if (data.length === 0) {
