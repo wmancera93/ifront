@@ -169,6 +169,7 @@ export class FormsRequestsComponent implements OnInit {
       this.formDataService.postRequestsFormData(model)
         .subscribe(
           (data: any) => {
+
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
             const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);

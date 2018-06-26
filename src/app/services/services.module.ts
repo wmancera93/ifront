@@ -78,7 +78,7 @@ import { EvaluationsSharedService } from './shared/common/evaluations/evaluation
     ButtonReturnService,
     StylesExplorerService,
     EvaluationsService,
-    EvaluationsSharedService
+    EvaluationsSharedService,
   ]
 })
 export class ServicesModule { }

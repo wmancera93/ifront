@@ -40,6 +40,7 @@ import { PendingsComponent } from './approver-requests/pendings/pendings.compone
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
+import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
 
 const routes: Routes = [
     {
@@ -191,7 +192,12 @@ const routes: Routes = [
     {
         path : 'evaluated',
         component: EvaluatedComponent
+    },
+    {        
+        path : 'historical_posts',
+        component: HistoricalPostsComponent
     }
+    
 ];
 
 @NgModule({
