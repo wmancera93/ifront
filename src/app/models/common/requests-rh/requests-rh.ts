@@ -1,4 +1,4 @@
-import { Url } from "../url/url";
+import { Url } from '../url/url';
 
 
 export interface RequestsRh {
@@ -8,12 +8,12 @@ export interface RequestsRh {
 }
 
 export interface TypesRequests {
-    id: number,
-    id_activity: string,
-    name: string,
-    available_days: number,
-    maximun_days: number,
-    minimun_days: number
+    id: number;
+    id_activity: string;
+    name: string;
+    available_days: number;
+    maximum_days: number;
+    minimum_days: number;
 }
 
 export interface ListRequests {

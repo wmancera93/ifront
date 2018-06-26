@@ -75,8 +75,8 @@ export class RequestsRhComponent implements OnInit {
             );
         }
       }
-    )
- 
+    );
+
   }
 
   ngOnInit() {
@@ -114,9 +114,9 @@ export class RequestsRhComponent implements OnInit {
   }
 
   newForm(typeForm: TypesRequests) {
-    
+
     this.formsRequestsService.setFormRequests(typeForm);
-   
+
   }
 
   deleteRequest(id: number) {
