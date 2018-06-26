@@ -39,6 +39,7 @@ export class RequestsComponent implements OnInit {
   public token: boolean;
   public showButtonReturn: boolean;
 
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public reportsHrService: ReportsHrService,
@@ -267,7 +268,8 @@ export class RequestsComponent implements OnInit {
   }
 
   excelExport() {
-    this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
+    window.open('http://apihr-development.hrinteractive.co/api/v2/hr_reports/requests_export_file/'+this.filter_active+'.xls', "_blank");
+    // this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
   }
 
   csvExport() {

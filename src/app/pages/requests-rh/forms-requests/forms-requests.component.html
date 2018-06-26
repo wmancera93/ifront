@@ -217,10 +217,58 @@
                     <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPres.controls['observation_request']"></textarea>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-md-12 top-containter">
+                    <div class="row justify-content-end">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                          <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                        <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                          <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div *ngIf="formRequests.id_activity == 'INCA'" class="row justify-content-left">
+          <div class="col-12 col-lg-12">
+            <form [formGroup]="formInca" class="row justify-content-left" (ngSubmit)="newRequest(formInca.value)">
+              <div class="col-md-6 col-12 top-containter">
+                <label for="dateBegin" class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Fecha Inicial *
+                </label>
+                <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']" placeholder="dd/mm/yyyy"
+                />
+              </div>
+              <div class="col-md-6 col-12 top-containter">
+                <label for="dateEnd" class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Fecha Final *
+                </label>
+                <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']" placeholder="dd/mm/yyyy"
+                />
+              </div>
+              <div class="col-md-12 col-12 top-containter">
+                <label for="dateEnd" class="font-title-general">
+                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                  Adjuntar soporte *
+                </label>
+                <app-file-upload [nameFile]='fileInability' [extensions]="extensions"></app-file-upload>
+              </div>
+              <div class="col-md-12 col-12 top-containter">
+                <label for="celulaInput" class="font-title-general">
+                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                  Observaciones
+                </label>
+                <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formInca.controls['observation_request']"></textarea>
               </div>
               <div class="col-md-12 top-containter">
                 <div class="row justify-content-end">
-                  <div class="col-md-5 col-12">
+                  <div class="col-lg-3 col-md-4 col-12">
                     <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
                       <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
                     <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
@@ -231,7 +279,6 @@
             </form>
           </div>
         </div>
-
         <app-alerts></app-alerts>
       </div>
       <div class="modal-footerInfo justify-content-center">

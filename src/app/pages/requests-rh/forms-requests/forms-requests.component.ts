@@ -22,12 +22,14 @@ export class FormsRequestsComponent implements OnInit {
 
   public file: any;
   public filePermisionMarriage = 'fileMarriage';
+  public fileInability = 'fileInability';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public formVaca: any;
   public formVacaComp: any;
   public formPerm: any;
   public formPres: any;
+  public formInca: any;
 
   public detectLetter = ' ';
   public captureDateInit = ' ';
@@ -59,6 +61,8 @@ export class FormsRequestsComponent implements OnInit {
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
       this.formPres = new FormGroup({});
+      this.formInca = new FormGroup({});
+
       this.formRequests = data;
       this.model = {};
       this.fields = [];
@@ -82,6 +86,7 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'PERM':
+          this.fileUploadService.setCleanUpload(true);
           this.formPerm = fb.group({
             request_type_id: this.formRequests.id,
             date_begin: '',
@@ -114,7 +119,15 @@ export class FormsRequestsComponent implements OnInit {
 
           break;
         case 'INCA':
+          this.fileUploadService.setCleanUpload(true);
+          this.formInca = fb.group({
+            request_type_id: this.formRequests.id,
+            date_begin: '',
+            date_end: '',
+            file_sopport: '',
+            observation_request: '',
 
+          });
           break;
         default:
           break;
@@ -139,10 +152,12 @@ export class FormsRequestsComponent implements OnInit {
 
 
   newRequest(model) {
+
+
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-    if (this.formRequests.id_activity === 'PERM') {
+    if (this.formRequests.id_activity === 'PERM' || this.formRequests.id_activity === 'INCA') {
       const modelFromdata = new FormData();
       modelFromdata.append('request_type_id', model.request_type_id);
       modelFromdata.append('date_begin', model.date_begin);
@@ -247,7 +262,7 @@ export class FormsRequestsComponent implements OnInit {
     }
     if (this.captureDateInit !== null && this.formRequests.maximum_days === 1) {
       this.formPres.controls.date_end.value = this.formPres.controls.date_begin.value;
-    }
+      }
     if (dateBegin !== null || dateEnd !== null) {
       if (this.formPres.controls.date_begin.value === this.formPres.controls.date_end.value) {
         this.showTime = true;

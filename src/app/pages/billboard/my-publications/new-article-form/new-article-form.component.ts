@@ -38,6 +38,11 @@ export class NewArticleFormComponent implements OnInit {
   formNewArticle: FormGroup;
   fileToUpload: File = null;
 
+  public tags = [];
+  public summary: string = '';
+  public title_form: string = '';
+  public text_form: string = '';
+
 
   constructor(public createArticleService: MyPublicationsService,
     private fb: FormBuilder,
@@ -50,15 +55,15 @@ export class NewArticleFormComponent implements OnInit {
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.image = data;
     })
-    this.formNewArticle = this.fb.group({
-      'title': [''],
-      'summary': [''],
-      'body': [''],
-      'tags': [''],
-      'image': ['']
-    });
+    this.formNewArticle = new FormGroup({});
   }
 
+  cleanFormData() {
+    this.tags = [];
+    this.summary = '';
+    this.title_form = '';
+    this.text_form = '';
+  }
   ngOnInit() {
     //document.getElementsByClassName('ng2-tag-input__text-input')[0].setAttribute('style', 'height:20px !important; ');
 
@@ -69,6 +74,7 @@ export class NewArticleFormComponent implements OnInit {
       const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
       this.showSubmit = true;
       this.alert.setAlert(alertWarning[0]);
+
     }
     else {
       this.showSubmit = false;
@@ -81,6 +87,8 @@ export class NewArticleFormComponent implements OnInit {
       newArticleForm.append('image', this.image);
       this.formDataService.postNoticeFormData(newArticleForm).subscribe((data: any) => {
         if (data.success == true) {
+          this.cleanFormData();
+          this.fileUploadService.setCleanUpload(true);
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
           const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
           this.alert.setAlert(alertConfirmation[0]);
@@ -97,6 +105,8 @@ export class NewArticleFormComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
 
         })
+
+
     }
   }
 }
