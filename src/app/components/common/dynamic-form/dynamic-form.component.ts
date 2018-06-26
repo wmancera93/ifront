@@ -51,14 +51,9 @@ export class DynamicFormComponent implements OnInit {
   public valueSend;
 
   sendDynamicForm(form) {
-    console.log(form)
-    // form.forEach(element => {
-      
-    // });
-debugger
     let objectForm: any[] = [];
     let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
-    console.log(recorrer)
+    
     for (let index = 0; index < recorrer.length; index++) {      
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
@@ -73,7 +68,6 @@ debugger
     }
     let objectSend: any[] = [];
     objectForm.forEach(data => {
-      debugger
       this.objectEditBlur.forEach(element => {
         if (data.id.toString() === element.id.toString()) {
           if (data.value_to_change.toString() !== element.value.toString()) {
