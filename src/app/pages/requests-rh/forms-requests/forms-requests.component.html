@@ -177,7 +177,7 @@
                       Fecha Inicial *
                     </label>
                     <input type="date" name="date_begin" class="form-control" [formControl]="formPres.controls['date_begin']" placeholder="dd/mm/yyyy"
-                      [(ngModel)]="captureDateInit" (blur)="calculateDay()" />
+                      (blur)="calculateDay()" />
                   </div>
 
                   <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
@@ -186,7 +186,7 @@
                       Fecha Final *
                     </label>
                     <input type="date" name="date_end" class="form-control" [formControl]="formPres.controls['date_end']" placeholder="dd/mm/yyyy"
-                      [(ngModel)]="captureDateEnd" (blur)="calculateDay()" />
+                      (blur)="calculateDay()" />
                   </div>
                 </div>
                 <div class="row">
