@@ -30,14 +30,14 @@ export class FileUploadComponent implements OnInit {
 
 
   ngOnInit() {
-    if(this.extensions !== ''){
-      this.acceptExtensions = this.extensions;      
+    if (this.extensions !== '') {
+      this.acceptExtensions = this.extensions;
     }
 
     this.progressBar = '0%';
     this.textFileUpload = '';
-  
-  }  
+
+  }
 
   clickFile() {
     document.getElementById(this.nameFile).click();
@@ -54,7 +54,7 @@ export class FileUploadComponent implements OnInit {
         }, 500)
       }
     }
-    if(this.textFileUpload === ''){
+    if (this.textFileUpload === '') {
       this.progressBar = '0%';
     }
 

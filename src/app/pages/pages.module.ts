@@ -61,6 +61,7 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
+import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
 
 
 @NgModule({
@@ -122,7 +123,8 @@ import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation
     NewArticleFormComponent,
     EvaluatedComponent,
     FillEvaluationComponent,
-    ShowEvaluationComponent
+    ShowEvaluationComponent,
+    HistoricalPostsComponent
   ],
   providers: [
     
