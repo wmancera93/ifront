@@ -59,36 +59,46 @@ export class MasterDataComponent implements OnInit {
       behavior: 'smooth'
     });
 
-
-    this.showPersonalData();
-
-    setTimeout(() => {
-      this.stylesExplorerService.addStylesCommon();
-    }, 2000);
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
       let dataMasterEdit = {
         employee_master_data: object
       }
-      this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
-        const alertWarning: Alerts[] = [{
-          type: 'success',
-          title: 'Confirmación',
-          message: data.message,
-          confirmation: false,
-          typeConfirmation: ''
-        }];
+      if (dataMasterEdit.employee_master_data.length == 0) {
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
-      },
-        (error: any) => {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+      }
+      else {
+        this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
+          const alertWarning: Alerts[] = [{
+            type: 'success',
+            title: 'Confirmación',
+            message: data.message,
+            confirmation: false,
+            typeConfirmation: ''
+          }];
           this.alert.setAlert(alertWarning[0]);
-        })
+        },
+          (error: any) => {
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+          })
+      }
+
 
       if (document.getElementById("buttonDashManagerial")) {
         document.getElementById("buttonDashManagerial").click();
 
       }
     })
+
+
+    this.showPersonalData();
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 2000);
+
+
   }
 
   activeEditButton(dataMaster: any) {
@@ -116,7 +126,7 @@ export class MasterDataComponent implements OnInit {
     this.titleData = 'Datos personales';
 
     this.dataMasterService.getDataPersonal().subscribe((personal: any) => {
-      this.dataMaster = personal.data[0];      
+      this.dataMaster = personal.data[0];
       this.activeEditButton(this.dataMaster);
       this.noEdit();
       this.lengthArray = this.dataMaster.length;
@@ -148,9 +158,9 @@ export class MasterDataComponent implements OnInit {
       case 'listContactData':
         this.dataMasterService.getDataContact().subscribe((contact: any) => {
           this.dataMaster = contact.data[0];
-          this.activeEditButton(this.dataMaster);              
+          this.activeEditButton(this.dataMaster);
           this.canEditData = false;
-          this.noEdit();     
+          this.noEdit();
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
 
