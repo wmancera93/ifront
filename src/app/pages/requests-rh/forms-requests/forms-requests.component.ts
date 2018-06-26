@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsRequestsService } from '../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -9,6 +9,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+
 
 @Component({
   selector: 'app-forms-requests',
@@ -29,14 +30,16 @@ export class FormsRequestsComponent implements OnInit {
   public formPres: any;
 
   public detectLetter = ' ';
-  public captureDate = ' ';
+  public captureDateInit = ' ';
+  public captureDateEnd = ' ';
 
   public model = {};
   public fields: FormlyFieldConfig[] = [];
 
-  // tslint:disable-next-line:no-inferrable-types
-  public showTime: boolean = false;
-  // public diffDays: number;
+  public showTime = true;
+  public showDate = false;
+  diffDays: number;
+  lowerDate: boolean;
 
   constructor(private requestsRhService: RequestsRhService,
     public formsRequestsService: FormsRequestsService,
@@ -56,7 +59,6 @@ export class FormsRequestsComponent implements OnInit {
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
       this.formPres = new FormGroup({});
-
       this.formRequests = data;
       this.model = {};
       this.fields = [];
@@ -97,13 +99,16 @@ export class FormsRequestsComponent implements OnInit {
             end_time: '',
             observation_request: '',
           });
-
+          if (this.formRequests.minimum_days === 1 && this.formRequests.maximum_days === 1) {
+            this.showDate = false;
+          } else {
+            this.showDate = true;
+          }
           if (this.formRequests.minimum_days === 1 && this.formRequests.maximum_days === 1) {
             this.showTime = true;
           } else {
             this.showTime = false;
           }
-
           break;
         case 'CESA':
 
@@ -131,6 +136,8 @@ export class FormsRequestsComponent implements OnInit {
 
   }
 
+
+
   newRequest(model) {
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -148,12 +155,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{
-              type: 'success',
-              title: 'Solicitud Exitosa',
-              message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(),
-              confirmation: false
-            }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);
@@ -165,12 +167,7 @@ export class FormsRequestsComponent implements OnInit {
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{
-              type: 'danger',
-              title: 'Solicitud Denegada',
-              message: error.json().errors.toString(),
-              confirmation: false
-            }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
 
@@ -184,12 +181,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{
-              type: 'success',
-              title: 'Solicitud Exitosa',
-              message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(),
-              confirmation: false
-            }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);
@@ -201,11 +193,7 @@ export class FormsRequestsComponent implements OnInit {
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{
-              type: 'danger',
-              title: 'Solicitud Denegada',
-              message: error.json().errors.toString(), confirmation: false
-            }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
 
@@ -229,26 +217,45 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   calculateDay() {
-
-    if (this.captureDate !== null && this.formRequests.maximum_days === 1 ) {
-      this.formPres.controls.date_end.value = this.formPres.controls.date_begin.value;
-      console.log(this.formPres.controls.date_end.value);
-      }
-     if (this.formPres.controls.date_begin.value === this.formPres.controls.date_end.value) {
-      this.showTime = true;
-    } else {
-      this.showTime = false;
+    /* calculate dates */
+    let dateBegin = new Date(this.formPres.controls.date_begin.value);
+    let dateEnd = new Date(this.formPres.controls.date_end.value);
+    if ((dateBegin || dateEnd) !== null) {
+      this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
+    if (this.diffDays < 0) {
+      this.lowerDate = true;
+      const alertDataWrong: Alerts[] = [{
+        type: 'danger',
+        title: 'Error',
+        message: 'Fecha inicial no puede ser superior a la fecha final',
+        confirmation: false
+      }];
+      this.alert.setAlert(alertDataWrong[0]);
+      this.formPres = this.fb.group({
+        request_type_id: this.formRequests.id,
+        date_begin: '',
+        date_end: '',
+        start_time: '',
+        end_time: '',
+        observation_request: '',
+      });
+
+      dateBegin = null;
+      dateEnd = null;
+
+    }
+    if (this.captureDateInit !== null && this.formRequests.maximum_days === 1) {
+      this.formPres.controls.date_end.value = this.formPres.controls.date_begin.value;
+    }
+    if (dateBegin !== null || dateEnd !== null) {
+      if (this.formPres.controls.date_begin.value === this.formPres.controls.date_end.value) {
+        this.showTime = true;
+      } else {
+        this.showTime = false;
+      }
+    }
+
   }
-
-  /* calculate dates */
-  // const dateBegin = new Date(this.formPres.controls.date_begin.value);
-  // const dateEnd = new Date(this.formPres.controls.date_end.value);
-  // if (dateBegin || dateEnd != null) {
-  //   const diffDays = dateEnd.getDate() - dateBegin.getDate() ;
-  // }
-
-
-
 
 }
