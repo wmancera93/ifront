@@ -9,7 +9,7 @@ import { DataMasterSharedService } from '../../../services/shared/common/data-ma
 })
 export class DynamicFormComponent implements OnInit {
   form: FormGroup;
-  objectForm: any[] = [];
+  objectForm: any[] = null;
   public questionModel: any;
   public showSubmit: boolean = true;
   public showForm: boolean = false;
@@ -17,30 +17,34 @@ export class DynamicFormComponent implements OnInit {
   public name: any;
   public idEdit: any[] = [];
   public objectEditBlur: any[] = [];
-
-
+  public edit: boolean = false;
 
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
-      this.objectForm = data;
+      this.objectForm = data.data;
+      if (this.objectForm !== null && this.objectForm !== undefined) {
+        this.edit = data.edit;
+        this.form = new FormGroup({});
+        this.form = this.createGroup();
+        this.showForm = true;
+      }
+
 
     })
   }
 
-
   ngOnInit() {
-    setTimeout(() => {
-      this.form = this.createGroup();
-      this.showForm = true;
-    }, 100);
+
 
   }
 
   createGroup() {
     const group = this.fb.group({});
+
     this.objectForm.forEach(control => group.addControl(control.id, this.fb.control(control.value)));
+
     return group;
   }
   public idSend;
@@ -84,14 +88,12 @@ export class DynamicFormComponent implements OnInit {
   }
 
   detectChange(params: any) {
-    
-    if(this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0)
-    {
+
+    if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
-     
+
     }
-    this.objectEditBlur.push(params);  
-    
+    this.objectEditBlur.push(params);
     document.getElementById("savebutton").removeAttribute('disabled');
   }
 
