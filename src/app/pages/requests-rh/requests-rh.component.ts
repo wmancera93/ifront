@@ -7,6 +7,7 @@ import { AlertsService } from '../../services/shared/common/alerts/alerts.servic
 import { Alerts } from '../../models/common/alerts/alerts';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
+import { FileUploadService } from '../../services/shared/common/file-upload/file-upload.service';
 
 @Component({
   selector: 'app-requests-rh',
@@ -28,7 +29,8 @@ export class RequestsRhComponent implements OnInit {
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService,
+    public fileUploadService: FileUploadService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -72,7 +74,7 @@ export class RequestsRhComponent implements OnInit {
         }
       }
     )
-
+ 
   }
 
   ngOnInit() {
@@ -110,7 +112,9 @@ export class RequestsRhComponent implements OnInit {
   }
 
   newForm(typeForm: TypesRequests) {
+    
     this.formsRequestsService.setFormRequests(typeForm);
+   
   }
 
   deleteRequest(id: number) {
