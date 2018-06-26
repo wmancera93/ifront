@@ -39,6 +39,7 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
 import { ShowEventsComponent } from './common/show-events/show-events.component';
 import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
+import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.component';
 
 
 @NgModule({
@@ -79,7 +80,8 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     LoadingComponent,
     ErrorPageHttpComponent,
     ShowEventsComponent,
-    GerencialModalComponent
+    GerencialModalComponent,
+    DynamicFormComponent
   ],
   exports: [
     HeaderComponent,
@@ -104,7 +106,8 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     CommentArticleComponent,
     LoadingComponent,
     GerencialModalComponent,
-    ErrorPageHttpComponent
+    ErrorPageHttpComponent,
+    DynamicFormComponent
   ],
   providers: [
     // ToasterService
