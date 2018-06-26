@@ -62,8 +62,6 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
-import { CopyrequestComponent } from './reports-rh/copyrequest/copyrequest.component';
-
 
 @NgModule({
   imports: [
@@ -124,8 +122,7 @@ import { CopyrequestComponent } from './reports-rh/copyrequest/copyrequest.compo
     NewArticleFormComponent,
     EvaluatedComponent,
     FillEvaluationComponent,
-    ShowEvaluationComponent,
-    CopyrequestComponent
+    ShowEvaluationComponent
   ],
   providers: [
 
