@@ -279,9 +279,9 @@ export class RequestsComponent implements OnInit {
               NombreSolicitante: "#" + element.pernr + ' - ' + element.name_applicant,
               Estado: element.status,
               Plataforma: element.next_platform + ' - #Nivel:' + element.next_level,
-              FechaInicial: element.date_begin_format,
-              FechaFinal: element.date_end_format,
               FechaSolicitud: element.created,
+              FechaInicial: element.date_begin_format,
+              FechaFinal: element.date_end_format,             
             });
           })
         }
