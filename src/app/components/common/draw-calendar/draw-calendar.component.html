@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="text-center">
+          <h2>
+            {{nameMonth}}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-5">
+        <div class="row  justify-content-center">
+          <div class="col-3">
+            <div class="top-general-p" style="width: 100%;">
+              <div class="roundArrow">
+                <i class="fa fa-chevron-left"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="col-12 top-general-p">
+              <div class="roundArrow" style="width: 60px !important;">
+                Hoy
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="col-12 top-general-p">
+              <div class="roundArrow">
+                <i class="fa fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center" style="margin-top: 30px;">
+      <div class="col-11">
+        <div class="row justify-content-left">
+          <div [ngClass]="{'col-2':dia !== 'Sabado' && dia !== 'Domingo', 'col-1':dia =='Sabado'|| dia =='Domingo'}" class="title-letter bgn-title text-center"
+            *ngFor="let dia of dayWeek;">
+            {{dia}}
+          </div>
+
+        </div>
+        <div class="row justify-content-left">
+          <div [ngClass]="{'col-2':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-1':day.weekday =='sabado'|| day.weekday=='domingo'}"
+            class="text-center" style="height: 70px; border:1px solid gray" *ngFor="let day of newObjectDate">
+            <strong>{{day.date}}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

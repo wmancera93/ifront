@@ -19,4 +19,11 @@ export class CalendarComponent implements OnInit {
       this.objectWidget = data;
     })
   }
+
+  showModalCalendar()
+  {     
+      document.getElementById('btn-calendar').click();
+      document.getElementById("bodyGeneral").removeAttribute('style');
+    
+  }
 }

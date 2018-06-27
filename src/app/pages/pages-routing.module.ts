@@ -40,6 +40,7 @@ import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
+import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
 
 
 const routes: Routes = [
@@ -196,7 +197,13 @@ const routes: Routes = [
     {        
         path : 'historical_posts',
         component: HistoricalPostsComponent
+    },
+    {        
+        path : 'calendar_modal',
+        component: CalendarModalComponent
     }
+
+    
     
 ];
 
