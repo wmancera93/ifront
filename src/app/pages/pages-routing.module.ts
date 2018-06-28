@@ -40,6 +40,7 @@ import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
+import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
 
 
 const routes: Routes = [
@@ -196,8 +197,11 @@ const routes: Routes = [
     {        
         path : 'historical_posts',
         component: HistoricalPostsComponent
+    },
+    {        
+        path : 'requests-type',
+        component: RequestsApproversComponent
     }
-    
 ];
 
 @NgModule({

@@ -37,6 +37,14 @@ export class ReportsHrService {
     return this.tokenService.get('hr_reports/historical_positions')
       .map((data: any) => data.json());
   }
+  getRequestsApprovers(type: string, approver:string, platform:string) {
+    return this.tokenService.get('hr_reports/consultation_approvers_filter/'+ type + '/' + approver + '/' + platform)
+      .map((data: any) => data.json());
+  }
+  getSelectRequestsByType() {
+    return this.tokenService.get('employee_requets/select_activities')
+      .map((data: any) => data.json());
+  }
 }
   
 
