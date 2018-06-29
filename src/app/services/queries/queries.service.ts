@@ -66,4 +66,12 @@ export class QueriesService {
     return this.tokenService.get('consultations/aniversary')
       .map((data: any) => data.json());
   }
+  getHistoricalPosts() {
+    return this.tokenService.get('consultations/historical_positions')
+      .map((data: any) => data.json());
+  }
+  getIvaEmployee() {
+    return this.tokenService.get('consultations/movements_iva')
+      .map((data: any) => data.json());
+  }
 }

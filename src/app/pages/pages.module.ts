@@ -62,7 +62,10 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
-import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
+import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
+import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
+import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
+
 
 @NgModule({
   imports: [
@@ -124,7 +127,9 @@ import { HistoricalPostsComponent } from './reports-rh/historical-posts/historic
     EvaluatedComponent,
     FillEvaluationComponent,
     ShowEvaluationComponent,
-    HistoricalPostsComponent
+    HistoricalPostsComponent,
+    RequestsApproversComponent,
+    IvaEmployeeComponent
   ],
   providers: [
 
