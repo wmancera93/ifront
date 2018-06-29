@@ -33,10 +33,6 @@ export class ReportsHrService {
     return this.tokenService.get('hr_reports/requests_export_file/' + status + '.xls')
       .map((data: any) => data.json());
   }
-  getHistoricalPosts() {
-    return this.tokenService.get('hr_reports/historical_positions')
-      .map((data: any) => data.json());
-  }
   getRequestsApprovers(type: string, approver:string, platform:string) {
     return this.tokenService.get('hr_reports/consultation_approvers_filter/'+ type + '/' + approver + '/' + platform)
       .map((data: any) => data.json());

@@ -108,6 +108,12 @@
             <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
               <a id="aAniversary" routerLink="/ihr/aniversary" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aAniversary', 'query')">Aniversario de los empleados</a>
             </li>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
+              <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalPosts', 'query')">Historico de puestos</a>
+            </li>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
+              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aaIvaEmployee', 'query')">Movimiento de Iva</a>
+            </li>
           </ul>
         </div>
       </li>
@@ -124,9 +130,6 @@
             </li>
             <li class="bg-li">
               <a id="aUsersPermisions" routerLink="/ihr/users_permisions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aUsersPermisions', 'reportsRH')">Permisos de usuarios</a>
-            </li>
-            <li class="bg-li">
-              <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aHistoricalPosts', 'reportsRH')">Historico de puestos</a>
             </li>
             <li class="bg-li">
               <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">Aprobadores de Solicitudes</a>
