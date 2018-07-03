@@ -43,7 +43,7 @@ export class MyPublicationsComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
-        })   
+        })
 
     this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
       if (data == true) {
@@ -101,33 +101,34 @@ export class MyPublicationsComponent implements OnInit {
   getDataPublications() {
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
       this.myPublications = data.data;
+      console.log(this.myPublications);
     })
   }
 
   goToForm() {
     document.getElementById('btn-newArt').click();
-    document.getElementById("bodyGeneral").removeAttribute('style');
+    document.getElementById('bodyGeneral').removeAttribute('style');
   }
 
   publishArticle(infoPub: PublicArticle) {
-    let parameter = infoPub.id;
+    const parameter = infoPub.id;
     this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
       infoPub.publish = data.data[0].publish;
-    })
+    });
 
   }
   hideArticle(infoPub: PublicArticle) {
-    let parameter = infoPub.id;
+    const parameter = infoPub.id;
     this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
       infoPub.publish = data.data[0].publish;
-    })
+    });
   }
 
   viewDetailArticle(infoPub: any) {
     this.myPublicationModal.emit('myPublicationModal');
      setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
-    }, 500);    
+    }, 500);
   }
 
   editNew(infoPub: PublicArticle) {

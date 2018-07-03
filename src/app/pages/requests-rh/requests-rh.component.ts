@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { RequestsRhService } from '../../services/requests-rh/requests-rh.service';
-import { RequestsRh, ListRequests, TypesRequests } from '../../models/common/requests-rh/requests-rh';
+import { RequestsRh, ListRequests, TypesRequests, ListRequetsTypes } from '../../models/common/requests-rh/requests-rh';
 import { AproversRequestsService } from '../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { FormsRequestsService } from '../../services/shared/forms-requests/forms-requests.service';
 import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
@@ -8,6 +8,8 @@ import { Alerts } from '../../models/common/alerts/alerts';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { FileUploadService } from '../../services/shared/common/file-upload/file-upload.service';
+import { filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-requests-rh',
@@ -16,13 +18,21 @@ import { FileUploadService } from '../../services/shared/common/file-upload/file
 })
 export class RequestsRhComponent implements OnInit {
   public requests: RequestsRh;
+  public requestStatic: ListRequests[] = [];
+  public getListrequest: ListRequests;
+
+  public listTypesFilters: ListRequetsTypes[] = [];
+
   public viewContainer = false;
 
   private alertWarning: Alerts[];
   public idDelete = 0;
+  public is_collapse: boolean;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
+  groupCheck: any;
+
 
   constructor(private requestsRhService: RequestsRhService,
     private aproversRequestsService: AproversRequestsService,
@@ -97,7 +107,11 @@ export class RequestsRhComponent implements OnInit {
     this.requestsRhService.getAllRequests().subscribe((data: any) => {
       if (data.success) {
         this.requests = data.data[0];
+        this.requestStatic = this.requests.my_requests_list;
         this.viewContainer = true;
+        this.requests.list_requets_types.forEach((element) => {
+          this.listTypesFilters.push({ id: element.id, id_activity: element.id_activity, name: element.name, active: false });
+        });
       } else {
         this.viewContainer = false;
       }
@@ -129,6 +143,39 @@ export class RequestsRhComponent implements OnInit {
       typeConfirmation: 'deletRequest'
     }];
     this.alert.setAlert(this.alertWarning[0]);
+  }
+
+  getDataRquest() {
+    this.requestsRhService.getAllRequests().subscribe((data: any) => {
+      this.getListrequest = data.data[0];
+    });
+  }
+
+  selectedRequest(infoRequest: ListRequetsTypes) {
+    this.requests.my_requests_list = [];
+
+    if (infoRequest.active) {
+      infoRequest.active = false;
+    } else {
+      infoRequest.active = true;
+    }
+
+    this.listTypesFilters.forEach((groupCheck) => {
+      if (groupCheck.active) {
+        this.requestStatic.filter((data) =>
+          data.type_requests_id === groupCheck.id).forEach((element) => {
+            this.requests.my_requests_list.push(element);
+          });
+      }
+    });
+
+    if (this.listTypesFilters.filter(data => data.active === true).length === 0) {
+      this.requests.my_requests_list = this.requestStatic;
+    }
+  }
+
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
   }
 
 }

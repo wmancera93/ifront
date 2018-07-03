@@ -193,11 +193,10 @@ const routes: Routes = [
         path : 'evaluated',
         component: EvaluatedComponent
     },
-    {        
+    {
         path : 'historical_posts',
         component: HistoricalPostsComponent
     }
-    
 ];
 
 @NgModule({

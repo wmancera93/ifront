@@ -3,7 +3,7 @@
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
-  
+
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -18,6 +18,7 @@
   <div class="row-hr-container justify-content-center" *ngIf="viewContainer">
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
+
         <div class="col-lg-4 col-12">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -37,33 +38,50 @@
         </div>
       </div>
 
-      <div class="row justify-content-center">
-        <div class="col-lg-2 col-4">
-          <div class="row">
-            <div class="col-12 number-size">
-              <div class="text-warning">
-                <i class="fa fa-square-o"></i>
+
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-4 col-lg-4 col-12 text-left">
+            <b>
+              Filtros de consulta
+            </b>
+            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(true)"></i>
+            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(false)"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
+        <div class="row align-items-center">
+          <div class="col-12 col-md-6 col-lg-3" *ngFor="let request of listTypesFilters; let i = index">
+            <div class="row align-items-center">
+              <div class="col-2">
+                <div *ngIf="!request.active" class="text-warning cursor-general number-size" (click)="selectedRequest(request)">
+                  <i class="fa fa-square-o"></i>
+                </div>
+                <div *ngIf="request.active" class="text-success cursor-general number-size" (click)="selectedRequest(request)">
+                  <i class="fa fa-check-square-o"></i>
+                </div>
               </div>
-              <div class="text-success">
-                <i class="fa fa-check-square-o"></i>
+              <div class="col-10 text-left text-capitalize">
+                {{request.name | lowercase}}
               </div>
-            </div>
-            <div class="col-12">
-              Tipo de solicitu #1
             </div>
           </div>
         </div>
       </div>
 
-      <div class="border-botton-general">
-        <div class="row top-containter">
-          <div class="col-xl-2 col-lg-4 col-12 text-left">
-            <b>
-              Mis Solicitudes
-            </b>
-          </div>
+
+      <div class="row top-containter" style="margin-top: 20px">
+        <div class="col-xl-2 col-lg-4 col-12 text-left">
+          <b>
+            Mis Solicitudes
+          </b>
         </div>
       </div>
+
 
       <div class="row justify-content-center top-containter">
         <div class="col-12">

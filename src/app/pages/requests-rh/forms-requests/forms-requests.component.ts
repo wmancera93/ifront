@@ -32,8 +32,6 @@ export class FormsRequestsComponent implements OnInit {
   public formInca: any;
 
   public detectLetter = ' ';
-  public captureDateInit = ' ';
-  public captureDateEnd = ' ';
 
   public model = {};
   public fields: FormlyFieldConfig[] = [];
@@ -234,8 +232,8 @@ export class FormsRequestsComponent implements OnInit {
 
   calculateDay() {
     /* calculate dates */
-    let dateBegin = new Date(this.formPres.controls.date_begin.value);
-    let dateEnd = new Date(this.formPres.controls.date_end.value);
+    let dateBegin = this.formPres.controls.date_begin.value === ' ' ? null : new Date(this.formPres.controls.date_begin.value);
+    let dateEnd = this.formPres.controls.date_end.value === ' ' ? null : new Date(this.formPres.controls.date_end.value);
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
@@ -261,9 +259,9 @@ export class FormsRequestsComponent implements OnInit {
       dateEnd = null;
 
     }
-    if (this.captureDateInit !== null && this.formRequests.maximum_days === 1) {
+    if (dateBegin !== null && this.formRequests.maximum_days === 1) {
       this.formPres.controls.date_end.value = this.formPres.controls.date_begin.value;
-      }
+    }
     if (dateBegin !== null || dateEnd !== null) {
       if (this.formPres.controls.date_begin.value === this.formPres.controls.date_end.value) {
         this.showTime = true;
