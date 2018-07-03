@@ -77,7 +77,7 @@ export class NewArticleFormComponent implements OnInit {
 
     }
     else {
-      this.showSubmit = false;
+      this.showSubmit = false;      
       const selectedItems = value.tags.map(({ display }) => display);
       let newArticleForm = new FormData();
       newArticleForm.append('title', value.title);

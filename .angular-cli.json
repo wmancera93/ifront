@@ -32,7 +32,8 @@
         "./assets/javascript/pace.js",
         "../node_modules/jspdf/dist/jspdf.min.js",
         "../node_modules/jspdf/dist/jspdf.debug.js",
-        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js"
+        "../node_modules/jspdf-autotable/dist/jspdf.plugin.autotable.js",
+        "../node_modules/moment/min/moment.min.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

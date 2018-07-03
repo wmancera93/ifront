@@ -29,6 +29,7 @@ export class MasterDataService {
     return this.tokenService.get('master_data_types/personal')
       .map((data: any) => data.json());
   }
+  
 
   getDataContact() {
     return this.tokenService.get('master_data_types/contact')
@@ -54,5 +55,14 @@ export class MasterDataService {
     return this.tokenService.get('master_data_types/retefuente')
       .map((data: any) => data.json());
   }
+
+  putEditDataMaster(editDataMaster : any)
+  {
+    return this.tokenService.put('master_data_types/update_master_data',editDataMaster)
+    .map((data: any) => data.json()); 
+  }
+
+
+  
 
 }

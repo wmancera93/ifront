@@ -16,6 +16,7 @@ import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-ch
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
+// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
 import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
@@ -39,8 +40,9 @@ import { PendingsComponent } from './approver-requests/pendings/pendings.compone
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
-import { HistoricalPostsComponent } from './reports-rh/historical-posts/historical-posts.component';
-
+import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
+import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
+import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
 
 const routes: Routes = [
     {
@@ -181,23 +183,30 @@ const routes: Routes = [
         path: 'managed_approvers',
         component: ManagedComponent
     },
-    {        
-        path : 'master_data',
+    {
+        path: 'master_data',
         component: MasterDataComponent
     },
-    {        
-        path : 'help',
+    {
+        path: 'help',
         component: HelpComponent
     },
-    {        
-        path : 'evaluated',
+    {
+        path: 'evaluated',
         component: EvaluatedComponent
     },
-    {        
-        path : 'historical_posts',
+    {
+        path: 'historical_posts',
         component: HistoricalPostsComponent
+    },
+    {
+        path: 'requests-type',
+        component: RequestsApproversComponent
+    },
+    {
+        path: 'iva_employee',
+        component: IvaEmployeeComponent
     }
-    
 ];
 
 @NgModule({

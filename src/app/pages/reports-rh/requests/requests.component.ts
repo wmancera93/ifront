@@ -268,8 +268,26 @@ export class RequestsComponent implements OnInit {
   }
 
   excelExport() {
-    window.open('http://apihr-development.hrinteractive.co/api/v2/hr_reports/requests_export_file/'+this.filter_active+'.xls', "_blank");
-    // this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
+    let object: any[] = [];
+    this.reportsHrService.getRequestsExcelByStatus(this.filter_active)
+      .subscribe((data: any) => {
+        if (data.data.length > 0) {
+          data.data.forEach(element => {
+            object.push({
+              Ticket: element.id,
+              TipoSolicitud: element.type_requests_name,
+              NombreSolicitante: "#" + element.pernr + ' - ' + element.name_applicant,
+              Estado: element.status,
+              Plataforma: element.next_platform + ' - #Nivel:' + element.next_level,
+              FechaSolicitud: element.created,
+              FechaInicial: element.date_begin_format,
+              FechaFinal: element.date_end_format,             
+            });
+          })
+        }
+
+        this.excelService.exportAsExcelFile(object, this.title, '.xlsx');
+      });
   }
 
   csvExport() {

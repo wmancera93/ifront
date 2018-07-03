@@ -21,7 +21,7 @@ export class AlertsService {
     return this.actionConfirm;
   }
 
-  setActionConfirm(action:string) {
+  setActionConfirm(action: string) {
     return this.actionConfirm.next(action);
   }
 }
