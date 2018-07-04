@@ -40,6 +40,7 @@ import { ShowEventsComponent } from './common/show-events/show-events.component'
 import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
 import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.component';
+import { DetailsArrayComponent } from './common/details-array/details-array.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.compone
     ErrorPageHttpComponent,
     ShowEventsComponent,
     GerencialModalComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    DetailsArrayComponent
   ],
   exports: [
     HeaderComponent,

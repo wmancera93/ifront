@@ -1,0 +1,90 @@
+<!-- Button trigger modal -->
+
+<div class="row">
+  <div class="col-4">
+    <button (mouseover)="clickOpenModal()" (mouseleave)="clickCloseModal()">
+      prueba
+    </button>
+  </div>
+  <div class="col-4">
+      <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+        prueba
+      </button>
+    </div>
+    <div class="col-4">
+        <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+          prueba
+        </button>
+      </div>
+      <div class="col-4">
+          <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+            prueba
+          </button>
+        </div>
+        <div class="col-4">
+            <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+              prueba
+            </button>
+          </div>
+          <div class="col-4">
+              <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+                prueba
+              </button>
+            </div>
+            <div class="col-4">
+                <button (mouseover)="clickOpenModal($event)" (mouseleave)="clickCloseModal()">
+                  prueba
+                </button>
+              </div>
+</div>
+
+
+<button type="button" style="display: none" class="btn btn-primary" data-toggle="modal" data-target="#calendar-detail" id="btn_calendar_detail">
+  modal
+</button>
+<div class="fade modal1" data-backdrop="false" data- id="calendar-detail" tabindex="-1" role="dialog" aria-labelledby="calendar-detail">
+  <div class="modal-dinamic-calendar modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header borderLine-title row-hr justify-content-center" style="height:100px">
+        <h5 class="modal-title titleColor1 justify-content-center" id="exampleModalCenterTitle">Detalles Agenda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body" style="background: white">
+        <div class="row bodyColorInfo">
+          <div class="col-12 col-lg-6">
+            <i class="fa fa-calendar-minus-o paddingInfo"></i>
+            <strong>&nbsp;Descripcion actividad:</strong>&nbsp;{{detail_calendar[0].descript}}
+            <br>
+            <i class="fa fa-info-circle paddingInfo"></i>
+            <strong>&nbsp;Descripción tipo agenda</strong>&nbsp;{{detail_calendar[0].description_calendar}}
+            <br>
+          </div>
+          <div class="col-12 col-lg-6">
+            <i class="fa fa-hourglass paddingInfo"></i>
+            <strong>&nbsp;Hora de finalización:</strong>&nbsp;{{detail_calendar[0].hour_end}}
+            <br>
+            <i class="fa fa-clock-o paddingInfo"></i>
+            <strong>&nbsp;Hora de inicio:</strong>&nbsp;{{detail_calendar[0].hour_begin}}
+            <br>
+          </div>
+          <div class="col-12 col-lg-6">
+            <i class="fa fa-commenting-o paddingInfo"></i>
+            <strong>&nbsp;Texto de calendario:</strong>&nbsp;{{detail_calendar[0].hour_end}}
+            <br>
+          </div>
+          <div class="col-12 col-lg-6">
+            <i class="fa fa-book paddingInfo"></i>
+            <strong>&nbsp;Descripción plan de trabajo</strong>&nbsp;{{detail_calendar[0].description_calendar}}
+            <br>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer justify-content-center" style="background: white">
+        <div id="closeDetailCalendar" class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
