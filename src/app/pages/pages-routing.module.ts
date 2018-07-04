@@ -42,6 +42,7 @@ import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component'
 import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
 import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
 import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
+import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
 
 
 const routes: Routes = [
@@ -206,7 +207,13 @@ const routes: Routes = [
     {
         path: 'iva_employee',
         component: IvaEmployeeComponent
+    },
+    {        
+        path : 'calendar_modal',
+        component: CalendarModalComponent
     }
+
+    
     
 ];
 

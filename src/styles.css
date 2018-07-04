@@ -648,8 +648,7 @@ header{
     border-radius: 40px;
     -webkit-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
     -moz-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
-    box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
-  
+    box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);  
 }
 
 .roundMoreInfo{
@@ -797,6 +796,22 @@ cursor: pointer;
     border-radius:50px;  
     -webkit-box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
     box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
+}
+
+/*Calendar */
+.item-calendar {
+    text-align: center;
+    background-color:var(--primary);    
+    color: #fff;    
+    padding-top: 2px;
+    padding-bottom: 3px;
+    width: 100%;
+    margin-bottom: 3px;
+}
+
+.item-calendar {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
 }
 
 /*Error Message */
