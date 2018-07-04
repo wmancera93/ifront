@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../../../services/calendar/calendar.service';
 import { CalendarData } from '../../../models/common/calendar/calendar';
+import { CalendarDetailService } from '../../../services/shared/common/calendar-detail/calendar-detail.service';
 
 
 @Component({
@@ -24,12 +25,12 @@ export class DrawCalendarComponent implements OnInit {
   public changeMonth: number = 0;
   public dayWeek: any[] = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
 
-  constructor(public calendarService: CalendarService) { }
+  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
 
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
-      
+
 
       let count = 0;
       this.objectDateCurrent.forEach(element => {
@@ -889,4 +890,31 @@ export class DrawCalendarComponent implements OnInit {
 
   }
 
+  clickOpenModal(event:any, day: any) {
+    let objeto = {
+      efecto: 'open',
+      fecha: '04/07/2018',
+      pointx: event.clientX,
+      pointy: event.clientY,
+      evento: {
+        descript: "hola",
+        calendar_text: "holaa",
+        hour_begin: "7:00:00",
+        hour_end: "17:00:00",
+        description_calendar: "HOLA TU",
+        description_work: "BOGOTA COLOMBIA",
+      }
+    }
+
+
+    this.calendarDetailService.setDetailCalendar(objeto);
+  }
+
+  clickCloseModal() {
+    this.calendarDetailService.setDetailCalendar({ efecto: 'close' });
+  }
+
+  desingPosition(){
+
+  }
 }

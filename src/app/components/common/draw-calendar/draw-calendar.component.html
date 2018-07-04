@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row">   
   <div class="col-12">
     <div class="row justify-content-center">
       <div class="col-12">
@@ -36,8 +36,10 @@
         </div>
       </div>
     </div>
+    
     <div class="row justify-content-center" style="margin-top: 30px;">
       <div class="col-11">
+          <app-calendar-detail></app-calendar-detail>
         <div class="row justify-content-left">
           <div [ngClass]="{'col-2':dia !== 'Sabado' && dia !== 'Domingo', 'col-1':dia =='Sabado'|| dia =='Domingo'}" class="title-letter bgn-title text-center"
             *ngFor="let dia of dayWeek;">
@@ -56,7 +58,7 @@
               </div>
             </div>
             <div class="row">
-              <div class=" col-12 padding-item-calendar">
+              <div class=" col-12 padding-item-calendar" (mouseover)="clickOpenModal($event, day)" (mouseleave)="clickCloseModal()">
                 <div class="item-calendar">
                   tema
                 </div>

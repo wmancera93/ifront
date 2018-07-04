@@ -23,7 +23,7 @@
     overflow-y: auto;
  }
 
- /* .modal-dinamic-calendar {
-    z-index: 3000 !important;
-    position: absolute !important;  
- } */
+ .modal-dinamic-calendar {
+    position: fixed;
+    z-index: 3000;
+ }
