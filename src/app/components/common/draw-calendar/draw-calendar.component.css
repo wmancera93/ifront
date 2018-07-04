@@ -33,3 +33,23 @@
     color: white;
     font-size:15px;
 }
+
+.cell-day:hover{
+    background-color:rgba(37, 50, 63, 0.9); 
+    color: #ffffff;
+    
+}
+.borderNumber{
+    border-radius:20px;
+    color: #fff;
+    background: var(--btn-primary);    
+        
+}
+ .bgn-color-day
+ {
+    background-color: rgba(37, 50, 63, 0.9);   
+ }
+
+
+
+

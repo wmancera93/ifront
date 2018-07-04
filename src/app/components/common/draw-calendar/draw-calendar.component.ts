@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarService } from '../../../services/calendar/calendar.service';
+import { CalendarData } from '../../../models/common/calendar/calendar';
+
 
 @Component({
   selector: 'app-draw-calendar',
@@ -6,183 +9,147 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./draw-calendar.component.css']
 })
 export class DrawCalendarComponent implements OnInit {
-  public objectDate: any[] = [];
+  public objectDateCurrent: any[] = [];
+  public objectPerMonthData: any[] = [];
   public newObjectDate: any[] = [];
   public data: any[] = [];
   public month: any;
   public nameMonth: any;
   public nameWeek: any;
-
+  public objectDateNextMonth: CalendarData[] = [];
+  public objectDateLast: CalendarData[] = [];
+  public objectDateToday: CalendarData[] = [];
+  public objectDataPosition: any[] = [];
+  public numberDay: any;
+  public changeMonth: number = 0;
   public dayWeek: any[] = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
 
-  constructor() { }
+  constructor(public calendarService: CalendarService) { }
 
   ngOnInit() {
-    this.objectDate = [
-      {
-        title: "Plan de horario de trabajo",
-        title_table: "Plan de horario de trabajo",
-        data: [
-          {
-            date: "2018-10-01",
-            weekday: "martes"
-          },
-          {
-            date: "2018-10-03",
-            weekday: "miercoles"
-          },
-          {
-            date: "2018-10-04",
-            weekday: "jueves"
-          },
-          {
-            date: "2018-10-05",
-            weekday: "viernes"
-          },
-          {
-            date: "2018-10-06",
-            weekday: "sabado"
-          },
-          {
-            date: "2018-10-07",
-            weekday: "domingo"
-          },
-          {
-            date: "2018-10-08",
-            weekday: "lunes"
-          },
-          {
-            date: "2018-10-09",
-            weekday: "martes"
-          },
-          {
-            date: "2018-10-10",
-            weekday: "miercoles"
-          },
-          {
-            date: "2018-10-11",
-            weekday: "jueves"
-          },
-          {
-            date: "2018-10-12",
-            weekday: "viernes"
-          },
-          {
-            date: "2018-10-13",
-            weekday: "sabado"
-          },
-          {
-            date: "2018-10-14",
-            weekday: "domingo"
-          },
-          {
-            date: "2018-10-15",
-            weekday: "lunes"
-          },
-          {
-            date: "2018-10-16",
-            weekday: "martes"
-          },
-          {
-            date: "2018-10-17",
-            weekday: "miercoles"
-          },
-          {
-            date: "2018-10-18",
-            weekday: "jueves"
-          },
-          {
-            date: "2018-10-19",
-            weekday: "viernes"
-          },
-          {
-            date: "2018-10-20",
-            weekday: "sabado"
-          },
-          {
-            date: "2018-10-21",
-            weekday: "domingo"
-          },
-          {
-            date: "2018-10-22",
-            weekday: "lunes"
-          },
-          {
-            date: "2018-10-23",
-            weekday: "martes"
-          },
-          {
-            date: "2018-10-24",
-            weekday: "miercoles"
-          },
-          {
-            date: "2018-10-25",
-            weekday: "jueves"
-          },
-          {
-            date: "2018-10-26",
-            weekday: "viernes"
-          },
-          {
-            date: "2018-10-27",
-            weekday: "sabado"
-          },
-          {
-            date: "2018-10-28",
-            weekday: "domingo"
-          },
-          {
-            date: "2018-10-29",
-            weekday: "lunes"
-          },
-          {
-            date: "2018-10-30",
-            weekday: "martes"
-          },
-          {
-            date: "2018-10-31",
-            weekday: "miercoles"
-          },
-          {
-            date: "2018-10-32",
-            weekday: "jueves"
-          },
+    this.calendarService.getDataCalendar().subscribe((data: any) => {
+      this.objectDateCurrent = data.data;
+      
 
-          {
-            date: "2018-10-30",
-            weekday: "viernes"
-          },
-          {
-            date: "2018-10-31",
-            weekday: "sabado"
+      let count = 0;
+      this.objectDateCurrent.forEach(element => {
+        if (element.date !== null) {
+          if (this.changeMonth !== element.date.split('-')[1]) {
+            this.changeMonth = element.date.split('-')[1];
+            count++;
+            switch (count) {
+              case 1:
+                this.objectDateLast.push(element);
+                break;
+              case 2:
+                this.objectDateToday.push(element);
+                break;
+              case 3:
+                this.objectDateNextMonth.push(element);
+                break;
+
+              default:
+                break;
+            }
           }
-        ]
-      }
-    ];
+          else if (count === 1) {
+            this.objectDateLast.push(element);
 
+          }
+          else if (count === 2) {
+            this.objectDateToday.push(element);
+          }
+          else if (count === 3) {
+            this.objectDateNextMonth.push(element);
+          }
+        }
+      });
+      this.objectPerMonthData = this.objectDateToday;
+      this.showDataCalendar();
+    });
 
+  }
 
-    switch (this.objectDate[0].data[0].weekday) {
+  pushLastObjectDate() {
+    this.objectPerMonthData.forEach(element => {
+      this.newObjectDate.push({
+        calendar_text: element.calendar_text,
+        date: element.date,
+        holiday_calendar: element.holiday_calendar,
+        hour_begin: element.hour_begin,
+        hour_finish: element.hour_finish,
+        is_now: element.is_now,
+        schedule_plan_for_periods: element.schedule_plan_for_periods,
+        theorist_hours: element.theorist_hours,
+        type_schedule_code: element.type_schedule_code,
+        type_schedule_plan_class: element.type_schedule_plan_class,
+        type_schedule_plan_description: element.type_schedule_plan_description,
+        weekday: element.weekday,
+        work_schedule_plan_text: element.work_schedule_plan_text,
+        work_schedule_type_id: element.work_schedule_type_id
+      });
+    });
+  }
+
+  showDataCalendar() {
+
+    switch (this.objectPerMonthData[0].weekday) {
       case 'domingo':
-        this.newObjectDate = this.objectDate[0].data;
+        this.newObjectDate = this.objectDateCurrent[0].data;
         break;
       case 'lunes':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         });
         this.pushLastObjectDate();
         break;
       case 'martes':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "lunes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "lunes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
 
@@ -190,187 +157,658 @@ export class DrawCalendarComponent implements OnInit {
       case 'miercoles':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "lunes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "lunes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "martes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "martes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
+
         break;
       case 'jueves':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "lunes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "lunes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "martes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "martes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "miercoles"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "miercoles",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
         break;
+
       case 'viernes':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "lunes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "lunes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "martes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "martes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "miercoles"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "miercoles",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "jueves"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "jueves",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
         break;
       case 'sabado':
         this.newObjectDate = [];
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "domingo"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "domingo",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "lunes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "lunes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "martes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "martes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "miercoles"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "miercoles",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "jueves"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "jueves",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           },
           {
+            calendar_text: "",
             date: "",
-            weekday: "viernes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "viernes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
+        break;
+
     }
-    switch (this.objectDate[0].data[this.objectDate[0].data.length - 1].weekday) {
+
+    switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
       case 'sabado':
         break;
       case 'domingo':
-    
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "lunes"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "lunes",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "martes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "martes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "miercoles"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "miercoles",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "jueves"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "jueves",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "viernes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "viernes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "sabado"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "sabado",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
         break;
-        case 'lunes':
+      case 'lunes':
 
         this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "martes"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "martes",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         },
           {
+            calendar_text: "",
             date: "",
-            weekday: "miercoles"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "miercoles",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "jueves"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "jueves",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "viernes"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "viernes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           }, {
+            calendar_text: "",
             date: "",
-            weekday: "sabado"
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "sabado",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
           });
 
         break;
       case 'martes':
-      this.newObjectDate.push( {
+        this.newObjectDate.push({
+          calendar_text: "",
           date: "",
-          weekday: "miercoles"
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "miercoles",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
         }, {
-          date: "",
-          weekday: "jueves"
-        }, {
-          date: "",
-          weekday: "viernes"
-        }, {
-          date: "",
-          weekday: "sabado"
-        });
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "jueves",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          }, {
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "viernes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          }, {
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "sabado",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          });
 
         break;
       case 'miercoles':
-      this.newObjectDate.push({
-        date: "",
-        weekday: "jueves"
-      }, {
-        date: "",
-        weekday: "viernes"
-      }, {
-        date: "",
-        weekday: "sabado"
-      });
+        this.newObjectDate.push({
+          calendar_text: "",
+          date: "",
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "jueves",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
+        }, {
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "viernes",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          }, {
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "sabado",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          });
         break;
       case 'jueves':
-      this.newObjectDate.push({
-        date: "",
-        weekday: "viernes"
-      }, {
-        date: "",
-        weekday: "sabado"
-      });
+        this.newObjectDate.push({
+          calendar_text: "",
+          date: "",
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "viernes",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
+        }, {
+            calendar_text: "",
+            date: "",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            is_now: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_code: "",
+            type_schedule_plan_class: "",
+            type_schedule_plan_description: "",
+            weekday: "sabado",
+            work_schedule_plan_text: "",
+            work_schedule_type_id: ""
+          });
         break;
       case 'viernes':
-      this.newObjectDate.push({
-        date: "",
-        weekday: "sabado"
-      });
+        this.newObjectDate.push({
+          calendar_text: "",
+          date: "",
+          holiday_calendar: "",
+          hour_begin: "",
+          hour_finish: "",
+          is_now: "",
+          schedule_plan_for_periods: "",
+          theorist_hours: "",
+          type_schedule_code: "",
+          type_schedule_plan_class: "",
+          type_schedule_plan_description: "",
+          weekday: "sabado",
+          work_schedule_plan_text: "",
+          work_schedule_type_id: ""
+        });
         break;
     }
-    
-    this.objectDate[0].data.forEach(element => {
-      this.month = element.date.split("-");
 
-    }); 0
+    this.objectPerMonthData.forEach(today => {
+      this.month = today.date.split("-");
+    });
     switch (this.month[1]) {
       case "01":
         this.nameMonth = "Enero"
@@ -412,13 +850,43 @@ export class DrawCalendarComponent implements OnInit {
 
   }
 
-  pushLastObjectDate() {
-    this.objectDate[0].data.forEach(element => {
-      this.newObjectDate.push({
-        date: element.date,
-        weekday: element.weekday
-      });
-    });
+  nextMonth() {
+
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+
+    if (this.objectDataPosition[this.objectDataPosition.length - 3] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[1];
+
+      this.showDataCalendar();
+    }
+    else if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[2];
+
+      this.showDataCalendar();
+    }
+  }
+
+  lastMonth() {
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+
+    if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[0];
+
+      this.showDataCalendar();
+    }
+    else if (this.objectDataPosition[this.objectDataPosition.length - 1] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[1];
+
+      this.showDataCalendar();
+    }
+
+  }
+
+  actualMonth() {
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+    this.objectPerMonthData = this.objectDataPosition[1];
+    this.showDataCalendar();
+
   }
 
 }

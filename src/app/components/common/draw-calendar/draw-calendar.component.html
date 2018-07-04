@@ -10,24 +10,24 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <div class="col-5">
+      <div class="col-12 col-md-5 col-xl-5">
         <div class="row  justify-content-center">
-          <div class="col-3">
-            <div class="top-general-p" style="width: 100%;">
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" style="width: 100%;" (click)="lastMonth()">
               <div class="roundArrow">
                 <i class="fa fa-chevron-left"></i>
               </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="col-12 top-general-p">
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" (click)="actualMonth()">
               <div class="roundArrow" style="width: 60px !important;">
                 Hoy
               </div>
             </div>
           </div>
-          <div class="col-3">
-            <div class="col-12 top-general-p">
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" (click)="nextMonth()">
               <div class="roundArrow">
                 <i class="fa fa-chevron-right"></i>
               </div>
@@ -43,12 +43,25 @@
             *ngFor="let dia of dayWeek;">
             {{dia}}
           </div>
-
         </div>
-        <div class="row justify-content-left">
-          <div [ngClass]="{'col-2':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-1':day.weekday =='sabado'|| day.weekday=='domingo'}"
-            class="text-center" style="height: 70px; border:1px solid gray" *ngFor="let day of newObjectDate">
-            <strong>{{day.date}}</strong>
+        <div class="row">
+          <div [ngClass]="{'col-2':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-1':day.weekday =='sabado'|| day.weekday=='domingo','bgn-color-day' : day.is_now == true}"
+            class="cell-day text-right" style="height: 100px; border:1px solid gray" *ngFor="let day of newObjectDate">
+            <div class="row justify-content-end">
+              <div class="text-center" [ngClass]="{ 'col-4':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-6':day.weekday =='sabado'|| day.weekday=='domingo'}">
+                <div [ngClass]="{'borderNumber' : day.is_now === true}">
+                  {{day.date | date: "dd"}}
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class=" col-12 padding-item-calendar">
+                <div class="item-calendar">
+                  tema
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

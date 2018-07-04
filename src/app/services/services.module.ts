@@ -39,6 +39,7 @@ import { StylesExplorerService } from './common/styles-explorer/styles-explorer.
 import { EvaluationsService } from './evaluations/evaluations.service';
 import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
 import { DataMasterSharedService } from './shared/common/data-master/data-master-shared.service';
+import { CalendarService } from './calendar/calendar.service';
 
 @NgModule({
   imports: [
@@ -80,7 +81,8 @@ import { DataMasterSharedService } from './shared/common/data-master/data-master
     StylesExplorerService,
     EvaluationsService,
     EvaluationsSharedService,
-    DataMasterSharedService
+    DataMasterSharedService,
+    CalendarService
   ]
 })
 export class ServicesModule { }
