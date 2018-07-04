@@ -10,7 +10,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 export class IvaEmployeeComponent implements OnInit {
 
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Reporte de Iva';
+  public nameReport: string = 'Movimientos de Iva';
   public token: boolean;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
