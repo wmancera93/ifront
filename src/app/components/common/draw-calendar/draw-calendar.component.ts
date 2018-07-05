@@ -24,13 +24,24 @@ export class DrawCalendarComponent implements OnInit {
   public numberDay: any;
   public changeMonth: number = 0;
   public dayWeek: any[] = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
+  public eventPrueba : any[] = [{hour_begin: "03:00",
+    hour_finish:"10:00", type_schedule_plan_description: "descripcion evento",
+    work_schedule_plan_text:"trabajo"},{hour_begin: "05:00",
+    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text:"trabajo 2"},{hour_begin: "05:00",
+    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text:"trabajo 3"},{hour_begin: "05:00",
+    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text:"trabajo 4"},{hour_begin: "05:00",
+    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text:"trabajo 5"}] 
 
   constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
 
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
-      this.objectDateCurrent = data.data;
-
+      this.objectDateCurrent = data.data;      
+      
 
       let count = 0;
       this.objectDateCurrent.forEach(element => {
@@ -68,6 +79,7 @@ export class DrawCalendarComponent implements OnInit {
       this.objectPerMonthData = this.objectDateToday;
       this.showDataCalendar();
     });
+
 
   }
 
@@ -113,7 +125,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         });
         this.pushLastObjectDate();
@@ -133,7 +145,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -149,7 +161,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text:null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -170,7 +182,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -186,7 +198,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text:null,
             work_schedule_type_id: ""
           },
           {
@@ -202,7 +214,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "martes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -223,7 +235,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -239,7 +251,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -255,7 +267,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "martes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -271,7 +283,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text:null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -292,7 +304,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -308,7 +320,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text:  null,
             work_schedule_type_id: ""
           },
           {
@@ -324,7 +336,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "martes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -340,7 +352,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -356,7 +368,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "jueves",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -376,7 +388,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "domingo",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -392,7 +404,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -408,7 +420,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "martes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -424,7 +436,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -440,7 +452,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "jueves",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -456,7 +468,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "viernes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -481,7 +493,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "lunes",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -497,7 +509,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "martes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -512,7 +524,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -527,7 +539,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "jueves",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -542,7 +554,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "viernes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -557,7 +569,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "sabado",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         break;
@@ -576,7 +588,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "martes",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         },
           {
@@ -592,7 +604,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -607,7 +619,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "jueves",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -622,7 +634,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "viernes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -637,7 +649,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "sabado",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
 
@@ -656,7 +668,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "miercoles",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         }, {
             calendar_text: "",
@@ -671,7 +683,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "jueves",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -686,7 +698,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "viernes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -701,7 +713,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "sabado",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
 
@@ -720,7 +732,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "jueves",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         }, {
             calendar_text: "",
@@ -735,7 +747,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "viernes",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           }, {
             calendar_text: "",
@@ -750,7 +762,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "sabado",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         break;
@@ -768,7 +780,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "viernes",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         }, {
             calendar_text: "",
@@ -783,7 +795,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "sabado",
-            work_schedule_plan_text: "",
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         break;
@@ -801,7 +813,7 @@ export class DrawCalendarComponent implements OnInit {
           type_schedule_plan_class: "",
           type_schedule_plan_description: "",
           weekday: "sabado",
-          work_schedule_plan_text: "",
+          work_schedule_plan_text: null,
           work_schedule_type_id: ""
         });
         break;
@@ -890,13 +902,13 @@ export class DrawCalendarComponent implements OnInit {
 
   }
 
-  clickOpenModal(event:any, day: any) {
-    let objeto = {
-      efecto: 'open',
-      fecha: '04/07/2018',
+  openModal(event:any, day: any) {
+    let objet_calendar = {
+      effect: 'open',
+      date_info: '04/07/2018',
       pointx: event.clientX,
       pointy: event.clientY,
-      evento: {
+      event_info: {
         descript: "hola",
         calendar_text: "holaa",
         hour_begin: "7:00:00",
@@ -904,14 +916,14 @@ export class DrawCalendarComponent implements OnInit {
         description_calendar: "HOLA TU",
         description_work: "BOGOTA COLOMBIA",
       }
+      
     }
-
-
-    this.calendarDetailService.setDetailCalendar(objeto);
+    
+    this.calendarDetailService.setDetailCalendar(objet_calendar);
   }
 
-  clickCloseModal() {
-    this.calendarDetailService.setDetailCalendar({ efecto: 'close' });
+  closeModal() {
+    this.calendarDetailService.setDetailCalendar({ effect: 'close' });
   }
 
   desingPosition(){

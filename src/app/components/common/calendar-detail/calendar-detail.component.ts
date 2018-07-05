@@ -14,19 +14,33 @@ export class CalendarDetailComponent implements OnInit {
 
     this.calendarDetailService.getDetailCalendar()
       .subscribe((detail_calendar) => {
-        if (detail_calendar.efecto === 'open') {
+        if (detail_calendar.effect === 'open') {
           this.detail_calendar = [];
-          this.detail_calendar.push(detail_calendar.evento);
-          this.state_modal = true;
-
-          document.getElementById('calendar_detail').style.marginLeft = (detail_calendar.pointx).toString() + 'px';
-          document.getElementById('calendar_detail').style.marginTop = (detail_calendar.pointy - 300).toString() + 'px';
-          console.log(detail_calendar.pointx.toString() + ' - ' + detail_calendar.pointy.toString())
-          console.log(screen.height.toString() + ' - ' + screen.width.toString())
+          this.detail_calendar.push(detail_calendar.event_info);
+          this.state_modal = true;   
+          
+          if (detail_calendar.pointy < (0.6*screen.height)) {
+            let calculatey =  detail_calendar.pointy - 190;
+            document.getElementById('calendar_detail').style.marginTop = calculatey + 'px';
+          }else {
+            let calculatey =  detail_calendar.pointy - (190+(0.1*screen.height));
+            document.getElementById('calendar_detail').style.marginTop = calculatey + 'px';
+          }
+          // let calculatey =  detail_calendar.pointy - 200;
+          // document.getElementById('calendar_detail').style.marginTop = calculatey + 'px';
+          
+          if (detail_calendar.pointx < (0.6*screen.width)) {
+            document.getElementById('calendar_detail').style.marginLeft = (detail_calendar.pointx).toString() + 'px';
+          } else{
+            let calculatex=detail_calendar.pointx -(0.45*screen.width) 
+            document.getElementById('calendar_detail').style.marginLeft = calculatex + 'px';
+          }
+          
         } else {
           this.detail_calendar = [];
           this.state_modal = false;
         }
+
       })
   }
 
