@@ -25,6 +25,9 @@ export class EmployeesComponent implements OnInit {
   @Output() objectBirthDay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectAnniversay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();
+  @Output() objectQinquennials: EventEmitter<EventsEmployess[]> = new EventEmitter();
+  @Output() objectQinquennialsPayment: EventEmitter<EventsEmployess[]> = new EventEmitter();
+
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
@@ -33,7 +36,7 @@ export class EmployeesComponent implements OnInit {
     public dashboardEmployeeService: DashboardEmployeeService,
     public router: Router,
     public stylesExplorerService: StylesExplorerService) {
-     
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === '/index') {
@@ -63,7 +66,6 @@ export class EmployeesComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
 
     this.dashboardEmployeeService.getRequest()
@@ -94,13 +96,6 @@ export class EmployeesComponent implements OnInit {
         this.objectDeductions.emit({ graph_type: data.data.graph_type, properties: data.data.total_deductions });
       })
 
-    // setTimeout(() => {
-    //   this.objectMyLayoffs.emit(myLayoffs[0]);
-    //   this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
-    //   this.objectIncome.emit(income[0]);
-    //   this.objectDeductions.emit(deductions[0]);
-    // },200)     
-
     this.dashboardEmployeeService.getNewspaper()
       .subscribe((data: any) => {
         if (data.success === true) {
@@ -117,9 +112,21 @@ export class EmployeesComponent implements OnInit {
         }
       });
 
-      setTimeout(() => {
-        this.stylesExplorerService.addStylesCommon();
-      }, 3000);
+    this.dashboardEmployeeService.getQuinquennialsData()
+      .subscribe((data: any) => {
+        this.objectQinquennials.emit(data.data)
+      });
+
+    this.dashboardEmployeeService.getQuinquennialsPaymentsData()
+      .subscribe((data: any) => {
+        this.objectQinquennialsPayment.emit(data.data)
+      });
+
+
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 3000);
 
     setTimeout(() => {
       // document.getElementById("loginId").style.display = 'none'
