@@ -457,7 +457,7 @@ export class StylesExplorerService {
         '',
         dataEnterprise.background_header_menu.url
         , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
-      )
+      );
     }
   }
 

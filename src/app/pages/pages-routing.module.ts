@@ -196,7 +196,7 @@ const routes: Routes = [
         component: EvaluatedComponent
     },
     {
-        path: 'historical_posts',
+        path : 'historical_posts',
         component: HistoricalPostsComponent
     },
     {
