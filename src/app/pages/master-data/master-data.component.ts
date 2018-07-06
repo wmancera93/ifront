@@ -102,18 +102,15 @@ export class MasterDataComponent implements OnInit {
   }
 
   activeEditButton(dataMaster: any) {
-let countEdit = 0;
+    let countEdit = 0;
     dataMaster.forEach(element => {
-      console.log(element)
       element.forEach(info => {
-        console.log(info)
         if (info !== undefined) {
-          this.detectCanEdit = info.control !== 'label' ? countEdit+=1 :countEdit+=0 ;
-          if(countEdit > 0)
-          {
+          this.detectCanEdit = info.control !== 'label' ? countEdit += 1 : countEdit += 0;
+          if (countEdit > 0) {
             this.showButton = true;
           }
-          else{
+          else {
             this.showButton = false;
           }
         }

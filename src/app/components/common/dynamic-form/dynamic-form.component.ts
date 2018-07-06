@@ -44,6 +44,7 @@ export class DynamicFormComponent implements OnInit {
     this.objectForm = [];
     const group = this.fb.group({});
 
+
     this.generalObject.forEach(element => {
       element.forEach(control => {
         group.addControl(control.id, this.fb.control(control.value))
@@ -53,10 +54,12 @@ export class DynamicFormComponent implements OnInit {
         setTimeout(() => {
           document.getElementById('border-general').classList.remove('border-array');
         }, 100);
-     
       }
 
+
+
     });
+
 
     return group;
   }
@@ -93,7 +96,6 @@ export class DynamicFormComponent implements OnInit {
         }
       });
     })
-    console.log(objectSend)
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
