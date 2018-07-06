@@ -29,6 +29,7 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
@@ -64,7 +65,6 @@ import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation
 import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
 import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
 import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
-
 
 
 @NgModule({
@@ -132,7 +132,7 @@ import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.compon
     IvaEmployeeComponent
   ],
   providers: [
-    
+
   ]
 })
 export class PagesModule { }

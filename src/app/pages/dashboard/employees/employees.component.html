@@ -2,10 +2,12 @@
   <div class="row">
     <app-notification-primary [notificationPrimary]="objectRequest" class="col-xl-2 col-6" routerLink="/ihr/requests_rh"></app-notification-primary>
     <app-notification-secundary [notificationSecundary]="objectVacations" class="col-xl-2 col-6"></app-notification-secundary>
-    <div class="col-xl-4 col-12">
+    <app-notification-primary *ngIf="dataEnterprise.show_quinquennials" [notificationPrimary]="objectQinquennials" class="col-xl-2 col-6"></app-notification-primary>
+    <app-notification-secundary *ngIf="dataEnterprise.show_quinquennials" [notificationSecundary]="objectQinquennialsPayment" class="col-xl-2 col-6"></app-notification-secundary>
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_shart_severance && dataEnterprise.show_shart_severance_interest">
       <div class="row">
-        <app-estadistics [estadistics]="objectMyLayoffs"  class="col-12"></app-estadistics>
-        <app-estadistics [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
+        <app-estadistics  [estadistics]="objectMyLayoffs"  class="col-12"></app-estadistics>
+        <app-estadistics  [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
       </div>
     </div>
     <div class="col-xl-4 col-12">

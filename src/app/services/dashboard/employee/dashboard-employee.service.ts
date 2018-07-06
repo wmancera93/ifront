@@ -44,5 +44,13 @@ export class DashboardEmployeeService {
     return this.tokenService.get('dashboards/total_incomes_deductions_widget')
       .map((data: any) => data.json());
   }
+  getQuinquennialsData() {
+    return this.tokenService.get('dashboards/total_quinquennials_widget')
+      .map((data: any) => data.json());
+  }
+  getQuinquennialsPaymentsData() {
+    return this.tokenService.get('dashboards/total_quinquennials_payments_widget')
+      .map((data: any) => data.json());
+  }
 
 }
