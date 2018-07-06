@@ -23,11 +23,11 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
   declarations: [
     AppComponent
   ],
-  imports: [     
+  imports: [
     CommonModule,
-    // BrowserModule, 
-    BrowserAnimationsModule,    
-    PagesModule,  
+    // BrowserModule,
+    BrowserAnimationsModule,
+    PagesModule,
     ChartsModule,
     ComponentsModule,
     AppRoutingModule,

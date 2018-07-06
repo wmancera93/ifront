@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { ReportsHrService } from '../../../services/reports-rh/reports-hr.service';
 import { TablesPermisions } from '../../../models/common/tables/tables';
 import { Angular2TokenService } from 'angular2-token';
+import { QueriesService } from '../../../services/queries/queries.service';
 
 @Component({
   selector: 'app-historical-posts',
@@ -9,21 +9,14 @@ import { Angular2TokenService } from 'angular2-token';
   styleUrls: ['./historical-posts.component.css']
 })
 export class HistoricalPostsComponent implements OnInit {
+  
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Historico de Puestos';
-  public value_search: string = '';
-  public postsTotal: TablesPermisions[] = [];
-  public postsPrint: TablesPermisions[] = [];
-  public postsStatic: TablesPermisions[] = [];
-  public key: any[] = [];
-  public labelCell: TablesPermisions[] = [];
-  public labels: any[] = [];
-
   public token: boolean;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public reportsHrService: ReportsHrService,
+  constructor(public queriesService : QueriesService ,
     private tokenService: Angular2TokenService) {
     this.tokenService.validateToken()
       .subscribe(
@@ -47,7 +40,7 @@ export class HistoricalPostsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.reportsHrService.getHistoricalPosts()
+    this.queriesService .getHistoricalPosts()
       .subscribe((data: any) => {
         this.objectReport.emit(data);
 

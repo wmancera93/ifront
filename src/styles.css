@@ -648,8 +648,7 @@ header{
     border-radius: 40px;
     -webkit-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
     -moz-box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
-    box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);
-  
+    box-shadow: -12px 10px 22px -6px rgba(0,0,0,0.48);  
 }
 
 .roundMoreInfo{
@@ -799,6 +798,26 @@ cursor: pointer;
     box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
 }
 
+/*Calendar */
+.item-calendar {
+    text-align: center;    
+    background-color:rgb(41, 43, 44, 0.7);        
+    color: #fff;    
+    padding-top: 2px;
+    padding-bottom: 3px;
+    width: 100%;
+    margin-bottom: 3px;
+    margin-top: 5px;
+}
+
+.padding-item-calendar {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+
+.odd {   background-color:rgb(41, 43, 44, 0.7); }
+.even {  background-color:rgb(28, 154, 218);}
+
 /*Error Message */
 .errorMessage {
     margin-top: 80px;
@@ -891,9 +910,11 @@ cursor: pointer;
 }
 
 .nav-header-menu .text-muted {
-    color: var(--primary) !important;
+    /* color: var(--primary) !important;
     font-weight: 500;
-    text-shadow: 1px 1px 2px #000000,0 0 5px var(--primary)!important;
+    text-shadow: 1px 1px 2px #000000,0 0 5px var(--primary)!important; */
+    color: var(--primary) !important;
+    text-shadow: 2px 2px 10px #000000, 2px 2px 1px #000000;
 }
 
  
@@ -1453,7 +1474,7 @@ border-bottom: 1px solid  #dddd;
 }
 .bg-white-1x {
     background: #f1f1f1 !important;
-    color: #acacac;
+    color: #5a5a5a;
     text-align: center;
     -webkit-transition: all 0.4s;
     -moz-transition: all 0.4s;

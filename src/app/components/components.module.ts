@@ -40,6 +40,9 @@ import { ShowEventsComponent } from './common/show-events/show-events.component'
 import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
 import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.component';
+import { CalendarModalComponent } from './common/calendar-modal/calendar-modal.component';
+import { DrawCalendarComponent } from './common/draw-calendar/draw-calendar.component';
+import { CalendarDetailComponent } from './common/calendar-detail/calendar-detail.component';
 
 
 @NgModule({
@@ -81,7 +84,10 @@ import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.compone
     ErrorPageHttpComponent,
     ShowEventsComponent,
     GerencialModalComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    CalendarModalComponent,
+    DrawCalendarComponent,
+    CalendarDetailComponent
   ],
   exports: [
     HeaderComponent,

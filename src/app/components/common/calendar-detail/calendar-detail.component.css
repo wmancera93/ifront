@@ -1,0 +1,29 @@
+.modal-header {
+
+    background-color: var(--btn-primary);
+}
+.titleColor1
+    {
+        color:white !important;
+        /* font-size: 0.9rem !important; */
+    }
+
+.modal-body1 {
+        background-color:white;
+    }
+
+.popover-header  {
+
+    background-color: var(--btn-primary);
+}
+.modal1 {
+    position: absolute;  
+    left: 20;
+    overflow: auto;
+    overflow-y: auto;
+ }
+
+ .modal-dinamic-calendar {
+    position: fixed;
+    z-index: 3000;
+ }

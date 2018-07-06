@@ -1,0 +1,19 @@
+.bg-person-menu{    
+    background-color: rgba(0, 0, 0, 0.4);
+    margin-top: -13px;
+    padding-top: 13px;
+    margin-bottom: -13px;
+    padding-bottom: 13px;
+    margin-left: -25px;
+    padding-left: 25px;
+    margin-right: -25px;
+    padding-right: 25px;
+}
+
+.nav-header-menu .text-muted {
+    text-shadow: 0 0 1px #000000,0 0 1px #000000,0 0 0px #000000,0 0 9px #000000 !important;
+}
+
+.text-muted {
+    color: #dfe4ed!important;
+}
