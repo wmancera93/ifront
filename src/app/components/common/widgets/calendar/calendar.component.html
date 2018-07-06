@@ -1,4 +1,4 @@
-<div *ngIf="objectWidget" [ngStyle]="{'background-color': objectWidget.background}" class="widget widget-calendar wg-hover-general wg-hover-bg text-center">
+<div *ngIf="objectWidget" (click)="showModalCalendar()" [ngStyle]="{'background-color': objectWidget.background}" class="widget widget-calendar wg-hover-general wg-hover-bg text-center">
   <div class="m-lg">
     <i [ngStyle]="{'color': objectWidget.color}" class="fa fa-calendar fa-7x"></i>
     <div class="m-lg">
@@ -22,3 +22,4 @@
     </h3>
   </div>
 </div>
+<app-calendar-modal></app-calendar-modal>
