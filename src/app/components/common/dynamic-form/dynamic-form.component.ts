@@ -18,13 +18,15 @@ export class DynamicFormComponent implements OnInit {
   public idEdit: any[] = [];
   public objectEditBlur: any[] = [];
   public edit: boolean = false;
+  public generalObject: any[] = null;
 
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
-      this.objectForm = data.data;
-      if (this.objectForm !== null && this.objectForm !== undefined) {
+      this.generalObject = data.data;
+
+      if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
         this.form = new FormGroup({});
         this.form = this.createGroup();
@@ -36,14 +38,28 @@ export class DynamicFormComponent implements OnInit {
   }
 
   ngOnInit() {
-
-
   }
 
   createGroup() {
+    this.objectForm = [];
     const group = this.fb.group({});
 
-    this.objectForm.forEach(control => group.addControl(control.id, this.fb.control(control.value)));
+
+    this.generalObject.forEach(element => {
+      element.forEach(control => {
+        group.addControl(control.id, this.fb.control(control.value))
+      });
+      this.objectForm.push(element);
+      if (this.generalObject.length <= 1) {
+        setTimeout(() => {
+          document.getElementById('border-general').classList.remove('border-array');
+        }, 100);
+      }
+
+
+
+    });
+
 
     return group;
   }
@@ -53,8 +69,8 @@ export class DynamicFormComponent implements OnInit {
   sendDynamicForm(form) {
     let objectForm: any[] = [];
     let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
-    
-    for (let index = 0; index < recorrer.length; index++) {      
+
+    for (let index = 0; index < recorrer.length; index++) {
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
       }

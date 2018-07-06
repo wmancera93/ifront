@@ -1,13 +1,13 @@
 <form [formGroup]="form" *ngIf="showForm" class="row justify-content-start" (ngSubmit)="sendDynamicForm(form.value)">
-    <div class="col-12">
-        <div class="row" *ngFor="let config of objectForm" style="margin-top: 10px;">
-            <div class="col-6 text-left">
-                <strong [ngClass]="config.class_label">{{ config.name_label}}</strong>
+    <div id="border-general" class="col-12" *ngFor="let element of objectForm; let index = index;" [ngClass]="{ 'border-array':objectForm.length -1 !== index}">
+        <div class="row" *ngFor="let config of element" style="margin-top: 10px;">
+            <div class="col-12 col-md-6 center-data-master text-left">                
+                <strong [ngClass]="config.class_label">{{ config.name_label}}</strong>  
             </div>
-            <div class="col-6 text-left">
+            <div class="col-12 col-md-6  center-data-master text-left">
                 <label [ngClass]="config.class_input" *ngIf="config.control === 'label'">{{config.value}}</label>
 
-                <fieldset class="text-left" [disabled]="edit">
+                <fieldset class="text-left center-data-master" [disabled]="edit">
                     <div [ngClass]="config.class_input" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
                         <input id="input-text" class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)" type="text" [formControlName]="config.id"
                             [attr.placeHolder]="config.place_holder" [disabled]="edit" />

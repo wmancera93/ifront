@@ -2996,6 +2996,11 @@ a.close-canvas-menu:hover {
     .body-newspaper {
         height: 60px;
     }
+    
+    .center-data-master{
+        text-align: center !important;
+    }
+
     .errorImg
     {
         background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
@@ -3154,6 +3159,10 @@ a.close-canvas-menu:hover {
 
     .pasword-input-icon {
         margin-left: 88% !important;
+    }
+
+    .center-data-master{
+        text-align: center !important;
     }
 
     .hideText {
@@ -3393,6 +3402,10 @@ a.close-canvas-menu:hover {
     }
     .errorMessage {
         margin-top: 130px;
+    }
+
+    .center-data-master{
+        text-align: center !important;
     }
 
     .row-title-newspaper {
@@ -3656,6 +3669,9 @@ a.close-canvas-menu:hover {
         margin-left: 0px !important;
     }
     
+    .center-data-master{
+        text-align: center !important;
+    }
     
     .buttonBack {
         width: 70%;
