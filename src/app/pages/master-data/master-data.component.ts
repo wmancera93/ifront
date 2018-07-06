@@ -102,18 +102,25 @@ export class MasterDataComponent implements OnInit {
   }
 
   activeEditButton(dataMaster: any) {
-    if (dataMaster !== undefined) {
-      this.detectCanEdit = dataMaster.filter(edit => edit.control !== 'label');
-      if (this.detectCanEdit.length !== 0) {
-        this.showButton = true;
-      }
-      else {
-        this.showButton = false;
-      }
-    }
-    else {
-      this.showButton = false;
-    }
+    let countEdit = 0;
+    dataMaster.forEach(element => {
+      element.forEach(info => {
+        if (info !== undefined) {
+          this.detectCanEdit = info.control !== 'label' ? countEdit += 1 : countEdit += 0;
+          if (countEdit > 0) {
+            this.showButton = true;
+          }
+          else {
+            this.showButton = false;
+          }
+        }
+        else {
+          this.showButton = false;
+        }
+      });
+
+    });
+
   }
 
   showPersonalData() {
@@ -126,7 +133,7 @@ export class MasterDataComponent implements OnInit {
     this.titleData = 'Datos personales';
 
     this.dataMasterService.getDataPersonal().subscribe((personal: any) => {
-      this.dataMaster = personal.data[0];
+      this.dataMaster = personal.data;
       this.activeEditButton(this.dataMaster);
       this.noEdit();
       this.lengthArray = this.dataMaster.length;
@@ -137,14 +144,14 @@ export class MasterDataComponent implements OnInit {
     this.canEditData = false;
     setTimeout(() => {
       this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData })
-    }, 100);
+    }, 200);
   }
 
   noEdit() {
     this.canEditData = true;
     setTimeout(() => {
       this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData })
-    }, 100);
+    }, 200);
   }
 
   showData(idTag: string) {
@@ -157,7 +164,7 @@ export class MasterDataComponent implements OnInit {
 
       case 'listContactData':
         this.dataMasterService.getDataContact().subscribe((contact: any) => {
-          this.dataMaster = contact.data[0];
+          this.dataMaster = contact.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
           this.noEdit();
@@ -174,7 +181,8 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Datos familiares';
         this.dataMasterService.getDataFamily().subscribe((family: any) => {
-          this.dataMaster = family.data[0];
+          this.dataMaster = family.data;
+
           this.canEditData = false;
           this.noEdit();
           this.activeEditButton(this.dataMaster);
@@ -188,7 +196,7 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Datos académicos';
         this.dataMasterService.getDataStudies().subscribe((studies: any) => {
-          this.dataMaster = studies.data[0];
+          this.dataMaster = studies.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
           this.noEdit();
@@ -203,7 +211,7 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Datos empresariales';
         this.dataMasterService.getDataBussiness().subscribe((enterprise: any) => {
-          this.dataMaster = enterprise.data[0];
+          this.dataMaster = enterprise.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
           this.noEdit();
@@ -218,9 +226,10 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Datos bancarios';
         this.dataMasterService.getDataBanking().subscribe((bank: any) => {
-          this.dataMaster = bank.data[0];
+          this.dataMaster = bank.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
+          this.noEdit();
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
 
@@ -232,9 +241,10 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Datos de los beneficiaros';
         this.dataMasterService.getDataBeneficiaries().subscribe((beneficiaries: any) => {
-          this.dataMaster = beneficiaries.data[0];
+          this.dataMaster = beneficiaries.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
+          this.noEdit();
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
 
@@ -246,9 +256,10 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Seguridad social';
         this.dataMasterService.getDataSocialSecurity().subscribe((social: any) => {
-          this.dataMaster = social.data[0];
+          this.dataMaster = social.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
+          this.noEdit();
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
           }
@@ -259,9 +270,10 @@ export class MasterDataComponent implements OnInit {
         this.dataMaster = [];
         this.titleData = 'Retención en la fuente';
         this.dataMasterService.getDataReteFuente().subscribe((retefuente: any) => {
-          this.dataMaster = retefuente.data[0];
+          this.dataMaster = retefuente.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
+          this.noEdit();
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
 
