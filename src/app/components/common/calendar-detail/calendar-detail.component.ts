@@ -57,7 +57,7 @@ export class CalendarDetailComponent implements OnInit {
           }
 
           if ((screen.height < 500) && (screen.width > screen.height)) {
-            let calculatey = 0;
+            let calculatey = -100;
             document.getElementById('calendar_detail').style.marginTop = calculatey + 'px';
             let calculatex = 0;
             document.getElementById('calendar_detail').style.marginLeft = calculatex + 'px';
