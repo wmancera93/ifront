@@ -1,6 +1,6 @@
 <form [formGroup]="form" *ngIf="showForm" class="row justify-content-start" (ngSubmit)="sendDynamicForm(form.value)">
-    <div class="col-12">
-        <div class="row" *ngFor="let config of objectForm" style="margin-top: 10px;">
+    <div id="border-general" class="col-12 border-array" *ngFor="let element of objectForm">
+        <div class="row" *ngFor="let config of element" style="margin-top: 10px;">
             <div class="col-6 text-left">
                 <strong [ngClass]="config.class_label">{{ config.name_label}}</strong>
             </div>
