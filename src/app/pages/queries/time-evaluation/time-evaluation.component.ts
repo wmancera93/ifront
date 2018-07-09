@@ -18,8 +18,8 @@ export class TimeEvaluationComponent implements OnInit {
   public allevaluationmessage: any[] = [];
   public periodi_timevaluation: Date;
   public periodf_timevaluation: Date;
-  public date1: string = null;
-  public date2: string = null;
+  public dateBegin: string = null;
+  public dateEnd: string = null;
   public condition: any[] = [];
   public arreglo: string = "";
   public finalDate: number;
@@ -56,14 +56,12 @@ export class TimeEvaluationComponent implements OnInit {
     this.queriesService.getAllEvaluationTime()
       .subscribe((data: any) => {
         this.objectReport.emit(data)
-        console.log(data)
       });
   }
   // getFilterMessagesByMonth() {
   //   this.queriesService.getEvaluationMessagesByMonth(this.month)
   //     .subscribe((data: any) => {
   //       this.objectReport.emit(data);
-  //       console.log(data)
   //     });
   // }
 
@@ -79,8 +77,8 @@ export class TimeEvaluationComponent implements OnInit {
     if (this.periodi_timevaluation === null  && this.periodf_timevaluation === null) {
       this.allTimeEvaluation();
     } else {
-      this.date1 = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
-      this.date2 = this.periodf_timevaluation.toString().replace('-', '').replace('-', '');
+      this.dateBegin = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
+      this.dateEnd = this.periodf_timevaluation.toString().replace('-', '').replace('-', '');
 
       this.getFilterMessagesByPeriod();
       this.periodi_timevaluation = null;
@@ -88,11 +86,10 @@ export class TimeEvaluationComponent implements OnInit {
     }
   }
   comparisonDate() {
-    // this.periodi_timevaluation = new Date(this.periodi_timevaluation);
-    // this.periodf_timevaluation = new Date(this.periodf_timevaluation);
-    this.date1 = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
-    this.date2 = this.periodf_timevaluation.toString().replace('-', '').replace('-', '');
-    this.finalDate = parseInt(this.date2) - parseInt(this.date1);
+    
+    this.dateBegin = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
+    this.dateEnd = this.periodf_timevaluation.toString().replace('-', '').replace('-', '');
+    this.finalDate = parseInt(this.dateEnd) - parseInt(this.dateBegin);
     
     if (this.finalDate < 0) {
 
@@ -114,7 +111,7 @@ export class TimeEvaluationComponent implements OnInit {
       });
   }
   getFilterMessagesByPeriod() {
-    this.queriesService.getEvaluationMessagesByPeriod(this.date1, this.date2)
+    this.queriesService.getEvaluationMessagesByPeriod(this.dateBegin, this.dateEnd)
       .subscribe((data: any) => {
         this.objectReport.emit(data);
       });
