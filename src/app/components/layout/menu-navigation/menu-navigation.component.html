@@ -112,7 +112,10 @@
               <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalPosts', 'query')">Historico de puestos</a>
             </li>
             <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
-              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aaIvaEmployee', 'query')">Movimiento de Iva</a>
+              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIvaEmployee', 'query')">Movimiento de Iva</a>
+            </li>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
+              <a id="aTimeEvaluation" routerLink="/ihr/time_evaluation" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aTimeEvaluation', 'query')">Evaluación de tiempos</a>
             </li>
           </ul>
         </div>
