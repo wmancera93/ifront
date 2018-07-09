@@ -191,6 +191,23 @@
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones</span>
         </a>
+      </li>   
+      <li id="liPerformanceEvaluation">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#evaluations" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-Evaluations', 'evaluations')">
+          <i class="fa fa-circle-o-notch"></i>
+          <span class="nav-label">Evaluaciones de desempeño</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="evaluations" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aObjectives" routerLink="/ihr/evaluation_objectives" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aObjectives', 'evaluations')">Creación de objetivos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aResults" routerLink="/ihr/result_evaluation" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aResults', 'evaluations')">Resultados de evaluación</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">

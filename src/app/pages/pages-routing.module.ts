@@ -44,6 +44,8 @@ import { RequestsApproversComponent } from './reports-rh/requests-approvers/requ
 import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
 import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
 import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
+import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
+import { ResultEvaluationComponent } from './performance-evaluation/result-evaluation/result-evaluation.component';
 
 const routes: Routes = [
     {
@@ -211,6 +213,14 @@ const routes: Routes = [
     {        
         path : 'calendar_modal',
         component: CalendarModalComponent
+    },
+    {        
+        path : 'evaluation_objectives',
+        component: EvaluationObjectivesComponent
+    },
+    {        
+        path : 'result_evaluation',
+        component: ResultEvaluationComponent
     }
 ];
 
