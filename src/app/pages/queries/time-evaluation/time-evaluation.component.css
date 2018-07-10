@@ -1,0 +1,23 @@
+.fontDate {
+    font-size: 14px !important;
+    color: #464a4c !important;
+    font-weight: 500 !important;
+    padding: 4px;
+    border: 1px solid rgba(0,0,0,.15);
+}
+.btn-primary-second {
+    background-color: var(--btn-primary-hover) !important;
+    border-color: var(--btn-primary-hover) !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+ }
+ 
+ .btn-primary-second:hover {
+    background-color: var(--btn-primary) !important;
+    border-color: var(--btn-primary) !important;
+    color: #FFFFFF !important;
+    cursor: pointer;
+ }
+ .border-botton-general {
+    border-bottom: 1px solid #e0e0e0
+ }

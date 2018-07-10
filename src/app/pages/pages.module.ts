@@ -65,6 +65,7 @@ import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation
 import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
 import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
 import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
+import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { ResultEvaluationComponent } from './performance-evaluation/result-evaluation/result-evaluation.component';
 
@@ -133,6 +134,7 @@ import { ResultEvaluationComponent } from './performance-evaluation/result-evalu
     HistoricalPostsComponent,
     RequestsApproversComponent,
     IvaEmployeeComponent,
+    TimeEvaluationComponent,
     EvaluationObjectivesComponent,
     ResultEvaluationComponent
   ],
