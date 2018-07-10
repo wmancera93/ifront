@@ -74,17 +74,17 @@
 
               </div>
             </div>
-            <div class="row justify-content-center" *ngIf="day.work_schedule_plan_text !== null  && eventPrueba.length < 3">
-              <div class=" col-11 padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let event of eventPrueba; let index=index; let odd = odd; let even = even;"
+            <div class="row justify-content-center" *ngIf="day.work_schedule_plan !== null  && day.work_schedule_plan.length < 3">
+              <div class=" col-11 padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let event of day.work_schedule_plan; let index=index; let odd = odd; let even = even;"
                 [ngClass]="{odd : odd, even : even}" (mouseover)="openModal($event, event)" (mouseleave)="closeModal()">
                 <div class="item-calendar">
                   {{event.hour_begin}} {{event.work_schedule_plan_text}}
                 </div>
               </div>
             </div>
-            <div class="row justify-content-center" *ngIf="day.work_schedule_plan_text !== null && eventPrueba.length > 3">
+            <div class="row justify-content-center" *ngIf="day.work_schedule_plan !== null && day.work_schedule_plan.length  > 3">
               <div id="scrollbarAction" class=" col-12 scrollbarBody scrollbarBody-success ">
-                <div class="  padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let event of eventPrueba; let index=index; let odd = odd; let even = even;"
+                <div class="  padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let event of day.work_schedule_plan; let index=index; let odd = odd; let even = even;"
                   [ngClass]="{odd : odd, even : even}" (mouseover)="openModal($event, event_info)" (mouseleave)="closeModal()">
                   <div class="item-calendar">
                     {{event.hour_begin}} {{event.work_schedule_plan_text}}
