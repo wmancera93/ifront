@@ -52,6 +52,12 @@ export interface Enterprise {
     show_vacations_c?: boolean,
     show_verification_code_pdf?: boolean,
     show_work_schedules?:boolean,
+    show_m_iva?:boolean,
+    show_h_positions?:boolean,
+    show_evaluation_times?:boolean,
+    show_approver_report?:boolean,
+    
+
     make_request?: boolean,
     make_approvals?: boolean,
     show_evaluations?: boolean,
