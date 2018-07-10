@@ -1,3 +1,9 @@
 .number-size{
     font-size: 1.5rem !important;
 }
+.hoverColorsucces:hover{
+    color:#23c6c8 !important;
+}
+.hoverColordanger:hover{
+    color:#ed5565 !important;
+}
