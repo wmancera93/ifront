@@ -2835,9 +2835,16 @@ a.close-canvas-menu:hover {
         transform: scale(1);   
     }
 }
-
+@media (max-width:1100px) and (max-height : 1400px){
+    .fontDate{
+        margin-top: 25px;
+    }
+}
 /* ipad horizontal */
 @media (max-width: 1100px)  and (max-height: 800px) {
+    .fontDate{
+        margin-top: 20px;
+    }
     header{
         background-position: center top !important;
         padding: 55px 0 150px !important;
@@ -2926,6 +2933,9 @@ a.close-canvas-menu:hover {
 }
 /* ipad vertical */
 @media (max-width: 800px)  and (max-height: 1100px) {
+    .fontDate{
+        margin-top: 20px;
+    }
     header{
         background-position: center top !important;
         padding: 220px 0 150px !important;
@@ -3091,6 +3101,9 @@ a.close-canvas-menu:hover {
 }
 /* mobile horizontal */
 @media only screen and (max-width: 830px)  and (max-height: 500px) {
+    .fontDate{
+        margin-top: 20px;
+    }
     header{
         background-position: center top !important;
         padding: 30px 0px 40px !important;

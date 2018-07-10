@@ -108,11 +108,14 @@
             <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
               <a id="aAniversary" routerLink="/ihr/aniversary" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aAniversary', 'query')">Aniversario de los empleados</a>
             </li>
-            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
-              <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalPosts', 'query')">Histórico de Puestos</a>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'&& dataEnterprise.show_h_positions">
+              <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalPosts', 'query')">Historico de puestos</a>
             </li>
-            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
-              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aaIvaEmployee', 'query')">Movimiento de Iva</a>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true' && dataEnterprise.show_m_iva">
+              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIvaEmployee', 'query')">Movimiento de Iva</a>
+            </li>
+            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true' && dataEnterprise.show_evaluation_times">
+              <a id="aTimeEvaluation" routerLink="/ihr/time_evaluation" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aTimeEvaluation', 'query')">Evaluación de tiempos</a>
             </li>
           </ul>
         </div>
@@ -131,7 +134,7 @@
             <li class="bg-li">
               <a id="aUsersPermisions" routerLink="/ihr/users_permisions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aUsersPermisions', 'reportsRH')">Permisos de usuarios</a>
             </li>     
-            <li class="bg-li">
+            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
               <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">Aprobadores de Solicitudes</a>
             </li>
           </ul>
@@ -191,6 +194,23 @@
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones</span>
         </a>
+      </li>   
+      <li id="liPerformanceEvaluation">
+        <a class="nav-link bg-menu" data-toggle="collapse" href="#evaluations" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-Evaluations', 'evaluations')">
+          <i class="fa fa-line-chart"></i>
+          <span class="nav-label">Evaluaciones de desempeño</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="evaluations" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aObjectives" routerLink="/ihr/evaluation_objectives" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aObjectives', 'evaluations')">Creación de objetivos</a>
+            </li>
+            <li class="bg-li">
+              <a id="aResults" routerLink="/ihr/result_evaluation" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aResults', 'evaluations')">Resultados de evaluación</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
