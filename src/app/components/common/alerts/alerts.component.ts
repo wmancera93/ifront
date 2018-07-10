@@ -25,24 +25,33 @@ export class AlertsComponent implements OnInit {
     this.alert.getAlert().subscribe((data) => {
       document.getElementById('closeModal').click();
       this.bodyAlert = data;
+
+      document.getElementById('btnModal').click();
+      document.getElementById('bodyGeneral').removeAttribute('style');
+
+
       if (this.bodyAlert.type === 'primary') {
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(2, 90, 165)', '', '', '', '', '', '', '', );
         document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165)`);
+        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(2, 90, 165)', '', '', '', '', '', '', '', );
+
         this.icon = 'fa-check';
       }
       if (this.bodyAlert.type === 'success') {
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(92, 184, 92)', '', '', '', '', '', '', '', );
         document.documentElement.style.setProperty(`--color-alert`, `rgba(92, 184, 92)`);
+        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(92, 184, 92)', '', '', '', '', '', '', '', );
+
         this.icon = 'fa-check';
       }
       if (this.bodyAlert.type === 'danger') {
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(217, 83, 79)', '', '', '', '', '', '', '', );
         document.documentElement.style.setProperty(`--color-alert`, `rgba(217, 83, 79)`);
+        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(217, 83, 79)', '', '', '', '', '', '', '', );
+
         this.icon = 'fa-exclamation-triangle';
       }
-      if (this.bodyAlert.type === 'warning') {        
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(240, 173, 78)', '', '', '', '', '', '', '', );
+      if (this.bodyAlert.type === 'warning') {
         document.documentElement.style.setProperty(`--color-alert`, `rgba(240, 173, 78)`);
+        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(240, 173, 78)', '', '', '', '', '', '', '', );
+
         this.icon = 'fa-exclamation-triangle';
       }
 
@@ -50,8 +59,6 @@ export class AlertsComponent implements OnInit {
         this.confirmationShow = this.bodyAlert.confirmation;
       }
 
-      document.getElementById('btnModal').click();
-      document.getElementById('bodyGeneral').removeAttribute('style');
     });
   }
 

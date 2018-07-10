@@ -349,7 +349,7 @@ export class StylesExplorerService {
 
     }
 
-    if (color_alert !== '' && color_alert !== null) {
+    if (color_alert !== '' && color_alert !== null) {      
       if (document.getElementsByClassName('modal-content').length > 0) {
         for (let index = 0; index < document.getElementsByClassName('modal-content').length; index++) {
           (<HTMLInputElement>document.getElementsByClassName('modal-content')[index]).style.backgroundColor = color_alert;
