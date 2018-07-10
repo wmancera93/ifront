@@ -11,7 +11,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 export class HistoricalPostsComponent implements OnInit {
   
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Historico de Puestos';
+  public nameReport: string = 'Histórico de Puestos';
   public token: boolean;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
