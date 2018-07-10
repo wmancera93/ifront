@@ -1,0 +1,72 @@
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+<div *ngIf="!token" class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xl-10 col-md-8 col-7 title">
+          <i class="fa fa-paste"></i>
+          Evaluación de tiempos
+        </div>
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atrás
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="data_table" class="row-hr-container justify-content-center">
+    <div class="col-12 widget bg-white">
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-2 col-lg-4 col-12 text-left">
+            <b>
+              Filtros de consulta
+            </b>
+            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(true)"></i>
+            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(false)"></i>
+          </div>
+        </div>
+      </div>
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
+        <div class="row">
+          <div class="col-md-4 col-12 top-containter">
+            <label for="dateb" class="font-title-general">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              Fecha Inicial *
+            </label>
+          <input type="date"  class="fontDate" name="periodBegin_evaluation" [(ngModel)]="periodi_timevaluation" placeholder="dd/mm/yyyy" >
+        </div>
+          <div class="col-md-4 col-12 top-containter">
+            <label for="datef" class="font-title-general">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              Fecha Final *
+            </label>
+            <input type="date" class="fontDate" name="periodEnd_evaluation" [(ngModel)]="periodf_timevaluation" placeholder="dd/mm/yyyy" (change)="comparisonDate()">
+          </div>
+          <div class="col-md-4 col-12 ">
+              <div class="btn btn-block btn-primary-second fontDate" (click)="filterByperiod()">
+                <i class="fa fa-search-plus"></i>
+                Consulta
+              </div>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 top-general-p">
+          <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-alerts></app-alerts>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Enterprise } from '../../../models/general/enterprise';
 
 @Component({
   selector: 'app-calendar-modal',
@@ -6,10 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-modal.component.css']
 })
 export class CalendarModalComponent implements OnInit {
+  public dataEnterprise: Enterprise = null;
+  public activeCalendar: boolean = false;
+  constructor() { 
+  
 
-  constructor() { }
+  }
 
   ngOnInit() {
+
   }
 
 }

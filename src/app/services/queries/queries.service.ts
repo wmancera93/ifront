@@ -74,4 +74,20 @@ export class QueriesService {
     return this.tokenService.get('consultations/movements_iva')
       .map((data: any) => data.json());
   }
+  getAllEvaluationTime() {
+    return this.tokenService.get('evaluation_messages')
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByMonth(period: string) {
+    return this.tokenService.get('evaluation_messages/find_for_period/' + period)
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByDay(day: string) {
+    return this.tokenService.get('evaluation_messages/find_for_day/' + day)
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByPeriod(date1: string, date2: string) {
+    return this.tokenService.get('evaluation_messages/find_date_range/' + date1 + '/' + date2)
+      .map((data: any) => data.json());
+  }
 }
