@@ -1,5 +1,5 @@
-<app-calendar-detail></app-calendar-detail>   
-<div class="row">    
+<app-calendar-detail></app-calendar-detail>
+<div class="row">
   <div class="col-12">
     <div class="row justify-content-center">
       <div class="col-12">
@@ -37,13 +37,30 @@
         </div>
       </div>
     </div>
-    
+
     <div class="row justify-content-center" style="margin-top: 10px;">
-      <div class="col-11">          
-        <div class="row justify-content-left">
-          <div [ngClass]="{'col-2':dia !== 'Sabado' && dia !== 'Domingo', 'col-1':dia =='Sabado'|| dia =='Domingo'}" class="title-letter bgn-title text-center"
-            *ngFor="let dia of dayWeek;">
-            {{dia}}
+      <div class="col-11">
+        <div class="row title-letter bgn-title text-center">
+          <div class="col-1">
+            {{sunday}}
+          </div>
+          <div class="col-2">
+            {{monday}}
+          </div>
+          <div class="col-2">
+            {{tuesday}}
+          </div>
+          <div class="col-2">
+            {{wednesday}}
+          </div>
+          <div class="col-2">
+            {{thursday}}
+          </div>
+          <div class="col-2">
+            {{friday}}
+          </div>
+          <div class="col-1">
+            {{saturday}}
           </div>
         </div>
         <div class="row scrollbarBody scrollbarBody-success" style="height: calc(69vh); overflow-y: auto">

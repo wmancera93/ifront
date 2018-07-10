@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { DataMasterSharedService } from '../../services/shared/common/data-master/data-master-shared.service';
 import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../models/common/alerts/alerts';
+import { Enterprise } from '../../models/general/enterprise';
 
 @Component({
   selector: 'app-master-data',
@@ -25,6 +26,7 @@ export class MasterDataComponent implements OnInit {
   public formEditDataMaster: any;
   public showSubmit = true;
   public dataPrueba: any;
+  public dataEnterprise: Enterprise = null;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -59,6 +61,8 @@ export class MasterDataComponent implements OnInit {
       behavior: 'smooth'
     });
 
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+    
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
       let dataMasterEdit = {
         employee_master_data: object
@@ -102,12 +106,12 @@ export class MasterDataComponent implements OnInit {
   }
 
   activeEditButton(dataMaster: any) {
-    let countEdit = 0;
+    let countEdit = 0;    
     dataMaster.forEach(element => {
       element.forEach(info => {
         if (info !== undefined) {
           this.detectCanEdit = info.control !== 'label' ? countEdit += 1 : countEdit += 0;
-          if (countEdit > 0) {
+          if (countEdit > 0 && this.dataEnterprise.show_edit_master_data) {
             this.showButton = true;
           }
           else {

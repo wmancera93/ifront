@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Calendar } from '../../../../models/common/widgets/widgets';
+import { Enterprise } from '../../../../models/general/enterprise';
 
 @Component({
   selector: 'app-calendar',
@@ -9,6 +10,7 @@ import { Calendar } from '../../../../models/common/widgets/widgets';
 export class CalendarComponent implements OnInit {
   @Input('calendar') calendar: any
   public objectWidget: Calendar;
+  public dataEnterprise: Enterprise = null;
 
   constructor() {
 
@@ -20,10 +22,18 @@ export class CalendarComponent implements OnInit {
     })
   }
 
-  showModalCalendar()
-  {     
-      document.getElementById('btn-calendar').click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
-    
+  showModalCalendar() {
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+    if (this.dataEnterprise.show_employee_calendar !== null) {
+      if (this.dataEnterprise.show_employee_calendar === true) {
+        document.getElementById('btn-calendar').click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
+
+    }
+
+
+
   }
 }

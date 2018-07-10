@@ -23,25 +23,43 @@ export class DrawCalendarComponent implements OnInit {
   public objectDataPosition: any[] = [];
   public numberDay: any;
   public changeMonth: number = 0;
-  public dayWeek: any[] = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sabado"];
-  public eventPrueba : any[] = [{hour_begin: "03:00",
-    hour_finish:"10:00", type_schedule_plan_description: "descripcion evento",
-    work_schedule_plan_text:"trabajo"},{hour_begin: "05:00",
-    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
-    work_schedule_plan_text:"trabajo 2"},{hour_begin: "05:00",
-    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
-    work_schedule_plan_text:"trabajo 3"},{hour_begin: "05:00",
-    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
-    work_schedule_plan_text:"trabajo 4"},{hour_begin: "05:00",
-    hour_finish:"17:00", type_schedule_plan_description: "descripcion evento 2",
-    work_schedule_plan_text:"trabajo 5"}] 
+  
+  public saturday = 'Sabado';
+  public sunday = 'Domingo';
+  public monday = 'Lunes';
+  public tuesday = 'Martes';
+  public wednesday = 'Miercoles';
+  public thursday = 'Jueves';
+  public friday = 'Viernes';
+
+  public eventPrueba: any[] = [{
+    hour_begin: "03:00",
+    hour_finish: "10:00", type_schedule_plan_description: "descripcion evento",
+    work_schedule_plan_text: "trabajo"
+  }, {
+    hour_begin: "05:00",
+    hour_finish: "17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text: "trabajo 2"
+  }, {
+    hour_begin: "05:00",
+    hour_finish: "17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text: "trabajo 3"
+  }, {
+    hour_begin: "05:00",
+    hour_finish: "17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text: "trabajo 4"
+  }, {
+    hour_begin: "05:00",
+    hour_finish: "17:00", type_schedule_plan_description: "descripcion evento 2",
+    work_schedule_plan_text: "trabajo 5"
+  }]
 
   constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
 
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
-      this.objectDateCurrent = data.data;      
-      
+      this.objectDateCurrent = data.data;
+
 
       let count = 0;
       this.objectDateCurrent.forEach(element => {
@@ -161,7 +179,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text:null,
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -198,7 +216,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text:null,
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -283,7 +301,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "miercoles",
-            work_schedule_plan_text:null,
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           });
         this.pushLastObjectDate();
@@ -320,7 +338,7 @@ export class DrawCalendarComponent implements OnInit {
             type_schedule_plan_class: "",
             type_schedule_plan_description: "",
             weekday: "lunes",
-            work_schedule_plan_text:  null,
+            work_schedule_plan_text: null,
             work_schedule_type_id: ""
           },
           {
@@ -902,7 +920,7 @@ export class DrawCalendarComponent implements OnInit {
 
   }
 
-  openModal(event:any, day: any) {
+  openModal(event: any, day: any) {
     let objet_calendar = {
       effect: 'open',
       date_info: '04/07/2018',
@@ -916,9 +934,9 @@ export class DrawCalendarComponent implements OnInit {
         description_calendar: "HOLA TU",
         description_work: "BOGOTA COLOMBIA",
       }
-      
+
     }
-    
+
     this.calendarDetailService.setDetailCalendar(objet_calendar);
   }
 
@@ -926,7 +944,7 @@ export class DrawCalendarComponent implements OnInit {
     this.calendarDetailService.setDetailCalendar({ effect: 'close' });
   }
 
-  desingPosition(){
+  desingPosition() {
 
   }
 }
