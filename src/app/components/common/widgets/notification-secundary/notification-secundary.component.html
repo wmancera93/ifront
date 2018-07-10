@@ -13,12 +13,12 @@
       {{objectWidget.title}}
     </h3>
 
-    <!-- <div>
-      <small [ngStyle]="{'color': objectWidget.color}" class="m-l-n" style="margin-right: -22px">Pagado</small>
-      <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
-        05/06/2018
-      </h3>
-    </div>  -->
+    <div>
+      <small [ngStyle]="{'color': objectWidget.color}" class="m-l-n" style="margin-right: -22px">{{objectWidget.date_text}}</small>
+      <div [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
+        {{objectWidget.date_law}}
+      </div>
+    </div> 
 
 
 
