@@ -8,7 +8,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 })
 export class SeverancesComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Historico de cesantias';
+  public nameReport: string = 'Histórico de cesantías';
 
   constructor(public queriesService: QueriesService) { }
 

@@ -24,8 +24,8 @@ export interface NotificationSecundary {
     color_icon_secundary: string;
     background: string;
     color: string;
-    messge?: string;
-    date?: string;
+    date_text: string;
+    date_law: string;
 }
 
 export interface Estadistics {

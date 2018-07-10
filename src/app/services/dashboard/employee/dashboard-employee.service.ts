@@ -49,7 +49,7 @@ export class DashboardEmployeeService {
       .map((data: any) => data.json());
   }
   getQuinquennialsPaymentsData() {
-    return this.tokenService.get('dashboards/total_quinquennials_payments_widget')
+    return this.tokenService.get('dashboards/total_quinquennials_avaliables_widget')
       .map((data: any) => data.json());
   }
 
