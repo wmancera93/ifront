@@ -38,7 +38,8 @@ export class DrawCalendarComponent implements OnInit {
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
-      console.log(this.objectDateCurrent)
+
+
       let count = 0;
 
       this.objectDateCurrent.forEach(element => {
@@ -89,17 +90,17 @@ export class DrawCalendarComponent implements OnInit {
         is_now: element.is_now,
         weekday: element.weekday,
         work_schedule_plan: element.work_schedule_plan
-       
+
       });
     });
   }
 
   showDataCalendar() {
-    debugger
     switch (this.objectPerMonthData[0].weekday) {
 
       case 'domingo':
         this.newObjectDate = this.objectPerMonthData;
+
         break;
       case 'lunes':
         this.newObjectDate = [];
@@ -108,7 +109,18 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
         });
         this.pushLastObjectDate();
         break;
@@ -119,14 +131,36 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "lunes",
-            work_schedule_plan: []
+            work_schedule_plan: [
+              {
+                calendar_text: " ",
+                holiday_calendar: "",
+                hour_begin: "",
+                hour_finish: "",
+                schedule_plan_for_periods: "",
+                theorist_hours: "",
+                type_schedule_plan_description: 'descanso',
+                work_schedule_plan_text: ""
+              }
+            ]
           });
         this.pushLastObjectDate();
 
@@ -138,21 +172,52 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "lunes",
-            work_schedule_plan: []
+            work_schedule_plan: [
+              {
+                calendar_text: " ",
+                holiday_calendar: "",
+                hour_begin: "",
+                hour_finish: "",
+                schedule_plan_for_periods: "",
+                theorist_hours: "",
+                type_schedule_plan_description: 'descanso',
+                work_schedule_plan_text: ""
+              }
+            ]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "martes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         this.pushLastObjectDate();
 
@@ -164,28 +229,64 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "lunes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "martes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "miercoles",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         this.pushLastObjectDate();
         break;
@@ -197,35 +298,80 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "lunes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "martes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "miercoles",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "jueves",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         this.pushLastObjectDate();
         break;
@@ -236,42 +382,96 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "domingo",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "lunes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "martes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "miercoles",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "jueves",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "viernes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         this.pushLastObjectDate();
         break;
@@ -287,39 +487,93 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "lunes",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "martes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "miercoles",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "jueves",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "viernes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "sabado",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         break;
       case 'lunes':
@@ -329,32 +583,77 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "martes",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         },
           {
             date: "",
             id: "",
             is_now: "",
             weekday: "miercoles",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "jueves",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "viernes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "sabado",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
 
         break;
@@ -364,25 +663,61 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "miercoles",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "jueves",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "viernes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "sabado",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
 
         break;
@@ -392,19 +727,46 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "jueves",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "viernes",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "sabado",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         break;
       case 'jueves':
@@ -413,13 +775,31 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "viernes",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         }, {
             date: "",
             id: "",
             is_now: "",
             weekday: "sabado",
-            work_schedule_plan: []
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
           });
         break;
       case 'viernes':
@@ -428,14 +808,24 @@ export class DrawCalendarComponent implements OnInit {
           id: "",
           is_now: "",
           weekday: "sabado",
-          work_schedule_plan: []
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
         });
         break;
     }
 
-    this.objectPerMonthData.forEach(today => {
-      this.month = today.date.split("-");
-    });
+    this.month = this.objectPerMonthData[0].date.split("-");
+    // this.objectPerMonthData.forEach(today => {
+    //   this.month = today.date.split("-");      
+    // });
 
     switch (this.month[1]) {
       case "01":
@@ -495,7 +885,6 @@ export class DrawCalendarComponent implements OnInit {
   }
 
   lastMonth() {
-    debugger
     this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
 
     if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
@@ -519,23 +908,24 @@ export class DrawCalendarComponent implements OnInit {
   }
 
   openModal(event: any, day: any) {
-    let objet_calendar = {
+
+    let object_calendar = {
       effect: 'open',
-      date_info: '04/07/2018',
+      date_info: '',
       pointx: event.clientX,
       pointy: event.clientY,
       event_info: {
-        descript: "hola",
-        calendar_text: "holaa",
-        hour_begin: "7:00:00",
-        hour_end: "17:00:00",
-        description_calendar: "HOLA TU",
-        description_work: "BOGOTA COLOMBIA",
+        descript: day.type_schedule_plan_description,
+        calendar_text: day.calendar_text,
+        hour_begin: day.hour_begin,
+        hour_end: day.hour_finish,
+        description_calendar: day.theorist_hours,
+        description_work: day.work_schedule_plan_text,
       }
 
     }
 
-    this.calendarDetailService.setDetailCalendar(objet_calendar);
+    this.calendarDetailService.setDetailCalendar(object_calendar);
   }
 
   closeModal() {
