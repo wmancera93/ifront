@@ -769,6 +769,11 @@ cursor: pointer;
         text-align: center;
      }
     
+     /* Estadistics */
+     .height-doughnut
+     {
+        height:250px !important;
+     }
 
 /* Modal Contact Information*/
 

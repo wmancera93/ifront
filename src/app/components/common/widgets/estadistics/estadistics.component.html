@@ -33,9 +33,9 @@
       <div class="row align-items-center">
      <div class="col-12 text-center" *ngIf="activeDoughnutChartType">
         <strong class="font-size-20 m-l-n-md"> {{objectWidget[0].title}} </strong>
-       <div style="display: block; width:100% !important; height:410px !important;">
-         <canvas baseChart id="doughnutChartHov" [data]="doughnutChartData" [legend]="legend" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
-           [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)" height="300px !important;"></canvas>
+       <div style="display: block; width:100% !important; height:385px !important;">
+         <canvas baseChart id="doughnutChartHov" style="margin-top: 35px;" [data]="doughnutChartData" [legend]="legend" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
+           [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)" class="height-doughnut"></canvas>
        </div>
      </div>
      <!-- <div class="col-6" *ngIf="activeBarChartType">
