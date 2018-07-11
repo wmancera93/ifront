@@ -60,7 +60,7 @@ export class EstadisticsComponent implements OnInit {
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
           legend:{
-            position: 'bottom'
+            position: 'right'          
           },
           responsive: true,
           tooltips:
