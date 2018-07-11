@@ -19,7 +19,7 @@ export class AniversaryComponent implements OnInit {
       behavior: 'smooth'
     });
     this.queriesService.getAniversary()
-      .subscribe((data: any) => {
+      .subscribe((data: any) => {      
        this.objectReport.emit(data);
       },
       error => {
