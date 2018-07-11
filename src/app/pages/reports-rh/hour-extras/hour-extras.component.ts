@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-hour-extras',
@@ -8,7 +9,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 export class HourExtrasComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Horas extras';
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
     window.scroll({
@@ -133,9 +134,14 @@ export class HourExtrasComponent implements OnInit {
       }]
     }
 
+   
+
     setTimeout(() => {
       this.objectReport.emit(dataTemporal);
     }, 500);
   }
 
+  returnBackPage(){
+    this.router.navigate(['ihr/index']);
+  }
 }
