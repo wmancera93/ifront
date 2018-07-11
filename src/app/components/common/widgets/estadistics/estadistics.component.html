@@ -1,5 +1,5 @@
 <div style="background-color:#ffffff" class="widget wg-hover-general wg-hover-bg navy-bg">
-  <div *ngIf="objectWidget[0]">
+  <div *ngIf="objectWidget[0] && !extraHours">
        <div class="row">
       <div class="col-6" *ngIf="activeDoughnutChartType">
         <div style="display: block; width:200px; height:96px;">
@@ -29,4 +29,35 @@
       </div>
     </div>
   </div>
+  <div *ngIf="objectWidget[0] && extraHours">
+      <div class="row align-items-center">
+     <div class="col-12 text-center" *ngIf="activeDoughnutChartType">
+        <strong class="font-size-20 m-l-n-md"> {{objectWidget[0].title}} </strong>
+       <div style="display: block; width:100% !important; height:410px !important;">
+         <canvas baseChart id="doughnutChartHov" [data]="doughnutChartData" [legend]="showChartLegendExtraHour" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
+           [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)" style="width: 100% !important;"></canvas>
+       </div>
+     </div>
+     <!-- <div class="col-6" *ngIf="activeBarChartType">
+       <div style="display: block;width:150px; height:96px;">
+         <canvas baseChart  [chartType]="barChartType"  [data]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [colors]="barChartColors" [legend]="barChartLegend"
+         (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+       </div>
+     </div> -->
+     <!-- <div class="col-6 text-right">
+       <div class="row">
+         <div class="col-12">
+           <strong class="font-size-12   m-l-n-md"> {{objectWidget[0].title}} </strong>
+         </div>
+         <div class="col-12">
+           <p class="font-size-12   m-l-n-md"> {{objectWidget[0].comment}} </p>
+         </div>
+         <div class="col-12">
+           <strong class="font-bold m-l-n-lg m-t-n-xs font-size-20" id="info_severances">
+             <i class="fa fa-arrow-up"></i> {{objectWidget[0].number}}</strong>
+         </div>
+       </div>
+     </div> -->
+   </div>
+ </div>
 </div>

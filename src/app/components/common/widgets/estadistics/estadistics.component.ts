@@ -22,7 +22,9 @@ export class EstadisticsComponent implements OnInit {
   public doughnutOptions: any;
   public doughnutChartType: string = 'doughnut';
   public showChartLegend: boolean = false;
+  public showChartLegendExtraHour: boolean = true;
   public hovered: boolean;
+  public extraHours: boolean = false;
 
   /* Bar Chart */
   public barChartOptions: any = {
@@ -40,7 +42,6 @@ export class EstadisticsComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.estadistics.subscribe((data: any) => {
       this.objectWidget[0] = data.properties;
       this.typeGraph = data.graph_type;
@@ -48,30 +49,33 @@ export class EstadisticsComponent implements OnInit {
       //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
+        if (this.objectWidget[0].title === "Cantidad horas por tipo de hora") {
+          this.extraHours = true;
+        }
         //Doughnut 
         this.activeDoughnutChartType = true;
         this.doughnutChartType = 'doughnut';
         this.doughnutChartLabels = this.objectWidget[0].data.names;
         this.doughnutChartData = this.objectWidget[0].data.values;
-        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors}];
+        this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
           responsive: true,
           tooltips:
           {
-            enabled: true,  
+            enabled: true,
             mode: 'single',
-            callbacks:{
-              label: function(tooltipItem, data) {
+            callbacks: {
+              label: function (tooltipItem, data) {
                 let label = data.labels[tooltipItem.index];
                 let datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
                 let dataNumber = new Number(datasetLabel);
                 return label + ': ' + dataNumber.toLocaleString();
               }
-            }         
-             
-            
+            }
+
+
           }
-            
+
 
 
         };
