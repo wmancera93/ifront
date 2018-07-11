@@ -31,9 +31,22 @@ export class DrawCalendarComponent implements OnInit {
   public wednesday = 'Miercoles';
   public thursday = 'Jueves';
   public friday = 'Viernes';
+public eventResponsive : boolean = false;
 
+  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) {
 
-  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
+    if(screen.width <= 500)
+    {
+      this.saturday ="S";
+      this.sunday ="D";
+      this.monday ="L";
+      this.tuesday ="M";
+      this.wednesday ="Mi";
+      this.thursday ="J";
+      this.friday ="V";
+      this.eventResponsive = true;
+    }
+   }
 
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {

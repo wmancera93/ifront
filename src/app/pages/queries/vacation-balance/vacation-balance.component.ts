@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vacation-balance',
@@ -10,7 +11,8 @@ export class VacationBalanceComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Saldo de vacaciones';
 
-  constructor(public queriesService: QueriesService) { }
+  constructor(public queriesService: QueriesService,
+    public router: Router) { }
 
   ngOnInit() {
     window.scroll({
@@ -20,10 +22,13 @@ export class VacationBalanceComponent implements OnInit {
     });
     this.queriesService.getVacationBalance()
       .subscribe((data: any) => {
-       this.objectReport.emit(data);
+        this.objectReport.emit(data);
       },
-      error => {
-        console.log(error.error);
-      })
+        error => {
+          console.log(error.error);
+        })
+  }
+  returnBackPage() {
+    this.router.navigate(['ihr/index']);
   }
 }
