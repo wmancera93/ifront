@@ -22,7 +22,7 @@ export class EstadisticsComponent implements OnInit {
   public doughnutOptions: any;
   public doughnutChartType: string = 'doughnut';
   public showChartLegend: boolean = false;
-  public showChartLegendExtraHour: boolean = true;
+  // public showChartLegendExtraHour: boolean = true;
   public hovered: boolean;
   public extraHours: boolean = false;
 
@@ -59,6 +59,9 @@ export class EstadisticsComponent implements OnInit {
         this.doughnutChartData = this.objectWidget[0].data.values;
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
+          legend:{
+            position: 'bottom'
+          },
           responsive: true,
           tooltips:
           {
