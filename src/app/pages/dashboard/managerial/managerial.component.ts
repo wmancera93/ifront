@@ -73,7 +73,7 @@ export class ManagerialComponent implements OnInit {
       },
       number: "90.32%",
       subtitle: "Saldo de",
-      title: "Cantidad horas por tipo de hora"
+      title: "Cantidad horas extra por tipo de hora"
 
     };
 

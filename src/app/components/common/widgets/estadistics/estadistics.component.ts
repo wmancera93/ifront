@@ -49,7 +49,7 @@ export class EstadisticsComponent implements OnInit {
       //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
-        if (this.objectWidget[0].title === "Cantidad horas por tipo de hora") {
+        if (this.objectWidget[0].title === "Cantidad horas extra por tipo de hora") {
           this.extraHours = true;
         }
         //Doughnut 
