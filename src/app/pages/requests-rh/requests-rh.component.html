@@ -155,34 +155,24 @@
 
 
               <div class="col-lg-2 col-md-3 col-12 text-center top-p">
-                <!-- <p class="font-title-general">
-                  Acción
-                </p> -->
-
-                <div class="row">
-                  <div class="col-6 number-size hoverColorsucces" [attr.title]="request.action_employee_requets_index_view[0].title" [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true"
-                    (click)="modalAprovers(request)">
-                    <i class="fa fa-eye" aria-hidden="true"></i>
+                  <div class="row">
+                    <div class="col-6 number-size" [attr.title]="request.action_employee_requets_index_view[0].title" [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true"
+                      (click)="modalAprovers(request)">
+                      <i class="fa fa-eye" aria-hidden="true" style="color:#23c6c8"></i>
+                    </div>
+                    <div class="col-6 number-size text-danger" id="hideTrash" *ngIf=" request.action_employee_requets_index_view[1].is_active == true" style="cursor: pointer" (click)="deleteRequest(request.ticket)">
+                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-6 number-size" id="hideTrash" *ngIf=" request.action_employee_requets_index_view[1].is_active == false" style="cursor: no-drop">
+                      <i class="fa fa-trash" aria-hidden="false"></i>
+                    </div>
+                    <div class="col-6">
+                      Ver
+                    </div>
+                    <div class="col-6">
+                      Eliminar
+                    </div>
                   </div>
-                  <div class="col-6 number-size hoverColordanger" (click)="deleteRequest(request.ticket)" [attr.title]="request.action_employee_requets_index_view[1].title"
-                    [attr.disabled]="request.action_employee_requets_index_view[1].is_active == true ? null : true">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                  </div>
-                  <div class="col-6">
-                    Ver
-                  </div>
-                  <div class="col-6">
-                    Eliminar
-                  </div>
-                </div>
-                <!-- <button class="btn btn-sm btn-secondary cursor-general" [attr.title]="request.action_employee_requets_index_view[0].title"
-                  [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true" (click)="modalAprovers(request)">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </button> -->
-                <!-- <button class="btn btn-sm btn-danger cursor-general" (click)="deleteRequest(request.ticket)" [attr.title]="request.action_employee_requets_index_view[1].title"
-                  [attr.disabled]="request.action_employee_requets_index_view[1].is_active == true ? null : true">
-                  <i class="fa fa-trash" aria-hidden="true"></i>
-                </button> -->
               </div>
             </div>
           </div>

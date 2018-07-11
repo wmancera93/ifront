@@ -4,9 +4,9 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-circle-o-notch"></i>
-          Aprobaciones Pendientes 
+          Aprobaciones Pendientes
         </div>
-        <div  class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
@@ -94,13 +94,11 @@
                   <i class="fa fa-fw fa-clock-o font-color-default"></i>{{pending.antiquity}}
                 </p>
               </div>
-              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p">
-                <p class="font-title-general">
-                  Acción
-                </p>
-                <button class="btn btn-sm btn-secondary cursor-general" title="Ver" (click)="modalAprovers(pending)">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </button>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p hoverColor" (click)="modalAprovers(pending)" >
+                <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color: #23c6c8"></i>
+                <div class="col-6">
+                  Ver
+                </div>
               </div>
             </div>
           </div>
