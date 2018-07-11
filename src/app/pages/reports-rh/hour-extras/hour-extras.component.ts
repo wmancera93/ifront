@@ -141,7 +141,7 @@ export class HourExtrasComponent implements OnInit {
     }, 500);
   }
 
-  returnBackPage(){
+  returnBackPage() {
     this.router.navigate(['ihr/index']);
   }
 }
