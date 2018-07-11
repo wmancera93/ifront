@@ -68,6 +68,8 @@ import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.compon
 import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { ResultEvaluationComponent } from './performance-evaluation/result-evaluation/result-evaluation.component';
+import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
+import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 
 
 
@@ -136,7 +138,9 @@ import { ResultEvaluationComponent } from './performance-evaluation/result-evalu
     IvaEmployeeComponent,
     TimeEvaluationComponent,
     EvaluationObjectivesComponent,
-    ResultEvaluationComponent
+    ResultEvaluationComponent,
+    MyHourExtrasComponent,
+    HourExtrasComponent
   ],
   providers: [
 
