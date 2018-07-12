@@ -38,28 +38,28 @@
       </div>
     </div>
 
-    <div class="row justify-content-center" style="margin-top: 10px;">
+    <div class="row " style="margin-top: 10px;">
       <div class="col-12 col-md-11">
         <div class="row title-letter bgn-title text-center">
-          <div class="col-1 col-md-1">
+          <div class="col col-md-1">
             {{sunday}}
           </div>
-          <div class="col-2 col-md-2">
+          <div class="col col-md-2">
             {{monday}}
           </div>
-          <div class="col-2 col-md-2">
+          <div class="col col-md-2">
             {{tuesday}}
           </div>
-          <div class="col-2 col-md-2">
+          <div class="col col-md-2">
             {{wednesday}}
           </div>
-          <div class="col-2 col-md-2">
+          <div class="col col-md-2">
             {{thursday}}
           </div>
-          <div class="col-2 col-md-2">
+          <div class="col col-md-2">
             {{friday}}
           </div>
-          <div class="col-1 col-md-1">
+          <div class="col  col-md-1">
             {{saturday}}
           </div>
         </div>
@@ -84,9 +84,8 @@
             </div>
           </div>
         </div>
-        <div *ngIf="responsive" class="row scrollbarBody  height-vh-calendar">
-          <div [ngClass]="{'col-2':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-1':day.weekday =='sabado'|| day.weekday=='domingo','bgn-color-day' : day.is_now == true}"
-            class="cell-day text-right scrollbarBody scrollbarBody-success" style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
+        <div *ngIf="responsive" class="row seven-cols scrollbarBody  height-vh-calendar">
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success" style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
             <div class="row justify-content-end">
               <div class="text-right" [ngClass]="{ 'col-12':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-12':day.weekday =='sabado'|| day.weekday=='domingo'}">
                 <div [ngClass]="{'borderNumber' : day.is_now === true}">
