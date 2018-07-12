@@ -3848,13 +3848,11 @@ a.close-canvas-menu:hover {
     transition: all 200ms ease-in;
     transform: scale(1);   
 }
-<<<<<<< HEAD
 .height-vh-calendar
 {
     height: calc(45vh); 
     overflow-y: auto
 }
-=======
 .title-letter
 {
     color: white;
@@ -3877,7 +3875,6 @@ a.close-canvas-menu:hover {
     border-radius: 10px !important;
 }
 
->>>>>>> dc120703e9402834a719f30352636917e77185a6
 }
 
 
