@@ -41,7 +41,7 @@ export class DrawCalendarComponent implements OnInit {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
       let count = 0;
-      if (screen.width <= 800) {
+      if (screen.width <= 1000) {
         if (screen.width <= 500)
         {
 
