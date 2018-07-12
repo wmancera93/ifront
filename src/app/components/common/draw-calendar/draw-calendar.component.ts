@@ -31,30 +31,31 @@ export class DrawCalendarComponent implements OnInit {
   public wednesday = 'Miercoles';
   public thursday = 'Jueves';
   public friday = 'Viernes';
-public eventResponsive : boolean = false;
 
-  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) {
+  public responsive: boolean = false;
 
-    if(screen.width <= 500)
-    {
-      this.saturday ="S";
-      this.sunday ="D";
-      this.monday ="L";
-      this.tuesday ="M";
-      this.wednesday ="Mi";
-      this.thursday ="J";
-      this.friday ="V";
-      this.eventResponsive = true;
-    }
-   }
+
+  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
 
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
-
-
       let count = 0;
+      if (screen.width <= 800) {
+        if (screen.width <= 500)
+        {
 
+          this.responsive = true;
+        }
+
+        this.saturday = 'S';
+        this.sunday = 'D';
+        this.monday = 'L';
+        this.tuesday = 'M';
+        this.wednesday = 'Mi';
+        this.thursday = 'J';
+        this.friday = 'V';
+      }
       this.objectDateCurrent.forEach(element => {
         if (element.date !== null) {
           if (this.changeMonth !== element.date.split('-')[1]) {
