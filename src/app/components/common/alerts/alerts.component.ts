@@ -14,7 +14,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
   styleUrls: ['./alerts.component.css']
 })
 export class AlertsComponent implements OnInit {
-  public bodyAlert: Alerts = { type: '', title: '', message: '' };
+  public bodyAlert: Alerts = { type: 'primary', title: '', message: '' };
   public icon: string;
   public confirmationShow = false;
 
@@ -31,27 +31,15 @@ export class AlertsComponent implements OnInit {
 
 
       if (this.bodyAlert.type === 'primary') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(2, 90, 165)', '', '', '', '', '', '', '', );
-
         this.icon = 'fa-check';
       }
       if (this.bodyAlert.type === 'success') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(92, 184, 92)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(92, 184, 92)', '', '', '', '', '', '', '', );
-
         this.icon = 'fa-check';
       }
       if (this.bodyAlert.type === 'danger') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(217, 83, 79)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(217, 83, 79)', '', '', '', '', '', '', '', );
-
         this.icon = 'fa-exclamation-triangle';
       }
       if (this.bodyAlert.type === 'warning') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(240, 173, 78)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(240, 173, 78)', '', '', '', '', '', '', '', );
-
         this.icon = 'fa-exclamation-triangle';
       }
 
