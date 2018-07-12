@@ -9,6 +9,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { FileUploadService } from '../../services/shared/common/file-upload/file-upload.service';
 import { filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -40,7 +41,8 @@ export class RequestsRhComponent implements OnInit {
     public alert: AlertsService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
-    public fileUploadService: FileUploadService) {
+    public fileUploadService: FileUploadService,
+    public router: Router) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -121,6 +123,10 @@ export class RequestsRhComponent implements OnInit {
       //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
       // }, 1000)
     });
+  }
+
+  returnBackPage() {
+    this.router.navigate(['ihr/index']);
   }
 
   modalAprovers(request: ListRequests) {

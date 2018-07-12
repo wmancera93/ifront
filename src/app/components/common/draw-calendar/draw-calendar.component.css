@@ -6,8 +6,7 @@
     background: var(--btn-primary);
     padding-left: 16px;
     text-decoration: none;   
-    transition: transform .2s;
-   
+    transition: transform .2s;   
 }
 .roundArrow:hover
 {
@@ -34,28 +33,22 @@
 {
     background-color: darkgray;
 }
+
+
+
 .border-cell 
 {
     border-bottom: 1px solid #fff;
 }
 
-.title-letter
-{
-    color: white;
-    font-size:15px;
-}
+
 
 .cell-day:hover{
     background-color:rgba(37, 50, 63, 0.9); 
     color: #ffffff;
     
 }
-.borderNumber{
-    border-radius:20px;
-    color: #fff;
-    background: var(--btn-primary);    
-        
-}
+
  .bgn-color-day
  {
     background-color: rgba(37, 50, 63, 0.9);   

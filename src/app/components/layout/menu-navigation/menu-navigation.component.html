@@ -116,7 +116,10 @@
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_evaluation_times">
               <a id="aTimeEvaluation" routerLink="/ihr/time_evaluation" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aTimeEvaluation', 'query')">Evaluación de tiempos</a>
-            </li>
+            </li>           
+            <!-- <li class="bg-li" *ngIf="'true'">
+              <a id="aMyHourExtra" routerLink="/ihr/my_hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aMyHourExtra', 'query')">Mis horas Extras</a>
+            </li> -->
           </ul>
         </div>
       </li>
@@ -137,6 +140,9 @@
             <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
               <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">Aprobadores de Solicitudes</a>
             </li>
+            <!-- <li class="bg-li" *ngIf="'true'">
+              <a id="aHourExtra" routerLink="/ihr/hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aHourExtra', 'reportsRH')">Horas Extras</a>
+            </li> -->
           </ul>
         </div>
       </li>
@@ -195,7 +201,7 @@
           <span class="nav-label">Evaluaciones</span>
         </a>
       </li>   
-      <li id="liPerformanceEvaluation">
+      <!-- <li id="liPerformanceEvaluation">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#evaluations" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-Evaluations', 'evaluations')">
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones de desempeño</span>
@@ -211,7 +217,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> -->
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
           <i class="fa fa-folder-open-o"></i>

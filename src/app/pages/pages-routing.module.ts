@@ -47,6 +47,8 @@ import { CalendarModalComponent } from '../components/common/calendar-modal/cale
 import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { ResultEvaluationComponent } from './performance-evaluation/result-evaluation/result-evaluation.component';
+import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
+import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 
 const routes: Routes = [
     {
@@ -200,7 +202,7 @@ const routes: Routes = [
         component: EvaluatedComponent
     },
     {
-        path : 'historical_posts',
+        path: 'historical_posts',
         component: HistoricalPostsComponent
     },
     {
@@ -211,24 +213,32 @@ const routes: Routes = [
         path: 'iva_employee',
         component: IvaEmployeeComponent
     },
-    {        
-        path : 'calendar_modal',
+    {
+        path: 'calendar_modal',
         component: CalendarModalComponent
     },
-    {        
-        path : 'evaluation_objectives',
+    {
+        path: 'evaluation_objectives',
         component: EvaluationObjectivesComponent
     },
-    {        
-        path : 'result_evaluation',
+    {
+        path: 'result_evaluation',
         component: ResultEvaluationComponent
     }
     ,
-    {        
-        path : 'time_evaluation',
+    {
+        path: 'time_evaluation',
         component: TimeEvaluationComponent
+    },
+    {
+        path: 'hour_extras',
+        component: HourExtrasComponent
+    },
+    {
+        path: 'my_hour_extras',
+        component: MyHourExtrasComponent
     }
-    
+
 ];
 
 @NgModule({

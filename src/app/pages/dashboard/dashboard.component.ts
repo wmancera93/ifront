@@ -94,6 +94,14 @@ export class DashboardComponent implements OnInit {
           }
         }, 100);
 
+        setTimeout(() => {
+
+          this.urlBeforePending = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforePending === '/ihr/hour_extras') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
       })
 
     this.tokenService.validateToken()

@@ -101,7 +101,7 @@ export class MyPublicationsComponent implements OnInit {
   getDataPublications() {
     this.myPublicationsService.getMyArticles().subscribe((data: any) => {
       this.myPublications = data.data;
-      console.log(this.myPublications);
+
     })
   }
 
@@ -111,6 +111,7 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   publishArticle(infoPub: PublicArticle) {
+
     const parameter = infoPub.id;
     this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
       infoPub.publish = data.data[0].publish;
@@ -126,7 +127,7 @@ export class MyPublicationsComponent implements OnInit {
 
   viewDetailArticle(infoPub: any) {
     this.myPublicationModal.emit('myPublicationModal');
-     setTimeout(() => {
+    setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
     }, 500);
   }
