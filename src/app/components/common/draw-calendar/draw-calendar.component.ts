@@ -41,10 +41,13 @@ export class DrawCalendarComponent implements OnInit {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
       let count = 0;
-      if(screen.width<=500)
-      {
-        this.responsive = true;
-        console.log("responsive")
+      if (screen.width <= 800) {
+        if (screen.width <= 500)
+        {
+
+          this.responsive = true;
+        }
+
         this.saturday = 'S';
         this.sunday = 'D';
         this.monday = 'L';
