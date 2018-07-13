@@ -63,9 +63,9 @@
             {{saturday}}
           </div>
         </div>
-        <div *ngIf="!responsive" class="row scrollbarBody scrollbarBody-success height-vh-calendar">
-          <div [ngClass]="{'col-2':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-1':day.weekday =='sabado'|| day.weekday=='domingo','bgn-color-day' : day.is_now == true}"
-            class="cell-day text-right scrollbarBody scrollbarBody-success" style="height: 150px; border:1px solid gray" *ngFor="let day of newObjectDate;">
+        <div *ngIf="!responsive" class="row  scrollbarBody scrollbarBody-success height-vh-calendar">
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="seven-cols-no col-lg-1 cell-day text-right scrollbarBody scrollbarBody-success"
+            style="height: 150px; border:1px solid gray" *ngFor="let day of newObjectDate;">
             <div class="row justify-content-end">
               <div class="text-center" [ngClass]="{ 'col-4':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-6':day.weekday =='sabado'|| day.weekday=='domingo'}">
                 <div [ngClass]="{'borderNumber' : day.is_now === true}">
@@ -85,7 +85,8 @@
           </div>
         </div>
         <div *ngIf="responsive" class="row seven-cols scrollbarBody  height-vh-calendar">
-          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success" style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success"
+            style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
             <div class="row justify-content-end">
               <div class="text-right" [ngClass]="{ 'col-12':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-12':day.weekday =='sabado'|| day.weekday=='domingo'}">
                 <div [ngClass]="{'borderNumber' : day.is_now === true}">
