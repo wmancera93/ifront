@@ -116,7 +116,7 @@
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_evaluation_times">
               <a id="aTimeEvaluation" routerLink="/ihr/time_evaluation" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aTimeEvaluation', 'query')">Evaluación de tiempos</a>
-            </li>           
+            </li>
             <!-- <li class="bg-li" *ngIf="'true'">
               <a id="aMyHourExtra" routerLink="/ihr/my_hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aMyHourExtra', 'query')">Mis horas Extras</a>
             </li> -->
@@ -136,7 +136,7 @@
             </li>
             <li class="bg-li">
               <a id="aUsersPermisions" routerLink="/ihr/users_permisions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aUsersPermisions', 'reportsRH')">Permisos de usuarios</a>
-            </li>     
+            </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
               <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">Aprobadores de Solicitudes</a>
             </li>
@@ -200,12 +200,23 @@
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones</span>
         </a>
-      </li>   
+      </li>
       <li id="liPerformanceEvaluation">
-        <a id="aPerformanceEvaluation"class="nav-link bg-menu" routerLink="evaluation_objectives" (click)="clickOptionMenu('liPerformanceEvaluation','aPerformanceEvaluation', '')">
+        <a id="aPerformanceEvaluation" class="nav-link bg-menu"  data-toggle="collapse" href="#performanceEval" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-PerformanceEval', 'performanceEval')">
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones de desempeño</span>
+          <span class="fa fa-angle-down"></span>
         </a>
+        <div id="performanceEval" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aGenerateEval" class="nav-link bg-menu" routerLink="evaluation_objectives" (click)="clickOptionMenu('liPerformanceEvaluation','aGenerateEval', 'performanceEval')">Objetivos de evaluación</a>
+            </li>
+            <li class="bg-li">
+              <a id="aReviewEval" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aReviewEval', 'performanceEval')">otro</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
