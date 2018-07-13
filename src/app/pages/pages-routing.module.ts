@@ -46,7 +46,6 @@ import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.compon
 import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
 import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
-import { ResultEvaluationComponent } from './performance-evaluation/result-evaluation/result-evaluation.component';
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 
@@ -221,11 +220,6 @@ const routes: Routes = [
         path: 'evaluation_objectives',
         component: EvaluationObjectivesComponent
     },
-    {
-        path: 'result_evaluation',
-        component: ResultEvaluationComponent
-    }
-    ,
     {
         path: 'time_evaluation',
         component: TimeEvaluationComponent

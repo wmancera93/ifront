@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluationObjectivesComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    
+    
+  }
 
   ngOnInit() {
   }
-
+  showModalObjetivesEva(){
+    document.getElementById('btn-evaluationObjetives').click();
+  }
+  
 }
