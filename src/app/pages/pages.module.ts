@@ -69,10 +69,7 @@ import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluati
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
-import { EditEvaluationObjectivesComponent } from './performance-evaluation/edit-evaluation-objectives/edit-evaluation-objectives.component';
-
-
-
+import { EditEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/edit-evaluation-objetives/edit-evaluation-objetives.component';
 
 @NgModule({
   imports: [
@@ -141,7 +138,7 @@ import { EditEvaluationObjectivesComponent } from './performance-evaluation/edit
     EvaluationObjectivesComponent,
     MyHourExtrasComponent,
     HourExtrasComponent,
-    EditEvaluationObjectivesComponent
+    EditEvaluationObjetivesComponent
   ],
   providers: [
 

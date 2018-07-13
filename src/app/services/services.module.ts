@@ -41,6 +41,7 @@ import { EvaluationsSharedService } from './shared/common/evaluations/evaluation
 import { DataMasterSharedService } from './shared/common/data-master/data-master-shared.service';
 import { CalendarService } from './calendar/calendar.service';
 import { CalendarDetailService } from './shared/common/calendar-detail/calendar-detail.service';
+import { PerformanceEvaluationService } from './performance-evaluation/performance-evaluation.service';
 
 @NgModule({
   imports: [
@@ -84,7 +85,8 @@ import { CalendarDetailService } from './shared/common/calendar-detail/calendar-
     EvaluationsSharedService,
     DataMasterSharedService,
     CalendarService,
-    CalendarDetailService
+    CalendarDetailService,
+    PerformanceEvaluationService
   ]
 })
 export class ServicesModule { }
