@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PerformanceEvaluationService } from '../../../services/performance-evaluation/performance-evaluation.service';
 
 @Component({
   selector: 'app-evaluation-objectives',
@@ -7,13 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EvaluationObjectivesComponent implements OnInit {
 
-  constructor() { 
+  constructor(public performanceEvaluationService:PerformanceEvaluationService) { 
     
     
   }
 
   ngOnInit() {
+    this.performanceEvaluationService.getPerformanceEvaluations().subscribe((data:any)=>{
+      console.log(data)
+    })
   }
+
+
   showModalObjetivesEva(){
     document.getElementById('btn-evaluationObjetives').click();
   }
