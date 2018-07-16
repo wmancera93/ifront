@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { TablesPermisions } from '../../../models/common/tables/tables';
 import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
+import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-historical-posts',
@@ -13,11 +14,13 @@ export class HistoricalPostsComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Histórico de Puestos';
   public token: boolean;
+  public showExcel : boolean =  true;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public queriesService : QueriesService ,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService,
+    private accionDataTableService: DataDableSharedService) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -39,6 +42,12 @@ export class HistoricalPostsComponent implements OnInit {
       top: 1,
       left: 0,
       behavior: 'smooth'
+    });
+    this.accionDataTableService.getActionDataTable().subscribe((data)=>{
+      if(data ==="Histórico de Puestos")
+      {
+
+      }
     });
     this.queriesService .getHistoricalPosts()
       .subscribe((data: any) => {

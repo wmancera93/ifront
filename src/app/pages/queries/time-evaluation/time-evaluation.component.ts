@@ -4,6 +4,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-time-evaluation',
@@ -23,6 +24,7 @@ export class TimeEvaluationComponent implements OnInit {
   public condition: any[] = [];
   public arreglo: string = "";
   public finalDate: number;
+  public showExcel : boolean =  true;
 
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -30,7 +32,8 @@ export class TimeEvaluationComponent implements OnInit {
   constructor(public queriesService: QueriesService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public alertsService: AlertsService) {
+    public alertsService: AlertsService,
+    private accionDataTableService: DataDableSharedService) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -51,6 +54,13 @@ export class TimeEvaluationComponent implements OnInit {
       top: 1,
       left: 0,
       behavior: 'smooth'
+    });
+
+this.accionDataTableService.getActionDataTable().subscribe((data)=>{
+      if(data ==="Evaluación de tiempos")
+      {
+
+      }
     });
 
     this.queriesService.getAllEvaluationTime()
