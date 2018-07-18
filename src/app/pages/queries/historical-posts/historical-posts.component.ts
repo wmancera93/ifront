@@ -10,15 +10,15 @@ import { DataDableSharedService } from '../../../services/shared/common/data-tab
   styleUrls: ['./historical-posts.component.css']
 })
 export class HistoricalPostsComponent implements OnInit {
-  
+
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Histórico de Puestos';
   public token: boolean;
-  public showExcel : boolean =  true;
+  public showExcel: boolean = true;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public queriesService : QueriesService ,
+  constructor(public queriesService: QueriesService,
     private tokenService: Angular2TokenService,
     private accionDataTableService: DataDableSharedService) {
     this.tokenService.validateToken()
@@ -43,13 +43,18 @@ export class HistoricalPostsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.accionDataTableService.getActionDataTable().subscribe((data)=>{
-      if(data ==="Histórico de Puestos")
-      {
+    this.accionDataTableService.getActionDataTable().subscribe((data) => {
+      if (data === "Histórico de Puestos") {
+        this.queriesService.getHistoricalPositionExcel().subscribe((info: any) => {
+          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
+          this.tokenService.get(urlSplit).subscribe((url: any) => {
+            window.open(url.url);
+          })
 
+        })
       }
     });
-    this.queriesService .getHistoricalPosts()
+    this.queriesService.getHistoricalPosts()
       .subscribe((data: any) => {
         this.objectReport.emit(data);
 

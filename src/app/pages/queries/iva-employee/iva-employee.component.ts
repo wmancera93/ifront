@@ -13,13 +13,14 @@ export class IvaEmployeeComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Movimientos de Iva';
   public token: boolean;
-  public showExcel : boolean =  true;
+  public showExcel: boolean = true;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(private tokenService: Angular2TokenService,
     public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService) {
+    private accionDataTableService: DataDableSharedService,
+  ) {
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -43,7 +44,12 @@ export class IvaEmployeeComponent implements OnInit {
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
       if (data === "Movimientos de Iva") {
-
+        this.queriesService.getIvaMovementsExcel().subscribe((info: any) => {
+          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
+          this.tokenService.get(urlSplit).subscribe((url: any) => {
+            window.open(url.url);
+          });
+        })
       }
     });
     this.queriesService.getIvaEmployee()
