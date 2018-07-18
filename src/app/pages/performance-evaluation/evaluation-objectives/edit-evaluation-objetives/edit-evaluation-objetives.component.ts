@@ -3,6 +3,7 @@ import { PerformanceEvaluationService } from '../../../../services/performance-e
 import { PerformanceEvaluation } from '../../../../models/common/performance-evaluation/performance-evaluation';
 import { TablesPermisions } from '../../../../models/common/tables/tables';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 
 
 @Component({
@@ -16,26 +17,55 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public EvaluacionPer: PerformanceEvaluation[] = [];
   public namecomplete: string = "";
   public ObjectivesTable: any[] = [];
-  public bedit: boolean;
+  public edithObjectivesTable: any[] = [];
+  public bedit: boolean = false;
+  public bnew: boolean = false;
   public newId: number;
   public showSubmit = true;
   public formObjetive: any;
-  public idEdit:number;
-
+  public idEdit: number;
+  public showPdf: boolean = false;
+  public showSizeTable: boolean = false;
+  public is_collapse: boolean = false;
   public nameReport: string = 'Objetivos de Evaluación'
 
   public objectReport: EventEmitter<any> = new EventEmitter();
 
-  constructor(public performanceEvaluationService: PerformanceEvaluationService,private fb: FormBuilder) {
-
-    this.formObjetive= new FormGroup({});
+  constructor(public performanceEvaluationService: PerformanceEvaluationService,
+    private fb: FormBuilder, private accionDataTableService: DataDableSharedService) {
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    this.formObjetive = new FormGroup({});
     this.formObjetive = fb.group({
-      start_date:'',
-      end_date:'',
-      weight:'',
-     objetive_text:'',
+      start_date: '',
+      end_date: '',
+      weight: '',
+      objetive_text: '',
     });
 
+    this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+
+      if (!this.bedit) {
+        if(!this.bnew){
+          document.getElementById("funtionObjectives").click();
+          this.bedit = true;
+        }else{
+          this.bnew = false
+          this.bedit = true;
+        }        
+      }
+     
+      if ((data.action_method === "updateEvaluationObjetive") && (this.bedit === true)) {
+        this.formObjetive = new FormGroup({});
+        this.formObjetive = fb.group({
+          start_date: '2018-02-28',
+          end_date: '2018-02-28',
+          weight: '20.0 %',
+          objetive_text: data.id,
+        });
+
+        console.log(this.formObjetive)
+      }
+    });
     this.EvaluacionPer.push({
       id: 2,
       code: "01",
@@ -147,7 +177,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           {
             id: 2,
             field_0: 2,
-            field_1: "Objetivo de evaluacion 1",
+            field_1: "Objetivo de tyftyf",
             field_2: "2018-02-28",
             field_3: "2018-02-28",
             field_4: "20.0 %",
@@ -155,7 +185,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
               type_method: "UPDATE",
               type_element: "button",
               icon: "fa-pencil",
-              id: 1,
+              id: 2,
               title: "Editar",
               action_method: "updateEvaluationObjetive",
               disable: false
@@ -186,16 +216,33 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     //   console.log(data)
     // });
   }
-
-  selectNamebutton() {
-    this.bedit = true;
-  }
   newObjetive(model) {
     this.showSubmit = false;
-     console.log(model)
+
+    console.log(model)
   }
-  editObjective(){
-    
+  colapseNew(){
+    if(!this.bnew){
+      this.bnew = true
+    }else{
+      this.bnew = false
+    }
+    document.getElementById("funtionObjectives").click();
+  }
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
+  }
+  closeObjetive() {
+    this.is_collapse = false;
+    this.showSubmit = true;
+    this.bedit = false;
+    this.bnew = false
+    this.formObjetive = this.fb.group({
+      start_date: '',
+      end_date: '',
+      weight: '',
+      objetive_text: '',
+    });
   }
 
 }

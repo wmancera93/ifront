@@ -171,20 +171,22 @@
             <div class="justify-content-center">
               <div class="col-12 widget">
                 <div class="row">
-                  <div class="col-12 top-general-p">
-                    <!-- <app-data-table-edit [records]="objectReport" id="tableEvaluation" [title]="nameReport"></app-data-table-edit> -->
+                  <div class="col-12 top-general-p" style="height: 200px">
+                    <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <button *ngIf="bedit == true" id="funtionObjectives" class="btn btn-primary text-center" data-toggle="collapse" data-target="#collapseExample">
-                      Editar
-                    </button>
-                    <button *ngIf="bedit != true" id="funtionObjectives" class="btn btn-primary text-center" data-toggle="collapse" data-target="#collapseExample">
+                    <h5 *ngIf="bedit">
+                      Editar Objetivo
+                    </h5>
+                    <h5 *ngIf="bnew">
+                      Nuevo Objetivo
+                    </h5>
+                    <button *ngIf="!bedit && !bnew" class="btn btn-primary text-center" (click)="colapseNew()">
                       Nuevo
                     </button>
-                    <button (click)="selectNamebutton()">
-                      prueba
+                    <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseExample" style="display: none">
                     </button>
                   </div>
                 </div>
@@ -195,21 +197,29 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         Fecha Inicial *
                       </label>
-                      <input type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']" placeholder="dd/mm/yyyy" />
+                      <input *ngIf="!bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
+                        placeholder="dd/mm/yyyy" />
+                      <input *ngIf="bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
+                        value="formObjetive.start_date" />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         Fecha Final *
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']" placeholder="dd/mm/yyyy" />
+                      <input *ngIf="!bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']"
+                        placeholder="dd/mm/yyyy" />
+                      <input *ngIf="bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']" value="formObjetive.end_date"
+                      />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-percent text-primary-hr"></i>
                         Ponderación *
                       </label>
-                      <input type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
+                      <input *ngIf="!bedit" type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
+                      <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight"
+                      />
                     </div>
                     <div class="col-md-12 col-12 top-containter">
                       <label for="celulaInput" class="font-title-general">
@@ -221,11 +231,16 @@
                     <div class="col-md-12 top-containter">
                       <div class="row justify-content-end">
                         <div class="col-lg-3 col-md-4 col-12">
-                          <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                          <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
                             <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
                           <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
                             <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
                         </div>
+                        <div class="col-lg-3 col-md-4 col-12">
+                          <button class="btn btn-warning btn-block cursor-general" (click)="closeObjetive()" data-toggle="collapse" data-target="#collapseExample">
+                            <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
+                        </div>
+
                       </div>
                     </div>
                   </form>

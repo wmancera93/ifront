@@ -28,7 +28,8 @@ export class DataTableComponent implements OnInit {
   @Input() recordsPrint: any[] = [];
   @Input() title: any;
   @Input() excel?: any = false;
-
+  @Input() pdf?: any = true;
+  @Input() sizeTable?: any=true;
   public keys: any[] = [];
   public labels: any[] = [];
   public p = 1;
@@ -42,6 +43,7 @@ export class DataTableComponent implements OnInit {
   public recordsStatic: any[] = [];
 
   public objectTable: any[] = [];
+
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
