@@ -48,10 +48,10 @@
                   {{type_selected}}
                 </a>
                 <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
-                    <div *ngFor="let type of newtype_requests; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('selectType',type.value, type.name)">{{type.name}}</a>
-                  <div *ngIf="newtype_requests.length !== (i + 1)" class="dropdown-divider"></div>
-                    </div>
+                  <div *ngFor="let type of newtype_requests; let i = index">
+                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('selectType',type.value, type.name)">{{type.name}}</a>
+                    <div *ngIf="newtype_requests.length !== (i + 1)" class="dropdown-divider"></div>
+                  </div>
                 </div>
               </li>
             </ul>
@@ -65,10 +65,10 @@
                   {{approver_selected}}
                 </a>
                 <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','0','Con aprobador')">Con aprobador</a>
-                    <div  class="dropdown-divider"></div>
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','1','Sin aprobador')">Sin aprobador</a>
-                  </div>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','0','Con aprobador')">Con aprobador</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','1','Sin aprobador')">Sin aprobador</a>
+                </div>
               </li>
             </ul>
           </div>
@@ -80,13 +80,13 @@
                   <i class="fa fa-chevron-circle-down"></i>
                   {{platform_selected}}
                 </a>
-              
-                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('platform','I','IHR')">IHR</a>
-                    <div  class="dropdown-divider"></div>
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('platform','S','SAP')">SAP</a>
 
-                  </div>
+                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('platform','I','IHR')">IHR</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('platform','S','SAP')">SAP</a>
+
+                </div>
               </li>
             </ul>
           </div>

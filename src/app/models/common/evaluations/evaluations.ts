@@ -29,3 +29,4 @@ export interface ResponseAnswer {
     answer_id?: number,
     comments?: string
 }
+

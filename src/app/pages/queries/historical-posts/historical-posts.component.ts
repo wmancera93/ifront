@@ -40,7 +40,7 @@ export class HistoricalPostsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.queriesService .getHistoricalPosts()
+    this.queriesService.getHistoricalPosts()
       .subscribe((data: any) => {
         this.objectReport.emit(data);
 
