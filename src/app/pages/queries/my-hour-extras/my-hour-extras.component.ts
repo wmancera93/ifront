@@ -1,4 +1,5 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
+import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-my-hour-extras',
@@ -8,7 +9,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 export class MyHourExtrasComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Mis horas extras';
-  constructor() { }
+  public showExcel : boolean =  true;
+  constructor( private accionDataTableService: DataDableSharedService) { }
 
   ngOnInit() {
     window.scroll({
@@ -16,6 +18,14 @@ export class MyHourExtrasComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
+    this.accionDataTableService.getActionDataTable().subscribe((data)=>{
+      if(data ==="Mis horas extras")
+      {
+
+      }
+    });
+
     let dataTemporal =
     {
       success: true,

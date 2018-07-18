@@ -5,13 +5,14 @@
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-paste"></i>
           Ingresos y retenciones
+          <a href="http://apihr-development.hrinteractive.co/api/v2/consultations/income_and_withholdings_export.xlsx">252652652</a>
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
-        <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
+      <app-data-table [records]="objectReport" [title]="nameReport" [excel]="showExcel"></app-data-table>
     </div>
   </div>
 </div>
