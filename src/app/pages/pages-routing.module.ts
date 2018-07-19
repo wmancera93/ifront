@@ -48,6 +48,7 @@ import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluati
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
+import { TravelManagementComponent } from './travel-management/travel-management.component';
 
 const routes: Routes = [
     {
@@ -232,7 +233,7 @@ const routes: Routes = [
         path: 'my_hour_extras',
         component: MyHourExtrasComponent
     }
-
+    
 ];
 
 @NgModule({
