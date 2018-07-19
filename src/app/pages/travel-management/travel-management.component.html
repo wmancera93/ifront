@@ -1,0 +1,37 @@
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-line-chart"></i>
+          Gestión de viajes
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-2 col-lg-4 col-12 text-left">
+            <b>
+              Registro de viajes
+            </b>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <button id="btn-evaluationObjetives" type="button" class="btn btn-primary" data-toggle="modal" data-target="#EvaluationObjetivesModal" >
+            Prueba
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-new-travel></app-new-travel>

@@ -163,16 +163,16 @@ export class EditEvaluationObjetivesComponent implements OnInit {
               title: "Editar",
               action_method: "updateEvaluationObjetive",
               disable: false
-            },
-            field_6: {
-              type_method: "DELETE",
-              type_element: "button",
-              icon: "fa-trash",
-              id: 1,
-              title: "Eliminar",
-              action_method: "deleteEvaluationObjetive",
-              disable: false
-            }
+              },
+              field_6: {
+                type_method: "DELETE",
+                type_element: "button",
+                icon: "fa-trash",
+                id: 1,
+                title: "Eliminar",
+                action_method: "deleteEvaluationObjetive",
+                disable: false
+              }
           },
           {
             id: 2,
