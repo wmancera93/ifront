@@ -72,6 +72,7 @@ import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.compon
 import { EditEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/edit-evaluation-objetives/edit-evaluation-objetives.component';
 import { TravelManagementComponent } from './travel-management/travel-management.component';
 import { NewTravelComponent } from './travel-management/new-travel/new-travel.component';
+import { EmployeeTripsComponent } from './travel-management/employee-trips/employee-trips.component';
 
 @NgModule({
   imports: [
@@ -142,7 +143,8 @@ import { NewTravelComponent } from './travel-management/new-travel/new-travel.co
     HourExtrasComponent,
     EditEvaluationObjetivesComponent,
     TravelManagementComponent,
-    NewTravelComponent
+    NewTravelComponent,
+    EmployeeTripsComponent
   ],
   providers: [
 
