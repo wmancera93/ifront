@@ -10,4 +10,8 @@ export class TravelManagementService {
     return this.tokenService.get('planning_travel_requests')
       .map((data: any) => data.json());
   }
+      getgeographicLocations(id_consult:string) {
+    return this.tokenService.get('geographic_locations/show_childrens/'+ id_consult)
+      .map((data: any) => data.json());
+  }
 }

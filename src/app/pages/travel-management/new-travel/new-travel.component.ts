@@ -15,6 +15,10 @@ export class NewTravelComponent implements OnInit {
   public token: boolean;
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
+  public transport_types: any[] = [];
+  public countries: any[] = [];
+  public cityLocations: any[] = [];
+  public stateLocations: any[] = [];
   public formTravelManagement: any;
   public showSubmit: boolean = true;
 
@@ -38,8 +42,12 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_countries: 1,
-      trip_text:'',
+      id_travel: 1,
+      trip_text: '',
+      id_transport: 1,
+      id_city: '',
+      id_country: '-1',
+      id_state: '',
     });
 
 
@@ -55,12 +63,39 @@ export class NewTravelComponent implements OnInit {
       subscribe((data: any) => {
         this.planningTravel = data;
         this.travel_types = data.data.travel_types;
-
+        this.transport_types = data.data.transport_types;
+        this.countries = data.data.countries;
       })
   }
+
   newTrip(model) {
     this.showSubmit = false;
-    console.log(model)
   }
+  originTrip() {
 
+  }
+  lookState(form: any) {
+    this.stateLocations = [];
+    this.travelManagementService.getgeographicLocations(form.id_country).
+      subscribe((data: any) => {
+        this.stateLocations = data.data;
+        if (this.stateLocations.length > 0) {
+          this.formTravelManagement.controls['id_state'].setValue('-1');
+        } else {
+          this.formTravelManagement.controls['id_state'].setValue('');
+        }
+      });
+  }
+  lookCity(form: any) {
+    this.cityLocations = [];
+    this.travelManagementService.getgeographicLocations(form.id_state).
+      subscribe((data: any) => {
+        this.cityLocations = data.data;
+        if (this.cityLocations.length > 0) {
+          this.formTravelManagement.controls['id_city'].setValue('-1');
+        } else {
+          this.formTravelManagement.controls['id_city'].setValue('');
+        }
+      });
+  }
 }
