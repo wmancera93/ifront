@@ -71,7 +71,12 @@ import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.c
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { EditEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/edit-evaluation-objetives/edit-evaluation-objetives.component';
 import { TravelManagementComponent } from './travel-management/travel-management.component';
-import { NewTravelComponent } from './travel-management/new-travel/new-travel.component';
+import { TravelComponent } from './travel-management/travel/travel.component';
+import { NewTravelComponent } from './travel-management/travel/new-travel/new-travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
+import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hotel.component';
+import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-hotel.component';
+import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 
 @NgModule({
   imports: [
@@ -142,7 +147,12 @@ import { NewTravelComponent } from './travel-management/new-travel/new-travel.co
     HourExtrasComponent,
     EditEvaluationObjetivesComponent,
     TravelManagementComponent,
-    NewTravelComponent
+    NewTravelComponent,
+    TravelComponent,
+    HotelsComponent,
+    NewHotelComponent,
+    EditHotelComponent,
+    ViewHotelComponent
   ],
   providers: [
 

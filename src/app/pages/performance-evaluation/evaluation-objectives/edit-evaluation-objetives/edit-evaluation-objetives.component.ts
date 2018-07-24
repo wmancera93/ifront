@@ -218,8 +218,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
   newObjetive(model) {
     this.showSubmit = false;
-
-    console.log(model)
   }
   colapseNew(){
     if(!this.bnew){

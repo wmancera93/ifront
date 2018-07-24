@@ -21,7 +21,7 @@ export class TravelManagementComponent implements OnInit {
         url: "../assets/themes/images-demo/litera.png"
       },
       tooltipText: "haga Clic aquí para asignar hoteles",
-      route: ""
+      route: "/ihr/hotels"
     },
     {
       title: "Viajes",
@@ -29,7 +29,7 @@ export class TravelManagementComponent implements OnInit {
         url: ""
       },
       tooltipText: "haga Clic aquí para asignar viajes",
-      route: ""
+      route: "/ihr/travels"
     },
     {
       title: "Programación de viajes",
@@ -41,5 +41,7 @@ export class TravelManagementComponent implements OnInit {
     }
     ];
   }
+  redirectPage(){
 
+  }
 }

@@ -49,6 +49,8 @@ import { EvaluationObjectivesComponent } from './performance-evaluation/evaluati
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 import { TravelManagementComponent } from './travel-management/travel-management.component';
+import { TravelComponent } from './travel-management/travel/travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
 
 const routes: Routes = [
     {
@@ -236,9 +238,16 @@ const routes: Routes = [
     {
         path: 'travel_management',
         component: TravelManagementComponent
+    },
+    {
+        path: 'travels',
+        component: TravelComponent
+    },
+    {
+        path:'hotels',
+        component: HotelsComponent
     }
     
-
 ];
 
 @NgModule({
