@@ -49,7 +49,7 @@ import { EvaluationObjectivesComponent } from './performance-evaluation/evaluati
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 import { TravelManagementComponent } from './travel-management/travel-management.component';
-import { EmployeeTripsComponent } from './travel-management/employee-trips/employee-trips.component';
+import { TravelComponent } from './travel-management/travel/travel.component';
 
 const routes: Routes = [
     {
@@ -240,7 +240,7 @@ const routes: Routes = [
     },
     {
         path: 'employee_trips',
-        component: EmployeeTripsComponent
+        component: TravelComponent
     }
     
 ];

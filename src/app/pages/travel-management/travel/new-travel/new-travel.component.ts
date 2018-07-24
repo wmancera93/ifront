@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TravelManagementService } from '../../../services/travel-management/travel-management.service';
 import { Angular2TokenService } from 'angular2-token';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { TravelManagementService } from '../../../../services/travel-management/travel-management.service';
 
 @Component({
   selector: 'app-new-travel',
@@ -19,6 +19,7 @@ export class NewTravelComponent implements OnInit {
   public countries: any[] = [];
   public cityLocations: any[] = [];
   public stateLocations: any[] = [];
+  public terminalLocations: any[] = [];
   public formTravelManagement: any;
   public showSubmit: boolean = true;
 
@@ -48,6 +49,9 @@ export class NewTravelComponent implements OnInit {
       id_city: '',
       id_country: '-1',
       id_state: '',
+      id_terminal:'',
+      date_begin:'',
+      hour_begin:'',
     });
 
 
@@ -65,6 +69,7 @@ export class NewTravelComponent implements OnInit {
         this.travel_types = data.data.travel_types;
         this.transport_types = data.data.transport_types;
         this.countries = data.data.countries;
+        console.log(this.countries)
       })
   }
 
@@ -74,7 +79,7 @@ export class NewTravelComponent implements OnInit {
   originTrip() {
 
   }
-  lookState(form: any) {
+  searchState(form: any) {
     this.stateLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_country).
       subscribe((data: any) => {
@@ -86,7 +91,7 @@ export class NewTravelComponent implements OnInit {
         }
       });
   }
-  lookCity(form: any) {
+  searchCity(form: any) {
     this.cityLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_state).
       subscribe((data: any) => {
@@ -95,6 +100,18 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_city'].setValue('-1');
         } else {
           this.formTravelManagement.controls['id_city'].setValue('');
+        }
+      });
+  }
+  searchTerminal(form: any){
+    this.terminalLocations = [];
+    this.travelManagementService.gettransportTerminals(form.id_city).
+      subscribe((data: any) => {
+        this.terminalLocations = data.data;
+        if (this.terminalLocations.length > 0) {
+          this.formTravelManagement.controls['id_terminal'].setValue('-1');
+        } else {
+          this.formTravelManagement.controls['id_terminal'].setValue('');
         }
       });
   }
