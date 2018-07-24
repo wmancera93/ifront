@@ -16,16 +16,16 @@
   <div class="row-hr-container justify-content-left">
     <div class="col-12">
       <div class="row justify-content-left">
-        <div class="col-md-2 col-12" style="margin-left: -15px;" *ngFor="let button of buttonInfo">
-          <div class="widget-travel bg-white height-notification-travel cursor-general" routerLink="{{button.route}}">
+        <div class="col five-col-no" style="margin-left: -15px;" *ngFor="let button of buttonInfo">
+          <div data-toggle="tooltip" data-placement="bottom" title="{{button.tooltipText}}" class="widget-travel wg-hover-bg wg-hover-general bg-white height-notification-travel cursor-general" style="padding-top:25px;" routerLink="{{button.route}}" (mouseover)="showTooltip(button)">
             <div class="row justify-content-center">
-              <div class="col-12 fontName top-general-p" style="font-size: 18px;">
-                <div class="row">
-                  <div class="col-12">
-                    {{button.title}}
-                  </div>
+              <div class="col-12 fontName top-general-p" style="font-size: 16px;">
+                <div class="row align-items-center">
                   <div class="col-12">
                     <img src="{{button.image.url}}" />
+                  </div>
+                  <div class="col-12" style="color: rgb(51, 68, 110);">
+                    <strong>{{button.title | uppercase}}</strong>
                   </div>
                 </div>
               </div>

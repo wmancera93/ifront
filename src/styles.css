@@ -1696,7 +1696,8 @@ border-bottom: 1px solid  #dddd;
 
 .wg-hover-general:hover{
     transition:all .5s ease-in-out;
-    -webkit-transform:scale(1.1);transform:scale(1.1);
+    -webkit-transform:scale(1.1);
+    transform:scale(1.1);
 }
 
 .wg-hover-bg:hover{

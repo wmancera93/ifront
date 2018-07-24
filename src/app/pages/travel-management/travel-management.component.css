@@ -1,0 +1,6 @@
+.five-cols-no
+{
+    max-width: 20% !important;
+    width: 20% !important;
+    flex: none;
+}
