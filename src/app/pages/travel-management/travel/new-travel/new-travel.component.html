@@ -18,8 +18,7 @@
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']"
-                  paceholder="Seleccione">
+                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
@@ -58,190 +57,237 @@
             <div class="tab-content">
               <div id="Viajes" class="tab-pane text-muted active" style="background-color: transparent !important">
                 <div class="row" style="margin-top: 15px">
-                  <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa fa-bus text-primary-hr"></i>
-                      <strong>Transporte:</strong>
-                    </label>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                    <select *ngIf="transport_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                      paceholder="Seleccione">
-                      <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
-                    </select>
+                  <div class="col-12 top-general-p" style="height: 200px">
+                    <!-- <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table> -->
                   </div>
                 </div>
                 <div class="row" style="margin-top: 15px">
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="border">
-                          <strong class="text-primary-hr">Lugar de origen</strong>
+                  <div class=" col-lg-3 col-md-4 col-12 top-containter">
+                    <label  class="titleColor">
+                      <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                      <strong>Adjuntar Cotización</strong>
+                    </label>
+                    <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+                  </div>
+                </div>
+                <div class="row justify-content-end">
+                  <div class="col-lg-3 col-md-4 col-12">
+                    <h5 *ngIf="bedit">
+                      Editar Viaje
+                    </h5>
+                    <h5 class="titleColor" *ngIf="bnew">
+                      Nuevo Viaje
+                    </h5>
+                    <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                      Nuevo Viaje
+                    </button>
+                    <button id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
+                    </button>
+                  </div>
+                </div>
+
+                <div class="collapse top-general-p " id="collapseTravel">
+                  <div class="row" style="margin-top: 15px">
+                    <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa fa-bus text-primary-hr"></i>
+                        <strong>Transporte:</strong>
+                      </label>
+                    </div>
+                    <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
+                      <select *ngIf="transport_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
+                        paceholder="Seleccione">
+                        <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="row" style="margin-top: 15px">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="border">
+                            <strong class="text-primary-hr">Lugar de origen</strong>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
+                            <a>País:</a>
+                          </label>
+                          <select [attr.disabled]="countries.length == 0 ? true : null" *ngIf="countries.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_country']"
+                            paceholder="Seleccione" (change)="searchState(formTravelManagement.value)">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
+                            <a>Estado:</a>
+                          </label>
+                          <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
+                            paceholder="Seleccione" (change)="searchCity(formTravelManagement.value)">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
+                            <a>Ciudad:</a>
+                          </label>
+                          <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
+                            paceholder="Seleccione" (change)="searchTerminal(formTravelManagement.value)">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
+                            <a>Terminal de origen:</a>
+                          </label>
+                          <select [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']"
+                            paceholder="Seleccione">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                            <a> Fecha Inicial de Viaje *</a>
+                          </label>
+                          <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']" placeholder="dd/mm/yyyy"
+                          />
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
+                            <a> Hora de Partida *</a>
+                          </label>
+                          <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement['hour_begin']" />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
-                          <a>País:</a>
-                        </label>
-                        <select [attr.disabled]="countries.length == 0 ? true : null" *ngIf="countries.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_country']" paceholder="Seleccione" (change)="searchState(formTravelManagement.value)">
-                          <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                          <a>Estado:</a>
-                        </label>
-                        <select [attr.disabled]="stateLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_state']" paceholder="Seleccione" (change)="searchCity(formTravelManagement.value)">
-                            <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                          <a>Ciudad:</a>
-                        </label>
-                        <select [attr.disabled]="cityLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_city']" paceholder="Seleccione" (change)="searchTerminal(formTravelManagement.value)">
-                            <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
-                        </select>
+                  <div class="row" style="margin-top: 15px">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="border">
+                            <strong class="text-primary-hr">Lugar de destino</strong>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
-                          <a>Terminal de origen:</a>
-                        </label>
-                        <select [attr.disabled]="terminalLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_terminal']" paceholder="Seleccione">
+                    <div class="col-12">
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
+                            <a>País:</a>
+                          </label>
+                          <select [attr.disabled]="countries.length == 0 ? true : null" *ngIf="countries.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_country']"
+                            paceholder="Seleccione" (change)="searchState(formTravelManagement.value)">
                             <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
-                        </select>
+                            <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
+                            <a>Estado:</a>
+                          </label>
+                          <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
+                            paceholder="Seleccione" (change)="searchCity(formTravelManagement.value)">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
+                            <a>Ciudad:</a>
+                          </label>
+                          <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
+                            paceholder="Seleccione" (change)="searchTerminal(formTravelManagement.value)">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
+                          </select>
+                        </div>
                       </div>
-                      <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                         <a> Fecha Inicial de Viaje *</a>
-                        </label>
-                        <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']" placeholder="dd/mm/yyyy"
-                        />
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
-                         <a> Hora de Partida *</a>
-                        </label>
-                        <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement['hour_begin']"/>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row" style="margin-top: 15px">
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="border">
-                          <strong class="text-primary-hr">Lugar de destino</strong>
+                      <div class="row">
+                        <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
+                            <a>Terminal de destino:</a>
+                          </label>
+                          <select [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']"
+                            paceholder="Seleccione">
+                            <option value="-1">Seleccione</option>
+                            <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
+                          </select>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                            <a> Fecha final de Viaje *</a>
+                          </label>
+                          <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']" placeholder="dd/mm/yyyy"
+                          />
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
+                            <a> Hora de llegada *</a>
+                          </label>
+                          <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement['hour_begin']" />
                         </div>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
-                          <a>País:</a>
-                        </label>
-                        <select [attr.disabled]="countries.length == 0 ? true : null" *ngIf="countries.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_country']" paceholder="Seleccione" (change)="searchState(formTravelManagement.value)">
-                          <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                          <a>Estado:</a>
-                        </label>
-                        <select [attr.disabled]="stateLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_state']" paceholder="Seleccione" (change)="searchCity(formTravelManagement.value)">
-                            <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                          <a>Ciudad:</a>
-                        </label>
-                        <select [attr.disabled]="cityLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_city']" paceholder="Seleccione" (change)="searchTerminal(formTravelManagement.value)">
-                            <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
-                        </select>
+                  <div class="row" style="margin-top: 15px">
+                    <div class="col-lg-2 col-md-2 col-12" style="margin-top: 30px">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
+                        <strong>Hotel:</strong>
+                      </label>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-12" style="margin-top: 30px">
+                      <select *ngIf="transport_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
+                        paceholder="Seleccione">
+                        <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-12" style="margin-top: 20px">
+                      <div class="row text-center">
+                        <div class="col-12 number-size text-info">
+                          <i class="fa fa-check " style="font-size: 4em"></i>
+                        </div>
+                        <div class="col-12 titleColor">
+                          Continuar
+                        </div>
                       </div>
                     </div>
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
-                          <a>Terminal de destino:</a>
-                        </label>
-                        <select [attr.disabled]="terminalLocations.length == 0 ? true : null"  class="form-control" [formControl]="formTravelManagement.controls['id_terminal']" paceholder="Seleccione">
-                            <option value="-1">Seleccione</option>
-                          <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                         <a> Fecha final de Viaje *</a>
-                        </label>
-                        <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']" placeholder="dd/mm/yyyy"
-                        />
-                      </div>
-                      <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
-                         <a> Hora de llegada *</a>
-                        </label>
-                        <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement['hour_begin']"/>
+                    <div class="col-lg-3 col-md-3 col-12" style="margin-top: 20px">
+                      <div class="row text-center">
+                        <div class="col-12 number-size text-danger" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
+                          <i class="fa fa-times" style="font-size: 4em"></i>
+                        </div>
+                        <div class="col-12 titleColor">
+                          Cancelar
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="row" style="margin-top: 15px">
-                  <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
-                      <strong>Hotel:</strong>
-                    </label>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                    <select *ngIf="transport_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                      paceholder="Seleccione">
-                      <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
-                    </select>
-                  </div>
-                </div>
-                <div class="row" style="margin-top: 15px">
-                  <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa fa-cloud-upload text-primary-hr"></i>
-                      <strong>Cotización:</strong>
-                    </label>
-                  </div>
-                  <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                    <select *ngIf="transport_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                      paceholder="Seleccione">
-                      <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
-                    </select>
-                  </div>
+
                 </div>
               </div>
               <div id="Gastos" class="tab-pane text-muted" style="background-color: transparent !important">
@@ -274,7 +320,7 @@
                 <div class="row justify-content-end">
                   <div class="col-6">
                     <div class="collapse top-general-p row" id="collapseTrip">
-                     
+
                       <div class="col-12">
                         <div class="row ">
                           <div class="col-lg-4 col-md-6 col-6">
@@ -291,13 +337,12 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
 
 
-          <div class="col-12 top-containter" style="margin-top: 15px">
+          <div class="col-12 top-containter" style="margin-top: 30px">
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">

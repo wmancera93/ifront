@@ -22,6 +22,11 @@ export class NewTravelComponent implements OnInit {
   public terminalLocations: any[] = [];
   public formTravelManagement: any;
   public showSubmit: boolean = true;
+  public bedit: boolean = false;
+  public bnew: boolean = false;
+  public is_collapse: boolean = false;
+  public filequotation = 'fileQuotationTravel';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder) {
@@ -76,6 +81,35 @@ export class NewTravelComponent implements OnInit {
   newTrip(model) {
     this.showSubmit = false;
   }
+  colapseNew(){
+    if(!this.bnew){
+      this.bnew = true
+    }else{
+      this.bnew = false
+    }
+    document.getElementById("funtionTravel").click();
+  }
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
+  }
+  closeTrip() {
+    this.is_collapse = false;
+    this.showSubmit = true;
+    this.bedit = false;
+    this.bnew = false
+    this.formTravelManagement = this.fb.group({
+      id_travel: 1,
+      trip_text: '',
+      id_transport: 1,
+      id_city: '',
+      id_country: '-1',
+      id_state: '',
+      id_terminal:'',
+      date_begin:'',
+      hour_begin:'',
+    });
+  }
+
   originTrip() {
 
   }

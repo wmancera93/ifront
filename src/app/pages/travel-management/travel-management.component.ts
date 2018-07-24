@@ -18,7 +18,8 @@ export class TravelManagementComponent implements OnInit {
     this.buttonInfo = [{
       title: "Asignación de hoteles",
       image: {
-        url: "../assets/themes/images-demo/litera.png"
+
+       url: "../assets/themes/images-demo/litera.png"
       },
       tooltipText: "haga Clic aquí para asignar hoteles",
       route: "/ihr/hotels"
