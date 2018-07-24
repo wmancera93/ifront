@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
-import { Angular2TokenService } from '../../../../../node_modules/angular2-token';
+import { Angular2TokenService } from 'angular2-token';
 
 @Component({
   selector: 'app-extra-hours',
