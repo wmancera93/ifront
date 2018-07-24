@@ -50,6 +50,7 @@ import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.compon
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
 import { TravelManagementComponent } from './travel-management/travel-management.component';
 import { TravelComponent } from './travel-management/travel/travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
 
 const routes: Routes = [
     {
@@ -241,6 +242,10 @@ const routes: Routes = [
     {
         path: 'employee_trips',
         component: TravelComponent
+    },
+    {
+        path:'hotels',
+        component: HotelsComponent
     }
     
 ];

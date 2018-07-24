@@ -73,6 +73,10 @@ import { EditEvaluationObjetivesComponent } from './performance-evaluation/evalu
 import { TravelManagementComponent } from './travel-management/travel-management.component';
 import { TravelComponent } from './travel-management/travel/travel.component';
 import { NewTravelComponent } from './travel-management/travel/new-travel/new-travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
+import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hotel.component';
+import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-hotel.component';
+import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 
 @NgModule({
   imports: [
@@ -144,7 +148,11 @@ import { NewTravelComponent } from './travel-management/travel/new-travel/new-tr
     EditEvaluationObjetivesComponent,
     TravelManagementComponent,
     NewTravelComponent,
-    TravelComponent
+    TravelComponent,
+    HotelsComponent,
+    NewHotelComponent,
+    EditHotelComponent,
+    ViewHotelComponent
   ],
   providers: [
 

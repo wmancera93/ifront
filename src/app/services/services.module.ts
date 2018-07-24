@@ -43,7 +43,7 @@ import { CalendarService } from './calendar/calendar.service';
 import { CalendarDetailService } from './shared/common/calendar-detail/calendar-detail.service';
 import { PerformanceEvaluationService } from './performance-evaluation/performance-evaluation.service';
 import { DataDableSharedService } from './shared/common/data-table/data-dable-shared.service';
-import { TravelManagementService } from './travel-management/travel-management.service';
+import { TravelService } from './travel-management/travels/travel.service';
 
 @NgModule({
   imports: [
@@ -90,7 +90,7 @@ import { TravelManagementService } from './travel-management/travel-management.s
     CalendarDetailService,
     PerformanceEvaluationService,
     DataDableSharedService,
-    TravelManagementService
+    TravelService
   ]
 })
 export class ServicesModule { }

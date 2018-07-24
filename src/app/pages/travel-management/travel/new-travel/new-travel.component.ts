@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { TravelManagementService } from '../../../../services/travel-management/travel-management.service';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-new-travel',
@@ -23,7 +23,7 @@ export class NewTravelComponent implements OnInit {
   public formTravelManagement: any;
   public showSubmit: boolean = true;
 
-  constructor(public travelManagementService: TravelManagementService,
+  constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder) {
 
     this.tokenService.validateToken()

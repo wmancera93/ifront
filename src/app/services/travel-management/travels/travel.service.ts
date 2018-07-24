@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
-export class TravelManagementService {
+export class TravelService {
 
   constructor(private tokenService: Angular2TokenService) { }
 
