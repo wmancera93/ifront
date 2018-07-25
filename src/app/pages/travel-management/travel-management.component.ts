@@ -18,8 +18,15 @@ export class TravelManagementComponent implements OnInit {
   ngOnInit() {
     this.buttonInfo = [{
       title: "Asignación de hoteles",
+<<<<<<< HEAD
       icon_primary:"fa fa-circle-thin" ,
       icon_secundary: "fa fa-bed",
+=======
+      image: {
+
+       url: "../assets/themes/images-demo/litera.png"
+      },
+>>>>>>> a2740fda63faa63730450d65d929db408a5343c6
       tooltipText: "haga Clic aquí para asignar hoteles",
       route: "/ihr/hotels"
     },
