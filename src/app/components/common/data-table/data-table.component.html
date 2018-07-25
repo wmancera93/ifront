@@ -4,10 +4,10 @@
 <div id="data_table" *ngIf="!token" class="row">
   <div class="col-12">
     <div class="row justify-content-between" *ngIf="show">
-      <div class="col-xl-3 col-12" >
+      <div class="col-xl-3 col-12">
         <div class="form-group row" *ngIf="sizeTable">
           <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
-          <div class="col-xl-5 col-md-3 col-lg-3 col-6" >
+          <div class="col-xl-5 col-md-3 col-lg-3 col-6">
             <select class="form-control" [(ngModel)]="size_table">
               <option value="5">5</option>
               <option value="10">10</option>
@@ -112,22 +112,22 @@
                       </div>
                     </div>
                     <div *ngIf="record[key].type_method != null">
-                      <button type="button" *ngIf="record[key].type_method == 'SHOW'" class="btn btn-sm btn-secondary cursor-general" [disabled]="record[key].disable"
+                      <div *ngIf="record[key].type_method == 'SHOW'" class="cursor-general  text-success text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                      </button>
-                      <button type="button" *ngIf="record[key].type_method == 'UPDATE'" class="btn btn-sm btn-secondary cursor-general" [disabled]="record[key].disable"
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
+                      </div>
+                      <div *ngIf="record[key].type_method == 'UPDATE'" class="cursor-general text-info text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
-                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                      </button>
-                      <button type="button" *ngIf="record[key].type_method == 'PRINT'" class="btn btn-sm btn-secondary cursor-general" [disabled]="record[key].disable"
+                        <i class="fa fa-pencil" aria-hidden="true" style="font-size: 1.5em"></i>
+                      </div>
+                      <div *ngIf="record[key].type_method == 'PRINT'" class="cursor-general text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
-                        <i class="fa  fa-file-pdf-o" aria-hidden="true"></i>
-                      </button>
-                      <button type="button" *ngIf="record[key].type_method == 'DELETE'" class="btn btn-sm btn-danger cursor-general" [disabled]="record[key].disable"
+                        <i class="fa  fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
+                      </div>
+                      <div *ngIf="record[key].type_method == 'DELETE'" class="cursor-general text-danger text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                      </button>
+                        <i class="fa fa-trash" aria-hidden="true" style="font-size: 1.5em"></i>
+                      </div>
                     </div>
                   </div>
                 </td>

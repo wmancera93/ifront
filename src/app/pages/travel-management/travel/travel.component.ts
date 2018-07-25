@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-travel',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TravelComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
+
+  
   ngOnInit() {
   }
 
+  returnBackPage() {
+    this.router.navigate(['ihr/travel_management']);
+  }
 }

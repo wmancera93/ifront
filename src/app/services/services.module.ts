@@ -44,6 +44,7 @@ import { CalendarDetailService } from './shared/common/calendar-detail/calendar-
 import { PerformanceEvaluationService } from './performance-evaluation/performance-evaluation.service';
 import { DataDableSharedService } from './shared/common/data-table/data-dable-shared.service';
 import { TravelService } from './travel-management/travels/travel.service';
+import { HotelsService } from './travel-management/hotels/hotels.service';
 
 @NgModule({
   imports: [
@@ -90,7 +91,9 @@ import { TravelService } from './travel-management/travels/travel.service';
     CalendarDetailService,
     PerformanceEvaluationService,
     DataDableSharedService,
-    TravelService
+    TravelService,
+    HotelsService
+    
   ]
 })
 export class ServicesModule { }
