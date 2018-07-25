@@ -11,6 +11,7 @@ export class TravelManagementComponent implements OnInit {
 
 
   public buttonInfo: ButtonImage[] = [];
+  public flagShowTooltip: boolean = false;
 
   constructor() { }
 
@@ -27,22 +28,38 @@ export class TravelManagementComponent implements OnInit {
     {
       title: "Viajes",
       image: {
-        url: ""
+        url: "../assets/themes/images-demo/mundo.png"
       },
       tooltipText: "haga Clic aquí para asignar viajes",
       route: "/ihr/travels"
     },
     {
-      title: "Programación de viajes",
+      title: "Anticipos",
       image: {
-        url: ""
+        url: "../assets/themes/images-demo/dinero.png"
+      },
+      tooltipText: "haga Clic aquí para asignar la programación",
+      route: ""
+    },
+    {
+      title: "Gastos",
+      image: {
+        url: "../assets/themes/images-demo/etiqueta-del-precio.png"
+      },
+      tooltipText: "haga Clic aquí para asignar la programación",
+      route: ""
+    },
+    {
+      title: "Arpobaciones",
+      image: {
+        url: "../assets/themes/images-demo/lista.png"
       },
       tooltipText: "haga Clic aquí para asignar la programación",
       route: ""
     }
     ];
   }
-  redirectPage(){
-
+  showTooltip(data) {
+    this.flagShowTooltip = true; 
   }
 }
