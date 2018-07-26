@@ -77,12 +77,7 @@
                   </label>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                  <select *ngIf="transport_types.length > 0 && !bedit" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                    paceholder="Seleccione">
-                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
-                  </select>
-                  <select *ngIf="transport_types.length > 0 && bedit" class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                    paceholder="Seleccione" value="formTravelManagement.id_travel">
+                  <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']">
                     <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
                   </select>
                 </div>
@@ -104,13 +99,9 @@
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>País:</a>
                       </label>
-                      <select [attr.disabled]="countries.length == 0 ? true : null" *ngIf="countries.length > 0 && !bedit" class="form-control"
-                        [formControl]="formTravelManagement.controls['id_country']" paceholder="Seleccione" (change)="searchState(formTravelManagement.value)">
+                      <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control"
+                        [formControl]="formTravelManagement.controls['id_country']"  (change)="searchState(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
-                        <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
-                      </select>
-                      <select *ngIf="countries.length > 0 && bedit && filterCountry.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_country']"
-                        placeholder="Seleccione" value="{{filterCountry[0].id}}">
                         <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
                       </select>
                     </div>
@@ -119,14 +110,10 @@
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>Estado:</a>
                       </label>
-                      <select *ngIf="!bedit" [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
-                        placeholder="Seleccione" (change)="searchCity(formTravelManagement.value)">
+                      <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
+                         (change)="searchCity(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
-                      </select>
-                      <select *ngIf="bedit && filterState.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
-                        (change)="searchCity(formTravelManagement.value)" value="{{filterState[0].id}}">
-                        <option *ngFor="let nameState of stateLocations" [value]="nameState.id" value="formTravelManagement.id_state">{{nameState.name}}</option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
@@ -134,13 +121,9 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Ciudad:</a>
                       </label>
-                      <select *ngIf="!bedit" [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
-                        placeholder="Seleccione" (change)="searchTerminal(formTravelManagement.value)">
+                      <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
+                         (change)="searchTerminal(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
-                        <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
-                      </select>
-                      <select class="form-control" *ngIf="bedit && filterCity.length > 0" [formControl]="formTravelManagement.controls['id_city']"
-                        (change)="searchTerminal(formTravelManagement.value)" value="{{filterCity[0].id}}">
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
                       </select>
                     </div>
@@ -151,13 +134,8 @@
                         <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
                         <a>Terminal de origen:</a>
                       </label>
-                      <select *ngIf="!bedit" [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']"
-                        placeholder="Seleccione">
+                      <select [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']">
                         <option value="-1">Seleccione</option>
-                        <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
-                      </select>
-                      <select *ngIf="bedit && filterTerminal.length > 0" [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']"
-                        placeholder="Seleccione"  value="{{filterTerminal[0].id}}">
                         <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
                       </select>
                     </div>
@@ -166,15 +144,14 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha Inicial de Viaje *</a>
                       </label>
-                      <input *ngIf="!bedit" type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']"/>
-                      <input *ngIf="bedit" type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement['date_begin']" value="formTravelManagementedit.date_begin"/>
+                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']"/>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement['hour_begin']" />
+                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"/>
                     </div>
                   </div>
                 </div>
@@ -196,8 +173,8 @@
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>País:</a>
                       </label>
-                      <select [attr.disabled]="countriesto.length == 0 ? true : null" *ngIf="countriesto.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_countryto']"
-                        paceholder="Seleccione" (change)="searchStateto(formTravelManagement.value)">
+                      <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control"
+                        [formControl]="formTravelManagement.controls['id_countryto']"  (change)="searchStateto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCountryto of countriesto" [value]="nameCountryto.id">{{nameCountryto.name}}</option>
                       </select>
@@ -208,7 +185,7 @@
                         <a>Estado:</a>
                       </label>
                       <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']"
-                        paceholder="Seleccione" (change)="searchCityto(formTravelManagement.value)">
+                         (change)="searchCityto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameStateto of stateLocationsto" [value]="nameStateto.id">{{nameStateto.name}}</option>
                       </select>
@@ -219,7 +196,7 @@
                         <a>Ciudad:</a>
                       </label>
                       <select [attr.disabled]="cityLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_cityto']"
-                        paceholder="Seleccione" (change)="searchTerminalto(formTravelManagement.value);searchHotel(formTravelManagement.value)">
+                         (change)="searchTerminalto(formTravelManagement.value, 'new');searchHotel(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
                       </select>
@@ -232,7 +209,7 @@
                         <a>Terminal de destino:</a>
                       </label>
                       <select [attr.disabled]="terminalLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminalto']"
-                        paceholder="Seleccione">
+                        >
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameTerminalto of terminalLocationsto" [value]="nameTerminalto.id">{{nameTerminalto.name}}</option>
                       </select>
@@ -242,20 +219,20 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final de Viaje *</a>
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement['date_end']" placeholder="dd/mm/yyyy"
+                      <input  type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"
                       />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
+                        <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement['hour_end']" />
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" />                     
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="row" style="margin-top: 15px">
+              <div class="row" style="margin-top: 10px">
                 <div class="col-lg-2 col-md-2 col-12" style="margin-top: 30px">
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
@@ -263,7 +240,7 @@
                   </label>
                 </div>
                 <div class="col-lg-4 col-md-4 col-12" style="margin-top: 30px">
-                  <select *ngIf="hotels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_hotels']" paceholder="Seleccione">
+                  <select class="form-control" [formControl]="formTravelManagement.controls['id_hotels']">
                     <option *ngFor="let nameHotels of hotels" [value]="nameHotels.id">{{nameHotels.name}}</option>
                   </select>
                 </div>
