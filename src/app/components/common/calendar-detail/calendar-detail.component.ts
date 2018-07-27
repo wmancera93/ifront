@@ -17,14 +17,14 @@ export class CalendarDetailComponent implements OnInit {
         if (detail_calendar.effect === 'open') {
           this.detail_calendar = [];
           this.detail_calendar.push(detail_calendar.event_info);
-                    
+
           if ((screen.width < 500) && (screen.width < screen.height)) {
             let calculatey = (screen.height * (-0.12));
             document.getElementById('calendar_detail').style.marginTop = calculatey + 'px';
             let calculatex = 0;
             document.getElementById('calendar_detail').style.marginLeft = calculatex + 'px';
           }
-        
+
           if ((screen.width > 500) && (screen.width < 1100)) {
             if (detail_calendar.pointy < (0.7 * screen.height)) {
               let calculatey = detail_calendar.pointy - 180;

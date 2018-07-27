@@ -624,6 +624,8 @@ header{
 }
 
 
+
+
 #modal-alert {
     color: #FFFFFF !important;
 }
@@ -1826,6 +1828,20 @@ border-bottom: 1px solid  #dddd;
 
 
   /*-------------------------*/
+
+  /* Color icons Buttons */
+  .color-primary-button{
+      color: var(--btn-primary-hover);
+  }
+  .color-secundary-button{
+    color: var(--btn-primary);
+}
+
+.bg-white-btn
+{    
+    color: #7b7b88;
+    text-align: center;
+}
 
   /*Frames */
   .frameFullSize{
