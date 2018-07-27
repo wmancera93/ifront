@@ -95,7 +95,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
-                <td *ngFor="let key of keys">
+                <td *ngFor="let key of keys" >
                   <div *ngIf="record[key] != null">
                     <div *ngIf="record[key].type_method == null">
                       <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
@@ -111,7 +111,7 @@
                         {{record[key]}}
                       </div>
                     </div>
-                    <div *ngIf="record[key].type_method != null">
+                    <div *ngIf="record[key].type_method != null" class="text-center">
                       <div *ngIf="record[key].type_method == 'SHOW'" class="cursor-general  text-success text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
                         <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
