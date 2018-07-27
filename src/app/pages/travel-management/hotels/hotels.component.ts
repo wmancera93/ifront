@@ -17,7 +17,6 @@ export class HotelsComponent implements OnInit {
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
       this.objectImg.push(data)
-      this.prueba = data;
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
       }, 1000);
