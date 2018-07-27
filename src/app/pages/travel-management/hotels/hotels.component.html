@@ -21,19 +21,77 @@
 
 <div class="row-hr-container justify-content-center">
   <div class="col-12  widget bg-white minHeight">
-    <div class="row">
-      <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
-        {{index + 1}} - {{imgsaved.name}}
+    <div class="border-botton-general">
+      <div class="row justify-content-center top-containter">
+        <div class="col-lg-4 col-12">
+          <div class="row" style="margin-top: 10px">
+            <div class="col-12">
+              <button id="btn-travelManagement" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#travelManagement">
+                <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                Nuevo Hotel
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
+    <div class="row justify-content-center top-containter">
       <div class="col-12">
-        <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-4">
-        <button class="btn btn-primary" (click)="guardar(objectImg)">guardar</button>
+        <div class="widget bg-white-1x">
+          <div class="row align-items-center">
+            <div class="col-lg-2 col-md-3 col-12">
+              <h5>
+                <span class="badge badge-warning">
+                  Id # 22
+                </span>
+              </h5>
+              <p>
+                <i class="fa fa-clock-o"></i>
+                Creada el 01/01/2018
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+              <h3 class="font-color-default">
+                Hotel la cascada
+              </h3>
+            </div>
+            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+              <p class="font-title-general">
+                Pais
+              </p>
+              <p class="">
+                <i class="fa fa-user fa-fw text-primary-hr"></i>
+                Colombia
+              </p>
+            </div>
+            <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+              <p class="font-title-general">
+                Estado y/o Ciudad
+              </p>
+              <p class="">
+                <i class="fa fa-user fa-fw text-primary-hr"></i>
+                Cundinamarca / Bogota
+              </p>
+            </div>
+
+            <div class="col-lg-2 col-md-3 col-12 text-center top-p">
+              <div class="row justify-content-center">
+                <div class="col-6 number-size text-success text-center" (click)="viewHotels('')">
+                  <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                </div>
+                <div class="col-6 number-size text-danger" id="hideTrash" *ngIf="true" style="cursor: pointer" (click)="deleteHotels('')">
+                  <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                </div>
+                <div class="col-6">
+                  Ver
+                </div>
+                <div class="col-6">
+                  Eliminar
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
