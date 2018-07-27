@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
+import { TravelsService } from '../../../services/shared/travels/travels.service';
 
 @Component({
   selector: 'app-travel',
@@ -16,7 +17,7 @@ export class TravelComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
 
-  constructor(public router: Router, private tokenService: Angular2TokenService) {
+  constructor(public router: Router, private tokenService: Angular2TokenService, public travelsService: TravelsService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -65,8 +66,6 @@ export class TravelComponent implements OnInit {
         travels_text: "Capacitaciones SAP",
       }]
     });
-
-      console.log(this.My_travels_list[0].data)
   }
 
 
@@ -75,5 +74,9 @@ export class TravelComponent implements OnInit {
 
   returnBackPage() {
     this.router.navigate(['ihr/travel_management']);
+  }
+  cleanFormTravel() {
+
+    this.travelsService.setClearTravels(true);
   }
 }

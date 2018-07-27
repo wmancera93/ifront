@@ -43,15 +43,60 @@
                 <app-data-table [records]="objectReport" id="tableTravels" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
               </div>
             </div>
+
             <div class="row" style="margin-top: 50px">
               <div class="col-12 top-containter">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  <strong>Adjuntar Cotización</strong>
-                </label>
-                <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+                <div class="row">
+                  <div class="col-12">
+                    <label *ngIf="objectImg.length > 0" class="titleColor">
+                      <i class="fa fa-fw fa-check text-primary-hr"></i>
+                      <strong>Archivos adjuntos</strong>
+                    </label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
+                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert" >
+                      <div class="row">
+                        <div class="col-11">
+                          <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
+                            <h6>{{index+1}}.
+                              <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                              {{imgsaved.file.name}}
+                            </h6>
+                          </div>
+                          <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme='dark'>
+                            <h6>{{index+1}}.
+                              <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                              {{imgsaved.file.name}}
+                            </h6>
+                          </div>
+                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general " theme='dark'>
+                            <h6>{{index+1}}.
+                              <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                              {{imgsaved.file.name}}
+                            </h6>
+                          </div>
+                        </div>
+                        <div class="col-1 text-center">
+                          <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <label *ngIf="objectImg.length == 0" class="titleColor">
+                      <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                      <strong>Adjuntar Cotización</strong>
+                    </label>
+                    <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+                  </div>
+                </div>
               </div>
             </div>
+
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <h5 *ngIf="bedit">
@@ -99,8 +144,8 @@
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>País:</a>
                       </label>
-                      <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control"
-                        [formControl]="formTravelManagement.controls['id_country']"  (change)="searchState(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_country']"
+                        (change)="searchState(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
                       </select>
@@ -111,7 +156,7 @@
                         <a>Estado:</a>
                       </label>
                       <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
-                         (change)="searchCity(formTravelManagement.value, 'new')">
+                        (change)="searchCity(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                       </select>
@@ -122,7 +167,7 @@
                         <a>Ciudad:</a>
                       </label>
                       <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
-                         (change)="searchTerminal(formTravelManagement.value, 'new')">
+                        (change)="searchTerminal(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
                       </select>
@@ -144,14 +189,14 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha Inicial de Viaje *</a>
                       </label>
-                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']"/>
+                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"/>
+                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
                     </div>
                   </div>
                 </div>
@@ -173,8 +218,8 @@
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>País:</a>
                       </label>
-                      <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control"
-                        [formControl]="formTravelManagement.controls['id_countryto']"  (change)="searchStateto(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_countryto']"
+                        (change)="searchStateto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCountryto of countriesto" [value]="nameCountryto.id">{{nameCountryto.name}}</option>
                       </select>
@@ -185,7 +230,7 @@
                         <a>Estado:</a>
                       </label>
                       <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']"
-                         (change)="searchCityto(formTravelManagement.value, 'new')">
+                        (change)="searchCityto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameStateto of stateLocationsto" [value]="nameStateto.id">{{nameStateto.name}}</option>
                       </select>
@@ -196,7 +241,7 @@
                         <a>Ciudad:</a>
                       </label>
                       <select [attr.disabled]="cityLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_cityto']"
-                         (change)="searchTerminalto(formTravelManagement.value, 'new');searchHotel(formTravelManagement.value, 'new')">
+                        (change)="searchTerminalto(formTravelManagement.value, 'new');searchHotel(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
                       </select>
@@ -208,8 +253,7 @@
                         <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
                         <a>Terminal de destino:</a>
                       </label>
-                      <select [attr.disabled]="terminalLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminalto']"
-                        >
+                      <select [attr.disabled]="terminalLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminalto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameTerminalto of terminalLocationsto" [value]="nameTerminalto.id">{{nameTerminalto.name}}</option>
                       </select>
@@ -219,15 +263,14 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final de Viaje *</a>
                       </label>
-                      <input  type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"
-                      />
+                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" />                     
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" />
                     </div>
                   </div>
                 </div>
