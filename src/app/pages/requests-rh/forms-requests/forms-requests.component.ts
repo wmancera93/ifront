@@ -231,11 +231,9 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   calculateDay() {
-    /* calculate dates */
-
     let dateBegin = this.formPres.controls.date_begin.value === ' ' ? null : new Date(this.formPres.controls.date_begin.value);
     let dateEnd = this.formPres.controls.date_end.value === ' ' ? null : new Date(this.formPres.controls.date_end.value);
-    console.log(this.formPres.controls.date_begin.value)
+    
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
