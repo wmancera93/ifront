@@ -78,6 +78,7 @@ import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hote
 import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-hotel.component';
 import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
+import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
 
 
 @NgModule({
@@ -156,6 +157,7 @@ import { EditTravelComponent } from './travel-management/travel/edit-travel/edit
     EditHotelComponent,
     ViewHotelComponent,
     EditTravelComponent,
+    ViewTravelComponent,
     
   ],
   providers: [
