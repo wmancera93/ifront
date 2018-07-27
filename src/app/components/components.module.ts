@@ -43,6 +43,7 @@ import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.compone
 import { CalendarModalComponent } from './common/calendar-modal/calendar-modal.component';
 import { DrawCalendarComponent } from './common/draw-calendar/draw-calendar.component';
 import { CalendarDetailComponent } from './common/calendar-detail/calendar-detail.component';
+import { TooltipComponent } from './common/tooltip/tooltip.component';
 
 
 
@@ -89,7 +90,8 @@ import { CalendarDetailComponent } from './common/calendar-detail/calendar-detai
     DynamicFormComponent,
     CalendarModalComponent,
     DrawCalendarComponent,
-    CalendarDetailComponent
+    CalendarDetailComponent,
+    TooltipComponent
   ],
   exports: [
     HeaderComponent,
@@ -115,7 +117,8 @@ import { CalendarDetailComponent } from './common/calendar-detail/calendar-detai
     LoadingComponent,
     GerencialModalComponent,
     ErrorPageHttpComponent,
-    DynamicFormComponent
+    DynamicFormComponent,
+    TooltipComponent
   ],
   providers: [
     // ToasterService
