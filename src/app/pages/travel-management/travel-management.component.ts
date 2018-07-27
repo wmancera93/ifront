@@ -18,42 +18,36 @@ export class TravelManagementComponent implements OnInit {
   ngOnInit() {
     this.buttonInfo = [{
       title: "Asignación de hoteles",
-      image: {
-
-       url: "../assets/themes/images-demo/litera.png"
-      },
+      icon_primary:"fa fa-circle-thin" ,
+      icon_secundary: "fa fa-bed",
       tooltipText: "haga Clic aquí para asignar hoteles",
       route: "/ihr/hotels"
     },
     {
       title: "Viajes",
-      image: {
-        url: "../assets/themes/images-demo/mundo.png"
-      },
+      icon_primary:"fa fa-globe" ,
+      icon_secundary: "fa fa-plane",
       tooltipText: "haga Clic aquí para asignar viajes",
       route: "/ihr/travels"
     },
     {
       title: "Anticipos",
-      image: {
-        url: "../assets/themes/images-demo/dinero.png"
-      },
+      icon_primary:"fa fa-money" ,
+      icon_secundary: "",
       tooltipText: "haga Clic aquí para asignar la programación",
       route: ""
     },
     {
       title: "Gastos",
-      image: {
-        url: "../assets/themes/images-demo/etiqueta-del-precio.png"
-      },
+      icon_primary:"fa fa-circle-thin" ,
+      icon_secundary: "fa fa-usd",
       tooltipText: "haga Clic aquí para asignar la programación",
       route: ""
     },
     {
       title: "Arpobaciones",
-      image: {
-        url: "../assets/themes/images-demo/lista.png"
-      },
+      icon_primary:"fa fa-circle-thin" ,
+      icon_secundary: "fa fa-bed",
       tooltipText: "haga Clic aquí para asignar la programación",
       route: ""
     }
