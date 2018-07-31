@@ -31,7 +31,6 @@ export class MenuNavigationComponent implements OnInit {
   ngOnInit() {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-
     if (!this.stylesExplorerService.validateBrowser()) {
       document.documentElement.style.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
       document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
