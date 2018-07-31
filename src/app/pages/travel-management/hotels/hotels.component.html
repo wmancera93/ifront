@@ -19,8 +19,22 @@
   </div>
 </div>
 
-<div class="row-hr-container justify-content-center" >
+<div class="row-hr-container justify-content-center">
   <div class="col-12  widget bg-white minHeight">
-    
+    <div class="row">
+      <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
+        {{index + 1}} - {{imgsaved.name}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <button class="btn btn-primary" (click)="guardar(objectImg)">guardar</button>
+      </div>
+    </div>
   </div>
 </div>

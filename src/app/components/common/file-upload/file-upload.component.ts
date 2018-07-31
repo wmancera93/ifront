@@ -20,7 +20,7 @@ export class FileUploadComponent implements OnInit {
     .subscribe((clean) => {
       if(clean){
         this.progressBar = '0%';
-      this.textFileUpload = '';
+        this.textFileUpload = '';
       }
     })
 
@@ -57,7 +57,7 @@ export class FileUploadComponent implements OnInit {
     if (this.textFileUpload === '') {
       this.progressBar = '0%';
     }
-
+    
     this.fileUploadService.setObjectFile(e.target.files[0]);
   }
 
