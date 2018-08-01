@@ -4,15 +4,31 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class TravelsService {
 
-  typeTravel: Subject<any> = new Subject<any>();
-  
+   editTravel : Subject<any> = new Subject<any>();
+   newTravel : Subject<any> = new Subject<any>();
+   viewTravel: Subject<any> = new Subject<any>();
+
   constructor() { }
 
-  getClearTravels() {
-    return this.typeTravel;
+  getEditTravels() {
+    return this.editTravel;
   }
 
-  setClearTravels(typeTravel:any ) {
-    return this.typeTravel.next(typeTravel);
+  setEditTravels(editTravel:any ) {
+    return this.editTravel.next(editTravel);
   }
+  getNewTravels() {
+    return this.newTravel;
+  }
+
+  setNewTravels(newTravel:any ) {
+    return this.newTravel.next(newTravel);
+  }
+  getViewTravels() {
+    return this.viewTravel;
+  }
+
+  setViewTravels(viewTravel:any ) {
+    return this.viewTravel.next(viewTravel);
+  } 
 }

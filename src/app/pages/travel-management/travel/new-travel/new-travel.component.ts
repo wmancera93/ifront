@@ -88,16 +88,8 @@ export class NewTravelComponent implements OnInit {
       }, 1000);
     });
 
-    this.travelsService.getClearTravels().subscribe((data) => {
-      if (data) {
-        this.clearFormGeneral();
-        if (this.bnew || this.bedit) {
-          document.getElementById("funtionTravel").click();
-          this.bnew = false;
-          this.bedit = false;
-        } 
-      }
-    })
+   
+
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.formTravelManagement = new FormGroup({});
@@ -269,11 +261,11 @@ export class NewTravelComponent implements OnInit {
           this.bnew = false
           this.bedit = true;
         }
-      }
+      }      
+      
 
       if ((data.action_method === "updateTravels") && (this.bedit === true)) {
 
-        // this.formTravelManagementedit = new FormGroup({});
         this.formTravelManagementedit = {
           id_travel: 2,
           trip_text: 'Evaluaciones de avances',
@@ -298,6 +290,19 @@ export class NewTravelComponent implements OnInit {
 
     });
 
+    this.travelsService.getNewTravels().subscribe((data:any)=>{
+      
+      document.getElementById("btn_travel_new").click();
+      if (data) {
+        this.clearFormGeneral();
+        if (this.bnew || this.bedit) {
+          document.getElementById("funtionTravel").click();
+          this.bnew = false;
+          this.bedit = false;
+        } 
+      }
+
+    })
 
   }
 

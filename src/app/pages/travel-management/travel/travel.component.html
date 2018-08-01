@@ -32,7 +32,7 @@
             <div class="col-lg-4 col-12">
               <div class="row" style="margin-top: 10px">
                 <div class="col-12">
-                  <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" data-toggle="modal" data-target="#travelManagement" (click)="cleanFormTravel()">
+                  <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newFormTravel()">
                     <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                     Nuevo Viaje
                   </button>
@@ -50,8 +50,8 @@
         </div>
 
         <div class="row justify-content-center top-containter">
-          <div class="col-12">
-            <div class="widget bg-white-1x" *ngFor="let travels of My_travels_list[0].data">
+          <div class="col-12" *ngIf="my_travels_list.length > 0">
+            <div class="widget bg-white-1x" *ngFor="let travels of my_travels_list">
               <div class="row align-items-center">
                 <div class="col-lg-2 col-md-3 col-12">
                   <h5>
@@ -66,7 +66,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
                   <h3 class="font-color-default">
-                    {{travels.travels_text}}
+                    {{travels.observation}}
                   </h3>
                 </div>
                 <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
@@ -75,26 +75,26 @@
                   </p>
                   <h6 *ngIf="travels.status == 'Aprobado'">
                     <span class="badge badge-primary">
-                      {{travels.status}}
+                      {{travels.status_request}}
                     </span>
                   </h6>
                   <h6 *ngIf="travels.status == 'Cancelado'">
                     <span class="badge badge-danger">
-                      {{travels.status}}
+                      {{travels.status_request}}
                     </span>
                   </h6>
                   <h6 *ngIf="travels.status == 'En Proceso'">
                     <span class="badge badge-success">
-                      {{travels.status}}
+                      {{travels.status_request}}
                     </span>
                   </h6>
                   <h6 *ngIf="travels.status == 'Pendiente'">
                     <span class="badge badge-default">
-                      {{travels.status}}
+                      {{travels.status_request}}
                     </span>
                   </h6>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee != undefined">
+                <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" >
                   <p class="font-title-general">
                     {{travels.next_approver_to_json.approver_employee.short_name}}
                   </p>
@@ -108,22 +108,22 @@
 
                 <div class="col-lg-2 col-md-3 col-12 text-center top-p">
                   <div class="row justify-content-center">
-                    <div class="col-4 number-size text-success text-center" [attr.title]="travels.action_employee_travel_index_view[0].title"
-                      [attr.disabled]="travels.action_employee_travel_index_view[0].is_active == true ? null : true" (click)="viewTravels(travels)">
+                    <div class="col-4 number-size text-success text-center" [attr.title]="travels.action_travel_requests_index_view[0].title"
+                      [attr.disabled]="travels.action_travel_requests_index_view[0].is_active == true ? null : true" (click)="viewTravels(travels.ticket)">
                       <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                     </div>
-                    <div class="col-4 number-size text-info" id="hideEdit" *ngIf=" travels.action_employee_travel_index_view[1].is_active == true"
+                    <div class="col-4 number-size text-info" id="hideEdit" *ngIf="travels.action_travel_requests_index_view[1].is_active"
                       style="cursor: pointer" (click)="editTravels(travels.ticket)">
                       <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                     </div>
-                    <div class="col-4 number-size" id="hideEdit" *ngIf=" travels.action_employee_travel_index_view[1].is_active == false" style="cursor: pointer">
+                    <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active " style="cursor: pointer">
                       <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                     </div>
-                    <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf=" travels.action_employee_travel_index_view[1].is_active == true"
+                    <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[1].is_active"
                       style="cursor: pointer" (click)="deleteTravels(travels.ticket)">
                       <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                     </div>
-                    <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf=" travels.action_employee_travel_index_view[1].is_active == false"
+                    <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf="!travels.action_travel_requests_index_view[1].is_active"
                       style="cursor: no-drop">
                       <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
                     </div>
@@ -147,3 +147,5 @@
   </div>
 </div>
 <app-new-travel></app-new-travel>
+<app-edit-travel></app-edit-travel>
+<app-view-travel></app-view-travel>
