@@ -9,10 +9,13 @@ import { HotelsService } from '../../../services/travel-management/hotels/hotels
   styleUrls: ['./hotels.component.css']
 })
 export class HotelsComponent implements OnInit {
-
+  public objectHotels: any[] = []
   constructor(public hotelsService: HotelsService) {
     this.hotelsService.getHotelsByCompany().subscribe(data => {
-      console.log(data)
+      if(data.success){
+        this.objectHotels = data.data[0];
+        console.log(this.objectHotels)
+      }      
     });
   }
 
