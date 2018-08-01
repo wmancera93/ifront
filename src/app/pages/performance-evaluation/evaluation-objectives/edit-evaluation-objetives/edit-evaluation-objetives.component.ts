@@ -4,6 +4,7 @@ import { PerformanceEvaluation } from '../../../../models/common/performance-eva
 import { TablesPermisions } from '../../../../models/common/tables/tables';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
 
 
 @Component({
@@ -32,8 +33,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
-    private fb: FormBuilder, private accionDataTableService: DataDableSharedService) {
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+    private fb: FormBuilder, private accionDataTableService: DataDableSharedService,
+    public performanceEvalSharedService: PerformanceEvalSharedService) {
+
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
     this.formObjetive = fb.group({
       start_date: '',
@@ -43,17 +46,16 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-
       if (!this.bedit) {
-        if(!this.bnew){
+        if (!this.bnew) {
           document.getElementById("funtionObjectives").click();
           this.bedit = true;
-        }else{
+        } else {
           this.bnew = false
           this.bedit = true;
-        }        
+        }
       }
-     
+
       if ((data.action_method === "updateEvaluationObjetive") && (this.bedit === true)) {
         this.formObjetive = new FormGroup({});
         this.formObjetive = fb.group({
@@ -62,10 +64,13 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           weight: '20.0 %',
           objetive_text: data.id,
         });
-
-        console.log(this.formObjetive)
       }
     });
+
+    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info:any)=>{
+      console.log(info)
+    })
+
     this.EvaluacionPer.push({
       id: 2,
       code: "01",
@@ -102,6 +107,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       },
     });
 
+    console.log(this.EvaluacionPer);
     this.namecomplete = this.EvaluacionPer[0].qualifier.name + ' ' + this.EvaluacionPer[0].qualifier.lastname;
 
     this.ObjectivesTable.push({
@@ -163,16 +169,16 @@ export class EditEvaluationObjetivesComponent implements OnInit {
               title: "Editar",
               action_method: "updateEvaluationObjetive",
               disable: false
-              },
-              field_6: {
-                type_method: "DELETE",
-                type_element: "button",
-                icon: "fa-trash",
-                id: 1,
-                title: "Eliminar",
-                action_method: "deleteEvaluationObjetive",
-                disable: false
-              }
+            },
+            field_6: {
+              type_method: "DELETE",
+              type_element: "button",
+              icon: "fa-trash",
+              id: 1,
+              title: "Eliminar",
+              action_method: "deleteEvaluationObjetive",
+              disable: false
+            }
           },
           {
             id: 2,
@@ -219,10 +225,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   newObjetive(model) {
     this.showSubmit = false;
   }
-  colapseNew(){
-    if(!this.bnew){
+  colapseNew() {
+    if (!this.bnew) {
       this.bnew = true
-    }else{
+    } else {
       this.bnew = false
     }
     document.getElementById("funtionObjectives").click();

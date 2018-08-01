@@ -31,7 +31,6 @@ export class MenuNavigationComponent implements OnInit {
   ngOnInit() {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-
     if (!this.stylesExplorerService.validateBrowser()) {
       document.documentElement.style.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
       document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
@@ -61,7 +60,6 @@ export class MenuNavigationComponent implements OnInit {
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
       this.dataUser = JSON.parse(localStorage.getItem('user'));
-
     }
   }
 
@@ -131,7 +129,7 @@ export class MenuNavigationComponent implements OnInit {
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
       if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
-        document.getElementById('btnHideMenu').click( );
+        document.getElementById('btnHideMenu').click();
 
       }
     }

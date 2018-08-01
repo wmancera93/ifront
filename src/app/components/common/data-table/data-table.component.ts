@@ -8,6 +8,7 @@ import { Angular2TokenService } from 'angular2-token';
 
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -20,7 +21,8 @@ export interface ColumnSetting {
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.css']
+  styleUrls: ['./data-table.component.css'],
+
 })
 export class DataTableComponent implements OnInit {
   public show = true;
@@ -29,7 +31,7 @@ export class DataTableComponent implements OnInit {
   @Input() title: any;
   @Input() excel?: any = false;
   @Input() pdf?: any = true;
-  @Input() sizeTable?: any=true;
+  @Input() sizeTable?: any = true;
   public keys: any[] = [];
   public labels: any[] = [];
   public p = 1;
@@ -77,7 +79,6 @@ export class DataTableComponent implements OnInit {
   ngOnInit() {
 
     this.records.subscribe((data) => {
-
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
           this.labels = [];
