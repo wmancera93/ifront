@@ -127,7 +127,6 @@ export class ViewTravelComponent implements OnInit {
             field_8: "2018-08-28  10:15:00",
             field_9: "El Delfin Rosado",
             
-            
             }
           ]
       }]

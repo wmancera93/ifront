@@ -293,10 +293,8 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
-                        <i class="fa fa-fw fa-floppy-o"></i>&nbsp;&nbsp;Guardar</button>
-                      <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                        <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
                       <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
@@ -315,6 +313,12 @@
             <button type="submit" *ngIf="send" class="btn btn-success btn-block cursor-general">
               <i class="fa fa-fw fa-fw fa fa-reply"></i>&nbsp;&nbsp;Enviar</button>
             <button type="button" *ngIf="!showSubmit && !send" class="btn btn-warning btn-block">
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+          </div>
+          <div class="col-lg-3 col-md-4 col-12">
+            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
+              <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Guardar</button>
+            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
           </div>
         </div>

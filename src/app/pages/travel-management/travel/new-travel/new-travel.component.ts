@@ -6,6 +6,7 @@ import { HotelsService } from '../../../../services/travel-management/hotels/hot
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
+import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 
 @Component({
   selector: 'app-new-travel',
@@ -28,6 +29,7 @@ export class NewTravelComponent implements OnInit {
   public stateLocationsto: any[] = [];
   public terminalLocations: any[] = [];
   public terminalLocationsto: any[] = [];
+  public traverlsDestination: any[]=[];
   public travelProof: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
   public send: boolean = false;
@@ -59,7 +61,7 @@ export class NewTravelComponent implements OnInit {
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
-    public fileUploadService: FileUploadService, public travelsService: TravelsService) {
+    public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -88,7 +90,7 @@ export class NewTravelComponent implements OnInit {
       }, 1000);
     });
 
-   
+
 
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
@@ -261,8 +263,8 @@ export class NewTravelComponent implements OnInit {
           this.bnew = false
           this.bedit = true;
         }
-      }      
-      
+      }
+
 
       if ((data.action_method === "updateTravels") && (this.bedit === true)) {
 
@@ -290,8 +292,8 @@ export class NewTravelComponent implements OnInit {
 
     });
 
-    this.travelsService.getNewTravels().subscribe((data:any)=>{
-      
+    this.travelsService.getNewTravels().subscribe((data: any) => {
+
       document.getElementById("btn_travel_new").click();
       if (data) {
         this.clearFormGeneral();
@@ -299,7 +301,7 @@ export class NewTravelComponent implements OnInit {
           document.getElementById("funtionTravel").click();
           this.bnew = false;
           this.bedit = false;
-        } 
+        }
       }
 
     })
@@ -326,9 +328,33 @@ export class NewTravelComponent implements OnInit {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
   }
   newTravel(model) {
+    console.log(model)
     this.showSubmit = false;
     this.send = true;
+    
+    const modelFromdata = new FormData();
+    modelFromdata.append('travel_request_type_id', '1');
+    modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
+    modelFromdata.append('files_length', this.objectImg.length.toString())
+    for (let index = 0; index < this.objectImg.length; index++) {
+      modelFromdata.append('files_' + (index + 1).toString(), this.objectImg[index]);
+    }
+    model = modelFromdata;
 
+    this.formDataService.postNewTravel(model)
+      .subscribe(
+        (data: any) => {
+          console.log(data)
+        });
+  }
+  addDestination(modelPartial){
+    this.traverlsDestination = [
+      { transport_id: 1, origin_location_id: 3, origin_terminal_id: 1, hotel_id: 5, destination_location_id: 14, destination_terminal_id: 4, origin_datetime: "2018-07-16 18:13:09", destination_datetime: "2018-07-16 22:12:09" },
+      { transport_id: 1, origin_location_id: 14, origin_terminal_id: 4, hotel_id: 5, destination_location_id: 3, destination_terminal_id: 1, origin_datetime: "2018-07-16 22:13:09", destination_datetime: "2018-07-16 23:13:09" }
+    ];
+    
   }
   editTravels(param: any) {
     this.formTravelManagement = new FormGroup({});
