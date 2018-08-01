@@ -46,6 +46,7 @@ import { DataDableSharedService } from './shared/common/data-table/data-dable-sh
 import { TravelService } from './travel-management/travels/travel.service';
 import { HotelsService } from './travel-management/hotels/hotels.service';
 import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
+import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
 
 @NgModule({
   imports: [
@@ -94,7 +95,8 @@ import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.ser
     DataDableSharedService,
     TravelService,
     HotelsService,
-    TooltipSharedService
+    TooltipSharedService,
+    PerformanceEvalSharedService
     
   ]
 })

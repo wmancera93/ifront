@@ -7,6 +7,10 @@ export class PerformanceEvaluationService {
   constructor(private tokenService: Angular2TokenService) { }
 
   getPerformanceEvaluations() {
+    return this.tokenService.get('perfomance_evaluations/')
+      .map((data: any) => data.json());
+  }
+  getPerformanceEvaluationstable() {
     return this.tokenService.get('perfomance_evaluations/index_table')
       .map((data: any) => data.json());
   }

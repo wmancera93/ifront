@@ -60,7 +60,6 @@ export class MenuNavigationComponent implements OnInit {
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
       this.dataUser = JSON.parse(localStorage.getItem('user'));
-
     }
   }
 
@@ -130,7 +129,7 @@ export class MenuNavigationComponent implements OnInit {
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
       if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
-        document.getElementById('btnHideMenu').click( );
+        document.getElementById('btnHideMenu').click();
 
       }
     }
