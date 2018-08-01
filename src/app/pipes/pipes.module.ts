@@ -15,7 +15,8 @@ import { DecimalPipe } from './decimal/decimal.pipe';
   ],
   exports: [
     SplitPipe,
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    DecimalPipe
   ]
 })
 export class PipesModule { }

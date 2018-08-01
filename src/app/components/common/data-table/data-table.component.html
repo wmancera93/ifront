@@ -95,7 +95,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
-                <td *ngFor="let key of keys" >
+                <td *ngFor="let key of keys">
                   <div *ngIf="record[key] != null">
                     <div *ngIf="record[key].type_method == null">
                       <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
@@ -105,7 +105,7 @@
                         {{record[key]}}
                       </div>
                       <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
-                        {{record[key] | currency}}
+                        {{record[key]}}
                       </div>
                       <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
                         {{record[key]}}

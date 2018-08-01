@@ -109,7 +109,6 @@ export class RequestsRhComponent implements OnInit {
     this.requestsRhService.getAllRequests().subscribe((data: any) => {
       if (data.success) {
         this.requests = data.data[0];
-        console.log(this.requests)
         this.requestStatic = this.requests.my_requests_list;
         this.viewContainer = true;
         this.requests.list_requets_types.forEach((element) => {
