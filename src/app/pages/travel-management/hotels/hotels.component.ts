@@ -23,6 +23,13 @@ export class HotelsComponent implements OnInit {
 
   }
 
+  returnBackPage(){
+
+  }
+
+  viewHotels(test){
+
+  }
 
 
 }

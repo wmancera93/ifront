@@ -58,8 +58,8 @@ export interface Enterprise {
     show_h_positions?:boolean,
     show_evaluation_times?:boolean,
     show_approver_report?:boolean,
-    
-
+    show_performance_evaluacion?:boolean,
+    show_travel_request?: boolean,
     make_request?: boolean,
     make_approvals?: boolean,
     show_evaluations?: boolean,

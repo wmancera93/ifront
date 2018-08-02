@@ -14,6 +14,7 @@ export class TravelManagementComponent implements OnInit {
   public buttonInfo: ButtonImage[] = [];
   public flagShowTooltip: boolean = false;
   public eventPosition: any = [];
+  token
 
   constructor(public tooltipSharedService: TooltipSharedService) { }
 

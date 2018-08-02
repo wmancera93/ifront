@@ -11,6 +11,7 @@ import { TravelsService } from '../../../../services/shared/travels/travels.serv
 export class ViewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
+  nameReport
   public objectReport: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
