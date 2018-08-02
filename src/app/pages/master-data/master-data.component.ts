@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
-import { DataMaster } from '../../models/common/data-master/data-master';
+import { DataMaster, ListDataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { FormBuilder } from '@angular/forms';
@@ -27,7 +27,7 @@ export class MasterDataComponent implements OnInit {
   public showSubmit = true;
   public dataPrueba: any;
   public dataEnterprise: Enterprise = null;
-
+  public listDataMaster: ListDataMaster;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -62,7 +62,7 @@ export class MasterDataComponent implements OnInit {
     });
 
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-    
+
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
       let dataMasterEdit = {
         employee_master_data: object
@@ -95,7 +95,7 @@ export class MasterDataComponent implements OnInit {
       }
     })
 
-
+    this.masterDataList();
     this.showPersonalData();
 
     setTimeout(() => {
@@ -105,8 +105,14 @@ export class MasterDataComponent implements OnInit {
 
   }
 
+  masterDataList() {
+    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
+      this.listDataMaster = list.data;
+    })
+  }
+
   activeEditButton(dataMaster: any) {
-    let countEdit = 0;    
+    let countEdit = 0;
     dataMaster.forEach(element => {
       element.forEach(info => {
         if (info !== undefined) {
@@ -158,16 +164,17 @@ export class MasterDataComponent implements OnInit {
     }, 200);
   }
 
-  showData(idTag: string) {
-    document.getElementsByClassName('active-report')[0].classList.remove('active-report');
-    document.getElementById(idTag).className = 'nav-item navReport tabReport active-report text-left';
+  showData(i: any, idTag: string) {
+    document.getElementById('listData').getElementsByClassName('active-report')[0].classList.remove('active-report');
+    document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
     switch (idTag) {
-      case 'PersonalData':
+      case 'personal_data':
         this.showPersonalData();
         break;
 
-      case 'listContactData':
+      case 'contact_data':
         this.dataMasterService.getDataContact().subscribe((contact: any) => {
+          this.titleData = 'Datos de contacto';
           this.dataMaster = contact.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
@@ -181,7 +188,7 @@ export class MasterDataComponent implements OnInit {
 
 
         break;
-      case 'listFamilyData':
+      case 'family_data':
         this.dataMaster = [];
         this.titleData = 'Datos familiares';
         this.dataMasterService.getDataFamily().subscribe((family: any) => {
@@ -196,7 +203,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = this.dataMaster.length;
         })
         break;
-      case 'listAcademicData':
+      case 'study_data':
         this.dataMaster = [];
         this.titleData = 'Datos académicos';
         this.dataMasterService.getDataStudies().subscribe((studies: any) => {
@@ -211,7 +218,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = studies.data.length;
         })
         break;
-      case 'listEnterpriseData':
+      case 'business_data':
         this.dataMaster = [];
         this.titleData = 'Datos empresariales';
         this.dataMasterService.getDataBussiness().subscribe((enterprise: any) => {
@@ -226,7 +233,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = enterprise.data.length;
         })
         break;
-      case 'listBankData':
+      case 'banking_data':
         this.dataMaster = [];
         this.titleData = 'Datos bancarios';
         this.dataMasterService.getDataBanking().subscribe((bank: any) => {
@@ -241,7 +248,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = bank.data.length;
         })
         break;
-      case 'listBeneficData':
+      case 'beneficiary_data':
         this.dataMaster = [];
         this.titleData = 'Datos de los beneficiaros';
         this.dataMasterService.getDataBeneficiaries().subscribe((beneficiaries: any) => {
@@ -256,7 +263,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = beneficiaries.data.length;
         })
         break;
-      case 'listSoSecurityData':
+      case 'social_security_data':
         this.dataMaster = [];
         this.titleData = 'Seguridad social';
         this.dataMasterService.getDataSocialSecurity().subscribe((social: any) => {
@@ -270,7 +277,7 @@ export class MasterDataComponent implements OnInit {
           this.lengthArray = social.data.length;
         })
         break;
-      case 'listReteFuentData':
+      case 'retefuente_data':
         this.dataMaster = [];
         this.titleData = 'Retención en la fuente';
         this.dataMasterService.getDataReteFuente().subscribe((retefuente: any) => {
