@@ -47,7 +47,7 @@ export class TravelComponent implements OnInit {
       console.log(this.my_travels_list)
     })
 
-    this.travelService.getTravelRequestsByid('2').subscribe((data:any) => {
+    this.travelService.getTravelRequestsByid('1').subscribe((data:any) => {
       console.log(data)
     })
   }
