@@ -10,10 +10,14 @@ export interface PerformanceEvaluation {
     updated_date: string;
     start_evaluation_date: string;
     end_evaluation_date:string;
+    start_planning_date:string,
+    end_planning_date:string,
     start_excecution_date:string;
     end_excecution_date: string;
-    target_dat:string;
+    target_date:string;
     qualifier?: Qualifier;
+    period_evaluation: string,
+    period_planning: string,
 }
 export interface Qualifier{
     id: number;

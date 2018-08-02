@@ -67,48 +67,47 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       }
     });
 
-    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info:any)=>{
+    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
       console.log(info)
+      this.EvaluacionPer = info;
     })
 
-    this.EvaluacionPer.push({
-      id: 2,
-      code: "01",
-      name: "Evaluacion de desempeño",
-      status_name: "Planificado",
-      status_code: "2",
-      created_date: "04-07-2018 16:28:11",
-      updated_date: "04-07-2018 16:28:11",
-      start_evaluation_date: "01-01-2018",
-      end_evaluation_date: "01-12-2018",
-      start_excecution_date: "01-01-2018",
-      end_excecution_date: "28-02-2018",
-      target_dat: "01-02-2018",
-      qualifier: {
-        id: 5703,
-        name: "Laura",
-        lastname: "Beltran Silvina",
-        phone: "",
-        pernr: 2717,
-        image: {
-          url: "../../../../../assets/themes/patterns/icon-user-negative.png"
-        },
-        unidad_org: "DIRECCION MARKETING Y COMUNICACIONES",
-        area: "Gerencial",
-        division_per: "Demo Interactive",
-        subdivision_per: "Administrativos",
-        name_complete: "Laura  Beltran Silvina",
-        personal_phone: "3232143",
-        short_name: "Laura Beltran silvina",
-        personal_code: 2717,
-        position: "DIRECTOR DE MARKETING Y COMUNICACIONES",
-        get_user_of_email: "@juan.contreras",
-        get_domain_of_email: "@hrinteractive.co"
-      },
-    });
-
-    console.log(this.EvaluacionPer);
-    this.namecomplete = this.EvaluacionPer[0].qualifier.name + ' ' + this.EvaluacionPer[0].qualifier.lastname;
+    // this.EvaluacionPer.push({
+    //   id: 2,
+    //   code: "01",
+    //   name: "Evaluacion de desempeño",
+    //   status_name: "Planificado",
+    //   status_code: "2",
+    //   created_date: "04-07-2018 16:28:11",
+    //   updated_date: "04-07-2018 16:28:11",
+    //   start_evaluation_date: "01-01-2018",
+    //   end_evaluation_date: "01-12-2018",
+    //   start_excecution_date: "01-01-2018",
+    //   end_excecution_date: "28-02-2018",
+    //   target_dat: "01-02-2018",
+    //   qualifier: {
+    //     id: 5703,
+    //     name: "Laura",
+    //     lastname: "Beltran Silvina",
+    //     phone: "",
+    //     pernr: 2717,
+    //     image: {
+    //       url: "../../../../../assets/themes/patterns/icon-user-negative.png"
+    //     },
+    //     unidad_org: "DIRECCION MARKETING Y COMUNICACIONES",
+    //     area: "Gerencial",
+    //     division_per: "Demo Interactive",
+    //     subdivision_per: "Administrativos",
+    //     name_complete: "Laura  Beltran Silvina",
+    //     personal_phone: "3232143",
+    //     short_name: "Laura Beltran silvina",
+    //     personal_code: 2717,
+    //     position: "DIRECTOR DE MARKETING Y COMUNICACIONES",
+    //     get_user_of_email: "@juan.contreras",
+    //     get_domain_of_email: "@hrinteractive.co"
+    //   },
+    // });
+    // this.namecomplete = this.EvaluacionPer[0].qualifier.name + ' ' + this.EvaluacionPer[0].qualifier.lastname;
 
     this.ObjectivesTable.push({
       success: true,
