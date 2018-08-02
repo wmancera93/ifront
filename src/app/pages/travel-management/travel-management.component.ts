@@ -57,19 +57,19 @@ export class TravelManagementComponent implements OnInit {
   }
 
   showTooltip(event: any, data: any) {
-
-    // this.flagShowTooltip = true;
+    this.flagShowTooltip = true;
     this.eventPosition = {
       positionX: event.clientX,
       positionY: event.clientY
     }
-
-    this.tooltipSharedService.setDataTooltip({ text: data.tooltipText, show: this.flagShowTooltip, position: this.eventPosition });
-
+    setTimeout(() => {
+      this.tooltipSharedService.setDataTooltip({ text: data, show: this.flagShowTooltip, position: this.eventPosition });
+    }, 100);
+    
   }
 
   closeTooltip() {
-    // this.flagShowTooltip = false;
+    this.flagShowTooltip = false;
     this.tooltipSharedService.setDataTooltip({ text: "", show: this.flagShowTooltip, position: "" });
   }
 }
