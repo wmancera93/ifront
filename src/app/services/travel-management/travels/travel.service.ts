@@ -18,4 +18,12 @@ export class TravelService {
     return this.tokenService.get('geographic_locations/show_transport_terminals/'+ id_city)
       .map((data: any) => data.json());
   }
+  getTravelRequests() {
+    return this.tokenService.get('travel_requests')
+      .map((data: any) => data.json());
+  }
+  getTravelRequestsByid(idTravel:string) {
+    return this.tokenService.get('travel_requests/'+ idTravel)
+      .map((data: any) => data.json());
+  }
 }
