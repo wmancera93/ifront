@@ -18,32 +18,40 @@
       <div class="row">
         <div class="col-12 col-xl-3">
           <div id="listData" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
-            <div id="PersonalData" class="nav-item navReport active-report tabReport text-left" (click)="showData('PersonalData')">
-              <i class="fa fa-id-badge"></i> Datos personales
-            </div>
-            <div id="listContactData" class="nav-item navReport tabReport text-left" (click)="showData('listContactData')">
-              <i class="fa fa-phone"></i> Datos de contacto
-            </div>
-            <div id="listFamilyData" class="nav-item navReport tabReport text-left" (click)="showData('listFamilyData')">
-              <i class="fa fa-users"></i> Datos familiares
-            </div>
-            <div id="listAcademicData" class="nav-item navReport tabReport text-left" (click)="showData('listAcademicData')">
-              <i class="fa fa-graduation-cap"></i> Datos académicos
-            </div>
-            <div id="listEnterpriseData" class="nav-item navReport tabReport text-left" (click)="showData('listEnterpriseData')">
-              <i class="fa fa-industry"></i> Datos empresariales
-            </div>
-            <div id="listBankData" class="nav-item navReport tabReport text-left" (click)="showData('listBankData')">
-              <i class="fa fa-money"></i> Datos bancarios
-            </div>
-            <div id="listBeneficData" class="nav-item navReport tabReport text-left" (click)="showData('listBeneficData')">
-              <i class="fa fa-file-text-o"></i> Datos de los beneficiarios
-            </div>
-            <div id="listSoSecurityData" class="nav-item navReport tabReport text-left" (click)="showData('listSoSecurityData')">
-              <i class="fa fa-shield"></i> Seguridad social
-            </div>
-            <div id="listReteFuentData" class="nav-item navReport tabReport text-left" (click)="showData('listReteFuentData')">
-              <i class="fa fa-line-chart"></i> Retención en la fuente
+            <div id="{{i}}PersonalData" [ngClass]="{'active-report': i=='0'}" class="nav-item navReport tabReport text-left" *ngFor="let item of listDataMaster; let i = index;"
+              (click)="showData(i,item.method_name)">
+              <div *ngIf="item.code==1">
+                <i class="fa  fa-id-badge"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==2">
+                <i class="fa fa-phone"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==3">
+                <i class="fa fa-users"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==4">
+                <i class="fa fa-file-text-o"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==5">
+                <i class="fa fa-graduation-cap"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==6">
+                <i class="fa fa-industry"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==7">
+                <i class="fa fa-money"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==8">
+                <i class="fa fa-shield"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==9">
+                <i class="fa fa-money"></i> {{item.description}}
+              </div>
+              <div *ngIf="item.code==10">
+                <i class="fa fa-money"></i> {{item.description}}
+              </div>
+
+              <!-- <i [ngClass]="{'fa fa-id-badge': i=='0','fa fa-phone': i=='1','fa fa-users': i=='2'}"></i> {{item.description}} -->
             </div>
           </div>
         </div>

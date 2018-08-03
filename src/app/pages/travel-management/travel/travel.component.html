@@ -24,118 +24,116 @@
     </div>
   </div>
 
-  
-    <div class="row-hr-container justify-content-center">
-      <div class="col-12  widget bg-white minHeight">
-        <div class="border-botton-general">
-          <div class="row justify-content-center top-containter">
-            <div class="col-lg-4 col-12">
-              <div class="row" style="margin-top: 10px">
-                <div class="col-12">
-                  <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newFormTravel()">
-                    <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                    Nuevo Viaje
-                  </button>
-                </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row justify-content-center top-containter">
+          <div class="col-lg-4 col-12">
+            <div class="row" style="margin-top: 10px">
+              <div class="col-12">
+                <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newFormTravel()">
+                  <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                  Nuevo Viaje
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div class="row top-containter" style="margin-top: 20px">
-          <div class="col-xl-2 col-lg-4 col-12 text-left">
-            <b>
-              Viajes registrados
-            </b>
-          </div>
+      </div>
+      <div class="row top-containter" style="margin-top: 20px">
+        <div class="col-xl-2 col-lg-4 col-12 text-left">
+          <b>
+            Viajes registrados
+          </b>
         </div>
+      </div>
 
-        <div class="row justify-content-center top-containter">
-          <div class="col-12" *ngIf="my_travels_list.length > 0">
-            <div class="widget bg-white-1x" *ngFor="let travels of my_travels_list">
-              <div class="row align-items-center">
-                <div class="col-lg-2 col-md-3 col-12">
-                  <h5>
-                    <span class="badge badge-warning">
-                      Ticket # {{travels.ticket}}
-                    </span>
-                  </h5>
-                  <p>
-                    <i class="fa fa-clock-o"></i>
-                    Creada el {{travels.created_date}}
-                  </p>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
-                  <h3 class="font-color-default">
-                    {{travels.observation}}
-                  </h3>
-                </div>
-                <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
-                  <p class="font-title-general">
-                    Estado:
-                  </p>
-                  <h6 *ngIf="travels.status == 'Aprobado'">
-                    <span class="badge badge-primary">
-                      {{travels.status_request}}
-                    </span>
-                  </h6>
-                  <h6 *ngIf="travels.status == 'Cancelado'">
-                    <span class="badge badge-danger">
-                      {{travels.status_request}}
-                    </span>
-                  </h6>
-                  <h6 *ngIf="travels.status == 'En Proceso'">
-                    <span class="badge badge-success">
-                      {{travels.status_request}}
-                    </span>
-                  </h6>
-                  <h6 *ngIf="travels.status == 'Pendiente'">
-                    <span class="badge badge-default">
-                      {{travels.status_request}}
-                    </span>
-                  </h6>
-                </div>
-                <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" >
-                  <p class="font-title-general">
-                    {{travels.next_approver_to_json.approver_employee.short_name}}
-                  </p>
-                  <p class="">
-                    {{travels.next_approver_to_json.approver_employee.posicion}}
-                  </p>
-                  <p class="">
-                    Aprobador {{travels.next_approver_to_json.level}}
-                  </p>
-                </div>
+      <div class="row justify-content-center top-containter">
+        <div class="col-12" *ngIf="my_travels_list.length > 0">
+          <div class="widget bg-white-1x" *ngFor="let travels of my_travels_list">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Ticket # {{travels.ticket}}
+                  </span>
+                </h5>
+                <p>
+                  <i class="fa fa-clock-o"></i>
+                  Creada el {{travels.created_date}}
+                </p>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+                <h3 class="font-color-default">
+                  {{travels.observation}}
+                </h3>
+              </div>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                <p class="font-title-general">
+                  Estado:
+                </p>
+                <h6 *ngIf="travels.status_request == 'Aprobado'">
+                  <span class="badge badge-primary">
+                    {{travels.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="travels.status_request == 'Cancelado'">
+                  <span class="badge badge-danger">
+                    {{travels.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="travels.status_request == 'En Proceso'">
+                  <span class="badge badge-success">
+                    {{travels.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="travels.status_request == 'Pendiente'">
+                  <span class="badge badge-default">
+                    {{travels.status_request}}
+                  </span>
+                </h6>
+              </div>
+              <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  {{travels.next_approver_to_json.approver_employee.short_name}}
+                </p>
+                <p class="">
+                  {{travels.next_approver_to_json.approver_employee.posicion}}
+                </p>
+                <p class="">
+                  Aprobador {{travels.next_approver_to_json.level}}
+                </p>
+              </div>
 
-                <div class="col-lg-2 col-md-3 col-12 text-center top-p">
-                  <div class="row justify-content-center">
-                    <div class="col-4 number-size text-success text-center" [attr.title]="travels.action_travel_requests_index_view[0].title"
-                      [attr.disabled]="travels.action_travel_requests_index_view[0].is_active == true ? null : true" (click)="viewTravels(travels.ticket)">
-                      <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
-                    </div>
-                    <div class="col-4 number-size text-info" id="hideEdit" *ngIf="travels.action_travel_requests_index_view[1].is_active"
-                      style="cursor: pointer" (click)="editTravels(travels.ticket)">
-                      <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
-                    </div>
-                    <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active " style="cursor: pointer">
-                      <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
-                    </div>
-                    <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[1].is_active"
-                      style="cursor: pointer" (click)="deleteTravels(travels.ticket)">
-                      <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
-                    </div>
-                    <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf="!travels.action_travel_requests_index_view[1].is_active"
-                      style="cursor: no-drop">
-                      <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
-                    </div>
-                    <div class="col-4">
-                      Ver
-                    </div>
-                    <div class="col-4">
-                      Editar
-                    </div>
-                    <div class="col-4">
-                      Eliminar
-                    </div>
+              <div class="col-lg-2 col-md-3 col-12 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-4 number-size text-success text-center" [attr.title]="travels.action_travel_requests_index_view[0].title"
+                    [attr.disabled]="travels.action_travel_requests_index_view[0].is_active == true ? null : true" (click)="viewTravels(travels.ticket)">
+                    <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-4 number-size text-info" id="hideEdit" *ngIf="travels.action_travel_requests_index_view[1].is_active" style="cursor: pointer"
+                    (click)="editTravels(travels.ticket)">
+                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active " style="cursor: pointer">
+                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[1].is_active"
+                    style="cursor: pointer" (click)="deleteTravels(travels.ticket)">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf="!travels.action_travel_requests_index_view[1].is_active"
+                    style="cursor: no-drop">
+                    <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-4">
+                    Ver
+                  </div>
+                  <div class="col-4">
+                    Editar
+                  </div>
+                  <div class="col-4">
+                    Eliminar
                   </div>
                 </div>
               </div>

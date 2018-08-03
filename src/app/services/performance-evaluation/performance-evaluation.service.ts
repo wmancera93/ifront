@@ -15,16 +15,28 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
 
-    getEvaluationPerformanById(IdEvaluation:string) {
-      return this.tokenService.get('perfomance_evaluations/'+ IdEvaluation)
-        .map((data: any) => data.json());
-    }
-    getEvaluationObjetive() {
-      return this.tokenService.get('evaluation_objetive')
-        .map((data: any) => data.json());
-    }
-    postEvaluationObjetive() {
-      return this.tokenService.get('evaluation_objetive')
-        .map((data: any) => data.json());
-    }
+  getEvaluationPerformanById(IdEvaluation: string) {
+    return this.tokenService.get('perfomance_evaluations/' + IdEvaluation)
+      .map((data: any) => data.json());
+  }
+  getEvaluationObjetive() {
+    return this.tokenService.get('evaluation_objetive')
+      .map((data: any) => data.json());
+  }
+  getEvaluationObjetiveByID(IdObjective) {
+    return this.tokenService.get('erfomance_evaluations/detail/' + IdObjective)
+      .map((data: any) => data.json());
+  }
+  postEvaluationObjetive(data) {
+    return this.tokenService.post('evaluation_objetive', data)
+      .map((data: any) => data.json());
+  }
+  putEvaluationObjetive(IdObjective, data) {
+    return this.tokenService.put('evaluation_objetive/' + IdObjective, data)
+      .map((data: any) => data.json());
+  }
+  deleteEvaluationObjetive(IdObjective) {
+    return this.tokenService.delete('evaluation_objetive/' + IdObjective)
+      .map((data: any) => data.json());
+  }
 }

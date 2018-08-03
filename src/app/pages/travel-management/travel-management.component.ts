@@ -14,10 +14,17 @@ export class TravelManagementComponent implements OnInit {
   public buttonInfo: ButtonImage[] = [];
   public flagShowTooltip: boolean = false;
   public eventPosition: any = [];
+  token
 
   constructor(public tooltipSharedService: TooltipSharedService) { }
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
+
     this.buttonInfo = [{
       title: "Asignación de hoteles",
       icon_primary: "fa fa-circle-thin",

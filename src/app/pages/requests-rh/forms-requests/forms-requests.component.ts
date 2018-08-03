@@ -172,8 +172,8 @@ export class FormsRequestsComponent implements OnInit {
             const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
-            this.formsRequestsService.setRestartObject(true);
-
+            this.formsRequestsService.setRestartObject(true); 
+            
             // setTimeout(() => {
             //   document.getElementById("loginId").style.display = 'none'
             //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
