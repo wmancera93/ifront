@@ -4,6 +4,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { TravelsService } from '../../../services/shared/travels/travels.service';
 import { TravelService } from '../../../services/travel-management/travels/travel.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Alert } from '../../../../../node_modules/@types/selenium-webdriver';
 
 @Component({
   selector: 'app-travel',
@@ -80,5 +81,15 @@ export class TravelComponent implements OnInit {
 
   editTravels(id_travel: number) {
     this.travelsService.setEditTravels(id_travel);
+  }
+
+  deleteTravels(id: string) {
+    this.travelService.deleteTravelById(id).subscribe(
+      (data: any) => {
+        alert('eliminado ok');
+      },
+      (error: any) => {
+        alert('eliminado no');
+      });
   }
 }
