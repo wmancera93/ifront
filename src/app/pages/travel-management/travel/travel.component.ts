@@ -18,9 +18,10 @@ export class TravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-
-  constructor(public router: Router, private tokenService: Angular2TokenService,
-    public travelsService: TravelsService, public travelService: TravelService) {
+  constructor(public router: Router,
+    private tokenService: Angular2TokenService,
+    public travelsService: TravelsService,
+    public travelService: TravelService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -36,34 +37,48 @@ export class TravelComponent implements OnInit {
           this.token = true;
         });
 
-    }
+    this.travelsService.getResultSaved().subscribe((data: any) => {
+      if (data) {
+        this.travelService.getTravelRequests().subscribe((data: any) => {
+          this.my_travels_list = [];
+          this.my_travels_list = data.data[0].my_travel_requests_list;
+        });
+      }
+
+    });
+  }
 
 
   ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
-      console.log(data)
       this.my_travels_list = data.data[0].my_travel_requests_list;
-      console.log(this.my_travels_list)
-    })
+    });
 
-    this.travelService.getTravelRequestsByid('1').subscribe((data:any) => {
+    this.travelService.getTravelRequestsByid('13').subscribe((data: any) => {
       console.log(data)
-    })
+    });
+    document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
   }
 
   returnBackPage() {
     this.router.navigate(['ihr/travel_management']);
   }
+
   newFormTravel() {
     this.travelsService.setNewTravels(true)
   }
-  viewTravels(id_travel: number) {
 
+  viewTravels(id_travel: number) {
     this.travelsService.setViewTravels(id_travel);
   }
-  editTravels(id_travel: number) {
 
+  editTravels(id_travel: number) {
     this.travelsService.setEditTravels(id_travel);
   }
 }

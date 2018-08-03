@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Solicitud de pasajes y hotel</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -34,18 +34,17 @@
             <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control"
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
-
-          <div class="row border" style="margin-left: 15px">
-            <h4>Viajes</h4>
-          </div>
-
           <div class="col-12">
+            <div class="row border" style="margin-left: 15px">
+              <h4>Viajes</h4>
+            </div>
             <div class="row" style="margin-top: 15px">
-              <div class="col-12 top-general-p" style="height: 300px">
-                <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport" ></app-data-table>
+              <div class="col-12 top-general-p" >
+                <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
               </div>
             </div>
-
+          </div>
+          <div class="col-12">
             <div class="row" style="margin-top: 50px">
               <div class="col-12 top-containter">
                 <div class="row">
@@ -58,7 +57,7 @@
                 </div>
                 <div class="row">
                   <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
-                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert" >
+                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                       <div class="row">
                         <div class="col-11">
                           <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
@@ -73,7 +72,8 @@
                               {{imgsaved.file.name}}
                             </h6>
                           </div>
-                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general " theme='dark'>
+                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                            theme='dark'>
                             <h6>{{index+1}}.
                               <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                               {{imgsaved.file.name}}
@@ -293,7 +293,8 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
+                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
+                        data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
@@ -310,14 +311,8 @@
 
         <div class="row justify-content-end" style="margin-top: 30px">
           <div class="col-lg-3 col-md-4 col-12">
-            <button type="submit" *ngIf="send" class="btn btn-success btn-block cursor-general">
-              <i class="fa fa-fw fa-fw fa fa-reply"></i>&nbsp;&nbsp;Enviar</button>
-            <button type="button" *ngIf="!showSubmit && !send" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
-          </div>
-          <div class="col-lg-3 col-md-4 col-12">
-            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
-              <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Guardar</button>
+            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newTravel(formTravelManagement.value)">
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
           </div>

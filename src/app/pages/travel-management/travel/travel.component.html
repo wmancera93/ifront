@@ -72,22 +72,22 @@
                 <p class="font-title-general">
                   Estado:
                 </p>
-                <h6 *ngIf="travels.status == 'Aprobado'">
+                <h6 *ngIf="travels.status_request == 'Aprobado'">
                   <span class="badge badge-primary">
                     {{travels.status_request}}
                   </span>
                 </h6>
-                <h6 *ngIf="travels.status == 'Cancelado'">
+                <h6 *ngIf="travels.status_request == 'Cancelado'">
                   <span class="badge badge-danger">
                     {{travels.status_request}}
                   </span>
                 </h6>
-                <h6 *ngIf="travels.status == 'En Proceso'">
+                <h6 *ngIf="travels.status_request == 'En Proceso'">
                   <span class="badge badge-success">
                     {{travels.status_request}}
                   </span>
                 </h6>
-                <h6 *ngIf="travels.status == 'Pendiente'">
+                <h6 *ngIf="travels.status_request == 'Pendiente'">
                   <span class="badge badge-default">
                     {{travels.status_request}}
                   </span>
