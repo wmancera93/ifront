@@ -1,3 +1,4 @@
+
 <div *ngIf="token">
   <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
@@ -142,8 +143,8 @@
         </div>
       </div>
     </div>
-  
+  </div>
 </div>
-<app-new-travel></app-new-travel>
-<app-edit-travel></app-edit-travel>
-<app-view-travel></app-view-travel>
+<app-new-travel *ngIf="!token"></app-new-travel>
+<app-edit-travel *ngIf="!token"></app-edit-travel>
+<app-view-travel *ngIf="!token"></app-view-travel>
