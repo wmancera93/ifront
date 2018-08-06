@@ -7,6 +7,7 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { start } from 'repl';
 
 
 @Component({
@@ -50,18 +51,20 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+
       if (data.action_method === "updateEvaluationObjetive") {
         document.getElementById("funtionObjectives").click();
         this.bedit = true;
         this.formObjetive = new FormGroup({});
-        // this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID:any)=>{
-        //   console.log(dataID)
-        // })
-        this.formObjetive = fb.group({
-          start_date: '2018-02-28',
-          end_date: '2018-02-28',
-          weight: '20.0 %',
-          objetive_text: data.id,
+        this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
+          let startDate = dataID.data.start_date_obj.split("-");
+          console.log(startDate.reverse().join("-").toString())
+          this.formObjetive = fb.group({
+            start_date: startDate.reverse().join("-").toString(),
+            end_date: dataID.data.end_date_obj,
+            weight: (dataID.data.weight_value * 100),
+            objetive_text: dataID.data.objetive_text
+          });
         });
       }
       if (data.action_method === "deleteEvaluationObjetive") {

@@ -343,7 +343,7 @@ export class EditTravelComponent implements OnInit {
 
   }
   editTravels(param: any) {
-
+debugger
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
       id_travel: param.id_travel,
