@@ -31,7 +31,7 @@ export class EvaluationObjectivesComponent implements OnInit {
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
   showModalObjetivesEva() {
-    document.getElementById('btn-evaluationObjetives').click();
+    document.getElementById('btn-evaluationObjetives').click();     
   }
 
 }

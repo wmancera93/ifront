@@ -93,7 +93,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
       this.EvaluacionPer = info;
       this.qualifierData = info.qualifier;
-      this.idEvaluation = this.EvaluacionPer.id;
+      this.idEvaluation = this.EvaluacionPer.id;      
+      document.getElementById('bodyGeneral').removeAttribute('style');   
     })
 
     this.dataTableConsult();

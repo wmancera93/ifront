@@ -56,7 +56,7 @@
                         <div class="col-11">
                           <h6>{{imgsaved.name}}</h6>
                           <a href="#" class="badge badge-light wg-hover-general">Ver</a>
-                          <a [attr.href]="imgsaved.file.url" class="badge badge-light wg-hover-general">Descargar</a>
+                          <p  class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
                         </div>
                         <div class="col-1 text-center">
                           <h6 class="text-primary-hr cursor-general">x</h6>

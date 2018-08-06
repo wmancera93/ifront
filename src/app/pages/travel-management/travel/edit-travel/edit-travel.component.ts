@@ -19,8 +19,8 @@ export class EditTravelComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
-  public showPdf:boolean = false;
-  public showSizeTable: boolean= false;
+  public showPdf: boolean = false;
+  public showSizeTable: boolean = false;
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];
@@ -66,19 +66,7 @@ export class EditTravelComponent implements OnInit {
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService) {
 
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
-          this.token = true;
-        });
+
     this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
@@ -91,7 +79,6 @@ export class EditTravelComponent implements OnInit {
         }, 200);
       }, 1000);
     });
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
@@ -311,8 +298,8 @@ export class EditTravelComponent implements OnInit {
         id_hotels: '',
       });
 
-      document.getElementById("btn_travel_edit").click();
-
+      document.getElementById("btn_travel_edit").click();  
+      document.getElementById('bodyGeneral').removeAttribute('style');   
     })
 
 

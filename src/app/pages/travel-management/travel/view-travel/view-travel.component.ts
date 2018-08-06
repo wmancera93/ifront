@@ -32,23 +32,11 @@ export class ViewTravelComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public travelsService: TravelsService, ) {
 
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-          this.token = true;
-        })
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
       document.getElementById("btn_travel_view").click();
+      document.getElementById('bodyGeneral').removeAttribute('style');
       this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
         console.log(result)
         this.observations = result.data[0].travel_request.observation;
@@ -57,7 +45,8 @@ export class ViewTravelComponent implements OnInit {
         this.annexeds.forEach(element => {
           this.nombre = element.name;
           this.todonombres.push({file: element.file, nameDoc: this.nombre});
-        });
+          });
+          console.log(this.todonombres[0].file.url)
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });
     });
@@ -65,5 +54,21 @@ export class ViewTravelComponent implements OnInit {
 
   ngOnInit() {
   }
+  viewCotization(){
 
+  }
+  downloadCotization(param:any){
+    var url = window.URL.createObjectURL(param.file.url);
+    var a = document.createElement('a');
+    document.body.appendChild(a);
+    a.setAttribute('style', 'display: none');
+    a.href = url;
+    a.download = 'test';
+    a.click();
+    window.URL.revokeObjectURL(url);
+    a.remove(); 
+    
+    
+
+  }
 }
