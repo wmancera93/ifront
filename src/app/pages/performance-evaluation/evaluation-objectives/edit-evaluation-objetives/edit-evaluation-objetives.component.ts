@@ -50,18 +50,9 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      console.log(data)
-      if (!this.bedit) {
-        if (!this.bnew) {
-          document.getElementById("funtionObjectives").click();
-          this.bedit = true;
-        } else {
-          this.bnew = false
-          this.bedit = true;
-        }
-      }
-
-      if ((data.action_method === "updateEvaluationObjetive") && (this.bedit === true)) {
+      if (data.action_method === "updateEvaluationObjetive") {
+        document.getElementById("funtionObjectives").click();
+        this.bedit = true;
         this.formObjetive = new FormGroup({});
         // this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID:any)=>{
         //   console.log(dataID)
@@ -84,8 +75,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           }];
           this.dataTableConsult();
           this.alert.setAlert(alertWarning[0]);
-          this.bedit = true;
-          this.bnew = true;
         })
       }
     });
@@ -156,6 +145,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     }
     document.getElementById("funtionObjectives").click();
   }
+
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
