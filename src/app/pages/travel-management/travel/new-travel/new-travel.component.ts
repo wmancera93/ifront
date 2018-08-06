@@ -69,21 +69,7 @@ export class NewTravelComponent implements OnInit {
       }
     })
 
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-          this.token = true;
-        })
-
-    this.fileUploadService.getObjetFile().subscribe((data) => {
+   this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
         setTimeout(() => {
@@ -96,9 +82,6 @@ export class NewTravelComponent implements OnInit {
         }, 200);
       }, 1000);
     });
-
-
-    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
@@ -137,7 +120,7 @@ export class NewTravelComponent implements OnInit {
           this.bedit = false;
         }
       }
-      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+      document.getElementById('bodyGeneral').removeAttribute('style');
     })
 
   }

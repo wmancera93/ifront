@@ -32,23 +32,11 @@ export class ViewTravelComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public travelsService: TravelsService, ) {
 
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-          this.token = true;
-        })
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
       document.getElementById("btn_travel_view").click();
+      document.getElementById('bodyGeneral').removeAttribute('style');
       this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
 
         this.observations = result.data[0].travel_request.observation;
@@ -56,8 +44,8 @@ export class ViewTravelComponent implements OnInit {
         this.annexeds = result.data[0].travel_request_annexeds;
         this.annexeds.forEach(element => {
           this.nombre = element.name;
-          this.todonombres.push({file: element.file, nameDoc: this.nombre});
-        
+          this.todonombres.push({ file: element.file, nameDoc: this.nombre });
+
         });
         console.log(this.annexeds)
 
