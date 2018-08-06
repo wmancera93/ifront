@@ -19,7 +19,7 @@
                 <strong>Tipo de viaje:</strong>
               </label>
             </div>
-            <div class="col-lg-4 col-md-6 col-12" *ngFor="let travelsView of travelProof ">
+            <div class="col-lg-4 col-md-6 col-12" *ngFor="let travelsView of result ">
               <label id="typeTravel">mkmn</label>
             </div>
           </div>
@@ -30,11 +30,11 @@
             <strong>Motivo del Viaje *</strong>
           </label>
         </div>
-        <div class="col-12" *ngFor="let travelsView of travelProof" style="margin-left: 20px">
-          <label id="typeTravel">jkfkj</label>
+        <div class="col-12" style="margin-left: 20px; font-size:1.2em">
+          <label id="typeTravel">{{observations}}</label>
         </div>
 
-        <div class="row border" style="margin-left: 15px">
+        <div class="row border justify-content-center titleColor">
           <h4>Viajes</h4>
         </div>
 
@@ -44,59 +44,12 @@
               <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
             </div>
           </div>
-          <!-- 
-            <div class="row" style="margin-top: 50px">
-              <div class="col-12 top-containter">
-                <div class="row">
-                  <div class="col-12">
-                    <label *ngIf="objectImg.length > 0" class="titleColor">
-                      <i class="fa fa-fw fa-check text-primary-hr"></i>
-                      <strong>Archivos adjuntos</strong>
-                    </label>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
-                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert" >
-                      <div class="row">
-                        <div class="col-11">
-                          <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
-                            <h6>{{index+1}}.
-                              <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
-                              {{imgsaved.file.name}}
-                            </h6>
-                          </div>
-                          <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme='dark'>
-                            <h6>{{index+1}}.
-                              <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
-                              {{imgsaved.file.name}}
-                            </h6>
-                          </div>
-                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general " theme='dark'>
-                            <h6>{{index+1}}.
-                              <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
-                              {{imgsaved.file.name}}
-                            </h6>
-                          </div>
-                        </div>
-                        <div class="col-1 text-center">
-                          <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-12">
-                    <label *ngIf="objectImg.length == 0" class="titleColor">
-                      <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                      <strong>Adjuntar Cotización</strong>
-                    </label>
-                    <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
-                  </div>
-                </div>
-              </div>
-            </div> -->
+
+          <div class="col-12">
+            <div class="row" style="margin-top: 15px">
+              <div class="alert" style="background-color:rgba(0,0,0,.2)" *ngFor="let imagesAnexed of annexeds" role="alert">{{imagesAnexed.name}}</div>
+            </div>
+          </div>
           <div class="modal-footerInfo justify-content-center">
             <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
               <h6> Cerrar </h6>
