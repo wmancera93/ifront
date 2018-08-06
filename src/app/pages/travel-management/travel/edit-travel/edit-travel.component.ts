@@ -19,6 +19,8 @@ export class EditTravelComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
+  public showPdf:boolean = false;
+  public showSizeTable: boolean= false;
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];

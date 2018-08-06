@@ -7,6 +7,9 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+import { Alert } from '../../../../../../node_modules/@types/selenium-webdriver';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-new-travel',
@@ -18,6 +21,8 @@ export class NewTravelComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
+  public showPdf: boolean = false;
+  public showSizeTable: boolean = false;
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];
@@ -29,7 +34,7 @@ export class NewTravelComponent implements OnInit {
   public stateLocationsto: any[] = [];
   public terminalLocations: any[] = [];
   public terminalLocationsto: any[] = [];
-  public traverlsDestination: any[]=[];
+  public traverlsDestination: any[] = [];
   public travelProof: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
   public send: boolean = false;
@@ -44,24 +49,24 @@ export class NewTravelComponent implements OnInit {
   public filequotation = 'fileQuotationTravel';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public objectImg: any[] = [];
-  public filterState: any = [];
-  public filterStateto: any = [];
-  public filterCountry: any = [];
-  public filterCountryto: any = [];
-  public filterCity: any = [];
-  public filterCityto: any = [];
-  public filterTerminal: any = [];
-  public filterTerminalto: any = [];
-  public filterHotels: any = [];
   public iconUpload: any[] = [];
   public iconDocument: string = '';
   public is_upload: boolean = false;
+  public count: number = 0;
+  public file: any[] = [];
+
 
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
-    public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService) {
+    public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
+    public alert: AlertsService) {
+
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      document.getElementById("btn_travel_new").click();
+
+    })
 
     this.tokenService.validateToken()
       .subscribe(
@@ -84,12 +89,12 @@ export class NewTravelComponent implements OnInit {
           this.iconUpload = data.name.split('.');
           this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
           this.is_upload = true;
+          this.file.push(data);
           this.objectImg.push({ file: data, extension: this.iconDocument });
 
         }, 200);
       }, 1000);
     });
-
 
 
     document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -114,182 +119,10 @@ export class NewTravelComponent implements OnInit {
       id_hotels: '',
     });
 
-    this.travelProof.push({
-      success: true,
-      data: [{
-        title: "Viajes solicitados. Laura Beltran silvina",
-        title_table: "Viajes solicitados. Laura Beltran silvina",
-        labels: {
-          field_0: {
-            value: "Ticket",
-            type: "string",
-            sortable: false,
-          },
-          field_1: {
-            value: "Transporte",
-            type: "string",
-            sortable: false,
-          },
-          field_2: {
-            value: "Motivo de viaje",
-            type: "string",
-            sortable: false,
-          },
-
-          field_3: {
-            value: "Ciudad origen",
-            type: "string",
-            sortable: false,
-          },
-          field_4: {
-            value: "Terminal de origen",
-            type: "string",
-            sortable: false,
-          },
-          field_5: {
-            value: "Fecha de partida",
-            type: "string",
-            sortable: false,
-          },
-          field_6: {
-            value: "Ciudad destino",
-            type: "string",
-            sortable: false,
-          },
-          field_7: {
-            value: "Terminal destino",
-            type: "string",
-            sortable: false,
-          },
-          field_8: {
-            value: "Fecha de llegada",
-            type: "string",
-            sortable: false,
-          },
-          field_9: {
-            value: "Hotel",
-            type: "string",
-            sortable: false,
-          },
-          field_10: {
-            value: "Editar",
-            type: "string",
-            sortable: false,
-          },
-          field_11: {
-            value: "Eliminar",
-            type: "string",
-            sortable: false,
-          }
-        },
-        data: [
-          {
-            id: 1,
-            field_0: 123,
-            field_1: "Aereo",
-            field_2: "Consultoria SAP",
-            field_3: "Bogota",
-            field_4: "Aeropuerto Internacional el dorado",
-            field_5: "2018-08-11  12:00:00",
-            field_6: "Medellin",
-            field_7: "Aeropuerto Henrique Olaya Herrera",
-            field_8: "2018-08-11  18:00:00",
-            field_9: "Alcazar Real",
-            field_10: {
-              type_method: "UPDATE",
-              type_element: "button",
-              icon: "fa-pencil",
-              id: 1,
-              title: "Editar",
-              action_method: "updateTravels",
-              disable: false
-            },
-            field_11: {
-              type_method: "DELETE",
-              type_element: "button",
-              icon: "fa-trash",
-              id: 1,
-              title: "Eliminar",
-              action_method: "deleteTravels",
-              disable: false
-            }
-          },
-          {
-            id: 1,
-            field_0: 124,
-            field_1: "Terrestre",
-            field_2: "Capacitaciones iHR",
-            field_3: "Bogota",
-            field_4: "Terminal del sur",
-            field_5: "2018-08-28  7:30:00",
-            field_6: "Villavicencio",
-            field_7: "Terminal central",
-            field_8: "2018-08-28  10:15:00",
-            field_9: "El Delfin Rosado",
-            field_10: {
-              type_method: "UPDATE",
-              type_element: "button",
-              icon: "fa-pencil",
-              id: 1,
-              title: "Editar",
-              action_method: "updateTravels",
-              disable: false
-            },
-            field_11: {
-              type_method: "DELETE",
-              type_element: "button",
-              icon: "fa-trash",
-              id: 1,
-              title: "Eliminar",
-              action_method: "deleteTravels",
-              disable: false
-            }
-          }]
-      }]
-
-    });
-
-    setTimeout(() => {
-      this.objectReport.emit(this.travelProof[0]);
-    }, 200);
-
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-
-      if (!this.bedit) {
-        if (!this.bnew) {
-          document.getElementById("funtionTravel").click();
-          this.bedit = true;
-        } else {
-          this.bnew = false
-          this.bedit = true;
-        }
+      if (data.action_method === 'deleteTravels') {
+        this.deleteDestinations(data);
       }
-
-
-      if ((data.action_method === "updateTravels") && (this.bedit === true)) {
-
-        this.formTravelManagementedit = {
-          id_travel: 2,
-          trip_text: 'Evaluaciones de avances',
-          id_transport: 2,
-          id_city: '3',
-          id_country: '1',
-          id_state: '2',
-          id_terminal: '1',
-          date_begin: '2018-07-28',
-          hour_begin: '03:00:00',
-          hour_end: '18:00:00',
-          date_end: '2018-07-29',
-          id_terminalto: '3',
-          id_cityto: '5',
-          id_stateto: '2',
-          id_countryto: '1',
-          id_hotels: '5',
-        };
-        this.editTravels(this.formTravelManagementedit);
-      }
-
-
     });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
@@ -326,12 +159,18 @@ export class NewTravelComponent implements OnInit {
 
   deleteUpload(param: any) {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
+    this.file.splice(this.file.findIndex(filter => filter.file.name === param.file.name), 1);
   }
+  deleteDestinations(param: any) {
+    this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === param.id), 1);
+    this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === param.id), 1);
+    this.objectReport.emit(this.travelProof[0]);
+  }
+
   newTravel(model) {
-    console.log(model)
     this.showSubmit = false;
     this.send = true;
-    
+
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
@@ -339,22 +178,69 @@ export class NewTravelComponent implements OnInit {
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
-      modelFromdata.append('files_' + (index + 1).toString(), this.objectImg[index]);
+      modelFromdata.append('files_' + (index + 1).toString(), this.file[index]);
     }
     model = modelFromdata;
 
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
-          console.log(data)
-        });
+          if (data.success) {
+            document.getElementById("closeTravels").click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente', confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.travelsService.setResultSaved(true);
+          }
+        },
+        (error: any) => {
+          document.getElementById("closeTravels").click();
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true }];
+          this.showSubmit = true;
+          this.alert.setAlert(alertWarning[0]);
+        }
+      )
+
+
+
   }
-  addDestination(modelPartial){
-    this.traverlsDestination = [
-      { transport_id: 1, origin_location_id: 3, origin_terminal_id: 1, hotel_id: 5, destination_location_id: 14, destination_terminal_id: 4, origin_datetime: "2018-07-16 18:13:09", destination_datetime: "2018-07-16 22:12:09" },
-      { transport_id: 1, origin_location_id: 14, origin_terminal_id: 4, hotel_id: 5, destination_location_id: 3, destination_terminal_id: 1, origin_datetime: "2018-07-16 22:13:09", destination_datetime: "2018-07-16 23:13:09" }
-    ];
-    
+
+  addDestination(modelPartial) {
+    this.travelProof[0].data[0].data.push({
+      field_0: this.count + 1,
+      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+      field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+      field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
+      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+      field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
+      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
+      field_10: {
+        type_method: "DELETE",
+        type_element: "button",
+        icon: "fa-trash",
+        id: this.count + 1,
+        title: "Eliminar",
+        action_method: "deleteTravels",
+        disable: false
+      }
+    })
+
+    this.traverlsDestination.push({
+      travel_id: this.count + 1,
+      transport_id: modelPartial.id_transport,
+      origin_location_id: modelPartial.id_city,
+      origin_terminal_id: modelPartial.id_terminal,
+      hotel_id: modelPartial.id_hotels,
+      destination_location_id: modelPartial.id_cityto,
+      destination_terminal_id: modelPartial.id_terminalto,
+      origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
+    });
+
+    this.count += 1
+    this.objectReport.emit(this.travelProof[0]);
+    this.closeTrip();
   }
   editTravels(param: any) {
     this.formTravelManagement = new FormGroup({});
@@ -391,9 +277,8 @@ export class NewTravelComponent implements OnInit {
       this.bnew = false
     }
     document.getElementById("funtionTravel").click();
-
-
   }
+
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
@@ -466,7 +351,6 @@ export class NewTravelComponent implements OnInit {
     this.travelManagementService.gettransportTerminals(form.id_city).
       subscribe((data: any) => {
         this.terminalLocations = data.data;
-        this.filterTerminal = this.terminalLocations.filter((terminals: any) => terminals.id == form.id_terminal);
         if (this.terminalLocations.length > 0) {
           if (acction === 'new') {
             this.formTravelManagement.controls['id_terminal'].setValue('-1');
@@ -507,6 +391,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   clearFormGeneral() {
+    this.showSubmit = true;
     this.stateLocations = [];
     this.stateLocationsto = [];
     this.cityLocations = [];
@@ -515,6 +400,69 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocationsto = [];
     this.hotels = [];
     this.objectImg = [];
+    this.travelProof = [];
+    this.travelProof.push({
+      success: true,
+      data: [{
+        title: "Viajes solicitados. Laura Beltran silvina",
+        title_table: "Viajes solicitados. Laura Beltran silvina",
+        labels: {
+          field_1: {
+            value: "Tipo de Transporte",
+            type: "string",
+            sortable: false,
+          },
+          field_2: {
+            value: "Origen",
+            type: "string",
+            sortable: false,
+          },
+
+          field_3: {
+            value: "Terminal de Origen",
+            type: "string",
+            sortable: false,
+          },
+          field_4: {
+            value: "Fecha y Hora Origen",
+            type: "string",
+            sortable: false,
+          },
+          field_5: {
+            value: "Destino",
+            type: "string",
+            sortable: false,
+          },
+          field_6: {
+            value: "Terminal destino",
+            type: "string",
+            sortable: false,
+          },
+          field_7: {
+            value: "Fecha y Hora Destino",
+            type: "string",
+            sortable: false,
+          },
+          field_8: {
+            value: "Hotel",
+            type: "string",
+            sortable: false,
+          },
+          field_10: {
+            value: "Eliminar",
+            type: "string",
+            sortable: false,
+          }
+        },
+        data: [
+        ]
+      }]
+
+    });
+
+    setTimeout(() => {
+      this.objectReport.emit(this.travelProof[0]);
+    }, 50);
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({

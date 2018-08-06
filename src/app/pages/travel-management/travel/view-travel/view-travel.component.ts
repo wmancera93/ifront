@@ -11,12 +11,15 @@ import { TravelsService } from '../../../../services/shared/travels/travels.serv
 export class ViewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
+  public nameReport:string='Gestión de viajes'
   public objectReport: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
   public ticket: number;
   public travelProof: any[] = [];
   public viewInfo: any[]=[];
+  public showPdf: boolean = false;
+  public showSizeTable: boolean= false;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService,

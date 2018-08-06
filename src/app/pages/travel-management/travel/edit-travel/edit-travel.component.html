@@ -42,7 +42,7 @@
           <div class="col-12">
             <div class="row" style="margin-top: 15px">
               <div class="col-12 top-general-p" style="height: 300px">
-                <app-data-table [records]="objectReport" id="tableTravels" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
+                <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable"  [title]="nameReport"></app-data-table>
               </div>
             </div>
 
@@ -311,6 +311,12 @@
         </form>
 
         <div class="row justify-content-end" style="margin-top: 30px">
+            <div class="col-lg-3 col-md-4 col-12">
+                <button type="submit" *ngIf="send" class="btn btn-success btn-block cursor-general">
+                  <i class="fa fa-fw fa-fw fa fa-reply"></i>&nbsp;&nbsp;Enviar</button>
+                <button type="button" *ngIf="!showSubmit && !send" class="btn btn-warning btn-block">
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+              </div>
           <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="send" class="btn btn-success btn-block cursor-general">
               <i class="fa fa-fw fa-fw fa fa-reply"></i>&nbsp;&nbsp;Enviar</button>
