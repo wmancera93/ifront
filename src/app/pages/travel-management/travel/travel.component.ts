@@ -75,7 +75,10 @@ export class TravelComponent implements OnInit {
     this.travelService.getTravelRequestsByid('13').subscribe((data: any) => {
       
     });
-    document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+    setTimeout(() => {
+      document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+    }, 300);
+    
   }
 
   returnBackPage() {

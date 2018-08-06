@@ -137,7 +137,7 @@ export class NewTravelComponent implements OnInit {
           this.bedit = false;
         }
       }
-
+      document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     })
 
   }

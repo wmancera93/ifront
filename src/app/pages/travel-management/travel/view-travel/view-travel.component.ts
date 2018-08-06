@@ -18,7 +18,11 @@ export class ViewTravelComponent implements OnInit {
   public ticket: string = "";
   public objectPrint: any[] = [];
   public observations: any[] = [];
-  public annexeds :any[]=[];
+  public annexeds: any[] = [];
+  public nombre: string = "";
+  public todonombres: any[] = [];
+  public icon: string = '';
+
 
 
   public showPdf: boolean = false;
@@ -46,11 +50,17 @@ export class ViewTravelComponent implements OnInit {
       this.ticket = data;
       document.getElementById("btn_travel_view").click();
       this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
-        console.log(result)
+
         this.observations = result.data[0].travel_request.observation;
         this.objectPrint = result.data[0].travel_managements;
-        this.annexeds = result.data[0].travel_request_annexeds;  
+        this.annexeds = result.data[0].travel_request_annexeds;
+        this.annexeds.forEach(element => {
+          this.nombre = element.name;
+          this.todonombres.push({file: element.file, nameDoc: this.nombre});
+        
+        });
         console.log(this.annexeds)
+
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });
     });

@@ -40,19 +40,26 @@
 
         <div class="col-12">
           <div class="row" style="margin-top: 15px">
-            <div class="col-12 top-general-p" style="height: 300px">
+            <div class="col-12 top-general-p" style="height: 250px">
               <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
             </div>
           </div>
 
-          <div class="col-12">
-            <div class="row" style="margin-top: 15px">
-              <div class="alert" style="background-color:rgba(0,0,0,.2)" *ngFor="let imagesAnexed of annexeds" role="alert">{{imagesAnexed.name}}</div>
-            </div>
-          </div>
-          <div class="modal-footerInfo justify-content-center">
-            <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-              <h6> Cerrar </h6>
+          <div class="row">
+            <div class="col-9" *ngFor="let imgsaved of annexeds; let index = index">
+              <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                {{imgsaved.name}}
+
+                <div class="col-1 text-center">
+                  <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+        <div class="modal-footerInfo justify-content-center">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+            <h6> Cerrar </h6>
+          </div>
+        </div>
+      </div>
