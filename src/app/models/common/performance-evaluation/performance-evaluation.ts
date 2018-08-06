@@ -20,22 +20,22 @@ export interface PerformanceEvaluation {
     period_planning: string,
 }
 export interface Qualifier{
-    id: number;
-    name:string;
-    lastname: string;
-    phone:string;
-    pernr: number;
-    image: Url
-    unidad_org:string;
-    area: string;
-    division_per:string;
-    subdivision_per:string;
-    name_complete: string;
-    personal_phone: string;
-    short_name:string;
-    personal_code: number;
-    position:string;
-    get_user_of_email: string;
-    get_domain_of_email:string;
+    area: string,
+    division_per:string
+    get_domain_of_email:string,
+    get_user_of_email:string,
+    id:number,
+    image:Url,
+    lastname:string,
+    name:string,
+    name_complete:string,
+    pernr:number,
+    personal_code:number,
+    personal_phone:string,
+    phone:string,
+    position:string,
+    short_name:string,
+    subdivision_per:string,
+    unidad_org:string
 
 }

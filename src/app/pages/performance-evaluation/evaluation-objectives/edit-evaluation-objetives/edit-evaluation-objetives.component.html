@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center">
-          <div class="col-11" style="border: 1px solid darkgray;border-style: groove">
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
             <div class="row border" style="margin-left: 2px">
               <h4>Datos de Evaluación</h4>
             </div>
@@ -24,7 +24,7 @@
                   </div>
                   <div class="col-lg-8 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
-                      <!-- {{EvaluacionPer[0].name}} -->
+                      {{EvaluacionPer.name}}
                     </label>
                   </div>
                 </div>
@@ -49,7 +49,7 @@
                       </div>
                       <div class="col-lg-8 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <!-- {{EvaluacionPer[0].start_evaluation_date}} -->
+                          {{EvaluacionPer.start_evaluation_date}}
                         </label>
                       </div>
                     </div>
@@ -64,7 +64,7 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <!-- {{EvaluacionPer[0].end_evaluation_date}} -->
+                          {{EvaluacionPer.end_evaluation_date}}
                         </label>
                       </div>
                     </div>
@@ -91,7 +91,7 @@
                       </div>
                       <div class="col-lg-8 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <!-- {{EvaluacionPer[0].start_excecution_date}} -->
+                          {{EvaluacionPer.start_excecution_date}}
                         </label>
                       </div>
                     </div>
@@ -106,7 +106,7 @@
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <!-- {{EvaluacionPer[0].end_excecution_date}} -->
+                          {{EvaluacionPer.end_excecution_date}}
                         </label>
                       </div>
                     </div>
@@ -125,16 +125,16 @@
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
                     <div class="row text-center">
-                      <div class="col-lg-4 col-md-4 col-12 ">
-                        <!-- <img class="roundPhoto-employee" src="{{EvaluacionPer[0].qualifier.image.url}}"> -->
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <!-- <img class="roundPhoto-employee" src="{{qualifier.image.Url}}"> -->
                       </div>
                       <div class="col-lg-8 col-md-8 col-12">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-graduation-cap text-primary-hr"></i>
-                          <!-- {{namecomplete}} -->
+                          {{qualifierData.name_complete}}
                         </label>
                         <label for="nomEvaluation" class="titleColor">
-                          <!-- {{EvaluacionPer[0].qualifier.position}} -->
+                          {{qualifierData.position}}
                         </label>
                       </div>
                     </div>
@@ -153,7 +153,7 @@
                   </div>
                   <div class="col-lg-6 col-md-6 col-12 text-center">
                     <label for="nomEvaluation" class="titleColor text-center">
-                      <!-- {{EvaluacionPer[0].target_dat}} -->
+                      {{EvaluacionPer.period_evaluation}}
                     </label>
                   </div>
                 </div>
@@ -171,7 +171,7 @@
             <div class="justify-content-center">
               <div class="col-12 widget">
                 <div class="row">
-                  <div class="col-12 top-general-p" style="height: 200px">
+                  <div class="col-12 top-general-p">
                     <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
                   </div>
                 </div>
