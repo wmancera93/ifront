@@ -45,21 +45,37 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-9" *ngFor="let imgsaved of annexeds; let index = index">
-              <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
-                {{imgsaved.name}}
 
-                <div class="col-1 text-center">
-                  <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+          <div class="col-12">
+            <div class="row" style="margin-top: 50px">
+              <div class="col-12 top-containter">
+                <div class="row">
+                  <div class="col-8" *ngFor="let imgsaved of annexeds; let index = index">
+                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                      <div class="row">
+                        <div class="col-11">
+                          <h6>{{imgsaved.name}}</h6>
+                          <a href="#" class="badge badge-light wg-hover-general">Ver</a>
+                          <a [attr.href]="imgsaved.file.url" class="badge badge-light wg-hover-general">Descargar</a>
+                        </div>
+                        <div class="col-1 text-center">
+                          <h6 class="text-primary-hr cursor-general">x</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footerInfo justify-content-center">
-          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-            <h6> Cerrar </h6>
+
+
+
+
+
+          <div class="modal-footerInfo justify-content-center">
+            <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+              <h6> Cerrar </h6>
+            </div>
           </div>
         </div>
-      </div>

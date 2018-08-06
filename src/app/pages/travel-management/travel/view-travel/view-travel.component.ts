@@ -50,123 +50,17 @@ export class ViewTravelComponent implements OnInit {
       this.ticket = data;
       document.getElementById("btn_travel_view").click();
       this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
-
+        console.log(result)
         this.observations = result.data[0].travel_request.observation;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
         this.annexeds.forEach(element => {
           this.nombre = element.name;
           this.todonombres.push({file: element.file, nameDoc: this.nombre});
-        
         });
-        console.log(this.annexeds)
-
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });
     });
-
-
-
-    // this.travelProof.push({
-    //   success: true,
-    //   data: [{
-    //     title: "Viajes solicitados. Laura Beltran silvina",
-    //     title_table: "Viajes solicitados. Laura Beltran silvina",
-    //     labels: {
-    //       field_0: {
-    //         value: "Ticket",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_1: {
-    //         value: "Transporte",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_2: {
-    //         value: "Motivo de viaje",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-
-    //       field_3: {
-    //         value: "Ciudad origen",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_4: {
-    //         value: "Terminal de origen",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_5: {
-    //         value: "Fecha de partida",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_6: {
-    //         value: "Ciudad destino",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_7: {
-    //         value: "Terminal destino",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_8: {
-    //         value: "Fecha de llegada",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-    //       field_9: {
-    //         value: "Hotel",
-    //         type: "string",
-    //         sortable: false,
-    //       },
-
-    //     },
-    //     data: [
-    //       {
-    //         id: 1,
-    //         field_0: 123,
-    //         field_1: "Aereo",
-    //         field_2: "Consultoria SAP",
-    //         field_3: "Bogota",
-    //         field_4: "Aeropuerto Internacional el dorado",
-    //         field_5: "2018-08-11  12:00:00",
-    //         field_6: "Medellin",
-    //         field_7: "Aeropuerto Henrique Olaya Herrera",
-    //         field_8: "2018-08-11  18:00:00",
-    //         field_9: "Alcazar Real",
-
-    //       },
-    //       {
-    //         id: 1,
-    //         field_0: 124,
-    //         field_1: "Terrestre",
-    //         field_2: "Capacitaciones iHR",
-    //         field_3: "Bogota",
-    //         field_4: "Terminal del sur",
-    //         field_5: "2018-08-28  7:30:00",
-    //         field_6: "Villavicencio",
-    //         field_7: "Terminal central",
-    //         field_8: "2018-08-28  10:15:00",
-    //         field_9: "El Delfin Rosado",
-
-    //         }
-    //       ]
-    //   }]
-
-    // });
-
-
-    // setTimeout(() => {
-    //   this.objectReport.emit(this.travelProof[0]);
-    // }, 200);
-
-    // this.viewInfo=this.travelProof[0].data[0].data[0];
-
   }
 
   ngOnInit() {
