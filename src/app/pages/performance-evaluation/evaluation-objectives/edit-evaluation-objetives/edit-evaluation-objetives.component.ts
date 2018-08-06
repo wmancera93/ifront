@@ -1,10 +1,12 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PerformanceEvaluationService } from '../../../../services/performance-evaluation/performance-evaluation.service';
-import { PerformanceEvaluation } from '../../../../models/common/performance-evaluation/performance-evaluation';
+import { PerformanceEvaluation, Qualifier } from '../../../../models/common/performance-evaluation/performance-evaluation';
 import { TablesPermisions } from '../../../../models/common/tables/tables';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 
 
 @Component({
@@ -14,27 +16,29 @@ import { PerformanceEvalSharedService } from '../../../../services/shared/common
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
 
-  public IdEvaluation: string = "2";
-  public EvaluacionPer: PerformanceEvaluation[] = [];
+  public idEvaluation: number;
+  public EvaluacionPer: PerformanceEvaluation = null;
+  public sendDataObjective: any;
+  public qualifierData: Qualifier[] = [];
   public namecomplete: string = "";
   public ObjectivesTable: any[] = [];
   public edithObjectivesTable: any[] = [];
   public bedit: boolean = false;
   public bnew: boolean = false;
-  public newId: number;
   public showSubmit = true;
   public formObjetive: any;
   public idEdit: number;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public is_collapse: boolean = false;
-  public nameReport: string = 'Objetivos de Evaluación'
+  public nameReport: string = 'Objetivos de Evaluación';
 
   public objectReport: EventEmitter<any> = new EventEmitter();
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     private fb: FormBuilder, private accionDataTableService: DataDableSharedService,
-    public performanceEvalSharedService: PerformanceEvalSharedService) {
+    public performanceEvalSharedService: PerformanceEvalSharedService,
+    public alert: AlertsService) {
 
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
@@ -46,6 +50,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      console.log(data)
       if (!this.bedit) {
         if (!this.bnew) {
           document.getElementById("funtionObjectives").click();
@@ -58,6 +63,9 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
       if ((data.action_method === "updateEvaluationObjetive") && (this.bedit === true)) {
         this.formObjetive = new FormGroup({});
+        // this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID:any)=>{
+        //   console.log(dataID)
+        // })
         this.formObjetive = fb.group({
           start_date: '2018-02-28',
           end_date: '2018-02-28',
@@ -65,164 +73,80 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           objetive_text: data.id,
         });
       }
+      if (data.action_method === "deleteEvaluationObjetive") {
+        this.performanceEvaluationService.deleteEvaluationObjetive(data.id).subscribe((state: any) => {
+          const alertWarning: Alerts[] = [{
+            type: 'success',
+            title: 'Confirmación',
+            message: state.message,
+            confirmation: false,
+            typeConfirmation: ''
+          }];
+          this.dataTableConsult();
+          this.alert.setAlert(alertWarning[0]);
+          this.bedit = true;
+          this.bnew = true;
+        })
+      }
     });
 
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
-      console.log(info)
       this.EvaluacionPer = info;
+      this.qualifierData = info.qualifier;
+      this.idEvaluation = this.EvaluacionPer.id;
     })
 
-    // this.EvaluacionPer.push({
-    //   id: 2,
-    //   code: "01",
-    //   name: "Evaluacion de desempeño",
-    //   status_name: "Planificado",
-    //   status_code: "2",
-    //   created_date: "04-07-2018 16:28:11",
-    //   updated_date: "04-07-2018 16:28:11",
-    //   start_evaluation_date: "01-01-2018",
-    //   end_evaluation_date: "01-12-2018",
-    //   start_excecution_date: "01-01-2018",
-    //   end_excecution_date: "28-02-2018",
-    //   target_dat: "01-02-2018",
-    //   qualifier: {
-    //     id: 5703,
-    //     name: "Laura",
-    //     lastname: "Beltran Silvina",
-    //     phone: "",
-    //     pernr: 2717,
-    //     image: {
-    //       url: "../../../../../assets/themes/patterns/icon-user-negative.png"
-    //     },
-    //     unidad_org: "DIRECCION MARKETING Y COMUNICACIONES",
-    //     area: "Gerencial",
-    //     division_per: "Demo Interactive",
-    //     subdivision_per: "Administrativos",
-    //     name_complete: "Laura  Beltran Silvina",
-    //     personal_phone: "3232143",
-    //     short_name: "Laura Beltran silvina",
-    //     personal_code: 2717,
-    //     position: "DIRECTOR DE MARKETING Y COMUNICACIONES",
-    //     get_user_of_email: "@juan.contreras",
-    //     get_domain_of_email: "@hrinteractive.co"
-    //   },
-    // });
-    // this.namecomplete = this.EvaluacionPer[0].qualifier.name + ' ' + this.EvaluacionPer[0].qualifier.lastname;
+    this.dataTableConsult();
+  }
 
-    this.ObjectivesTable.push({
-      success: true,
-      data: [{
-        title: "Objetivos de Evaluación. Laura Beltran silvina",
-        title_table: "Objetivos de Evaluación. Laura Beltran silvina",
-        labels: {
-          field_0: {
-            value: "Id",
-            type: "string",
-            sortable: false,
-          },
-          field_1: {
-            value: "Descripción de Objetivo",
-            type: "string",
-            sortable: false,
-          },
-          field_2: {
-            value: "Inicia",
-            type: "string",
-            sortable: false,
-          },
-
-          field_3: {
-            value: "Finaliza",
-            type: "string",
-            sortable: false,
-          },
-          field_4: {
-            value: "Valor Importancia",
-            type: "string",
-            sortable: false,
-          },
-          field_5: {
-            value: "Editar",
-            type: "string",
-            sortable: false,
-          },
-          field_6: {
-            value: "Eliminar",
-            type: "string",
-            sortable: false,
-          }
-        },
-        data: [
-          {
-            id: 1,
-            field_0: 1,
-            field_1: "Objetivo de evaluacion 1",
-            field_2: "2018-02-28",
-            field_3: "2018-02-28",
-            field_4: "20.0 %",
-            field_5: {
-              type_method: "UPDATE",
-              type_element: "button",
-              icon: "fa-pencil",
-              id: 1,
-              title: "Editar",
-              action_method: "updateEvaluationObjetive",
-              disable: false
-            },
-            field_6: {
-              type_method: "DELETE",
-              type_element: "button",
-              icon: "fa-trash",
-              id: 1,
-              title: "Eliminar",
-              action_method: "deleteEvaluationObjetive",
-              disable: false
-            }
-          },
-          {
-            id: 2,
-            field_0: 2,
-            field_1: "Objetivo de tyftyf",
-            field_2: "2018-02-28",
-            field_3: "2018-02-28",
-            field_4: "20.0 %",
-            field_5: {
-              type_method: "UPDATE",
-              type_element: "button",
-              icon: "fa-pencil",
-              id: 2,
-              title: "Editar",
-              action_method: "updateEvaluationObjetive",
-              disable: false
-            },
-            field_6: {
-              type_method: "DELETE",
-              type_element: "button",
-              icon: "fa-trash",
-              id: 1,
-              title: "Eliminar",
-              action_method: "deleteEvaluationObjetive",
-              disable: false
-            }
-          }]
-      }]
-
-    });
-
-    setTimeout(() => {
-      this.objectReport.emit(this.ObjectivesTable[0]);
-    }, 200);
+  dataTableConsult() {
+    this.performanceEvaluationService.getEvaluationObjetive().subscribe((table: any) => {
+      this.ObjectivesTable = table;
+      setTimeout(() => {
+        this.objectReport.emit(this.ObjectivesTable);
+      }, 100);
+    })
   }
 
 
   ngOnInit() {
-    // this.performanceEvaluationService.getEvaluationPerformanById(this.IdEvaluation)
-    // .subscribe((data: any) => {
-    //   console.log(data)
-    // });
+
+
   }
   newObjetive(model) {
     this.showSubmit = false;
+    this.sendDataObjective = {
+      perfomance_evaluation_id: this.idEvaluation,
+      objetive_text: model.objetive_text,
+      target_agrement_date: new Date(),
+      start_date: model.start_date,
+      end_date: model.end_date,
+      weight: model.weight / 100
+    };
+    this.performanceEvaluationService.postEvaluationObjetive(this.sendDataObjective).subscribe((info: any) => {
+      this.showSubmit = true;
+      const alertWarning: Alerts[] = [{
+        type: 'success',
+        title: 'Confirmación',
+        message: info.message,
+        confirmation: false,
+        typeConfirmation: ''
+      }];
+      this.dataTableConsult();
+      this.alert.setAlert(alertWarning[0]);
+    },
+      (error: any) => {
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: error._body.errors,
+          confirmation: false,
+          typeConfirmation: ''
+        }];
+        this.alert.setAlert(alertWarning[0]);
+        this.showSubmit = true;
+      })
+
   }
   colapseNew() {
     if (!this.bnew) {
