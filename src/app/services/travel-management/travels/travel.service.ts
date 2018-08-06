@@ -31,4 +31,9 @@ export class TravelService {
     return this.tokenService.delete('travel_requests/' + id)
     .map((data: any) => data.json());
   }
+  getTravelById(id:string){
+    return this.tokenService.delete('travel_requests/' + id)
+    .map((data: any) => data.json());
+  }
+
 }

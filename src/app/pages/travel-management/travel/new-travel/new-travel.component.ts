@@ -64,8 +64,9 @@ export class NewTravelComponent implements OnInit {
     public alert: AlertsService) {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      document.getElementById("btn_travel_new").click();
-
+      if(data === 'continueTravelRequests'){
+        document.getElementById("btn_travel_new").click();
+      }
     })
 
     this.tokenService.validateToken()
@@ -194,7 +195,7 @@ export class NewTravelComponent implements OnInit {
         },
         (error: any) => {
           document.getElementById("closeTravels").click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation : 'continueTravelRequests'}];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
         }
