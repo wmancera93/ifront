@@ -16,18 +16,18 @@
             <div class="col-lg-4 col-md-6 col-12">
               <label class="titleColor">
                 <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-                <strong>Tipo de viaje:</strong>
+                <strong>Tipo de viaje*:</strong>
               </label>
             </div>
-            <div class="col-lg-4 col-md-6 col-12" *ngFor="let travelsView of result ">
-              <label id="typeTravel">mkmn</label>
+            <div class="col-lg-4 col-md-6 col-12">
+              <label id="typeTravel">{{typeTravel}}</label>
             </div>
           </div>
         </div>
         <div class="col-12 top-containter" style="margin-top: 20px">
           <label for="celulaInput" class="titleColor">
             <i class="fa fa-fw fa-comment text-primary-hr"></i>
-            <strong>Motivo del Viaje *</strong>
+            <strong>Motivo del Viaje*:</strong>
           </label>
         </div>
         <div class="col-12" style="margin-left: 20px; font-size:1.2em">
@@ -45,21 +45,29 @@
             </div>
           </div>
 
-          <div class="row">
-            <div class="col-9" *ngFor="let imgsaved of annexeds; let index = index">
-              <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
-                {{imgsaved.name}}
 
-                <div class="col-1 text-center">
-                  <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+          <div class="col-12">
+            <div class="row" style="margin-top: 50px">
+              <div class="col-12 top-containter">
+                <div class="row">
+                  <div class="col-8" *ngFor="let imgsaved of annexeds; let index = index">
+                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                      <div class="row">
+                        <div class="col-11">
+                          <h6>{{imgsaved.name}}</h6>
+                          <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
+                          <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="modal-footerInfo justify-content-center">
-          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-            <h6> Cerrar </h6>
+          <div class="modal-footerInfo justify-content-center">
+            <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+              <h6> Cerrar </h6>
+            </div>
           </div>
         </div>
-      </div>
