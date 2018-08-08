@@ -27,11 +27,9 @@ export class EvaluationObjectivesComponent implements OnInit {
   }
 
   goToModalEval(infoEval: any)
-  {
+  {   
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
-  showModalObjetivesEva() {
-    document.getElementById('btn-evaluationObjetives').click();     
-  }
+ 
 
 }
