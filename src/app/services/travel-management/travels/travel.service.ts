@@ -35,5 +35,9 @@ export class TravelService {
     return this.tokenService.delete('travel_requests/' + id)
     .map((data: any) => data.json());
   }
+  getDestinationsById(id:string, travel_request_id: string ){
+    return this.tokenService.delete('travel_requests/show_journey/' + id +'/'+ travel_request_id)
+    .map((data: any) => data.json());
+  }
 
 }

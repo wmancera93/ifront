@@ -20,10 +20,9 @@ export class ViewTravelComponent implements OnInit {
   public ticket: string = "";
   public objectPrint: any[] = [];
   public observations: any[] = [];
+  public typeTravel: any[] = [];
   public annexeds: any[] = [];
-  public nombre: string = "";
-  public todonombres: any[] = [];
-  public icon: string = '';
+ 
 
 
 
@@ -41,8 +40,8 @@ export class ViewTravelComponent implements OnInit {
       document.getElementById("btn_travel_view").click();
       document.getElementById('bodyGeneral').removeAttribute('style');
       this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
-        console.log(result.data[0].travel_request_annexeds)
         this.observations = result.data[0].travel_request.observation;
+        this.typeTravel = result.data[0].travel_request.travel_type_name;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
         

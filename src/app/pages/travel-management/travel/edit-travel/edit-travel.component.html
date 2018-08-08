@@ -46,6 +46,31 @@
               </div>
             </div>
 
+
+            <div class="col-12">
+              <div class="row" style="margin-top: 50px">
+                <div class="col-12 top-containter">
+                  <div class="row">
+                    <div class="col-8" *ngFor="let imgsaved of generalViajes[0].travel_request_annexeds; let index = index">
+                      <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                        <div class="row">
+                          <div class="col-11">
+                            <h6>{{imgsaved.name}}</h6>
+                            <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
+                            <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
+                          </div>
+                          <div class="col-1 text-center">
+                            <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             <div class="row" style="margin-top: 50px">
               <div class="col-12 top-containter">
                 <div class="row">
