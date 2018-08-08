@@ -22,7 +22,8 @@ export class ViewTravelComponent implements OnInit {
   public observations: any[] = [];
   public typeTravel: any[] = [];
   public annexeds: any[] = [];
- 
+  public edit: boolean = false;
+
 
 
 
@@ -37,14 +38,15 @@ export class ViewTravelComponent implements OnInit {
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
+
       document.getElementById("btn_travel_view").click();
       document.getElementById('bodyGeneral').removeAttribute('style');
-      this.travelManagementService.getTravelRequestsByid(this.ticket).subscribe((result: any) => {
+      this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
-        
+
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });
     });
@@ -56,16 +58,16 @@ export class ViewTravelComponent implements OnInit {
     window.open(param.file.url)
   }
   downloadCotization(param: any) {
-  
+
     this.http.get(param.file.url, {
       responseType: ResponseContentType.Blob
-    }) .map(res => {
+    }).map(res => {
       return {
         filename: param.name,
         data: res.blob()
       };
     })
-    .subscribe(res => {
+      .subscribe(res => {
         var url = window.URL.createObjectURL(res.data);
         var a = document.createElement('a');
         document.body.appendChild(a);
@@ -74,7 +76,7 @@ export class ViewTravelComponent implements OnInit {
         a.download = res.filename;
         a.click();
         window.URL.revokeObjectURL(url);
-        a.remove(); 
+        a.remove();
       });
   }
 }
