@@ -201,8 +201,8 @@
           <span class="nav-label">Evaluaciones</span>
         </a>
       </li>
-      <li id="liPerformanceEvaluation" *ngIf="dataEnterprise.show_performance_evaluacion" >
-        <a id="aPerformanceEvaluation" class="nav-link bg-menu"  data-toggle="collapse" href="#performanceEval" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-PerformanceEval', 'performanceEval')">
+      <li id="liPerformanceEvaluation" *ngIf="dataEnterprise.show_performance_evaluacion">
+        <a id="aPerformanceEvaluation" class="nav-link bg-menu" data-toggle="collapse" href="#performanceEval" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-PerformanceEval', 'performanceEval')">
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">Evaluaciones de desempeño</span>
           <span class="fa fa-angle-down"></span>
@@ -213,7 +213,7 @@
               <a id="aGenerateEval" class="nav-link bg-menu" routerLink="evaluation_objectives" (click)="clickOptionMenu('liPerformanceEvaluation','aGenerateEval', 'performanceEval')">Objetivos de evaluación</a>
             </li>
             <li class="bg-li">
-              <a id="aReviewEval" class="nav-link bg-menu" (click)="clickOptionMenu('liPerformanceEvaluation','aReviewEval', 'performanceEval')">Evaluaciones por gestionar</a>
+              <a id="aReviewEval" class="nav-link bg-menu" routerLink="planning_evaluation" (click)="clickOptionMenu('liPerformanceEvaluation','aReviewEval', 'performanceEval')">Evaluaciones por gestionar</a>
             </li>
           </ul>
         </div>
@@ -223,6 +223,20 @@
           <i class="fa fa-plane"></i>
           <span class="nav-label">Gestión de viajes</span>
         </a>
+      </li>
+      <li id="liEventsManagement" >
+        <a id="aEventsManagement" class="nav-link bg-menu" data-toggle="collapse" href="#eventsManagement" (click)="clickOptionMenu('liEventsManagement','toggle-eventsManagement', 'eventsManagement')">
+          <i class="fa fa-flag"></i>
+          <span class="nav-label">Gestión de eventos</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="eventsManagement" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a id="aTraining" class="nav-link bg-menu" routerLink="training" (click)="clickOptionMenu('liEventsManagement','aTraining', 'eventsManagement')">Capacitaciones</a>
+            </li>
+          </ul>
+        </div>
       </li>
       <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
         <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">

@@ -48,6 +48,7 @@ import { HotelsService } from './travel-management/hotels/hotels.service';
 import { TravelsService } from './shared/travels/travels.service';
 import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
 import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
+import { TrainingService } from './training/training.service';
 
 @NgModule({
   imports: [
@@ -98,7 +99,8 @@ import { PerformanceEvalSharedService } from './shared/common/performance-evalua
     HotelsService,
     TravelsService,
     TooltipSharedService,
-    PerformanceEvalSharedService
+    PerformanceEvalSharedService,
+    TrainingService
     
   ]
 })

@@ -7,7 +7,7 @@ import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -79,6 +79,10 @@ import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-h
 import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
 import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
+import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
+
+import { EditPlanningDateComponent } from './performance-evaluation/planning-evaluation/edit-planning-date/edit-planning-date.component';
+import { TrainingComponent } from './events-management/training/training.component';
 
 
 @NgModule({
@@ -158,7 +162,10 @@ import { ViewTravelComponent } from './travel-management/travel/view-travel/view
     ViewHotelComponent,
     EditTravelComponent,
     ViewTravelComponent,
-    
+    PlanningEvaluationComponent,
+    EditPlanningDateComponent,
+    TrainingComponent,
+
   ],
   providers: [
 

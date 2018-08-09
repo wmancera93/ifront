@@ -27,8 +27,8 @@ export class PerformanceEvaluationService {
     return this.tokenService.get('perfomance_evaluations/detail/' + IdObjective)
       .map((data: any) => data.json());
   }
-  getEvaluationObjetiveID(id) { 
-    return this.tokenService.get('evaluation_objetive/'+id)
+  getEvaluationObjetiveID(id) {
+    return this.tokenService.get('evaluation_objetive/' + id)
       .map((data: any) => data.json());
   }
   postEvaluationObjetive(data) {
@@ -43,4 +43,15 @@ export class PerformanceEvaluationService {
     return this.tokenService.delete('evaluation_objetive/' + IdObjective)
       .map((data: any) => data.json());
   }
+
+  getPlanningEvaluationObjectives() {
+    return this.tokenService.get('perfomance_evaluations/index_table_planning')
+      .map((data: any) => data.json());
+  }
+  // putPeriodPlanningEvaluation(id, objectDate) {
+  //   return this.tokenService.put('perfomance_evaluations/update_period_planning/' + id, objectDate)
+  //     .map((data: any) => data.json());
+  // }
+
+
 }
