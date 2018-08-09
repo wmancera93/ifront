@@ -3,6 +3,8 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { HotelsService } from '../../../services/travel-management/hotels/hotels.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { HotelsSharedService } from '../../../services/shared/hotels-shared/hotels-shared.service';
+import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-hotels',
@@ -14,7 +16,11 @@ export class HotelsComponent implements OnInit {
   public alertWarning: any[] = [];
   public hotel_id: string;
 
-  constructor(public hotelsService: HotelsService, public alert: AlertsService) {
+  constructor(public hotelsService: HotelsService, 
+    public alert: AlertsService, 
+    public hotelsSharedService: HotelsSharedService,
+    public router: Router) {
+      
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deletHotel') {
         let hotels: any;
@@ -38,7 +44,7 @@ export class HotelsComponent implements OnInit {
   }
 
   returnBackPage() {
-
+    this.router.navigate(['ihr/travel_management']);
   }
 
   viewHotels(test) {
@@ -51,6 +57,10 @@ export class HotelsComponent implements OnInit {
         this.objectHotels = data.data;
       }
     });
+  }
+
+  newHotel(){
+    this.hotelsSharedService.setNewHotel(true);
   }
 
   deleteHotels(hotel: any) {
