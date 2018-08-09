@@ -34,12 +34,12 @@
             <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control"
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
-          <div class="col-12">
+          <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0">
             <div class="row border" style="margin-left: 15px">
               <h4>Viajes</h4>
             </div>
             <div class="row" style="margin-top: 15px">
-              <div class="col-12 top-general-p" >
+              <div class="col-12 top-general-p">
                 <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
               </div>
             </div>
@@ -319,3 +319,6 @@
         </div>
 
       </div>
+    </div>
+  </div>
+</div>
