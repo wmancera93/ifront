@@ -239,6 +239,7 @@ export class NewTravelComponent implements OnInit {
     this.closeTrip();
 
   }
+  
   editTravels(param: any) {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
