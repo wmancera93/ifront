@@ -122,7 +122,6 @@ export class EditTravelComponent implements OnInit {
           this.generalViajes = result.data;
           this.objectPrint = this.generalViajes[0].travel_managements;
 
-          console.log(this.generalViajes)
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
             id_travel: this.generalViajes[0].travel_request.travel_type_id,
@@ -156,53 +155,53 @@ export class EditTravelComponent implements OnInit {
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
 
       this.ticketDestinations = data.id;
-      if (!this.bedit) {
-        if (!this.bnew) {
-          document.getElementById("edit_funtionTravel").click();
-          this.bedit = true;
-        } else {
-          this.bnew = false
-          this.bedit = true;
+      
+      if ((data.action_method === "updateTravelManagement")) {
+        if (!this.bedit) {
+          if (!this.bnew) {
+            document.getElementById("edit_funtionTravel").click();
+            this.bedit = true;
+          } else {
+            this.bnew = false
+            this.bedit = true;
+          }
         }
+
+        if ((this.bedit === true)) {
+          this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
+
+            this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
+            this.split_end = resutlDestinations.data.destino_datetime.split(' ');
+
+            this.formTravelManagementedit = {
+              id_travel: this.generalViajes[0].travel_request.travel_type_id,
+              trip_text: this.generalViajes[0].travel_request.observation,
+              id_transport: resutlDestinations.data.type_transport_id,
+              id_city: resutlDestinations.data.origin_geographic_location_id,
+              id_country: resutlDestinations.data.origin_country,
+              id_state: resutlDestinations.data.origin_state,
+              id_terminal: resutlDestinations.data.origin_transport_terminal_id,
+              date_begin: this.split_begin[0],
+              hour_begin: this.split_begin[1],
+              hour_end: this.split_end[1],
+              date_end: this.split_end[0],
+              id_terminalto: resutlDestinations.data.destination_transport_terminal_id,
+              id_cityto: resutlDestinations.data.destination_geographic_location_id,
+              id_stateto: resutlDestinations.data.destination_state,
+              id_countryto: resutlDestinations.data.destination_country,
+              id_hotels: resutlDestinations.data.hotel_id,
+            };
+
+          })
+          setTimeout(() => {
+            this.editTravels(this.formTravelManagementedit);
+          }, 1000);
+        }
+
+
       }
 
-      if ((data.action_method === "updateTravelManagement") && (this.bedit === true)) {
-        this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-
-          this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
-          this.split_end = resutlDestinations.data.destino_datetime.split(' ');
-
-          this.formTravelManagementedit = {
-            id_travel: this.generalViajes[0].travel_request.travel_type_id,
-            trip_text: this.generalViajes[0].travel_request.observation,
-            id_transport: resutlDestinations.data.type_transport_id,
-            id_city: resutlDestinations.data.origin_geographic_location_id,
-            id_country: resutlDestinations.data.origin_country,
-            id_state: resutlDestinations.data.origin_state,
-            id_terminal: resutlDestinations.data.origin_transport_terminal_id,
-            date_begin: this.split_begin[0],
-            hour_begin: this.split_begin[1],
-            hour_end: this.split_end[1],
-            date_end: this.split_end[0],
-            id_terminalto: resutlDestinations.data.destination_transport_terminal_id,
-            id_cityto: resutlDestinations.data.destination_geographic_location_id,
-            id_stateto: resutlDestinations.data.destination_state,
-            id_countryto: resutlDestinations.data.destination_country,
-            id_hotels: resutlDestinations.data.hotel_id,
-          };
-
-        })
-        setTimeout(() => {
-          this.editTravels(this.formTravelManagementedit);
-        }, 200);
-
-      }
-
-
-    });
-
-    this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if ((data.action_method === "deleteTravelManagement") && (this.bedit === true)) {
+      if ((data.action_method === "deleteTravelManagement")) {
         this.deleteDestinations(data)
         this.travelManagementService.deleteTravelByDestination(this.ticketDestinations, this.ticket).
           subscribe((resultDestination: any) => {
@@ -210,14 +209,11 @@ export class EditTravelComponent implements OnInit {
 
           })
       }
+
+      if ((data.action_method === "deleteTravels")) {
+        this.deleteDestinations(data)
+      }
     });
-
-
-
-
-
-
-
   }
 
   ngOnInit() {
@@ -248,13 +244,13 @@ export class EditTravelComponent implements OnInit {
 
   }
   deleteDestinations(param: any) {
-    this.generalViajes[0].data[0].data.splice(this.generalViajes[0].data[0].data.findIndex(filter => filter.field_0 === param.id), 1);
+    this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === param.id), 1);
     this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === param.id), 1);
     this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
   }
 
   newEditTravel(model) {
-
+    debugger
     this.showSubmit = false;
     this.send = true;
 
@@ -269,7 +265,7 @@ export class EditTravelComponent implements OnInit {
     }
     model = modelFromdata;
 
-    this.travelManagementService.putEditTravel(model)
+    this.travelManagementService.putEditTravel(this.ticket, model)
       .subscribe(
         (data: any) => {
           if (data.success) {
@@ -293,7 +289,7 @@ export class EditTravelComponent implements OnInit {
   addDestination(modelPartial) {
 
     this.generalViajes[0].travel_managements.data.push({
-      field_0: this.count + 1,
+      field_0: 'temp_' + this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
       field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
@@ -306,7 +302,7 @@ export class EditTravelComponent implements OnInit {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
-        id: this.count + 1,
+        id: 'temp_' + this.count + 1,
         title: "Eliminar",
         action_method: "deleteTravels",
         disable: false
@@ -314,7 +310,7 @@ export class EditTravelComponent implements OnInit {
     })
 
     this.traverlsDestination.push({
-      travel_id: this.count + 1,
+      travel_id: 'temp_' + this.count + 1,
       transport_id: modelPartial.id_transport,
       origin_location_id: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,

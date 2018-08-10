@@ -26,7 +26,7 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button id="btn-travelManagement" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#travelManagement">
+              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newHotel()">
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                 Nuevo Hotel
               </button>
@@ -36,42 +36,42 @@
       </div>
     </div>
     <div class="row justify-content-center top-containter">
-      <div class="col-12">
-        <div class="widget bg-white-1x">
+      <div class="col-12 col-lg-">
+        <div class="widget bg-white-1x"  *ngFor="let hotel of objectHotels">
           <div class="row align-items-center">
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                  Id # 22
+                 Código # {{hotel.id}}
                 </span>
               </h5>
-              <p>
+              <!-- <p>
                 <i class="fa fa-clock-o"></i>
                 Creada el 01/01/2018
-              </p>
+              </p> -->
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
               <h3 class="font-color-default">
-                Hotel la cascada
+                {{hotel.name}}
               </h3>
             </div>
             <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
-              <p class="font-title-general">
+              <!-- <p class="font-title-general">
                 Pais
               </p>
               <p class="">
                 <i class="fa fa-user fa-fw text-primary-hr"></i>
                 Colombia
-              </p>
+              </p> -->
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
-              <p class="font-title-general">
+              <!-- <p class="font-title-general">
                 Estado y/o Ciudad
               </p>
               <p class="">
                 <i class="fa fa-user fa-fw text-primary-hr"></i>
                 Cundinamarca / Bogota
-              </p>
+              </p> -->
             </div>
 
             <div class="col-lg-2 col-md-3 col-12 text-center top-p">
@@ -79,7 +79,10 @@
                 <div class="col-6 number-size text-success text-center" (click)="viewHotels('')">
                   <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div class="col-6 number-size text-danger" id="hideTrash" *ngIf="true" style="cursor: pointer" (click)="deleteHotels('')">
+                <div *ngIf="hotel.is_delete"  class="col-6 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteHotels(hotel)">
+                  <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                </div>
+                <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-6 number-size" id="hideTrash" style="cursor: no-drop">
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
                 <div class="col-6">
@@ -96,3 +99,5 @@
     </div>
   </div>
 </div>
+
+<app-new-hotel></app-new-hotel>
