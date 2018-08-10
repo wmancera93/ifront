@@ -13,7 +13,7 @@ export class TrainingComponent implements OnInit {
   public dataTabletraining: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: EventEmitter<any> = new EventEmitter();
-
+  token = true;
 
   constructor(public trainingService: TrainingService,
     private accionDataTableService: DataDableSharedService) {
