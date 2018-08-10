@@ -89,13 +89,15 @@ export class DynamicFormComponent implements OnInit {
           if (data.value_to_change.toString() !== element.value.toString()) {
             objectSend.push({
               id: data.id,
-              value_to_change: data.value_to_change
+              value_to_change: data.value_to_change,
+              count: 0
             })
           }
 
         }
       });
     })
+    
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
