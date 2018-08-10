@@ -16,9 +16,9 @@
   <div class="row-hr-container justify-content-left">
     <div class="col-12">
       <div class="row justify-content-left">
-        <div class="col five-col-no" style="margin-left: -15px;" *ngFor="let button of buttonInfo;" (mouseleave)="closeTooltip()"
+        <div routerLink="{{button.route}}" class="col five-col-no" style="margin-left: -15px;" *ngFor="let button of buttonInfo;" (mouseleave)="closeTooltip()"
         (mouseover)="showTooltip($event,button)">
-          <div class="widget-travel wg-hover-bg  bg-white height-notification-travel cursor-general" style="padding-top:25px;" routerLink="{{button.route}}">
+          <div class="widget-travel wg-hover-bg  bg-white height-notification-travel cursor-general" style="padding-top:25px;" >
             <div class="row justify-content-center" >
               <div class="col-12 fontName top-general-p" style="font-size: 16px;">
                 <div class="row align-items-center" >
