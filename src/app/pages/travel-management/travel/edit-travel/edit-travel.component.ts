@@ -368,6 +368,7 @@ export class EditTravelComponent implements OnInit {
 
   }
 
+  
 
   colapseNew() {
     if (!this.bnew) {
