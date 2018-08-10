@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Creación de hoteles</h5>
-        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeHotels" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -40,8 +40,7 @@
                   <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                   <a>Ciudad:</a>
                 </label>
-                <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_city']"
-                  (change)="searchTerminal(formHotels.value, 'new')">
+                <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_city']">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
                 </select>
@@ -51,7 +50,17 @@
                   <i class="fa fa-fw fa-hotel text-primary-hr"></i>
                   <a>Nombre del hotel:</a>
                 </label>
-                <input [attr.disabled]="(formHotels.controls.id_state == '-1' || formHotels.controls.id_city == '-1') ? true : null" type="text" class="form-control" [formControl]="formHotels.controls['name_hotel']">
+                <input [attr.disabled]="(formHotels.value.id_country == -1 || formHotels.value.id_state == -1 || formHotels.value.id_city == -1 || formHotels.value.id_state == ''|| formHotels.value.id_city == '') ? true : null"
+                  type="text" class="form-control" [formControl]="formHotels.controls['name_hotel']">
+              </div>
+            </div>
+            <div class="row justify-content-end" style="margin-top: 30px">
+              <div class="col-lg-3 col-md-4 col-12">
+                <button [attr.disabled]="(formHotels.value.id_country == -1 || formHotels.value.id_state == -1 || formHotels.value.id_city == -1 || formHotels.value.id_state == ''|| formHotels.value.id_city == '' || formHotels.value.name_hotel == '') ? true : null"
+                  type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
+                  <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
+                <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
               </div>
             </div>
           </div>

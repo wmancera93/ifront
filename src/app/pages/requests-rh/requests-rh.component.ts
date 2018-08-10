@@ -81,7 +81,7 @@ export class RequestsRhComponent implements OnInit {
               },
               (error: any) => {
                 // tslint:disable-next-line:max-line-length
-                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.error.errors.toString(), confirmation: false }];
+                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               }
             );
