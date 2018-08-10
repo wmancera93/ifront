@@ -70,7 +70,6 @@ export class MasterDataComponent implements OnInit {
         let dataMasterEdit = {
           employee_master_data: object
         }
-        console.log(dataMasterEdit)
         if (dataMasterEdit.employee_master_data.length == 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
