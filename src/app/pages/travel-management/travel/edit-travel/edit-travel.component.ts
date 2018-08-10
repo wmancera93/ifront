@@ -331,11 +331,6 @@ export class EditTravelComponent implements OnInit {
     document.getElementById("edit_funtionTravel").click();
   }
 
-
-
-
-
-
   editTravels(param: any) {
     if (param !== undefined) {
       this.formTravelManagement = new FormGroup({});
