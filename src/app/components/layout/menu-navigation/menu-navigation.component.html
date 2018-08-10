@@ -224,7 +224,7 @@
           <span class="nav-label">Gestión de viajes</span>
         </a>
       </li>
-      <li id="liEventsManagement" >
+      <li id="liEventsManagement" *ngIf="dataEnterprise.show_event_management">
         <a id="aEventsManagement" class="nav-link bg-menu" data-toggle="collapse" href="#eventsManagement" (click)="clickOptionMenu('liEventsManagement','toggle-eventsManagement', 'eventsManagement')">
           <i class="fa fa-flag"></i>
           <span class="nav-label">Gestión de eventos</span>

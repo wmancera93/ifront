@@ -64,7 +64,6 @@ export class MasterDataComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
-      debugger
       if (object[0].count === 0) {
         object[0].count += 1;
         let dataMasterEdit = {
