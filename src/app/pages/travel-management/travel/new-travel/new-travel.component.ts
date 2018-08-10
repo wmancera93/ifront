@@ -63,13 +63,17 @@ export class NewTravelComponent implements OnInit {
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
     public alert: AlertsService) {
 
+    this.travelProof = [{
+      success: true,
+      data: [{ data: [] }]
+    }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if(data === 'continueTravelRequests'){
+      if (data === 'continueTravelRequests') {
         document.getElementById("btn_travel_new").click();
       }
     })
 
-   this.fileUploadService.getObjetFile().subscribe((data) => {
+    this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
         setTimeout(() => {
@@ -110,17 +114,20 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
-
-      document.getElementById("btn_travel_new").click();
-      if (data) {
-        this.clearFormGeneral();
-        if (this.bnew || this.bedit) {
-          document.getElementById("funtionTravel").click();
-          this.bnew = false;
-          this.bedit = false;
+      if (document.getElementById('travel_new').className !== 'modal show') {
+        document.getElementById("btn_travel_new").click();
+        if (data) {
+          this.clearFormGeneral();
+          if (this.bnew || this.bedit) {
+            document.getElementById("funtionTravel").click();
+            this.bnew = false;
+            this.bedit = false;
+          }
         }
+
+
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
-      document.getElementById('bodyGeneral').removeAttribute('style');
     })
 
   }
@@ -155,6 +162,7 @@ export class NewTravelComponent implements OnInit {
     this.showSubmit = false;
     this.send = true;
 
+
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
@@ -178,7 +186,7 @@ export class NewTravelComponent implements OnInit {
         },
         (error: any) => {
           document.getElementById("closeTravels").click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation : 'continueTravelRequests'}];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
         }
@@ -223,8 +231,13 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.count += 1
-    this.objectReport.emit(this.travelProof[0]);
+
+    setTimeout(() => {
+      this.objectReport.emit(this.travelProof[0]);
+    }, 500);
+    
     this.closeTrip();
+
   }
   editTravels(param: any) {
     this.formTravelManagement = new FormGroup({});
@@ -272,6 +285,7 @@ export class NewTravelComponent implements OnInit {
     this.bedit = false;
     this.bnew = false;
     this.send = false;
+    document.getElementById("funtionTravel").click();
     this.clearFormPartial();
   }
 
@@ -443,10 +457,9 @@ export class NewTravelComponent implements OnInit {
       }]
 
     });
-
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 50);
+    }, 100);
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
