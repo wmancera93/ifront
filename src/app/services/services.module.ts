@@ -49,6 +49,7 @@ import { TravelsService } from './shared/travels/travels.service';
 import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
 import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
 import { TrainingService } from './training/training.service';
+import { TrainingSharedService } from './shared/common/training-events/training-shared.service';
 
 @NgModule({
   imports: [
@@ -100,7 +101,8 @@ import { TrainingService } from './training/training.service';
     TravelsService,
     TooltipSharedService,
     PerformanceEvalSharedService,
-    TrainingService
+    TrainingService,
+    TrainingSharedService
     
   ]
 })
