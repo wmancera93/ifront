@@ -276,7 +276,6 @@ export class EditTravelComponent implements OnInit {
   }
 
   newEditTravel(model) {
-    debugger
     this.showSubmit = false;
     this.send = true;
 

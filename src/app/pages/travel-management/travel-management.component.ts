@@ -44,7 +44,7 @@ export class TravelManagementComponent implements OnInit {
       icon_primary: "fa fa-money",
       icon_secundary: "",
       tooltipText: "Haga clic aquí para asignar anticipos",
-      route: ""
+      route: "/ihr/advances"
     },
     {
       title: "Gastos",

@@ -81,14 +81,14 @@ export class NewHotelComponent implements OnInit {
   }
 
   newHotel(param: any) {
-    const hotel = [
-      {
-        hotels: [{
-          geographic_location_id: param.id_city,
-          name: param.name_hotel
-        }]
-      }
-    ]
+    const hotel =
+    {
+      hotels: [{
+        geographic_location_id: param.id_city,
+        name: param.name_hotel
+      }]
+    }
+    
     this.hotelsService.postHotelsByCompany(hotel).subscribe(
       (data: any) => {
         if (data.success) {
