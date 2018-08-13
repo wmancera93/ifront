@@ -189,6 +189,7 @@ export class NewTravelComponent implements OnInit {
             document.getElementById("closeTravels").click();
             const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente', confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
             this.travelsService.setResultSaved(true);
           }
         },
@@ -272,37 +273,36 @@ export class NewTravelComponent implements OnInit {
       this.closeTrip();
     }
   }
+  
+  // editTravels(param: any) {
+  //   this.formTravelManagement = new FormGroup({});
+  //   this.formTravelManagement = this.fb.group({
+  //     id_travel: param.id_travel,
+  //     trip_text: param.trip_text,
+  //     id_transport: param.id_transport,
+  //     id_city: param.id_city,
+  //     id_country: param.id_country,
+  //     id_state: param.id_state,
+  //     id_terminal: param.id_terminal,
+  //     date_begin: param.date_begin,
+  //     hour_begin: param.hour_begin,
+  //     hour_end: param.hour_end,
+  //     date_end: param.date_end,
+  //     id_terminalto: param.id_terminalto,
+  //     id_cityto: param.id_cityto,
+  //     id_stateto: param.id_stateto,
+  //     id_countryto: param.id_countryto,
+  //     id_hotels: param.id_hotels,
+  //   });
+  //   this.searchState(param, 'edit');
+  //   this.searchStateto(param, 'edit');
+  //   this.searchCity(param, 'edit');
+  //   this.searchCityto(param, 'edit');
+  //   this.searchTerminal(param, 'edit');
+  //   this.searchTerminalto(param, 'edit');
+  //   this.searchHotel(param, 'edit');
+  // }
 
-
-
-  editTravels(param: any) {
-    this.formTravelManagement = new FormGroup({});
-    this.formTravelManagement = this.fb.group({
-      id_travel: param.id_travel,
-      trip_text: param.trip_text,
-      id_transport: param.id_transport,
-      id_city: param.id_city,
-      id_country: param.id_country,
-      id_state: param.id_state,
-      id_terminal: param.id_terminal,
-      date_begin: param.date_begin,
-      hour_begin: param.hour_begin,
-      hour_end: param.hour_end,
-      date_end: param.date_end,
-      id_terminalto: param.id_terminalto,
-      id_cityto: param.id_cityto,
-      id_stateto: param.id_stateto,
-      id_countryto: param.id_countryto,
-      id_hotels: param.id_hotels,
-    });
-    this.searchState(param, 'edit');
-    this.searchStateto(param, 'edit');
-    this.searchCity(param, 'edit');
-    this.searchCityto(param, 'edit');
-    this.searchTerminal(param, 'edit');
-    this.searchTerminalto(param, 'edit');
-    this.searchHotel(param, 'edit');
-  }
   colapseNew() {
     if (!this.bnew) {
       this.bnew = true
@@ -318,7 +318,6 @@ export class NewTravelComponent implements OnInit {
   closeTrip() {
     this.is_collapse = false;
     this.showSubmit = true;
-    this.bedit = false;
     this.bnew = false;
     this.send = false;
     document.getElementById("funtionTravel").click();
