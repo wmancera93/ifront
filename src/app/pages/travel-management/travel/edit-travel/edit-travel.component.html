@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viajes</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="close_edit_travel" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -224,7 +224,7 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
+                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"/>
                     </div>
                   </div>
                 </div>
@@ -291,14 +291,14 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final de Viaje *</a>
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" />
+                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"/>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" />
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"/>
                     </div>
                   </div>
                 </div>
@@ -319,12 +319,27 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="!bedit">
-                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
+                      <button [attr.disabled]="
+                      (formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_city == -1
+                        || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.date_begin == ''
+                        || formTravelManagement.value.hour_begin == ''
+                        || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_cityto == -1
+                        || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.date_end == ''
+                        || formTravelManagement.value.hour_end == ''
+                        || formTravelManagement.value.id_hotels == -1) ? true : null" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
                         data-target="#collapseTravel">
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino
+                      </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="bedit">
-                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
+                      <button class="btn btn-primary btn-block cursor-general" (click)="EditDestination(formTravelManagement.value)" data-toggle="collapse"
                         data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
@@ -342,7 +357,7 @@
 
         <div class="row justify-content-end" style="margin-top: 30px">
           <div class="col-lg-3 col-md-4 col-12">
-            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
+            <button  type="submit"  *ngIf="showSubmit && activate" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>

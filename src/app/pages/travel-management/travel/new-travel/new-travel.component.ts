@@ -54,6 +54,9 @@ export class NewTravelComponent implements OnInit {
   public is_upload: boolean = false;
   public count: number = 0;
   public file: any[] = [];
+  public dayResult: number;
+  public dayResultE: number;
+  public activate: boolean = false;
 
 
 
@@ -71,6 +74,11 @@ export class NewTravelComponent implements OnInit {
       if (data === 'continueTravelRequests') {
         document.getElementById("btn_travel_new").click();
       }
+      if (data === 'continueDestinationRequests') {
+        document.getElementById("btn_travel_new").click();
+        document.getElementById("funtionTravel").click();
+      }
+
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -118,7 +126,7 @@ export class NewTravelComponent implements OnInit {
         document.getElementById("btn_travel_new").click();
         if (data) {
           this.clearFormGeneral();
-          if (this.bnew || this.bedit) {
+          if (this.bnew) {
             document.getElementById("funtionTravel").click();
             this.bnew = false;
             this.bedit = false;
@@ -197,49 +205,76 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    this.travelProof[0].data[0].data.push({
-      field_0: this.count + 1,
-      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
-      field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
-      field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
-      field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
-      field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-      field_10: {
-        type_method: "DELETE",
-        type_element: "button",
-        icon: "fa-trash",
-        id: this.count + 1,
-        title: "Eliminar",
-        action_method: "deleteTravels",
-        disable: false
-      }
-    })
-
-    this.traverlsDestination.push({
-      travel_id: this.count + 1,
-      transport_id: modelPartial.id_transport,
-      origin_location_id: modelPartial.id_city,
-      origin_terminal_id: modelPartial.id_terminal,
-      hotel_id: modelPartial.id_hotels,
-      destination_location_id: modelPartial.id_cityto,
-      destination_terminal_id: modelPartial.id_terminalto,
-      origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
-    });
-
-    this.count += 1
-
-    setTimeout(() => {
-      this.objectReport.emit(this.travelProof[0]);
-    }, 500);
     
-    this.closeTrip();
+    this.activate = true;
 
+    let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
+    let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
+   
+    let dateBeginCalculate = dateBegin.toString().replace('-', '').replace('-', '');
+    let dateEndCalculate = dateEnd.toString().replace('-', '').replace('-', '');
+
+    this.dayResult = dateEndCalculate - dateBeginCalculate;
+
+    if (this.dayResult < 0) {
+      document.getElementById("btn_travel_new").click();
+      const alertDataWrong: Alerts[] = [{
+        type: 'danger',
+        title: 'Error',
+        message: 'La fecha de origen no puede ser mayor a la de destino',
+        confirmation: true,
+        typeConfirmation: 'continueDestinationRequests'
+      }];
+      this.alert.setAlert(alertDataWrong[0])
+
+    }
+    else {
+
+      this.travelProof[0].data[0].data.push({
+        field_0: this.count + 1,
+        field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+        field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+        field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
+        field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+        field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+        field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
+        field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+        field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
+        field_10: {
+          type_method: "DELETE",
+          type_element: "button",
+          icon: "fa-trash",
+          id: this.count + 1,
+          title: "Eliminar",
+          action_method: "deleteTravels",
+          disable: false
+        }
+      })
+
+      this.traverlsDestination.push({
+        travel_id: this.count + 1,
+        transport_id: modelPartial.id_transport,
+        origin_location_id: modelPartial.id_city,
+        origin_terminal_id: modelPartial.id_terminal,
+        hotel_id: modelPartial.id_hotels,
+        destination_location_id: modelPartial.id_cityto,
+        destination_terminal_id: modelPartial.id_terminalto,
+        origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+        destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
+      });
+
+      this.count += 1
+
+      setTimeout(() => {
+        this.objectReport.emit(this.travelProof[0]);
+      }, 500);
+
+      this.closeTrip();
+    }
   }
-  
+
+
+
   editTravels(param: any) {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({

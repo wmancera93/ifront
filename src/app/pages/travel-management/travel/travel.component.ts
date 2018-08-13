@@ -18,6 +18,7 @@ export class TravelComponent implements OnInit {
   public my_travels_list: any[] = [];
   public token: boolean;
   public alertWarning: any[] = [];
+  public id_requests_travel: string;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -28,10 +29,26 @@ export class TravelComponent implements OnInit {
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
+      document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
       if (data === 'deletRequestTravel') {
-        this.travelService.getTravelRequests().subscribe((data: any) => {
-          this.my_travels_list = data.data[0].my_travel_requests_list;
-        });
+        this.travelService.deleteTravelById(this.id_requests_travel).subscribe(
+          (data: any) => {
+            this.alertWarning = [{
+              type: 'success',
+              title: 'Solicitud exitosa',
+              message: 'La solicitud de viaje se elimino correctamente',
+              confirmation: false,
+            }];
+            this.alert.setAlert(this.alertWarning[0]);
+            this.travelService.getTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          },
+          (error: any) => {
+            const alertWarning = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+          });
+        
       }
     })
 
@@ -71,7 +88,7 @@ export class TravelComponent implements OnInit {
     this.travelService.getTravelRequests().subscribe((data: any) => {
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
-  
+
   }
 
   returnBackPage() {
@@ -91,19 +108,15 @@ export class TravelComponent implements OnInit {
   }
 
   deleteTravels(id: string) {
-    this.travelService.deleteTravelById(id).subscribe(
-      (data: any) => {
-        this.alertWarning = [{
-          type: 'warning',
-          title: 'Confirmación',
-          message: '¿Desea eliminar la solicitud de viaje con ticket #' + id.toString() + '?',
-          confirmation: true,
-          typeConfirmation: 'deletRequestTravel'
-        }];
-        this.alert.setAlert(this.alertWarning[0]);
-      },
-      (error: any) => {
-        alert('eliminado no');
-      });
+    this.id_requests_travel=id;
+    this.alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar la solicitud de viaje con ticket #' + id.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deletRequestTravel'
+    }];
+    this.alert.setAlert(this.alertWarning[0]);
+    
   }
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
+import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 
 @Injectable()
 export class HotelsService {
 
-  constructor(private tokenService: Angular2TokenService) { }
+  constructor(private tokenService: Angular2TokenService, public http: HttpClient) { }
 
   getshowHotels(id_city) {
     return this.tokenService.get('geographic_locations/show_hotels/' + id_city)
@@ -22,7 +23,7 @@ export class HotelsService {
   }
 
   deleteHotelsByCompany(objectHotelsDelete: any) {
-    return this.tokenService.delete('hotels', objectHotelsDelete)
+    return this.tokenService.delete('hotels/destroy_hotels', objectHotelsDelete)
       .map((data: any) => data.json());
   }
 }

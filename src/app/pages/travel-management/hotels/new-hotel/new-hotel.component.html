@@ -19,7 +19,7 @@
                   <a>País:</a>
                 </label>
                 <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_country']"
-                  (change)="searchState(formHotels.value, 'new')">
+                  (change)="searchState(formHotels.value)">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
                 </select>
@@ -30,7 +30,7 @@
                   <a>Estado:</a>
                 </label>
                 <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_state']"
-                  (change)="searchCity(formHotels.value, 'new')">
+                  (change)="searchCity(formHotels.value)">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                 </select>
@@ -56,8 +56,14 @@
             </div>
             <div class="row justify-content-end" style="margin-top: 30px">
               <div class="col-lg-3 col-md-4 col-12">
-                <button [attr.disabled]="(formHotels.value.id_country == -1 || formHotels.value.id_state == -1 || formHotels.value.id_city == -1 || formHotels.value.id_state == ''|| formHotels.value.id_city == '' || formHotels.value.name_hotel == '') ? true : null"
-                  type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
+                <button [attr.disabled]="
+                (formHotels.value.id_country == -1 
+                || formHotels.value.id_state == -1 
+                || formHotels.value.id_city == -1 
+                || formHotels.value.id_state == ''
+                || formHotels.value.id_city == '' 
+                || formHotels.value.name_hotel == ''
+                ) ? true :null" type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
                   <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
                 <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
                   <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>

@@ -53,6 +53,7 @@ import { TravelComponent } from './travel-management/travel/travel.component';
 import { HotelsComponent } from './travel-management/hotels/hotels.component';
 import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
 import { TrainingComponent } from './events-management/training/training.component';
+import { AdvancesComponent } from './travel-management/advances/advances.component';
 
 const routes: Routes = [
     {
@@ -257,8 +258,11 @@ const routes: Routes = [
     {
         path:'training',
         component: TrainingComponent
+    },
+    {
+        path:'advances',
+        component: AdvancesComponent        
     }
-    
 ];
 
 @NgModule({

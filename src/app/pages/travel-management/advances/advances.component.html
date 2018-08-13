@@ -2,8 +2,8 @@
   <div class="col-12">
     <div class="row justify-content-center">
       <div class="col-xl-10 col-md-8 col-7 text-left title">
-        <i class="fa fa-hotel"></i>
-        Asignacion de hoteles
+        <i class="fa fa-money"></i>
+        Anticipos
       </div>
       <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
         <div class="buttonBack img-zoom" (click)="returnBackPage()">
@@ -26,9 +26,9 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newHotel()">
+              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" >
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                Nuevo Hotel
+                Nuevo Anticipo
               </button>
             </div>
           </div>
@@ -37,32 +37,32 @@
     </div>
     <div class="row justify-content-center top-containter">
       <div class="col-12">
-        <div class="widget bg-white-1x"  *ngFor="let hotel of objectHotels">
+        <div class="widget bg-white-1x" >
           <div class="row align-items-center">
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                 Código # {{hotel.id}}
+                 Código # 1
                 </span>
               </h5>
-              <!-- <p>
+              <p>
                 <i class="fa fa-clock-o"></i>
                 Creada el 01/01/2018
-              </p> -->
+              </p>
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
               <h3 class="font-color-default">
-                {{hotel.name}}
+                Importe: $580.000
               </h3>
             </div>
             <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
-              <!-- <p class="font-title-general">
-                Pais
+              <p class="font-title-general">
+                Moneda
               </p>
               <p class="">
                 <i class="fa fa-user fa-fw text-primary-hr"></i>
-                Colombia
-              </p> -->
+                Dolar US
+              </p>
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
               <!-- <p class="font-title-general">
@@ -76,12 +76,12 @@
 
             <div class="col-lg-2 col-md-3 col-12 text-center top-p">
               <div class="row justify-content-center">
-                <div *ngIf="hotel.is_delete"  class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteHotels(hotel)">
+                 <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" >
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
+               <!--<div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
-                </div>
+                </div> -->
                 <div class="col-12">
                   Eliminar
                 </div>
@@ -93,5 +93,3 @@
     </div>
   </div>
 </div>
-
-<app-new-hotel></app-new-hotel>
