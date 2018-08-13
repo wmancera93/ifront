@@ -82,6 +82,7 @@ import { PlanningEvaluationComponent } from './performance-evaluation/planning-e
 import { EditPlanningDateComponent } from './performance-evaluation/planning-evaluation/edit-planning-date/edit-planning-date.component';
 import { TrainingComponent } from './events-management/training/training.component';
 import { ViewTrainingComponent } from './events-management/training/view-training/view-training.component';
+import { AdvancesComponent } from './travel-management/advances/advances.component';
 
 
 @NgModule({
@@ -163,6 +164,7 @@ import { ViewTrainingComponent } from './events-management/training/view-trainin
     EditPlanningDateComponent,
     TrainingComponent,
     ViewTrainingComponent,
+    AdvancesComponent,
 
   ],
   providers: [
