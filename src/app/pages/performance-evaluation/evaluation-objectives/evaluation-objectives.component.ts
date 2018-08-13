@@ -12,8 +12,8 @@ export class EvaluationObjectivesComponent implements OnInit {
   public evaluationPerformanceList: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
   token
-  
-  constructor(public performanceEvaluationService: PerformanceEvaluationService, 
+
+  constructor(public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService) {
 
 
@@ -26,12 +26,9 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   }
 
-  goToModalEval(infoEval: any)
-  {
+  goToModalEval(infoEval: any) {
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
-  showModalObjetivesEva() {
-    document.getElementById('btn-evaluationObjetives').click();     
-  }
+
 
 }

@@ -69,6 +69,8 @@ export class EditTravelComponent implements OnInit {
   public id_destinations: number = 0;
   public dayResult: number;
   public dayResultE: number;
+  public activate: boolean = false;
+
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -127,8 +129,15 @@ export class EditTravelComponent implements OnInit {
         document.getElementById("btn_travel_edit").click();
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
-
-
+      if (data) {
+        this.clearFormGeneral();
+        if (this.bnew || this.bedit) {
+          document.getElementById("edit_funtionTravel").click();
+          this.bnew = false;
+          this.bedit = false;
+        }
+      }
+    
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         if (result.success) {
@@ -156,7 +165,7 @@ export class EditTravelComponent implements OnInit {
           });
           setTimeout(() => {
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
-          }, 100);
+          }, 50);
 
 
         }
@@ -209,7 +218,7 @@ export class EditTravelComponent implements OnInit {
           })
           setTimeout(() => {
             this.editTravels(this.formTravelManagementedit);
-          }, 1000);
+          }, 500);
 
           this.destination_is_edit = true;
         }
@@ -304,6 +313,8 @@ export class EditTravelComponent implements OnInit {
 
   addDestination(modelPartial) {
 
+    this.activate = true;
+
     let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
     let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
     let hourBegin = modelPartial.hour_begin == null ? '' : modelPartial.hour_begin;
@@ -386,7 +397,8 @@ export class EditTravelComponent implements OnInit {
 
 
   EditDestination(modelEditPartial) {
-    debugger
+    this.activate = true;
+
     let dateBeginE = modelEditPartial.date_begin == null ? '' : modelEditPartial.date_begin;
     let dateEndE = modelEditPartial.date_end == null ? '' : modelEditPartial.date_end;
     let hourBeginE = modelEditPartial.hour_begin == null ? '' : modelEditPartial.hour_begin;
@@ -421,7 +433,7 @@ export class EditTravelComponent implements OnInit {
       }];
       this.alert.setAlert(alertDataWrong[0])
 
-    }else{
+    } else {
       if (dateBeginE !== '' && dateEndE !== '' && hourBeginE !== '' && hourEndE !== '') {
 
         this.generalViajes[0].travel_managements.data.forEach(element => {
@@ -437,9 +449,9 @@ export class EditTravelComponent implements OnInit {
             element.field_9 = '';
           }
         });
-  
+
         this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destinations), 1);
-  
+
         this.traverlsDestination.push({
           travel_id: this.id_destinations,
           transport_id: modelEditPartial.id_transport,
@@ -451,18 +463,18 @@ export class EditTravelComponent implements OnInit {
           origin_datetime: modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin,
           destination_datetime: modelEditPartial.date_end + ' ' + modelEditPartial.hour_end
         });
-  
+
         setTimeout(() => {
           this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
         }, 100);
-  
+
         this.closeTrip();
         document.getElementById("edit_funtionTravel").click();
         this.id_destinations = 0;
       }
     }
-    
-   
+
+
   }
 
   editTravels(param: any) {

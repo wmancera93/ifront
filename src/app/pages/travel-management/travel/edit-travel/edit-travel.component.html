@@ -319,9 +319,24 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="!bedit">
-                      <button class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
+                      <button [attr.disabled]="
+                      (formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_city == -1
+                        || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.date_begin == ''
+                        || formTravelManagement.value.hour_begin == ''
+                        || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_cityto == -1
+                        || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.date_end == ''
+                        || formTravelManagement.value.hour_end == ''
+                        || formTravelManagement.value.id_hotels == -1) ? true : null" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
                         data-target="#collapseTravel">
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino
+                      </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="bedit">
                       <button class="btn btn-primary btn-block cursor-general" (click)="EditDestination(formTravelManagement.value)" data-toggle="collapse"
@@ -342,7 +357,7 @@
 
         <div class="row justify-content-end" style="margin-top: 30px">
           <div class="col-lg-3 col-md-4 col-12">
-            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
+            <button  type="submit"  *ngIf="showSubmit && activate" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>

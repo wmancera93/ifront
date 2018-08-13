@@ -88,7 +88,7 @@ export class TravelComponent implements OnInit {
     this.travelService.getTravelRequests().subscribe((data: any) => {
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
-  
+
   }
 
   returnBackPage() {

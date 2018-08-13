@@ -7,6 +7,7 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { start } from 'repl';
 
 
 @Component({
@@ -25,9 +26,9 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public edithObjectivesTable: any[] = [];
   public bedit: boolean = false;
   public bnew: boolean = false;
+  public idEdit: number;
   public showSubmit = true;
   public formObjetive: any;
-  public idEdit: number;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public is_collapse: boolean = false;
@@ -40,6 +41,13 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService,
     public alert: AlertsService) {
 
+    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
+      this.EvaluacionPer = info;
+      this.qualifierData = info.qualifier;
+      this.idEvaluation = this.EvaluacionPer.id;
+      document.getElementById('btn-evaluationObjetives').click();
+      document.getElementById('bodyGeneral').removeAttribute('style');
+    })
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
     this.formObjetive = fb.group({
@@ -50,27 +58,20 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      console.log(data)
-      if (!this.bedit) {
-        if (!this.bnew) {
-          document.getElementById("funtionObjectives").click();
-          this.bedit = true;
-        } else {
-          this.bnew = false
-          this.bedit = true;
-        }
-      }
-
-      if ((data.action_method === "updateEvaluationObjetive") && (this.bedit === true)) {
-        this.formObjetive = new FormGroup({});
-        // this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID:any)=>{
-        //   console.log(dataID)
-        // })
-        this.formObjetive = fb.group({
-          start_date: '2018-02-28',
-          end_date: '2018-02-28',
-          weight: '20.0 %',
-          objetive_text: data.id,
+      if (data.action_method === "updateEvaluationObjetive") {
+        document.getElementById("funtionObjectives").click();
+        this.idEdit = data.id;
+        this.bedit = true;
+        this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
+          let startDate = dataID.data.start_date_obj.split("-");
+          let endDate = dataID.data.end_date_obj.split("-");
+          this.formObjetive = new FormGroup({});
+          this.formObjetive = fb.group({
+            start_date: (startDate[2] + "-" + startDate[1] + "-" + startDate[0]).toString(),
+            end_date: (endDate[2] + "-" + endDate[1] + "-" + endDate[0]).toString(),
+            weight: (dataID.data.weight_value * 100),
+            objetive_text: dataID.data.objetive_text
+          });
         });
       }
       if (data.action_method === "deleteEvaluationObjetive") {
@@ -84,18 +85,9 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           }];
           this.dataTableConsult();
           this.alert.setAlert(alertWarning[0]);
-          this.bedit = true;
-          this.bnew = true;
         })
       }
     });
-
-    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
-      this.EvaluacionPer = info;
-      this.qualifierData = info.qualifier;
-      this.idEvaluation = this.EvaluacionPer.id;      
-      document.getElementById('bodyGeneral').removeAttribute('style');   
-    })
 
     this.dataTableConsult();
   }
@@ -124,29 +116,58 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       end_date: model.end_date,
       weight: model.weight / 100
     };
-    this.performanceEvaluationService.postEvaluationObjetive(this.sendDataObjective).subscribe((info: any) => {
-      this.showSubmit = true;
-      const alertWarning: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: info.message,
-        confirmation: false,
-        typeConfirmation: ''
-      }];
-      this.dataTableConsult();
-      this.alert.setAlert(alertWarning[0]);
-    },
-      (error: any) => {
+    if (this.bedit) {
+      this.performanceEvaluationService.putEvaluationObjetive(this.idEdit, this.sendDataObjective).subscribe((edit: any) => {
+        this.showSubmit = true;
         const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: 'Advertencia',
-          message: error._body.errors,
+          type: 'success',
+          title: 'Confirmación',
+          message: edit.message,
           confirmation: false,
           typeConfirmation: ''
         }];
+        this.dataTableConsult();
         this.alert.setAlert(alertWarning[0]);
+      },
+        (error: any) => {
+          const alertWarning: Alerts[] = [{
+            type: 'danger',
+            title: 'Advertencia',
+            message: error._body.errors,
+            confirmation: false,
+            typeConfirmation: ''
+          }];
+          this.alert.setAlert(alertWarning[0]);
+          this.showSubmit = true;
+        })
+
+    }
+    else {
+      this.performanceEvaluationService.postEvaluationObjetive(this.sendDataObjective).subscribe((info: any) => {
         this.showSubmit = true;
-      })
+        const alertWarning: Alerts[] = [{
+          type: 'success',
+          title: 'Confirmación',
+          message: info.message,
+          confirmation: false,
+          typeConfirmation: ''
+        }];
+        this.dataTableConsult();
+        this.alert.setAlert(alertWarning[0]);
+      },
+        (error: any) => {
+          const alertWarning: Alerts[] = [{
+            type: 'danger',
+            title: 'Advertencia',
+            message: error._body.errors,
+            confirmation: false,
+            typeConfirmation: ''
+          }];
+          this.alert.setAlert(alertWarning[0]);
+          this.showSubmit = true;
+        })
+    }
+
 
   }
   colapseNew() {
@@ -157,6 +178,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     }
     document.getElementById("funtionObjectives").click();
   }
+
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }

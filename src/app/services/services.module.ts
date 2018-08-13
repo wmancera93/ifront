@@ -11,15 +11,15 @@ import { GoogleAnalyticsEventsService } from './google-analytics-events.service'
 import { EmployeeService } from './common/employee/employee.service';
 import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
 import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
-import {MyTeamInfoService} from './my-team/my-team-info.service';
+import { MyTeamInfoService } from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
 import { QueriesService } from './queries/queries.service';
 import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from './common/excel/excel.service';
 import { ReportsHrService } from './reports-rh/reports-hr.service';
-import { AutoServicesService} from './auto-services/auto-services.service'
-import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
+import { AutoServicesService } from './auto-services/auto-services.service'
+import { MyPublicationsService } from './billboard/my-publications/my-publications.service'
 import { RequestsRhService } from './requests-rh/requests-rh.service';
 import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
 import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
@@ -48,11 +48,13 @@ import { HotelsService } from './travel-management/hotels/hotels.service';
 import { TravelsService } from './shared/travels/travels.service';
 import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
 import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
+import { TrainingService } from './training/training.service';
+import { TrainingSharedService } from './shared/common/training-events/training-shared.service';
 import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.service';
 
 @NgModule({
   imports: [
-    CommonModule 
+    CommonModule
   ],
   declarations: [],
   providers: [
@@ -100,6 +102,8 @@ import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.servic
     TravelsService,
     TooltipSharedService,
     PerformanceEvalSharedService,
+    TrainingService,
+    TrainingSharedService,
     HotelsSharedService
   ]
 })

@@ -67,6 +67,7 @@ export class DynamicFormComponent implements OnInit {
 
   sendDynamicForm(form) {
     let objectForm: any[] = [];
+
     let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
 
     for (let index = 0; index < recorrer.length; index++) {
@@ -88,20 +89,21 @@ export class DynamicFormComponent implements OnInit {
           if (data.value_to_change.toString() !== element.value.toString()) {
             objectSend.push({
               id: data.id,
-              value_to_change: data.value_to_change
+              value_to_change: data.value_to_change,
+              count: 0
             })
           }
 
         }
       });
     })
+    
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
   }
 
   detectChange(params: any) {
-
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }

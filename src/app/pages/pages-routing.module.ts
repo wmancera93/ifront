@@ -51,6 +51,8 @@ import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.c
 import { TravelManagementComponent } from './travel-management/travel-management.component';
 import { TravelComponent } from './travel-management/travel/travel.component';
 import { HotelsComponent } from './travel-management/hotels/hotels.component';
+import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
+import { TrainingComponent } from './events-management/training/training.component';
 
 const routes: Routes = [
     {
@@ -224,6 +226,11 @@ const routes: Routes = [
         component: EvaluationObjectivesComponent
     },
     {
+        path: 'planning_evaluation',
+        component: PlanningEvaluationComponent
+    },
+    
+    {
         path: 'time_evaluation',
         component: TimeEvaluationComponent
     },
@@ -246,6 +253,10 @@ const routes: Routes = [
     {
         path:'hotels',
         component: HotelsComponent
+    },
+    {
+        path:'training',
+        component: TrainingComponent
     }
     
 ];

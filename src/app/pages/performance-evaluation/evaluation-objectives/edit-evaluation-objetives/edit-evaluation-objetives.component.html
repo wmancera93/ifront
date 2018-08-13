@@ -1,4 +1,7 @@
-<div class="modal" tabindex="-1" role="dialog" id="EvaluationObjetivesModal">
+<button id="btn-evaluationObjetives" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evaluationObjetives"
+  style="display:none;">
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="modal_evaluationObjetives">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -126,7 +129,7 @@
                   <div class="col-lg-8 col-md-8 col-12">
                     <div class="row text-center">
                       <div class="col-lg-4 col-md-4 col-12">
-                        <!-- <img class="roundPhoto-employee" src="{{qualifier.image.Url}}"> -->
+                        <img class="roundPhoto-employee" src="{{qualifierData.image.Url}}">
                       </div>
                       <div class="col-lg-8 col-md-8 col-12">
                         <label for="nomEvaluation" class="titleColor">
@@ -240,7 +243,6 @@
                           <button class="btn btn-warning btn-block cursor-general" (click)="closeObjetive()" data-toggle="collapse" data-target="#collapseExample">
                             <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
                         </div>
-
                       </div>
                     </div>
                   </form>

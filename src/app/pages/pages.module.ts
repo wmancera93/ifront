@@ -7,7 +7,7 @@ import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
 
@@ -75,10 +75,13 @@ import { TravelComponent } from './travel-management/travel/travel.component';
 import { NewTravelComponent } from './travel-management/travel/new-travel/new-travel.component';
 import { HotelsComponent } from './travel-management/hotels/hotels.component';
 import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hotel.component';
-import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-hotel.component';
-import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
 import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
+import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
+
+import { EditPlanningDateComponent } from './performance-evaluation/planning-evaluation/edit-planning-date/edit-planning-date.component';
+import { TrainingComponent } from './events-management/training/training.component';
+import { ViewTrainingComponent } from './events-management/training/view-training/view-training.component';
 
 
 @NgModule({
@@ -154,11 +157,13 @@ import { ViewTravelComponent } from './travel-management/travel/view-travel/view
     TravelComponent,
     HotelsComponent,
     NewHotelComponent,
-    EditHotelComponent,
-    ViewHotelComponent,
     EditTravelComponent,
     ViewTravelComponent,
-    
+    PlanningEvaluationComponent,
+    EditPlanningDateComponent,
+    TrainingComponent,
+    ViewTrainingComponent,
+
   ],
   providers: [
 

@@ -116,13 +116,17 @@
                         (click)="accionTable(record[key])">
                         <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
-                      <div *ngIf="record[key].type_method == 'UPDATE'" class="cursor-general text-info text-center" [attr.disabled]="record[key].disable"
+                      <div *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT' " class="cursor-general text-info text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div *ngIf="record[key].type_method == 'PRINT'" class="cursor-general text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
                         <i class="fa  fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
+                      </div>
+                      <div *ngIf="record[key].type_method == 'CONVENIO'" class="cursor-general text-danger text-center" [attr.disabled]="record[key].disable"
+                        (click)="accionTable(record[key])">
+                        <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div *ngIf="record[key].type_method == 'DELETE'" class="cursor-general text-danger text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
