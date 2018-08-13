@@ -88,13 +88,14 @@ export class NewHotelComponent implements OnInit {
         name: param.name_hotel
       }]
     }
-    
+
     this.hotelsService.postHotelsByCompany(hotel).subscribe(
       (data: any) => {
         if (data.success) {
           document.getElementById("closeHotels").click();
           const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Hotel generado correctamente', confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
+          this.hotelsSharedService.setViewHotels(true);
         }
       },
       (error: any) => {
