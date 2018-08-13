@@ -125,6 +125,7 @@ export class EditTravelComponent implements OnInit {
 
     this.travelsService.getEditTravels().subscribe((data) => {
       this.ticket = data;
+      this.activate = false;
       if (document.getElementById('travel_edit').className !== 'modal show') {
         document.getElementById("btn_travel_edit").click();
         document.getElementById('bodyGeneral').removeAttribute('style');
@@ -137,7 +138,7 @@ export class EditTravelComponent implements OnInit {
           this.bedit = false;
         }
       }
-    
+
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         if (result.success) {
@@ -275,6 +276,7 @@ export class EditTravelComponent implements OnInit {
   }
 
   newEditTravel(model) {
+    debugger
     this.showSubmit = false;
     this.send = true;
 
@@ -317,8 +319,7 @@ export class EditTravelComponent implements OnInit {
 
     let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
     let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
-    let hourBegin = modelPartial.hour_begin == null ? '' : modelPartial.hour_begin;
-    let hourEnd = modelPartial.hour_end == null ? '' : modelPartial.hour_end;
+
 
 
     let dateBeginCalculate = dateBegin.toString().replace('-', '').replace('-', '');
@@ -326,18 +327,7 @@ export class EditTravelComponent implements OnInit {
 
     this.dayResult = dateEndCalculate - dateBeginCalculate;
 
-    if (dateBegin === '' || dateEnd === '' || hourBegin === '' || hourEnd === '') {
 
-      document.getElementById("btn_travel_edit").click();
-      const alertDataWrong: Alerts[] = [{
-        type: 'danger',
-        title: 'Error',
-        message: 'La fecha y/o Horas de origen o destino, no pueden ir vacias',
-        confirmation: true,
-        typeConfirmation: 'continueEditDestinationRequests'
-      }];
-      this.alert.setAlert(alertDataWrong[0]);
-    }
     if (this.dayResult < 0) {
       document.getElementById("btn_travel_edit").click();
       const alertDataWrong: Alerts[] = [{
