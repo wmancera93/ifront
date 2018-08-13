@@ -49,8 +49,5 @@ export class TravelService {
     return this.tokenService.delete('travel_requests/destroy_file/' + id + '/' + id_requests_tarvels)
       .map((data: any) => data.json());
   }
-  putEditTravel(id_request: any, newEditTravel: any) {
-    return this.tokenService.put('travel_requests/' + id_request, newEditTravel)
-      .map((data: any) => data.json());
-  }
+ 
 }
