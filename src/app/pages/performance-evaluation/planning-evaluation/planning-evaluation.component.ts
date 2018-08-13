@@ -12,7 +12,7 @@ export class PlanningEvaluationComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public evaluationList: any;
   public editDate: boolean = false;
-  token = true;
+  token = false;
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     private accionDataTableService: DataDableSharedService,

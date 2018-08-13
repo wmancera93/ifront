@@ -131,7 +131,7 @@ export class RequestsRhComponent implements OnInit {
   }
 
   modalAprovers(request: ListRequests) {
-    // request.flag_count = true;
+    // request.flag_count = 0;   
     this.aproversRequestsService.setRequests(request);
   }
 

@@ -19,26 +19,23 @@ export class TimeLineApproversComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService) {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
-        // if (data.flag_count) {
-        //   data.flag_count = false;
-          this.requestsRhService.getRequestDetailById(data.ticket)
-            .subscribe((detail: any) => {
-              this.detailRequets = [];
-              if (detail.success) {
-                this.detailRequets = detail.data;
-                this.fileSupport = this.detailRequets[0].request.file_support.url;
+        // if (data.flag_count === 0) {
+        this.requestsRhService.getRequestDetailById(data.ticket)
+          .subscribe((detail: any) => {
+            this.detailRequets = [];
+            if (detail.success) {
+              this.detailRequets = detail.data;
+              this.fileSupport = this.detailRequets[0].request.file_support.url;
 
-                if (document.getElementById('aprovers_requests').className !== 'modal show') {
-                  document.getElementById('btn_aprovers_requests').click();
-                  document.getElementById("bodyGeneral").removeAttribute('style');
-                }
-
-                this.viewModal = true;
+              if (document.getElementById('aprovers_requests').className !== 'modal show') {
+                document.getElementById('btn_aprovers_requests').click();
+                document.getElementById("bodyGeneral").removeAttribute('style');
               }
-            })
+              this.viewModal = true;
+            }
+          })
+        //   data.flag_count += 1;
         // }
-
-
       }
     )
 
