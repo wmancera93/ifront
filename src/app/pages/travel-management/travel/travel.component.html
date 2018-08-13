@@ -127,13 +127,13 @@
                     style="cursor: no-drop">
                     <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4">
+                  <div class="col-4" (click)="viewTravels(travels.ticket)">
                     Ver
                   </div>
-                  <div class="col-4">
+                  <div class="col-4" (click)="editTravels(travels.ticket)">
                     Editar
                   </div>
-                  <div class="col-4">
+                  <div class="col-4" (click)="deleteTravels(travels.ticket)">
                     Eliminar
                   </div>
                 </div>
