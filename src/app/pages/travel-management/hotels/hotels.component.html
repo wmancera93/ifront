@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="row justify-content-center top-containter">
-      <div class="col-12 col-lg-">
+      <div class="col-12">
         <div class="widget bg-white-1x"  *ngFor="let hotel of objectHotels">
           <div class="row align-items-center">
             <div class="col-lg-2 col-md-3 col-12">
@@ -76,19 +76,13 @@
 
             <div class="col-lg-2 col-md-3 col-12 text-center top-p">
               <div class="row justify-content-center">
-                <div class="col-6 number-size text-success text-center" (click)="viewHotels('')">
-                  <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
-                </div>
-                <div *ngIf="hotel.is_delete"  class="col-6 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteHotels(hotel)">
+                <div *ngIf="hotel.is_delete"  class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteHotels(hotel)">
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-6 number-size" id="hideTrash" style="cursor: no-drop">
+                <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div class="col-6">
-                  Ver
-                </div>
-                <div class="col-6">
+                <div class="col-12">
                   Eliminar
                 </div>
               </div>

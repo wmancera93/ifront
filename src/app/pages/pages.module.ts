@@ -75,8 +75,6 @@ import { TravelComponent } from './travel-management/travel/travel.component';
 import { NewTravelComponent } from './travel-management/travel/new-travel/new-travel.component';
 import { HotelsComponent } from './travel-management/hotels/hotels.component';
 import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hotel.component';
-import { EditHotelComponent } from './travel-management/hotels/edit-hotel/edit-hotel.component';
-import { ViewHotelComponent } from './travel-management/hotels/view-hotel/view-hotel.component';
 import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
 import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
 import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
@@ -159,8 +157,6 @@ import { ViewTrainingComponent } from './events-management/training/view-trainin
     TravelComponent,
     HotelsComponent,
     NewHotelComponent,
-    EditHotelComponent,
-    ViewHotelComponent,
     EditTravelComponent,
     ViewTravelComponent,
     PlanningEvaluationComponent,

@@ -27,6 +27,15 @@ export class NewHotelComponent implements OnInit {
     this.hotelsSharedService.getNewHotel().subscribe(
       (data: any) => {
         if (document.getElementById('hotel_new').className !== 'modal show') {
+          this.stateLocations = [];
+          this.cityLocations = []
+          this.formHotels = new FormGroup({});
+          this.formHotels = this.fb.group({
+            id_country: '-1',
+            id_city: '',
+            id_state: '',
+            name_hotel: '',
+          });
           document.getElementById('btn_hotel_new').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }
@@ -48,8 +57,9 @@ export class NewHotelComponent implements OnInit {
       })
   }
 
-  searchState(form: any, acction: any) {
+  searchState(form: any) {
     this.stateLocations = [];
+    this.cityLocations = []
     this.travelManagementService.getgeographicLocations(form.id_country).subscribe(
       (data: any) => {
         this.stateLocations = data.data;
@@ -59,7 +69,7 @@ export class NewHotelComponent implements OnInit {
       });
   }
 
-  searchCity(form: any, acction: any) {
+  searchCity(form: any) {
     this.cityLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_state).subscribe(
       (data: any) => {
