@@ -7,7 +7,7 @@ import { TravelsService } from '../../../../services/shared/travels/travels.serv
   styleUrls: ['./new-spend.component.css']
 })
 export class NewSpendComponent implements OnInit {
-
+  showSubmit: boolean = true
   constructor(public travelsService: TravelsService) {
 
     this.travelsService.getNewSpend().subscribe((data :any)=>{
