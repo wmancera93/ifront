@@ -8,6 +8,7 @@ export class TravelsService {
    newTravel : Subject<any> = new Subject<any>();
    viewTravel: Subject<any> = new Subject<any>();
    resutlSaved: Subject<any> = new Subject<any>();
+   newSpend : Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -38,4 +39,11 @@ export class TravelsService {
   setResultSaved(resutlSaved:any ) {
     return this.resutlSaved.next(resutlSaved);
   } 
+  getNewSpend() {
+    return this.newSpend;
+  }
+  setNewSpend(newSpend:any ) {
+    return this.newSpend.next(newSpend);
+  } 
+
 }

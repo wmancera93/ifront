@@ -265,7 +265,7 @@ export class EditTravelComponent implements OnInit {
     this.idFile = param.id;
     this.travelManagementService.deleteFile(this.idFile.toString(), this.ticket)
       .subscribe((data: any) => {
-        this.generalViajes[0].travel_request_annexeds.splice(this.generalViajes[0].travel_request_annexeds.findIndex(filter => filter.file.id === param.file.id), 1);
+        this.generalViajes[0].travel_request_annexeds.splice(this.generalViajes[0].travel_request_annexeds.findIndex(filter => filter.id === param.id), 1);
       })
 
   }
@@ -290,13 +290,14 @@ export class EditTravelComponent implements OnInit {
     }
     model = modelFromdata;
 
-    this.travelManagementService.putEditTravel(this.ticket, model)
+    this.formDataService.putEditTravelsFormData(this.ticket, model)
       .subscribe(
         (data: any) => {
           if (data.success) {
             document.getElementById("close_edit_travel").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje modificado correctamente', confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
             this.travelsService.setResultSaved(true);
           }
         },
@@ -385,7 +386,7 @@ export class EditTravelComponent implements OnInit {
   }
 
 
-  EditDestination(modelEditPartial) {
+  editDestination(modelEditPartial) {
     this.activate = true;
 
     let dateBeginE = modelEditPartial.date_begin == null ? '' : modelEditPartial.date_begin;
@@ -442,6 +443,7 @@ export class EditTravelComponent implements OnInit {
         this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destinations), 1);
 
         this.traverlsDestination.push({
+          id:this.id_destinations,
           travel_id: this.id_destinations,
           transport_id: modelEditPartial.id_transport,
           origin_location_id: modelEditPartial.id_city,

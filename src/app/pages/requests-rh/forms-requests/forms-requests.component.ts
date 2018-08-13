@@ -9,6 +9,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { debug } from 'util';
 
 
 @Component({
@@ -54,7 +55,7 @@ export class FormsRequestsComponent implements OnInit {
         this.file = object;
       });
 
-    this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
+    this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {    
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});

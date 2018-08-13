@@ -64,13 +64,11 @@ export class MasterDataComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
-      debugger
       if (object[0].count === 0) {
         object[0].count += 1;
         let dataMasterEdit = {
           employee_master_data: object
         }
-        console.log(dataMasterEdit)
         if (dataMasterEdit.employee_master_data.length == 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
           this.alert.setAlert(alertWarning[0]);

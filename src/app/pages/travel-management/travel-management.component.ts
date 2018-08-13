@@ -51,7 +51,7 @@ export class TravelManagementComponent implements OnInit {
       icon_primary: "fa fa-circle-thin",
       icon_secundary: "fa fa-usd",
       tooltipText: "Haga clic aquí para asignar gastos",
-      route: ""
+      route: "/ihr/spend"
     },
     {
       title: "Aprobaciones",
