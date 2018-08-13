@@ -19,7 +19,7 @@
                   <a>País:</a>
                 </label>
                 <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_country']"
-                  (change)="searchState(formHotels.value, 'new')">
+                  (change)="searchState(formHotels.value)">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
                 </select>
@@ -30,7 +30,7 @@
                   <a>Estado:</a>
                 </label>
                 <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_state']"
-                  (change)="searchCity(formHotels.value, 'new')">
+                  (change)="searchCity(formHotels.value)">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                 </select>
