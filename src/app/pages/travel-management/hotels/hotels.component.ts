@@ -25,8 +25,8 @@ export class HotelsComponent implements OnInit {
       if (data === 'deletHotel') {
         let hotels: any;
         hotels = { hotels: [{ id: this.hotel_id }] }
-        
-        this.hotelsService.deleteHotelsByCompany(hotels).subscribe(
+        debugger
+        this.hotelsService.deleteHotelsByCompany(JSON.stringify(hotels)).subscribe(
           (data: any) => {            
           this.getHotels();
         })
