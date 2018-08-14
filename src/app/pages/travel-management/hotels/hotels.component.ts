@@ -16,20 +16,31 @@ export class HotelsComponent implements OnInit {
   public alertWarning: any[] = [];
   public hotel_id: string;
 
-  constructor(public hotelsService: HotelsService, 
-    public alert: AlertsService, 
+  constructor(public hotelsService: HotelsService,
+    public alert: AlertsService,
     public hotelsSharedService: HotelsSharedService,
     public router: Router) {
-      
+
+    this.hotelsSharedService.getViewHotels().subscribe((data: any) => {
+      if (data) {
+        this.getHotels();
+      }
+    })
+
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deletHotel') {
-        let hotels: any;
-        hotels = { hotels: [{ id: this.hotel_id }] }
-        debugger
-        this.hotelsService.deleteHotelsByCompany(JSON.stringify(hotels)).subscribe(
-          (data: any) => {            
-          this.getHotels();
-        })
+
+        this.hotelsService.deleteHotelsByCompany(this.hotel_id).subscribe(
+          (data: any) => {
+            this.getHotels();
+            this.alertWarning = [{
+              type: 'danger',
+              title: 'Alerta',
+              message: 'Hotel eliminado correctamente',
+              confirmation: false,
+            }];
+            this.alert.setAlert(this.alertWarning[0]);
+          })
       }
     })
 
@@ -60,7 +71,7 @@ export class HotelsComponent implements OnInit {
     });
   }
 
-  newHotel(){
+  newHotel() {
     this.hotelsSharedService.setNewHotel(true);
   }
 

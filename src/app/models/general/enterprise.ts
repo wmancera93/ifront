@@ -63,5 +63,6 @@ export interface Enterprise {
     make_request?: boolean,
     make_approvals?: boolean,
     show_evaluations?: boolean,
-    show_quinquennials?: boolean
+    show_quinquennials?: boolean,
+    show_event_management?:boolean
 }
