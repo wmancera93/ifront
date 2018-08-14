@@ -49,92 +49,73 @@
       </div>
 
       <div class="row justify-content-center top-containter">
-        <div class="col-12" >
-          <div class="widget bg-white-1x" >
+        <div class="col-12">
+          <div class="widget bg-white-1x">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Código 20
-                    <!-- Ticket # {{travels.ticket}} -->
+                    Código # 1
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-clock-o"></i>
-                  Creada el 31/10/2018
-                  <!-- Creada el {{travels.created_date}} -->
+                  Creada el 01/01/2018
                 </p>
               </div>
-              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+              <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  Gastos viaje internacional
-                  <!-- {{travels.observation}} -->
+                  Descripción
                 </h3>
               </div>
-              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+              <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
                   Estado:
                 </p>
-                <h6 >
+                <h6>
                   <span class="badge badge-primary">
-                    Pendiente
-                    <!-- {{travels.status_request}} -->
+                   Pendiente
                   </span>
                 </h6>
-                <!-- <h6 *ngIf="travels.status_request == 'Cancelado'">
-                  <span class="badge badge-danger">
-                    
-                    {{travels.status_request}}
-                  </span>
-                </h6>
-                <h6 *ngIf="travels.status_request == 'En Proceso'">
-                  <span class="badge badge-success">
-                    {{travels.status_request}}
-                  </span>
-                </h6>
-                <h6 *ngIf="travels.status_request == 'Pendiente'">
-                  <span class="badge badge-default">
-                    {{travels.status_request}}
-                  </span>
-                </h6> -->
               </div>
-              <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p text-center">
-                <p class="font-title-general text-center">
-                  Solicitud de Viaje
-                  <!-- {{travels.next_approver_to_json.approver_employee.short_name}} -->
+              <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Solicitud de viaje
                 </p>
-                <h6 class="text-primary-hr text-center">
-                  # 10 
-                  <!-- {{travels.next_approver_to_json.approver_employee.posicion}} -->
-                </h6>
+                <p class="">
+                  <i class="fa fa-hashtag fa-fw text-primary-hr"></i>
+                  58
+                </p>
               </div>
-
-              <div class="col-lg-2 col-md-3 col-12 text-center top-p">
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
                 <div class="row justify-content-center">
-                  <div class="col-4 number-size text-success text-center" 
-                    (click)="viewSpend()">
+                  <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer">
                     <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4 number-size text-info" id="hideEdit" style="cursor: pointer"
-                    (click)="editSpend()">
-                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
-                  </div>
-                  <!-- <div class="col-4 number-size" id="hideEdit" style="cursor: pointer">
-                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
-                  </div> -->
-                  <div class="col-4 number-size text-danger align-items-center" id="hideTrash" style="cursor: pointer" (click)="deleteSpend()">
-                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
-                  </div>
-                  <!-- <div class="col-4 number-size align-items-center" id="hideTrash" style="cursor: no-drop">
-                    <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
-                  </div> -->
-                  <div class="col-4" (click)="viewSpend()">
+                  <div class="col-12">
                     Ver
                   </div>
-                  <div class="col-4" (click)="editSpend()">
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8; font-size:2em"></i>
+                  </div>
+                  <div class="col-12">
                     Editar
                   </div>
-                  <div class="col-4" (click)="deleteSpend()">
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <!--<div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div> -->
+                  <div class="col-12">
                     Eliminar
                   </div>
                 </div>
@@ -143,6 +124,8 @@
           </div>
         </div>
       </div>
+   
     </div>
   </div>
 </div>
+<app-new-spend *ngIf="!token"></app-new-spend>
