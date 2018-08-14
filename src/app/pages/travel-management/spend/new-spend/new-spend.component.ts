@@ -17,6 +17,7 @@ export class NewSpendComponent implements OnInit {
   public iconDocument: string = '';
   public is_upload: boolean = false;
   public file: any[] = [];
+  formSpendTravel
   constructor(public travelsService: TravelsService,public fileUploadService: FileUploadService) {
 
     this.travelsService.getNewSpend().subscribe((data :any)=>{
@@ -42,7 +43,7 @@ export class NewSpendComponent implements OnInit {
   ngOnInit() {
   }
 
-  newSpend(){
+  newSpend(param){
 
   }
 }
