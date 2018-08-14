@@ -10,6 +10,7 @@ import { TravelsService } from '../../../services/shared/travels/travels.service
 export class SpendComponent implements OnInit {
 
   public prueba: string ='3'
+  token
 
   constructor(public router: Router, public travelsService:TravelsService) { }
 

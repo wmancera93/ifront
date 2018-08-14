@@ -29,3 +29,8 @@
 .border{
     border-bottom: 1px solid #585858
 }
+
+.margin-row
+{
+    margin-top: 15px;
+}

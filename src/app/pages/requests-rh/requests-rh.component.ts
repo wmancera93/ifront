@@ -33,6 +33,7 @@ export class RequestsRhComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   groupCheck: any;
+  public flagCountService: boolean = false;
 
 
   constructor(private requestsRhService: RequestsRhService,
@@ -130,13 +131,12 @@ export class RequestsRhComponent implements OnInit {
   }
 
   modalAprovers(request: ListRequests) {
+    // request.flag_count = 0;   
     this.aproversRequestsService.setRequests(request);
   }
 
   newForm(typeForm: TypesRequests) {
-
     this.formsRequestsService.setFormRequests(typeForm);
-
   }
 
   deleteRequest(id: number) {

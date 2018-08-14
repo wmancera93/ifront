@@ -22,8 +22,8 @@ export class HotelsService {
       .map((data: any) => data.json());
   }
 
-  deleteHotelsByCompany(objectHotelsDelete: any) {
-    return this.tokenService.delete('hotels/destroy_hotels', objectHotelsDelete)
+  deleteHotelsByCompany(id_hotel: any) {
+    return this.tokenService.delete('hotels/'+ id_hotel)
       .map((data: any) => data.json());
   }
 }

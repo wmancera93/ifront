@@ -28,6 +28,7 @@ export interface ListRequests {
     status: string;
     next_approver_to_json: NextApprover;
     action_employee_requets_index_view: Action[];
+    flag_count?: number;
 }
 
 
