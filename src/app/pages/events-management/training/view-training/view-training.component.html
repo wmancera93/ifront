@@ -6,7 +6,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Convenio de capacitación </h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeModalTraining" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -39,7 +39,7 @@
             </div>
             <div class="row margin-row">
               <div class="col-6 titleColor">
-                <i class="fa fa fa-history text-primary-hr"></i>
+                <i class="fa fa-history text-primary-hr"></i>
                 <strong>Duración en días:</strong>
               </div>
               <div class="col-6">
@@ -48,7 +48,7 @@
             </div>
             <div class="row margin-row">
               <div class="col-6 titleColor">
-                <i class="fa fa fa-history text-primary-hr"></i>
+                <i class="fa fa-clock-o text-primary-hr"></i>
                 <strong>Duración en horas:</strong>
               </div>
               <div class="col-6">
@@ -56,11 +56,28 @@
               </div>
             </div>
             <div class="row margin-row">
+              <div class="col-6 titleColor">
+                <i class="fa fa fa-history text-primary-hr"></i>
+                <strong>Observaciones:</strong>
+              </div>
+            </div>
+            <div class="row margin-row">
+              <div class="col-12">
+                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones" style="width:100% !important;"
+                  ngModel required>                        
+                </textarea>
+              </div>
+            </div>
+            <div class="row margin-row">
               <div class="col-6">
-                <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(true)"> ACEPTAR </button>
+                <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(true)">
+                  <i class="fa fa-check"></i>
+                  ACEPTAR </button>
               </div>
               <div class="col-6">
-                <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(false)"> DECLINAR </button>
+                <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(false)">
+                  <i class="fa fa-times"></i>
+                  DECLINAR </button>
               </div>
             </div>
 
