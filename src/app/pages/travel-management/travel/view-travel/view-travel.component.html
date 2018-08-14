@@ -50,11 +50,12 @@
             <div class="row" style="margin-top: 50px">
               <div class="col-12 top-containter">
                 <div class="row">
-                  <div class="col-8" *ngFor="let imgsaved of annexeds; let index = index">
+                  <div class="col-lg-8 col-12" *ngFor="let imgsaved of annexeds; let index = index">
                     <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                       <div class="row">
                         <div class="col-11">
-                          <h6>{{imgsaved.name}}</h6>
+                          <h6>{{imgsaved.name |slice: 0:20}}
+                          <span [hidden]="imgsaved.name.length < 20">...</span></h6>
                           <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
                           <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
                         </div>

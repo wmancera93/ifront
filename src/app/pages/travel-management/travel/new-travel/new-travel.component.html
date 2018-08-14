@@ -39,7 +39,7 @@
               <h4>Viajes</h4>
             </div>
             <div class="row" style="margin-top: 15px">
-              <div class="col-12 top-general-p">
+              <div class="col-12 top-general-p" style="min-height: 200px !important">
                 <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
               </div>
             </div>
@@ -312,7 +312,7 @@
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
+                      <button class="btn btn-warning btn-block cursor-general" (click)="cleanSpend()" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                     </div>
                   </div>

@@ -48,7 +48,6 @@ export class TravelComponent implements OnInit {
             const alertWarning = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
           });
-        
       }
     })
 

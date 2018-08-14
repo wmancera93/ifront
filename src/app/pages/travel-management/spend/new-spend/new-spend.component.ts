@@ -8,18 +8,18 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
   styleUrls: ['./new-spend.component.css']
 })
 export class NewSpendComponent implements OnInit {
-  
+
   public showSubmit: boolean = true;
   public filequotation = 'fileSpend';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
-  public objectImg: any[] = [];
-  public iconUpload: any[] = [];
+  public imgSpend: any[] = [];
+  public icon: any[] = [];
   public iconDocument: string = '';
   public is_upload: boolean = false;
   public file: any[] = [];
-  constructor(public travelsService: TravelsService,public fileUploadService: FileUploadService) {
+  constructor(public travelsService: TravelsService, public fileUploadService: FileUploadService) {
 
-    this.travelsService.getNewSpend().subscribe((data :any)=>{
+    this.travelsService.getNewSpend().subscribe((data: any) => {
       document.getElementById('btn_spend_new').click();
     });
 
@@ -27,22 +27,25 @@ export class NewSpendComponent implements OnInit {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
         setTimeout(() => {
-          this.iconUpload = data.name.split('.');
-          this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
+          this.icon = data.name.split('.');
+          this.iconDocument = this.icon[this.icon.length - 1];
           this.is_upload = true;
           this.file.push(data);
-          this.objectImg.push({ file: data, extension: this.iconDocument });
+          this.imgSpend.push({ file: data, extension: this.iconDocument });
 
         }, 200);
       }, 1000);
     });
 
 
-   }
+  }
+  cleanSpend() {
+
+  }
   ngOnInit() {
   }
 
-  newSpend(){
+  newSpend() {
 
   }
 }

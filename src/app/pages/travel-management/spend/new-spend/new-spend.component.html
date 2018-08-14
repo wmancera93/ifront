@@ -12,11 +12,9 @@
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formSpendTravel" class="row" (ngSubmit)="newSpend(formSpendTravel.value)">
           <div class="col-12">
-            <div class="row border" style="margin-left: 15px">
               <h4>Nuevo gasto</h4>
-            </div>
           </div>
-          <div class="col-11" style="margin-top: 15px; margin-left: 20px">
+          <div class="col-12" style="margin-top: 15px">
             <div class="row">
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
@@ -59,20 +57,19 @@
             </div>
           </div>
 
-          <div class="col-12 top-containter" style="margin-top: 20px; margin-left: 20px">
-            <!-- <div class="row">
+          <div class="col-12 top-containter" style="margin-top: 20px">
+            <div class="row">
               <div class="col-12">
-                <label  class="titleColor">
-                  <i class="fa fa-fw fa-check text-primary-hr"></i>
+                <label class="titleColor" *ngIf="imgSpend.length > 0">
                   <strong>Archivos adjuntos</strong>
                 </label>
               </div>
-            </div> -->
-            <!-- <div class="row">
-              <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
+            </div>
+            <div class="row">
+              <div class="col-lg-8 col-md-12 col-12" *ngFor="let imgsaved of imgSpend; let index = index">
                 <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                   <div class="row">
-                    <div class="col-11">
+                    <div class="col-md-11 col-10">
                       <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
                         <h6>{{index+1}}.
                           <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
@@ -93,48 +90,38 @@
                         </h6>
                       </div>
                     </div>
-                    <div class="col-1 text-center">
+                    <div class="col-md-1 col-2 text-center">
                       <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
                     </div>
                   </div>
                 </div>
               </div>
-            </div> -->
+            </div>
             <div class="row">
               <div class="col-12">
-                <label  class="titleColor">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                <label class="titleColor">
                   <strong>Adjuntar Soporte de gastos</strong>
                 </label>
                 <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
               </div>
             </div>
           </div>
-
-
         </form>
 
-        <div class="col-12 top-containter" style="margin-top: 30px">
-          <div class="row justify-content-end" style="margin-right:17px">
-            <div class="col-lg-3 col-md-4 col-12">
-              <button class="btn btn-primary btn-block cursor-general">
-             &nbsp;&nbsp;Agregar Gasto</button>
-            </div>
-            <div class="col-lg-3 col-md-4 col-12">
-              <button class="btn btn-warning btn-block cursor-general">
-                <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
-            </div>
+
+        <div class="row justify-content-end">
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+            <button class="btn btn-primary btn-block cursor-general">
+                <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
+          </div>
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+            <button class="btn btn-warning btn-block cursor-general">
+              <i class="fa fa-fw fa-eraser"></i>&nbsp;&nbsp;Limpiar</button>
           </div>
         </div>
 
-        
-
-
-
-
-
-        <div class="row justify-content-end" style="margin-top: 30px; margin-right: 30px">
-          <div class="col-lg-3 col-md-4 col-12">
+        <div class="row justify-content-end" >
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">

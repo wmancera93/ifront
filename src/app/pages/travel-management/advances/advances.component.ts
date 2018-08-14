@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { TravelsService } from '../../../services/shared/travels/travels.service';
 
 @Component({
   selector: 'app-advances',
@@ -8,7 +9,7 @@ import { Router } from '../../../../../node_modules/@angular/router';
 })
 export class AdvancesComponent implements OnInit {
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public travelsService:TravelsService) { }
 
   ngOnInit() {
   }
@@ -18,4 +19,7 @@ export class AdvancesComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
 
+  newAdvanceTravel() {
+    this.travelsService.setNewAdvance(true);
+  }
 }
