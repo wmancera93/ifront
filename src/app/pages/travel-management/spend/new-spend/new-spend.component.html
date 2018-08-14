@@ -1,29 +1,148 @@
 <button id="btn_spend_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spend_new" style="display:none;">
-  </button>
-  <div class="modal" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
-        <div class="modal-content ">
-          <div class="modal-header borderLine-title">
-            <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Legalización de Gastos</h5>
-            <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
-              <h4 class="text-primary-hr">X</h4>
-            </button>
+</button>
+<div class="modal" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Legalización de Gastos</h5>
+        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <form [formGroup]="formSpendTravel" class="row" (ngSubmit)="newSpend(formSpendTravel.value)">
+          <div class="col-12">
+            <div class="row border" style="margin-left: 15px">
+              <h4>Nuevo gasto</h4>
+            </div>
           </div>
-          <div class="modal-body bodyColorInfo">
-            <form [formGroup]="formSpendTravel" class="row justify-content-left" (ngSubmit)="newSpend(formSpendTravel.value)">
-            
-            </form>
-    
-            <div class="row justify-content-end" style="margin-top: 30px">
-              <div class="col-lg-3 col-md-4 col-12">
-                <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
-                  <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
-                <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                  <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+          <div class="col-11" style="margin-top: 15px; margin-left: 20px">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-bars text-primary-hr"></i>
+                  <strong>Tipo de gasto:</strong>
+                </label>
+                <select class="form-control">
+                  <option>Transportes</option>
+                </select>
+              </div>
+
+              <!-- <div class="col-lg-4 col-md-6 col-12">
+                <select  class="form-control" [formControl]="formSpendTravel.controls['id_typeSpend']">
+                  <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
+                </select>
+              </div> -->
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-money text-primary-hr"></i>
+                  <strong>Importe:</strong>
+                </label>
+                <input type="text" class="form-control">
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <strong>Moneda:</strong>
+                </label>
+                <select class="form-control">
+                  <option>Pesos</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <strong>Fecha de Gasto:</strong>
+                </label>
+                <input type="date" name="date_begin" class="form-control" />
               </div>
             </div>
-    
+          </div>
+
+          <div class="col-12 top-containter" style="margin-top: 20px; margin-left: 20px">
+            <!-- <div class="row">
+              <div class="col-12">
+                <label  class="titleColor">
+                  <i class="fa fa-fw fa-check text-primary-hr"></i>
+                  <strong>Archivos adjuntos</strong>
+                </label>
+              </div>
+            </div> -->
+            <!-- <div class="row">
+              <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
+                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                  <div class="row">
+                    <div class="col-11">
+                      <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                          {{imgsaved.file.name}}
+                        </h6>
+                      </div>
+                      <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                          {{imgsaved.file.name}}
+                        </h6>
+                      </div>
+                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                        theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                          {{imgsaved.file.name}}
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-1 text-center">
+                      <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+            <div class="row">
+              <div class="col-12">
+                <label  class="titleColor">
+                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                  <strong>Adjuntar Soporte de gastos</strong>
+                </label>
+                <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+        <div class="col-12 top-containter" style="margin-top: 30px">
+          <div class="row justify-content-end" style="margin-right:17px">
+            <div class="col-lg-3 col-md-4 col-12">
+              <button class="btn btn-primary btn-block cursor-general">
+             &nbsp;&nbsp;Agregar Gasto</button>
+            </div>
+            <div class="col-lg-3 col-md-4 col-12">
+              <button class="btn btn-warning btn-block cursor-general">
+                <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
+            </div>
           </div>
         </div>
+
+        
+
+
+
+
+
+        <div class="row justify-content-end" style="margin-top: 30px; margin-right: 30px">
+          <div class="col-lg-3 col-md-4 col-12">
+            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
+            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+          </div>
+        </div>
+
       </div>
     </div>
+  </div>
+</div>

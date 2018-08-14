@@ -38,11 +38,11 @@ export class ViewTravelComponent implements OnInit {
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
-      if(document.getElementById('travel_edit').className !== 'modal show'){
+      if(document.getElementById('travel_view').className !== 'modal show'){
       document.getElementById("btn_travel_view").click();
       document.getElementById('bodyGeneral').removeAttribute('style');
       }
-      
+
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
