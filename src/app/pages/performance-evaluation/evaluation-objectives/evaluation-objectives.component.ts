@@ -9,21 +9,18 @@ import { PerformanceEvalSharedService } from '../../../services/shared/common/pe
 })
 export class EvaluationObjectivesComponent implements OnInit {
 
-  public evaluationPerformanceList: any;
+  public evaluationPerformanceList: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
-  token
+  token = false;
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService) {
-
-
   }
 
   ngOnInit() {
     this.performanceEvaluationService.getPerformanceEvaluations().subscribe((data: any) => {
       this.evaluationPerformanceList = data.data;
     });
-
   }
 
   goToModalEval(infoEval: any) {

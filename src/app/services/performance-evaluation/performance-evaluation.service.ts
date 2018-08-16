@@ -48,10 +48,10 @@ export class PerformanceEvaluationService {
     return this.tokenService.get('perfomance_evaluations/index_table_planning')
       .map((data: any) => data.json());
   }
-  // putPeriodPlanningEvaluation(id, objectDate) {
-  //   return this.tokenService.put('perfomance_evaluations/update_period_planning/' + id, objectDate)
-  //     .map((data: any) => data.json());
-  // }
+  putPeriodPlanningEvaluation(id, objectDate) {
+    return this.tokenService.put('perfomance_evaluations/update_period_planning/' + id, objectDate)
+      .map((data: any) => data.json());
+  }
 
 
 }
