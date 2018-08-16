@@ -36,917 +36,917 @@ export class DrawCalendarComponent implements OnInit {
 
 
   constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
-  ngOnInit() {}
-  // ngOnInit() {
-  //   this.calendarService.getDataCalendar().subscribe((data: any) => {
-  //     this.objectDateCurrent = data.data;
-  //     let count = 0;
-  //     if (screen.width <= 1000) {
-  //       if (screen.width <= 500)
-  //       {
+  //ngOnInit() {}
+  ngOnInit() {
+    this.calendarService.getDataCalendar().subscribe((data: any) => {
+      this.objectDateCurrent = data.data;
+      let count = 0;
+      if (screen.width <= 1000) {
+        if (screen.width <= 500)
+        {
 
-  //         this.responsive = true;
-  //       }
+          this.responsive = true;
+        }
 
-  //       this.saturday = 'S';
-  //       this.sunday = 'D';
-  //       this.monday = 'L';
-  //       this.tuesday = 'M';
-  //       this.wednesday = 'Mi';
-  //       this.thursday = 'J';
-  //       this.friday = 'V';
-  //     }
-  //     this.objectDateCurrent.forEach(element => {
-  //       if (element.date !== null) {
-  //         if (this.changeMonth !== element.date.split('-')[1]) {
-  //           this.changeMonth = element.date.split('-')[1];
-  //           count++;
-  //           switch (count) {
-  //             case 1:
-  //               this.objectDateLast.push(element);
-  //               break;
-  //             case 2:
-  //               this.objectDateToday.push(element);
-  //               break;
-  //             case 3:
-  //               this.objectDateNextMonth.push(element);
-  //               break;
+        this.saturday = 'S';
+        this.sunday = 'D';
+        this.monday = 'L';
+        this.tuesday = 'M';
+        this.wednesday = 'Mi';
+        this.thursday = 'J';
+        this.friday = 'V';
+      }
+      this.objectDateCurrent.forEach(element => {
+        if (element.date !== null) {
+          if (this.changeMonth !== element.date.split('-')[1]) {
+            this.changeMonth = element.date.split('-')[1];
+            count++;
+            switch (count) {
+              case 1:
+                this.objectDateLast.push(element);
+                break;
+              case 2:
+                this.objectDateToday.push(element);
+                break;
+              case 3:
+                this.objectDateNextMonth.push(element);
+                break;
 
-  //             default:
-  //               break;
-  //           }
-  //         }
-  //         else if (count === 1) {
-  //           this.objectDateLast.push(element);
+              default:
+                break;
+            }
+          }
+          else if (count === 1) {
+            this.objectDateLast.push(element);
 
-  //         }
-  //         else if (count === 2) {
-  //           this.objectDateToday.push(element);
-  //         }
-  //         else if (count === 3) {
-  //           this.objectDateNextMonth.push(element);
-  //         }
-  //       }
-  //     });
-  //     this.objectPerMonthData = this.objectDateToday;
+          }
+          else if (count === 2) {
+            this.objectDateToday.push(element);
+          }
+          else if (count === 3) {
+            this.objectDateNextMonth.push(element);
+          }
+        }
+      });
+      this.objectPerMonthData = this.objectDateToday;
 
-  //     this.showDataCalendar();
-  //   });
+      this.showDataCalendar();
+    });
 
 
-  // }
+  }
 
-  // pushLastObjectDate() {
-  //   this.objectPerMonthData.forEach(element => {
-  //     this.newObjectDate.push({
-  //       date: element.date,
-  //       id: element.id,
-  //       is_now: element.is_now,
-  //       weekday: element.weekday,
-  //       work_schedule_plan: element.work_schedule_plan
+  pushLastObjectDate() {
+    this.objectPerMonthData.forEach(element => {
+      this.newObjectDate.push({
+        date: element.date,
+        id: element.id,
+        is_now: element.is_now,
+        weekday: element.weekday,
+        work_schedule_plan: element.work_schedule_plan
 
-  //     });
-  //   });
-  // }
+      });
+    });
+  }
 
-  // showDataCalendar() {
-  //   switch (this.objectPerMonthData[0].weekday) {
+  showDataCalendar() {
+    switch (this.objectPerMonthData[0].weekday) {
 
-  //     case 'domingo':
-  //       this.newObjectDate = this.objectPerMonthData;
+      case 'domingo':
+        this.newObjectDate = this.objectPerMonthData;
 
-  //       break;
-  //     case 'lunes':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [
-  //           {
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }
-  //         ]
-  //       });
-  //       this.pushLastObjectDate();
-  //       break;
-  //     case 'martes':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [
-  //           {
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }
-  //         ]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "lunes",
-  //           work_schedule_plan: [
-  //             {
-  //               calendar_text: " ",
-  //               holiday_calendar: "",
-  //               hour_begin: "",
-  //               hour_finish: "",
-  //               schedule_plan_for_periods: "",
-  //               theorist_hours: "",
-  //               type_schedule_plan_description: 'descanso',
-  //               work_schedule_plan_text: ""
-  //             }
-  //           ]
-  //         });
-  //       this.pushLastObjectDate();
+        break;
+      case 'lunes':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
+        });
+        this.pushLastObjectDate();
+        break;
+      case 'martes':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "lunes",
+            work_schedule_plan: [
+              {
+                calendar_text: " ",
+                holiday_calendar: "",
+                hour_begin: "",
+                hour_finish: "",
+                schedule_plan_for_periods: "",
+                theorist_hours: "",
+                type_schedule_plan_description: 'descanso',
+                work_schedule_plan_text: ""
+              }
+            ]
+          });
+        this.pushLastObjectDate();
 
-  //       break;
-  //     case 'miercoles':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [
-  //           {
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }
-  //         ]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "lunes",
-  //           work_schedule_plan: [
-  //             {
-  //               calendar_text: " ",
-  //               holiday_calendar: "",
-  //               hour_begin: "",
-  //               hour_finish: "",
-  //               schedule_plan_for_periods: "",
-  //               theorist_hours: "",
-  //               type_schedule_plan_description: 'descanso',
-  //               work_schedule_plan_text: ""
-  //             }
-  //           ]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "martes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       this.pushLastObjectDate();
+        break;
+      case 'miercoles':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [
+            {
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }
+          ]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "lunes",
+            work_schedule_plan: [
+              {
+                calendar_text: " ",
+                holiday_calendar: "",
+                hour_begin: "",
+                hour_finish: "",
+                schedule_plan_for_periods: "",
+                theorist_hours: "",
+                type_schedule_plan_description: 'descanso',
+                work_schedule_plan_text: ""
+              }
+            ]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "martes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        this.pushLastObjectDate();
 
-  //       break;
-  //     case 'jueves':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "lunes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "martes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "miercoles",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       this.pushLastObjectDate();
-  //       break;
+        break;
+      case 'jueves':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "lunes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "martes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "miercoles",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        this.pushLastObjectDate();
+        break;
 
-  //     case 'viernes':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "lunes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "martes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "miercoles",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "jueves",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       this.pushLastObjectDate();
-  //       break;
-  //     case 'sabado':
-  //       this.newObjectDate = [];
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "domingo",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "lunes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "martes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "miercoles",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "jueves",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "viernes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       this.pushLastObjectDate();
-  //       break;
+      case 'viernes':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "lunes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "martes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "miercoles",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "jueves",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        this.pushLastObjectDate();
+        break;
+      case 'sabado':
+        this.newObjectDate = [];
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "domingo",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "lunes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "martes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "miercoles",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "jueves",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "viernes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        this.pushLastObjectDate();
+        break;
 
-  //   }
+    }
 
-  //   switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
-  //     case 'sabado':
-  //       break;
-  //     case 'domingo':
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "lunes",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "martes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "miercoles",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "jueves",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "viernes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "sabado",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       break;
-  //     case 'lunes':
+    switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
+      case 'sabado':
+        break;
+      case 'domingo':
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "lunes",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "martes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "miercoles",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "jueves",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "viernes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "sabado",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        break;
+      case 'lunes':
 
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "martes",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       },
-  //         {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "miercoles",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "jueves",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "viernes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "sabado",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "martes",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        },
+          {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "miercoles",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "jueves",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "viernes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "sabado",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
 
-  //       break;
-  //     case 'martes':
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "miercoles",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "jueves",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "viernes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "sabado",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
+        break;
+      case 'martes':
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "miercoles",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "jueves",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "viernes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "sabado",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
 
-  //       break;
-  //     case 'miercoles':
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "jueves",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "viernes",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "sabado",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       break;
-  //     case 'jueves':
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "viernes",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       }, {
-  //           date: "",
-  //           id: "",
-  //           is_now: "",
-  //           weekday: "sabado",
-  //           work_schedule_plan: [{
-  //             calendar_text: " ",
-  //             holiday_calendar: "",
-  //             hour_begin: "",
-  //             hour_finish: "",
-  //             schedule_plan_for_periods: "",
-  //             theorist_hours: "",
-  //             type_schedule_plan_description: 'descanso',
-  //             work_schedule_plan_text: ""
-  //           }]
-  //         });
-  //       break;
-  //     case 'viernes':
-  //       this.newObjectDate.push({
-  //         date: "",
-  //         id: "",
-  //         is_now: "",
-  //         weekday: "sabado",
-  //         work_schedule_plan: [{
-  //           calendar_text: " ",
-  //           holiday_calendar: "",
-  //           hour_begin: "",
-  //           hour_finish: "",
-  //           schedule_plan_for_periods: "",
-  //           theorist_hours: "",
-  //           type_schedule_plan_description: 'descanso',
-  //           work_schedule_plan_text: ""
-  //         }]
-  //       });
-  //       break;
-  //   }
+        break;
+      case 'miercoles':
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "jueves",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "viernes",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "sabado",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        break;
+      case 'jueves':
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "viernes",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        }, {
+            date: "",
+            id: "",
+            is_now: "",
+            weekday: "sabado",
+            work_schedule_plan: [{
+              calendar_text: " ",
+              holiday_calendar: "",
+              hour_begin: "",
+              hour_finish: "",
+              schedule_plan_for_periods: "",
+              theorist_hours: "",
+              type_schedule_plan_description: 'descanso',
+              work_schedule_plan_text: ""
+            }]
+          });
+        break;
+      case 'viernes':
+        this.newObjectDate.push({
+          date: "",
+          id: "",
+          is_now: "",
+          weekday: "sabado",
+          work_schedule_plan: [{
+            calendar_text: " ",
+            holiday_calendar: "",
+            hour_begin: "",
+            hour_finish: "",
+            schedule_plan_for_periods: "",
+            theorist_hours: "",
+            type_schedule_plan_description: 'descanso',
+            work_schedule_plan_text: ""
+          }]
+        });
+        break;
+    }
 
-  //   this.month = this.objectPerMonthData[0].date.split("-");
-  //   // this.objectPerMonthData.forEach(today => {
-  //   //   this.month = today.date.split("-");      
-  //   // });
+    this.month = this.objectPerMonthData[0].date.split("-");
+    // this.objectPerMonthData.forEach(today => {
+    //   this.month = today.date.split("-");      
+    // });
 
-  //   switch (this.month[1]) {
-  //     case "01":
-  //       this.nameMonth = "Enero"
-  //       return;
-  //     case "02":
-  //       this.nameMonth = "Febrero"
-  //       return;
-  //     case "03":
-  //       this.nameMonth = "Marzo"
-  //       return;
-  //     case "04":
-  //       this.nameMonth = "Abril"
-  //       return;
-  //     case "05":
-  //       this.nameMonth = "Mayo"
-  //       return;
-  //     case "06":
-  //       this.nameMonth = "Junio"
-  //       return;
-  //     case "07":
-  //       this.nameMonth = "Julio"
-  //       return;
-  //     case "08":
-  //       this.nameMonth = "Agosto"
-  //       return;
-  //     case "09":
-  //       this.nameMonth = "Septiembre"
-  //       return;
-  //     case "10":
-  //       this.nameMonth = "Octubre"
-  //       return;
-  //     case "11":
-  //       this.nameMonth = "Noviembre"
-  //       return;
-  //     case "12":
-  //       this.nameMonth = "Diciembre"
-  //       return;
-  //   }
+    switch (this.month[1]) {
+      case "01":
+        this.nameMonth = "Enero"
+        return;
+      case "02":
+        this.nameMonth = "Febrero"
+        return;
+      case "03":
+        this.nameMonth = "Marzo"
+        return;
+      case "04":
+        this.nameMonth = "Abril"
+        return;
+      case "05":
+        this.nameMonth = "Mayo"
+        return;
+      case "06":
+        this.nameMonth = "Junio"
+        return;
+      case "07":
+        this.nameMonth = "Julio"
+        return;
+      case "08":
+        this.nameMonth = "Agosto"
+        return;
+      case "09":
+        this.nameMonth = "Septiembre"
+        return;
+      case "10":
+        this.nameMonth = "Octubre"
+        return;
+      case "11":
+        this.nameMonth = "Noviembre"
+        return;
+      case "12":
+        this.nameMonth = "Diciembre"
+        return;
+    }
 
-  // }
+  }
 
-  // nextMonth() {
+  nextMonth() {
 
-  //   this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
 
-  //   if (this.objectDataPosition[this.objectDataPosition.length - 3] === this.objectPerMonthData) {
-  //     this.objectPerMonthData = this.objectDataPosition[1];
+    if (this.objectDataPosition[this.objectDataPosition.length - 3] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[1];
 
-  //     this.showDataCalendar();
-  //   }
-  //   else if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
-  //     this.objectPerMonthData = this.objectDataPosition[2];
+      this.showDataCalendar();
+    }
+    else if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[2];
 
-  //     this.showDataCalendar();
-  //   }
-  // }
+      this.showDataCalendar();
+    }
+  }
 
-  // lastMonth() {
-  //   this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+  lastMonth() {
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
 
-  //   if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
-  //     this.objectPerMonthData = this.objectDataPosition[0];
+    if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[0];
 
-  //     this.showDataCalendar();
-  //   }
-  //   else if (this.objectDataPosition[this.objectDataPosition.length - 1] === this.objectPerMonthData) {
-  //     this.objectPerMonthData = this.objectDataPosition[1];
+      this.showDataCalendar();
+    }
+    else if (this.objectDataPosition[this.objectDataPosition.length - 1] === this.objectPerMonthData) {
+      this.objectPerMonthData = this.objectDataPosition[1];
 
-  //     this.showDataCalendar();
-  //   }
+      this.showDataCalendar();
+    }
 
-  // }
+  }
 
-  // actualMonth() {
-  //   this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
-  //   this.objectPerMonthData = this.objectDataPosition[1];
-  //   this.showDataCalendar();
+  actualMonth() {
+    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+    this.objectPerMonthData = this.objectDataPosition[1];
+    this.showDataCalendar();
 
-  // }
+  }
 
-  // openModal(event: any, day: any) {
+  openModal(event: any, day: any) {
 
-  //   let object_calendar = {
-  //     effect: 'open',
-  //     date_info: '',
-  //     pointx: event.clientX,
-  //     pointy: event.clientY,
-  //     event_info: {
-  //       descript: day.type_schedule_plan_description,
-  //       calendar_text: day.calendar_text,
-  //       hour_begin: day.hour_begin,
-  //       hour_end: day.hour_finish,
-  //       description_calendar: day.theorist_hours,
-  //       description_work: day.work_schedule_plan_text,
-  //     }
+    let object_calendar = {
+      effect: 'open',
+      date_info: '',
+      pointx: event.clientX,
+      pointy: event.clientY,
+      event_info: {
+        descript: day.type_schedule_plan_description,
+        calendar_text: day.calendar_text,
+        hour_begin: day.hour_begin,
+        hour_end: day.hour_finish,
+        description_calendar: day.theorist_hours,
+        description_work: day.work_schedule_plan_text,
+      }
 
-  //   }
+    }
 
-  //   this.calendarDetailService.setDetailCalendar(object_calendar);
-  // }
+    this.calendarDetailService.setDetailCalendar(object_calendar);
+  }
 
-  // closeModal() {
-  //   this.calendarDetailService.setDetailCalendar({ effect: 'close' });
-  // }
+  closeModal() {
+    this.calendarDetailService.setDetailCalendar({ effect: 'close' });
+  }
 
-  // desingPosition() {
+  desingPosition() {
 
-  // }
+  }
 }
