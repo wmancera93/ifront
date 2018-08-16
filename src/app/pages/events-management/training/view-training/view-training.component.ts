@@ -25,6 +25,7 @@ export class ViewTrainingComponent implements OnInit {
       this.idTraining = activeModal;
       this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
         this.trainingDetailInfo = info.data;
+        console.log(this.trainingDetailInfo)
         document.getElementById('btn-viewTraining').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       });
