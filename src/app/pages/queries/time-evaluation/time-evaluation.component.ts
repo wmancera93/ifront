@@ -106,7 +106,7 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
       const alertDataWrong: Alerts[] = [{
         type: 'danger',
         title: 'Error',
-        message: 'La fecha final no puede ser mayor que la inicial',
+        message: 'La fecha inicial no puede ser mayor que la final',
         confirmation: false
       }];
       this.alertsService.setAlert(alertDataWrong[0]);
@@ -121,6 +121,7 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
       });
   }
   getFilterMessagesByPeriod() {
+    this.objectReport.emit({success:true, data:[]});
     this.queriesService.getEvaluationMessagesByPeriod(this.dateBegin, this.dateEnd)
       .subscribe((data: any) => {
         this.objectReport.emit(data);
