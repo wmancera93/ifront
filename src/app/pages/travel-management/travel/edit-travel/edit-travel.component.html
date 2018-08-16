@@ -13,16 +13,29 @@
         <form [formGroup]="formTravelManagement" class="row justify-content-left" (ngSubmit)="newEditTravel(formTravelManagement.value)">
           <div class="col-11">
             <div class="row">
-              <div class="col-lg-4 col-md-6 col-12">
+              <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
               </div>
-              <div class="col-lg-4 col-md-6 col-12">
+              <div class="col-lg-3 col-md-6 col-12">
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 form-check">
+                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectPlaningTravel"
+                  value="true" checked>
+                <label class="form-check-label titleColor" for="selectPlaningTravel">
+                  <strong>Viaje Planificado</strong>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 form-check">
+                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectTravelDone" value="false">
+                <label class="form-check-label titleColor" for="travelDone">
+                  <strong>Viaje Realizado</strong>
+                </label>
               </div>
             </div>
           </div>
@@ -35,7 +48,76 @@
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
 
+          
+            <div class="col-lg-3 col-md-6 col-12 form-check"  style="margin-top: 20px">
+              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="" id="manutencionCheck">
+              <label class="form-check-label titleColor" for="manutencionCheck">
+                <strong>Manutención</strong>
+              </label>
+            </div>
+         
+
           <div class="col-12">
+            <div class="row" style="margin-top: 10px">
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <a>Tipo de costo:</a>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
+                  <a>Centro de costo:</a>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="margin-top: 15px">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
+                  <a>Clase de viaje legal:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
+                  <a>Clase de viaje especial:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
+                  <a>Actividad de viaje:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-12" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
               <h4>Viajes</h4>
             </div>
@@ -43,7 +125,7 @@
 
           <div class="col-12">
             <div class="row" style="margin-top: 15px">
-              <div class="col-12 top-general-p" style="height: 200px">
+              <div class="col-12 top-general-p" style="min-height: 20px">
                 <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
               </div>
             </div>

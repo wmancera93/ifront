@@ -86,6 +86,7 @@ import { AdvancesComponent } from './travel-management/advances/advances.compone
 import { SpendComponent } from './travel-management/spend/spend.component';
 import { NewSpendComponent } from './travel-management/spend/new-spend/new-spend.component';
 import { EditSpendComponent } from './travel-management/spend/edit-spend/edit-spend.component';
+import { NewAdvancesComponent } from './travel-management/advances/new-advances/new-advances.component';
 
 
 
@@ -172,6 +173,7 @@ import { EditSpendComponent } from './travel-management/spend/edit-spend/edit-sp
     SpendComponent,
     NewSpendComponent,
     EditSpendComponent,
+    NewAdvancesComponent,
 
   ],
   providers: [

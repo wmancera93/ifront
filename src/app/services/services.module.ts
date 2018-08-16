@@ -51,6 +51,9 @@ import { PerformanceEvalSharedService } from './shared/common/performance-evalua
 import { TrainingService } from './training/training.service';
 import { TrainingSharedService } from './shared/common/training-events/training-shared.service';
 import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.service';
+import { SpendSharedService } from './shared/spend-shared/spend-shared.service';
+import { AdvanceSharedService } from './shared/advance-shared/advance-shared.service';
+
 
 @NgModule({
   imports: [
@@ -104,7 +107,9 @@ import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.servic
     PerformanceEvalSharedService,
     TrainingService,
     TrainingSharedService,
-    HotelsSharedService
+    HotelsSharedService,
+    SpendSharedService,
+    AdvanceSharedService
   ]
 })
 export class ServicesModule { }

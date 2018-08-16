@@ -54,13 +54,15 @@ export class RequestsApproversComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
     this.reportsHrService.getSelectRequestsByType()
       .subscribe((data: any) => {
         this.newtype_requests = data.data;
+        console.log(this.newtype_requests)
+
       });
 
     this.getObjectRequests()
-
   }
   returnBackPage() {
     this.router.navigate(['ihr/index']);

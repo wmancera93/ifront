@@ -70,6 +70,9 @@ export class EditTravelComponent implements OnInit {
   public dayResult: number;
   public dayResultE: number;
   public activate: boolean = false;
+  public alertWarning: any[] = [];
+  public id_destination_delete: string = ''
+
 
 
   constructor(public travelManagementService: TravelService,
@@ -86,6 +89,24 @@ export class EditTravelComponent implements OnInit {
       if (data === 'continueEditDestinationRequests') {
         document.getElementById("btn_travel_edit").click();
       }
+      if (data === 'deleteDocumentSaved') {
+        document.getElementById("btn_travel_edit").click();
+        this.travelManagementService.deleteFile(this.idFile.toString(), this.ticket)
+          .subscribe((data: any) => {
+            this.generalViajes[0].travel_request_annexeds.splice(this.generalViajes[0].travel_request_annexeds.findIndex(filter => filter.id === this.idFile), 1);
+          })
+        document.getElementById("btn_travel_edit").click();
+      }
+      if (data === 'deleteDestinations') {
+        document.getElementById("btn_travel_edit").click();
+        this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
+        this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
+        this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+        document.getElementById("btn_travel_edit").click();
+      }
+
+
+
     })
 
 
@@ -180,9 +201,15 @@ export class EditTravelComponent implements OnInit {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
+        
         if (!this.bedit) {
           if (!this.bnew) {
             document.getElementById("edit_funtionTravel").click();
+
+            setTimeout(() => {
+              document.getElementById('travel_edit').scrollTo(0,1300);
+            }, 300);
+            
             this.bedit = true;
           } else {
             this.bnew = false
@@ -260,19 +287,30 @@ export class EditTravelComponent implements OnInit {
 
   deleteUpload(param: any) {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
+
   }
   deleteUploadSaved(param: any) {
     this.idFile = param.id;
-    this.travelManagementService.deleteFile(this.idFile.toString(), this.ticket)
-      .subscribe((data: any) => {
-        this.generalViajes[0].travel_request_annexeds.splice(this.generalViajes[0].travel_request_annexeds.findIndex(filter => filter.id === param.id), 1);
-      })
+    this.alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el archivo #' + this.idFile.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteDocumentSaved'
+    }];
+    this.alert.setAlert(this.alertWarning[0]);
 
   }
   deleteDestinations(param: any) {
-    this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === param.id), 1);
-    this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === param.id), 1);
-    this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+    this.id_destination_delete = param.id;
+    this.alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el destino con ticket #' + this.id_destination_delete.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteDestinations'
+    }];
+    this.alert.setAlert(this.alertWarning[0]);
   }
 
   newEditTravel(model) {
@@ -443,7 +481,7 @@ export class EditTravelComponent implements OnInit {
         this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destinations), 1);
 
         this.traverlsDestination.push({
-          id:this.id_destinations,
+          id: this.id_destinations,
           travel_id: this.id_destinations,
           transport_id: modelEditPartial.id_transport,
           origin_location_id: modelEditPartial.id_city,
@@ -505,12 +543,17 @@ export class EditTravelComponent implements OnInit {
 
 
   colapseNew() {
+
     if (!this.bnew) {
       this.bnew = true
     } else {
       this.bnew = false
     }
     document.getElementById("edit_funtionTravel").click();
+
+    setTimeout(() => {
+      document.getElementById('travel_edit').scrollTo(0,1250);
+    }, 200);
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;

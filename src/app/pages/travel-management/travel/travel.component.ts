@@ -48,7 +48,6 @@ export class TravelComponent implements OnInit {
             const alertWarning = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
           });
-        
       }
     })
 
@@ -87,6 +86,7 @@ export class TravelComponent implements OnInit {
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
       this.my_travels_list = data.data[0].my_travel_requests_list;
+      console.log(this.my_travels_list)
     });
 
   }

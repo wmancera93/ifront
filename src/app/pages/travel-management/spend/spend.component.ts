@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TravelsService } from '../../../services/shared/travels/travels.service';
+import { SpendSharedService } from '../../../services/shared/spend-shared/spend-shared.service';
 
 @Component({
   selector: 'app-spend',
@@ -12,7 +13,7 @@ export class SpendComponent implements OnInit {
   public prueba: string ='3'
   token
 
-  constructor(public router: Router, public travelsService:TravelsService) { }
+  constructor(public router: Router, public spendSharedService:SpendSharedService) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,7 @@ export class SpendComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
   newSpendTravel() {
-    this.travelsService.setNewSpend(true);
+    this.spendSharedService.setNewSpend(true);
   }
   viewSpend(){
   

@@ -26,7 +26,7 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general">
+              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newAdvanceTravel()">
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                 Nuevo Anticipo
               </button>
@@ -113,3 +113,4 @@
     </div>
   </div>
 </div>
+<app-new-advances *ngIf="!token"></app-new-advances>

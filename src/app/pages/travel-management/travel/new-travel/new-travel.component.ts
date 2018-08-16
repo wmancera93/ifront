@@ -57,6 +57,7 @@ export class NewTravelComponent implements OnInit {
   public dayResult: number;
   public dayResultE: number;
   public activate: boolean = false;
+  public showMilenage: boolean = false;
 
 
 
@@ -206,12 +207,12 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    
+
     this.activate = true;
 
     let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
     let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
-   
+
     let dateBeginCalculate = dateBegin.toString().replace('-', '').replace('-', '');
     let dateEndCalculate = dateEnd.toString().replace('-', '').replace('-', '');
 
@@ -273,35 +274,6 @@ export class NewTravelComponent implements OnInit {
       this.closeTrip();
     }
   }
-  
-  // editTravels(param: any) {
-  //   this.formTravelManagement = new FormGroup({});
-  //   this.formTravelManagement = this.fb.group({
-  //     id_travel: param.id_travel,
-  //     trip_text: param.trip_text,
-  //     id_transport: param.id_transport,
-  //     id_city: param.id_city,
-  //     id_country: param.id_country,
-  //     id_state: param.id_state,
-  //     id_terminal: param.id_terminal,
-  //     date_begin: param.date_begin,
-  //     hour_begin: param.hour_begin,
-  //     hour_end: param.hour_end,
-  //     date_end: param.date_end,
-  //     id_terminalto: param.id_terminalto,
-  //     id_cityto: param.id_cityto,
-  //     id_stateto: param.id_stateto,
-  //     id_countryto: param.id_countryto,
-  //     id_hotels: param.id_hotels,
-  //   });
-  //   this.searchState(param, 'edit');
-  //   this.searchStateto(param, 'edit');
-  //   this.searchCity(param, 'edit');
-  //   this.searchCityto(param, 'edit');
-  //   this.searchTerminal(param, 'edit');
-  //   this.searchTerminalto(param, 'edit');
-  //   this.searchHotel(param, 'edit');
-  // }
 
   colapseNew() {
     if (!this.bnew) {
@@ -310,6 +282,11 @@ export class NewTravelComponent implements OnInit {
       this.bnew = false
     }
     document.getElementById("funtionTravel").click();
+
+    setTimeout(() => {
+      document.getElementById('travel_new').scrollTo(0, 500);
+    }, 200);
+
   }
 
   collapse(is_collapse: boolean) {
@@ -324,6 +301,15 @@ export class NewTravelComponent implements OnInit {
     this.clearFormPartial();
   }
 
+  mileageTravel(param) {
+
+    if (param.id_transport == 2) {
+      this.showMilenage = true;
+    } else {
+      this.showMilenage = false;
+    }
+
+  }
   searchState(form: any, acction: any) {
     this.stateLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_country).
