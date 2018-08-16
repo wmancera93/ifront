@@ -5,6 +5,7 @@ import { TrainingDetail } from '../../../../models/common/events_management/trai
 import { State } from '../../../../../../node_modules/ngx-chips/core/providers/drag-provider';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-view-training',
@@ -16,16 +17,18 @@ export class ViewTrainingComponent implements OnInit {
   public trainingDetailInfo: TrainingDetail[] = [];
   public idTraining: number;
   public sendState: any;
-  public observations : string ="";
+  public observations: string = "";
+  public urlPrevisualize: string;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    public sanitizer: DomSanitizer) {
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
       this.idTraining = activeModal;
       this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
         this.trainingDetailInfo = info.data;
-        console.log(this.trainingDetailInfo)
+        this.urlPrevisualize = info.data.pdf.url;
         document.getElementById('btn-viewTraining').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       });
@@ -43,8 +46,7 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
-      if(response.success)
-      {
+      if (response.success) {
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
