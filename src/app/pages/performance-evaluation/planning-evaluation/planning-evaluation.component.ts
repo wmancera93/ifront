@@ -10,6 +10,7 @@ import { PerformanceEvalSharedService } from '../../../services/shared/common/pe
 })
 export class PlanningEvaluationComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
+
   public evaluationList: any;
   public editDate: boolean = false;
   token = false;

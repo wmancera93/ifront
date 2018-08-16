@@ -18,6 +18,7 @@ export class NewSpendComponent implements OnInit {
   public iconDocument: string = '';
   public is_upload: boolean = false;
   public file: any[] = [];
+  
   constructor(public spendSharedService: SpendSharedService, public fileUploadService: FileUploadService) {
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
@@ -54,7 +55,7 @@ export class NewSpendComponent implements OnInit {
   ngOnInit() {
   }
 
-  newSpend() {
+  newSpend(param){
 
   }
 }

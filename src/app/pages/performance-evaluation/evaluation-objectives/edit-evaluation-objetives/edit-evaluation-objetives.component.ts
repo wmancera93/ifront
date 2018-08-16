@@ -83,7 +83,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             confirmation: false,
             typeConfirmation: ''
           }];
-          this.dataTableConsult();
+          this.dataTableConsult();          
+        document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
         })
       }
@@ -126,6 +127,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           confirmation: false,
           typeConfirmation: ''
         }];
+        document.getElementById("closeModalObjectiveEvaluation").click();
         this.dataTableConsult();
         this.alert.setAlert(alertWarning[0]);
       },
@@ -137,6 +139,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             confirmation: false,
             typeConfirmation: ''
           }];
+
+          document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
         })
@@ -152,8 +156,11 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           confirmation: false,
           typeConfirmation: ''
         }];
+
         this.dataTableConsult();
+        document.getElementById("closeModalObjectiveEvaluation").click();
         this.alert.setAlert(alertWarning[0]);
+
       },
         (error: any) => {
           const alertWarning: Alerts[] = [{
