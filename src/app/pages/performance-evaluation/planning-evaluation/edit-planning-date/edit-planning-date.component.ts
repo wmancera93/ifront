@@ -39,11 +39,9 @@ export class EditPlanningDateComponent implements OnInit {
   }
 
   editDateEvaluation(objectDate) {
-    // objectDate.split("-");
-    // console.log(objectDate)
-    // this.performanceEvaluationService.putPeriodPlanningEvaluation(this.idEditDate, objectDate).subscribe((response: any) => {
-    //   console.log(response);
-    // })
+    this.performanceEvaluationService.putPeriodPlanningEvaluation(this.idEditDate, objectDate).subscribe((response: any) => {
+
+    })
   }
 
 
