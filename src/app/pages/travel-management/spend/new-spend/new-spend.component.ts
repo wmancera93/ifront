@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
+import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -17,10 +18,13 @@ export class NewSpendComponent implements OnInit {
   public iconDocument: string = '';
   public is_upload: boolean = false;
   public file: any[] = [];
-  constructor(public travelsService: TravelsService, public fileUploadService: FileUploadService) {
+  constructor(public spendSharedService: SpendSharedService, public fileUploadService: FileUploadService) {
 
-    this.travelsService.getNewSpend().subscribe((data: any) => {
-      document.getElementById('btn_spend_new').click();
+    this.spendSharedService.getNewSpend().subscribe((data: any) => {
+      if (document.getElementById('spend_new').className !== 'modal show'){
+        document.getElementById('btn_spend_new').click();
+      }
+      
     });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -38,6 +42,11 @@ export class NewSpendComponent implements OnInit {
     });
 
 
+  }
+
+  deleteUpload(param){
+    console.log(param)
+    this.imgSpend.splice(this.imgSpend.findIndex(filter => filter.file.name === param.file.name), 1);
   }
   cleanSpend() {
 

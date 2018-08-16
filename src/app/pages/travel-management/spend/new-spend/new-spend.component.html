@@ -12,7 +12,22 @@
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formSpendTravel" class="row" (ngSubmit)="newSpend(formSpendTravel.value)">
           <div class="col-12">
-              <h4>Nuevo gasto</h4>
+            <h4>Nuevo gasto</h4>
+          </div>
+          <div class="col-12" style="margin-top: 10px">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                    <i class="fa fa-fw fa-plane text-primary-hr"></i>
+                  <strong>Viaje asociado</strong>
+                </label>
+              </div>
+              <div class="col-lg-9 col-md-6 col-12">
+                <select class="form-control">
+                  <option>54 - Viaje a las vegas</option>
+                </select>
+              </div>
+            </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
             <div class="row">
@@ -112,15 +127,15 @@
         <div class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button class="btn btn-primary btn-block cursor-general">
-                <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
+              <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
           </div>
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button class="btn btn-warning btn-block cursor-general">
-              <i class="fa fa-fw fa-eraser"></i>&nbsp;&nbsp;Limpiar</button>
+              <i class="fa fa-fw fa-window-close-o"></i>&nbsp;&nbsp;Limpiar</button>
           </div>
         </div>
 
-        <div class="row justify-content-end" >
+        <div class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>

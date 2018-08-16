@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '../../../../../node_modules/@angular/router';
 import { TravelsService } from '../../../services/shared/travels/travels.service';
+import { AdvanceSharedService } from '../../../services/shared/advance-shared/advance-shared.service';
 
 @Component({
   selector: 'app-advances',
@@ -9,7 +10,7 @@ import { TravelsService } from '../../../services/shared/travels/travels.service
 })
 export class AdvancesComponent implements OnInit {
 
-  constructor(public router: Router, public travelsService:TravelsService) { }
+  constructor(public router: Router, public advanceSharedService:AdvanceSharedService) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,7 @@ export class AdvancesComponent implements OnInit {
   }
 
   newAdvanceTravel() {
-    this.travelsService.setNewAdvance(true);
+    debugger
+    this.advanceSharedService.setNewAdvance(true);
   }
 }

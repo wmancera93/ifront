@@ -12,17 +12,30 @@
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formTravelManagement" class="row justify-content-left" (ngSubmit)="newTravel(formTravelManagement.value)">
           <div class="col-11">
-            <div class="row">
-              <div class="col-lg-4 col-md-6 col-12">
+            <div class="row align-items-center">
+              <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
               </div>
-              <div class="col-lg-4 col-md-6 col-12">
+              <div class="col-lg-3 col-md-6 col-12">
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 form-check">
+                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectPlaningTravel"
+                  value="true" checked>
+                <label class="form-check-label titleColor" for="selectPlaningTravel">
+                  <strong>Viaje Planificado</strong>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 form-check">
+                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectTravelDone" value="false">
+                <label class="form-check-label titleColor" for="travelDone">
+                  <strong>Viaje Realizado</strong>
+                </label>
               </div>
             </div>
           </div>
@@ -34,7 +47,78 @@
             <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control"
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
-          <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0">
+
+          <div class="col-12" style="margin-top: 20px">
+            <div class="col-lg-3 col-md-6 col-12 form-check ">
+              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="" id="manutencionCheck">
+              <label class="form-check-label titleColor" for="manutencionCheck">
+                <strong>Manutención</strong>
+              </label>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row" style="margin-top: 10px">
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <a>Tipo de costo:</a>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
+                  <a>Centro de costo:</a>
+                </label>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="margin-top: 15px">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
+                  <a>Clase de viaje legal:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
+                  <a>Clase de viaje especial:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usb text-primary-hr"></i>
+                  <a>Actividad de viaje:</a>
+                </label>
+                <select class="form-control">
+                  <option value="-1">Seleccione</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
               <h4>Viajes</h4>
             </div>
@@ -101,13 +185,10 @@
 
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
-                <h5 *ngIf="bedit">
-                  Editar Viaje
-                </h5>
                 <h5 class="titleColor" *ngIf="bnew">
                   Nuevo Viaje
                 </h5>
-                <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                <button *ngIf="!bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
                   Nuevo Viaje
                 </button>
                 <button id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
@@ -124,11 +205,23 @@
                   </label>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                  <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']">
+                  <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
+                  (change)="mileageTravel(formTravelManagement.value, 'new')">
                     <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
                   </select>
                 </div>
+                <div class="col-lg-2 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa fa-car text-primary-hr"></i>
+                    <strong>Kilometraje:</strong>
+                  </label>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
+                  <input type="text" class="form-control">
+                </div>
               </div>
+
+
               <div class="row" style="margin-top: 15px">
                 <div class="col-12">
                   <div class="row">
@@ -307,12 +400,12 @@
                         || formTravelManagement.value.id_terminalto == -1
                         || formTravelManagement.value.date_end == ''
                         || formTravelManagement.value.hour_end == ''
-                        || formTravelManagement.value.id_hotels == -1) ? true : null" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse"
-                        data-target="#collapseTravel">
+                        || formTravelManagement.value.id_hotels == -1) ? true : null" class="btn btn-primary btn-block cursor-general"
+                        (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button class="btn btn-warning btn-block cursor-general" (click)="cleanSpend()" data-toggle="collapse" data-target="#collapseTravel">
+                      <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                     </div>
                   </div>
