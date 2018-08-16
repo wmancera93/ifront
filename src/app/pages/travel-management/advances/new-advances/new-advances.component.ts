@@ -9,7 +9,7 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 })
 export class NewAdvancesComponent implements OnInit {
   public showSubmit: boolean = true
-
+  formAdvanceTravel
   constructor(public advanceSharedService: AdvanceSharedService) {
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
@@ -26,6 +26,8 @@ export class NewAdvancesComponent implements OnInit {
   }
 
 
-
+  newAdvance(param){
+    
+  }
 
 }

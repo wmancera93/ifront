@@ -18,7 +18,7 @@ export class NewSpendComponent implements OnInit {
   public iconDocument: string = '';
   public is_upload: boolean = false;
   public file: any[] = [];
-  
+  formSpendTravel
   constructor(public spendSharedService: SpendSharedService, public fileUploadService: FileUploadService) {
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
