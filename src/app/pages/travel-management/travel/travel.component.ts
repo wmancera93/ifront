@@ -19,6 +19,7 @@ export class TravelComponent implements OnInit {
   public token: boolean;
   public alertWarning: any[] = [];
   public id_requests_travel: string;
+  public aproover: string = 'No existe aprobador para esta solicitud';
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -70,6 +71,10 @@ export class TravelComponent implements OnInit {
         this.travelService.getTravelRequests().subscribe((data: any) => {
           this.my_travels_list = [];
           this.my_travels_list = data.data[0].my_travel_requests_list;
+          this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee
+          if (this.aproover !== '') {
+            this.aproover = this.aproover;
+          } 
         });
       }
 
@@ -86,7 +91,7 @@ export class TravelComponent implements OnInit {
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
       this.my_travels_list = data.data[0].my_travel_requests_list;
-      console.log(this.my_travels_list)
+
     });
 
   }
@@ -108,7 +113,7 @@ export class TravelComponent implements OnInit {
   }
 
   deleteTravels(id: string) {
-    this.id_requests_travel=id;
+    this.id_requests_travel = id;
     this.alertWarning = [{
       type: 'warning',
       title: 'Confirmación',
@@ -117,6 +122,6 @@ export class TravelComponent implements OnInit {
       typeConfirmation: 'deletRequestTravel'
     }];
     this.alert.setAlert(this.alertWarning[0]);
-    
+
   }
 }

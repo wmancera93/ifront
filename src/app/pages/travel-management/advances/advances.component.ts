@@ -21,7 +21,6 @@ export class AdvancesComponent implements OnInit {
   }
 
   newAdvanceTravel() {
-    debugger
     this.advanceSharedService.setNewAdvance(true);
   }
 }

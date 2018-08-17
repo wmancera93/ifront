@@ -13,7 +13,7 @@ export class NewAdvancesComponent implements OnInit {
   constructor(public advanceSharedService: AdvanceSharedService) {
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
-      debugger
+   
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
       }

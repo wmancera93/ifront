@@ -4,7 +4,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viajes</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viaje # {{ticket}}</h5>
         <button id="close_edit_travel" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -23,19 +23,6 @@
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12 form-check">
-                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectPlaningTravel"
-                  value="true" checked>
-                <label class="form-check-label titleColor" for="selectPlaningTravel">
-                  <strong>Viaje Planificado</strong>
-                </label>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12 form-check">
-                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectTravelDone" value="false">
-                <label class="form-check-label titleColor" for="travelDone">
-                  <strong>Viaje Realizado</strong>
-                </label>
               </div>
             </div>
           </div>
@@ -59,7 +46,7 @@
 
           <div class="col-12">
             <div class="row" style="margin-top: 10px">
-              <div class="col-lg-3 col-md-6 col-12">
+              <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Tipo de costo:</a>
@@ -70,7 +57,7 @@
                   <option value="-1">Seleccione</option>
                 </select>
               </div>
-              <div class="col-lg-3 col-md-6 col-12">
+              <div class="col-lg-3 col-md-6 col-12 text-right">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
                   <a>Centro de costo:</a>
