@@ -74,7 +74,7 @@ export class TravelComponent implements OnInit {
           this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee
           if (this.aproover !== '') {
             this.aproover = this.aproover;
-          } 
+          }
         });
       }
 
@@ -91,7 +91,6 @@ export class TravelComponent implements OnInit {
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
       this.my_travels_list = data.data[0].my_travel_requests_list;
-
     });
 
   }

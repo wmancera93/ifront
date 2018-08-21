@@ -71,7 +71,9 @@ export class EditTravelComponent implements OnInit {
   public dayResultE: number;
   public activate: boolean = false;
   public alertWarning: any[] = [];
-  public id_destination_delete: string = ''
+  public id_destination_delete: string = '';
+
+  public acctionDeleteTable: string = '';
 
 
 
@@ -86,9 +88,11 @@ export class EditTravelComponent implements OnInit {
       if (data === 'continueEditTravelRequests') {
         document.getElementById("btn_travel_edit").click();
       }
+
       if (data === 'continueEditDestinationRequests') {
         document.getElementById("btn_travel_edit").click();
       }
+
       if (data === 'deleteDocumentSaved') {
         document.getElementById("btn_travel_edit").click();
         this.travelManagementService.deleteFile(this.idFile.toString(), this.ticket)
@@ -97,15 +101,38 @@ export class EditTravelComponent implements OnInit {
           })
         document.getElementById("btn_travel_edit").click();
       }
+
       if (data === 'deleteDestinations') {
-        document.getElementById("btn_travel_edit").click();
-        this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
-        this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
-        this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-        document.getElementById("btn_travel_edit").click();
+
+        if (this.acctionDeleteTable === 'deleteTravelManagement') {
+
+          this.travelManagementService.deleteTravelByDestination(this.ticketDestinations, this.ticket).
+            subscribe((resultDestination: any) => {
+              this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
+              this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
+              this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+
+              document.getElementById("btn_travel_edit").click();
+
+            })
+        } else {
+          this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
+          this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
+          this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+          document.getElementById("btn_travel_edit").click();
+        }
+
       }
 
-
+      if (data === 'closeAlertdeleteDestinations') {
+        this.id_destination_delete = '';
+        document.getElementById("btn_travel_edit").click();
+      }
+      
+      if (data === 'closeAlertdeleteDocumentSaved') {
+        document.getElementById("btn_travel_edit").click();
+        document.getElementById("btn_travel_edit").click();
+      }
 
     })
 
@@ -188,8 +215,6 @@ export class EditTravelComponent implements OnInit {
           setTimeout(() => {
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
           }, 50);
-
-
         }
 
       });
@@ -201,15 +226,15 @@ export class EditTravelComponent implements OnInit {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
-        
+
         if (!this.bedit) {
           if (!this.bnew) {
             document.getElementById("edit_funtionTravel").click();
 
             setTimeout(() => {
-              document.getElementById('travel_edit').scrollTo(0,1300);
+              document.getElementById('travel_edit').scrollTo(0, 1300);
             }, 300);
-            
+
             this.bedit = true;
           } else {
             this.bnew = false
@@ -255,17 +280,18 @@ export class EditTravelComponent implements OnInit {
       }
 
       if ((data.action_method === "deleteTravelManagement")) {
-        this.deleteDestinations(data)
-        this.travelManagementService.deleteTravelByDestination(this.ticketDestinations, this.ticket).
-          subscribe((resultDestination: any) => {
-            this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
 
-          })
+        document.getElementById("btn_travel_edit").click();
+        this.deleteDestinations(data)
       }
 
       if ((data.action_method === "deleteTravels")) {
+
+        document.getElementById("btn_travel_edit").click();
         this.deleteDestinations(data)
       }
+
+      this.acctionDeleteTable = data.action_method;
     });
   }
 
@@ -552,7 +578,7 @@ export class EditTravelComponent implements OnInit {
     document.getElementById("edit_funtionTravel").click();
 
     setTimeout(() => {
-      document.getElementById('travel_edit').scrollTo(0,1250);
+      document.getElementById('travel_edit').scrollTo(0, 1250);
     }, 200);
   }
   collapse(is_collapse: boolean) {

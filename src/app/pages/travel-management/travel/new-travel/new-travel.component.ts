@@ -55,9 +55,10 @@ export class NewTravelComponent implements OnInit {
   public count: number = 0;
   public file: any[] = [];
   public dayResult: number;
-  public dayResultE: number;
   public activate: boolean = false;
   public showMilenage: boolean = false;
+  public dayBeginRequests: string = '';
+  public dayEndRequests: string = '';
 
 
 
@@ -72,7 +73,7 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueTravelRequests') { 
+      if (data === 'continueTravelRequests') {
         document.getElementById("btn_travel_new").click();
       }
       if (data === 'continueDestinationRequests') {
@@ -99,6 +100,8 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
       id_transport: 1,
       id_city: '',
@@ -175,6 +178,8 @@ export class NewTravelComponent implements OnInit {
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('date_begin', model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
@@ -208,7 +213,9 @@ export class NewTravelComponent implements OnInit {
 
   addDestination(modelPartial) {
 
-    this.activate = true;
+
+    this.dayBeginRequests = modelPartial.date_requests_begin.toString().replace('-', '').replace('-', '');
+    this.dayEndRequests = modelPartial.date_requests_endtoString().replace('-', '').replace('-', '');
 
     let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
     let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
@@ -485,6 +492,8 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
       id_transport: 1,
       id_city: '',
@@ -501,6 +510,18 @@ export class NewTravelComponent implements OnInit {
       id_countryto: '-1',
       id_hotels: '',
     });
+
+  }
+
+  dateComplete(days) {
+    debugger
+    if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
+      
+      this.activate = true;
+    } 
+    else {
+      this.activate = false;
+    }
 
   }
 
