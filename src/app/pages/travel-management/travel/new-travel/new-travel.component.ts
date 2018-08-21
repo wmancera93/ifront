@@ -72,7 +72,7 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueTravelRequests') {
+      if (data === 'continueTravelRequests') { 
         document.getElementById("btn_travel_new").click();
       }
       if (data === 'continueDestinationRequests') {
