@@ -32,6 +32,10 @@ export class DataTableComponent implements OnInit {
   @Input() excel?: any = false;
   @Input() pdf?: any = true;
   @Input() sizeTable?: any = true;
+  @Input() minHeight?: any = true;
+
+  public height = "min-height: 370px;";
+
   public keys: any[] = [];
   public labels: any[] = [];
   public p = 1;

@@ -6,6 +6,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { debug } from 'util';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AlertsComponent implements OnInit {
   public bodyAlert: Alerts = { type: 'primary', title: '', message: '' };
   public icon: string;
   public confirmationShow = false;
+  public cancelation:string;
 
 
   constructor(public alert: AlertsService, public route: Router,
@@ -59,4 +61,9 @@ export class AlertsComponent implements OnInit {
     this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
   }
 
+  clickCancel() {
+    this.cancelation='closeAlert'+ this.bodyAlert.typeConfirmation;
+    document.getElementById('closeModal').click();
+    this.alert.setActionConfirm(this.cancelation);
+  }
 }

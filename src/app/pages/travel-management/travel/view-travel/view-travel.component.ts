@@ -56,9 +56,12 @@ export class ViewTravelComponent implements OnInit {
 
   ngOnInit() {
   }
-  viewCotization(param) {
-    window.open(param.file.url)
+  viewCotization(paramView) {
+
+    window.open(paramView.file.url)
+
   }
+
   downloadCotization(param: any) {
 
     this.http.get(param.file.url, {
