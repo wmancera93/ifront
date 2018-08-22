@@ -57,8 +57,9 @@ export class NewTravelComponent implements OnInit {
   public dayResult: number;
   public activate: boolean = false;
   public showMilenage: boolean = false;
-  public dayBeginRequests: string = '';
-  public dayEndRequests: string = '';
+  public dayBeginRequests: number;
+  public dayEndRequests: number;
+  public dayRequestResult: number;
 
 
 
@@ -213,9 +214,14 @@ export class NewTravelComponent implements OnInit {
 
   addDestination(modelPartial) {
 
+    debugger
+    let dateRequestStart = modelPartial.date_requests_begin == null ? '' : modelPartial.date_requests_begin;
+    let dateRequestFinish = modelPartial.date_requests_end == null ? '' : modelPartial.date_requests_end;
 
-    this.dayBeginRequests = modelPartial.date_requests_begin.toString().replace('-', '').replace('-', '');
-    this.dayEndRequests = modelPartial.date_requests_endtoString().replace('-', '').replace('-', '');
+    this.dayBeginRequests = dateRequestStart.toString().replace('-', '').replace('-', '');
+    this.dayEndRequests = dateRequestFinish.toString().replace('-', '').replace('-', '');
+
+    this.dayRequestResult = this.dayEndRequests - this.dayBeginRequests;
 
     let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
     let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
@@ -225,60 +231,101 @@ export class NewTravelComponent implements OnInit {
 
     this.dayResult = dateEndCalculate - dateBeginCalculate;
 
-    if (this.dayResult < 0) {
+    if (this.dayRequestResult < 0) {
+
       document.getElementById("btn_travel_new").click();
       const alertDataWrong: Alerts[] = [{
         type: 'danger',
         title: 'Error',
-        message: 'La fecha de origen no puede ser mayor a la de destino',
+        message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud',
         confirmation: true,
         typeConfirmation: 'continueDestinationRequests'
+
       }];
       this.alert.setAlert(alertDataWrong[0])
 
-    }
-    else {
+    } else {
 
-      this.travelProof[0].data[0].data.push({
-        field_0: this.count + 1,
-        field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
-        field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
-        field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-        field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-        field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
-        field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-        field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
-        field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-        field_10: {
-          type_method: "DELETE",
-          type_element: "button",
-          icon: "fa-trash",
-          id: this.count + 1,
-          title: "Eliminar",
-          action_method: "deleteTravels",
-          disable: false
-        }
-      })
+      if (this.dayResult < 0) {
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de origen de la ruta no puede ser mayor a la de destino de la ruta',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
 
-      this.traverlsDestination.push({
-        travel_id: this.count + 1,
-        transport_id: modelPartial.id_transport,
-        origin_location_id: modelPartial.id_city,
-        origin_terminal_id: modelPartial.id_terminal,
-        hotel_id: modelPartial.id_hotels,
-        destination_location_id: modelPartial.id_cityto,
-        destination_terminal_id: modelPartial.id_terminalto,
-        origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-        destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
-      });
+      }
+      if ((dateBeginCalculate > this.dayEndRequests) || (dateBeginCalculate < this.dayBeginRequests)) {
 
-      this.count += 1
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de origen de la ruta no se encuentra en el rango de fecha de la solicitud general',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
 
-      setTimeout(() => {
-        this.objectReport.emit(this.travelProof[0]);
-      }, 500);
+      }
 
-      this.closeTrip();
+      if ((dateEndCalculate > this.dayEndRequests) || (dateEndCalculate < this.dayBeginRequests)) {
+
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
+      }else {
+
+        this.travelProof[0].data[0].data.push({
+          field_0: this.count + 1,
+          field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+          field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+          field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
+          field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+          field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+          field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
+          field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+          field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
+          field_10: {
+            type_method: "DELETE",
+            type_element: "button",
+            icon: "fa-trash",
+            id: this.count + 1,
+            title: "Eliminar",
+            action_method: "deleteTravels",
+            disable: false
+          }
+        })
+
+        this.traverlsDestination.push({
+          travel_id: this.count + 1,
+          transport_id: modelPartial.id_transport,
+          origin_location_id: modelPartial.id_city,
+          origin_terminal_id: modelPartial.id_terminal,
+          hotel_id: modelPartial.id_hotels,
+          destination_location_id: modelPartial.id_cityto,
+          destination_terminal_id: modelPartial.id_terminalto,
+          origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+          destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
+        });
+
+        this.count += 1
+
+        setTimeout(() => {
+          this.objectReport.emit(this.travelProof[0]);
+        }, 500);
+
+        this.closeTrip();
+      }
     }
   }
 
@@ -417,6 +464,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   clearFormGeneral() {
+    this.activate = false;
     this.showSubmit = true;
     this.stateLocations = [];
     this.stateLocationsto = [];
@@ -516,9 +564,9 @@ export class NewTravelComponent implements OnInit {
   dateComplete(days) {
     debugger
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
-      
+
       this.activate = true;
-    } 
+    }
     else {
       this.activate = false;
     }
