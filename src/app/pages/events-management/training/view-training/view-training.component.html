@@ -12,8 +12,8 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center" *ngIf="trainingDetailInfo !== undefined">
-          <div class="col-6">
-              <iframe  [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe>
+          <div class="col-6" *ngIf="flagPDF">
+            <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe>
           </div>
           <div class="col-6">
             <strong>
@@ -64,7 +64,7 @@
             <div class="row margin-row">
               <div class="col-12">
                 <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones" style="width:100% !important;"
-                  ngModel required>                        
+                  required>                        
                 </textarea>
               </div>
             </div>

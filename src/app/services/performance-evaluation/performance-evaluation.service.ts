@@ -53,5 +53,9 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
 
+getViewEvaluationPDF(idEvaluation:number){
+   return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
+      .map((data: any) => data.json());
+}
 
 }

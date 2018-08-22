@@ -6,13 +6,13 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Editar fechas de planificación </h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeModalPlanning" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center">
-          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" >
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove">
             <div class="row border" style="margin-left: 2px">
               <h4>Planificación de objetivos</h4>
             </div>
@@ -26,7 +26,7 @@
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               Fecha Inicial *
             </label>
-            <input type="date" name="date_begin" class="form-control" [formControl]="formDate.controls['start_date']" placeholder="dd/mm/yyyy"
+            <input type="date" name="date_begin" class="form-control" [formControl]="formDate.controls['start_planning']" placeholder="dd/mm/yyyy"
             />
           </div>
           <div class="col-md-4 col-12 top-containter">
@@ -34,7 +34,7 @@
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               Fecha Final *
             </label>
-            <input type="date" name="date_end" class="form-control" [formControl]="formDate.controls['end_date']" placeholder="dd/mm/yyyy"
+            <input type="date" name="date_end" class="form-control" [formControl]="formDate.controls['end_planning']" placeholder="dd/mm/yyyy"
             />
           </div>
           <div class="col-md-12 top-containter">
@@ -46,7 +46,7 @@
                   <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <button class="btn btn-warning btn-block cursor-general" data-toggle="collapse" data-target="#collapseExample">
+                <button class="btn btn-warning btn-block cursor-general" data-dismiss="modal" aria-label="Close">
                   <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
               </div>
             </div>

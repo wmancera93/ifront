@@ -19,24 +19,37 @@ export class ViewTrainingComponent implements OnInit {
   public sendState: any;
   public observations: string = "";
   public urlPrevisualize: string;
+  public flagPDF: boolean = false;
+  public activeBlur: number = 0;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
     public sanitizer: DomSanitizer) {
-    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      this.idTraining = activeModal;
-      this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
-        this.trainingDetailInfo = info.data;
-        this.urlPrevisualize = info.data.pdf.url;
-        document.getElementById('btn-viewTraining').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-      });
-    });
 
   }
 
   ngOnInit() {
+
+    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
+      this.idTraining = activeModal;
+      debugger
+      if (this.activeBlur === 0) {
+        this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
+          this.flagPDF = true;
+          setTimeout(() => {
+            this.trainingDetailInfo = info.data;
+            this.urlPrevisualize = info.data.pdf.url;
+          }, 100);
+          document.getElementById('btn-viewTraining').click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+          this.activeBlur += 1;
+        });
+      }
+
+    });
+
+
   }
 
   acceptTraining(flag: boolean) {
@@ -46,6 +59,7 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
+      console.log(response)
       if (response.success) {
         const alertWarning: Alerts[] = [{
           type: 'success',
@@ -56,7 +70,11 @@ export class ViewTrainingComponent implements OnInit {
         }];
         this.alert.setAlert(alertWarning[0]);
       }
-      document.getElementById("closeModalTraining").click();
-    })
+
+    },
+      (error: any) => {
+        console.log(error)
+      });
+    document.getElementById("closeModalTraining").click();
   }
 }

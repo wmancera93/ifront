@@ -7,7 +7,7 @@ export interface Evaluations {
     code: string,
     title?: string,
     description: string,
-    questions_to_json: Questions,
+    questions_to_json: Questions[],
     sections_to_json: Sections
 }
 export interface Sections {
@@ -16,7 +16,7 @@ export interface Sections {
     code: string,
     question_type_id?: number,
     parent_id?: number,
-    question_childrens_to_json?: Questions,
+    question_childrens_to_json?: Questions[],
     answer_options?: Answers
 }
 

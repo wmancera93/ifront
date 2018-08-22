@@ -27,5 +27,12 @@ export class EvaluationObjectivesComponent implements OnInit {
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
 
+  goToViewEval(viewEval:any)
+  {
+    this.performanceEvaluationService.getViewEvaluationPDF(viewEval.id).subscribe((data:any)=>{
+      window.open(data.data.result_pdf.url);
+    })
+  }
+
 
 }

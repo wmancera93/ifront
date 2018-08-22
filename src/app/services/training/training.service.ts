@@ -17,7 +17,7 @@ export class TrainingService {
   }
 
   putTrainingEventsByID(id, objectEdit) {
-    return this.tokenService.get('training_events/' + id, objectEdit)
+    return this.tokenService.put('training_events/' + id, objectEdit)
       .map((data: any) => data.json());
   }
 
