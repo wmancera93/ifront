@@ -26,6 +26,10 @@ export class NewTravelComponent implements OnInit {
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];
+  public legal_travels: any[] = [];
+  public trips_specific: any[] = [];
+  public trips_activities: any[] = [];
+  public costs_travels: any[] = [];
   public countries: any[] = [];
   public countriesto: any[] = [];
   public cityLocations: any[] = [];
@@ -57,7 +61,8 @@ export class NewTravelComponent implements OnInit {
   public activate: boolean = false;
   public showMilenage: boolean = false;
   public disabledDatesHeader: boolean = false;
-
+  public deleteDocumenFile: string;
+  public deleteDestination: string;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -77,7 +82,23 @@ export class NewTravelComponent implements OnInit {
       if (data === 'continueDestinationRequestsValidateDates') {
         this.activate = false;
       }
+      if (data === 'deleteNewDocumentSaved') {
+        document.getElementById("btn_travel_new").click();
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
 
+      }
+      if (data === 'deleteNewDestinations') {
+        document.getElementById("btn_travel_new").click();
+        this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === this.deleteDestination), 1);
+        this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.deleteDestination), 1);
+        this.objectReport.emit(this.travelProof[0]);
+      }
+
+      if (data === 'closeAlertdeleteNewDocument' || data === 'closeAlertdeleteNewDestinations') {
+
+        document.getElementById("btn_travel_new").click();
+      }
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -100,6 +121,7 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
+      id_travel_costs:'',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -149,22 +171,44 @@ export class NewTravelComponent implements OnInit {
     });
     this.travelManagementService.getplanningTravelRequests().
       subscribe((data: any) => {
+        console.log(data)
         this.planningTravel = data;
         this.travel_types = data.data.travel_types;
         this.transport_types = data.data.transport_types;
         this.countries = data.data.countries;
         this.countriesto = data.data.countries;
+        this.legal_travels = data.data.legal_travels_types;
+        this.trips_specific =data.data.specific_types_trips;
+        this.trips_activities =data.data.travel_activities;
+        this.costs_travels =data.data.travel_costs_types;
       })
   }
 
   deleteUpload(param: any) {
-    this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
-    this.file.splice(this.file.findIndex(filter => filter.file.name === param.file.name), 1);
+    document.getElementById("btn_travel_new").click();
+    this.deleteDocumenFile = param.file.name;
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el archivo ' + param.file.name.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteNewDocumentSaved'
+    }];
+    this.alert.setAlert(alertWarning[0]);
+
+
   }
   deleteDestinations(param: any) {
-    this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === param.id), 1);
-    this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === param.id), 1);
-    this.objectReport.emit(this.travelProof[0]);
+    document.getElementById("btn_travel_new").click();
+    this.deleteDestination = param.id;
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el destino con ticket #' + this.deleteDestination.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteNewDestinations'
+    }];
+    this.alert.setAlert(alertWarning[0]);
   }
 
   newTravel(model) {
@@ -466,6 +510,7 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
+      id_travel_costs:'',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -562,7 +607,7 @@ export class NewTravelComponent implements OnInit {
           typeConfirmation: 'continueDestinationRequests'
         }];
         this.alert.setAlert(alertDataWrong[0])
-      } 
+      }
     }
   }
 

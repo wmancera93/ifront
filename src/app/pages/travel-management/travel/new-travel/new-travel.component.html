@@ -18,7 +18,7 @@
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
-                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
+                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
@@ -68,8 +68,8 @@
                 </label>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
-                <select class="form-control">
-                  <option value="-1">Seleccione</option>
+                <select *ngIf="costs_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
+                  <option *ngFor="let costsTravel of costs_travels " [value]="costsTravel.id">{{costsTravel.name}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-right">

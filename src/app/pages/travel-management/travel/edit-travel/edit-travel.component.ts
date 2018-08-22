@@ -125,7 +125,6 @@ export class EditTravelComponent implements OnInit {
       }
 
       if (data === 'closeAlertdeleteDestinations') {
-        this.id_destination_delete = '';
         document.getElementById("btn_travel_edit").click();
       }
       
