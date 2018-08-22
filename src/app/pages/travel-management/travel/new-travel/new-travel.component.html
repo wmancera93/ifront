@@ -11,35 +11,38 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formTravelManagement" class="row justify-content-left" (ngSubmit)="newTravel(formTravelManagement.value)">
-          <div class="col-11">
+          <div class="col-12">
             <div class="row align-items-center">
-              <div class="col-lg-3 col-md-6 col-12">
+              <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-3 col-md-6 col-12 form-check">
-                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectPlaningTravel"
-                  value="true" checked>
-                <label class="form-check-label titleColor" for="selectPlaningTravel">
-                  <strong>Viaje Planificado</strong>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+                  <strong>Fecha inicial de solicitud:*</strong>
                 </label>
+                <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
+                  (change)="dateComplete(formTravelManagement.value)" [attr.disabled]='travelProof[0].data[0].data.length > 0  ? true : null'
+                />
               </div>
-              <div class="col-lg-3 col-md-6 col-12 form-check">
-                <input class="form-check-input" style="margin-top: 4px !important" type="radio" name="typeTravel" id="selectTravelDone" value="false">
-                <label class="form-check-label titleColor" for="travelDone">
-                  <strong>Viaje Realizado</strong>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+                  <strong>Fecha final de solicitud:*</strong>
                 </label>
+                <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
+                  (change)="dateComplete(formTravelManagement.value)"  [attr.disabled]='travelProof[0].data[0].data.length > 0 ? true : null'/>
               </div>
             </div>
           </div>
-          <div class="col-12 top-containter" style="margin-top: 20px">
+
+          <div class="col-12 top-containter" *ngIf="activate" style="margin-top: 20px">
             <label for="celulaInput" class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
               <strong>Motivo del Viaje *</strong>
@@ -48,17 +51,17 @@
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
 
-          
-            <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
-              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="" id="manutencionCheck">
-              <label class="form-check-label titleColor" for="manutencionCheck">
-                <strong>Manutención</strong>
-              </label>
-            </div>
-         
-          <div class="col-12">
+
+          <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
+            <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="" id="manutencionCheck">
+            <label class="form-check-label titleColor" for="manutencionCheck">
+              <strong>Manutención</strong>
+            </label>
+          </div>
+
+          <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 10px">
-              <div class="col-lg-3 col-md-6 col-12">
+              <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Tipo de costo:</a>
@@ -69,7 +72,7 @@
                   <option value="-1">Seleccione</option>
                 </select>
               </div>
-              <div class="col-lg-3 col-md-6 col-12">
+              <div class="col-lg-3 col-md-6 col-12 text-right">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
                   <a>Centro de costo:</a>
@@ -83,7 +86,7 @@
             </div>
           </div>
 
-          <div class="col-12">
+          <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 15px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -115,10 +118,7 @@
             </div>
           </div>
 
-
-
-
-          <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0" style="margin-top: 15px">
+          <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0 && activate" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
               <h4>Viajes</h4>
             </div>
@@ -128,7 +128,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12">
+          <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 50px">
               <div class="col-12 top-containter">
                 <div class="row">
@@ -205,8 +205,7 @@
                   </label>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
-                  <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']"
-                  (change)="mileageTravel(formTravelManagement.value, 'new')">
+                  <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']" (change)="mileageTravel(formTravelManagement.value, 'new')">
                     <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
                   </select>
                 </div>
@@ -284,7 +283,8 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha Inicial de Viaje *</a>
                       </label>
-                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" />
+                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" (change)="dateValidateTrayect(formTravelManagement.value)"
+                      />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
@@ -358,7 +358,8 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final de Viaje *</a>
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" />
+                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" (change)="dateValidateTrayect(formTravelManagement.value)"
+                      />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
@@ -416,9 +417,9 @@
           </div>
         </form>
 
-        <div class="row justify-content-end" style="margin-top: 30px">
+        <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate">
           <div class="col-lg-3 col-md-4 col-12">
-            <button type="submit" *ngIf="showSubmit && activate" class="btn btn-success btn-block cursor-general" (click)="newTravel(formTravelManagement.value)">
+            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>

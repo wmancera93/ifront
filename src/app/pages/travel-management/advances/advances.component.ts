@@ -9,7 +9,7 @@ import { AdvanceSharedService } from '../../../services/shared/advance-shared/ad
   styleUrls: ['./advances.component.css']
 })
 export class AdvancesComponent implements OnInit {
-
+  token
   constructor(public router: Router, public advanceSharedService:AdvanceSharedService) { }
 
   ngOnInit() {
@@ -21,7 +21,6 @@ export class AdvancesComponent implements OnInit {
   }
 
   newAdvanceTravel() {
-    debugger
     this.advanceSharedService.setNewAdvance(true);
   }
 }

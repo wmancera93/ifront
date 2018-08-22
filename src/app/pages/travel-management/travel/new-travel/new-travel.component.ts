@@ -54,11 +54,9 @@ export class NewTravelComponent implements OnInit {
   public is_upload: boolean = false;
   public count: number = 0;
   public file: any[] = [];
-  public dayResult: number;
-  public dayResultE: number;
   public activate: boolean = false;
   public showMilenage: boolean = false;
-
+  public disabledDatesHeader: boolean = false;
 
 
   constructor(public travelManagementService: TravelService,
@@ -72,12 +70,12 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueTravelRequests') {
+      if (data === 'continueTravelRequests' || data === 'continueDestinationRequests' || data === 'continueDestinationRequestsValidateDates') {
         document.getElementById("btn_travel_new").click();
       }
-      if (data === 'continueDestinationRequests') {
-        document.getElementById("btn_travel_new").click();
-        document.getElementById("funtionTravel").click();
+
+      if (data === 'continueDestinationRequestsValidateDates') {
+        this.activate = false;
       }
 
     })
@@ -99,6 +97,8 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
       id_transport: 1,
       id_city: '',
@@ -117,7 +117,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.action_method === 'deleteTravels') {
+      if (data.action_method === 'deleteNewTravels') {
         this.deleteDestinations(data);
       }
     });
@@ -175,6 +175,8 @@ export class NewTravelComponent implements OnInit {
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('date_begin', model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
@@ -208,71 +210,46 @@ export class NewTravelComponent implements OnInit {
 
   addDestination(modelPartial) {
 
-    this.activate = true;
+    this.travelProof[0].data[0].data.push({
+      field_0: this.count + 1,
+      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+      field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+      field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
+      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+      field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
+      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
+      field_10: {
+        type_method: "DELETE",
+        type_element: "button",
+        icon: "fa-trash",
+        id: this.count + 1,
+        title: "Eliminar",
+        action_method: "deleteNewTravels",
+        disable: false
+      }
+    })
 
-    let dateBegin = modelPartial.date_begin == null ? '' : modelPartial.date_begin;
-    let dateEnd = modelPartial.date_end == null ? '' : modelPartial.date_end;
+    this.traverlsDestination.push({
+      travel_id: this.count + 1,
+      transport_id: modelPartial.id_transport,
+      origin_location_id: modelPartial.id_city,
+      origin_terminal_id: modelPartial.id_terminal,
+      hotel_id: modelPartial.id_hotels,
+      destination_location_id: modelPartial.id_cityto,
+      destination_terminal_id: modelPartial.id_terminalto,
+      origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
+    });
 
-    let dateBeginCalculate = dateBegin.toString().replace('-', '').replace('-', '');
-    let dateEndCalculate = dateEnd.toString().replace('-', '').replace('-', '');
+    this.count += 1
 
-    this.dayResult = dateEndCalculate - dateBeginCalculate;
+    setTimeout(() => {
+      this.objectReport.emit(this.travelProof[0]);
+    }, 500);
 
-    if (this.dayResult < 0) {
-      document.getElementById("btn_travel_new").click();
-      const alertDataWrong: Alerts[] = [{
-        type: 'danger',
-        title: 'Error',
-        message: 'La fecha de origen no puede ser mayor a la de destino',
-        confirmation: true,
-        typeConfirmation: 'continueDestinationRequests'
-      }];
-      this.alert.setAlert(alertDataWrong[0])
-
-    }
-    else {
-
-      this.travelProof[0].data[0].data.push({
-        field_0: this.count + 1,
-        field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
-        field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
-        field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-        field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-        field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
-        field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-        field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
-        field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-        field_10: {
-          type_method: "DELETE",
-          type_element: "button",
-          icon: "fa-trash",
-          id: this.count + 1,
-          title: "Eliminar",
-          action_method: "deleteTravels",
-          disable: false
-        }
-      })
-
-      this.traverlsDestination.push({
-        travel_id: this.count + 1,
-        transport_id: modelPartial.id_transport,
-        origin_location_id: modelPartial.id_city,
-        origin_terminal_id: modelPartial.id_terminal,
-        hotel_id: modelPartial.id_hotels,
-        destination_location_id: modelPartial.id_cityto,
-        destination_terminal_id: modelPartial.id_terminalto,
-        origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-        destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
-      });
-
-      this.count += 1
-
-      setTimeout(() => {
-        this.objectReport.emit(this.travelProof[0]);
-      }, 500);
-
-      this.closeTrip();
-    }
+    this.closeTrip();
   }
 
   colapseNew() {
@@ -410,6 +387,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   clearFormGeneral() {
+    this.activate = false;
     this.showSubmit = true;
     this.stateLocations = [];
     this.stateLocationsto = [];
@@ -485,6 +463,8 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
       id_transport: 1,
       id_city: '',
@@ -502,6 +482,88 @@ export class NewTravelComponent implements OnInit {
       id_hotels: '',
     });
 
+  }
+
+  dateComplete(days) {
+    if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
+      let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
+      let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
+
+      if ((dateEndCalculate - dateBeginCalculate) < 0) {
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequestsValidateDates'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      } else {
+        this.activate = true;
+      }
+    }
+    else {
+      this.activate = false;
+    }
+
+  }
+
+  dateValidateTrayect(dateTrayect) {
+    let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
+    let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
+
+    if (dateTrayect.date_begin !== '') {
+      let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
+      if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+        this.formTravelManagement.controls['date_begin'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
+      }
+    }
+
+    if (dateTrayect.date_end !== '') {
+      let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
+      if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+        this.formTravelManagement.controls['date_end'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
+      }
+    }
+
+    if (dateTrayect.date_begin !== '' && dateTrayect.date_end !== '') {
+      let dateBeginCalculate = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
+      let dateEndCalculate = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
+
+      if ((dateEndCalculate - dateBeginCalculate) < 0) {
+        this.formTravelManagement.controls['date_begin'].setValue('');
+        this.formTravelManagement.controls['date_end'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de origen del trayecto no puede ser mayor a la de destino.',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+        }];
+        this.alert.setAlert(alertDataWrong[0])
+      } 
+    }
   }
 
   clearFormPartial() {
@@ -527,7 +589,5 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_countryto'].setValue('-1');
     this.formTravelManagement.controls['id_hotels'].setValue('');
   }
-
-
 
 }

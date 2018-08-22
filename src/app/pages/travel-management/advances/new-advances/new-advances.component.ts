@@ -9,11 +9,11 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 })
 export class NewAdvancesComponent implements OnInit {
   public showSubmit: boolean = true
-
+  formAdvanceTravel
   constructor(public advanceSharedService: AdvanceSharedService) {
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
-      debugger
+   
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
       }
@@ -26,6 +26,8 @@ export class NewAdvancesComponent implements OnInit {
   }
 
 
-
+  newAdvance(param){
+    
+  }
 
 }
