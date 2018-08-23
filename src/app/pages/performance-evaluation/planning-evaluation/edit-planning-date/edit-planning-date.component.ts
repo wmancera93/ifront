@@ -43,7 +43,6 @@ export class EditPlanningDateComponent implements OnInit {
         this.endPlanning = data.data.end_planning_date.split("-");
         this.startDate = (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString();
         this.endDate = (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString();
-        console.log(this.startDate, this.endDate)
         this.formDate = new FormGroup({});
         this.formDate = fb.group({
           start_planning: (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString(),
