@@ -33,7 +33,6 @@ export class ViewTrainingComponent implements OnInit {
 
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
       this.idTraining = activeModal;
-      debugger
       if (this.activeBlur === 0) {
         this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
           this.flagPDF = true;
@@ -59,7 +58,7 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
-      console.log(response)
+
       if (response.success) {
         const alertWarning: Alerts[] = [{
           type: 'success',
@@ -73,7 +72,14 @@ export class ViewTrainingComponent implements OnInit {
 
     },
       (error: any) => {
-        console.log(error)
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: error.json().errors.toString(),
+          confirmation: false,
+          typeConfirmation: ''
+        }];
+        this.alert.setAlert(alertWarning[0]);
       });
     document.getElementById("closeModalTraining").click();
   }

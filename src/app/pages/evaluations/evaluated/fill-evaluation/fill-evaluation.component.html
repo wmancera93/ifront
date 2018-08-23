@@ -22,7 +22,7 @@
               </strong>
               <div class="row top-containter  justify-content-center" *ngFor="let question of section.question_childrens_to_json; let index = index;"
                 style="margin-top: 15px;">
-                <div class="col-12">
+                <div class="col-12" *ngIf="question.question_type.code !== undefined">
                   {{question.description}}
                   <div *ngIf="question.question_type.code === 'unique'">
                     <div class="col-12" *ngFor="let answer of question.answer_options_childrens_to_json; let x = index;">
