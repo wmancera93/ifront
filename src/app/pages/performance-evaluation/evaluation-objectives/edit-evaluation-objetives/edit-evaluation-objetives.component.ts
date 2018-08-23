@@ -135,7 +135,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.alert.setAlert(alertWarning[0]);
       },
         (error: any) => {
-          console.log(error)
           const alertWarning: Alerts[] = [{
             type: 'danger',
             title: 'Advertencia',
