@@ -30,6 +30,7 @@ export class NewTravelComponent implements OnInit {
   public trips_specific: any[] = [];
   public trips_activities: any[] = [];
   public costs_travels: any[] = [];
+  public center_costs_travels: any[] = [];
   public countries: any[] = [];
   public countriesto: any[] = [];
   public cityLocations: any[] = [];
@@ -121,7 +122,12 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
-      id_travel_costs:'',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -136,6 +142,7 @@ export class NewTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -178,9 +185,10 @@ export class NewTravelComponent implements OnInit {
         this.countries = data.data.countries;
         this.countriesto = data.data.countries;
         this.legal_travels = data.data.legal_travels_types;
-        this.trips_specific =data.data.specific_types_trips;
-        this.trips_activities =data.data.travel_activities;
-        this.costs_travels =data.data.travel_costs_types;
+        this.trips_specific = data.data.specific_types_trips;
+        this.trips_activities = data.data.travel_activities;
+        this.center_costs_travels = data.data.travel_costs_types;
+        this.costs_travels = [];
       })
   }
 
@@ -219,9 +227,14 @@ export class NewTravelComponent implements OnInit {
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('is_maintenance', model.maintenance);
     modelFromdata.append('date_begin', model.date_requests_begin);
     modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
+    modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
+    modelFromdata.append('travel_activity_id', model.id_travel_activities);
+    modelFromdata.append('travel_cost_id', model.id_travel_costs);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -253,7 +266,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-
+    debugger
     this.travelProof[0].data[0].data.push({
       field_0: this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
@@ -278,6 +291,7 @@ export class NewTravelComponent implements OnInit {
     this.traverlsDestination.push({
       travel_id: this.count + 1,
       transport_id: modelPartial.id_transport,
+      total_mileage: modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
@@ -429,6 +443,20 @@ export class NewTravelComponent implements OnInit {
         }
       });
   }
+  searchCostsCenter(form: any, acction: any) {
+
+    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+      subscribe((data: any) => {
+        this.costs_travels = data.data;
+        if (this.costs_travels.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_travel_costs'].setValue('');
+        }
+      })
+  }
 
   clearFormGeneral() {
     this.activate = false;
@@ -510,7 +538,12 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
-      id_travel_costs:'',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -525,6 +558,7 @@ export class NewTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
   }
@@ -633,6 +667,14 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_stateto'].setValue('');
     this.formTravelManagement.controls['id_countryto'].setValue('-1');
     this.formTravelManagement.controls['id_hotels'].setValue('');
+    this.formTravelManagement.controls['manutencion'].setValue('');
+    this.formTravelManagement.controls['id_center_travel'].setValue('-1');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['id_travel_legal'].setValue('-1');
+    this.formTravelManagement.controls['id_travel_specific'].setValue('-1');
+    this.formTravelManagement.controls['id_travel_activities'].setValue('-1');
+    this.formTravelManagement.controls['travel_mileage'].setValue('-1');
+
   }
 
 }
