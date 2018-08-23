@@ -12,51 +12,52 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center" *ngIf="trainingDetailInfo !== undefined">
-          <div class="col-6" *ngIf="flagPDF">
-            <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe>
+          <div class="col-12 col-lg-6" *ngIf="flagPDF">
+            <pdf-viewer [src]="urlPrevisualize" [original-size]="false" style="display: block;"></pdf-viewer>
+            <!-- <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe> -->
           </div>
-          <div class="col-6">
+          <div class="col-lg-6 col-12">
             <strong>
               {{trainingDetailInfo.name | uppercase}}
             </strong>
             <div class="row margin-row">
-              <div class="col-6 titleColor">
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-calendar text-primary-hr"></i>
                 <strong>Inicia:</strong>
               </div>
-              <div class="col-6">
+              <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.start_date_trainig}}
               </div>
             </div>
             <div class="row margin-row">
-              <div class="col-6 titleColor">
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-calendar text-primary-hr"></i>
                 <strong>Finaliza:</strong>
               </div>
-              <div class="col-6">
+              <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.end_date_trainnig}}
               </div>
             </div>
             <div class="row margin-row">
-              <div class="col-6 titleColor">
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-history text-primary-hr"></i>
                 <strong>Duración en días:</strong>
               </div>
-              <div class="col-6">
+              <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.ndays}} días
               </div>
             </div>
             <div class="row margin-row">
-              <div class="col-6 titleColor">
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-clock-o text-primary-hr"></i>
                 <strong>Duración en horas:</strong>
               </div>
-              <div class="col-6">
+              <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.nhours_for_days}} horas por día
               </div>
             </div>
             <div class="row margin-row">
-              <div class="col-6 titleColor">
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa fa-history text-primary-hr"></i>
                 <strong>Observaciones:</strong>
               </div>

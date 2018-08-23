@@ -10,6 +10,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -103,7 +104,8 @@ import { NewAdvancesComponent } from './travel-management/advances/new-advances/
     FormlyBootstrapModule,
     CKEditorModule,
     TagInputModule,
-    FileUploadModule
+    FileUploadModule,
+    PdfViewerModule
 
   ],
   declarations: [
