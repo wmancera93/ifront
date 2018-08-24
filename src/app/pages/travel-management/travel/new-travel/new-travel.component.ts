@@ -178,7 +178,6 @@ export class NewTravelComponent implements OnInit {
     });
     this.travelManagementService.getplanningTravelRequests().
       subscribe((data: any) => {
-        console.log(data)
         this.planningTravel = data;
         this.travel_types = data.data.travel_types;
         this.transport_types = data.data.transport_types;
@@ -266,7 +265,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    debugger
+    
     this.travelProof[0].data[0].data.push({
       field_0: this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
@@ -277,7 +276,8 @@ export class NewTravelComponent implements OnInit {
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-      field_10: {
+      field_9: modelPartial.travel_mileage,
+      field_11: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -517,7 +517,12 @@ export class NewTravelComponent implements OnInit {
             type: "string",
             sortable: false,
           },
-          field_10: {
+          field_9: {
+            value: "Kilometraje",
+            type: "string",
+            sortable: false,
+          },
+          field_11: {
             value: "Eliminar",
             type: "string",
             sortable: false,
@@ -667,14 +672,7 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_stateto'].setValue('');
     this.formTravelManagement.controls['id_countryto'].setValue('-1');
     this.formTravelManagement.controls['id_hotels'].setValue('');
-    this.formTravelManagement.controls['manutencion'].setValue('');
-    this.formTravelManagement.controls['id_center_travel'].setValue('-1');
-    this.formTravelManagement.controls['id_travel_costs'].setValue('');
-    this.formTravelManagement.controls['id_travel_legal'].setValue('-1');
-    this.formTravelManagement.controls['id_travel_specific'].setValue('-1');
-    this.formTravelManagement.controls['id_travel_activities'].setValue('-1');
     this.formTravelManagement.controls['travel_mileage'].setValue('-1');
-
   }
 
 }

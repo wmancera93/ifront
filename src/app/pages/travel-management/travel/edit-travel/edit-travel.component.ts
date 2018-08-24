@@ -29,6 +29,11 @@ export class EditTravelComponent implements OnInit {
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];
+  public legal_travels: any[] = [];
+  public trips_specific: any[] = [];
+  public trips_activities: any[] = [];
+  public costs_travels: any[] = [];
+  public center_costs_travels: any[] = [];
   public countries: any[] = [];
   public countriesto: any[] = [];
   public cityLocations: any[] = [];
@@ -72,7 +77,7 @@ export class EditTravelComponent implements OnInit {
   public activate: boolean = false;
   public alertWarning: any[] = [];
   public id_destination_delete: string = '';
-
+  public showMilenage: boolean = false;
   public acctionDeleteTable: string = '';
 
 
@@ -127,7 +132,7 @@ export class EditTravelComponent implements OnInit {
       if (data === 'closeAlertdeleteDestinations') {
         document.getElementById("btn_travel_edit").click();
       }
-      
+
       if (data === 'closeAlertdeleteDocumentSaved') {
         document.getElementById("btn_travel_edit").click();
         document.getElementById("btn_travel_edit").click();
@@ -153,7 +158,15 @@ export class EditTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -168,6 +181,7 @@ export class EditTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
     this.travelsService.getEditTravels().subscribe((data) => {
@@ -191,11 +205,19 @@ export class EditTravelComponent implements OnInit {
         if (result.success) {
           this.generalViajes = result.data;
           this.objectPrint = this.generalViajes[0].travel_managements;
-
+          console.log(this.generalViajes)
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
             id_travel: this.generalViajes[0].travel_request.travel_type_id,
+            date_requests_begin: this.generalViajes[0].travel_request.date_begin,
+            date_requests_end: this.generalViajes[0].travel_request.date_end,
             trip_text: this.generalViajes[0].travel_request.observation,
+            maintenance: this.generalViajes[0].travel_request.is_maintenance,
+            id_center_travel: this.generalViajes[0].travel_request.is_maintenance,
+            id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
+            id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
+            id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
+            id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
             id_transport: 1,
             id_city: '',
             id_country: '-1',
@@ -210,6 +232,7 @@ export class EditTravelComponent implements OnInit {
             id_stateto: '',
             id_countryto: '-1',
             id_hotels: '',
+            travel_mileage: '',
           });
           setTimeout(() => {
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
@@ -247,10 +270,18 @@ export class EditTravelComponent implements OnInit {
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
-
+            console.log(resutlDestinations);
             this.formTravelManagementedit = {
               id_travel: this.generalViajes[0].travel_request.travel_type_id,
+              date_requests_begin: this.generalViajes[0].travel_request.date_begin,
+              date_requests_end: this.generalViajes[0].travel_request.date_end,
               trip_text: this.generalViajes[0].travel_request.observation,
+              maintenance: this.generalViajes[0].travel_request.is_maintenance,
+              id_center_travel: this.generalViajes[0].travel_request.is_maintenance,
+              id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
+              id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
+              id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
+              id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
               id_transport: resutlDestinations.data.type_transport_id,
               id_city: resutlDestinations.data.origin_geographic_location_id,
               id_country: resutlDestinations.data.origin_country,
@@ -265,6 +296,7 @@ export class EditTravelComponent implements OnInit {
               id_stateto: resutlDestinations.data.destination_state,
               id_countryto: resutlDestinations.data.destination_country,
               id_hotels: resutlDestinations.data.hotel_id,
+              travel_mileage:resutlDestinations.data.hotel_id,
             };
 
           })
@@ -307,6 +339,11 @@ export class EditTravelComponent implements OnInit {
         this.transport_types = data.data.transport_types;
         this.countries = data.data.countries;
         this.countriesto = data.data.countries;
+        this.legal_travels = data.data.legal_travels_types;
+        this.trips_specific = data.data.specific_types_trips;
+        this.trips_activities = data.data.travel_activities;
+        this.center_costs_travels = data.data.travel_costs_types;
+        this.costs_travels = [];
       })
   }
 
@@ -344,8 +381,15 @@ export class EditTravelComponent implements OnInit {
 
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
+    modelFromdata.append('is_maintenance', model.maintenance);
+    modelFromdata.append('date_begin', model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('travel_types', model.id_travel);
     modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
+    modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
+    modelFromdata.append('travel_activity_id', model.id_travel_activities);
+    modelFromdata.append('travel_cost_id', model.id_travel_costs);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -414,7 +458,8 @@ export class EditTravelComponent implements OnInit {
         field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
         field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
         field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-        field_10: {
+        field_9: modelPartial.travel_mileage,
+        field_11: {
           type_method: "DELETE",
           type_element: "button",
           icon: "fa-trash",
@@ -428,6 +473,7 @@ export class EditTravelComponent implements OnInit {
       this.traverlsDestination.push({
         travel_id: 'temp_' + this.count + 1,
         transport_id: modelPartial.id_transport,
+        total_mileage: modelPartial.travel_mileage,
         origin_location_id: modelPartial.id_city,
         origin_terminal_id: modelPartial.id_terminal,
         hotel_id: modelPartial.id_hotels,
@@ -499,7 +545,8 @@ export class EditTravelComponent implements OnInit {
             element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
             element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
             element.field_8 = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name;
-            element.field_9 = '';
+            element.field_9 = modelEditPartial.travel_mileage;
+            element.field_11 = '';
           }
         });
 
@@ -509,6 +556,7 @@ export class EditTravelComponent implements OnInit {
           id: this.id_destinations,
           travel_id: this.id_destinations,
           transport_id: modelEditPartial.id_transport,
+          total_mileage: modelEditPartial.travel_mileage,
           origin_location_id: modelEditPartial.id_city,
           origin_terminal_id: modelEditPartial.id_terminal,
           hotel_id: modelEditPartial.id_hotels,
@@ -538,7 +586,15 @@ export class EditTravelComponent implements OnInit {
       this.formTravelManagement = new FormGroup({});
       this.formTravelManagement = this.fb.group({
         id_travel: param.id_travel,
+        date_requests_begin: param.date_requests_begin,
+        date_requests_end: param.date_requests_end,
         trip_text: param.trip_text,
+        maintenance: param.maintenance,
+        id_center_travel: param.id_center_travel,
+        id_travel_costs: param.id_travel_costs,
+        id_travel_legal: param.id_travel_legal,
+        id_travel_specific: param.id_travel_specific,
+        id_travel_activities: param.id_travel_activities,
         id_transport: param.id_transport,
         id_city: param.id_city,
         id_country: param.id_country,
@@ -553,6 +609,7 @@ export class EditTravelComponent implements OnInit {
         id_stateto: param.id_stateto,
         id_countryto: param.id_countryto,
         id_hotels: param.id_hotels,
+        travel_mileage: param.travel_mileage,
       });
       this.searchState(param, 'edit');
       this.searchStateto(param, 'edit');
@@ -561,6 +618,7 @@ export class EditTravelComponent implements OnInit {
       this.searchTerminal(param, 'edit');
       this.searchTerminalto(param, 'edit');
       this.searchHotel(param, 'edit');
+      this.searchCostsCenter(param, 'edit');
     }
 
   }
@@ -592,7 +650,15 @@ export class EditTravelComponent implements OnInit {
     this.send = false;
     this.clearFormPartial();
   }
+  mileageTravel(param) {
 
+    if (param.id_transport == 2) {
+      this.showMilenage = true;
+    } else {
+      this.showMilenage = false;
+    }
+
+  }
   searchState(form: any, acction: any) {
     this.cityLocations = [];
     this.terminalLocations = [];
@@ -702,6 +768,20 @@ export class EditTravelComponent implements OnInit {
         }
       });
   }
+  searchCostsCenter(form: any, acction: any) {
+
+    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+      subscribe((data: any) => {
+        this.costs_travels = data.data;
+        if (this.costs_travels.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_travel_costs'].setValue('');
+        }
+      })
+  }
 
   clearFormGeneral() {
     this.stateLocations = [];
@@ -716,7 +796,15 @@ export class EditTravelComponent implements OnInit {
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
       id_travel: 1,
+      date_requests_begin: '',
+      date_requests_end: '',
       trip_text: '',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -731,6 +819,7 @@ export class EditTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
   }
