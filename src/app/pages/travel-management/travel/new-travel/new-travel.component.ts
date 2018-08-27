@@ -60,6 +60,7 @@ export class NewTravelComponent implements OnInit {
   public count: number = 0;
   public file: any[] = [];
   public activate: boolean = false;
+  public activate_submit: boolean = true;
   public showMilenage: boolean = false;
   public disabledDatesHeader: boolean = false;
   public deleteDocumenFile: string;
@@ -265,7 +266,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    
+    this.activate_submit = true;
     this.travelProof[0].data[0].data.push({
       field_0: this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
@@ -308,9 +309,12 @@ export class NewTravelComponent implements OnInit {
     }, 500);
 
     this.closeTrip();
+    this.activate_submit = true;
   }
 
   colapseNew() {
+    this.activate_submit = false;
+    this.showMilenage = false;
     if (!this.bnew) {
       this.bnew = true
     } else {
@@ -330,6 +334,7 @@ export class NewTravelComponent implements OnInit {
   closeTrip() {
     this.is_collapse = false;
     this.showSubmit = true;
+    this.activate_submit = false;
     this.bnew = false;
     this.send = false;
     document.getElementById("funtionTravel").click();
@@ -649,6 +654,30 @@ export class NewTravelComponent implements OnInit {
       }
     }
   }
+  hourvalidations(hourTrayect) {
+  
+    if (hourTrayect.date_begin === hourTrayect.date_end) {
+      let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
+      let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
+
+      if (hourEndTrayect - hourBeginTrayect < 0) {
+        this.formTravelManagement.controls['hour_begin'].setValue('');
+        this.formTravelManagement.controls['hour_end'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationRequests'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      }
+
+    }
+
+  }
 
   clearFormPartial() {
     this.stateLocations = [];
@@ -659,6 +688,7 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocationsto = [];
     this.hotels = [];
 
+    this.formTravelManagement.controls['id_transport'].setValue('1');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('-1');
     this.formTravelManagement.controls['id_state'].setValue('');
@@ -672,7 +702,7 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_stateto'].setValue('');
     this.formTravelManagement.controls['id_countryto'].setValue('-1');
     this.formTravelManagement.controls['id_hotels'].setValue('');
-    this.formTravelManagement.controls['travel_mileage'].setValue('-1');
+    this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
 
 }
