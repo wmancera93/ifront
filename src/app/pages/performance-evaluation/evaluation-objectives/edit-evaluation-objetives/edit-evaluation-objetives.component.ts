@@ -59,9 +59,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === "updateEvaluationObjetive") {
-        document.getElementById("funtionObjectives").click();
+
         this.idEdit = data.id;
         this.bedit = true;
+        this.bnew = false;
+
+        document.getElementById("funtionObjectives").click();
         this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
           let startDate = dataID.data.start_date_obj.split("-");
           let endDate = dataID.data.end_date_obj.split("-");
@@ -83,8 +86,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             confirmation: false,
             typeConfirmation: ''
           }];
-          this.dataTableConsult();          
-        document.getElementById("closeModalObjectiveEvaluation").click();
+          this.dataTableConsult();
+          document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
         })
       }
@@ -135,7 +138,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           const alertWarning: Alerts[] = [{
             type: 'danger',
             title: 'Advertencia',
-            message: error._body.errors,
+            message: error.json().errors.toString(),
             confirmation: false,
             typeConfirmation: ''
           }];

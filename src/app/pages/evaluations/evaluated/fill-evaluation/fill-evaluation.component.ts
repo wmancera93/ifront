@@ -28,6 +28,8 @@ export class FillEvaluationComponent implements OnInit {
   public refreshData: boolean = false;
   public multipleAnswer: MultipleAnswer[] = [];
   public objectBySection: any[] = [];
+  public totalQuestionsBySection: number = 0;
+  public totalQuestions: number = 0;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
@@ -49,17 +51,36 @@ export class FillEvaluationComponent implements OnInit {
   }
 
   onSubmitSendEval() {
-    console.log(this.object)
-    // this.evaluationService.postDataEvaluation(this.dataQuestions).subscribe((data: any) => {
-    //   if (data.success == true) {
-    //     (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
-    //     const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la evaluación', message: data.message }];
-    //     this.alert.setAlert(alertConfirmation[0]);
-    //     this.showSubmit = true;
-    //     this.refreshData = true;
-    //     this.evaluationSharedService.setRefreshEvaluationData(this.refreshData);
-    //   }
-    // })
+    if (this.sections.length !== 0) {
+      this.sections.forEach(element => {
+        this.totalQuestionsBySection = element.question_childrens_to_json.length;
+        this.totalQuestions = this.totalQuestions + this.totalQuestionsBySection;
+      });
+    }
+    else {
+      this.totalQuestions = this.infoEvaluation.questions_to_json.length;
+    }
+    this.evaluationService.postDataEvaluation(this.object, this.totalQuestions).subscribe((data: any) => {
+      if (data.success == true) {
+        (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
+        const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la evaluación', message: data.message }];
+        this.alert.setAlert(alertConfirmation[0]);
+        this.showSubmit = true;
+        this.refreshData = true;
+        this.evaluationSharedService.setRefreshEvaluationData(this.refreshData);
+        this.totalQuestions = 0;
+      }
+    },
+      (error: any) => {
+        const alertWarning: Alerts[] =
+          [{
+            type: 'danger',
+            title: 'Solicitud Denegada',
+            message: error.json().errors.toString(),
+            confirmation: false
+          }];
+        this.alert.setAlert(alertWarning[0]);
+      })
 
   }
 

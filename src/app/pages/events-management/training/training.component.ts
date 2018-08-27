@@ -22,6 +22,7 @@ export class TrainingComponent implements OnInit {
 
     this.trainingService.getTrainingEvents().subscribe((data: any) => {
       this.dataTabletraining = data;
+      console.log(this.dataTabletraining)
       this.nameReport = data.data[0].title;
       setTimeout(() => {
         this.objectReport.emit(this.dataTabletraining);

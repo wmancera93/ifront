@@ -142,4 +142,8 @@ export class QueriesService {
     return this.tokenService.get('consultations/movements_iva_export.xlsx')
       .map((data: any) => data);
   }
+    getTimeEvaluationExcel() {
+    return this.tokenService.get('evaluation_messages/evaluation_messages_export.xlsx')
+      .map((data: any) => data);
+  }
 }

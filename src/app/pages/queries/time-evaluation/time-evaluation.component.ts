@@ -24,7 +24,7 @@ export class TimeEvaluationComponent implements OnInit {
   public condition: any[] = [];
   public arreglo: string = "";
   public finalDate: number;
-  public showExcel : boolean =  true;
+  public showExcel: boolean = true;
 
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -56,10 +56,14 @@ export class TimeEvaluationComponent implements OnInit {
       behavior: 'smooth'
     });
 
-this.accionDataTableService.getActionDataTable().subscribe((data)=>{
-      if(data ==="Evaluación de tiempos")
-      {
-
+    this.accionDataTableService.getActionDataTable().subscribe((data) => {
+      if (data === "Evaluación de tiempos") {
+        this.queriesService.getTimeEvaluationExcel().subscribe((excel: any) => {
+          let urlSplit = excel.url.split('/')[excel.url.split('/').length - 2] + '/' + excel.url.split('/')[excel.url.split('/').length - 1];
+          this.tokenService.get(urlSplit).subscribe((url: any) => {
+            window.open(url.url);
+          });
+        })
       }
     });
 
@@ -83,8 +87,8 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
   // }
 
 
-  filterByperiod() {    
-    if (this.periodi_timevaluation === null  && this.periodf_timevaluation === null) {
+  filterByperiod() {
+    if (this.periodi_timevaluation === null && this.periodf_timevaluation === null) {
       this.allTimeEvaluation();
     } else {
       this.dateBegin = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
@@ -96,11 +100,11 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
     }
   }
   comparisonDate() {
-    
+
     this.dateBegin = this.periodi_timevaluation.toString().replace('-', '').replace('-', '');
     this.dateEnd = this.periodf_timevaluation.toString().replace('-', '').replace('-', '');
     this.finalDate = parseInt(this.dateEnd) - parseInt(this.dateBegin);
-    
+
     if (this.finalDate < 0) {
 
       const alertDataWrong: Alerts[] = [{
@@ -117,11 +121,11 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
     this.queriesService.getAllEvaluationTime()
       .subscribe((data: any) => {
         this.objectReport.emit(data)
-       
+
       });
   }
   getFilterMessagesByPeriod() {
-    this.objectReport.emit({success:true, data:[]});
+    this.objectReport.emit({ success: true, data: [] });
     this.queriesService.getEvaluationMessagesByPeriod(this.dateBegin, this.dateEnd)
       .subscribe((data: any) => {
         this.objectReport.emit(data);
@@ -137,5 +141,4 @@ this.accionDataTableService.getActionDataTable().subscribe((data)=>{
   }
 
 }
-
 

@@ -5,6 +5,7 @@ import { TrainingDetail } from '../../../../models/common/events_management/trai
 import { State } from '../../../../../../node_modules/ngx-chips/core/providers/drag-provider';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
 
 @Component({
   selector: 'app-view-training',
@@ -16,23 +17,38 @@ export class ViewTrainingComponent implements OnInit {
   public trainingDetailInfo: TrainingDetail[] = [];
   public idTraining: number;
   public sendState: any;
-  public observations : string ="";
+  public observations: string = "";
+  public urlPrevisualize: string;
+  public flagPDF: boolean = false;
+  public activeBlur: number = 0;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
-    public alert: AlertsService) {
-    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      this.idTraining = activeModal;
-      this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
-        this.trainingDetailInfo = info.data;
-        document.getElementById('btn-viewTraining').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-      });
-    });
+    public alert: AlertsService,
+    public sanitizer: DomSanitizer) {
 
   }
 
   ngOnInit() {
+
+    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
+      this.idTraining = activeModal;
+      if (this.activeBlur === 0) {
+        this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
+          this.flagPDF = true;
+          setTimeout(() => {
+            this.trainingDetailInfo = info.data;
+            this.urlPrevisualize = info.data.pdf.url;
+          }, 100);
+          document.getElementById('btn-viewTraining').click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+          this.activeBlur += 1;
+        });
+      }
+
+    });
+
+
   }
 
   acceptTraining(flag: boolean) {
@@ -42,8 +58,8 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
-      if(response.success)
-      {
+
+      if (response.success) {
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
@@ -53,7 +69,18 @@ export class ViewTrainingComponent implements OnInit {
         }];
         this.alert.setAlert(alertWarning[0]);
       }
-      document.getElementById("closeModalTraining").click();
-    })
+
+    },
+      (error: any) => {
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: error.json().errors.toString(),
+          confirmation: false,
+          typeConfirmation: ''
+        }];
+        this.alert.setAlert(alertWarning[0]);
+      });
+    document.getElementById("closeModalTraining").click();
   }
 }

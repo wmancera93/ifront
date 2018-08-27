@@ -116,17 +116,21 @@
                         (click)="accionTable(record[key])">
                         <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
-                      <div *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT' " class="cursor-general text-info text-center" [attr.disabled]="record[key].disable"
-                        (click)="accionTable(record[key])">
+                      <div *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT' " class="cursor-general text-info text-center"
+                        [attr.disabled]="record[key].disable" (click)="accionTable(record[key])">
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div *ngIf="record[key].type_method == 'PRINT'" class="cursor-general text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
                         <i class="fa  fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
-                      <div *ngIf="record[key].type_method == 'CONVENIO'" class="cursor-general text-danger text-center" [attr.disabled]="record[key].disable"
-                        (click)="accionTable(record[key])">
-                        <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
+                      <div *ngIf="record[key].type_method == 'CONVENIO'" class="cursor-general text-danger text-center" (click)="accionTable(record[key])">
+                        <!-- <div *ngIf="record[key].disable">
+                          <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; cursor:no-drop; color:#6c6c6c"></i>
+                        </div> -->
+                        <div *ngIf="record[key].disable">
+                          <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
+                        </div>
                       </div>
                       <div *ngIf="record[key].type_method == 'DELETE'" class="cursor-general text-danger text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">

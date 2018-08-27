@@ -78,15 +78,15 @@
                   <div class="row">
                     <div class="col-6 number-size" (click)="goToModalEval(evaluation)">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c6c8"></i>
-                    </div>
-                    <div class="col-6 number-size text-danger" id="hideTrash" style="cursor: pointer">
-                      <i class="fa fa-trash" aria-hidden="true"></i>
+                    </div>   
+                    <div class="col-6 number-size text-danger" (click)="goToViewEval(evaluation)">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    </div>                
+                    <div class="col-6">
+                      Modificar objetivos
                     </div>
                     <div class="col-6">
-                      Ver
-                    </div>
-                    <div class="col-6">
-                      Eliminar
+                     Ver Evaluación
                     </div>
                   </div>
                 </div>
