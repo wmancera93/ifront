@@ -23,6 +23,9 @@ export class ViewTravelComponent implements OnInit {
   public typeTravel: any[] = [];
   public annexeds: any[] = [];
   public edit: boolean = false;
+  public view_travels: any[] = [];
+  public maintenance_travel: string = 'Sin manutención'
+  public maintenance: boolean = false;
 
 
 
@@ -38,16 +41,23 @@ export class ViewTravelComponent implements OnInit {
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
-      if(document.getElementById('travel_view').className !== 'modal show'){
-      document.getElementById("btn_travel_view").click();
-      document.getElementById('bodyGeneral').removeAttribute('style');
+      if (document.getElementById('travel_view').className !== 'modal show') {
+        document.getElementById("btn_travel_view").click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
+   
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
+        this.view_travels = result.data[0].travel_request;
+        this.maintenance = result.data[0].travel_request.is_maintenance;
+
+        if(this.maintenance){
+          this.maintenance_travel='Con manutención'
+        }
 
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });

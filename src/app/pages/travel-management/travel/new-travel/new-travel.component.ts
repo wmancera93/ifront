@@ -26,6 +26,11 @@ export class NewTravelComponent implements OnInit {
   public planningTravel: any[] = [];
   public travel_types: any[] = [];
   public transport_types: any[] = [];
+  public legal_travels: any[] = [];
+  public trips_specific: any[] = [];
+  public trips_activities: any[] = [];
+  public costs_travels: any[] = [];
+  public center_costs_travels: any[] = [];
   public countries: any[] = [];
   public countriesto: any[] = [];
   public cityLocations: any[] = [];
@@ -57,7 +62,8 @@ export class NewTravelComponent implements OnInit {
   public activate: boolean = false;
   public showMilenage: boolean = false;
   public disabledDatesHeader: boolean = false;
-
+  public deleteDocumenFile: string;
+  public deleteDestination: string;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -77,7 +83,23 @@ export class NewTravelComponent implements OnInit {
       if (data === 'continueDestinationRequestsValidateDates') {
         this.activate = false;
       }
+      if (data === 'deleteNewDocumentSaved') {
+        document.getElementById("btn_travel_new").click();
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
 
+      }
+      if (data === 'deleteNewDestinations') {
+        document.getElementById("btn_travel_new").click();
+        this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === this.deleteDestination), 1);
+        this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.deleteDestination), 1);
+        this.objectReport.emit(this.travelProof[0]);
+      }
+
+      if (data === 'closeAlertdeleteNewDocument' || data === 'closeAlertdeleteNewDestinations') {
+
+        document.getElementById("btn_travel_new").click();
+      }
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -100,6 +122,12 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -114,6 +142,7 @@ export class NewTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -154,17 +183,39 @@ export class NewTravelComponent implements OnInit {
         this.transport_types = data.data.transport_types;
         this.countries = data.data.countries;
         this.countriesto = data.data.countries;
+        this.legal_travels = data.data.legal_travels_types;
+        this.trips_specific = data.data.specific_types_trips;
+        this.trips_activities = data.data.travel_activities;
+        this.center_costs_travels = data.data.travel_costs_types;
+        this.costs_travels = [];
       })
   }
 
   deleteUpload(param: any) {
-    this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
-    this.file.splice(this.file.findIndex(filter => filter.file.name === param.file.name), 1);
+    document.getElementById("btn_travel_new").click();
+    this.deleteDocumenFile = param.file.name;
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el archivo ' + param.file.name.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteNewDocumentSaved'
+    }];
+    this.alert.setAlert(alertWarning[0]);
+
+
   }
   deleteDestinations(param: any) {
-    this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === param.id), 1);
-    this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === param.id), 1);
-    this.objectReport.emit(this.travelProof[0]);
+    document.getElementById("btn_travel_new").click();
+    this.deleteDestination = param.id;
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el destino con ticket #' + this.deleteDestination.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteNewDestinations'
+    }];
+    this.alert.setAlert(alertWarning[0]);
   }
 
   newTravel(model) {
@@ -175,9 +226,14 @@ export class NewTravelComponent implements OnInit {
     const modelFromdata = new FormData();
     modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('is_maintenance', model.maintenance);
     modelFromdata.append('date_begin', model.date_requests_begin);
     modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
+    modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
+    modelFromdata.append('travel_activity_id', model.id_travel_activities);
+    modelFromdata.append('travel_cost_id', model.id_travel_costs);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -209,7 +265,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-
+    
     this.travelProof[0].data[0].data.push({
       field_0: this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
@@ -220,7 +276,8 @@ export class NewTravelComponent implements OnInit {
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name,
-      field_10: {
+      field_9: modelPartial.travel_mileage,
+      field_11: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -234,6 +291,7 @@ export class NewTravelComponent implements OnInit {
     this.traverlsDestination.push({
       travel_id: this.count + 1,
       transport_id: modelPartial.id_transport,
+      total_mileage: modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
@@ -385,6 +443,20 @@ export class NewTravelComponent implements OnInit {
         }
       });
   }
+  searchCostsCenter(form: any, acction: any) {
+
+    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+      subscribe((data: any) => {
+        this.costs_travels = data.data;
+        if (this.costs_travels.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_travel_costs'].setValue('');
+        }
+      })
+  }
 
   clearFormGeneral() {
     this.activate = false;
@@ -445,7 +517,12 @@ export class NewTravelComponent implements OnInit {
             type: "string",
             sortable: false,
           },
-          field_10: {
+          field_9: {
+            value: "Kilometraje",
+            type: "string",
+            sortable: false,
+          },
+          field_11: {
             value: "Eliminar",
             type: "string",
             sortable: false,
@@ -466,6 +543,12 @@ export class NewTravelComponent implements OnInit {
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
+      maintenance: '',
+      id_center_travel: '-1',
+      id_travel_costs: '',
+      id_travel_legal: '-1',
+      id_travel_specific: '-1',
+      id_travel_activities: '-1',
       id_transport: 1,
       id_city: '',
       id_country: '-1',
@@ -480,6 +563,7 @@ export class NewTravelComponent implements OnInit {
       id_stateto: '',
       id_countryto: '-1',
       id_hotels: '',
+      travel_mileage: '',
     });
 
   }
@@ -562,7 +646,7 @@ export class NewTravelComponent implements OnInit {
           typeConfirmation: 'continueDestinationRequests'
         }];
         this.alert.setAlert(alertDataWrong[0])
-      } 
+      }
     }
   }
 
@@ -588,6 +672,7 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_stateto'].setValue('');
     this.formTravelManagement.controls['id_countryto'].setValue('-1');
     this.formTravelManagement.controls['id_hotels'].setValue('');
+    this.formTravelManagement.controls['travel_mileage'].setValue('-1');
   }
 
 }

@@ -4,7 +4,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Solicitud de pasajes y hotel viaje # {{ticket}}</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalles de Viaje # {{ticket}}</h5>
         <button type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -19,18 +19,29 @@
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
-            <label>{{typeTravel}} - Programado - Con manutención</label>
+            <label>{{typeTravel}} - Programado - {{maintenance_travel}}</label>
           </div>
-          <!-- <div class="col-lg-3 col-md-6 col-12">
-            <label class="titleColor text-primary-hr">
-              <strong class="text-primary-hr">Viaje Programado</strong>
+        </div>
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+              <strong>Fecha inicial del Viaje:</strong>
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.date_begin}}</label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
-              <strong class="text-primary-hr">Viaje con manutención</strong>
+              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+              <strong>Fecha final del Viaje:</strong>
             </label>
-          </div> -->
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.date_end}}</label>
+          </div>
         </div>
 
         <div class="row">
@@ -75,7 +86,7 @@
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>Civil</label>
+            <label>{{view_travels.legal_travels_type_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
@@ -86,7 +97,7 @@
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>Extranjero</label>
+            <label>{{view_travels.specific_types_trip_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
@@ -97,7 +108,7 @@
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>Gerencial</label>
+            <label>{{view_travels.travel_activity_name}}</label>
           </div>
         </div>
       
