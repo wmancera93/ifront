@@ -39,10 +39,10 @@
                   <div class="col-lg-2 col-4">
                     <div class="row">
                       <div class="col-12 number-size">
-                        <div *ngIf="publication.publish"  class="text-warning" (click)="hideArticle(publication)">
+                        <div *ngIf="publication.publish"  class="text-warning" (click)="publishArticle(publication)">
                           <i class="fa fa-square-o"></i>
                         </div>
-                        <div *ngIf="!publication.publish" class="text-success" (click)="publishArticle(publication)">
+                        <div *ngIf="!publication.publish" class="text-success" (click)="hideArticle(publication)">
                           <i class="fa fa-check-square-o"></i>
                         </div>
                       </div>

@@ -1,0 +1,255 @@
+<button id="btn-evaluationObjetives" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evaluationObjetives"
+  style="display:none;">
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="modal_evaluationObjetives">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de evaluacion</h5>
+        <button id="closeModalObjectiveEvaluation" type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <div class="row justify-content-center">
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
+            <div class="row border" style="margin-left: 2px">
+              <h4>Datos de Evaluación</h4>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 30px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-file-text text-primary-hr"></i>
+                      <strong>Nombre:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      {{EvaluacionPer.name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
+                      <strong>Periodo de Evaluación:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-start text-primary-hr"></i>
+                          <strong>Inicia:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-8 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPer.start_evaluation_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-end text-primary-hr"></i>
+                          <strong>Finaliza:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPer.end_evaluation_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
+                      <strong>Periodo de Ejecución</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-start text-primary-hr"></i>
+                          <strong>Inicia:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-8 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPer.start_excecution_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-end text-primary-hr"></i>
+                          <strong>Finaliza:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPer.end_excecution_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class=" col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-user-o text-primary-hr"></i>
+                      <strong>Calificador</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12">
+                    <div class="row text-center">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <img class="roundPhoto-employee" src="{{qualifierData.image.Url}}">
+                      </div>
+                      <div class="col-lg-8 col-md-8 col-12">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-graduation-cap text-primary-hr"></i>
+                          {{qualifierData.name_complete}}
+                        </label>
+                        <label for="nomEvaluation" class="titleColor">
+                          {{qualifierData.position}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-6 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-clock-o text-primary-hr"></i>
+                      <strong>Fecha acuerdo de Objetivos</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-12 text-center">
+                    <label for="nomEvaluation" class="titleColor text-center">
+                      {{EvaluacionPer.period_evaluation}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <div class="row justify-content-center">
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove">
+            <div class="row border" style="margin-left: 2px">
+              <h4>Objetivos de Evaluación</h4>
+            </div>
+            <div class="justify-content-center">
+              <div class="col-12 widget">
+                <div class="row">
+                  <div class="col-12 top-general-p">
+                    <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <h5 *ngIf="bedit">
+                      Editar Objetivo
+                    </h5>
+                    <h5 *ngIf="bnew">
+                      Nuevo Objetivo
+                    </h5>
+                    <button *ngIf="!bedit && !bnew" class="btn btn-primary text-center" (click)="colapseNew()">
+                      Nuevo
+                    </button>
+                    <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseExample" style="display: none">
+                    </button>
+                  </div>
+                </div>
+                <div class="collapse top-general-p " id="collapseExample">
+                  <form [formGroup]="formObjetive" class="row justify-content-left" (ngSubmit)="newObjetive(formObjetive.value)">
+                    <div class="col-md-4 col-12 top-containter">
+                      <label for="dateBegin" class="font-title-general">
+                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                        Fecha Inicial *
+                      </label>
+                      <input *ngIf="!bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
+                        placeholder="dd/mm/yyyy" />
+                      <input *ngIf="bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
+                        value="formObjetive.start_date" />
+                    </div>
+                    <div class="col-md-4 col-12 top-containter">
+                      <label for="dateEnd" class="font-title-general">
+                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                        Fecha Final *
+                      </label>
+                      <input *ngIf="!bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']"
+                        placeholder="dd/mm/yyyy" />
+                      <input *ngIf="bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']" value="formObjetive.end_date"
+                      />
+                    </div>
+                    <div class="col-md-4 col-12 top-containter">
+                      <label for="dateEnd" class="font-title-general">
+                        <i class="fa fa-fw fa-percent text-primary-hr"></i>
+                        Ponderación *
+                      </label>
+                      <input *ngIf="!bedit" type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
+                      <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight"
+                      />
+                    </div>
+                    <div class="col-md-12 col-12 top-containter">
+                      <label for="celulaInput" class="font-title-general">
+                        <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                        Objetivo *
+                      </label>
+                      <textarea type="text" rows="3" style="height: auto !important;" name="objective_request" class="form-control" [formControl]="formObjetive.controls['objetive_text']"></textarea>
+                    </div>
+                    <div class="col-md-12 top-containter">
+                      <div class="row justify-content-end">
+                        <div class="col-lg-3 col-md-4 col-12">
+                          <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
+                            <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                          <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                            <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                        </div>
+                        <div class="col-lg-3 col-md-4 col-12">
+                          <button class="btn btn-warning btn-block cursor-general" (click)="closeObjetive()" data-toggle="collapse" data-target="#collapseExample">
+                            <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

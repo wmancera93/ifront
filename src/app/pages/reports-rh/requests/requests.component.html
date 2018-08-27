@@ -10,7 +10,7 @@
           <i class="fa fa-table"></i>
           Reporte de solicitudes
         </div>
-        <div  class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
@@ -27,7 +27,7 @@
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
         <div class="row top-containter">
-          <div class="col-xl-2 col-lg-4 col-12 text-left">
+          <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
               Filtros de consulta
             </b>
@@ -150,11 +150,11 @@
       <div class="border-botton-general">
         <div class="row top-general-p" *ngIf="show">
           <div class="col-12">
-            <div class="row justify-content-between">
-              <div class="col-xl-4 col-12 ">
+            <div class="row justify-content-end">
+              <div class="col-xl-8 col-12 ">
                 <div class="form-group row">
-                  <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
-                  <div class="col-xl-7 col-md-3 col-lg-3 col-6">
+                  <label class="col-xl-2 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+                  <div class="col-xl-2 col-md-3 col-lg-3 col-6">
                     <select class="form-control" [(ngModel)]="size_table">
                       <option value="5">5</option>
                       <option value="10">10</option>
@@ -170,13 +170,13 @@
                   PDF
                 </div>
               </div>
+              <div class="col-xl-2 col-md-3 col-6 top-containter">
+                <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
+                  <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+                  Excel
+                </div>
+              </div>
               <!-- <div class="col-xl-2 col-md-3 col-6 top-containter">
-            <div class="btn btn-block btn-outline-success cursor-general" (click)="excelExport()">
-              <i class="fa fa-file-excel-o" aria-hidden="true"></i>
-              Excel
-            </div>
-          </div>
-          <div class="col-xl-2 col-md-3 col-6 top-containter">
             <div class="btn btn-block btn-outline-secondary cursor-general" (click)="csvExport()">
               <i class="fa fa-file-excel-o" aria-hidden="true"></i>
               CSV
@@ -279,9 +279,9 @@
                       {{record[key]}}
                     </div>
                     <div *ngIf="record[key].title != null">
-                      <button type="button" class="btn btn-sm btn-secondary cursor-general" [attr.title]="record[key].title" (click)="viewDetail(record[key].id)">
-                          <i class="fa fa-eye" aria-hidden="true"></i>
-                      </button>
+                      <div class="cursor-general text-success" [attr.title]="record[key].title" (click)="viewDetail(record[key].id)" style="margin-top: 5px">
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.7em"></i>
+                      </div>
                     </div>
                   </td>
                 </tr>

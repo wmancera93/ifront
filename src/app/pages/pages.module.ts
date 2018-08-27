@@ -7,9 +7,10 @@ import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
-import {CKEditorModule} from 'ng2-ckeditor';
+import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 // components
 import { HeaderComponent } from '../components/layout/header/header.component';
@@ -29,6 +30,7 @@ import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-report
 import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
+// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
@@ -58,6 +60,35 @@ import { EditPublicationComponent } from './billboard/my-publications/edit-publi
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { NewArticleFormComponent } from './billboard/my-publications/new-article-form/new-article-form.component';
+import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
+import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
+import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
+import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
+import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
+import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
+import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
+import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
+import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
+import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
+import { EditEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/edit-evaluation-objetives/edit-evaluation-objetives.component';
+import { TravelManagementComponent } from './travel-management/travel-management.component';
+import { TravelComponent } from './travel-management/travel/travel.component';
+import { NewTravelComponent } from './travel-management/travel/new-travel/new-travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
+import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hotel.component';
+import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
+import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
+import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
+
+import { EditPlanningDateComponent } from './performance-evaluation/planning-evaluation/edit-planning-date/edit-planning-date.component';
+import { TrainingComponent } from './events-management/training/training.component';
+import { ViewTrainingComponent } from './events-management/training/view-training/view-training.component';
+import { AdvancesComponent } from './travel-management/advances/advances.component';
+import { SpendComponent } from './travel-management/spend/spend.component';
+import { NewSpendComponent } from './travel-management/spend/new-spend/new-spend.component';
+import { EditSpendComponent } from './travel-management/spend/edit-spend/edit-spend.component';
+import { NewAdvancesComponent } from './travel-management/advances/new-advances/new-advances.component';
+
 
 
 @NgModule({
@@ -73,7 +104,8 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
     FormlyBootstrapModule,
     CKEditorModule,
     TagInputModule,
-    FileUploadModule
+    FileUploadModule,
+    PdfViewerModule
 
   ],
   declarations: [
@@ -116,10 +148,38 @@ import { NewArticleFormComponent } from './billboard/my-publications/new-article
     EditPublicationComponent,
     MasterDataComponent,
     HelpComponent,
-    NewArticleFormComponent
+    NewArticleFormComponent,
+    EvaluatedComponent,
+    FillEvaluationComponent,
+    ShowEvaluationComponent,
+    HistoricalPostsComponent,
+    RequestsApproversComponent,
+    IvaEmployeeComponent,
+    TimeEvaluationComponent,
+    EvaluationObjectivesComponent,
+    MyHourExtrasComponent,
+    HourExtrasComponent,
+    EditEvaluationObjetivesComponent,
+    TravelManagementComponent,
+    NewTravelComponent,
+    TravelComponent,
+    HotelsComponent,
+    NewHotelComponent,
+    EditTravelComponent,
+    ViewTravelComponent,
+    PlanningEvaluationComponent,
+    EditPlanningDateComponent,
+    TrainingComponent,
+    ViewTrainingComponent,
+    AdvancesComponent,
+    SpendComponent,
+    NewSpendComponent,
+    EditSpendComponent,
+    NewAdvancesComponent,
+
   ],
   providers: [
-    
+
   ]
 })
 export class PagesModule { }

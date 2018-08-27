@@ -1,0 +1,155 @@
+<button id="btn_travel_view" type="button" class="btn btn-primary" data-toggle="modal" data-target="#travel_view" style="display:none;">
+</button>
+<div class="modal" id="travel_view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalles de Viaje # {{ticket}}</h5>
+        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo">
+
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
+              <strong>Tipo de viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <label>{{typeTravel}} - Programado - {{maintenance_travel}}</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+              <strong>Fecha inicial del Viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.date_begin}}</label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+              <strong>Fecha final del Viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.date_end}}</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 top-containter" style="margin-top: 20px">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-comment text-primary-hr"></i>
+              <strong>Motivo del Viaje:</strong>
+            </label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12" style="margin-left: 20px; font-size:1.2em">
+            <label id="objectivesTravel">{{observations}}</label>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
+              <strong>Tipo de costo:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>Gasto Administrativo</label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
+              <strong>Centro de costo:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>Recursos Humanos</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-rocket text-primary-hr"></i>
+              <strong>Clase de viaje legal:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.legal_travels_type_name}}</label>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-ship text-primary-hr"></i>
+              <strong>Clase de viaje especial:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.specific_types_trip_name}}</label>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
+              <strong>Actividad de viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12">
+            <label>{{view_travels.travel_activity_name}}</label>
+          </div>
+        </div>
+      
+        <div class="row border justify-content-center titleColor" style="margin-top: 15px">
+          <div class="col-12">
+            <h4>Viajes</h4>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 15px">
+          <div class="col-12 top-general-p">
+            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 50px">
+          <div class="col-12 top-containter">
+            <div class="row">
+              <div class="col-lg-8 col-12" *ngFor="let imgsaved of annexeds; let index = index">
+                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                  <div class="row">
+                    <div class="col-11">
+                      <h6>{{imgsaved.name |slice: 0:20}}
+                        <span [hidden]="imgsaved.name.length < 20">...</span>
+                      </h6>
+                      <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
+                      <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footerInfo justify-content-center">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+            <h6> Cerrar </h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

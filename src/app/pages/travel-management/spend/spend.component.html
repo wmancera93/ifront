@@ -1,0 +1,131 @@
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row">
+        <div class="col-xl-10 col-md-8 col-7 title">
+          <i class="fa fa-usd"></i>
+          Gastos
+        </div>
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atrás
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row justify-content-center top-containter">
+          <div class="col-lg-4 col-12">
+            <div class="row" style="margin-top: 10px">
+              <div class="col-12">
+                <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newSpendTravel()">
+                  <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                  Nuevo Gasto
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row top-containter" style="margin-top: 20px">
+        <div class="col-xl-2 col-lg-4 col-12 text-left">
+          <b>
+            Gastos reportados
+          </b>
+        </div>
+      </div>
+
+      <div class="row justify-content-center top-containter">
+        <div class="col-12">
+          <div class="widget bg-white-1x">
+            <div class="row align-items-center">
+              <div class="col-lg-2 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Código # 1
+                  </span>
+                </h5>
+                <p>
+                  <i class="fa fa-clock-o"></i>
+                  Creada el 01/01/2018
+                </p>
+              </div>
+              <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+                <h3 class="font-color-default">
+                  Descripción
+                </h3>
+              </div>
+              <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Estado:
+                </p>
+                <h6>
+                  <span class="badge badge-primary">
+                   Pendiente
+                  </span>
+                </h6>
+              </div>
+              <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Solicitud de viaje
+                </p>
+                <p class="">
+                  <i class="fa fa-hashtag fa-fw text-primary-hr"></i>
+                  58
+                </p>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-12">
+                    Ver
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8; font-size:2em"></i>
+                  </div>
+                  <div class="col-12">
+                    Editar
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <!--<div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div> -->
+                  <div class="col-12">
+                    Eliminar
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+    </div>
+  </div>
+</div>
+<app-new-spend *ngIf="!token"></app-new-spend>

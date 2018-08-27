@@ -5,7 +5,10 @@ import { PrintDataTableService } from '../../../services/shared/common/print-dat
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
+
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+
 declare var jsPDF: any;
 
 export interface ColumnSetting {
@@ -18,16 +21,24 @@ export interface ColumnSetting {
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
-  styleUrls: ['./data-table.component.css']
+  styleUrls: ['./data-table.component.css'],
+
 })
 export class DataTableComponent implements OnInit {
-  public show: boolean = true;
+  public show = true;
   @Input() records: any;
   @Input() recordsPrint: any[] = [];
   @Input() title: any;
+  @Input() excel?: any = false;
+  @Input() pdf?: any = true;
+  @Input() sizeTable?: any = true;
+  @Input() minHeight?: any = true;
+
+  public height = "min-height: 370px;";
+
   public keys: any[] = [];
   public labels: any[] = [];
-  public p: number = 1;
+  public p = 1;
   public size_table: number = 10;
 
   public labelsCell: any[] = [];
@@ -39,6 +50,7 @@ export class DataTableComponent implements OnInit {
 
   public objectTable: any[] = [];
 
+
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -46,6 +58,7 @@ export class DataTableComponent implements OnInit {
     public excelService: ExcelService,
     public router: Router,
     private tokenService: Angular2TokenService,
+    private accionDataTableService: DataDableSharedService,
     public stylesExplorerService: StylesExplorerService) {
 
     this.tokenService.validateToken()
@@ -58,14 +71,17 @@ export class DataTableComponent implements OnInit {
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        })
+        });
+
+
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
+
     this.records.subscribe((data) => {
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
@@ -107,6 +123,7 @@ export class DataTableComponent implements OnInit {
       }
     });
 
+
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 4000);
@@ -121,8 +138,8 @@ export class DataTableComponent implements OnInit {
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
 
-   let alineation = '';
-   let positionPage = 0;
+    let alineation = '';
+    let positionPage = 0;
 
     if (dd.toString().length === 1) {
       ddNew = '0' + dd.toString();
@@ -136,7 +153,7 @@ export class DataTableComponent implements OnInit {
     if (this.columnsPdf.length > 5) {
       alineation = 'l';
       positionPage = 740;
-    }else{
+    } else {
       alineation = 'p';
       positionPage = 500;
     }
@@ -280,9 +297,18 @@ export class DataTableComponent implements OnInit {
         (<HTMLInputElement>document.getElementsByClassName('input-filter')[i]).value = '';
       }
     }
+
     let input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
     let parameter = label.label;
     this.recordsPrint = this.recordsStatic.filter((prod: any) => prod[parameter].toString().toUpperCase().indexOf(input.toUpperCase()) >= 0);
 
   }
+
+  excelDownload(type) {
+    this.accionDataTableService.setActionDataTable(type);
+  }
+  accionTable(fieldSelected: any) {
+    this.accionDataTableService.setActionDataTable(fieldSelected);
+  }
+
 }

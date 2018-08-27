@@ -14,17 +14,30 @@ export class FileUploadComponent implements OnInit {
 
   public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
-  constructor(public fileUploadService:FileUploadService) { }
+  constructor(public fileUploadService:FileUploadService) {
+
+    this.fileUploadService.getCleanUpload()
+    .subscribe((clean) => {
+      if(clean){
+        this.progressBar = '0%';
+        this.textFileUpload = '';
+      }
+    })
+
+   }
+
+
+
 
   ngOnInit() {
-    if(this.extensions !== ''){
-      this.acceptExtensions = this.extensions;      
+    if (this.extensions !== '') {
+      this.acceptExtensions = this.extensions;
     }
 
     this.progressBar = '0%';
     this.textFileUpload = '';
-  
-  }  
+
+  }
 
   clickFile() {
     document.getElementById(this.nameFile).click();
@@ -41,10 +54,10 @@ export class FileUploadComponent implements OnInit {
         }, 500)
       }
     }
-    if(this.textFileUpload === ''){
+    if (this.textFileUpload === '') {
       this.progressBar = '0%';
     }
-
+    
     this.fileUploadService.setObjectFile(e.target.files[0]);
   }
 
