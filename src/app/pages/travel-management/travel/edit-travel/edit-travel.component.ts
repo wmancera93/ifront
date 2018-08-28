@@ -75,6 +75,7 @@ export class EditTravelComponent implements OnInit {
   public dayResult: number;
   public dayResultE: number;
   public activate: boolean = false;
+  public activate_submit: boolean = true;
   public alertWarning: any[] = [];
   public id_destination_delete: string = '';
   public showMilenage: boolean = false;
@@ -97,7 +98,7 @@ export class EditTravelComponent implements OnInit {
       if (data === 'continueEditDestinationRequestsValidateDates') {
         this.activate = false;
       }
-      
+
       if (data === 'deleteDocumentSaved') {
         document.getElementById("btn_travel_edit").click();
         this.travelManagementService.deleteFile(this.idFile.toString(), this.ticket)
@@ -204,8 +205,8 @@ export class EditTravelComponent implements OnInit {
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         if (result.success) {
           this.generalViajes = result.data;
+         
           this.objectPrint = this.generalViajes[0].travel_managements;
-          console.log(this.generalViajes)
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
             id_travel: this.generalViajes[0].travel_request.travel_type_id,
@@ -213,7 +214,7 @@ export class EditTravelComponent implements OnInit {
             date_requests_end: this.generalViajes[0].travel_request.date_end,
             trip_text: this.generalViajes[0].travel_request.observation,
             maintenance: this.generalViajes[0].travel_request.is_maintenance,
-            id_center_travel: this.generalViajes[0].travel_request.is_maintenance,
+            id_center_travel: this.generalViajes[0].travel_request.travel_costs_type_id,
             id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
             id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
             id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -235,6 +236,7 @@ export class EditTravelComponent implements OnInit {
             travel_mileage: '',
           });
           setTimeout(() => {
+            this.searchCostsCenter(this.formTravelManagement.value,'')
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
           }, 50);
         }
@@ -248,7 +250,7 @@ export class EditTravelComponent implements OnInit {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
-
+        this.activate_submit = false;
         if (!this.bedit) {
           if (!this.bnew) {
             document.getElementById("edit_funtionTravel").click();
@@ -277,7 +279,7 @@ export class EditTravelComponent implements OnInit {
               date_requests_end: this.generalViajes[0].travel_request.date_end,
               trip_text: this.generalViajes[0].travel_request.observation,
               maintenance: this.generalViajes[0].travel_request.is_maintenance,
-              id_center_travel: this.generalViajes[0].travel_request.is_maintenance,
+              id_center_travel: this.generalViajes[0].travel_request.travel_costs_type_id,
               id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
               id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -296,7 +298,7 @@ export class EditTravelComponent implements OnInit {
               id_stateto: resutlDestinations.data.destination_state,
               id_countryto: resutlDestinations.data.destination_country,
               id_hotels: resutlDestinations.data.hotel_id,
-              travel_mileage: resutlDestinations.data.hotel_id,
+              travel_mileage: resutlDestinations.data.total_mileage,
             };
 
           })
@@ -343,7 +345,7 @@ export class EditTravelComponent implements OnInit {
         this.trips_specific = data.data.specific_types_trips;
         this.trips_activities = data.data.travel_activities;
         this.center_costs_travels = data.data.travel_costs_types;
-        this.costs_travels = [];
+        
       })
   }
 
@@ -419,9 +421,8 @@ export class EditTravelComponent implements OnInit {
 
   }
 
-
   addDestination(modelPartial) {
-
+    this.activate_submit = true;
     this.activate = true;
 
     this.generalViajes[0].travel_managements.data.push({
@@ -465,8 +466,8 @@ export class EditTravelComponent implements OnInit {
     document.getElementById("edit_funtionTravel").click();
   }
 
-
   editDestination(modelEditPartial) {
+    this.activate_submit = true;
     this.activate = true;
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {
@@ -552,10 +553,9 @@ export class EditTravelComponent implements OnInit {
 
   }
 
-
-
-  colapseNew() {
-
+  colapseEdit() {
+    this.activate_submit = false;
+    this.showMilenage = false;
     if (!this.bnew) {
       this.bnew = true
     } else {
@@ -577,6 +577,7 @@ export class EditTravelComponent implements OnInit {
     this.bedit = false;
     this.bnew = false;
     this.send = false;
+    this.activate_submit = true;
     this.clearFormPartial();
   }
   mileageTravel(param) {
@@ -763,6 +764,7 @@ export class EditTravelComponent implements OnInit {
     this.terminalLocationsto = [];
     this.hotels = [];
 
+    this.formTravelManagement.controls['id_transport'].setValue('1');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('-1');
     this.formTravelManagement.controls['id_state'].setValue('');
@@ -882,5 +884,29 @@ export class EditTravelComponent implements OnInit {
         this.alert.setAlert(alertDataWrong[0])
       }
     }
+  }
+  hourvalidations(hourTrayect) {
+  
+    if (hourTrayect.date_begin === hourTrayect.date_end) {
+      let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
+      let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
+
+      if (hourEndTrayect - hourBeginTrayect < 0) {
+        this.formTravelManagement.controls['hour_begin'].setValue('');
+        this.formTravelManagement.controls['hour_end'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida',
+          confirmation: true,
+          typeConfirmation: 'continueEditDestinationRequests'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      }
+
+    }
+
   }
 }

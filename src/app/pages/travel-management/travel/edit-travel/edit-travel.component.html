@@ -28,7 +28,7 @@
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
-                  (change)="dateComplete(formTravelManagement.value)" [attr.disabled]='generalViajes[0].travel_managements.data.length > 0? true : null'
+                  (change)="dateComplete(formTravelManagement.value)" 
                 />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -37,7 +37,7 @@
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
-                  (change)="dateComplete(formTravelManagement.value)" [attr.disabled]='generalViajes[0].travel_managements.data.length > 0 ? true : null' />
+                  (change)="dateComplete(formTravelManagement.value)"  />
               </div>
             </div>
           </div>
@@ -221,7 +221,7 @@
                 <h5 class="titleColor" *ngIf="bnew">
                   Nuevo Viaje
                 </h5>
-                <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseEdit()">
                   Nuevo Viaje
                 </button>
                 <button id="edit_funtionTravel" data-toggle="collapse" data-target="#collapseTravelEdit" style="display: none">
@@ -398,7 +398,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" />
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)" />
                     </div>
                   </div>
                 </div>
@@ -432,8 +432,7 @@
                         || formTravelManagement.value.id_cityto == -1
                         || formTravelManagement.value.id_terminalto == -1
                         || formTravelManagement.value.date_end == ''
-                        || formTravelManagement.value.hour_end == ''
-                        || formTravelManagement.value.id_hotels == -1) ? true : null" class="btn btn-primary btn-block cursor-general"
+                        || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
                         (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino
                       </button>
@@ -455,7 +454,7 @@
           </div>
         </form>
 
-        <div class="row justify-content-end" style="margin-top: 30px">
+        <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate_submit">
           <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>

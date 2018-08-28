@@ -47,16 +47,16 @@ export class ViewTravelComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
-   
+        this.view_travels = [];
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
-        this.view_travels = result.data[0].travel_request;
+        this.view_travels.push(result.data[0].travel_request);
         this.maintenance = result.data[0].travel_request.is_maintenance;
-
-        if(this.maintenance){
-          this.maintenance_travel='Con manutención'
+        console.log(this.view_travels);
+        if (this.maintenance) {
+          this.maintenance_travel = 'Con manutención'
         }
 
         this.objectReport.emit({ success: true, data: [this.objectPrint] });
