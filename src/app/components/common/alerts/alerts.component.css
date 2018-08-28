@@ -1,3 +1,21 @@
 .modal {
-    z-index: 2051 !important;
-  }
+  z-index: 2051 !important;
+}
+
+/* .font-controls-login {
+  font-size: 1.1rem !important;
+} */
+
+.btn-outline-secondary:hover {
+  color: #616161 !important;
+  background-image: none !important;
+  background-color: transparent !important;
+  border-color: #616161 !important;
+}
+
+.btn-outline-secondary {
+  cursor: pointer;
+  color: #ffffff !important;
+  background-color: rgba(0, 0, 0, 0.1) !important;
+  border-color: #616161 !important;
+}

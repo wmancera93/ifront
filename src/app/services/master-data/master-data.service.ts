@@ -10,6 +10,12 @@ export class MasterDataService {
   constructor(public http: HttpClient,
     private tokenService: Angular2TokenService) { }
 
+  getMasterDataTypes() {
+
+    return this.tokenService.get('master_data_types')
+      .map((data: any) => data.json());
+  }
+
   getDataBussiness() {
     return this.tokenService.get('master_data_types/business')
       .map((data: any) => data.json());
@@ -29,6 +35,7 @@ export class MasterDataService {
     return this.tokenService.get('master_data_types/personal')
       .map((data: any) => data.json());
   }
+
 
   getDataContact() {
     return this.tokenService.get('master_data_types/contact')
@@ -54,5 +61,13 @@ export class MasterDataService {
     return this.tokenService.get('master_data_types/retefuente')
       .map((data: any) => data.json());
   }
+
+  putEditDataMaster(editDataMaster: any) {
+    return this.tokenService.put('master_data_types/update_master_data', editDataMaster)
+      .map((data: any) => data.json());
+  }
+
+
+
 
 }

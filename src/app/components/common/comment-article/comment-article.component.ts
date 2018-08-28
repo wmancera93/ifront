@@ -35,6 +35,7 @@ export class CommentArticleComponent implements OnInit {
   public flagEditComment: boolean = false;
   public commentEdit: string;
   public modalName : string = "";
+  public flagRefreshPublication : boolean = false;
 
 
   constructor(public billboardSharedService: BillboardService,
@@ -57,7 +58,7 @@ export class CommentArticleComponent implements OnInit {
             if (data.success == true) {
             }
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            this.getDetailArticle()
+            this.getDetailArticle();
             
           })
       }
@@ -126,6 +127,7 @@ export class CommentArticleComponent implements OnInit {
             this.getDetailArticle();
             this.comment = '';
             this.numberComments = data.total_comments;
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             const alertWarning: Alerts[] = [{ 
             type: 'success',
             title: 'Confirmación',
@@ -133,8 +135,9 @@ export class CommentArticleComponent implements OnInit {
             confirmation: false,
             typeConfirmation: ''}];
             this.showSubmit = true;
-            this.alert.setAlert(alertWarning[0]);
-
+            this.flagRefreshPublication = true;
+            this.alert.setAlert(alertWarning[0]);            
+            this.billboardSharedService.setRefreshEditNew(this.flagRefreshPublication);
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
@@ -144,8 +147,7 @@ export class CommentArticleComponent implements OnInit {
               message: error.error.errors.toString(),
               confirmation: false }];
             this.showSubmit = true;
-            this.alert.setAlert(alertWarning[0]);
-   
+            this.alert.setAlert(alertWarning[0]);   
           }
         )
     }

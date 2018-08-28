@@ -190,7 +190,7 @@
                         </div>
                         <div class="col-12 tops" *ngIf="!prerequisit">
                           <div class="row justify-content-center">
-                            <div class="col-lg-6 col-md-6 col-8 text-left">
+                            <div class="col-12 text-cent">
                               <h3 class="font-color-default">
                                 Solicitud a
                                 <span *ngIf="switch == 'on'">
@@ -201,10 +201,19 @@
                                 </span>
                               </h3>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-4">
+                            <div class="col-lg-6 col-md-6 col-8">
+                              Deslizar para
+                              <span *ngIf="switch == 'off'">
+                                Aprobar
+                              </span>
+                              <span *ngIf="switch == 'on'">
+                                Cancelar
+                              </span>
+                            </div>
+                            <div class="col-4">
                               <div class="top-interruptor">
-                                <input type="radio" name="interruptor" id="prendido">
-                                <input type="radio" name="interruptor" id="apagado" checked>
+                                <input type="radio" name="interruptor" id="prendido" checked>
+                                <input type="radio" name="interruptor" id="apagado">
                                 <div class="interruptor-cuerpo">
                                   <div class="interruptor-tecla">
                                     <label for="prendido" (click)="onAprovlas()"></label>
@@ -218,7 +227,7 @@
                             </div>
                             <div class="col-12">
                               <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
-                            </div>
+                            </div>  
                             <div class="col-md-4 col-12">
                               <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
                                 <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>

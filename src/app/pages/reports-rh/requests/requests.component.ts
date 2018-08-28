@@ -39,6 +39,7 @@ export class RequestsComponent implements OnInit {
   public token: boolean;
   public showButtonReturn: boolean;
 
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public reportsHrService: ReportsHrService,
@@ -191,13 +192,16 @@ export class RequestsComponent implements OnInit {
   }
 
   pdfExport() {
-    let title: string = this.title;
+    let title: string = this.title === null ? 'Reporte de solicitudes' : this.title === undefined ? 'Reporte de solicitudes' : this.title === '' ? 'Reporte de solicitudes' : this.title;
     var today = new Date();
     let dd: number = today.getDate();
     let mm: number = today.getMonth() + 1;
     let yyyy: number = today.getFullYear();
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
+
+    let alineation = '';
+    let positionPage = 0;
 
     if (dd.toString().length === 1) {
       ddNew = '0' + dd.toString();
@@ -208,9 +212,27 @@ export class RequestsComponent implements OnInit {
 
     let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
     let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
-    var doc = new jsPDF('p', 'pt');
+    if (this.columnsPdf.length > 5) {
+      alineation = 'l';
+      positionPage = 740;
+    } else {
+      alineation = 'p';
+      positionPage = 500;
+    }
+
+    var doc = new jsPDF(alineation, 'pt');
     doc.page = 1;
-    doc.autoTable(this.columnsPdf, this.recordsPrint, {
+
+    let column = [];
+
+    this.columnsPdf.forEach((data: any) => {
+      if (data.title !== 'Acción') {
+        column.push(data)
+      }
+
+    })
+
+    doc.autoTable(column, this.recordsPrint, {
       theme: 'striped',
       styles: {
         cellPadding: 5,
@@ -238,16 +260,34 @@ export class RequestsComponent implements OnInit {
         doc.setFontSize(12)
         doc.text(40, 95, 'Generado el ' + dateNow)
         doc.setFontSize(10)
-        doc.text(500, 60, 'pagina ' + doc.page);
+        doc.text(positionPage, 60, 'pagina ' + doc.page);
         doc.page++;
       }
     });
-
     doc.save(title + '.pdf')
   }
 
   excelExport() {
-    this.excelService.exportAsExcelFile(this.recordsPrint, this.title, '.xlsx');
+    let object: any[] = [];
+    this.reportsHrService.getRequestsExcelByStatus(this.filter_active)
+      .subscribe((data: any) => {
+        if (data.data.length > 0) {
+          data.data.forEach(element => {
+            object.push({
+              Ticket: element.id,
+              TipoSolicitud: element.type_requests_name,
+              NombreSolicitante: "#" + element.pernr + ' - ' + element.name_applicant,
+              Estado: element.status,
+              Plataforma: element.next_platform + ' - #Nivel:' + element.next_level,
+              FechaSolicitud: element.created,
+              FechaInicial: element.date_begin_format,
+              FechaFinal: element.date_end_format,             
+            });
+          })
+        }
+
+        this.excelService.exportAsExcelFile(object, this.title, '.xlsx');
+      });
   }
 
   csvExport() {

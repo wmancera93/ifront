@@ -18,7 +18,7 @@ export class ApprovalsDetailsComponent implements OnInit {
   public showSubmit: boolean = true;
 
   public prerequisit: boolean = true;
-  public switch: string = "off";
+  public switch: string = "on";
   public description: string = "";
 
   constructor(public approverRequestsService: ApproverRequestsService,
@@ -28,7 +28,7 @@ export class ApprovalsDetailsComponent implements OnInit {
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
-        this.switch = 'off';
+        this.switch = 'on';
         this.description = '';
         this.approvals = [];
         this.edit = data.edit;

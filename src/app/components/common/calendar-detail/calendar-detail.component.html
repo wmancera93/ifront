@@ -1,0 +1,42 @@
+
+<div  class="fade modal1 show" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="calendar-detail">
+  <div id="calendar_detail" class="modal-dinamic-calendar modal-dialog modal-dialog-centered" role="document">
+    <div *ngIf="state_modal" class="modal-content">
+      <div class="modal-header borderLine-title row-hr justify-content-center" style="height:100px">
+        <h5 class="modal-title titleColor1 justify-content-center" id="exampleModalCenterTitle">Detalles Agenda</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        </button>
+      </div>
+      <div class="modal-body" style="background: white">
+        <div  *ngIf="detail_calendar.length > 0" class="row bodyColorInfo">
+          <div class="col-12 col-lg-6 col-md-4">
+            <i class="fa fa-calendar-minus-o paddingInfo"></i>
+            <strong>&nbsp;Descripcion actividad:</strong>&nbsp;{{detail_calendar[0].descript}}
+            <br>
+            <i class="fa fa-info-circle paddingInfo"></i>
+            <strong>&nbsp;Horas teoricas:</strong>&nbsp;{{detail_calendar[0].description_calendar}}
+            <br>
+          </div>
+          <div class="col-12 col-lg-6 col-md-4">
+              <i class="fa fa-clock-o paddingInfo"></i>
+              <strong>&nbsp;Hora de inicio:</strong>&nbsp;{{detail_calendar[0].hour_begin}}
+              <br>
+            <i class="fa fa-hourglass paddingInfo"></i>
+            <strong>&nbsp;Hora de finalización:</strong>&nbsp;{{detail_calendar[0].hour_end}}
+            <br>           
+          </div>
+          <div class="col-12 col-lg-6 col-md-4">
+            <i class="fa fa-commenting-o paddingInfo"></i>
+            <strong>&nbsp;Texto de calendario:</strong>&nbsp;{{detail_calendar[0].calendar_text}}
+            <br>
+          </div>
+          <div class="col-12 col-lg-6 col-md-4">
+            <i class="fa fa-book paddingInfo"></i>
+            <strong>&nbsp;Descripción plan de trabajo:</strong>&nbsp;{{detail_calendar[0].description_work}}
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -14,11 +14,11 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 export class MenuNavigationComponent implements OnInit {
   public dataUser: User = null;
   public dataEnterprise: Enterprise = null;
-  public showMenu: boolean = true;
-  public liActive: string = 'liIndex';
-  public aActive: string = 'aIndex';
-  public showCollapse: string = '';
-  public heightContenGeneral: number = 0;
+  public showMenu = true;
+  public liActive = 'liIndex';
+  public aActive = 'aIndex';
+  public showCollapse = '';
+  public heightContenGeneral = 0;
 
   constructor(private userSharedService: UserSharedService,
     public companieService: MainService,
@@ -30,8 +30,7 @@ export class MenuNavigationComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
     if (!this.stylesExplorerService.validateBrowser()) {
       document.documentElement.style.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
       document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
@@ -51,17 +50,16 @@ export class MenuNavigationComponent implements OnInit {
           '',
           this.dataEnterprise.background_header_menu.url
           , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
-        )
+        );
       }, 400);
-     
+
     }
 
   }
 
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
-      this.dataUser = JSON.parse(localStorage.getItem("user"));
-
+      this.dataUser = JSON.parse(localStorage.getItem('user'));
     }
   }
 
@@ -85,7 +83,7 @@ export class MenuNavigationComponent implements OnInit {
         '',
         this.dataEnterprise.background_header_menu.url
         , '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
-      )
+      );
     }
   }
 
@@ -93,7 +91,7 @@ export class MenuNavigationComponent implements OnInit {
     if (!this.stylesExplorerService.validateBrowser()) {
       document.documentElement.style.setProperty(`--left-show-menu-hover`, `-20px`);
       document.documentElement.style.setProperty(`--left-show-menu`, `-20px`);
-      document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);;
+      document.documentElement.style.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
       document.documentElement.style.setProperty(`--width-nav-menu`, `220px`);
       setTimeout(() => {
         document.documentElement.style.setProperty(`--visible-menu`, `block`);
@@ -109,7 +107,7 @@ export class MenuNavigationComponent implements OnInit {
         '',
         this.dataEnterprise.background_header_menu.url
         , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
-      )
+      );
     }
   }
 
@@ -122,7 +120,7 @@ export class MenuNavigationComponent implements OnInit {
       if (document.getElementById(this.showCollapse) !== null) {
         document.getElementById(this.showCollapse).classList.remove('show');
       }
-      this.showCollapse = toggle
+      this.showCollapse = toggle;
     }
     if (a.split('-')[0].toString() !== 'toggle') {
       if (document.getElementById(this.aActive) !== null) {
@@ -130,8 +128,8 @@ export class MenuNavigationComponent implements OnInit {
       }
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
-      if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'block') {
-        document.getElementById('btnHideMenu').click()
+      if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
+        document.getElementById('btnHideMenu').click();
 
       }
     }
