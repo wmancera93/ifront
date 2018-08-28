@@ -1,0 +1,8 @@
+app:
+  build: ./nginx
+  restart: always
+  volumes:
+    - .angular/:/var/www/html/angular
+  ports:
+    - "80:80"
+    - "443:443"
