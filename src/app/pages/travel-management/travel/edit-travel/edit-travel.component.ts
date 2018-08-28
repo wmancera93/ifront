@@ -205,8 +205,8 @@ export class EditTravelComponent implements OnInit {
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         if (result.success) {
           this.generalViajes = result.data;
+         
           this.objectPrint = this.generalViajes[0].travel_managements;
-          console.log(this.generalViajes)
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
             id_travel: this.generalViajes[0].travel_request.travel_type_id,
@@ -236,6 +236,7 @@ export class EditTravelComponent implements OnInit {
             travel_mileage: '',
           });
           setTimeout(() => {
+            this.searchCostsCenter(this.formTravelManagement.value,'')
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
           }, 50);
         }
@@ -420,7 +421,6 @@ export class EditTravelComponent implements OnInit {
 
   }
 
-
   addDestination(modelPartial) {
     this.activate_submit = true;
     this.activate = true;
@@ -465,7 +465,6 @@ export class EditTravelComponent implements OnInit {
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
   }
-
 
   editDestination(modelEditPartial) {
     this.activate_submit = true;
@@ -553,8 +552,6 @@ export class EditTravelComponent implements OnInit {
     }
 
   }
-
-
 
   colapseEdit() {
     this.activate_submit = false;
