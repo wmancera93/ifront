@@ -1,0 +1,109 @@
+<app-calendar-detail></app-calendar-detail>
+<div class="row">
+  <div class="col-12">
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="text-center">
+          <h2>
+            {{nameMonth}}
+          </h2>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-12 col-md-5 col-xl-5">
+        <div class="row  justify-content-center">
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" style="width: 100%;" (click)="lastMonth()">
+              <div class="roundArrow">
+                <i class="fa fa-chevron-left"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" (click)="actualMonth()">
+              <div class="roundArrow" style="width: 60px !important;">
+                Hoy
+              </div>
+            </div>
+          </div>
+          <div class="col-4 col-md-3 col-xl-3">
+            <div class="col-12 top-general-p" (click)="nextMonth()">
+              <div class="roundArrow">
+                <i class="fa fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center" style="margin-top: 10px;">
+      <div class="col-12 col-md-11">
+        <div class="row title-letter bgn-title text-center">
+          <div class="col seven-cols-no">
+            {{sunday}}
+          </div>
+          <div class="col seven-cols-no">
+            {{monday}}
+          </div>
+          <div class="col seven-cols-no">
+            {{tuesday}}
+          </div>
+          <div class="col seven-cols-no">
+            {{wednesday}}
+          </div>
+          <div class="col seven-cols-no">
+            {{thursday}}
+          </div>
+          <div class="col seven-cols-no">
+            {{friday}}
+          </div>
+          <div class="col  seven-cols-no">
+            {{saturday}}
+          </div>
+        </div>
+        <div *ngIf="!responsive" class="row  scrollbarBody scrollbarBody-success height-vh-calendar">
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="seven-cols-no col-lg-1 cell-day text-right scrollbarBody scrollbarBody-success"
+            style="height: 150px; border:1px solid gray" *ngFor="let day of newObjectDate;">
+            <div class="row justify-content-end">
+              <div class="text-center" [ngClass]="{ 'col-4':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-6':day.weekday =='sabado'|| day.weekday=='domingo'}">
+                <div [ngClass]="{'borderNumber' : day.is_now === true}">
+                  {{day.date | date: "dd"}}
+                </div>
+
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf=" day.work_schedule_plan[0].type_schedule_plan_description  !== 'descanso' ">
+              <div class=" col-11 padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let description of day.work_schedule_plan; let index=index; let odd = odd; let even = even;"
+                [ngClass]="{odd : odd, even : even}" (mouseover)="openModal($event, description)" (mouseleave)="closeModal()">
+                <div class="item-calendar">
+                  {{description.hour_begin}} {{description.work_schedule_plan_text}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="responsive" class="row seven-cols scrollbarBody  height-vh-calendar">
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success"
+            style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
+            <div class="row justify-content-end">
+              <div class="text-right" [ngClass]="{ 'col-12':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-12':day.weekday =='sabado'|| day.weekday=='domingo'}">
+                <div [ngClass]="{'borderNumber' : day.is_now === true}">
+                  {{day.date | date: "dd"}}
+                </div>
+              </div>
+            </div>
+            <div class="row justify-content-center" *ngIf=" day.work_schedule_plan[0].type_schedule_plan_description  !== 'descanso'">
+              <div class=" col-11 padding-item-calendar" style="margin-top:7px; cursor: pointer;" *ngFor="let description of day.work_schedule_plan; let index=index; let odd = odd; let even = even;"
+                (mouseover)="openModal($event, description)" (mouseleave)="closeModal()">
+                <div [ngClass]="{odd : odd, even : even}" class="round-rpsv-event">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

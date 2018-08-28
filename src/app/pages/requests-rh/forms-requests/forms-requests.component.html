@@ -17,9 +17,7 @@
                   <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
                   <i class="fa fa-plane fa-stack-1x text-origin"></i>
                 </span>
-
                 <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
-
                 <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
                   Dias disponibles
                 </h3>
@@ -36,14 +34,16 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Inicial *
                 </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" placeholder="dd/mm/yyyy" />
+                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Final *
                 </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" placeholder="dd/mm/yyyy"/>
+                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
@@ -92,7 +92,8 @@
                   <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
                   Dias requeridos *
                 </label>
-                <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter" (keyup)="noAcceptMinus()" [formControl]="formVacaComp.controls['days_request']" />
+                <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter" (keyup)="noAcceptMinus()"
+                  [formControl]="formVacaComp.controls['days_request']" />
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
@@ -114,6 +115,7 @@
             </form>
           </div>
         </div>
+
         <div *ngIf="formRequests.id_activity == 'PERM'" class="row justify-content-left">
           <div class="col-12 col-lg-12">
             <form [formGroup]="formPerm" class="row justify-content-left" (ngSubmit)="newRequest(formPerm.value)">
@@ -122,14 +124,16 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Inicial *
                 </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']"  placeholder="dd/mm/yyyy"/>
+                <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Final *
                 </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" placeholder="dd/mm/yyyy"/>
+                <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
@@ -158,6 +162,75 @@
             </form>
           </div>
         </div>
+
+        <div *ngIf="formRequests.id_activity == 'PRSC'" class="row justify-content-center">
+          <div class="col-12 col-lg-8">
+            <form [formGroup]="formPres" class="row justify-content-start" (ngSubmit)="newRequest(formPres.value)">
+
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-md-6 col-12 top-containter">
+                    <label for="dateBegin" class="font-title-general">
+                      <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                      Fecha Inicial *
+                    </label>
+                    <input type="date" name="date_begin" class="form-control" [formControl]="formPres.controls['date_begin']" placeholder="dd/mm/yyyy"
+                      (blur)="calculateDay()" />
+                  </div>
+
+                  <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
+                    <label for="dateEnd" class="font-title-general">
+                      <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                      Fecha Final *
+                    </label>
+                    <input type="date" name="date_end" class="form-control" [formControl]="formPres.controls['date_end']" placeholder="dd/mm/yyyy"
+                      (blur)="calculateDay()" />
+                  </div>
+                </div>
+                <div class="row">
+                  <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                    <label for="startTime" class="font-title-general">
+                      <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
+                      Hora inicio *
+                    </label>
+                    <input type="time" name="start_time" class="form-control" [formControl]="formPres.controls['start_time']" placeholder="HH-MM am/pm"
+                    />
+                  </div>
+
+                  <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                    <label for="endTime" class="font-title-general">
+                      <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
+                      Hora Fin *
+                    </label>
+                    <input type="time" name="end_time" class="form-control" [formControl]="formPres.controls['end_time']" placeholder="HH-MM am/pm"
+                    />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 col-12 top-containter">
+                    <label for="celulaInput" class="font-title-general">
+                      <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                      Observaciones
+                    </label>
+                    <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPres.controls['observation_request']"></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12 top-containter">
+                    <div class="row justify-content-end">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                          <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                        <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                          <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
         <div *ngIf="formRequests.id_activity == 'INCA'" class="row justify-content-left">
           <div class="col-12 col-lg-12">
             <form [formGroup]="formInca" class="row justify-content-left" (ngSubmit)="newRequest(formInca.value)">
@@ -166,14 +239,16 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Inicial *
                 </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']"  placeholder="dd/mm/yyyy"/>
+                <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   Fecha Final *
                 </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']" placeholder="dd/mm/yyyy"/>
+                <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']" placeholder="dd/mm/yyyy"
+                />
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">

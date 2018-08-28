@@ -66,4 +66,84 @@ export class QueriesService {
     return this.tokenService.get('consultations/aniversary')
       .map((data: any) => data.json());
   }
+  getHistoricalPosts() {
+    return this.tokenService.get('consultations/historical_positions')
+      .map((data: any) => data.json());
+  }
+  getIvaEmployee() {
+    return this.tokenService.get('consultations/movements_iva')
+      .map((data: any) => data.json());
+  }
+  getAllEvaluationTime() {
+    return this.tokenService.get('evaluation_messages')
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByMonth(period: string) {
+    return this.tokenService.get('evaluation_messages/find_for_period/' + period)
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByDay(day: string) {
+    return this.tokenService.get('evaluation_messages/find_for_day/' + day)
+      .map((data: any) => data.json());
+  }
+  getEvaluationMessagesByPeriod(date1: string, date2: string) {
+    return this.tokenService.get('evaluation_messages/find_date_range/' + date1 + '/' + date2)
+      .map((data: any) => data.json());
+  }
+  getIncomeWithholdingsExcel() {
+    return this.tokenService.get('consultations/income_and_withholdings_export.xlsx')
+      .map((data: any) => data);
+  }
+  getPaymentsAndDeductionsExcel() {
+    return this.tokenService.get('consultations/payments_and_deductions_export.xlsx')
+      .map((data: any) => data);
+  }
+  getSeverancesExcel() {
+    return this.tokenService.get('consultations/severances_export.xlsx')
+      .map((data: any) => data);
+  }
+  getEmbargoesExcel() {
+    return this.tokenService.get('consultations/embargoes_export.xlsx')
+      .map((data: any) => data);
+  }
+  getLoansExcel() {
+    return this.tokenService.get('consultations/loans_export.xlsx')
+      .map((data: any) => data.json());
+  }
+  getEnjoyedVacationExcel() {
+    return this.tokenService.get('consultations/vacation_enjoyed_export.xlsx')
+      .map((data: any) => data);
+  }
+  getCompensatedVacationExcel() {
+    return this.tokenService.get('consultations/compensated_vacations_export.xlsx')
+      .map((data: any) => data);
+  }
+  getBalanceVacationExcel() {
+    return this.tokenService.get('consultations/vacation_balance_export.xlsx')
+      .map((data: any) => data);
+  }
+  getPermissionsExcel() {
+    return this.tokenService.get('consultations/permissions_export.xlsx')
+      .map((data: any) => data);
+  }
+  getDisabilitiesExcel() {
+    return this.tokenService.get('consultations/disabilities_export.xlsx')
+      .map((data: any) => data);
+  }
+  getExtraHoursExcel() {
+    return this.tokenService.get('consultations/extra_hours_export.xlsx')
+      .map((data: any) => data);
+  }
+  getHistoricalPositionExcel() {
+    return this.tokenService.get('consultations/historical_positions_export.xlsx')
+      .map((data: any) => data);
+  }
+  getIvaMovementsExcel() {
+    return this.tokenService.get('consultations/movements_iva_export.xlsx')
+      .map((data: any) => data);
+  }
+    getTimeEvaluationExcel() {
+    return this.tokenService.get('evaluation_messages/evaluation_messages_export.xlsx')
+      .map((data: any) => data);
+  }
 }

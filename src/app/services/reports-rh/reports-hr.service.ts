@@ -29,8 +29,19 @@ export class ReportsHrService {
     return this.tokenService.get('hr_reports/requests/' + status)
       .map((data: any) => data.json());
   }
-  getExcelRequestsByStatus(status: string) {
-    return this.tokenService.get('hr_reports/requests_export_file/' + status+ '.xls')
+
+  getRequestsExcelByStatus(status: any) {
+    return this.tokenService.get('hr_reports/requests_employee_report/' + status)
+      .map((data: any) => data.json());
+  }
+  getRequestsApprovers(type: string, approver:string, platform:string) {
+    return this.tokenService.get('hr_reports/consultation_approvers_filter/'+ type + '/' + approver + '/' + platform)
+      .map((data: any) => data.json());
+  }
+  getSelectRequestsByType() {
+    return this.tokenService.get('employee_requets/select_activities')
       .map((data: any) => data.json());
   }
 }
+  
+

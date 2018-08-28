@@ -19,6 +19,7 @@ export class TimeLineApproversComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService) {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
+        // if (data.flag_count === 0) {
         this.requestsRhService.getRequestDetailById(data.ticket)
           .subscribe((detail: any) => {
             this.detailRequets = [];
@@ -30,10 +31,11 @@ export class TimeLineApproversComponent implements OnInit {
                 document.getElementById('btn_aprovers_requests').click();
                 document.getElementById("bodyGeneral").removeAttribute('style');
               }
-
               this.viewModal = true;
             }
           })
+        //   data.flag_count += 1;
+        // }
       }
     )
 

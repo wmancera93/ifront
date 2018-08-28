@@ -7,7 +7,7 @@
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
-          <i class="fa fa-line-chart"></i>
+          <i class="fa fa-list"></i>
           Estado de evaluaciones
         </div>
       </div>
@@ -39,20 +39,20 @@
               <div class="row justify-content-center">
                 <div class="col-12 col-xl-10  text-center top-p">
                   <div class="row justify-content-center">
-                    <div class="col-12 font-color-default text-lg-left title-size hoverTitle">
+                    <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="fillEvaluation(evaluation)">
                       <strong>{{evaluation.title |uppercase}} </strong>
                     </div>
-                    <div class="col-12 text-lg-left">
+                    <div class=" col-12 text-lg-left ">
                       {{evaluation.description}}
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-2 col-12">
-                  <div class="row">
-                    <div class="col-12 number-size text-info" (click)="fillEvaluation(evaluation)">
-                      <i class="fa fa-pencil"></i>
+                <div class="col-xl-2 col-12 ">
+                  <div class="row ">
+                    <div class="col-12 number-size text-info " (click)="fillEvaluation(evaluation) ">
+                      <i class="fa fa-pencil "></i>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 ">
                       Presentar
                     </div>
                   </div>
@@ -62,44 +62,44 @@
           </div>
         </div>
       </div>
-      <div class="border-botton-general">
-        <div class="row top-containter">
-          <div class="col-xl-2 col-lg-4 col-12 text-left">
+      <div class="border-botton-general ">
+        <div class="row top-containter ">
+          <div class="col-xl-2 col-lg-4 col-12 text-left ">
             <b>
               Gestionadas
             </b>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center top-containter">
-        <div class="col-12">
-          <div class="row justify-content-center top-containter" *ngIf="evaluationsListSubmitted.length === 0" style="margin-top:25px;">
-            <div class="col-lg-8 col-12 text-center" style="min-height: 200px;">
-              <div class="alert alert-warning" role="alert">
+      <div class="row justify-content-center top-containter ">
+        <div class="col-12 ">
+          <div class="row justify-content-center top-containter " *ngIf="evaluationsListSubmitted.length===0 " style="margin-top:25px; ">
+            <div class="col-lg-8 col-12 text-center " style="min-height: 200px; ">
+              <div class="alert alert-warning " role="alert ">
                 No hay
                 <strong>evaluaciones gestionadas</strong>&nbsp;para el empleado
               </div>
             </div>
           </div>
-          <div *ngIf="evaluationsListSubmitted.length !== 0">
-            <div class="widget bg-white-1x" *ngFor="let evaluationSub of evaluationsListSubmitted">
-              <div class="row justify-content-center">
-                <div class="col-12 col-xl-10 text-center top-p">
-                  <div class="row justify-content-center">
-                    <div class="col-12 font-color-default text-lg-left title-size hoverTitle">
+          <div *ngIf="evaluationsListSubmitted.length !==0 ">
+            <div class="widget bg-white-1x " *ngFor="let evaluationSub of evaluationsListSubmitted ">
+              <div class="row justify-content-center ">
+                <div class="col-12 col-xl-10 text-center top-p ">
+                  <div class="row justify-content-center ">
+                    <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="seeEvaluation(evaluationSub) ">
                       <strong>{{evaluationSub.title |uppercase}} </strong>
                     </div>
-                    <div class="col-12 text-lg-left">
+                    <div class="col-12 text-lg-left ">
                       {{evaluationSub.description}}
                     </div>
                   </div>
                 </div>                
-                <div class="col-xl-2 col-12">
-                  <div class="row">
-                    <div id="seeEval" class="col-12 number-size" (click)="seeEvaluation(evaluationSub)">
-                      <i class="fa fa-eye"></i>
+                <div class="col-xl-2 col-12 ">
+                  <div class="row ">
+                    <div id="seeEval " class="col-12 number-size text-navy " (click)="seeEvaluation(evaluationSub) ">
+                      <i class="fa fa-eye "></i>
                     </div>
-                    <div class="col-12">
+                    <div class="col-12 ">
                       Ver
                     </div>
                   </div>

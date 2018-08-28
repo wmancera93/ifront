@@ -34,6 +34,8 @@ input:focus {
    transition:all .5s ease-in-out;
 }
 
+
+
 /* checkButton */ 
 
 .container {
@@ -48,6 +50,14 @@ input:focus {
     user-select: none;
 }
 
+.checkmark-check {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
 /* Hide the browser's default radio button */
 .container input {
     position: absolute;
@@ -70,14 +80,23 @@ input:focus {
 .container:hover input ~ .checkmark {
     background-color: #ccc;
 }
-
+.container:hover input ~ .checkmark-check {
+    background-color: #ccc;
+}
 /* When the radio button is checked, add a blue background */
 .container input:checked ~ .checkmark {
     background-color: var(--btn-primary);
 }
-
+.container input:checked ~ .checkmark-check {
+    background-color: var(--btn-primary);
+}
 /* Create the indicator (the dot/circle - hidden when not checked) */
 .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkmark-check:after {
     content: "";
     position: absolute;
     display: none;
@@ -85,6 +104,9 @@ input:focus {
 
 /* Show the indicator (dot/circle) when checked */
 .container input:checked ~ .checkmark:after {
+    display: block;
+}
+.container input:checked ~ .checkmark-check:after {
     display: block;
 }
 
@@ -96,5 +118,17 @@ input:focus {
 	height: 8px;
 	border-radius: 50%;
 	background: white;
+}
+
+.container .checkmark-check:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 

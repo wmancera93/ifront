@@ -1,0 +1,102 @@
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-line-chart"></i>
+          Estado de evaluaciones
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-2 col-lg-4 col-12 text-left">
+            <b>
+              Evaluaciones creadas
+            </b>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-containter">
+        <div class="col-12" *ngIf="evaluationPerformanceList">
+          <div class="row justify-content-center top-containter" *ngIf="evaluationPerformanceList.length === 0">
+            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+              <div class="alert alert-warning" role="alert">
+                No hay
+                <strong>evaluaciones</strong>&nbsp;disponibles
+              </div>
+            </div>
+          </div>
+          <div *ngIf="evaluationPerformanceList.length !== undefined">
+            <div class="widget bg-white-1x" *ngFor="let evaluation of evaluationPerformanceList">
+              <div class="row align-items-center">
+                <div class="col-lg-2 col-md-3 col-12">
+                  <h5>
+                    <span class="badge badge-warning">
+                      Código #{{evaluation.code}}
+                    </span>
+                  </h5>
+                  <p>
+                    <i class="fa fa-clock-o"></i>
+                    Creada el {{evaluation.created_date}}
+                  </p>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+                  <h3 class="font-color-default">
+                    {{evaluation.name}}
+                  </h3>
+                </div>
+                <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                  <p class="font-title-general">
+                    Estado:
+                  </p>
+                  <h6>
+                    <span class="badge badge-primary">
+                      {{evaluation.status_name}}
+                    </span>
+                  </h6>
+                </div>
+                <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                  <p class="font-title-general">
+                    {{evaluation.qualifier.short_name}}
+                  </p>
+                  <p class="">
+                    {{evaluation.qualifier.unidad_org}}
+                  </p>
+                  <p class="">
+                    Calificador
+                  </p>
+                </div>
+                <div class="col-lg-2 col-md-3 col-12 text-center top-p">
+                  <div class="row">
+                    <div class="col-6 number-size" (click)="goToModalEval(evaluation)">
+                      <i class="fa fa-eye" aria-hidden="true" style="color:#23c6c8"></i>
+                    </div>   
+                    <div class="col-6 number-size text-danger" (click)="goToViewEval(evaluation)">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    </div>                
+                    <div class="col-6">
+                      Modificar objetivos
+                    </div>
+                    <div class="col-6">
+                     Ver Evaluación
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-edit-evaluation-objetives></app-edit-evaluation-objetives>

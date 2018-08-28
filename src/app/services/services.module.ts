@@ -11,15 +11,15 @@ import { GoogleAnalyticsEventsService } from './google-analytics-events.service'
 import { EmployeeService } from './common/employee/employee.service';
 import { EmployeeInfoService } from './shared/common/employee/employee-info.service';
 import { DashboardEmployeeService } from './dashboard/employee/dashboard-employee.service';
-import {MyTeamInfoService} from './my-team/my-team-info.service';
+import { MyTeamInfoService } from './my-team/my-team-info.service';
 import { MyTeamReportService } from './shared/common/my-team/my-team-report.service';
 import { HierarchicalChartService } from './hierarchical-chart/hierarchical-chart.service';
 import { QueriesService } from './queries/queries.service';
 import { PrintDataTableService } from './shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from './common/excel/excel.service';
 import { ReportsHrService } from './reports-rh/reports-hr.service';
-import { AutoServicesService} from './auto-services/auto-services.service'
-import {MyPublicationsService} from './billboard/my-publications/my-publications.service'
+import { AutoServicesService } from './auto-services/auto-services.service'
+import { MyPublicationsService } from './billboard/my-publications/my-publications.service'
 import { RequestsRhService } from './requests-rh/requests-rh.service';
 import { AproversRequestsService } from './shared/common/aprovers-requestes/aprovers-requests.service';
 import { CorporateDocsService } from './corporate-documents/corporate-docs.service';
@@ -38,10 +38,26 @@ import { ButtonReturnService } from './shared/common/managerial-data/button-retu
 import { StylesExplorerService } from './common/styles-explorer/styles-explorer.service';
 import { EvaluationsService } from './evaluations/evaluations.service';
 import { EvaluationsSharedService } from './shared/common/evaluations/evaluations-shared.service';
+import { DataMasterSharedService } from './shared/common/data-master/data-master-shared.service';
+import { CalendarService } from './calendar/calendar.service';
+import { CalendarDetailService } from './shared/common/calendar-detail/calendar-detail.service';
+import { PerformanceEvaluationService } from './performance-evaluation/performance-evaluation.service';
+import { DataDableSharedService } from './shared/common/data-table/data-dable-shared.service';
+import { TravelService } from './travel-management/travels/travel.service';
+import { HotelsService } from './travel-management/hotels/hotels.service';
+import { TravelsService } from './shared/travels/travels.service';
+import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
+import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
+import { TrainingService } from './training/training.service';
+import { TrainingSharedService } from './shared/common/training-events/training-shared.service';
+import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.service';
+import { SpendSharedService } from './shared/spend-shared/spend-shared.service';
+import { AdvanceSharedService } from './shared/advance-shared/advance-shared.service';
+
 
 @NgModule({
   imports: [
-    CommonModule 
+    CommonModule
   ],
   declarations: [],
   providers: [
@@ -78,7 +94,22 @@ import { EvaluationsSharedService } from './shared/common/evaluations/evaluation
     ButtonReturnService,
     StylesExplorerService,
     EvaluationsService,
-    EvaluationsSharedService
+    EvaluationsSharedService,
+    DataMasterSharedService,
+    CalendarService,
+    CalendarDetailService,
+    PerformanceEvaluationService,
+    DataDableSharedService,
+    TravelService,
+    HotelsService,
+    TravelsService,
+    TooltipSharedService,
+    PerformanceEvalSharedService,
+    TrainingService,
+    TrainingSharedService,
+    HotelsSharedService,
+    SpendSharedService,
+    AdvanceSharedService
   ]
 })
 export class ServicesModule { }

@@ -8,25 +8,93 @@
         <h4 class="modal-title titleColor text-shadow">{{infoEvaluation.title}}</h4>
       </div>
       <div class="modal-body bodyColorInfo">
-
+        <!-- 
         <div class="row justify-content-center">
           <div class="col-12">
             {{infoEvaluation.description}}
           </div>
-        </div>
-        <div class="row top-containter border-botton-general justify-content-center" *ngFor="let question of questions; let index = index;" style="margin-top: 15px;">
+        </div> -->
+        <div>
+          <div *ngIf="sections.length !== 0">
+            <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngFor="let section of sections;">
+              <strong>
+                {{section.description | uppercase}}
+              </strong>
+              <div class="row top-containter  justify-content-center" *ngFor="let question of section.question_childrens_to_json; let index = index;"
+                style="margin-top: 15px;">
+                <div class="col-12" *ngIf="question.question_type.code !== undefined">
+                  {{question.description}}
+                  <div *ngIf="question.question_type.code === 'unique'">
+                    <div class="col-12" *ngFor="let answer of question.answer_options_childrens_to_json; let x = index;">
+                      <label class="container custom-control custom-radio"> {{answer.description}}
+                        <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id, 'unique',question.parent_id,section)">
+                        <span class="checkmark"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div *ngIf="question.question_type.code === 'multiple'">
+                    <div class="col-12" *ngFor="let answer of question.answer_options_childrens_to_json; let x = index;">
+                      <label class="container"> {{answer.description}}
+                        <input type="checkbox" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id,'multiple',question.parent_id,section)">
+                        <span class="checkmark-check"></span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="row justify-content-center">
+                    <div *ngIf="question.question_type.code === 'open'">
+                      <div class="col-12">
+                        <textarea id="{{question.id}}openResponse" name="response" rows="2" cols="50" placeholder="Escribir respuesta" (blur)="detectResponse(question.id,question.parent_id,section)"
+                          style="width: 100%;"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row justify-content-center">
+                  <div class="col-12" *ngIf="question.question_type.code !== 'open'">
+                    <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="Agregar comentario"
+                      style="width: 100%;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
-          <div class="col-12">
-            {{question.description}}
-          </div>
-          <div class="col-12" *ngFor="let answer of question.answer_options; let x = index;">
-            <label class="container custom-control custom-radio"> {{answer.description}}
-              <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id)">
-              <span class="checkmark"></span>
-            </label>
-          </div>
-          <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="Agregar comentario" style="width: 70%;"></textarea>
         </div>
+        <div *ngIf="sections.length === 0">
+          <div class="row top-containter border-botton-general justify-content-center" *ngFor="let question of questions; let index = index;"
+            style="margin-top: 15px;">
+            <div class="col-12" *ngIf="question.question_type.code !== undefined">
+              {{question.description}}
+              <div *ngIf="question.question_type.code === 'unique'">
+                <div class="col-12" *ngFor="let answer of question.answer_options; let x = index;">
+                  <label class="container custom-control custom-radio"> {{answer.description}}
+                    <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id,question.question_type.code,null)">
+                    <span class="checkmark"></span>
+                  </label>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="question.question_type.code === 'multiple'">
+              <div class="col-12" *ngFor="let answer of question.answer_options; let x = index;">
+                <label class="container custom-control custom-radio"> {{answer.description}}
+                  <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id,question.question_type.code,null)">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <div *ngIf="question.question_type.code === 'open'">
+              <div class="col-12" *ngFor="let answer of question.answer_options; let x = index;">
+                <label class="container custom-control custom-radio"> {{answer.description}}
+                  <input type="radio" [attr.name]="'form' + index" (click)="changeAnswer(answer.id, question.id,question_type.code,null)">
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </div>
+            <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="Agregar comentario"
+              style="width: 70%;"></textarea>
+          </div>
+        </div>
+
         <div class="row justify-content-center" style="margin-top:10px;">
           <div class="col-md-12 top-containter">
             <div class="row justify-content-end">
