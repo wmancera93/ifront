@@ -79,10 +79,12 @@ export class NewTravelComponent implements OnInit {
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueTravelRequests' || data === 'continueDestinationRequests' || data === 'continueDestinationRequestsValidateDates') {
         document.getElementById("btn_travel_new").click();
+        this.activate_submit = true;
       }
 
       if (data === 'continueDestinationRequestsValidateDates') {
         this.activate = false;
+        this.activate_submit = true;
       }
       if (data === 'deleteNewDocumentSaved') {
         document.getElementById("btn_travel_new").click();
