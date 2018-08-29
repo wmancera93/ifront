@@ -1,6 +1,6 @@
 FROM ubuntu
 
-MAINTAINER Asfo "wilmer.mancera@hrinteractive.co"
+MAINTAINER Asfo "wilmer"
 
 ENV NGINX_VERSION 1.13.4
 
@@ -60,6 +60,6 @@ RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 #COPY server.key /etc/nginx/ssl/
 #COPY server.crt /etc/nginx/ssl/
 
-EXPOSE 80 443
+EXPOSE 3003
 
 CMD nginx

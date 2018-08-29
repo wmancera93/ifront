@@ -4,5 +4,4 @@ app:
   volumes:
     - .angular/:/var/www/html/angular
   ports:
-    - "80:80"
-    - "443:443"
+    - "3003:3003"
