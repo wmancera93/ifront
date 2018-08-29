@@ -125,7 +125,7 @@
 
           <div class="col-12" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
-              <h4>Viajes</h4>
+              <h4>Trayectos</h4>
             </div>
           </div>
 
@@ -313,7 +313,7 @@
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        <a> Fecha Inicial de Viaje *</a>
+                        <a> Fecha Inicial del Trayecto *</a>
                       </label>
                       <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" (change)="dateValidateTrayect(formTravelManagement.value)"
                       />
@@ -368,7 +368,7 @@
                         <a>Ciudad:</a>
                       </label>
                       <select [attr.disabled]="cityLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_cityto']"
-                        (change)="searchTerminalto(formTravelManagement.value, 'new');searchHotel(formTravelManagement.value, 'new')">
+                        (change)="searchTerminalto(formTravelManagement.value, 'edit');searchHotel(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
                       </select>
@@ -388,7 +388,7 @@
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        <a> Fecha final de Viaje *</a>
+                        <a> Fecha final del Trayecto *</a>
                       </label>
                       <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" (change)="dateValidateTrayect(formTravelManagement.value)"
                       />
@@ -398,7 +398,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)" />
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)" />
                     </div>
                   </div>
                 </div>
@@ -448,7 +448,6 @@
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
