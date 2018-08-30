@@ -54,12 +54,14 @@ export class ViewTravelComponent implements OnInit {
         this.annexeds = result.data[0].travel_request_annexeds;
         this.view_travels.push(result.data[0].travel_request);
         this.maintenance = result.data[0].travel_request.is_maintenance;
-        console.log(this.view_travels);
+
         if (this.maintenance) {
           this.maintenance_travel = 'Con manutención'
         }
+        setTimeout(() => {
+          this.objectReport.emit({ success: true, data: [this.objectPrint] });
+        }, 100);
 
-        this.objectReport.emit({ success: true, data: [this.objectPrint] });
       });
     });
   }
