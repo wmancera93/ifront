@@ -17,9 +17,17 @@ export class AdvancesComponent implements OnInit {
   constructor(public router: Router,
     public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService) {
+
     this.advancesService.getAdvancePayments().subscribe((advances: any) => {
       this.advancesItems = advances.data;
+debugger
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'advances') {
+        this.advanceSharedService.setNewAdvance(url.split('/')[url.split('/').length - 1]);
+      }
     })
+
 
   }
 
@@ -35,9 +43,8 @@ export class AdvancesComponent implements OnInit {
     this.advanceSharedService.setNewAdvance(true);
   }
 
-  showAdvance(id: number)
-  {
+  showAdvance(id: number) {
     this.advanceSharedService.setViewAdvance(id);
-    
+
   }
 }

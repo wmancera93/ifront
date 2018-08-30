@@ -12,6 +12,8 @@ import { Alert } from '../../../../../../node_modules/@types/selenium-webdriver'
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { DebugContext } from '@angular/core/src/view';
 import { debug } from 'util';
+import { AdvanceSharedService } from '../../../../services/shared/advance-shared/advance-shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-travel',
@@ -69,18 +71,24 @@ export class NewTravelComponent implements OnInit {
   public deleteDestination: string;
   public validateDateHeader: any[] = [];
   public array_wrong: any[] = [];
+  public ticket_advance: number;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public advanceSharedService: AdvanceSharedService,public router: Router,) {
 
     this.travelProof = [{
       success: true,
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
+
+      if (data === 'continueTravelAdvances') {
+        this.router.navigate(['/ihr/advances', this.ticket_advance]);
+      }
+
       if (data === 'continueTravelRequests' || data === 'continueDestinationRequests' || data === 'continueDestinationRequestsValidateDates') {
         document.getElementById("btn_travel_new").click();
       }
@@ -257,9 +265,10 @@ export class NewTravelComponent implements OnInit {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          this.ticket_advance = data.data[0].travel_request.ticket;
           if (data.success) {
             document.getElementById("closeTravels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.travelsService.setResultSaved(true);

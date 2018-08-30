@@ -261,6 +261,10 @@ const routes: Routes = [
         component: TrainingComponent
     },
     {
+        path:'advances/:id',
+        component: AdvancesComponent        
+    },
+    {
         path:'advances',
         component: AdvancesComponent        
     },
