@@ -1,0 +1,102 @@
+<button id="btn-viewAdvance" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_viewAdvance" style="display:none;">
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="modal_viewAdvance">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Anticipo</h5>
+        <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo" *ngIf="infoAdvance!== null">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
+              <strong>Nombre del Viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <label>{{infoAdvance.travel_request_name}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
+                  <strong>Valor Anticipo:</strong>
+                </label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <label>{{infoAdvance.curreny_symbol}} {{infoAdvance.value}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row justify-content-start">
+              <div class="col-lg-6 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-money text-primary-hr"></i>
+                  <strong>Moneda:</strong>
+                </label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <label>{{infoAdvance.curreny_name}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-calendar text-primary-hr"></i>
+                  <strong>Fecha de Anticipo:</strong>
+                </label>
+              </div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <label>{{infoAdvance.date_advance}}</label>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="row justify-content-start">
+              <div class="col-lg-6 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-circle text-primary-hr"></i>
+                  <strong>Estado:</strong>
+                </label>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <span class="badge badge-primary">
+                  {{infoAdvance.status_name}}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-bars text-primary-hr"></i>
+              <strong>Observaciones:</strong>
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <label>{{infoAdvance.observation}}</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footerInfo justify-content-center">
+        <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+          <h6> Cerrar </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

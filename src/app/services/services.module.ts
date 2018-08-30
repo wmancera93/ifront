@@ -53,6 +53,7 @@ import { TrainingSharedService } from './shared/common/training-events/training-
 import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.service';
 import { SpendSharedService } from './shared/spend-shared/spend-shared.service';
 import { AdvanceSharedService } from './shared/advance-shared/advance-shared.service';
+import { AdvancesService } from './travel-management/advances/advances.service';
 
 
 @NgModule({
@@ -109,7 +110,8 @@ import { AdvanceSharedService } from './shared/advance-shared/advance-shared.ser
     TrainingSharedService,
     HotelsSharedService,
     SpendSharedService,
-    AdvanceSharedService
+    AdvanceSharedService,
+    AdvancesService
   ]
 })
 export class ServicesModule { }
