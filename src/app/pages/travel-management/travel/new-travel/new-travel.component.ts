@@ -11,6 +11,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { Alert } from '../../../../../../node_modules/@types/selenium-webdriver';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { DebugContext } from '@angular/core/src/view';
+import { debug } from 'util';
 
 @Component({
   selector: 'app-new-travel',
@@ -88,7 +89,8 @@ export class NewTravelComponent implements OnInit {
         this.activate_submit = true;
         this.activate = false;
         this.bnew = false;
-        
+        this.traverlsDestination = [];
+
       }
       if (data === 'deleteNewDocumentSaved') {
         document.getElementById("btn_travel_new").click();
@@ -161,6 +163,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
+      debugger
       if (document.getElementById('travel_new').className !== 'modal show') {
         document.getElementById("btn_travel_new").click();
         if (data) {
@@ -228,7 +231,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-
+    debugger
     this.showSubmit = false;
     this.send = true;
 
@@ -275,8 +278,9 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
+    debugger
     this.activate_submit = true;
-    let hotell=this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length>0 ?  this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
+    let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
       field_0: this.count + 1,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
@@ -451,7 +455,7 @@ export class NewTravelComponent implements OnInit {
         this.hotels = data.data;
         if (this.hotels.length > 0) {
           if (acction === 'new') {
-            this.formTravelManagement.controls['id_hotels'].setValue('-1');
+            this.formTravelManagement.controls['id_hotels'].setValue('');
           }
         } else {
           this.formTravelManagement.controls['id_hotels'].setValue('');
@@ -474,6 +478,7 @@ export class NewTravelComponent implements OnInit {
   }
   clearFormGeneral() {
     this.activate = false;
+    this.activate_submit = true;
     this.showSubmit = true;
     this.stateLocations = [];
     this.stateLocationsto = [];
@@ -483,7 +488,9 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocationsto = [];
     this.hotels = [];
     this.objectImg = [];
+    this.costs_travels = [];
     this.travelProof = [];
+    this.traverlsDestination = [];
     this.travelProof.push({
       success: true,
       data: [{
@@ -582,14 +589,14 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateComplete(days) {
-
+    debugger
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
 
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
       if ((dateEndCalculate - dateBeginCalculate) < 0) {
-        
+
         this.formTravelManagement.controls['date_requests_begin'].setValue('');
         this.formTravelManagement.controls['date_requests_end'].setValue('');
 
@@ -620,7 +627,7 @@ export class NewTravelComponent implements OnInit {
               }];
               this.alert.setAlert(alertDataWrong[0]);
             } else {
-              if (this.traverlsDestination.length > 0) {
+              if (this.travelProof[0].data[0].data.length > 0) {
                 document.getElementById("btn_travel_new").click();
 
                 this.dateBeginValidate(days);
@@ -634,7 +641,7 @@ export class NewTravelComponent implements OnInit {
                       message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                       confirmation: true,
                       typeConfirmation: 'continueDestinationRequests'
-    
+
                     }];
                     this.alert.setAlert(alertDataWrong[0]);
                   }
@@ -659,13 +666,14 @@ export class NewTravelComponent implements OnInit {
                 }];
                 this.alert.setAlert(alertDataWrong[0]);
               } else {
-                if (this.traverlsDestination.length > 0) {
+                if (this.travelProof[0].data[0].data.length > 0) {
                   document.getElementById("btn_travel_new").click();
 
                   this.dateBeginValidate(days);
                   this.dateEndValidate(days);
                   setTimeout(() => {
                     if (this.array_wrong.length > 0) {
+                      debugger
                       document.getElementById("btn_travel_new").click();
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
@@ -673,7 +681,7 @@ export class NewTravelComponent implements OnInit {
                         message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                         confirmation: true,
                         typeConfirmation: 'continueDestinationRequests'
-      
+
                       }];
                       this.alert.setAlert(alertDataWrong[0]);
                     }
@@ -685,7 +693,7 @@ export class NewTravelComponent implements OnInit {
             }
           }
         } else {
-          if (this.traverlsDestination.length > 0) {
+          if (this.travelProof[0].data[0].data.length > 0) {
             this.validateDateHeader = [];
             this.array_wrong = [];
 
@@ -774,7 +782,7 @@ export class NewTravelComponent implements OnInit {
     }
   }
   hourvalidations(hourTrayect) {
-    
+
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
@@ -823,34 +831,38 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
   dateBeginValidate(days) {
-    
+    debugger
     this.validateDateHeader = [];
-    this.traverlsDestination.forEach(element => {
-      if (days.date_requests_begin > element.origin_datetime.split(' ')[0]) {
+    this.travelProof[0].data[0].data.forEach(element => {
+      debugger
+      if (days.date_requests_begin > element.field_4.split(' ')[0]) {
         this.validateDateHeader.push({
-          id_travel_wrong: element.travel_id
+          id_travel_wrong: element.field_0
         });
       }
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
+      debugger
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }
   }
   dateEndValidate(days) {
-    
+    debugger
     this.validateDateHeader = [];
 
-    this.traverlsDestination.forEach(element => {
-      if (days.date_requests_end < element.destination_datetime.split(' ')[0]) {
+    this.travelProof[0].data[0].data.forEach(element => {
+      debugger
+      if (days.date_requests_end < element.field_7.split(' ')[0]) {
         this.validateDateHeader.push({
-          id_travel_wrong: element.travel_id
+          id_travel_wrong: element.field_0
         });
       }
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
+      debugger
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }
