@@ -50,4 +50,8 @@ export class TravelService {
       .map((data: any) => data.json());
   }
  
+  getTravelsCosts(id_type_costs: string) {
+    return this.tokenService.get('geographic_locations/show_travel_costs/' + id_type_costs)
+      .map((data: any) => data.json());
+  }
 }
