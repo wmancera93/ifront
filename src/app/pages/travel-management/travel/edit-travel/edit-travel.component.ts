@@ -82,7 +82,7 @@ export class EditTravelComponent implements OnInit {
   public showMilenage: boolean = false;
   public acctionDeleteTable: string = '';
   public validateDateHeader: any[] = [];
-  public prueba: any[] = [];
+  public travels_wrong: any[] = [];
 
 
 
@@ -101,7 +101,6 @@ export class EditTravelComponent implements OnInit {
 
       if (data === 'continueEditDestinationRequestsValidateDates') {
         this.activate = false;
-
       }
 
       if (data === 'deleteDocumentSaved') {
@@ -145,11 +144,8 @@ export class EditTravelComponent implements OnInit {
         document.getElementById("btn_travel_edit").click();
         document.getElementById("btn_travel_edit").click();
         this.activate_submit = true;
-
       }
-
     })
-
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
@@ -214,8 +210,7 @@ export class EditTravelComponent implements OnInit {
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         if (result.success) {
           this.generalViajes = result.data;
-          console.log(this.generalViajes)
-
+    
           this.objectPrint = this.generalViajes[0].travel_managements;
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
@@ -355,7 +350,6 @@ export class EditTravelComponent implements OnInit {
 
       })
   }
-
   deleteUpload(param: any) {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
 
@@ -383,7 +377,6 @@ export class EditTravelComponent implements OnInit {
     }];
     this.alert.setAlert(this.alertWarning[0]);
   }
-
   newEditTravel(model) {
     this.showSubmit = false;
     this.send = true;
@@ -427,7 +420,6 @@ export class EditTravelComponent implements OnInit {
 
 
   }
-
   addDestination(modelPartial) {
     
     this.activate_submit = true;
@@ -453,7 +445,7 @@ export class EditTravelComponent implements OnInit {
       //   action_method: "updateTravelManagement",
       //   disable: false
       // },
-      field_12: {
+      field_11: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -482,9 +474,8 @@ export class EditTravelComponent implements OnInit {
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
   }
-
   editDestination(modelEditPartial) {
-    debugger
+    
     this.activate_submit = true;
     this.activate = true;
     let hotell=this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length>0 ?  this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
@@ -534,7 +525,6 @@ export class EditTravelComponent implements OnInit {
     document.getElementById("edit_funtionTravel").click();
     this.id_destinations = 0;
   }
-
   editTravels(param: any) {
 
     if (param !== undefined) {
@@ -578,7 +568,6 @@ export class EditTravelComponent implements OnInit {
     }
 
   }
-
   colapseEdit() {
     this.activate_submit = false;
     this.showMilenage = false;
@@ -829,7 +818,7 @@ export class EditTravelComponent implements OnInit {
       });
   }
   dateComplete(days) {
-    debugger
+    
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
@@ -866,16 +855,16 @@ export class EditTravelComponent implements OnInit {
               if (this.generalViajes[0].travel_managements.data.length > 0) {
                 document.getElementById("btn_travel_edit").click();
 
-                this.validacionFecha1(days);
-                this.validacionFecha2(days);
+                this.validateDateTrayectOrigin(days);
+                this.validateDateTrayectEnd(days);
 
                 setTimeout(() => {
-                  if (this.prueba.length > 0) {
+                  if (this.travels_wrong.length > 0) {
                     document.getElementById("btn_travel_edit").click();
                     const alertDataWrong: Alerts[] = [{
                       type: 'danger',
                       title: 'Error',
-                      message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                      message: 'La fecha de los trayectos' + ' ' + this.travels_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                       confirmation: true,
                       typeConfirmation: 'continueEditDestinationRequests'
 
@@ -906,15 +895,15 @@ export class EditTravelComponent implements OnInit {
                 if (this.generalViajes[0].travel_managements.data.length > 0) {
                   document.getElementById("btn_travel_edit").click();
 
-                  this.validacionFecha1(days);
-                  this.validacionFecha2(days);
+                  this.validateDateTrayectOrigin(days);
+                  this.validateDateTrayectEnd(days);
                   setTimeout(() => {
-                    if (this.prueba.length > 0) {
+                    if (this.travels_wrong.length > 0) {
                       document.getElementById("btn_travel_edit").click();
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
                         title: 'Error',
-                        message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                        message: 'La fecha de los trayectos' + ' ' + this.travels_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                         confirmation: true,
                         typeConfirmation: 'continueEditDestinationRequests'
 
@@ -931,17 +920,17 @@ export class EditTravelComponent implements OnInit {
         } else {
           if (this.generalViajes[0].travel_managements.data.length > 0) {
             this.validateDateHeader = [];
-            this.prueba = [];
+            this.travels_wrong = [];
 
-            this.validacionFecha1(days);
-            this.validacionFecha2(days);
+            this.validateDateTrayectOrigin(days);
+            this.validateDateTrayectEnd(days);
             setTimeout(() => {
-              if (this.prueba.length > 0) {
+              if (this.travels_wrong.length > 0) {
                 document.getElementById("btn_travel_edit").click();
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                  message: 'La fecha de los trayectos' + ' ' + this.travels_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                   confirmation: true,
                   typeConfirmation: 'continueEditDestinationRequests'
 
@@ -1017,7 +1006,7 @@ export class EditTravelComponent implements OnInit {
     }
   }
   hourValidationsEdit(hourTrayect) {
-    debugger
+    
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
@@ -1040,11 +1029,11 @@ export class EditTravelComponent implements OnInit {
     }
 
   }
-  validacionFecha1(days) {
-    debugger
+  validateDateTrayectOrigin(days) {
+    
     this.validateDateHeader = [];
     this.generalViajes[0].travel_managements.data.forEach(element => {
-      debugger
+      
       if (days.date_requests_begin > element.field_4.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -1054,15 +1043,15 @@ export class EditTravelComponent implements OnInit {
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.prueba.push(element);
+      this.travels_wrong.push(element);
     }
   }
-  validacionFecha2(days) {
-    debugger
+  validateDateTrayectEnd(days) {
+    
     this.validateDateHeader = [];
 
     this.generalViajes[0].travel_managements.data.forEach(element => {
-      debugger
+      
       if (days.date_requests_end < element.field_7.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -1072,7 +1061,7 @@ export class EditTravelComponent implements OnInit {
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.prueba.push(element);
+      this.travels_wrong.push(element);
     }
   }
 }

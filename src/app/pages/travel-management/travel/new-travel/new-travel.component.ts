@@ -67,7 +67,7 @@ export class NewTravelComponent implements OnInit {
   public deleteDocumenFile: string;
   public deleteDestination: string;
   public validateDateHeader: any[] = [];
-  public prueba: any[] = [];
+  public array_wrong: any[] = [];
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -228,7 +228,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-    debugger
+
     this.showSubmit = false;
     this.send = true;
 
@@ -589,7 +589,7 @@ export class NewTravelComponent implements OnInit {
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
       if ((dateEndCalculate - dateBeginCalculate) < 0) {
-        debugger
+        
         this.formTravelManagement.controls['date_requests_begin'].setValue('');
         this.formTravelManagement.controls['date_requests_end'].setValue('');
 
@@ -623,15 +623,15 @@ export class NewTravelComponent implements OnInit {
               if (this.traverlsDestination.length > 0) {
                 document.getElementById("btn_travel_new").click();
 
-                this.validacionFecha1(days);
-                this.validacionFecha2(days);
+                this.dateBeginValidate(days);
+                this.dateEndValidate(days);
                 setTimeout(() => {
-                  if (this.prueba.length > 0) {
+                  if (this.array_wrong.length > 0) {
                     document.getElementById("btn_travel_new").click();
                     const alertDataWrong: Alerts[] = [{
                       type: 'danger',
                       title: 'Error',
-                      message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                       confirmation: true,
                       typeConfirmation: 'continueDestinationRequests'
     
@@ -662,15 +662,15 @@ export class NewTravelComponent implements OnInit {
                 if (this.traverlsDestination.length > 0) {
                   document.getElementById("btn_travel_new").click();
 
-                  this.validacionFecha1(days);
-                  this.validacionFecha2(days);
+                  this.dateBeginValidate(days);
+                  this.dateEndValidate(days);
                   setTimeout(() => {
-                    if (this.prueba.length > 0) {
+                    if (this.array_wrong.length > 0) {
                       document.getElementById("btn_travel_new").click();
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
                         title: 'Error',
-                        message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                        message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                         confirmation: true,
                         typeConfirmation: 'continueDestinationRequests'
       
@@ -687,17 +687,17 @@ export class NewTravelComponent implements OnInit {
         } else {
           if (this.traverlsDestination.length > 0) {
             this.validateDateHeader = [];
-            this.prueba = [];
+            this.array_wrong = [];
 
-            this.validacionFecha1(days);
-            this.validacionFecha2(days);
+            this.dateBeginValidate(days);
+            this.dateEndValidate(days);
             setTimeout(() => {
-              if (this.prueba.length > 0) {
+              if (this.array_wrong.length > 0) {
                 document.getElementById("btn_travel_new").click();
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'La fecha de los trayectos' + ' ' + this.prueba.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                  message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
                   confirmation: true,
                   typeConfirmation: 'continueDestinationRequests'
 
@@ -774,7 +774,7 @@ export class NewTravelComponent implements OnInit {
     }
   }
   hourvalidations(hourTrayect) {
-    debugger
+    
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
@@ -822,11 +822,10 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
-  validacionFecha1(days) {
-    debugger
+  dateBeginValidate(days) {
+    
     this.validateDateHeader = [];
     this.traverlsDestination.forEach(element => {
-      debugger
       if (days.date_requests_begin > element.origin_datetime.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.travel_id
@@ -836,15 +835,14 @@ export class NewTravelComponent implements OnInit {
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.prueba.push(element);
+      this.array_wrong.push(element);
     }
   }
-  validacionFecha2(days) {
-    debugger
+  dateEndValidate(days) {
+    
     this.validateDateHeader = [];
 
     this.traverlsDestination.forEach(element => {
-      debugger
       if (days.date_requests_end < element.destination_datetime.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.travel_id
@@ -854,7 +852,7 @@ export class NewTravelComponent implements OnInit {
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.prueba.push(element);
+      this.array_wrong.push(element);
     }
   }
 
