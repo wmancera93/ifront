@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Solicitud de Anticipos</h5>
-        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeAdvances" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -20,7 +20,7 @@
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']" paceholder="Seleccione">
+                <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']" paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
                   <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
                 </select>
               </div>
@@ -56,10 +56,18 @@
           <div class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>Descripción</strong>
+              <strong>Descripción:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control" [formControl]="formAdvanceTravel.controls['observation']">
               </textarea>
+          </div>
+          <div *ngIf="infoTableAdvances[0].data[0].data.length > 0" class="col-12" style="min-height: 100px !important">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              <strong>Anticipos</strong>
+            </label>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+
           </div>
         </form>
         <div class="row justify-content-end">

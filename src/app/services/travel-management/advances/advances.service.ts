@@ -19,7 +19,7 @@ export class AdvancesService {
     return this.tokenService.get('travel_requests/currency_for_select')
       .map((data: any) => data.json());
   }
-  postAdvanceMoneyList(newAdvances) {
+  postAdvanceList(newAdvances) {
     return this.tokenService.post('travel_advance_payments',{advances:newAdvances})
       .map((data: any) => data.json());
   }

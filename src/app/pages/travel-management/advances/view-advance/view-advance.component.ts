@@ -15,6 +15,7 @@ export class ViewAdvanceComponent implements OnInit {
       this.advancesService.getAdvanceByID(id).subscribe((advance: any) => {
         if (document.getElementById('modal_viewAdvance').className !== 'modal show') {
           document.getElementById('btn-viewAdvance').click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
         }
         this.infoAdvance = advance.data;
       })
