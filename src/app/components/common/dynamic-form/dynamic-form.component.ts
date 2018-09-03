@@ -28,6 +28,7 @@ export class DynamicFormComponent implements OnInit {
 
       if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
+        this.code = data.code;
         this.form = new FormGroup({});
         this.form = this.createGroup();
         this.showForm = true;
@@ -64,6 +65,7 @@ export class DynamicFormComponent implements OnInit {
   }
   public idSend;
   public valueSend;
+  public code;
 
   sendDynamicForm(form) {
     let objectForm: any[] = [];
@@ -90,6 +92,7 @@ export class DynamicFormComponent implements OnInit {
             objectSend.push({
               id: data.id,
               value_to_change: data.value_to_change,
+              master_data_type: this.code,
               count: 0
             })
           }
@@ -101,6 +104,7 @@ export class DynamicFormComponent implements OnInit {
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
+    this.code = "";
   }
 
   detectChange(params: any) {
