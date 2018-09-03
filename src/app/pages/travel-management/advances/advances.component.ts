@@ -20,7 +20,7 @@ export class AdvancesComponent implements OnInit {
 
     this.advancesService.getAdvancePayments().subscribe((advances: any) => {
       this.advancesItems = advances.data;
-debugger
+
       let url = window.location.href;
       url.split('/')[url.split('/').length - 1];
       if (url.split('/')[url.split('/').length - 1] !== 'advances') {

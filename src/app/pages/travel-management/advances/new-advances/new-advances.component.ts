@@ -37,7 +37,7 @@ export class NewAdvancesComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      console.log(data)
+    
       if (data === 'confirmSaveAdvance' || data === 'errorConfirmTravelID' || data === 'errorValidationAdvance') {
         document.getElementById("btn_advances_new").click();
       }
