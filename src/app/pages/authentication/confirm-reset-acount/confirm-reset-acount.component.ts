@@ -8,9 +8,7 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MainService } from '../../../services/main/main.service';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-
 declare const ga: any;
-
 @Component({
   selector: 'app-confirm-reset-acount',
   templateUrl: './confirm-reset-acount.component.html',
@@ -22,9 +20,6 @@ export class ConfirmResetAcountComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public eyePasswordVisible: boolean = false;
   public urlTokenPassword: string = '';
-
-  public urlLogoLogin: string = '';
-
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     private route: ActivatedRoute,
@@ -40,13 +35,10 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     });
   }
-
-
   ngOnInit() {
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
       let ambient;
-
       if (url.split("localhost").length === 1) {
         if (url.split("-").length > 1) {
           ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
@@ -54,21 +46,18 @@ export class ConfirmResetAcountComponent implements OnInit {
       } else {
         ambient = 'development';
       }
-
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
-          this.urlLogoLogin = 'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString();
           if (!this.stylesExplorerService.validateBrowser()) {
-            document.documentElement.style.setProperty(`--img-header-login`, `url(` +  'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString() + `)`);
-            document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
-            document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
-            document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+            document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+            document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+            document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+            document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
           } else {
-            document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
             setTimeout(() => {
               this.stylesExplorerService.stylesInExplorerOrEdge(
-                'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString(),
+                this.dataEnterprise.background_login.url,
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.body_text, '', '',
@@ -101,7 +90,6 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.urlTokenPassword = params.reset_password_token;
     });
   }
-
   restartPassword() {
     if (this.txtPassword !== this.txtConfirmPassword) {
       const alertWarning: Alerts[] = [{
@@ -113,7 +101,6 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.txtConfirmPassword = '';
     }
   }
-
   restartPasword() {
     let resultError: any;
     if (this.txtPassword !== '' && this.txtConfirmPassword !== '') {
@@ -153,16 +140,13 @@ export class ConfirmResetAcountComponent implements OnInit {
       );
     }
   }
-
   // events
   overEyePassword(input: string) {
     (<HTMLInputElement>document.getElementById(input)).type = 'text';
   }
-
   leaveEyePassword(input: string) {
     (<HTMLInputElement>document.getElementById(input)).type = 'password';
   }
-
   blurPasword() {
     if (this.txtPassword !== '') {
       let expressionRegular
@@ -186,7 +170,6 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     }
   }
-
   blurConfirmPasword() {
     if (this.txtPassword !== '' && this.txtConfirmPassword !== '') {
       if (this.txtPassword !== this.txtConfirmPassword) {
@@ -201,7 +184,6 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     }
   }
-
   keyupPassword() {
     if (this.txtPassword === '' && this.txtConfirmPassword !== '') {
       const alertWarning: Alerts[] = [{
@@ -216,7 +198,6 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.eyePasswordVisible = true;
     }
   }
-
   keyupConfirmPassword() {
     if (this.txtPassword === '') {
       const alertWarning: Alerts[] = [{

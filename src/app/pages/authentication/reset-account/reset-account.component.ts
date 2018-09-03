@@ -22,8 +22,6 @@ export class ResetAccountComponent implements OnInit {
   public txtEmail: string = '';
   public dataEnterprise: Enterprise;
 
-  public urlLogoLogin: string = '';
-
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     public router: Router,
@@ -52,17 +50,14 @@ export class ResetAccountComponent implements OnInit {
       } else {
         ambient = 'development';
       }
-
-      
-
-      this.mainService.getDataEnterprise(ambient)     
+      this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise[0] = result.data;
-          this.urlLogoLogin = 'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString();
+
           document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
           setTimeout(() => {
             this.stylesExplorerService.stylesInExplorerOrEdge(
-              'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString(),
+              this.dataEnterprise[0].background_login.url,
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].body_text, '', '',
