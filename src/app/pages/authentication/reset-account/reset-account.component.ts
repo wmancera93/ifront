@@ -58,11 +58,11 @@ export class ResetAccountComponent implements OnInit {
       this.mainService.getDataEnterprise(ambient)     
         .subscribe((result: any) => {
           this.dataEnterprise[0] = result.data;
-          this.urlLogoLogin = this.dataEnterprise[0].logo_dashboard.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/');
+          this.urlLogoLogin = 'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString();
           document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
           setTimeout(() => {
             this.stylesExplorerService.stylesInExplorerOrEdge(
-              this.dataEnterprise[0].background_login.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/'),
+              'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString(),
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].body_text, '', '',
