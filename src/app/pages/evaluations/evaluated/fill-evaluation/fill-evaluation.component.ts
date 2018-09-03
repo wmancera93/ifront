@@ -35,6 +35,12 @@ export class FillEvaluationComponent implements OnInit {
     public evaluationService: EvaluationsService,
     private formBuilder: FormBuilder,
     public alert: AlertsService) {
+
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'sendEvaluation' || data === 'errorSendEvaluation') {
+        document.getElementById("btn_fillEvaluation").click();
+      }
+    })
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
       this.evaluationService.getDataEvaluationById(info).subscribe((list: any) => {
         this.idEvaluation = info;
@@ -62,8 +68,14 @@ export class FillEvaluationComponent implements OnInit {
     }
     this.evaluationService.postDataEvaluation(this.object, this.totalQuestions).subscribe((data: any) => {
       if (data.success == true) {
+        const alertConfirmation: Alerts[] = [{
+          type: 'success',
+          title: 'Estado de la evaluación',
+          message: data.message,
+          confirmation: true,
+          typeConfirmation: 'sendEvaluation'
+        }];
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
-        const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la evaluación', message: data.message }];
         this.alert.setAlert(alertConfirmation[0]);
         this.showSubmit = true;
         this.refreshData = true;
@@ -77,8 +89,10 @@ export class FillEvaluationComponent implements OnInit {
             type: 'danger',
             title: 'Solicitud Denegada',
             message: error.json().errors.toString(),
-            confirmation: false
+            confirmation: false,
+            typeConfirmation: 'errorSendEvaluation'
           }];
+        document.getElementById("buttonCloseEvaluation").click();
         this.alert.setAlert(alertWarning[0]);
       })
 

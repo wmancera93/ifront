@@ -22,7 +22,7 @@ export class NewAdvancesComponent implements OnInit {
   public idAdvance: number = 0;
   public advancesItems: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: EventEmitter<any> = new EventEmitter();
+  public nameReport: string = 'Anticipos';
   public dd: any;
   public mm: any;
   public yyyy: any;
@@ -102,6 +102,7 @@ export class NewAdvancesComponent implements OnInit {
       }];
       document.getElementById("closeAdvances").click();
       this.alert.setAlert(alertSuccess[0]);
+      this.advanceSharedService.setRefreshAdvanceList(true);
     },
       (error: any) => {
         document.getElementById("btn_advances_new").click();
@@ -263,7 +264,6 @@ export class NewAdvancesComponent implements OnInit {
     });
     setTimeout(() => {
       this.objectReport.emit(this.infoTableAdvances[0]);
-      this.nameReport.emit(this.infoTableAdvances[0].data[0].title);
     }, 100);
 
   }

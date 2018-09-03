@@ -17,4 +17,9 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
 
+  getViewDetailSpends(idSpend) {
+    return this.tokenService.get('/travel_allowance_requests/' + idSpend)
+      .map((data: any) => data.json());
+  }
+
 }

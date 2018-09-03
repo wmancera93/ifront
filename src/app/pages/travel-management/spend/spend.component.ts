@@ -14,7 +14,7 @@ export class SpendComponent implements OnInit {
 
   public prueba: string = '3'
   token
-  public spedsData: Spends[]=[];
+  public spedsData: Spends[] = [];
 
   constructor(public router: Router,
     public spendSharedService: SpendSharedService,
@@ -22,7 +22,6 @@ export class SpendComponent implements OnInit {
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
       this.spedsData = list.data;
-      console.log(this.spedsData)
     });
   }
 
@@ -36,7 +35,7 @@ export class SpendComponent implements OnInit {
     this.spendSharedService.setNewSpend(true);
   }
   viewSpend(objectSpend) {
-    this.spendSharedService.setViewSpend(objectSpend);
+    this.spendSharedService.setViewSpend(objectSpend.id);
   }
 
   editSpend() {

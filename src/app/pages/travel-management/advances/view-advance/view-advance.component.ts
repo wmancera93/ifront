@@ -11,7 +11,7 @@ export class ViewAdvanceComponent implements OnInit {
   public infoAdvance: any[] = [];
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService) {
-    this.advanceSharedService.getViewAdvance().subscribe((id: any) => {
+    this.advanceSharedService.getViewAdvance().subscribe((id: any) => {      
       this.advancesService.getAdvanceByID(id).subscribe((advance: any) => {
         if (document.getElementById('modal_viewAdvance').className !== 'modal show') {
           document.getElementById('btn-viewAdvance').click();
