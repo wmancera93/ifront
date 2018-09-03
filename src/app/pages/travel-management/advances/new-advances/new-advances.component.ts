@@ -23,6 +23,10 @@ export class NewAdvancesComponent implements OnInit {
   public advancesItems: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: EventEmitter<any> = new EventEmitter();
+  public dd: any;
+  public mm: any;
+  public yyyy: any;
+  public today: any;
 
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
@@ -37,8 +41,7 @@ export class NewAdvancesComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      console.log(data)
-      if (data === 'confirmSaveAdvance' || data === 'errorConfirmTravelID' || data === 'errorValidationAdvance') {
+      if (data === 'confirmSaveAdvance' || data === 'errorConfirmTravelID' || data === 'errorValidationAdvance' || data === 'confirmDate') {
         document.getElementById("btn_advances_new").click();
       }
     })
@@ -163,6 +166,39 @@ export class NewAdvancesComponent implements OnInit {
       }
     });
   }
+  validateDateAdvance(date: any) {
+    this.today = new Date();
+    this.dd = this.today.getDate();
+    this.mm = this.today.getMonth() + 1;
+    this.yyyy = this.today.getFullYear();
+    if (this.dd < 10) {
+      this.dd = '0' + this.dd
+    }
+
+    if (this.mm < 10) {
+      this.mm = '0' + this.mm
+    }
+    this.today = (this.yyyy + '-' + this.mm + '-' + this.dd).toString();
+    if (date.date !== this.today) {
+      let enterDate = date.date.replace("-", "").replace("-", "");
+      let actualDate = this.today.replace("-", "").replace("-", "");
+      if (actualDate - enterDate < 1) {
+
+      }
+      else {
+        document.getElementById("closeAdvances").click();
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: "la fecha es menor a la actual",
+          confirmation: true,
+          typeConfirmation: 'confirmDate'
+        }];
+        this.alert.setAlert(alertWarning[0]);
+      }
+    }
+  }
+
   deleteAdvance(params: any) {
     this.infoTableAdvances[0].data[0].data.splice(this.infoTableAdvances[0].data[0].data.findIndex(filter => filter.field_0 === params.id), 1);
     this.objectAdvances.splice(this.objectAdvances.findIndex(filter => filter.id_advance === params.id), 1);
@@ -171,17 +207,12 @@ export class NewAdvancesComponent implements OnInit {
 
   clearFormAdvance() {
     this.formAdvanceTravel = this.fb.group({
-      travel_request_id: "",
       currency_id: "",
       value: "",
       date: "",
       observation: ""
     });
 
-    this.infoTableAdvances = [{
-      success: true,
-      data: [{ data: [] }]
-    }];
 
   }
 
@@ -193,11 +224,6 @@ export class NewAdvancesComponent implements OnInit {
         title: "Anticipos",
         title_table: "Anticipos solicitados",
         labels: {
-          field_0: {
-            value: "ID",
-            type: "string",
-            sortable: false,
-          },
           field_1: {
             value: "Viaje",
             type: "string",

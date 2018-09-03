@@ -18,6 +18,7 @@ export class ViewAdvanceComponent implements OnInit {
           document.getElementById("bodyGeneral").removeAttribute('style');
         }
         this.infoAdvance = advance.data;
+        console.log(this.infoAdvance)
       })
 
     })
