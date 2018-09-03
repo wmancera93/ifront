@@ -23,6 +23,8 @@ export class ConfirmResetAcountComponent implements OnInit {
   public eyePasswordVisible: boolean = false;
   public urlTokenPassword: string = '';
 
+  public urlLogoLogin: string = '';
+
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     private route: ActivatedRoute,
@@ -56,15 +58,17 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
+          this.urlLogoLogin = this.dataEnterprise[0].logo_dashboard.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/');
           if (!this.stylesExplorerService.validateBrowser()) {
-            document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
-            document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
-            document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
-            document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
+            document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/') + `)`);
+            document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
+            document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
+            document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);          
           } else {
+            document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
             setTimeout(() => {
               this.stylesExplorerService.stylesInExplorerOrEdge(
-                this.dataEnterprise.background_login.url,
+                this.dataEnterprise[0].background_login.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/'),
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.body_text, '', '',

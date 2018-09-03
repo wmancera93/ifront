@@ -25,6 +25,8 @@ export class LockedScreenComponent implements OnInit {
   public txtPassword: string = '';
   public dataEnterprise: Enterprise[] = [];
 
+  public urlLogoLogin: string = '';
+
   constructor(private tokenService: Angular2TokenService,
     public alert: AlertsService,
     public userSharedService: UserSharedService,
@@ -58,12 +60,13 @@ export class LockedScreenComponent implements OnInit {
       }
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
+          this.urlLogoLogin = this.dataEnterprise[0].logo_dashboard.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/');
           this.dataEnterprise[0] = result.data;
 
           document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
           setTimeout(() => {
             this.stylesExplorerService.stylesInExplorerOrEdge(
-              this.dataEnterprise[0].background_login.url,
+              this.dataEnterprise[0].background_login.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/'),
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].body_text, '', '',
@@ -76,6 +79,7 @@ export class LockedScreenComponent implements OnInit {
 
   getDataLocalStorage() {
     if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
+      this.urlLogoLogin = this.dataEnterprise[0].logo_dashboard.url.replace('http://10.0.7.192:3003/', 'http://10.0.7.112:3000/');
       this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     }
   }
