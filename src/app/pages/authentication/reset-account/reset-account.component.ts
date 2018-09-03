@@ -62,7 +62,7 @@ export class ResetAccountComponent implements OnInit {
           document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
           setTimeout(() => {
             this.stylesExplorerService.stylesInExplorerOrEdge(
-              'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString(),
+              'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString(),
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].primary_color,
               this.dataEnterprise[0].body_text, '', '',

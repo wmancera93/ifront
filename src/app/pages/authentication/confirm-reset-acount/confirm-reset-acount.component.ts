@@ -60,7 +60,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           this.dataEnterprise = result.data;
           this.urlLogoLogin = 'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString();
           if (!this.stylesExplorerService.validateBrowser()) {
-            document.documentElement.style.setProperty(`--img-header-login`, `url(` + 'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString() + `)`);
+            document.documentElement.style.setProperty(`--img-header-login`, `url(` +  'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString() + `)`);
             document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
             document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
             document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
@@ -68,7 +68,7 @@ export class ConfirmResetAcountComponent implements OnInit {
             document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
             setTimeout(() => {
               this.stylesExplorerService.stylesInExplorerOrEdge(
-                'http://10.0.7.112:3000/' + this.dataEnterprise[0].logo_dashboard.url.toString(),
+                'http://10.0.7.112:3000/' +  this.dataEnterprise[0].background_login.url.toString(),
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.primary_color,
                 this.dataEnterprise.body_text, '', '',
