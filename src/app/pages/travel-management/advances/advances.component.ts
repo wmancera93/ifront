@@ -17,6 +17,12 @@ export class AdvancesComponent implements OnInit {
   constructor(public router: Router,
     public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService) {
+    this.getadvancesList();
+    this.advanceSharedService.getRefreshAdvanceList().subscribe((validate: any) => {
+      if (validate === true) {
+        this.getadvancesList();
+      }
+    });
 
     this.advancesService.getAdvancePayments().subscribe((advances: any) => {
       this.advancesItems = advances.data;
@@ -34,7 +40,11 @@ export class AdvancesComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  getadvancesList() {
+    this.advancesService.getAdvancePayments().subscribe((advances: any) => {
+      this.advancesItems = advances.data;
+    })
+  }
   returnBackPage() {
     this.router.navigate(['ihr/travel_management']);
   }

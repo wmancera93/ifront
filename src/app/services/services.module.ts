@@ -54,6 +54,7 @@ import { HotelsSharedService } from './shared/hotels-shared/hotels-shared.servic
 import { SpendSharedService } from './shared/spend-shared/spend-shared.service';
 import { AdvanceSharedService } from './shared/advance-shared/advance-shared.service';
 import { AdvancesService } from './travel-management/advances/advances.service';
+import { SpendsService } from './travel-management/spends/spends.service';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { AdvancesService } from './travel-management/advances/advances.service';
     HotelsSharedService,
     SpendSharedService,
     AdvanceSharedService,
-    AdvancesService
+    AdvancesService,
+    SpendsService
   ]
 })
 export class ServicesModule { }
