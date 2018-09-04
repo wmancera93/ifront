@@ -67,40 +67,45 @@ export class MasterDataComponent implements OnInit {
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
-      if (object[0].count === 0) {
-        object[0].count += 1;
-        let dataMasterEdit = {
-          master_data_type: this.codeGeneral,
-          employee_master_data: object
-        }
-        if (dataMasterEdit.employee_master_data.length == 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
-          this.alert.setAlert(alertWarning[0]);
-        }
-        else {
-
-          this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
-            const alertWarning: Alerts[] = [{
-              type: 'success',
-              title: 'Confirmación',
-              message: data.message,
-              confirmation: false,
-              typeConfirmation: ''
-            }];
+      if(object[0].count !== undefined){
+        if (object[0].count === 0) {
+          object[0].count += 1;
+          let dataMasterEdit = {
+            master_data_type: this.codeGeneral,
+            employee_master_data: object
+          }
+          if (dataMasterEdit.employee_master_data.length == 0) {
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
-          },
-            (error: any) => {
-              const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+          }
+          else {
+  
+            this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
+              const alertWarning: Alerts[] = [{
+                type: 'success',
+                title: 'Confirmación',
+                message: data.message,
+                confirmation: false,
+                typeConfirmation: ''
+              }];
               this.alert.setAlert(alertWarning[0]);
-            })
+            },
+              (error: any) => {
+                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+                this.alert.setAlert(alertWarning[0]);
+              })
+          }
+  
+  
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+  
+          }
         }
-
-
-        if (document.getElementById("buttonDashManagerial")) {
-          document.getElementById("buttonDashManagerial").click();
-
-        }
+      } else {
+        alert(object) 
       }
+     
     })
 
     this.masterDataList();
