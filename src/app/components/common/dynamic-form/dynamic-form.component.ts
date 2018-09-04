@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -22,7 +24,8 @@ export class DynamicFormComponent implements OnInit {
 
 
   constructor(public fb: FormBuilder,
-    public dataMasterSharedService: DataMasterSharedService) {
+    public dataMasterSharedService: DataMasterSharedService,
+    public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       this.generalObject = data.data;
 
@@ -100,7 +103,14 @@ export class DynamicFormComponent implements OnInit {
         }
       });
     })
-    
+    const alertWarning: Alerts[] = [{
+      type: 'success',
+      title: 'Confirmación',
+      message: JSON.stringify(objectSend),
+      confirmation: false,
+      typeConfirmation: ''
+    }];
+    this.alert.setAlert(alertWarning[0]);
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
