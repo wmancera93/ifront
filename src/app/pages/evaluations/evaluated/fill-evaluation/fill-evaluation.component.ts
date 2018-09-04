@@ -36,9 +36,12 @@ export class FillEvaluationComponent implements OnInit {
     private formBuilder: FormBuilder,
     public alert: AlertsService) {
 
+
+    document.getElementById("bodyGeneral").removeAttribute('style');
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSendEvaluation') {
         document.getElementById("btn_fillEvaluation").click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
       }
     })
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
@@ -87,11 +90,11 @@ export class FillEvaluationComponent implements OnInit {
           [{
             type: 'danger',
             title: 'Solicitud Denegada',
-            message: error.json().errors.toString(),
+            message: error.json().errors.toString() + "¿Desea continuar con la encuesta ?",
             confirmation: true,
             typeConfirmation: 'errorSendEvaluation'
           }];
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
+        (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
         this.alert.setAlert(alertWarning[0]);
       })
 
