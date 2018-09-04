@@ -78,7 +78,7 @@ export class MasterDataComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
         }
         else {
-     
+
           this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
             const alertWarning: Alerts[] = [{
               type: 'success',
@@ -203,10 +203,9 @@ export class MasterDataComponent implements OnInit {
         this.titleData = 'Datos familiares';
         this.dataMasterService.getDataFamily().subscribe((family: any) => {
           this.dataMaster = family.data;
-
+          this.activeEditButton(this.dataMaster);
           this.canEditData = false;
           this.noEdit();
-          this.activeEditButton(this.dataMaster);
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
           }
