@@ -22,6 +22,16 @@ export class AdvancesComponent implements OnInit {
       if (validate === true) {
         this.getadvancesList();
       }
+    });
+
+    this.advancesService.getAdvancePayments().subscribe((advances: any) => {
+      this.advancesItems = advances.data;
+
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'advances') {
+        this.advanceSharedService.setNewAdvance(url.split('/')[url.split('/').length - 1]);
+      }
     })
 
 

@@ -50,6 +50,9 @@ export class TravelComponent implements OnInit {
             this.alert.setAlert(alertWarning[0]);
           });
       }
+      if(data=== 'closeAlertdeletRequestTravel'){
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+      }
     })
 
     this.tokenService.validateToken()

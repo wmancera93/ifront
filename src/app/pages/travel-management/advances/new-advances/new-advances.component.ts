@@ -64,6 +64,14 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
+      this.formAdvanceTravel = new FormGroup({});
+      this.formAdvanceTravel = fb.group({
+        travel_request_id: data,
+        currency_id: "",
+        value: "",
+        date: "",
+        observation: ""
+      });
       this.refreshTableAdvances();
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
