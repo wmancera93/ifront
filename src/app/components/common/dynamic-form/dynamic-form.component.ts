@@ -87,6 +87,16 @@ export class DynamicFormComponent implements OnInit {
         })
       }
     }
+
+    const alertWarning: Alerts[] = [{
+      type: 'success',
+      title: 'Confirmación',
+      message: JSON.stringify(objectForm),
+      confirmation: false,
+      typeConfirmation: ''
+    }];
+    this.alert.setAlert(alertWarning[0]);
+
     let objectSend: any[] = [];
     objectForm.forEach(data => {
       this.objectEditBlur.forEach(element => {
@@ -103,14 +113,7 @@ export class DynamicFormComponent implements OnInit {
         }
       });
     })
-    const alertWarning: Alerts[] = [{
-      type: 'success',
-      title: 'Confirmación',
-      message: JSON.stringify(objectSend),
-      confirmation: false,
-      typeConfirmation: ''
-    }];
-    this.alert.setAlert(alertWarning[0]);
+   
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
