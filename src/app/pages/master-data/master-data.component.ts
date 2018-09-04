@@ -9,6 +9,7 @@ import { AlertsService } from '../../services/shared/common/alerts/alerts.servic
 import { Alerts } from '../../models/common/alerts/alerts';
 import { Enterprise } from '../../models/general/enterprise';
 
+
 @Component({
   selector: 'app-master-data',
   templateUrl: './master-data.component.html',
@@ -29,6 +30,8 @@ export class MasterDataComponent implements OnInit {
   public dataEnterprise: Enterprise = null;
   public listDataMaster: ListDataMaster;
   public token: boolean;
+
+  public codeGeneral: string;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public dataMasterService: MasterDataService,
@@ -67,6 +70,7 @@ export class MasterDataComponent implements OnInit {
       if (object[0].count === 0) {
         object[0].count += 1;
         let dataMasterEdit = {
+          master_data_type: this.codeGeneral,
           employee_master_data: object
         }
         if (dataMasterEdit.employee_master_data.length == 0) {
@@ -74,6 +78,7 @@ export class MasterDataComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
         }
         else {
+     
           this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
             const alertWarning: Alerts[] = [{
               type: 'success',
@@ -110,6 +115,7 @@ export class MasterDataComponent implements OnInit {
 
   masterDataList() {
     this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
+
       this.listDataMaster = list.data;
     })
   }
@@ -156,18 +162,19 @@ export class MasterDataComponent implements OnInit {
   isEdit() {
     this.canEditData = false;
     setTimeout(() => {
-      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData })
+      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData, code: this.codeGeneral })
     }, 200);
   }
 
   noEdit() {
     this.canEditData = true;
     setTimeout(() => {
-      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData })
+      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData, code: this.codeGeneral })
     }, 200);
   }
 
-  showData(i: any, idTag: string) {
+  showData(i: any, idTag: string, code: string) {
+    this.codeGeneral = code;
     document.getElementById('listData').getElementsByClassName('active-report')[0].classList.remove('active-report');
     document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
     switch (idTag) {

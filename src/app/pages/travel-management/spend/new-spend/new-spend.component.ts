@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
+import { SpendsService } from '../../../../services/travel-management/spends/spends.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -19,13 +20,20 @@ export class NewSpendComponent implements OnInit {
   public is_upload: boolean = false;
   public file: any[] = [];
   formSpendTravel
-  constructor(public spendSharedService: SpendSharedService, public fileUploadService: FileUploadService) {
+  constructor(public spendSharedService: SpendSharedService, 
+    public fileUploadService: FileUploadService,
+    public spendsService: SpendsService) {
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       if (document.getElementById('spend_new').className !== 'modal show'){
         document.getElementById('btn_spend_new').click();
       }
       
+    });
+
+    
+    this.spendsService.getSpendsTypes().subscribe((select:any)=>{
+      console.log(select)
     });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {

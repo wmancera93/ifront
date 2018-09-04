@@ -12,6 +12,8 @@ import { Alert } from '../../../../../../node_modules/@types/selenium-webdriver'
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { DebugContext } from '@angular/core/src/view';
 import { debug } from 'util';
+import { AdvanceSharedService } from '../../../../services/shared/advance-shared/advance-shared.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-travel',
@@ -69,18 +71,24 @@ export class NewTravelComponent implements OnInit {
   public deleteDestination: string;
   public validateDateHeader: any[] = [];
   public array_wrong: any[] = [];
+  public ticket_advance: number;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public advanceSharedService: AdvanceSharedService, public router: Router, ) {
 
     this.travelProof = [{
       success: true,
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
+
+      if (data === 'continueTravelAdvances') {
+        this.router.navigate(['/ihr/advances', this.ticket_advance]);
+      }
+
       if (data === 'continueTravelRequests' || data === 'continueDestinationRequests' || data === 'continueDestinationRequestsValidateDates') {
         document.getElementById("btn_travel_new").click();
       }
@@ -111,6 +119,10 @@ export class NewTravelComponent implements OnInit {
         document.getElementById("btn_travel_new").click();
         this.activate_submit = true;
       }
+      if (data === 'closeAlertcontinueDestinationRequestsValidateDates' || data === 'closeAlertcontinueTravelRequests'|| data==='closeAlertcontinueDestinationRequests' || data==='closeAlertcontinueTravelAdvances' ) {
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+      }
+
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -163,7 +175,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
-      debugger
+      
       if (document.getElementById('travel_new').className !== 'modal show') {
         document.getElementById("btn_travel_new").click();
         if (data) {
@@ -231,7 +243,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-    debugger
+    
     this.showSubmit = false;
     this.send = true;
 
@@ -257,9 +269,10 @@ export class NewTravelComponent implements OnInit {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          this.ticket_advance = data.data[0].travel_request.ticket;
           if (data.success) {
             document.getElementById("closeTravels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.travelsService.setResultSaved(true);
@@ -278,7 +291,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    debugger
+    
     this.activate_submit = true;
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
@@ -589,7 +602,7 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateComplete(days) {
-    debugger
+   
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
 
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
@@ -673,7 +686,7 @@ export class NewTravelComponent implements OnInit {
                   this.dateEndValidate(days);
                   setTimeout(() => {
                     if (this.array_wrong.length > 0) {
-                      debugger
+                     
                       document.getElementById("btn_travel_new").click();
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
@@ -831,10 +844,10 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
   dateBeginValidate(days) {
-    debugger
+    
     this.validateDateHeader = [];
     this.travelProof[0].data[0].data.forEach(element => {
-      debugger
+      
       if (days.date_requests_begin > element.field_4.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -843,17 +856,17 @@ export class NewTravelComponent implements OnInit {
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
-      debugger
+      
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }
   }
   dateEndValidate(days) {
-    debugger
+    
     this.validateDateHeader = [];
 
     this.travelProof[0].data[0].data.forEach(element => {
-      debugger
+      
       if (days.date_requests_end < element.field_7.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -862,7 +875,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
-      debugger
+     
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }
