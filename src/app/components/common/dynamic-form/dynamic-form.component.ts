@@ -91,7 +91,7 @@ export class DynamicFormComponent implements OnInit {
     const alertWarning: Alerts[] = [{
       type: 'success',
       title: 'Confirmación',
-      message: JSON.stringify(objectForm),
+      message: JSON.stringify(form),
       confirmation: false,
       typeConfirmation: ''
     }];
