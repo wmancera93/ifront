@@ -57,14 +57,6 @@ export class MasterDataComponent implements OnInit {
 
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
-      const alertWarning: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: JSON.stringify(object),
-        confirmation: false,
-        typeConfirmation: ''
-      }];
-      this.alert.setAlert(alertWarning[0]);
       if (object[0].count === 0) {
         object[0].count += 1;
         let dataMasterEdit = {

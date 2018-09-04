@@ -34,6 +34,14 @@ export class DynamicFormComponent implements OnInit {
         this.code = data.code;
         this.form = new FormGroup({});
         this.form = this.createGroup();
+        const alertWarning: Alerts[] = [{
+          type: 'success',
+          title: 'form',
+          message: JSON.stringify(this.form),
+          confirmation: false,
+          typeConfirmation: ''
+        }];
+        this.alert.setAlert(alertWarning[0]);
         this.showForm = true;
       }
 
@@ -50,6 +58,7 @@ export class DynamicFormComponent implements OnInit {
 
 
     this.generalObject.forEach(element => {
+      console.log(element)
       element.forEach(control => {
         group.addControl(control.id, this.fb.control(control.value))
       });
@@ -70,6 +79,14 @@ export class DynamicFormComponent implements OnInit {
   public code;
 
   sendDynamicForm(form) {
+    const alertWarning: Alerts[] = [{
+      type: 'success',
+      title: 'form',
+      message: JSON.stringify(form),
+      confirmation: false,
+      typeConfirmation: ''
+    }];
+    this.alert.setAlert(alertWarning[0]);
     let objectForm: any[] = [];
 
     let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
