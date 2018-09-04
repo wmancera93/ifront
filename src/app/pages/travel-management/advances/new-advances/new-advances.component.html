@@ -49,7 +49,7 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong>Fecha entrega de Anticipo:</strong>
                 </label>
-                <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" />
+                <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" (change)="validateDateAdvance(formAdvanceTravel.value)"/>
               </div>
             </div>
           </div>

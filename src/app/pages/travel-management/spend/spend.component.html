@@ -49,23 +49,19 @@
       </div>
 
       <div class="row justify-content-center top-containter">
-        <div class="col-12">
-          <div class="widget bg-white-1x">
+        <div class="col-12" *ngIf="spedsData.length > 0">
+          <div class="widget bg-white-1x" *ngFor="let spend of spedsData;">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Código # 1
+                    Ticket # {{spend.info_travel.ticket}}
                   </span>
                 </h5>
-                <p>
-                  <i class="fa fa-clock-o"></i>
-                  Creada el 01/01/2018
-                </p>
               </div>
               <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  Descripción
+                  {{spend.info_travel.name_travel}}
                 </h3>
               </div>
               <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -74,20 +70,20 @@
                 </p>
                 <h6>
                   <span class="badge badge-primary">
-                   Pendiente
+                    {{spend.status}}
                   </span>
                 </h6>
               </div>
               <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Solicitud de viaje
+                  Solicitud de gastos
                 </p>
                 <p class="">
                   <i class="fa fa-hashtag fa-fw text-primary-hr"></i>
-                  58
+                  {{spend.info_travel.ticket}}
                 </p>
               </div>
-              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" (click)="viewSpend(spend)">
                 <div class="row justify-content-center">
                   <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer">
                     <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
@@ -112,9 +108,6 @@
                   <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
                     <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                   </div>
-                  <!--<div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
-                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
-                  </div> -->
                   <div class="col-12">
                     Eliminar
                   </div>
@@ -124,8 +117,9 @@
           </div>
         </div>
       </div>
-   
+
     </div>
   </div>
 </div>
 <app-new-spend *ngIf="!token"></app-new-spend>
+<app-view-spend *ngIf="!token"></app-view-spend>
