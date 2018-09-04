@@ -37,7 +37,7 @@ export class FillEvaluationComponent implements OnInit {
     public alert: AlertsService) {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'sendEvaluation' || data === 'errorSendEvaluation') {
+      if (data === 'errorSendEvaluation') {
         document.getElementById("btn_fillEvaluation").click();
       }
     })
@@ -72,8 +72,7 @@ export class FillEvaluationComponent implements OnInit {
           type: 'success',
           title: 'Estado de la evaluación',
           message: data.message,
-          confirmation: true,
-          typeConfirmation: 'sendEvaluation'
+          confirmation: false,
         }];
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
         this.alert.setAlert(alertConfirmation[0]);
@@ -89,10 +88,10 @@ export class FillEvaluationComponent implements OnInit {
             type: 'danger',
             title: 'Solicitud Denegada',
             message: error.json().errors.toString(),
-            confirmation: false,
+            confirmation: true,
             typeConfirmation: 'errorSendEvaluation'
           }];
-        document.getElementById("buttonCloseEvaluation").click();
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
         this.alert.setAlert(alertWarning[0]);
       })
 
