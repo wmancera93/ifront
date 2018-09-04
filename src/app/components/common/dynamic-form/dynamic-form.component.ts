@@ -60,17 +60,9 @@ export class DynamicFormComponent implements OnInit {
         }, 100);
       }
 
-
     });
 
-    const alertWarning: Alerts[] = [{
-      type: 'success',
-      title: 'form',
-      message: JSON.stringify(group),
-      confirmation: false,
-      typeConfirmation: ''
-    }];
-    this.alert.setAlert(alertWarning[0]);
+
     return group;
   }
   public idSend;
@@ -94,16 +86,7 @@ export class DynamicFormComponent implements OnInit {
         })
       }
     }
-
-    const alertWarning: Alerts[] = [{
-      type: 'success',
-      title: 'test',
-      message: JSON.stringify(form),
-      confirmation: false,
-      typeConfirmation: ''
-    }];
-    this.alert.setAlert(alertWarning[0]);
-
+    
     let objectSend: any[] = [];
     objectForm.forEach(data => {
       this.objectEditBlur.forEach(element => {
