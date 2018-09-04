@@ -62,7 +62,6 @@ export class AlertsComponent implements OnInit {
   }
 
   clickCancel() {
-    debugger
     this.cancelation='closeAlert'+ this.bodyAlert.typeConfirmation;
     document.getElementById('closeModal').click();
     this.alert.setActionConfirm(this.cancelation);
