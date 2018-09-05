@@ -10,7 +10,7 @@ import { Angular2TokenService } from 'angular2-token';
 })
 export class EmbargoesComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Embargos';
+  public nameReport: string = 'Retención judicial';
   public showExcel: boolean = true;
 
   constructor(public queriesService: QueriesService,

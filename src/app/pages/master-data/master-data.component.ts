@@ -68,7 +68,6 @@ export class MasterDataComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
         }
         else {
-
           this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
             const alertWarning: Alerts[] = [{
               type: 'success',
@@ -117,8 +116,12 @@ export class MasterDataComponent implements OnInit {
   }
 
   masterDataList() {
-    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
-
+    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {      
+      list.data.forEach(element => {
+        if(element.method_name === 'personal_data'){
+          this.codeGeneral = element.code;
+        }
+      });
       this.listDataMaster = list.data;
     })
   }
