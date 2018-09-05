@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-dynamic-form',
@@ -22,7 +24,8 @@ export class DynamicFormComponent implements OnInit {
 
 
   constructor(public fb: FormBuilder,
-    public dataMasterSharedService: DataMasterSharedService) {
+    public dataMasterSharedService: DataMasterSharedService,
+    public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       this.generalObject = data.data;
 
@@ -31,6 +34,7 @@ export class DynamicFormComponent implements OnInit {
         this.code = data.code;
         this.form = new FormGroup({});
         this.form = this.createGroup();
+
         this.showForm = true;
       }
 
@@ -45,8 +49,8 @@ export class DynamicFormComponent implements OnInit {
     this.objectForm = [];
     const group = this.fb.group({});
 
-
     this.generalObject.forEach(element => {
+
       element.forEach(control => {
         group.addControl(control.id, this.fb.control(control.value))
       });
@@ -57,9 +61,7 @@ export class DynamicFormComponent implements OnInit {
         }, 100);
       }
 
-
     });
-
 
     return group;
   }
@@ -69,9 +71,7 @@ export class DynamicFormComponent implements OnInit {
 
   sendDynamicForm(form) {
     let objectForm: any[] = [];
-
-    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
-
+    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1).length).split(",");
     for (let index = 0; index < recorrer.length; index++) {
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
@@ -100,7 +100,6 @@ export class DynamicFormComponent implements OnInit {
         }
       });
     })
-    
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
