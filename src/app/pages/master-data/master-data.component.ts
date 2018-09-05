@@ -116,7 +116,7 @@ export class MasterDataComponent implements OnInit {
   }
 
   masterDataList() {
-    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {      
+    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
       list.data.forEach(element => {
         if(element.method_name === 'personal_data'){
           this.codeGeneral = element.code;
