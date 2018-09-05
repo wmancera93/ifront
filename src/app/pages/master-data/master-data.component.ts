@@ -55,16 +55,6 @@ export class MasterDataComponent implements OnInit {
           this.token = true;
         });
 
-  }
-
-  ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth'
-    });
-
-    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
       if (object[0].count === 0) {
@@ -78,7 +68,7 @@ export class MasterDataComponent implements OnInit {
           this.alert.setAlert(alertWarning[0]);
         }
         else {
-     
+
           this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
             const alertWarning: Alerts[] = [{
               type: 'success',
@@ -102,6 +92,19 @@ export class MasterDataComponent implements OnInit {
         }
       }
     })
+
+  }
+
+  ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+
 
     this.masterDataList();
     this.showPersonalData();
@@ -203,10 +206,9 @@ export class MasterDataComponent implements OnInit {
         this.titleData = 'Datos familiares';
         this.dataMasterService.getDataFamily().subscribe((family: any) => {
           this.dataMaster = family.data;
-
+          this.activeEditButton(this.dataMaster);
           this.canEditData = false;
           this.noEdit();
-          this.activeEditButton(this.dataMaster);
           if (document.getElementById("buttonDashManagerial")) {
             document.getElementById("buttonDashManagerial").click();
           }
