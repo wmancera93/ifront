@@ -222,7 +222,7 @@ thead{
 body {
     font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !important;
     background-color: #2f4050 !important;
-    font-size: 13px !important;
+    font-size: 15px !important;
     color: #676a6c !important;
     overflow-x: hidden !important;
 }
@@ -245,7 +245,7 @@ body {
 
 p {
     margin: 0 0 10px !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
 }
 
@@ -280,7 +280,7 @@ a {
 }
 
 .font-title-general {
-    font-size: 14px !important;
+    font-size: 16px !important;
     color: #888888 !important;
     font-weight: 500 !important;
 }
