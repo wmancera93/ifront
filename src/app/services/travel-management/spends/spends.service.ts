@@ -22,4 +22,12 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
 
+  getSpendListTravel() {
+    return this.tokenService.get('travel_requests/index_for_select')
+      .map((data: any) => data.json());
+  }
+  getSpendMoneyList() {
+    return this.tokenService.get('travel_requests/currency_for_select')
+      .map((data: any) => data.json());
+  }
 }

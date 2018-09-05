@@ -23,8 +23,8 @@
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control">
-                  <option>54 - Viaje a las vegas</option>
+                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" paceholder="Seleccione" >
+                  <option  *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
                 </select>
               </div>
             </div>
@@ -36,30 +36,24 @@
                   <i class="fa fa-fw fa-bars text-primary-hr"></i>
                   <strong>Tipo de gasto:</strong>
                 </label>
-                <select class="form-control">
-                  <option>Transportes</option>
+                <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione" >
+                  <option  *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
                 </select>
               </div>
-
-              <!-- <div class="col-lg-4 col-md-6 col-12">
-                <select  class="form-control" [formControl]="formSpendTravel.controls['id_typeSpend']">
-                  <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
-                </select>
-              </div> -->
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
                   <strong>Importe:</strong>
                 </label>
-                <input type="text" class="form-control">
+                <input type="number" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
               </div>
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <strong>Moneda:</strong>
                 </label>
-                <select class="form-control">
-                  <option>Pesos</option>
+                <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
+                  <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-6 col-12">

@@ -25,41 +25,42 @@ export class TravelManagementComponent implements OnInit {
       behavior: 'smooth'
     });
 
-    this.buttonInfo = [{
-      title: "Asignación de hoteles",
-      icon_primary: "fa fa-circle-thin",
-      icon_secundary: "fa fa-bed",
-      tooltipText: "Haga clic aquí para asignar hoteles",
-      route: "/ihr/hotels"
-    },
-    {
-      title: "Viajes",
-      icon_primary: "fa fa-globe",
-      icon_secundary: "fa fa-plane",
-      tooltipText: "Haga clic aquí para asignar viajes",
-      route: "/ihr/travels"
-    },
-    {
-      title: "Anticipos",
-      icon_primary: "fa fa-money",
-      icon_secundary: "",
-      tooltipText: "Haga clic aquí para asignar anticipos",
-      route: "/ihr/advances"
-    },
-    {
-      title: "Gastos",
-      icon_primary: "fa fa-circle-thin",
-      icon_secundary: "fa fa-usd",
-      tooltipText: "Haga clic aquí para asignar gastos",
-      route: "/ihr/spend"
-    },
-    {
-      title: "Aprobaciones",
-      icon_primary: "fa fa fa-square-o",
-      icon_secundary: "fa fa-check",
-      tooltipText: "Haga clic aquí para asignar aprobaciones",
-      route: ""
-    }
+    this.buttonInfo = [
+      {
+        title: "Viajes",
+        icon_primary: "fa fa-globe",
+        icon_secundary: "fa fa-plane",
+        tooltipText: "Haga clic aquí para asignar viajes",
+        route: "/ihr/travels"
+      },
+      {
+        title: "Asignación de hoteles",
+        icon_primary: "fa fa-circle-thin",
+        icon_secundary: "fa fa-bed",
+        tooltipText: "Haga clic aquí para asignar hoteles",
+        route: "/ihr/hotels"
+      },
+      {
+        title: "Anticipos",
+        icon_primary: "fa fa-money",
+        icon_secundary: "",
+        tooltipText: "Haga clic aquí para asignar anticipos",
+        route: "/ihr/advances"
+      },
+      {
+        title: "Gastos",
+        icon_primary: "fa fa-circle-thin",
+        icon_secundary: "fa fa-usd",
+        tooltipText: "Haga clic aquí para asignar gastos",
+        route: "/ihr/spend"
+      },
+      {
+        title: "Aprobaciones",
+        icon_primary: "fa fa fa-square-o",
+        icon_secundary: "fa fa-check",
+        tooltipText: "Haga clic aquí para asignar aprobaciones",
+        route: ""
+      }
     ];
   }
 
@@ -72,7 +73,7 @@ export class TravelManagementComponent implements OnInit {
     setTimeout(() => {
       this.tooltipSharedService.setDataTooltip({ text: data, show: this.flagShowTooltip, position: this.eventPosition });
     }, 100);
-    
+
   }
 
   closeTooltip() {
