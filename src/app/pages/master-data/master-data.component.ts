@@ -55,16 +55,6 @@ export class MasterDataComponent implements OnInit {
           this.token = true;
         });
 
-  }
-
-  ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth'
-    });
-
-    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
       if (object[0].count === 0) {
@@ -102,6 +92,19 @@ export class MasterDataComponent implements OnInit {
         }
       }
     })
+
+  }
+
+  ngOnInit() {
+    window.scroll({
+      top: 1,
+      left: 0,
+      behavior: 'smooth'
+    });
+
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+
 
     this.masterDataList();
     this.showPersonalData();
