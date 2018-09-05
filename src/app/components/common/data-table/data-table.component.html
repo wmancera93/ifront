@@ -98,7 +98,7 @@
                 <td *ngFor="let key of keys">
                   <div *ngIf="record[key] != null">
                     <div *ngIf="record[key].type_method == null">
-                      <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
+                      <div *ngIf="labelsCell[key].type == 'int'" style="text-align:right">
                         {{record[key]}}
                       </div>
                       <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
