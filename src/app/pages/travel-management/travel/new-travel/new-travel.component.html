@@ -64,7 +64,7 @@
               <div class="col-lg-3 col-md-6 col-12 text-right" >
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                  <a>Centro de costo:</a>
+                  <a>Centro de costo:*</a>
                 </label>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
@@ -76,7 +76,7 @@
               <div class="col-lg-2 col-md-6 col-12 ">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Tipo de costo:</a>
+                  <a>Tipo de costo:*</a>
                 </label>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
@@ -93,7 +93,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-                  <a>Clase de viaje legal:</a>
+                  <a>Clase de viaje legal:*</a>
                 </label>
                 <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
                   <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
@@ -102,7 +102,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-ship text-primary-hr"></i>
-                  <a>Clase de viaje especial:</a>
+                  <a>Clase de viaje especial:*</a>
                 </label>
                 <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
                   <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
@@ -111,7 +111,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-                  <a>Actividad de viaje:</a>
+                  <a>Actividad de viaje:*</a>
                 </label>
                 <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
                   <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
