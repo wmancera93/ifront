@@ -34,14 +34,7 @@ export class DynamicFormComponent implements OnInit {
         this.code = data.code;
         this.form = new FormGroup({});
         this.form = this.createGroup();
-        const alertWarning: Alerts[] = [{
-          type: 'success',
-          title: 'form',
-          message: JSON.stringify(this.form),
-          confirmation: false,
-          typeConfirmation: ''
-        }];
-        this.alert.setAlert(alertWarning[0]);
+
         this.showForm = true;
       }
 
@@ -56,9 +49,8 @@ export class DynamicFormComponent implements OnInit {
     this.objectForm = [];
     const group = this.fb.group({});
 
-
     this.generalObject.forEach(element => {
-      console.log(element)
+
       element.forEach(control => {
         group.addControl(control.id, this.fb.control(control.value))
       });
@@ -71,7 +63,6 @@ export class DynamicFormComponent implements OnInit {
 
     });
 
-
     return group;
   }
   public idSend;
@@ -79,18 +70,8 @@ export class DynamicFormComponent implements OnInit {
   public code;
 
   sendDynamicForm(form) {
-    const alertWarning: Alerts[] = [{
-      type: 'success',
-      title: 'form',
-      message: JSON.stringify(form),
-      confirmation: false,
-      typeConfirmation: ''
-    }];
-    this.alert.setAlert(alertWarning[0]);
     let objectForm: any[] = [];
-
-    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().split(",,").toString().length - 1).split(',')
-
+    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1).length).split(",");
     for (let index = 0; index < recorrer.length; index++) {
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
@@ -103,7 +84,6 @@ export class DynamicFormComponent implements OnInit {
         })
       }
     }
-    
     let objectSend: any[] = [];
     objectForm.forEach(data => {
       this.objectEditBlur.forEach(element => {
@@ -120,7 +100,6 @@ export class DynamicFormComponent implements OnInit {
         }
       });
     })
-   
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
     this.idSend = "";
     this.valueSend = "";
