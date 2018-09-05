@@ -37,7 +37,7 @@
                 <i class="fa fa-plus"></i>
                 Crear nueva solicitud
               </a>
-              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of requests.request_types; let i = index">
                   <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="newForm(request)">{{request.name | lowercase}}</a>
                   <div *ngIf="requests.request_types.length !== (i + 1)" class="dropdown-divider"></div>
