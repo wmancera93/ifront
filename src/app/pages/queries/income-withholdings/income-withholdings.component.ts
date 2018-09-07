@@ -31,10 +31,7 @@ export class IncomeWithholdingsComponent implements OnInit {
       if (data === "Ingresos y retenciones") {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getIncomeWithholdingsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          })
+          window.open(info.url);
         })
       }
     });

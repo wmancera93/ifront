@@ -62,10 +62,7 @@ export class TimeEvaluationComponent implements OnInit {
       if (data === "Evaluación de tiempos") {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getTimeEvaluationExcel(this.userAuthenticated.employee_id.toString()).subscribe((excel: any) => {
-          let urlSplit = excel.url.split('/')[excel.url.split('/').length - 2] + '/' + excel.url.split('/')[excel.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+          window.open(excel.url);
         })
       }
     });

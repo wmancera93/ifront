@@ -31,10 +31,7 @@ export class VacationBalanceComponent implements OnInit {
       if (data === "Saldo de vacaciones") {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getBalanceVacationExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+          window.open(info.url);
         })
       }
     });

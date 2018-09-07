@@ -29,10 +29,7 @@ export class CompnsatedVacationsComponent implements OnInit {
       if (data === "Vacaciones compensadas") {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getCompensatedVacationExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+          window.open(info.url);
         })
       }
     });
