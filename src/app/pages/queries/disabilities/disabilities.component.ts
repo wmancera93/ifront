@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { Angular2TokenService } from 'angular2-token';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-disabilities',
@@ -12,6 +13,7 @@ export class DisabilitiesComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Incapacidades';
   public showExcel: boolean = true;
+  public userAuthenticated:User;
 
   constructor(public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
@@ -25,7 +27,8 @@ export class DisabilitiesComponent implements OnInit {
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
       if (data === "Incapacidades") {
-        this.queriesService.getDisabilitiesExcel().subscribe((info: any) => {
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getDisabilitiesExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
           this.tokenService.get(urlSplit).subscribe((url: any) => {
             window.open(url.url);

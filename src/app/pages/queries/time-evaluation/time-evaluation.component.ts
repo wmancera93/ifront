@@ -5,6 +5,7 @@ import { QueriesService } from '../../../services/queries/queries.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-time-evaluation',
@@ -25,6 +26,7 @@ export class TimeEvaluationComponent implements OnInit {
   public arreglo: string = "";
   public finalDate: number;
   public showExcel: boolean = true;
+  public userAuthenticated:User;
 
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -58,7 +60,8 @@ export class TimeEvaluationComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
       if (data === "Evaluación de tiempos") {
-        this.queriesService.getTimeEvaluationExcel().subscribe((excel: any) => {
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getTimeEvaluationExcel(this.userAuthenticated.employee_id.toString()).subscribe((excel: any) => {
           let urlSplit = excel.url.split('/')[excel.url.split('/').length - 2] + '/' + excel.url.split('/')[excel.url.split('/').length - 1];
           this.tokenService.get(urlSplit).subscribe((url: any) => {
             window.open(url.url);
