@@ -112,17 +112,17 @@ export class DrawCalendarComponent implements OnInit {
   showDataCalendar() {
     switch (this.objectPerMonthData[0].weekday) {
 
-      case 'domingo':
+      case 'DO':
         this.newObjectDate = this.objectPerMonthData;
 
         break;
-      case 'lunes':
+      case 'LU':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -138,13 +138,13 @@ export class DrawCalendarComponent implements OnInit {
         });
         this.pushLastObjectDate();
         break;
-      case 'martes':
+      case 'MA':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -162,7 +162,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "lunes",
+            weekday: "LU",
             work_schedule_plan: [
               {
                 calendar_text: " ",
@@ -179,13 +179,13 @@ export class DrawCalendarComponent implements OnInit {
         this.pushLastObjectDate();
 
         break;
-      case 'miercoles':
+      case 'MI':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -203,7 +203,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "lunes",
+            weekday: "LU",
             work_schedule_plan: [
               {
                 calendar_text: " ",
@@ -221,7 +221,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "martes",
+            weekday: "MA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -236,13 +236,13 @@ export class DrawCalendarComponent implements OnInit {
         this.pushLastObjectDate();
 
         break;
-      case 'jueves':
+      case 'JU':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -258,7 +258,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "lunes",
+            weekday: "LU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -274,7 +274,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "martes",
+            weekday: "MA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -290,7 +290,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "miercoles",
+            weekday: "MI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -305,13 +305,13 @@ export class DrawCalendarComponent implements OnInit {
         this.pushLastObjectDate();
         break;
 
-      case 'viernes':
+      case 'VI':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -327,7 +327,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "lunes",
+            weekday: "LU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -343,7 +343,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "martes",
+            weekday: "MA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -359,7 +359,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "miercoles",
+            weekday: "MI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -375,7 +375,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "jueves",
+            weekday: "JU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -389,13 +389,13 @@ export class DrawCalendarComponent implements OnInit {
           });
         this.pushLastObjectDate();
         break;
-      case 'sabado':
+      case 'SA':
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "domingo",
+          weekday: "DO",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -411,7 +411,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "lunes",
+            weekday: "LU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -427,7 +427,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "martes",
+            weekday: "MA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -443,7 +443,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "miercoles",
+            weekday: "MI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -459,7 +459,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "jueves",
+            weekday: "JU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -475,7 +475,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "viernes",
+            weekday: "VI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -493,14 +493,14 @@ export class DrawCalendarComponent implements OnInit {
     }
 
     switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
-      case 'sabado':
+      case 'SA':
         break;
-      case 'domingo':
+      case 'DO':
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "lunes",
+          weekday: "LU",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -516,7 +516,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "martes",
+            weekday: "MA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -532,7 +532,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "miercoles",
+            weekday: "MI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -547,7 +547,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "jueves",
+            weekday: "JU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -562,7 +562,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "viernes",
+            weekday: "VI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -577,7 +577,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "sabado",
+            weekday: "SA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -590,13 +590,13 @@ export class DrawCalendarComponent implements OnInit {
             }]
           });
         break;
-      case 'lunes':
+      case 'LU':
 
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "martes",
+          weekday: "MA",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -612,7 +612,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "miercoles",
+            weekday: "MI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -627,7 +627,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "jueves",
+            weekday: "JU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -642,7 +642,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "viernes",
+            weekday: "VI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -657,7 +657,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "sabado",
+            weekday: "SA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -671,12 +671,12 @@ export class DrawCalendarComponent implements OnInit {
           });
 
         break;
-      case 'martes':
+      case 'MA':
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "miercoles",
+          weekday: "MI",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -691,7 +691,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "jueves",
+            weekday: "JU",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -706,7 +706,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "viernes",
+            weekday: "VI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -721,7 +721,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "sabado",
+            weekday: "SA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -735,12 +735,12 @@ export class DrawCalendarComponent implements OnInit {
           });
 
         break;
-      case 'miercoles':
+      case 'MI':
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "jueves",
+          weekday: "JU",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -755,7 +755,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "viernes",
+            weekday: "VI",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -770,7 +770,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "sabado",
+            weekday: "SA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -783,12 +783,12 @@ export class DrawCalendarComponent implements OnInit {
             }]
           });
         break;
-      case 'jueves':
+      case 'JU':
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "viernes",
+          weekday: "VI",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -803,7 +803,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "sabado",
+            weekday: "SA",
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -816,12 +816,12 @@ export class DrawCalendarComponent implements OnInit {
             }]
           });
         break;
-      case 'viernes':
+      case 'VI':
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "sabado",
+          weekday: "SA",
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
