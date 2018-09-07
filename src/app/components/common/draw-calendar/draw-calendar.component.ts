@@ -24,11 +24,11 @@ export class DrawCalendarComponent implements OnInit {
   public numberDay: any;
   public changeMonth: number = 0;
 
-  public saturday = 'Sabado';
+  public saturday = 'Sábado';
   public sunday = 'Domingo';
   public monday = 'Lunes';
   public tuesday = 'Martes';
-  public wednesday = 'Miercoles';
+  public wednesday = 'Miércoles';
   public thursday = 'Jueves';
   public friday = 'Viernes';
 
