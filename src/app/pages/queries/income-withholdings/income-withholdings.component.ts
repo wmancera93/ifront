@@ -46,9 +46,9 @@ export class IncomeWithholdingsComponent implements OnInit {
   }
 
   downloadFile(data: Response) {
-    var blob = new Blob([data], { type: 'text/csv' });
-    var url = window.URL.createObjectURL(blob);
-    window.open(url);
+    // var blob = new Blob([data], { type: 'text/csv' });
+    // var url = window.URL.createObjectURL(blob);
+    // window.open(url);
   }
 
 }
