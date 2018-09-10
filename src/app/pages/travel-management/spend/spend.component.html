@@ -23,7 +23,6 @@
       </div>
     </div>
   </div>
-
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
@@ -47,11 +46,10 @@
           </b>
         </div>
       </div>
-
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="spedsData.length > 0">
           <div class="widget bg-white-1x" *ngFor="let spend of spedsData;">
-            <div class="row align-items-center">
+            <div *ngIf="spend.info_travel != null" class="row align-items-center">
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
@@ -95,7 +93,7 @@
               </div>
               <div class="col-lg-1 col-md-4 col-4 text-center top-p">
                 <div class="row justify-content-center">
-                  <div class="col-12 number-size" id="hideTrash" style="cursor: pointer">
+                  <div class="col-12 number-size" id="hideTrash" style="cursor: pointer" (click)="editSpend(spend)">
                     <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8; font-size:2em"></i>
                   </div>
                   <div class="col-12">
@@ -105,13 +103,27 @@
               </div>
               <div class="col-lg-1 col-md-4 col-4 text-center top-p">
                 <div class="row justify-content-center">
-                  <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
+                  <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteSpend(spend)">
                     <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                   </div>
                   <div class="col-12">
                     Eliminar
                   </div>
                 </div>
+              </div>
+            </div>
+            <div *ngIf="spend.info_travel == null" class="row align-items-center">
+              <div class="col-lg-6 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Ticket # {{spend.id}}
+                  </span>
+                </h5>
+              </div>
+              <div class="col-lg-6 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  El viaje {{spend.travel_request_id}} no se encuentra dentro del sistema.
+                </p>
               </div>
             </div>
           </div>
@@ -123,3 +135,4 @@
 </div>
 <app-new-spend *ngIf="!token"></app-new-spend>
 <app-view-spend *ngIf="!token"></app-view-spend>
+<app-edit-spend *ngIf="!token"></app-edit-spend>

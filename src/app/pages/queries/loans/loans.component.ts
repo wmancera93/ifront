@@ -10,7 +10,7 @@ import { DataDableSharedService } from '../../../services/shared/common/data-tab
 export class LoansComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Préstamos';
-  public showExcel : boolean =  true;
+  public showExcel: boolean = true;
 
   constructor(public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService) { }
@@ -22,19 +22,18 @@ export class LoansComponent implements OnInit {
       behavior: 'smooth'
     });
 
-    this.accionDataTableService.getActionDataTable().subscribe((data)=>{
-      if(data ==="Préstamos")
-      {
+    this.accionDataTableService.getActionDataTable().subscribe((data) => {
+      if (data === "Préstamos") {
 
       }
     });
 
     this.queriesService.getLoans()
       .subscribe((data: any) => {
-       this.objectReport.emit(data);
+        this.objectReport.emit(data);
       },
-      error => {
-        console.log(error.error);
-      })
+        error => {
+          console.log(error.error);
+        })
   }
 }
