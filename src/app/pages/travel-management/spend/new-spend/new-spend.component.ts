@@ -33,7 +33,8 @@ export class NewSpendComponent implements OnInit {
   public idSpend: number = 0;
   public objectSpends: SpendsCreate;
   public objectAllowances: ObjectSpends[] = [];
-
+  showPdf
+  showSizeTable
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
 
