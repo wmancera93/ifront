@@ -2,6 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { Angular2TokenService } from 'angular2-token';
+import { User } from '../../../models/general/user';
 
 
 @Component({
@@ -13,6 +14,7 @@ export class IncomeWithholdingsComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Ingresos y retenciones';
   public showExcel: boolean = true;
+  public userAuthenticated:User;
 
   constructor(public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
@@ -27,11 +29,9 @@ export class IncomeWithholdingsComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
       if (data === "Ingresos y retenciones") {
-        this.queriesService.getIncomeWithholdingsExcel().subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          })
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getIncomeWithholdingsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+          window.open(info.url);
         })
       }
     });
@@ -46,9 +46,9 @@ export class IncomeWithholdingsComponent implements OnInit {
   }
 
   downloadFile(data: Response) {
-    var blob = new Blob([data], { type: 'text/csv' });
-    var url = window.URL.createObjectURL(blob);
-    window.open(url);
+    // var blob = new Blob([data], { type: 'text/csv' });
+    // var url = window.URL.createObjectURL(blob);
+    // window.open(url);
   }
 
 }

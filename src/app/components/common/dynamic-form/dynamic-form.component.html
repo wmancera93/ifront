@@ -1,24 +1,27 @@
 <form [formGroup]="form" *ngIf="showForm" class="row justify-content-start" (ngSubmit)="sendDynamicForm(form.value)">
     <div id="border-general" class="col-12" *ngFor="let element of objectForm; let index = index;" [ngClass]="{ 'border-array':objectForm.length -1 !== index}">
         <div class="row" *ngFor="let config of element" style="margin-top: 10px;">
-            <div class="col-12 col-md-6 center-data-master text-left">
-                <strong [ngClass]="config.class_label">{{ config.name_label}}</strong>
+            <div class="col-12 col-md-4 center-data-master text-left">
+                <strong class="font-color-default text-left text-style">{{ config.name_label}}</strong>
             </div>
-            <div class="col-12 col-md-6  center-data-master text-left">
-                <label [ngClass]="config.class_input" *ngIf="config.control === 'label'">{{config.value}}</label>
-
+            <div style="font-size: 16px!important;" class="col-12 col-md-8 center-data-master text-left">
+                <label class="text-left center-data-master" *ngIf="config.control === 'label'">{{config.value}}</label>
                 <fieldset class="text-left center-data-master" [disabled]="edit">
-                    <div [ngClass]="config.class_input" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
-                        <input id="input-text" class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)" type="text" [formControlName]="config.id"
-                            [attr.placeHolder]="config.place_holder" [disabled]="edit" />
-                        <input id="input-number" class="form-control" *ngSwitchCase="'number'" (blur)="detectChange(config)" type="number" [formControlName]="config.id"
-                            [attr.placeHolder]="config.place_holder" [disabled]="edit" />
-                        <input id="input-date" class="form-control" *ngSwitchCase="'date'" (blur)="detectChange(config)" type="date" [formControlName]="config.id"
-                            [attr.placeHolder]="config.place_holder" [disabled]="edit" />
-                        <input id="input-time" class="form-control" *ngSwitchCase="'time'" (blur)="detectChange(config)" type="time" [formControlName]="config.id"
-                            [attr.placeHolder]="config.place_holder" [disabled]="edit" />
-                        <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config)" [formControlName]="config.id"
-                            [disabled]="edit">
+                    <div class="text-left" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
+                        <input id="input-text" class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)"
+                            type="text" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            [disabled]="edit" />
+                        <input id="input-number" class="form-control" *ngSwitchCase="'number'" (blur)="detectChange(config)"
+                            type="number" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            [disabled]="edit" />
+                        <input id="input-date" class="form-control" *ngSwitchCase="'date'" (blur)="detectChange(config)"
+                            type="date" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            [disabled]="edit" />
+                        <input id="input-time" class="form-control" *ngSwitchCase="'time'" (blur)="detectChange(config)"
+                            type="time" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            [disabled]="edit" />
+                        <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config)"
+                            [formControlName]="config.id" [disabled]="edit">
                             <option *ngFor="let option of config.option" [value]="option.code">{{option.description}}</option>
                         </select>
                     </div>
