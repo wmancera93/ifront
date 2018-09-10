@@ -9,7 +9,7 @@ export interface PublicArticle {
     employee_id: number,
     title: string,
     creation_date: string,
-    articles_wiget: Url,
+    image: Url,
     body: string,
     summary: string,
     publish: boolean,
@@ -30,5 +30,5 @@ export interface Comments {
 }
 
 export interface image {
-    articles_wiget: Url
+    image: Url
 }
