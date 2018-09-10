@@ -41,56 +41,56 @@ export class DrawCalendarComponent implements OnInit {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
       let count = 0;
-      if (screen.width <= 1000) {
-        if (screen.width <= 500)
-        {
+      // if (screen.width <= 1000) {
+      //   if (screen.width <= 500)
+      //   {
 
-          this.responsive = true;
-        }
+      //     this.responsive = true;
+      //   }
 
-        this.saturday = 'S';
-        this.sunday = 'D';
-        this.monday = 'L';
-        this.tuesday = 'M';
-        this.wednesday = 'Mi';
-        this.thursday = 'J';
-        this.friday = 'V';
-      }
-      this.objectDateCurrent.forEach(element => {
-        if (element.date !== null) {
-          if (this.changeMonth !== element.date.split('-')[1]) {
-            this.changeMonth = element.date.split('-')[1];
-            count++;
-            switch (count) {
-              case 1:
-                this.objectDateLast.push(element);
-                break;
-              case 2:
-                this.objectDateToday.push(element);
-                break;
-              case 3:
-                this.objectDateNextMonth.push(element);
-                break;
+      //   this.saturday = 'S';
+      //   this.sunday = 'D';
+      //   this.monday = 'L';
+      //   this.tuesday = 'M';
+      //   this.wednesday = 'Mi';
+      //   this.thursday = 'J';
+      //   this.friday = 'V';
+      // }
+      // this.objectDateCurrent.forEach(element => {
+      //   if (element.date !== null) {
+      //     if (this.changeMonth !== element.date.split('-')[1]) {
+      //       this.changeMonth = element.date.split('-')[1];
+      //       count++;
+      //       switch (count) {
+      //         case 1:
+      //           this.objectDateLast.push(element);
+      //           break;
+      //         case 2:
+      //           this.objectDateToday.push(element);
+      //           break;
+      //         case 3:
+      //           this.objectDateNextMonth.push(element);
+      //           break;
 
-              default:
-                break;
-            }
-          }
-          else if (count === 1) {
-            this.objectDateLast.push(element);
+      //         default:
+      //           break;
+      //       }
+      //     }
+      //     else if (count === 1) {
+      //       this.objectDateLast.push(element);
 
-          }
-          else if (count === 2) {
-            this.objectDateToday.push(element);
-          }
-          else if (count === 3) {
-            this.objectDateNextMonth.push(element);
-          }
-        }
-      });
-      this.objectPerMonthData = this.objectDateToday;
+      //     }
+      //     else if (count === 2) {
+      //       this.objectDateToday.push(element);
+      //     }
+      //     else if (count === 3) {
+      //       this.objectDateNextMonth.push(element);
+      //     }
+      //   }
+      // });
+      // this.objectPerMonthData = this.objectDateToday;
 
-      this.showDataCalendar();
+      // this.showDataCalendar();
     });
 
 
