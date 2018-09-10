@@ -48,14 +48,17 @@ export class LockedScreenComponent implements OnInit {
     if (this.stylesExplorerService.validateBrowser()) {
       let url = window.location.href;
       let ambient;
-
+  
       if (url.split("localhost").length === 1) {
-        if (url.split("-").length > 1) {
-          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+        if (url.split("//")[1].split("/")[0].toString() === "10.0.2.210:3003") {
+          ambient = "productivo";
+        }else {
+          ambient = "staging";
         }
       } else {
         ambient = 'development';
       }
+      
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise[0] = result.data;
