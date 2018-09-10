@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-aniversary',
@@ -11,6 +12,7 @@ export class AniversaryComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Aniversario de los empleados';
   public showExcel: boolean = true;
+  public userAuthenticated:User;
 
   constructor(public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService) { }
@@ -24,7 +26,10 @@ export class AniversaryComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
       if (data === "Aniversario de los empleados") {
-
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        // this.queriesService.(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+        //   window.open(info.url);
+        // })
       }
     });
 
