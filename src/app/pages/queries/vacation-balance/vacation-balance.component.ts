@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { Router } from '@angular/router';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
@@ -10,11 +10,12 @@ import { User } from '../../../models/general/user';
   templateUrl: './vacation-balance.component.html',
   styleUrls: ['./vacation-balance.component.css']
 })
-export class VacationBalanceComponent implements OnInit {
+export class VacationBalanceComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Saldo de vacaciones';
   public showExcel: boolean = true;
   public userAuthenticated:User;
+  public countAfter: number = 0;
 
   constructor(public queriesService: QueriesService,
     public router: Router,
@@ -28,7 +29,7 @@ export class VacationBalanceComponent implements OnInit {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Saldo de vacaciones") {
+      if (data === "Saldo de vacaciones" && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getBalanceVacationExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);
@@ -45,5 +46,9 @@ export class VacationBalanceComponent implements OnInit {
   }
   returnBackPage() {
     this.router.navigate(['ihr/index']);
+  }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 }
