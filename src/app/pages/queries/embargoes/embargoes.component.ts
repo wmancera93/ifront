@@ -26,7 +26,7 @@ export class EmbargoesComponent implements OnInit {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Embargos") {
+      if (data === "Retención judicial") {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getEmbargoesExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
+import { QueriesService } from '../../../services/queries/queries.service';
 
 @Component({
   selector: 'app-my-hour-extras',
@@ -10,7 +12,10 @@ export class MyHourExtrasComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Mis horas extras';
   public showExcel : boolean =  true;
-  constructor( private accionDataTableService: DataDableSharedService) { }
+  public userAuthenticated:User;
+  
+  constructor( private accionDataTableService: DataDableSharedService,
+    public queriesService: QueriesService) { }
 
   ngOnInit() {
     window.scroll({
@@ -22,7 +27,10 @@ export class MyHourExtrasComponent implements OnInit {
     this.accionDataTableService.getActionDataTable().subscribe((data)=>{
       if(data ==="Mis horas extras")
       {
-
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getExtraHoursExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+          window.open(info.url);
+        })
       }
     });
 
