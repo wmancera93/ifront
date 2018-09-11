@@ -212,6 +212,7 @@ export class NewSpendComponent implements OnInit {
     console.log(this.objectSpends)
     this.spendsService.postSpendData(this.objectSpends).subscribe((data: any) => {
       console.log(data)
+      document.getElementById("btn_spend_new").click();
       const alertSuccess: Alerts[] = [{
         type: 'success',
         title: 'Confirmación',
