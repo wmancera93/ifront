@@ -8,6 +8,7 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
+import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -43,7 +44,8 @@ export class NewSpendComponent implements OnInit {
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
-    public alert: AlertsService) {
+    public alert: AlertsService,
+    public formDataService: FormDataService) {
 
     this.infoTableSpends = [{
       success: true,
@@ -208,10 +210,17 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
-    console.log(param)
-    console.log(this.objectSpends)
-    this.spendsService.postSpendData(this.objectSpends).subscribe((data: any) => {
-      console.log(data)
+
+    const spendsFormData = new FormData();
+    spendsFormData.append('travel_request_id', param.travel_request_id.toString());
+    spendsFormData.append('allowances', JSON.stringify(this.objectAllowances));
+    spendsFormData.append('files_length', this.imgSpend.length.toString())
+    for (let index = 0; index < this.imgSpend.length; index++) {
+      spendsFormData.append('files_' + (index + 1).toString(), this.file[index]);
+    };
+
+    param = spendsFormData;
+    this.formDataService.postSpendsFormData(spendsFormData).subscribe((data: any) => {
       document.getElementById("btn_spend_new").click();
       const alertSuccess: Alerts[] = [{
         type: 'success',
