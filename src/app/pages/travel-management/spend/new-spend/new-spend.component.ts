@@ -208,6 +208,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
+    console.log(param)
     console.log(this.objectSpends)
     this.spendsService.postSpendData(this.objectSpends).subscribe((data: any) => {
       console.log(data)
