@@ -59,7 +59,7 @@ export class NewSpendComponent implements OnInit {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data[0];
+      this.listSpendType = select.data;
     });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
@@ -184,7 +184,6 @@ export class NewSpendComponent implements OnInit {
         file: this.imgSpend
       }]
     }
-    console.log(this.objectSpends)
 
     setTimeout(() => {
       this.objectReport.emit(this.infoTableSpends[0]);
