@@ -85,7 +85,7 @@
           </div>
         </div>
         <div *ngIf="responsive" class="row seven-cols scrollbarBody  height-vh-calendar">
-          <div  class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success"
+          <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success"
             style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
             <div class="row justify-content-end">
               <!-- <div class="text-right" [ngClass]="{ 'col-12':day.weekday !== 'sabado' && day.weekday !== 'domingo', 'col-12':day.weekday =='sabado'|| day.weekday=='domingo'}">
