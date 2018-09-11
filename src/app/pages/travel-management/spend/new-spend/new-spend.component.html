@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Legalización de Gastos</h5>
-        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeSpends" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -18,13 +18,13 @@
             <div class="row">
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
-                    <i class="fa fa-fw fa-plane text-primary-hr"></i>
+                  <i class="fa fa-fw fa-plane text-primary-hr"></i>
                   <strong>Viaje asociado</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" paceholder="Seleccione" >
-                  <option  *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
+                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" paceholder="Seleccione" (change)="validateTravel(formSpendTravel.value)">
+                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
                 </select>
               </div>
             </div>
@@ -36,8 +36,8 @@
                   <i class="fa fa-fw fa-bars text-primary-hr"></i>
                   <strong>Tipo de gasto:</strong>
                 </label>
-                <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione" >
-                  <option  *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
+                <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
+                  <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
@@ -61,11 +61,58 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong>Fecha de Gasto:</strong>
                 </label>
-                <input type="date" name="date_begin" class="form-control" />
+                <input type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" />
               </div>
             </div>
           </div>
+          <div class="col-12" style="margin-top: 15px">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              <strong>Descripción:</strong>
+            </label>
+            <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control" [formControl]="formSpendTravel.controls['observation']">
+                  </textarea>
+          </div>
+          <div class="col-12" style="margin-top: 15px">
+            <div class="row">
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                  <strong>Número Factura:</strong>
+                </label>
+                <input type="number" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']">
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calculator text-primary-hr"></i>
+                  <strong>Número de Control:</strong>
+                </label>
+                <input type="number" class="form-control" name="control_number" [formControl]="formSpendTravel.controls['control_number']">
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <strong>NIT:</strong>
+                </label>
+                <input type="number" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']">
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                  <strong>Establecimiento:</strong>
+                </label>
+                <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="min-height: 100px !important">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              <strong>Gastos</strong>
+            </label>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
 
+          </div>
           <div class="col-12 top-containter" style="margin-top: 20px">
             <div class="row">
               <div class="col-12">
@@ -120,7 +167,7 @@
 
         <div class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-            <button class="btn btn-primary btn-block cursor-general">
+            <button class="btn btn-primary btn-block cursor-general" (click)="aditionSpend(formSpendTravel.value)">
               <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
           </div>
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">

@@ -55,8 +55,6 @@ export class NewAdvancesComponent implements OnInit {
       observation: ""
     });
 
-
-
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === "deleteAdvance") {
         this.deleteAdvance(data);
