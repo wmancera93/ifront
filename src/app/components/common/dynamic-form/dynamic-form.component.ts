@@ -52,9 +52,10 @@ export class DynamicFormComponent implements OnInit {
     this.generalObject.forEach(element => {
 
       element.forEach(control => {
-        group.addControl(control.id, this.fb.control(control.value))
+        group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')))
       });
       this.objectForm.push(element);
+      
       if (this.generalObject.length <= 1) {
         setTimeout(() => {
           document.getElementById('border-general').classList.remove('border-array');
@@ -114,6 +115,23 @@ export class DynamicFormComponent implements OnInit {
     document.getElementById("savebutton").removeAttribute('disabled');
   }
 
+
+  kewUptext(value) {
+    let out = '';
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;';
+
+    for (let i = 0; i < value.currentTarget.value.length; i++) {
+      if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
+        out += value.currentTarget.value.charAt(i);
+      }else {
+        if(value.key === ',') {
+          out += '.';
+        }
+      }
+    }
+
+    value.currentTarget.value = out
+  }
 
 
 }
