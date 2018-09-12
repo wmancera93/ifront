@@ -1,6 +1,7 @@
 <button id="btn_travel_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#travel_new" style="display:none;">
 </button>
-<div class="modal" id="travel_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" data-backdrop="static" id="travel_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -28,8 +29,7 @@
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
-                  (change)="dateComplete(formTravelManagement.value)" 
-                />
+                  (change)="dateComplete(formTravelManagement.value)"/>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -37,7 +37,7 @@
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
-                  (change)="dateComplete(formTravelManagement.value)" />
+                   (change)="dateComplete(formTravelManagement.value)" />
               </div>
             </div>
           </div>
@@ -61,7 +61,7 @@
 
           <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 10px">
-              <div class="col-lg-3 col-md-6 col-12 text-right" >
+              <div class="col-lg-3 col-md-6 col-12 text-right">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
                   <a>Centro de costo:</a>
@@ -69,7 +69,7 @@
               </div>
               <div class="col-lg-3 col-md-6 col-12">
                 <select *ngIf="center_costs_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_center_travel']"
-                    (change)="searchCostsCenter(formTravelManagement.value, 'new')" placeholder="Seleccione">
+                  (change)="searchCostsCenter(formTravelManagement.value, 'new')" placeholder="Seleccione">
                   <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.id">{{costsTravelCenter.name}}</option>
                 </select>
               </div>
@@ -187,10 +187,13 @@
 
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
-                <h5 class="titleColor" *ngIf="bnew">
+                <h5 class="titleColor" *ngIf="bnew && !bedit">
                   Nuevo Trayecto
                 </h5>
-                <button *ngIf="!bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                <h5 class="titleColor" *ngIf="bedit && !bnew">
+                  Editar Trayecto
+                </h5>
+                <button *ngIf="!bnew && !bedit" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
                   Nuevo Trayecto
                 </button>
                 <button id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
@@ -368,7 +371,8 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)"/>
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)"
+                      />
                     </div>
                   </div>
                 </div>
@@ -389,7 +393,7 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button [attr.disabled]="
+                      <button *ngIf="bnew" [attr.disabled]="
                       (formTravelManagement.value.id_transport == -1
                         || formTravelManagement.value.id_country == -1
                         || formTravelManagement.value.id_state == -1
@@ -405,6 +409,22 @@
                         || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
                         (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
+                      <button *ngIf="bedit" [attr.disabled]="
+                      (formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_city == -1
+                        || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.date_begin == ''
+                        || formTravelManagement.value.hour_begin == ''
+                        || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_cityto == -1
+                        || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.date_end == ''
+                        || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
+                        (click)="addDestinationEdit(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
                       <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">

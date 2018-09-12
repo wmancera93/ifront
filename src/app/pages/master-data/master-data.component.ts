@@ -187,6 +187,7 @@ export class MasterDataComponent implements OnInit {
 
       case 'contact_data':
         this.dataMasterService.getDataContact().subscribe((contact: any) => {
+          debugger
           this.titleData = 'Datos de contacto';
           this.dataMaster = contact.data;
           this.activeEditButton(this.dataMaster);

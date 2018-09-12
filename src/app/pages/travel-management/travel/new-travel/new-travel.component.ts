@@ -72,6 +72,8 @@ export class NewTravelComponent implements OnInit {
   public validateDateHeader: any[] = [];
   public array_wrong: any[] = [];
   public ticket_advance: number;
+  public editTrip: any[] = [];
+  public prueba: any[] = [];
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -119,10 +121,9 @@ export class NewTravelComponent implements OnInit {
         document.getElementById("btn_travel_new").click();
         this.activate_submit = true;
       }
-      if (data === 'closeAlertcontinueDestinationRequestsValidateDates' || data === 'closeAlertcontinueTravelRequests'|| data==='closeAlertcontinueDestinationRequests' || data==='closeAlertcontinueTravelAdvances' ) {
+      if (data === 'closeAlertcontinueDestinationRequestsValidateDates' || data === 'closeAlertcontinueTravelRequests' || data === 'closeAlertcontinueDestinationRequests' || data === 'closeAlertcontinueTravelAdvances') {
         document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
       }
-
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -169,13 +170,75 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      
       if (data.action_method === 'deleteNewTravels') {
         this.deleteDestinations(data);
       }
+      if (data.action_method === 'editNewTravel') {
+
+        this.activate_submit = false;
+        if (!this.bedit) {
+          if (!this.bnew) {
+            document.getElementById("funtionTravel").click();
+
+            setTimeout(() => {
+              document.getElementById('travel_new').scrollTo(0, 1300);
+            }, 300);
+
+            this.bedit = true;
+          } else {
+            this.bnew = false
+            this.bedit = true;
+          }
+        }
+
+        if ((this.bedit === true)) {
+    
+          let object: any = this.editTrip.filter((result) => result.id_travel.toString() === data.id.toString())
+
+          this.formTravelManagement = new FormGroup({});
+          this.formTravelManagement = this.fb.group({
+
+            date_requests_begin: object[0].date_requests_begin,
+            date_requests_end: object[0].date_requests_end,
+            trip_text:object[0].trip_text,
+            maintenance: object[0].maintenance,
+            id_center_travel: object[0].id_center_travel,
+            id_travel_costs: object[0].id_travel_costs,
+            id_travel_legal: object[0].id_travel_legal,
+            id_travel_specific: object[0].id_travel_specific,
+            id_travel_activities: object[0].id_travel_activities,
+            id_transport: object[0].id_transport,
+            id_city: object[0].id_city,
+            id_country: object[0].id_country,
+            id_state: object[0].id_state,
+            id_terminal: object[0].id_terminal,
+            date_begin: object[0].date_begin,
+            hour_begin: object[0].hour_begin,
+            hour_end: object[0].hour_end,
+            date_end: object[0].date_end,
+            id_terminalto: object[0].id_terminalto,
+            id_cityto: object[0].id_cityto,
+            id_stateto: object[0].id_stateto,
+            id_countryto:object[0].id_countryto,
+            id_hotels: object[0].id_hotels,
+            travel_mileage: object[0].travel_mileage,
+          });
+          this.searchState(this.formTravelManagement.value, 'edit');
+          this.searchStateto(this.formTravelManagement.value, 'edit');
+          this.searchCity(this.formTravelManagement.value, 'edit');
+          this.searchCityto(this.formTravelManagement.value, 'edit');
+          this.searchTerminal(this.formTravelManagement.value, 'edit');
+          this.searchTerminalto(this.formTravelManagement.value, 'edit');
+          this.searchHotel(this.formTravelManagement.value, 'edit');
+          this.searchCostsCenter(this.formTravelManagement.value, 'edit');
+        }
+      }
     });
 
+
     this.travelsService.getNewTravels().subscribe((data: any) => {
-      
+
       if (document.getElementById('travel_new').className !== 'modal show') {
         document.getElementById("btn_travel_new").click();
         if (data) {
@@ -213,6 +276,7 @@ export class NewTravelComponent implements OnInit {
         this.center_costs_travels = data.data.travel_costs_types;
         this.costs_travels = [];
       })
+
   }
 
   deleteUpload(param: any) {
@@ -243,7 +307,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-    
+
     this.showSubmit = false;
     this.send = true;
 
@@ -291,11 +355,13 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    
+
+    modelPartial.id_travel = this.count + 1;
+    this.editTrip.push(modelPartial);
     this.activate_submit = true;
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
-      field_0: this.count + 1,
+      field_0: modelPartial.id_travel,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
       field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
@@ -305,11 +371,20 @@ export class NewTravelComponent implements OnInit {
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
       field_9: modelPartial.travel_mileage,
+      field_10: {
+        type_method: "UPDATE",
+        type_element: "button",
+        icon: "fa-pencil",
+        id: modelPartial.id_travel,
+        title: "Editar",
+        action_method: "editNewTravel",
+        disable: false
+      },
       field_11: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
-        id: this.count + 1,
+        id: modelPartial.id_travel,
         title: "Eliminar",
         action_method: "deleteNewTravels",
         disable: false
@@ -317,7 +392,7 @@ export class NewTravelComponent implements OnInit {
     })
 
     this.traverlsDestination.push({
-      travel_id: this.count + 1,
+      travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_city,
@@ -337,6 +412,15 @@ export class NewTravelComponent implements OnInit {
 
     this.closeTrip();
     this.activate_submit = true;
+  }
+
+  addDestinationEdit(modelEditPartial){
+
+    this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === modelEditPartial.id_travel), 1);
+    this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === modelEditPartial.id_travel), 1);
+    this.objectReport.emit(this.travelProof[0]);
+    this.addDestination(modelEditPartial);
+  
   }
 
   colapseNew() {
@@ -363,6 +447,7 @@ export class NewTravelComponent implements OnInit {
     this.showSubmit = true;
     this.activate_submit = true;
     this.bnew = false;
+    this.bedit = false;
     this.send = false;
     document.getElementById("funtionTravel").click();
     this.clearFormPartial();
@@ -556,6 +641,11 @@ export class NewTravelComponent implements OnInit {
             type: "string",
             sortable: false,
           },
+          field_10: {
+            value: "Editar",
+            type: "string",
+            sortable: false,
+          },
           field_11: {
             value: "Eliminar",
             type: "string",
@@ -602,7 +692,6 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateComplete(days) {
-   
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
 
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
@@ -686,7 +775,7 @@ export class NewTravelComponent implements OnInit {
                   this.dateEndValidate(days);
                   setTimeout(() => {
                     if (this.array_wrong.length > 0) {
-                     
+
                       document.getElementById("btn_travel_new").click();
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
@@ -844,10 +933,10 @@ export class NewTravelComponent implements OnInit {
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
   dateBeginValidate(days) {
-    
+
     this.validateDateHeader = [];
     this.travelProof[0].data[0].data.forEach(element => {
-      
+
       if (days.date_requests_begin > element.field_4.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -856,17 +945,17 @@ export class NewTravelComponent implements OnInit {
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
-      
+
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }
   }
   dateEndValidate(days) {
-    
+
     this.validateDateHeader = [];
 
     this.travelProof[0].data[0].data.forEach(element => {
-      
+
       if (days.date_requests_end < element.field_7.split(' ')[0]) {
         this.validateDateHeader.push({
           id_travel_wrong: element.field_0
@@ -875,7 +964,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     for (let index = 0; index < this.validateDateHeader.length; index++) {
-     
+
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.array_wrong.push(element);
     }

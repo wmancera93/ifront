@@ -4,6 +4,7 @@ import { DataMasterSharedService } from '../../../services/shared/common/data-ma
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
+
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
