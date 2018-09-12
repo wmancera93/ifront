@@ -71,7 +71,7 @@ export class DynamicFormComponent implements OnInit {
 
   sendDynamicForm(form) {
     let objectForm: any[] = [];
-    let recorrer = JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1, JSON.stringify(form).split(':').toString().replace('{', '').replace('}', '').split('"').toString().split(",,,").toString().substring(1).length).split(",");
+    let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
     for (let index = 0; index < recorrer.length; index++) {
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
