@@ -4,27 +4,34 @@ import { Subject } from 'rxjs';
 @Injectable()
 export class SpendSharedService {
 
-  newSpend : Subject<any> = new Subject<any>();
-  editSpend : Subject<any> = new Subject<any>();
-  viewSpend : Subject<any> = new Subject<any>();
+  newSpend: Subject<any> = new Subject<any>();
+  editSpend: Subject<any> = new Subject<any>();
+  viewSpend: Subject<any> = new Subject<any>();
+  deleteSpend: Subject<any> = new Subject<any>();
   constructor() { }
 
   getNewSpend() {
     return this.newSpend;
   }
-  setNewSpend(newSpend:any ) {
+  setNewSpend(newSpend: any) {
     return this.newSpend.next(newSpend);
-  } 
+  }
   getEditSpend() {
     return this.editSpend;
   }
-  setEditSpend(editSpend:any ) {
+  setEditSpend(editSpend: any) {
     return this.editSpend.next(editSpend);
-  } 
+  }
   getViewSpend() {
     return this.viewSpend;
   }
-  setViewSpend(viewSpend:any ) {
+  setViewSpend(viewSpend: any) {
     return this.viewSpend.next(viewSpend);
-  } 
+  }
+  getDeleteSpend() {
+    return this.deleteSpend;
+  }
+  setDeleteSpend(statusDelete: any) {
+    return this.deleteSpend.next(statusDelete);
+  }
 }

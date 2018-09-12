@@ -1,19 +1,22 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-iva-employee',
   templateUrl: './iva-employee.component.html',
   styleUrls: ['./iva-employee.component.css']
 })
-export class IvaEmployeeComponent implements OnInit {
+export class IvaEmployeeComponent implements OnInit, OnDestroy {
 
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Movimientos de Iva';
   public token: boolean;
   public showExcel: boolean = true;
+  public userAuthenticated:User;
+  public countAfter: number = 0;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -43,12 +46,10 @@ export class IvaEmployeeComponent implements OnInit {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Movimientos de Iva") {
-        this.queriesService.getIvaMovementsExcel().subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+      if (data === "Movimientos de Iva" && this.countAfter === 0) {
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getIvaMovementsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+          window.open(info.url);
         })
       }
     });
@@ -57,5 +58,9 @@ export class IvaEmployeeComponent implements OnInit {
         this.objectReport.emit(data);
 
       });
+  }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 }

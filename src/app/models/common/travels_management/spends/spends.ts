@@ -18,3 +18,27 @@ export interface InfoTravel {
     travel_type_id: number,
     travel_type_name: string
 }
+
+export interface SpendsCreate {
+    travel_request_id: number,
+    allowances: ObjectSpends[],
+    anexeds: Annexes[]
+}
+
+export interface ObjectSpends {
+    id: number,
+    travel_allowance_type_id: number,
+    currency_id: number,
+    value: number,
+    date: string,
+    observation: string,
+    bill_number: string,
+    control_number: string,
+    nit: string,
+    bussines_name: string
+
+}
+
+export interface Annexes {
+    file: any
+}

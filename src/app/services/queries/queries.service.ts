@@ -66,6 +66,10 @@ export class QueriesService {
     return this.tokenService.get('consultations/aniversary')
       .map((data: any) => data.json());
   }
+  getAniversaryExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/aniversary_export/' + idEmployee + '.xlsx')
+      .map((data: any) => data.json());
+  }
   getHistoricalPosts() {
     return this.tokenService.get('consultations/historical_positions')
       .map((data: any) => data.json());
@@ -90,60 +94,60 @@ export class QueriesService {
     return this.tokenService.get('evaluation_messages/find_date_range/' + date1 + '/' + date2)
       .map((data: any) => data.json());
   }
-  getIncomeWithholdingsExcel() {
-    return this.tokenService.get('consultations/income_and_withholdings_export.xlsx')
+  getIncomeWithholdingsExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/income_and_withholdings_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getPaymentsAndDeductionsExcel() {
-    return this.tokenService.get('consultations/payments_and_deductions_export.xlsx')
+  getPaymentsAndDeductionsExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/payments_and_deductions_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getSeverancesExcel() {
-    return this.tokenService.get('consultations/severances_export.xlsx')
+  getSeverancesExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/severances_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getEmbargoesExcel() {
-    return this.tokenService.get('consultations/embargoes_export.xlsx')
+  getEmbargoesExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/embargoes_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getLoansExcel() {
-    return this.tokenService.get('consultations/loans_export.xlsx')
+  getLoansExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/loans_export/' + idEmployee + '.xlsx')
       .map((data: any) => data.json());
   }
-  getEnjoyedVacationExcel() {
-    return this.tokenService.get('consultations/vacation_enjoyed_export.xlsx')
+  getEnjoyedVacationExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/vacation_enjoyed_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getCompensatedVacationExcel() {
-    return this.tokenService.get('consultations/compensated_vacations_export.xlsx')
+  getCompensatedVacationExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/compensated_vacations_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getBalanceVacationExcel() {
-    return this.tokenService.get('consultations/vacation_balance_export.xlsx')
+  getBalanceVacationExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/vacation_balance_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getPermissionsExcel() {
-    return this.tokenService.get('consultations/permissions_export.xlsx')
+  getPermissionsExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/permissions_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getDisabilitiesExcel() {
-    return this.tokenService.get('consultations/disabilities_export.xlsx')
+  getDisabilitiesExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/disabilities_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getExtraHoursExcel() {
-    return this.tokenService.get('consultations/extra_hours_export.xlsx')
+  getExtraHoursExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/extra_hours_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getHistoricalPositionExcel() {
-    return this.tokenService.get('consultations/historical_positions_export.xlsx')
+  getHistoricalPositionExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/historical_positions_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-  getIvaMovementsExcel() {
-    return this.tokenService.get('consultations/movements_iva_export.xlsx')
+  getIvaMovementsExcel(idEmployee: string) {
+    return this.tokenService.get('consultations/movements_iva_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
-    getTimeEvaluationExcel() {
-    return this.tokenService.get('evaluation_messages/evaluation_messages_export.xlsx')
+  getTimeEvaluationExcel(idEmployee: string) {
+    return this.tokenService.get('evaluation_messages/evaluation_messages_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
 }

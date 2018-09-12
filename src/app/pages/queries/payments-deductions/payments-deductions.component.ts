@@ -1,17 +1,20 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, OnDestroy, EventEmitter } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { Angular2TokenService } from 'angular2-token';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-payments-deductions',
   templateUrl: './payments-deductions.component.html',
   styleUrls: ['./payments-deductions.component.css']
 })
-export class PaymentsDeductionsComponent implements OnInit {
+export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Pagos y deducciones';
   public showExcel: boolean = true;
+  public userAuthenticated: User;
+  public countAfter: number = 0;
 
   constructor(public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
@@ -24,15 +27,14 @@ export class PaymentsDeductionsComponent implements OnInit {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Pagos y deducciones") {
-        this.queriesService.getPaymentsAndDeductionsExcel().subscribe((info: any) => {
-          let urlSplit = info.url.split('/')[info.url.split('/').length - 2] + '/' + info.url.split('/')[info.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+      if (data === "Pagos y deducciones" && this.countAfter === 0) {
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getPaymentsAndDeductionsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+          window.open(info.url);
         });
       }
     });
+    
     this.queriesService.getPaymentsDeductions()
       .subscribe((data: any) => {
         this.objectReport.emit(data);
@@ -41,4 +43,9 @@ export class PaymentsDeductionsComponent implements OnInit {
           console.log(error.error);
         })
   }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
+  }
+
 }

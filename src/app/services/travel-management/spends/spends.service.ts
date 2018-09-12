@@ -18,7 +18,7 @@ export class SpendsService {
   }
 
   getViewDetailSpends(idSpend) {
-    return this.tokenService.get('/travel_allowance_requests/' + idSpend)
+    return this.tokenService.get('travel_allowance_requests/' + idSpend)
       .map((data: any) => data.json());
   }
 
@@ -28,6 +28,21 @@ export class SpendsService {
   }
   getSpendMoneyList() {
     return this.tokenService.get('travel_requests/currency_for_select')
+      .map((data: any) => data.json());
+  }
+
+  postSpendData(objectSpend: any) {
+    return this.tokenService.post('travel_allowance_requests', objectSpend)
+      .map((data: any) => data.json());
+  }
+
+  deleteSpendData(idDelete) {
+    return this.tokenService.delete('travel_allowance_requests/' + idDelete)
+      .map((data: any) => data.json());
+  }
+
+  putSpendData(idEdit, objectEdit) {
+    return this.tokenService.put('travel_allowance_requests/' + idEdit, objectEdit)
       .map((data: any) => data.json());
   }
 }

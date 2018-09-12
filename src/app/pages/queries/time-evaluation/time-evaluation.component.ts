@@ -1,17 +1,18 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-time-evaluation',
   templateUrl: './time-evaluation.component.html',
   styleUrls: ['./time-evaluation.component.css']
 })
-export class TimeEvaluationComponent implements OnInit {
+export class TimeEvaluationComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Evaluación de tiempos';
   public token: boolean;
@@ -25,7 +26,8 @@ export class TimeEvaluationComponent implements OnInit {
   public arreglo: string = "";
   public finalDate: number;
   public showExcel: boolean = true;
-
+  public userAuthenticated:User;
+  public countAfter: number = 0;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -57,12 +59,10 @@ export class TimeEvaluationComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Evaluación de tiempos") {
-        this.queriesService.getTimeEvaluationExcel().subscribe((excel: any) => {
-          let urlSplit = excel.url.split('/')[excel.url.split('/').length - 2] + '/' + excel.url.split('/')[excel.url.split('/').length - 1];
-          this.tokenService.get(urlSplit).subscribe((url: any) => {
-            window.open(url.url);
-          });
+      if (data === "Evaluación de tiempos" && this.countAfter === 0) {
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getTimeEvaluationExcel(this.userAuthenticated.employee_id.toString()).subscribe((excel: any) => {
+          window.open(excel.url);
         })
       }
     });
@@ -138,6 +138,10 @@ export class TimeEvaluationComponent implements OnInit {
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+  }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 
 }

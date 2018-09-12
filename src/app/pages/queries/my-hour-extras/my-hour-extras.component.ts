@@ -1,16 +1,22 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
+import { QueriesService } from '../../../services/queries/queries.service';
 
 @Component({
   selector: 'app-my-hour-extras',
   templateUrl: './my-hour-extras.component.html',
   styleUrls: ['./my-hour-extras.component.css']
 })
-export class MyHourExtrasComponent implements OnInit {
+export class MyHourExtrasComponent implements OnInit,  OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Mis horas extras';
   public showExcel : boolean =  true;
-  constructor( private accionDataTableService: DataDableSharedService) { }
+  public userAuthenticated:User;
+  public countAfter: number = 0;
+  
+  constructor( private accionDataTableService: DataDableSharedService,
+    public queriesService: QueriesService) { }
 
   ngOnInit() {
     window.scroll({
@@ -20,9 +26,12 @@ export class MyHourExtrasComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data)=>{
-      if(data ==="Mis horas extras")
+      if(data ==="Mis horas extras" && this.countAfter === 0)
       {
-
+        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.queriesService.getExtraHoursExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
+          window.open(info.url);
+        })
       }
     });
 
@@ -82,4 +91,8 @@ export class MyHourExtrasComponent implements OnInit {
     }, 500);
   }
 
+
+  ngOnDestroy() {
+    this.countAfter += 1;
+  }
 }
