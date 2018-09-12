@@ -60,7 +60,7 @@ export class MasterDataComponent implements OnInit {
       if (object[0].count === 0) {
         object[0].count += 1;
         let dataMasterEdit = {
-          master_data_type: object[0].count,
+          master_data_type: object[0].master_data_type,
           employee_master_data: object
         }
         if (dataMasterEdit.employee_master_data.length == 0) {
