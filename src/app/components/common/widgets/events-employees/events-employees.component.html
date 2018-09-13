@@ -1,6 +1,6 @@
 <div *ngIf="!nohaveTeam" class="employee_event widget white-bg wg-hover-general wg-hoverImg-bg navy-bg">
   <div class="row">
-    <div id="{{cauruselIdGeneral}}" class="carousel slide" data-ride="carousel" data-interval="false">
+    <div id="{{cauruselIdGeneral}}" class="carousel slide" data-ride="carousel" data-interval="7000">
       <ul class="carousel-indicators" style="display:none">
         <li [attr.data-target]="cauruselId" [attr.data-slide-to]="i" [ngClass]="{'active': i=='0'}" *ngFor="let eventEmployee of objectWidget;let i = index"></li>
       </ul>
