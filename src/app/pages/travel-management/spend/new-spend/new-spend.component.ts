@@ -39,8 +39,6 @@ export class NewSpendComponent implements OnInit {
 
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
-  showPdf
-  showSizeTable
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
