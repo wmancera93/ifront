@@ -3,7 +3,7 @@
         <div class="row" *ngFor="let config of element" style="margin-top: 10px;">
             <div class="col-12 col-md-4 center-data-master text-left">
                 <strong class="font-color-default text-left text-style">{{config.name_label}}
-                    <span *ngIf="config.required && config.control !== 'label' && edit">*</span>
+                    <span *ngIf="config.required && config.control !== 'label' && !edit">*</span>
                 </strong>
             </div>
             <div style="font-size: 16px!important;" class="col-12 col-md-8  center-data-master text-left">
