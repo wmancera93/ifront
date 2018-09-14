@@ -158,14 +158,23 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs">
+                    <ul class="nav nav-tabs" *ngIf="approvals[0].platform_answer == 'I'">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
-                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab" href="#Approval">
+                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab"
+                          href="#Approval">
                           Gestionar solicitud
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab" href="#Detail">
+                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab"
+                          href="#Detail">
+                          Ver detalles
+                        </a>
+                      </li>
+                    </ul>
+                    <ul class="nav nav-tabs" *ngIf="approvals[0].platform_answer == 'S'">
+                      <li id="litab2" class="nav-item" style="width: 50%">
+                        <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
                           Ver detalles
                         </a>
                       </li>
@@ -173,7 +182,7 @@
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div  *ngIf="approvals[0].platform_answer == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
                       <div class="row">
                         <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
@@ -197,7 +206,7 @@
                                   Aprobar
                                 </span>
                                 <span *ngIf="switch == 'off'">
-                                  Cancelar
+                                  Rechazar
                                 </span>
                               </h3>
                             </div>
@@ -207,7 +216,7 @@
                                 Aprobar
                               </span>
                               <span *ngIf="switch == 'on'">
-                                Cancelar
+                                Rechazar
                               </span>
                             </div>
                             <div class="col-4">
@@ -227,7 +236,7 @@
                             </div>
                             <div class="col-12">
                               <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
-                            </div>  
+                            </div>
                             <div class="col-md-4 col-12">
                               <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
                                 <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
@@ -273,6 +282,42 @@
                       </div>
                     </div>
                   </div>
+                  <div  *ngIf="approvals[0].platform_answer == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                      <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
+                        <div class="col-12 tab-pane">
+                          <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
+                            <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
+                              <div class="col-12 text-left">
+                                <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
+                                Nivel de aprobación {{details.approver_to_json.level}}
+                              </div>
+                              <div class="col-12 text-left">
+                                <h3 class="font-color-default">
+                                  {{details.status}} por {{details.approver_to_json.name}}
+                                </h3>
+                              </div>
+                              <div class="col-12 text-left">
+                                <h3 class="font-color-default">
+                                  Descripción:
+                                </h3>
+                              </div>
+                              <div class="col-12 text-left">
+                                {{details.description}}
+                              </div>
+                            </div>
+                          </div>
+                          <div *ngIf="approvals[0].answers_to_json.length == 0">
+                            <div class="row justify-content-center">
+                              <div class="col-12 text-center top-general">
+                                <h3 class="font-color-default">
+                                  Aun no hay detalles
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>

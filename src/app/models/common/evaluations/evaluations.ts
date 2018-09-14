@@ -17,7 +17,8 @@ export interface Sections {
     question_type_id?: number,
     parent_id?: number,
     question_childrens_to_json?: Questions[],
-    answer_options?: Answers
+    answer_options?: Answers,
+    open_answer?: Answers
 }
 
 export interface Questions {
@@ -35,7 +36,7 @@ export interface QuestionType {
 export interface Answers {
     id: number,
     description: string,
-    code: string
+    code?: string
 }
 
 export interface ResponseEvaluation {

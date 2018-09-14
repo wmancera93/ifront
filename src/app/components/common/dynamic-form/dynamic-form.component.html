@@ -2,13 +2,15 @@
     <div id="border-general" class="col-12" *ngFor="let element of objectForm; let index = index;" [ngClass]="{ 'border-array':objectForm.length -1 !== index}">
         <div class="row" *ngFor="let config of element" style="margin-top: 10px;">
             <div class="col-12 col-md-4 center-data-master text-left">
-                <strong class="font-color-default text-left text-style">{{ config.name_label}}</strong>
+                <strong class="font-color-default text-left text-style">{{config.name_label}}
+                    <span *ngIf="config.required && config.control !== 'label' && !edit">*</span>
+                </strong>
             </div>
             <div style="font-size: 16px!important;" class="col-12 col-md-8 center-data-master text-left">
                 <label class="text-left center-data-master" *ngIf="config.control === 'label'">{{config.value}}</label>
                 <fieldset class="text-left center-data-master" [disabled]="edit">
                     <div class="text-left" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
-                        <input id="input-text" class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)"
+                        <input (keyup)="kewUptext($event)" id="input-text" class="form-control" *ngSwitchCase="'text'" (blur)="detectChange(config)"
                             type="text" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
                             [disabled]="edit" />
                         <input id="input-number" class="form-control" *ngSwitchCase="'number'" (blur)="detectChange(config)"
