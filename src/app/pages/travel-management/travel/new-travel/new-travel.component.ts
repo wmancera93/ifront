@@ -286,8 +286,6 @@ export class NewTravelComponent implements OnInit {
         }
       )
 
-
-
   }
 
   addDestination(modelPartial) {

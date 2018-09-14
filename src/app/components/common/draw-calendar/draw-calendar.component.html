@@ -88,7 +88,11 @@
           <div [ngClass]="{'bgn-color-day' : day.is_now == true}" class="col-md-1 cell-day text-right scrollbarBody scrollbarBody-success"
             style="height: 80px; border:1px solid gray" *ngFor="let day of newObjectDate;">
             <div class="row justify-content-end">
+<<<<<<< HEAD
               <div class="text-right" [ngClass]="{ 'col-12': day.weekday != 'sabado' && day.weekday != 'domingo', 'col-12': day.weekday =='sabado'|| day.weekday =='domingo'}">
+=======
+              <div class="text-right col-12" >
+>>>>>>> 55baca1b75b72086c47cba929426c9879298e10f
                 <div [ngClass]="{'borderNumber' : day.is_now === true}">
                   {{day.date | date: "dd"}}
                 </div>

@@ -61,7 +61,7 @@ export class NewSpendComponent implements OnInit {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data;
+      this.listSpendType = select.data[0];
     });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
@@ -221,17 +221,18 @@ export class NewSpendComponent implements OnInit {
 
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe((data: any) => {
-      document.getElementById("btn_spend_new").click();
+      document.getElementById("closeSpends").click();
       const alertSuccess: Alerts[] = [{
         type: 'success',
         title: 'Confirmación',
         message: data.message,
         confirmation: false
       }];
+
       this.alert.setAlert(alertSuccess[0]);
+      this.spendSharedService.setNewSpend(true);
     },
       (error: any) => {
-        console.log(error)
         document.getElementById("btn_spend_new").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
