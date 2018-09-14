@@ -35,53 +35,81 @@
         <div *ngIf="dataEvaluation !== null">
           <div class="row top-containter border-botton-general " *ngFor="let question of dataEvaluation[0].evaluation_answers;"
             style="margin-top: 15px;">
-            <div class="col-12" *ngIf="question.answer_option.is_right !== null">
+            <div class="col-12" *ngIf="question.open_answer == null">
               <div class="row">
-                <div class="col-12" *ngIf="question.answer_option.is_right">
+                <div class="col-12" *ngIf="question.answer_option.is_right !== null">
                   <div class="row">
-                    <div class="col-12">
-                      <div class="alert alert-success" role="alert">
-                        <div class="row">
-                          <div class="col-12">
-                            <label> {{question.answer_option.question.description}}
-                            </label>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-12">
+                    <div class="col-12" *ngIf="question.answer_option.is_right">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="alert alert-success" role="alert">
                             <div class="row">
-                              <div class="col-6 align-self-start">
-                                <strong>{{question.answer_option.description}}</strong>
+                              <div class="col-12">
+                                <label> {{question.answer_option.question.description}}
+                                </label>
                               </div>
-                              <div class="col-6">
-                                <label>Correcta</label>
+                            </div>
+                            <div class="row">
+                              <div class="col-12">
+                                <div class="row">
+                                  <div class="col-6 align-self-start">
+                                    <strong>{{question.answer_option.description}}</strong>
+                                  </div>
+                                  <div class="col-6">
+                                    <label>Correcta</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row container justify-content-center">
+                              <div class="col-12">
+                                {{question.comments}}
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row container justify-content-center">
-                          <div class="col-12">
-                            {{question.comments}}
+                      </div>
+                    </div>
+                    <div class="col-12" *ngIf="!question.answer_option.is_right">
+                      <div class="row">
+                        <div class="col-12">
+                          <div class="alert alert-danger" role="alert">
+                            <label> {{question.answer_option.question.description}}
+                            </label>
+                            <div class="row ">
+                              <div class="col-12">
+                                <div class="row">
+                                  <div class="col-6 align-self-start">
+                                    <strong>{{question.answer_option.description}}</strong>
+                                  </div>
+                                  <div class="col-6">
+                                    <label>Incorrecta</label>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row container justify-content-center">
+                              <div class="col-12">
+                                {{question.comments}}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-12" *ngIf="!question.answer_option.is_right">
+                <div class="col-12" *ngIf="question.answer_option.is_right === null">
                   <div class="row">
                     <div class="col-12">
-                      <div class="alert alert-danger" role="alert">
+                      <div class="alert alert-success" role="alert">
                         <label> {{question.answer_option.question.description}}
                         </label>
-                        <div class="row ">
+                        <div class="row">
                           <div class="col-12">
                             <div class="row">
                               <div class="col-6 align-self-start">
                                 <strong>{{question.answer_option.description}}</strong>
-                              </div>
-                              <div class="col-6">
-                                <label>Incorrecta</label>
                               </div>
                             </div>
                           </div>
@@ -97,24 +125,19 @@
                 </div>
               </div>
             </div>
-            <div class="col-12" *ngIf="question.answer_option.is_right === null">
+            <div class="col-12" *ngIf="question.open_answer != null">
               <div class="row">
                 <div class="col-12">
                   <div class="alert alert-success" role="alert">
-                    <label> {{question.answer_option.question.description}}
+                    <label> {{question.open_answer.description}}
                     </label>
                     <div class="row">
                       <div class="col-12">
                         <div class="row">
                           <div class="col-6 align-self-start">
-                            <strong>{{question.answer_option.description}}</strong>
+                            <strong>{{question.comments}}</strong>
                           </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="row container justify-content-center">
-                      <div class="col-12">
-                        {{question.comments}}
                       </div>
                     </div>
                   </div>

@@ -36,7 +36,7 @@ export class ApprovalsDetailsComponent implements OnInit {
           .subscribe((request: any) => {
             this.approvals[0] = request.data[0].request;
 
-            if (this.approvals[0].type_request_to_json.prerequisites != "") {
+            if (this.approvals[0].type_request_to_json.prerequisites != "" && this.approvals[0].type_request_to_json.prerequisites != null) {
               this.prerequisit = true;
             } else {
               this.prerequisit = false;
