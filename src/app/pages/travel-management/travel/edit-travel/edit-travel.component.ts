@@ -83,6 +83,7 @@ export class EditTravelComponent implements OnInit {
   public acctionDeleteTable: string = '';
   public validateDateHeader: any[] = [];
   public travels_wrong: any[] = [];
+  public editEditTrip: any[] = [];
 
 
 
@@ -320,6 +321,31 @@ export class EditTravelComponent implements OnInit {
           this.destination_is_edit = true;
         }
       }
+
+      if ((data.action_method === "updateTrayectManagement")) {
+        this.activate_submit = false;
+        if (!this.bedit) {
+          if (!this.bnew) {
+            document.getElementById("edit_funtionTravel").click();
+
+            setTimeout(() => {
+              document.getElementById('travel_edit').scrollTo(0, 1300);
+            }, 300);
+
+            this.bedit = true;
+          } else {
+            this.bnew = false
+            this.bedit = true;
+          }
+        }
+        if ((this.bedit === true)) {
+
+          let object: any = this.editEditTrip.filter((result) => result.id_travel.toString() === data.id.toString())
+
+          this.editTravels(object);
+        }
+      }
+
       if ((data.action_method === "deleteTravelManagement")) {
         document.getElementById("btn_travel_edit").click();
         this.deleteDestinations(data)
@@ -426,6 +452,7 @@ export class EditTravelComponent implements OnInit {
 
     this.activate_submit = true;
     this.activate = true;
+    this.editEditTrip.push(modelPartial);
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.generalViajes[0].travel_managements.data.push({
       field_0: 'temp_' + this.count + 1,
@@ -438,15 +465,15 @@ export class EditTravelComponent implements OnInit {
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
       field_9: modelPartial.travel_mileage,
-      // field_10: {
-      //   type_method: "UPDATE",
-      //   type_element: "button",
-      //   icon: "fa-pencil",
-      //   id: 'temp_' + this.count + 1,
-      //   title: "Editar",
-      //   action_method: "updateTravelManagement",
-      //   disable: false
-      // },
+      field_10: {
+        type_method: "UPDATE",
+        type_element: "button",
+        icon: "fa-pencil",
+        id: 'temp_' + this.count + 1,
+        title: "Editar",
+        action_method: "updateTrayectManagement",
+        disable: false
+      },
       field_11: {
         type_method: "DELETE",
         type_element: "button",
@@ -492,15 +519,24 @@ export class EditTravelComponent implements OnInit {
         element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
         element.field_9 = modelEditPartial.travel_mileage;
-        element.field_11 = {
-          type_method: "DELETE",
+        element.field_10 = {
+          type_method: "UPDATE",
           type_element: "button",
-          icon: "fa-trash",
+          icon: "fa-pencil",
           id: 'temp_' + this.count + 1,
-          title: "Eliminar",
-          action_method: "deleteTravels",
+          title: "Editar",
+          action_method: "updateTrayectManagement",
           disable: false
-        };
+        },
+          element.field_11 = {
+            type_method: "DELETE",
+            type_element: "button",
+            icon: "fa-trash",
+            id: 'temp_' + this.count + 1,
+            title: "Eliminar",
+            action_method: "deleteTravels",
+            disable: false
+          };
       }
     });
 
