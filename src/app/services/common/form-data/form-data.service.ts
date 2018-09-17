@@ -72,6 +72,23 @@ export class FormDataService extends Angular2TokenService {
 
     }
 
+    postSpendsFormData(data: FormData) {
+        this.definitionServer()
+
+        let hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', "multipart/form-data")
+        let requestOptions = new RequestOptions({
+            method: RequestMethod.Post,
+            headers: hdrs,
+            url: this.baseUrl + '/api/v2/' + 'travel_allowance_requests',
+            body: data
+        });
+        return this.request(requestOptions).map(
+            (response) => response.json()
+        );
+
+    }
+
     postNoticeFormData(data: FormData) {
         this.definitionServer()
 
