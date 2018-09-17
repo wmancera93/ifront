@@ -54,15 +54,194 @@
             <app-data-table [records]="objectReport" id="tableViewSpends" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
         </div>
-        <div class="row">
-
+        <div class="row" style="margin-top: 50px">
+          <div class="col-8" *ngFor="let imgsaved of annexes; let index = index">
+            <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+              <div class="row">
+                <div class="col-11">
+                  <p class="badge badge-light wg-hover-general" (click)="viewSpend(imgsaved)">Ver</p>
+                  <p class="badge badge-light wg-hover-general" (click)="downloadSpend(imgsaved)">Descargar</p>
+                </div>
+                <div class="col-1 text-center">
+                  <h6 (click)="deleteUploadSaved(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+
+
+        <div class="row" style="margin-top: 50px">
+          <div class="col-12 top-containter">
+            <div class="row">
+              <div class="col-12">
+                <label *ngIf="annexes.length > 0" class="titleColor">
+                  <i class="fa fa-fw fa-check text-primary-hr"></i>
+                  <strong>Archivos adjuntos</strong>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-8" *ngFor="let imgsaved of annexes; let index = index">
+                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+                  <div class="row">
+                    <div class="col-11">
+                      <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                          {{imgsaved.file.name |slice: 0:30 }}
+                          <span [hidden]="imgsaved.file.name.length < 30">...</span>
+                        </h6>
+                      </div>
+                      <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                          {{imgsaved.file.name |slice: 0:30 }}
+                          <span [hidden]="imgsaved.file.name.length < 30">...</span>
+                        </h6>
+                      </div>
+                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                        theme='dark'>
+                        <h6>{{index+1}}.
+                          <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
+                          {{imgsaved.file.name |slice: 0:30 }}
+                          <span [hidden]="imgsaved.file.name.length < 30">...</span>
+                        </h6>
+                      </div>
+                    </div>
+                    <div class="col-1 text-center">
+                      <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12">
+                <label *ngIf="annexes.length == 0" class="titleColor">
+                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                  <strong>Adjuntar Cotización</strong>
+                </label>
+                <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="row" *ngIf="activeEdit">
+            <form [formGroup]="formEditSpendDetail" class="row" (ngSubmit)="editSpend(formEditSpendDetail.value)">
+              <div class="col-12" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-bars text-primary-hr"></i>
+                      <strong>Tipo de gasto:</strong>
+                    </label>
+                    <select class="form-control" [formControl]="formEditSpendDetail.controls['travel_allowance_type_id']" paceholder="Seleccione">
+                      <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-money text-primary-hr"></i>
+                      <strong>Importe:</strong>
+                    </label>
+                    <input type="number" class="form-control" name="value" [formControl]="formEditSpendDetail.controls['value']">
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                      <strong>Moneda:</strong>
+                    </label>
+                    <select class="form-control" [formControl]="formEditSpendDetail.controls['currency_id']" paceholder="Seleccione">
+                      <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                      <strong>Fecha de Gasto:</strong>
+                    </label>
+                    <input type="date" name="date" [formControl]="formEditSpendDetail.controls['date']" class="form-control" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12" style="margin-top: 15px">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <strong>Descripción:</strong>
+                </label>
+                <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control" [formControl]="formEditSpendDetail.controls['observation']">
+                  </textarea>
+              </div>
+              <div class="col-12" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                      <strong>Número Factura:</strong>
+                    </label>
+                    <input type="number" class="form-control" name="bill_number" [formControl]="formEditSpendDetail.controls['bill_number']">
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-calculator text-primary-hr"></i>
+                      <strong>Número de Control:</strong>
+                    </label>
+                    <input type="number" class="form-control" name="control_number" [formControl]="formEditSpendDetail.controls['control_number']">
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                      <strong>NIT:</strong>
+                    </label>
+                    <input type="number" class="form-control" name="nit" [formControl]="formEditSpendDetail.controls['nit']">
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                      <strong>Establecimiento:</strong>
+                    </label>
+                    <input type="text" class="form-control" name="bussines_name" [formControl]="formEditSpendDetail.controls['bussines_name']">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12" style="min-height: 100px !important">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <strong>Gastos</strong>
+                </label>
+                <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+
+              </div>
+
+            </form>
+          </div>
+        </div>
+        <div class="row justify-content-end" *ngIf="activeEdit">
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+            <button class="btn btn-primary btn-block cursor-general" (click)="aditionSpend(formSpendTravel.value)">
+              <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
+          </div>
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+            <button class="btn btn-warning btn-block cursor-general">
+              <i class="fa fa-fw fa-window-close-o"></i>&nbsp;&nbsp;Limpiar</button>
+          </div>
+        </div>
+
+        <div class="row justify-content-end" *ngIf="activeEdit">
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
+            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+          </div>
+        </div>
+        <div class="modal-footerInfo justify-content-center" style="margin-top:10px;">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+            <h6> Cerrar </h6>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>

@@ -45,6 +45,7 @@ export class FillEvaluationComponent implements OnInit {
       }
     })
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
+      this.object = [];
       this.evaluationService.getDataEvaluationById(info).subscribe((list: any) => {
         this.idEvaluation = info;
         this.infoEvaluation = list.data;
@@ -60,6 +61,8 @@ export class FillEvaluationComponent implements OnInit {
   }
 
   onSubmitSendEval() {
+    this.totalQuestions = 0;
+    this.totalQuestionsBySection = null;
     if (this.sections.length !== 0) {
       this.sections.forEach(element => {
         this.totalQuestionsBySection = element.question_childrens_to_json.length;
@@ -69,6 +72,7 @@ export class FillEvaluationComponent implements OnInit {
     else {
       this.totalQuestions = this.infoEvaluation.questions_to_json.length;
     }
+
     this.evaluationService.postDataEvaluation(this.object, this.totalQuestions).subscribe((data: any) => {
       if (data.success == true) {
         const alertConfirmation: Alerts[] = [{

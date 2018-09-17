@@ -37,25 +37,6 @@ export class EmployeesComponent implements OnInit {
     public router: Router,
     public stylesExplorerService: StylesExplorerService) {
 
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/index') {
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-          }, 20000);
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
-          }, 30000);
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
-          }, 40000);
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
-          }, 50000);
-        }
-      }
-    });
-
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
