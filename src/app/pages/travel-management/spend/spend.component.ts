@@ -22,6 +22,9 @@ export class SpendComponent implements OnInit {
     public spendsService: SpendsService,
     public alert: AlertsService) {
 
+    this.spendSharedService.getNewSpend().subscribe((data: any) => {
+      this.chargeDataSpends();
+    });
     this.chargeDataSpends();
   }
 
