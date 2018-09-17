@@ -158,7 +158,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].platform_answer == 'I'">
+                    <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'I'">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab"
                           href="#Approval">
@@ -172,7 +172,7 @@
                         </a>
                       </li>
                     </ul>
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].platform_answer == 'S'">
+                    <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
                           Ver detalles
@@ -182,7 +182,7 @@
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div  *ngIf="approvals[0].platform_answer == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div  *ngIf="approvals[0].approver_platform == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
                       <div class="row">
                         <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
@@ -282,7 +282,7 @@
                       </div>
                     </div>
                   </div>
-                  <div  *ngIf="approvals[0].platform_answer == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div  *ngIf="approvals[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                       <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
                         <div class="col-12 tab-pane">
                           <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
