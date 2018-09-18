@@ -23,7 +23,7 @@ export class SpendsService {
   }
 
   getSpendListTravel() {
-    return this.tokenService.get('travel_requests/index_for_select')
+    return this.tokenService.get('travel_requests/index_for_select_allowances')
       .map((data: any) => data.json());
   }
   getSpendMoneyList() {

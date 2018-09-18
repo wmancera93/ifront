@@ -193,10 +193,10 @@
                 <h5 class="titleColor" *ngIf="bedit && !bnew">
                   Editar Trayecto
                 </h5>
-                <button *ngIf="!bnew && !bedit" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                <button type="button" *ngIf="!bnew && !bedit" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
                   Nuevo Trayecto
                 </button>
-                <button id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
+                <button type="button" id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
                 </button>
               </div>
             </div>

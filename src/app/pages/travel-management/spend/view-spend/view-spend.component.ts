@@ -22,6 +22,7 @@ export class ViewSpendComponent implements OnInit {
     public http: Http) {
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
       this.spendsService.getViewDetailSpends(idSpend).subscribe((data: any) => {
+        debugger
         this.showSpendDetail = data.data[0];
 
         this.anexes = data.data[0].travel_request_annexeds;
