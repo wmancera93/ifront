@@ -86,7 +86,7 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-
+      debugger
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -460,7 +460,7 @@ export class NewTravelComponent implements OnInit {
       || param.id_transport == 18  || param.id_transport == 19 
       || param.id_transport == 20 || param.id_transport == 22 
       || param.id_transport == 23) {
-        
+
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -721,9 +721,7 @@ export class NewTravelComponent implements OnInit {
         if ((days.date_begin !== '') || (days.date_end !== '')) {
           if ((days.date_begin !== '')) {
             if ((days.date_requests_begin > days.date_begin)) {
-
               document.getElementById("btn_travel_new").click();
-
               const alertDataWrong: Alerts[] = [{
                 type: 'danger',
                 title: 'Error',
@@ -760,9 +758,7 @@ export class NewTravelComponent implements OnInit {
           } else {
             if ((days.date_end !== '')) {
               if ((days.date_requests_end < days.date_end)) {
-
                 document.getElementById("btn_travel_new").click();
-
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
@@ -834,40 +830,9 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
+    debugger
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
-
-    if (dateTrayect.date_begin !== '') {
-      let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
-      if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
-        this.formTravelManagement.controls['date_begin'].setValue('');
-        document.getElementById("btn_travel_new").click();
-        const alertDataWrong: Alerts[] = [{
-          type: 'danger',
-          title: 'Error',
-          message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
-          confirmation: true,
-          typeConfirmation: 'continueDestinationRequests'
-        }];
-        this.alert.setAlert(alertDataWrong[0])
-      }
-    }
-
-    if (dateTrayect.date_end !== '') {
-      let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
-      if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
-        this.formTravelManagement.controls['date_end'].setValue('');
-        document.getElementById("btn_travel_new").click();
-        const alertDataWrong: Alerts[] = [{
-          type: 'danger',
-          title: 'Error',
-          message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
-          confirmation: true,
-          typeConfirmation: 'continueDestinationRequests'
-        }];
-        this.alert.setAlert(alertDataWrong[0])
-      }
-    }
 
     if (dateTrayect.date_begin !== '' && dateTrayect.date_end !== '') {
       let dateBeginCalculate = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
@@ -886,7 +851,43 @@ export class NewTravelComponent implements OnInit {
         }];
         this.alert.setAlert(alertDataWrong[0])
       }
+    } else {
+
+      if (dateTrayect.date_begin !== '') {
+        let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_begin'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
+      }
+  
+      if (dateTrayect.date_end !== '') {
+        let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_end'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
+      }
     }
+
+
+  
   }
   hourvalidations(hourTrayect) {
 
