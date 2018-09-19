@@ -48,6 +48,11 @@ export class EditSpendComponent implements OnInit {
   public alertWarning: any[] = [];
   public idFile: number;
 
+  showPdf
+  showSizeTable
+
+  newEditSpend
+
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
@@ -76,7 +81,6 @@ export class EditSpendComponent implements OnInit {
       }
 
       if (data === 'deleteDocumentSavedSpend') {
-        debugger
         this.buttonNewSpend = true;
         this.labelNewSpend = false;
         this.show_submit_editSpend = true;
