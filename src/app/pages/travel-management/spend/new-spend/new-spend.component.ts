@@ -9,6 +9,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-new-spend',
@@ -38,6 +39,12 @@ export class NewSpendComponent implements OnInit {
   showSizeTable
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
+  public spendEdit: boolean = false;
+  public spendNew: boolean = false;
+  public activate_submit_spend: boolean = true;
+  public continue: boolean = false;
+  public collapse_is: boolean = false;
+  public objectProof: any[] = [];
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -53,35 +60,67 @@ export class NewSpendComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'errorConfirmTravelSpendID' || data === 'errorValidationNewSpend') {
+      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend') {
         document.getElementById("btn_spend_new").click();
+        this.activate_submit_spend = true;
+        this.showSubmit = true;
       }
     })
-    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-      this.listTravelsFromSpend = travel.data;
-    });
-    this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data[0];
-    });
-    this.spendsService.getSpendMoneyList().subscribe((money: any) => {
-      this.listMoneyType = money.data;
-    });
 
-    this.spendsService.getSpendsRequest().subscribe((list: any) => {
-      this.spedsData = list.data;
-    });
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('collapseNewSpend').className = "show";
       }
+
       this.refreshTableSpends();
+
     });
+
+    this.spendSharedService.getDeleteSpend().subscribe((data) => {
+      if (data === 'deleteSpend') {
+        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+          this.listTravelsFromSpend = travel.data;
+        });
+      }
+    })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === "deleteSpend") {
         this.deleteSpend(data);
+      }
+      if (data.action_method === "editNewSpend") {
+
+        this.spendEdit = true;
+        this.spendNew = false;
+        this.collapse_is = false;
+        this.activate_submit_spend = false;
+        document.getElementById("funtionSpendTravel").click();
+        setTimeout(() => {
+          document.getElementById('spend_new').scrollTo(0, 1200);
+        }, 200);
+
+        if ((this.spendEdit === true)) {
+
+          let objectSpend: any = this.objectProof.filter((result) => result.id_spend.toString() === data.id.toString());
+
+          this.formSpendTravel = new FormGroup({});
+          this.formSpendTravel = fb.group({
+            id_spend: objectSpend[0].id_spend,
+            travel_request_id: objectSpend[0].travel_request_id,
+            travel_allowance_type_id: objectSpend[0].travel_allowance_type_id,
+            currency_id: objectSpend[0].currency_id,
+            value: objectSpend[0].value,
+            date: objectSpend[0].date,
+            observation: objectSpend[0].observation,
+            bill_number: objectSpend[0].bill_number,
+            control_number: objectSpend[0].control_number,
+            nit: objectSpend[0].nit,
+            bussines_name: objectSpend[0].bussines_name,
+          });
+        }
       }
     })
 
@@ -116,11 +155,32 @@ export class NewSpendComponent implements OnInit {
     });
   }
 
+
+  ngOnInit() {
+    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+      this.listTravelsFromSpend = travel.data;
+    });
+    this.spendsService.getSpendsTypes().subscribe((select: any) => {
+      this.listSpendType = select.data;
+    });
+    this.spendsService.getSpendMoneyList().subscribe((money: any) => {
+      this.listMoneyType = money.data;
+    });
+
+    this.spendsService.getSpendsRequest().subscribe((list: any) => {
+      this.spedsData = list.data;
+    });
+  }
+
   deleteUpload(param) {
     this.imgSpend.splice(this.imgSpend.findIndex(filter => filter.file.name === param.file.name), 1);
   }
 
   validateTravel(travel: any) {
+    this.continue = true;
+    this.activate_submit_spend = false;
+    this.spendEdit = false;
+    this.spendNew = true;
     this.spedsData.forEach(element => {
       if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
         document.getElementById("closeSpends").click();
@@ -129,19 +189,25 @@ export class NewSpendComponent implements OnInit {
           title: 'Advertencia',
           message: "Ya existe una solicitud de gastos para el viaje",
           confirmation: true,
-          typeConfirmation: 'errorConfirmTravelSpendID'
+          typeConfirmation: 'ConfirmTravelSpendID'
+
         }];
         this.alert.setAlert(alertWarning[0]);
+
       }
     });
   }
 
   deleteSpend(params) {
     this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === params.id), 1);
-
     this.objectReport.emit(this.infoTableSpends[0]);
   }
+
   aditionSpend(objectSpend) {
+    
+    objectSpend.id_spend = this.idSpend + 1;
+    this.objectProof.push(objectSpend)
+
     this.infoTableSpends[0].data[0].data.push({
       field_0: this.idSpend + 1,
       field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
@@ -155,6 +221,15 @@ export class NewSpendComponent implements OnInit {
       field_9: objectSpend.nit,
       field_10: objectSpend.bussines_name,
       field_11: {
+        type_method: "UPDATE",
+        type_element: "button",
+        icon: "fa-pencil",
+        id: this.idSpend + 1,
+        title: "Editar",
+        action_method: "editNewSpend",
+        disable: false
+      },
+      field_12: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -168,6 +243,7 @@ export class NewSpendComponent implements OnInit {
 
     this.objectAllowances.push({
       id: null,
+      id_temp: objectSpend.id_spend,
       travel_allowance_type_id: objectSpend.travel_allowance_type_id,
       currency_id: objectSpend.currency_id,
       value: objectSpend.value,
@@ -179,37 +255,52 @@ export class NewSpendComponent implements OnInit {
       bussines_name: objectSpend.bussines_name
     });
 
-    this.objectSpends = {
-      travel_request_id: objectSpend.travel_request_id,
-      allowances: this.objectAllowances,
-      anexeds: [{
-        file: this.imgSpend
-      }]
-    }
-
     setTimeout(() => {
       this.objectReport.emit(this.infoTableSpends[0]);
     }, 500);
 
-  }
-  cleanSpend() {
-    this.formSpendTravel = this.fb.group({
-      travel_request_id: "",
-      travel_allowance_type_id: "",
-      currency_id: "",
-      value: "",
-      date: "",
-      observation: "",
-      bill_number: "",
-      control_number: "",
-      nit: "",
-      bussines_name: ""
-    });
-  }
-  ngOnInit() {
+    this.idSpend += 1
+    this.refreshPartialSpend();
+    this.spendNew = false;
+    this.spendEdit = false;
+    this.collapse_is = true;
+    this.activate_submit_spend = true;
+    document.getElementById('funtionSpendTravel').click();
   }
 
+  aditionSpendEdit(objectSpendEdit) {
+    this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === objectSpendEdit.id_spend), 1);
+    this.objectAllowances.splice(this.objectAllowances.findIndex(filter => filter.id_temp === objectSpendEdit.id_spend), 1);
+    this.objectReport.emit(this.infoTableSpends[0]);
+    this.aditionSpend(objectSpendEdit);
+    this.spendNew = false;
+    this.spendEdit = false;
+  }
+
+  colapse() {
+    this.activate_submit_spend = false;
+    this.spendEdit = false;
+    this.spendNew = true;
+    this.collapse_is = false;
+    document.getElementById('funtionSpendTravel').click();
+    setTimeout(() => {
+      document.getElementById('spend_new').scrollTo(0, 1200);
+    }, 200);
+
+  }
+  closeSpend() {
+    this.showSubmit = true;
+    this.spendNew = false;
+    this.spendEdit = false;
+    this.collapse_is = true;
+    this.activate_submit_spend = true;
+    document.getElementById("funtionSpendTravel").click();
+    this.refreshPartialSpend();
+  }
+
+
   newSpend(param) {
+    this.showSubmit = false;
 
     const spendsFormData = new FormData();
     spendsFormData.append('travel_request_id', param.travel_request_id.toString());
@@ -220,18 +311,24 @@ export class NewSpendComponent implements OnInit {
     };
 
     param = spendsFormData;
-    this.formDataService.postSpendsFormData(spendsFormData).subscribe((data: any) => {
-      document.getElementById("closeSpends").click();
-      const alertSuccess: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: data.message,
-        confirmation: false
-      }];
+    this.formDataService.postSpendsFormData(spendsFormData).subscribe(
+      (data: any) => {
+        document.getElementById("closeSpends").click();
 
-      this.alert.setAlert(alertSuccess[0]);
-      this.spendSharedService.setNewSpend(true);
-    },
+        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+          this.listTravelsFromSpend = travel.data;
+        });
+
+        const alertSuccess: Alerts[] = [{
+          type: 'success',
+          title: 'Alerta',
+          message: data.message,
+          confirmation: false
+        }];
+        this.showSubmit = true;
+        this.alert.setAlert(alertSuccess[0]);
+        this.spendSharedService.setRefreshSpend(true);
+      },
       (error: any) => {
         document.getElementById("btn_spend_new").click();
         const alertWarning: Alerts[] = [{
@@ -239,8 +336,9 @@ export class NewSpendComponent implements OnInit {
           title: 'Advertencia',
           message: error.json().errors.toString(),
           confirmation: true,
-          typeConfirmation: 'errorValidationNewSpend'
+          typeConfirmation: 'ValidationNewSpend'
         }];
+        this.showSubmit = true;
         this.alert.setAlert(alertWarning[0]);
       })
   }
@@ -308,6 +406,11 @@ export class NewSpendComponent implements OnInit {
             value: "Eliminar",
             type: "string",
             sortable: false,
+          },
+          field_12: {
+            value: "Editar",
+            type: "string",
+            sortable: false,
           }
         },
         data: [
@@ -318,6 +421,25 @@ export class NewSpendComponent implements OnInit {
     setTimeout(() => {
       this.objectReport.emit(this.infoTableSpends[0]);
     }, 100);
+    this.spendNew = true;
+    this.collapse_is = false;
+    this.activate_submit_spend = false;
+    this.imgSpend = [];
+    this.refreshPartialSpend();
+    this.formSpendTravel.controls['travel_request_id'].setValue('');
+  }
+
+  refreshPartialSpend() {
+
+    this.formSpendTravel.controls['travel_allowance_type_id'].setValue('');
+    this.formSpendTravel.controls['currency_id'].setValue('');
+    this.formSpendTravel.controls['value'].setValue('');
+    this.formSpendTravel.controls['date'].setValue('');
+    this.formSpendTravel.controls['observation'].setValue('');
+    this.formSpendTravel.controls['bill_number'].setValue('');
+    this.formSpendTravel.controls['control_number'].setValue('');
+    this.formSpendTravel.controls['nit'].setValue('');
+    this.formSpendTravel.controls['bussines_name'].setValue('');
 
   }
 }

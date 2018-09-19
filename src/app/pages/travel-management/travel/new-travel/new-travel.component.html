@@ -29,7 +29,7 @@
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
-                  (change)="dateComplete(formTravelManagement.value)"/>
+                  (change)="dateComplete(formTravelManagement.value)" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -37,7 +37,7 @@
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
-                   (change)="dateComplete(formTravelManagement.value)" />
+                  (change)="dateComplete(formTravelManagement.value)" />
               </div>
             </div>
           </div>
@@ -193,10 +193,10 @@
                 <h5 class="titleColor" *ngIf="bedit && !bnew">
                   Editar Trayecto
                 </h5>
-                <button *ngIf="!bnew && !bedit" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
+                <button type="button" *ngIf="!bnew && !bedit" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
                   Nuevo Trayecto
                 </button>
-                <button id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
+                <button type="button" id="funtionTravel" data-toggle="collapse" data-target="#collapseTravel" style="display: none">
                 </button>
               </div>
             </div>
@@ -395,32 +395,50 @@
                     <div class="col-lg-3 col-md-4 col-12">
                       <button *ngIf="bnew" [attr.disabled]="
                       (formTravelManagement.value.id_transport == -1
+                      ||formTravelManagement.value.id_transport == ''
                         || formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_state == ''
                         || formTravelManagement.value.id_city == -1
+                        || formTravelManagement.value.id_city == ''
                         || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
                         || formTravelManagement.value.hour_begin == ''
                         || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_stateto == ''
                         || formTravelManagement.value.id_cityto == -1
+                        || formTravelManagement.value.id_cityto == ''
                         || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
                         || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
                         (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                       <button *ngIf="bedit" [attr.disabled]="
                       (formTravelManagement.value.id_transport == -1
+                      ||formTravelManagement.value.id_transport == ''
                         || formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_state == ''
                         || formTravelManagement.value.id_city == -1
+                        || formTravelManagement.value.id_city == ''
                         || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
                         || formTravelManagement.value.hour_begin == ''
                         || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_stateto == ''
                         || formTravelManagement.value.id_cityto == -1
+                        || formTravelManagement.value.id_cityto == ''
                         || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
                         || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
                         (click)="addDestinationEdit(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">

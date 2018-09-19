@@ -17,13 +17,13 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
 
-  getViewDetailSpends(idSpend) {
-    return this.tokenService.get('travel_allowance_requests/' + idSpend)
+  getViewDetailSpends(idSpend: string, edit: boolean) {
+    return this.tokenService.get('travel_allowance_requests/' + idSpend + '/' + edit)
       .map((data: any) => data.json());
   }
 
   getSpendListTravel() {
-    return this.tokenService.get('travel_requests/index_for_select')
+    return this.tokenService.get('travel_requests/index_for_select_allowances')
       .map((data: any) => data.json());
   }
   getSpendMoneyList() {
@@ -54,4 +54,12 @@ export class SpendsService {
     return this.tokenService.get('travel_allowances/' + idEdit)
       .map((data: any) => data.json());
   }
+
+  deleteFileSpendData(idFile) {
+    return this.tokenService.delete('travel_allowances/destroy_anexed/' + idFile)
+      .map((data: any) => data.json());
+  }
+
+
+
 }

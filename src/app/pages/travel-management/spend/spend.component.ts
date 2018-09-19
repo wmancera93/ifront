@@ -22,13 +22,16 @@ export class SpendComponent implements OnInit {
     public spendsService: SpendsService,
     public alert: AlertsService) {
 
-    this.spendSharedService.getNewSpend().subscribe((data: any) => {
-      this.chargeDataSpends();
+    this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
+      if(data){
+        this.chargeDataSpends();
+      }     
     });
-    this.chargeDataSpends();
+   
   }
 
   ngOnInit() {
+    this.chargeDataSpends();
   }
 
   chargeDataSpends() {
@@ -59,6 +62,7 @@ export class SpendComponent implements OnInit {
       }];
       this.alert.setAlert(alertSuccess[0]);
       this.chargeDataSpends();
+      this.spendSharedService.setDeleteSpend('deleteSpend');
     })
   }
 }

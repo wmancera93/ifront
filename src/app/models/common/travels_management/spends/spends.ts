@@ -27,6 +27,7 @@ export interface SpendsCreate {
 
 export interface ObjectSpends {
     id: number,
+    id_temp?:number,
     travel_allowance_type_id: number,
     currency_id: number,
     value: number,

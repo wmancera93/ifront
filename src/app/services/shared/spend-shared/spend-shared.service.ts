@@ -3,12 +3,19 @@ import { Subject } from 'rxjs';
 
 @Injectable()
 export class SpendSharedService {
-
+  refreshSpend: Subject<any> = new Subject<any>();
   newSpend: Subject<any> = new Subject<any>();
   editSpend: Subject<any> = new Subject<any>();
   viewSpend: Subject<any> = new Subject<any>();
   deleteSpend: Subject<any> = new Subject<any>();
   constructor() { }
+
+  getRefreshSpend() {
+    return this.refreshSpend;
+  }
+  setRefreshSpend(refreshSpend: any) {
+    return this.refreshSpend.next(refreshSpend);
+  }
 
   getNewSpend() {
     return this.newSpend;
@@ -34,4 +41,6 @@ export class SpendSharedService {
   setDeleteSpend(statusDelete: any) {
     return this.deleteSpend.next(statusDelete);
   }
+
+
 }

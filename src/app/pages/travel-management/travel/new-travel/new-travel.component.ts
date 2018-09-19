@@ -170,7 +170,7 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      
+
       if (data.action_method === 'deleteNewTravels') {
         this.deleteDestinations(data);
       }
@@ -193,7 +193,7 @@ export class NewTravelComponent implements OnInit {
         }
 
         if ((this.bedit === true)) {
-    
+
           let object: any = this.editTrip.filter((result) => result.id_travel.toString() === data.id.toString())
 
           this.formTravelManagement = new FormGroup({});
@@ -201,7 +201,7 @@ export class NewTravelComponent implements OnInit {
 
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
-            trip_text:object[0].trip_text,
+            trip_text: object[0].trip_text,
             maintenance: object[0].maintenance,
             id_center_travel: object[0].id_center_travel,
             id_travel_costs: object[0].id_travel_costs,
@@ -220,7 +220,7 @@ export class NewTravelComponent implements OnInit {
             id_terminalto: object[0].id_terminalto,
             id_cityto: object[0].id_cityto,
             id_stateto: object[0].id_stateto,
-            id_countryto:object[0].id_countryto,
+            id_countryto: object[0].id_countryto,
             id_hotels: object[0].id_hotels,
             travel_mileage: object[0].travel_mileage,
           });
@@ -353,6 +353,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
+    debugger
 
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
@@ -412,13 +413,13 @@ export class NewTravelComponent implements OnInit {
     this.activate_submit = true;
   }
 
-  addDestinationEdit(modelEditPartial){
+  addDestinationEdit(modelEditPartial) {
 
     this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === modelEditPartial.id_travel), 1);
     this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === modelEditPartial.id_travel), 1);
     this.objectReport.emit(this.travelProof[0]);
     this.addDestination(modelEditPartial);
-  
+
   }
 
   colapseNew() {
