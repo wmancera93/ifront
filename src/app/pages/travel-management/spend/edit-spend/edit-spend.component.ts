@@ -200,7 +200,6 @@ export class EditSpendComponent implements OnInit {
   aditionSpend(objectSpend) {
     debugger
     objectSpend.id_spend = this.idSpend + 1;
-
     this.editSpendTable[0].data[0].push({
 
       field_0: 'temp_' + this.idSpend + 1,
