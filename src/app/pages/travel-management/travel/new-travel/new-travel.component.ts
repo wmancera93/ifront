@@ -454,7 +454,13 @@ export class NewTravelComponent implements OnInit {
 
   mileageTravel(param) {
 
-    if (param.id_transport == 2) {
+    if (param.id_transport == 5 || param.id_transport == 7 || param.id_transport == 8 
+      || param.id_transport == 9 || param.id_transport == 10 
+      || param.id_transport == 16  || param.id_transport == 17 
+      || param.id_transport == 18  || param.id_transport == 19 
+      || param.id_transport == 20 || param.id_transport == 22 
+      || param.id_transport == 23) {
+        
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
