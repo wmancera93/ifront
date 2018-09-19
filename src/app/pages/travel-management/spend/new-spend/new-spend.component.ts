@@ -204,6 +204,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
+    
     objectSpend.id_spend = this.idSpend + 1;
     this.objectProof.push(objectSpend)
 

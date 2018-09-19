@@ -15,16 +15,16 @@ export class ViewSpendComponent implements OnInit {
   public showTableSpendsDetail: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
+  public edit: boolean = false;
   public anexes: any[] = [];
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public http: Http) {
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
-      this.spendsService.getViewDetailSpends(idSpend).subscribe((data: any) => {
+      this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
         debugger
         this.showSpendDetail = data.data[0];
-
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
         this.showTableSpendsDetail = data.data[0].travel_allowances;
@@ -47,13 +47,13 @@ export class ViewSpendComponent implements OnInit {
   }
 
   viewAnnex(paramView) {
-
+    debugger
     window.open(paramView.file.url)
 
   }
 
   downloadAnnex(param: any) {
-
+    debugger
     this.http.get(param.file.url, {
       responseType: ResponseContentType.Blob
     }).map(res => {

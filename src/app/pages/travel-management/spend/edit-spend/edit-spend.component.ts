@@ -7,6 +7,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Http, ResponseContentType } from '@angular/http';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
+import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 
 @Component({
   selector: 'app-edit-spend',
@@ -25,23 +26,37 @@ export class EditSpendComponent implements OnInit {
   public listTravelsFromSpend: any[] = [];
   public listSpendType: any[] = [];
   public listMoneyType: any[] = [];
-  public formEditSpendDetail: any;
+  public formSpendEditTravel: any;
   public annexes: any[] = [];
   public formatDate: any;
-  public infoTableSpends: any[] = [];
   public idSpend: number = 0;
   public objectSpends: SpendsCreate;
-  public objectAllowances: ObjectSpends[] = [];
+  public objectAllowancesEdit: ObjectSpends[] = [];
+  public edit: boolean = true;
+  public icon: any[] = [];
+  public iconDocument: string = '';
+  public is_upload: boolean = false;
+  public file: any[] = [];
+  public objectImg: any[] = [];
+  public iconUpload: any[] = [];
+  public filequotation = 'fileQuotationSpendEdit';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls'
+  public buttonNewSpend: boolean = true;
+  public labelNewSpend: boolean = false;
+  public show_submit_editSpend: boolean = true;
+  public edit_Spend: boolean = false;
+  public alertWarning: any[] = [];
+  public idFile: number;
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
     public alert: AlertsService,
     public fb: FormBuilder,
-    public http: Http) {
+    public http: Http, public fileUploadService: FileUploadService) {
 
-    this.formEditSpendDetail = new FormGroup({});
-    this.formEditSpendDetail = fb.group({
+    this.formSpendEditTravel = new FormGroup({});
+    this.formSpendEditTravel = fb.group({
       travel_request_id: "",
       travel_allowance_type_id: "",
       currency_id: "",
@@ -59,27 +74,36 @@ export class EditSpendComponent implements OnInit {
       if (data === 'deleteDetailSpend') {
         document.getElementById("btn_spend_edit").click();
       }
+
+      if (data === 'deleteDocumentSavedSpend') {
+        debugger
+        this.buttonNewSpend = true;
+        this.labelNewSpend = false;
+        this.show_submit_editSpend = true;
+        this.showSubmit = true;
+        document.getElementById("btn_spend_edit").click();
+
+        this.spendsService.deleteFileSpendData(this.idFile.toString()).subscribe((deleteSpend: any) => {
+          this.annexes.splice(this.annexes.findIndex(filter => filter.id === this.idFile), 1);
+        })
+        document.getElementById("btn_spend_edit").click();
+      }
+
     });
 
-    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-      this.listTravelsFromSpend = travel.data;
-    });
-    this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data[0];
-    });
-    this.spendsService.getSpendMoneyList().subscribe((money: any) => {
-      this.listMoneyType = money.data;
-    });
 
-    this.spendsService.getSpendsRequest().subscribe((list: any) => {
-      this.spedsData = list.data;
-    });
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-      this.spendsService.getViewDetailSpends(idEdit).subscribe((editSpend: any) => {
-        this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
+
+      this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
+        debugger
+        this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel.ticket;
         this.editSpendTable = editSpend.data[0].travel_allowances;
         this.annexes = editSpend.data[0].travel_request_annexeds;
+        this.buttonNewSpend = true;
+        this.labelNewSpend = false;
+        this.show_submit_editSpend = true;
+        this.showSubmit = true;
 
         setTimeout(() => {
           this.objectReport.emit({ data: [this.editSpendTable] });
@@ -92,16 +116,31 @@ export class EditSpendComponent implements OnInit {
       })
     })
 
+    this.fileUploadService.getObjetFile().subscribe((data) => {
+      setTimeout(() => {
+        this.fileUploadService.setCleanUpload(true);
+        setTimeout(() => {
+          this.iconUpload = data.name.split('.');
+          this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
+          this.is_upload = true;
+          this.file.push(data);
+          this.objectImg.push({ file: data, extension: this.iconDocument });
+
+        }, 200);
+      }, 1000);
+    });
+
+
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
 
       if (action.action_method == "updateTravelAllowance") {
 
         this.idEditSpend = action.id;
         this.spendsService.getDetailSpendEdit(this.idEditSpend).subscribe((data: any) => {
-          console.log(data)
+
           this.formatDate = data.data.date_time.split("T")[0];
-          this.formEditSpendDetail = new FormGroup({});
-          this.formEditSpendDetail = fb.group({
+          this.formSpendEditTravel = new FormGroup({});
+          this.formSpendEditTravel = fb.group({
             travel_request_id: "",
             travel_allowance_type_id: data.data.travel_allowance_type_id,
             currency_id: data.data.currency_id,
@@ -138,16 +177,85 @@ export class EditSpendComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+      this.listTravelsFromSpend = travel.data;
+    });
+    this.spendsService.getSpendsTypes().subscribe((select: any) => {
+      this.listSpendType = select.data;
+    });
+    this.spendsService.getSpendMoneyList().subscribe((money: any) => {
+      this.listMoneyType = money.data;
+    });
+
+    this.spendsService.getSpendsRequest().subscribe((list: any) => {
+      this.spedsData = list.data;
+    });
   }
 
-  viewAnnex(paramView) {
+  aditionSpend(objectSpend) {
+    debugger
+    objectSpend.id_spend = this.idSpend + 1;
 
+    this.editSpendTable[0].data[0].push({
+
+      field_0: 'temp_' + this.idSpend + 1,
+      field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
+      field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
+      field_3: objectSpend.value,
+      field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
+      field_5: objectSpend.date,
+      field_6: objectSpend.observation,
+      field_7: objectSpend.bill_number,
+      field_8: objectSpend.control_number,
+      field_9: objectSpend.nit,
+      field_10: objectSpend.bussines_name,
+      field_11: {
+        type_method: "UPDATE",
+        type_element: "button",
+        icon: "fa-pencil",
+        id: this.idSpend + 1,
+        title: "Editar",
+        action_method: "editSaveSpend",
+        disable: false
+      },
+      field_12: {
+        type_method: "DELETE",
+        type_element: "button",
+        icon: "fa-trash",
+        id: this.idSpend + 1,
+        title: "Eliminar",
+        action_method: "deleteSpend",
+        disable: false
+      }
+
+    });
+
+    this.objectAllowancesEdit.push({
+      id: null,
+      id_temp:objectSpend.id_spend,
+      travel_allowance_type_id: objectSpend.travel_allowance_type_id,
+      currency_id: objectSpend.currency_id,
+      value: objectSpend.value,
+      date: objectSpend.date,
+      observation: objectSpend.observation,
+      bill_number: objectSpend.bill_number,
+      control_number: objectSpend.control_number,
+      nit: objectSpend.nit,
+      bussines_name: objectSpend.bussines_name
+    });
+
+    
+    setTimeout(() => {
+      this.objectReport.emit(this.editSpendTable[0]);
+    }, 500);
+
+  }
+
+  viewDocumentSaved(paramView) {
     window.open(paramView.file.url)
-
   }
-
-  downloadAnnex(param: any) {
-
+  downloadDocumentSaved(param) {
     this.http.get(param.file.url, {
       responseType: ResponseContentType.Blob
     }).map(res => {
@@ -169,56 +277,46 @@ export class EditSpendComponent implements OnInit {
       });
   }
 
-  aditionSpend(objectSpend) {
-    this.infoTableSpends[0].data[0].data.push({
-      field_0: this.idSpend + 1,
-      field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
-      field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
-      field_3: objectSpend.value,
-      field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_5: objectSpend.date,
-      field_6: objectSpend.observation,
-      field_7: objectSpend.bill_number,
-      field_8: objectSpend.control_number,
-      field_9: objectSpend.nit,
-      field_10: objectSpend.bussines_name,
-      field_11: {
-        type_method: "DELETE",
-        type_element: "button",
-        icon: "fa-trash",
-        id: this.idSpend + 1,
-        title: "Eliminar",
-        action_method: "deleteSpend",
-        disable: false
-      }
+  colapseEdit() {
+    this.buttonNewSpend = false;
+    this.labelNewSpend = true;
+    this.show_submit_editSpend = false;
+    this.showSubmit = false;
+    this.edit_Spend = false;
 
-    });
-
-    this.objectAllowances.push({
-      id: null,
-      travel_allowance_type_id: objectSpend.travel_allowance_type_id,
-      currency_id: objectSpend.currency_id,
-      value: objectSpend.value,
-      date: objectSpend.date,
-      observation: objectSpend.observation,
-      bill_number: objectSpend.bill_number,
-      control_number: objectSpend.control_number,
-      nit: objectSpend.nit,
-      bussines_name: objectSpend.bussines_name
-    });
-
-    this.objectSpends = {
-      travel_request_id: objectSpend.travel_request_id,
-      allowances: this.objectAllowances,
-      anexeds: [{
-        file: ""
-      }]
-    }
-
+    document.getElementById('EditfuntionSpend').click();
     setTimeout(() => {
-      this.objectReport.emit(this.infoTableSpends[0]);
-    }, 500);
+      document.getElementById('spend_edit').scrollTo(0, 1200);
+    }, 200);
 
   }
+  closeEditSpend() {
+    this.buttonNewSpend = true;
+    this.labelNewSpend = false;
+    this.show_submit_editSpend = true;
+    this.showSubmit = true;
+    this.edit_Spend = false;
+
+    document.getElementById("EditfuntionSpend").click();
+    // this.refreshPartialSpend();
+  }
+
+  deleteUploadSavedEdit(param: any) {
+    this.idFile = param.id;
+    this.alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el archivo #' + this.idFile.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteDocumentSavedSpend'
+    }];
+    this.alert.setAlert(this.alertWarning[0]);
+
+  }
+
+  deleteUploadEditSpend(param: any) {
+    this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
+  }
+
 
 }

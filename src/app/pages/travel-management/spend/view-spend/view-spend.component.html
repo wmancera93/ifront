@@ -9,7 +9,7 @@
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
-      <div class="modal-body bodyColorInfo" *ngIf="showSpendDetail!== null">
+      <div class="modal-body bodyColorInfo" *ngIf="showSpendDetail !== null">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
@@ -21,12 +21,12 @@
             <label>{{showTravelDetail.name_travel}}</label>
           </div>
         </div>
-        <div class="row">
+        <div class="row" style="margin-top:20px">
           <div class="col-lg-6">
             <div class="row">
               <div class="col-lg-6 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
+                  <i class="fa fa-fw fa-globe text-primary-hr"></i>
                   <strong>Tipo de Viaje</strong>
                 </label>
               </div>
@@ -36,10 +36,10 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="row"  style="margin-top:20px">
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
-              <i class="fa fa-fw fa fa-bars text-primary-hr"></i>
+              <i class="fa fa-fw fa-check-square-o text-primary-hr"></i>
               <strong>Estado:</strong>
             </label>
           </div>
@@ -49,8 +49,8 @@
             </label>
           </div>
         </div>
-        <div class="row justify-content-center">
-          <div class="col-12">
+        <div class="row justify-content-center" style="margin-top:40px">
+          <div class="col-12" style="min-height: 80px !important">
             <app-data-table [records]="objectReport" id="tableViewSpends" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
         </div>
@@ -61,6 +61,9 @@
                 <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                   <div class="row">
                     <div class="col-11">
+                      <h6>{{imgsaved.name |slice: 0:40}}
+                        <span [hidden]="imgsaved.name.length < 20">...</span>
+                      </h6>
                       <p class="badge badge-light wg-hover-general" (click)="viewAnnex(imgsaved)">Ver</p>
                       <p class="badge badge-light wg-hover-general" (click)="downloadAnnex(imgsaved)">Descargar</p>
                     </div>

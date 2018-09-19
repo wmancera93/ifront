@@ -449,7 +449,6 @@ export class EditTravelComponent implements OnInit {
 
   }
   addDestination(modelPartial) {
-
     this.activate_submit = true;
     this.activate = true;
     this.editEditTrip.push(modelPartial);
