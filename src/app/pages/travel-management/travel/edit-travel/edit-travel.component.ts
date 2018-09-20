@@ -522,7 +522,7 @@ export class EditTravelComponent implements OnInit {
           type_method: "UPDATE",
           type_element: "button",
           icon: "fa-pencil",
-          id: 'temp_' + this.count + 1,
+          id: this.id_destinations,
           title: "Editar",
           action_method: "updateTrayectManagement",
           disable: false
@@ -531,7 +531,7 @@ export class EditTravelComponent implements OnInit {
             type_method: "DELETE",
             type_element: "button",
             icon: "fa-trash",
-            id: 'temp_' + this.count + 1,
+            id: this.id_destinations,
             title: "Eliminar",
             action_method: "deleteTravels",
             disable: false

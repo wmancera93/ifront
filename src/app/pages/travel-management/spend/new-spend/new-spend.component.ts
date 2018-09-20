@@ -119,6 +119,9 @@ export class NewSpendComponent implements OnInit {
             control_number: objectSpend[0].control_number,
             nit: objectSpend[0].nit,
             bussines_name: objectSpend[0].bussines_name,
+            cod_provider:  objectSpend[0].cod_provider,
+            authorization_number:  objectSpend[0].authorization_number,
+            populated:  objectSpend[0].populated,
           });
         }
       }
@@ -135,7 +138,10 @@ export class NewSpendComponent implements OnInit {
       bill_number: "",
       control_number: "",
       nit: "",
-      bussines_name: ""
+      bussines_name: "",
+      cod_provider: "",
+      authorization_number: "",
+      populated: "",
     });
 
 
@@ -204,7 +210,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
-    
+
     objectSpend.id_spend = this.idSpend + 1;
     this.objectProof.push(objectSpend)
 
@@ -220,7 +226,10 @@ export class NewSpendComponent implements OnInit {
       field_8: objectSpend.control_number,
       field_9: objectSpend.nit,
       field_10: objectSpend.bussines_name,
-      field_11: {
+      field_11: objectSpend.cod_provider,
+      field_12: objectSpend.authorization_number,
+      field_13: objectSpend.populated,
+      field_14: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -229,7 +238,7 @@ export class NewSpendComponent implements OnInit {
         action_method: "editNewSpend",
         disable: false
       },
-      field_12: {
+      field_15: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -252,7 +261,10 @@ export class NewSpendComponent implements OnInit {
       bill_number: objectSpend.bill_number,
       control_number: objectSpend.control_number,
       nit: objectSpend.nit,
-      bussines_name: objectSpend.bussines_name
+      bussines_name: objectSpend.bussines_name,
+      doc_num_origin: objectSpend.authorization_number,
+      provider_code: objectSpend.cod_provider,
+      population: objectSpend.populated
     });
 
     setTimeout(() => {
@@ -403,11 +415,26 @@ export class NewSpendComponent implements OnInit {
             sortable: false,
           },
           field_11: {
-            value: "Eliminar",
+            value: "Código de proveedor ",
             type: "string",
             sortable: false,
           },
           field_12: {
+            value: "Numero de autorización",
+            type: "string",
+            sortable: false,
+          },
+          field_13: {
+            value: "Poblado",
+            type: "string",
+            sortable: false,
+          },
+          field_14: {
+            value: "Eliminar",
+            type: "string",
+            sortable: false,
+          },
+          field_15: {
             value: "Editar",
             type: "string",
             sortable: false,
@@ -440,6 +467,10 @@ export class NewSpendComponent implements OnInit {
     this.formSpendTravel.controls['control_number'].setValue('');
     this.formSpendTravel.controls['nit'].setValue('');
     this.formSpendTravel.controls['bussines_name'].setValue('');
+    this.formSpendTravel.controls['cod_provider'].setValue('');
+    this.formSpendTravel.controls['authorization_number'].setValue('');
+    this.formSpendTravel.controls['populated'].setValue('');
+
 
   }
 }

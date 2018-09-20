@@ -8,7 +8,7 @@
         <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
-      </div>                       
+      </div>
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formSpendEditTravel" class="row" (ngSubmit)="newEditSpend(formSpendEditTravel.value)">
 
@@ -119,7 +119,7 @@
                 <h5 class="titleColor" *ngIf="edit_Spend">
                   Editar gasto
                 </h5>
-                <button type="button" class="btn btn-block btn-primary text-center"  *ngIf="buttonNewSpend" (click)="colapseEdit()">
+                <button type="button" class="btn btn-block btn-primary text-center" *ngIf="buttonNewSpend" (click)="colapseEdit()">
                   Nuevo gasto
                 </button>
                 <button id="EditfuntionSpend" data-toggle="collapse" data-target="#collapseEditSpend" style="display: none">
@@ -205,6 +205,32 @@
                     <strong>Establecimiento:</strong>
                   </label>
                   <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendEditTravel.controls['bussines_name']">
+                </div>
+              </div>
+            </div>
+
+            <div class="col-12" style="margin-top: 15px">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
+                    <strong>Código de proveedor:</strong>
+                  </label>
+                  <input type="number" class="form-control" name="provider_number" [formControl]="formSpendEditTravel.controls['cod_provider']">
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                    <strong>Numero de autorización:</strong>
+                  </label>
+                  <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']">
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
+                    <strong>Poblado:</strong>
+                  </label>
+                  <input type="text" class="form-control" name="populate_name" [formControl]="formSpendEditTravel.controls['populated']">
                 </div>
               </div>
             </div>

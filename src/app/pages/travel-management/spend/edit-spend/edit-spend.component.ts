@@ -17,8 +17,7 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
 export class EditSpendComponent implements OnInit {
   public showSubmit: boolean = true;
   public editSpendDetail: any[] = [];
-  public editSpendTable: any[] = [];
-  public activeEdit: boolean = false;
+  public editSpendTable: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
   public idEditSpend: number;
@@ -47,6 +46,8 @@ export class EditSpendComponent implements OnInit {
   public edit_Spend: boolean = false;
   public alertWarning: any[] = [];
   public idFile: number;
+  public id_Spend_Save: string;
+  public objectSpendProvitional: any[] = [];
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
@@ -66,7 +67,10 @@ export class EditSpendComponent implements OnInit {
       bill_number: "",
       control_number: "",
       nit: "",
-      bussines_name: ""
+      bussines_name: "",
+      cod_provider: "",
+      authorization_number: "",
+      populated: ""
     });
 
 
@@ -133,28 +137,83 @@ export class EditSpendComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
 
+      debugger
       if (action.action_method == "updateTravelAllowance") {
 
-        this.idEditSpend = action.id;
-        this.spendsService.getDetailSpendEdit(this.idEditSpend).subscribe((data: any) => {
+        this.buttonNewSpend = false;
+        this.labelNewSpend = false;
+        this.show_submit_editSpend = false;
+        this.showSubmit = false;
+        this.edit_Spend = true;
 
-          this.formatDate = data.data.date_time.split("T")[0];
+        document.getElementById('EditfuntionSpend').click();
+        setTimeout(() => {
+          document.getElementById('spend_edit').scrollTo(0, 1200);
+        }, 200);
+
+        if ((this.edit_Spend === true)) {
+          this.idEditSpend = action.id;
+          this.spendsService.getDetailSpendEdit(this.idEditSpend).subscribe((data: any) => {
+            console.log(data)
+            debugger            
+            this.formatDate = data.data.date_time.split("T")[0];
+            this.formSpendEditTravel = new FormGroup({});
+            this.formSpendEditTravel = fb.group({
+              travel_request_id: "",
+              travel_allowance_type_id: data.data.travel_allowance_type_id,
+              currency_id: data.data.currency_id,
+              value: data.data.value,
+              date: this.formatDate,
+              observation: data.data.observation,
+              bill_number: data.data.bill_number,
+              control_number: data.data.control_number,
+              nit: data.data.nit,
+              bussines_name: data.data.bussines_name,
+              cod_provider: data.data.provider_code,
+              authorization_number: data.data.doc_num_origin,
+              populated: data.data.population
+            });
+          })
+        }
+      }
+
+      if (action.action_method == "editSavedSpend") {
+
+        this.buttonNewSpend = false;
+        this.labelNewSpend = false;
+        this.show_submit_editSpend = false;
+        this.showSubmit = false;
+        this.edit_Spend = true;
+
+        document.getElementById('EditfuntionSpend').click();
+        setTimeout(() => {
+          document.getElementById('spend_edit').scrollTo(0, 1200);
+        }, 200);
+
+        if ((this.edit_Spend === true)) {
+
+          let spendEditNew: any = this.objectSpendProvitional.filter((result) => result.id === action.id);
+
           this.formSpendEditTravel = new FormGroup({});
           this.formSpendEditTravel = fb.group({
-            travel_request_id: "",
-            travel_allowance_type_id: data.data.travel_allowance_type_id,
-            currency_id: data.data.currency_id,
-            value: data.data.value,
-            date: this.formatDate,
-            observation: data.data.observation,
-            bill_number: data.data.bill_number,
-            control_number: data.data.control_number,
-            nit: data.data.nit,
-            bussines_name: data.data.bussines_name
+            id_spend: spendEditNew[0].id_spend,
+            travel_request_id: spendEditNew[0].travel_request_id,
+            travel_allowance_type_id: spendEditNew[0].travel_allowance_type_id,
+            currency_id: spendEditNew[0].currency_id,
+            value: spendEditNew[0].value,
+            date: spendEditNew[0].date,
+            observation: spendEditNew[0].observation,
+            bill_number: spendEditNew[0].bill_number,
+            control_number: spendEditNew[0].control_number,
+            nit: spendEditNew[0].nit,
+            bussines_name: spendEditNew[0].bussines_name,
+            cod_provider: spendEditNew[0].cod_provider,
+            authorization_number: spendEditNew[0].authorization_number,
+            populated: spendEditNew[0].populated,
           });
-        })
-        this.activeEdit = true;
+        }
       }
+
       if (action.action_method == "destroyTravelAllowance") {
         this.idEditSpend = action.id;
         this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe((deleteSpend: any) => {
@@ -194,45 +253,46 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
-    debugger
-    objectSpend.id_spend = this.idSpend + 1;
-    this.editSpendTable[0].data[0].push({
 
-      field_0: 'temp_' + this.idSpend + 1,
-      field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
-      field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
-      field_3: objectSpend.value,
-      field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_5: objectSpend.date,
-      field_6: objectSpend.observation,
-      field_7: objectSpend.bill_number,
-      field_8: objectSpend.control_number,
-      field_9: objectSpend.nit,
-      field_10: objectSpend.bussines_name,
-      field_11: {
+    objectSpend.id = 'temp_' + this.idSpend + 1;
+    this.objectSpendProvitional.push(objectSpend);
+    this.editSpendTable.data.push({
+      field_0: objectSpend.id,
+      field_1: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
+      field_2: objectSpend.value,
+      field_3: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
+      field_4: objectSpend.date,
+      field_5: objectSpend.observation,
+      field_6: objectSpend.bill_number,
+      field_7: objectSpend.control_number,
+      field_8: objectSpend.nit,
+      field_9: objectSpend.bussines_name,
+      field_10: objectSpend.cod_provider,
+      field_11: objectSpend.authorization_number,
+      field_12: objectSpend.populated,
+      field_13: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
-        id: this.idSpend + 1,
+        id: objectSpend.id,
         title: "Editar",
-        action_method: "editSaveSpend",
+        action_method: "editSavedSpend",
         disable: false
       },
-      field_12: {
+      field_14: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
-        id: this.idSpend + 1,
+        id: objectSpend.id,
         title: "Eliminar",
-        action_method: "deleteSpend",
+        action_method: "deleteSavedSpend",
         disable: false
       }
 
     });
 
     this.objectAllowancesEdit.push({
-      id: null,
-      id_temp:objectSpend.id_spend,
+      id: objectSpend.id,
       travel_allowance_type_id: objectSpend.travel_allowance_type_id,
       currency_id: objectSpend.currency_id,
       value: objectSpend.value,
@@ -241,15 +301,87 @@ export class EditSpendComponent implements OnInit {
       bill_number: objectSpend.bill_number,
       control_number: objectSpend.control_number,
       nit: objectSpend.nit,
-      bussines_name: objectSpend.bussines_name
+      bussines_name: objectSpend.bussines_name,
+      doc_num_origin: objectSpend.authorization_number,
+      provider_code: objectSpend.cod_provider,
+      population: objectSpend.populated
     });
 
-    
+    this.idSpend += 1
     setTimeout(() => {
       this.objectReport.emit(this.editSpendTable[0]);
     }, 500);
+    this.closeEditSpend();
+  }
+
+  aditionSpendEdit(objectEditSpend) {
+    debugger
+    this.editSpendTable.data.forEach(element => {
+      if (element.field_0.toString() === objectEditSpend.id_spend.toString()) {
+        element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
+        element.field_2 = objectEditSpend.value;
+        element.field_3 = this.listMoneyType.filter((data) => data.id.toString() === objectEditSpend.currency_id.toString())[0].name;
+        element.field_4 = objectEditSpend.date;
+        element.field_5 = objectEditSpend.observation;
+        element.field_6 = objectEditSpend.bill_number;
+        element.field_7 = objectEditSpend.control_number;
+        element.field_8 = objectEditSpend.nit;
+        element.field_9 = objectEditSpend.bussines_name;
+        element.field_10 = objectEditSpend.cod_provider;
+        element.field_11 = objectEditSpend.authorization_number;
+        element.field_12 = objectEditSpend.populated;
+        element.field_13 = {
+          type_method: "UPDATE",
+          type_element: "button",
+          icon: "fa-pencil",
+          id: this.idEditSpend,
+          title: "Editar",
+          action_method: "updateTravelAllowance",
+          disable: false
+        };
+        element.field_14 = {
+          type_method: "DELETE",
+          type_element: "button",
+          icon: "fa-trash",
+          id: this.idEditSpend,
+          title: "Eliminar",
+          action_method: "destroyTravelAllowance",
+          disable: false
+        }
+      }
+    });
+
+    this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend.toString()), 1);
+
+    this.objectAllowancesEdit.push({
+      id: this.idEditSpend.toString(),
+      travel_allowance_type_id: objectEditSpend.travel_allowance_type_id,
+      currency_id: objectEditSpend.currency_id,
+      value: objectEditSpend.value,
+      date: objectEditSpend.date,
+      observation: objectEditSpend.observation,
+      bill_number: objectEditSpend.bill_number,
+      control_number: objectEditSpend.control_number,
+      nit: objectEditSpend.nit,
+      bussines_name: objectEditSpend.bussines_name,
+      doc_num_origin: objectEditSpend.authorization_number,
+      provider_code: objectEditSpend.cod_provider,
+      population: objectEditSpend.populated
+
+    });
+
+    setTimeout(() => {
+      this.objectReport.emit(this.editSpendTable[0]);
+    }, 500);
+    this.closeEditSpend();
 
   }
+
+
+
+
+
+
 
   viewDocumentSaved(paramView) {
     window.open(paramView.file.url)
