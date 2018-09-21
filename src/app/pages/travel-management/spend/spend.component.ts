@@ -6,6 +6,7 @@ import { SpendsService } from '../../../services/travel-management/spends/spends
 import { Spends } from '../../../models/common/travels_management/spends/spends';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-spend',
@@ -16,6 +17,7 @@ export class SpendComponent implements OnInit {
 
   token
   public spedsData: Spends[] = [];
+  public idSpenRequestsIndex: string;
 
   constructor(public router: Router,
     public spendSharedService: SpendSharedService,
@@ -23,11 +25,30 @@ export class SpendComponent implements OnInit {
     public alert: AlertsService) {
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
-      if(data){
+      if (data) {
         this.chargeDataSpends();
-      }     
+      }
     });
-   
+
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'deleteSpendRequest') {
+        this.spendsService.deleteSpendData(this.idSpenRequestsIndex).subscribe((status: any) => {
+          const alertSuccess: Alerts[] = [{
+            type: 'success',
+            title: 'Confirmación',
+            message: status.message,
+            confirmation: false
+          }];
+          this.alert.setAlert(alertSuccess[0]);
+          this.chargeDataSpends();
+          this.spendSharedService.setDeleteSpend('deleteSpendRequest');
+        })
+      }
+
+    })
+
+
+
   }
 
   ngOnInit() {
@@ -53,16 +74,14 @@ export class SpendComponent implements OnInit {
     this.spendSharedService.setEditSpend(objectSpend.id);
   }
   deleteSpend(deleteSpend) {
-    this.spendsService.deleteSpendData(deleteSpend.id).subscribe((status: any) => {
-      const alertSuccess: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: status.message,
-        confirmation: false
-      }];
-      this.alert.setAlert(alertSuccess[0]);
-      this.chargeDataSpends();
-      this.spendSharedService.setDeleteSpend('deleteSpend');
-    })
+    this.idSpenRequestsIndex = deleteSpend.id;
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar la solicitud de gastos #' + deleteSpend.id.toString() + '?',
+      confirmation: true,
+      typeConfirmation: 'deleteSpendRequest'
+    }];
+    this.alert.setAlert(alertWarning[0]);
   }
 }

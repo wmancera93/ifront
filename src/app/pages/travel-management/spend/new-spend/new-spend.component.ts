@@ -73,8 +73,11 @@ export class NewSpendComponent implements OnInit {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
         document.getElementById('collapseNewSpend').className = "show";
+       
       }
-
+      this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+        this.listTravelsFromSpend = travel.data;
+      });
       this.refreshTableSpends();
 
     });
@@ -312,6 +315,7 @@ export class NewSpendComponent implements OnInit {
 
 
   newSpend(param) {
+    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();

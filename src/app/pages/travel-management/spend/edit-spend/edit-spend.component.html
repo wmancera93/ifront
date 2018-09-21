@@ -4,8 +4,8 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Editar Gastos Viaje # {{editSpendDetail}}</h5>
-        <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Editar Gastos Viaje # {{ticketTravel}}</h5>
+        <button id="closeModalEditSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -17,20 +17,18 @@
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-plane text-primary-hr"></i>
-                  <strong>Editar viaje asociado</strong>
+                  <strong>Viaje asociado</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formSpendEditTravel.controls['travel_request_id']">
-                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.ticket">{{nameTravel.name_travel}}</option>
-                </select>
+                <label>{{nameSpend}}</label>
               </div>
             </div>
           </div>
 
           <div class="col-12" id="table" style="min-height: 80px !important; margin-top: 30px">
             <h4>Gastos</h4>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableEditSpend" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
 
           <div class="col-12 top-containter" style="margin-top: 20px" *ngIf="annexes.length > 0 || objectImg.length > 0">

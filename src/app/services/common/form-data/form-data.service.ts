@@ -171,4 +171,29 @@ export class FormDataService extends Angular2TokenService {
         );
   
       }
+
+      putEditSpendFormData(objectID: string,data: FormData){
+        this.definitionServer()
+
+        let hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', "multipart/form-data")
+        let requestOptions = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: hdrs,
+            url: this.baseUrl + '/api/v2/travel_allowance_requests/'+ objectID,
+            body: data
+        });
+        return this.request(requestOptions).map(
+            (response) => response.json()
+        );
+  
+      }
+
+
+
+
+
+
+
+
 }
