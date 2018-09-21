@@ -56,7 +56,7 @@ export class DynamicFormComponent implements OnInit {
         group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')))
       });
       this.objectForm.push(element);
-      
+
       if (this.generalObject.length <= 1) {
         setTimeout(() => {
           document.getElementById('border-general').classList.remove('border-array');
@@ -119,13 +119,13 @@ export class DynamicFormComponent implements OnInit {
 
   kewUptext(value) {
     let out = '';
-    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;';
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
 
     for (let i = 0; i < value.currentTarget.value.length; i++) {
       if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
         out += value.currentTarget.value.charAt(i);
-      }else {
-        if(value.key === ',') {
+      } else {
+        if (value.key === ',') {
           out += '.';
         }
       }
