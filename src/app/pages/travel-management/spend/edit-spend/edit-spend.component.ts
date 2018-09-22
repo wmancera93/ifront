@@ -52,8 +52,10 @@ export class EditSpendComponent implements OnInit {
   public objectSpendProvitional: any[] = [];
   public idSpendRequests: string;
   public ticketTravel: string;
-  public nameSpend:string;
+  public nameSpend: string;
 
+  showSizeTable
+  showPdf
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
@@ -82,8 +84,8 @@ export class EditSpendComponent implements OnInit {
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if ( data === 'errorSaveSpendEdit' || data === 'closeAlertdeleteSavedSpend' || data === 'closeAlerterrorSaveSpendEdit' 
-      || data === 'closeAlertdeleteDocumentSavedSpend' || data === 'closeAlertdeleteDetailSpendEdit') {
+      if (data === 'errorSaveSpendEdit' || data === 'closeAlertdeleteSavedSpend' || data === 'closeAlerterrorSaveSpendEdit'
+        || data === 'closeAlertdeleteDocumentSavedSpend' || data === 'closeAlertdeleteDetailSpendEdit') {
         document.getElementById("btn_spend_edit").click();
       }
 
@@ -101,8 +103,8 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("btn_spend_edit").click();
       }
 
-      if (data === 'deleteDetailSpendEdit'){
-        
+      if (data === 'deleteDetailSpendEdit') {
+        debugger
         this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe((deleteSpend: any) => {
           this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
           this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
@@ -111,15 +113,15 @@ export class EditSpendComponent implements OnInit {
           document.getElementById("btn_spend_edit").click();
         })
       }
-      if (data === 'deleteDetailSpendEditCreated'){
-
+      if (data === 'deleteDetailSpendEditCreated') {
+        debugger
         this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
         this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
         this.objectReport.emit({ success: true, data: [this.editSpendTable] });
 
         document.getElementById("btn_spend_edit").click();
       }
-      
+
     });
 
 
@@ -131,7 +133,7 @@ export class EditSpendComponent implements OnInit {
         debugger
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
         this.ticketTravel = this.editSpendDetail.ticket;
-        this.nameSpend=this.editSpendDetail.name_travel
+        this.nameSpend = this.editSpendDetail.name_travel
         this.editSpendTable = editSpend.data[0].travel_allowances;
         this.annexes = editSpend.data[0].travel_request_annexeds;
         this.buttonNewSpend = true;
@@ -186,7 +188,7 @@ export class EditSpendComponent implements OnInit {
             this.formatDate = data.data.date_time.split("T")[0];
             this.formSpendEditTravel = new FormGroup({});
             this.formSpendEditTravel = fb.group({
-              id_spend:this.idEditSpend,
+              id_spend: this.idEditSpend,
               travel_request_id: "",
               travel_allowance_type_id: data.data.travel_allowance_type_id,
               currency_id: data.data.currency_id,
@@ -248,7 +250,7 @@ export class EditSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: 'Confirmación',
-          message: 'Desea eliminar el gasto #'+ this.idEditSpend ,
+          message: 'Desea eliminar el gasto',
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEdit'
         }];
@@ -262,14 +264,14 @@ export class EditSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: 'Confirmación',
-          message: 'Desea eliminar el gasto #'+ this.idEditSpend,
+          message: 'Desea eliminar el gasto #' + this.idEditSpend,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEditCreated'
         }];
 
         this.alert.setAlert(alertSuccess[0]);
       }
-      
+
 
     });
 
@@ -295,7 +297,7 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
-debugger
+    debugger
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
     this.editSpendTable.data.push({
@@ -358,7 +360,7 @@ debugger
   }
 
   aditionSpendEdit(objectEditSpend) {
-debugger
+    debugger
     this.editSpendTable.data.forEach(element => {
       if (element.field_0 === objectEditSpend.id_spend) {
         element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
@@ -394,9 +396,9 @@ debugger
       }
     });
 
-    if(this.objectAllowancesEdit.filter(filter => filter.id === objectEditSpend.id_spend).length > 0){
+    if (this.objectAllowancesEdit.filter(filter => filter.id === objectEditSpend.id_spend).length > 0) {
       this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === objectEditSpend.id_spend), 1);
-    }    
+    }
 
     this.objectAllowancesEdit.push({
       id: objectEditSpend.id_spend,
@@ -426,7 +428,7 @@ debugger
     this.showSubmit = false;
 
     const spendsFormDataEdit = new FormData();
-    spendsFormDataEdit.append('travel_request_id',this.ticketTravel);
+    spendsFormDataEdit.append('travel_request_id', this.ticketTravel);
     spendsFormDataEdit.append('allowances', JSON.stringify(this.objectAllowancesEdit));
     spendsFormDataEdit.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -436,7 +438,7 @@ debugger
 
     param = spendsFormDataEdit;
 
-    this.formDataService.putEditSpendFormData(this.ticketTravel, param).subscribe(
+    this.formDataService.putEditSpendFormData(this.idSpendRequests, param).subscribe(
       (data: any) => {
 
         debugger
