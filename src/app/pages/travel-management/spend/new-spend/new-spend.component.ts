@@ -10,6 +10,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { debounce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-spend',
@@ -69,6 +70,7 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
+      
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
@@ -79,6 +81,23 @@ export class NewSpendComponent implements OnInit {
         this.listTravelsFromSpend = travel.data;
       });
       this.refreshTableSpends();
+      this.formSpendTravel = new FormGroup({});
+      this.formSpendTravel = fb.group({
+        travel_request_id: '',
+        travel_allowance_type_id: "",
+        currency_id: "",
+        value: "",
+        date: "",
+        observation: "",
+        bill_number: "",
+        control_number: "",
+        nit: "",
+        bussines_name: "",
+        cod_provider: "",
+        authorization_number: "",
+        populated: "",
+      });
+      this.continue = false;
 
     });
 
@@ -132,7 +151,7 @@ export class NewSpendComponent implements OnInit {
 
     this.formSpendTravel = new FormGroup({});
     this.formSpendTravel = fb.group({
-      travel_request_id: "",
+      travel_request_id: '',
       travel_allowance_type_id: "",
       currency_id: "",
       value: "",
@@ -146,8 +165,6 @@ export class NewSpendComponent implements OnInit {
       authorization_number: "",
       populated: "",
     });
-
-
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
@@ -166,9 +183,6 @@ export class NewSpendComponent implements OnInit {
 
 
   ngOnInit() {
-    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-      this.listTravelsFromSpend = travel.data;
-    });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
       this.listSpendType = select.data;
     });
@@ -186,25 +200,32 @@ export class NewSpendComponent implements OnInit {
   }
 
   validateTravel(travel: any) {
-    this.continue = true;
-    this.activate_submit_spend = false;
-    this.spendEdit = false;
-    this.spendNew = true;
-    this.spedsData.forEach(element => {
-      if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
-        document.getElementById("closeSpends").click();
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: 'Advertencia',
-          message: "Ya existe una solicitud de gastos para el viaje",
-          confirmation: true,
-          typeConfirmation: 'ConfirmTravelSpendID'
-
-        }];
-        this.alert.setAlert(alertWarning[0]);
-
-      }
-    });
+    if(travel.travel_request_id.toString() !== '')
+    {
+      this.continue = true;
+      this.activate_submit_spend = false;
+      this.spendEdit = false;
+      this.spendNew = true;
+      this.spedsData.forEach(element => {
+        if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
+          document.getElementById("closeSpends").click();
+          const alertWarning: Alerts[] = [{
+            type: 'danger',
+            title: 'Advertencia',
+            message: "Ya existe una solicitud de gastos para el viaje",
+            confirmation: true,
+            typeConfirmation: 'ConfirmTravelSpendID'
+  
+          }];
+          this.alert.setAlert(alertWarning[0]);
+  
+        }
+      });
+    }else{
+      this.continue = false;
+      this.refreshPartialSpend();
+    }
+    
   }
 
   deleteSpend(params) {
@@ -434,12 +455,12 @@ export class NewSpendComponent implements OnInit {
             sortable: false,
           },
           field_14: {
-            value: "Eliminar",
+            value: "Editar",
             type: "string",
             sortable: false,
           },
           field_15: {
-            value: "Editar",
+            value: "Eliminar",
             type: "string",
             sortable: false,
           }

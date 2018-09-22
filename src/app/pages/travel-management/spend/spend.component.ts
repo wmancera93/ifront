@@ -64,6 +64,7 @@ export class SpendComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
   newSpendTravel() {
+    debugger
     this.spendSharedService.setNewSpend(true);
   }
   viewSpend(objectSpend) {

@@ -1,6 +1,7 @@
 <button id="btn_spend_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spend_new" style="display:none;">
 </button>
-<div class="modal" data-backdrop="static" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" data-backdrop="static" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -21,7 +22,8 @@
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" paceholder="Seleccione" (change)="validateTravel(formSpendTravel.value)">
+                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" (change)="validateTravel(formSpendTravel.value)">
+                  <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
                 </select>
               </div>
@@ -30,7 +32,7 @@
 
 
 
-          
+
           <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
             <h4>Gastos</h4>
             <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
@@ -87,7 +89,7 @@
           </div>
 
           <div class="col-12" style="margin-top: 15px" *ngIf="continue">
-            <h5  *ngIf="spendNew">
+            <h5 *ngIf="spendNew">
               Nuevo gasto
             </h5>
           </div>
@@ -110,7 +112,7 @@
 
           <div class="collapse top-general-p" id="collapseNewSpend">
             <div class="col-12" style="margin-top: 15px" *ngIf="continue">
-              <label class="titleColor" >
+              <label class="titleColor">
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
               </label>
@@ -126,6 +128,7 @@
                     <strong>Tipo de gasto:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
                     <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
                   </select>
                 </div>
@@ -142,6 +145,7 @@
                     <strong>Moneda:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
                     <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
                   </select>
                 </div>
@@ -228,9 +232,10 @@
                     || formSpendTravel.value.bill_number == ''
                     || formSpendTravel.value.control_number == ''
                     || formSpendTravel.value.nit == ''
-                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpend(formSpendTravel.value)">
+                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
-                    <button *ngIf="spendEdit" [attr.disabled]="
+                  <button *ngIf="spendEdit" [attr.disabled]="
                   (formSpendTravel.value.travel_request_id == ''
                     || formSpendTravel.value.observation == ''
                     || formSpendTravel.value.travel_allowance_type_id == ''
@@ -240,7 +245,8 @@
                     || formSpendTravel.value.bill_number == ''
                     || formSpendTravel.value.control_number == ''
                     || formSpendTravel.value.nit == ''
-                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
+                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpendEdit(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
