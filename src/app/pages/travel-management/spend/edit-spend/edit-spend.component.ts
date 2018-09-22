@@ -54,6 +54,9 @@ export class EditSpendComponent implements OnInit {
   public ticketTravel: string;
   public nameSpend:string;
 
+  showPdf
+  showSizeTable
+
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
