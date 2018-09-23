@@ -127,10 +127,13 @@ export class EditSpendComponent implements OnInit {
 
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-      debugger
+      
       this.idSpendRequests = idEdit;
       this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
-        debugger
+
+        this.editSpendDetail = [];
+        this.editSpendTable = [];
+        this.annexes = [];
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
         this.ticketTravel = this.editSpendDetail.ticket;
         this.nameSpend = this.editSpendDetail.name_travel
@@ -354,7 +357,7 @@ export class EditSpendComponent implements OnInit {
 
     this.idSpend += 1
     setTimeout(() => {
-      this.objectReport.emit(this.editSpendTable[0]);
+      this.objectReport.emit({ success: true, data: [this.editSpendTable] });
     }, 500);
     this.closeEditSpend();
   }
@@ -418,7 +421,7 @@ export class EditSpendComponent implements OnInit {
     });
 
     setTimeout(() => {
-      this.objectReport.emit(this.editSpendTable[0]);
+      this.objectReport.emit({ success: true, data: [this.editSpendTable] });
     }, 500);
     this.closeEditSpend();
 
