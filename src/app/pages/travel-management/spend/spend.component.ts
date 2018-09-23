@@ -26,6 +26,7 @@ export class SpendComponent implements OnInit {
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
       if (data) {
+        this.spedsData = [];
         this.chargeDataSpends();
       }
     });
@@ -57,6 +58,7 @@ export class SpendComponent implements OnInit {
 
   chargeDataSpends() {
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
+      this.spedsData = [];
       this.spedsData = list.data;
     });
   }
