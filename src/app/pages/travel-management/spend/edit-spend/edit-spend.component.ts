@@ -127,7 +127,7 @@ export class EditSpendComponent implements OnInit {
 
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-      
+
       this.idSpendRequests = idEdit;
       this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
 
@@ -171,19 +171,27 @@ export class EditSpendComponent implements OnInit {
 
 
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
-
       debugger
       if (action.action_method == "updateTravelAllowance") {
-        this.buttonNewSpend = false;
+        debugger
+        if (!this.edit_Spend) {
+          if (this.buttonNewSpend) {
+            document.getElementById('EditfuntionSpend').click();
+            setTimeout(() => {
+              document.getElementById('spend_edit').scrollTo(0, 1200);
+            }, 200);
+
+            this.edit_Spend = true;
+            this.buttonNewSpend = false;
+          } else {
+            this.buttonNewSpend = false;
+            this.edit_Spend = true;
+          }
+        }
+
         this.labelNewSpend = false;
         this.show_submit_editSpend = false;
         this.showSubmit = false;
-        this.edit_Spend = true;
-
-        document.getElementById('EditfuntionSpend').click();
-        setTimeout(() => {
-          document.getElementById('spend_edit').scrollTo(0, 1200);
-        }, 200);
 
         if ((this.edit_Spend === true)) {
           this.idEditSpend = action.id;
@@ -212,17 +220,23 @@ export class EditSpendComponent implements OnInit {
 
       if (action.action_method == "editSavedSpend") {
 
-        this.buttonNewSpend = false;
+        if (!this.edit_Spend) {
+          if (!this.buttonNewSpend) {
+            document.getElementById('EditfuntionSpend').click();
+            setTimeout(() => {
+              document.getElementById('spend_edit').scrollTo(0, 1200);
+            }, 200);
+
+            this.edit_Spend = true;
+          } else {
+            this.buttonNewSpend = false
+            this.edit_Spend = true;
+          }
+        }
+
         this.labelNewSpend = false;
         this.show_submit_editSpend = false;
         this.showSubmit = false;
-        this.edit_Spend = true;
-
-        document.getElementById('EditfuntionSpend').click();
-        setTimeout(() => {
-          document.getElementById('spend_edit').scrollTo(0, 1200);
-        }, 200);
-
         if ((this.edit_Spend === true)) {
 
           let spendEditNew: any = this.objectSpendProvitional.filter((result) => result.id === action.id);

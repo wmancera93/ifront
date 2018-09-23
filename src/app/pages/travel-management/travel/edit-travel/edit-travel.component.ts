@@ -254,7 +254,7 @@ export class EditTravelComponent implements OnInit {
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-
+      debugger
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
@@ -342,7 +342,7 @@ export class EditTravelComponent implements OnInit {
 
           let object: any = this.editEditTrip.filter((result) => result.id_travel.toString() === data.id.toString())
 
-          this.editTravels(object);
+          this.editTravels(object[0]);
         }
       }
 
@@ -449,12 +449,14 @@ export class EditTravelComponent implements OnInit {
 
   }
   addDestination(modelPartial) {
+
+    modelPartial.id_travel = 'temp_' + this.count + 1;
     this.activate_submit = true;
     this.activate = true;
     this.editEditTrip.push(modelPartial);
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.generalViajes[0].travel_managements.data.push({
-      field_0: 'temp_' + this.count + 1,
+      field_0: modelPartial.id_travel,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
       field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
@@ -468,7 +470,7 @@ export class EditTravelComponent implements OnInit {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
-        id: 'temp_' + this.count + 1,
+        id: modelPartial.id_travel,
         title: "Editar",
         action_method: "updateTrayectManagement",
         disable: false
@@ -477,7 +479,7 @@ export class EditTravelComponent implements OnInit {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
-        id: 'temp_' + this.count + 1,
+        id: modelPartial.id_travel,
         title: "Eliminar",
         action_method: "deleteTravels",
         disable: false
@@ -485,7 +487,7 @@ export class EditTravelComponent implements OnInit {
     })
 
     this.traverlsDestination.push({
-      travel_id: 'temp_' + this.count + 1,
+      travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_city,
@@ -564,7 +566,7 @@ export class EditTravelComponent implements OnInit {
     this.id_destinations = 0;
   }
   editTravels(param: any) {
-
+    debugger
     if (param !== undefined) {
 
       this.formTravelManagement = new FormGroup({});
