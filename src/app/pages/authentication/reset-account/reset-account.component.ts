@@ -46,8 +46,12 @@ export class ResetAccountComponent implements OnInit {
       if (url.split("localhost").length === 1) {
         if (url.split("//")[1].split("/")[0].toString() === "10.0.2.210:3003") {
           ambient = "productivo";
-        }else {
+        }
+        if (url.split("//")[1].split("/")[0].toString() === "10.0.5.100:3003") {
           ambient = "staging";
+        }
+        if (url.split("//")[1].split("/")[0].toString() === "10.0.7.192:3003") {
+          ambient = 'development';
         }
       } else {
         ambient = 'development';
