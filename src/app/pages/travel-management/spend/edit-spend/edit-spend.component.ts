@@ -57,11 +57,6 @@ export class EditSpendComponent implements OnInit {
   showSizeTable
   showPdf
 
-  showPdf
-  showSizeTable
-
-  newEditSpend
-
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
