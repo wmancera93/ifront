@@ -56,7 +56,7 @@ export class DynamicFormComponent implements OnInit {
         group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')))
       });
       this.objectForm.push(element);
-      
+
       if (this.generalObject.length <= 1) {
         setTimeout(() => {
           document.getElementById('border-general').classList.remove('border-array');
@@ -108,7 +108,32 @@ export class DynamicFormComponent implements OnInit {
     this.code = "";
   }
 
-  detectChange(params: any) {
+  detectChange(params: any, form) {
+    let objectForm: any[] = [];
+    let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
+    console.log(recorrer)
+    for (let index = 0; index < recorrer.length; index++) {
+      if (((index / 2) % 1) === 0) {
+        this.idSend = recorrer[index];
+      }
+      else {
+        this.valueSend = recorrer[index];
+        objectForm.push({
+          id: this.idSend,
+          value_to_change: this.valueSend,
+        })
+      }
+    }
+    debugger
+    console.log(params.is_prerequisite)
+    console.log(params.prerequisite_id)
+    if (params.is_prerequisite !== null && params.is_prerequisite !== undefined && params.is_prerequisite === true) {    
+    let aa =  this.objectEditBlur.filter(
+        filterByRequisite => filterByRequisite.id === params.prerequisite_id)[0].option.filter(
+          codeFilter => codeFilter.code === objectForm.filter(objectFilter => objectFilter.id === params.id)[0].value_to_change);
+
+          console.log(aa)
+    }
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
@@ -124,8 +149,8 @@ export class DynamicFormComponent implements OnInit {
     for (let i = 0; i < value.currentTarget.value.length; i++) {
       if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
         out += value.currentTarget.value.charAt(i);
-      }else {
-        if(value.key === ',') {
+      } else {
+        if (value.key === ',') {
           out += '.';
         }
       }
