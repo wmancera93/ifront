@@ -26,7 +26,7 @@ export interface SpendsCreate {
 }
 
 export interface ObjectSpends {
-    id: number,
+    id:  string,
     id_temp?:number,
     travel_allowance_type_id: number,
     currency_id: number,
@@ -36,8 +36,11 @@ export interface ObjectSpends {
     bill_number: string,
     control_number: string,
     nit: string,
-    bussines_name: string
-
+    bussines_name: string,
+    doc_num_origin: string,
+    provider_code: string,
+    population: string
+   
 }
 
 export interface Annexes {

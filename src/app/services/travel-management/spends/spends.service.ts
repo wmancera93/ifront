@@ -41,10 +41,6 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
 
-  putSpendData(idEdit, objectEdit) {
-    return this.tokenService.put('travel_allowance_requests/' + idEdit, objectEdit)
-      .map((data: any) => data.json());
-  }
   deleteDetailSpend(idEdit) {
     return this.tokenService.delete('travel_allowances/destroy_allowance/' + idEdit)
       .map((data: any) => data.json());
