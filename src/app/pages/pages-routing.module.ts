@@ -55,6 +55,8 @@ import { PlanningEvaluationComponent } from './performance-evaluation/planning-e
 import { TrainingComponent } from './events-management/training/training.component';
 import { AdvancesComponent } from './travel-management/advances/advances.component';
 import { SpendComponent } from './travel-management/spend/spend.component';
+import { ManagedTravelComponent } from './approver-travels/managed-travel/managed-travel.component';
+import { PendingTravelComponent } from './approver-travels/pending-travel/pending-travel.component';
 
 const routes: Routes = [
     {
@@ -271,6 +273,14 @@ const routes: Routes = [
     {
         path:'spend',
         component: SpendComponent        
+    },
+    {
+        path:'management_travel',
+        component: ManagedTravelComponent        
+    },
+    {
+        path:'pending_travel',
+        component: PendingTravelComponent        
     }
 ];
 
