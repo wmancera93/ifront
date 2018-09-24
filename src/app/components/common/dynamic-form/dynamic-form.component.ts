@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-import { FormDinamic } from '../../../models/common/data-master/data-master';
 
 @Component({
   selector: 'app-dynamic-form',
