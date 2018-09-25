@@ -32,8 +32,8 @@ export class DynamicFormComponent implements OnInit {
 
       if (this.generalObject.length > 0) {
         debugger
-        data.forEach(index => {
-          index.data.forEach(element => {
+        data.data.forEach(index => {
+          index.forEach(element => {
             this.staticGeneralObject.push({
               id_static: element.id,
               options_static: element.option,
@@ -41,7 +41,6 @@ export class DynamicFormComponent implements OnInit {
               id_requesite: element.prerequisite_id
             })
           });
-
         });
 
 
