@@ -36,6 +36,12 @@ export class DynamicFormComponent implements OnInit {
           id_requesite: element.prerequisite_id
         })
       });
+      
+      // debugger
+      // this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+      //   let newOptions = element.options_static.filter(option => option.filtrer === this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_requesite)[0].value);
+      //   this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+      // });
 
       if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
