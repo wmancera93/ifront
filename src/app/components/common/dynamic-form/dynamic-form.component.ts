@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -21,41 +20,48 @@ export class DynamicFormComponent implements OnInit {
   public edit: boolean = false;
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
-
+  public countAfter: number = 0;
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
-      this.generalObject = data.data;
+      if (this.countAfter === 0) {
+        this.generalObject = data.data;
+        if (!data.edit) {
+          this.staticGeneralObject = [];
+          if (this.generalObject.length > 0) {
+            data.data.forEach(index => {
+              index.forEach(element => {
+                this.staticGeneralObject.push({
+                  id_static: element.id,
+                  options_static: element.option,
+                  validate_requisite: element.is_prerequisite,
+                  id_requesite: element.prerequisite_id
+                });
+              });
+            });
+          }
+          if (this.staticGeneralObject.length > 0) {
+            this.generalObject.forEach((object) => {
+              object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
+                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                change.option = newOptions;
+              });
+            });
+          }
+        }
 
-      if (this.generalObject.length > 0) {
-        data.data[0].forEach(element => {
-          this.staticGeneralObject.push({
-            id_static: element.id,
-            options_static: element.option,
-            validate_requisite: element.is_prerequisite,
-            id_requesite: element.prerequisite_id
-          })
-        });
+        if (this.generalObject !== null && this.generalObject !== undefined) {
+          this.edit = data.edit;
+          this.code = data.code;
+          this.form = new FormGroup({});
+          this.form = this.createGroup();
+          this.showForm = true;
+        }
       }
-      // debugger
-      // this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
-      //   let newOptions = element.options_static.filter(option => option.filtrer === this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_requesite)[0].value);
-      //   this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
-      // });
-
-      if (this.generalObject !== null && this.generalObject !== undefined) {
-        this.edit = data.edit;
-        this.code = data.code;
-        this.form = new FormGroup({});
-        this.form = this.createGroup();
-        this.showForm = true;
-      }
-
     })
   }
   ngOnInit() {
-
   }
   createGroup() {
     this.objectForm = [];
@@ -73,11 +79,9 @@ export class DynamicFormComponent implements OnInit {
     });
     return group;
   }
-
   public idSend;
   public valueSend;
   public code;
-
   sendDynamicForm(form) {
     let objectForm: any[] = [];
     let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
@@ -118,12 +122,10 @@ export class DynamicFormComponent implements OnInit {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
-
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
       if (element.id_requesite === params.id) {
         let objectForm: any[] = [];
         let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
-
         for (let index = 0; index < recorrer.length; index++) {
           if (((index / 2) % 1) === 0) {
             this.idSend = recorrer[index];
@@ -136,13 +138,18 @@ export class DynamicFormComponent implements OnInit {
             })
           }
         }
-        let newOptions = element.options_static.filter(option => option.filtrer === objectForm.filter(objectFilter => objectFilter.id === params.id.toString())[0].value_to_change);
-        this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+        let newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
+        this.generalObject.forEach((object) => {
+          object.forEach(change => {
+            if (change.id === element.id_static) {
+              change.option = newOptions;
+            }
+          });
+        });
       }
     });
     document.getElementById("savebutton").removeAttribute('disabled');
   }
-
   kewUptext(value) {
     let out = '';
     let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
@@ -156,6 +163,9 @@ export class DynamicFormComponent implements OnInit {
       }
     }
     value.currentTarget.value = out
+  }
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 
 }
