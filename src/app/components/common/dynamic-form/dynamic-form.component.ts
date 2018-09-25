@@ -156,10 +156,16 @@ export class DynamicFormComponent implements OnInit {
           }
         }
         let newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
-        this.generalObject.forEach((object) =>{
-          object.filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+        this.generalObject.forEach((object) => {
+          debugger
+          object.forEach(change => {
+            if(change.id === element.id_static){
+              change.option = newOptions;
+            }
+            // element.filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+          });
         });
-      
+
       }
     });
     console.log(this.staticGeneralObject)
