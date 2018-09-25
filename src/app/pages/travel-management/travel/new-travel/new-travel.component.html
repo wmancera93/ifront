@@ -60,6 +60,41 @@
           </div>
 
           <div class="col-12" *ngIf="activate">
+            <div class="row" style="margin-top: 15px">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
+                  <a>Clase de viaje legal:*</a>
+                </label>
+                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
+                  <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
+                  <a>Clase de viaje empresarial:*</a>
+                </label>
+                <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
+                  <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
+                  <a>Actividad de viaje:*</a>
+                </label>
+                <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
+                  <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 10px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -104,37 +139,7 @@
             </div>
           </div>
 
-          <div class="col-12" *ngIf="activate">
-            <div class="row" style="margin-top: 15px">
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-                  <a>Clase de viaje legal:*</a>
-                </label>
-                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
-                  <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
-                </select>
-              </div>
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
-                  <a>Clase de viaje empresarial:*</a>
-                </label>
-                <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
-                  <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
-                </select>
-              </div>
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-                  <a>Actividad de viaje:*</a>
-                </label>
-                <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
-                  <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
+          
 
           <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0 && activate" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
@@ -414,16 +419,12 @@
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
-                        || formTravelManagement.value.id_terminal == -1
-                        || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
                         || formTravelManagement.value.hour_begin == ''
                         || formTravelManagement.value.id_countryto == -1
                         || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
                         || formTravelManagement.value.id_stateto == ''
-                        || formTravelManagement.value.id_terminalto == -1
-                        || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
                         || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bnew" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)"
                         data-toggle="collapse" data-target="#collapseTravel">
@@ -435,16 +436,12 @@
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
-                        || formTravelManagement.value.id_terminal == -1
-                        || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
                         || formTravelManagement.value.hour_begin == ''
                         || formTravelManagement.value.id_countryto == -1
                         || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
                         || formTravelManagement.value.id_stateto == ''
-                        || formTravelManagement.value.id_terminalto == -1
-                        || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
                         || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bedit" class="btn btn-primary btn-block cursor-general" (click)="addDestinationEdit(formTravelManagement.value)"
                         data-toggle="collapse" data-target="#collapseTravel">
