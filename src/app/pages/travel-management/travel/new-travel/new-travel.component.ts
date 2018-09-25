@@ -486,6 +486,7 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_state'].setValue('');
         }
       });
+      this.searchTerminal(form, 'edit');
   }
   searchStateto(form: any, acction: any) {
     this.stateLocationsto = [];
@@ -500,6 +501,8 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_stateto'].setValue('');
         }
       });
+      this.searchTerminalto(form, 'edit');
+      this.searchHotel(form, 'edit');
   }
   searchCity(form: any, acction: any) {
     this.cityLocations = [];
