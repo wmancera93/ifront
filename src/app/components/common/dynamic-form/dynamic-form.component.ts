@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
-import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-
 
 @Component({
   selector: 'app-dynamic-form',
@@ -21,8 +19,8 @@ export class DynamicFormComponent implements OnInit {
   public idEdit: any[] = [];
   public objectEditBlur: any[] = [];
   public edit: boolean = false;
-  public generalObject: any[] = null;
-
+  public generalObject: any[] = [];
+  public staticGeneralObject: any[] = [];
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
@@ -30,43 +28,52 @@ export class DynamicFormComponent implements OnInit {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       this.generalObject = data.data;
 
+      if (this.generalObject.length > 0) {
+        data.data[0].forEach(element => {
+          this.staticGeneralObject.push({
+            id_static: element.id,
+            options_static: element.option,
+            validate_requisite: element.is_prerequisite,
+            id_requesite: element.prerequisite_id
+          })
+        });
+      }
+      // debugger
+      // this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+      //   let newOptions = element.options_static.filter(option => option.filtrer === this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_requesite)[0].value);
+      //   this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+      // });
+
       if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
         this.code = data.code;
         this.form = new FormGroup({});
         this.form = this.createGroup();
-
         this.showForm = true;
       }
 
-
     })
   }
-
   ngOnInit() {
-  }
 
+  }
   createGroup() {
     this.objectForm = [];
     const group = this.fb.group({});
-
     this.generalObject.forEach(element => {
-
       element.forEach(control => {
         group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')))
       });
       this.objectForm.push(element);
-      
       if (this.generalObject.length <= 1) {
         setTimeout(() => {
           document.getElementById('border-general').classList.remove('border-array');
         }, 100);
       }
-
     });
-
     return group;
   }
+
   public idSend;
   public valueSend;
   public code;
@@ -98,7 +105,6 @@ export class DynamicFormComponent implements OnInit {
               count: 0
             })
           }
-
         }
       });
     })
@@ -107,32 +113,49 @@ export class DynamicFormComponent implements OnInit {
     this.valueSend = "";
     this.code = "";
   }
-
-  detectChange(params: any) {
+  detectChange(params: any, form) {
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
+
+    this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+      if (element.id_requesite === params.id) {
+        let objectForm: any[] = [];
+        let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
+
+        for (let index = 0; index < recorrer.length; index++) {
+          if (((index / 2) % 1) === 0) {
+            this.idSend = recorrer[index];
+          }
+          else {
+            this.valueSend = recorrer[index];
+            objectForm.push({
+              id: this.idSend,
+              value_to_change: this.valueSend,
+            })
+          }
+        }
+        let newOptions = element.options_static.filter(option => option.filtrer === objectForm.filter(objectFilter => objectFilter.id === params.id.toString())[0].value_to_change);
+        this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+      }
+    });
     document.getElementById("savebutton").removeAttribute('disabled');
   }
 
-
   kewUptext(value) {
     let out = '';
-    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;';
-
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
     for (let i = 0; i < value.currentTarget.value.length; i++) {
       if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
         out += value.currentTarget.value.charAt(i);
-      }else {
-        if(value.key === ',') {
+      } else {
+        if (value.key === ',') {
           out += '.';
         }
       }
     }
-
     value.currentTarget.value = out
   }
-
 
 }

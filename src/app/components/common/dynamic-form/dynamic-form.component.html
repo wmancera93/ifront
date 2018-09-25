@@ -22,7 +22,7 @@
                         <input id="input-time" class="form-control" *ngSwitchCase="'time'" (blur)="detectChange(config)"
                             type="time" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
                             [disabled]="edit" />
-                        <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config)"
+                        <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config, form.value)"
                             [formControlName]="config.id" [disabled]="edit">
                             <option *ngFor="let option of config.option" [value]="option.code">{{option.description}}</option>
                         </select>
