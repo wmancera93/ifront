@@ -31,6 +31,7 @@ export class DynamicFormComponent implements OnInit {
       this.staticGeneralObject = [];
 
       if (this.generalObject.length > 0) {
+
         data.data[0].forEach(element => {
           this.staticGeneralObject.push({
             id_static: element.id,
@@ -41,20 +42,15 @@ export class DynamicFormComponent implements OnInit {
         });
 
 
-         console.log(this.staticGeneralObject)
-        // debugger
-        // setTimeout(() => {
-        //   this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
-        //     let newOptions = element.options_static.filter(option => option.filtrer === this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_requesite)[0].value);
-        //     this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
-        //   });
-    
-          console.log(this.generalObject[0])
-        // }, 400);
-       
+        // this.generalObject[0].filter(data => data.is_prerequisite.toString() === 'true').forEach(element => {
+        //   let newOptions = element.option.filter(option => option.filter === this.generalObject[0].filter(objectFilter => objectFilter.id.toString() === element.prerequisite_id.toString())[0].value);
+        //   element.option = newOptions;
+        // });
+
+
       }
 
-     
+
 
       if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
@@ -125,7 +121,16 @@ export class DynamicFormComponent implements OnInit {
     this.valueSend = "";
     this.code = "";
   }
+
+  clickInput() {
+    // this.generalObject[0].filter(data => data.is_prerequisite.toString() === 'true').forEach(element => {
+    //   let newOptions = element.option.filter(option => option.filter === this.generalObject[0].filter(objectFilter => objectFilter.id.toString() === element.prerequisite_id.toString())[0].value);
+    //   element.option = newOptions;
+    // });
+  }
+
   detectChange(params: any, form) {
+    debugger
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
@@ -148,10 +153,12 @@ export class DynamicFormComponent implements OnInit {
             })
           }
         }
-        let newOptions = element.options_static.filter(option => option.filtrer === objectForm.filter(objectFilter => objectFilter.id === params.id.toString())[0].value_to_change);
+        let newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
         this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
       }
     });
+    console.log(this.staticGeneralObject)
+    console.log(this.generalObject[0])
     document.getElementById("savebutton").removeAttribute('disabled');
   }
 
