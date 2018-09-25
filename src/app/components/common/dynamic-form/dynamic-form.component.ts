@@ -31,14 +31,17 @@ export class DynamicFormComponent implements OnInit {
       this.staticGeneralObject = [];
 
       if (this.generalObject.length > 0) {
+        debugger
+        data.forEach(index => {
+          index.data.forEach(element => {
+            this.staticGeneralObject.push({
+              id_static: element.id,
+              options_static: element.option,
+              validate_requisite: element.is_prerequisite,
+              id_requesite: element.prerequisite_id
+            })
+          });
 
-        data.data[0].forEach(element => {
-          this.staticGeneralObject.push({
-            id_static: element.id,
-            options_static: element.option,
-            validate_requisite: element.is_prerequisite,
-            id_requesite: element.prerequisite_id
-          })
         });
 
 
