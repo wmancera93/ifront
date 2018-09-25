@@ -21,46 +21,51 @@ export class DynamicFormComponent implements OnInit {
   public edit: boolean = false;
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
+  public countAfter: number = 0;
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
-      this.generalObject = data.data;
+      if (this.countAfter === 0) {
+        this.generalObject = data.data;
 
-      this.staticGeneralObject = [];
+        if (!data.edit) {
+          this.staticGeneralObject = [];
 
-      if (this.generalObject.length > 0) {
-        data.data.forEach(index => {
-          index.forEach(element => {
-            this.staticGeneralObject.push({
-              id_static: element.id,
-              options_static: element.option,
-              validate_requisite: element.is_prerequisite,
-              id_requesite: element.prerequisite_id
+          if (this.generalObject.length > 0) {
+            data.data.forEach(index => {
+              index.forEach(element => {
+                this.staticGeneralObject.push({
+                  id_static: element.id,
+                  options_static: element.option,
+                  validate_requisite: element.is_prerequisite,
+                  id_requesite: element.prerequisite_id
+                });
+              });
             });
-          });
-        });
+          }
+
+          if (this.staticGeneralObject.length > 0) {
+            this.generalObject.forEach((object) => {
+              object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
+                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                change.option = newOptions;
+              });
+            });
+          }
+        }
 
 
-        // this.generalObject[0].filter(data => data.is_prerequisite.toString() === 'true').forEach(element => {
-        //   let newOptions = element.option.filter(option => option.filter === this.generalObject[0].filter(objectFilter => objectFilter.id.toString() === element.prerequisite_id.toString())[0].value);
-        //   element.option = newOptions;
-        // });
-
+        if (this.generalObject !== null && this.generalObject !== undefined) {
+          this.edit = data.edit;
+          this.code = data.code;
+          this.form = new FormGroup({});
+          this.form = this.createGroup();
+          this.showForm = true;
+        }
 
       }
-
-
-
-      if (this.generalObject !== null && this.generalObject !== undefined) {
-        this.edit = data.edit;
-        this.code = data.code;
-        this.form = new FormGroup({});
-        this.form = this.createGroup();
-        this.showForm = true;
-      }
-
     })
   }
   ngOnInit() {
@@ -174,5 +179,10 @@ export class DynamicFormComponent implements OnInit {
     }
     value.currentTarget.value = out
   }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
+  }
+
 
 }
