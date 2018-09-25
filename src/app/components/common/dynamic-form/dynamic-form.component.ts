@@ -31,7 +31,6 @@ export class DynamicFormComponent implements OnInit {
       this.staticGeneralObject = [];
 
       if (this.generalObject.length > 0) {
-        debugger
         data.data.forEach(index => {
           index.forEach(element => {
             this.staticGeneralObject.push({
@@ -39,7 +38,7 @@ export class DynamicFormComponent implements OnInit {
               options_static: element.option,
               validate_requisite: element.is_prerequisite,
               id_requesite: element.prerequisite_id
-            })
+            });
           });
         });
 
@@ -124,15 +123,7 @@ export class DynamicFormComponent implements OnInit {
     this.code = "";
   }
 
-  clickInput() {
-    // this.generalObject[0].filter(data => data.is_prerequisite.toString() === 'true').forEach(element => {
-    //   let newOptions = element.option.filter(option => option.filter === this.generalObject[0].filter(objectFilter => objectFilter.id.toString() === element.prerequisite_id.toString())[0].value);
-    //   element.option = newOptions;
-    // });
-  }
-
   detectChange(params: any, form) {
-    debugger
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
@@ -157,19 +148,15 @@ export class DynamicFormComponent implements OnInit {
         }
         let newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
         this.generalObject.forEach((object) => {
-          debugger
           object.forEach(change => {
-            if(change.id === element.id_static){
+            if (change.id === element.id_static) {
               change.option = newOptions;
             }
-            // element.filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
           });
         });
 
       }
     });
-    console.log(this.staticGeneralObject)
-    console.log(this.generalObject)
     document.getElementById("savebutton").removeAttribute('disabled');
   }
 

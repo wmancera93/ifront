@@ -25,7 +25,7 @@
                             [disabled]="edit" />
                         <fieldset [disabled]="config.is_prerequisite && config.option.length === 0">
                             <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config, form.value)"
-                                (click)="clickInput()" [formControlName]="config.id" [disabled]="edit">
+                                [formControlName]="config.id" [disabled]="edit">
                                 <option *ngFor="let option of config.option" [value]="option.code">{{option.description}}</option>
                             </select>
                         </fieldset>
