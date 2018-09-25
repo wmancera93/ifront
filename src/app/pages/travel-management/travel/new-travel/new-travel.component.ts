@@ -14,6 +14,7 @@ import { DebugContext } from '@angular/core/src/view';
 import { debug } from 'util';
 import { AdvanceSharedService } from '../../../../services/shared/advance-shared/advance-shared.service';
 import { Router } from '@angular/router';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-new-travel',
@@ -74,6 +75,9 @@ export class NewTravelComponent implements OnInit {
   public ticket_advance: number;
   public editTrip: any[] = [];
   public prueba: any[] = [];
+  public grahp: any[] = [];
+  public operations: any[] = [];
+  public idGrahpTravel:string='';
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -147,8 +151,10 @@ export class NewTravelComponent implements OnInit {
       date_requests_end: '',
       trip_text: '',
       maintenance: '',
-      id_center_travel: '',
+      id_element_imputation: '',
       id_travel_costs: '',
+      id_grahp: '',
+      id_operations: '',
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
@@ -203,8 +209,10 @@ export class NewTravelComponent implements OnInit {
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
             maintenance: object[0].maintenance,
-            id_center_travel: object[0].id_center_travel,
+            id_element_imputation: object[0].id_element_imputation,
             id_travel_costs: object[0].id_travel_costs,
+            id_grahp: object[0].id_grahp,
+            id_operations: object[0].id_operations,
             id_travel_legal: object[0].id_travel_legal,
             id_travel_specific: object[0].id_travel_specific,
             id_travel_activities: object[0].id_travel_activities,
@@ -231,7 +239,8 @@ export class NewTravelComponent implements OnInit {
           this.searchTerminal(this.formTravelManagement.value, 'edit');
           this.searchTerminalto(this.formTravelManagement.value, 'edit');
           this.searchHotel(this.formTravelManagement.value, 'edit');
-          this.searchCostsCenter(this.formTravelManagement.value, 'edit');
+          this.searchCostsCenterAndGrahp(this.formTravelManagement.value, 'edit');
+          this.searchOperationsGrahp(this.formTravelManagement.value, 'edit');
         }
       }
     });
@@ -323,6 +332,8 @@ export class NewTravelComponent implements OnInit {
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
+    modelFromdata.append('travel_graph_id', model.id_grahp);
+    modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -454,12 +465,7 @@ export class NewTravelComponent implements OnInit {
 
   mileageTravel(param) {
 
-    if (param.id_transport == 5 || param.id_transport == 7 || param.id_transport == 8 
-      || param.id_transport == 9 || param.id_transport == 10 
-      || param.id_transport == 16  || param.id_transport == 17 
-      || param.id_transport == 18  || param.id_transport == 19 
-      || param.id_transport == 20 || param.id_transport == 22 
-      || param.id_transport == 23) {
+    if (param.id_transport == 2) {
 
       this.showMilenage = true;
     } else {
@@ -524,7 +530,7 @@ export class NewTravelComponent implements OnInit {
   }
   searchTerminal(form: any, acction: any) {
     this.terminalLocations = [];
-    this.travelManagementService.gettransportTerminals(form.id_city).
+    this.travelManagementService.gettransportTerminals(form.id_country).
       subscribe((data: any) => {
         this.terminalLocations = data.data;
         if (this.terminalLocations.length > 0) {
@@ -538,7 +544,7 @@ export class NewTravelComponent implements OnInit {
   }
   searchTerminalto(form: any, acction: any) {
     this.terminalLocationsto = [];
-    this.travelManagementService.gettransportTerminals(form.id_cityto).
+    this.travelManagementService.gettransportTerminals(form.id_countryto).
       subscribe((data: any) => {
         this.terminalLocationsto = data.data;
         if (this.terminalLocationsto.length > 0) {
@@ -553,7 +559,7 @@ export class NewTravelComponent implements OnInit {
   }
   searchHotel(form: any, acction: any) {
     this.hotels = [];
-    this.hotelsService.getshowHotels(form.id_cityto).
+    this.hotelsService.getshowHotels(form.id_countryto).
       subscribe((data: any) => {
         this.hotels = data.data;
         if (this.hotels.length > 0) {
@@ -565,9 +571,9 @@ export class NewTravelComponent implements OnInit {
         }
       });
   }
-  searchCostsCenter(form: any, acction: any) {
+  searchCostsCenterAndGrahp(form: any, acction: any) {
 
-    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+    this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       subscribe((data: any) => {
         this.costs_travels = data.data;
         if (this.costs_travels.length > 0) {
@@ -578,7 +584,35 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_travel_costs'].setValue('');
         }
       })
+
+      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      subscribe((data: any) => {
+        this.grahp = data.data;
+        if (this.grahp.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_grahp'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_grahp'].setValue('');
+        }
+      })
   }
+
+  searchOperationsGrahp(form: any, acction: any) {
+
+    this.travelManagementService.getTravelsOperations(form.id_grahp).
+      subscribe((data: any) => {
+        this.operations = data.data;
+        if (this.operations.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_operations'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_operations'].setValue('');
+        }
+      })
+  }
+
   clearFormGeneral() {
     this.activate = false;
     this.activate_submit = true;
@@ -673,8 +707,10 @@ export class NewTravelComponent implements OnInit {
       date_requests_end: '',
       trip_text: '',
       maintenance: '',
-      id_center_travel: '',
+      id_element_imputation: '',
       id_travel_costs: '',
+      id_grahp: '',
+      id_operations: '',
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
@@ -868,7 +904,7 @@ export class NewTravelComponent implements OnInit {
           this.alert.setAlert(alertDataWrong[0])
         }
       }
-  
+
       if (dateTrayect.date_end !== '') {
         let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
         if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
@@ -887,7 +923,7 @@ export class NewTravelComponent implements OnInit {
     }
 
 
-  
+
   }
   hourvalidations(hourTrayect) {
 
@@ -920,6 +956,8 @@ export class NewTravelComponent implements OnInit {
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
+    this.grahp = [];
+    this.operations = [];
     this.hotels = [];
 
     this.formTravelManagement.controls['id_transport'].setValue('1');

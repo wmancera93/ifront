@@ -88,13 +88,13 @@
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="continue">
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 15px" >
             <h5 *ngIf="spendNew">
               Nuevo gasto
             </h5>
           </div>
 
-          <div class="col-12 ">
+          <div class="col-12">
             <div class="row justify-content-end">
               <div class="col-3" style="padding-bottom: 20px">
                 <h5 class="titleColor" *ngIf="spendEdit && !spendNew">
@@ -111,7 +111,7 @@
 
 
           <div class="collapse top-general-p" id="collapseNewSpend">
-            <div class="col-12" style="margin-top: 15px" *ngIf="continue">
+            <div class="col-12" style="margin-top: 15px" >
               <label class="titleColor">
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
@@ -120,7 +120,7 @@
                 [formControl]="formSpendTravel.controls['observation']"></textarea>
             </div>
 
-            <div class="col-12" style="margin-top: 30px" *ngIf="continue">
+            <div class="col-12" style="margin-top: 30px" >
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -159,7 +159,7 @@
               </div>
             </div>
 
-            <div class="col-12" style="margin-top: 15px" *ngIf="continue">
+            <div class="col-12" style="margin-top: 15px" >
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -192,7 +192,7 @@
               </div>
             </div>
 
-            <div class="col-12" style="margin-top: 15px" *ngIf="continue">
+            <div class="col-12" style="margin-top: 15px">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                   <label class="titleColor">
@@ -219,33 +219,13 @@
             </div>
 
 
-            <div class="col-12" style="margin-top: 30px" *ngIf="continue">
+            <div class="col-12" style="margin-top: 30px" >
               <div class="row justify-content-end">
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                  <button *ngIf="spendNew" [attr.disabled]="
-                  (formSpendTravel.value.travel_request_id == ''
-                    || formSpendTravel.value.observation == ''
-                    || formSpendTravel.value.travel_allowance_type_id == ''
-                    || formSpendTravel.value.value == ''
-                    || formSpendTravel.value.currency_id == ''
-                    || formSpendTravel.value.date == ''
-                    || formSpendTravel.value.bill_number == ''
-                    || formSpendTravel.value.control_number == ''
-                    || formSpendTravel.value.nit == ''
-                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
+                  <button *ngIf="spendNew"  type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
-                  <button *ngIf="spendEdit" [attr.disabled]="
-                  (formSpendTravel.value.travel_request_id == ''
-                    || formSpendTravel.value.observation == ''
-                    || formSpendTravel.value.travel_allowance_type_id == ''
-                    || formSpendTravel.value.value == ''
-                    || formSpendTravel.value.currency_id == ''
-                    || formSpendTravel.value.date == ''
-                    || formSpendTravel.value.bill_number == ''
-                    || formSpendTravel.value.control_number == ''
-                    || formSpendTravel.value.nit == ''
-                    || formSpendTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
+                  <button *ngIf="spendEdit"  type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpendEdit(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>

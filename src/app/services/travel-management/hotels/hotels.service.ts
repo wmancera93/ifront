@@ -7,8 +7,8 @@ export class HotelsService {
 
   constructor(private tokenService: Angular2TokenService, public http: HttpClient) { }
 
-  getshowHotels(id_city) {
-    return this.tokenService.get('geographic_locations/show_hotels/' + id_city)
+  getshowHotels(id_country) {
+    return this.tokenService.get('geographic_locations/show_hotels/' + id_country)
       .map((data: any) => data.json());
   }
 

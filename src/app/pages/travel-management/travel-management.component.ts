@@ -48,11 +48,18 @@ export class TravelManagementComponent implements OnInit {
         route: "/ihr/spend"
       },
       {
-        title: "Aprobaciones",
+        title: "Aprobaciones Pendientes",
+        icon_primary: "fa fa fa-square-o",
+        icon_secundary: "fa fa-clock-o",
+        tooltipText: "Haga clic aquí para asignar aprobaciones",
+        route: "/ihr/pending_travel"
+      },
+      {
+        title: "Aprobaciones Gestionadas",
         icon_primary: "fa fa fa-square-o",
         icon_secundary: "fa fa-check",
         tooltipText: "Haga clic aquí para asignar aprobaciones",
-        route: ""
+        route: "/ihr/management_travel"
       },
       {
         title: "Asignación de hoteles",

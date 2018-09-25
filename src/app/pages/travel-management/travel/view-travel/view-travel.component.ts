@@ -30,6 +30,7 @@ export class ViewTravelComponent implements OnInit {
 
 
 
+
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
 
