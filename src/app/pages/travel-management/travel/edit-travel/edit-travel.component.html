@@ -57,31 +57,46 @@
             </label>
           </div>
 
-          <div class="col-12">
+          <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 10px">
-              <div class="col-lg-3 col-md-6 col-12 text-right">
+              <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                  <a>Centro de costo:</a>
+                  <a>Elemento de imputación:*</a>
                 </label>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
-                <select *ngIf="center_costs_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_center_travel']"
-                  (change)="searchCostsCenter(formTravelManagement.value, 'new')">
-                  <option value="-1">Seleccione</option>
+                <select *ngIf="center_costs_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_element_imputation']"
+                  (change)="searchCostsCenterAndGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
                   <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.id">{{costsTravelCenter.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-2 col-md-6 col-12 ">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='KOSTL'">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Tipo de costo:</a>
+                  <a>Costo:*</a>
                 </label>
-              </div>
-              <div class="col-lg-3 col-md-6 col-12">
                 <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <a>Grafo:*</a>
+                </label>
+                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
+                  (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
+                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <a>Operacion:*</a>
+                </label>
+                <select [attr.disabled]="operations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_operations']">
+                  <option value="-1">Seleccione</option>
+                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.name}}</option>
                 </select>
               </div>
             </div>
@@ -216,13 +231,13 @@
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <h5 *ngIf="bedit">
-                  Editar Viaje
+                  Editar trayecto
                 </h5>
                 <h5 class="titleColor" *ngIf="bnew">
-                  Nuevo Viaje
+                 Crear taryecto
                 </h5>
                 <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseEdit()">
-                  Nuevo Viaje
+                  Crear taryecto
                 </button>
                 <button id="edit_funtionTravel" data-toggle="collapse" data-target="#collapseTravelEdit" style="display: none">
                 </button>
@@ -279,7 +294,7 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                        <a>Estado:</a>
+                        <a>Región:</a>
                       </label>
                       <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
                         (change)="searchCity(formTravelManagement.value, 'new')">
@@ -290,9 +305,9 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                        <a>Ciudad:</a>
+                        <a>Provincia:</a>
                       </label>
-                      <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_city']"
+                      <select class="form-control" [formControl]="formTravelManagement.controls['id_city']"
                         (change)="searchTerminal(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
@@ -354,7 +369,7 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                        <a>Estado:</a>
+                        <a>Región:</a>
                       </label>
                       <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']"
                         (change)="searchCityto(formTravelManagement.value, 'new')">
@@ -365,9 +380,9 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                        <a>Ciudad:</a>
+                        <a>Provincia:</a>
                       </label>
-                      <select [attr.disabled]="cityLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_cityto']"
+                      <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']"
                         (change)="searchTerminalto(formTravelManagement.value, 'edit');searchHotel(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
@@ -426,8 +441,6 @@
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
-                        || formTravelManagement.value.id_city == -1
-                        || formTravelManagement.value.id_city == ''
                         || formTravelManagement.value.id_terminal == -1
                         || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
@@ -436,8 +449,6 @@
                         || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
                         || formTravelManagement.value.id_stateto == ''
-                        || formTravelManagement.value.id_cityto == -1
-                        || formTravelManagement.value.id_cityto == ''
                         || formTravelManagement.value.id_terminalto == -1
                         || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
