@@ -71,7 +71,7 @@
                   <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.id">{{costsTravelCenter.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='KOSTL'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Costo:*</a>
@@ -81,7 +81,7 @@
                   <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Grafo:*</a>
@@ -91,7 +91,7 @@
                   <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Operacion:*</a>

@@ -77,7 +77,10 @@ export class NewTravelComponent implements OnInit {
   public prueba: any[] = [];
   public grahp: any[] = [];
   public operations: any[] = [];
-  public idGrahpTravel:string='';
+  public idGrahpTravel: string = '';
+
+  public kostl:boolean = false;
+  public nplnr:boolean = false;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -486,7 +489,7 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_state'].setValue('');
         }
       });
-      this.searchTerminal(form, 'edit');
+    this.searchTerminal(form, 'edit');
   }
   searchStateto(form: any, acction: any) {
     this.stateLocationsto = [];
@@ -501,8 +504,8 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_stateto'].setValue('');
         }
       });
-      this.searchTerminalto(form, 'edit');
-      this.searchHotel(form, 'edit');
+    this.searchTerminalto(form, 'edit');
+    this.searchHotel(form, 'edit');
   }
   searchCity(form: any, acction: any) {
     this.cityLocations = [];
@@ -575,8 +578,12 @@ export class NewTravelComponent implements OnInit {
       });
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
-
-    this.travelManagementService.getTravelsCosts(form.id_element_imputation).
+    debugger
+   if(this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL'){
+     this.kostl = true;
+     this.nplnr = false;
+      
+      this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       subscribe((data: any) => {
         this.costs_travels = data.data;
         if (this.costs_travels.length > 0) {
@@ -588,6 +595,10 @@ export class NewTravelComponent implements OnInit {
         }
       })
 
+    }
+    if(this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR'){
+      this.kostl = false;
+     this.nplnr = true;
       this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       subscribe((data: any) => {
         this.grahp = data.data;
@@ -599,6 +610,9 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_grahp'].setValue('');
         }
       })
+    }
+    
+    
   }
 
   searchOperationsGrahp(form: any, acction: any) {
