@@ -772,7 +772,7 @@ export class EditTravelComponent implements OnInit {
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
 
-    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+    this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       subscribe((data: any) => {
         this.costs_travels = data.data;
         if (this.costs_travels.length > 0) {
@@ -784,7 +784,7 @@ export class EditTravelComponent implements OnInit {
         }
       })
 
-      this.travelManagementService.getTravelsGrahp(form.id_center_travel).
+      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       subscribe((data: any) => {
         this.grahp = data.data;
         if (this.grahp.length > 0) {
