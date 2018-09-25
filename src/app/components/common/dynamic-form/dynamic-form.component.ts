@@ -28,14 +28,21 @@ export class DynamicFormComponent implements OnInit {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       this.generalObject = data.data;
 
-      data.data[0].forEach(element => {
-        this.staticGeneralObject.push({
-          id_static: element.id,
-          options_static: element.option,
-          validate_requisite: element.is_prerequisite,
-          id_requesite: element.prerequisite_id
-        })
-      });
+      if (this.generalObject.length > 0) {
+        data.data[0].forEach(element => {
+          this.staticGeneralObject.push({
+            id_static: element.id,
+            options_static: element.option,
+            validate_requisite: element.is_prerequisite,
+            id_requesite: element.prerequisite_id
+          })
+        });
+      }
+      // debugger
+      // this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+      //   let newOptions = element.options_static.filter(option => option.filtrer === this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_requesite)[0].value);
+      //   this.generalObject[0].filter(objectFilter => objectFilter.id === element.id_static)[0].option = newOptions;
+      // });
 
       if (this.generalObject !== null && this.generalObject !== undefined) {
         this.edit = data.edit;
