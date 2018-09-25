@@ -97,6 +97,7 @@ export class NewAdvancesComponent implements OnInit {
 
 
   newAdvance(param) {
+    
     this.advancesService.postAdvanceList(this.objectAdvances).subscribe((response: any) => {
       document.getElementById("btn_advances_new").click();
       const alertSuccess: Alerts[] = [{

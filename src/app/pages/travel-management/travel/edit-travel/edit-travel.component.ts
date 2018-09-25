@@ -84,6 +84,8 @@ export class EditTravelComponent implements OnInit {
   public validateDateHeader: any[] = [];
   public travels_wrong: any[] = [];
   public editEditTrip: any[] = [];
+  public grahp: any[] = [];
+  public operations: any[] = [];
 
 
 
@@ -172,7 +174,10 @@ export class EditTravelComponent implements OnInit {
       trip_text: '',
       maintenance: '',
       id_center_travel: '',
+      id_element_imputation: '',
       id_travel_costs: '',
+      id_grahp: '',
+      id_operations: '',
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
@@ -222,7 +227,10 @@ export class EditTravelComponent implements OnInit {
             date_requests_end: this.generalViajes[0].travel_request.date_end,
             trip_text: this.generalViajes[0].travel_request.observation,
             maintenance: this.generalViajes[0].travel_request.is_maintenance,
-            id_center_travel: this.generalViajes[0].travel_request.travel_costs_type_id,
+            id_center_travel: this.generalViajes[0].travel_request.id_center_travel,
+            id_element_imputation: this.generalViajes[0].travel_request.id_element_imputation,
+            id_grahp: this.generalViajes[0].travel_request.id_grahp,
+            id_operations: this.generalViajes[0].travel_request.id_operations,
             id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
             id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
             id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -244,7 +252,7 @@ export class EditTravelComponent implements OnInit {
             travel_mileage: '',
           });
           setTimeout(() => {
-            this.searchCostsCenter(this.formTravelManagement.value, '')
+            this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
           }, 50);
         }
@@ -291,6 +299,9 @@ export class EditTravelComponent implements OnInit {
               date_requests_end: this.generalViajes[0].travel_request.date_end,
               trip_text: this.generalViajes[0].travel_request.observation,
               maintenance: this.generalViajes[0].travel_request.is_maintenance,
+              id_element_imputation: this.generalViajes[0].travel_request.id_element_imputation,
+              id_grahp: this.generalViajes[0].travel_request.id_grahp,
+              id_operations: this.generalViajes[0].travel_request.id_operations,
               id_center_travel: this.generalViajes[0].travel_request.travel_costs_type_id,
               id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
@@ -420,6 +431,8 @@ export class EditTravelComponent implements OnInit {
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
+    modelFromdata.append('travel_graph_id', model.id_grahp);
+    modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -577,7 +590,10 @@ export class EditTravelComponent implements OnInit {
         trip_text: param.trip_text,
         maintenance: param.maintenance,
         id_center_travel: param.id_center_travel,
+        id_element_imputation: param.id_element_imputation,
         id_travel_costs: param.id_travel_costs,
+        id_grahp: param.id_grahp,
+        id_operations: param.id_operations,
         id_travel_legal: param.id_travel_legal,
         id_travel_specific: param.id_travel_specific,
         id_travel_activities: param.id_travel_activities,
@@ -604,7 +620,8 @@ export class EditTravelComponent implements OnInit {
       this.searchTerminal(param, 'edit');
       this.searchTerminalto(param, 'edit');
       this.searchHotel(param, 'edit');
-      this.searchCostsCenter(param, 'edit');
+      this.searchCostsCenterAndGrahp(param, 'edit');
+      this.searchOperationsGrahp(param, 'edit');
     }
 
   }
@@ -660,6 +677,7 @@ export class EditTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_state'].setValue('');
         }
       });
+      this.searchTerminal(form, 'edit');
   }
   searchStateto(form: any, acction: any) {
     this.cityLocationsto = [];
@@ -678,6 +696,8 @@ export class EditTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_stateto'].setValue('');
         }
       });
+      this.searchTerminalto(form, 'edit');
+      this.searchHotel(form, 'edit');
   }
   searchCity(form: any, acction: any) {
     this.terminalLocations = [];
@@ -753,9 +773,9 @@ export class EditTravelComponent implements OnInit {
         }
       });
   }
-  searchCostsCenter(form: any, acction: any) {
+  searchCostsCenterAndGrahp(form: any, acction: any) {
 
-    this.travelManagementService.getTravelsCosts(form.id_center_travel).
+    this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       subscribe((data: any) => {
         this.costs_travels = data.data;
         if (this.costs_travels.length > 0) {
@@ -766,7 +786,36 @@ export class EditTravelComponent implements OnInit {
           this.formTravelManagement.controls['id_travel_costs'].setValue('');
         }
       })
+
+      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      subscribe((data: any) => {
+        this.grahp = data.data;
+        if (this.grahp.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_grahp'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_grahp'].setValue('');
+        }
+      })
+
   }
+
+  searchOperationsGrahp(form: any, acction: any) {
+    this.travelManagementService.getTravelsOperations(form.id_grahp).
+      subscribe((data: any) => {
+        this.operations = data.data;
+        if (this.operations.length > 0) {
+          if (acction === 'new') {
+            this.formTravelManagement.controls['id_operations'].setValue('-1');
+          }
+        } else {
+          this.formTravelManagement.controls['id_operations'].setValue('');
+        }
+      })
+  }
+
+
   clearFormGeneral() {
     this.stateLocations = [];
     this.stateLocationsto = [];
@@ -774,6 +823,9 @@ export class EditTravelComponent implements OnInit {
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
+    this.grahp = [];
+    this.operations = [];
+    this.hotels = [];
     this.hotels = [];
     this.objectImg = [];
 
@@ -815,6 +867,9 @@ export class EditTravelComponent implements OnInit {
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
+    this.grahp = [];
+    this.operations = [];
+    this.hotels = [];
     this.hotels = [];
 
     this.formTravelManagement.controls['id_transport'].setValue('1');

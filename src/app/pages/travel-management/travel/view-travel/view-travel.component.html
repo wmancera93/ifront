@@ -61,19 +61,37 @@
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
-              <strong>Tipo de costo:</strong>
+              <strong>Elemento de imputación:</strong>
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <label>{{view_travels[0].travel_costs_type_name}}</label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>Centro de costo:</strong>
+              <strong>Costo:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+            <label>{{view_travels[0].travel_cost_name}}</label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
+              <strong>Grafo:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+            <label>{{view_travels[0].travel_cost_name}}</label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
+              <strong>Operación:</strong>
+            </label>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
             <label>{{view_travels[0].travel_cost_name}}</label>
           </div>
         </div>

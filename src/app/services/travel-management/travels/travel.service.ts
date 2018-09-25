@@ -14,8 +14,8 @@ export class TravelService {
     return this.tokenService.get('geographic_locations/show_childrens/' + id_consult)
       .map((data: any) => data.json());
   }
-  gettransportTerminals(id_city: string) {
-    return this.tokenService.get('geographic_locations/show_transport_terminals/' + id_city)
+  gettransportTerminals(id_country: string) {
+    return this.tokenService.get('geographic_locations/show_transport_terminals/' + id_country)
       .map((data: any) => data.json());
   }
   getTravelRequests() {
@@ -52,6 +52,15 @@ export class TravelService {
  
   getTravelsCosts(id_type_costs: string) {
     return this.tokenService.get('geographic_locations/show_travel_costs/' + id_type_costs)
+      .map((data: any) => data.json());
+  }
+
+  getTravelsGrahp(imputation_id: string) {
+    return this.tokenService.get('geographic_locations/show_travel_graphs/' + imputation_id)
+      .map((data: any) => data.json());
+  }
+  getTravelsOperations(code_grahp: string) {
+    return this.tokenService.get('geographic_locations/show_travel_operations/' + code_grahp)
       .map((data: any) => data.json());
   }
 }
