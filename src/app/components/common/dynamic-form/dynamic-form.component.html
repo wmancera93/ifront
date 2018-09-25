@@ -24,7 +24,7 @@
                             type="time" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
                             [disabled]="edit" />
                         <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config, form.value)"
-                            [formControlName]="config.id" [disabled]="edit">
+                            [formControlName]="config.id" [disabled]="edit && config.option.length > 0 && config.is_prerequisite">
                             <option *ngFor="let option of config.option" [value]="option.code">{{option.description}}</option>
                         </select>
                     </div>
