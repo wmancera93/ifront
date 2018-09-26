@@ -139,7 +139,10 @@
                   <div class="col-4" (click)="editTravels(travels.ticket)">
                     Editar
                   </div>
-                  <div class="col-4" (click)="deleteTravels(travels.ticket)">
+                  <div class="col-4" *ngIf="travels.action_travel_requests_index_view[1].is_active" (click)="deleteTravels(travels.ticket)">
+                    Eliminar
+                  </div>
+                  <div class="col-4" *ngIf="!travels.action_travel_requests_index_view[1].is_active">
                     Eliminar
                   </div>
                 </div>

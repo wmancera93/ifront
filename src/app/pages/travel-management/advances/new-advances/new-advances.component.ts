@@ -27,6 +27,7 @@ export class NewAdvancesComponent implements OnInit {
   public mm: any;
   public yyyy: any;
   public today: any;
+  public continue: boolean = false;
 
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
@@ -64,7 +65,7 @@ export class NewAdvancesComponent implements OnInit {
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
       this.formAdvanceTravel = new FormGroup({});
       this.formAdvanceTravel = fb.group({
-        travel_request_id: data,
+        travel_request_id: data == true ? "" : data ,
         currency_id: "",
         value: "",
         date: "",
@@ -97,7 +98,7 @@ export class NewAdvancesComponent implements OnInit {
 
 
   newAdvance(param) {
-    
+
     this.advancesService.postAdvanceList(this.objectAdvances).subscribe((response: any) => {
       document.getElementById("btn_advances_new").click();
       const alertSuccess: Alerts[] = [{
@@ -155,24 +156,26 @@ export class NewAdvancesComponent implements OnInit {
 
     this.idAdvance += 1
 
+    this.formAdvanceTravel.controls['currency_id'].setValue('');
+    this.formAdvanceTravel.controls['value'].setValue('');
+    this.formAdvanceTravel.controls['date'].setValue('');
+    this.formAdvanceTravel.controls['observation'].setValue('');
+
     setTimeout(() => {
       this.objectReport.emit(this.infoTableAdvances[0]);
     }, 500);
+
+    setTimeout(() => {
+      document.getElementById('advance_new').scrollTo(0, 1000);
+    }, 200);
   }
+
   validateTravel(travel: any) {
-    this.advancesItems.forEach(element => {
-      if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
-        document.getElementById("closeAdvances").click();
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: 'Advertencia',
-          message: "Ya existe una solicitud de anticipo para el viaje",
-          confirmation: true,
-          typeConfirmation: 'errorConfirmTravelID'
-        }];
-        this.alert.setAlert(alertWarning[0]);
-      }
-    });
+    if (travel.travel_request_id !== '') {
+      this.continue = true;
+    } else {
+      this.continue = false;
+    }
   }
   validateDateAdvance(date: any) {
     this.today = new Date();
@@ -211,17 +214,6 @@ export class NewAdvancesComponent implements OnInit {
     this.infoTableAdvances[0].data[0].data.splice(this.infoTableAdvances[0].data[0].data.findIndex(filter => filter.field_0 === params.id), 1);
     this.objectAdvances.splice(this.objectAdvances.findIndex(filter => filter.id_advance === params.id), 1);
     this.objectReport.emit(this.infoTableAdvances[0]);
-  }
-
-  clearFormAdvance() {
-    this.formAdvanceTravel = this.fb.group({
-      currency_id: "",
-      value: "",
-      date: "",
-      observation: ""
-    });
-
-
   }
 
   refreshTableAdvances() {
