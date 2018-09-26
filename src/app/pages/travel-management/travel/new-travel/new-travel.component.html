@@ -52,12 +52,12 @@
           </div>
 
 
-          <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
+          <!-- <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
             <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="manutencionCheck" [formControl]="formTravelManagement.controls['maintenance']">
             <label class="form-check-label titleColor" for="manutencionCheck">
               <strong>Manutención</strong>
             </label>
-          </div>
+          </div> -->
 
           <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 15px">
@@ -123,7 +123,7 @@
                 </label>
                 <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
                   (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
-                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}}</option>
+                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
