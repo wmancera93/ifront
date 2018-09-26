@@ -12,7 +12,7 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
   getAdvanceListTravel() {
-    return this.tokenService.get('travel_requests/index_for_select')
+    return this.tokenService.get('travel_requests/index_for_select_advance_pay')
       .map((data: any) => data.json());
   }
   getAdvanceMoneyList() {
