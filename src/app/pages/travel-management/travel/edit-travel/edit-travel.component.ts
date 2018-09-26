@@ -471,10 +471,10 @@ export class EditTravelComponent implements OnInit {
     this.generalViajes[0].travel_managements.data.push({
       field_0: modelPartial.id_travel,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
-      field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+      field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+      field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
@@ -525,10 +525,10 @@ export class EditTravelComponent implements OnInit {
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {
         element.field_1 = this.transport_types.filter((data) => data.id.toString() === modelEditPartial.id_transport.toString())[0].name;
-        element.field_2 = this.cityLocations.filter((data) => data.id.toString() === modelEditPartial.id_city.toString())[0].name;
+        element.field_2 = modelEditPartial.id_city,
         element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
         element.field_4 = modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin;
-        element.field_5 = this.cityLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_cityto.toString())[0].name;
+        element.field_5 = modelEditPartial.id_cityto,
         element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
         element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
