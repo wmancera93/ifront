@@ -43,13 +43,10 @@ export class DynamicFormComponent implements OnInit {
             });
           }
           if (this.staticGeneralObject.length > 0) {
-            console.log(this.generalObject)
             this.generalObject.forEach((object) => {
-              console.log(object)
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                console.log(change)
-                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
-                change.option = newOptions;
+                  let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                  change.option = newOptions;                                            
               });
             });
           }
