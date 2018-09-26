@@ -52,12 +52,12 @@
           </div>
 
 
-          <!-- <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
+          <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
             <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="manutencionCheck" [formControl]="formTravelManagement.controls['maintenance']">
             <label class="form-check-label titleColor" for="manutencionCheck">
               <strong>Manutención</strong>
             </label>
-          </div> -->
+          </div>
 
           <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 15px">
@@ -275,8 +275,7 @@
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>Región:</a>
                       </label>
-                      <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
-                        (change)="searchCity(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                       </select>
@@ -286,7 +285,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_city']">
+                      <input type="text" class="form-control" name="id_city" [formControl]="formTravelManagement.controls['id_city']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
@@ -350,8 +349,7 @@
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>Región:</a>
                       </label>
-                      <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']"
-                        (change)="searchCityto(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameStateto of stateLocationsto" [value]="nameStateto.id">{{nameStateto.name}}</option>
                       </select>
@@ -361,7 +359,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_cityto']">
+                      <input type="text" class="form-control" name="id_cityto" [formControl]="formTravelManagement.controls['id_cityto']">
 
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
                         <option value="-1">Seleccione</option>

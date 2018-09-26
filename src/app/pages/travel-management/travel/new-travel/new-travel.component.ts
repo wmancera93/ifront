@@ -236,8 +236,6 @@ export class NewTravelComponent implements OnInit {
           });
           this.searchState(this.formTravelManagement.value, 'edit');
           this.searchStateto(this.formTravelManagement.value, 'edit');
-          this.searchCity(this.formTravelManagement.value, 'edit');
-          this.searchCityto(this.formTravelManagement.value, 'edit');
           this.searchTerminal(this.formTravelManagement.value, 'edit');
           this.searchTerminalto(this.formTravelManagement.value, 'edit');
           this.searchHotel(this.formTravelManagement.value, 'edit');
@@ -376,7 +374,7 @@ export class NewTravelComponent implements OnInit {
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      field_5:  modelPartial.id_cityto,
+      field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
@@ -425,14 +423,12 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestinationEdit(modelEditPartial) {
-
     this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === modelEditPartial.id_travel), 1);
     this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === modelEditPartial.id_travel), 1);
     this.objectReport.emit(this.travelProof[0]);
     this.addDestination(modelEditPartial);
 
   }
-
   colapseNew() {
     this.activate_submit = false;
     this.showMilenage = false;
@@ -448,7 +444,6 @@ export class NewTravelComponent implements OnInit {
     }, 200);
 
   }
-
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
@@ -462,7 +457,6 @@ export class NewTravelComponent implements OnInit {
     document.getElementById("funtionTravel").click();
     this.clearFormPartial();
   }
-
   mileageTravel(param) {
 
     if (param.id_transport == 2) {
@@ -503,33 +497,6 @@ export class NewTravelComponent implements OnInit {
       });
     this.searchTerminalto(form, 'edit');
     this.searchHotel(form, 'edit');
-  }
-  searchCity(form: any, acction: any) {
-    this.cityLocations = [];
-    this.travelManagementService.getgeographicLocations(form.id_state).
-      subscribe((data: any) => {
-        this.cityLocations = data.data;
-        if (this.cityLocations.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_city'].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_city'].setValue('');
-        }
-      });
-  }
-  searchCityto(form: any, acction: any) {
-    this.travelManagementService.getgeographicLocations(form.id_stateto).
-      subscribe((data: any) => {
-        this.cityLocationsto = data.data;
-        if (this.cityLocationsto.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_cityto'].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_cityto'].setValue('');
-        }
-      });
   }
   searchTerminal(form: any, acction: any) {
     this.terminalLocations = [];
@@ -608,7 +575,7 @@ export class NewTravelComponent implements OnInit {
             this.formTravelManagement.controls['id_grahp'].setValue('');
           }
         })
-    }else {
+    } else {
       this.nplnr = false;
     }
   }
