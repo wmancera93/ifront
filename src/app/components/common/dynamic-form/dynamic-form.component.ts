@@ -44,8 +44,12 @@ export class DynamicFormComponent implements OnInit {
           if (this.staticGeneralObject.length > 0) {
             this.generalObject.forEach((object) => {
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
-                change.option = newOptions;
+                if(object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== null && object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== undefined){
+                  let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                  change.option = newOptions;
+                } else {
+                  change.option = [];
+                }                
               });
             });
           }
