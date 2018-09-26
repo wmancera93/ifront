@@ -36,14 +36,14 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
-                  <strong>Importe:</strong>
+                  <strong>Importe*:</strong>
                 </label>
                 <input type="number" class="form-control" name="value" [formControl]="formAdvanceTravel.controls['value']">
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <strong>Moneda:</strong>
+                  <strong>Moneda*:</strong>
                 </label>
                 <select class="form-control" [formControl]="formAdvanceTravel.controls['currency_id']" paceholder="Seleccione">
                   <option value="">Seleccione</option>
@@ -53,7 +53,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  <strong>Fecha entrega de Anticipo:</strong>
+                  <strong>Fecha entrega de Anticipo*:</strong>
                 </label>
                 <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
                   (change)="validateDateAdvance(formAdvanceTravel.value)" />
@@ -63,7 +63,7 @@
           <div *ngIf="continue" class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>Descripción:</strong>
+              <strong>Descripción*:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control"
               [formControl]="formAdvanceTravel.controls['observation']">
@@ -75,7 +75,12 @@
           <div class="col-12" *ngIf="continue">
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12" style="margin-top: 20px">
-                <button type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
+                <button [attr.disabled]="
+                (formAdvanceTravel.value.travel_request_id == ''
+                ||formAdvanceTravel.value.currency_id == ''
+                  || formAdvanceTravel.value.value == ''
+                  || formAdvanceTravel.value.date == ''
+                  || formAdvanceTravel.value.observation == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
                   <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
               </div>
             </div>

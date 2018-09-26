@@ -20,7 +20,7 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
   postAdvanceList(newAdvances) {
-    return this.tokenService.post('travel_advance_payments',{advances:newAdvances})
+    return this.tokenService.post('travel_advance_payments',newAdvances)
       .map((data: any) => data.json());
   }
   getAdvanceByID(id) {
