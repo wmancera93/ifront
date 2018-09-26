@@ -93,7 +93,6 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      debugger
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -367,8 +366,6 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    debugger
-
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
@@ -578,7 +575,6 @@ export class NewTravelComponent implements OnInit {
       });
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
-    debugger
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
@@ -885,7 +881,6 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
-    debugger
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 

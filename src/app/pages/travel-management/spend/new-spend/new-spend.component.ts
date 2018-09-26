@@ -482,7 +482,6 @@ export class NewSpendComponent implements OnInit {
   }
 
   refreshPartialSpend() {
-
     this.formSpendTravel.controls['travel_allowance_type_id'].setValue('');
     this.formSpendTravel.controls['currency_id'].setValue('');
     this.formSpendTravel.controls['value'].setValue('');
@@ -495,7 +494,5 @@ export class NewSpendComponent implements OnInit {
     this.formSpendTravel.controls['cod_provider'].setValue('');
     this.formSpendTravel.controls['authorization_number'].setValue('');
     this.formSpendTravel.controls['populated'].setValue('');
-
-
   }
 }

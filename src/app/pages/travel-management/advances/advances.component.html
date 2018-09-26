@@ -64,7 +64,7 @@
                 </span>
               </h6>
             </div>
-            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+            <div class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p">
               <p class="font-title-general">
                 Solicitud de viaje
               </p>
@@ -73,12 +73,12 @@
                 {{advance.travel_request_id}}
               </p>
             </div>
-            <div class="col-lg-3 col-md-4 col-4 top-p text-align-right">
+            <div class="col-lg-1 col-md-4 col-4 top-p text-align-center">
               <div class="row">
                 <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer" (click)="showAdvance(advance.id)">
                   <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div class="col-12">
+                <div class="col-12" (click)="showAdvance(advance.id)">
                   Ver
                 </div>
               </div>
