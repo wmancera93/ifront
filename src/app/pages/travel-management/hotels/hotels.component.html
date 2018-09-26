@@ -82,7 +82,10 @@
                 <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
-                <div class="col-12">
+                <div class="col-12" *ngIf="hotel.is_delete" (click)="deleteHotels(hotel)">
+                  Eliminar
+                </div>
+                <div class="col-12" *ngIf="!hotel.is_delete">
                   Eliminar
                 </div>
               </div>

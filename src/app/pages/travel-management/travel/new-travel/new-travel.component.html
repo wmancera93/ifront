@@ -286,10 +286,11 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
+                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_city']">
+                      <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
-                      </select>
+                      </select> -->
                     </div>
                   </div>
                   <div class="row">
@@ -360,10 +361,12 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
+                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_cityto']">
+
+                      <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
-                      </select>
+                      </select> -->
                     </div>
                   </div>
                   <div class="row">
@@ -412,7 +415,7 @@
                 <div class="col-12 top-containter" style="margin-top: 30px">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button [attr.disabled]="
+                      <button type="button" [attr.disabled]="
                       (formTravelManagement.value.id_transport == -1
                       ||formTravelManagement.value.id_transport == ''
                         || formTravelManagement.value.id_country == -1
@@ -448,7 +451,7 @@
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
+                      <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                     </div>
                   </div>

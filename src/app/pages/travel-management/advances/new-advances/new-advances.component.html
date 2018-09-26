@@ -1,6 +1,7 @@
-<button id="btn_advances_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance_new" style="display:none;">
+<button id="btn_advances_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance_new"
+  style="display:none;">
 </button>
-<div class="modal" id="advance_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div data-backdrop="static" class="modal" id="advance_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -20,13 +21,17 @@
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']" paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
-                  <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
-                </select>
+                <fieldset [disabled]="objectAdvances.length > 0">
+                  <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']"
+                    paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
+                  </select>
+                </fieldset>
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 15px">
+          <div *ngIf="continue" class="col-12" style="margin-top: 15px">
             <div class="row">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -41,6 +46,7 @@
                   <strong>Moneda:</strong>
                 </label>
                 <select class="form-control" [formControl]="formAdvanceTravel.controls['currency_id']" paceholder="Seleccione">
+                  <option value="">Seleccione</option>
                   <option *ngFor="let money of listMoneyTypes" [value]="money.id">{{money.name}}</option>
                 </select>
               </div>
@@ -49,38 +55,42 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong>Fecha entrega de Anticipo:</strong>
                 </label>
-                <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" (change)="validateDateAdvance(formAdvanceTravel.value)"/>
+                <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
+                  (change)="validateDateAdvance(formAdvanceTravel.value)" />
               </div>
             </div>
           </div>
-          <div class="col-12">
+          <div *ngIf="continue" class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong>Descripción:</strong>
             </label>
-            <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control" [formControl]="formAdvanceTravel.controls['observation']">
+            <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control"
+              [formControl]="formAdvanceTravel.controls['observation']">
+
+
+
               </textarea>
           </div>
-          <div *ngIf="infoTableAdvances[0].data[0].data.length > 0" class="col-12" style="min-height: 100px !important">
+          <div class="col-12" *ngIf="continue">
+            <div class="row justify-content-end">
+              <div class="col-lg-3 col-md-4 col-12" style="margin-top: 20px">
+                <button type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
+                  <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="infoTableAdvances[0].data[0].data.length > 0 && continue" class="col-12" style="min-height: 100px !important">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong>Anticipos</strong>
             </label>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable"
+              [title]="nameReport"></app-data-table>
 
           </div>
         </form>
-        <div class="row justify-content-end">
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 20px">
-            <button class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
-              <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
-          </div>
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 20px">
-            <button class="btn btn-warning btn-block cursor-general" (click)="clearFormAdvance()">
-              <i class="fa fa-fw fa-window-close-o"></i>&nbsp;&nbsp;Limpiar</button>
-          </div>
-        </div>
-        <div class="row justify-content-end">
+        <div  *ngIf="continue && objectAdvances.length > 0" class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newAdvance(formAdvanceTravel.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>

@@ -93,7 +93,6 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      debugger
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -367,8 +366,6 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    debugger
-
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
@@ -376,10 +373,10 @@ export class NewTravelComponent implements OnInit {
     this.travelProof[0].data[0].data.push({
       field_0: modelPartial.id_travel,
       field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
-      field_2: this.cityLocations.filter((data) => data.id.toString() === modelPartial.id_city.toString())[0].name,
+      field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      field_5: this.cityLocationsto.filter((data) => data.id.toString() === modelPartial.id_cityto.toString())[0].name,
+      field_5:  modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
@@ -578,14 +575,13 @@ export class NewTravelComponent implements OnInit {
       });
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
-    debugger
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
 
       this.travelManagementService.getTravelsCosts(form.id_element_imputation).
         subscribe((data: any) => {
-          this.costs_travels = data.data;
+          this.costs_travels = data;
           if (this.costs_travels.length > 0) {
             if (acction === 'new') {
               this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
@@ -887,7 +883,6 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
-    debugger
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
