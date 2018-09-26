@@ -21,7 +21,7 @@ export class DynamicFormComponent implements OnInit {
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
   public countAfter: number = 0;
-  
+
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
@@ -43,14 +43,13 @@ export class DynamicFormComponent implements OnInit {
             });
           }
           if (this.staticGeneralObject.length > 0) {
+            console.log(this.generalObject)
             this.generalObject.forEach((object) => {
+              console.log(object)
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                if(object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== null && object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== undefined){
-                  let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
-                  change.option = newOptions;
-                } else {
-                  change.option = [];
-                }                
+                console.log(change)
+                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                change.option = newOptions;
               });
             });
           }
