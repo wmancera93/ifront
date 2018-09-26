@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -22,17 +21,15 @@ export class DynamicFormComponent implements OnInit {
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
   public countAfter: number = 0;
-
+  
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       if (this.countAfter === 0) {
         this.generalObject = data.data;
-
         if (!data.edit) {
           this.staticGeneralObject = [];
-
           if (this.generalObject.length > 0) {
             data.data.forEach(index => {
               index.forEach(element => {
@@ -45,17 +42,19 @@ export class DynamicFormComponent implements OnInit {
               });
             });
           }
-
           if (this.staticGeneralObject.length > 0) {
             this.generalObject.forEach((object) => {
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
-                change.option = newOptions;
+                if(object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== null && object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value !== undefined){
+                  let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                  change.option = newOptions;
+                } else {
+                  change.option = [];
+                }                
               });
             });
           }
         }
-
 
         if (this.generalObject !== null && this.generalObject !== undefined) {
           this.edit = data.edit;
@@ -64,12 +63,10 @@ export class DynamicFormComponent implements OnInit {
           this.form = this.createGroup();
           this.showForm = true;
         }
-
       }
     })
   }
   ngOnInit() {
-
   }
   createGroup() {
     this.objectForm = [];
@@ -87,11 +84,9 @@ export class DynamicFormComponent implements OnInit {
     });
     return group;
   }
-
   public idSend;
   public valueSend;
   public code;
-
   sendDynamicForm(form) {
     let objectForm: any[] = [];
     let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
@@ -133,12 +128,10 @@ export class DynamicFormComponent implements OnInit {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
-
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
       if (element.id_requesite === params.id) {
         let objectForm: any[] = [];
         let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
-
         for (let index = 0; index < recorrer.length; index++) {
           if (((index / 2) % 1) === 0) {
             this.idSend = recorrer[index];
@@ -159,12 +152,10 @@ export class DynamicFormComponent implements OnInit {
             }
           });
         });
-
       }
     });
     document.getElementById("savebutton").removeAttribute('disabled');
   }
-
   kewUptext(value) {
     let out = '';
     let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
@@ -179,7 +170,6 @@ export class DynamicFormComponent implements OnInit {
     }
     value.currentTarget.value = out
   }
-
   ngOnDestroy() {
     this.countAfter += 1;
   }
