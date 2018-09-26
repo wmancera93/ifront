@@ -581,7 +581,7 @@ export class NewTravelComponent implements OnInit {
 
       this.travelManagementService.getTravelsCosts(form.id_element_imputation).
         subscribe((data: any) => {
-          this.costs_travels = data;
+          this.costs_travels = data.data;
           if (this.costs_travels.length > 0) {
             if (acction === 'new') {
               this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
@@ -593,7 +593,6 @@ export class NewTravelComponent implements OnInit {
 
     } else {
       this.kostl = false;
-      this.nplnr = false;
     }
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
       this.kostl = false;
@@ -610,7 +609,6 @@ export class NewTravelComponent implements OnInit {
           }
         })
     }else {
-      this.kostl = false;
       this.nplnr = false;
     }
   }
