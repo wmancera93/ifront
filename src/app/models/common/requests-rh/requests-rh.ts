@@ -67,7 +67,7 @@ export interface Request {
     observation_request: string,
     days_request: number,
     id_activity: string,
-    file_support: Url
+    image: Url
     is_finished: boolean,
     ticket: number,
     type_requests_name: string,
