@@ -594,7 +594,18 @@ export class NewTravelComponent implements OnInit {
         }
       })
   }
+  changeTypeTravel(param) {
+    if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
+      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
+      this.changeTravelLegal('P');
+    }
+  }
 
+  changeTravelLegal(travelLegal: any) {
+    if (travelLegal === 'P') {
+      this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
+    }
+  }
   clearFormGeneral() {
     this.activate = false;
     this.activate_submit = true;
