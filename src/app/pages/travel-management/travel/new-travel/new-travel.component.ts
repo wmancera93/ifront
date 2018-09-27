@@ -160,7 +160,7 @@ export class NewTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
       id_country: '-1',
       id_state: '',
@@ -370,7 +370,7 @@ export class NewTravelComponent implements OnInit {
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
       field_0: modelPartial.id_travel,
-      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString()).length > 0 ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
@@ -459,7 +459,7 @@ export class NewTravelComponent implements OnInit {
   }
   mileageTravel(param) {
 
-    if (param.id_transport == 2) {
+    if (param.id_transport == 'T') {
 
       this.showMilenage = true;
     } else {
@@ -696,7 +696,7 @@ export class NewTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
       id_country: '-1',
       id_state: '',
