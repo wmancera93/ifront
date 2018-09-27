@@ -564,7 +564,7 @@ export class NewTravelComponent implements OnInit {
 
       this.travelManagementService.getTravelsCosts(form.id_element_imputation).
         subscribe((data: any) => {
-          this.costs_travels = data.data;
+          this.costs_travels = this.sortByAphabet(data.data);
           if (this.costs_travels.length > 0) {
             if (acction === 'new') {
               this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
@@ -582,7 +582,7 @@ export class NewTravelComponent implements OnInit {
       this.nplnr = true;
       this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
         subscribe((data: any) => {
-          this.grahp = data.data;
+          this.grahp = this.sortByAphabet(data.data);
           if (this.grahp.length > 0) {
             if (acction === 'new') {
               this.formTravelManagement.controls['id_grahp'].setValue('-1');
@@ -600,7 +600,7 @@ export class NewTravelComponent implements OnInit {
 
     this.travelManagementService.getTravelsOperations(form.id_grahp).
       subscribe((data: any) => {
-        this.operations = data.data;
+        this.operations = this.sortByAphabet(data.data);
         if (this.operations.length > 0) {
           if (acction === 'new') {
             this.formTravelManagement.controls['id_operations'].setValue('-1');
