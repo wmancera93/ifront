@@ -623,28 +623,12 @@ export class NewTravelComponent implements OnInit {
     if (travelLegal === 'P') {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
 
-      if (this.center_costs_travels.filter((data) => data.id.toString() === this.formTravelManagement.controls['id_element_imputation'].toString())[0].code === 'KOSTL') {
-        this.kostl = true;
-        this.nplnr = false;
-
-        this.travelManagementService.getTravelsCosts(this.formTravelManagement.controls['id_element_imputation'].toString()).
-          subscribe((data: any) => {
-            this.costs_travels = this.sortByAphabet(data.data);
-          })
-
-      } else {
-        this.kostl = false;
-      }
-      if (this.center_costs_travels.filter((data) => data.id.toString() === this.formTravelManagement.controls['id_element_imputation'].toString())[0].code === 'NPLNR') {
-        this.kostl = false;
-        this.nplnr = true;
-        this.travelManagementService.getTravelsGrahp(this.formTravelManagement.controls['id_element_imputation'].toString()).
-          subscribe((data: any) => {
-            this.grahp = this.sortByAphabet(data.data);
-          })
-      } else {
-        this.nplnr = false;
-      }
+      this.kostl = false;
+      this.nplnr = true;
+      this.travelManagementService.getTravelsGrahp(this.formTravelManagement.controls['id_element_imputation'].toString()).
+        subscribe((data: any) => {
+          this.grahp = this.sortByAphabet(data.data);
+        });
     }
   }
   clearFormGeneral() {
