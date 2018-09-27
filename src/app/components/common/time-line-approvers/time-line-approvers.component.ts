@@ -26,7 +26,7 @@ export class TimeLineApproversComponent implements OnInit {
               this.detailRequets = [];
               if (detail.success) {
                 this.detailRequets = detail.data;
-                this.fileSupport = this.detailRequets[0].request.file_support.url;
+                this.fileSupport = this.detailRequets[0].request.image.url;
 
                 if (document.getElementById('aprovers_requests').className !== 'modal show') {
                   document.getElementById('btn_aprovers_requests').click();
