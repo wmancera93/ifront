@@ -380,6 +380,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
+    console.log(modelPartial);
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
@@ -475,8 +476,7 @@ export class NewTravelComponent implements OnInit {
   }
   mileageTravel(param) {
 
-    if (param.id_transport == 'T') {
-
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
