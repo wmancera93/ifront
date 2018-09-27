@@ -386,7 +386,7 @@ export class NewTravelComponent implements OnInit {
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
       field_0: modelPartial.id_travel,
-      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString()).length > 0 ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
+      field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
@@ -973,11 +973,9 @@ export class NewTravelComponent implements OnInit {
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
-    this.grahp = [];
-    this.operations = [];
     this.hotels = [];
 
-    this.formTravelManagement.controls['id_transport'].setValue('1');
+    this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('-1');
     this.formTravelManagement.controls['id_state'].setValue('');
