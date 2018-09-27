@@ -625,7 +625,7 @@ export class NewTravelComponent implements OnInit {
 
       this.kostl = false;
       this.nplnr = true;
-      this.travelManagementService.getTravelsGrahp('NPLNR').
+      this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
         subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
         });
