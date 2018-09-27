@@ -229,7 +229,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
                   <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']" (change)="mileageTravel(formTravelManagement.value, 'new')">
-                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.code">{{nameTransport.name}}</option>
+                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
