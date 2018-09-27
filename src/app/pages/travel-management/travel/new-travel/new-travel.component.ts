@@ -625,7 +625,7 @@ export class NewTravelComponent implements OnInit {
 
       this.kostl = false;
       this.nplnr = true;
-      this.travelManagementService.getTravelsGrahp(this.formTravelManagement.controls['id_element_imputation'].toString()).
+      this.travelManagementService.getTravelsGrahp('NPLNR').
         subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
         });
