@@ -98,4 +98,8 @@ export class ApprovalsDetailsComponent implements OnInit {
         })
   }
 
+  viewSupport() {
+    window.open(this.approvals[0].image.url);
+  }
+
 }
