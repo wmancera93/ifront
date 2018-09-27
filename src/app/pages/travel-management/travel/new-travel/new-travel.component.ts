@@ -621,6 +621,7 @@ export class NewTravelComponent implements OnInit {
 
   changeTravelLegal(travelLegal: any) {
     if (travelLegal === 'P') {
+      this.nplnr = false;
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
     }
   }
