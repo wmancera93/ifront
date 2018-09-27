@@ -72,11 +72,11 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='KOSTL'">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Costo:*</a>
+                  <a>Centro de costo:*</a>
                 </label>
                 <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
                   <option value="-1">Seleccione</option>
-                  <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.name}}</option>
+                  <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.code}} - {{costsTrip.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
@@ -86,7 +86,7 @@
                 </label>
                 <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
                   (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
-                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}}</option>
+                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}} - {{grahpTravels.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
@@ -96,7 +96,7 @@
                 </label>
                 <select [attr.disabled]="operations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_operations']">
                   <option value="-1">Seleccione</option>
-                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.name}}</option>
+                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                 </select>
               </div>
             </div>
@@ -307,7 +307,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_city']">
+                      <input type="text" class="form-control" name="id_city" [formControl]="formTravelManagement.controls['id_city']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
@@ -382,7 +382,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Provincia:</a>
                       </label>
-                      <input type="text" class="form-control" name="province_name" [formControl]="formTravelManagement.controls['id_cityto']">
+                      <input type="text" class="form-control" name="id_cityto" [formControl]="formTravelManagement.controls['id_cityto']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>

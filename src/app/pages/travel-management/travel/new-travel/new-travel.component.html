@@ -19,7 +19,7 @@
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
-                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']">
+                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" (change)="changeTypeTravel(formTravelManagement.value)">
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
@@ -66,7 +66,7 @@
                   <i class="fa fa-fw fa-rocket text-primary-hr"></i>
                   <a>Clase de viaje legal:*</a>
                 </label>
-                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
+                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']" (change)="changeTravelLegal()">
                   <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
                 </select>
               </div>
@@ -91,9 +91,6 @@
             </div>
           </div>
 
-
-
-
           <div class="col-12" *ngIf="activate">
             <div class="row" style="margin-top: 10px">
               <div class="col-lg-4 col-md-6 col-12">
@@ -109,11 +106,11 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Costo:*</a>
+                  <a>Centro de costo:*</a>
                 </label>
                 <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
                   <option value="-1">Seleccione</option>
-                  <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.name}}</option>
+                  <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.code}} - {{costsTrip.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
@@ -123,7 +120,7 @@
                 </label>
                 <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
                   (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
-                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.name}}</option>
+                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.name}} - {{grahpTravels.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
@@ -133,7 +130,7 @@
                 </label>
                 <select [attr.disabled]="operations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_operations']">
                   <option value="-1">Seleccione</option>
-                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.name}}</option>
+                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                 </select>
               </div>
             </div>
@@ -232,7 +229,7 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
                   <select class="form-control" [formControl]="formTravelManagement.controls['id_transport']" (change)="mileageTravel(formTravelManagement.value, 'new')">
-                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{nameTransport.name}}</option>
+                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.code">{{nameTransport.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-2 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">

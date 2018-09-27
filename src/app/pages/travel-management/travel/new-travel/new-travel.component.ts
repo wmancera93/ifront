@@ -160,7 +160,7 @@ export class NewTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
       id_country: '-1',
       id_state: '',
@@ -275,17 +275,33 @@ export class NewTravelComponent implements OnInit {
     this.travelManagementService.getplanningTravelRequests().
       subscribe((data: any) => {
         this.planningTravel = data;
-        this.travel_types = data.data.travel_types;
-        this.transport_types = data.data.transport_types;
-        this.countries = data.data.countries;
-        this.countriesto = data.data.countries;
-        this.legal_travels = data.data.legal_travels_types;
-        this.trips_specific = data.data.specific_types_trips;
-        this.trips_activities = data.data.travel_activities;
-        this.center_costs_travels = data.data.travel_costs_types;
+        this.travel_types = this.sortByAphabet(data.data.travel_types);
+        this.transport_types = this.sortByAphabet(data.data.transport_types);
+        this.countries = this.sortByAphabet(data.data.countries);
+        this.countriesto = this.sortByAphabet(data.data.countries);
+        this.legal_travels = this.sortByAphabet(data.data.legal_travels_types);
+        this.trips_specific = this.sortByAphabet(data.data.specific_types_trips);
+        this.trips_activities = this.sortByAphabet(data.data.travel_activities);
+        this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = [];
       })
 
+  }
+
+  sortByAphabet(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      const nameA: String = a.name.toLowerCase();
+      const nameB: String = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+
+    return dataBySort;
   }
 
   deleteUpload(param: any) {
@@ -370,7 +386,7 @@ export class NewTravelComponent implements OnInit {
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.travelProof[0].data[0].data.push({
       field_0: modelPartial.id_travel,
-      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name,
+      field_1: this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString()).length > 0 ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
@@ -459,7 +475,7 @@ export class NewTravelComponent implements OnInit {
   }
   mileageTravel(param) {
 
-    if (param.id_transport == 2) {
+    if (param.id_transport == 'T') {
 
       this.showMilenage = true;
     } else {
@@ -594,7 +610,18 @@ export class NewTravelComponent implements OnInit {
         }
       })
   }
+  changeTypeTravel(param) {
+    if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
+      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
+      this.changeTravelLegal('P');
+    }
+  }
 
+  changeTravelLegal(travelLegal: any) {
+    if (travelLegal === 'P') {
+      this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
+    }
+  }
   clearFormGeneral() {
     this.activate = false;
     this.activate_submit = true;
@@ -696,7 +723,7 @@ export class NewTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
       id_country: '-1',
       id_state: '',
