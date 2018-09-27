@@ -275,17 +275,33 @@ export class NewTravelComponent implements OnInit {
     this.travelManagementService.getplanningTravelRequests().
       subscribe((data: any) => {
         this.planningTravel = data;
-        this.travel_types = data.data.travel_types;
-        this.transport_types = data.data.transport_types;
-        this.countries = data.data.countries;
-        this.countriesto = data.data.countries;
-        this.legal_travels = data.data.legal_travels_types;
-        this.trips_specific = data.data.specific_types_trips;
-        this.trips_activities = data.data.travel_activities;
-        this.center_costs_travels = data.data.travel_costs_types;
+        this.travel_types = this.sortByAphabet(data.data.travel_types);
+        this.transport_types = this.sortByAphabet(data.data.transport_types);
+        this.countries = this.sortByAphabet(data.data.countries);
+        this.countriesto = this.sortByAphabet(data.data.countries);
+        this.legal_travels = this.sortByAphabet(data.data.legal_travels_types);
+        this.trips_specific = this.sortByAphabet(data.data.specific_types_trips);
+        this.trips_activities = this.sortByAphabet(data.data.travel_activities);
+        this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = [];
       })
 
+  }
+
+  sortByAphabet(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      const nameA: String = a.name.toLowerCase();
+      const nameB: String = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+
+    return dataBySort;
   }
 
   deleteUpload(param: any) {
