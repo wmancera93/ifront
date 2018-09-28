@@ -207,7 +207,8 @@ export class NewTravelComponent implements OnInit {
 
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
-
+            
+            id_travel:object[0].id_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
@@ -336,7 +337,7 @@ export class NewTravelComponent implements OnInit {
 
     this.showSubmit = false;
     this.send = true;
-console.log(model)
+    console.log(model)
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.id_travel);
     modelFromdata.append('is_maintenance', model.maintenance);
@@ -419,10 +420,12 @@ console.log(model)
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
-      origin_location_id: modelPartial.id_city,
+      origin_location_id: modelPartial.id_state,
+      origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
-      destination_location_id: modelPartial.id_cityto,
+      destination_location_id: modelPartial.id_stateto,
+      destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
@@ -719,7 +722,7 @@ console.log(model)
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -733,7 +736,7 @@ console.log(model)
       id_travel_activities: '',
       id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -743,7 +746,7 @@ console.log(model)
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -976,7 +979,7 @@ console.log(model)
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('-1');
+    this.formTravelManagement.controls['id_country'].setValue('');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
@@ -986,7 +989,7 @@ console.log(model)
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('-1');
+    this.formTravelManagement.controls['id_countryto'].setValue('');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
@@ -1027,5 +1030,4 @@ console.log(model)
       this.array_wrong.push(element);
     }
   }
-
 }

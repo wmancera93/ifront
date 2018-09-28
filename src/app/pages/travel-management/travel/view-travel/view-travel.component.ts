@@ -4,6 +4,8 @@ import { Angular2TokenService } from 'angular2-token';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Http, ResponseContentType } from '@angular/http';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-view-travel',
@@ -36,7 +38,7 @@ export class ViewTravelComponent implements OnInit {
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService,
-    public travelsService: TravelsService,
+    public travelsService: TravelsService,public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
 
 
@@ -69,6 +71,19 @@ export class ViewTravelComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  sedRequestsTravel(){
+
+    this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
+      if(data){
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+      }
+      this.travelsService.setResultSaved(true);
+    });
+
+  }
+    
   viewCotization(paramView) {
 
     window.open(paramView.file.url)

@@ -55,7 +55,7 @@ import { SpendSharedService } from './shared/spend-shared/spend-shared.service';
 import { AdvanceSharedService } from './shared/advance-shared/advance-shared.service';
 import { AdvancesService } from './travel-management/advances/advances.service';
 import { SpendsService } from './travel-management/spends/spends.service';
-import { ApproverTravelsService } from './approver-travels/approver-travels.service';
+import { ApproverTravelsService } from './travel-management/approver-travels/approver-travels.service';
 
 
 @NgModule({
