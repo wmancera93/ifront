@@ -132,7 +132,7 @@
 
         <div class="row border justify-content-center titleColor" style="margin-top: 15px">
           <div class="col-12">
-            <h4>Viajes</h4>
+            <h4>Trayectos</h4>
           </div>
         </div>
 
@@ -161,7 +161,12 @@
             </div>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col-lg-3 col-md-4 col-12">
+            <button *ngIf="objectPrint.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
+              <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+          </div>
+        </div>
         <div class="modal-footerInfo justify-content-center">
           <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
             <h6> Cerrar </h6>

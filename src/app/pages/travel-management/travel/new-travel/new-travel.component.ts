@@ -15,6 +15,7 @@ import { debug } from 'util';
 import { AdvanceSharedService } from '../../../../services/shared/advance-shared/advance-shared.service';
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { TagModelClass } from 'ngx-chips/core/accessor';
 
 @Component({
   selector: 'app-new-travel',
@@ -148,7 +149,7 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -162,7 +163,7 @@ export class NewTravelComponent implements OnInit {
       id_travel_activities: '',
       id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -172,7 +173,7 @@ export class NewTravelComponent implements OnInit {
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -335,19 +336,17 @@ export class NewTravelComponent implements OnInit {
 
     this.showSubmit = false;
     this.send = true;
-
-
+console.log(model)
     const modelFromdata = new FormData();
-    modelFromdata.append('travel_request_type_id', '1');
     modelFromdata.append('travel_types', model.id_travel);
     modelFromdata.append('is_maintenance', model.maintenance);
-    modelFromdata.append('date_begin', model.date_requests_begin);
-    modelFromdata.append('date_end', model.date_requests_end);
-    modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
+    modelFromdata.append('date_begin', model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end);
+    modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
@@ -420,10 +419,12 @@ export class NewTravelComponent implements OnInit {
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
-      origin_location_id: modelPartial.id_city,
+      origin_location_id: modelPartial.id_state,
+      origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
-      destination_location_id: modelPartial.id_cityto,
+      destination_location_id: modelPartial.id_stateto,
+      destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
@@ -720,7 +721,7 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -1028,5 +1029,4 @@ export class NewTravelComponent implements OnInit {
       this.array_wrong.push(element);
     }
   }
-
 }

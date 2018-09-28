@@ -87,7 +87,8 @@ export class EditTravelComponent implements OnInit {
   public grahp: any[] = [];
   public operations: any[] = [];
 
-
+  public kostl: boolean = false;
+  public nplnr: boolean = false;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -168,7 +169,7 @@ export class EditTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -181,9 +182,9 @@ export class EditTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -193,7 +194,7 @@ export class EditTravelComponent implements OnInit {
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -235,9 +236,9 @@ export class EditTravelComponent implements OnInit {
             id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
             id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
             id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
-            id_transport: 1,
+            id_transport: '',
             id_city: '',
-            id_country: '-1',
+            id_country: '',
             id_state: '',
             id_terminal: '',
             date_begin: '',
@@ -247,7 +248,7 @@ export class EditTravelComponent implements OnInit {
             id_terminalto: '',
             id_cityto: '',
             id_stateto: '',
-            id_countryto: '-1',
+            id_countryto: '',
             id_hotels: '',
             travel_mileage: '',
           });
@@ -423,6 +424,7 @@ export class EditTravelComponent implements OnInit {
 
   }
   deleteDestinations(param: any) {
+    document.getElementById("btn_travel_edit").click();
     this.id_destination_delete = param.id;
     this.alertWarning = [{
       type: 'warning',
@@ -438,16 +440,15 @@ export class EditTravelComponent implements OnInit {
     this.send = true;
 
     const modelFromdata = new FormData();
-    modelFromdata.append('travel_request_type_id', '1');
-    modelFromdata.append('is_maintenance', model.maintenance);
-    modelFromdata.append('date_begin', model.date_requests_begin);
-    modelFromdata.append('date_end', model.date_requests_end);
     modelFromdata.append('travel_types', model.id_travel);
-    modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('is_maintenance', model.maintenance);
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
+    modelFromdata.append('date_begin', model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end);
+    modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
@@ -520,17 +521,23 @@ export class EditTravelComponent implements OnInit {
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
-      origin_location_id: modelPartial.id_city,
+      origin_location_id: modelPartial.id_state,
+      origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
-      destination_location_id: modelPartial.id_cityto,
+      destination_location_id: modelPartial.id_stateto,
+      destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
     });
 
     this.count += 1
-    this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+    setTimeout(() => {
+      this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+    }, 500);
+
+
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
   }
@@ -542,11 +549,11 @@ export class EditTravelComponent implements OnInit {
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {
         element.field_1 = modelEditPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelEditPartial.id_transport.toString())[0].name : '',
-          element.field_2 = modelEditPartial.id_city,
-          element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
+        element.field_2 = modelEditPartial.id_city,
+        element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
         element.field_4 = modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin;
         element.field_5 = modelEditPartial.id_cityto,
-          element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
+        element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
         element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
         element.field_9 = modelEditPartial.travel_mileage;
@@ -578,10 +585,12 @@ export class EditTravelComponent implements OnInit {
       travel_id: this.id_destinations,
       transport_id: modelEditPartial.id_transport,
       total_mileage: modelEditPartial.travel_mileage,
-      origin_location_id: modelEditPartial.id_city,
+      origin_location_id: modelEditPartial.id_state,
+      origin_location_text: modelEditPartial.id_city,
       origin_terminal_id: modelEditPartial.id_terminal,
       hotel_id: modelEditPartial.id_hotels,
-      destination_location_id: modelEditPartial.id_cityto,
+      destination_location_id: modelEditPartial.id_stateto,
+      destination_location_text: modelEditPartial.id_cityto,
       destination_terminal_id: modelEditPartial.id_terminalto,
       origin_datetime: modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin,
       destination_datetime: modelEditPartial.date_end + ' ' + modelEditPartial.hour_end
@@ -632,8 +641,6 @@ export class EditTravelComponent implements OnInit {
       });
       this.searchState(param, 'edit');
       this.searchStateto(param, 'edit');
-      this.searchCity(param, 'edit');
-      this.searchCityto(param, 'edit');
       this.searchTerminal(param, 'edit');
       this.searchTerminalto(param, 'edit');
       this.searchHotel(param, 'edit');
@@ -671,7 +678,7 @@ export class EditTravelComponent implements OnInit {
   }
   mileageTravel(param) {
 
-    if (param.id_transport == 2) {
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -716,37 +723,7 @@ export class EditTravelComponent implements OnInit {
     this.searchTerminalto(form, 'edit');
     this.searchHotel(form, 'edit');
   }
-  searchCity(form: any, acction: any) {
-    this.terminalLocations = [];
-    this.cityLocations = [];
-    this.travelManagementService.getgeographicLocations(form.id_state).
-      subscribe((data: any) => {
-        this.cityLocations = data.data;
-        if (this.cityLocations.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_city'].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_city'].setValue('');
-        }
-      });
-  }
-  searchCityto(form: any, acction: any) {
-    this.terminalLocationsto = [];
-    this.hotels = [];
-    this.cityLocationsto = [];
-    this.travelManagementService.getgeographicLocations(form.id_stateto).
-      subscribe((data: any) => {
-        this.cityLocationsto = data.data;
-        if (this.cityLocationsto.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_cityto'].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_cityto'].setValue('');
-        }
-      });
-  }
+  
   searchTerminal(form: any, acction: any) {
     this.terminalLocations = [];
     this.travelManagementService.gettransportTerminals(form.id_city).
@@ -792,29 +769,42 @@ export class EditTravelComponent implements OnInit {
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
 
-    this.travelManagementService.getTravelsCosts(form.id_element_imputation).
-      subscribe((data: any) => {
-        this.costs_travels = data.data;
-        if (this.costs_travels.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_travel_costs'].setValue('');
-        }
-      })
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
+      this.kostl = true;
+      this.nplnr = false;
 
-    this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-      subscribe((data: any) => {
-        this.grahp = data.data;
-        if (this.grahp.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_grahp'].setValue('-1');
+      this.travelManagementService.getTravelsCosts(form.id_element_imputation).
+        subscribe((data: any) => {
+          this.costs_travels = this.sortByAphabet(data.data);
+          if (this.costs_travels.length > 0) {
+            if (acction === 'new') {
+              this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+            }
+          } else {
+            this.formTravelManagement.controls['id_travel_costs'].setValue('');
           }
-        } else {
-          this.formTravelManagement.controls['id_grahp'].setValue('');
-        }
-      })
+        })
+
+    } else {
+      this.kostl = false;
+    }
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
+      this.kostl = false;
+      this.nplnr = true;
+      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+        subscribe((data: any) => {
+          this.grahp = this.sortByAphabet(data.data);
+          if (this.grahp.length > 0) {
+            if (acction === 'new') {
+              this.formTravelManagement.controls['id_grahp'].setValue('-1');
+            }
+          } else {
+            this.formTravelManagement.controls['id_grahp'].setValue('');
+          }
+        })
+    } else {
+      this.nplnr = false;
+    }
 
   }
 
@@ -838,30 +828,39 @@ export class EditTravelComponent implements OnInit {
       this.changeTravelLegal('P');
 
     }
-    this.searchCostsCenterAndGrahp(param, 'edit');
+   
   }
+
   changeTravelLegal(travelLegal: any) {
     if (travelLegal === 'P') {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
+
+      this.kostl = false;
+      this.nplnr = true;
+      this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
+        subscribe((data: any) => {
+          this.grahp = this.sortByAphabet(data.data);
+        });
     }
   }
 
   clearFormGeneral() {
+    this.activate = false;
+    this.activate_submit = true;
+    this.showSubmit = true;
     this.stateLocations = [];
     this.stateLocationsto = [];
     this.cityLocations = [];
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
-    this.grahp = [];
-    this.operations = [];
-    this.hotels = [];
     this.hotels = [];
     this.objectImg = [];
+    this.costs_travels = [];
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -871,9 +870,9 @@ export class EditTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -883,7 +882,7 @@ export class EditTravelComponent implements OnInit {
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -1188,5 +1187,16 @@ export class EditTravelComponent implements OnInit {
       const element = this.validateDateHeader[index].id_travel_wrong.toString();
       this.travels_wrong.push(element);
     }
+  }
+  sedRequestsTravel(){
+
+    this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
+      if(data){
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+      }
+      this.travelsService.setResultSaved(true);
+    });
+
   }
 }

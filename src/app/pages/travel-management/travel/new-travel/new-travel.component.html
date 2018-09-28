@@ -20,6 +20,7 @@
                   <strong>Tipo de viaje:</strong>
                 </label>
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" (change)="changeTypeTravel(formTravelManagement.value)">
+                  <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
@@ -66,7 +67,8 @@
                   <i class="fa fa-fw fa-rocket text-primary-hr"></i>
                   <a>Clase de viaje legal:*</a>
                 </label>
-                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']" (change)="changeTravelLegal()">
+                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']"
+                  (change)="changeTravelLegal()">
                   <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
                 </select>
               </div>
@@ -118,8 +120,8 @@
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Grafo:*</a>
                 </label>
-                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
-                  (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
+                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']" (change)="searchOperationsGrahp(formTravelManagement.value, 'new')"
+                  placeholder="Seleccione">
                   <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.code}} - {{grahpTravels.name}}</option>
                 </select>
               </div>
@@ -136,7 +138,7 @@
             </div>
           </div>
 
-          
+
 
           <div class="col-12" *ngIf="travelProof[0].data[0].data.length > 0 && activate" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
@@ -411,9 +413,7 @@
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
                       <button type="button" [attr.disabled]="
-                      (formTravelManagement.value.id_transport == -1
-                      ||formTravelManagement.value.id_transport == ''
-                        || formTravelManagement.value.id_country == -1
+                      ( formTravelManagement.value.id_country == -1
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
@@ -424,25 +424,27 @@
                         || formTravelManagement.value.id_stateto == -1
                         || formTravelManagement.value.id_stateto == ''
                         || formTravelManagement.value.date_end == ''
-                        || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bnew" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)"
-                        data-toggle="collapse" data-target="#collapseTravel">
+                        || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bnew" class="btn btn-primary btn-block cursor-general"
+                        (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                       <button [attr.disabled]="
-                      (formTravelManagement.value.id_transport == -1
-                      ||formTravelManagement.value.id_transport == ''
-                        || formTravelManagement.value.id_country == -1
+                      (formTravelManagement.value.id_country == -1
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
+                        || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.id_terminal == ''
                         || formTravelManagement.value.date_begin == ''
                         || formTravelManagement.value.hour_begin == ''
                         || formTravelManagement.value.id_countryto == -1
                         || formTravelManagement.value.id_countryto == ''
                         || formTravelManagement.value.id_stateto == -1
                         || formTravelManagement.value.id_stateto == ''
+                        || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.id_terminalto == ''
                         || formTravelManagement.value.date_end == ''
-                        || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bedit" class="btn btn-primary btn-block cursor-general" (click)="addDestinationEdit(formTravelManagement.value)"
-                        data-toggle="collapse" data-target="#collapseTravel">
+                        || formTravelManagement.value.hour_end == '') ? true : null" *ngIf="bedit" class="btn btn-primary btn-block cursor-general"
+                        (click)="addDestinationEdit(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">

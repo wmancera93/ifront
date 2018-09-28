@@ -63,4 +63,9 @@ export class TravelService {
     return this.tokenService.get('geographic_locations/show_travel_operations/' + code_grahp)
       .map((data: any) => data.json());
   }
+
+  putSendRequestsTravels(id_travels_requests) {
+    return this.tokenService.put('travel_requests/send_request_to_approve/' + id_travels_requests, {})
+      .map((data: any) => data.json());
+  }
 }
