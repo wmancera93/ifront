@@ -24,7 +24,13 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
   getAdvanceByID(id) {
-    return this.tokenService.get('/travel_advance_payments/' + id)
+    return this.tokenService.get('travel_advance_payments/' + id)
       .map((data: any) => data.json());
   }
+
+  sendRequestToApprove(id) {
+    return this.tokenService.get('travel_advance_payments/send_request_to_approve/' + id)
+      .map((data: any) => data.json());
+  }
+  
 }

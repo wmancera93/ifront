@@ -108,18 +108,26 @@ export class NewAdvancesComponent implements OnInit {
       advances: this.objectAdvances
     }
 
-    this.advancesService.postAdvanceList(objectSendAdvance).subscribe((response: any) => {
-      document.getElementById("btn_advances_new").click();
-      const alertSuccess: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: response.message,
-        confirmation: false
-      }];
-      document.getElementById("closeAdvances").click();
-      this.alert.setAlert(alertSuccess[0]);
-      this.advanceSharedService.setRefreshAdvanceList(true);
-    },
+    this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
+      (response: any) => {
+
+        this.advancesService.sendRequestToApprove(response.data[0].id.toString()).subscribe(
+          (data: any) => {
+            document.getElementById("btn_advances_new").click();
+            const alertSuccess: Alerts[] = [{
+              type: 'success',
+              title: 'Confirmación',
+              message: response.message,
+              confirmation: false
+            }];
+
+            document.getElementById("closeAdvances").click();
+            this.alert.setAlert(alertSuccess[0]);
+            this.advanceSharedService.setRefreshAdvanceList(true);
+          }
+        )
+
+      },
       (error: any) => {
         document.getElementById("btn_advances_new").click();
         const alertWarning: Alerts[] = [{
