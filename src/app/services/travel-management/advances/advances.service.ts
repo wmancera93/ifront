@@ -6,7 +6,7 @@ import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 export class AdvancesService {
 
   constructor(private tokenService: Angular2TokenService, public http: HttpClient) { }
-  
+
   getAdvancePayments() {
     return this.tokenService.get('travel_advance_payments')
       .map((data: any) => data.json());
@@ -20,11 +20,17 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
   postAdvanceList(newAdvances) {
-    return this.tokenService.post('travel_advance_payments',newAdvances)
+    return this.tokenService.post('travel_advance_payments', newAdvances)
       .map((data: any) => data.json());
   }
   getAdvanceByID(id) {
-    return this.tokenService.get('/travel_advance_payments/'+id)
+    return this.tokenService.get('travel_advance_payments/' + id)
       .map((data: any) => data.json());
   }
+
+  sendRequestToApprove(id) {
+    return this.tokenService.get('travel_advance_payments/send_request_to_approve/' + id)
+      .map((data: any) => data.json());
+  }
+  
 }

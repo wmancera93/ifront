@@ -44,6 +44,7 @@ import { CalendarModalComponent } from './common/calendar-modal/calendar-modal.c
 import { DrawCalendarComponent } from './common/draw-calendar/draw-calendar.component';
 import { CalendarDetailComponent } from './common/calendar-detail/calendar-detail.component';
 import { TooltipComponent } from './common/tooltip/tooltip.component';
+import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-details-travels/approvals-details-travels.component';
 
 
 
@@ -91,7 +92,8 @@ import { TooltipComponent } from './common/tooltip/tooltip.component';
     CalendarModalComponent,
     DrawCalendarComponent,
     CalendarDetailComponent,
-    TooltipComponent
+    TooltipComponent,
+    ApprovalsDetailsTravelsComponent
   ],
   exports: [
     HeaderComponent,

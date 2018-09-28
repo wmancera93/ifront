@@ -44,12 +44,48 @@
         </div>
       </div>
       <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
+        <div class="col-lg-4 col-12">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-filter"></i>
+                Filtrar solicitudes 
+              </a>
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
+                
+              </div>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
             No se encontrarón registros para mostrar
           </div>
         </div>
       </div>
+
+      <div class="row">
+        <div class="col-12 text-left" *ngIf="travelsRequests">
+          <h3 class="font-color-default">
+            Aprobaciones de Solicitud de viajes
+          </h3>
+        </div>
+        <div class="col-12 text-left" *ngIf="travelsSpend">
+          <h3 class="font-color-default">
+            Aprobaciones de Anticipos
+          </h3>
+        </div>
+        <div class="col-12 text-left" *ngIf="travelsAllowance">
+          <h3 class="font-color-default">
+            Aprobaciones de Gastos
+          </h3>
+        </div>
+      </div>
+
       <div class="row justify-content-center top-containter" *ngIf="pendingsRequestTravels.length > 0">
         <div class="col-12">
           <div class="widget bg-white-1x" *ngFor="let pending of pendingsRequestTravels">
@@ -57,7 +93,7 @@
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{pending.ticket}}
+                    Ticket #{{pending.requests.ticket}}
                   </span>
                 </h5>
               </div>
@@ -72,7 +108,7 @@
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
-                  {{pending.level_answer}}
+                  {{pending.level}}
                 </p>
                 <strong class="text-primary-hr">
                   Solicitud de {{pending.type_request_travel}}
