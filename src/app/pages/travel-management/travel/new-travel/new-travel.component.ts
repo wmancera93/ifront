@@ -336,7 +336,7 @@ export class NewTravelComponent implements OnInit {
 
     this.showSubmit = false;
     this.send = true;
-console.log(model)
+    console.log(model)
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.id_travel);
     modelFromdata.append('is_maintenance', model.maintenance);
@@ -735,7 +735,7 @@ console.log(model)
       id_travel_activities: '',
       id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -745,7 +745,7 @@ console.log(model)
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -978,7 +978,7 @@ console.log(model)
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('-1');
+    this.formTravelManagement.controls['id_country'].setValue('');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
@@ -988,7 +988,7 @@ console.log(model)
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('-1');
+    this.formTravelManagement.controls['id_countryto'].setValue('');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
