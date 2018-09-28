@@ -19,6 +19,7 @@
                   <strong>Tipo de viaje:</strong>
                 </label>
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione" (change)="changeTypeTravel(formTravelManagement.value)">
+                  <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
@@ -55,6 +56,41 @@
             <label class="form-check-label titleColor" for="manutencionCheck">
               <strong>Manutención</strong>
             </label>
+          </div>
+
+          <div class="col-12">
+            <div class="row" style="margin-top: 15px">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
+                  <a>Clase de viaje legal:*</a>
+                </label>
+                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
+                  <option value="-1">Seleccione</option>
+                  <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
+                  <a>Clase de viaje empresarial:*</a>
+                </label>
+                <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
+                  <option value="-1">Seleccione</option>
+                  <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
+                </select>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
+                  <a>Actividad de viaje:*</a>
+                </label>
+                <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
+                  <option value="-1">Seleccione</option>
+                  <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
+                </select>
+              </div>
+            </div>
           </div>
 
           <div class="col-12" *ngIf="activate">
@@ -101,42 +137,6 @@
               </div>
             </div>
           </div>
-
-          <div class="col-12">
-            <div class="row" style="margin-top: 15px">
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-                  <a>Clase de viaje legal:</a>
-                </label>
-                <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
-                  <option value="-1">Seleccione</option>
-                  <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{legalTravel.name}}</option>
-                </select>
-              </div>
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-ship text-primary-hr"></i>
-                  <a>Clase de viaje especial:</a>
-                </label>
-                <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
-                  <option value="-1">Seleccione</option>
-                  <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
-                </select>
-              </div>
-              <div class="col-lg-4 col-md-6 col-12">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-                  <a>Actividad de viaje:</a>
-                </label>
-                <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
-                  <option value="-1">Seleccione</option>
-                  <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
 
           <div class="col-12" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
@@ -234,10 +234,10 @@
                   Editar trayecto
                 </h5>
                 <h5 class="titleColor" *ngIf="bnew">
-                 Crear taryecto
+                 Crear trayecto
                 </h5>
                 <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseEdit()">
-                  Crear taryecto
+                  Crear trayecto
                 </button>
                 <button id="edit_funtionTravel" data-toggle="collapse" data-target="#collapseTravelEdit" style="display: none">
                 </button>
@@ -435,9 +435,7 @@
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="!bedit">
                       <button type="button" [attr.disabled]="
-                      (formTravelManagement.value.id_transport == -1
-                      ||formTravelManagement.value.id_transport == ''
-                        || formTravelManagement.value.id_country == -1
+                      (formTravelManagement.value.id_country == -1
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
@@ -474,6 +472,10 @@
         </form>
 
         <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate_submit">
+            <div class="col-lg-3 col-md-4 col-12">
+                <button *ngIf="objectPrint.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
+                  <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+              </div>
           <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
