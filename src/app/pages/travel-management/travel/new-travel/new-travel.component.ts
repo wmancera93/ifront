@@ -419,10 +419,12 @@ console.log(model)
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
       total_mileage: modelPartial.travel_mileage,
-      origin_location_id: modelPartial.id_city,
+      origin_location_id: modelPartial.id_state,
+      origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
       hotel_id: modelPartial.id_hotels,
-      destination_location_id: modelPartial.id_cityto,
+      destination_location_id: modelPartial.id_stateto,
+      destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
@@ -719,7 +721,7 @@ console.log(model)
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -1027,5 +1029,4 @@ console.log(model)
       this.array_wrong.push(element);
     }
   }
-
 }
