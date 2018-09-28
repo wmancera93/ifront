@@ -20,6 +20,7 @@
                   <strong>Tipo de viaje:</strong>
                 </label>
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" (change)="changeTypeTravel(formTravelManagement.value)">
+                  <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>

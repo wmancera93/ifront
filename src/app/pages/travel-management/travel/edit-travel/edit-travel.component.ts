@@ -168,7 +168,7 @@ export class EditTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: 1,
+      id_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -181,9 +181,9 @@ export class EditTravelComponent implements OnInit {
       id_travel_legal: '',
       id_travel_specific: '',
       id_travel_activities: '',
-      id_transport: 1,
+      id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -193,7 +193,7 @@ export class EditTravelComponent implements OnInit {
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
