@@ -55,8 +55,8 @@ import { PlanningEvaluationComponent } from './performance-evaluation/planning-e
 import { TrainingComponent } from './events-management/training/training.component';
 import { AdvancesComponent } from './travel-management/advances/advances.component';
 import { SpendComponent } from './travel-management/spend/spend.component';
-import { ManagedTravelComponent } from './approver-travels/managed-travel/managed-travel.component';
-import { PendingTravelComponent } from './approver-travels/pending-travel/pending-travel.component';
+import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
+import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
 
 const routes: Routes = [
     {

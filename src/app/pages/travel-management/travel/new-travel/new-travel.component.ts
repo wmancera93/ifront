@@ -207,7 +207,8 @@ export class NewTravelComponent implements OnInit {
 
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
-
+            
+            id_travel:object[0].id_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
