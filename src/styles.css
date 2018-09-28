@@ -461,14 +461,14 @@ button, input, optgroup, select, textarea {
 }
 
 header{
-    background-color: #2f4050 !important;
-    background-image: var(--img-header-login);    
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;   
-    height: calc(100vh) !important;
-    padding: 40px 0 150px;
-    color: white;
+        background-color: #0146ae !important;
+        background-image: var(--img-header-login); 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 69%;
+        height: calc(100vh) !important;
+        padding: 40px 0 150px;
+        color: white;
 }
 
 .img-explorer{
@@ -480,7 +480,6 @@ header{
     background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center;
-    
 }
 
 .img-user {
@@ -2641,7 +2640,7 @@ a.close-canvas-menu:hover {
 
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 100px 0 150px;
     }   
      
@@ -2649,14 +2648,14 @@ a.close-canvas-menu:hover {
 @media (min-width: 1800px) and (min-height: 800px) 
 {
     header {
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 100px 0 150px;
     }
 }
 
 @media (min-width: 1300px)  and (min-height: 1000px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 150px 0 150px !important;
     }   
     
@@ -2763,7 +2762,7 @@ a.close-canvas-menu:hover {
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 300px 0 150px !important;
     }    
    
@@ -2947,7 +2946,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 55px 0 150px !important;
     }
    
@@ -3038,7 +3037,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 220px 0 150px !important;
     }
    
@@ -3206,7 +3205,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 30px 0px 40px !important;
     }
 
@@ -3412,7 +3411,7 @@ a.close-canvas-menu:hover {
     }
 
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 90px 5px 40px !important;
     }
 
@@ -3711,7 +3710,7 @@ a.close-canvas-menu:hover {
         }
 
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 30px 5px 40px !important;
     }
     .errorImg
