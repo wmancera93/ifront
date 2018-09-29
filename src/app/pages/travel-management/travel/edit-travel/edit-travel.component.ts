@@ -169,7 +169,7 @@ export class EditTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -223,7 +223,7 @@ export class EditTravelComponent implements OnInit {
           this.objectPrint = this.generalViajes[0].travel_managements;
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = fb.group({
-            id_travel: this.generalViajes[0].travel_request.travel_type_id,
+            type_travel: this.generalViajes[0].travel_request.travel_type_id,
             date_requests_begin: this.generalViajes[0].travel_request.date_begin,
             date_requests_end: this.generalViajes[0].travel_request.date_end,
             trip_text: this.generalViajes[0].travel_request.observation,
@@ -294,7 +294,7 @@ export class EditTravelComponent implements OnInit {
               this.showMilenage = false;
             }
             this.formTravelManagementedit = {
-              id_travel: this.generalViajes[0].travel_request.travel_type_id,
+              type_travel: this.generalViajes[0].travel_request.travel_type_id,
               date_requests_begin: this.generalViajes[0].travel_request.date_begin,
               date_requests_end: this.generalViajes[0].travel_request.date_end,
               trip_text: this.generalViajes[0].travel_request.observation,
@@ -439,7 +439,7 @@ export class EditTravelComponent implements OnInit {
     this.send = true;
 
     const modelFromdata = new FormData();
-    modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('travel_types', model.type_travel);
     modelFromdata.append('is_maintenance', model.maintenance);
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
@@ -609,7 +609,7 @@ export class EditTravelComponent implements OnInit {
 
       this.formTravelManagement = new FormGroup({});
       this.formTravelManagement = this.fb.group({
-        id_travel: param.id_travel,
+        type_travel: param.type_travel,
         date_requests_begin: param.date_requests_begin,
         date_requests_end: param.date_requests_end,
         trip_text: param.trip_text,
@@ -859,7 +859,7 @@ export class EditTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -900,9 +900,11 @@ export class EditTravelComponent implements OnInit {
     this.hotels = [];
     this.hotels = [];
 
-    this.formTravelManagement.controls['id_transport'].setValue('1');
+    
+    this.formTravelManagement.controls['type_travel'].setValue('');
+    this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('-1');
+    this.formTravelManagement.controls['id_country'].setValue('');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
@@ -912,7 +914,7 @@ export class EditTravelComponent implements OnInit {
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('-1');
+    this.formTravelManagement.controls['id_countryto'].setValue('');
     this.formTravelManagement.controls['id_hotels'].setValue('');
   }
   viewCotization(param) {

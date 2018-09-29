@@ -12,16 +12,34 @@ import { ApproverTravelsService } from '../../../../services/travel-management/a
 export class PendingTravelComponent implements OnInit {
 
   public pendingsRequestTravels: any[] = [];
-  public travelsRequests:boolean = false;
-  public travelsSpend:boolean = false;
-  public travelsAllowance:boolean = false;
+  public travelsRequests: boolean = false;
+  public travelsSpend: boolean = false;
+  public travelsAllowance: boolean = false;
+  public typesRequest: any[] = [];
+
 
   constructor(public alert: AlertsService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService) {
 
+
+    this.typesRequest.push([{
+      id: 1,
+      name: "Solicitudes de viajes"
+    },
+    {
+      id: 2,
+      name: "Solicitudes de Anticipos"
+    },
+    {
+      id: 3,
+      name: "Solicitudes de Gastos"
+    }
+    ])
+    console.log(this.typesRequest)
   }
+  
 
   ngOnInit() {
     window.scroll({
@@ -31,10 +49,11 @@ export class PendingTravelComponent implements OnInit {
     });
 
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
-      if (data){
+      if (data) {
+        debugger
         this.travelsRequests = true;
         this.pendingsRequestTravels = data;
-      }else{
+      } else {
         this.travelsRequests = false;
       }
     })
