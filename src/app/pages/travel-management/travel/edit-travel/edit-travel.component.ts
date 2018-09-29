@@ -263,7 +263,6 @@ export class EditTravelComponent implements OnInit {
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      debugger
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {

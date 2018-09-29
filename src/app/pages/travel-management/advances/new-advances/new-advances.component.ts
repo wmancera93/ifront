@@ -63,14 +63,18 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
+      this.objectAdvances = [];
+      this.continue = false;
+
       this.formAdvanceTravel = new FormGroup({});
       this.formAdvanceTravel = fb.group({
-        travel_request_id: data == true ? "" : data ,
+        travel_request_id: data == true ? "" : data,
         currency_id: "",
         value: "",
         date: "",
         observation: ""
       });
+
       this.refreshTableAdvances();
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
@@ -98,26 +102,38 @@ export class NewAdvancesComponent implements OnInit {
 
 
   newAdvance(param) {
+    let objectSendAdvance =
+    {
+      travel_request_id: this.formAdvanceTravel.controls['travel_request_id'].value,
+      advances: this.objectAdvances
+    }
 
-    this.advancesService.postAdvanceList(this.objectAdvances).subscribe((response: any) => {
-      document.getElementById("btn_advances_new").click();
-      const alertSuccess: Alerts[] = [{
-        type: 'success',
-        title: 'Confirmación',
-        message: response.message,
-        confirmation: true,
-        typeConfirmation: 'confirmSaveAdvance'
-      }];
-      document.getElementById("closeAdvances").click();
-      this.alert.setAlert(alertSuccess[0]);
-      this.advanceSharedService.setRefreshAdvanceList(true);
-    },
+    this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
+      (response: any) => {
+
+        this.advancesService.sendRequestToApprove(response.data[0].id.toString()).subscribe(
+          (data: any) => {
+            document.getElementById("btn_advances_new").click();
+            const alertSuccess: Alerts[] = [{
+              type: 'success',
+              title: 'Confirmación',
+              message: response.message,
+              confirmation: false
+            }];
+
+            document.getElementById("closeAdvances").click();
+            this.alert.setAlert(alertSuccess[0]);
+            this.advanceSharedService.setRefreshAdvanceList(true);
+          }
+        )
+
+      },
       (error: any) => {
         document.getElementById("btn_advances_new").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
-          message: error.json().errors.toString(),
+          message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'errorValidationAdvance'
         }];
@@ -201,7 +217,7 @@ export class NewAdvancesComponent implements OnInit {
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
-          message: "la fecha es menor a la actual",
+          message: "la fecha es menor a la actual, ¿Desea continuar con la solicitud?",
           confirmation: true,
           typeConfirmation: 'confirmDate'
         }];
