@@ -977,7 +977,6 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocationsto = [];
     this.hotels = [];
     
-    this.formTravelManagement.controls['type_travel'].setValue('');
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('');

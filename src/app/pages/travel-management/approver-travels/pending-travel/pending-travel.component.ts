@@ -24,7 +24,7 @@ export class PendingTravelComponent implements OnInit {
     public approverTravelsService: ApproverTravelsService) {
 
 
-    this.typesRequest.push([{
+    this.typesRequest.push({
       id: 1,
       name: "Solicitudes de viajes"
     },
@@ -36,7 +36,7 @@ export class PendingTravelComponent implements OnInit {
       id: 3,
       name: "Solicitudes de Gastos"
     }
-    ])
+    )
     console.log(this.typesRequest)
   }
   
@@ -53,9 +53,7 @@ export class PendingTravelComponent implements OnInit {
         debugger
         this.travelsRequests = true;
         this.pendingsRequestTravels = data;
-      } else {
-        this.travelsRequests = false;
-      }
+      } 
     })
 
   }
