@@ -110,8 +110,7 @@ export class NewAdvancesComponent implements OnInit {
 
     this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
       (response: any) => {
-debugger
-        this.advancesService.sendRequestToApprove(response.data[0].id.toString()).subscribe(
+        this.advancesService.sendRequestToApprove(response.data.id.toString()).subscribe(
           (data: any) => {
             document.getElementById("btn_advances_new").click();
             const alertSuccess: Alerts[] = [{
@@ -124,7 +123,20 @@ debugger
             document.getElementById("closeAdvances").click();
             this.alert.setAlert(alertSuccess[0]);
             this.advanceSharedService.setRefreshAdvanceList(true);
+          },
+          (error: any) => {
+            document.getElementById("btn_advances_new").click();
+            const alertWarning: Alerts[] = [{
+              type: 'danger',
+              title: 'Advertencia',
+              message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
+              confirmation: true,
+              typeConfirmation: 'errorValidationAdvance'
+            }];
+    
+            this.alert.setAlert(alertWarning[0]);
           }
+          
         )
 
       },
