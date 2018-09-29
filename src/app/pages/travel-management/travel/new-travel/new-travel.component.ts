@@ -149,7 +149,7 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -207,8 +207,8 @@ export class NewTravelComponent implements OnInit {
 
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
-            
-            id_travel:object[0].id_travel,
+
+            type_travel:object[0].type_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
@@ -339,7 +339,7 @@ export class NewTravelComponent implements OnInit {
     this.send = true;
     console.log(model)
     const modelFromdata = new FormData();
-    modelFromdata.append('travel_types', model.id_travel);
+    modelFromdata.append('travel_types', model.type_travel);
     modelFromdata.append('is_maintenance', model.maintenance);
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
@@ -722,7 +722,7 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -976,7 +976,8 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocations = [];
     this.terminalLocationsto = [];
     this.hotels = [];
-
+    
+    this.formTravelManagement.controls['type_travel'].setValue('');
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('');

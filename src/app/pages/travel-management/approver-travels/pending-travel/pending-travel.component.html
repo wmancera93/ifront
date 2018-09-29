@@ -41,24 +41,28 @@
               Usted no tiene solicitudes pendientes
             </h3>
           </div>
+          <div class="col-12">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="fa fa-plus"></i>
+                  Filtrar Solicitudes
+                </a>
+                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
+                  <div *ngFor="let request of typesRequest; let i = index">
+                    <a class="dropdown-item color-font-gree text-capitalize cursor-general">{{request.name | lowercase}}</a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
-        <div class="col-lg-4 col-12">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
-                <i class="fa fa-filter"></i>
-                Filtrar solicitudes 
-              </a>
-              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
-                
-              </div>
-            </li>
-          </ul>
-        </div>
+        <div class="col-12">
 
+        </div>
       </div>
       <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
