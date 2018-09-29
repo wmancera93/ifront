@@ -255,7 +255,7 @@ export class EditTravelComponent implements OnInit {
           setTimeout(() => {
             this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
-          }, 50);
+          }, 100);
         }
 
       });
@@ -534,7 +534,7 @@ export class EditTravelComponent implements OnInit {
     this.count += 1
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-    }, 500);
+    }, 100);
 
 
     this.closeTrip();
