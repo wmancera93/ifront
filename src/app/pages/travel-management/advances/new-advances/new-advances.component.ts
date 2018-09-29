@@ -110,7 +110,7 @@ export class NewAdvancesComponent implements OnInit {
 
     this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
       (response: any) => {
-
+debugger
         this.advancesService.sendRequestToApprove(response.data[0].id.toString()).subscribe(
           (data: any) => {
             document.getElementById("btn_advances_new").click();
