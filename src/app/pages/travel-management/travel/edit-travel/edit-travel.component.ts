@@ -14,6 +14,7 @@ import { FormDataService } from '../../../../services/common/form-data/form-data
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { element } from 'protractor';
+import { truncate } from 'fs';
 
 @Component({
   selector: 'app-edit-travel',
@@ -388,6 +389,14 @@ export class EditTravelComponent implements OnInit {
         this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = []
       })
+
+      if(this.center_costs_travels[0].travel_cost_type_code === "KOSTL" ){
+        this.kostl= true;
+        this.nplnr= false;
+      }else{
+        this.kostl= false;
+        this.nplnr= true;
+      }
   }
 
   sortByAphabet(dataBySort: any) {
@@ -821,27 +830,27 @@ export class EditTravelComponent implements OnInit {
       })
   }
 
-  changeTypeTravel(param) {
-    if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
-      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
-      this.changeTravelLegal('P');
+  // changeTypeTravel(param) {
+  //   if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
+  //     this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
+  //     this.changeTravelLegal('P');
 
-    }
+  //   }
    
-  }
+  // }
 
-  changeTravelLegal(travelLegal: any) {
-    if (travelLegal === 'P') {
-      this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
+  // changeTravelLegal(travelLegal: any) {
+  //   if (travelLegal === 'P') {
+  //     this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
 
-      this.kostl = false;
-      this.nplnr = true;
-      this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
-        subscribe((data: any) => {
-          this.grahp = this.sortByAphabet(data.data);
-        });
-    }
-  }
+  //     this.kostl = false;
+  //     this.nplnr = true;
+  //     this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
+  //       subscribe((data: any) => {
+  //         this.grahp = this.sortByAphabet(data.data);
+  //       });
+  //   }
+  // }
 
   clearFormGeneral() {
     this.activate = false;
