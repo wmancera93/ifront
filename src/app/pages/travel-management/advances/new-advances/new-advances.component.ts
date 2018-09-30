@@ -125,18 +125,21 @@ export class NewAdvancesComponent implements OnInit {
             this.advanceSharedService.setRefreshAdvanceList(true);
           },
           (error: any) => {
-            document.getElementById("btn_advances_new").click();
-            const alertWarning: Alerts[] = [{
-              type: 'danger',
-              title: 'Advertencia',
-              message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
-              confirmation: true,
-              typeConfirmation: 'errorValidationAdvance'
-            }];
-    
-            this.alert.setAlert(alertWarning[0]);
+
+            this.advancesService.deleteRequestAdvance(response.data.id.toString()).subscribe((response) => {
+              document.getElementById("btn_advances_new").click();
+              const alertWarning: Alerts[] = [{
+                type: 'danger',
+                title: 'Advertencia',
+                message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
+                confirmation: false,
+                typeConfirmation: 'errorValidationAdvance'
+              }];
+
+              this.alert.setAlert(alertWarning[0]);
+            })
           }
-          
+
         )
 
       },

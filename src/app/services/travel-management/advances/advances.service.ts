@@ -32,5 +32,11 @@ export class AdvancesService {
     return this.tokenService.get('travel_advance_payments/send_request_to_approve/' + id)
       .map((data: any) => data.json());
   }
+
+  deleteRequestAdvance(id){
+    return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
+    .map((data: any) => data.json());
+     
+  }
   
 }
