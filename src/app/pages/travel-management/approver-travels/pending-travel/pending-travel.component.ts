@@ -24,22 +24,23 @@ export class PendingTravelComponent implements OnInit {
     public approverTravelsService: ApproverTravelsService) {
 
 
-    this.typesRequest.push({
-      id: 1,
-      name: "Solicitudes de viajes"
-    },
-    {
-      id: 2,
-      name: "Solicitudes de Anticipos"
-    },
-    {
-      id: 3,
-      name: "Solicitudes de Gastos"
-    }
+    this.typesRequest.push(
+      {
+        id: 1,
+        name: "Solicitudes de viajes"
+      },
+      {
+        id: 2,
+        name: "Solicitudes de Anticipos"
+      },
+      {
+        id: 3,
+        name: "Solicitudes de Gastos"
+      }
     )
     console.log(this.typesRequest)
   }
-  
+
 
   ngOnInit() {
     window.scroll({
@@ -48,13 +49,7 @@ export class PendingTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
-    this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
-      if (data) {
-        debugger
-        this.travelsRequests = true;
-        this.pendingsRequestTravels = data;
-      } 
-    })
+   
 
   }
   returnBackTravelPending() {
@@ -62,7 +57,24 @@ export class PendingTravelComponent implements OnInit {
   }
   modalAproversTravelPending(request: any) {
 
+  }
+  selectTypeReques(param) {
+    debugger
+    switch (param.id) {
+      case '1':
+      this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+        if (data) {
+          debugger
+          this.travelsRequests = true;
+          this.pendingsRequestTravels = data;
+        }
+      })
+        
+        break;
+      
+      default:
 
-
+        break;
+    }
   }
 }

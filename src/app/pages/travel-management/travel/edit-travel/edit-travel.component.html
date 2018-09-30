@@ -18,7 +18,7 @@
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
-                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione" (change)="changeTypeTravel(formTravelManagement.value)">
+                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel']" paceholder="Seleccione">
                   <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
@@ -105,7 +105,7 @@
                   <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.id">{{costsTravelCenter.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='KOSTL'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Centro de costo:*</a>
@@ -115,17 +115,17 @@
                   <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.code}} - {{costsTrip.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Grafo:*</a>
                 </label>
-                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']"
-                  (change)="searchOperationsGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
-                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.id">{{grahpTravels.name}} - {{grahpTravels.name}}</option>
+                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']" (change)="searchOperationsGrahp(formTravelManagement.value, 'new')"
+                  placeholder="Seleccione">
+                  <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.code}} - {{grahpTravels.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="center_costs_travels.code =='NPLNR'">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Operacion:*</a>

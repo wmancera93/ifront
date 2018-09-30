@@ -1,4 +1,4 @@
-<div class="heigth-content-general">
+<!-- <div class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
@@ -54,7 +54,7 @@
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of typesRequest; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general">{{request.name | lowercase}}</a>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReques(request)">{{request.name | lowercase}}</a>
                 </div>
               </div>
             </li>
@@ -147,4 +147,4 @@
     </div>
   </div>
 </div>
-<app-approvals-details></app-approvals-details>
+<app-approvals-details></app-approvals-details> -->
