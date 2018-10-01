@@ -50,7 +50,7 @@ export class DynamicFormComponent implements OnInit {
                   change.option = newOptions;                                            
               });
             });
-            console.log(newOptions)
+            console.log(this.staticGeneralObject)
             console.log(this.generalObject)
           }
 
@@ -130,7 +130,7 @@ export class DynamicFormComponent implements OnInit {
     }
     this.objectEditBlur.push(params);
 
-    console.log(this.objectEditBlur)
+    console.log(this.staticGeneralObject)
 
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
       console.log(element.id_requesite)
