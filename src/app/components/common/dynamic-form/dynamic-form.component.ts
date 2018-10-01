@@ -129,7 +129,12 @@ export class DynamicFormComponent implements OnInit {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
+
+    console.log(this.objectEditBlur)
+
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+      console.log(element.id_requesite)
+      console.log(params.id)
       if (element.id_requesite === params.id) {
         let objectForm: any[] = [];
         let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
@@ -154,9 +159,10 @@ export class DynamicFormComponent implements OnInit {
           });
         });
 
-        console.log(newOptions)
-        console.log(this.generalObject)
       }
+
+      console.log(this.staticGeneralObject)
+      console.log(this.generalObject)
     });
     document.getElementById("savebutton").removeAttribute('disabled');
   }
