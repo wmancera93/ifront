@@ -1,4 +1,4 @@
-<div class="heigth-content-general">
+<!-- <div class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
@@ -23,19 +23,19 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
         <div class="row top-containter">
-          <div class="col-12 text-left" *ngIf="pendingsRequestTravels.data[0].requests.length == 1">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.data[0].requests.length}} solicitud pendiente
+              Usted tiene {{pendingsRequestTravels[0].data[0].requests.length}} solicitud pendiente
             </h3>
           </div>
-          <div class="col-6 text-left" *ngIf="pendingsRequestTravels.data[0].requests.length > 1">
+          <div class="col-6 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.data[0].requests.length}} solicitudes pendientes
+              Usted tiene {{pendingsRequestTravels[0].data[0].requests.length}} solicitudes pendientes
             </h3>
           </div>
-          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.data[0].requests.length == 0">
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
               Usted no tiene solicitudes pendientes
@@ -54,7 +54,7 @@
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of typesRequest; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general">{{request.name | lowercase}}</a>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReques(request)">{{request.name | lowercase}}</a>
                 </div>
               </div>
             </li>
@@ -147,4 +147,4 @@
     </div>
   </div>
 </div>
-<app-approvals-details></app-approvals-details>
+<app-approvals-details></app-approvals-details> -->
