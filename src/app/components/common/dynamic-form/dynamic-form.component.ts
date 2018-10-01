@@ -43,13 +43,18 @@ export class DynamicFormComponent implements OnInit {
             });
           }
           if (this.staticGeneralObject.length > 0) {
+            let newOptions 
             this.generalObject.forEach((object) => {
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                  let newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                  newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
                   change.option = newOptions;                                            
               });
             });
+            console.log(newOptions)
+            console.log(this.generalObject)
           }
+
+         
         }
 
         if (this.generalObject !== null && this.generalObject !== undefined) {
@@ -148,6 +153,9 @@ export class DynamicFormComponent implements OnInit {
             }
           });
         });
+
+        console.log(newOptions)
+        console.log(this.generalObject)
       }
     });
     document.getElementById("savebutton").removeAttribute('disabled');
