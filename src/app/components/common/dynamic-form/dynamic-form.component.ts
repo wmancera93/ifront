@@ -28,7 +28,7 @@ export class DynamicFormComponent implements OnInit {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       if (this.countAfter === 0) {
         this.generalObject = data.data;
-        if (!data.edit) {
+        if (data.edit) {
           this.staticGeneralObject = [];
           if (this.generalObject.length > 0) {
             data.data.forEach(index => {
