@@ -151,19 +151,24 @@ export class DashboardComponent implements OnInit {
       ambient = 'development';
     }
 
-    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {      
+    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
-
-      if (this.showServiceManagement == true) {
-        if (this.validateRoleManagement === 'true') {
-          this.showButtonDashManagement = true;
-        } else {
+      if (this.userAuthenticated.employee.is_admin === 'true') {
+        if (this.showServiceManagement == true) {
+          if (this.validateRoleManagement === 'true') {
+            this.showButtonDashManagement = true;
+          } else {
+            this.showButtonDashManagement = false;
+          }
+        }
+        else {
           this.showButtonDashManagement = false;
-        }       
+        }
       }
       else {
         this.showButtonDashManagement = false;
       }
+
     })
   }
 

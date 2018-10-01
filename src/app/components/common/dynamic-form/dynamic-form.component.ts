@@ -21,17 +21,31 @@ export class DynamicFormComponent implements OnInit {
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
   public countAfter: number = 0;
+  public codeStatic: number = -1;
+
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       if (this.countAfter === 0) {
+
+        if (data.code !== this.codeStatic) {
+          this.codeStatic = data.code;
+          this.staticGeneralObject = [];
+        }
+
         this.generalObject = data.data;
+        // console.log('1')
+        // console.log(this.generalObject)
         if (data.edit) {
           if (this.staticGeneralObject.length === 0) {
             if (this.generalObject.length > 0) {
               data.data.forEach(index => {
+                // console.log('2')
+                // console.log(index)
                 index.forEach(element => {
+                  // console.log('3')
+                  // console.log(element)
                   this.staticGeneralObject.push({
                     id_static: element.id,
                     options_static: element.option,
@@ -45,9 +59,12 @@ export class DynamicFormComponent implements OnInit {
 
           if (this.staticGeneralObject.length > 0) {
             this.generalObject.forEach((object) => {
-              console.log(object)
+              // console.log('4')
+              // console.log(object)
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                console.log(change)
+                // console.log('5')
+                // console.log(change)
+                // console.log('6')
                 console.log(this.staticGeneralObject)
                 let newOptions = this.staticGeneralObject.filter(staticObject => staticObject.id_static === change.id)[0].options_static.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
                 change.option = newOptions;
@@ -171,6 +188,7 @@ export class DynamicFormComponent implements OnInit {
   }
   ngOnDestroy() {
     this.countAfter += 1;
+    this.staticGeneralObject = [];
   }
 
 }
