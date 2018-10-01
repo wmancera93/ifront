@@ -90,7 +90,7 @@ export class MasterDataComponent implements OnInit {
 
         }
       }
-    })
+    });
 
   }
 
@@ -118,7 +118,7 @@ export class MasterDataComponent implements OnInit {
   masterDataList() {
     this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
       list.data.forEach(element => {
-        if(element.method_name === 'personal_data'){
+        if (element.method_name === 'personal_data') {
           this.codeGeneral = element.code;
         }
       });
@@ -173,16 +173,23 @@ export class MasterDataComponent implements OnInit {
   }
 
   noEdit() {
+
     this.canEditData = true;
     setTimeout(() => {
       this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData, code: this.codeGeneral })
     }, 200);
   }
 
+  public idTagStastic
+
   showData(i: any, idTag: string, code: string) {
+    this.idTagStastic = idTag
     this.codeGeneral = code;
-    document.getElementById('listData').getElementsByClassName('active-report')[0].classList.remove('active-report');
-    document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
+    if (i !== '' && code !== '') {
+      document.getElementById('listData').getElementsByClassName('active-report')[0].classList.remove('active-report');
+      document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
+    }
+
     switch (idTag) {
       case 'personal_data':
         this.showPersonalData();

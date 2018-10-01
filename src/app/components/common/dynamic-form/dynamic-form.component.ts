@@ -21,7 +21,6 @@ export class DynamicFormComponent implements OnInit {
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
   public countAfter: number = 0;
-
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService) {
@@ -29,32 +28,29 @@ export class DynamicFormComponent implements OnInit {
       if (this.countAfter === 0) {
         this.generalObject = data.data;
         if (data.edit) {
-          this.staticGeneralObject = [];
-          if (this.generalObject.length > 0) {
-            data.data.forEach(index => {
-              index.forEach(element => {
-                this.staticGeneralObject.push({
-                  id_static: element.id,
-                  options_static: element.option,
-                  validate_requisite: element.is_prerequisite,
-                  id_requesite: element.prerequisite_id
+          if (this.staticGeneralObject.length === 0) {
+            if (this.generalObject.length > 0) {
+              data.data.forEach(index => {
+                index.forEach(element => {
+                  this.staticGeneralObject.push({
+                    id_static: element.id,
+                    options_static: element.option,
+                    validate_requisite: element.is_prerequisite,
+                    id_requesite: element.prerequisite_id
+                  });
                 });
               });
-            });
-          }
-          if (this.staticGeneralObject.length > 0) {
-            let newOptions 
-            this.generalObject.forEach((object) => {
-              object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                  newOptions = change.option.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
-                  change.option = newOptions;                                            
-              });
-            });
-            console.log(this.staticGeneralObject)
-            console.log(this.generalObject)
+            }
           }
 
-         
+          if (this.staticGeneralObject.length > 0) {
+            this.generalObject.forEach((object) => {
+              object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
+                let newOptions = this.staticGeneralObject.filter(staticObject => staticObject.id_static === change.id)[0].options_static.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                change.option = newOptions;
+              });
+            });
+          }
         }
 
         if (this.generalObject !== null && this.generalObject !== undefined) {
@@ -123,18 +119,12 @@ export class DynamicFormComponent implements OnInit {
     this.valueSend = "";
     this.code = "";
   }
-
   detectChange(params: any, form) {
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
       this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
-
-    console.log(this.staticGeneralObject)
-
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
-      console.log(element.id_requesite)
-      console.log(params.id)
       if (element.id_requesite === params.id) {
         let objectForm: any[] = [];
         let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
@@ -158,11 +148,7 @@ export class DynamicFormComponent implements OnInit {
             }
           });
         });
-
       }
-
-      console.log(this.staticGeneralObject)
-      console.log(this.generalObject)
     });
     document.getElementById("savebutton").removeAttribute('disabled');
   }
@@ -183,6 +169,5 @@ export class DynamicFormComponent implements OnInit {
   ngOnDestroy() {
     this.countAfter += 1;
   }
-
 
 }
