@@ -64,10 +64,8 @@ export class PendingTravelComponent implements OnInit {
       case '1':
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {
-
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
-            
           }
         })
 
