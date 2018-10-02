@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { AproversRequestsService } from '../../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
+import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
 
 @Component({
   selector: 'app-pending-travel',
@@ -12,33 +13,31 @@ import { ApproverTravelsService } from '../../../../services/travel-management/a
 export class PendingTravelComponent implements OnInit {
 
   public pendingsRequestTravels: any[] = [];
-  public travelsRequests: boolean = false;
-  public travelsSpend: boolean = false;
-  public travelsAllowance: boolean = false;
+  public travelsRequestsType: string = 'travels';
   public typesRequest: any[] = [];
 
 
   constructor(public alert: AlertsService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
-    public approverTravelsService: ApproverTravelsService) {
+    public approverTravelsService: ApproverTravelsService,
+    public travelApproverServiceShared:TravelApproverService) {
 
 
     this.typesRequest.push(
       {
         id: 1,
-        name: "Solicitudes de viajes"
+        name: "Solicitudes pendientes de viajes"
       },
       {
         id: 2,
-        name: "Solicitudes de Anticipos"
+        name: "Solicitudes pendientes de anticipos"
       },
       {
         id: 3,
-        name: "Solicitudes de Gastos"
+        name: "Solicitudes pendientes de gastos"
       }
     )
-    console.log(this.typesRequest)
   }
 
 
@@ -49,29 +48,41 @@ export class PendingTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
-   
+
 
   }
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any) {
-
+    this.travelApproverServiceShared.setviewDetailRequests(request)
   }
   selectTypeReques(param) {
     debugger
-    switch (param.id) {
+    switch (param.id.toString()) {
+
       case '1':
-      this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
-        if (data) {
-          debugger
-          this.travelsRequests = true;
-          this.pendingsRequestTravels = data;
-        }
-      })
-        
+        this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+          if (data) {
+
+            this.travelsRequestsType = 'travels';
+            this.pendingsRequestTravels = data.data[0].requests;
+            
+          }
+        })
+
         break;
-      
+      case '2':
+
+
+        this.travelsRequestsType = 'advance';
+
+        break;
+      case '3':
+
+        this.travelsRequestsType = 'spend';
+
+        break;
       default:
 
         break;

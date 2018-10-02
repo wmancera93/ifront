@@ -1,6 +1,7 @@
 <button id="btn_travel_edit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#travel_edit" style="display:none;">
 </button>
-<div class="modal" data-backdrop="static" id="travel_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" data-backdrop="static" id="travel_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -18,7 +19,8 @@
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong>Tipo de viaje:</strong>
                 </label>
-                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['type_travel']" paceholder="Seleccione">
+                <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['type_travel']"
+                  paceholder="Seleccione">
                   <option value="">Seleccione</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
@@ -29,8 +31,7 @@
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
-                  (change)="dateComplete(formTravelManagement.value)" 
-                />
+                  (change)="dateComplete(formTravelManagement.value)" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -38,7 +39,7 @@
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
-                  (change)="dateComplete(formTravelManagement.value)"  />
+                  (change)="dateComplete(formTravelManagement.value)" />
               </div>
             </div>
           </div>
@@ -234,7 +235,7 @@
                   Editar trayecto
                 </h5>
                 <h5 class="titleColor" *ngIf="bnew">
-                 Crear trayecto
+                  Crear trayecto
                 </h5>
                 <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseEdit()">
                   Crear trayecto
@@ -413,7 +414,8 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)" />
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)"
+                      />
                     </div>
                   </div>
                 </div>
@@ -456,8 +458,8 @@
                       </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="bedit">
-                      <button type="button" class="btn btn-primary btn-block cursor-general" (click)="editDestination(formTravelManagement.value)" data-toggle="collapse"
-                        data-target="#collapseTravel">
+                      <button type="button" class="btn btn-primary btn-block cursor-general" (click)="editDestination(formTravelManagement.value)"
+                        data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
@@ -477,10 +479,11 @@
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
-              <div class="col-lg-3 col-md-4 col-12">
-                <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
-                  <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
-              </div>
+
+          </div>
+          <div class="col-lg-3 col-md-4 col-12">
+            <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
+              &nbsp;Enviar aprobación</button>
           </div>
         </div>
       </div>

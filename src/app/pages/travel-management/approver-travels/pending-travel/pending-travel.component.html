@@ -1,4 +1,4 @@
-<!-- <div class="heigth-content-general">
+<div class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
@@ -22,28 +22,69 @@
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
-        <div class="row top-containter">
-          <div class="col-12 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length == 1">
+        <div class="row top-containter" *ngIf="travelsRequestsType == 'travels'">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels[0].data[0].requests.length}} solicitud pendiente
+              Usted tiene {{pendingsRequestTravels.length}} solicitud de viaje pendiente
             </h3>
           </div>
-          <div class="col-6 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length > 1">
+          <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels[0].data[0].requests.length}} solicitudes pendientes
+              Usted tiene {{pendingsRequestTravels.length}} solicitudes de viajes pendientes
             </h3>
           </div>
-          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels[0].data[0].requests.length == 0">
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              Usted no tiene solicitudes pendientes
+              Usted no tiene solicitudes de viaje pendientes
+            </h3>
+          </div>
+        </div>
+        <div class="row top-containter" *ngIf="travelsRequestsType == 'advance'">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendingsRequestTravels.length}} solicitud de anticipos pendiente
+            </h3>
+          </div>
+          <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendingsRequestTravels.length}} solicitudes de anticipos pendientes
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no tiene solicitudes de anticipos pendientes
+            </h3>
+          </div>
+        </div>
+        <div class="row top-containter" *ngIf="travelsRequestsType == 'spend'">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendingsRequestTravels.length}} solicitud de gastos pendiente
+            </h3>
+          </div>
+          <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{pendingsRequestTravels.length}} solicitudes de gastos pendientes
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no tiene solicitudes de gastos pendientes
             </h3>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center top-general-p">
+
+      <div class="row justify-content-center">
         <div class="col-6">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
@@ -55,37 +96,22 @@
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of typesRequest; let i = index">
                   <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReques(request)">{{request.name | lowercase}}</a>
+                  <div *ngIf="typesRequest.length !== (i + 1)" class="dropdown-divider"></div>
                 </div>
               </div>
             </li>
           </ul>
         </div>
       </div>
+
       <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
-        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+        <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             No se encontrarón registros para mostrar
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-12 text-left" *ngIf="travelsRequests">
-          <h3 class="font-color-default">
-            Aprobaciones de Solicitud de viajes
-          </h3>
-        </div>
-        <div class="col-12 text-left" *ngIf="travelsSpend">
-          <h3 class="font-color-default">
-            Aprobaciones de Anticipos
-          </h3>
-        </div>
-        <div class="col-12 text-left" *ngIf="travelsAllowance">
-          <h3 class="font-color-default">
-            Aprobaciones de Gastos
-          </h3>
-        </div>
-      </div>
 
       <div class="row justify-content-center top-containter" *ngIf="pendingsRequestTravels.length > 0">
         <div class="col-12">
@@ -144,7 +170,13 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-12">
+          <button type="button" class="btn btn-warning btn-block cursor-general">
+            <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;ver</button>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<app-approvals-details></app-approvals-details> -->
+<app-approvals-details-travels></app-approvals-details-travels>

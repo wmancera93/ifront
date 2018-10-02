@@ -18,13 +18,23 @@ export class EmployeeInfoComponent implements OnInit {
   public flagShowModal: boolean = false;
   public isBoss: boolean = false;
   public validateRol: boolean;
+  public dateAddCompany: string;
+  public datebirth: string;
 
   constructor(public employeeSharedService: EmployeeInfoService,
     public stylesExplorerService: StylesExplorerService) {
 
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
       this.employeeInfo = null;
-      this.employeeInfo = data;      
+      this.employeeInfo = data;
+
+      let dateIn = data.fecha_ingreso.split('-');
+      this.dateAddCompany = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
+
+      let dateBorn = data.fecha_nac.split('-');
+      this.datebirth = dateBorn[2] + '/' + dateBorn[1] + '/' + dateBorn[0];
+      console.log(this.datebirth);
+
       if (this.employeeInfo !== null) {
         this.flagShowModal = true;
       } else {
