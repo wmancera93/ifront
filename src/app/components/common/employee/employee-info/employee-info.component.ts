@@ -33,8 +33,7 @@ export class EmployeeInfoComponent implements OnInit {
 
       let dateBorn = data.fecha_nac.split('-');
       this.datebirth = dateBorn[2] + '/' + dateBorn[1] + '/' + dateBorn[0];
-      console.log(this.datebirth);
-
+     
       if (this.employeeInfo !== null) {
         this.flagShowModal = true;
       } else {

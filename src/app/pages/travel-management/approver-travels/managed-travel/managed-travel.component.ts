@@ -15,7 +15,6 @@ export class ManagedTravelComponent implements OnInit {
 
   public managedRequestTravels: any[] = [];
   public travelsRequestsManagedType: string = 'travels';
-  public managedRequestsTravel: any[] = [];
   public typesRequestManaged: any[] = [];
 
   public token: boolean;
@@ -67,8 +66,12 @@ export class ManagedTravelComponent implements OnInit {
     switch (param.id.toString()) {
 
       case '1':
-        this.travelsRequestsManagedType = 'travels';
-
+      this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
+        if (data) {
+          this.travelsRequestsManagedType = 'travels';
+          this.managedRequestTravels = data.data[0].requests;
+        }
+      })
         break;
       case '2':
 
