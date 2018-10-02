@@ -153,15 +153,10 @@ export class DashboardComponent implements OnInit {
 
     this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
-      if (this.userAuthenticated.employee.is_admin === 'true') {
-        if (this.showServiceManagement == true) {
-          if (this.validateRoleManagement === 'true') {
-            this.showButtonDashManagement = true;
-          } else {
-            this.showButtonDashManagement = false;
-          }
-        }
-        else {
+      if (this.showServiceManagement == true) {
+        if (this.validateRoleManagement === 'true') {
+          this.showButtonDashManagement = true;
+        } else {
           this.showButtonDashManagement = false;
         }
       }
