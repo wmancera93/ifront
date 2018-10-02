@@ -68,6 +68,39 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   offAprovlasTravels() {
     this.switchTravels = 'off';
   }
+  saveApprovalRequestsTravels(param){
+    this.showSubmit = false;
+    switch (param.typeRequests.toString()) {
+
+      case 'travel':
+    
+      this.approverTravelsService.postApprovalsRequestTravel({
+        request_id: this.approvals[0],
+        answer: this.switchTravels,
+        description: this.descriptionTravels
+      }).subscribe((data:any) =>{
+        this.showSubmit = true;
+
+
+
+      })
+
+        break;
+      case 'advance':
+
+
+  
+
+        break;
+      case 'spend':
+
+
+        break;
+      default:
+
+        break;
+    }
+  }
 
   // viewSupport() {
   //   window.open(this.approvals[0].image.url);
