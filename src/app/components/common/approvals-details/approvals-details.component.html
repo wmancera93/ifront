@@ -86,14 +86,14 @@
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           Desde:
-                          <span style="font-weight: 100 !important">{{approvals[0].date_begin_format}}</span>
+                          <span style="font-weight: 100 !important">{{dateSince}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           Hasta:
-                          <span style="font-weight: 100 !important">{{approvals[0].date_end_format}}</span>
+                          <span style="font-weight: 100 !important">{{dateUntil}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">

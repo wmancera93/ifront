@@ -120,7 +120,8 @@ import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-det
     GerencialModalComponent,
     ErrorPageHttpComponent,
     DynamicFormComponent,
-    TooltipComponent
+    TooltipComponent,
+    ApprovalsDetailsTravelsComponent
   ],
   providers: [
     // ToasterService

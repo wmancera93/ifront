@@ -14,6 +14,8 @@ export class TimeLineApproversComponent implements OnInit {
   public fileSupport: string = '';
   public viewModal: boolean = false;
   public countAfter: number = 0;
+  public dateFirts: string;
+  public dateFinally: string;
 
   constructor(private aproversRequestsService: AproversRequestsService,
     private requestsRhService: RequestsRhService,
@@ -28,6 +30,11 @@ export class TimeLineApproversComponent implements OnInit {
                 this.detailRequets = detail.data;
                 this.fileSupport = this.detailRequets[0].request.image.url;
 
+                let dateBegin = this.detailRequets[0].request.date_begin_format.split('/');
+                this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
+                let dateEnd= this.detailRequets[0].request.date_end_format.split('/');
+                this.dateFinally =  dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
+              
                 if (document.getElementById('aprovers_requests').className !== 'modal show') {
                   document.getElementById('btn_aprovers_requests').click();
                   document.getElementById("bodyGeneral").removeAttribute('style');
