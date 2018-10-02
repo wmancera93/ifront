@@ -13,7 +13,7 @@ import { TravelApproverService } from '../../../../services/shared/travel-approv
 })
 export class ManagedTravelComponent implements OnInit {
 
-  public managedRequestTravels: any[] = [];
+  public managedRequestsTravel: any[] = [];
   public travelsRequestsManagedType: string = 'travels';
   public typesRequestManaged: any[] = [];
 
@@ -69,7 +69,7 @@ export class ManagedTravelComponent implements OnInit {
       this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
         if (data) {
           this.travelsRequestsManagedType = 'travels';
-          this.managedRequestTravels = data.data[0].requests;
+          this.managedRequestsTravel = data.data[0].requests;
         }
       })
         break;
