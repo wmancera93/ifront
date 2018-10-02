@@ -35,12 +35,6 @@ export class AdvancesService {
 
   deleteRequestAdvance(id){
     return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
-    .map((data: any) => data.json());
-     
-  }
-  
-  deleteRequestAdvance(id){
-    return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
     .map((data: any) => data.json());     
   }
 }
