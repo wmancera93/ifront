@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.name_complete}}</h4>
+          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.short_name}}</h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
@@ -55,7 +55,8 @@
                 <i class="fa fa-male paddingInfo"></i>
                 <strong>&nbsp;Jefe:</strong>
                 <span class="text-capitalize">
-                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname | lowercase}}
+                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname |
+                  lowercase}}
                 </span>
               </div>
               <div *ngIf="employeeInfo.division_per">

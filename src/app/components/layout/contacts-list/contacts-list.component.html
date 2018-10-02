@@ -17,9 +17,10 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="Buscar compañeros" (keyup.enter)="searchByName()"
-              maxlength="25" (keyup)="enterNameEmployee()">
-            <i class="search-input-icon fa fa-search icon-search  detectLetter cursor general" (click)='searchByName()' [ngClass]="{detectLetter : searchIconActive == true}"></i>
+            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="Buscar compañeros"
+              (keyup.enter)="searchByName()" maxlength="25" (keyup)="enterNameEmployee()">
+            <i class="search-input-icon fa fa-search icon-search  detectLetter cursor general" (click)='searchByName()'
+              [ngClass]="{detectLetter : searchIconActive == true}"></i>
           </div>
           <div (click)="openInfoEmployee(contact.id)" *ngFor="let contact of contacts; let index=index; let colorContactPrimary = odd; let colorContactSecundary = even;"
             [ngClass]="{  colorContactPrimary:  colorContactPrimary, colorContactSecundary: colorContactSecundary}">
@@ -29,7 +30,7 @@
                 <br>
               </div>
               <div class="col-9">
-                {{contact.name_complete}}
+                {{contact.short_name}}
                 <br>{{contact.posicion}}
                 <br> {{contact.phone}}
                 <div class="starIcon">
@@ -46,7 +47,8 @@
           {{error}}
         </div>
         <div id="tab-2" class="tab-pane">
-          <div *ngFor="let item of chats; let index=index; let colorContactPrimary=odd; let colorContactSecundary=even;" [ngClass]="{ colorContactPrimary: colorContactPrimary, colorContactSecundary: colorContactSecundary }">
+          <div *ngFor="let item of chats; let index=index; let colorContactPrimary=odd; let colorContactSecundary=even;"
+            [ngClass]="{ colorContactPrimary: colorContactPrimary, colorContactSecundary: colorContactSecundary }">
             <div class="row">
               <div class="col-3">
                 <img src="{{item.photo}}" class="roundPhoto">
