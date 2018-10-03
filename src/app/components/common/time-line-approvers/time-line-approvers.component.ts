@@ -34,8 +34,9 @@ export class TimeLineApproversComponent implements OnInit {
                 if (dateBegin !== null) {
                   this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
                 }
+                
                 let dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
-                if (this.dateFinally) {
+                if (dateEnd  !== null) {
                   this.dateFinally = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
                 }
 
