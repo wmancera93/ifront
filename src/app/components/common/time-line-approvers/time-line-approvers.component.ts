@@ -29,12 +29,17 @@ export class TimeLineApproversComponent implements OnInit {
               if (detail.success) {
                 this.detailRequets = detail.data;
                 this.fileSupport = this.detailRequets[0].request.image.url;
+                
+                let dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
+                if (dateBegin !== null) {
+                  this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
+                }
+                let dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
+                if (this.dateFinally) {
+                  this.dateFinally = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
+                }
 
-                let dateBegin = this.detailRequets[0].request.date_begin_format.split('/');
-                this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
-                let dateEnd= this.detailRequets[0].request.date_end_format.split('/');
-                this.dateFinally =  dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
-              
+
                 if (document.getElementById('aprovers_requests').className !== 'modal show') {
                   document.getElementById('btn_aprovers_requests').click();
                   document.getElementById("bodyGeneral").removeAttribute('style');
