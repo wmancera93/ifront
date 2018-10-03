@@ -24,6 +24,8 @@ export class RequestsRhComponent implements OnInit {
 
   public listTypesFilters: ListRequetsTypes[] = [];
 
+  public listTypesStatic: ListRequetsTypes[] = [];
+
   public viewContainer = false;
 
   private alertWarning: Alerts[];
@@ -110,6 +112,9 @@ export class RequestsRhComponent implements OnInit {
     this.requestsRhService.getAllRequests().subscribe((data: any) => {
       if (data.success) {
         this.requests = data.data[0];
+
+        this.requests.request_types = this.sortByAphabet(this.requests.request_types);
+
         this.requestStatic = this.requests.my_requests_list;
         this.viewContainer = true;
         this.requests.list_requets_types.forEach((element) => {
@@ -124,6 +129,22 @@ export class RequestsRhComponent implements OnInit {
       //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
       // }, 1000)
     });
+  }
+
+  sortByAphabet(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      const nameA: String = a.name.toLowerCase();
+      const nameB: String = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return 1;
+      }
+      if (nameA > nameB) {
+        return -1;
+      }
+    });
+
+    return dataBySort;
   }
 
   returnBackPage() {

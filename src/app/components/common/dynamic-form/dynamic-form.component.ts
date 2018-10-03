@@ -35,17 +35,16 @@ export class DynamicFormComponent implements OnInit {
         }
 
         this.generalObject = data.data;
-        // console.log('1')
-        // console.log(this.generalObject)
         if (data.edit) {
           if (this.staticGeneralObject.length === 0) {
             if (this.generalObject.length > 0) {
               data.data.forEach(index => {
-                // console.log('2')
-                // console.log(index)
                 index.forEach(element => {
-                  // console.log('3')
-                  // console.log(element)
+                  if (element.type === 'date') {
+                    let split = element.value.split('/')
+                    element.value = split[2] + '-' + split[1] + '-' + split[0];
+                  }
+
                   this.staticGeneralObject.push({
                     id_static: element.id,
                     options_static: element.option,
@@ -59,14 +58,14 @@ export class DynamicFormComponent implements OnInit {
 
           if (this.staticGeneralObject.length > 0) {
             this.generalObject.forEach((object) => {
-              // console.log('4')
-              // console.log(object)
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                // console.log('5')
-                // console.log(change)
-                // console.log('6')
-                console.log(this.staticGeneralObject)
-                let newOptions = this.staticGeneralObject.filter(staticObject => staticObject.id_static === change.id)[0].options_static.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                let newOptions
+                if (change.prerequisite_id !== null) {
+                  newOptions = this.staticGeneralObject.filter(staticObject => staticObject.id_static === change.id)[0].options_static.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
+                } else {
+                  newOptions = [{ code: '', description: '' }]
+                }
+
                 change.option = newOptions;
               });
             });
@@ -145,6 +144,8 @@ export class DynamicFormComponent implements OnInit {
     }
     this.objectEditBlur.push(params);
     this.staticGeneralObject.filter(data => data.validate_requisite.toString() === 'true').forEach(element => {
+
+
       if (element.id_requesite === params.id) {
         let objectForm: any[] = [];
         let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
@@ -160,7 +161,12 @@ export class DynamicFormComponent implements OnInit {
             })
           }
         }
-        let newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
+        let newOptions
+        if (element.prerequisite_id !== null) {
+          newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
+        } else {
+          newOptions = [{ code: '', description: '' }]
+        }
         this.generalObject.forEach((object) => {
           object.forEach(change => {
             if (change.id === element.id_static) {

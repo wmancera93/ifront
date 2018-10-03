@@ -123,7 +123,7 @@
           </ul>
         </div>
       </li>
-      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && (this.dataUser.employee.is_admin  == 'true'  || this.dataUser.employee.see_rpgen  == 'true' )">
+      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && this.dataUser.employee.is_admin == 'true' && this.dataUser.employee.see_rpgen  == 'true'">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#reportsRH" (click)="clickOptionMenu('liReportsRH','toggle-reportsRH', 'reportsRH')">
           <i class="fa fa-table"></i>
           <span class="nav-label">Reportes RH</span>
