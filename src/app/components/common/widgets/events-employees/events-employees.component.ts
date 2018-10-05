@@ -29,7 +29,6 @@ export class EventsEmployeesComponent implements OnInit {
         this.nohaveTeam = true;
       }
       else {
-        this.nohaveTeam = false;
         this.cauruselIdGeneral = this.objectWidget[0].name_event;
         this.cauruselId = '#' + this.objectWidget[0].name_event;
 
@@ -52,6 +51,9 @@ export class EventsEmployeesComponent implements OnInit {
               default:
                 break;
             }
+          }
+          if(data.length === this.objectWidget.length){
+            this.nohaveTeam = false;
           }
         }, 3000);
       };
