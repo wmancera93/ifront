@@ -16,6 +16,8 @@ export class ManagedTravelComponent implements OnInit {
   public managedRequestTravel: any[] = [];
   public travelsRequestsManagedType: string = 'travels';
   public typesRequestManaged: any[] = [];
+  public request_managed_id :string;
+  public request_managed_type :string;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -58,7 +60,7 @@ export class ManagedTravelComponent implements OnInit {
   }
 
   modalAproversTravelManaged(request: any) {
-    this.travelApproverServiceShared.setviewDetailRequests(request)
+    this.travelApproverServiceShared.setviewDetailRequests(this.request_managed_id , this.request_managed_type)
   }
 
   selectTypeRequestsManaged(param) {

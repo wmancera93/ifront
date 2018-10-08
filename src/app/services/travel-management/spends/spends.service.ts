@@ -55,7 +55,10 @@ export class SpendsService {
     return this.tokenService.delete('travel_allowances/destroy_anexed/' + idFile)
       .map((data: any) => data.json());
   }
-
+  putSendRequestsSpend(id_spend_requests) {
+    return this.tokenService.put('travel_requests/send_request_to_approve/' + id_spend_requests, {})
+      .map((data: any) => data.json());
+  }
 
 
 }

@@ -15,6 +15,8 @@ export class PendingTravelComponent implements OnInit {
   public pendingsRequestTravels: any[] = [];
   public travelsRequestsType: string = 'travels';
   public typesRequest: any[] = [];
+  public request_id:string;
+  public request_type:string;
 
 
   constructor(public alert: AlertsService,
@@ -55,7 +57,11 @@ export class PendingTravelComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any) {
-    this.travelApproverServiceShared.setviewDetailRequests(request)
+
+
+
+
+    this.travelApproverServiceShared.setviewDetailRequests(this.request_id, this.request_type)
   }
   selectTypeReques(param) {
     debugger

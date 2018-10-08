@@ -105,7 +105,27 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
         break;
       case 'spend':
-
+      this.approverTravelsService.postApprovalsRequestSpend({
+        request_id: this.approvals[0],
+        answer: this.switchTravels,
+        observation: this.descriptionTravels
+      }).subscribe((data:any) =>{
+        this.showSubmit = true;
+        if (data.success) {
+          document.getElementById("btn_approvals_requests_travels").click();
+          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false}];
+          this.alert.setAlert(alertWarning[0]);
+          this.showSubmit = true;
+         
+        }
+      },
+      (error: any) => {
+        document.getElementById("btn_approvals_requests_travels").click();
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+        this.showSubmit = true;
+        this.alert.setAlert(alertWarning[0]);
+      }
+    )
 
         break;
       default:

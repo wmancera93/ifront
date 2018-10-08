@@ -76,7 +76,7 @@ export class ViewTravelComponent implements OnInit {
 
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
       if(data){
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved(true);

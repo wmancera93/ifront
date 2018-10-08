@@ -760,7 +760,7 @@ export class EditTravelComponent implements OnInit {
   }
   searchHotel(form: any, acction: any) {
     this.hotels = [];
-    this.hotelsService.getshowHotels(form.id_cityto).
+    this.hotelsService.getshowHotels(form.id_countryto).
       subscribe((data: any) => {
         this.hotels = data.data;
         if (this.hotels.length > 0) {
@@ -1199,7 +1199,7 @@ export class EditTravelComponent implements OnInit {
 
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
       if(data){
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved(true);

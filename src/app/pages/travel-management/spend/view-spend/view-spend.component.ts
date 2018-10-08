@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 import { SpendsService } from '../../../../services/travel-management/spends/spends.service';
 import { Http, ResponseContentType } from '@angular/http';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-view-spend',
@@ -17,13 +19,16 @@ export class ViewSpendComponent implements OnInit {
   public nameReport: string = 'Gastos';
   public edit: boolean = false;
   public anexes: any[] = [];
+  public id_spend: string;
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
-    public http: Http) {
+    public http: Http, public alert: AlertsService) {
+
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
       this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
-        debugger
+
+        this.id_spend = idSpend;
         this.showSpendDetail = data.data[0];
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
@@ -45,6 +50,26 @@ export class ViewSpendComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  sedRequestsSpend() {
+
+    this.spendsService.putSendRequestsSpend(this.id_spend).subscribe((data: any) => {
+      if (data) {
+
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+      }
+      this.spendSharedService.setRefreshSpend(true);
+    },
+      (error: any) => {
+        document.getElementById("closeTravels").click();
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+
+      });
+  }
+
+
 
   viewAnnex(paramView) {
     debugger
