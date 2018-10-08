@@ -55,7 +55,7 @@ export class EventsEmployeesComponent implements OnInit {
           if(data.length === this.objectWidget.length){
             this.nohaveTeam = false;
           }
-        }, 3000);
+        }, 5000);
       };
     });
   }
