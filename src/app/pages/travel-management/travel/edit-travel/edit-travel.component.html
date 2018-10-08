@@ -94,7 +94,7 @@
             </div>
           </div>
 
-          <div class="col-12" *ngIf="activate">
+          <div class="col-12">
             <div class="row" style="margin-top: 10px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -139,14 +139,14 @@
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px">
+          <div class="col-12" style="margin-top: 15px" *ngIf="objectPrint.data.length > 0">
             <div class="row border" style="margin-left: 15px">
               <h4>Trayectos</h4>
             </div>
           </div>
 
           <div class="col-12">
-            <div class="row" style="margin-top: 15px">
+            <div class="row" style="margin-top: 15px" *ngIf="objectPrint.data.length > 0">
               <div class="col-12 top-general-p" style="min-height: 20px">
                 <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
               </div>
@@ -297,8 +297,7 @@
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>Región:</a>
                       </label>
-                      <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']"
-                        (change)="searchCity(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                       </select>
@@ -372,8 +371,7 @@
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>Región:</a>
                       </label>
-                      <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']"
-                        (change)="searchCityto(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameStateto of stateLocationsto" [value]="nameStateto.id">{{nameStateto.name}}</option>
                       </select>
@@ -462,7 +460,7 @@
                         data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
                     </div>
-                    <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+                    <div class="col-lg-3 col-md-4 col-12">
                       <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravelEdit">
                         <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                     </div>
@@ -475,15 +473,14 @@
 
         <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate_submit">
           <div class="col-lg-3 col-md-4 col-12">
+            <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
+              &nbsp;Enviar aprobación</button>
+          </div>
+          <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
-
-          </div>
-          <div class="col-lg-3 col-md-4 col-12">
-            <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
-              &nbsp;Enviar aprobación</button>
           </div>
         </div>
       </div>

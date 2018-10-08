@@ -175,7 +175,6 @@ export class EditTravelComponent implements OnInit {
       date_requests_end: '',
       trip_text: '',
       maintenance: '',
-      id_center_travel: '',
       id_element_imputation: '',
       id_travel_costs: '',
       id_grahp: '',
@@ -229,8 +228,7 @@ export class EditTravelComponent implements OnInit {
             date_requests_end: this.generalViajes[0].travel_request.date_end,
             trip_text: this.generalViajes[0].travel_request.observation,
             maintenance: this.generalViajes[0].travel_request.is_maintenance,
-            id_center_travel: this.generalViajes[0].travel_request.id_center_travel,
-            id_element_imputation: this.generalViajes[0].travel_request.id_element_imputation,
+            id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
             id_grahp: this.generalViajes[0].travel_request.id_grahp,
             id_operations: this.generalViajes[0].travel_request.id_operations,
             id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
@@ -300,10 +298,9 @@ export class EditTravelComponent implements OnInit {
               date_requests_end: this.generalViajes[0].travel_request.date_end,
               trip_text: this.generalViajes[0].travel_request.observation,
               maintenance: this.generalViajes[0].travel_request.is_maintenance,
-              id_element_imputation: this.generalViajes[0].travel_request.id_element_imputation,
+              id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
               id_grahp: this.generalViajes[0].travel_request.id_grahp,
               id_operations: this.generalViajes[0].travel_request.id_operations,
-              id_center_travel: this.generalViajes[0].travel_request.travel_costs_type_id,
               id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
               id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -734,7 +731,7 @@ export class EditTravelComponent implements OnInit {
   
   searchTerminal(form: any, acction: any) {
     this.terminalLocations = [];
-    this.travelManagementService.gettransportTerminals(form.id_city).
+    this.travelManagementService.gettransportTerminals(form.id_country).
       subscribe((data: any) => {
         this.terminalLocations = data.data;
         if (this.terminalLocations.length > 0) {
@@ -748,7 +745,7 @@ export class EditTravelComponent implements OnInit {
   }
   searchTerminalto(form: any, acction: any) {
     this.terminalLocationsto = [];
-    this.travelManagementService.gettransportTerminals(form.id_cityto).
+    this.travelManagementService.gettransportTerminals(form.id_countryto).
       subscribe((data: any) => {
         this.terminalLocationsto = data.data;
         if (this.terminalLocationsto.length > 0) {

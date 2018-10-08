@@ -85,24 +85,24 @@
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_begin_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Desde:
+                          Fecha inicial de solicitud:
                           <span style="font-weight: 100 !important">{{approvals[0].date_begin_format}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Hasta:
+                          Fecha final de solicitud:
                           <span style="font-weight: 100 !important">{{approvals[0].date_end_format}}</span>
                         </p>
                       </div>
-                      <div class="col-12 text-md-left text-left">
+                      <!-- <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
                           <i class="fa fa-fw fa-clock-o font-color-default"></i>
                           Dias Solicitados:
                           <span style="font-weight: 100 !important">{{approvals[0].days_request}}</span>
                         </p>
-                      </div>
+                      </div> -->
                     </div>
                   </div>
                   <div class="col-lg-6 col-12 text-md-left text-left">
@@ -130,6 +130,40 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-lg-6 col-12 text-md-left text-left">
+                    <div class="collapse top-general-p" id="collapseDetailRequestTravels">
+                      <div class="row"  *ngIf="travel_managements.length != null || travel_managements.length != ''">
+                        <div class="col-lg-6 col-12 text-md-left text-left">
+                          <h4>Pasaje, hotel y trayectos de solicitud</h4>
+                          <!-- <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table> -->
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="travel_request_annexeds.length != null || travel_request_annexeds.length != ''">
+                        <div class="col-lg-6 col-12 text-md-left text-left">
+                          <h4>Anexos solicitud de viajes</h4>
+
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="travel_advance_requests.length != null || travel_advance_requests.length != ''">
+                        <div class="col-lg-6 col-12 text-md-left text-left" >
+                          <h4>Anticipos de viaje</h4>
+                          <!-- <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table> -->
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="travel_allowance_request.length != null || travel_allowance_request.length != ''">
+                        <div class="col-lg-6 col-12 text-md-left text-left">
+                          <h4>Gastos de viaje</h4>
+                          <!-- <app-data-table [records]="objectReport" id="tableTravels" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table> -->
+                        </div>
+                      </div>
+                      <div class="row" *ngIf="travel_allowance_request.data.travel_allowance_anexeds.length != null || travel_allowance_request.data.travel_allowance_anexeds.length != ''">
+                        <div class="col-lg-6 col-12 text-md-left text-left">
+                          <h4>Anexos gastos de viajes</h4>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="col-12 text-left" *ngIf="approvals[0].observation_request != null">
                     <p class="font-title-general">
                       <i class="fa fa-fw fa-comment font-color-default"></i>
@@ -138,13 +172,13 @@
                     </p>
                   </div>
 
-                  <div class="col-12 text-left" *ngIf="approvals[0].image != undefined">
+                  <!-- <div class="col-12 text-left" *ngIf="approvals[0].image != undefined">
                     <p class="font-title-general">
                       <i class="fa fa-fw fa-paperclip font-color-default"></i>
                       Soporte adjunto:
                       <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">Ver</span>
                     </p>
-                  </div>
+                  </div> -->
 
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left tops">
@@ -169,14 +203,12 @@
                   <div class="col-12">
                     <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'I'">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequests">
-                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequests}" data-toggle="tab"
-                          href="#Approval">
+                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequests}" data-toggle="tab" href="#Approval">
                           Gestionar solicitud
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequests}" data-toggle="tab"
-                          href="#Detail">
+                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequests}" data-toggle="tab" href="#Detail">
                           Ver detalles
                         </a>
                       </li>
@@ -191,7 +223,7 @@
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div  *ngIf="approvals[0].approver_platform == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div *ngIf="approvals[0].approver_platform == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
                       <div class="row">
                         <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
@@ -291,42 +323,42 @@
                       </div>
                     </div>
                   </div>
-                  <div  *ngIf="approvals[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
-                      <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
-                        <div class="col-12 tab-pane">
-                          <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
-                            <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
-                              <div class="col-12 text-left">
-                                <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                                Nivel de aprobación {{details.approver_to_json.level}}
-                              </div>
-                              <div class="col-12 text-left">
-                                <h3 class="font-color-default">
-                                  {{details.status}} por {{details.approver_to_json.name}}
-                                </h3>
-                              </div>
-                              <div class="col-12 text-left">
-                                <h3 class="font-color-default">
-                                  Descripción:
-                                </h3>
-                              </div>
-                              <div class="col-12 text-left">
-                                {{details.description}}
-                              </div>
+                  <div *ngIf="approvals[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                    <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
+                      <div class="col-12 tab-pane">
+                        <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
+                          <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
+                            <div class="col-12 text-left">
+                              <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
+                              Nivel de aprobación {{details.approver_to_json.level}}
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3 class="font-color-default">
+                                {{details.status}} por {{details.approver_to_json.name}}
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3 class="font-color-default">
+                                Descripción:
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              {{details.description}}
                             </div>
                           </div>
-                          <div *ngIf="approvals[0].answers_to_json.length == 0">
-                            <div class="row justify-content-center">
-                              <div class="col-12 text-center top-general">
-                                <h3 class="font-color-default">
-                                  Aun no hay detalles
-                                </h3>
-                              </div>
+                        </div>
+                        <div *ngIf="approvals[0].answers_to_json.length == 0">
+                          <div class="row justify-content-center">
+                            <div class="col-12 text-center top-general">
+                              <h3 class="font-color-default">
+                                Aun no hay detalles
+                              </h3>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
