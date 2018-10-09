@@ -15,15 +15,16 @@ export class PendingTravelComponent implements OnInit {
   public pendingsRequestTravels: any[] = [];
   public travelsRequestsType: string = 'travels';
   public typesRequest: any[] = [];
-  public request_id:string;
-  public request_type:string;
+  public request_id: string;
+  public request_type: string;
+  public typesRequestFirts: any[] = [];
 
 
   constructor(public alert: AlertsService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
-    public travelApproverServiceShared:TravelApproverService) {
+    public travelApproverServiceShared: TravelApproverService) {
 
 
     this.typesRequest.push(
@@ -50,26 +51,30 @@ export class PendingTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
-
-
+    this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+      if (data) {
+        debugger
+        this.travelsRequestsType = 'travels';
+        this.pendingsRequestTravels = data.data[0].requests;
+      }
+    })
   }
+
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any) {
-
-
-
-
-    this.travelApproverServiceShared.setviewDetailRequests(this.request_id, this.request_type)
+    debugger
+    this.travelApproverServiceShared.setviewDetailRequests(request)
   }
   selectTypeReques(param) {
     debugger
     switch (param.id.toString()) {
-
       case '1':
+        debugger
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {
+            debugger
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
           }

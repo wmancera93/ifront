@@ -14,7 +14,7 @@ export class TravelApproverService {
     return this.viewDetailRequest;
   }
 
-  setviewDetailRequests(viewDetailRequest:any , type_request:string) {
+  setviewDetailRequests(viewDetailRequest:any) {
     return this.viewDetailRequest.next(viewDetailRequest);
   }
   getrefreshIndexRequest() {

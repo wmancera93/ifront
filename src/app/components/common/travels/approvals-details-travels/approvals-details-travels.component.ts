@@ -20,6 +20,8 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public switchTravels: string = "on";
   public descriptionTravels: string = "";
   public requests_travels: any;
+  public id_type_requests: string;
+  public type_requests: string;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
@@ -30,8 +32,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         this.descriptionTravels = '';
         this.approvals = [];
         this.requests_travels = data;
+        this.id_type_requests = data.id;
+        this.type_requests = data.object;
 
-        this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.id)
+        switch (this.type_requests) {
+          case 'travels':
+          this.approverTravelsService.getApprovalsRequestsById(this.id_type_requests)
           .subscribe((request: any) => {
             this.approvals[0] = request.data[0].request;
 
@@ -41,6 +47,30 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
               this.prerequisit_travel = false;
             }
           })
+            break;
+          case 'advance':
+          
+
+            break;
+          case 'spend':
+          this.approverTravelsService.getApprovalsRequestsSpendById(this.id_type_requests)
+          .subscribe((request: any) => {
+            this.approvals[0] = request.data[0].request;
+
+            if (this.approvals[0].type_request_to_json.prerequisites !== "" && this.approvals[0].type_request_to_json.prerequisites != null) {
+              this.prerequisit_travel = true;
+            } else {
+              this.prerequisit_travel = false;
+            }
+          })
+
+            break;
+          default:
+
+            break;
+        }
+
+       
 
         if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
           document.getElementById('btn_approvals_requests_travels').click();
@@ -69,63 +99,63 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   offAprovlasTravels() {
     this.switchTravels = 'off';
   }
-  saveApprovalRequestsTravels(param){
+  saveApprovalRequestsTravels(param) {
     this.showSubmit = false;
     switch (param.typeRequests.toString()) {
 
       case 'travel':
-    
-      this.approverTravelsService.postApprovalsRequestTravel({
-        request_id: this.approvals[0],
-        answer: this.switchTravels,
-        description: this.descriptionTravels
-      }).subscribe((data:any) =>{
-        this.showSubmit = true;
-        if (data.success) {
-          document.getElementById("btn_approvals_requests_travels").click();
-          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false}];
-          this.alert.setAlert(alertWarning[0]);
+
+        this.approverTravelsService.postApprovalsRequestTravel({
+          request_id: this.approvals[0],
+          answer: this.switchTravels,
+          description: this.descriptionTravels
+        }).subscribe((data: any) => {
           this.showSubmit = true;
-         
-        }
-      },
-      (error: any) => {
-        document.getElementById("btn_approvals_requests_travels").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
-        this.showSubmit = true;
-        this.alert.setAlert(alertWarning[0]);
-      }
-    )
+          if (data.success) {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+
+          }
+        },
+          (error: any) => {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          }
+        )
 
         break;
       case 'advance':
 
 
-  
+
 
         break;
       case 'spend':
-      this.approverTravelsService.postApprovalsRequestSpend({
-        request_id: this.approvals[0],
-        answer: this.switchTravels,
-        observation: this.descriptionTravels
-      }).subscribe((data:any) =>{
-        this.showSubmit = true;
-        if (data.success) {
-          document.getElementById("btn_approvals_requests_travels").click();
-          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false}];
-          this.alert.setAlert(alertWarning[0]);
+        this.approverTravelsService.postApprovalsRequestSpend({
+          request_id: this.approvals[0],
+          answer: this.switchTravels,
+          observation: this.descriptionTravels
+        }).subscribe((data: any) => {
           this.showSubmit = true;
-         
-        }
-      },
-      (error: any) => {
-        document.getElementById("btn_approvals_requests_travels").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
-        this.showSubmit = true;
-        this.alert.setAlert(alertWarning[0]);
-      }
-    )
+          if (data.success) {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+
+          }
+        },
+          (error: any) => {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          }
+        )
 
         break;
       default:
