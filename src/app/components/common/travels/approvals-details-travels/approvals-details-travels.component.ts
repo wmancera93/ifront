@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
@@ -13,6 +13,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 })
 export class ApprovalsDetailsTravelsComponent implements OnInit {
 
+  @Output() objectToken: EventEmitter<any> = new EventEmitter();
+
   public approvals: TravelsApprovals[] = []
   public editRequests: boolean = false;
   public showSubmit: boolean = true;
@@ -20,49 +22,43 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public switchTravels: string = "on";
   public descriptionTravels: string = "";
   public requests_travels: any;
-  public id_type_requests: string;
-  public type_requests: string;
+  public objectTravelsReport: EventEmitter<any> = new EventEmitter();;
+  public objectSpendReport: EventEmitter<any> = new EventEmitter();;
+  public objectAdvanceReport: EventEmitter<any> = new EventEmitter();;
+
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
+        debugger
         this.switchTravels = 'on';
         this.descriptionTravels = '';
         this.approvals = [];
         this.requests_travels = data;
-        this.id_type_requests = data.id;
-        this.type_requests = data.object;
 
-        switch (this.type_requests) {
-          case 'travels':
-          this.approverTravelsService.getApprovalsRequestsById(this.id_type_requests)
-          .subscribe((request: any) => {
-            this.approvals[0] = request.data[0].request;
-
-            if (this.approvals[0].type_request_to_json.prerequisites !== "" && this.approvals[0].type_request_to_json.prerequisites != null) {
-              this.prerequisit_travel = true;
-            } else {
-              this.prerequisit_travel = false;
-            }
-          })
+        switch (this.requests_travels.type_request_to_json.id_activity) {
+          case 'SOVN':
+            debugger
+            this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
+              .subscribe((request: any) => {
+                debugger
+                this.approvals = request.data;
+                this.objectAdvanceReport = request.data[0].travel_advance_requests.data;
+                this.objectSpendReport = request.data[0].travel_allowance_request.data;
+                this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+              })
             break;
           case 'advance':
-          
+
 
             break;
           case 'spend':
-          this.approverTravelsService.getApprovalsRequestsSpendById(this.id_type_requests)
-          .subscribe((request: any) => {
-            this.approvals[0] = request.data[0].request;
-
-            if (this.approvals[0].type_request_to_json.prerequisites !== "" && this.approvals[0].type_request_to_json.prerequisites != null) {
-              this.prerequisit_travel = true;
-            } else {
-              this.prerequisit_travel = false;
-            }
-          })
+            this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)
+              .subscribe((request: any) => {
+                this.approvals = request.data[0].request;
+              })
 
             break;
           default:
@@ -70,7 +66,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
             break;
         }
 
-       
+
 
         if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
           document.getElementById('btn_approvals_requests_travels').click();
