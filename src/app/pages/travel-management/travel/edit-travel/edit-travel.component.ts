@@ -217,7 +217,8 @@ export class EditTravelComponent implements OnInit {
 
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
-        if (result.success) {
+         if (result.success) {
+          debugger
           this.generalViajes = result.data;
 
           this.objectPrint = this.generalViajes[0].travel_managements;
@@ -229,8 +230,8 @@ export class EditTravelComponent implements OnInit {
             trip_text: this.generalViajes[0].travel_request.observation,
             maintenance: this.generalViajes[0].travel_request.is_maintenance,
             id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
-            id_grahp: this.generalViajes[0].travel_request.id_grahp,
-            id_operations: this.generalViajes[0].travel_request.id_operations,
+            id_grahp: this.generalViajes[0].travel_request.travel_graph_code,
+            id_operations: this.generalViajes[0].travel_request.travel_operation_id,
             id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
             id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
             id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -254,8 +255,11 @@ export class EditTravelComponent implements OnInit {
           setTimeout(() => {
             this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
             this.objectReport.emit({ success: true, data: [this.objectPrint] });
+            this.searchOperationsGrahp(this.formTravelManagement.value, '')
           }, 100);
+           
         }
+        
 
       });
 
@@ -814,6 +818,7 @@ export class EditTravelComponent implements OnInit {
   }
 
   searchOperationsGrahp(form: any, acction: any) {
+    debugger
     this.travelManagementService.getTravelsOperations(form.id_grahp).
       subscribe((data: any) => {
         this.operations = data.data;
@@ -901,8 +906,6 @@ export class EditTravelComponent implements OnInit {
     this.cityLocationsto = [];
     this.terminalLocations = [];
     this.terminalLocationsto = [];
-    this.grahp = [];
-    this.operations = [];
     this.hotels = [];
     this.hotels = [];
 

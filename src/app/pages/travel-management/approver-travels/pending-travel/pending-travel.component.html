@@ -23,7 +23,7 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
         <div class="row top-containter" *ngIf="travelsRequestsType == 'travels'">
-          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
               Usted tiene {{pendingsRequestTravels.length}} solicitud de viaje pendiente
@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="row top-containter" *ngIf="travelsRequestsType == 'advance'">
-          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
               Usted tiene {{pendingsRequestTravels.length}} solicitud de anticipos pendiente
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="row top-containter" *ngIf="travelsRequestsType == 'spend'">
-          <div class="col-12 text-left" *ngIf="pendingsRequestTravels == 1">
+          <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
               Usted tiene {{pendingsRequestTravels.length}} solicitud de gastos pendiente
@@ -120,13 +120,13 @@
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{pending.requests.ticket}}
+                    Ticket #{{pending.ticket}}
                   </span>
                 </h5>
               </div>
               <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  {{pending.type_requests_to_json.description}}
+                  {{pending.type_request_to_json.description}}
                 </h3>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -137,9 +137,6 @@
                   <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
                   {{pending.level}}
                 </p>
-                <strong class="text-primary-hr">
-                  Solicitud de {{pending.type_request_travel}}
-                </strong>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
@@ -168,12 +165,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-12">
-          <button type="button" class="btn btn-warning btn-block cursor-general">
-            <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;ver</button>
         </div>
       </div>
     </div>

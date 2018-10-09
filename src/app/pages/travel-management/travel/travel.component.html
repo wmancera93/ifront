@@ -125,24 +125,24 @@
                   <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active " style="cursor: pointer">
                     <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[1].is_active"
+                  <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[2].is_active"
                     style="cursor: pointer" (click)="deleteTravels(travels.ticket)">
                     <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf="!travels.action_travel_requests_index_view[1].is_active"
+                  <div class="col-4 number-size align-items-center" id="hideTrash" *ngIf="!travels.action_travel_requests_index_view[2].is_active"
                     style="cursor: no-drop">
                     <i class="fa fa-trash" aria-hidden="false" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4" (click)="viewTravels(travels.ticket)">
+                  <div class="col-4" (click)="viewTravels(travels.ticket)" *ngIf="travels.action_travel_requests_index_view[0].is_active">
                     Ver
                   </div>
-                  <div class="col-4" (click)="editTravels(travels.ticket)">
+                  <div class="col-4" (click)="editTravels(travels.ticket)" *ngIf="travels.action_travel_requests_index_view[1].is_active">
                     Editar
                   </div>
-                  <div class="col-4" *ngIf="travels.action_travel_requests_index_view[1].is_active" (click)="deleteTravels(travels.ticket)">
+                  <div class="col-4" *ngIf="travels.action_travel_requests_index_view[2].is_active" (click)="deleteTravels(travels.ticket)">
                     Eliminar
                   </div>
-                  <div class="col-4" *ngIf="!travels.action_travel_requests_index_view[1].is_active">
+                  <div class="col-4" *ngIf="!travels.action_travel_requests_index_view[2].is_active">
                     Eliminar
                   </div>
                 </div>

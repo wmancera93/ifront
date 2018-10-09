@@ -157,8 +157,10 @@
                 <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                   <div class="row">
                     <div class="col-11">
-                      <h6>{{imgsaved.name | slice: 0:40}}
-                        <span [hidden]="imgsaved.name.length < 40">...</span>
+                      <h6 *ngIf="imgsaved.name !== null">{{imgsaved.name |slice: 0:20}}
+                        <span [hidden]="imgsaved.name.length < 20">...</span>
+                      </h6>
+                      <h6 *ngIf="imgsaved.name === null">Sin nombre
                       </h6>
                       <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
                       <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>

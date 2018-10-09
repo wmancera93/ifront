@@ -60,7 +60,7 @@ export class ManagedTravelComponent implements OnInit {
   }
 
   modalAproversTravelManaged(request: any) {
-    this.travelApproverServiceShared.setviewDetailRequests(this.request_managed_id , this.request_managed_type)
+    this.travelApproverServiceShared.setviewDetailRequests(request)
   }
 
   selectTypeRequestsManaged(param) {

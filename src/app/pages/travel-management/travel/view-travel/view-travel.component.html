@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalles de Viaje # {{ticket}}</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeTravelsNew" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -68,37 +68,37 @@
             <label>{{view_travels[0].travel_costs_type_name}}</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-5 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+          <div class="col-lg-5 col-md-6 col-12" >
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong>Centro de costo:</strong>
             </label>
           </div>
-          <div class="col-lg-7 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].travel_cost_name}}</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-5 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+          <div class="col-lg-5 col-md-6 col-12" >
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong>Grafo:</strong>
             </label>
           </div>
-          <div class="col-lg-7 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].travel_graph_name}}</label>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-5 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong>Operación:</strong>
             </label>
           </div>
-          <div class="col-lg-7 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
-            <label>{{view_travels[0].travel_operations_name}}</label>
+          <div class="col-lg-7 col-md-6 col-12">
+            <label>{{view_travels[0].travel_operation_name}}</label>
           </div>
         </div>
 
@@ -149,15 +149,17 @@
           </div>
         </div>
 
-        <div class="row" style="margin-top: 50px">
+        <div class="row" style="margin-top: 50px" >
           <div class="col-12 top-containter">
             <div class="row">
               <div class="col-lg-8 col-12" *ngFor="let imgsaved of annexeds; let index = index">
-                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
-                  <div class="row">
+                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert" >
+                  <div class="row" >
                     <div class="col-11">
-                      <h6>{{imgsaved.name |slice: 0:20}}
+                      <h6 *ngIf="imgsaved.name !== null">{{imgsaved.name |slice: 0:20}}
                         <span [hidden]="imgsaved.name.length < 20">...</span>
+                      </h6>
+                      <h6 *ngIf="imgsaved.name === null">Sin nombre
                       </h6>
                       <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
                       <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>

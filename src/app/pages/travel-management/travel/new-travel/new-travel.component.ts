@@ -261,8 +261,6 @@ export class NewTravelComponent implements OnInit {
             this.bedit = false;
           }
         }
-
-
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     })
@@ -588,7 +586,7 @@ export class NewTravelComponent implements OnInit {
           this.grahp = this.sortByAphabet(data.data);
           if (this.grahp.length > 0) {
             if (acction === 'new') {
-              this.formTravelManagement.controls['id_grahp'].setValue('-1');
+              this.formTravelManagement.controls['id_grahp'].setValue('');
             }
           } else {
             this.formTravelManagement.controls['id_grahp'].setValue('');
@@ -897,6 +895,7 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
+
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -917,6 +916,7 @@ export class NewTravelComponent implements OnInit {
         }];
         this.alert.setAlert(alertDataWrong[0])
       }
+
     } else {
 
       if (dateTrayect.date_begin !== '') {
