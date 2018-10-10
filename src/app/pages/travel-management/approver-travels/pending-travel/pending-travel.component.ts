@@ -65,7 +65,7 @@ export class PendingTravelComponent implements OnInit {
   }
   modalAproversTravelPending(request: any) {
     debugger
-    this.travelApproverServiceShared.setviewDetailRequests(request)
+    this.travelApproverServiceShared.setviewDetailRequests({request ,edit: true})
   }
   selectTypeReques(param) {
     debugger

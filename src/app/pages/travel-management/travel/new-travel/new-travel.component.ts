@@ -339,7 +339,7 @@ export class NewTravelComponent implements OnInit {
     console.log(model)
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
-    modelFromdata.append('is_maintenance', model.maintenance);
+    modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);

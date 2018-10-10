@@ -22,9 +22,13 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public switchTravels: string = "on";
   public descriptionTravels: string = "";
   public requests_travels: any;
-  public objectTravelsReport: EventEmitter<any> = new EventEmitter();;
-  public objectSpendReport: EventEmitter<any> = new EventEmitter();;
-  public objectAdvanceReport: EventEmitter<any> = new EventEmitter();;
+  public objectTravelsReport: EventEmitter<any> = new EventEmitter();
+  public objectSpendReport: EventEmitter<any> = new EventEmitter();
+  public objectAdvanceReport: EventEmitter<any> = new EventEmitter();
+  public nameReportTravel: string = 'Trayectos de viaje';
+  public nameReportAdvance: string = 'Anticipos de viaje';
+  public nameReportSpend: string = 'Gastos de viaje';
+  public editRequest: boolean;
 
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
@@ -36,7 +40,8 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         this.switchTravels = 'on';
         this.descriptionTravels = '';
         this.approvals = [];
-        this.requests_travels = data;
+        this.requests_travels = data.request;
+        this.editRequest = data.edit;
 
         switch (this.requests_travels.type_request_to_json.id_activity) {
           case 'SOVN':
@@ -45,9 +50,16 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
               .subscribe((request: any) => {
                 debugger
                 this.approvals = request.data;
-                this.objectAdvanceReport = request.data[0].travel_advance_requests.data;
-                this.objectSpendReport = request.data[0].travel_allowance_request.data;
-                this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+
+                setTimeout(() => {
+                  this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+                }, 300);
+                setTimeout(() => {
+                  this.objectAdvanceReport.emit({ success: true, data: [request.data[0].travel_advance_requests] });
+                }, 300);
+                setTimeout(() => {
+                  this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });
+                }, 300);
               })
             break;
           case 'advance':
@@ -95,14 +107,15 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   offAprovlasTravels() {
     this.switchTravels = 'off';
   }
-  saveApprovalRequestsTravels(param) {
+  saveApprovalRequestsTravels() {
     this.showSubmit = false;
-    switch (param.typeRequests.toString()) {
+    debugger
+    switch (this.requests_travels.type_request_to_json.id_activity) {
 
-      case 'travel':
-
+      case 'SOVN':
+        debugger
         this.approverTravelsService.postApprovalsRequestTravel({
-          request_id: this.approvals[0],
+          request_id: this.approvals[0].travel_request.ticket,
           answer: this.switchTravels,
           description: this.descriptionTravels
         }).subscribe((data: any) => {
@@ -160,7 +173,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
     }
   }
 
-  // viewSupport() {
-  //   window.open(this.approvals[0].image.url);
+  // viewAnexedTravels() {
+  //   window.open(this.approvals[0].travel_request_annexeds.url);
   // }
 }
