@@ -99,7 +99,7 @@ export class EditTravelComponent implements OnInit {
     public alert: AlertsService) {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates') {
+      if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates' || data ==='sendApprobalAlert') {
         document.getElementById("btn_travel_edit").click();
       }
 
@@ -1201,14 +1201,15 @@ export class EditTravelComponent implements OnInit {
 
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
       if(data){
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false }];
+        document.getElementById("btn_travel_edit").click();
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation :'sendApprobalAlert'}];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved(true);
     },
     (error: any) => {
-      document.getElementById("closeTravels").click();
-      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+      document.getElementById("btn_travel_edit").click();
+      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation :'sendApprobalAlert' }];
       this.alert.setAlert(alertWarning[0]);
     
     });

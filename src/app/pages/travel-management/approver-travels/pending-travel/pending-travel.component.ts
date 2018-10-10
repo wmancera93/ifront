@@ -27,6 +27,12 @@ export class PendingTravelComponent implements OnInit {
     public travelApproverServiceShared: TravelApproverService) {
 
 
+    this.travelApproverServiceShared.getrefreshIndexRequest().subscribe(data => {
+      if (data) {
+        this.getRequestsPendings();
+      }
+    });
+
     this.typesRequest.push(
       {
         id: 1,
@@ -51,6 +57,10 @@ export class PendingTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
+    this.getRequestsPendings();
+  }
+
+  getRequestsPendings() {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
         debugger
@@ -58,14 +68,14 @@ export class PendingTravelComponent implements OnInit {
         this.pendingsRequestTravels = data.data[0].requests;
       }
     })
-  }
+  };
 
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any) {
     debugger
-    this.travelApproverServiceShared.setviewDetailRequests({request ,edit: true})
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true })
   }
   selectTypeReques(param) {
     debugger

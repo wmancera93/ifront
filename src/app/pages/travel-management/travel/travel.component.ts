@@ -19,7 +19,7 @@ export class TravelComponent implements OnInit {
   public token: boolean;
   public alertWarning: any[] = [];
   public id_requests_travel: string;
-  public aproover: string = 'No existe aprobador para esta solicitud';
+  public aproover: string = 'No existe aprobador para esta solicitud ó ya fue aprobada';
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -93,6 +93,7 @@ export class TravelComponent implements OnInit {
     });
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
+      debugger
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
 

@@ -147,7 +147,7 @@
                         <div class="row" style="padding-bottom: 40px">
                           <div class="col-12">
                             <p class="font-title-general text-left">
-                              <i class="fa fa-fw fa-paperclip font-color-default"></i>
+                              <i class="fa fa-fw fa-paperclip font-color-default"></i>lo
                               Soportes adjuntos trayectos:
                               <span *ngFor="let approversTravels of approvals[0].travel_request_annexeds" style="color: rgb(75, 82, 82); cursor: pointer"
                                 (click)="viewAnexedTravels()">{{approversTravels.name}}</span>
@@ -211,7 +211,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'I'">
+                    <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'I' || approvals[0].travel_request.approver_platform == null ">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequest">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}" data-toggle="tab" href="#Approval">
                           Gestionar solicitud
@@ -223,18 +223,18 @@
                         </a>
                       </li>
                     </ul>
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'S'">
+                    <!-- <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
                           Ver detalles
                         </a>
                       </li>
-                    </ul>
+                    </ul> -->
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div *ngIf="approvals[0].travel_request.approver_platform == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
-                    <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
+                  <div *ngIf="approvals[0].travel_request.approver_platform == 'I' || approvals[0].travel_request.approver_platform == null" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                    <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': editRequest}" style="background-color: transparent !important">
                       <div class="row">
                         <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
                           <div class="row justify-content-center">
@@ -298,7 +298,7 @@
                         </div>
                       </div>
                     </div>
-                    <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !edit}" style="background-color: transparent !important">
+                    <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !editRequest}" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
                         <div *ngIf="approvals[0].travel_request.answers_to_json.length > 0" class="">
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].travel_request.answers_to_json">

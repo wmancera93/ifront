@@ -62,6 +62,24 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                 }, 300);
               })
             break;
+          case 'SOVI':
+            this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
+              .subscribe((request: any) => {
+                debugger
+                this.approvals = request.data;
+
+                setTimeout(() => {
+                  this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+                }, 300);
+                setTimeout(() => {
+                  this.objectAdvanceReport.emit({ success: true, data: [request.data[0].travel_advance_requests] });
+                }, 300);
+                setTimeout(() => {
+                  this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });
+                }, 300);
+              })
+
+            break;
           case 'advance':
 
 
@@ -117,7 +135,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         this.approverTravelsService.postApprovalsRequestTravel({
           request_id: this.approvals[0].travel_request.ticket,
           answer: this.switchTravels,
-          description: this.descriptionTravels
+          observation: this.descriptionTravels
         }).subscribe((data: any) => {
           this.showSubmit = true;
           if (data.success) {
@@ -125,7 +143,31 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
             const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
+            this.travelApproverServiceShared.setrefreshIndexRequest(true);
+          }
+        },
+          (error: any) => {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          }
+        )
 
+        break;
+      case 'SOVI':
+        this.approverTravelsService.postApprovalsRequestTravel({
+          request_id: this.approvals[0].travel_request.ticket,
+          answer: this.switchTravels,
+          observation: this.descriptionTravels
+        }).subscribe((data: any) => {
+          this.showSubmit = true;
+          if (data.success) {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.travelApproverServiceShared.setrefreshIndexRequest(true);
           }
         },
           (error: any) => {

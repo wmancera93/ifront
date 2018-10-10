@@ -51,16 +51,25 @@ export class ManagedTravelComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-
+    this.getRequestsManaged();
 
   }
 
+  getRequestsManaged() {
+    this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
+      if (data) {
+        debugger
+        this.travelsRequestsManagedType = 'travels';
+        this.managedRequestTravel = data.data[0].requests;
+      }
+    })
+  };
   returnBackTravel() {
     this.router.navigate(['ihr/travel_management']);
   }
 
   modalAproversTravelManaged(request: any) {
-    this.travelApproverServiceShared.setviewDetailRequests(request)
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false })
   }
 
   selectTypeRequestsManaged(param) {
