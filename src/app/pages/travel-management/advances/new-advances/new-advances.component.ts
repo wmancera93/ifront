@@ -75,11 +75,19 @@ export class NewAdvancesComponent implements OnInit {
         observation: ""
       });
 
+      
       this.refreshTableAdvances();
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
+
+       if (data !== true) {
+        this.continue = true;
+      } else {
+        this.continue = false;
+      }
+      
     });
 
     this.advancesService.getAdvanceListTravel().subscribe((list: any) => {
@@ -131,7 +139,7 @@ export class NewAdvancesComponent implements OnInit {
               const alertWarning: Alerts[] = [{
                 type: 'danger',
                 title: 'Advertencia',
-                message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
+                message: error.json().errors.toString(),
                 confirmation: false,
                 typeConfirmation: 'errorValidationAdvance'
               }];
@@ -148,7 +156,7 @@ export class NewAdvancesComponent implements OnInit {
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
-          message: error.json().errors.toString() + ', ¿Desea continuar con la solicitud?',
+          message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorValidationAdvance'
         }];
@@ -208,6 +216,7 @@ export class NewAdvancesComponent implements OnInit {
       this.continue = false;
     }
   }
+
   validateDateAdvance(date: any) {
     this.today = new Date();
     this.dd = this.today.getDate();

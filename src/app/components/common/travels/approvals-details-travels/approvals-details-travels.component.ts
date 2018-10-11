@@ -47,7 +47,9 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                 this.approvals = request.data;
                 this.objectAdvanceReport = request.data[0].travel_advance_requests.data;
                 this.objectSpendReport = request.data[0].travel_allowance_request.data;
-                this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+                setTimeout(() => {
+                  this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+                }, 500);                
               })
             break;
           case 'advance':

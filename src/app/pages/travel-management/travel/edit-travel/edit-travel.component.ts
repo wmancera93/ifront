@@ -389,7 +389,7 @@ export class EditTravelComponent implements OnInit {
         this.trips_activities = this.sortByAphabet(data.data.travel_activities);
         this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = []
-      })
+      });
 
       if(this.center_costs_travels[0].travel_cost_type_code === "KOSTL" ){
         this.kostl= true;
