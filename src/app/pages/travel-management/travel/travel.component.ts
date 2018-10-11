@@ -135,7 +135,7 @@ export class TravelComponent implements OnInit {
     this.approverTravelsService.getApprovalsRequestsById(id_travel)
       .subscribe((request: any) => {
         debugger
-        this.aproversRequestsService.setRequests(request.travel_requests);
+        this.aproversRequestsService.setAprovalsRequests(request.requests_travels);
       }
       )
   }

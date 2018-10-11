@@ -612,7 +612,7 @@ export class NewTravelComponent implements OnInit {
       })
   }
   changeTypeTravel(param) {
-    if (param.type_travel === '24') {
+    if (param.type_travel === '27') {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
       this.changeTravelLegal('P');
     } else {

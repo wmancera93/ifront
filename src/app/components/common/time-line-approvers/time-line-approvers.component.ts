@@ -22,7 +22,6 @@ export class TimeLineApproversComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService) {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
-        debugger
         if (this.countAfter === 0) {
           this.requestsRhService.getRequestDetailById(data.ticket)
             .subscribe((detail: any) => {
@@ -51,7 +50,9 @@ export class TimeLineApproversComponent implements OnInit {
         }
       }
     )
-
+    this.aproversRequestsService.getAprovalsRequests().subscribe((result:any)=>{
+      debugger
+    })
   }
 
   ngOnInit() {
