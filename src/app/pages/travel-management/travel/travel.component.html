@@ -94,6 +94,9 @@
                     {{travels.status_request}}
                   </span>
                 </h6>
+                <p class="text-primary cursor-general" style="text-decoration: underline  #0275d8!important" (click)="seeAproverFlow(travels.ticket)">
+                  Ver flujo aprobaciones
+                </p>
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee != undefined">
                 <p class="font-title-general">
@@ -164,3 +167,4 @@
 <app-new-travel *ngIf="!token"></app-new-travel>
 <app-edit-travel *ngIf="!token"></app-edit-travel>
 <app-view-travel *ngIf="!token"></app-view-travel>
+<app-time-line-approvers *ngIf="!token"></app-time-line-approvers>

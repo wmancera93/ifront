@@ -15,7 +15,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  public approvals: TravelsApprovals[] = []
+  public approvals: any[] = []
   public editRequests: boolean = false;
   public showSubmit: boolean = true;
   public prerequisit_travel: boolean = true;
@@ -33,6 +33,14 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
+
+
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'continueTravelRequestsApprover') {
+        document.getElementById("btn_approvals_requests_travels").click();
+      }
+
+    });
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
@@ -148,7 +156,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
@@ -172,7 +180,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
@@ -202,7 +210,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
@@ -215,7 +223,11 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
     }
   }
 
-  // viewAnexedTravels() {
+  viewAnexedTravels() {
+    window.open(this.approvals[0].travel_request_annexeds.url);
+  }
+
+  // viewAnexedTravelsSpend() {
   //   window.open(this.approvals[0].travel_request_annexeds.url);
   // }
 }

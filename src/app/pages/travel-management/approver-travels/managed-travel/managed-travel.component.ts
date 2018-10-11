@@ -91,9 +91,12 @@ export class ManagedTravelComponent implements OnInit {
 
         break;
       case '3':
-
-        this.travelsRequestsManagedType = 'spend';
-
+      this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
+        if (data) {
+          this.travelsRequestsManagedType = 'spend';
+          this.managedRequestTravel = data.data[0].requests;
+        }
+      })
         break;
       default:
 

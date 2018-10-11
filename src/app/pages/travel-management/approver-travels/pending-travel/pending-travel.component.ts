@@ -81,10 +81,8 @@ export class PendingTravelComponent implements OnInit {
     debugger
     switch (param.id.toString()) {
       case '1':
-        debugger
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {
-            debugger
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
           }
@@ -92,15 +90,21 @@ export class PendingTravelComponent implements OnInit {
 
         break;
       case '2':
-
-
+        // this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+        //   if (data) {
+        //     this.travelsRequestsType = 'advance';
+        //     this.pendingsRequestTravels = data.data[0].requests;
+        //   }
+        // })
         this.travelsRequestsType = 'advance';
-
         break;
       case '3':
-
-        this.travelsRequestsType = 'spend';
-
+        this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+          if (data) {
+            this.travelsRequestsType = 'spend';
+            this.pendingsRequestTravels = data.data[0].requests;
+          }
+        })
         break;
       default:
 
