@@ -51,7 +51,9 @@ export class TimeLineApproversComponent implements OnInit {
         }
       }
     )
-
+    this.aproversRequestsService.getAprovalsRequests().subscribe((result:any)=>{
+      debugger
+    })
   }
 
   ngOnInit() {

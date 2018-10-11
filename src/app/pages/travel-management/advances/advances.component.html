@@ -51,7 +51,8 @@
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
               <h3 class="font-color-default">
-                {{advance.travel_request_name}}
+                {{advance.travel_request_name | slice: 0:20}}
+                <span [hidden]="advance.travel_request_name.length < 20">...</span>
               </h3>
             </div>
             <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">

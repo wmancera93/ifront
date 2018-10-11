@@ -34,6 +34,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public is_collapse: boolean = false;
   public nameReport: string = 'Objetivos de Evaluación';
 
+  public countAfter: number = 0;
+
   public objectReport: EventEmitter<any> = new EventEmitter();
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
@@ -42,11 +44,13 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public alert: AlertsService) {
 
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
-      this.EvaluacionPer = info;
-      this.qualifierData = info.qualifier;
-      this.idEvaluation = this.EvaluacionPer.id;
-      document.getElementById('btn-evaluationObjetives').click();
-      document.getElementById('bodyGeneral').removeAttribute('style');
+      if (this.countAfter === 0) {
+        this.EvaluacionPer = info;
+        this.qualifierData = info.qualifier;
+        this.idEvaluation = this.EvaluacionPer.id;
+        document.getElementById('btn-evaluationObjetives').click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+      }
     })
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
@@ -203,6 +207,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       weight: '',
       objetive_text: '',
     });
+  }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 
 }

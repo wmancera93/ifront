@@ -23,19 +23,19 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
         <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'travels'">
-          <div class="col-12 text-left" *ngIf="managedRequestsTravel == 1">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted ha gestionado {{managedRequestsTravel.length}} solicitudes de viaje
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de viaje
             </h3>
           </div>
-          <div class="col-6 text-left" *ngIf="managedRequestsTravel.length > 1">
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted ha gestionado {{managedRequestsTravel.length}} solicitudes de viajes
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de viajes
             </h3>
           </div>
-          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestsTravel.length == 0">
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
               Usted no ha gestionado solicitudes de viaje
@@ -43,19 +43,19 @@
           </div>
         </div>
         <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'advance'">
-          <div class="col-12 text-left" *ngIf="managedRequestsTravel == 1">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted ha gestionado {{managedRequestsTravel.length}} solicitudes de anticipos
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de anticipos
             </h3>
           </div>
-          <div class="col-6 text-left" *ngIf="managedRequestsTravel.length > 1">
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{managedRequestsTravel.length}} solicitudes de anticipos
+              Usted tiene {{managedRequestTravel.length}} solicitudes de anticipos
             </h3>
           </div>
-          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestsTravel.length == 0">
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
               Usted no ha gestionado solicitudes de anticipos
@@ -63,19 +63,19 @@
           </div>
         </div>
         <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'spend'">
-          <div class="col-12 text-left" *ngIf="managedRequestsTravel == 1">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted ha gestionado {{managedRequestsTravel.length}} solicitudes de gastos
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de gastos
             </h3>
           </div>
-          <div class="col-6 text-left" *ngIf="managedRequestsTravel.length > 1">
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted ha gestionado {{managedRequestsTravel.length}} solicitudes de gastos
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de gastos
             </h3>
           </div>
-          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestsTravel.length == 0">
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
               Usted no ha gestionado solicitudes de gastos
@@ -104,7 +104,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-center top-general-p" *ngIf="managedRequestsTravel.length == 0">
+      <div class="row justify-content-center top-general-p" *ngIf="managedRequestTravel.length == 0">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             No se encontrarón registros para mostrar
@@ -113,20 +113,20 @@
       </div>
 
 
-      <div class="row justify-content-center top-containter" *ngIf="managedRequestsTravel.length > 0">
+      <div class="row justify-content-center top-containter" *ngIf="managedRequestTravel.length > 0">
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let requestManaged of managedRequestsTravel">
+          <div class="widget bg-white-1x" *ngFor="let requestManaged of managedRequestTravel">
             <div class="row align-items-center">
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{requestManaged.requests.ticket}}
+                    Ticket #{{requestManaged.ticket}}
                   </span>
                 </h5>
               </div>
               <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  {{requestManaged.type_requests_to_json.description}}
+                  {{requestManaged.type_request_to_json.description}}
                 </h3>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -137,9 +137,6 @@
                   <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
                   {{requestManaged.level}}
                 </p>
-                <strong class="text-primary-hr">
-                  Solicitud de {{requestManaged.type_request_travel}}
-                </strong>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
@@ -168,12 +165,6 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-4 col-12">
-          <button type="button" class="btn btn-warning btn-block cursor-general">
-            <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;ver</button>
         </div>
       </div>
     </div>

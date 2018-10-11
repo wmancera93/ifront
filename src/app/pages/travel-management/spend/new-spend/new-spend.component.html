@@ -88,13 +88,13 @@
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 15px" >
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 15px" *ngIf="continue">
             <h5 *ngIf="spendNew">
               Nuevo gasto
             </h5>
           </div>
 
-          <div class="col-12">
+          <div class="col-12" *ngIf="continue">
             <div class="row justify-content-end">
               <div class="col-3" style="padding-bottom: 20px">
                 <h5 class="titleColor" *ngIf="spendEdit && !spendNew">
@@ -110,7 +110,7 @@
           </div>
 
 
-          <div class="collapse top-general-p" id="collapseNewSpend">
+          <div class="collapse top-general-p" id="collapseNewSpend" *ngIf="continue">
             <div class="col-12" style="margin-top: 15px" >
               <label class="titleColor">
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
@@ -239,7 +239,7 @@
         </form>
 
         <div class="row justify-content-end" *ngIf="activate_submit_spend">
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="continue">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar Solicitud</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">

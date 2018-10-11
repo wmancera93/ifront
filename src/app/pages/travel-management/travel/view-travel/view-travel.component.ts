@@ -38,9 +38,18 @@ export class ViewTravelComponent implements OnInit {
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService,
-    public travelsService: TravelsService,public alert: AlertsService,
+    public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
 
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'continueViewTravelRequests') {
+        if (document.getElementById('travel_view').className !== 'modal show') {
+          document.getElementById("btn_travel_view").click();
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        }
+      }
+
+    })
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
@@ -72,24 +81,25 @@ export class ViewTravelComponent implements OnInit {
   ngOnInit() {
   }
 
-  sedRequestsTravel(){
+  sedRequestsTravel() {
 
-    this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
-      if(data){
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente', confirmation: false }];
+    this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data: any) => {
+      if (data) {
+        document.getElementById("closeTravelsNew").click();
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved(true);
     },
-    (error: any) => {
-      document.getElementById("closeTravels").click();
-      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: false }];
-      this.alert.setAlert(alertWarning[0]);
-    
-    });
+      (error: any) => {
+        document.getElementById("closeTravelsNew").click();
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
+        this.alert.setAlert(alertWarning[0]);
+
+      });
 
   }
-    
+
   viewCotization(paramView) {
 
     window.open(paramView.file.url)

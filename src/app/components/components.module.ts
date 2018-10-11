@@ -46,6 +46,7 @@ import { CalendarDetailComponent } from './common/calendar-detail/calendar-detai
 import { TooltipComponent } from './common/tooltip/tooltip.component';
 import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-details-travels/approvals-details-travels.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.component';
 
 
 
@@ -95,7 +96,8 @@ import { PipesModule } from '../pipes/pipes.module';
     DrawCalendarComponent,
     CalendarDetailComponent,
     TooltipComponent,
-    ApprovalsDetailsTravelsComponent
+    ApprovalsDetailsTravelsComponent,
+    PdfTravelComponent
   ],
   exports: [
     HeaderComponent,
@@ -123,7 +125,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ErrorPageHttpComponent,
     DynamicFormComponent,
     TooltipComponent,
-    ApprovalsDetailsTravelsComponent
+    ApprovalsDetailsTravelsComponent,
+    PdfTravelComponent
   ],
   providers: [
     // ToasterService

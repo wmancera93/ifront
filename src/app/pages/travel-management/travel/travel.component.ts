@@ -6,6 +6,8 @@ import { TravelService } from '../../../services/travel-management/travels/trave
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Alert } from '../../../../../node_modules/@types/selenium-webdriver';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
+import { ApproverTravelsService } from '../../../services/travel-management/approver-travels/approver-travels.service';
 
 @Component({
   selector: 'app-travel',
@@ -19,14 +21,16 @@ export class TravelComponent implements OnInit {
   public token: boolean;
   public alertWarning: any[] = [];
   public id_requests_travel: string;
-  public aproover: string = 'No existe aprobador para esta solicitud';
+  public aproover: string = 'No existe aprobador para esta solicitud ó ya fue aprobada';
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public router: Router,
     private tokenService: Angular2TokenService,
     public travelsService: TravelsService,
-    public travelService: TravelService, public alert: AlertsService) {
+    public travelService: TravelService, public alert: AlertsService,
+    private aproversRequestsService: AproversRequestsService,
+    public approverTravelsService: ApproverTravelsService) {
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -50,7 +54,7 @@ export class TravelComponent implements OnInit {
             this.alert.setAlert(alertWarning[0]);
           });
       }
-      if(data=== 'closeAlertdeletRequestTravel'){
+      if (data === 'closeAlertdeletRequestTravel') {
         document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
       }
     })
@@ -93,6 +97,7 @@ export class TravelComponent implements OnInit {
     });
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
+      debugger
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
 
@@ -124,6 +129,14 @@ export class TravelComponent implements OnInit {
       typeConfirmation: 'deletRequestTravel'
     }];
     this.alert.setAlert(this.alertWarning[0]);
-
+  }
+  seeAproverFlow(id_travel: string) {
+    debugger
+    this.approverTravelsService.getApprovalsRequestsById(id_travel)
+      .subscribe((request: any) => {
+        debugger
+        this.aproversRequestsService.setAprovalsRequests(request.requests_travels);
+      }
+      )
   }
 }

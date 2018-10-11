@@ -94,6 +94,7 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
+
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -110,10 +111,10 @@ export class NewTravelComponent implements OnInit {
 
       }
       if (data === 'deleteNewDocumentSaved') {
-        document.getElementById("btn_travel_new").click();
-        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
-        this.file.splice(this.file.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
 
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+        document.getElementById("btn_travel_new").click();
       }
       if (data === 'deleteNewDestinations') {
         document.getElementById("btn_travel_new").click();
@@ -208,7 +209,7 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
 
-            type_travel:object[0].type_travel,
+            type_travel: object[0].type_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
@@ -260,8 +261,6 @@ export class NewTravelComponent implements OnInit {
             this.bedit = false;
           }
         }
-
-
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     })
@@ -340,7 +339,7 @@ export class NewTravelComponent implements OnInit {
     console.log(model)
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
-    modelFromdata.append('is_maintenance', model.maintenance);
+    modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
@@ -477,8 +476,8 @@ export class NewTravelComponent implements OnInit {
     this.clearFormPartial();
   }
   mileageTravel(param) {
-
-    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
+    debugger
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -587,7 +586,7 @@ export class NewTravelComponent implements OnInit {
           this.grahp = this.sortByAphabet(data.data);
           if (this.grahp.length > 0) {
             if (acction === 'new') {
-              this.formTravelManagement.controls['id_grahp'].setValue('-1');
+              this.formTravelManagement.controls['id_grahp'].setValue('');
             }
           } else {
             this.formTravelManagement.controls['id_grahp'].setValue('');
@@ -613,9 +612,11 @@ export class NewTravelComponent implements OnInit {
       })
   }
   changeTypeTravel(param) {
-    if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
+    if (param.type_travel === '27') {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
       this.changeTravelLegal('P');
+    } else {
+      this.changeTravelLegal('');
 
     }
 
@@ -624,13 +625,21 @@ export class NewTravelComponent implements OnInit {
   changeTravelLegal(travelLegal: any) {
     if (travelLegal === 'P') {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
-
       this.kostl = false;
       this.nplnr = true;
       this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
         subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
         });
+    } else {
+      this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString());
+      this.kostl = true;
+      this.nplnr = false;
+
+      this.travelManagementService.getTravelsCosts(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString()).
+        subscribe((data: any) => {
+          this.costs_travels = this.sortByAphabet(data.data);
+        })
     }
   }
   clearFormGeneral() {
@@ -886,6 +895,7 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
+
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -906,6 +916,7 @@ export class NewTravelComponent implements OnInit {
         }];
         this.alert.setAlert(alertDataWrong[0])
       }
+
     } else {
 
       if (dateTrayect.date_begin !== '') {
@@ -976,7 +987,7 @@ export class NewTravelComponent implements OnInit {
     this.terminalLocations = [];
     this.terminalLocationsto = [];
     this.hotels = [];
-    
+
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('');
