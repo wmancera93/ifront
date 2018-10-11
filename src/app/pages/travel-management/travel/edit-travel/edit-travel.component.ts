@@ -99,7 +99,7 @@ export class EditTravelComponent implements OnInit {
     public alert: AlertsService) {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates') {
+      if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates' || data ==='sendApprobalAlert') {
         document.getElementById("btn_travel_edit").click();
       }
 
@@ -303,8 +303,8 @@ export class EditTravelComponent implements OnInit {
               trip_text: this.generalViajes[0].travel_request.observation,
               maintenance: this.generalViajes[0].travel_request.is_maintenance,
               id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
-              id_grahp: this.generalViajes[0].travel_request.id_grahp,
-              id_operations: this.generalViajes[0].travel_request.id_operations,
+              id_grahp: this.generalViajes[0].travel_request.travel_graph_code,
+              id_operations: this.generalViajes[0].travel_request.travel_operation_id,
               id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
               id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
@@ -450,7 +450,7 @@ export class EditTravelComponent implements OnInit {
 
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
-    modelFromdata.append('is_maintenance', model.maintenance);
+    modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
@@ -907,7 +907,6 @@ export class EditTravelComponent implements OnInit {
     this.terminalLocations = [];
     this.terminalLocationsto = [];
     this.hotels = [];
-    this.hotels = [];
 
     
     this.formTravelManagement.controls['type_travel'].setValue('');
@@ -1202,14 +1201,15 @@ export class EditTravelComponent implements OnInit {
 
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data : any) => {
       if(data){
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false }];
+        document.getElementById("btn_travel_edit").click();
+        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation :'sendApprobalAlert'}];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved(true);
     },
     (error: any) => {
-      document.getElementById("closeTravels").click();
-      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+      document.getElementById("btn_travel_edit").click();
+      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation :'sendApprobalAlert' }];
       this.alert.setAlert(alertWarning[0]);
     
     });

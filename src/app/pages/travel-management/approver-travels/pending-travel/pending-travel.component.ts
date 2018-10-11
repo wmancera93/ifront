@@ -27,6 +27,12 @@ export class PendingTravelComponent implements OnInit {
     public travelApproverServiceShared: TravelApproverService) {
 
 
+    this.travelApproverServiceShared.getrefreshIndexRequest().subscribe(data => {
+      if (data) {
+        this.getRequestsPendings();
+      }
+    });
+
     this.typesRequest.push(
       {
         id: 1,
@@ -51,6 +57,10 @@ export class PendingTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
+    this.getRequestsPendings();
+  }
+
+  getRequestsPendings() {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
         debugger
@@ -58,23 +68,21 @@ export class PendingTravelComponent implements OnInit {
         this.pendingsRequestTravels = data.data[0].requests;
       }
     })
-  }
+  };
 
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any) {
     debugger
-    this.travelApproverServiceShared.setviewDetailRequests(request)
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true })
   }
   selectTypeReques(param) {
     debugger
     switch (param.id.toString()) {
       case '1':
-        debugger
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {
-            debugger
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
           }
@@ -82,15 +90,21 @@ export class PendingTravelComponent implements OnInit {
 
         break;
       case '2':
-
-
+        // this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+        //   if (data) {
+        //     this.travelsRequestsType = 'advance';
+        //     this.pendingsRequestTravels = data.data[0].requests;
+        //   }
+        // })
         this.travelsRequestsType = 'advance';
-
         break;
       case '3':
-
-        this.travelsRequestsType = 'spend';
-
+        this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+          if (data) {
+            this.travelsRequestsType = 'spend';
+            this.pendingsRequestTravels = data.data[0].requests;
+          }
+        })
         break;
       default:
 
