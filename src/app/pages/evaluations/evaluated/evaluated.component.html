@@ -35,35 +35,38 @@
             </div>
           </div>
           <div *ngIf="evaluationsListPendind.length !== 0">
-            <div class="widget bg-white-1x" *ngFor="let evaluation of evaluationsListPendind">
-              <div class="row">
-                <div class="col-12">
-
+            <section *ngFor="let evaluation of evaluationsListPendind; let index = index">
+              <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListPendind[index-1].evaluation_type_id !== evaluation.evaluation_type_id">
+                <div class="col-12 text-left">
+                  <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                  {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
                 </div>
               </div>
-              <div class="row justify-content-center">
-                <div class="col-12 col-xl-10  text-center top-p">
-                  <div class="row justify-content-center">
-                    <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="fillEvaluation(evaluation)">
-                      <strong>{{evaluation.title |uppercase}} </strong>
+              <div class="widget bg-white-1x">
+                <div class="row justify-content-center">
+                  <div class="col-12 col-xl-10  text-center top-p">
+                    <div class="row justify-content-center">
+                      <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="fillEvaluation(evaluation)">
+                        <strong>{{evaluation.title |uppercase}} </strong>
+                      </div>
+                      <div class=" col-12 text-lg-left ">
+                        {{evaluation.subtitle}}
+                      </div>
                     </div>
-                    <div class=" col-12 text-lg-left ">
-                      {{evaluation.subtitle}}
+                  </div>
+                  <div class="col-xl-2 col-12 ">
+                    <div class="row ">
+                      <div class="col-12 number-size text-info " (click)="fillEvaluation(evaluation) ">
+                        <i class="fa fa-pencil "></i>
+                      </div>
+                      <div class="col-12" (click)="fillEvaluation(evaluation) ">
+                        Presentar
+                      </div>
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-2 col-12 ">
-                  <div class="row ">
-                    <div class="col-12 number-size text-info " (click)="fillEvaluation(evaluation) ">
-                      <i class="fa fa-pencil "></i>
-                    </div>
-                    <div class="col-12" (click)="fillEvaluation(evaluation) ">
-                      Presentar
-                    </div>
-                  </div>
-                </div>
               </div>
-            </div>
+            </section>
           </div>
         </div>
       </div>
