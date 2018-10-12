@@ -19,40 +19,52 @@ export class TimeLineApproversComponent implements OnInit {
 
   constructor(private aproversRequestsService: AproversRequestsService,
     private requestsRhService: RequestsRhService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService)
+     {
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
-        if (this.countAfter === 0) {
-          this.requestsRhService.getRequestDetailById(data.ticket)
-            .subscribe((detail: any) => {
-              this.detailRequets = [];
-              if (detail.success) {
-                this.detailRequets = detail.data;
-                this.fileSupport = this.detailRequets[0].request.image.url;
-                
-                let dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
-                if (dateBegin !== null) {
-                  this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
-                }
-                let dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
-                if (this.dateFinally) {
-                  this.dateFinally = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
-                }
+        debugger
+        if (data.type_request == 'requestsOnly') {
+          if (this.countAfter === 0) {
+            this.requestsRhService.getRequestDetailById(data.request.ticket)
+              .subscribe((detail: any) => {
+                this.detailRequets = [];
+                if (detail.success) {
+                  debugger
+                  this.detailRequets = detail.data;
+                  this.fileSupport = this.detailRequets[0].request.image.url;
+
+                  let dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
+                  if (dateBegin !== null) {
+                    this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
+                  }
+                  let dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
+                  if (this.dateFinally) {
+                    this.dateFinally = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
+                  }
 
 
-                if (document.getElementById('aprovers_requests').className !== 'modal show') {
-                  document.getElementById('btn_aprovers_requests').click();
-                  document.getElementById("bodyGeneral").removeAttribute('style');
+                  if (document.getElementById('aprovers_requests').className !== 'modal show') {
+                    document.getElementById('btn_aprovers_requests').click();
+                    document.getElementById("bodyGeneral").removeAttribute('style');
+                  }
+                  this.viewModal = true;
                 }
-                this.viewModal = true;
-              }
-            })
+              })
+          }
+        }
+        if (data.type_request == 'requestsTravels') {
+          this.detailRequets = data.request;
+          this.fileSupport= data.request.employee_applicant_to_json.image.url;
+
+          if (document.getElementById('aprovers_requests').className !== 'modal show') {
+            document.getElementById('btn_aprovers_requests').click();
+            document.getElementById("bodyGeneral").removeAttribute('style');
+          }
+          this.viewModal = true;
         }
       }
     )
-    this.aproversRequestsService.getAprovalsRequests().subscribe((result:any)=>{
-      debugger
-    })
   }
 
   ngOnInit() {

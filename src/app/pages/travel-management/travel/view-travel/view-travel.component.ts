@@ -26,13 +26,8 @@ export class ViewTravelComponent implements OnInit {
   public annexeds: any[] = [];
   public edit: boolean = false;
   public view_travels: any[] = [];
-  public maintenance_travel: string = 'Sin manutención'
+  public maintenance_travel: string = 'Sin manutención';
   public maintenance: boolean = false;
-
-
-
-
-
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
 
