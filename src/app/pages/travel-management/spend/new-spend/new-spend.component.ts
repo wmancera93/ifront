@@ -9,8 +9,6 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { debounce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-new-spend',
@@ -70,16 +68,16 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
-      
-      if (document.getElementById('spend_new').className !== 'modal show') {
-        document.getElementById('btn_spend_new').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
-        document.getElementById('collapseNewSpend').className = "show";
-       
-      }
+      debugger
       this.spendsService.getSpendListTravel().subscribe((travel: any) => {
         this.listTravelsFromSpend = travel.data;
       });
+
+      if (document.getElementById('spend_new').className !== 'modal show') {
+        document.getElementById('btn_spend_new').click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
+
       this.refreshTableSpends();
       this.formSpendTravel = new FormGroup({});
       this.formSpendTravel = fb.group({
@@ -141,9 +139,9 @@ export class NewSpendComponent implements OnInit {
             control_number: objectSpend[0].control_number,
             nit: objectSpend[0].nit,
             bussines_name: objectSpend[0].bussines_name,
-            cod_provider:  objectSpend[0].cod_provider,
-            authorization_number:  objectSpend[0].authorization_number,
-            populated:  objectSpend[0].populated,
+            cod_provider: objectSpend[0].cod_provider,
+            authorization_number: objectSpend[0].authorization_number,
+            populated: objectSpend[0].populated,
           });
         }
       }
@@ -200,12 +198,14 @@ export class NewSpendComponent implements OnInit {
   }
 
   validateTravel(travel: any) {
-    if(travel.travel_request_id.toString() !== '')
-    {
+
+    if (travel.travel_request_id.toString() !== '') {
       this.continue = true;
       this.activate_submit_spend = false;
       this.spendEdit = false;
       this.spendNew = true;
+
+
       this.spedsData.forEach(element => {
         if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
           document.getElementById("closeSpends").click();
@@ -215,17 +215,21 @@ export class NewSpendComponent implements OnInit {
             message: "Ya existe una solicitud de gastos para el viaje",
             confirmation: true,
             typeConfirmation: 'ConfirmTravelSpendID'
-  
+
           }];
           this.alert.setAlert(alertWarning[0]);
-  
+
         }
       });
-    }else{
+    } else {
       this.continue = false;
       this.refreshPartialSpend();
     }
-    
+    setTimeout(() => {
+      document.getElementById('collapseNewSpend').className = "show";
+    }, 200);
+
+
   }
 
   deleteSpend(params) {
