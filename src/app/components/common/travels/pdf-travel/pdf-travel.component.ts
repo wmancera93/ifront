@@ -18,7 +18,7 @@ export class PdfTravelComponent implements OnInit {
 
   printPDF() {
     this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-debugger
+    debugger
     let doc = new jsPDF(500, 'pt');
     doc.page = 1;
 

@@ -6,8 +6,9 @@
                     <span *ngIf="config.required && config.control !== 'label' && !edit">*</span>
                 </strong>
             </div>
-            <div style="font-size: 16px!important;" class="col-12 col-md-8 center-data-master text-left">
+            <div style="font-size: 16px!important;" class="col-12 col-md-8  center-data-master text-left">
                 <label class="text-left center-data-master" *ngIf="config.control === 'label'">{{config.value}}</label>
+
                 <fieldset class="text-left center-data-master" [disabled]="edit">
                     <div class="text-left" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
                         <input (keyup)="kewUptext($event)" id="input-text" class="form-control" *ngSwitchCase="'text'"

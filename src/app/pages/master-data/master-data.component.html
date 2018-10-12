@@ -18,8 +18,8 @@
       <div class="row">
         <div class="col-12 col-xl-3">
           <div id="listData" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
-            <div id="{{i}}PersonalData" [ngClass]="{'active-report': i=='0'}" class="nav-item navReport tabReport text-left" *ngFor="let item of listDataMaster; let i = index;"
-              (click)="showData(i,item.method_name, item.code)">
+            <div id="{{i}}PersonalData" [ngClass]="{'active-report': i=='0'}" class="nav-item navReport tabReport text-left"
+              *ngFor="let item of listDataMaster; let i = index;" (click)="showData(i,item.method_name, item.code)">
               <div *ngIf="item.code==1">
                 <i class="fa  fa-id-badge"></i> {{item.description}}
               </div>
@@ -90,8 +90,8 @@
               </div>
             </div>
             <div class="col-12 col-md-12">
-              <app-dynamic-form *ngIf="!canEditData"></app-dynamic-form>
-              <app-dynamic-form *ngIf=" lengthArray !== 0 && canEditData"></app-dynamic-form>
+              <!-- <app-dynamic-form *ngIf="!canEditData"></app-dynamic-form> -->
+              <app-dynamic-form *ngIf="lengthArray !== 0"></app-dynamic-form>
             </div>
           </div>
         </div>
