@@ -36,6 +36,11 @@
           </div>
           <div *ngIf="evaluationsListPendind.length !== 0">
             <div class="widget bg-white-1x" *ngFor="let evaluation of evaluationsListPendind">
+              <div class="row">
+                <div class="col-12">
+
+                </div>
+              </div>
               <div class="row justify-content-center">
                 <div class="col-12 col-xl-10  text-center top-p">
                   <div class="row justify-content-center">
@@ -43,7 +48,7 @@
                       <strong>{{evaluation.title |uppercase}} </strong>
                     </div>
                     <div class=" col-12 text-lg-left ">
-                      {{evaluation.description}}
+                      {{evaluation.subtitle}}
                     </div>
                   </div>
                 </div>
@@ -52,11 +57,11 @@
                     <div class="col-12 number-size text-info " (click)="fillEvaluation(evaluation) ">
                       <i class="fa fa-pencil "></i>
                     </div>
-                    <div class="col-12"  (click)="fillEvaluation(evaluation) ">
+                    <div class="col-12" (click)="fillEvaluation(evaluation) ">
                       Presentar
                     </div>
                   </div>
-                </div>               
+                </div>
               </div>
             </div>
           </div>
@@ -90,10 +95,10 @@
                       <strong>{{evaluationSub.title |uppercase}} </strong>
                     </div>
                     <div class="col-12 text-lg-left ">
-                      {{evaluationSub.description}}
+                      {{evaluationSub.subtitle}}
                     </div>
                   </div>
-                </div>                
+                </div>
                 <div class="col-xl-2 col-12 ">
                   <div class="row ">
                     <div id="seeEval " class="col-12 number-size text-navy " (click)="seeEvaluation(evaluationSub) ">
