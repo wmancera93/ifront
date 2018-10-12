@@ -36,7 +36,7 @@
           </div>
           <div *ngIf="evaluationsListPendind.length !== 0">
             <section *ngFor="let evaluation of evaluationsListPendind; let index = index">
-              <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListPendind[index-1].evaluation_type_id !== evaluation.evaluation_type_id">
+              <div class="row" style="padding-top: 5px; padding-bottom: 5px" >
                 <div class="col-12 text-left">
                   <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
                   {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
