@@ -36,12 +36,22 @@
           </div>
           <div *ngIf="evaluationsListPendind.length !== 0">
             <section *ngFor="let evaluation of evaluationsListPendind; let index = index">
-              <div class="row" style="padding-top: 5px; padding-bottom: 5px" >
-                <div class="col-12 text-left">
-                  <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                  {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}} - {{evaluationsListPendind[index - 1].evaluation_type_id}}
+              <section *ngIf="index == 0">
+                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                  <div class="col-12 text-left">
+                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                    {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
+                  </div>
                 </div>
-              </div>
+              </section>
+              <section *ngIf="index > 0">
+                <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListPendind[index - 1].evaluation_type_id !== evaluation.evaluation_type_id">
+                  <div class="col-12 text-left">
+                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                    {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
+                  </div>
+                </div>
+              </section>
               <div class="widget bg-white-1x">
                 <div class="row justify-content-center">
                   <div class="col-12 col-xl-10  text-center top-p">
@@ -91,12 +101,23 @@
           </div>
           <div *ngIf="evaluationsListSubmitted.length !==0 ">
             <section *ngFor="let evaluationSub of evaluationsListSubmitted ">
-              <div class="row" style="padding-top: 5px; padding-bottom: 5px">
-                <div class="col-12 text-left">
-                  <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                  {{evaluationSub.evaluation_type_id}}. {{evaluationSub.evaluation_type_name}}
+              <section *ngIf="index == 0">
+                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                  <div class="col-12 text-left">
+                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                    {{evaluationSub.evaluation_type_id}}. {{evaluationSub.evaluation_type_name}}
+                  </div>
                 </div>
-              </div>
+              </section>
+              <section *ngIf="index > 0">
+                <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListSubmitted[index - 1].evaluation_type_id !== evaluationSub.evaluation_type_id">
+                  <div class="col-12 text-left">
+                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
+                    {{evaluationSub.evaluation_type_id}}. {{evaluationSub.evaluation_type_name}}
+                  </div>
+                </div>
+              </section>
+
               <div class="widget bg-white-1x ">
                 <div class="row justify-content-center ">
                   <div class="col-12 col-xl-10 text-center top-p ">
