@@ -34,6 +34,7 @@ export class EvaluatedComponent implements OnInit {
         })
     this.getDataEvaluation();
     this.evaluationSharedService.getRefreshEvaluationData().subscribe((refresh: any) => {
+      debugger
       if (refresh == true) {
         this.getDataEvaluation();
       }

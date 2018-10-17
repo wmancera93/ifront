@@ -8,7 +8,8 @@ export interface Evaluations {
     title?: string,
     description: string,
     questions_to_json: Questions[],
-    sections_to_json: Sections
+    sections_to_json: Sections,
+    subtitle: string
 }
 export interface Sections {
     id: number,

@@ -44,7 +44,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
-        debugger
+
         this.switchTravels = 'on';
         this.descriptionTravels = '';
         this.approvals = [];
@@ -53,10 +53,10 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
         switch (this.requests_travels.type_request_to_json.id_activity) {
           case 'SOVN':
-            debugger
+
             this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
               .subscribe((request: any) => {
-                debugger
+      
                 this.approvals = request.data;
 
                 setTimeout(() => {
@@ -73,7 +73,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
           case 'SOVI':
             this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
               .subscribe((request: any) => {
-                debugger
+         
                 this.approvals = request.data;
 
                 setTimeout(() => {
@@ -127,19 +127,21 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   }
 
   onAprovlasTravels() {
+
     this.switchTravels = 'on';
   }
 
   offAprovlasTravels() {
+
     this.switchTravels = 'off';
   }
   saveApprovalRequestsTravels() {
     this.showSubmit = false;
-    debugger
+
     switch (this.requests_travels.type_request_to_json.id_activity) {
 
       case 'SOVN':
-        debugger
+
         this.approverTravelsService.postApprovalsRequestTravel({
           request_id: this.approvals[0].travel_request.ticket,
           answer: this.switchTravels,
@@ -223,8 +225,9 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
     }
   }
 
-  viewAnexedTravels() {
-    window.open(this.approvals[0].travel_request_annexeds.url);
+  viewAnexedTravels(param) {
+
+    window.open(param.file.url);
   }
 
   // viewAnexedTravelsSpend() {

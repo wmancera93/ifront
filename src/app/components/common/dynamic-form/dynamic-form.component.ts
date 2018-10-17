@@ -42,7 +42,9 @@ export class DynamicFormComponent implements OnInit {
                 index.forEach(element => {
                   if (element.type === 'date' && element.control === 'input') {
                     let split = element.value.split('/')
-                    element.value = split[2] + '-' + split[1] + '-' + split[0];
+                    if (split.length > 1) {
+                      element.value = split[2] + '-' + split[1] + '-' + split[0];
+                    }
                   }
 
                   this.staticGeneralObject.push({
