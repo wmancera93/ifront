@@ -90,7 +90,6 @@ export class EditSpendComponent implements OnInit {
       }
 
       if (data === 'deleteDocumentSavedSpend') {
-        debugger
         this.buttonNewSpend = true;
         this.labelNewSpend = false;
         this.show_submit_editSpend = true;
@@ -104,7 +103,6 @@ export class EditSpendComponent implements OnInit {
       }
 
       if (data === 'deleteDetailSpendEdit') {
-        debugger
         this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe((deleteSpend: any) => {
           this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
           this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
@@ -114,7 +112,6 @@ export class EditSpendComponent implements OnInit {
         })
       }
       if (data === 'deleteDetailSpendEditCreated') {
-        debugger
         this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
         this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
         this.objectReport.emit({ success: true, data: [this.editSpendTable] });
@@ -171,9 +168,7 @@ export class EditSpendComponent implements OnInit {
 
 
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
-      debugger
       if (action.action_method == "updateTravelAllowance") {
-        debugger
         if (!this.edit_Spend) {
           if (this.buttonNewSpend) {
             document.getElementById('EditfuntionSpend').click();
@@ -314,7 +309,6 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
-    debugger
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
     this.editSpendTable.data.push({
@@ -377,7 +371,6 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpendEdit(objectEditSpend) {
-    debugger
     this.editSpendTable.data.forEach(element => {
       if (element.field_0 === objectEditSpend.id_spend) {
         element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
@@ -457,8 +450,6 @@ export class EditSpendComponent implements OnInit {
 
     this.formDataService.putEditSpendFormData(this.idSpendRequests, param).subscribe(
       (data: any) => {
-
-        debugger
         document.getElementById("closeModalEditSpend").click();
 
         const alertSuccess: Alerts[] = [{

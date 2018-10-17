@@ -60,7 +60,7 @@ export class NewSpendComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' ||  data === 'closeAlertdeleteSpendNew') {
+      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
@@ -75,9 +75,33 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
-      debugger
+
       this.spendsService.getSpendListTravel().subscribe((travel: any) => {
         this.listTravelsFromSpend = travel.data;
+
+        this.refreshTableSpends();
+        this.formSpendTravel = new FormGroup({});
+        this.formSpendTravel = fb.group({
+          travel_request_id: data !== true ? data : '',
+          travel_allowance_type_id: "",
+          currency_id: "",
+          value: "",
+          date: "",
+          observation: "",
+          bill_number: "",
+          control_number: "",
+          nit: "",
+          bussines_name: "",
+          cod_provider: "",
+          authorization_number: "",
+          populated: "",
+        });
+
+        if (this.formSpendTravel.value.travel_request_id !== '') {
+          this.continue = data !== true ? true : false;
+          this.validateTravel(this.formSpendTravel.value);
+        }
+
       });
 
       if (document.getElementById('spend_new').className !== 'modal show') {
@@ -85,24 +109,7 @@ export class NewSpendComponent implements OnInit {
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
 
-      this.refreshTableSpends();
-      this.formSpendTravel = new FormGroup({});
-      this.formSpendTravel = fb.group({
-        travel_request_id: '',
-        travel_allowance_type_id: "",
-        currency_id: "",
-        value: "",
-        date: "",
-        observation: "",
-        bill_number: "",
-        control_number: "",
-        nit: "",
-        bussines_name: "",
-        cod_provider: "",
-        authorization_number: "",
-        populated: "",
-      });
-      this.continue = false;
+
 
     });
 
@@ -252,7 +259,7 @@ export class NewSpendComponent implements OnInit {
     }];
     this.alert.setAlert(alertWarning[0]);
     this.spend_delete_local = params.id;
-    }
+  }
 
   aditionSpend(objectSpend) {
 
@@ -357,7 +364,6 @@ export class NewSpendComponent implements OnInit {
 
 
   newSpend(param) {
-    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();

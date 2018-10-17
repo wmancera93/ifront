@@ -20,8 +20,12 @@
               <div class="panel-heading icon">
                 <i class="fa fa-file-text"></i>
               </div>
-              <div class="panel-heading">
+              <div class="panel-heading" *ngIf="requests_print == 'requestsOnly'">
                 <h2 class="panel-title text-capitalize">Solicitud de {{detailRequets[0].request.type_requests_name |
+                  lowercase}}</h2>
+              </div>
+              <div class="panel-heading" *ngIf="requests_print !='requestsOnly'">
+                <h2 class="panel-title text-capitalize">{{detailRequets[0].request.type_requests_name |
                   lowercase}}</h2>
               </div>
               <div class="row">
@@ -164,11 +168,18 @@
                                       </span>
                                     </h6>
                                   </div>
-                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null">
+                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null && answer.description !== undefined">
                                     <p class="font-title-general text-center">
                                       <i class="font-color-default fa fa-fw fa fa-comment"></i>
                                       Observaciones:
                                       <span style="font-weight: 100 !important">{{answer.description}}</span>
+                                    </p>
+                                  </div>
+                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description == undefined">
+                                    <p class="font-title-general text-center">
+                                      <i class="font-color-default fa fa-fw fa fa-comment"></i>
+                                      Observaciones:
+                                      <span style="font-weight: 100 !important">{{answer.observation}}</span>
                                     </p>
                                   </div>
                                 </div>
@@ -189,7 +200,7 @@
               </div>
             </div>
 
-            <div *ngIf="detailRequets[0].pending_level_approver">
+            <div *ngIf="detailRequets[0].pending_level_approver.level != undefined">
               <div class="separator text-muted">
               </div>
 

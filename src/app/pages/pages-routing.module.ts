@@ -271,6 +271,10 @@ const routes: Routes = [
         component: AdvancesComponent        
     },
     {
+        path:'spend/:id',
+        component: SpendComponent        
+    },
+    {
         path:'spend',
         component: SpendComponent        
     },

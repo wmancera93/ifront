@@ -48,7 +48,14 @@ export class SpendComponent implements OnInit {
 
     })
 
+    this.spendsService.getSpendsRequest().subscribe((list: any) => {
 
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'spend') {
+        this.spendSharedService.setNewSpend(url.split('/')[url.split('/').length - 1]);
+      }
+    });
 
   }
 
@@ -66,7 +73,6 @@ export class SpendComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
   newSpendTravel() {
-    debugger
     this.spendSharedService.setNewSpend(true);
   }
   viewSpend(objectSpend) {
