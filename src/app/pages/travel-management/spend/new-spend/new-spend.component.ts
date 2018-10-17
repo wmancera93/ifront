@@ -44,6 +44,7 @@ export class NewSpendComponent implements OnInit {
   public continue: boolean = false;
   public collapse_is: boolean = false;
   public objectProof: any[] = [];
+  public spend_delete_local: string;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -59,11 +60,17 @@ export class NewSpendComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend') {
+      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' ||  data === 'closeAlertdeleteSpendNew') {
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
       }
+      if (data === 'deleteSpendNew') {
+        this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === this.spend_delete_local), 1);
+        this.objectReport.emit(this.infoTableSpends[0]);
+        document.getElementById("btn_spend_new").click();
+      }
+
     })
 
 
@@ -233,9 +240,19 @@ export class NewSpendComponent implements OnInit {
   }
 
   deleteSpend(params) {
-    this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === params.id), 1);
-    this.objectReport.emit(this.infoTableSpends[0]);
-  }
+
+    document.getElementById("btn_spend_new").click();
+
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el gasto?',
+      confirmation: true,
+      typeConfirmation: 'deleteSpendNew'
+    }];
+    this.alert.setAlert(alertWarning[0]);
+    this.spend_delete_local = params.id;
+    }
 
   aditionSpend(objectSpend) {
 

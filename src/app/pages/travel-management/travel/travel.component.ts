@@ -22,6 +22,8 @@ export class TravelComponent implements OnInit {
   public alertWarning: any[] = [];
   public id_requests_travel: string;
   public aproover: string = 'No existe aprobador para esta solicitud ó ya fue aprobada';
+  public edit = false;
+  public objectSend: any[];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -30,7 +32,7 @@ export class TravelComponent implements OnInit {
     public travelsService: TravelsService,
     public travelService: TravelService, public alert: AlertsService,
     private aproversRequestsService: AproversRequestsService,
-    public approverTravelsService: ApproverTravelsService) {
+    public approverTravelsService: ApproverTravelsService, public travelManagementService: TravelService) {
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -130,13 +132,17 @@ export class TravelComponent implements OnInit {
     }];
     this.alert.setAlert(this.alertWarning[0]);
   }
+
   seeAproverFlow(id_travel: string) {
     debugger
-    this.approverTravelsService.getApprovalsRequestsById(id_travel)
-      .subscribe((request: any) => {
+    setTimeout(() => {
+      this.travelManagementService.getTravelRequestsByid(id_travel, this.edit).subscribe((result: any) => {
         debugger
-        this.aproversRequestsService.setAprovalsRequests(request.requests_travels);
-      }
-      )
+        this.objectSend = result.data[0].travel_request;
+        this.aproversRequestsService.setRequests({ request: this.objectSend, type_request: 'requestsTravels' });
+      });
+    }, 500);
+   
   }
+
 }
