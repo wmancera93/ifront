@@ -221,15 +221,14 @@
                         Ponderación *
                       </label>
                       <input *ngIf="!bedit" type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
-                      <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight"
-                      />
+                      <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight" />
                     </div>
                     <div class="col-md-12 col-12 top-containter">
                       <label for="celulaInput" class="font-title-general">
                         <i class="fa fa-fw fa-comment text-primary-hr"></i>
                         Objetivo *
                       </label>
-                      <textarea type="text" rows="3" style="height: auto !important;" name="objective_request" class="form-control" [formControl]="formObjetive.controls['objetive_text']"></textarea>
+                      <textarea type="text" rows="2" maxlength="80"style="height: auto !important;" name="objective_request" class="form-control" [formControl]="formObjetive.controls['objetive_text']"></textarea>
                     </div>
                     <div class="col-md-12 top-containter">
                       <div class="row justify-content-end">
