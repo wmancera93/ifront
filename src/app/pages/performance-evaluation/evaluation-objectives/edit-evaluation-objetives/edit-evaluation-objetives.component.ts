@@ -43,6 +43,22 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService,
     public alert: AlertsService) {
 
+    this.alert.getActionConfirm().subscribe((data) => {
+      if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives') {
+        document.getElementById('btn-evaluationObjetives').click()
+
+        this.formObjetive = new FormGroup({});
+        this.formObjetive = fb.group({
+          start_date: '',
+          end_date: '',
+          weight: '',
+          objetive_text: '',
+        });
+
+         
+      }
+    })
+
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
       if (this.countAfter === 0) {
         this.EvaluacionPer = info;
@@ -131,9 +147,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           type: 'success',
           title: 'Confirmación',
           message: edit.message,
-          confirmation: false,
-          typeConfirmation: ''
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
         }];
+        this.closeObjetive();
         document.getElementById("closeModalObjectiveEvaluation").click();
         this.dataTableConsult();
         this.alert.setAlert(alertWarning[0]);
@@ -143,10 +160,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             type: 'danger',
             title: 'Advertencia',
             message: error.json().errors.toString(),
-            confirmation: false,
-            typeConfirmation: ''
+            confirmation: true,
+            typeConfirmation: 'evaluationObjectives'
           }];
-
+          this.closeObjetive();
           document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
@@ -160,10 +177,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           type: 'success',
           title: 'Confirmación',
           message: info.message,
-          confirmation: false,
-          typeConfirmation: ''
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
         }];
-
+        this.closeObjetive();
         this.dataTableConsult();
         document.getElementById("closeModalObjectiveEvaluation").click();
         this.alert.setAlert(alertWarning[0]);
@@ -173,10 +190,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           const alertWarning: Alerts[] = [{
             type: 'danger',
             title: 'Advertencia',
-            message: error._body.errors,
-            confirmation: false,
-            typeConfirmation: ''
+            message: error.json().errors.toString(),
+            confirmation: true,
+            typeConfirmation: 'evaluationObjectives'
           }];
+          this.closeObjetive();
+          document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
         })
@@ -212,5 +231,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   ngOnDestroy() {
     this.countAfter += 1;
   }
+
+  // validatePercentage(param) {
+  //   debugger
+  //   console.log(this.ObjectivesTable);
+  // }
 
 }
