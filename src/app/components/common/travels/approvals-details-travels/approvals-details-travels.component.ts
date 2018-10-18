@@ -54,7 +54,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
         switch (this.requests_travels.type_request_to_json.id_activity) {
           case 'SOVN':
-
+            debugger
             this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
               .subscribe((request: any) => {
       
@@ -69,7 +69,6 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                     element.travel_advance_payments.forEach(dataObject => {
                       this.table_advances.push(dataObject)
                     });
-                    
                   });
                   
                 let object={
@@ -93,7 +92,18 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                   this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                 }, 300);
                 setTimeout(() => {
-                  this.objectAdvanceReport.emit({ success: true, data: [request.data[0].travel_advance_requests] });
+                debugger
+                  request.data[0].travel_advance_requests.data.forEach(element => {
+                    element.travel_advance_payments.forEach(dataObject => {
+                      this.table_advances.push(dataObject)
+                    });
+                  });
+                  
+                let object={
+                  labels : request.data[0].travel_advance_requests.labels,
+                  data : this.table_advances,
+                }
+                  this.objectAdvanceReport.emit({ success: true, data: [object] });
                 }, 300);
                 setTimeout(() => {
                   this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });
