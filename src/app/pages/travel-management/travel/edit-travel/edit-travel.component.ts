@@ -335,7 +335,7 @@ export class EditTravelComponent implements OnInit {
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
               id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
               id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
-              id_transport: resutlDestinations.data.type_transport_id,
+              id_transport: resutlDestinations.data.travel_transport_id,
               id_city: resutlDestinations.data.origin_geographic_location_id,
               id_country: resutlDestinations.data.origin_country,
               id_state: resutlDestinations.data.origin_state,
