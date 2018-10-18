@@ -99,7 +99,6 @@ export class TravelComponent implements OnInit {
     });
 
     this.travelService.getTravelRequests().subscribe((data: any) => {
-      debugger
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
 
@@ -134,10 +133,8 @@ export class TravelComponent implements OnInit {
   }
 
   seeAproverFlow(id_travel: string) {
-    debugger
     setTimeout(() => {
       this.travelManagementService.getTravelRequestsByid(id_travel, this.edit).subscribe((result: any) => {
-        debugger
         this.objectSend = result.data[0].travel_request;
         this.aproversRequestsService.setRequests({ request: this.objectSend, type_request: 'requestsTravels' });
       });

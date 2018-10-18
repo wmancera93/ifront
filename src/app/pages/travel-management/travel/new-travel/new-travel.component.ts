@@ -82,6 +82,7 @@ export class NewTravelComponent implements OnInit {
 
   public kostl: boolean = false;
   public nplnr: boolean = false;
+  public today: any;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -94,6 +95,10 @@ export class NewTravelComponent implements OnInit {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
+
+      if (data === 'continueTravelAlowances') {
+        this.router.navigate(['/ihr/spend', this.ticket_advance]);
+      }
 
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
@@ -287,6 +292,9 @@ export class NewTravelComponent implements OnInit {
         this.costs_travels = [];
       })
 
+    let fecha = new Date();
+    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + fecha.getDate().toString();
+
   }
 
   sortByAphabet(dataBySort: any) {
@@ -336,7 +344,7 @@ export class NewTravelComponent implements OnInit {
 
     this.showSubmit = false;
     this.send = true;
-    console.log(model)
+
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
     modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
@@ -359,13 +367,26 @@ export class NewTravelComponent implements OnInit {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
-          if (data.success) {
-            document.getElementById("closeTravels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
-            this.alert.setAlert(alertWarning[0]);
-            this.showSubmit = true;
-            this.travelsService.setResultSaved(true);
+          if (validate > 0) {
+            if (data.success) {
+
+              document.getElementById("closeTravels").click();
+              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved(true);
+            }
+          } else {
+            if (data.success) {
+
+              document.getElementById("closeTravels").click();
+              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved(true);
+            }
           }
         },
         (error: any) => {
@@ -476,7 +497,6 @@ export class NewTravelComponent implements OnInit {
     this.clearFormPartial();
   }
   mileageTravel(param) {
-    debugger
     if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
     } else {

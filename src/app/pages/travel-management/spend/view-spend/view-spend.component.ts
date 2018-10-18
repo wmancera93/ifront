@@ -72,13 +72,11 @@ export class ViewSpendComponent implements OnInit {
 
 
   viewAnnex(paramView) {
-    debugger
     window.open(paramView.file.url)
 
   }
 
   downloadAnnex(param: any) {
-    debugger
     this.http.get(param.file.url, {
       responseType: ResponseContentType.Blob
     }).map(res => {

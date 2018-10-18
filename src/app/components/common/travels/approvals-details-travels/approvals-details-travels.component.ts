@@ -29,6 +29,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public nameReportAdvance: string = 'Anticipos de viaje';
   public nameReportSpend: string = 'Gastos de viaje';
   public editRequest: boolean;
+  public table_advances: any[] = [];
 
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
@@ -63,7 +64,19 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                   this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                 }, 300);
                 setTimeout(() => {
-                  this.objectAdvanceReport.emit({ success: true, data: [request.data[0].travel_advance_requests] });
+                  debugger
+                  request.data[0].travel_advance_requests.data.forEach(element => {
+                    element.travel_advance_payments.forEach(dataObject => {
+                      this.table_advances.push(dataObject)
+                    });
+                    
+                  });
+                  
+                let object={
+                  labels : request.data[0].travel_advance_requests.labels,
+                  data : this.table_advances,
+                }
+                  this.objectAdvanceReport.emit({ success: true, data: [object] });
                 }, 300);
                 setTimeout(() => {
                   this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });

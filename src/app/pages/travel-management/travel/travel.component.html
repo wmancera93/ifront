@@ -63,10 +63,15 @@
                   Creada el {{travels.created_date}}
                 </p>
               </div>
-              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p" *ngIf="travels.observation != null">
                 <h3 class="font-color-default">
                   {{travels.observation | slice: 0:20}}
                   <span [hidden]="travels.observation.length < 20">...</span>
+                </h3>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p" *ngIf="travels.observation == null">
+                <h3 class="font-color-default">
+                  {{travels.observation}}
                 </h3>
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
@@ -105,13 +110,14 @@
                 <p class="">
                   Aprobador {{travels.next_approver_to_json.level}}
                 </p>
-                <p class="text-primary cursor-general" style="text-decoration: underline  #0275d8!important" (click)="seeAproverFlow(travels.ticket)">
-                  Ver flujo aprobaciones
-                </p>
+                
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee == undefined">
                 <p class="font-title-general">
                   {{aproover}}
+                </p>
+                <p class="text-primary cursor-general" style="text-decoration: underline  #0275d8!important" (click)="seeAproverFlow(travels.ticket)">
+                  Ver flujo aprobaciones
                 </p>
               </div>
 

@@ -111,7 +111,7 @@
 
 
           <div class="collapse top-general-p" id="collapseNewSpend" *ngIf="continue">
-            <div class="col-12" style="margin-top: 15px" >
+            <div class="col-12" style="margin-top: 15px">
               <label class="titleColor">
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
@@ -120,7 +120,7 @@
                 [formControl]="formSpendTravel.controls['observation']"></textarea>
             </div>
 
-            <div class="col-12" style="margin-top: 30px" >
+            <div class="col-12" style="margin-top: 30px">
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -159,7 +159,7 @@
               </div>
             </div>
 
-            <div class="col-12" style="margin-top: 15px" >
+            <div class="col-12" style="margin-top: 15px">
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -219,14 +219,39 @@
             </div>
 
 
-            <div class="col-12" style="margin-top: 30px" >
+            <div class="col-12" style="margin-top: 30px">
               <div class="row justify-content-end">
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                  <button *ngIf="spendNew"  type="button" class="btn btn-primary btn-block cursor-general"
+                  <button *ngIf="spendNew" type="button" [attr.disabled]="
+                  ( formSpendTravel.value.travel_allowance_type_id == -1
+                    || formSpendTravel.value.travel_allowance_type_id == ''
+                    || formSpendTravel.value.travel_request_id == -1
+                    || formSpendTravel.value.travel_request_id == ''
+                    || formSpendTravel.value.observation == ''
+                    || formSpendTravel.value.observation == -1
+                    || formSpendTravel.value.value == ''
+                    || formSpendTravel.value.value == -1
+                    || formSpendTravel.value.currency_id == ''
+                    || formSpendTravel.value.currency_id == -1
+                    || formSpendTravel.value.date == ''
+                    || formSpendTravel.value.date == -1
+                    || formSpendTravel.value.bill_number == ''
+                    || formSpendTravel.value.bill_number == -1
+                    || formSpendTravel.value.control_number == ''
+                    || formSpendTravel.value.control_number == -1
+                    || formSpendTravel.value.nit == ''
+                    || formSpendTravel.value.nit == -1
+                    || formSpendTravel.value.bussines_name == ''
+                    || formSpendTravel.value.bussines_name == -1
+                    || formSpendTravel.value.cod_provider == ''
+                    || formSpendTravel.value.cod_provider == -1
+                    || formSpendTravel.value.authorization_number == ''
+                    || formSpendTravel.value.authorization_number == -1
+                    || formSpendTravel.value.populated == ''
+                    || formSpendTravel.value.populated == -1) ? true : null" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
-                  <button *ngIf="spendEdit"  type="button" class="btn btn-primary btn-block cursor-general"
-                    (click)="aditionSpendEdit(formSpendTravel.value)">
+                  <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
