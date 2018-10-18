@@ -33,7 +33,6 @@ export class TimeLineApproversComponent implements OnInit {
 
                 this.detailRequets = [];
                 if (detail.success) {
-                  debugger
                   this.detailRequets = detail.data;
                   this.fileSupport = this.detailRequets[0].request.image.url;
 
