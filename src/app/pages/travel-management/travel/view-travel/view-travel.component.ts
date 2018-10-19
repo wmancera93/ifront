@@ -70,6 +70,9 @@ export class ViewTravelComponent implements OnInit {
         }, 100);
 
       });
+      this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail:any)=>{
+        
+      })
     });
   }
 

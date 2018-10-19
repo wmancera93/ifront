@@ -62,8 +62,8 @@ export class ViewSpendComponent implements OnInit {
       this.spendSharedService.setRefreshSpend(true);
     },
       (error: any) => {
-        document.getElementById("closeTravels").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: false }];
+        document.getElementById("closeModalViewSpend").click();
+        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de gastos?', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
 
       });

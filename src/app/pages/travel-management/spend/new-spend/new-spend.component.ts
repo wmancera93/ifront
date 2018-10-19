@@ -61,6 +61,7 @@ export class NewSpendComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
+        debugger
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
@@ -377,6 +378,7 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
+        debugger
         document.getElementById("closeSpends").click();
 
         this.spendsService.getSpendListTravel().subscribe((travel: any) => {
