@@ -68,4 +68,8 @@ export class TravelService {
     return this.tokenService.put('travel_requests/send_request_to_approve/' + id_travels_requests, {})
       .map((data: any) => data.json());
   }
+  getTravelsAllDetail(id_request: string) {
+    return this.tokenService.get('travel_requests/show_all_detail/' + id_request)
+      .map((data: any) => data.json());
+  }
 }

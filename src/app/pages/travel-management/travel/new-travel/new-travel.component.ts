@@ -297,6 +297,33 @@ export class NewTravelComponent implements OnInit {
 
   }
 
+  delete(date_param) {
+    switch (date_param) {
+      case 'date_begin_header':
+        this.formTravelManagement.controls['date_requests_begin'].setValue('');
+        break;
+      case 'date_end_header':
+        this.formTravelManagement.controls['date_requests_end'].setValue('');
+        break;
+      case 'date_begin_body':
+        this.formTravelManagement.controls['date_begin'].setValue('');
+        break;
+      case 'date_end_body':
+        this.formTravelManagement.controls['date_end'].setValue('');
+        break;
+      case 'hour_begin':
+        this.formTravelManagement.controls['hour_begin'].setValue('');
+        break;
+      case 'hour_end':
+        this.formTravelManagement.controls['hour_end'].setValue('');
+        break;
+
+
+      default:
+        break;
+    }
+  }
+
   sortByAphabet(dataBySort: any) {
     dataBySort.sort(function (a, b) {
       const nameA: String = a.name.toLowerCase();
@@ -400,7 +427,6 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
-    console.log(modelPartial);
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;

@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Gastos</h5>
-        <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeModalViewSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -73,16 +73,17 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row justify-content-end" style="padding-bottom: 25px">
-        <div class="col-lg-4 col-md-6 col-12">
-          <button  class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
-            <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+
+        <div class="row justify-content-end" style="padding-bottom: 25px">
+          <div class="col-lg-4 col-md-6 col-12">
+            <button class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
+              <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+          </div>
         </div>
-      </div>
-      <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+        <div class="modal-footerInfo justify-content-center">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+            <h6> Cerrar </h6>
+          </div>
         </div>
       </div>
     </div>

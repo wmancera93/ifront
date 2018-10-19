@@ -56,7 +56,7 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
   putSendRequestsSpend(id_spend_requests) {
-    return this.tokenService.put('travel_requests/send_request_to_approve/' + id_spend_requests, {})
+    return this.tokenService.put('travel_allowance_requests/send_request_to_approve/' + id_spend_requests, {})
       .map((data: any) => data.json());
   }
 
