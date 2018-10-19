@@ -85,7 +85,7 @@ export class EditSpendComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSaveSpendEdit' || data === 'closeAlertdeleteSavedSpend' || data === 'closeAlerterrorSaveSpendEdit'
-        || data === 'closeAlertdeleteDocumentSavedSpend' || data === 'closeAlertdeleteDetailSpendEdit') {
+        || data === 'closeAlertdeleteDocumentSavedSpend' || data === 'closeAlertdeleteDetailSpendEdit' || data === 'errorApproverSpend') {
         document.getElementById("btn_spend_edit").click();
       }
 
@@ -560,4 +560,31 @@ export class EditSpendComponent implements OnInit {
 
 
   }
+
+  sendRequestsSpend() {
+
+    this.spendsService.putSendRequestsSpend(this.idSpendRequests).subscribe((data: any) => {
+      if (data) {
+        const alertWarning: Alerts[] = [{ 
+        type: 'success', 
+        title: 'Solicitud Exitosa', 
+        message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+      }
+      this.spendSharedService.setRefreshSpend(true);
+    },
+      (error: any) => {
+        document.getElementById("closeModalEditSpend").click();
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Solicitud Denegada',
+          message: error.json().errors.toString(),
+          confirmation: true,
+          typeConfirmation: 'errorApproverSpend'
+        }];
+        this.alert.setAlert(alertWarning[0]);
+
+      });
+  }
+
 }

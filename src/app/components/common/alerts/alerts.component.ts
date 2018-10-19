@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 // services
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-import { debug } from 'util';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 
 
 @Component({
@@ -57,11 +56,13 @@ export class AlertsComponent implements OnInit {
   }
 
   clickConfirmate() {
+    debugger
     document.getElementById('closeModal').click();
     this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
   }
 
   clickCancel() {
+    debugger
     this.cancelation='closeAlert'+ this.bodyAlert.typeConfirmation;
     document.getElementById('closeModal').click();
     this.alert.setActionConfirm(this.cancelation);
