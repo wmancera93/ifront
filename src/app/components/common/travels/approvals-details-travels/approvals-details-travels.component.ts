@@ -30,7 +30,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public nameReportSpend: string = 'Gastos de viaje';
   public editRequest: boolean;
   public table_advances: any[] = [];
-
+  public table_spend: any[] = [];
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
@@ -64,6 +64,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                 setTimeout(() => {
                   this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                 }, 300);
+
                 setTimeout(() => {
                   debugger
                   request.data[0].travel_advance_requests.data.forEach(element => {
@@ -78,8 +79,17 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                   }
                   this.objectAdvanceReport.emit({ success: true, data: [object] });
                 }, 300);
+
+
                 setTimeout(() => {
-                  this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });
+                  request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                      this.table_spend.push(element)
+                  });
+                  let object = {
+                    labels: request.data[0].travel_allowance_request.labels,
+                    data: this.table_spend,
+                  }
+                  this.objectSpendReport.emit({ success: true, data: [object] });
                 }, 300);
               })
             break;
@@ -108,7 +118,14 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
                   this.objectAdvanceReport.emit({ success: true, data: [object] });
                 }, 300);
                 setTimeout(() => {
-                  this.objectSpendReport.emit({ success: true, data: [request.data[0].travel_allowance_request] });
+                  request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                    this.table_spend.push(element)
+                });
+                let object = {
+                  labels: request.data[0].travel_allowance_request.labels,
+                  data: this.table_spend,
+                }
+                this.objectSpendReport.emit({ success: true, data: [object] });
                 }, 300);
               })
 
@@ -255,7 +272,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
     window.open(param.file.url);
   }
 
-  // viewAnexedTravelsSpend() {
-  //   window.open(this.approvals[0].travel_request_annexeds.url);
-  // }
+  viewAnexedTravelsSpend() {
+    window.open(this.approvals[0].travel_allowance_request.data.travel_allowance_anexeds.url);
+  }
 }
