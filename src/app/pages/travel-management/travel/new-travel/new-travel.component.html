@@ -30,7 +30,7 @@
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
-                  (change)="dateComplete(formTravelManagement.value)" />
+                  (change)="dateComplete(formTravelManagement.value)" (keyup)="delete('date_begin_header')" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -38,7 +38,7 @@
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
                 <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
-                  (change)="dateComplete(formTravelManagement.value)" />
+                  (change)="dateComplete(formTravelManagement.value)" (keyup)="delete('date_end_header')" />
               </div>
             </div>
           </div>
@@ -307,7 +307,7 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha Inicial del Trayecto *</a>
                       </label>
-                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" (change)="dateValidateTrayect(formTravelManagement.value)"
+                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']" (change)="dateValidateTrayect(formTravelManagement.value)" (keyup)="delete('date_begin_body')"
                       />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
@@ -315,7 +315,7 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
+                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" (keyup)="delete('hour_begin')"/>
                     </div>
                   </div>
                 </div>
@@ -382,7 +382,7 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final del Trayecto *</a>
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" (change)="dateValidateTrayect(formTravelManagement.value)"
+                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']" (change)="dateValidateTrayect(formTravelManagement.value)" (keyup)="delete('date_end_body')"
                       />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
@@ -390,7 +390,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)"
+                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourvalidations(formTravelManagement.value)" (keyup)="delete('hour_end')"
                       />
                     </div>
                   </div>
