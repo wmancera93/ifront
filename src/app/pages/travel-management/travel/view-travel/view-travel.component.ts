@@ -17,6 +17,8 @@ export class ViewTravelComponent implements OnInit {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gestión de viajes'
   public objectReport: EventEmitter<any> = new EventEmitter();
+  public objectPrintAdvances: EventEmitter<any> = new EventEmitter();
+  public objectPrintSpend: EventEmitter<any> = new EventEmitter();
 
   public token: boolean;
   public ticket: string = "";
@@ -30,6 +32,12 @@ export class ViewTravelComponent implements OnInit {
   public maintenance: boolean = false;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
+  public allRequests: any[];
+  public nameReportAdvance: string = 'Anticipos de viaje';
+  public nameReportSpend: string = 'Gastos de viaje';
+  public table_advances_view: any[] = [];
+  public table_spend_view: any[] = [];
+
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService,
@@ -70,8 +78,43 @@ export class ViewTravelComponent implements OnInit {
         }, 100);
 
       });
-      this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail:any)=>{
-        
+      this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
+        debugger
+        this.allRequests = detail;
+        this.table_advances_view = [];
+        this.table_spend_view = [];
+        if (detail.data[0].travel_advance_requests.data.length > 0) {
+          setTimeout(() => {
+            detail.data[0].travel_advance_requests.data.forEach(element => {
+              element.travel_advance_payments.forEach(dataObject => {
+                this.table_advances_view.push(dataObject)
+              });
+            });
+
+            let object = {
+              labels: detail.data[0].travel_advance_requests.labels,
+              data: this.table_advances_view,
+            }
+            this.objectPrintAdvances.emit({ success: true, data: [object] });
+          }, 300);
+        } else {
+          this.objectPrintAdvances.emit({ success: true, data: [] });
+        }
+        if (detail.data[0].travel_allowance_request.data.travel_allowances !== undefined) {
+          setTimeout(() => {
+            detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+              this.table_spend_view.push(element)
+            });
+            let object = {
+              labels: detail.data[0].travel_allowance_request.labels,
+              data: this.table_spend_view,
+            }
+            this.objectPrintSpend.emit({ success: true, data: [object] });
+          }, 300);
+        } else {
+          this.objectPrintSpend.emit({ success: true, data: [] });
+        }
+
       })
     });
   }

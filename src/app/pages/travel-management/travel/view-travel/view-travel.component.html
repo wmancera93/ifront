@@ -170,6 +170,60 @@
             </div>
           </div>
         </div>
+
+        <div id="accordion" class="col-12" style="margin-top: 15px">
+          <div class="row">
+            <div class="titleColor col-12 text-left" id="headingTwo">
+              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver
+                anticipos de viaje</p>
+            </div>
+            <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
+              style="margin-top: 25px">
+              <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved"
+                [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" titleColor  col-12 text-left" id="headingThree">
+              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver
+                gastos de viaje</p>
+            </div>
+            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion"
+              style="margin-top: 25px">
+              <div class="row">
+                <div class="col-12">
+                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved"
+                    [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
+                </div>
+              </div>
+              <!-- <div class="row" style="padding-bottom: 40px">
+                <div class="col-12">
+                  <p class="font-title-general text-left">
+                    <i class="fa fa-fw fa-paperclip font-color-default"></i>
+                    Soportes adjuntos gastos: </p>
+                  <div class="row text-left">
+                    <div class="col-12" *ngFor="let anexedSpend of approvals[0].travel_allowance_request.data.travel_allowance_anexeds; let index = index">
+                      <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravelsSpend(approversTravels)">
+                        <p>{{index+1}}.
+                          <i aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                          {{anexedSpend.name |slice: 0:40}}
+                          <span [hidden]="anexedSpend.name.length < 40">...</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+
+          </div>
+        </div>
+
+
+
+
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="view_travels[0].status_request == 'Pendiente'">
           <div class="col-lg-4 col-md-6 col-12">
             <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">

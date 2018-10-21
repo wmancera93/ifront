@@ -199,12 +199,12 @@
                               <i class="fa fa-fw fa-paperclip font-color-default"></i>
                               Soportes adjuntos gastos: </p>
                             <div class="row text-left">
-                              <div class="col-12" *ngFor="let approversTravels of approvals[0].travel_request_annexeds; let index = index">
+                              <div class="col-12" *ngFor="let anexedSpend of approvals[0].travel_allowance_request.data.travel_allowance_anexeds; let index = index">
                                 <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravelsSpend(approversTravels)">
                                   <p>{{index+1}}.
                                     <i aria-hidden="true" style="font-size: 1.5em; color: white"></i>
-                                    {{approversTravels.name |slice: 0:40}}
-                                    <span [hidden]="approversTravels.name.length < 40">...</span>
+                                    {{anexedSpend.name |slice: 0:40}}
+                                    <span [hidden]="anexedSpend.name.length < 40">...</span>
                                   </p>
                                 </div>
                               </div>
