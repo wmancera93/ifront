@@ -16,6 +16,7 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TagModelClass } from 'ngx-chips/core/accessor';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
 @Component({
   selector: 'app-new-travel',
@@ -88,7 +89,8 @@ export class NewTravelComponent implements OnInit {
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
-    public alert: AlertsService, public advanceSharedService: AdvanceSharedService, public router: Router, ) {
+    public alert: AlertsService, public advanceSharedService: AdvanceSharedService
+    , public router: Router, public employeeService: EmployeeService) {
 
     this.travelProof = [{
       success: true,
@@ -257,6 +259,10 @@ export class NewTravelComponent implements OnInit {
     this.travelsService.getNewTravels().subscribe((data: any) => {
 
       if (document.getElementById('travel_new').className !== 'modal show') {
+        this.employeeService.getEmployeeTravelsById("").subscribe((data) => {
+          console.log(data)
+        })
+
         document.getElementById("btn_travel_new").click();
         if (data) {
           this.clearFormGeneral();
