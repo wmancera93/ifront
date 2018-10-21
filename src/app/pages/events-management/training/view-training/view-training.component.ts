@@ -22,6 +22,8 @@ export class ViewTrainingComponent implements OnInit {
   public flagPDF: boolean = false;
   public activeBlur: number = 0;
 
+  public countAfter: number = 0;
+
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
@@ -30,10 +32,9 @@ export class ViewTrainingComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      this.idTraining = activeModal;
-      if (this.activeBlur === 0) {
+      if (this.countAfter === 0) {
+        this.idTraining = activeModal;
         this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
           this.flagPDF = true;
           setTimeout(() => {
@@ -42,13 +43,9 @@ export class ViewTrainingComponent implements OnInit {
           }, 100);
           document.getElementById('btn-viewTraining').click();
           document.getElementById("bodyGeneral").removeAttribute('style');
-          this.activeBlur += 1;
         });
       }
-
     });
-
-
   }
 
   acceptTraining(flag: boolean) {
@@ -58,8 +55,8 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
-
       if (response.success) {
+        document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
@@ -72,6 +69,7 @@ export class ViewTrainingComponent implements OnInit {
 
     },
       (error: any) => {
+        document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
@@ -81,6 +79,10 @@ export class ViewTrainingComponent implements OnInit {
         }];
         this.alert.setAlert(alertWarning[0]);
       });
-    document.getElementById("closeModalTraining").click();
+  }
+
+  
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 }

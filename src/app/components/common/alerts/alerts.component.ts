@@ -56,13 +56,11 @@ export class AlertsComponent implements OnInit {
   }
 
   clickConfirmate() {
-    debugger
     document.getElementById('closeModal').click();
     this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
   }
 
   clickCancel() {
-    debugger
     this.cancelation='closeAlert'+ this.bodyAlert.typeConfirmation;
     document.getElementById('closeModal').click();
     this.alert.setActionConfirm(this.cancelation);
