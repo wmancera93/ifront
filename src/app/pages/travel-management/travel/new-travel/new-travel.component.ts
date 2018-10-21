@@ -259,7 +259,7 @@ export class NewTravelComponent implements OnInit {
     this.travelsService.getNewTravels().subscribe((data: any) => {
 
       if (document.getElementById('travel_new').className !== 'modal show') {
-        this.employeeService.getEmployeeTravelsById("").subscribe((data) => {
+        this.employeeService.getEmployeeTravelsById("la").subscribe((data) => {
           console.log(data)
         })
 
