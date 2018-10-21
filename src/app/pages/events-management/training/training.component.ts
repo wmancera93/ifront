@@ -29,7 +29,7 @@ export class TrainingComponent implements OnInit {
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.type_element = "showConvenio") {
+      if (data.action_method = "showConvenio") {
         this.trainingSharedService.setDataTraining(data.id);
       }
 
