@@ -72,4 +72,9 @@ export class TravelService {
     return this.tokenService.get('travel_requests/show_all_detail/' + id_request)
       .map((data: any) => data.json());
   }
+
+  getMyTravelRequests() {
+    return this.tokenService.get('travel_requests/my_travels_requests')
+      .map((data: any) => data.json());
+  }
 }

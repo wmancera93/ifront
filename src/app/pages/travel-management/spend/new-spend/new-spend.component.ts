@@ -9,6 +9,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { User } from '../../../../models/general/user';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -46,13 +48,22 @@ export class NewSpendComponent implements OnInit {
   public objectProof: any[] = [];
   public spend_delete_local: string;
 
+  public userAuthenticated: User = null;
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
+
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, public employeeService: EmployeeService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.infoTableSpends = [{
       success: true,
@@ -206,6 +217,33 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
       this.spedsData = list.data;
     });
+  }
+
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
   }
 
   deleteUpload(param) {
@@ -371,6 +409,7 @@ export class NewSpendComponent implements OnInit {
     spendsFormData.append('travel_request_id', param.travel_request_id.toString());
     spendsFormData.append('allowances', JSON.stringify(this.objectAllowances));
     spendsFormData.append('files_length', this.imgSpend.length.toString())
+    spendsFormData.append('employee_id', this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString());
     for (let index = 0; index < this.imgSpend.length; index++) {
       spendsFormData.append('files_' + (index + 1).toString(), this.file[index]);
     };

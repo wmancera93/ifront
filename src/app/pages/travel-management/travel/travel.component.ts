@@ -3,11 +3,10 @@ import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { TravelsService } from '../../../services/shared/travels/travels.service';
 import { TravelService } from '../../../services/travel-management/travels/travel.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { Alert } from '../../../../../node_modules/@types/selenium-webdriver';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { ApproverTravelsService } from '../../../services/travel-management/approver-travels/approver-travels.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-travel',
@@ -15,8 +14,6 @@ import { ApproverTravelsService } from '../../../services/travel-management/appr
   styleUrls: ['./travel.component.css']
 })
 export class TravelComponent implements OnInit {
-
-
   public my_travels_list: any[] = [];
   public token: boolean;
   public alertWarning: any[] = [];
@@ -24,6 +21,8 @@ export class TravelComponent implements OnInit {
   public aproover: string = 'No existe aprobador para esta solicitud ó ya fue aprobada';
   public edit = false;
   public objectSend: any[];
+
+  public userAuthenticated: User = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -34,7 +33,8 @@ export class TravelComponent implements OnInit {
     private aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService, public travelManagementService: TravelService) {
 
-
+   
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     this.alert.getActionConfirm().subscribe((data: any) => {
       document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
       if (data === 'deletRequestTravel') {
@@ -104,6 +104,26 @@ export class TravelComponent implements OnInit {
 
   }
 
+  checkTravels(travel) {
+    switch (travel) {
+      case 'travels_request':
+        this.my_travels_list = [];
+        this.travelService.getTravelRequests().subscribe((data: any) => {
+          this.my_travels_list = data.data[0].my_travel_requests_list;
+        });
+        break;
+      case 'my_travels_request':
+        this.my_travels_list = [];
+        this.travelService.getMyTravelRequests().subscribe((data: any) => {
+          this.my_travels_list = data.data[0].my_travel_requests_list;
+        });
+        break;
+
+      default:
+        break;
+    }
+  }
+
   returnBackPage() {
     this.router.navigate(['ihr/travel_management']);
   }
@@ -139,7 +159,7 @@ export class TravelComponent implements OnInit {
         this.aproversRequestsService.setRequests({ request: this.objectSend, type_request: 'requestsTravels' });
       });
     }, 500);
-   
+
   }
 
 }

@@ -12,25 +12,40 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formTravelManagement" class="row justify-content-left" (ngSubmit)="newTravel(formTravelManagement.value)">
-          <div class="col-xl-10 col-10 align-items-left searchInput" *ngIf="activateSearch">
-            <div class="workTeam-search animate-bounce  bounceInLeft">
-              <form name="searchAutoComplete">
-                <p>
-                  <input id="searchByAutoComplete" type="text" name="employeeList" [(ngModel)]="searchByLetter" ngModel
-                    (keyup)="enterNameEmployee()" (keyup.enter)="goToStorageEmployee()">
-                </p>
-              </form>
-              <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
-                <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
-                  <div class="row align-items-center">
-                    <div class="col-4">
-                      <img src="{{employee.image.url}}" class="roundPhotoChart">
-                    </div>
-                    <div class="col-8 text-left">
-                      <i class="fa fa-user-o"></i> {{employee.short_name}}
+          <div class="col-12" *ngIf="userAuthenticated.employee.trip_by_third">
+            <div class="row">
+              <div class="col-4 align-items-left">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-user text-primary-hr"></i>
+                  <strong>Si va realizar un viaje para un tercero, busque por el nombre en la caja de texto:</strong>
+                </label>
+                <form name="searchAutoComplete">
+                  <p>
+                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter"
+                      (keyup)="enterNameEmployee()">
+                  </p>
+                </form>
+                <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
+                    <div class="row align-items-center">
+                      <div class="col-4">
+                        <img src="{{employee.image.url}}" class="roundPhotoChart">
+                      </div>
+                      <div class="col-8 text-left">
+                        <i class="fa fa-user-o"></i> {{employee.name_complete}}
+                      </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="col-8 align-self-center">
+                <label class="titleColor" *ngIf="eployee_selected !== null">
+                  Usted va a realizar un viaje para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+                </label>
+              <br>
+                <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" (click)="deleteEmployeeThird()">
+                    Click para eliminar el tercero
+                </span>
               </div>
             </div>
           </div>
