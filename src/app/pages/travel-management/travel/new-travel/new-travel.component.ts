@@ -522,7 +522,7 @@ export class NewTravelComponent implements OnInit {
 
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 50);
+    }, 200);
 
     this.closeTrip();
     this.activate_submit = true;
