@@ -72,11 +72,7 @@
                     <div class="col-6 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluation.status_complete === false && evaluation.status_code ==='2'">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c6c8"></i>
                     </div>   
-                    <div class="col-6 number-size" *ngIf="evaluation.status_complete === true" 
-                    [attr.disabled]="evaluation.status_complete === false
-                    || evaluation.status_code ==='3'
-                    || evaluation.status_code ==='4'
-                    || evaluation.status_code ==='5' ? null : true" style="cursor: no-drop">
+                    <div class="col-6 number-size" *ngIf="evaluation.status_complete === true || evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-eye" aria-hidden="false"></i>
                     </div>
                     <div class="col-6 number-size text-danger" (click)="goToViewEval(evaluation)">
