@@ -53,13 +53,14 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
 
-getViewEvaluationPDF(idEvaluation:number){
-   return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
+  getViewEvaluationPDF(idEvaluation: number) {
+    return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
       .map((data: any) => data.json());
-}
-getSendEvaluationsComplete(idEvaluationComplete:number){
-  return this.tokenService.get('perfomance_evaluations/sender_complete/' + idEvaluationComplete)
-     .map((data: any) => data.json());
-}
+  }
+
+  putSendEvaluationsComplete(id) {
+    return this.tokenService.put('perfomance_evaluations/sender_complete/' + id, {})
+      .map((data: any) => data.json());
+  }
 
 }
