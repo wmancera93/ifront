@@ -423,7 +423,7 @@ export class NewTravelComponent implements OnInit {
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
-    modelFromdata.append('employee_id', this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString());
+    modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {

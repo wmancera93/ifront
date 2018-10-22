@@ -409,7 +409,7 @@ export class NewSpendComponent implements OnInit {
     spendsFormData.append('travel_request_id', param.travel_request_id.toString());
     spendsFormData.append('allowances', JSON.stringify(this.objectAllowances));
     spendsFormData.append('files_length', this.imgSpend.length.toString())
-    spendsFormData.append('employee_id', this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString());
+    spendsFormData.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     for (let index = 0; index < this.imgSpend.length; index++) {
       spendsFormData.append('files_' + (index + 1).toString(), this.file[index]);
     };
