@@ -37,7 +37,7 @@
           <div *ngIf="evaluationPerformanceList.length !== undefined">
             <div class="widget bg-white-1x" *ngFor="let evaluation of evaluationPerformanceList">
               <div class="row align-items-center">
-                <div class="col-lg-2 col-md-3 col-12">
+                <div class="col-lg-4 col-md-3 col-12">
                   <h5>
                     <span class="badge badge-warning">
                       Código #{{evaluation.code}}
@@ -48,12 +48,12 @@
                     Creada el {{evaluation.created_date}}
                   </p>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+                <div class="col-lg-2 col-md-6 col-12 text-lg-left text-center top-p">
                   <h3 class="font-color-default">
                     {{evaluation.name}}
                   </h3>
                 </div>
-                <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                <div class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
                   <p class="font-title-general">
                     Estado:
                   </p>
@@ -63,7 +63,7 @@
                     </span>
                   </h6>
                 </div>
-                <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                   <p class="font-title-general">
                     {{evaluation.qualifier.short_name}}
                   </p>
@@ -76,9 +76,12 @@
                 </div>
                 <div class="col-lg-2 col-md-3 col-12 text-center top-p">
                   <div class="row">
-                    <div class="col-6 number-size" (click)="goToModalEval(evaluation)">
+                    <div class="col-6 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluationPerformanceList[0].status_complete !== true">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c6c8"></i>
                     </div>   
+                    <div class="col-6 number-size" *ngIf="evaluationPerformanceList[0].status_complete === true" [attr.disabled]="evaluationPerformanceList[0].status_complete === false ? null : true" style="cursor: no-drop">
+                      <i class="fa fa-eye" aria-hidden="false"></i>
+                    </div>
                     <div class="col-6 number-size text-danger" (click)="goToViewEval(evaluation)">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>                

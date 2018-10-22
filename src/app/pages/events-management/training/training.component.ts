@@ -20,10 +20,10 @@ export class TrainingComponent implements OnInit {
   constructor(public trainingService: TrainingService,
     private accionDataTableService: DataDableSharedService,
     public trainingSharedService: TrainingSharedService,
-    public eventsEmployeeService:EventsEmployeeService) {
+    public eventsEmployeeService: EventsEmployeeService) {
 
-    this.eventsEmployeeService.getRefreshEventEmployee().subscribe((data:any)=>{
-      if (data == true){
+    this.eventsEmployeeService.getRefreshEventEmployee().subscribe((data: any) => {
+      if (data == true) {
         this.searchEvents();
       }
     })
@@ -41,14 +41,21 @@ export class TrainingComponent implements OnInit {
   ngOnInit() {
     this.searchEvents();
   }
-searchEvents(){
-  this.trainingService.getTrainingEvents().subscribe((data: any) => {
-    this.dataTabletraining = data;
-    this.nameReport = data.data[0].title;
-    setTimeout(() => {
-      this.objectReport.emit(this.dataTabletraining);
-    }, 100);
-  })
-}
- 
+  searchEvents() {
+    this.trainingService.getTrainingEvents().subscribe((data: any) => {
+      debugger
+      this.dataTabletraining = data;
+      this.nameReport = data.data[0].title;
+      if (data.data[0].data.length > 0) {
+        setTimeout(() => {
+          this.objectReport.emit(this.dataTabletraining);
+        }, 100);
+      } else {
+        setTimeout(() => {
+          this.objectReport.emit({ succes: true, data: [] });
+        }, 100);
+      }
+    })
+  }
+
 }

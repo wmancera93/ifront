@@ -145,7 +145,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
               <div class="col-12 top-containter" style="margin-top: 15px">
                 <div class="row">
                   <div class="col-lg-6 col-md-6 col-12">
@@ -161,7 +161,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
@@ -230,6 +230,13 @@
                     </button>
                   </div>
                 </div>
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseEditObjetives" style="display: none">
+                    </button>
+                  </div>
+                </div>
+
                 <div class="collapse top-general-p " id="collapseEditObjetives">
                   <form [formGroup]="formObjetive" class="row justify-content-left" (ngSubmit)="newObjetive(formObjetive.value)">
                     <div class="col-md-4 col-12 top-containter">
