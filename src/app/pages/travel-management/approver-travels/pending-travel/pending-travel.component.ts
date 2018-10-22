@@ -73,9 +73,9 @@ export class PendingTravelComponent implements OnInit {
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
-  modalAproversTravelPending(request: any) {
+  modalAproversTravelPending(request: any, type: string) {
 
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true })
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true , type: type })
   }
   selectTypeReques(param) {
 
