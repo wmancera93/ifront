@@ -62,6 +62,7 @@ export class ViewTravelComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
+        debugger
         this.view_travels = [];
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
