@@ -87,7 +87,7 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
-
+      this.eployee_selected = null;
       this.spendsService.getSpendListTravel().subscribe((travel: any) => {
         this.listTravelsFromSpend = travel.data;
 

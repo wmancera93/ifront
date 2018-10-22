@@ -269,6 +269,7 @@ export class NewTravelComponent implements OnInit {
     this.travelsService.getNewTravels().subscribe((data: any) => {
 
       if (document.getElementById('travel_new').className !== 'modal show') {
+        this.eployee_selected = null;
         document.getElementById("btn_travel_new").click();
         if (data) {
           this.clearFormGeneral();
@@ -522,7 +523,7 @@ export class NewTravelComponent implements OnInit {
 
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 200);
+    }, 500);
 
     this.closeTrip();
     this.activate_submit = true;
@@ -863,7 +864,7 @@ export class NewTravelComponent implements OnInit {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud',
+          message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequestsValidateDates'
 
@@ -877,7 +878,7 @@ export class NewTravelComponent implements OnInit {
               const alertDataWrong: Alerts[] = [{
                 type: 'danger',
                 title: 'Error',
-                message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje',
+                message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                 confirmation: true,
                 typeConfirmation: 'continueDestinationRequests'
 
@@ -895,7 +896,7 @@ export class NewTravelComponent implements OnInit {
                     const alertDataWrong: Alerts[] = [{
                       type: 'danger',
                       title: 'Error',
-                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                       confirmation: true,
                       typeConfirmation: 'continueDestinationRequests'
 
@@ -914,7 +915,7 @@ export class NewTravelComponent implements OnInit {
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje',
+                  message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                   confirmation: true,
                   typeConfirmation: 'continueDestinationRequests'
 
@@ -933,7 +934,7 @@ export class NewTravelComponent implements OnInit {
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
                         title: 'Error',
-                        message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                        message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                         confirmation: true,
                         typeConfirmation: 'continueDestinationRequests'
 
@@ -960,7 +961,7 @@ export class NewTravelComponent implements OnInit {
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                  message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                   confirmation: true,
                   typeConfirmation: 'continueDestinationRequests'
 
@@ -997,7 +998,7 @@ export class NewTravelComponent implements OnInit {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La fecha de origen del trayecto no puede ser mayor a la de destino.',
+          message: 'La fecha de origen del trayecto no puede ser mayor a la de destino. ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequests'
         }];
@@ -1014,7 +1015,7 @@ export class NewTravelComponent implements OnInit {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
             confirmation: true,
             typeConfirmation: 'continueDestinationRequests'
           }];
@@ -1030,7 +1031,7 @@ export class NewTravelComponent implements OnInit {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
             confirmation: true,
             typeConfirmation: 'continueDestinationRequests'
           }];
@@ -1055,7 +1056,7 @@ export class NewTravelComponent implements OnInit {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida',
+          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequests'
 

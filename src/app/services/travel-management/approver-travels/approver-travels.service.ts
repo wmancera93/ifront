@@ -18,8 +18,16 @@ export class ApproverTravelsService {
     return this.tokenService.get('approvals_employee_allowance_requests')
       .map((data: any) => data.json());
   }
+  getApprovalsAdvancePending() {
+    return this.tokenService.get('approvals_employee_travel_advance_requests')
+      .map((data: any) => data.json());
+  }
   getApprovalsSpendManaged() {
     return this.tokenService.get('approvals_employee_allowance_requests/managed')
+      .map((data: any) => data.json());
+  }
+  getApprovalsAdvanceManaged() {
+    return this.tokenService.get('approvals_employee_travel_advance_requests/managed')
       .map((data: any) => data.json());
   }
   getApprovalsRequestsById(idRequestsTravelsAproval : string) {
@@ -30,12 +38,20 @@ export class ApproverTravelsService {
     return this.tokenService.get('approvals_employee_allowance_requests/' + idRequestsSpendAproval)
       .map((data: any) => data.json());
   }
+  getApprovalsRequestsAdnvanceById(idRequestsAdvancedAproval : string) {
+    return this.tokenService.get('approvals_employee_travel_advance_requests/' + idRequestsAdvancedAproval)
+      .map((data: any) => data.json());
+  }
   postApprovalsRequestTravel(objectApprovalsTravel: any) {
     return this.tokenService.post('approvals_employee_travel_requests/', objectApprovalsTravel)
       .map((data: any) => data.json());
   }
   postApprovalsRequestSpend(objectApprovalsSpend: any) {
     return this.tokenService.post('approvals_employee_allowance_requests/', objectApprovalsSpend)
+      .map((data: any) => data.json());
+  }
+  postApprovalsRequestAdvance(objectApprovalsAdvance: any) {
+    return this.tokenService.post('approvals_employee_travel_advance_requests/', objectApprovalsAdvance)
       .map((data: any) => data.json());
   }
 }
