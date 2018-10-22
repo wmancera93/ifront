@@ -73,6 +73,7 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
+      this.eployee_selected = null;
       this.objectAdvances = [];
       this.continue = false;
 

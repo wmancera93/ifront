@@ -269,6 +269,7 @@ export class NewTravelComponent implements OnInit {
     this.travelsService.getNewTravels().subscribe((data: any) => {
 
       if (document.getElementById('travel_new').className !== 'modal show') {
+        this.eployee_selected = null;
         document.getElementById("btn_travel_new").click();
         if (data) {
           this.clearFormGeneral();
