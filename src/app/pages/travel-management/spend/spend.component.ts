@@ -53,7 +53,6 @@ export class SpendComponent implements OnInit {
     })
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
-
       let url = window.location.href;
       url.split('/')[url.split('/').length - 1];
       if (url.split('/')[url.split('/').length - 1] !== 'spend') {
@@ -67,7 +66,7 @@ export class SpendComponent implements OnInit {
     this.chargeDataSpends();
   }
 
-  checkSpends(spend) {
+  checkSpends(spend) {    
     switch (spend) {
       case 'spends_request':
         this.chargeDataSpends();

@@ -73,6 +73,7 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
+      this.eployee_selected = null;
       this.objectAdvances = [];
       this.continue = false;
 
@@ -150,7 +151,7 @@ export class NewAdvancesComponent implements OnInit {
     let objectSendAdvance =
     {
       travel_request_id: this.formAdvanceTravel.controls['travel_request_id'].value,
-      employee_id: this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString(),
+      employee_id: this.eployee_selected == null ? '' : this.eployee_selected.id.toString(),
       advances: this.objectAdvances
     }
 
