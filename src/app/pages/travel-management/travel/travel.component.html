@@ -41,10 +41,18 @@
         </div>
       </div>
       <div class="row top-containter" style="margin-top: 20px">
-        <div class="col-xl-2 col-lg-4 col-12 text-left">
-          <b>
-            Viajes registrados
-          </b>
+        <div class="col-12 text-left">
+          <form>
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="travels_request" checked (click)="checkTravels('travels_request')"/>
+            <b>
+              Mis viajes registrados
+            </b>
+            &nbsp;&nbsp;
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_travels_request" (click)="checkTravels('my_travels_request')"/>
+            <b *ngIf="userAuthenticated.employee.trip_by_third">
+              Viajes registrados a terceros
+            </b>
+          </form>
         </div>
       </div>
 
@@ -127,14 +135,16 @@
               <div class="col-lg-2 col-md-3 col-12 text-center top-p">
                 <div class="row justify-content-center">
                   <div class="col-4 number-size text-success text-center" [attr.title]="travels.action_travel_requests_index_view[0].title"
-                    [attr.disabled]="travels.action_travel_requests_index_view[0].is_active == true ? null : true" (click)="viewTravels(travels.ticket)">
+                    [attr.disabled]="travels.action_travel_requests_index_view[0].is_active == true ? null : true"
+                    (click)="viewTravels(travels.ticket)">
                     <i class="fa fa-eye" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4 number-size text-info" id="hideEdit" *ngIf="travels.action_travel_requests_index_view[1].is_active" style="cursor: pointer"
-                    (click)="editTravels(travels.ticket)">
+                  <div class="col-4 number-size text-info" id="hideEdit" *ngIf="travels.action_travel_requests_index_view[1].is_active"
+                    style="cursor: pointer" (click)="editTravels(travels.ticket)">
                     <i class="fa fa-pencil" style="font-size:2em"></i>
                   </div>
-                  <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active " style="cursor: no-drop">
+                  <div class="col-4 number-size" id="hideEdit" *ngIf="!travels.action_travel_requests_index_view[1].is_active "
+                    style="cursor: no-drop">
                     <i class="fa fa-pencil" style="font-size:2em"></i>
                   </div>
                   <div class="col-4 number-size text-danger align-items-center" id="hideTrash" *ngIf="travels.action_travel_requests_index_view[2].is_active"

@@ -6,6 +6,7 @@ import { State } from '../../../../../../node_modules/ngx-chips/core/providers/d
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
+import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
 
 @Component({
   selector: 'app-view-training',
@@ -27,7 +28,7 @@ export class ViewTrainingComponent implements OnInit {
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer, public eventsEmployeeService:EventsEmployeeService) {
 
   }
 
@@ -65,6 +66,7 @@ export class ViewTrainingComponent implements OnInit {
           typeConfirmation: ''
         }];
         this.alert.setAlert(alertWarning[0]);
+        this.eventsEmployeeService.setRefreshEventEmployee(true);
       }
 
     },

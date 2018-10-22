@@ -11,6 +11,10 @@ export class AdvancesService {
     return this.tokenService.get('travel_advance_payments')
       .map((data: any) => data.json());
   }
+  getMyAdvancePayments() {
+    return this.tokenService.get('travel_advance_payments/my_travels_advances_requests')
+      .map((data: any) => data.json());
+  }
   getAdvanceListTravel() {
     return this.tokenService.get('travel_requests/index_for_select_advance_pay')
       .map((data: any) => data.json());

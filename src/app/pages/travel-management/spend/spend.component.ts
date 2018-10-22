@@ -7,6 +7,7 @@ import { Spends } from '../../../models/common/travels_management/spends/spends'
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-spend',
@@ -18,11 +19,14 @@ export class SpendComponent implements OnInit {
   token
   public spedsData: Spends[] = [];
   public idSpenRequestsIndex: string;
+  public userAuthenticated: User = null;
 
   constructor(public router: Router,
     public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public alert: AlertsService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
       if (data) {
@@ -61,6 +65,23 @@ export class SpendComponent implements OnInit {
 
   ngOnInit() {
     this.chargeDataSpends();
+  }
+
+  checkSpends(spend) {
+    switch (spend) {
+      case 'spends_request':
+        this.chargeDataSpends();
+        break;
+      case 'my_spends_request':
+        this.spendsService.getMySpendsRequest().subscribe((list: any) => {
+          this.spedsData = [];
+          this.spedsData = list.data;
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   chargeDataSpends() {

@@ -6,6 +6,8 @@ import { AdvancesService } from '../../../../services/travel-management/advances
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { User } from '../../../../models/general/user';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
 @Component({
   selector: 'app-new-advances',
@@ -29,12 +31,20 @@ export class NewAdvancesComponent implements OnInit {
   public today: any;
   public continue: boolean = false;
 
+  public userAuthenticated: User = null;
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
+
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
     public fb: FormBuilder,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public employeeService: EmployeeService) {
 
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.infoTableAdvances = [{
       success: true,
@@ -75,19 +85,19 @@ export class NewAdvancesComponent implements OnInit {
         observation: ""
       });
 
-      
+
       this.refreshTableAdvances();
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
 
-       if (data !== true) {
+      if (data !== true) {
         this.continue = true;
       } else {
         this.continue = false;
       }
-      
+
     });
 
     this.advancesService.getAdvanceListTravel().subscribe((list: any) => {
@@ -108,11 +118,38 @@ export class NewAdvancesComponent implements OnInit {
   ngOnInit() {
   }
 
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
+  }
 
   newAdvance(param) {
     let objectSendAdvance =
     {
       travel_request_id: this.formAdvanceTravel.controls['travel_request_id'].value,
+      employee_id: this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString(),
       advances: this.objectAdvances
     }
 

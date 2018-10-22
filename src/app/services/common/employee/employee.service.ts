@@ -28,4 +28,11 @@ export class EmployeeService {
       .map((data: any) => data.json());
   }
 
+  getEmployeeTravelsById(text: string): Observable<any> {
+    return this.tokenService.get('employee_requets/search_employees/' + text)
+      .map((data: any) => data.json());
+  }
+
+  
+
 }
