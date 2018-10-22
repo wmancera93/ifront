@@ -57,5 +57,9 @@ getViewEvaluationPDF(idEvaluation:number){
    return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
       .map((data: any) => data.json());
 }
+getSendEvaluationsComplete(idEvaluationComplete:number){
+  return this.tokenService.get('perfomance_evaluations/sender_complete/' + idEvaluationComplete)
+     .map((data: any) => data.json());
+}
 
 }
