@@ -66,7 +66,7 @@ export class SpendComponent implements OnInit {
     this.chargeDataSpends();
   }
 
-  checkSpends(spend) {
+  checkSpends(spend) {    
     switch (spend) {
       case 'spends_request':
         this.chargeDataSpends();
