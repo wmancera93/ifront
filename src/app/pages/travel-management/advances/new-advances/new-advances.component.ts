@@ -146,6 +146,7 @@ export class NewAdvancesComponent implements OnInit {
   }
 
   newAdvance(param) {
+    this.showSubmit = false;
     let objectSendAdvance =
     {
       travel_request_id: this.formAdvanceTravel.controls['travel_request_id'].value,
@@ -168,6 +169,7 @@ export class NewAdvancesComponent implements OnInit {
             document.getElementById("closeAdvances").click();
             this.alert.setAlert(alertSuccess[0]);
             this.advanceSharedService.setRefreshAdvanceList(true);
+            this.showSubmit = true;
           },
           (error: any) => {
 
@@ -182,6 +184,7 @@ export class NewAdvancesComponent implements OnInit {
               }];
 
               this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
             })
           }
 
@@ -199,6 +202,7 @@ export class NewAdvancesComponent implements OnInit {
         }];
 
         this.alert.setAlert(alertWarning[0]);
+        this.showSubmit = true;
       })
   }
 
