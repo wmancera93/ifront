@@ -33,6 +33,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public showSizeTable: boolean = false;
   public is_collapse: boolean = false;
   public nameReport: string = 'Objetivos de Evaluación';
+  public flag_complete: boolean = false;
+  public showCharge: boolean = true;
 
   public countAfter: number = 0;
 
@@ -44,9 +46,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public alert: AlertsService) {
 
     this.alert.getActionConfirm().subscribe((data) => {
-      if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives') {
+      debugger
+      if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
         document.getElementById('btn-evaluationObjetives').click()
-
+        this.showCharge = true;
         this.formObjetive = new FormGroup({});
         this.formObjetive = fb.group({
           start_date: '',
@@ -55,7 +58,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           objetive_text: '',
         });
 
-         
+
       }
     })
 
@@ -66,6 +69,13 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.idEvaluation = this.EvaluacionPer.id;
         document.getElementById('btn-evaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
+
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
+        this.dataTableConsult();
       }
     })
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -78,13 +88,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      debugger
       if (data.action_method === "updateEvaluationObjetive") {
-
+        document.getElementById("funtionObjectives").click();
         this.idEdit = data.id;
         this.bedit = true;
         this.bnew = false;
-
-        document.getElementById("funtionObjectives").click();
         this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
           let startDate = dataID.data.start_date_obj.split("-");
           let endDate = dataID.data.end_date_obj.split("-");
@@ -96,15 +105,23 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             objetive_text: dataID.data.objetive_text
           });
         });
+
       }
       if (data.action_method === "deleteEvaluationObjetive") {
+
         this.performanceEvaluationService.deleteEvaluationObjetive(data.id).subscribe((state: any) => {
+          this.EvaluacionPer = state.data[0];
+          if (this.EvaluacionPer.current_weight == '100.0') {
+            this.flag_complete = true;
+          } else {
+            this.flag_complete = false;
+          }
           const alertWarning: Alerts[] = [{
             type: 'success',
             title: 'Confirmación',
             message: state.message,
-            confirmation: false,
-            typeConfirmation: ''
+            confirmation: true,
+            typeConfirmation: 'deleteEvaluationByObjetive'
           }];
           this.dataTableConsult();
           document.getElementById("closeModalObjectiveEvaluation").click();
@@ -113,7 +130,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       }
     });
 
-    this.dataTableConsult();
   }
 
   dataTableConsult() {
@@ -121,16 +137,16 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       this.ObjectivesTable = table;
       setTimeout(() => {
         this.objectReport.emit(this.ObjectivesTable);
-      }, 100);
+      }, 50);
     })
   }
-
 
   ngOnInit() {
 
 
   }
   newObjetive(model) {
+    debugger
     this.showSubmit = false;
     this.sendDataObjective = {
       perfomance_evaluation_id: this.idEvaluation,
@@ -142,6 +158,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     };
     if (this.bedit) {
       this.performanceEvaluationService.putEvaluationObjetive(this.idEdit, this.sendDataObjective).subscribe((edit: any) => {
+        this.EvaluacionPer = edit.data[0];
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
@@ -151,7 +173,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           typeConfirmation: 'evaluationObjectives'
         }];
         this.closeObjetive();
-        document.getElementById("closeModalObjectiveEvaluation").click();
+        document.getElementById("closeModalObjectiveEvaluation").click()
         this.dataTableConsult();
         this.alert.setAlert(alertWarning[0]);
       },
@@ -169,9 +191,14 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           this.showSubmit = true;
         })
 
-    }
-    else {
+    } else {
       this.performanceEvaluationService.postEvaluationObjetive(this.sendDataObjective).subscribe((info: any) => {
+        this.EvaluacionPer = info.data[0];
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
@@ -182,6 +209,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         }];
         this.closeObjetive();
         this.dataTableConsult();
+
         document.getElementById("closeModalObjectiveEvaluation").click();
         this.alert.setAlert(alertWarning[0]);
 
@@ -203,6 +231,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
 
   }
+
   colapseNew() {
     if (!this.bnew) {
       this.bnew = true
@@ -210,22 +239,39 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       this.bnew = false
     }
     document.getElementById("funtionObjectives").click();
+    setTimeout(() => {
+      document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);
+    }, 200);
   }
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
   closeObjetive() {
-    this.is_collapse = false;
-    this.showSubmit = true;
-    this.bedit = false;
-    this.bnew = false
-    this.formObjetive = this.fb.group({
-      start_date: '',
-      end_date: '',
-      weight: '',
-      objetive_text: '',
-    });
+    if (!this.flag_complete) {
+      this.is_collapse = false;
+      this.showSubmit = true;
+      this.bedit = false;
+      this.bnew = false
+      document.getElementById("funtionObjectives").click();
+      this.formObjetive = this.fb.group({
+        start_date: '',
+        end_date: '',
+        weight: '',
+        objetive_text: '',
+      });
+    } else {
+      this.is_collapse = false;
+      this.showSubmit = true;
+      this.bedit = false;
+      this.bnew = false
+      this.formObjetive = this.fb.group({
+        start_date: '',
+        end_date: '',
+        weight: '',
+        objetive_text: '',
+      });
+    }
   }
 
   ngOnDestroy() {
@@ -236,5 +282,31 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   //   debugger
   //   console.log(this.ObjectivesTable);
   // }
-
+  evaluationComplete() {
+    this.showCharge = false;
+    this.performanceEvaluationService.getSendEvaluationsComplete(this.idEvaluation).subscribe((data: any) => {
+      const alertWarning: Alerts[] = [{
+        type: 'success',
+        title: 'Confirmación',
+        message: data.message,
+        confirmation: false,
+        typeConfirmation: ''
+      }];
+      this.closeObjetive();
+      this.alert.setAlert(alertWarning[0]);
+    },
+      (error: any) => {
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: error.json().errors.toString() + '¿desea continuar con los objetivos de evaluación?',
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
+        }];
+        this.closeObjetive();
+        document.getElementById("closeModalObjectiveEvaluation").click();
+        this.alert.setAlert(alertWarning[0]);
+        this.showSubmit = true;
+      });
+  }
 }

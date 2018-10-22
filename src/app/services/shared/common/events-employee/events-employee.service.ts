@@ -5,6 +5,7 @@ import { Subject } from 'rxjs/Subject';
 export class EventsEmployeeService {
 
   infoEventEmployee: Subject<any> = new Subject<any>();  
+  refreshEvent: Subject<any> = new Subject<any>(); 
 
   constructor() { }
 
@@ -16,4 +17,11 @@ export class EventsEmployeeService {
     return this.infoEventEmployee.next(infoEmployee);
   }
 
+  getRefreshEventEmployee() {
+    return this.refreshEvent;
+  }
+
+  setRefreshEventEmployee(refreshEvent: any) {
+    return this.refreshEvent.next(refreshEvent);
+  }
 }
