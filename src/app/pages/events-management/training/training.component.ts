@@ -43,7 +43,6 @@ export class TrainingComponent implements OnInit {
   }
   searchEvents() {
     this.trainingService.getTrainingEvents().subscribe((data: any) => {
-      debugger
       this.dataTabletraining = data;
       this.nameReport = data.data[0].title;
       if (data.data[0].data.length > 0) {
