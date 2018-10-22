@@ -40,10 +40,20 @@
         </div>
       </div>
       <div class="row top-containter" style="margin-top: 20px">
-        <div class="col-xl-2 col-lg-4 col-12 text-left">
-          <b>
-            Gastos reportados
-          </b>
+        <div class="col-12 text-left">
+          <form>
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request"
+              checked (click)="checkSpends('spends_request')" />
+            <b>
+              Mis gastos registrados
+            </b>
+            &nbsp;&nbsp;
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request"
+              (click)="checkSpends('my_spends_request')" />
+            <b *ngIf="userAuthenticated.employee.trip_by_third">
+              Gastos registrados a terceros
+            </b>
+          </form>
         </div>
       </div>
       <div class="row justify-content-center top-containter">

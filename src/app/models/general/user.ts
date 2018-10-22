@@ -39,7 +39,8 @@ export interface Employee {
     see_rpgen?:string,
     is_admin?: string,
     new_cont?: string,
-    is_approver?: boolean
+    is_approver?: boolean,
+    trip_by_third?: boolean
     
 }
 export interface Boss{

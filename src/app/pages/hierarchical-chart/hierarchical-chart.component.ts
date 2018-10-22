@@ -22,10 +22,6 @@ export class HierarchicalChartComponent implements OnInit {
   // @Output() name: string = 'hierarhical';
   @Output() name: EventEmitter<string> = new EventEmitter();
  
-
-
- 
-
   public flagActivatethirdLevel: boolean = false;
   public topEmployee: MyPosition;
   public beforeTopEmployee: MyPosition;

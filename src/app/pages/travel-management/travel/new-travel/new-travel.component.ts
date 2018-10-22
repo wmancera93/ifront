@@ -16,6 +16,8 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TagModelClass } from 'ngx-chips/core/accessor';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { User } from '../../../../models/general/user';
 
 @Component({
   selector: 'app-new-travel',
@@ -25,6 +27,7 @@ import { TagModelClass } from 'ngx-chips/core/accessor';
 export class NewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
+  public userAuthenticated: User = null;
 
   public token: boolean;
   public showPdf: boolean = false;
@@ -80,6 +83,12 @@ export class NewTravelComponent implements OnInit {
   public operations: any[] = [];
   public idGrahpTravel: string = '';
 
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
+
   public kostl: boolean = false;
   public nplnr: boolean = false;
   public today: any;
@@ -88,7 +97,10 @@ export class NewTravelComponent implements OnInit {
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
-    public alert: AlertsService, public advanceSharedService: AdvanceSharedService, public router: Router, ) {
+    public alert: AlertsService, public advanceSharedService: AdvanceSharedService
+    , public router: Router, public employeeService: EmployeeService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.travelProof = [{
       success: true,
@@ -297,6 +309,33 @@ export class NewTravelComponent implements OnInit {
 
   }
 
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
+  }
+
   delete(date_param) {
     switch (date_param) {
       case 'date_begin_header':
@@ -368,7 +407,6 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-
     this.showSubmit = false;
     this.send = true;
 
@@ -384,6 +422,7 @@ export class NewTravelComponent implements OnInit {
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
+    modelFromdata.append('employee_id', this.eployee_selected == null ? this.userAuthenticated.employee_id : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -404,6 +443,7 @@ export class NewTravelComponent implements OnInit {
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
               this.travelsService.setResultSaved(true);
+              this.eployee_selected = null;
             }
           } else {
             if (data.success) {
@@ -413,6 +453,7 @@ export class NewTravelComponent implements OnInit {
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
               this.travelsService.setResultSaved(true);
+              this.eployee_selected = null;
             }
           }
         },
