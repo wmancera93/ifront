@@ -297,6 +297,13 @@ a {
 }
 
 /* begin search autocomplete */
+    .roundPhotoChart{
+        width: 100% !important;
+        height:100% !important;      
+        border-radius:50px;     
+        -webkit-box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
+        box-shadow: -9px 11px 32px -6px rgba(0,0,0,0.5);
+    }
  
     .list-search-autocomplete{
         color : #707070;
