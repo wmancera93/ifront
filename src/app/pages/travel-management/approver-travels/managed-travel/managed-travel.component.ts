@@ -16,8 +16,8 @@ export class ManagedTravelComponent implements OnInit {
   public managedRequestTravel: any[] = [];
   public travelsRequestsManagedType: string = 'travels';
   public typesRequestManaged: any[] = [];
-  public request_managed_id :string;
-  public request_managed_type :string;
+  public request_managed_id: string;
+  public request_managed_type: string;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -26,7 +26,7 @@ export class ManagedTravelComponent implements OnInit {
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
-    public travelApproverServiceShared:TravelApproverService) {
+    public travelApproverServiceShared: TravelApproverService) {
 
     this.typesRequestManaged.push(
       {
@@ -77,30 +77,30 @@ export class ManagedTravelComponent implements OnInit {
     switch (param.id.toString()) {
 
       case '1':
-      this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-        if (data) {
-          this.travelsRequestsManagedType = 'travels';
-          this.managedRequestTravel = data.data[0].requests;
-        }
-      })
+        this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
+          if (data) {
+            this.travelsRequestsManagedType = 'travels';
+            this.managedRequestTravel = data.data[0].requests;
+          }
+        })
         break;
       case '2':
-
-
-        this.travelsRequestsManagedType = 'advance';
-
+        this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
+          this.travelsRequestsManagedType = 'advance';
+          this.managedRequestTravel = data.data[0].requests;
+        })
         break;
       case '3':
-      this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-        if (data) {
-          this.travelsRequestsManagedType = 'spend';
-          this.managedRequestTravel = data.data[0].requests;
-        }
-      })
+        this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
+          if (data) {
+            this.travelsRequestsManagedType = 'spend';
+            this.managedRequestTravel = data.data[0].requests;
+          }
+        })
         break;
       default:
 
-        break;                                                                                                                 
+        break;
     }
   }
 }

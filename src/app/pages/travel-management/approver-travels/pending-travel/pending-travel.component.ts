@@ -90,13 +90,13 @@ export class PendingTravelComponent implements OnInit {
 
         break;
       case '2':
-        // this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
-        //   if (data) {
-        //     this.travelsRequestsType = 'advance';
-        //     this.pendingsRequestTravels = data.data[0].requests;
-        //   }
-        // })
-        this.travelsRequestsType = 'advance';
+        this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+          if (data){
+            this.travelsRequestsType = 'advance';
+            this.pendingsRequestTravels = data.data[0].requests;
+          }
+        })
+        
         break;
       case '3':
         this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
