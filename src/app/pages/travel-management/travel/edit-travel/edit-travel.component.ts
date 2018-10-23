@@ -422,8 +422,8 @@ export class EditTravelComponent implements OnInit {
     return dataBySort;
   }
 
-    delete(date_param) {
-    
+  delete(date_param) {
+
     switch (date_param) {
       case 'date_begin_header':
         this.formTravelManagement.controls['date_requests_begin'].setValue(this.generalViajes[0].travel_request.date_begin);
@@ -1176,7 +1176,7 @@ export class EditTravelComponent implements OnInit {
 
   }
   hourValidationsEdit(hourTrayect) {
-
+    debugger
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');

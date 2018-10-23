@@ -361,7 +361,7 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
+                      <input type="time" name="hour_begin" min="00:00" max="23:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
                     </div>
                   </div>
                 </div>
@@ -438,7 +438,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
+                      <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
                         (change)="hourvalidations(formTravelManagement.value)" />
                     </div>
                   </div>

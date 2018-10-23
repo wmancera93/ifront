@@ -53,7 +53,7 @@
           </div>
 
           <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
-            <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="manutencionCheck" [formControl]="formTravelManagement.controls['maintenance']">
+            <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" id="manutencionCheck" [formControl]="formTravelManagement.controls['maintenance']">
             <label class="form-check-label titleColor" for="manutencionCheck">
               <strong>Manutención</strong>
             </label>
@@ -340,7 +340,7 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" (keydown)="delete('hour_begin')"/>
+                      <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"/>
                     </div>
                   </div>
                 </div>
@@ -414,8 +414,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)" (keydown)="delete('hour_end')"
-                      />
+                      <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)" />
                     </div>
                   </div>
                 </div>
