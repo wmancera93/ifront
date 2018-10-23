@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Http, ResponseContentType } from '@angular/http';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { User } from '../../../../models/general/user';
 
 @Component({
   selector: 'app-view-travel',
@@ -38,11 +39,14 @@ export class ViewTravelComponent implements OnInit {
   public table_advances_view: any[] = [];
   public table_spend_view: any[] = [];
 
+  public eployee_selected: any = null;
+
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService,
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
+
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueViewTravelRequests') {
@@ -62,7 +66,6 @@ export class ViewTravelComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
-        debugger
         this.view_travels = [];
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
@@ -70,6 +73,19 @@ export class ViewTravelComponent implements OnInit {
         this.annexeds = result.data[0].travel_request_annexeds;
         this.view_travels.push(result.data[0].travel_request);
         this.maintenance = result.data[0].travel_request.is_maintenance;
+
+        if (result.data[0].travel_request.employee_applicant_to_json !== null) {
+          this.eployee_selected = {
+            id: result.data[0].travel_request.employee_applicant_to_json.personal_code,
+            image: result.data[0].travel_request.employee_applicant_to_json.image,
+            name_complete: result.data[0].travel_request.employee_applicant_to_json.short_name,
+            posicion: result.data[0].travel_request.employee_applicant_to_json.position
+          }
+        } else {
+          this.eployee_selected = null;
+        }
+
+
 
         if (this.maintenance) {
           this.maintenance_travel = 'Con manutención'
@@ -80,7 +96,6 @@ export class ViewTravelComponent implements OnInit {
 
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
-        debugger
         this.allRequests = detail;
         this.table_advances_view = [];
         this.table_spend_view = [];

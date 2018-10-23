@@ -43,12 +43,12 @@
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-12 text-left">
           <form>
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="travels_request" checked (click)="checkTravels('travels_request')"/>
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="travels_request" [checked]="checkThird" (click)="checkTravels('travels_request')"/>
             <b>
               Mis viajes registrados
             </b>
             &nbsp;&nbsp;
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_travels_request" (click)="checkTravels('my_travels_request')"/>
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_travels_request" [checked]="!checkThird" (click)="checkTravels('my_travels_request')"/>
             <b *ngIf="userAuthenticated.employee.trip_by_third">
               Viajes registrados a terceros
             </b>
