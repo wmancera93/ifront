@@ -417,7 +417,6 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
-        debugger
         document.getElementById("closeSpends").click();
 
         this.spendsService.getSpendListTravel().subscribe((travel: any) => {
@@ -432,7 +431,7 @@ export class NewSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend(true);
+        this.spendSharedService.setRefreshSpend({success: true, third: this.eployee_selected == null ? false : true});
       },
       (error: any) => {
         document.getElementById("btn_spend_new").click();

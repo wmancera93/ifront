@@ -12,7 +12,6 @@
       </div>
       <div class="modal-body bodyColorInfo" *ngIf="generalViajes != null">
         <form [formGroup]="formTravelManagement" class="row justify-content-left" (ngSubmit)="newEditTravel(formTravelManagement.value)">
-
           <div class="col-12 align-self-center" *ngIf="eployee_selected_current !== null">
             <label class="titleColor">
               Viaje creado para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected_current.name_complete}}</strong>
