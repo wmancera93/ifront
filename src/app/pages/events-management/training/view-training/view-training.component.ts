@@ -21,7 +21,6 @@ export class ViewTrainingComponent implements OnInit {
   public observations: string = "";
   public urlPrevisualize: string;
   public flagPDF: boolean = false;
-
   public countAfterEval: number = 0;
 
   constructor(public trainingSharedService: TrainingSharedService,
@@ -88,7 +87,6 @@ export class ViewTrainingComponent implements OnInit {
 
 
   ngOnDestroy() {
-    debugger
     this.countAfterEval += 1;
   }
 }
