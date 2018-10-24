@@ -69,8 +69,11 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-12 text-center top-p">
                   <div class="row">
-                    <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)">
+                    <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code ==='2'">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c831"></i>
+                    </div> 
+                    <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code !=='2'" style="cursor: no-drop">
+                      <i class="fa fa-eye" aria-hidden="true"></i>
                     </div> 
                     <div class="col-4 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluation.status_complete === false && evaluation.status_code ==='2'">
                       <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8"></i>
@@ -82,7 +85,7 @@
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>  
                     <div class="col-4">
-                      Ver Evaluación
+                      Ver Objetivos
                      </div>              
                     <div class="col-4">
                       Modificar objetivos
