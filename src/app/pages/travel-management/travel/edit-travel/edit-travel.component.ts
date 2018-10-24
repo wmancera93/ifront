@@ -15,6 +15,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { element } from 'protractor';
 import { truncate } from 'fs';
+import { User } from '../../../../models/general/user';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
 @Component({
   selector: 'app-edit-travel',
@@ -88,6 +90,14 @@ export class EditTravelComponent implements OnInit {
   public grahp: any[] = [];
   public operations: any[] = [];
 
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
+  public eployee_selected_current: any = null;  
+  public userAuthenticated: User = null;
+
   public kostl: boolean = false;
   public nplnr: boolean = false;
 
@@ -96,7 +106,9 @@ export class EditTravelComponent implements OnInit {
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService,
     public http: Http, public formDataService: FormDataService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public employeeService: EmployeeService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates' || data === 'sendApprobalAlert') {
@@ -275,6 +287,17 @@ export class EditTravelComponent implements OnInit {
                 travel_mileage: '',
               });
 
+              if (result.data[0].travel_request.employee_applicant_to_json !== null) {
+                this.eployee_selected_current = {
+                  id: result.data[0].travel_request.employee_applicant_to_json.personal_code,
+                  image: result.data[0].travel_request.employee_applicant_to_json.image,
+                  name_complete: result.data[0].travel_request.employee_applicant_to_json.short_name,
+                  posicion: result.data[0].travel_request.employee_applicant_to_json.position
+                }
+              } else {
+                this.eployee_selected_current = null;
+              }
+
               setTimeout(() => {
                 this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
                 this.objectReport.emit({ success: true, data: [this.objectPrint] });
@@ -406,6 +429,33 @@ export class EditTravelComponent implements OnInit {
 
   }
 
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
+  }
+
   sortByAphabet(dataBySort: any) {
     dataBySort.sort(function (a, b) {
       const nameA: String = a.name.toLowerCase();
@@ -422,8 +472,8 @@ export class EditTravelComponent implements OnInit {
     return dataBySort;
   }
 
-    delete(date_param) {
-    
+  delete(date_param) {
+
     switch (date_param) {
       case 'date_begin_header':
         this.formTravelManagement.controls['date_requests_begin'].setValue(this.generalViajes[0].travel_request.date_begin);
@@ -495,6 +545,7 @@ export class EditTravelComponent implements OnInit {
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
+    modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -1176,7 +1227,7 @@ export class EditTravelComponent implements OnInit {
 
   }
   hourValidationsEdit(hourTrayect) {
-
+    debugger
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');

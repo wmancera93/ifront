@@ -4,6 +4,7 @@ import { SpendsService } from '../../../../services/travel-management/spends/spe
 import { Http, ResponseContentType } from '@angular/http';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-view-spend',
@@ -16,19 +17,28 @@ export class ViewSpendComponent implements OnInit {
   public showTravelDetail: any[] = [];
   public showTableSpendsDetail: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
+  public objectPrintAdvancesView: EventEmitter<any> = new EventEmitter();
+  public objectPrintTravelView: EventEmitter<any> = new EventEmitter();
   public nameReport: string = 'Gastos';
   public edit: boolean = false;
   public anexes: any[] = [];
   public id_spend: string;
+  public allRequestsInSpend: any[] = [];
+  public table_advances_spend: any[];
+  public table_travels_spend: any[];
+  public ticket: string;
+  public nameReportAdvance: string = 'Anticipos de viaje';
+  public nameReportTravels: string = 'Trayectos de viaje';
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
-    public http: Http, public alert: AlertsService) {
+    public http: Http, public alert: AlertsService, public travelManagementService: TravelService) {
 
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
+      debugger
       this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
-
         this.id_spend = idSpend;
+        this.ticket = data.data[0].travel_allowance_request.travel_request_id
         this.showSpendDetail = data.data[0];
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
@@ -44,6 +54,45 @@ export class ViewSpendComponent implements OnInit {
           document.getElementById("bodyGeneral").removeAttribute('style');
         }
       });
+      setTimeout(() => {
+        this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
+          debugger
+          this.allRequestsInSpend = detail.data;
+          this.table_advances_spend = [];
+          this.table_travels_spend = [];
+          if (detail.data[0].travel_advance_requests.data.length > 0) {
+
+            detail.data[0].travel_advance_requests.data.forEach(element => {
+              element.travel_advance_payments.forEach(dataObject => {
+                this.table_advances_spend.push(dataObject)
+              });
+            });
+
+            let object = {
+              labels: detail.data[0].travel_advance_requests.labels,
+              data: this.table_advances_spend,
+            }
+            setTimeout(() => {
+              this.objectPrintAdvancesView.emit({ success: true, data: [object] });
+            }, 500);
+          } else {
+            setTimeout(() => {
+              this.objectPrintAdvancesView.emit({ success: true, data: [] });
+            }, 500);
+          }
+
+          if (detail.data[0].travel_managements.data.length > 0) {
+            setTimeout(() => {
+              this.objectPrintTravelView.emit({ success: true, data: [detail.data[0].travel_managements] });
+            }, 500);
+          } else {
+            setTimeout(() => {
+              this.objectPrintTravelView.emit({ success: true, data: [] });
+            }, 500);
+          }
+        })
+      }, 1000);
+
 
     })
   }
@@ -68,12 +117,8 @@ export class ViewSpendComponent implements OnInit {
 
       });
   }
-
-
-
   viewAnnex(paramView) {
     window.open(paramView.file.url)
-
   }
 
   downloadAnnex(param: any) {

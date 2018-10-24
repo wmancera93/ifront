@@ -74,6 +74,57 @@
           </div>
         </div>
 
+        <div class="row" *ngIf="allRequestsInSpend.length > 0">
+          <div id="accordion" class="col-12" style="margin-top: 15px">
+            <div class="row">
+              <div class="col-12 text-left" id="headingOne">
+                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse" data-target="#collapseTravels" aria-expanded="false" aria-controls="collapseTravels">
+                  Ver pasaje, hotel y trayectos de solicitud</p>
+              </div>
+              <div id="collapseTravels" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion"
+                style="margin-top: 25px">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <strong>Fecha inicial de solicitud:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label>{{allRequestsInSpend[0].travel_request.date_begin_format}}</label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <strong>Fecha final de solicitud:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label>{{allRequestsInSpend[0].travel_request.date_end_format}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <app-data-table [records]="objectPrintTravelView" [pdf]="showPdf" id="tableTravelsSaved"
+                      [sizeTable]="showSizeTable" [title]="nameReportTravels"></app-data-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="text-primary col-12 text-left" id="headingTwo">
+                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse" data-target="#collapseAdvance" aria-expanded="false" aria-controls="collapseAdvance">Ver
+                  anticipos de viaje</p>
+              </div>
+              <div id="collapseAdvance" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
+                style="margin-top: 25px">
+                <app-data-table [records]="objectPrintAdvancesView" [pdf]="showPdf" id="tableAdvanceSaved"
+                  [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <div class="row justify-content-end" style="padding-bottom: 25px">
           <div class="col-lg-4 col-md-6 col-12">
             <button class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">

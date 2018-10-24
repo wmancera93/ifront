@@ -17,7 +17,7 @@
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>Si va realizar un viaje para un tercero, busque por el nombre en la caja de texto:</strong>
+                  <strong>Si va a realizar un viaje para un tercero, busque por el nombre en la caja de texto:</strong>
                 </label>
                 <form name="searchAutoComplete">
                   <p>
@@ -361,7 +361,7 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
+                      <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
                     </div>
                   </div>
                 </div>
@@ -438,7 +438,7 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
+                      <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
                         (change)="hourvalidations(formTravelManagement.value)" />
                     </div>
                   </div>
@@ -458,10 +458,12 @@
                 </div>
 
                 <div class="col-12 top-containter" style="margin-top: 30px">
-                  <div class="row justify-content-end">
+                  <div class="row justify-content-end" *ngIf="!showMilenage">
                     <div class="col-lg-3 col-md-4 col-12">
                       <button type="button" [attr.disabled]="
                       ( formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_transport == ''
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
@@ -478,6 +480,8 @@
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
                       <button [attr.disabled]="
                       (formTravelManagement.value.id_country == -1
+                      || formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_transport == ''
                         || formTravelManagement.value.id_country == ''
                         || formTravelManagement.value.id_state == -1
                         || formTravelManagement.value.id_state == ''
@@ -503,6 +507,62 @@
                         <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                     </div>
                   </div>
+                  <div class="row justify-content-end" *ngIf="showMilenage">
+                    <div class="col-lg-3 col-md-4 col-12">
+                      <button type="button" [attr.disabled]="
+                      ( formTravelManagement.value.id_country == -1
+                        || formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_transport == ''
+                        || formTravelManagement.value.id_country == ''
+                        || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_state == ''
+                        || formTravelManagement.value.date_begin == ''
+                        || formTravelManagement.value.hour_begin == ''
+                        || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_countryto == ''
+                        || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_stateto == ''
+                        || formTravelManagement.value.date_end == ''
+                        || formTravelManagement.value.hour_end == ''
+                        || formTravelManagement.value.id_city == ''
+                        || formTravelManagement.value.id_cityto == '') ? true : null"
+                        *ngIf="bnew" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)"
+                        data-toggle="collapse" data-target="#collapseTravel">
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino</button>
+                      <button [attr.disabled]="
+                      (formTravelManagement.value.id_country == -1
+                      || formTravelManagement.value.id_transport == -1
+                        || formTravelManagement.value.id_transport == ''
+                        || formTravelManagement.value.id_country == ''
+                        || formTravelManagement.value.id_state == -1
+                        || formTravelManagement.value.id_state == ''
+                        || formTravelManagement.value.id_terminal == -1
+                        || formTravelManagement.value.id_terminal == ''
+                        || formTravelManagement.value.date_begin == ''
+                        || formTravelManagement.value.hour_begin == ''
+                        || formTravelManagement.value.id_countryto == -1
+                        || formTravelManagement.value.id_countryto == ''
+                        || formTravelManagement.value.id_stateto == -1
+                        || formTravelManagement.value.id_stateto == ''
+                        || formTravelManagement.value.id_terminalto == -1
+                        || formTravelManagement.value.id_terminalto == ''
+                        || formTravelManagement.value.date_end == ''
+                        || formTravelManagement.value.hour_end == ''
+                        || formTravelManagement.value.id_city == ''
+                        || formTravelManagement.value.id_cityto == ''
+                        || formTravelManagement.value.travel_mileage == '') ? true : null"
+                        *ngIf="bedit" class="btn btn-primary btn-block cursor-general" (click)="addDestinationEdit(formTravelManagement.value)"
+                        data-toggle="collapse" data-target="#collapseTravel">
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
+                    </div>
+                    <div class="col-lg-3 col-md-4 col-12">
+                      <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeTrip()"
+                        data-toggle="collapse" data-target="#collapseTravel">
+                        <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
+                    </div>
+                  </div>
+
+
                 </div>
 
               </div>
@@ -518,7 +578,6 @@
               <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>
