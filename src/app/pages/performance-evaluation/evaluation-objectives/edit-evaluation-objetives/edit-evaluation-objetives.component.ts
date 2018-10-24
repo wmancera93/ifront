@@ -88,8 +88,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      debugger
       if (data.action_method === "updateEvaluationObjetive") {
         document.getElementById("funtionObjectives").click();
+        setTimeout(() => {
+          document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);
+        }, 200);
         this.idEdit = data.id;
         this.bedit = true;
         this.bnew = false;
