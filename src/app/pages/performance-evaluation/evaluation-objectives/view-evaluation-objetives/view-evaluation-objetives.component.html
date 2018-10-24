@@ -1,0 +1,166 @@
+<button id="btn-viewEvaluationObjetives" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_viewEvaluationObjetives"
+  style="display:none;">
+</button>
+<div class="modal" tabindex="-1" role="dialog" id="modal_viewEvaluationObjetives">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content ">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de evaluacion</h5>
+        <button id="closeModalObjectiveEvaluation" type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <div class="row justify-content-center">
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPerView !== null">
+            <div class="row border" style="margin-left: 2px">
+              <h4>Datos de Evaluación</h4>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 30px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-file-text text-primary-hr"></i>
+                      <strong>Nombre:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-8 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      {{EvaluacionPerView.name}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-6 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
+                      <strong>Periodo de Evaluación:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-4 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-start text-primary-hr"></i>
+                          <strong>Inicia:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-8 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPerView.start_evaluation_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-4 col-md-12 col-12">
+                    <div class="row">
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-hourglass-end text-primary-hr"></i>
+                          <strong>Finaliza:</strong>
+                        </label>
+                      </div>
+                      <div class="col-lg-6 col-md-6 col-6">
+                        <label for="nomEvaluation" class="titleColor">
+                          {{EvaluacionPerView.end_evaluation_date}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class=" col-12 top-containter" style="margin-top: 15px">
+                <div class="row">
+                  <div class="col-lg-4 col-md-4 col-12">
+                    <label for="nomEvaluation" class="titleColor">
+                      <i class="fa fa-user-o text-primary-hr"></i>
+                      <strong>Calificador</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-12">
+                    <div class="row text-center">
+                      <div class="col-lg-4 col-md-4 col-12">
+                        <img class="roundPhoto-employee" src="{{qualifierDataView.image.url}}">
+                      </div>
+                      <div class="col-lg-8 col-md-8 col-12">
+                        <label for="nomEvaluation" class="titleColor">
+                          <i class="fa fa-graduation-cap text-primary-hr"></i>
+                          {{qualifierDataView.name_complete}}
+                        </label>
+                        <label for="nomEvaluation" class="titleColor">
+                          {{qualifierDataView.position}}
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body bodyColorInfo">
+        <div class="row justify-content-center">
+          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPerView !== null">
+            <div class="row border" style="margin-left: 2px">
+              <div class="col-12">
+                <h4>Objetivos de Evaluación</h4>
+              </div>
+            </div>
+            <div class="row" style="margin-top: 30px">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-check-circle-o text-primary-hr"></i>
+                  <strong>Total Objetivos:</strong>
+                </label>
+                <label class="col-lg-4 col-md-6 col-12">
+                  <a>{{EvaluacionPerView.count_evaluation_objetives}}</a>
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-thermometer-full text-primary-hr"></i>
+                  <strong>Porcentaje completado</strong>
+                </label>
+              </div>
+              <div class="col-lg-2 col-md-6 col-12">
+                <label class="titleColor">
+                  <a>{{EvaluacionPerView.current_weight}}%</a>
+                </label>
+              </div>
+              <div class="col-lg-4 col-md-6 col-12">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-thermometer-half text-primary-hr"></i>
+                  <strong>Porcentaje Faltante</strong>
+                </label>
+              </div>
+              <div class="col-lg-2 col-md-6 col-12">
+                <label class="titleColor">
+                  <a> {{EvaluacionPerView.missing_weight}}%</a>
+                </label>
+              </div>
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-12 widget">
+                <div class="row">
+                  <div class="col-12 top-general-p">
+                    <app-data-table [records]="objectReportEval" id="tableEvaluationView" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

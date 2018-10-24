@@ -35,6 +35,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public nameReport: string = 'Objetivos de Evaluación';
   public flag_complete: boolean = false;
   public showCharge: boolean = true;
+  public status: boolean = true;
 
   public countAfter: number = 0;
 
@@ -76,7 +77,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         }
         this.dataTableConsult();
       }
-    })
+    });
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
     this.formObjetive = fb.group({
@@ -131,7 +132,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
 
   dataTableConsult() {
-    this.performanceEvaluationService.getEvaluationObjetive().subscribe((table: any) => {
+    this.performanceEvaluationService.getEvaluationObjetive(this.status).subscribe((table: any) => {
       this.ObjectivesTable = table;
       setTimeout(() => {
         this.objectReport.emit(this.ObjectivesTable);
@@ -246,19 +247,19 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
   closeObjetive() {
 
-      this.is_collapse = false;
-      this.showSubmit = true;
-      this.bedit = false;
-      this.bnew = false
-      document.getElementById("funtionObjectives").click();
+    this.is_collapse = false;
+    this.showSubmit = true;
+    this.bedit = false;
+    this.bnew = false
+    document.getElementById("funtionObjectives").click();
 
-      this.formObjetive = this.fb.group({
-        start_date: '',
-        end_date: '',
-        weight: '',
-        objetive_text: '',
-      });
-    
+    this.formObjetive = this.fb.group({
+      start_date: '',
+      end_date: '',
+      weight: '',
+      objetive_text: '',
+    });
+
   }
 
   ngOnDestroy() {

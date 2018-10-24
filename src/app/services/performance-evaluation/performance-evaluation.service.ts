@@ -19,8 +19,8 @@ export class PerformanceEvaluationService {
     return this.tokenService.get('perfomance_evaluations/' + IdEvaluation)
       .map((data: any) => data.json());
   }
-  getEvaluationObjetive() {
-    return this.tokenService.get('evaluation_objetive')
+  getEvaluationObjetive(status:boolean) {
+    return this.tokenService.get('evaluation_objetive/' + status)
       .map((data: any) => data.json());
   }
   getEvaluationObjetiveByID(IdObjective) {
@@ -28,7 +28,7 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
   getEvaluationObjetiveID(id) {
-    return this.tokenService.get('evaluation_objetive/' + id)
+    return this.tokenService.get('evaluation_objetive/' + id )
       .map((data: any) => data.json());
   }
   postEvaluationObjetive(data) {

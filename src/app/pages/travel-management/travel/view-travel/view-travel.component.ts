@@ -62,7 +62,6 @@ export class ViewTravelComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
-        debugger
         this.view_travels = [];
         this.observations = result.data[0].travel_request.observation;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
@@ -80,7 +79,6 @@ export class ViewTravelComponent implements OnInit {
 
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
-        debugger
         this.allRequests = detail;
         this.table_advances_view = [];
         this.table_spend_view = [];
