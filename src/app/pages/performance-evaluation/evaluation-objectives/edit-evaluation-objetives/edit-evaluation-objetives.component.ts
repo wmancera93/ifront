@@ -17,7 +17,7 @@ import { start } from 'repl';
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
 
-  public idEvaluation: number;
+  public idEvaluation: string;
   public EvaluacionPer: PerformanceEvaluation = null;
   public sendDataObjective: any;
   public qualifierData: Qualifier[] = [];
@@ -66,7 +66,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       if (this.countAfter === 0) {
         this.EvaluacionPer = info;
         this.qualifierData = info.qualifier;
-        this.idEvaluation = this.EvaluacionPer.id;
+        this.idEvaluation = info.id;
         document.getElementById('btn-evaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
@@ -88,7 +88,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      debugger
+
       if (data.action_method === "updateEvaluationObjetive") {
         document.getElementById("funtionObjectives").click();
         setTimeout(() => {
@@ -136,7 +136,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
 
   dataTableConsult() {
-    this.performanceEvaluationService.getEvaluationObjetive(this.status).subscribe((table: any) => {
+    this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status).subscribe((table: any) => {
       this.ObjectivesTable = table;
       setTimeout(() => {
         this.objectReport.emit(this.ObjectivesTable);
