@@ -13,7 +13,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
   public countAfter: number = 0;
   public EvaluacionPerView: any = null;
   public qualifierDataView: Qualifier[] = [];
-  public idEvaluation: number;
+  public idEvaluation: string;
   public status: boolean = false;
   public ObjectivesTableView: any[] = [];
   public nameReport: string = 'Objetivos de Evaluación'
@@ -31,7 +31,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
         document.getElementById('btn-viewEvaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
-        this.performanceEvaluationService.getEvaluationObjetive(this.status)
+        this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status)
           .subscribe((table: any) => {
             this.ObjectivesTableView = table;
             setTimeout(() => {
