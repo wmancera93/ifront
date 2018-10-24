@@ -43,13 +43,13 @@
         <div class="col-12 text-left">
           <form>
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request"
-              checked (click)="checkSpends('spends_request')" />
+              [checked]="checkThird" (click)="checkSpends('spends_request')" />
             <b>
               Mis gastos registrados
             </b>
             &nbsp;&nbsp;
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request"
-              (click)="checkSpends('my_spends_request')" />
+              [checked]="!checkThird" (click)="checkSpends('my_spends_request')" />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
               Gastos registrados a terceros
             </b>

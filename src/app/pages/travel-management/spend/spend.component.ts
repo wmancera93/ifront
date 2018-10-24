@@ -20,6 +20,8 @@ export class SpendComponent implements OnInit {
   public spedsData: Spends[] = [];
   public idSpenRequestsIndex: string;
   public userAuthenticated: User = null;
+  public third: string = '';
+  public checkThird: boolean = true;
 
   constructor(public router: Router,
     public spendSharedService: SpendSharedService,
@@ -29,9 +31,24 @@ export class SpendComponent implements OnInit {
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
-      if (data) {
-        this.spedsData = [];
-        this.chargeDataSpends();
+      if (data.success) {
+        this.third = data.third == false ? 'spends_request' : 'my_spends_request';
+        switch (this.third) {
+          case 'spends_request':
+            this.chargeDataSpends();
+            break;
+          case 'my_spends_request':
+            this.third = 'my_spends_request';
+            this.spendsService.getMySpendsRequest().subscribe((list: any) => {
+              this.checkThird = false;
+              this.spedsData = [];
+              this.spedsData = list.data;
+            });
+            break;
+
+          default:
+            break;
+        }
       }
     });
 
@@ -45,7 +62,22 @@ export class SpendComponent implements OnInit {
             confirmation: false
           }];
           this.alert.setAlert(alertSuccess[0]);
-          this.chargeDataSpends();
+          switch (this.third) {
+            case 'spends_request':
+              this.chargeDataSpends();
+              break;
+            case 'my_spends_request':
+              this.third = 'my_spends_request';
+              this.spendsService.getMySpendsRequest().subscribe((list: any) => {
+                this.checkThird = false;
+                this.spedsData = [];
+                this.spedsData = list.data;
+              });
+              break;
+
+            default:
+              break;
+          }
           this.spendSharedService.setDeleteSpend('deleteSpendRequest');
         })
       }
@@ -66,13 +98,15 @@ export class SpendComponent implements OnInit {
     this.chargeDataSpends();
   }
 
-  checkSpends(spend) {    
+  checkSpends(spend) {
     switch (spend) {
       case 'spends_request':
         this.chargeDataSpends();
         break;
       case 'my_spends_request':
+        this.third = 'my_spends_request';
         this.spendsService.getMySpendsRequest().subscribe((list: any) => {
+          this.checkThird = false;
           this.spedsData = [];
           this.spedsData = list.data;
         });
@@ -85,6 +119,8 @@ export class SpendComponent implements OnInit {
 
   chargeDataSpends() {
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
+      this.checkThird = true;
+      this.third = 'spends_request';
       this.spedsData = [];
       this.spedsData = list.data;
     });

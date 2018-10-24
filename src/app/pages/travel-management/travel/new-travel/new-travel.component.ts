@@ -27,9 +27,7 @@ import { User } from '../../../../models/general/user';
 export class NewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-  public userAuthenticated: User = null;
-
-  public token: boolean;
+public token: boolean;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public planningTravel: any[] = [];
@@ -88,6 +86,7 @@ export class NewTravelComponent implements OnInit {
   public searchEmployee: any[] = [];
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
+  public userAuthenticated: User = null;
 
   public kostl: boolean = false;
   public nplnr: boolean = false;
@@ -443,7 +442,7 @@ export class NewTravelComponent implements OnInit {
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
-              this.travelsService.setResultSaved(true);
+              this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? false : true});
               this.eployee_selected = null;
             }
           } else {
@@ -453,7 +452,7 @@ export class NewTravelComponent implements OnInit {
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
-              this.travelsService.setResultSaved(true);
+              this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? false : true});
               this.eployee_selected = null;
             }
           }
