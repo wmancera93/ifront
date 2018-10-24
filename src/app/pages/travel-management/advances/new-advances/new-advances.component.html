@@ -1,7 +1,8 @@
 <button id="btn_advances_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance_new"
   style="display:none;">
 </button>
-<div data-backdrop="static" class="modal" id="advance_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div data-backdrop="static" class="modal" id="advance_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -12,6 +13,44 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <form [formGroup]="formAdvanceTravel" class="row" (ngSubmit)="newAdvance(formAdvanceTravel.value)">
+          <div class="col-12" *ngIf="userAuthenticated.employee.trip_by_third">
+            <div class="row">
+              <div class="col-4 align-items-left">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa fa-user text-primary-hr"></i>
+                  <strong>Si va realizar un anticipo para un tercero, busque por el nombre en la caja de texto:</strong>
+                </label>
+                <form name="searchAutoComplete">
+                  <p>
+                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter"
+                      (keyup)="enterNameEmployee()">
+                  </p>
+                </form>
+                <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
+                    <div class="row align-items-center">
+                      <div class="col-4">
+                        <img src="{{employee.image.url}}" class="roundPhotoChart">
+                      </div>
+                      <div class="col-8 text-left">
+                        <i class="fa fa-user-o"></i> {{employee.name_complete}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-8 align-self-center">
+                <label class="titleColor" *ngIf="eployee_selected !== null">
+                  Usted va a realizar un anticipo para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+                </label>
+                <br>
+                <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
+                  (click)="deleteEmployeeThird()">
+                  Click para eliminar el tercero
+                </span>
+              </div>
+            </div>
+          </div>
           <div class="col-12" style="margin-top: 10px">
             <div class="row">
               <div class="col-lg-3 col-md-6 col-12">
@@ -66,11 +105,7 @@
               <strong>Descripción*:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control"
-              [formControl]="formAdvanceTravel.controls['observation']">
-
-
-
-              </textarea>
+              [formControl]="formAdvanceTravel.controls['observation']"></textarea>
           </div>
           <div class="col-12" *ngIf="continue">
             <div class="row justify-content-end">
@@ -80,7 +115,8 @@
                 ||formAdvanceTravel.value.currency_id == ''
                   || formAdvanceTravel.value.value == ''
                   || formAdvanceTravel.value.date == ''
-                  || formAdvanceTravel.value.observation == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
+                  || formAdvanceTravel.value.observation == '') ? true : null"
+                  type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
                   <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
               </div>
             </div>
@@ -95,7 +131,7 @@
 
           </div>
         </form>
-        <div  *ngIf="continue && objectAdvances.length > 0" class="row justify-content-end">
+        <div *ngIf="continue && objectAdvances.length > 0" class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newAdvance(formAdvanceTravel.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>

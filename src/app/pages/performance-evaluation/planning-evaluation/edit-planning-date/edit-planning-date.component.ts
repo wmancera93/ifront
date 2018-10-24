@@ -21,6 +21,8 @@ export class EditPlanningDateComponent implements OnInit {
   public endPlanning: any;
   public startDate: any;
   public endDate: any;
+  public countAfter: number = 0;
+
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService,
@@ -33,25 +35,27 @@ export class EditPlanningDateComponent implements OnInit {
     });
 
     this.performanceEvalSharedService.getPlanningEvaluationData().subscribe((actionInfo: any) => {
-      this.idEditDate = actionInfo.id;
-      this.performanceEvaluationService.getEvaluationPerformanById(this.idEditDate).subscribe((data: any) => {
-        this.planningInfo = data.data;
-        // this.startPlanning = data.data.start_planning_date;
-        // this.endPlanning = data.data.end_planning_date;
+      if (this.countAfter === 0) {
+        this.idEditDate = actionInfo.id;
+        this.performanceEvaluationService.getEvaluationPerformanById(this.idEditDate).subscribe((data: any) => {
+          this.planningInfo = data.data;
+          // this.startPlanning = data.data.start_planning_date;
+          // this.endPlanning = data.data.end_planning_date;
 
-        this.startPlanning = data.data.start_planning_date.split("-");
-        this.endPlanning = data.data.end_planning_date.split("-");
-        this.startDate = (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString();
-        this.endDate = (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString();
-        this.formDate = new FormGroup({});
-        this.formDate = fb.group({
-          start_planning: (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString(),
-          end_planning: (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString()
-        });
-      })
+          this.startPlanning = data.data.start_planning_date.split("-");
+          this.endPlanning = data.data.end_planning_date.split("-");
+          this.startDate = (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString();
+          this.endDate = (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString();
+          this.formDate = new FormGroup({});
+          this.formDate = fb.group({
+            start_planning: (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString(),
+            end_planning: (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString()
+          });
+        })
 
-      document.getElementById('btn-planningEvaluation').click();
-      document.getElementById('bodyGeneral').removeAttribute('style');
+        document.getElementById('btn-planningEvaluation').click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+      }
 
     })
 
@@ -85,6 +89,11 @@ export class EditPlanningDateComponent implements OnInit {
         document.getElementById("closeModalPlanning").click();
         this.alert.setAlert(alertWarning[0]);
       })
+  }
+
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 
 

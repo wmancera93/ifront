@@ -17,7 +17,7 @@ import { start } from 'repl';
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
 
-  public idEvaluation: number;
+  public idEvaluation: string;
   public EvaluacionPer: PerformanceEvaluation = null;
   public sendDataObjective: any;
   public qualifierData: Qualifier[] = [];
@@ -33,6 +33,11 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public showSizeTable: boolean = false;
   public is_collapse: boolean = false;
   public nameReport: string = 'Objetivos de Evaluación';
+  public flag_complete: boolean = false;
+  public showCharge: boolean = true;
+  public status: boolean = true;
+
+  public countAfter: number = 0;
 
   public objectReport: EventEmitter<any> = new EventEmitter();
 
@@ -41,13 +46,38 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService,
     public alert: AlertsService) {
 
-    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
-      this.EvaluacionPer = info;
-      this.qualifierData = info.qualifier;
-      this.idEvaluation = this.EvaluacionPer.id;
-      document.getElementById('btn-evaluationObjetives').click();
-      document.getElementById('bodyGeneral').removeAttribute('style');
+    this.alert.getActionConfirm().subscribe((data) => {
+      if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
+        document.getElementById('btn-evaluationObjetives').click()
+        this.showCharge = true;
+        this.formObjetive = new FormGroup({});
+        this.formObjetive = fb.group({
+          start_date: '',
+          end_date: '',
+          weight: '',
+          objetive_text: '',
+        });
+
+
+      }
     })
+
+    this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
+      if (this.countAfter === 0) {
+        this.EvaluacionPer = info;
+        this.qualifierData = info.qualifier;
+        this.idEvaluation = info.id;
+        document.getElementById('btn-evaluationObjetives').click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
+        this.dataTableConsult();
+      }
+    });
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.formObjetive = new FormGroup({});
     this.formObjetive = fb.group({
@@ -58,13 +88,15 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.action_method === "updateEvaluationObjetive") {
 
+      if (data.action_method === "updateEvaluationObjetive") {
+        document.getElementById("funtionObjectives").click();
+        setTimeout(() => {
+          document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);
+        }, 200);
         this.idEdit = data.id;
         this.bedit = true;
         this.bnew = false;
-
-        document.getElementById("funtionObjectives").click();
         this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
           let startDate = dataID.data.start_date_obj.split("-");
           let endDate = dataID.data.end_date_obj.split("-");
@@ -76,15 +108,23 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             objetive_text: dataID.data.objetive_text
           });
         });
+
       }
       if (data.action_method === "deleteEvaluationObjetive") {
+
         this.performanceEvaluationService.deleteEvaluationObjetive(data.id).subscribe((state: any) => {
+          this.EvaluacionPer = state.data[0];
+          if (this.EvaluacionPer.current_weight == '100.0') {
+            this.flag_complete = true;
+          } else {
+            this.flag_complete = false;
+          }
           const alertWarning: Alerts[] = [{
             type: 'success',
             title: 'Confirmación',
             message: state.message,
-            confirmation: false,
-            typeConfirmation: ''
+            confirmation: true,
+            typeConfirmation: 'deleteEvaluationByObjetive'
           }];
           this.dataTableConsult();
           document.getElementById("closeModalObjectiveEvaluation").click();
@@ -93,18 +133,16 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       }
     });
 
-    this.dataTableConsult();
   }
 
   dataTableConsult() {
-    this.performanceEvaluationService.getEvaluationObjetive().subscribe((table: any) => {
+    this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status).subscribe((table: any) => {
       this.ObjectivesTable = table;
       setTimeout(() => {
         this.objectReport.emit(this.ObjectivesTable);
-      }, 100);
+      }, 50);
     })
   }
-
 
   ngOnInit() {
 
@@ -122,14 +160,21 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     };
     if (this.bedit) {
       this.performanceEvaluationService.putEvaluationObjetive(this.idEdit, this.sendDataObjective).subscribe((edit: any) => {
+        this.EvaluacionPer = edit.data[0];
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
           message: edit.message,
-          confirmation: false,
-          typeConfirmation: ''
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
         }];
+        this.closeObjetive();
         document.getElementById("closeModalObjectiveEvaluation").click();
         this.dataTableConsult();
         this.alert.setAlert(alertWarning[0]);
@@ -139,28 +184,34 @@ export class EditEvaluationObjetivesComponent implements OnInit {
             type: 'danger',
             title: 'Advertencia',
             message: error.json().errors.toString(),
-            confirmation: false,
-            typeConfirmation: ''
+            confirmation: true,
+            typeConfirmation: 'evaluationObjectives'
           }];
-
+          this.closeObjetive();
           document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
         })
 
-    }
-    else {
+    } else {
       this.performanceEvaluationService.postEvaluationObjetive(this.sendDataObjective).subscribe((info: any) => {
+        this.EvaluacionPer = info.data[0];
+        if (this.EvaluacionPer.current_weight == '100.0') {
+          this.flag_complete = true;
+        } else {
+          this.flag_complete = false;
+        }
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
           message: info.message,
-          confirmation: false,
-          typeConfirmation: ''
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
         }];
-
+        this.closeObjetive();
         this.dataTableConsult();
+
         document.getElementById("closeModalObjectiveEvaluation").click();
         this.alert.setAlert(alertWarning[0]);
 
@@ -169,10 +220,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           const alertWarning: Alerts[] = [{
             type: 'danger',
             title: 'Advertencia',
-            message: error._body.errors,
-            confirmation: false,
-            typeConfirmation: ''
+            message: error.json().errors.toString(),
+            confirmation: true,
+            typeConfirmation: 'evaluationObjectives'
           }];
+          this.closeObjetive();
+          document.getElementById("closeModalObjectiveEvaluation").click();
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
         })
@@ -180,6 +233,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
 
   }
+
   colapseNew() {
     if (!this.bnew) {
       this.bnew = true
@@ -187,22 +241,62 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       this.bnew = false
     }
     document.getElementById("funtionObjectives").click();
+    setTimeout(() => {
+      document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);
+    }, 200);
   }
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
   closeObjetive() {
+
     this.is_collapse = false;
     this.showSubmit = true;
     this.bedit = false;
     this.bnew = false
+    document.getElementById("funtionObjectives").click();
+
     this.formObjetive = this.fb.group({
       start_date: '',
       end_date: '',
       weight: '',
       objetive_text: '',
     });
+
   }
 
+  ngOnDestroy() {
+    this.countAfter += 1;
+  }
+
+  // validatePercentage(param) {
+  //   debugger
+  //   console.log(this.ObjectivesTable);
+  // }
+  evaluationComplete() {
+    this.showCharge = false;
+    this.performanceEvaluationService.putSendEvaluationsComplete(this.idEvaluation).subscribe((data: any) => {
+      document.getElementById("closeModalObjectiveEvaluation").click();
+      const alertWarning: Alerts[] = [{
+        type: 'success',
+        title: 'Confirmación',
+        message: data.message,
+        confirmation: false,
+      }];
+      this.alert.setAlert(alertWarning[0]);
+    },
+      (error: any) => {
+        document.getElementById("closeModalObjectiveEvaluation").click();
+        const alertWarning: Alerts[] = [{
+          type: 'danger',
+          title: 'Advertencia',
+          message: error.json().errors.toString() + '¿desea continuar con los objetivos de evaluación?',
+          confirmation: true,
+          typeConfirmation: 'evaluationObjectives'
+        }];
+        this.alert.setAlert(alertWarning[0]);
+        this.showSubmit = true;
+      });
+  }
 }

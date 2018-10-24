@@ -5,41 +5,49 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalles de Viaje # {{ticket}}</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeTravelsNew" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo" *ngIf="view_travels.length > 0">
+        <div class="row" *ngIf="eployee_selected !== null">
+          <div class="col-12 align-self-center">
+            <label class="titleColor">
+              Viaje creado para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+            </label>
+            <br>
+          </div>
+        </div>
 
         <div class="row">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
               <strong>Tipo de viaje:</strong>
             </label>
           </div>
-          <div class="col-lg-6 col-md-6 col-12">
+          <div class="col-lg-8 col-md-6 col-12">
             <label>{{typeTravel}} - {{view_travels[0].travel_requests_type_name}} - {{maintenance_travel}}</label>
           </div>
         </div>
 
         <div class="row" style="margin-top: 20px">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
               <strong>Fecha inicial del Viaje:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-2 col-md-6 col-12">
             <label>{{view_travels[0].date_begin}}</label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
               <strong>Fecha final del Viaje:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-2 col-md-6 col-12">
             <label>{{view_travels[0].date_end}}</label>
           </div>
         </div>
@@ -58,74 +66,81 @@
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
               <strong>Elemento de imputación:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].travel_costs_type_name}}</label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+        </div>
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>Costo:</strong>
+              <strong>Centro de costo:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].travel_cost_name}}</label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        </div>
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong>Grafo:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
-            <label>{{view_travels[0].travel_cost_name}}</label>
+          <div class="col-lg-7 col-md-6 col-12">
+            <label>{{view_travels[0].travel_graph_name}}</label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        </div>
+        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong>Operación:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
-            <label>{{view_travels[0].travel_cost_name}}</label>
+          <div class="col-lg-7 col-md-6 col-12">
+            <label>{{view_travels[0].travel_operation_name}}</label>
           </div>
         </div>
 
+
         <div class="row" style="margin-top: 20px">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-rocket text-primary-hr"></i>
               <strong>Clase de viaje legal:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].legal_travels_type_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-ship text-primary-hr"></i>
               <strong>Clase de viaje especial:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].specific_types_trip_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
               <strong>Actividad de viaje:</strong>
             </label>
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-7 col-md-6 col-12">
             <label>{{view_travels[0].travel_activity_name}}</label>
           </div>
         </div>
@@ -138,7 +153,8 @@
 
         <div class="row" style="margin-top: 15px">
           <div class="col-12 top-general-p">
-            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable"
+              [title]="nameReport"></app-data-table>
           </div>
         </div>
 
@@ -149,8 +165,10 @@
                 <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                   <div class="row">
                     <div class="col-11">
-                      <h6>{{imgsaved.name |slice: 0:20}}
+                      <h6 *ngIf="imgsaved.name !== null">{{imgsaved.name |slice: 0:20}}
                         <span [hidden]="imgsaved.name.length < 20">...</span>
+                      </h6>
+                      <h6 *ngIf="imgsaved.name === null">Sin nombre
                       </h6>
                       <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
                       <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
@@ -161,9 +179,62 @@
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-3 col-md-4 col-12">
-            <button *ngIf="objectPrint.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
+
+        <div id="accordion" class="col-12" style="margin-top: 15px">
+          <div class="row">
+            <div class="titleColor col-12 text-left" id="headingTwo">
+              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver
+                anticipos de viaje</p>
+            </div>
+            <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
+              <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable"
+                [title]="nameReportAdvance"></app-data-table>
+            </div>
+          </div>
+          <div class="row">
+            <div class=" titleColor  col-12 text-left" id="headingThree">
+              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver
+                gastos de viaje</p>
+            </div>
+            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion"
+              style="margin-top: 25px">
+              <div class="row">
+                <div class="col-12">
+                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable"
+                    [title]="nameReportSpend"></app-data-table>
+                </div>
+              </div>
+              <!-- <div class="row" style="padding-bottom: 40px">
+                <div class="col-12">
+                  <p class="font-title-general text-left">
+                    <i class="fa fa-fw fa-paperclip font-color-default"></i>
+                    Soportes adjuntos gastos: </p>
+                  <div class="row text-left">
+                    <div class="col-12" *ngFor="let anexedSpend of approvals[0].travel_allowance_request.data.travel_allowance_anexeds; let index = index">
+                      <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravelsSpend(approversTravels)">
+                        <p>{{index+1}}.
+                          <i aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                          {{anexedSpend.name |slice: 0:40}}
+                          <span [hidden]="anexedSpend.name.length < 40">...</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="view_travels[0].status_request == 'Registrado'">
+          <div class="col-lg-4 col-md-6 col-12">
+            <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
               <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
           </div>
         </div>

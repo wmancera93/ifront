@@ -5,6 +5,9 @@ export interface PerformanceEvaluation {
     code:string;
     name:string;
     status_name:string;
+    count_evaluation_objetives:number;
+    current_weight:string;
+    missing_weight:string;
     status_code:string;
     created_date: string;
     updated_date: string;

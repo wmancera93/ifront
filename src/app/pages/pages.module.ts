@@ -90,10 +90,9 @@ import { EditSpendComponent } from './travel-management/spend/edit-spend/edit-sp
 import { NewAdvancesComponent } from './travel-management/advances/new-advances/new-advances.component';
 import { ViewAdvanceComponent } from './travel-management/advances/view-advance/view-advance.component';
 import { ViewSpendComponent } from './travel-management/spend/view-spend/view-spend.component';
-import { PendingTravelComponent } from './approver-travels/pending-travel/pending-travel.component';
-import { ManagedTravelComponent } from './approver-travels/managed-travel/managed-travel.component';
-
-
+import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
+import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
+import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/view-evaluation-objetives/view-evaluation-objetives.component';
 
 
 @NgModule({
@@ -185,6 +184,7 @@ import { ManagedTravelComponent } from './approver-travels/managed-travel/manage
     ViewSpendComponent,
     PendingTravelComponent,
     ManagedTravelComponent,
+    ViewEvaluationObjetivesComponent,
   
   ],
   providers: [

@@ -1,7 +1,8 @@
-<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal" style="display:none;">
-</button>
-<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal"
   style="display:none;">
+</button>
+<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true" style="display:none;">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header borderLine-title row-hr justify-content-center">
@@ -19,7 +20,15 @@
                 <div class="col-3 align-self-center text-center">
                   <img src="{{employeeList.image.url}}" class="roundPhotoEventE">
                 </div>
-                <div class="col-6 titleColor align-self-center text-center">
+                <div *ngIf="flagTypeOfEvent" class="col-6 titleColor align-self-center text-center">
+                  {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
+                  <div style="color: #bbbbbb;">
+                    <span class="text-capitalize">
+                      {{employeeList.posicion | lowercase}}
+                    </span>
+                  </div>
+                </div>
+                <div *ngIf="!flagTypeOfEvent" class="col-4 titleColor align-self-center text-center">
                   {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
                   <div style="color: #bbbbbb;">
                     <span class="text-capitalize">
@@ -31,6 +40,15 @@
                   <strong>{{employeeList.time_birthday}}</strong>
                 </div>
                 <div *ngIf="!flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
+                  <div style="color: #bbbbbb;">
+                    <span class="text-capitalize">
+                      Fecha de ingreso:
+                    </span>
+                  </div>
+                  <strong>{{employeeList.fecha_ingreso | split:'-':2 }}/{{employeeList.fecha_ingreso | split:'-':1
+                    }}/{{employeeList.fecha_ingreso | split:'-':0 }}</strong>
+                </div>
+                <div *ngIf="!flagTypeOfEvent" class="col-2 titleColor align-self-center text-center">
                   <strong>{{employeeList.time_anniversary}}</strong>
                 </div>
               </div>

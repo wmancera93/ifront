@@ -20,6 +20,9 @@ export class ApprovalsDetailsComponent implements OnInit {
   public prerequisit: boolean = true;
   public switch: string = "on";
   public description: string = "";
+  public dateSince: string;
+  public dateUntil: string;
+
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
@@ -35,6 +38,10 @@ export class ApprovalsDetailsComponent implements OnInit {
         this.approverRequestsService.getDetailApprovalsRequests(data.id)
           .subscribe((request: any) => {
             this.approvals[0] = request.data[0].request;
+            let dateBegin = request.data[0].request.date_begin_format.split('/');
+            this.dateSince = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
+            let dateEnd = request.data[0].request.date_end_format.split('/');
+            this.dateUntil = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
 
             if (this.approvals[0].type_request_to_json.prerequisites != "" && this.approvals[0].type_request_to_json.prerequisites != null) {
               this.prerequisit = true;
@@ -56,7 +63,7 @@ export class ApprovalsDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+
   }
 
   aceptPrerequisit() {

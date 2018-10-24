@@ -20,8 +20,12 @@
               <div class="panel-heading icon">
                 <i class="fa fa-file-text"></i>
               </div>
-              <div class="panel-heading">
+              <div class="panel-heading" *ngIf="requests_print == 'requestsOnly'">
                 <h2 class="panel-title text-capitalize">Solicitud de {{detailRequets[0].request.type_requests_name |
+                  lowercase}}</h2>
+              </div>
+              <div class="panel-heading" *ngIf="requests_print !='requestsOnly'">
+                <h2 class="panel-title text-capitalize">{{detailRequets[0].request.type_requests_name |
                   lowercase}}</h2>
               </div>
               <div class="row">
@@ -48,22 +52,22 @@
                           </div>
                           <div class="col-12 text-left">
                             <div class="row">
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_begin_format !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_begin_format != null">
                                 <p class="font-title-general">
                                   <i class=" font-color-default fa fa-fw fa-calendar"></i>
                                   Fecha Inicial:
-                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.date_begin_format}}</span>
+                                  <span style="font-weight: 100 !important">{{dateFirts}}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_end_format !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_end_format != null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-calendar"></i>
                                   Fecha Final:
                                   <span style="font-weight: 100 !important">
-                                    {{detailRequets[0].request.date_end_format}}</span>
+                                    {{dateFinally}}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center">
+                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.days_request !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-sun-o"></i>
                                   Dias Solicitados:
@@ -126,7 +130,7 @@
                             <div class="row">
                               <div class="col-12">
                                 <h3 class="font-color-default">
-                                  {{answer.approver_to_json.name_complete}}
+                                  {{answer.approver_to_json.short_name}}
                                 </h3>
                               </div>
                               <div class="col-12">
@@ -164,11 +168,18 @@
                                       </span>
                                     </h6>
                                   </div>
-                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null">
+                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null && answer.description !== undefined">
                                     <p class="font-title-general text-center">
                                       <i class="font-color-default fa fa-fw fa fa-comment"></i>
                                       Observaciones:
                                       <span style="font-weight: 100 !important">{{answer.description}}</span>
+                                    </p>
+                                  </div>
+                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description == undefined">
+                                    <p class="font-title-general text-center">
+                                      <i class="font-color-default fa fa-fw fa fa-comment"></i>
+                                      Observaciones:
+                                      <span style="font-weight: 100 !important">{{answer.observation}}</span>
                                     </p>
                                   </div>
                                 </div>
@@ -189,7 +200,7 @@
               </div>
             </div>
 
-            <div *ngIf="detailRequets[0].pending_level_approver">
+            <div *ngIf="detailRequets[0].pending_level_approver.level != undefined">
               <div class="separator text-muted">
               </div>
 
@@ -214,7 +225,7 @@
                           <div class="row">
                             <div class="col-12">
                               <h3 class="font-color-default">
-                                {{detailRequets[0].pending_level_approver.approver_employee.name_complete}}
+                                {{detailRequets[0].pending_level_approver.approver_employee.short_name}}
                               </h3>
                             </div>
                             <div class="col-12">

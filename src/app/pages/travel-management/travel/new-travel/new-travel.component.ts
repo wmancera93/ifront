@@ -16,6 +16,8 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 import { Router } from '@angular/router';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { TagModelClass } from 'ngx-chips/core/accessor';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { User } from '../../../../models/general/user';
 
 @Component({
   selector: 'app-new-travel',
@@ -25,8 +27,7 @@ import { TagModelClass } from 'ngx-chips/core/accessor';
 export class NewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
-  public token: boolean;
+public token: boolean;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public planningTravel: any[] = [];
@@ -80,20 +81,36 @@ export class NewTravelComponent implements OnInit {
   public operations: any[] = [];
   public idGrahpTravel: string = '';
 
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
+  public userAuthenticated: User = null;
+
   public kostl: boolean = false;
   public nplnr: boolean = false;
+  public today: any;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService, public formDataService: FormDataService,
-    public alert: AlertsService, public advanceSharedService: AdvanceSharedService, public router: Router, ) {
+    public alert: AlertsService, public advanceSharedService: AdvanceSharedService
+    , public router: Router, public employeeService: EmployeeService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.travelProof = [{
       success: true,
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
+
+      if (data === 'continueTravelAlowances') {
+        this.router.navigate(['/ihr/spend', this.ticket_advance]);
+      }
+
       if (data === 'continueTravelAdvances') {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -110,10 +127,10 @@ export class NewTravelComponent implements OnInit {
 
       }
       if (data === 'deleteNewDocumentSaved') {
-        document.getElementById("btn_travel_new").click();
-        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
-        this.file.splice(this.file.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
 
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+        document.getElementById("btn_travel_new").click();
       }
       if (data === 'deleteNewDestinations') {
         document.getElementById("btn_travel_new").click();
@@ -149,7 +166,7 @@ export class NewTravelComponent implements OnInit {
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -208,6 +225,7 @@ export class NewTravelComponent implements OnInit {
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
 
+            type_travel: object[0].type_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
             trip_text: object[0].trip_text,
@@ -250,6 +268,7 @@ export class NewTravelComponent implements OnInit {
     this.travelsService.getNewTravels().subscribe((data: any) => {
 
       if (document.getElementById('travel_new').className !== 'modal show') {
+        this.eployee_selected = null;
         document.getElementById("btn_travel_new").click();
         if (data) {
           this.clearFormGeneral();
@@ -259,8 +278,6 @@ export class NewTravelComponent implements OnInit {
             this.bedit = false;
           }
         }
-
-
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     })
@@ -287,6 +304,63 @@ export class NewTravelComponent implements OnInit {
         this.costs_travels = [];
       })
 
+    let fecha = new Date();
+    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + fecha.getDate().toString();
+
+  }
+
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
+  }
+
+  delete(date_param) {
+    switch (date_param) {
+      case 'date_begin_header':
+        this.formTravelManagement.controls['date_requests_begin'].setValue('');
+        break;
+      case 'date_end_header':
+        this.formTravelManagement.controls['date_requests_end'].setValue('');
+        break;
+      case 'date_begin_body':
+        this.formTravelManagement.controls['date_begin'].setValue('');
+        break;
+      case 'date_end_body':
+        this.formTravelManagement.controls['date_end'].setValue('');
+        break;
+      case 'hour_begin':
+        this.formTravelManagement.controls['hour_begin'].setValue('');
+        break;
+      case 'hour_end':
+        this.formTravelManagement.controls['hour_end'].setValue('');
+        break;
+
+
+      default:
+        break;
+    }
   }
 
   sortByAphabet(dataBySort: any) {
@@ -333,13 +407,12 @@ export class NewTravelComponent implements OnInit {
   }
 
   newTravel(model) {
-
     this.showSubmit = false;
     this.send = true;
-console.log(model)
+
     const modelFromdata = new FormData();
-    modelFromdata.append('travel_types', model.id_travel);
-    modelFromdata.append('is_maintenance', model.maintenance);
+    modelFromdata.append('travel_types', model.type_travel);
+    modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
     modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
     modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
     modelFromdata.append('travel_activity_id', model.id_travel_activities);
@@ -349,6 +422,7 @@ console.log(model)
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
+    modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -359,13 +433,28 @@ console.log(model)
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
-          if (data.success) {
-            document.getElementById("closeTravels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
-            this.alert.setAlert(alertWarning[0]);
-            this.showSubmit = true;
-            this.travelsService.setResultSaved(true);
+          if (validate > 0) {
+            if (data.success) {
+
+              document.getElementById("closeTravels").click();
+              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? false : true});
+              this.eployee_selected = null;
+            }
+          } else {
+            if (data.success) {
+
+              document.getElementById("closeTravels").click();
+              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? false : true});
+              this.eployee_selected = null;
+            }
           }
         },
         (error: any) => {
@@ -379,7 +468,6 @@ console.log(model)
   }
 
   addDestination(modelPartial) {
-    console.log(modelPartial);
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
@@ -476,8 +564,7 @@ console.log(model)
     this.clearFormPartial();
   }
   mileageTravel(param) {
-
-    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -586,7 +673,7 @@ console.log(model)
           this.grahp = this.sortByAphabet(data.data);
           if (this.grahp.length > 0) {
             if (acction === 'new') {
-              this.formTravelManagement.controls['id_grahp'].setValue('-1');
+              this.formTravelManagement.controls['id_grahp'].setValue('');
             }
           } else {
             this.formTravelManagement.controls['id_grahp'].setValue('');
@@ -612,9 +699,11 @@ console.log(model)
       })
   }
   changeTypeTravel(param) {
-    if (this.travel_types.filter(data => data.id.toString() === param.id_travel)[0].code.toString() === '03') {
+    if (param.type_travel === '27') {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
       this.changeTravelLegal('P');
+    } else {
+      this.changeTravelLegal('');
 
     }
 
@@ -623,13 +712,21 @@ console.log(model)
   changeTravelLegal(travelLegal: any) {
     if (travelLegal === 'P') {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
-
       this.kostl = false;
       this.nplnr = true;
       this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
         subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
         });
+    } else {
+      this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString());
+      this.kostl = true;
+      this.nplnr = false;
+
+      this.travelManagementService.getTravelsCosts(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString()).
+        subscribe((data: any) => {
+          this.costs_travels = this.sortByAphabet(data.data);
+        })
     }
   }
   clearFormGeneral() {
@@ -721,7 +818,7 @@ console.log(model)
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({
-      id_travel: '',
+      type_travel: '',
       date_requests_begin: '',
       date_requests_end: '',
       trip_text: '',
@@ -735,7 +832,7 @@ console.log(model)
       id_travel_activities: '',
       id_transport: '',
       id_city: '',
-      id_country: '-1',
+      id_country: '',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -745,7 +842,7 @@ console.log(model)
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '-1',
+      id_countryto: '',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -766,7 +863,7 @@ console.log(model)
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud',
+          message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequestsValidateDates'
 
@@ -780,7 +877,7 @@ console.log(model)
               const alertDataWrong: Alerts[] = [{
                 type: 'danger',
                 title: 'Error',
-                message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje',
+                message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                 confirmation: true,
                 typeConfirmation: 'continueDestinationRequests'
 
@@ -798,7 +895,7 @@ console.log(model)
                     const alertDataWrong: Alerts[] = [{
                       type: 'danger',
                       title: 'Error',
-                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                       confirmation: true,
                       typeConfirmation: 'continueDestinationRequests'
 
@@ -817,7 +914,7 @@ console.log(model)
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje',
+                  message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                   confirmation: true,
                   typeConfirmation: 'continueDestinationRequests'
 
@@ -836,7 +933,7 @@ console.log(model)
                       const alertDataWrong: Alerts[] = [{
                         type: 'danger',
                         title: 'Error',
-                        message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                        message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                         confirmation: true,
                         typeConfirmation: 'continueDestinationRequests'
 
@@ -863,7 +960,7 @@ console.log(model)
                 const alertDataWrong: Alerts[] = [{
                   type: 'danger',
                   title: 'Error',
-                  message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje',
+                  message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                   confirmation: true,
                   typeConfirmation: 'continueDestinationRequests'
 
@@ -885,6 +982,7 @@ console.log(model)
 
   }
   dateValidateTrayect(dateTrayect) {
+
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -899,12 +997,13 @@ console.log(model)
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La fecha de origen del trayecto no puede ser mayor a la de destino.',
+          message: 'La fecha de origen del trayecto no puede ser mayor a la de destino. ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequests'
         }];
         this.alert.setAlert(alertDataWrong[0])
       }
+
     } else {
 
       if (dateTrayect.date_begin !== '') {
@@ -915,7 +1014,7 @@ console.log(model)
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
             confirmation: true,
             typeConfirmation: 'continueDestinationRequests'
           }];
@@ -931,7 +1030,7 @@ console.log(model)
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
             confirmation: true,
             typeConfirmation: 'continueDestinationRequests'
           }];
@@ -956,7 +1055,7 @@ console.log(model)
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida',
+          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueDestinationRequests'
 
@@ -978,7 +1077,7 @@ console.log(model)
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('-1');
+    this.formTravelManagement.controls['id_country'].setValue('');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
@@ -988,7 +1087,7 @@ console.log(model)
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('-1');
+    this.formTravelManagement.controls['id_countryto'].setValue('');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }

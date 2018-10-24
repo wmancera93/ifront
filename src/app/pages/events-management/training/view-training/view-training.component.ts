@@ -6,6 +6,7 @@ import { State } from '../../../../../../node_modules/ngx-chips/core/providers/d
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
+import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
 
 @Component({
   selector: 'app-view-training',
@@ -22,18 +23,19 @@ export class ViewTrainingComponent implements OnInit {
   public flagPDF: boolean = false;
   public activeBlur: number = 0;
 
+  public countAfter: number = 0;
+
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
-    public sanitizer: DomSanitizer) {
+    public sanitizer: DomSanitizer, public eventsEmployeeService:EventsEmployeeService) {
 
   }
 
   ngOnInit() {
-
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      this.idTraining = activeModal;
-      if (this.activeBlur === 0) {
+      if (this.countAfter === 0) {
+        this.idTraining = activeModal;
         this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
           this.flagPDF = true;
           setTimeout(() => {
@@ -42,13 +44,9 @@ export class ViewTrainingComponent implements OnInit {
           }, 100);
           document.getElementById('btn-viewTraining').click();
           document.getElementById("bodyGeneral").removeAttribute('style');
-          this.activeBlur += 1;
         });
       }
-
     });
-
-
   }
 
   acceptTraining(flag: boolean) {
@@ -58,8 +56,8 @@ export class ViewTrainingComponent implements OnInit {
       observation: this.observations
     }
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
-
       if (response.success) {
+        document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: 'Confirmación',
@@ -68,10 +66,12 @@ export class ViewTrainingComponent implements OnInit {
           typeConfirmation: ''
         }];
         this.alert.setAlert(alertWarning[0]);
+        this.eventsEmployeeService.setRefreshEventEmployee(true);
       }
 
     },
       (error: any) => {
+        document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
@@ -81,6 +81,10 @@ export class ViewTrainingComponent implements OnInit {
         }];
         this.alert.setAlert(alertWarning[0]);
       });
-    document.getElementById("closeModalTraining").click();
+  }
+
+  
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 }

@@ -2,7 +2,7 @@
   style="display:none;">
 </button>
 <div class="modal" tabindex="-1" role="dialog" id="modal_viewAdvance">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+  <div  *ngIf="infoAdvance != null" style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Anticipo</h5>
@@ -33,9 +33,10 @@
             </span>
           </div>
         </div>
-        <div class="row">
+        <div class="row top">
           <div class="col-12">
-
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable"
+            [title]="nameReport"></app-data-table>
           </div>
         </div>
 

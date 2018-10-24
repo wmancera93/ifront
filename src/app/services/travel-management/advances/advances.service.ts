@@ -6,9 +6,13 @@ import { HttpClient } from '../../../../../node_modules/@angular/common/http';
 export class AdvancesService {
 
   constructor(private tokenService: Angular2TokenService, public http: HttpClient) { }
-  
+
   getAdvancePayments() {
     return this.tokenService.get('travel_advance_payments')
+      .map((data: any) => data.json());
+  }
+  getMyAdvancePayments() {
+    return this.tokenService.get('travel_advance_payments/my_travels_advances_requests')
       .map((data: any) => data.json());
   }
   getAdvanceListTravel() {
@@ -20,11 +24,21 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
   postAdvanceList(newAdvances) {
-    return this.tokenService.post('travel_advance_payments',newAdvances)
+    return this.tokenService.post('travel_advance_payments', newAdvances)
       .map((data: any) => data.json());
   }
   getAdvanceByID(id) {
-    return this.tokenService.get('/travel_advance_payments/'+id)
+    return this.tokenService.get('travel_advance_payments/' + id)
       .map((data: any) => data.json());
+  }
+
+  sendRequestToApprove(id) {
+    return this.tokenService.get('travel_advance_payments/send_request_to_approve/' + id)
+      .map((data: any) => data.json());
+  }
+
+  deleteRequestAdvance(id){
+    return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
+    .map((data: any) => data.json());     
   }
 }

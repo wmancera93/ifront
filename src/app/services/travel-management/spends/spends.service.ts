@@ -12,6 +12,10 @@ export class SpendsService {
     return this.tokenService.get('travel_allowance_requests')
       .map((data: any) => data.json());
   }
+  getMySpendsRequest() {
+    return this.tokenService.get('travel_allowance_requests/my_travels_allowances_requests')
+      .map((data: any) => data.json());
+  }
   getSpendsTypes() {
     return this.tokenService.get('travel_requests/allowance_type_for_select')
       .map((data: any) => data.json());
@@ -55,7 +59,10 @@ export class SpendsService {
     return this.tokenService.delete('travel_allowances/destroy_anexed/' + idFile)
       .map((data: any) => data.json());
   }
-
+  putSendRequestsSpend(id_spend_requests) {
+    return this.tokenService.put('travel_allowance_requests/send_request_to_approve/' + id_spend_requests, {})
+      .map((data: any) => data.json());
+  }
 
 
 }

@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Gastos</h5>
-        <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeModalViewSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -36,7 +36,7 @@
             </div>
           </div>
         </div>
-        <div class="row"  style="margin-top:20px">
+        <div class="row" style="margin-top:20px">
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-check-square-o text-primary-hr"></i>
@@ -73,11 +73,68 @@
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+        <div class="row" *ngIf="allRequestsInSpend.length > 0">
+          <div id="accordion" class="col-12" style="margin-top: 15px">
+            <div class="row">
+              <div class="col-12 text-left" id="headingOne">
+                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse" data-target="#collapseTravels" aria-expanded="false" aria-controls="collapseTravels">
+                  Ver pasaje, hotel y trayectos de solicitud</p>
+              </div>
+              <div id="collapseTravels" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion"
+                style="margin-top: 25px">
+                <div class="row">
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <strong>Fecha inicial de solicitud:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label>{{allRequestsInSpend[0].travel_request.date_begin_format}}</label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label class="titleColor">
+                      <strong>Fecha final de solicitud:</strong>
+                    </label>
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-12">
+                    <label>{{allRequestsInSpend[0].travel_request.date_end_format}}</label>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <app-data-table [records]="objectPrintTravelView" [pdf]="showPdf" id="tableTravelsSaved"
+                      [sizeTable]="showSizeTable" [title]="nameReportTravels"></app-data-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="text-primary col-12 text-left" id="headingTwo">
+                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse" data-target="#collapseAdvance" aria-expanded="false" aria-controls="collapseAdvance">Ver
+                  anticipos de viaje</p>
+              </div>
+              <div id="collapseAdvance" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
+                style="margin-top: 25px">
+                <app-data-table [records]="objectPrintAdvancesView" [pdf]="showPdf" id="tableAdvanceSaved"
+                  [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row justify-content-end" style="padding-bottom: 25px">
+          <div class="col-lg-4 col-md-6 col-12">
+            <button class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
+              <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+          </div>
+        </div>
+        <div class="modal-footerInfo justify-content-center">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+            <h6> Cerrar </h6>
+          </div>
         </div>
       </div>
     </div>

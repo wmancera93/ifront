@@ -4,6 +4,7 @@ import { TravelsService } from '../../../services/shared/travels/travels.service
 import { AdvanceSharedService } from '../../../services/shared/advance-shared/advance-shared.service';
 import { AdvancesService } from '../../../services/travel-management/advances/advances.service';
 import { Advances } from '../../../models/common/travels_management/advances/advances';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-advances',
@@ -13,10 +14,14 @@ import { Advances } from '../../../models/common/travels_management/advances/adv
 export class AdvancesComponent implements OnInit {
   token
   public advancesItems: Advances;
+  public userAuthenticated: User = null;
 
   constructor(public router: Router,
     public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+
     this.getadvancesList();
     this.advanceSharedService.getRefreshAdvanceList().subscribe((validate: any) => {
       if (validate === true) {
@@ -38,6 +43,24 @@ export class AdvancesComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  checkAdvance(advance) {
+    switch (advance) {
+      case 'advance_request':
+        this.advancesService.getAdvancePayments().subscribe((advances: any) => {
+          this.advancesItems = advances.data;
+        });
+        break;
+      case 'my_advance_request':
+        this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+          this.advancesItems = data.data;
+        });
+        break;
+
+      default:
+        break;
+    }
   }
 
   getadvancesList() {

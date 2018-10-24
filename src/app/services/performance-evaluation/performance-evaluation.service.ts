@@ -19,8 +19,8 @@ export class PerformanceEvaluationService {
     return this.tokenService.get('perfomance_evaluations/' + IdEvaluation)
       .map((data: any) => data.json());
   }
-  getEvaluationObjetive() {
-    return this.tokenService.get('evaluation_objetive')
+  getEvaluationObjetive(id: string, status:boolean) {
+    return this.tokenService.get('evaluation_objetive/show_edit/'+ id + '/' + status)
       .map((data: any) => data.json());
   }
   getEvaluationObjetiveByID(IdObjective) {
@@ -28,7 +28,7 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
   getEvaluationObjetiveID(id) {
-    return this.tokenService.get('evaluation_objetive/' + id)
+    return this.tokenService.get('evaluation_objetive/' + id )
       .map((data: any) => data.json());
   }
   postEvaluationObjetive(data) {
@@ -53,9 +53,14 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
 
-getViewEvaluationPDF(idEvaluation:number){
-   return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
+  getViewEvaluationPDF(idEvaluation: number) {
+    return this.tokenService.get('perfomance_evaluations/show_result_pdf/' + idEvaluation)
       .map((data: any) => data.json());
-}
+  }
+
+  putSendEvaluationsComplete(id) {
+    return this.tokenService.put('perfomance_evaluations/sender_complete/' + id, {})
+      .map((data: any) => data.json());
+  }
 
 }

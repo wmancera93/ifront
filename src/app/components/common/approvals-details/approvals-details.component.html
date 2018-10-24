@@ -86,14 +86,14 @@
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           Desde:
-                          <span style="font-weight: 100 !important">{{approvals[0].date_begin_format}}</span>
+                          <span style="font-weight: 100 !important">{{dateSince}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           Hasta:
-                          <span style="font-weight: 100 !important">{{approvals[0].date_end_format}}</span>
+                          <span style="font-weight: 100 !important">{{dateUntil}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
@@ -208,24 +208,12 @@
                         </div>
                         <div class="col-12 tops" *ngIf="!prerequisit">
                           <div class="row justify-content-center">
-                            <div style="display: none" class="col-12 text-cent">
-                              <h3 class="font-color-default">
-                                Solicitud a
-                                <span *ngIf="switch == 'on'">
-                                  Aprobar
-                                </span>
-                                <span *ngIf="switch == 'off'">
-                                  Rechazar
-                                </span>
-                              </h3>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-8">
-                              Deslizar para
-                              <span *ngIf="switch == 'off'">
-                                Aprobar
+                            <div class="col-lg-6 col-md-6 col-8">                         
+                              <span *ngIf="switchTravels == 'off'">
+                                Rechazado
                               </span>
-                              <span *ngIf="switch == 'on'">
-                                Rechazar
+                              <span *ngIf="switchTravels == 'on'">
+                                Aprobado
                               </span>
                             </div>
                             <div class="col-4">

@@ -12,7 +12,7 @@
           </div>
         </div>
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.name_complete}}</h4>
+          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.short_name}}</h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
@@ -55,7 +55,8 @@
                 <i class="fa fa-male paddingInfo"></i>
                 <strong>&nbsp;Jefe:</strong>
                 <span class="text-capitalize">
-                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname | lowercase}}
+                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname |
+                  lowercase}}
                 </span>
               </div>
               <div *ngIf="employeeInfo.division_per">
@@ -74,7 +75,7 @@
               </div>
               <div *ngIf="employeeInfo.fecha_ingreso">
                 <i class="fa fa-calendar paddingInfo"></i>
-                <strong>&nbsp;Fecha Ingreso:</strong>&nbsp;{{employeeInfo.fecha_ingreso}}
+                <strong>&nbsp;Fecha Ingreso:</strong>&nbsp;{{dateAddCompany}}
               </div>
               <div *ngIf="validateRol">
                 <i class="fa fa-file paddingInfo"></i>
@@ -92,7 +93,7 @@
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
               <i class="fa fa-birthday-cake paddingInfo"></i>
-              <strong>&nbsp;Fecha de nacimiento:</strong>&nbsp;{{employeeInfo.fecha_nac}}
+              <strong>&nbsp;Fecha de nacimiento:</strong>&nbsp;{{datebirth}}
               <br>
               <i class="fa fa-address-card paddingInfo"></i>
               <strong>&nbsp;Número de identificación:</strong>&nbsp;{{employeeInfo.number_document}}

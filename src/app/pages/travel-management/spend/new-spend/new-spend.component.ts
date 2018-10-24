@@ -9,8 +9,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_management/spends/spends';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { debounce } from 'rxjs/operators';
+import { User } from '../../../../models/general/user';
+import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -46,6 +46,14 @@ export class NewSpendComponent implements OnInit {
   public continue: boolean = false;
   public collapse_is: boolean = false;
   public objectProof: any[] = [];
+  public spend_delete_local: string;
+
+  public userAuthenticated: User = null;
+  public searchByLetter: string;
+  public nameEmployee: string = '';
+  public searchEmployee: any[] = [];
+  public showListAutoC: boolean = false;
+  public eployee_selected: any = null;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -53,7 +61,9 @@ export class NewSpendComponent implements OnInit {
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, public employeeService: EmployeeService) {
+
+    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.infoTableSpends = [{
       success: true,
@@ -61,43 +71,57 @@ export class NewSpendComponent implements OnInit {
     }];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend') {
+      if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
+        debugger
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
       }
+      if (data === 'deleteSpendNew') {
+        this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === this.spend_delete_local), 1);
+        this.objectReport.emit(this.infoTableSpends[0]);
+        document.getElementById("btn_spend_new").click();
+      }
+
     })
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
-      
+      this.eployee_selected = null;
+      this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+        this.listTravelsFromSpend = travel.data;
+
+        this.refreshTableSpends();
+        this.formSpendTravel = new FormGroup({});
+        this.formSpendTravel = fb.group({
+          travel_request_id: data !== true ? data : '',
+          travel_allowance_type_id: "",
+          currency_id: "",
+          value: "",
+          date: "",
+          observation: "",
+          bill_number: "",
+          control_number: "",
+          nit: "",
+          bussines_name: "",
+          cod_provider: "",
+          authorization_number: "",
+          populated: "",
+        });
+
+        if (this.formSpendTravel.value.travel_request_id !== '') {
+          this.continue = data !== true ? true : false;
+          this.validateTravel(this.formSpendTravel.value);
+        }
+
+      });
+
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
-        document.getElementById('collapseNewSpend').className = "show";
-       
       }
-      this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-        this.listTravelsFromSpend = travel.data;
-      });
-      this.refreshTableSpends();
-      this.formSpendTravel = new FormGroup({});
-      this.formSpendTravel = fb.group({
-        travel_request_id: '',
-        travel_allowance_type_id: "",
-        currency_id: "",
-        value: "",
-        date: "",
-        observation: "",
-        bill_number: "",
-        control_number: "",
-        nit: "",
-        bussines_name: "",
-        cod_provider: "",
-        authorization_number: "",
-        populated: "",
-      });
-      this.continue = false;
+
+
 
     });
 
@@ -141,9 +165,9 @@ export class NewSpendComponent implements OnInit {
             control_number: objectSpend[0].control_number,
             nit: objectSpend[0].nit,
             bussines_name: objectSpend[0].bussines_name,
-            cod_provider:  objectSpend[0].cod_provider,
-            authorization_number:  objectSpend[0].authorization_number,
-            populated:  objectSpend[0].populated,
+            cod_provider: objectSpend[0].cod_provider,
+            authorization_number: objectSpend[0].authorization_number,
+            populated: objectSpend[0].populated,
           });
         }
       }
@@ -195,17 +219,46 @@ export class NewSpendComponent implements OnInit {
     });
   }
 
+  enterNameEmployee() {
+    this.nameEmployee = this.searchByLetter;
+    if (this.nameEmployee !== null) {
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
+        .subscribe((data: any) => {
+          if (data.data.length > 0) {
+            this.searchEmployee = data.data;
+            this.showListAutoC = true;
+          } else {
+            this.searchEmployee = [];
+            this.showListAutoC = true;
+          }
+        })
+    }
+
+  }
+
+  returnObjectSearch(ObjectSearch: any) {
+    this.eployee_selected = ObjectSearch;
+    this.searchByLetter = null;
+    this.searchEmployee = [];
+  }
+
+  deleteEmployeeThird() {
+    this.eployee_selected = null;
+  }
+
   deleteUpload(param) {
     this.imgSpend.splice(this.imgSpend.findIndex(filter => filter.file.name === param.file.name), 1);
   }
 
   validateTravel(travel: any) {
-    if(travel.travel_request_id.toString() !== '')
-    {
+
+    if (travel.travel_request_id.toString() !== '') {
       this.continue = true;
       this.activate_submit_spend = false;
       this.spendEdit = false;
       this.spendNew = true;
+
+
       this.spedsData.forEach(element => {
         if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
           document.getElementById("closeSpends").click();
@@ -215,22 +268,36 @@ export class NewSpendComponent implements OnInit {
             message: "Ya existe una solicitud de gastos para el viaje",
             confirmation: true,
             typeConfirmation: 'ConfirmTravelSpendID'
-  
+
           }];
           this.alert.setAlert(alertWarning[0]);
-  
+
         }
       });
-    }else{
+    } else {
       this.continue = false;
       this.refreshPartialSpend();
     }
-    
+    setTimeout(() => {
+      document.getElementById('collapseNewSpend').className = "show";
+    }, 200);
+
+
   }
 
   deleteSpend(params) {
-    this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === params.id), 1);
-    this.objectReport.emit(this.infoTableSpends[0]);
+
+    document.getElementById("btn_spend_new").click();
+
+    let alertWarning = [{
+      type: 'warning',
+      title: 'Confirmación',
+      message: '¿Desea eliminar el gasto?',
+      confirmation: true,
+      typeConfirmation: 'deleteSpendNew'
+    }];
+    this.alert.setAlert(alertWarning[0]);
+    this.spend_delete_local = params.id;
   }
 
   aditionSpend(objectSpend) {
@@ -336,13 +403,13 @@ export class NewSpendComponent implements OnInit {
 
 
   newSpend(param) {
-    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
     spendsFormData.append('travel_request_id', param.travel_request_id.toString());
     spendsFormData.append('allowances', JSON.stringify(this.objectAllowances));
     spendsFormData.append('files_length', this.imgSpend.length.toString())
+    spendsFormData.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     for (let index = 0; index < this.imgSpend.length; index++) {
       spendsFormData.append('files_' + (index + 1).toString(), this.file[index]);
     };
@@ -364,7 +431,7 @@ export class NewSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend(true);
+        this.spendSharedService.setRefreshSpend({success: true, third: this.eployee_selected == null ? false : true});
       },
       (error: any) => {
         document.getElementById("btn_spend_new").click();

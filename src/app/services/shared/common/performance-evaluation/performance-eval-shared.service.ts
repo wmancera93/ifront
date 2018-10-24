@@ -3,7 +3,8 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class PerformanceEvalSharedService {
-  exportEvaluationData: Subject<any> = new Subject<any>();  
+  exportEvaluationData: Subject<any> = new Subject<any>(); 
+  exportEditEvaluationData: Subject<any> = new Subject<any>();   
   editPlanningEvaluation: Subject<any> = new Subject<any>();  
 
   constructor() { }
@@ -17,6 +18,17 @@ export class PerformanceEvalSharedService {
   {    
     return this.exportEvaluationData.next(object);    
   }
+
+  getViewEvaluationPerformanceData()
+  {    
+    return this.exportEditEvaluationData;
+  }
+
+  setViewEvaluationPerformanceData(object:any)
+  {    
+    return this.exportEditEvaluationData.next(object);    
+  }
+
   getPlanningEvaluationData()
   {    
     return this.editPlanningEvaluation;

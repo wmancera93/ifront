@@ -1,0 +1,173 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-md-8 col-7 text-left title">
+          <i class="fa fa-clock-o"></i>
+          Aprobaciones gestionadas
+        </div>
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnBackTravel()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atrás
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'travels'">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de viaje
+            </h3>
+          </div>
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de viajes
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no ha gestionado solicitudes de viaje
+            </h3>
+          </div>
+        </div>
+        <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'advance'">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de anticipos
+            </h3>
+          </div>
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted tiene {{managedRequestTravel.length}} solicitudes de anticipos
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no ha gestionado solicitudes de anticipos
+            </h3>
+          </div>
+        </div>
+        <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'spend'">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de gastos
+            </h3>
+          </div>
+          <div class="col-6 text-left" *ngIf="managedRequestTravel.length > 1">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
+              Usted ha gestionado {{managedRequestTravel.length}} solicitudes de gastos
+            </h3>
+          </div>
+          <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="managedRequestTravel.length == 0">
+            <h3 class="font-color-default">
+              <i class="fa fa-fw fa-cog text-primary-hr"></i>
+              Usted no ha gestionado solicitudes de gastos
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fa fa-plus"></i>
+                Filtrar Solicitudes gestionadas
+              </a>
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
+                <div *ngFor="let managed of typesRequestManaged; let i = index">
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeRequestsManaged(managed)">{{managed.name | lowercase}}</a>
+                  <div *ngIf="typesRequestManaged.length !== (i + 1)" class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row justify-content-center top-general-p" *ngIf="managedRequestTravel.length == 0">
+        <div class="col-lg-8 col-12 text-center">
+          <div class="alert alert-warning" role="alert">
+            No se encontrarón registros para mostrar
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row justify-content-center top-containter" *ngIf="managedRequestTravel.length > 0">
+        <div class="col-12">
+          <div class="widget bg-white-1x" *ngFor="let requestManaged of managedRequestTravel">
+            <div class="row align-items-center">
+              <div class="col-xl-2 col-lg-2 col-md-3 col-12">
+                <h5>
+                  <span class="badge badge-warning">
+                    Ticket #{{requestManaged.ticket}}
+                  </span>
+                </h5>
+              </div>
+              <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+                <h3 class="font-color-default">
+                  {{requestManaged.type_request_to_json.description}}
+                </h3>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  {{requestManaged.level_answer_description}}
+                </p>
+                <p class="">
+                  <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
+                  {{requestManaged.level}}
+                </p>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Solicitante
+                </p>
+                <p class="">
+                  <i class="fa fa-user fa-fw text-primary-hr"></i>
+                  {{requestManaged.employee_applicant_to_json.short_name}}
+                </p>
+              </div>
+              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">
+                  Creada el
+                </p>
+                <p>
+                  <i class="fa fa-calendar fa-fw text-primary-hr"></i>
+                  {{requestManaged.created_date}} -
+                  <i class="fa fa-fw fa-clock-o font-color-default"></i>{{requestManaged.antiquity}}
+                </p>
+              </div>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p hoverColor" (click)="modalAproversTravelManaged(requestManaged)">
+                <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color: #23c6c8"></i>
+                <div class="col-12">
+                  Ver
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-approvals-details-travels></app-approvals-details-travels>

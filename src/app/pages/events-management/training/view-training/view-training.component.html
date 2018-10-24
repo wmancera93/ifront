@@ -14,7 +14,7 @@
         <div class="row justify-content-center" *ngIf="trainingDetailInfo !== undefined">
           <div class="col-12 col-lg-6" *ngIf="flagPDF">
             <pdf-viewer [src]="urlPrevisualize" [original-size]="false" style="display: block;"></pdf-viewer>
-            <!-- <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe> -->
+            <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe>
           </div>
           <div class="col-lg-6 col-12">
             <strong>
@@ -56,7 +56,7 @@
                 {{trainingDetailInfo.nhours_for_days}} horas por día
               </div>
             </div>
-            <div class="row margin-row">
+            <div class="row margin-row" *ngIf="trainingDetailInfo.status_id === 0">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa fa-history text-primary-hr"></i>
                 <strong>Observaciones:</strong>
@@ -69,7 +69,7 @@
                 </textarea>
               </div>
             </div>
-            <div class="row margin-row">
+            <div class="row margin-row" *ngIf="trainingDetailInfo.status_id === 0">
               <div class="col-6">
                 <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(true)">
                   <i class="fa fa-check"></i>

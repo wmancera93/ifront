@@ -3,6 +3,7 @@ import { TrainingService } from '../../../services/training/training.service';
 import { subscribeOn } from '../../../../../node_modules/rxjs/operator/subscribeOn';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { TrainingSharedService } from '../../../services/shared/common/training-events/training-shared.service';
+import { EventsEmployeeService } from '../../../services/shared/common/events-employee/events-employee.service';
 
 @Component({
   selector: 'app-training',
@@ -18,19 +19,18 @@ export class TrainingComponent implements OnInit {
 
   constructor(public trainingService: TrainingService,
     private accionDataTableService: DataDableSharedService,
-    public trainingSharedService: TrainingSharedService) {
+    public trainingSharedService: TrainingSharedService,
+    public eventsEmployeeService: EventsEmployeeService) {
 
-    this.trainingService.getTrainingEvents().subscribe((data: any) => {
-      this.dataTabletraining = data;
-      console.log(this.dataTabletraining)
-      this.nameReport = data.data[0].title;
-      setTimeout(() => {
-        this.objectReport.emit(this.dataTabletraining);
-      }, 100);
+    this.eventsEmployeeService.getRefreshEventEmployee().subscribe((data: any) => {
+      if (data == true) {
+        this.searchEvents();
+      }
     })
 
+
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.type_element = "showConvenio") {
+      if (data.action_method = "showConvenio") {
         this.trainingSharedService.setDataTraining(data.id);
       }
 
@@ -39,6 +39,22 @@ export class TrainingComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchEvents();
+  }
+  searchEvents() {
+    this.trainingService.getTrainingEvents().subscribe((data: any) => {
+      this.dataTabletraining = data;
+      this.nameReport = data.data[0].title;
+      if (data.data[0].data.length > 0) {
+        setTimeout(() => {
+          this.objectReport.emit(this.dataTabletraining);
+        }, 100);
+      } else {
+        setTimeout(() => {
+          this.objectReport.emit({ succes: true, data: [] });
+        }, 100);
+      }
+    })
   }
 
 }
