@@ -157,7 +157,7 @@ export class NewAdvancesComponent implements OnInit {
 
     this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
       (response: any) => {
-        this.advancesService.sendRequestToApprove(response.data.id.toString()).subscribe(
+        this.advancesService.sendRequestToApprove(response.data.travel_advance_request.id.toString()).subscribe(
           (data: any) => {
             document.getElementById("btn_advances_new").click();
             const alertSuccess: Alerts[] = [{
@@ -174,7 +174,7 @@ export class NewAdvancesComponent implements OnInit {
           },
           (error: any) => {
 
-            this.advancesService.deleteRequestAdvance(response.data.id.toString()).subscribe((response) => {
+            this.advancesService.deleteRequestAdvance(response.data.travel_advance_request.id.toString()).subscribe((response) => {
               document.getElementById("btn_advances_new").click();
               const alertWarning: Alerts[] = [{
                 type: 'danger',
