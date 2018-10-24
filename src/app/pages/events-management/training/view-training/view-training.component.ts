@@ -23,7 +23,7 @@ export class ViewTrainingComponent implements OnInit {
   public flagPDF: boolean = false;
   public activeBlur: number = 0;
 
-  public countAfter: number = 0;
+  public countAfterEval: number = 0;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
@@ -34,7 +34,7 @@ export class ViewTrainingComponent implements OnInit {
 
   ngOnInit() {
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      if (this.countAfter === 0) {
+      if (this.countAfterEval === 0) {
         this.idTraining = activeModal;
         this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
           this.flagPDF = true;
@@ -85,6 +85,6 @@ export class ViewTrainingComponent implements OnInit {
 
   
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.countAfterEval += 1;
   }
 }
