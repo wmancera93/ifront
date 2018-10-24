@@ -21,33 +21,35 @@ export class ViewTrainingComponent implements OnInit {
   public observations: string = "";
   public urlPrevisualize: string;
   public flagPDF: boolean = false;
-  public activeBlur: number = 0;
-
-  public countAfter: number = 0;
+  public countAfterEval: number = 0;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
     public sanitizer: DomSanitizer, public eventsEmployeeService:EventsEmployeeService) {
 
-  }
-
-  ngOnInit() {
-    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-      if (this.countAfter === 0) {
-        this.idTraining = activeModal;
-        this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
-          this.flagPDF = true;
-          setTimeout(() => {
-            this.trainingDetailInfo = info.data;
-            this.urlPrevisualize = info.data.pdf.url;
-          }, 100);
-          document.getElementById('btn-viewTraining').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
-        });
-      }
-    });
-  }
+      this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
+        if (this.countAfterEval === 0) {
+          if (document.getElementById('modal_viewTraining').className !== 'modal show') {
+            document.getElementById('btn-viewTraining').click();
+            document.getElementById("bodyGeneral").removeAttribute('style');
+            this.idTraining = activeModal;
+            this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
+              this.flagPDF = true;
+              setTimeout(() => {
+                this.trainingDetailInfo = info.data;
+                this.urlPrevisualize = info.data.pdf.url;
+              }, 100);
+  
+            });
+          }
+        }
+      });
+    }
+  
+    ngOnInit() {
+  
+    }
 
   acceptTraining(flag: boolean) {
     this.sendState = {
@@ -85,6 +87,6 @@ export class ViewTrainingComponent implements OnInit {
 
   
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.countAfterEval += 1;
   }
 }
