@@ -72,7 +72,6 @@ export class PendingTravelComponent implements OnInit {
   getRequestsPendings() {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
-
         this.travelsRequestsType = 'travels';
         this.pendingsRequestTravels = data.data[0].requests;
       }
@@ -81,8 +80,7 @@ export class PendingTravelComponent implements OnInit {
   getRequestsPendingsAllowances() {
     this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
       if (data) {
-
-        this.travelsRequestsType = 'travels';
+        this.travelsRequestsType = 'spend';
         this.pendingsRequestTravels = data.data[0].requests;
       }
     })
@@ -90,7 +88,7 @@ export class PendingTravelComponent implements OnInit {
   getRequestsPendingsAdvance() {
     this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
       if (data) {
-        this.travelsRequestsType = 'travels';
+        this.travelsRequestsType = 'advance';
         this.pendingsRequestTravels = data.data[0].requests;
       }
     })

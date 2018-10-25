@@ -38,12 +38,11 @@ export class ViewSpendComponent implements OnInit {
       debugger
       this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
         this.id_spend = idSpend;
-        this.ticket = data.data[0].travel_allowance_request.travel_request_id
+        this.ticket = data.data[0].travel_allowance_request.travel_request_id;
         this.showSpendDetail = data.data[0];
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
         this.showTableSpendsDetail = data.data[0].travel_allowances;
-
 
         setTimeout(() => {
           this.objectReport.emit({ data: [data.data[0].travel_allowances] });
@@ -104,11 +103,11 @@ export class ViewSpendComponent implements OnInit {
 
     this.spendsService.putSendRequestsSpend(this.id_spend).subscribe((data: any) => {
       if (data) {
-
+        document.getElementById("closeModalViewSpend").click();
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.spendSharedService.setRefreshSpend(true);
+      this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
     },
       (error: any) => {
         document.getElementById("closeModalViewSpend").click();
