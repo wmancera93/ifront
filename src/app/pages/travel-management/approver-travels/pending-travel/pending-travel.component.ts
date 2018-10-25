@@ -32,7 +32,16 @@ export class PendingTravelComponent implements OnInit {
         this.getRequestsPendings();
       }
     });
-
+    this.travelApproverServiceShared.getrefreshIndexAllowance().subscribe(data => {
+      if (data) {
+        this.getRequestsPendingsAllowances();
+      }
+    });
+    this.travelApproverServiceShared.getrefreshIndexAdvance().subscribe(data => {
+      if (data) {
+        this.getRequestsPendingsAdvance();
+      }
+    });
     this.typesRequest.push(
       {
         id: 1,
@@ -63,8 +72,23 @@ export class PendingTravelComponent implements OnInit {
   getRequestsPendings() {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
-
         this.travelsRequestsType = 'travels';
+        this.pendingsRequestTravels = data.data[0].requests;
+      }
+    })
+  };
+  getRequestsPendingsAllowances() {
+    this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+      if (data) {
+        this.travelsRequestsType = 'spend';
+        this.pendingsRequestTravels = data.data[0].requests;
+      }
+    })
+  };
+  getRequestsPendingsAdvance() {
+    this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+      if (data) {
+        this.travelsRequestsType = 'advance';
         this.pendingsRequestTravels = data.data[0].requests;
       }
     })

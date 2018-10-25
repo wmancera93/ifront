@@ -58,7 +58,6 @@ export class ManagedTravelComponent implements OnInit {
   getRequestsManaged() {
     this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
       if (data) {
-        debugger
         this.travelsRequestsManagedType = 'travels';
         this.managedRequestTravel = data.data[0].requests;
       }
@@ -68,12 +67,11 @@ export class ManagedTravelComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
 
-  modalAproversTravelManaged(request: any) {
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false })
+  modalAproversTravelManaged(request: any, type: string) {
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false, type: type })
   }
 
   selectTypeRequestsManaged(param) {
-    debugger
     switch (param.id.toString()) {
 
       case '1':

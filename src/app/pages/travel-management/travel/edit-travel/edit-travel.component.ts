@@ -1293,7 +1293,7 @@ export class EditTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.travelsService.setResultSaved(true);
+      this.travelsService.setResultSaved({success: true, third: 'travels_request'});
     },
       (error: any) => {
         document.getElementById("btn_travel_edit").click();
