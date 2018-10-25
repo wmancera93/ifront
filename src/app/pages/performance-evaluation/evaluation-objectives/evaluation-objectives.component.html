@@ -71,30 +71,30 @@
                   <div class="row">
                     <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code ==='2'">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c831"></i>
-                    </div> 
+                    </div>
                     <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-eye" aria-hidden="true"></i>
-                    </div> 
+                    </div>
                     <div class="col-4 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluation.status_complete === false && evaluation.status_code ==='2'">
                       <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8"></i>
-                    </div>   
+                    </div>
                     <div class="col-4 number-size" *ngIf="evaluation.status_complete === true || evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-pencil" aria-hidden="false"></i>
                     </div>
                     <div class="col-4 number-size text-danger" (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code !=='2'">
-                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                    </div>  
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    </div>
                     <div class="col-4 number-size " (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code ==='2'" style="cursor: no-drop">
                       <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                      </div> 
+                    </div>
                     <div class="col-4">
                       Ver objetivos
-                     </div>              
+                    </div>
                     <div class="col-4">
                       Modificar objetivos
                     </div>
                     <div class="col-4">
-                     Descargar Evaluación
+                      Descargar Evaluación
                     </div>
                   </div>
                 </div>
