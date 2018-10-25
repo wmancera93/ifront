@@ -81,9 +81,12 @@
                     <div class="col-4 number-size" *ngIf="evaluation.status_complete === true || evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-pencil" aria-hidden="false"></i>
                     </div>
-                    <div class="col-4 number-size text-danger" (click)="goToViewEval(evaluation)">
+                    <div class="col-4 number-size text-danger" (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code !=='2'">
                     <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>  
+                    <div class="col-4 number-size " (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code ==='2'" style="cursor: no-drop">
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                      </div> 
                     <div class="col-4">
                       Ver objetivos
                      </div>              
