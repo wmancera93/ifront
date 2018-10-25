@@ -184,8 +184,6 @@ export class DataTableComponent implements OnInit {
       addPageContent: function (data) {
         doc.setFontSize(16)
         doc.text(40, 60, title)
-        // doc.setFontSize(12)
-        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
         doc.setFontSize(12)
         doc.text(40, 95, 'Generado el ' + dateNow)
         doc.setFontSize(10)
