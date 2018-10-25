@@ -193,7 +193,7 @@
                               [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
                           </div>
                         </div>
-                        <div class="row" style="padding-bottom: 40px">
+                        <div class="row" style="padding-bottom: 40px" *ngIf="approvals[0].travel_allowance_request.data !== null">
                           <div class="col-12">
                             <p class="font-title-general text-left">
                               <i class="fa fa-fw fa-paperclip font-color-default"></i>
