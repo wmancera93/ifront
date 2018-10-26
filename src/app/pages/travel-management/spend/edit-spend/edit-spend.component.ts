@@ -460,7 +460,7 @@ export class EditSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend(true);
+        this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
       },
       (error: any) => {
         document.getElementById("btn_spend_edit").click();
@@ -565,13 +565,14 @@ export class EditSpendComponent implements OnInit {
 
     this.spendsService.putSendRequestsSpend(this.idSpendRequests).subscribe((data: any) => {
       if (data) {
+        document.getElementById("closeModalEditSpend").click();
         const alertWarning: Alerts[] = [{ 
         type: 'success', 
         title: 'Solicitud Exitosa', 
         message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.spendSharedService.setRefreshSpend(true);
+      this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
     },
       (error: any) => {
         document.getElementById("closeModalEditSpend").click();

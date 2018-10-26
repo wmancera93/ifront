@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
@@ -11,7 +11,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
   templateUrl: './approvals-details-travels.component.html',
   styleUrls: ['./approvals-details-travels.component.css']
 })
-export class ApprovalsDetailsTravelsComponent implements OnInit {
+export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -33,6 +33,8 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
   public table_spend: any[] = [];
   public type_requests: string;
 
+  public countAfter: number = 0;
+
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
 
@@ -46,120 +48,158 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
-        debugger
-        this.switchTravels = 'on';
-        this.descriptionTravels = '';
-        this.approvals = [];
-        this.requests_travels = data.request;
-        this.editRequest = data.edit;
-        this.type_requests = data.type;
 
-        switch (this.type_requests) {
-          case 'travels':
-            this.table_advances = [];
-            this.table_spend = [];
-            this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
-              .subscribe((request: any) => {
-                if (request) {
-                  this.approvals = request.data;
+        if (this.countAfter === 0) {
+          this.switchTravels = 'on';
+          this.descriptionTravels = '';
+          this.approvals = [];
+          this.requests_travels = data.request;
+          this.editRequest = data.edit;
+          this.type_requests = data.type;
 
-                  setTimeout(() => {
-                    this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
-                  }, 300);
+          switch (this.type_requests) {
+            case 'travels':
+              this.table_advances = [];
+              this.table_spend = [];
+              this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
+                .subscribe((request: any) => {
+                  if (request) {
+                    this.approvals = request.data;
 
-                  request.data[0].travel_advance_requests.data.forEach(element => {
-                    element.travel_advance_payments.forEach(dataObject => {
-                      this.table_advances.push(dataObject)
+                    setTimeout(() => {
+                      this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
+                    }, 300);
+
+                    request.data[0].travel_advance_requests.data.forEach(element => {
+                      element.travel_advance_payments.forEach(dataObject => {
+                        this.table_advances.push(dataObject)
+                      });
                     });
-                  });
-                  let object = {
-                    labels: request.data[0].travel_advance_requests.labels,
-                    data: this.table_advances,
+                    let object = {
+                      labels: request.data[0].travel_advance_requests.labels,
+                      data: this.table_advances,
+                    }
+
+                    setTimeout(() => {
+                      this.objectAdvanceReport.emit({ success: true, data: [object] });
+                    }, 300);
+
+                    request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                      this.table_spend.push(element)
+                    });
+                    let objectSpend = {
+                      labels: request.data[0].travel_allowance_request.labels,
+                      data: this.table_spend,
+                    }
+                    setTimeout(() => {
+
+                      this.objectSpendReport.emit({ success: true, data: [objectSpend] });
+                    }, 300);
+
                   }
+                });
 
-                  setTimeout(() => {
-                    this.objectAdvanceReport.emit({ success: true, data: [object] });
-                  }, 300);
-
-
-                  request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                    this.table_spend.push(element)
-                  });
-                  let objectSpend = {
-                    labels: request.data[0].travel_allowance_request.labels,
-                    data: this.table_spend,
-                  }
-                  setTimeout(() => {
-
-                    this.objectSpendReport.emit({ success: true, data: [objectSpend] });
-                  }, 300);
-                }
-              });
-
-            break;
-          case 'advance':
-
-            this.approverTravelsService.getApprovalsRequestsAdnvanceById(this.requests_travels.ticket)
-              .subscribe((advance: any) => {
-                console.log(advance)
-                this.approvals = advance.data;
-              })
-
-            break;
-          case 'spend':
-            this.table_advances = [];
-            this.table_spend = [];
-            this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)
-              .subscribe((spend: any) => {
-                if (spend) {
+              break;
+            case 'advance':
+              this.table_advances = [];
+              this.table_spend = [];
+              this.approverTravelsService.getApprovalsRequestsAdnvanceById(this.requests_travels.ticket)
+                .subscribe((advance: any) => {
                   debugger
-                  this.approvals = spend.data;
+                  this.approvals = advance.data[0].request;
                   setTimeout(() => {
-                    this.objectTravelsReport.emit({ success: true, data: [spend.data[0].travel_managements] });
+                    this.objectTravelsReport.emit({ success: true, data: [advance.data[0].request[0].travel_managements] });
                   }, 300);
 
-                  spend.data[0].travel_advance_requests.data.forEach(element => {
+                  advance.data[0].request[0].travel_advance_requests.data.forEach(element => {
                     element.travel_advance_payments.forEach(dataObject => {
                       this.table_advances.push(dataObject)
                     });
                   });
                   let object = {
-                    labels: spend.data[0].travel_advance_requests.labels,
+                    labels: advance.data[0].request[0].travel_advance_requests.labels,
                     data: this.table_advances,
                   }
+
                   setTimeout(() => {
                     this.objectAdvanceReport.emit({ success: true, data: [object] });
                   }, 300);
-                  spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+
+                  advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                     this.table_spend.push(element)
                   });
-                  let objectSpend = {
-                    labels: spend.data[0].travel_allowance_request.labels,
+                  let objectAdvance = {
+                    labels: advance.data[0].request[0].travel_allowance_request.labels,
                     data: this.table_spend,
                   }
                   setTimeout(() => {
-                    this.objectSpendReport.emit({ success: true, data: [objectSpend] });
+                    this.objectSpendReport.emit({ success: true, data: [objectAdvance] });
                   }, 300);
-                }
-              })
-            break;
-          default:
+                })
 
-            break;
-        }
-        if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
-          document.getElementById('btn_approvals_requests_travels').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+              break;
+            case 'spend':
+              this.table_advances = [];
+              this.table_spend = [];
+              this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)
+                .subscribe((spend: any) => {
+                  if (spend) {
+                    debugger
+                    this.approvals = spend.data;
+                    setTimeout(() => {
+                      this.objectTravelsReport.emit({ success: true, data: [spend.data[0].travel_managements] });
+                    }, 300);
+
+                    spend.data[0].travel_advance_requests.data.forEach(element => {
+                      element.travel_advance_payments.forEach(dataObject => {
+                        this.table_advances.push(dataObject)
+                      });
+                    });
+                    let object = {
+                      labels: spend.data[0].travel_advance_requests.labels,
+                      data: this.table_advances,
+                    }
+                    setTimeout(() => {
+                      this.objectAdvanceReport.emit({ success: true, data: [object] });
+                    }, 300);
+
+                    spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                      this.table_spend.push(element)
+                    });
+                    let objectSpend = {
+                      labels: spend.data[0].travel_allowance_request.labels,
+                      data: this.table_spend,
+                    }
+                    setTimeout(() => {
+                      this.objectSpendReport.emit({ success: true, data: [objectSpend] });
+                    }, 300);
+                  }
+                })
+              break;
+            default:
+
+              break;
+          }
+          if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
+            document.getElementById('btn_approvals_requests_travels').click();
+            document.getElementById("bodyGeneral").removeAttribute('style');
+          }
+
+          setTimeout(() => {
+            this.stylesExplorerService.addStylesCommon();
+          }, 1000);
         }
 
-        setTimeout(() => {
-          this.stylesExplorerService.addStylesCommon();
-        }, 1000);
+
 
       })
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.countAfter += 1;
   }
 
 
@@ -177,6 +217,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
     this.switchTravels = 'off';
   }
   saveApprovalRequestsTravels() {
+    debugger
     this.showSubmit = false;
 
     switch (this.type_requests) {
@@ -207,14 +248,9 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
 
         break;
       case 'advance':
-
-
-
-
-        break;
-      case 'spend':
-        this.approverTravelsService.postApprovalsRequestSpend({
-          request_id: this.requests_travels.ticket,
+        debugger
+        this.approverTravelsService.postApprovalsRequestAdvance({
+          request_id: this.approvals[0].travel_advance_requests.data[0].id,
           answer: this.switchTravels,
           observation: this.descriptionTravels
         }).subscribe((data: any) => {
@@ -224,7 +260,32 @@ export class ApprovalsDetailsTravelsComponent implements OnInit {
             const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
+            this.travelApproverServiceShared.setrefreshIndexAdvance(true);
+          }
+        },
+          (error: any) => {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          }
+        )
 
+        break;
+      case 'spend':
+        debugger
+        this.approverTravelsService.postApprovalsRequestSpend({
+          request_id: this.approvals[0].travel_allowance_request.data.id,
+          answer: this.switchTravels,
+          observation: this.descriptionTravels
+        }).subscribe((data: any) => {
+          this.showSubmit = true;
+          if (data.success) {
+            document.getElementById("btn_approvals_requests_travels").click();
+            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.travelApproverServiceShared.setrefreshIndexAllowance(true);
           }
         },
           (error: any) => {

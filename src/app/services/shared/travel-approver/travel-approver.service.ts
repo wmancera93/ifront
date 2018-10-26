@@ -6,6 +6,8 @@ export class TravelApproverService {
 
   viewDetailRequest: Subject<any> = new Subject<any>();
   refreshListIndex: Subject<any> = new Subject<any>();
+  refreshListIndexAllowance: Subject<any> = new Subject<any>();
+  refreshListIndexAdvance: Subject<any> = new Subject<any>();
   type_request: Subject<any> = new Subject<any>();
   
   constructor() { }
@@ -24,5 +26,18 @@ export class TravelApproverService {
   setrefreshIndexRequest(refreshListIndex:any ) {
     return this.refreshListIndex.next(refreshListIndex);
   }
+  getrefreshIndexAllowance() {
+    return this.refreshListIndexAllowance;
+  }
 
+  setrefreshIndexAllowance(refreshListIndexAllowance:any ) {
+    return this.refreshListIndexAllowance.next(refreshListIndexAllowance);
+  }
+  getrefreshIndexAdvance() {
+    return this.refreshListIndexAdvance;
+  }
+
+  setrefreshIndexAdvance(refreshListIndexAdvance:any ) {
+    return this.refreshListIndexAdvance.next(refreshListIndexAdvance);
+  }
 }

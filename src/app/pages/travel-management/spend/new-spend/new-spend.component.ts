@@ -134,6 +134,7 @@ export class NewSpendComponent implements OnInit {
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      debugger
       if (data.action_method === "deleteSpend") {
         this.deleteSpend(data);
       }
@@ -143,10 +144,7 @@ export class NewSpendComponent implements OnInit {
         this.spendNew = false;
         this.collapse_is = false;
         this.activate_submit_spend = false;
-        document.getElementById("funtionSpendTravel").click();
-        setTimeout(() => {
-          document.getElementById('spend_new').scrollTo(0, 1200);
-        }, 200);
+
 
         if ((this.spendEdit === true)) {
 
@@ -170,6 +168,10 @@ export class NewSpendComponent implements OnInit {
             populated: objectSpend[0].populated,
           });
         }
+        document.getElementById("funtionSpendTravel").click();
+        setTimeout(() => {
+          document.getElementById('spend_new').scrollTo(0, 1200);
+        }, 200);
       }
     })
 
@@ -431,7 +433,7 @@ export class NewSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend({success: true, third: this.eployee_selected == null ? false : true});
+        this.spendSharedService.setRefreshSpend({ success: true, third: this.eployee_selected == null ? false : true });
       },
       (error: any) => {
         document.getElementById("btn_spend_new").click();
