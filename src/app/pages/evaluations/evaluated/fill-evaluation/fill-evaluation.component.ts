@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EvaluationsSharedService } from '../../../../services/shared/common/evaluations/evaluations-shared.service';
 import { EvaluationsService } from '../../../../services/evaluations/evaluations.service';
 import { Evaluations, Questions, ResponseEvaluation, Sections, MultipleAnswer } from '../../../../models/common/evaluations/evaluations';
@@ -11,7 +11,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
   templateUrl: './fill-evaluation.component.html',
   styleUrls: ['./fill-evaluation.component.css']
 })
-export class FillEvaluationComponent implements OnInit {
+export class FillEvaluationComponent implements OnInit, OnDestroy {
   public infoEvaluation: Evaluations;
   public questions: Questions[] = [];
   public questionsChildren: Questions[] = [];
@@ -30,6 +30,7 @@ export class FillEvaluationComponent implements OnInit {
   public objectBySection: any[] = [];
   public totalQuestionsBySection: number = 0;
   public totalQuestions: number = 0;
+  public countAfter: number = 0;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
@@ -45,19 +46,26 @@ export class FillEvaluationComponent implements OnInit {
       }
     })
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
-      this.object = [];
-      this.evaluationService.getDataEvaluationById(info).subscribe((list: any) => {
-        this.idEvaluation = info;
-        this.infoEvaluation = list.data;
-        this.sections = list.data.sections_to_json;
-        this.questions = list.data.questions_to_json;
-      });
-      document.getElementById('btn_fillEvaluation').click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+      if(this.countAfter === 0){
+        this.object = [];
+        this.evaluationService.getDataEvaluationById(info).subscribe((list: any) => {
+          this.idEvaluation = info;
+          this.infoEvaluation = list.data;
+          this.sections = list.data.sections_to_json;
+          this.questions = list.data.questions_to_json;
+        });
+        document.getElementById('btn_fillEvaluation').click();
+        document.getElementById("bodyGeneral").removeAttribute('style');
+      }
+      
     });
   }
 
   ngOnInit() {
+  }
+
+  ngOnDestroy(){
+    this.countAfter += 1;
   }
 
   onSubmitSendEval() {
