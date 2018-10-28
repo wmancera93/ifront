@@ -30,15 +30,18 @@ export class ViewSpendComponent implements OnInit {
   public nameReportAdvance: string = 'Anticipos de viaje';
   public nameReportTravels: string = 'Trayectos de viaje';
 
+  public ticketSendPDF: any;
+
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public http: Http, public alert: AlertsService, public travelManagementService: TravelService) {
 
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
-      debugger
+      
       this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
         this.id_spend = idSpend;
         this.ticket = data.data[0].travel_allowance_request.travel_request_id;
+        this.ticketSendPDF = this.ticket;
         this.showSpendDetail = data.data[0];
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;

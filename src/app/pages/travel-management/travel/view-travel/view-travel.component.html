@@ -228,8 +228,13 @@
 
           </div>
         </div>
+        <div class="row justify-content-end" style="padding-bottom: 25px" >
+          <div class="col-lg-4 col-md-6 col-12">
+            <app-pdf-travel [ticketTravel]="ticketSendPDF"></app-pdf-travel>
+          </div>
+        </div>
 
-
+        
 
 
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="view_travels[0].status_request == 'Registrado'">
