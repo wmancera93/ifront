@@ -22,7 +22,7 @@
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-file-text text-primary-hr"></i>
-                      <strong>Nombre:</strong>
+                      <strong>Tipo de evaluación:</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-6 col-12">
@@ -75,48 +75,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 15px">
-                <div class="row">
-                  <div class="col-lg-4 col-md-6 col-12">
-                    <label for="nomEvaluation" class="titleColor">
-                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
-                      <strong>Periodo de Ejecución</strong>
-                    </label>
-                  </div>
-                  <div class="col-lg-4 col-md-12 col-12">
-                    <div class="row">
-                      <div class="col-lg-4 col-md-6 col-6">
-                        <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-start text-primary-hr"></i>
-                          <strong>Inicia:</strong>
-                        </label>
-                      </div>
-                      <div class="col-lg-8 col-md-6 col-6">
-                        <label for="nomEvaluation" class="titleColor">
-                          {{EvaluacionPer.start_excecution_date}}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-lg-4 col-md-12 col-12">
-                    <div class="row">
-                      <div class="col-lg-6 col-md-6 col-6">
-                        <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-end text-primary-hr"></i>
-                          <strong>Finaliza:</strong>
-                        </label>
-                      </div>
-                      <div class="col-lg-6 col-md-6 col-6">
-                        <label for="nomEvaluation" class="titleColor">
-                          {{EvaluacionPer.end_excecution_date}}
-                        </label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div> -->
             <div class="row">
               <div class=" col-12 top-containter" style="margin-top: 15px">
                 <div class="row">
@@ -145,23 +103,6 @@
                 </div>
               </div>
             </div>
-            <!-- <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 15px">
-                <div class="row">
-                  <div class="col-lg-6 col-md-6 col-12">
-                    <label for="nomEvaluation" class="titleColor">
-                      <i class="fa fa-clock-o text-primary-hr"></i>
-                      <strong>Fecha acuerdo de Objetivos</strong>
-                    </label>
-                  </div>
-                  <div class="col-lg-6 col-md-6 col-12 text-center">
-                    <label for="nomEvaluation" class="titleColor text-center">
-                      {{EvaluacionPer.period_evaluation}}
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div> -->
           </div>
         </div>
       </div>
@@ -271,7 +212,7 @@
                     <div class="col-md-12 col-12 top-containter">
                       <label for="celulaInput" class="font-title-general">
                         <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                        Objetivo *
+                        Objetivo * (Max, 80 caracteres)
                       </label>
                       <textarea type="text" rows="2" maxlength="80" style="height: auto !important;" name="objective_request" class="form-control"
                         [formControl]="formObjetive.controls['objetive_text']"></textarea>
