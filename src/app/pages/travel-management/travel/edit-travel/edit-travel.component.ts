@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Directive, HostListener } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Directive, HostListener, OnDestroy } from '@angular/core';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
@@ -21,7 +21,7 @@ import { EmployeeService } from '../../../../services/common/employee/employee.s
   templateUrl: './edit-travel.component.html',
   styleUrls: ['./edit-travel.component.css']
 })
-export class EditTravelComponent implements OnInit {
+export class EditTravelComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -93,22 +93,32 @@ export class EditTravelComponent implements OnInit {
   public searchEmployee: any[] = [];
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
-  public eployee_selected_current: any = null;  
+  public eployee_selected_current: any = null;
   public userAuthenticated: User = null;
 
   public kostl: boolean = false;
   public nplnr: boolean = false;
+
+  public viewSendAprovals: boolean = true;
+
+  public countAfter: number = 0;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService,
     public http: Http, public formDataService: FormDataService,
-    public alert: AlertsService, public employeeService: EmployeeService) {
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'goSpendsEditTravel') {
+        let url = window.location.href;
+        let travel = url.split('/')[url.split('/').length - 1];
+        let spend = url.split('/')[url.split('/').length - 2];
+        this.router.navigate(['/ihr/spend', travel, spend, 'travel']);
+      }
       if (data === 'continueEditTravelRequests' || data === 'continueEditDestinationRequests' || data === 'continueEditDestinationRequestsValidateDates' || data === 'sendApprobalAlert') {
         document.getElementById("btn_travel_edit").click();
       }
@@ -210,112 +220,114 @@ export class EditTravelComponent implements OnInit {
     });
 
     this.travelsService.getEditTravels().subscribe((data) => {
-      this.ticket = data;
+      if (this.countAfter === 0) {
+        this.ticket = data.id_travel;
+        this.viewSendAprovals = data.send_travel;
+        this.travelManagementService.getplanningTravelRequests().
+          subscribe((tavelManagement: any) => {
+            this.planningTravel = tavelManagement;
 
-      this.travelManagementService.getplanningTravelRequests().
-        subscribe((tavelManagement: any) => {
-          this.planningTravel = tavelManagement;
+            this.travel_types = this.sortByAphabet(tavelManagement.data.travel_types);
+            this.transport_types = this.sortByAphabet(tavelManagement.data.transport_types);
+            this.countries = this.sortByAphabet(tavelManagement.data.countries);
+            this.countriesto = this.sortByAphabet(tavelManagement.data.countries);
+            this.legal_travels = this.sortByAphabet(tavelManagement.data.legal_travels_types);
+            this.trips_specific = this.sortByAphabet(tavelManagement.data.specific_types_trips);
+            this.trips_activities = this.sortByAphabet(tavelManagement.data.travel_activities);
+            this.center_costs_travels = this.sortByAphabet(tavelManagement.data.travel_costs_types);
+            this.costs_travels = [];
 
-          this.travel_types = this.sortByAphabet(tavelManagement.data.travel_types);
-          this.transport_types = this.sortByAphabet(tavelManagement.data.transport_types);
-          this.countries = this.sortByAphabet(tavelManagement.data.countries);
-          this.countriesto = this.sortByAphabet(tavelManagement.data.countries);
-          this.legal_travels = this.sortByAphabet(tavelManagement.data.legal_travels_types);
-          this.trips_specific = this.sortByAphabet(tavelManagement.data.specific_types_trips);
-          this.trips_activities = this.sortByAphabet(tavelManagement.data.travel_activities);
-          this.center_costs_travels = this.sortByAphabet(tavelManagement.data.travel_costs_types);
-          this.costs_travels = [];
+            this.activate = false;
 
-          this.activate = false;
-
-          if (document.getElementById('travel_edit').className !== 'modal show') {
-            document.getElementById("btn_travel_edit").click();
-            document.getElementById('bodyGeneral').removeAttribute('style');
-          }
-          if (data) {
-            this.clearFormGeneral();
-            if (this.bnew || this.bedit) {
-              document.getElementById("edit_funtionTravel").click();
-              this.bnew = false;
-              this.bedit = false;
+            if (document.getElementById('travel_edit').className !== 'modal show') {
+              document.getElementById("btn_travel_edit").click();
+              document.getElementById('bodyGeneral').removeAttribute('style');
             }
-          }
+            if (data) {
+              this.clearFormGeneral();
+              if (this.bnew || this.bedit) {
+                document.getElementById("edit_funtionTravel").click();
+                this.bnew = false;
+                this.bedit = false;
+              }
+            }
 
-          if (this.center_costs_travels[0].travel_cost_type_code === "KOSTL") {
-            this.kostl = true;
-            this.nplnr = false;
-          } else {
-            this.kostl = false;
-            this.nplnr = true;
-          }
+            if (this.center_costs_travels[0].travel_cost_type_code === "KOSTL") {
+              this.kostl = true;
+              this.nplnr = false;
+            } else {
+              this.kostl = false;
+              this.nplnr = true;
+            }
 
-          this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
-            if (result.success) {
-              this.generalViajes = result.data;
+            this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
+              if (result.success) {
+                this.generalViajes = result.data;
 
-              this.objectPrint = this.generalViajes[0].travel_managements;
-              this.formTravelManagement = new FormGroup({});
-              this.formTravelManagement = fb.group({
-                type_travel: this.generalViajes[0].travel_request.travel_type_id,
-                date_requests_begin: this.generalViajes[0].travel_request.date_begin,
-                date_requests_end: this.generalViajes[0].travel_request.date_end,
-                trip_text: this.generalViajes[0].travel_request.observation,
-                maintenance: this.generalViajes[0].travel_request.is_maintenance,
-                id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
-                id_grahp: this.generalViajes[0].travel_request.travel_graph_code,
-                id_operations: this.generalViajes[0].travel_request.travel_operation_id,
-                id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
-                id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
-                id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
-                id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
-                id_transport: '',
-                id_city: '',
-                id_country: '',
-                id_state: '',
-                id_terminal: '',
-                date_begin: '',
-                hour_begin: '',
-                hour_end: '',
-                date_end: '',
-                id_terminalto: '',
-                id_cityto: '',
-                id_stateto: '',
-                id_countryto: '',
-                id_hotels: '',
-                travel_mileage: '',
-              });
+                this.objectPrint = this.generalViajes[0].travel_managements;
+                this.formTravelManagement = new FormGroup({});
+                this.formTravelManagement = fb.group({
+                  type_travel: this.generalViajes[0].travel_request.travel_type_id,
+                  date_requests_begin: this.generalViajes[0].travel_request.date_begin,
+                  date_requests_end: this.generalViajes[0].travel_request.date_end,
+                  trip_text: this.generalViajes[0].travel_request.observation,
+                  maintenance: this.generalViajes[0].travel_request.is_maintenance,
+                  id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
+                  id_grahp: this.generalViajes[0].travel_request.travel_graph_code,
+                  id_operations: this.generalViajes[0].travel_request.travel_operation_id,
+                  id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
+                  id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
+                  id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
+                  id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
+                  id_transport: '',
+                  id_city: '',
+                  id_country: '',
+                  id_state: '',
+                  id_terminal: '',
+                  date_begin: '',
+                  hour_begin: '',
+                  hour_end: '',
+                  date_end: '',
+                  id_terminalto: '',
+                  id_cityto: '',
+                  id_stateto: '',
+                  id_countryto: '',
+                  id_hotels: '',
+                  travel_mileage: '',
+                });
 
-              if (result.data[0].travel_request.employee_applicant_to_json !== null) {
-                this.eployee_selected_current = {
-                  id: result.data[0].travel_request.employee_applicant_to_json.personal_code,
-                  image: result.data[0].travel_request.employee_applicant_to_json.image,
-                  name_complete: result.data[0].travel_request.employee_applicant_to_json.short_name,
-                  posicion: result.data[0].travel_request.employee_applicant_to_json.position
+                if (result.data[0].travel_request.employee_applicant_to_json !== null) {
+                  this.eployee_selected_current = {
+                    id: result.data[0].travel_request.employee_applicant_to_json.personal_code,
+                    image: result.data[0].travel_request.employee_applicant_to_json.image,
+                    name_complete: result.data[0].travel_request.employee_applicant_to_json.short_name,
+                    posicion: result.data[0].travel_request.employee_applicant_to_json.position
+                  }
+                } else {
+                  this.eployee_selected_current = null;
                 }
-              } else {
-                this.eployee_selected_current = null;
+
+                setTimeout(() => {
+                  this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
+                  this.objectReport.emit({ success: true, data: [this.objectPrint] });
+                  if (this.generalViajes[0].travel_request.travel_graph_code !== null) {
+                    this.searchOperationsGrahp(this.formTravelManagement.value, '')
+                  }
+                }, 100);
+
               }
 
-              setTimeout(() => {
-                this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
-                this.objectReport.emit({ success: true, data: [this.objectPrint] });
-                if (this.generalViajes[0].travel_request.travel_graph_code !== null) {
-                  this.searchOperationsGrahp(this.formTravelManagement.value, '')
-                }
-              }, 100);
 
-            }
-
-
+            });
           });
-        });
-
+      }
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
+        debugger
         this.activate_submit = false;
         if (!this.bedit) {
           if (!this.bnew) {
@@ -334,7 +346,7 @@ export class EditTravelComponent implements OnInit {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-
+debugger
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -376,7 +388,7 @@ export class EditTravelComponent implements OnInit {
           })
           setTimeout(() => {
             this.editTravels(this.formTravelManagementedit);
-          }, 500);
+          }, 1000);
 
           this.destination_is_edit = true;
         }
@@ -425,6 +437,10 @@ export class EditTravelComponent implements OnInit {
       behavior: 'smooth'
     });
 
+  }
+
+  ngOnDestroy(){
+    this.countAfter += 1;
   }
 
   enterNameEmployee() {
@@ -556,17 +572,44 @@ export class EditTravelComponent implements OnInit {
         (data: any) => {
           if (data.success) {
             document.getElementById("close_edit_travel").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje modificado correctamente', confirmation: false }];
-            this.alert.setAlert(alertWarning[0]);
-            this.showSubmit = true;
-            this.travelsService.setResultSaved(true);
+            if (this.viewSendAprovals) {
+              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje modificado correctamente', confirmation: false }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved(true);
+            } else {
+              const alertWarning: Alerts[] = [{
+                type: 'success',
+                title: 'Solicitud Exitosa',
+                message: 'Viaje modificado correctamente - ¿Desea volver a la solicitud de gasto?',
+                confirmation: true,
+                typeConfirmation: 'goSpendsEditTravel'
+              }];
+              this.alert.setAlert(alertWarning[0]);
+              this.showSubmit = true;
+              this.travelsService.setResultSaved(true);
+            }
+
           }
         },
         (error: any) => {
+          if (this.viewSendAprovals) {
           document.getElementById("close_edit_travel").click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
+          }else {
+            document.getElementById("close_edit_travel").click();
+            const alertWarning: Alerts[] = [{
+              type: 'danger', 
+              title: 'Solicitud Denegada',
+              message: error.json().errors.toString() + ' - ¿Desea volver a la solicitud de gasto?',
+              confirmation: true,
+              typeConfirmation: 'goSpendsEditTravel'
+            }];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+          }
         }
       )
 
@@ -698,6 +741,7 @@ export class EditTravelComponent implements OnInit {
     this.id_destinations = 0;
   }
   editTravels(param: any) {
+    debugger
     if (param !== undefined) {
 
       this.formTravelManagement = new FormGroup({});
@@ -1226,7 +1270,6 @@ export class EditTravelComponent implements OnInit {
 
   }
   hourValidationsEdit(hourTrayect) {
-    debugger
     if (hourTrayect.date_begin === hourTrayect.date_end) {
       let hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
       let hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
@@ -1292,7 +1335,7 @@ export class EditTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.travelsService.setResultSaved({success: true, third: 'travels_request'});
+      this.travelsService.setResultSaved({ success: true, third: 'travels_request' });
     },
       (error: any) => {
         document.getElementById("btn_travel_edit").click();

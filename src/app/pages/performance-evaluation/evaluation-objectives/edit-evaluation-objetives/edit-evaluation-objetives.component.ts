@@ -66,7 +66,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       if (this.countAfter === 0) {
         this.EvaluacionPer = info;
         this.qualifierData = info.qualifier;
-        this.idEvaluation = info.id;
+        this.idEvaluation = info.perfomance_evaluation_id;
         document.getElementById('btn-evaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
