@@ -22,6 +22,8 @@ export class ViewAdvanceComponent implements OnInit {
 
   public countAfter: number = 0;
 
+  public ticketSendPDF: any;
+
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
     private accionDataTableService: DataDableSharedService,
@@ -33,17 +35,19 @@ export class ViewAdvanceComponent implements OnInit {
           if (document.getElementById('modal_viewAdvance').className !== 'modal show') {
             document.getElementById('btn-viewAdvance').click();
             document.getElementById("bodyGeneral").removeAttribute('style');
-          }
-          this.infoAdvance = advance.data;
-          let infoTableAdvances = [];
-          infoTableAdvances.push({
-            success: true,
-            data: [this.infoAdvance.table_advances_payment]
-          });
+            this.infoAdvance = advance.data;
+            this.ticketSendPDF = this.infoAdvance.travel_request_id;
+            let infoTableAdvances = [];
+            infoTableAdvances.push({
+              success: true,
+              data: [this.infoAdvance.table_advances_payment]
+            });
 
-          setTimeout(() => {
-            this.objectReport.emit(infoTableAdvances[0]);
-          }, 200);
+            setTimeout(() => {
+              this.objectReport.emit(infoTableAdvances[0]);
+            }, 200);
+          }
+
         })
       }
     })

@@ -16,6 +16,7 @@ import { User } from '../../../../models/general/user';
 export class ViewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
+  public ticketSendPDF: any;
   public nameReport: string = 'Gestión de viajes'
   public objectReport: EventEmitter<any> = new EventEmitter();
   public objectPrintAdvances: EventEmitter<any> = new EventEmitter();
@@ -47,6 +48,8 @@ export class ViewTravelComponent implements OnInit {
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
 
+     
+
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueViewTravelRequests') {
@@ -60,6 +63,7 @@ export class ViewTravelComponent implements OnInit {
 
     this.travelsService.getViewTravels().subscribe((data) => {
       this.ticket = data;
+      this.ticketSendPDF = this.ticket;
       if (document.getElementById('travel_view').className !== 'modal show') {
         document.getElementById("btn_travel_view").click();
         document.getElementById('bodyGeneral').removeAttribute('style');
