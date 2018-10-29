@@ -90,6 +90,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
 
       if (data.action_method === "updateEvaluationObjetive") {
+        debugger
         document.getElementById("funtionObjectives").click();
         setTimeout(() => {
           document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);

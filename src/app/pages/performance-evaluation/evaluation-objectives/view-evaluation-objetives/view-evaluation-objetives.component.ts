@@ -27,7 +27,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
     debugger
         this.EvaluacionPerView = result;
         this.qualifierDataView = result.qualifier;
-        this.idEvaluation = result.id;
+        this.idEvaluation = result.perfomance_evaluation_id;
         document.getElementById('btn-viewEvaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
