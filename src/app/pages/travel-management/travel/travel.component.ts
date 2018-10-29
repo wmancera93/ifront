@@ -80,6 +80,15 @@ export class TravelComponent implements OnInit {
       }
     })
 
+
+    this.travelService.getTravelRequests().subscribe((list: any) => {
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'travels') {
+        this.travelsService.setEditTravels(url.split('/')[url.split('/').length - 1]);
+      }
+    });
+
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

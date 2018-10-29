@@ -418,7 +418,7 @@ export class PdfTravelComponent implements OnInit {
 
   approvals(result, doc) {
     if (result.data[0].travel_request.approvers_to_json.length > 0) {
-      let columnsHeaderJourneys = ["APROBADORES", "ESTADOS", "OBESERVACIONES"];
+      let columnsHeaderJourneys = ["APROBADORES", "ESTADOS", "OBSERVACIONES"];
       let dataHeaderJourneys: any[] = [];
       let arrayPrint: any[]
       let index = 0;
