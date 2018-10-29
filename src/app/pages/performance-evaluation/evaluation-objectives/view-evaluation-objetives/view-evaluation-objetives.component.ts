@@ -36,7 +36,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
             this.ObjectivesTableView = table;
             setTimeout(() => {
               this.objectReportEval.emit(this.ObjectivesTableView);
-            }, 50);
+            }, 500);
           })
       
     })
