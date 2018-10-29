@@ -7,16 +7,14 @@ import { HotelsService } from '../../../../services/travel-management/hotels/hot
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Http, ResponseContentType } from '@angular/http';
 import { Travel, Travel_managements } from '../../../../models/common/travels_management/travel/travel';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
-import { element } from 'protractor';
-import { truncate } from 'fs';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
+
 
 @Component({
   selector: 'app-edit-travel',
@@ -368,7 +366,7 @@ export class EditTravelComponent implements OnInit {
               hour_end: this.split_end[1],
               date_end: this.split_end[0],
               id_terminalto: resutlDestinations.data.destination_transport_terminal_id,
-              id_cityto: resutlDestinations.data.destinations_location_text,
+              id_cityto: resutlDestinations.data.destination_location_text,
               id_stateto: resutlDestinations.data.destination_state,
               id_countryto: resutlDestinations.data.destination_country,
               id_hotels: resutlDestinations.data.hotel_id,
@@ -775,7 +773,7 @@ export class EditTravelComponent implements OnInit {
   }
   mileageTravel(param) {
 
-    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -1038,6 +1036,7 @@ export class EditTravelComponent implements OnInit {
       });
   }
   dateComplete(days) {
+    debugger
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
