@@ -227,13 +227,13 @@
       <li id="liEventsManagement" *ngIf="dataEnterprise.show_event_management">
         <a id="aEventsManagement" class="nav-link bg-menu" data-toggle="collapse" href="#eventsManagement" (click)="clickOptionMenu('liEventsManagement','toggle-eventsManagement', 'eventsManagement')">
           <i class="fa fa-flag"></i>
-          <span class="nav-label">Gestión de eventos</span>
+          <span class="nav-label">Gestión de capacitación</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="eventsManagement" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
             <li>
-              <a id="aTraining" class="nav-link bg-menu" routerLink="training" (click)="clickOptionMenu('liEventsManagement','aTraining', 'eventsManagement')">Capacitaciones</a>
+              <a id="aTraining" class="nav-link bg-menu" routerLink="training" (click)="clickOptionMenu('liEventsManagement','aTraining', 'eventsManagement')">Convenios de capacitación</a>
             </li>
           </ul>
         </div>
