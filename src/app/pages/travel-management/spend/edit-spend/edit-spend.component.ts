@@ -590,6 +590,7 @@ export class EditSpendComponent implements OnInit {
       });
   }
   returnTravelsRequest() {
+    document.getElementById("closeModalEditSpend").click();
     this.router.navigate(['/ihr/travels', this.idSpendRequests, this.ticketTravel]);
   }
 

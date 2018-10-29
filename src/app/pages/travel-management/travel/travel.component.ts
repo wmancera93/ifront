@@ -85,7 +85,7 @@ export class TravelComponent implements OnInit {
       let url = window.location.href;
       url.split('/')[url.split('/').length - 1];
       if (url.split('/')[url.split('/').length - 1] !== 'travels') {
-        this.travelsService.setEditTravels(url.split('/')[url.split('/').length - 1]);
+        this.travelsService.setEditTravels({ id_travel: url.split('/')[url.split('/').length - 1], send_travel: false });
       }
     });
 
@@ -193,7 +193,7 @@ export class TravelComponent implements OnInit {
   }
 
   editTravels(travel: number) {
-    this.travelsService.setEditTravels(travel);
+    this.travelsService.setEditTravels({ id_travel: travel, send_travel: true });
   }
 
   deleteTravels(id: string) {

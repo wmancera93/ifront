@@ -255,6 +255,10 @@ const routes: Routes = [
         component: TravelComponent
     },
     {
+        path: 'travels/:idSpend/:idTravels',
+        component: TravelComponent
+    },
+    {
         path:'hotels',
         component: HotelsComponent
     },
@@ -272,6 +276,10 @@ const routes: Routes = [
     },
     {
         path:'spend/:id',
+        component: SpendComponent        
+    },
+    {
+        path:'spend/:idTravels/:idSpend/:travel',
         component: SpendComponent        
     },
     {
