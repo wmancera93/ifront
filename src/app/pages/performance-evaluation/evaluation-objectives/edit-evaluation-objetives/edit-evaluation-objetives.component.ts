@@ -140,7 +140,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       this.ObjectivesTable = table;
       setTimeout(() => {
         this.objectReport.emit(this.ObjectivesTable);
-      }, 50);
+      }, 500);
     })
   }
 
