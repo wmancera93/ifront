@@ -7,14 +7,11 @@ import { HotelsService } from '../../../../services/travel-management/hotels/hot
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
-import { PARAMETERS } from '@angular/core/src/util/decorators';
 import { Http, ResponseContentType } from '@angular/http';
 import { Travel, Travel_managements } from '../../../../models/common/travels_management/travel/travel';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
-import { element } from 'protractor';
-import { truncate } from 'fs';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
@@ -150,7 +147,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
             subscribe((resultDestination: any) => {
               this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
               this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
-              this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+              setTimeout(() => {
+                this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+              }, 1000);
 
               document.getElementById("btn_travel_edit").click();
 
@@ -158,7 +157,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         } else {
           this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
           this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
-          this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+          setTimeout(() => {
+            this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+          }, 1000);
+          
           document.getElementById("btn_travel_edit").click();
         }
 
@@ -315,10 +317,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   if (this.generalViajes[0].travel_request.travel_graph_code !== null) {
                     this.searchOperationsGrahp(this.formTravelManagement.value, '')
                   }
-                }, 100);
+                }, 1000);
 
               }
-
 
             });
           });
@@ -348,7 +349,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-debugger
+            debugger
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -371,7 +372,7 @@ debugger
               id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
               id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
               id_transport: resutlDestinations.data.travel_transport_id,
-              id_city: resutlDestinations.data.origin_geographic_location_id,
+              id_city: resutlDestinations.data.origin_location_text,
               id_country: resutlDestinations.data.origin_country,
               id_state: resutlDestinations.data.origin_state,
               id_terminal: resutlDestinations.data.origin_transport_terminal_id,
@@ -380,7 +381,7 @@ debugger
               hour_end: this.split_end[1],
               date_end: this.split_end[0],
               id_terminalto: resutlDestinations.data.destination_transport_terminal_id,
-              id_cityto: resutlDestinations.data.destination_geographic_location_id,
+              id_cityto: resutlDestinations.data.destination_location_text,
               id_stateto: resutlDestinations.data.destination_state,
               id_countryto: resutlDestinations.data.destination_country,
               id_hotels: resutlDestinations.data.hotel_id,
@@ -441,7 +442,7 @@ debugger
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.countAfter += 1;
   }
 
@@ -510,12 +511,10 @@ debugger
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
 
-
       default:
         break;
     }
   }
-
 
   deleteUpload(param: any) {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
@@ -596,14 +595,14 @@ debugger
         },
         (error: any) => {
           if (this.viewSendAprovals) {
-          document.getElementById("close_edit_travel").click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
-          }else {
+            document.getElementById("close_edit_travel").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          } else {
             document.getElementById("close_edit_travel").click();
             const alertWarning: Alerts[] = [{
-              type: 'danger', 
+              type: 'danger',
               title: 'Solicitud Denegada',
               message: error.json().errors.toString() + ' - ¿Desea volver a la solicitud de gasto?',
               confirmation: true,
@@ -614,7 +613,6 @@ debugger
           }
         }
       )
-
 
   }
   addDestination(modelPartial) {
@@ -673,8 +671,7 @@ debugger
     this.count += 1
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-    }, 100);
-
+    }, 1000);
 
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
@@ -736,7 +733,7 @@ debugger
 
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-    }, 100);
+    }, 1500);
 
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
@@ -819,7 +816,7 @@ debugger
   }
   mileageTravel(param) {
 
-    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].code == 'T') {
+    if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
     } else {
       this.showMilenage = false;
@@ -1039,7 +1036,6 @@ debugger
     this.terminalLocationsto = [];
     this.hotels = [];
 
-
     this.formTravelManagement.controls['type_travel'].setValue('');
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
@@ -1082,6 +1078,7 @@ debugger
       });
   }
   dateComplete(days) {
+    debugger
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
@@ -1347,3 +1344,4 @@ debugger
 
   }
 }
+

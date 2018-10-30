@@ -9,7 +9,6 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { start } from 'repl';
 
-
 @Component({
   selector: 'app-edit-evaluation-objetives',
   templateUrl: './edit-evaluation-objetives.component.html',
@@ -17,7 +16,7 @@ import { start } from 'repl';
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
 
-  public idEvaluation: string;
+  public idEvaluation: string = '';
   public EvaluacionPer: PerformanceEvaluation = null;
   public sendDataObjective: any;
   public qualifierData: Qualifier[] = [];
@@ -48,6 +47,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data) => {
       if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
+        this.dataTableConsult();
         document.getElementById('btn-evaluationObjetives').click()
         this.showCharge = true;
         this.formObjetive = new FormGroup({});
@@ -58,7 +58,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           objetive_text: '',
         });
 
-
       }
     })
 
@@ -67,6 +66,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.EvaluacionPer = info;
         this.qualifierData = info.qualifier;
         this.idEvaluation = info.perfomance_evaluation_id;
+        this.status = true;
         document.getElementById('btn-evaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
@@ -98,9 +98,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.bedit = true;
         this.bnew = false;
         this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
-          let startDate = dataID.data.start_date_obj.split("-");
-          let endDate = dataID.data.end_date_obj.split("-");
+          let startDate = dataID.data.start_date_obj.split("/");
+          let endDate = dataID.data.end_date_obj.split("/");
           this.formObjetive = new FormGroup({});
+         
           this.formObjetive = fb.group({
             start_date: (startDate[2] + "-" + startDate[1] + "-" + startDate[0]).toString(),
             end_date: (endDate[2] + "-" + endDate[1] + "-" + endDate[0]).toString(),
@@ -136,16 +137,22 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
 
   dataTableConsult() {
+    this.ObjectivesTable = [];
     this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status).subscribe((table: any) => {
-      this.ObjectivesTable = table;
-      setTimeout(() => {
-        this.objectReport.emit(this.ObjectivesTable);
-      }, 500);
+      if (table.data !== null) {
+        this.ObjectivesTable = table;
+        setTimeout(() => {
+          this.objectReport.emit(this.ObjectivesTable);
+        }, 500);
+      } else {
+        this.ObjectivesTable = [];
+        this.objectReport.emit( {success: true, data: this.ObjectivesTable});
+      }
+
     })
   }
 
   ngOnInit() {
-
 
   }
   newObjetive(model) {
@@ -230,7 +237,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           this.showSubmit = true;
         })
     }
-
 
   }
 
