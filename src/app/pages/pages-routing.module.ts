@@ -57,6 +57,7 @@ import { AdvancesComponent } from './travel-management/advances/advances.compone
 import { SpendComponent } from './travel-management/spend/spend.component';
 import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
 import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
+import { ReportsComponent } from './travel-management/reports/reports.component';
 
 const routes: Routes = [
     {
@@ -285,7 +286,12 @@ const routes: Routes = [
     {
         path:'pending_travel',
         component: PendingTravelComponent        
+    },
+    {
+        path:'reports_travel',
+        component: ReportsComponent                
     }
+    
 ];
 
 @NgModule({

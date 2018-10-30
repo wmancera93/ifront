@@ -93,6 +93,7 @@ import { ViewSpendComponent } from './travel-management/spend/view-spend/view-sp
 import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
 import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
 import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/view-evaluation-objetives/view-evaluation-objetives.component';
+import { ReportsComponent } from './travel-management/reports/reports.component';
 
 
 @NgModule({
@@ -185,6 +186,7 @@ import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evalu
     PendingTravelComponent,
     ManagedTravelComponent,
     ViewEvaluationObjetivesComponent,
+    ReportsComponent,
   
   ],
   providers: [
