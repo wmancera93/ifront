@@ -447,13 +447,22 @@ export class NewTravelComponent implements OnInit {
             }
           } else {
             if (data.success) {
-
-              document.getElementById("closeTravels").click();
-              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
-              this.alert.setAlert(alertWarning[0]);
-              this.showSubmit = true;
-              this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
-              this.eployee_selected = null;
+              let tirthyDays = this.today -parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
+              if(tirthyDays < 30){
+                document.getElementById("closeTravels").click();
+                const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
+                this.alert.setAlert(alertWarning[0]);
+                this.showSubmit = true;
+                this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
+                this.eployee_selected = null;
+              }else{
+                document.getElementById("closeTravels").click();
+                const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu', confirmation: false}];
+                this.alert.setAlert(alertWarning[0]);
+                this.showSubmit = true;
+                this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
+                this.eployee_selected = null;
+              }
             }
           }
         },
@@ -984,7 +993,7 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
-    debugger
+
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -1005,7 +1014,7 @@ export class NewTravelComponent implements OnInit {
         }];
         this.alert.setAlert(alertDataWrong[0])
       }
-      
+
       if (dateTrayect.date_begin !== '') {
         let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
         if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
