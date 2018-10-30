@@ -62,6 +62,13 @@ export class TravelManagementComponent implements OnInit {
         route: "/ihr/management_travel"
       },
       {
+        title: "Reportes",
+        icon_primary: "fa fa-table",
+        icon_secundary: "fa fa-search",
+        tooltipText: "Haga clic aquí para ver los reportes",
+        route: "/ihr/reports_travel"
+      },
+      {
         title: "Asignación de hoteles",
         icon_primary: "fa fa-circle-thin",
         icon_secundary: "fa fa-bed",

@@ -26,6 +26,10 @@ export class TravelService {
     return this.tokenService.get('travel_requests/' + idTravel + '/' + edit)
       .map((data: any) => data.json());
   }
+  getHistoricalTravelRequests(id_travel: string) {
+    return this.tokenService.get('travel_requests/history_travel_requests/' + id_travel)
+      .map((data: any) => data.json());
+  }
   deleteTravelById(id: string) {
     return this.tokenService.delete('travel_requests/' + id)
       .map((data: any) => data.json());
@@ -48,7 +52,7 @@ export class TravelService {
     return this.tokenService.delete('travel_requests/destroy_file/' + id + '/' + id_requests_tarvels)
       .map((data: any) => data.json());
   }
- 
+
   getTravelsCosts(id_type_costs: string) {
     return this.tokenService.get('geographic_locations/show_travel_costs/' + id_type_costs)
       .map((data: any) => data.json());

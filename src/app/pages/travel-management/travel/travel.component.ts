@@ -35,7 +35,6 @@ export class TravelComponent implements OnInit {
     private aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService, public travelManagementService: TravelService) {
 
-
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     this.alert.getActionConfirm().subscribe((data: any) => {
       document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
