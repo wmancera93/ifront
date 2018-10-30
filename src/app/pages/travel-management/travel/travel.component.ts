@@ -79,6 +79,15 @@ export class TravelComponent implements OnInit {
       }
     })
 
+
+    this.travelService.getTravelRequests().subscribe((list: any) => {
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'travels') {
+        this.travelsService.setEditTravels({ id_travel: url.split('/')[url.split('/').length - 1], send_travel: false });
+      }
+    });
+
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -183,7 +192,7 @@ export class TravelComponent implements OnInit {
   }
 
   editTravels(travel: number) {
-    this.travelsService.setEditTravels(travel);
+    this.travelsService.setEditTravels({ id_travel: travel, send_travel: true });
   }
 
   deleteTravels(id: string) {

@@ -10,6 +10,7 @@ import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_ma
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-spend',
@@ -63,7 +64,7 @@ export class EditSpendComponent implements OnInit {
     public alert: AlertsService,
     public fb: FormBuilder,
     public http: Http, public fileUploadService: FileUploadService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, public router: Router) {
 
     this.formSpendEditTravel = new FormGroup({});
     this.formSpendEditTravel = fb.group({
@@ -566,10 +567,11 @@ export class EditSpendComponent implements OnInit {
     this.spendsService.putSendRequestsSpend(this.idSpendRequests).subscribe((data: any) => {
       if (data) {
         document.getElementById("closeModalEditSpend").click();
-        const alertWarning: Alerts[] = [{ 
-        type: 'success', 
-        title: 'Solicitud Exitosa', 
-        message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
+        const alertWarning: Alerts[] = [{
+          type: 'success',
+          title: 'Solicitud Exitosa',
+          message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false
+        }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
@@ -586,6 +588,10 @@ export class EditSpendComponent implements OnInit {
         this.alert.setAlert(alertWarning[0]);
 
       });
+  }
+  returnTravelsRequest() {
+    document.getElementById("closeModalEditSpend").click();
+    this.router.navigate(['/ihr/travels', this.idSpendRequests, this.ticketTravel]);
   }
 
 }

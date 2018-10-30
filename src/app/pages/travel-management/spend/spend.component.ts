@@ -85,10 +85,14 @@ export class SpendComponent implements OnInit {
     })
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
+      debugger
       let url = window.location.href;
       url.split('/')[url.split('/').length - 1];
-      if (url.split('/')[url.split('/').length - 1] !== 'spend') {
+      if (url.split('/')[url.split('/').length - 1] !== 'spend' && url.split('/')[url.split('/').length - 1] !== 'travel') {
         this.spendSharedService.setNewSpend(url.split('/')[url.split('/').length - 1]);
+      }
+      if(url.split('/')[url.split('/').length - 1] === 'travel'){
+        this.spendSharedService.setEditSpend(url.split('/')[url.split('/').length - 2]);
       }
     });
 
