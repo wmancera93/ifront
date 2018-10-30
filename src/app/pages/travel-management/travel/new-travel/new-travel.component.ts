@@ -984,7 +984,7 @@ export class NewTravelComponent implements OnInit {
 
   }
   dateValidateTrayect(dateTrayect) {
-
+    debugger
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -1004,6 +1004,38 @@ export class NewTravelComponent implements OnInit {
           typeConfirmation: 'continueDestinationRequests'
         }];
         this.alert.setAlert(alertDataWrong[0])
+      }
+      
+      if (dateTrayect.date_begin !== '') {
+        let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_begin'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
+      }
+
+      if (dateTrayect.date_end !== '') {
+        let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_end'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
       }
 
     } else {
