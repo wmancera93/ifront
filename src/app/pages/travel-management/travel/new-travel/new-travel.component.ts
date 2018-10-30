@@ -446,13 +446,22 @@ export class NewTravelComponent implements OnInit {
             }
           } else {
             if (data.success) {
-
-              document.getElementById("closeTravels").click();
-              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
-              this.alert.setAlert(alertWarning[0]);
-              this.showSubmit = true;
-              this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
-              this.eployee_selected = null;
+              let tirthyDays = this.today -parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
+              if(tirthyDays < 30){
+                document.getElementById("closeTravels").click();
+                const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
+                this.alert.setAlert(alertWarning[0]);
+                this.showSubmit = true;
+                this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
+                this.eployee_selected = null;
+              }else{
+                document.getElementById("closeTravels").click();
+                const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu', confirmation: false}];
+                this.alert.setAlert(alertWarning[0]);
+                this.showSubmit = true;
+                this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
+                this.eployee_selected = null;
+              }
             }
           }
         },
@@ -467,6 +476,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
+    debugger
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
@@ -521,7 +531,7 @@ export class NewTravelComponent implements OnInit {
 
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 1500);
+    }, 3000);
 
     this.closeTrip();
     this.activate_submit = true;
@@ -1003,6 +1013,38 @@ export class NewTravelComponent implements OnInit {
           typeConfirmation: 'continueDestinationRequests'
         }];
         this.alert.setAlert(alertDataWrong[0])
+      }
+
+      if (dateTrayect.date_begin !== '') {
+        let date = dateTrayect.date_begin.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_begin'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
+      }
+
+      if (dateTrayect.date_end !== '') {
+        let date = dateTrayect.date_end.toString().replace('-', '').replace('-', '');
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_end'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationRequests'
+          }];
+          this.alert.setAlert(alertDataWrong[0])
+        }
       }
 
     } else {
