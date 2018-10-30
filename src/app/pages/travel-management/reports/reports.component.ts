@@ -7,7 +7,7 @@ import { TravelService } from '../../../services/travel-management/travels/trave
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
-
+  token
   public typesReport: any[] = [];
   public titleReport: string = 'Historico de modificaciones'
 
@@ -23,7 +23,7 @@ export class ReportsComponent implements OnInit {
       }
     )
 
-    this.travelService.getHistoricalTravelRequests().subscribe(data => {
+    this.travelService.getHistoricalTravelRequests('479').subscribe(data => {
       console.log(data)
     });
 
@@ -37,7 +37,7 @@ export class ReportsComponent implements OnInit {
 
     switch (report.id) {
       case 1:
-        this.travelService.getHistoricalTravelRequests().subscribe(data => {
+        this.travelService.getHistoricalTravelRequests('479').subscribe(data => {
           console.log(data)
         });
         break;
