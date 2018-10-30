@@ -291,6 +291,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         confirmation: false,
       }];
       this.alert.setAlert(alertWarning[0]);
+      this.performanceEvalSharedService.setRefrehsEval(true);
     },
       (error: any) => {
         document.getElementById("closeModalObjectiveEvaluation").click();
