@@ -5,7 +5,8 @@ import { Subject } from 'rxjs/Subject';
 export class PerformanceEvalSharedService {
   exportEvaluationData: Subject<any> = new Subject<any>(); 
   exportEditEvaluationData: Subject<any> = new Subject<any>();   
-  editPlanningEvaluation: Subject<any> = new Subject<any>();  
+  editPlanningEvaluation: Subject<any> = new Subject<any>();
+  refreshEvalConve:  Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -38,5 +39,16 @@ export class PerformanceEvalSharedService {
   {    
     return this.editPlanningEvaluation.next(data);    
   }
+
+  getRefrehsEval()
+  {    
+    return this.refreshEvalConve;
+  }
+
+  setRefrehsEval(data:any)
+  {    
+    return this.refreshEvalConve.next(data);    
+  }
+
 
 }
