@@ -89,8 +89,6 @@ export class ViewTravelComponent implements OnInit {
           this.eployee_selected = null;
         }
 
-
-
         if (this.maintenance) {
           this.maintenance_travel = 'Con manutención'
         }
