@@ -35,7 +35,6 @@ export class TravelComponent implements OnInit {
     private aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService, public travelManagementService: TravelService) {
 
-
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     this.alert.getActionConfirm().subscribe((data: any) => {
       document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
@@ -79,6 +78,15 @@ export class TravelComponent implements OnInit {
         document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
       }
     })
+
+
+    this.travelService.getTravelRequests().subscribe((list: any) => {
+      let url = window.location.href;
+      url.split('/')[url.split('/').length - 1];
+      if (url.split('/')[url.split('/').length - 1] !== 'travels') {
+        this.travelsService.setEditTravels({ id_travel: url.split('/')[url.split('/').length - 1], send_travel: false });
+      }
+    });
 
     this.tokenService.validateToken()
       .subscribe(
@@ -184,7 +192,7 @@ export class TravelComponent implements OnInit {
   }
 
   editTravels(travel: number) {
-    this.travelsService.setEditTravels(travel);
+    this.travelsService.setEditTravels({ id_travel: travel, send_travel: true });
   }
 
   deleteTravels(id: string) {

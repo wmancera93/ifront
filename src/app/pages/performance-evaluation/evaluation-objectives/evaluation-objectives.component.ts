@@ -15,6 +15,15 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService) {
+
+    this.performanceEvalSharedService.getRefrehsEval().subscribe((data: any) => {
+      if (data) {
+        this.performanceEvaluationService.getPerformanceEvaluations().subscribe((data: any) => {
+          this.evaluationPerformanceList = data.data;
+        });
+      }
+    })
+
   }
 
   ngOnInit() {
@@ -27,13 +36,12 @@ export class EvaluationObjectivesComponent implements OnInit {
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
 
-  goToViewEval(editEval:any)
-  {
-    this.performanceEvaluationService.getViewEvaluationPDF(editEval.id).subscribe((data:any)=>{
+  goToViewEval(editEval: any) {
+    this.performanceEvaluationService.getViewEvaluationPDF(editEval.id).subscribe((data: any) => {
       window.open(data.data.result_pdf.url);
     })
   }
-  goToModalEvalView(viewEval:any){
+  goToModalEvalView(viewEval: any) {
     this.performanceEvalSharedService.setViewEvaluationPerformanceData(viewEval);
   }
 
