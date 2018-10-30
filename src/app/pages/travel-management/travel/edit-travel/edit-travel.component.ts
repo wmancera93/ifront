@@ -152,7 +152,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                 this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
               }, 1000);
 
-
               document.getElementById("btn_travel_edit").click();
 
             })
@@ -322,7 +321,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                 }, 1000);
 
               }
-
 
             });
           });
@@ -514,12 +512,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
 
-
       default:
         break;
     }
   }
-
 
   deleteUpload(param: any) {
     this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === param.file.name), 1);
@@ -619,7 +615,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }
       )
 
-
   }
   addDestination(modelPartial) {
 
@@ -678,7 +673,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
     }, 1000);
-
 
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
@@ -1043,7 +1037,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.terminalLocationsto = [];
     this.hotels = [];
 
-
     this.formTravelManagement.controls['type_travel'].setValue('');
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
@@ -1352,3 +1345,4 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
   }
 }
+

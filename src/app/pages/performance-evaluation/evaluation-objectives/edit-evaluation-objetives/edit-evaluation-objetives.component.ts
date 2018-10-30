@@ -9,7 +9,6 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { start } from 'repl';
 
-
 @Component({
   selector: 'app-edit-evaluation-objetives',
   templateUrl: './edit-evaluation-objetives.component.html',
@@ -59,7 +58,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           objetive_text: '',
         });
 
-
       }
     })
 
@@ -100,9 +98,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.bedit = true;
         this.bnew = false;
         this.performanceEvaluationService.getEvaluationObjetiveID(data.id).subscribe((dataID: any) => {
-          let startDate = dataID.data.start_date_obj.split("-");
-          let endDate = dataID.data.end_date_obj.split("-");
+          let startDate = dataID.data.start_date_obj.split("/");
+          let endDate = dataID.data.end_date_obj.split("/");
           this.formObjetive = new FormGroup({});
+         
           this.formObjetive = fb.group({
             start_date: (startDate[2] + "-" + startDate[1] + "-" + startDate[0]).toString(),
             end_date: (endDate[2] + "-" + endDate[1] + "-" + endDate[0]).toString(),
@@ -154,7 +153,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
 
   ngOnInit() {
-
 
   }
   newObjetive(model) {
@@ -239,7 +237,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           this.showSubmit = true;
         })
     }
-
 
   }
 
