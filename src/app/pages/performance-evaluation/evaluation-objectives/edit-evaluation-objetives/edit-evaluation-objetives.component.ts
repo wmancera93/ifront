@@ -17,7 +17,7 @@ import { start } from 'repl';
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
 
-  public idEvaluation: string;
+  public idEvaluation: string = '';
   public EvaluacionPer: PerformanceEvaluation = null;
   public sendDataObjective: any;
   public qualifierData: Qualifier[] = [];
@@ -48,6 +48,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data) => {
       if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
+        this.dataTableConsult();
         document.getElementById('btn-evaluationObjetives').click()
         this.showCharge = true;
         this.formObjetive = new FormGroup({});
@@ -67,6 +68,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.EvaluacionPer = info;
         this.qualifierData = info.qualifier;
         this.idEvaluation = info.perfomance_evaluation_id;
+        this.status = true;
         document.getElementById('btn-evaluationObjetives').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
 
@@ -90,7 +92,6 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
 
       if (data.action_method === "updateEvaluationObjetive") {
-        debugger
         document.getElementById("funtionObjectives").click();
         setTimeout(() => {
           document.getElementById('modal_evaluationObjetives').scrollTo(0, 800);
@@ -137,11 +138,18 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   }
 
   dataTableConsult() {
+    this.ObjectivesTable = [];
     this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status).subscribe((table: any) => {
-      this.ObjectivesTable = table;
-      setTimeout(() => {
-        this.objectReport.emit(this.ObjectivesTable);
-      }, 500);
+      if (table.data !== null) {
+        this.ObjectivesTable = table;
+        setTimeout(() => {
+          this.objectReport.emit(this.ObjectivesTable);
+        }, 500);
+      } else {
+        this.ObjectivesTable = [];
+        this.objectReport.emit( {success: true, data: this.ObjectivesTable});
+      }
+
     })
   }
 

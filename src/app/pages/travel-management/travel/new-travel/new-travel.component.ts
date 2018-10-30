@@ -136,7 +136,10 @@ public token: boolean;
         document.getElementById("btn_travel_new").click();
         this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === this.deleteDestination), 1);
         this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.deleteDestination), 1);
-        this.objectReport.emit(this.travelProof[0]);
+        setTimeout(() => {
+          this.objectReport.emit(this.travelProof[0]);
+        }, 1000);
+    
         this.activate_submit = true;
       }
 
@@ -522,7 +525,7 @@ public token: boolean;
 
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 500);
+    }, 1500);
 
     this.closeTrip();
     this.activate_submit = true;
@@ -531,7 +534,10 @@ public token: boolean;
   addDestinationEdit(modelEditPartial) {
     this.travelProof[0].data[0].data.splice(this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === modelEditPartial.id_travel), 1);
     this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === modelEditPartial.id_travel), 1);
-    this.objectReport.emit(this.travelProof[0]);
+    setTimeout(() => {
+      this.objectReport.emit(this.travelProof[0]);
+    }, 1000);
+
     this.addDestination(modelEditPartial);
 
   }
@@ -814,7 +820,7 @@ public token: boolean;
     });
     setTimeout(() => {
       this.objectReport.emit(this.travelProof[0]);
-    }, 100);
+    }, 1000);
 
     this.formTravelManagement = new FormGroup({});
     this.formTravelManagement = this.fb.group({

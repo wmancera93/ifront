@@ -148,7 +148,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
             subscribe((resultDestination: any) => {
               this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
               this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
-              this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+              setTimeout(() => {
+                this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+              }, 1000);
+
 
               document.getElementById("btn_travel_edit").click();
 
@@ -156,7 +159,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         } else {
           this.generalViajes[0].travel_managements.data.splice(this.generalViajes[0].travel_managements.data.findIndex(filter => filter.field_0 === this.id_destination_delete), 1);
           this.traverlsDestination.splice(this.traverlsDestination.findIndex(filter => filter.travel_id === this.id_destination_delete), 1);
-          this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+          setTimeout(() => {
+            this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
+          }, 1000);
+          
           document.getElementById("btn_travel_edit").click();
         }
 
@@ -313,7 +319,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   if (this.generalViajes[0].travel_request.travel_graph_code !== null) {
                     this.searchOperationsGrahp(this.formTravelManagement.value, '')
                   }
-                }, 100);
+                }, 1000);
 
               }
 
@@ -346,7 +352,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-debugger
+            debugger
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -439,7 +445,7 @@ debugger
 
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.countAfter += 1;
   }
 
@@ -594,14 +600,14 @@ debugger
         },
         (error: any) => {
           if (this.viewSendAprovals) {
-          document.getElementById("close_edit_travel").click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
-          }else {
+            document.getElementById("close_edit_travel").click();
+            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+          } else {
             document.getElementById("close_edit_travel").click();
             const alertWarning: Alerts[] = [{
-              type: 'danger', 
+              type: 'danger',
               title: 'Solicitud Denegada',
               message: error.json().errors.toString() + ' - ¿Desea volver a la solicitud de gasto?',
               confirmation: true,
@@ -671,7 +677,7 @@ debugger
     this.count += 1
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-    }, 100);
+    }, 1000);
 
 
     this.closeTrip();
@@ -734,7 +740,7 @@ debugger
 
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.generalViajes[0].travel_managements] });
-    }, 100);
+    }, 1500);
 
     this.closeTrip();
     document.getElementById("edit_funtionTravel").click();
