@@ -193,7 +193,7 @@
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                     <strong>Fecha de Gasto:</strong>
                   </label>
-                  <input type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" />
+                  <input type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')" />
                 </div>
               </div>
             </div>

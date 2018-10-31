@@ -95,7 +95,7 @@
                   <strong>Fecha entrega de Anticipo*:</strong>
                 </label>
                 <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
-                  (change)="validateDateAdvance(formAdvanceTravel.value)" />
+                  (change)="validateDateAdvance(formAdvanceTravel.value)" (keyup)="delete('date_body')" />
               </div>
             </div>
           </div>

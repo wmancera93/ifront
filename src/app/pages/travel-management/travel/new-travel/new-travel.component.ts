@@ -139,7 +139,6 @@ export class NewTravelComponent implements OnInit {
         setTimeout(() => {
           this.objectReport.emit(this.travelProof[0]);
         }, 1000);
-
         this.activate_submit = true;
       }
 
@@ -480,6 +479,7 @@ export class NewTravelComponent implements OnInit {
   }
 
   addDestination(modelPartial) {
+    debugger
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
