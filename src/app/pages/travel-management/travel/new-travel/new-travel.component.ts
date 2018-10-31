@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
@@ -24,7 +24,7 @@ import { User } from '../../../../models/general/user';
   templateUrl: './new-travel.component.html',
   styleUrls: ['./new-travel.component.css']
 })
-export class NewTravelComponent implements OnInit {
+export class NewTravelComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   public token: boolean;
@@ -91,6 +91,8 @@ export class NewTravelComponent implements OnInit {
   public kostl: boolean = false;
   public nplnr: boolean = false;
   public today: any;
+
+  public countAfter: number = 0;
 
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
@@ -268,24 +270,26 @@ export class NewTravelComponent implements OnInit {
     });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
-      this.travelProof = [{
-        success: true,
-        data: [{ data: [] }]
-      }];
-      if (document.getElementById('travel_new').className !== 'modal show') {
-        this.eployee_selected = null;
-        document.getElementById("btn_travel_new").click();
-        if (data) {
-          this.clearFormGeneral();
-          if (this.bnew) {
-            document.getElementById("funtionTravel").click();
-            this.bnew = false;
-            this.bedit = false;
+      if(this.countAfter === 0){
+        if (document.getElementById('travel_new').className !== 'modal show') {
+          this.travelProof = [{
+            success: true,
+            data: [{ data: [] }]
+          }];
+          this.eployee_selected = null;
+          document.getElementById("btn_travel_new").click();
+          if (data) {
+            this.clearFormGeneral();
+            if (this.bnew) {
+              document.getElementById("funtionTravel").click();
+              this.bnew = false;
+              this.bedit = false;
+            }
           }
-        }
-        document.getElementById('bodyGeneral').removeAttribute('style');
-      }
-    })
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        };
+      };     
+    });
 
   }
 
@@ -312,6 +316,10 @@ export class NewTravelComponent implements OnInit {
     let fecha = new Date();
     this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + fecha.getDate().toString();
 
+  }
+
+  ngOnDestroy(){
+    this.countAfter += 1;
   }
 
   enterNameEmployee() {
