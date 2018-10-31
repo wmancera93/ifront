@@ -32,6 +32,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public table_advances: any[] = [];
   public table_spend: any[] = [];
   public type_requests: string;
+  public idGeneral:string;
 
   public countAfter: number = 0;
 
@@ -56,6 +57,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.requests_travels = data.request;
           this.editRequest = data.edit;
           this.type_requests = data.type;
+          this.idGeneral=this.requests_travels.ticket;
 
           switch (this.type_requests) {
             case 'travels':
@@ -250,7 +252,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
       case 'advance':
         debugger
         this.approverTravelsService.postApprovalsRequestAdvance({
-          request_id: this.approvals[0].travel_advance_requests.data[0].id,
+          request_id: this.idGeneral,
           answer: this.switchTravels,
           observation: this.descriptionTravels
         }).subscribe((data: any) => {

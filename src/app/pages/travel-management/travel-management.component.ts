@@ -68,13 +68,13 @@ export class TravelManagementComponent implements OnInit {
         tooltipText: "Haga clic aquí para ver los reportes",
         route: "/ihr/reports_travel"
       },
-      {
-        title: "Asignación de hoteles",
-        icon_primary: "fa fa-circle-thin",
-        icon_secundary: "fa fa-bed",
-        tooltipText: "Haga clic aquí para crear hoteles",
-        route: "/ihr/hotels"
-      },
+      // {
+      //   title: "Asignación de hoteles",
+      //   icon_primary: "fa fa-circle-thin",
+      //   icon_secundary: "fa fa-bed",
+      //   tooltipText: "Haga clic aquí para crear hoteles",
+      //   route: "/ihr/hotels"
+      // },
     ];
   }
 
