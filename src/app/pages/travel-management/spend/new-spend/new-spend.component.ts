@@ -403,6 +403,12 @@ export class NewSpendComponent implements OnInit {
     this.refreshPartialSpend();
   }
 
+  delete(date_param) {
+    debugger
+    if(date_param == 'date_body'){
+      this.formSpendTravel.controls['date'].setValue('');
+    }
+  }
 
   newSpend(param) {
     this.showSubmit = false;

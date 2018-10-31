@@ -206,6 +206,12 @@ export class NewAdvancesComponent implements OnInit {
         this.showSubmit = true;
       })
   }
+  delete(date_param) {
+    debugger
+    if(date_param == 'date_body'){
+      this.formAdvanceTravel.controls['date'].setValue('');
+    }
+  }
 
   aditionAdvance(dataAgree) {
     this.infoTableAdvances[0].data[0].data.push({

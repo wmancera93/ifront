@@ -34,7 +34,6 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public type_requests: string;
   public idGeneral:string;
 
-
   public countAfter: number = 0;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
