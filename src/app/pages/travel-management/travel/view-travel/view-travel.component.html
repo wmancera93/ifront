@@ -5,7 +5,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalles de Viaje # {{ticket}}</h5>
-        <button id="closeTravelsNew" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeTravelsNew" type="button" class="close " data-dismiss="modal" aria-label="Close" (click)="cleanObjectShowDetail()">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -13,7 +13,9 @@
         <div class="row" *ngIf="eployee_selected !== null">
           <div class="col-12 align-self-center">
             <label class="titleColor">
-              Viaje creado para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+              Viaje creado para:
+              <i class="fa fa-fw fa fa-user text-primary-hr"></i>
+              <strong>{{eployee_selected.name_complete}}</strong>
             </label>
             <br>
           </div>
@@ -153,8 +155,7 @@
 
         <div class="row" style="margin-top: 15px">
           <div class="col-12 top-general-p">
-            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
         </div>
 
@@ -183,27 +184,36 @@
         <div id="accordion" class="col-12" style="margin-top: 15px">
           <div class="row">
             <div class="titleColor col-12 text-left" id="headingTwo">
-              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
-                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver
-                anticipos de viaje</p>
+              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
             </div>
             <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
-              <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable"
-                [title]="nameReportAdvance"></app-data-table>
+              <div class="row">
+                <div class="col-lg-7 col-md-6 col-12">
+                  <label class="titleColor">
+                    <p>Ticket de solicitudes de anticipos agregadas a este viaje:</p>
+                  </label>
+                </div>
+                <div class="col-lg-5 col-md-6 col-12" *ngFor="let requestAdvanceSaved of arrayAdvanceRequest">
+                  <label>{{requestAdvanceSaved}}</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-12">
+                  <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+                </div>
+              </div>
             </div>
           </div>
           <div class="row">
             <div class=" titleColor  col-12 text-left" id="headingThree">
-              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
-                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver
-                gastos de viaje</p>
+              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
             </div>
-            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion"
-              style="margin-top: 25px">
+            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
               <div class="row">
                 <div class="col-12">
-                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable"
-                    [title]="nameReportSpend"></app-data-table>
+                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
                 </div>
               </div>
               <!-- <div class="row" style="padding-bottom: 40px">
@@ -225,16 +235,15 @@
                 </div>
               </div> -->
             </div>
-
           </div>
         </div>
-        <div class="row justify-content-end" style="padding-bottom: 25px" >
+        <div class="row justify-content-end" style="padding-bottom: 25px">
           <div class="col-lg-4 col-md-6 col-12">
             <app-pdf-travel [ticketTravel]="ticketSendPDF"></app-pdf-travel>
           </div>
         </div>
 
-        
+
 
 
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="view_travels[0].status_request == 'Registrado'">
@@ -244,7 +253,7 @@
           </div>
         </div>
         <div class="modal-footerInfo justify-content-center">
-          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
+          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal" (click)="cleanObjectShowDetail()">
             <h6> Cerrar </h6>
           </div>
         </div>
