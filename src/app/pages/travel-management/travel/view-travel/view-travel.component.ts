@@ -39,7 +39,8 @@ export class ViewTravelComponent implements OnInit {
   public nameReportSpend: string = 'Gastos de viaje';
   public table_advances_view: any[] = [];
   public table_spend_view: any[] = [];
-
+  public arrayAdvanceRequest: any[] = [];
+  public arrayAllowanceRequest: any[] = [];
   public eployee_selected: any = null;
 
 
@@ -48,7 +49,7 @@ export class ViewTravelComponent implements OnInit {
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
 
-     
+
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -101,7 +102,15 @@ export class ViewTravelComponent implements OnInit {
         this.allRequests = detail;
         this.table_advances_view = [];
         this.table_spend_view = [];
+        this.arrayAdvanceRequest = [];
+        this.arrayAllowanceRequest = [];
+
         if (detail.data[0].travel_advance_requests.data.length > 0) {
+
+          detail.data[0].travel_advance_requests.data.forEach(element => {
+            this.arrayAdvanceRequest.push(element.id)
+          });
+
           setTimeout(() => {
             detail.data[0].travel_advance_requests.data.forEach(element => {
               element.travel_advance_payments.forEach(dataObject => {
@@ -118,7 +127,12 @@ export class ViewTravelComponent implements OnInit {
         } else {
           this.objectPrintAdvances.emit({ success: true, data: [] });
         }
+
         if (detail.data[0].travel_allowance_request.data.travel_allowances !== undefined) {
+
+          detail.data[0].travel_allowance_request.data.forEach(element => {
+            this.arrayAllowanceRequest.push(element.id)
+          });
           setTimeout(() => {
             detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
               this.table_spend_view.push(element)
@@ -132,9 +146,9 @@ export class ViewTravelComponent implements OnInit {
         } else {
           this.objectPrintSpend.emit({ success: true, data: [] });
         }
-
       })
     });
+
   }
 
   ngOnInit() {
@@ -148,7 +162,7 @@ export class ViewTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.travelsService.setResultSaved({success: true, third: 'travels_request'});
+      this.travelsService.setResultSaved({ success: true, third: 'travels_request' });
     },
       (error: any) => {
         document.getElementById("closeTravelsNew").click();
@@ -187,4 +201,10 @@ export class ViewTravelComponent implements OnInit {
         a.remove();
       });
   }
+
+  cleanObjectShowDetail() {
+    this.arrayAdvanceRequest = [];
+    this.arrayAllowanceRequest = [];
+  }
+
 }
