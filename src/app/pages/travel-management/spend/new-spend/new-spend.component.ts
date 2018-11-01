@@ -54,6 +54,7 @@ export class NewSpendComponent implements OnInit {
   public searchEmployee: any[] = [];
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
+  public ticket_allowance_request: string;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -210,7 +211,7 @@ export class NewSpendComponent implements OnInit {
 
   ngOnInit() {
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data;
+      this.listSpendType = this.sortByAphabet(select.data);
     });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
@@ -221,6 +222,21 @@ export class NewSpendComponent implements OnInit {
     });
   }
 
+  sortByAphabet(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      const nameA: String = a.name.toLowerCase();
+      const nameB: String = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+
+    return dataBySort;
+  }
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
     if (this.nameEmployee !== null) {
@@ -405,7 +421,7 @@ export class NewSpendComponent implements OnInit {
 
   delete(date_param) {
     debugger
-    if(date_param == 'date_body'){
+    if (date_param == 'date_body') {
       this.formSpendTravel.controls['date'].setValue('');
     }
   }
@@ -425,8 +441,8 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
+        this.ticket_allowance_request = data.data.travel_allowance_request_a.id
         document.getElementById("closeSpends").click();
-
         this.spendsService.getSpendListTravel().subscribe((travel: any) => {
           this.listTravelsFromSpend = travel.data;
         });
@@ -434,7 +450,7 @@ export class NewSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'success',
           title: 'Alerta',
-          message: data.message,
+          message: data.message + ' # ' + this.ticket_allowance_request,
           confirmation: false
         }];
         this.showSubmit = true;

@@ -298,7 +298,7 @@ export class EditSpendComponent implements OnInit {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = select.data;
+      this.listSpendType =  this.sortByAphabet(select.data);
     });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
@@ -309,6 +309,21 @@ export class EditSpendComponent implements OnInit {
     });
   }
 
+  sortByAphabet(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      const nameA: String = a.name.toLowerCase();
+      const nameB: String = b.name.toLowerCase();
+
+      if (nameA < nameB) {
+        return -1;
+      }
+      if (nameA > nameB) {
+        return 1;
+      }
+    });
+
+    return dataBySort;
+  }
   aditionSpend(objectSpend) {
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
