@@ -162,13 +162,13 @@ export class ViewTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.travelsService.setResultSaved({ success: true, third: 'travels_request' });
+      
+      this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? true : false});
     },
       (error: any) => {
         document.getElementById("closeTravelsNew").click();
         const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
-
       });
 
   }
