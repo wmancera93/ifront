@@ -102,6 +102,14 @@ export class SpendComponent implements OnInit {
     this.chargeDataSpends();
   }
 
+  sortByNumber(dataBySort: any) {
+    debugger
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
+  }
+
   checkSpends(spend) {
     switch (spend) {
       case 'spends_request':
@@ -126,7 +134,7 @@ export class SpendComponent implements OnInit {
       this.checkThird = true;
       this.third = 'spends_request';
       this.spedsData = [];
-      this.spedsData = list.data;
+      this.spedsData = this.sortByNumber(list.data);
     });
   }
   returnBackPage() {

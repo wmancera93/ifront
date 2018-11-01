@@ -110,11 +110,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.alert.getActionConfirm().subscribe((data: any) => {
 
       if (data === 'continueTravelAlowances') {
+        console.log(this.ticket_advance)
         document.getElementById("closeTravels").click();
         this.router.navigate(['/ihr/spend', this.ticket_advance]);
       }
 
       if (data === 'continueTravelAdvances') {
+        console.log(this.ticket_advance)
         document.getElementById("closeTravels").click();
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
@@ -448,13 +450,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           this.ticket_advance = 0;
           let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
+          console.log(this.ticket_advance)
           console.log(data.data[0].travel_request.date_end)
           console.log(validate)
           console.log(this.today)
           if (validate > 0) {
 
             if (data.success) {
-
+              console.log('1')
               document.getElementById("closeTravels").click();
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
               this.alert.setAlert(alertWarning[0]);
@@ -466,6 +469,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             if (data.success) {
               let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
               if (tirthyDays < 30) {
+                console.log('2')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -473,6 +477,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
                 this.eployee_selected = null;
               } else {
+                console.log('3')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu', confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
@@ -484,6 +489,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           }
         },
         (error: any) => {
+          console.log('4')
           document.getElementById("closeTravels").click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
           this.showSubmit = true;
