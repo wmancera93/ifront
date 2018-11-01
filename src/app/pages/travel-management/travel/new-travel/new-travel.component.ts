@@ -494,7 +494,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   addDestination(modelPartial) {
-    debugger
     modelPartial.id_travel = this.count + 1;
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
