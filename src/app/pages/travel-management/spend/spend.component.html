@@ -42,14 +42,14 @@
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-12 text-left">
           <form>
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request"
-              [checked]="checkThird" (click)="checkSpends('spends_request')" />
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" [checked]="checkThird"
+              (click)="checkSpends('spends_request')" />
             <b>
               Mis gastos registrados
             </b>
             &nbsp;&nbsp;
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request"
-              [checked]="!checkThird" (click)="checkSpends('my_spends_request')" />
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" [checked]="!checkThird"
+              (click)="checkSpends('my_spends_request')" />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
               Gastos registrados a terceros
             </b>
@@ -76,8 +76,23 @@
                 <p class="font-title-general">
                   Estado:
                 </p>
-                <h6>
+                <h6 *ngIf="spend.status_request == 'Aprobado'">
                   <span class="badge badge-primary">
+                    {{spend.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="spend.status_request == 'Cancelado'">
+                  <span class="badge badge-danger">
+                    {{spend.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="spend.status_request == 'En proceso'">
+                  <span class="badge badge-success">
+                    {{spend.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="spend.status_request == 'Registrado'">
+                  <span class="badge badge-default">
                     {{spend.status_request}}
                   </span>
                 </h6>
