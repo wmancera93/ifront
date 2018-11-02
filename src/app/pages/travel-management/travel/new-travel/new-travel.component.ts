@@ -287,7 +287,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = [];
 
-
         setTimeout(() => {
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
@@ -326,7 +325,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
 
     let fecha = new Date();
-    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + fecha.getDate().toString();
+    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0'+fecha.getDate().toString() :fecha.getDate().toString());
 
   }
 
@@ -457,6 +456,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          debugger
           this.ticket_advance = 0;
           let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
@@ -471,8 +471,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             }
           } else {
             if (data.success) {
-              let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
-              if (tirthyDays < 30) {
+              let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - 100;
+              if ((tirthyDays < 30) ||  (tirthyDays < -30)) {
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -481,7 +481,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 this.eployee_selected = null;
               } else {
                 document.getElementById("closeTravels").click();
-                const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
+                const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
                 this.alert.setAlert(alertWarning[0]);
                 this.showSubmit = true;
                 this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
