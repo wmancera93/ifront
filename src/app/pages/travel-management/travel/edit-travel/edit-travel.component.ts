@@ -551,12 +551,12 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
     modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
-    modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
-    modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
-    modelFromdata.append('travel_activity_id', model.id_travel_activities);
-    modelFromdata.append('travel_cost_id', model.id_travel_costs);
-    modelFromdata.append('date_begin', model.date_requests_begin);
-    modelFromdata.append('date_end', model.date_requests_end);
+    modelFromdata.append('legal_travels_type_id', model.id_travel_legal == '-1' ? '' : model.id_travel_legal);
+    modelFromdata.append('specific_types_trip_id', model.id_travel_specific == '-1' ? '' : model.id_travel_specific);
+    modelFromdata.append('travel_activity_id', model.id_travel_activities == '-1' ? '' : model.id_travel_activities);
+    modelFromdata.append('travel_cost_id', model.id_travel_costs == '-1' ? '' : model.id_travel_costs);
+    modelFromdata.append('date_begin', model.date_requests_begin == '-1' ? '' : model.date_requests_begin);
+    modelFromdata.append('date_end', model.date_requests_end == '-1' ? '' : model.date_requests_end);
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
@@ -1208,7 +1208,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }, error => {
           this.formTravelManagement.controls['date_requests_begin'].setValue(this.generalViajes[0].travel_request.date_begin);
           this.formTravelManagement.controls['date_requests_end'].setValue(this.generalViajes[0].travel_request.date_end);
-          
+
           document.getElementById("btn_travel_edit").click();
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
