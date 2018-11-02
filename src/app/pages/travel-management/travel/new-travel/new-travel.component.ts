@@ -108,7 +108,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-      debugger
       if (data === 'continueTravelAlowances') {
         document.getElementById("closeTravels").click();
         this.router.navigate(['/ihr/spend', this.ticket_advance]);
@@ -1170,7 +1169,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   dateValidateHotel(daysHotel) {
-    debugger
     let dateEndRequestCalculate = daysHotel.date_requests_end.toString().replace('-', '').replace('-', '');
     let dateEndTrayectCalculate = daysHotel.date_end.toString().replace('-', '').replace('-', '');
     let dateInHotelCalculate = daysHotel.date_hotel_in.toString().replace('-', '').replace('-', '');
