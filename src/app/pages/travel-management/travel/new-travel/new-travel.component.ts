@@ -573,6 +573,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.bnew = false
     }
+
+
+
     document.getElementById("funtionTravel").click();
 
     setTimeout(() => {
@@ -893,6 +896,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   dateComplete(days) {
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
 
+      if (this.travelProof[0].data[0].data.length === 0) {
+        this.formTravelManagement.controls['date_begin'].setValue(days.date_requests_begin);
+      }
+
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -1034,7 +1041,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message:  error.json().errors.toString() + '. ¿Desea continuar con la solicitud?',
+            message: error.json().errors.toString() + '. ¿Desea continuar con la solicitud?',
             confirmation: true,
             typeConfirmation: 'continueDestinationRequests1'
           }];
