@@ -18,6 +18,7 @@ export class PendingTravelComponent implements OnInit {
   public request_id: string;
   public request_type: string;
   public typesRequestFirts: any[] = [];
+  public global_ticket: string;
 
 
   constructor(public alert: AlertsService,
@@ -99,7 +100,7 @@ export class PendingTravelComponent implements OnInit {
   }
   modalAproversTravelPending(request: any, type: string) {
 
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true , type: type })
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true, type: type })
   }
   selectTypeReques(param) {
 
@@ -107,6 +108,7 @@ export class PendingTravelComponent implements OnInit {
       case '1':
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {
+            debugger
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
           }
@@ -115,12 +117,12 @@ export class PendingTravelComponent implements OnInit {
         break;
       case '2':
         this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
-          if (data){
+          if (data) {
             this.travelsRequestsType = 'advance';
             this.pendingsRequestTravels = data.data[0].requests;
           }
         })
-        
+
         break;
       case '3':
         this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {

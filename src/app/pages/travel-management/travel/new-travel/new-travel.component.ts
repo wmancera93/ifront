@@ -108,7 +108,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       data: [{ data: [] }]
     }];
     this.alert.getActionConfirm().subscribe((data: any) => {
-
+      debugger
       if (data === 'continueTravelAlowances') {
         document.getElementById("closeTravels").click();
         this.router.navigate(['/ihr/spend', this.ticket_advance]);
@@ -119,7 +119,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.router.navigate(['/ihr/advances', this.ticket_advance]);
       }
 
-      if (data === 'continueTravelRequests' || data === 'continueDestinationRequests' || data === 'continueDestinationRequestsValidateDates') {
+      if (data === 'continueDestinationHotel' || data === 'continueTravelRequests' || data === 'continueDestinationRequests1' || data === 'continueDestinationRequests2' || data === 'continueDestinationRequests3') {
         document.getElementById("btn_travel_new").click();
       }
 
@@ -128,6 +128,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.activate = false;
         this.bnew = false;
         this.traverlsDestination = [];
+        document.getElementById("btn_travel_new").click();
 
       }
       if (data === 'deleteNewDocumentSaved') {
@@ -198,6 +199,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_stateto: '',
       id_countryto: '',
       id_hotels: '',
+      date_hotel_in: '',
+      date_hotel_out: '',
       travel_mileage: '',
     });
 
@@ -257,6 +260,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_stateto: object[0].id_stateto,
             id_countryto: object[0].id_countryto,
             id_hotels: object[0].id_hotels,
+            date_hotel_in: object[0].date_hotel_in,
+            date_hotel_out: object[0].date_hotel_out,
             travel_mileage: object[0].travel_mileage,
           });
           this.searchState(this.formTravelManagement.value, 'edit');
@@ -448,14 +453,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           this.ticket_advance = 0;
           let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
-          console.log(this.ticket_advance)
-          console.log(data.data[0].travel_request.date_end)
-          console.log(validate)
-          console.log(this.today)
           if (validate > 0) {
-
             if (data.success) {
-              console.log('1')
               document.getElementById("closeTravels").click();
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
               this.alert.setAlert(alertWarning[0]);
@@ -467,7 +466,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             if (data.success) {
               let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
               if (tirthyDays < 30) {
-                console.log('2')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -475,7 +473,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
                 this.eployee_selected = null;
               } else {
-                console.log('3')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu', confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
@@ -487,7 +484,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           }
         },
         (error: any) => {
-          console.log('4')
           document.getElementById("closeTravels").click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
           this.showSubmit = true;
@@ -512,8 +508,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: modelPartial.travel_mileage,
-      field_10: {
+      field_9: modelPartial.date_hotel_in,
+      field_10: modelPartial.date_hotel_out,
+      field_11: modelPartial.travel_mileage,
+      field_12: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -522,7 +520,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         action_method: "editNewTravel",
         disable: false
       },
-      field_11: {
+      field_13: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -545,7 +543,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end
+      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      hotel_date_begin: modelPartial.date_hotel_in,
+      hotel_date_end: modelPartial.date_hotel_out,
     });
 
     this.count += 1
@@ -823,16 +823,26 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             sortable: false,
           },
           field_9: {
-            value: "Kilometraje",
+            value: "Ingreso al hotel",
             type: "string",
             sortable: false,
           },
           field_10: {
-            value: "Editar",
+            value: "Salida del hotel",
             type: "string",
             sortable: false,
           },
           field_11: {
+            value: "Kilometraje",
+            type: "string",
+            sortable: false,
+          },
+          field_12: {
+            value: "Editar",
+            type: "string",
+            sortable: false,
+          },
+          field_13: {
             value: "Eliminar",
             type: "string",
             sortable: false,
@@ -875,6 +885,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_stateto: '',
       id_countryto: '',
       id_hotels: '',
+      date_hotel_in: '',
+      date_hotel_out: '',
       travel_mileage: '',
     });
 
@@ -912,7 +924,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                     title: 'Error',
                     message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                     confirmation: true,
-                    typeConfirmation: 'continueDestinationRequests'
+                    typeConfirmation: 'continueDestinationRequests1'
 
                   }];
                   this.alert.setAlert(alertDataWrong[0]);
@@ -930,7 +942,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                           title: 'Error',
                           message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                           confirmation: true,
-                          typeConfirmation: 'continueDestinationRequests'
+                          typeConfirmation: 'continueDestinationRequests1'
 
                         }];
                         this.alert.setAlert(alertDataWrong[0]);
@@ -953,7 +965,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                       title: 'Error',
                       message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
                       confirmation: true,
-                      typeConfirmation: 'continueDestinationRequests'
+                      typeConfirmation: 'continueDestinationRequests1'
 
                     }];
                     this.alert.setAlert(alertDataWrong[0]);
@@ -972,7 +984,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                             title: 'Error',
                             message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                             confirmation: true,
-                            typeConfirmation: 'continueDestinationRequests'
+                            typeConfirmation: 'continueDestinationRequests1'
 
                           }];
                           this.alert.setAlert(alertDataWrong[0]);
@@ -1002,7 +1014,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                       title: 'Error',
                       message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
                       confirmation: true,
-                      typeConfirmation: 'continueDestinationRequests'
+                      typeConfirmation: 'continueDestinationRequests1'
 
                     }];
                     this.alert.setAlert(alertDataWrong[0]);
@@ -1015,7 +1027,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 }, 100);
               }
             }
-
           }
         }, error => {
           this.formTravelManagement.controls['date_requests_begin'].setValue('');
@@ -1026,7 +1037,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             title: 'Error',
             message:  error.json().errors.toString() + '. ¿Desea continuar con la solicitud?',
             confirmation: true,
-            typeConfirmation: 'continueDestinationRequests'
+            typeConfirmation: 'continueDestinationRequests1'
           }];
           this.alert.setAlert(alertDataWrong[0])
         });
@@ -1042,7 +1053,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   dateValidateTrayect(dateTrayect) {
-    debugger
+
     let dateBeginRequestCalculate = dateTrayect.date_requests_begin.toString().replace('-', '').replace('-', '');
     let dateEndRequestCalculate = dateTrayect.date_requests_end.toString().replace('-', '').replace('-', '');
 
@@ -1059,7 +1070,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           title: 'Error',
           message: 'La fecha de origen del trayecto no puede ser mayor a la de destino. ¿Desea continuar con la solicitud?',
           confirmation: true,
-          typeConfirmation: 'continueDestinationRequests'
+          typeConfirmation: 'continueDestinationRequests2'
         }];
         this.alert.setAlert(alertDataWrong[0])
       } else {
@@ -1073,7 +1084,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
               title: 'Error',
               message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
               confirmation: true,
-              typeConfirmation: 'continueDestinationRequests'
+              typeConfirmation: 'continueDestinationRequests2'
             }];
             this.alert.setAlert(alertDataWrong[0])
           }
@@ -1090,7 +1101,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
               title: 'Error',
               message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
               confirmation: true,
-              typeConfirmation: 'continueDestinationRequests'
+              typeConfirmation: 'continueDestinationRequests2'
             }];
             this.alert.setAlert(alertDataWrong[0])
           }
@@ -1109,7 +1120,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             title: 'Error',
             message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general ¿Desea continuar con la solicitud?',
             confirmation: true,
-            typeConfirmation: 'continueDestinationRequests'
+            typeConfirmation: 'continueDestinationRequests2'
           }];
           this.alert.setAlert(alertDataWrong[0])
         }
@@ -1125,7 +1136,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             title: 'Error',
             message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general. ¿Desea continuar con la solicitud?',
             confirmation: true,
-            typeConfirmation: 'continueDestinationRequests'
+            typeConfirmation: 'continueDestinationRequests2'
           }];
           this.alert.setAlert(alertDataWrong[0])
         }
@@ -1149,7 +1160,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           title: 'Error',
           message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida ¿Desea continuar con la solicitud?',
           confirmation: true,
-          typeConfirmation: 'continueDestinationRequests'
+          typeConfirmation: 'continueDestinationRequests3'
 
         }];
         this.alert.setAlert(alertDataWrong[0]);
@@ -1158,6 +1169,100 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     }
 
   }
+  dateValidateHotel(daysHotel) {
+    debugger
+    let dateEndRequestCalculate = daysHotel.date_requests_end.toString().replace('-', '').replace('-', '');
+    let dateEndTrayectCalculate = daysHotel.date_end.toString().replace('-', '').replace('-', '');
+    let dateInHotelCalculate = daysHotel.date_hotel_in.toString().replace('-', '').replace('-', '');
+    let dateOutHotelCalculate = daysHotel.date_hotel_out.toString().replace('-', '').replace('-', '');
+
+    if (dateEndTrayectCalculate !== '') {
+      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate < dateEndTrayectCalculate)) {
+        this.formTravelManagement.controls['date_hotel_in'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'El ingreso al hotel no puede ser menor a la fecha de llegada del destino, ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationHotel'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      };
+      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate > dateEndRequestCalculate)) {
+        this.formTravelManagement.controls['date_hotel_in'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'El ingreso al hotel no puede ser mayor a la fecha de final de la solicitud, ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationHotel'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      }
+      if (dateOutHotelCalculate !== '') {
+        if (dateInHotelCalculate > dateOutHotelCalculate) {
+          this.formTravelManagement.controls['date_hotel_in'].setValue('');
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'El ingreso al hotel no puede ser mayor a la fecha de salida del hotel, ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationHotel'
+
+          }];
+          this.alert.setAlert(alertDataWrong[0]);
+        }
+      }
+    }
+
+    if (dateOutHotelCalculate !== '') {
+      if ((dateOutHotelCalculate < dateEndTrayectCalculate)) {
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La salida del hotel no puede ser menor a la fecha de llegada al destino, ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationHotel'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      };
+      if ((dateOutHotelCalculate > dateEndRequestCalculate)) {
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La salida del hotel no puede superar la fecha de finalizacion de la solicitud, ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationHotel'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      }
+      if ((dateInHotelCalculate !== '') && (dateOutHotelCalculate < dateInHotelCalculate)) {
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
+        document.getElementById("btn_travel_new").click();
+        const alertDataWrong: Alerts[] = [{
+          type: 'danger',
+          title: 'Error',
+          message: 'La salida del hotel no puede ser menor a la fecha de ingreso al hotel, ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueDestinationHotel'
+
+        }];
+        this.alert.setAlert(alertDataWrong[0]);
+      }
+    }
+  }
+
   clearFormPartial() {
     this.stateLocations = [];
     this.stateLocationsto = [];
@@ -1181,6 +1286,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['id_stateto'].setValue('');
     this.formTravelManagement.controls['id_countryto'].setValue('');
     this.formTravelManagement.controls['id_hotels'].setValue('');
+    this.formTravelManagement.controls['date_hotel_in'].setValue('');
+    this.formTravelManagement.controls['date_hotel_out'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
   dateBeginValidate(days) {
