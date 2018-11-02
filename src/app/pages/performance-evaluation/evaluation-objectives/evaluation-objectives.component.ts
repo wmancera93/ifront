@@ -38,7 +38,7 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   goToViewEval(editEval: any) {
     this.performanceEvaluationService.getViewEvaluationPDF(editEval.id).subscribe((data: any) => {
-      window.open(data.data.result_pdf.url);
+      window.open(data.data.file_pdf.url);
     })
   }
   goToModalEvalView(viewEval: any) {
