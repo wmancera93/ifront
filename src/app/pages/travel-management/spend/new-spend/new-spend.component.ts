@@ -319,7 +319,6 @@ export class NewSpendComponent implements OnInit {
   }
 
   aditionSpend(objectSpend) {
-
     objectSpend.id_spend = this.idSpend + 1;
     this.objectProof.push(objectSpend)
 
@@ -410,6 +409,7 @@ export class NewSpendComponent implements OnInit {
 
   }
   closeSpend() {
+    debugger
     this.showSubmit = true;
     this.spendNew = false;
     this.spendEdit = false;

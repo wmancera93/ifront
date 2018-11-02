@@ -141,7 +141,7 @@
                 <button type="button" *ngIf="collapse_is" class="btn btn-block btn-primary text-center" (click)="colapse()">
                   Nuevo gasto
                 </button>
-                <button id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
+                <button  type="button"  id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
                 </button>
               </div>
             </div>
@@ -294,7 +294,7 @@
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
-                  <button class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse"
+                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse"
                     data-target="#collapseNewSpend">
                     <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                 </div>

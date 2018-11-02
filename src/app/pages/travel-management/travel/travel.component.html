@@ -63,7 +63,10 @@
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket # {{travels.ticket}}
+                    Ticket IHR # {{travels.ticket}}
+                  </span>
+                  <span *ngIf="travels.ticket_cli !== null" class="badge badge-warning">
+                    Ticket SAP # {{travels.ticket_cli}}
                   </span>
                 </h5>
                 <p>

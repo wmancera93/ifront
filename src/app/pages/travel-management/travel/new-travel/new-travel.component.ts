@@ -159,6 +159,37 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
     })
 
+    this.formTravelManagement = new FormGroup({});
+    this.formTravelManagement = this.fb.group({
+      type_travel: '',
+      date_requests_begin: '',
+      date_requests_end: '',
+      trip_text: '',
+      maintenance: '',
+      id_element_imputation: '',
+      id_travel_costs: '',
+      id_grahp: '',
+      id_operations: '',
+      id_travel_legal: '',
+      id_travel_specific: '',
+      id_travel_activities: '',
+      id_transport: '',
+      id_city: '',
+      id_country: '44',
+      id_state: '',
+      id_terminal: '',
+      date_begin: '',
+      hour_begin: '',
+      hour_end: '',
+      date_end: '',
+      id_terminalto: '',
+      id_cityto: '',
+      id_stateto: '',
+      id_countryto: '44',
+      id_hotels: '',
+      travel_mileage: '',
+    });
+
     this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
