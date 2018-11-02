@@ -6,6 +6,10 @@ export class TravelService {
 
   constructor(private tokenService: Angular2TokenService) { }
 
+  validateDatesTravelRequests(dateBegin: string, dateEnd: string, idTravelExcelpt: string) {
+    return this.tokenService.get('travel_requests/is_date_cross/' + dateBegin + '/' + dateEnd+ '/' + idTravelExcelpt)
+      .map((data: any) => data.json());
+  }
   getplanningTravelRequests() {
     return this.tokenService.get('planning_travel_requests')
       .map((data: any) => data.json());
