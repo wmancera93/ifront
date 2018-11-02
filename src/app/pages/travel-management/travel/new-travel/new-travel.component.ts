@@ -177,37 +177,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.formTravelManagement = new FormGroup({});
-    this.formTravelManagement = fb.group({
-      type_travel: '',
-      date_requests_begin: '',
-      date_requests_end: '',
-      trip_text: '',
-      maintenance: '',
-      id_element_imputation: '',
-      id_travel_costs: '',
-      id_grahp: '',
-      id_operations: '',
-      id_travel_legal: '',
-      id_travel_specific: '',
-      id_travel_activities: '',
-      id_transport: '',
-      id_city: '',
-      id_country: '',
-      id_state: '',
-      id_terminal: '',
-      date_begin: '',
-      hour_begin: '',
-      hour_end: '',
-      date_end: '',
-      id_terminalto: '',
-      id_cityto: '',
-      id_stateto: '',
-      id_countryto: '',
-      id_hotels: '',
-      travel_mileage: '',
-    });
-
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
 
       if (data.action_method === 'deleteNewTravels') {
@@ -319,6 +288,43 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.trips_activities = this.sortByAphabet(data.data.travel_activities);
         this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
         this.costs_travels = [];
+
+
+        setTimeout(() => {
+          this.formTravelManagement = new FormGroup({});
+          this.formTravelManagement = this.fb.group({
+            type_travel: '',
+            date_requests_begin: '',
+            date_requests_end: '',
+            trip_text: '',
+            maintenance: '',
+            id_element_imputation: '',
+            id_travel_costs: '',
+            id_grahp: '',
+            id_operations: '',
+            id_travel_legal: '',
+            id_travel_specific: '',
+            id_travel_activities: '',
+            id_transport: '',
+            id_city: '',
+            id_country: '44',
+            id_state: '',
+            id_terminal: '',
+            date_begin: '',
+            hour_begin: '',
+            hour_end: '',
+            date_end: '',
+            id_terminalto: '',
+            id_cityto: '',
+            id_stateto: '',
+            id_countryto: '44',
+            id_hotels: '',
+            travel_mileage: '',
+          });
+          this.searchState(this.formTravelManagement.value, 'edit');
+          this.searchStateto(this.formTravelManagement.value, 'edit');
+        }, 100);
+
       })
 
     let fecha = new Date();
@@ -456,14 +462,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           this.ticket_advance = 0;
           let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
-          console.log(this.ticket_advance)
-          console.log(data.data[0].travel_request.date_end)
-          console.log(validate)
-          console.log(this.today)
           if (validate > 0) {
 
             if (data.success) {
-              console.log('1')
               document.getElementById("closeTravels").click();
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
               this.alert.setAlert(alertWarning[0]);
@@ -475,7 +476,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             if (data.success) {
               let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', ''))
               if (tirthyDays < 30) {
-                console.log('2')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -483,7 +483,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? false : true });
                 this.eployee_selected = null;
               } else {
-                console.log('3')
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'warning', title: 'Espere', message: 'Este viaje esta fuera del tiempo limite para legalizar gastos, dirijase a editar las fechas de esta solicitud en la opcion del menu. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -495,7 +494,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           }
         },
         (error: any) => {
-          console.log('4')
           document.getElementById("closeTravels").click();
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueTravelRequests' }];
           this.showSubmit = true;
@@ -611,6 +609,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   searchState(form: any, acction: any) {
+    debugger
     this.stateLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_country).
       subscribe((data: any) => {
@@ -871,7 +870,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_travel_activities: '',
       id_transport: '',
       id_city: '',
-      id_country: '',
+      id_country: '44',
       id_state: '',
       id_terminal: '',
       date_begin: '',
@@ -881,11 +880,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '',
+      id_countryto: '44',
       id_hotels: '',
       travel_mileage: '',
     });
-
+    this.searchState(this.formTravelManagement.value, 'edit');
+    this.searchStateto(this.formTravelManagement.value, 'edit');
   }
   dateComplete(days) {
     if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
@@ -1160,7 +1160,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('');
+    this.formTravelManagement.controls['id_country'].setValue('44');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
@@ -1170,7 +1170,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('');
+    this.formTravelManagement.controls['id_countryto'].setValue('44');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
   }
