@@ -56,7 +56,7 @@
                     </span>
                   </h6>
                 </div>
-                <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <div *ngIf="evaluation.qualifier !== null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
                   <p class="font-title-general">
                     {{evaluation.qualifier.short_name}}
                   </p>
@@ -67,34 +67,39 @@
                     Calificador
                   </p>
                 </div>
+                <div *ngIf="evaluation.qualifier === null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                  <p class="">
+                    Esta evaluación no cuenta con calificador
+                  </p>
+                </div>
                 <div class="col-lg-3 col-md-3 col-12 text-center top-p">
                   <div class="row">
                     <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code ==='2'">
                       <i class="fa fa-eye" aria-hidden="true" style="color:#23c831"></i>
-                    </div> 
+                    </div>
                     <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-eye" aria-hidden="true"></i>
-                    </div> 
+                    </div>
                     <div class="col-4 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluation.status_complete === false && evaluation.status_code ==='2'">
                       <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8"></i>
-                    </div>   
+                    </div>
                     <div class="col-4 number-size" *ngIf="evaluation.status_complete === true || evaluation.status_code !=='2'" style="cursor: no-drop">
                       <i class="fa fa-pencil" aria-hidden="false"></i>
                     </div>
                     <div class="col-4 number-size text-danger" (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code !=='2'">
                       <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                      </div>  
-                      <div class="col-4 number-size " (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code ==='2'" style="cursor: no-drop">
-                        <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
-                        </div>   
+                    </div>
+                    <div class="col-4 number-size " (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code ==='2'" style="cursor: no-drop">
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    </div>
                     <div class="col-4">
                       Ver Objetivos
-                     </div>              
+                    </div>
                     <div class="col-4">
                       Modificar objetivos
                     </div>
                     <div class="col-4">
-                     Descargar Evaluación
+                      Descargar Evaluación
                     </div>
                   </div>
                 </div>
