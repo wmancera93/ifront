@@ -86,6 +86,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public editEditTrip: any[] = [];
   public grahp: any[] = [];
   public operations: any[] = [];
+  public ticket_sap: string;
 
   public searchByLetter: string;
   public nameEmployee: string = '';
@@ -229,6 +230,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       if (this.countAfter === 0) {
         this.ticket = data.id_travel;
         this.viewSendAprovals = data.send_travel;
+       
         this.travelManagementService.getplanningTravelRequests().
           subscribe((tavelManagement: any) => {
             this.planningTravel = tavelManagement;
@@ -694,16 +696,16 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {
         element.field_1 = modelEditPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelEditPartial.id_transport.toString())[0].name : '',
-        element.field_2 = modelEditPartial.id_city,
-        element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
+          element.field_2 = modelEditPartial.id_city,
+          element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
         element.field_4 = modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin;
         element.field_5 = modelEditPartial.id_cityto,
-        element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
+          element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
         element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
         element.field_9 = modelEditPartial.date_hotel_in,
-        element.field_10 = modelEditPartial.date_hotel_out,
-        element.field_11 = modelEditPartial.travel_mileage;
+          element.field_10 = modelEditPartial.date_hotel_out,
+          element.field_11 = modelEditPartial.travel_mileage;
         element.field_12 = {
           type_method: "UPDATE",
           type_element: "button",
@@ -787,7 +789,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         id_countryto: param.id_countryto,
         id_hotels: param.id_hotels,
         date_hotel_in: param.date_hotel_in,
-        date_hotel_out:param.date_hotel_out,
+        date_hotel_out: param.date_hotel_out,
         travel_mileage: param.travel_mileage,
       });
       this.searchState(param, 'edit');
@@ -1371,7 +1373,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     let dateOutHotelCalculate = daysHotel.date_hotel_out.toString().replace('-', '').replace('-', '');
 
     if (dateEndTrayectCalculate !== '') {
-      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate < dateEndTrayectCalculate )){
+      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate < dateEndTrayectCalculate)) {
         this.formTravelManagement.controls['date_hotel_in'].setValue('');
         document.getElementById("btn_travel_new").click();
         const alertDataWrong: Alerts[] = [{
@@ -1384,7 +1386,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }];
         this.alert.setAlert(alertDataWrong[0]);
       };
-      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate > dateEndRequestCalculate)){
+      if ((dateInHotelCalculate !== '') && (dateInHotelCalculate > dateEndRequestCalculate)) {
         this.formTravelManagement.controls['date_hotel_in'].setValue('');
         document.getElementById("btn_travel_new").click();
         const alertDataWrong: Alerts[] = [{
@@ -1397,25 +1399,25 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }];
         this.alert.setAlert(alertDataWrong[0]);
       }
-      if(dateOutHotelCalculate !== ''){
-        if( dateInHotelCalculate > dateOutHotelCalculate){
+      if (dateOutHotelCalculate !== '') {
+        if (dateInHotelCalculate > dateOutHotelCalculate) {
           this.formTravelManagement.controls['date_hotel_in'].setValue('');
-        document.getElementById("btn_travel_new").click();
-        const alertDataWrong: Alerts[] = [{
-          type: 'danger',
-          title: 'Error',
-          message: 'El ingreso al hotel no puede ser mayor a la fecha de salida del hotel, ¿Desea continuar con la solicitud?',
-          confirmation: true,
-          typeConfirmation: 'continueDestinationHotel'
+          document.getElementById("btn_travel_new").click();
+          const alertDataWrong: Alerts[] = [{
+            type: 'danger',
+            title: 'Error',
+            message: 'El ingreso al hotel no puede ser mayor a la fecha de salida del hotel, ¿Desea continuar con la solicitud?',
+            confirmation: true,
+            typeConfirmation: 'continueDestinationHotel'
 
-        }];
-        this.alert.setAlert(alertDataWrong[0]);
+          }];
+          this.alert.setAlert(alertDataWrong[0]);
         }
       }
     }
 
-    if(dateOutHotelCalculate !== ''){
-      if((dateOutHotelCalculate < dateEndTrayectCalculate)){
+    if (dateOutHotelCalculate !== '') {
+      if ((dateOutHotelCalculate < dateEndTrayectCalculate)) {
         this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById("btn_travel_new").click();
         const alertDataWrong: Alerts[] = [{
@@ -1428,7 +1430,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }];
         this.alert.setAlert(alertDataWrong[0]);
       };
-      if((dateOutHotelCalculate > dateEndRequestCalculate)){
+      if ((dateOutHotelCalculate > dateEndRequestCalculate)) {
         this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById("btn_travel_new").click();
         const alertDataWrong: Alerts[] = [{
@@ -1441,7 +1443,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }];
         this.alert.setAlert(alertDataWrong[0]);
       }
-      if((dateInHotelCalculate !== '') && (dateOutHotelCalculate < dateInHotelCalculate)){
+      if ((dateInHotelCalculate !== '') && (dateOutHotelCalculate < dateInHotelCalculate)) {
         this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById("btn_travel_new").click();
         const alertDataWrong: Alerts[] = [{
