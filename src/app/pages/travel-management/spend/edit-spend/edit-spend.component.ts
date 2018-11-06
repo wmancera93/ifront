@@ -54,6 +54,7 @@ export class EditSpendComponent implements OnInit {
   public idSpendRequests: string;
   public ticketTravel: string;
   public nameSpend: string;
+  public listTypeDocument: any[] = [];
 
   showSizeTable
   showPdf
@@ -307,6 +308,9 @@ export class EditSpendComponent implements OnInit {
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
       this.spedsData = list.data;
     });
+    this.spendsService.getTypesDocument().subscribe((document: any) => {
+      this.listTypeDocument = document.data;
+    });
   }
 
   sortByAphabet(dataBySort: any) {
@@ -376,7 +380,10 @@ export class EditSpendComponent implements OnInit {
       bussines_name: objectSpend.bussines_name,
       doc_num_origin: objectSpend.authorization_number,
       provider_code: objectSpend.cod_provider,
-      population: objectSpend.populated
+      population: objectSpend.populated,
+      have_format: objectSpend.formA,
+      type_of_expense_document : objectSpend.document
+
     });
 
     this.idSpend += 1
@@ -439,7 +446,10 @@ export class EditSpendComponent implements OnInit {
       bussines_name: objectEditSpend.bussines_name,
       doc_num_origin: objectEditSpend.authorization_number,
       provider_code: objectEditSpend.cod_provider,
-      population: objectEditSpend.populated
+      population: objectEditSpend.populated,
+      have_format: objectEditSpend.formA,
+      type_of_expense_document : objectEditSpend.document
+
 
     });
 

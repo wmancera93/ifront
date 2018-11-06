@@ -85,9 +85,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public nameEmployee: string = '';
   public searchEmployee: any[] = [];
   public showListAutoC: boolean = false;
+  public showListAutoCost: boolean = false;
+  public showListAutoGraph: boolean = false;
   public eployee_selected: any = null;
   public userAuthenticated: User = null;
-
+  public cost_selected: any = null;
   public kostl: boolean = false;
   public nplnr: boolean = false;
   public today: any;
@@ -114,16 +116,16 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           document.getElementById("closeTravels").click();
           this.router.navigate(['/ihr/spend', this.ticket_advance]);
         }
-  
+
         if (data === 'continueTravelAdvances') {
           document.getElementById("closeTravels").click();
           this.router.navigate(['/ihr/advances', this.ticket_advance]);
         }
-  
+
         if (data === 'continueDestinationHotel' || data === 'continueTravelRequests' || data === 'continueDestinationRequests1' || data === 'continueDestinationRequests2' || data === 'continueDestinationRequests3') {
           document.getElementById("btn_travel_new").click();
         }
-  
+
         if (data === 'continueDestinationRequestsValidateDates') {
           this.activate_submit = true;
           this.activate = false;
@@ -167,6 +169,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       trip_text: '',
       maintenance: '',
       id_element_imputation: '',
+      name_travel_costs: '',
+      name_travel_graph: '',
       id_travel_costs: '',
       id_grahp: '',
       id_operations: '',
@@ -240,6 +244,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             trip_text: object[0].trip_text,
             maintenance: object[0].maintenance,
             id_element_imputation: object[0].id_element_imputation,
+            name_travel_graph: object[0].name_travel_graph,
+            name_travel_costs: object[0].name_travel_costs,
             id_travel_costs: object[0].id_travel_costs,
             id_grahp: object[0].id_grahp,
             id_operations: object[0].id_operations,
@@ -327,6 +333,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             trip_text: '',
             maintenance: '',
             id_element_imputation: '',
+            name_travel_graph: '',
+            name_travel_costs: '',
             id_travel_costs: '',
             id_grahp: '',
             id_operations: '',
@@ -356,7 +364,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
 
     let fecha = new Date();
-    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0'+fecha.getDate().toString() :fecha.getDate().toString());
+    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
 
   }
 
@@ -382,12 +390,41 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
 
+  enterCost(form) {
+    this.travelManagementService.getFilterTravelCost(form.id_element_imputation, form.name_travel_costs).
+      subscribe((data: any) => {
+        this.costs_travels = this.sortByAphabet(data.data);
+        this.showListAutoCost = true;
+      });
+  }
+
+  enterGraph(form) {
+    this.travelManagementService.getFilterGraphs(form.id_element_imputation, form.name_travel_graph).
+      subscribe((data: any) => {
+        this.grahp = this.sortByAphabet(data.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = true;
+      });
+  }
   returnObjectSearch(ObjectSearch: any) {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
   }
 
+  returnCostSearch(cost: any) {
+    this.formTravelManagement.controls['id_travel_costs'].setValue(cost.id);
+    this.formTravelManagement.controls['name_travel_costs'].setValue(cost.code + ' - ' + cost.name);
+    this.costs_travels = [];
+  }
+
+  returnGraphSearch(graph) {
+    debugger
+    this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
+    this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
+    this.grahp = [];
+    this.searchOperationsGrahp(graph.code, 'edit')
+  }
   deleteEmployeeThird() {
     this.eployee_selected = null;
   }
@@ -461,6 +498,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   newTravel(model) {
+    debugger
     this.showSubmit = false;
     this.send = true;
 
@@ -487,7 +525,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
-          debugger
           this.ticket_advance = 0;
           let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
           this.ticket_advance = data.data[0].travel_request.ticket;
@@ -503,7 +540,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           } else {
             if (data.success) {
               let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - 100;
-              if ((tirthyDays < 30) ||  (tirthyDays < -30)) {
+              if ((tirthyDays < 30) || (tirthyDays < -30)) {
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -644,7 +681,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   searchState(form: any, acction: any) {
-    debugger
     this.stateLocations = [];
     this.travelManagementService.getgeographicLocations(form.id_country).
       subscribe((data: any) => {
@@ -722,44 +758,42 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
-
-      this.travelManagementService.getTravelsCosts(form.id_element_imputation).
-        subscribe((data: any) => {
-          this.costs_travels = this.sortByAphabet(data.data);
-          if (this.costs_travels.length > 0) {
-            if (acction === 'new') {
-              this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
-            }
-          } else {
-            this.formTravelManagement.controls['id_travel_costs'].setValue('');
-          }
-        })
-
+      // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.costs_travels = this.sortByAphabet(data.data);
+      //     if (this.costs_travels.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      //     }
+      //   })
     } else {
       this.kostl = false;
     }
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
       this.kostl = false;
       this.nplnr = true;
-      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-        subscribe((data: any) => {
-          this.grahp = this.sortByAphabet(data.data);
-          if (this.grahp.length > 0) {
-            if (acction === 'new') {
-              this.formTravelManagement.controls['id_grahp'].setValue('');
-            }
-          } else {
-            this.formTravelManagement.controls['id_grahp'].setValue('');
-          }
-        })
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
     } else {
       this.nplnr = false;
     }
   }
 
   searchOperationsGrahp(form: any, acction: any) {
-
-    this.travelManagementService.getTravelsOperations(form.id_grahp).
+    debugger
+    this.travelManagementService.getTravelsOperations(form).
       subscribe((data: any) => {
         this.operations = this.sortByAphabet(data.data);
         if (this.operations.length > 0) {
@@ -815,6 +849,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.hotels = [];
     this.objectImg = [];
     this.costs_travels = [];
+    this.grahp = [];
     this.travelProof = [];
     this.traverlsDestination = [];
     this.travelProof.push({
@@ -907,6 +942,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       trip_text: '',
       maintenance: '',
       id_element_imputation: '',
+      name_travel_graph: '',
+      name_travel_costs: '',
       id_travel_costs: '',
       id_grahp: '',
       id_operations: '',
@@ -1310,13 +1347,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   clearFormPartial() {
-    this.stateLocations = [];
-    this.stateLocationsto = [];
-    this.cityLocations = [];
-    this.cityLocationsto = [];
-    this.terminalLocations = [];
-    this.terminalLocationsto = [];
-    this.hotels = [];
+    // this.stateLocations = [];
+    // this.stateLocationsto = [];
+    // this.cityLocations = [];
+    // this.cityLocationsto = [];
+    // this.terminalLocations = [];
+    // this.terminalLocationsto = [];
+    // this.hotels = [];
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');

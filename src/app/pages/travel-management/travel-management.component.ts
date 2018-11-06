@@ -30,7 +30,6 @@ export class TravelManagementComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    debugger
     if ((this.dataUserTravels.employee.is_admin == 'true') && (this.dataUserTravels.employee.is_approver == true)) {
       this.buttonInfo = [
         {
@@ -84,7 +83,7 @@ export class TravelManagementComponent implements OnInit {
         // },
       ];
     } else {
-      if (this.dataUserTravels.employee.is_approver) {
+      if (this.dataUserTravels.employee.is_travel_approver) {
         this.buttonInfo = [
           {
             title: "Viajes",
@@ -153,7 +152,6 @@ export class TravelManagementComponent implements OnInit {
   }
 
   getDataUserPermissions() {
-    debugger
     if (this.dataUserTravels === null || this.dataUserTravels === undefined) {
       this.dataUserTravels = JSON.parse(localStorage.getItem('user'));
     }
