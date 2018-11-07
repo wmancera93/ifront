@@ -494,7 +494,7 @@ export class EditSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
+        this.spendSharedService.setRefreshSpend({ success: true, third: false });
       },
       (error: any) => {
         document.getElementById("btn_spend_edit").click();
