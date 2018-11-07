@@ -213,7 +213,7 @@ export class EditSpendComponent implements OnInit {
               authorization_number: data.data.doc_num_origin,
               populated: data.data.population,
               formA: data.data.have_format,
-              document: data.data.type_of_expense_document,
+              document: data.data.type_of_expense_document_id,
             });
           })
         }
@@ -258,7 +258,7 @@ export class EditSpendComponent implements OnInit {
             cod_provider: spendEditNew[0].cod_provider,
             authorization_number: spendEditNew[0].authorization_number,
             populated: spendEditNew[0].populated,
-            formA: spendEditNew[0].formA,
+            formA: spendEditNew[0].formA == false ? 'false' : 'true',
             document: spendEditNew[0].document,
           });
         }

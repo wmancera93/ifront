@@ -92,7 +92,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  <strong>Fecha entrega de Anticipo*:</strong>
+                  <strong>Fecha*:</strong>
                 </label>
                 <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
                   (change)="validateDateAdvance(formAdvanceTravel.value)" (keyup)="delete('date_body')" />
@@ -102,7 +102,7 @@
           <div *ngIf="continue" class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>Descripción*:</strong>
+              <strong>Observación*:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control"
               [formControl]="formAdvanceTravel.controls['observation']"></textarea>
