@@ -42,6 +42,8 @@ export class ViewTravelComponent implements OnInit {
   public arrayAdvanceRequest: any[] = [];
   public arrayAllowanceRequest: any[] = [];
   public eployee_selected: any = null;
+  public dateBeginRequest: string;
+  public dateEndRequest: string;
 
 
   constructor(public travelManagementService: TravelService,
@@ -90,13 +92,17 @@ export class ViewTravelComponent implements OnInit {
           this.eployee_selected = null;
         }
 
-        if (this.maintenance) {
+        if (this.maintenance == true) {
           this.maintenance_travel = 'Con manutención'
         }
         setTimeout(() => {
           this.objectReport.emit({ success: true, data: [this.objectPrint] });
         }, 100);
 
+        let split_begin = this.view_travels[0].date_begin.split('-');
+        this.dateBeginRequest = split_begin[2] + '-' + split_begin[1] + '-' + split_begin[0];
+        let split_end = this.view_travels[0].date_end.split('-');
+        this.dateEndRequest = split_end[2] + '-' + split_end[1] + '-' + split_end[0];
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
         this.allRequests = detail;
@@ -162,8 +168,8 @@ export class ViewTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      
-      this.travelsService.setResultSaved({success: true, third: this.eployee_selected == null ? true : false});
+
+      this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? true : false });
     },
       (error: any) => {
         document.getElementById("closeTravelsNew").click();

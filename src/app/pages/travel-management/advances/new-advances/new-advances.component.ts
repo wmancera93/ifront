@@ -30,6 +30,7 @@ export class NewAdvancesComponent implements OnInit {
   public yyyy: any;
   public today: any;
   public continue: boolean = false;
+  public todayStandar: string;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -82,7 +83,7 @@ export class NewAdvancesComponent implements OnInit {
         travel_request_id: data == true ? "" : data,
         currency_id: "",
         value: "",
-        date: "",
+        date: this.todayStandar,
         observation: ""
       });
 
@@ -117,6 +118,9 @@ export class NewAdvancesComponent implements OnInit {
 
 
   ngOnInit() {
+    let fecha = new Date();
+    this.todayStandar = fecha.getFullYear().toString() +'-'+ (fecha.getMonth() + 1).toString() +'-'+ (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
+    console.log(this.todayStandar)
   }
 
   enterNameEmployee() {
@@ -208,7 +212,7 @@ export class NewAdvancesComponent implements OnInit {
   }
   delete(date_param) {
     debugger
-    if(date_param == 'date_body'){
+    if (date_param == 'date_body') {
       this.formAdvanceTravel.controls['date'].setValue('');
     }
   }
@@ -245,7 +249,7 @@ export class NewAdvancesComponent implements OnInit {
 
     this.formAdvanceTravel.controls['currency_id'].setValue('');
     this.formAdvanceTravel.controls['value'].setValue('');
-    this.formAdvanceTravel.controls['date'].setValue('');
+    this.formAdvanceTravel.controls['date'].setValue(this.todayStandar);
     this.formAdvanceTravel.controls['observation'].setValue('');
 
     setTimeout(() => {
