@@ -137,6 +137,13 @@
                 [formControl]="formSpendEditTravel.controls['observation']"></textarea>
             </div>
 
+            <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
+              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendEditTravel.controls['formA']">
+              <label class="form-check-label titleColor" for="FormACheck">
+                <strong>Formato A</strong>
+              </label>
+            </div>
+
             <div class="col-12" style="margin-top: 30px">
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -209,26 +216,36 @@
 
             <div class="col-12" style="margin-top: 15px">
               <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
                     <strong>Código de proveedor:</strong>
                   </label>
                   <input type="number" class="form-control" name="provider_number" [formControl]="formSpendEditTravel.controls['cod_provider']">
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>Numero de autorización:</strong>
+                    <strong>No de autorización:</strong>
                   </label>
                   <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']">
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
                     <strong>Poblado:</strong>
                   </label>
                   <input type="text" class="form-control" name="populate_name" [formControl]="formSpendEditTravel.controls['populated']">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Tipo de documento:</strong>
+                  </label>
+                  <select class="form-control" [formControl]="formSpendEditTravel.controls['document']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
+                  </select>
                 </div>
               </div>
             </div>

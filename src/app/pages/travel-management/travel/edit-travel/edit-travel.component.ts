@@ -88,6 +88,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public grahp: any[] = [];
   public operations: any[] = [];
   public ticket_sap: string;
+  public showListAutoCost: boolean = false;
 
   public searchByLetter: string;
   public nameEmployee: string = '';
@@ -202,6 +203,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       trip_text: '',
       maintenance: '',
       id_element_imputation: '',
+      name_travel_costs: '',
+      name_travel_graph: '',
       id_travel_costs: '',
       id_grahp: '',
       id_operations: '',
@@ -231,7 +234,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       if (this.countAfter === 0) {
         this.ticket = data.id_travel;
         this.viewSendAprovals = data.send_travel;
-       
+
         this.travelManagementService.getplanningTravelRequests().
           subscribe((tavelManagement: any) => {
             this.planningTravel = tavelManagement;
@@ -271,6 +274,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
             this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
               if (result.success) {
+                debugger
                 this.generalViajes = result.data;
 
                 this.objectPrint = this.generalViajes[0].travel_managements;
@@ -288,6 +292,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
                   id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
                   id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
+                  name_travel_graph: this.generalViajes[0].travel_request.travel_graph_code + ' - ' + this.generalViajes[0].travel_request.travel_graph_name,
+                  name_travel_costs: this.generalViajes[0].travel_request.travel_cost_code + ' - ' + this.generalViajes[0].travel_request.travel_cost_name,
                   id_transport: '',
                   id_city: '',
                   id_country: '',
@@ -322,7 +328,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   this.searchCostsCenterAndGrahp(this.formTravelManagement.value, '')
                   this.objectReport.emit({ success: true, data: [this.objectPrint] });
                   if (this.generalViajes[0].travel_request.travel_graph_code !== null) {
-                    this.searchOperationsGrahp(this.formTravelManagement.value, '')
+                    this.searchOperationsGrahp(this.formTravelManagement.value.id_grahp, '')
                   }
                 }, 1000);
 
@@ -373,6 +379,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               maintenance: this.generalViajes[0].travel_request.is_maintenance,
               id_element_imputation: this.generalViajes[0].travel_request.travel_costs_type_id,
               id_grahp: this.generalViajes[0].travel_request.travel_graph_code,
+              name_travel_graph: this.generalViajes[0].travel_request.travel_graph_code + ' - ' + this.generalViajes[0].travel_request.travel_graph_name,
+              name_travel_costs: this.generalViajes[0].travel_request.travel_cost_code + ' - ' + this.generalViajes[0].travel_request.travel_cost_name,
               id_operations: this.generalViajes[0].travel_request.travel_operation_id,
               id_travel_costs: this.generalViajes[0].travel_request.travel_cost_id,
               id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
@@ -472,10 +480,40 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
   }
 
+  enterCost(form) {
+    this.travelManagementService.getFilterTravelCost(form.id_element_imputation, form.name_travel_costs).
+      subscribe((data: any) => {
+        this.costs_travels = this.sortByAphabet(data.data);
+        this.showListAutoCost = true;
+      });
+  }
+
+  enterGraph(form) {
+    this.travelManagementService.getFilterGraphs(form.id_element_imputation, form.name_travel_graph).
+      subscribe((data: any) => {
+        this.grahp = this.sortByAphabet(data.data);
+        this.showListAutoCost = false;
+      });
+  }
   returnObjectSearch(ObjectSearch: any) {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+  }
+  returnCostSearch(cost: any) {
+    this.formTravelManagement.controls['id_travel_costs'].setValue(cost.id);
+    this.formTravelManagement.controls['name_travel_costs'].setValue(cost.code + ' - ' + cost.name);
+    this.costs_travels = [];
+  }
+
+  returnGraphSearch(graph) {
+    debugger
+    this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
+    this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
+    this.operations = [];
+    this.formTravelManagement.controls['id_operations'].setValue('');
+    this.grahp = [];
+    this.searchOperationsGrahp(graph.code, 'edit')
   }
 
   deleteEmployeeThird() {
@@ -770,6 +808,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         id_center_travel: param.id_center_travel,
         id_element_imputation: param.id_element_imputation,
         id_travel_costs: param.id_travel_costs,
+        name_travel_graph: param.name_travel_graph,
+        name_travel_costs: param.name_travel_costs,
         id_grahp: param.id_grahp,
         id_operations: param.id_operations,
         id_travel_legal: param.id_travel_legal,
@@ -930,17 +970,17 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.kostl = true;
       this.nplnr = false;
 
-      this.travelManagementService.getTravelsCosts(form.id_element_imputation).
-        subscribe((data: any) => {
-          this.costs_travels = this.sortByAphabet(data.data);
-          if (this.costs_travels.length > 0) {
-            if (acction === 'new') {
-              this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
-            }
-          } else {
-            this.formTravelManagement.controls['id_travel_costs'].setValue('');
-          }
-        })
+      // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.costs_travels = this.sortByAphabet(data.data);
+      //     if (this.costs_travels.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      //     }
+      //   })
 
     } else {
       this.kostl = false;
@@ -948,17 +988,17 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
       this.kostl = false;
       this.nplnr = true;
-      this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-        subscribe((data: any) => {
-          this.grahp = this.sortByAphabet(data.data);
-          if (this.grahp.length > 0) {
-            if (acction === 'new') {
-              this.formTravelManagement.controls['id_grahp'].setValue('-1');
-            }
-          } else {
-            this.formTravelManagement.controls['id_grahp'].setValue('');
-          }
-        })
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('-1');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
     } else {
       this.nplnr = false;
     }
@@ -966,7 +1006,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   }
 
   searchOperationsGrahp(form: any, acction: any) {
-    this.travelManagementService.getTravelsOperations(form.id_grahp).
+    debugger
+    this.travelManagementService.getTravelsOperations(form).
       subscribe((data: any) => {
         this.operations = data.data;
         if (this.operations.length > 0) {
@@ -1023,6 +1064,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       trip_text: '',
       maintenance: '',
       id_center_travel: '',
+      name_travel_graph: '',
+      name_travel_costs: '',
       id_travel_costs: '',
       id_travel_legal: '',
       id_travel_specific: '',
@@ -1480,4 +1523,3 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
   }
 }
-

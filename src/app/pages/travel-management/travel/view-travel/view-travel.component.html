@@ -41,7 +41,7 @@
             </label>
           </div>
           <div class="col-lg-8 col-md-6 col-12">
-            <label>{{typeTravel}} - {{view_travels[0].travel_requests_type_name}} - {{maintenance_travel}}</label>
+            <label>{{view_travels[0].travel_requests_type_name}} - {{maintenance_travel}}</label>
           </div>
         </div>
 
@@ -53,7 +53,7 @@
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
-            <label>{{view_travels[0].date_begin}}</label>
+            <label>{{dateBeginRequest}}</label>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
@@ -62,7 +62,7 @@
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
-            <label>{{view_travels[0].date_end}}</label>
+            <label>{{dateEndRequest}}</label>
           </div>
         </div>
 
@@ -87,7 +87,7 @@
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_costs_type_name}}</label>
+            <label>{{view_travels[0].travel_costs_type_code}} - {{view_travels[0].travel_costs_type_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
@@ -109,7 +109,7 @@
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_graph_name}}</label>
+            <label>{{view_travels[0].travel_graph_code}} - {{view_travels[0].travel_graph_name}}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
@@ -120,7 +120,7 @@
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_operation_name}}</label>
+            <label>{{view_travels[0].travel_operation_code}} - {{view_travels[0].travel_operation_name}}</label>
           </div>
         </div>
 

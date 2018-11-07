@@ -32,6 +32,7 @@ export class NewSpendComponent implements OnInit {
   public listSpendType: any[] = [];
   public listMoneyType: any[] = [];
   public infoTableSpends: any[] = [];
+  public listTypeDocument: any[] = [];
   public spedsData: any[] = [];
   public idSpend: number = 0;
   public objectSpends: SpendsCreate;
@@ -108,6 +109,8 @@ export class NewSpendComponent implements OnInit {
           cod_provider: "",
           authorization_number: "",
           populated: "",
+          formA: "",
+          document: ""
         });
 
         if (this.formSpendTravel.value.travel_request_id !== '') {
@@ -167,6 +170,8 @@ export class NewSpendComponent implements OnInit {
             cod_provider: objectSpend[0].cod_provider,
             authorization_number: objectSpend[0].authorization_number,
             populated: objectSpend[0].populated,
+            formA: objectSpend[0].formA,
+            document: objectSpend[0].document,
           });
         }
         document.getElementById("funtionSpendTravel").click();
@@ -191,6 +196,8 @@ export class NewSpendComponent implements OnInit {
       cod_provider: "",
       authorization_number: "",
       populated: "",
+      formA: "",
+      document: ""
     });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -219,6 +226,11 @@ export class NewSpendComponent implements OnInit {
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
       this.spedsData = list.data;
+    });
+
+    this.spendsService.getTypesDocument().subscribe((document: any) => {
+      debugger
+      this.listTypeDocument =this.sortByAphabet(document.data);
     });
   }
 
@@ -337,7 +349,9 @@ export class NewSpendComponent implements OnInit {
       field_11: objectSpend.cod_provider,
       field_12: objectSpend.authorization_number,
       field_13: objectSpend.populated,
-      field_14: {
+      field_14: objectSpend.formA === true ? 'Si' : 'No',
+      field_15: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
+      field_16: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -346,7 +360,7 @@ export class NewSpendComponent implements OnInit {
         action_method: "editNewSpend",
         disable: false
       },
-      field_15: {
+      field_17: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -372,7 +386,9 @@ export class NewSpendComponent implements OnInit {
       bussines_name: objectSpend.bussines_name,
       doc_num_origin: objectSpend.authorization_number,
       provider_code: objectSpend.cod_provider,
-      population: objectSpend.populated
+      population: objectSpend.populated,
+      have_format: objectSpend.formA,
+      type_of_expense_document : objectSpend.document
     });
 
     setTimeout(() => {
@@ -546,11 +562,21 @@ export class NewSpendComponent implements OnInit {
             sortable: false,
           },
           field_14: {
-            value: "Editar",
+            value: "Diligencia formato",
             type: "string",
             sortable: false,
           },
           field_15: {
+            value: "Tipo de documento",
+            type: "string",
+            sortable: false,
+          },
+          field_16: {
+            value: "Editar",
+            type: "string",
+            sortable: false,
+          },
+          field_17: {
             value: "Eliminar",
             type: "string",
             sortable: false,
@@ -585,5 +611,7 @@ export class NewSpendComponent implements OnInit {
     this.formSpendTravel.controls['cod_provider'].setValue('');
     this.formSpendTravel.controls['authorization_number'].setValue('');
     this.formSpendTravel.controls['populated'].setValue('');
+    this.formSpendTravel.controls['formA'].setValue('');
+    this.formSpendTravel.controls['document'].setValue('');
   }
 }

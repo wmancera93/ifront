@@ -148,30 +148,52 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                  <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                   <a>Centro de costo:*</a>
                 </label>
-                <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
+                <form name="searchAutoCompleteCost">
+                  <p>
+                    <input id="searchByAutoCompleteCost" type="text" name="costList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_costs']"
+                      (keyup)="enterCost(formTravelManagement.value)">
+                  </p>
+                </form>
+                <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnCostSearch(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
+                    {{costsTrip.code}} - {{costsTrip.name}}
+                  </div>
+                </div>
+                <!-- <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
                   <option value="-1">Seleccione</option>
                   <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.code}} - {{costsTrip.name}}
                   </option>
-                </select>
+                </select> -->
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <a>Grafo:*</a>
                 </label>
-                <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']" (change)="searchOperationsGrahp(formTravelManagement.value, 'new')"
+                <form name="searchAutoCompleteGraph">
+                  <p>
+                    <input id="searchByAutoCompleteGraph" type="text" name="graphList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_graph']"
+                      (keyup)="enterGraph(formTravelManagement.value)">
+                  </p>
+                </form>
+                <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnGraphSearch(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">
+                    {{grahpTravels.code}} - {{grahpTravels.name}}
+                  </div>
+                </div>
+                <!-- <select *ngIf="grahp.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_grahp']" (change)="searchOperationsGrahp(formTravelManagement.value, 'new')"
                   placeholder="Seleccione">
                   <option *ngFor="let grahpTravels of grahp " [value]="grahpTravels.code">{{grahpTravels.code}} - {{grahpTravels.name}}
                   </option>
-                </select>
+                </select> -->
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
-                  <a>Operacion:*</a>
+                  <a>Operación:*</a>
                 </label>
                 <select [attr.disabled]="operations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_operations']">
                   <option value="-1">Seleccione</option>

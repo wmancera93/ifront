@@ -30,6 +30,7 @@ export class NewAdvancesComponent implements OnInit {
   public yyyy: any;
   public today: any;
   public continue: boolean = false;
+  public todayStandar: string;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -63,7 +64,8 @@ export class NewAdvancesComponent implements OnInit {
       currency_id: "",
       value: "",
       date: "",
-      observation: ""
+      observation: "",
+      box:""
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -82,8 +84,9 @@ export class NewAdvancesComponent implements OnInit {
         travel_request_id: data == true ? "" : data,
         currency_id: "",
         value: "",
-        date: "",
-        observation: ""
+        date: this.todayStandar,
+        observation: "",
+        box:""
       });
 
 
@@ -117,6 +120,8 @@ export class NewAdvancesComponent implements OnInit {
 
 
   ngOnInit() {
+    let fecha = new Date();
+    this.todayStandar = fecha.getFullYear().toString() +'-'+ (fecha.getMonth() + 1).toString() +'-'+ (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
   enterNameEmployee() {
@@ -208,7 +213,7 @@ export class NewAdvancesComponent implements OnInit {
   }
   delete(date_param) {
     debugger
-    if(date_param == 'date_body'){
+    if (date_param == 'date_body') {
       this.formAdvanceTravel.controls['date'].setValue('');
     }
   }
@@ -221,7 +226,8 @@ export class NewAdvancesComponent implements OnInit {
       field_3: dataAgree.date,
       field_4: dataAgree.value,
       field_5: dataAgree.observation,
-      field_6: {
+      field_6: dataAgree.box == true ? 'Caja' : 'Transferencia bancaria',
+      field_7: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -238,15 +244,17 @@ export class NewAdvancesComponent implements OnInit {
       currency_id: dataAgree.currency_id,
       value: dataAgree.value,
       date: dataAgree.date,
-      observation: dataAgree.observation
+      observation: dataAgree.observation,
+      
     });
 
     this.idAdvance += 1
 
     this.formAdvanceTravel.controls['currency_id'].setValue('');
     this.formAdvanceTravel.controls['value'].setValue('');
-    this.formAdvanceTravel.controls['date'].setValue('');
+    this.formAdvanceTravel.controls['date'].setValue(this.todayStandar);
     this.formAdvanceTravel.controls['observation'].setValue('');
+    this.formAdvanceTravel.controls['box'].setValue('');
 
     setTimeout(() => {
       this.objectReport.emit(this.infoTableAdvances[0]);
@@ -339,6 +347,11 @@ export class NewAdvancesComponent implements OnInit {
             sortable: false,
           },
           field_6: {
+            value: "Método de pago",
+            type: "string",
+            sortable: false,
+          },
+          field_7: {
             value: "Eliminar",
             type: "string",
             sortable: false,
