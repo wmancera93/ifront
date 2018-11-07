@@ -255,7 +255,7 @@
             </div>
           </div>
         </div>
-        <div *ngIf="view_travels[0].ticket_cli === null" class="row justify-content-end" style="padding-bottom: 25px">
+        <div *ngIf="view_travels[0].ticket_cli !== null" class="row justify-content-end" style="padding-bottom: 25px">
           <div class="col-lg-4 col-md-6 col-12">
             <app-pdf-travel [ticketTravel]="ticketSendPDF"></app-pdf-travel>
           </div>

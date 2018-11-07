@@ -22,7 +22,7 @@ export class PdfTravelComponent implements OnInit {
 
   printPDF() {
     this.result = null;
-    
+
     this.travelManagementService.getTravelsAllDetail(this.ticketTravel).subscribe((data) => {
       this.result = data;
       this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
@@ -84,7 +84,7 @@ export class PdfTravelComponent implements OnInit {
       doc.text('FORMULARIO DE VIAJE', pageCenter, 25, 'center');
       doc.text(this.result.data[0].travel_request.travel_requests_type_name.toUpperCase(), pageCenter, 30, 'center');
       doc.text('FECHA DE SOLICITUD: ' + dateNow, (pageCenter * 2) - rMargin, 20, 'right');
-      //doc.text('VIAJE NO: ' + this.result.data[0].travel_request.ticket_cli.toString(), (pageCenter * 2) - rMargin, 25, 'right');
+      doc.text('VIAJE NO: ' + this.result.data[0].travel_request.ticket_cli.toString(), (pageCenter * 2) - rMargin, 25, 'right');
 
       let columnsMacro = ["DATOS MARCO", ""];
       let dataMacro
@@ -92,11 +92,11 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "KOSTL") {
         dataMacro = [
           ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString()],
-          ["", "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
-          ["Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString(), "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
-          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_name.toString()],
-          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Centro de costo: " + this.result.data[0].travel_request.travel_cost_name.toString()],
+          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),"Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
+          ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
+          ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
+          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
+          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Centro de costo: " + this.result.data[0].travel_request.travel_cost_code.toString() + ' - ' + this.result.data[0].travel_request.travel_cost_name.toString()],
           ["Estatus de Viaje: " + this.result.data[0].travel_request.status_request.toString(), "Clase de viaje legal: " + this.result.data[0].travel_request.legal_travels_type_name.toString()],
           ["", "Clase de viaje especial: " + this.result.data[0].travel_request.specific_types_trip_name.toString()]
         ];
@@ -105,13 +105,12 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "NPLNR") {
         dataMacro = [
           ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Nombre Empleado: " + this.result.data[0]
-          .travel_request.employee_applicant_to_json.short_name.toString()],
-          ["", "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
-          ["Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString(), "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
-          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_name.toString()],
-          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Grafo: " + this.result.data[0].travel_request.travel_graph_name.toString()],
-          ["", "Operación: " + this.result.data[0].travel_request.travel_operation_name.toString()],
+          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),"Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
+          ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
+          ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
+          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
+          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Grafo: " + this.result.data[0].travel_request.travel_graph_code.toString() + ' - ' + this.result.data[0].travel_request.travel_graph_name.toString()],
+          ["", "Operación: " + this.result.data[0].travel_request.travel_operation_code.toString() + ' - ' + this.result.data[0].travel_request.travel_operation_name.toString()],
           ["Estatus de Viaje: " + this.result.data[0].travel_request.status_request.toString(), "Clase de viaje legal: " + this.result.data[0].travel_request.legal_travels_type_name.toString()],
           ["", "Clase de viaje especial: " + this.result.data[0].travel_request.specific_types_trip_name.toString()]
         ];
@@ -172,11 +171,41 @@ export class PdfTravelComponent implements OnInit {
         if (this.advances(this.result, doc)) {
           if (this.allowance(this.result, doc)) {
             if (this.approvals(this.result, doc)) {
+              let columnsSign = [""];
+              let dataSign = [["______________________________________________"],
+              [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
+
+              doc.autoTable(columnsSign, dataSign, {
+                startY: doc.autoTable.previous.finalY + 25,
+                pageBreak: 'avoid',
+                theme: 'plain',
+                styles: {
+                  cellPadding: 1,
+                  fontSize: 10,
+                  font: "helvetica",
+                  fontStyle: 'normal',
+                  overflow: 'hidden',
+                  textColor: 20,
+                  halign: 'left',
+                  valign: 'middle',
+                  columnWidth: 'auto',
+                },
+                headerStyles: {
+                  fillColor: [255, 255, 255],
+                  fontStyle: 'normal',
+                  halign: 'left',
+                  textColor: 20,
+                },
+              }
+              );
+
               doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
             }
           }
         }
       }
+
+
 
     });
 
@@ -194,7 +223,7 @@ export class PdfTravelComponent implements OnInit {
       let recordsPrint = result.data[0].travel_managements.data;
 
       keys.forEach((element) => {
-        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6' && element !== 'field_9'  && element !== 'field_10'  && element !== 'field_11') {
+        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6' && element !== 'field_9' && element !== 'field_10' && element !== 'field_11') {
           let label: any;
           label = result.data[0].travel_managements.labels[element];
 
