@@ -54,6 +54,7 @@ export class EditSpendComponent implements OnInit {
   public idSpendRequests: string;
   public ticketTravel: string;
   public nameSpend: string;
+  public listTypeDocument: any[] = [];
 
   showSizeTable
   showPdf
@@ -80,7 +81,9 @@ export class EditSpendComponent implements OnInit {
       bussines_name: "",
       cod_provider: "",
       authorization_number: "",
-      populated: ""
+      populated: "",
+      formA: "",
+      document: ""
     });
 
 
@@ -208,7 +211,9 @@ export class EditSpendComponent implements OnInit {
               bussines_name: data.data.bussines_name,
               cod_provider: data.data.provider_code,
               authorization_number: data.data.doc_num_origin,
-              populated: data.data.population
+              populated: data.data.population,
+              formA: data.data.have_format,
+              document: data.data.type_of_expense_document,
             });
           })
         }
@@ -253,6 +258,8 @@ export class EditSpendComponent implements OnInit {
             cod_provider: spendEditNew[0].cod_provider,
             authorization_number: spendEditNew[0].authorization_number,
             populated: spendEditNew[0].populated,
+            formA: spendEditNew[0].formA,
+            document: spendEditNew[0].document,
           });
         }
       }
@@ -298,7 +305,7 @@ export class EditSpendComponent implements OnInit {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType =  this.sortByAphabet(select.data);
+      this.listSpendType = this.sortByAphabet(select.data);
     });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
@@ -306,6 +313,9 @@ export class EditSpendComponent implements OnInit {
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
       this.spedsData = list.data;
+    });
+    this.spendsService.getTypesDocument().subscribe((document: any) => {
+      this.listTypeDocument = document.data;
     });
   }
 
@@ -341,7 +351,9 @@ export class EditSpendComponent implements OnInit {
       field_10: objectSpend.cod_provider,
       field_11: objectSpend.authorization_number,
       field_12: objectSpend.populated,
-      field_13: {
+      field_13: objectSpend.formA === true ? 'Si' : 'No',
+      field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
+      field_15: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -350,7 +362,7 @@ export class EditSpendComponent implements OnInit {
         action_method: "editSavedSpend",
         disable: false
       },
-      field_14: {
+      field_16: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -376,7 +388,10 @@ export class EditSpendComponent implements OnInit {
       bussines_name: objectSpend.bussines_name,
       doc_num_origin: objectSpend.authorization_number,
       provider_code: objectSpend.cod_provider,
-      population: objectSpend.populated
+      population: objectSpend.populated,
+      have_format: objectSpend.formA,
+      type_of_expense_document: objectSpend.document
+
     });
 
     this.idSpend += 1
@@ -401,7 +416,9 @@ export class EditSpendComponent implements OnInit {
         element.field_10 = objectEditSpend.cod_provider;
         element.field_11 = objectEditSpend.authorization_number;
         element.field_12 = objectEditSpend.populated;
-        element.field_13 = {
+        element.field_13 = objectEditSpend.formA === true ? 'Si' : 'No';
+        element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;
+        element.field_15 = {
           type_method: "UPDATE",
           type_element: "button",
           icon: "fa-pencil",
@@ -410,7 +427,7 @@ export class EditSpendComponent implements OnInit {
           action_method: "updateTravelAllowance",
           disable: false
         };
-        element.field_14 = {
+        element.field_16 = {
           type_method: "DELETE",
           type_element: "button",
           icon: "fa-trash",
@@ -439,8 +456,9 @@ export class EditSpendComponent implements OnInit {
       bussines_name: objectEditSpend.bussines_name,
       doc_num_origin: objectEditSpend.authorization_number,
       provider_code: objectEditSpend.cod_provider,
-      population: objectEditSpend.populated
-
+      population: objectEditSpend.populated,
+      have_format: objectEditSpend.formA,
+      type_of_expense_document: objectEditSpend.document
     });
 
     setTimeout(() => {
@@ -573,8 +591,8 @@ export class EditSpendComponent implements OnInit {
     this.formSpendEditTravel.controls['cod_provider'].setValue('');
     this.formSpendEditTravel.controls['authorization_number'].setValue('');
     this.formSpendEditTravel.controls['populated'].setValue('');
-
-
+    this.formSpendEditTravel.controls['formA'].setValue('');
+    this.formSpendEditTravel.controls['document'].setValue('');
   }
 
   sendRequestsSpend() {

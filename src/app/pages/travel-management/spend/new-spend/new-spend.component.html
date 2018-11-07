@@ -21,8 +21,7 @@
                 </label>
                 <form name="searchAutoComplete">
                   <p>
-                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter"
-                      (keyup)="enterNameEmployee()">
+                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
                   </p>
                 </form>
                 <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
@@ -40,7 +39,9 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  Usted va a realizar un gasto para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+                  Usted va a realizar un gasto para:
+                  <i class="fa fa-fw fa fa-user text-primary-hr"></i>
+                  <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
                 <br>
                 <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
@@ -72,8 +73,7 @@
 
           <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
             <h4>Gastos</h4>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
 
           <div class="col-12 top-containter" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="margin-top: 20px">
@@ -101,8 +101,8 @@
                           {{imgsaved.file.name}}
                         </h6>
                       </div>
-                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' "
-                        class="cursor-general " theme='dark'>
+                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                        theme='dark'>
                         <h6>{{index+1}}.
                           <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                           {{imgsaved.file.name}}
@@ -141,7 +141,7 @@
                 <button type="button" *ngIf="collapse_is" class="btn btn-block btn-primary text-center" (click)="colapse()">
                   Nuevo gasto
                 </button>
-                <button  type="button"  id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
+                <button type="button" id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
                 </button>
               </div>
             </div>
@@ -154,8 +154,15 @@
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
               </label>
-              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation"
-                class="form-control" [formControl]="formSpendTravel.controls['observation']"></textarea>
+              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control"
+                [formControl]="formSpendTravel.controls['observation']"></textarea>
+            </div>
+
+            <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="continue" style="margin-top: 20px">
+              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendTravel.controls['formA']">
+              <label class="form-check-label titleColor" for="FormACheck">
+                <strong>Formato A</strong>
+              </label>
             </div>
 
             <div class="col-12" style="margin-top: 30px">
@@ -165,8 +172,7 @@
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                     <strong>Tipo de gasto:</strong>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']"
-                    paceholder="Seleccione">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
                     <option value="">Seleccione</option>
                     <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.name}}</option>
                   </select>
@@ -193,7 +199,8 @@
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                     <strong>Fecha de Gasto:</strong>
                   </label>
-                  <input type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')" />
+                  <input type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"
+                  />
                 </div>
               </div>
             </div>
@@ -233,26 +240,36 @@
 
             <div class="col-12" style="margin-top: 15px">
               <div class="row">
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
                     <strong>Código de proveedor:</strong>
                   </label>
                   <input type="number" class="form-control" name="provider_number" [formControl]="formSpendTravel.controls['cod_provider']">
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>Numero de autorización:</strong>
+                    <strong>No. de autorización:</strong>
                   </label>
                   <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']">
                 </div>
-                <div class="col-lg-4 col-md-6 col-12">
+                <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
                     <strong>Poblado:</strong>
                   </label>
                   <input type="text" class="form-control" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Tipo de documento:</strong>
+                  </label>
+                  <select class="form-control" [formControl]="formSpendTravel.controls['document']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -287,15 +304,14 @@
                     || formSpendTravel.value.authorization_number == ''
                     || formSpendTravel.value.authorization_number == -1
                     || formSpendTravel.value.populated == ''
-                    || formSpendTravel.value.populated == -1) ? true : null"
-                    class="btn btn-primary btn-block cursor-general" (click)="aditionSpend(formSpendTravel.value)">
+                    || formSpendTravel.value.populated == -1) ? true : null" class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
                   <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
-                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse"
-                    data-target="#collapseNewSpend">
+                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse" data-target="#collapseNewSpend">
                     <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                 </div>
               </div>

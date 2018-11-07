@@ -26,8 +26,8 @@ export interface SpendsCreate {
 }
 
 export interface ObjectSpends {
-    id:  string,
-    id_temp?:number,
+    id: string,
+    id_temp?: number,
     travel_allowance_type_id: number,
     currency_id: number,
     value: number,
@@ -39,8 +39,10 @@ export interface ObjectSpends {
     bussines_name: string,
     doc_num_origin: string,
     provider_code: string,
-    population: string
-   
+    population: string,
+    have_format: boolean,
+    type_of_expense_document: number,
+
 }
 
 export interface Annexes {

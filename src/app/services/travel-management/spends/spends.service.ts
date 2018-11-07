@@ -63,6 +63,8 @@ export class SpendsService {
     return this.tokenService.put('travel_allowance_requests/send_request_to_approve/' + id_spend_requests, {})
       .map((data: any) => data.json());
   }
-
-
+  getTypesDocument() {
+    return this.tokenService.get('planning_travel_requests/all_types_documents')
+      .map((data: any) => data.json());
+  }
 }
