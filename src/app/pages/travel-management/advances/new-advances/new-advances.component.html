@@ -102,7 +102,7 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong>Fecha*:</strong>
                 </label>
-                <input type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
+                <input tabindex="-1" type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
                   (change)="validateDateAdvance(formAdvanceTravel.value)" (keyup)="delete('date_body')" />
               </div>
             </div>
