@@ -149,7 +149,7 @@ export class HierarchicalChartComponent implements OnInit {
     this.page = this.pageValue == 0 ? this.page : this.pageValue;
     this.getHierarchical(this.id_empleado);
     this.flagActivatethirdLevel = false;
-    this.activeArrowUp = false;
+    this.activeArrowUp = true;
     this.activeArrowDown = true;
 
   }

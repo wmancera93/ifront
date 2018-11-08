@@ -55,6 +55,7 @@
           </div>
         </div>
       </div>
+      <!-- first level -->
       <div class="row justify-content-center">
         <div class="col-10 col-xl-2 cardEmployee btn-widget position" *ngIf="topEmployee" (click)="showInfoEmployee(topEmployee)">
           <div class="row">
@@ -84,6 +85,7 @@
           </div>
         </div>
       </div>
+      <!-- second level -->
       <div class="row justify-content-center" *ngIf="topEmployee">
         <div class="col-10 col-xl-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee.work_team">
           <div class="row">
@@ -129,6 +131,7 @@
 
         </div>
       </div>
+      <!-- third level -->
       <div *ngIf="topEmployee">
         <div class="row justify-content-center" *ngIf="!flagActivatethirdLevel">
           <div class="row justify-content-center" *ngIf="activeArrowLeft">
@@ -168,7 +171,7 @@
                 </div>
               </div>
             </div>
-            <div class="row justify-content-center" *ngIf="activeArrowDown && employee.relationship == 111">
+            <div class="row justify-content-center" *ngIf="employee.relationship == 111">
               <div class="col-2 AjustArrowDown">
                 <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="downLevelTeam(employee)">
                   <i class="fa fa-chevron-down"></i>
@@ -183,12 +186,18 @@
               </div>
             </div>
           </div>
-          <div class="col-12">
-            <div class="row justify-content-center" *ngIf="activeArrowUp">
+          <div class="col-12" style="margin-top: 30px;">
+            <div class="row justify-content-center" *ngIf="topEmployee.work_team[0].relationship !== '001' && topEmployee.work_team[0].relationship !== '011' && topEmployee.work_team[0].relationship !== '010'">
               <div class="col-2">
                 <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="upLevelTeam()">
-                  <i class="fa fa-chevron-up"></i>
+                  <i class="fa fa-chevron-up"></i>                 
                 </div>
+                <div class="animated infinite flash" style="margin-top:5px !important;" >
+                  <strong>
+                    Subir posición
+                  </strong>
+                </div>
+                
               </div>
             </div>
           </div>
