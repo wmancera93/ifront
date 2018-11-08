@@ -32,7 +32,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public table_advances: any[] = [];
   public table_spend: any[] = [];
   public type_requests: string;
-  public idGeneral:string;
+  public idGeneral: string;
 
   public countAfter: number = 0;
 
@@ -57,8 +57,8 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.requests_travels = data.request;
           this.editRequest = data.edit;
           this.type_requests = data.type;
-          this.idGeneral=this.requests_travels.ticket;
-
+          this.idGeneral = this.requests_travels.ticket;
+          debugger
           switch (this.type_requests) {
             case 'travels':
               this.table_advances = [];
@@ -77,6 +77,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                         this.table_advances.push(dataObject)
                       });
                     });
+
                     let object = {
                       labels: request.data[0].travel_advance_requests.labels,
                       data: this.table_advances,
@@ -86,17 +87,23 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
 
-                    request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                      this.table_spend.push(element)
-                    });
-                    let objectSpend = {
-                      labels: request.data[0].travel_allowance_request.labels,
-                      data: this.table_spend,
-                    }
-                    setTimeout(() => {
+                    if (request.data[0].travel_allowance_request !== null) {
+                      request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                        this.table_spend.push(element)
+                      });
+                      let objectSpend = {
+                        labels: request.data[0].travel_allowance_request.labels,
+                        data: this.table_spend,
+                      }
+                      setTimeout(() => {
 
-                      this.objectSpendReport.emit({ success: true, data: [objectSpend] });
-                    }, 300);
+                        this.objectSpendReport.emit({ success: true, data: [objectSpend] });
+                      }, 300);
+                    } else {
+                      this.objectSpendReport.emit({ success: true, data: [] });
+                    }
+
+
 
                   }
                 });
@@ -127,16 +134,20 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     this.objectAdvanceReport.emit({ success: true, data: [object] });
                   }, 300);
 
-                  advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                    this.table_spend.push(element)
-                  });
-                  let objectAdvance = {
-                    labels: advance.data[0].request[0].travel_allowance_request.labels,
-                    data: this.table_spend,
+                  if (advance.data[0].travel_allowance_request !== null) {
+                    advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                      this.table_spend.push(element)
+                    });
+                    let objectAdvance = {
+                      labels: advance.data[0].request[0].travel_allowance_request.labels,
+                      data: this.table_spend,
+                    }
+                    setTimeout(() => {
+                      this.objectSpendReport.emit({ success: true, data: [objectAdvance] });
+                    }, 300);
+                  } else {
+                    this.objectSpendReport.emit({ success: true, data: [] });
                   }
-                  setTimeout(() => {
-                    this.objectSpendReport.emit({ success: true, data: [objectAdvance] });
-                  }, 300);
                 })
 
               break;
@@ -165,16 +176,20 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
 
-                    spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                      this.table_spend.push(element)
-                    });
-                    let objectSpend = {
-                      labels: spend.data[0].travel_allowance_request.labels,
-                      data: this.table_spend,
+                    if (spend.data[0].travel_allowance_request !== null) {
+                      spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+                        this.table_spend.push(element)
+                      });
+                      let objectSpend = {
+                        labels: spend.data[0].travel_allowance_request.labels,
+                        data: this.table_spend,
+                      }
+                      setTimeout(() => {
+                        this.objectSpendReport.emit({ success: true, data: [objectSpend] });
+                      }, 300);
+                    } else {
+                      this.objectSpendReport.emit({ success: true, data: [] });
                     }
-                    setTimeout(() => {
-                      this.objectSpendReport.emit({ success: true, data: [objectSpend] });
-                    }, 300);
                   }
                 })
               break;

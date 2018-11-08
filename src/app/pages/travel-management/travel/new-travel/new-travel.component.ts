@@ -449,7 +449,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       case 'hour_end':
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
-
+        case 'date_begin_hotel':
+        this.formTravelManagement.controls['date_begin_hotel'].setValue('');
+        break;
+      case 'date_end_hotel':
+        this.formTravelManagement.controls['date_end_hotel'].setValue('');
+        break;
       default:
         break;
     }

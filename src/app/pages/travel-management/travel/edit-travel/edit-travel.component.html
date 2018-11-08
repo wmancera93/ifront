@@ -88,7 +88,7 @@
                   <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
                   <strong>Fecha inicial de solicitud:*</strong>
                 </label>
-                <input type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
+                <input tabindex="-1" type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
                   (change)="dateComplete(formTravelManagement.value)" (keydown)="delete('date_begin_header')" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -96,7 +96,7 @@
                   <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
                   <strong>Fecha final de solicitud:*</strong>
                 </label>
-                <input type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
+                <input tabindex="-1" type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
                   (keydown)="delete('date_end_header')" (change)="dateComplete(formTravelManagement.value)" />
               </div>
             </div>
@@ -421,7 +421,7 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha Inicial del Trayecto *</a>
                       </label>
-                      <input type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']"
+                      <input tabindex="-1" type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']"
                         (change)="dateValidateTrayect(formTravelManagement.value)" (keydown)="delete('date_begin_body')" />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
@@ -498,7 +498,7 @@
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a> Fecha final del Trayecto *</a>
                       </label>
-                      <input type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"
+                      <input tabindex="-1" type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"
                         (change)="dateValidateTrayect(formTravelManagement.value)" (keydown)="delete('date_end_body')" />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
@@ -527,7 +527,7 @@
                     <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
                     <a>Fecha de ingreso:</a>
                   </label>
-                  <input type="date" name="date_begin_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_in']"
+                  <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_in']"
                     (change)="dateValidateHotelEdit(formTravelManagement.value)" (keyup)="delete('date_begin_hotel')" />
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
@@ -535,7 +535,7 @@
                     <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
                     <a>Fecha de salida:</a>
                   </label>
-                  <input type="date" name="date_end_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_out']"
+                  <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_out']"
                     (change)="dateValidateHotelEdit(formTravelManagement.value)" (keyup)="delete('date_end_hotel')" />
                 </div>
               </div>
