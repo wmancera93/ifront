@@ -134,19 +134,16 @@ export class ViewTravelComponent implements OnInit {
           this.objectPrintAdvances.emit({ success: true, data: [] });
         }
 
-        if (detail.data[0].travel_allowance_request.data.travel_allowances !== undefined) {
-
-          detail.data[0].travel_allowance_request.data.forEach(element => {
-            this.arrayAllowanceRequest.push(element.id)
+        if (detail.data[0].travel_allowance_request !== null) {
+          debugger
+          detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+            this.table_spend_view.push(element)
           });
+          let object = {
+            labels: detail.data[0].travel_allowance_request.labels,
+            data: this.table_spend_view,
+          }
           setTimeout(() => {
-            detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-              this.table_spend_view.push(element)
-            });
-            let object = {
-              labels: detail.data[0].travel_allowance_request.labels,
-              data: this.table_spend_view,
-            }
             this.objectPrintSpend.emit({ success: true, data: [object] });
           }, 300);
         } else {

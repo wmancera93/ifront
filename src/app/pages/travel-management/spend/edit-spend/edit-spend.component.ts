@@ -607,7 +607,7 @@ export class EditSpendComponent implements OnInit {
         }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
+      this.spendSharedService.setRefreshSpend({ success: true, third: false });
     },
       (error: any) => {
         document.getElementById("closeModalEditSpend").click();
