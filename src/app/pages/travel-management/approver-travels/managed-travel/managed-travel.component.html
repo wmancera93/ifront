@@ -23,7 +23,7 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="border-botton-general">
         <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'travels'">
-          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
               Usted ha gestionado {{managedRequestTravel.length}} solicitudes de viaje
@@ -63,7 +63,7 @@
           </div>
         </div>
         <div class="row top-containter" *ngIf="travelsRequestsManagedType == 'spend'">
-          <div class="col-12 text-left" *ngIf="managedRequestTravel == 1">
+          <div class="col-12 text-left" *ngIf="managedRequestTravel.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
               Usted ha gestionado {{managedRequestTravel.length}} solicitudes de gastos

@@ -56,6 +56,7 @@ export class ManagedTravelComponent implements OnInit {
   }
 
   getRequestsManaged() {
+    debugger
     this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsManagedType = 'travels';
@@ -72,8 +73,8 @@ export class ManagedTravelComponent implements OnInit {
   }
 
   selectTypeRequestsManaged(param) {
+    debugger
     switch (param.id.toString()) {
-
       case '1':
         this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
           if (data) {
