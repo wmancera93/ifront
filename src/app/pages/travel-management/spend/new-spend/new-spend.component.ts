@@ -91,7 +91,7 @@ export class NewSpendComponent implements OnInit {
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
       this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-        this.listTravelsFromSpend = travel.data;
+        this.listTravelsFromSpend = this.sortByNumber(travel.data);
 
         this.refreshTableSpends();
         this.formSpendTravel = new FormGroup({});
@@ -247,6 +247,13 @@ export class NewSpendComponent implements OnInit {
       }
     });
 
+    return dataBySort;
+  }
+  sortByNumber(dataBySort: any) {
+    debugger
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
     return dataBySort;
   }
   enterNameEmployee() {
