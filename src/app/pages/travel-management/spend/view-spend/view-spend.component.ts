@@ -110,7 +110,7 @@ export class ViewSpendComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.spendSharedService.setRefreshSpend({ success: true, third: 'spends_request' });
+      this.spendSharedService.setRefreshSpend({ success: true, third: false });
     },
       (error: any) => {
         document.getElementById("closeModalViewSpend").click();

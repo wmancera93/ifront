@@ -19,9 +19,14 @@
                   <strong>Total de preguntas :</strong> {{dataEvaluation[0].total_questions}}
                 </div>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers > 0 ">
                 <div class="alert alert-success" role="alert">
                   <strong>Total de preguntas correctas :</strong> {{dataEvaluation[0].total_correct_answers}}
+                </div>
+              </div>
+              <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers == -1 ">
+                <div class="alert alert-success" role="alert">
+                  <strong>Total de preguntas correctas :</strong> No aplica
                 </div>
               </div>
             </div>

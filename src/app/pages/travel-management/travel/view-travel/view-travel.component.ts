@@ -39,8 +39,11 @@ export class ViewTravelComponent implements OnInit {
   public nameReportSpend: string = 'Gastos de viaje';
   public table_advances_view: any[] = [];
   public table_spend_view: any[] = [];
-
+  public arrayAdvanceRequest: any[] = [];
+  public arrayAllowanceRequest: any[] = [];
   public eployee_selected: any = null;
+  public dateBeginRequest: string;
+  public dateEndRequest: string;
 
 
   constructor(public travelManagementService: TravelService,
@@ -48,7 +51,7 @@ export class ViewTravelComponent implements OnInit {
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http) {
 
-     
+
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -89,19 +92,31 @@ export class ViewTravelComponent implements OnInit {
           this.eployee_selected = null;
         }
 
-        if (this.maintenance) {
+        if (this.maintenance == true) {
           this.maintenance_travel = 'Con manutención'
         }
         setTimeout(() => {
           this.objectReport.emit({ success: true, data: [this.objectPrint] });
         }, 100);
 
+        let split_begin = this.view_travels[0].date_begin.split('-');
+        this.dateBeginRequest = split_begin[2] + '-' + split_begin[1] + '-' + split_begin[0];
+        let split_end = this.view_travels[0].date_end.split('-');
+        this.dateEndRequest = split_end[2] + '-' + split_end[1] + '-' + split_end[0];
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
         this.allRequests = detail;
         this.table_advances_view = [];
         this.table_spend_view = [];
+        this.arrayAdvanceRequest = [];
+        this.arrayAllowanceRequest = [];
+
         if (detail.data[0].travel_advance_requests.data.length > 0) {
+
+          detail.data[0].travel_advance_requests.data.forEach(element => {
+            this.arrayAdvanceRequest.push(element.id)
+          });
+
           setTimeout(() => {
             detail.data[0].travel_advance_requests.data.forEach(element => {
               element.travel_advance_payments.forEach(dataObject => {
@@ -118,23 +133,25 @@ export class ViewTravelComponent implements OnInit {
         } else {
           this.objectPrintAdvances.emit({ success: true, data: [] });
         }
-        if (detail.data[0].travel_allowance_request.data.travel_allowances !== undefined) {
+
+        if (detail.data[0].travel_allowance_request !== null) {
+          debugger
+          detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
+            this.table_spend_view.push(element)
+          });
+          let object = {
+            labels: detail.data[0].travel_allowance_request.labels,
+            data: this.table_spend_view,
+          }
           setTimeout(() => {
-            detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-              this.table_spend_view.push(element)
-            });
-            let object = {
-              labels: detail.data[0].travel_allowance_request.labels,
-              data: this.table_spend_view,
-            }
             this.objectPrintSpend.emit({ success: true, data: [object] });
           }, 300);
         } else {
           this.objectPrintSpend.emit({ success: true, data: [] });
         }
-
       })
     });
+
   }
 
   ngOnInit() {
@@ -148,13 +165,13 @@ export class ViewTravelComponent implements OnInit {
         const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
-      this.travelsService.setResultSaved({success: true, third: 'travels_request'});
+
+      this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? true : false });
     },
       (error: any) => {
         document.getElementById("closeTravelsNew").click();
         const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
-
       });
 
   }
@@ -187,4 +204,10 @@ export class ViewTravelComponent implements OnInit {
         a.remove();
       });
   }
+
+  cleanObjectShowDetail() {
+    this.arrayAdvanceRequest = [];
+    this.arrayAllowanceRequest = [];
+  }
+
 }

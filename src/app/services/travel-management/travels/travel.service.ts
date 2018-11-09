@@ -6,6 +6,10 @@ export class TravelService {
 
   constructor(private tokenService: Angular2TokenService) { }
 
+  validateDatesTravelRequests(dateBegin: string, dateEnd: string, idTravelExcelpt: string) {
+    return this.tokenService.get('travel_requests/is_date_cross/' + dateBegin + '/' + dateEnd + '/' + idTravelExcelpt)
+      .map((data: any) => data.json());
+  }
   getplanningTravelRequests() {
     return this.tokenService.get('planning_travel_requests')
       .map((data: any) => data.json());
@@ -78,6 +82,14 @@ export class TravelService {
 
   getMyTravelRequests() {
     return this.tokenService.get('travel_requests/my_travels_requests')
+      .map((data: any) => data.json());
+  }
+  getFilterTravelCost(id: string, wordFind: string) {
+    return this.tokenService.get('geographic_locations/filter_travel_costs/' + id + '/' + wordFind)
+      .map((data: any) => data.json());
+  }
+  getFilterGraphs(id: string, wordFind: string) {
+    return this.tokenService.get('geographic_locations/filter_travel_graphs/' + id + '/' + wordFind)
       .map((data: any) => data.json());
   }
 }

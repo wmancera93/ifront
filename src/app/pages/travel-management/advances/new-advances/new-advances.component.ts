@@ -8,6 +8,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-new-advances',
@@ -30,6 +31,7 @@ export class NewAdvancesComponent implements OnInit {
   public yyyy: any;
   public today: any;
   public continue: boolean = false;
+  public todayStandar: string;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -42,7 +44,7 @@ export class NewAdvancesComponent implements OnInit {
     public advancesService: AdvancesService,
     public fb: FormBuilder,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService, public employeeService: EmployeeService) {
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -55,6 +57,10 @@ export class NewAdvancesComponent implements OnInit {
       if (data === 'confirmSaveAdvance' || data === 'errorConfirmTravelID' || data === 'errorValidationAdvance' || data === 'confirmDate') {
         document.getElementById("btn_advances_new").click();
       }
+      if (data === 'returnTravelsRequests') {
+        this.router.navigate(['/ihr/travels']);
+      }
+      
     })
 
     this.formAdvanceTravel = new FormGroup({});
@@ -63,7 +69,8 @@ export class NewAdvancesComponent implements OnInit {
       currency_id: "",
       value: "",
       date: "",
-      observation: ""
+      observation: "",
+      box:""
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -82,8 +89,9 @@ export class NewAdvancesComponent implements OnInit {
         travel_request_id: data == true ? "" : data,
         currency_id: "",
         value: "",
-        date: "",
-        observation: ""
+        date: this.todayStandar,
+        observation: "",
+        box:""
       });
 
 
@@ -117,6 +125,8 @@ export class NewAdvancesComponent implements OnInit {
 
 
   ngOnInit() {
+    let fecha = new Date();
+    this.todayStandar = fecha.getFullYear().toString() +'-'+ (fecha.getMonth() + 1).toString() +'-'+ (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
   enterNameEmployee() {
@@ -163,8 +173,9 @@ export class NewAdvancesComponent implements OnInit {
             const alertSuccess: Alerts[] = [{
               type: 'success',
               title: 'Confirmación',
-              message: response.message,
-              confirmation: false
+              message: response.message + '¿Desea dirigirse al menu de solicitudes de viaje?',
+              confirmation: true,
+              typeConfirmation: 'returnTravelsRequests'
             }];
 
             document.getElementById("closeAdvances").click();
@@ -208,7 +219,7 @@ export class NewAdvancesComponent implements OnInit {
   }
   delete(date_param) {
     debugger
-    if(date_param == 'date_body'){
+    if (date_param == 'date_body') {
       this.formAdvanceTravel.controls['date'].setValue('');
     }
   }
@@ -221,7 +232,8 @@ export class NewAdvancesComponent implements OnInit {
       field_3: dataAgree.date,
       field_4: dataAgree.value,
       field_5: dataAgree.observation,
-      field_6: {
+      field_6: dataAgree.box == true ? 'Si' : 'No',
+      field_7: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -238,15 +250,17 @@ export class NewAdvancesComponent implements OnInit {
       currency_id: dataAgree.currency_id,
       value: dataAgree.value,
       date: dataAgree.date,
-      observation: dataAgree.observation
+      observation: dataAgree.observation,
+      box: dataAgree.box
     });
 
     this.idAdvance += 1
 
     this.formAdvanceTravel.controls['currency_id'].setValue('');
     this.formAdvanceTravel.controls['value'].setValue('');
-    this.formAdvanceTravel.controls['date'].setValue('');
+    this.formAdvanceTravel.controls['date'].setValue(this.todayStandar);
     this.formAdvanceTravel.controls['observation'].setValue('');
+    this.formAdvanceTravel.controls['box'].setValue('');
 
     setTimeout(() => {
       this.objectReport.emit(this.infoTableAdvances[0]);
@@ -339,6 +353,11 @@ export class NewAdvancesComponent implements OnInit {
             sortable: false,
           },
           field_6: {
+            value: "Caja",
+            type: "string",
+            sortable: false,
+          },
+          field_7: {
             value: "Eliminar",
             type: "string",
             sortable: false,
