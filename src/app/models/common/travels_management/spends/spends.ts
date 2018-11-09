@@ -40,7 +40,7 @@ export interface ObjectSpends {
     doc_num_origin: string,
     provider_code: string,
     population: string,
-    have_format: boolean,
+    have_format: string,
     type_of_expense_document: number,
 
 }

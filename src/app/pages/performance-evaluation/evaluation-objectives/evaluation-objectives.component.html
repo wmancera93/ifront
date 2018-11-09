@@ -50,9 +50,24 @@
                   <p class="font-title-general">
                     Estado:
                   </p>
-                  <h6>
-                    <span class="badge badge-primary">
+                  <h6 *ngIf="evaluation.status_code == '3'">
+                    <span class="badge badge-warning">
                       {{evaluation.status_name}}
+                    </span>
+                  </h6>
+                  <h6 *ngIf="evaluation.status_code == '4'">
+                    <span class="badge badge-danger">
+                      {{evaluation.status_name}}
+                    </span>
+                  </h6>
+                  <h6 *ngIf="evaluation.status_code == '5'">
+                    <span class="badge badge-success">
+                      {{evaluation.status_name}}
+                    </span>
+                  </h6>
+                  <h6 *ngIf="evaluation.status_code == '2'">
+                    <span class="badge badge-default">
+                      {{evaluation.status_name}} 
                     </span>
                   </h6>
                 </div>
