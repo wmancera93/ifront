@@ -182,14 +182,14 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="number" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
+                  <input type="number" max="300" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="delete('money')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
                     <strong>Moneda:</strong>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione" >
                     <option value="">Seleccione</option>
                     <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
                   </select>
