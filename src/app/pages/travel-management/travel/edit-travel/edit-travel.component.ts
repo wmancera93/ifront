@@ -15,7 +15,6 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 
-
 @Component({
   selector: 'app-edit-travel',
   templateUrl: './edit-travel.component.html',
