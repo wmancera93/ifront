@@ -113,7 +113,7 @@ export class RequestsRhComponent implements OnInit {
       if (data.success) {
         this.requests = data.data[0];
 
-        this.requests.request_types = this.sortByAphabet(this.requests.request_types);
+        this.requests.request_types = this.requests.request_types;
 
         this.requestStatic = this.requests.my_requests_list;
         this.viewContainer = true;
