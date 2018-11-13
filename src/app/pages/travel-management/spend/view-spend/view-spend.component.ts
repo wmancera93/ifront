@@ -58,7 +58,6 @@ export class ViewSpendComponent implements OnInit {
       });
       setTimeout(() => {
         this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
-          debugger
           this.allRequestsInSpend = detail.data;
           this.table_advances_spend = [];
           this.table_travels_spend = [];

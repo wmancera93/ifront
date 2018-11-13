@@ -55,6 +55,7 @@ export class EditSpendComponent implements OnInit {
   public ticketTravel: string;
   public nameSpend: string;
   public listTypeDocument: any[] = [];
+  public stateRequestsSpend: string;
 
   showSizeTable
   showPdf
@@ -131,11 +132,11 @@ export class EditSpendComponent implements OnInit {
 
       this.idSpendRequests = idEdit;
       this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
-
         this.editSpendDetail = [];
         this.editSpendTable = [];
         this.annexes = [];
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
+        this.stateRequestsSpend = editSpend.data[0].travel_allowance_request.status_request;
         this.ticketTravel = this.editSpendDetail.ticket;
         this.nameSpend = this.editSpendDetail.name_travel
         this.editSpendTable = editSpend.data[0].travel_allowances;
@@ -402,9 +403,9 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpendEdit(objectEditSpend) {
-    debugger
+
     this.editSpendTable.data.forEach(element => {
-      debugger
+
       if (element.field_0 === objectEditSpend.id_spend) {
         element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].code;
         element.field_2 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;

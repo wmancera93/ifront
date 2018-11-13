@@ -419,7 +419,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   returnGraphSearch(graph) {
-    debugger
+
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.grahp = [];
@@ -503,7 +503,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   newTravel(model) {
-    debugger
+
     this.showSubmit = false;
     this.send = true;
 
@@ -797,7 +797,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   searchOperationsGrahp(form: any, acction: any) {
-    debugger
+
     this.travelManagementService.getTravelsOperations(form).
       subscribe((data: any) => {
         this.operations = this.sortByAphabet(data.data);

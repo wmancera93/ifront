@@ -218,7 +218,6 @@ export class NewAdvancesComponent implements OnInit {
       })
   }
   delete(date_param) {
-    debugger
     if (date_param == 'date_body') {
       this.formAdvanceTravel.controls['date'].setValue('');
     }

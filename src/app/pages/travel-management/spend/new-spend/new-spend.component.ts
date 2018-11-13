@@ -74,7 +74,6 @@ export class NewSpendComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
-        debugger
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
@@ -138,7 +137,6 @@ export class NewSpendComponent implements OnInit {
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      debugger
       if (data.action_method === "deleteSpend") {
         this.deleteSpend(data);
       }
@@ -229,7 +227,6 @@ export class NewSpendComponent implements OnInit {
     });
 
     this.spendsService.getTypesDocument().subscribe((document: any) => {
-      debugger
       this.listTypeDocument = this.sortByAphabet(document.data);
     });
   }
@@ -250,7 +247,6 @@ export class NewSpendComponent implements OnInit {
     return dataBySort;
   }
   sortByNumber(dataBySort: any) {
-    debugger
     dataBySort.sort(function (a, b) {
       return b.id - a.id;
     });
@@ -432,7 +428,6 @@ export class NewSpendComponent implements OnInit {
 
   }
   closeSpend() {
-    debugger
     this.showSubmit = true;
     this.spendNew = false;
     this.spendEdit = false;
@@ -443,7 +438,6 @@ export class NewSpendComponent implements OnInit {
   }
 
   delete(date_param) {
-    debugger
     if (date_param == 'date_body') {
       this.formSpendTravel.controls['date'].setValue('');
     }
