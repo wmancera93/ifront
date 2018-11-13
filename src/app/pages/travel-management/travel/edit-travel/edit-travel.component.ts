@@ -263,17 +263,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               }
             }
 
-            if (this.center_costs_travels[0].travel_cost_type_code === "KOSTL") {
-              this.kostl = true;
-              this.nplnr = false;
-            } else {
-              this.kostl = false;
-              this.nplnr = true;
-            }
+            
 
             this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
               if (result.success) {
-                debugger
                 this.generalViajes = result.data;
 
                 this.objectPrint = this.generalViajes[0].travel_managements;
@@ -331,6 +324,15 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   }
                 }, 1000);
 
+
+                if (this.generalViajes[0].travel_request.travel_costs_type_code === "KOSTL") {
+                  this.kostl = true;
+                  this.nplnr = false;
+                } else {
+                  this.kostl = false;
+                  this.nplnr = true;
+                }
+
               }
 
             });
@@ -342,7 +344,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
-        debugger
+   
         this.activate_submit = false;
         if (!this.bedit) {
           if (!this.bnew) {
@@ -361,7 +363,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-            debugger
+          
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -506,7 +508,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   }
 
   returnGraphSearch(graph) {
-    debugger
+
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.operations = [];
@@ -591,7 +593,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.alert.setAlert(this.alertWarning[0]);
   }
   newEditTravel(model) {
-    debugger
+
     this.showSubmit = false;
     this.send = true;
 
@@ -795,7 +797,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.id_destinations = 0;
   }
   editTravels(param: any) {
-    debugger
+
     if (param !== undefined) {
 
       this.formTravelManagement = new FormGroup({});
@@ -1006,7 +1008,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   // }
 
   searchOperationsGrahp(form: any, acction: any) {
-    debugger
+
     this.travelManagementService.getTravelsOperations(form).
       subscribe((data: any) => {
         this.operations = data.data;

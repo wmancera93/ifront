@@ -107,8 +107,7 @@ export class PendingTravelComponent implements OnInit {
     switch (param.id.toString()) {
       case '1':
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
-          if (data) {
-            debugger
+          if (data) {         
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = data.data[0].requests;
           }

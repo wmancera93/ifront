@@ -15,11 +15,7 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row">
-        <div class="col-12 top-general-p">
-          <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
-        </div>
-      </div>
+      <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [excel]="showExcel"></app-data-table>
     </div>
   </div>
 </div>
