@@ -28,6 +28,7 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   ngOnInit() {
     this.performanceEvaluationService.getPerformanceEvaluations().subscribe((data: any) => {
+      debugger
       this.evaluationPerformanceList = data.data;
     });
   }

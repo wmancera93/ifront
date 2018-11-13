@@ -338,22 +338,22 @@ export class EditSpendComponent implements OnInit {
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
     this.editSpendTable.data.push({
-      field_0: objectSpend.id,
-      field_1: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
-      field_2: objectSpend.value,
-      field_3: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_4: objectSpend.date,
-      field_5: objectSpend.observation,
-      field_6: objectSpend.bill_number,
-      field_7: objectSpend.control_number,
-      field_8: objectSpend.nit,
-      field_9: objectSpend.bussines_name,
-      field_10: objectSpend.cod_provider,
-      field_11: objectSpend.authorization_number,
-      field_12: objectSpend.populated,
-      field_13: objectSpend.formA === true ? 'Si' : 'No',
+      field_1: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].code,
+      field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
+      field_3: objectSpend.value,
+      field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
+      field_5: objectSpend.date,
+      field_6: objectSpend.observation,
+      field_7: objectSpend.bill_number,
+      field_8: objectSpend.control_number,
+      field_9: objectSpend.nit,
+      field_10: objectSpend.bussines_name,
+      field_11: objectSpend.cod_provider,
+      field_12: objectSpend.authorization_number,
+      field_13: objectSpend.populated,
       field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
-      field_15: {
+      field_15: objectSpend.formA === true ? 'Si' : 'No',
+      field_16: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -362,7 +362,7 @@ export class EditSpendComponent implements OnInit {
         action_method: "editSavedSpend",
         disable: false
       },
-      field_16: {
+      field_17: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -389,7 +389,7 @@ export class EditSpendComponent implements OnInit {
       doc_num_origin: objectSpend.authorization_number,
       provider_code: objectSpend.cod_provider,
       population: objectSpend.populated,
-      have_format: objectSpend.formA,
+      have_format: objectSpend.formA == false ? 'false' : 'true',
       type_of_expense_document: objectSpend.document
 
     });
@@ -402,23 +402,26 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpendEdit(objectEditSpend) {
+    debugger
     this.editSpendTable.data.forEach(element => {
+      debugger
       if (element.field_0 === objectEditSpend.id_spend) {
-        element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
-        element.field_2 = objectEditSpend.value;
-        element.field_3 = this.listMoneyType.filter((data) => data.id.toString() === objectEditSpend.currency_id.toString())[0].name;
-        element.field_4 = objectEditSpend.date;
-        element.field_5 = objectEditSpend.observation;
-        element.field_6 = objectEditSpend.bill_number;
-        element.field_7 = objectEditSpend.control_number;
-        element.field_8 = objectEditSpend.nit;
-        element.field_9 = objectEditSpend.bussines_name;
-        element.field_10 = objectEditSpend.cod_provider;
-        element.field_11 = objectEditSpend.authorization_number;
-        element.field_12 = objectEditSpend.populated;
-        element.field_13 = objectEditSpend.formA === true ? 'Si' : 'No';
+        element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].code;
+        element.field_2 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
+        element.field_3 = objectEditSpend.value;
+        element.field_4 = this.listMoneyType.filter((data) => data.id.toString() === objectEditSpend.currency_id.toString())[0].name;
+        element.field_5 = objectEditSpend.date;
+        element.field_6 = objectEditSpend.observation;
+        element.field_7 = objectEditSpend.bill_number;
+        element.field_8 = objectEditSpend.control_number;
+        element.field_9 = objectEditSpend.nit;
+        element.field_10 = objectEditSpend.bussines_name;
+        element.field_11 = objectEditSpend.cod_provider;
+        element.field_12 = objectEditSpend.authorization_number;
+        element.field_13 = objectEditSpend.populated;
         element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;
-        element.field_15 = {
+        element.field_15 = objectEditSpend.formA === true ? 'Si' : 'No';
+        element.field_16 = {
           type_method: "UPDATE",
           type_element: "button",
           icon: "fa-pencil",
@@ -427,7 +430,7 @@ export class EditSpendComponent implements OnInit {
           action_method: "updateTravelAllowance",
           disable: false
         };
-        element.field_16 = {
+        element.field_17 = {
           type_method: "DELETE",
           type_element: "button",
           icon: "fa-trash",
@@ -457,7 +460,7 @@ export class EditSpendComponent implements OnInit {
       doc_num_origin: objectEditSpend.authorization_number,
       provider_code: objectEditSpend.cod_provider,
       population: objectEditSpend.populated,
-      have_format: objectEditSpend.formA,
+      have_format: objectEditSpend.formA == false ? 'false' : 'true',
       type_of_expense_document: objectEditSpend.document
     });
 

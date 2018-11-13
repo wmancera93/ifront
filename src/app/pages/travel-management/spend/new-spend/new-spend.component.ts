@@ -230,7 +230,7 @@ export class NewSpendComponent implements OnInit {
 
     this.spendsService.getTypesDocument().subscribe((document: any) => {
       debugger
-      this.listTypeDocument =this.sortByAphabet(document.data);
+      this.listTypeDocument = this.sortByAphabet(document.data);
     });
   }
 
@@ -394,8 +394,8 @@ export class NewSpendComponent implements OnInit {
       doc_num_origin: objectSpend.authorization_number,
       provider_code: objectSpend.cod_provider,
       population: objectSpend.populated,
-      have_format: objectSpend.formA,
-      type_of_expense_document : objectSpend.document
+      have_format: objectSpend.formA == false ? 'false' : 'true',
+      type_of_expense_document: objectSpend.document
     });
 
     setTimeout(() => {
@@ -447,6 +447,12 @@ export class NewSpendComponent implements OnInit {
     if (date_param == 'date_body') {
       this.formSpendTravel.controls['date'].setValue('');
     }
+    if (date_param == 'money') {
+      if (this.formSpendTravel.controls['value'].value > 300) {
+        this.formSpendTravel.controls['value'].setValue('');
+      }
+    }
+
   }
 
   newSpend(param) {
