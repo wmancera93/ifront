@@ -56,7 +56,7 @@ export class TimeLineApproversComponent implements OnInit {
           }
         }
         if (data.type_request == 'requestsTravels') {
-          
+          debugger
           this.detailRequets = [];
           this.requests_print = data.type_request;
 

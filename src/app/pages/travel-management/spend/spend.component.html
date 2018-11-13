@@ -106,9 +106,19 @@
                   {{spend.info_travel.ticket}}
                 </p>
               </div>
-              <div class="col-lg-1 col-md-4 col-4 text-center top-p" (click)="viewSpend(spend)">
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" (click)="viewSpend(spend)"  *ngIf="spend.action_travel_allowances_index_view[0].is_active">
                 <div class="row justify-content-center">
                   <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer">
+                    <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-12" (click)="viewSpend(spend)">
+                    Ver
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" *ngIf="!spend.action_travel_allowances_index_view[0].is_active">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
                     <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                   </div>
                   <div class="col-12">
@@ -116,22 +126,42 @@
                   </div>
                 </div>
               </div>
-              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" *ngIf="spend.action_travel_allowances_index_view[1].is_active">
                 <div class="row justify-content-center">
-                  <div class="col-12 number-size" id="hideTrash" style="cursor: pointer" (click)="editSpend(spend)">
-                    <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8; font-size:2em"></i>
+                  <div class="col-12 number-size text-info" id="hideTrash" style="cursor: pointer" (click)="editSpend(spend)">
+                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                   </div>
                   <div class="col-12" (click)="editSpend(spend)">
                     Editar
                   </div>
                 </div>
               </div>
-              <div class="col-lg-1 col-md-4 col-4 text-center top-p">
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" *ngIf="!spend.action_travel_allowances_index_view[1].is_active">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size " id="hideTrash" style="cursor: no-drop">
+                    <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-12">
+                    Editar
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p"  *ngIf="spend.action_travel_allowances_index_view[2].is_active">
                 <div class="row justify-content-center">
                   <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteSpend(spend)">
                     <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                   </div>
                   <div class="col-12" (click)="deleteSpend(spend)">
+                    Eliminar
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-1 col-md-4 col-4 text-center top-p" *ngIf="!spend.action_travel_allowances_index_view[2].is_active">
+                <div class="row justify-content-center">
+                  <div class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
+                    <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                  </div>
+                  <div class="col-12">
                     Eliminar
                   </div>
                 </div>
