@@ -450,6 +450,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
+    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
@@ -464,6 +465,7 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
+        debugger
         this.ticket_allowance_request = data.data.travel_allowance_request_a.id
         document.getElementById("closeSpends").click();
         this.spendsService.getSpendListTravel().subscribe((travel: any) => {
@@ -473,10 +475,11 @@ export class NewSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'success',
           title: 'Alerta',
-          message: data.message + ' # ' + this.ticket_allowance_request,
+          message: data.message,
           confirmation: false
         }];
         this.showSubmit = true;
+        this.collapse_is = false;
         this.alert.setAlert(alertSuccess[0]);
         this.spendSharedService.setRefreshSpend({ success: true, third: this.eployee_selected == null ? false : true });
       },
@@ -490,6 +493,7 @@ export class NewSpendComponent implements OnInit {
           typeConfirmation: 'ValidationNewSpend'
         }];
         this.showSubmit = true;
+        this.collapse_is = false;
         this.alert.setAlert(alertWarning[0]);
       })
   }
