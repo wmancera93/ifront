@@ -57,6 +57,7 @@ import { AdvancesService } from './travel-management/advances/advances.service';
 import { SpendsService } from './travel-management/spends/spends.service';
 import { ApproverTravelsService } from './travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from './shared/travel-approver/travel-approver.service';
+import { ReportTravelsService } from './travel-management/report/report-travels.service';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { TravelApproverService } from './shared/travel-approver/travel-approver.
     AdvancesService,
     SpendsService,
     ApproverTravelsService,
-    TravelApproverService
+    TravelApproverService,
+    ReportTravelsService
   ]
 })
 export class ServicesModule { }
