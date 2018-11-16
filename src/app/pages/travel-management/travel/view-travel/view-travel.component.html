@@ -21,6 +21,16 @@
             <br>
           </div>
         </div>
+        <div class="row" *ngIf="view_travels[0].ticket_cli === null && view_travels[0].synch_type_server !== 'S' && view_travels[0].synch_type_server === null">
+          <div class="col-12 align-self-center">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-exclamation-triangle text-danger" style="font-size:2em"></i>
+              <strong class="titleColor">Error de sincronización</strong>
+              <strong>{{view_travels[0].synch_message_sap}}</strong>
+            </label>
+            <br>
+          </div>
+        </div>
 
         <div class="row" *ngIf="eployee_selected !== null">
           <div class="col-12 align-self-center">
@@ -167,8 +177,7 @@
 
         <div class="row" style="margin-top: 15px">
           <div class="col-12 top-general-p">
-            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
         </div>
 
@@ -197,9 +206,8 @@
         <div id="accordion" class="col-12" style="margin-top: 15px">
           <div class="row">
             <div class="titleColor col-12 text-left" id="headingTwo">
-              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
-                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver
-                anticipos de viaje</p>
+              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
             </div>
             <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
               <div class="row">
@@ -214,24 +222,20 @@
               </div>
               <div class="row">
                 <div class="col-12">
-                  <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable"
-                    [title]="nameReportAdvance"></app-data-table>
+                  <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class=" titleColor  col-12 text-left" id="headingThree">
-              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
-                data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver
-                gastos de viaje</p>
+              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
             </div>
-            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion"
-              style="margin-top: 25px">
+            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
               <div class="row">
                 <div class="col-12">
-                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable"
-                    [title]="nameReportSpend"></app-data-table>
+                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
                 </div>
               </div>
               <!-- <div class="row" style="padding-bottom: 40px">

@@ -67,19 +67,24 @@
                   <span *ngIf="travels.ticket_cli !== null" class="badge badge-warning">
                     No. Viaje SAP # {{travels.ticket_cli}}
                   </span>
+                  <span *ngIf="travels.ticket_cli === null &&  travels.messages_server === null ">
+                    <h6>
+                      <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
+                  </span>
                   <span class="badge badge-warning">
                     No. Viaje iHR # {{travels.ticket}}
                   </span>
                 </h5>
                 <p>
-                  <i class="fa fa-clock-o"></i>
-                  Creada el {{travels.created_date}}
+                  <i class="fa fa-plane"></i>
+                  Fecha salida {{travels.date_begin_format}}
+                </p>
+                <p>Fecha llegada {{travels.date_end_format}}
                 </p>
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p" *ngIf="travels.observation != null">
                 <h3 class="font-color-default">
-                  {{travels.observation | slice: 0:59}}
-                  <span [hidden]="travels.observation.length < 59"></span>
+                  {{travels.name_travel | slice: 0:59}}
                 </h3>
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p" *ngIf="travels.observation == null">
