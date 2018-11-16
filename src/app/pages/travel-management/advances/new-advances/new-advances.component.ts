@@ -9,6 +9,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 import { Router } from '@angular/router';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-new-advances',
@@ -32,6 +33,7 @@ export class NewAdvancesComponent implements OnInit {
   public today: any;
   public continue: boolean = false;
   public todayStandar: string;
+  public edit: boolean = false;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -44,7 +46,7 @@ export class NewAdvancesComponent implements OnInit {
     public advancesService: AdvancesService,
     public fb: FormBuilder,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService, public employeeService: EmployeeService, public router: Router) {
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router, public travelManagementService: TravelService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -60,7 +62,7 @@ export class NewAdvancesComponent implements OnInit {
       if (data === 'returnTravelsRequests') {
         this.router.navigate(['/ihr/travels']);
       }
-      
+
     })
 
     this.formAdvanceTravel = new FormGroup({});
@@ -70,7 +72,7 @@ export class NewAdvancesComponent implements OnInit {
       value: "",
       date: "",
       observation: "",
-      box:""
+      box: ""
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -80,6 +82,7 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
+      debugger
       this.eployee_selected = null;
       this.objectAdvances = [];
       this.continue = false;
@@ -91,7 +94,7 @@ export class NewAdvancesComponent implements OnInit {
         value: "",
         date: this.todayStandar,
         observation: "",
-        box:""
+        box: ""
       });
 
 
@@ -107,6 +110,16 @@ export class NewAdvancesComponent implements OnInit {
         this.continue = false;
       }
 
+      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+        debugger
+        if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
+          let objetcThird = {
+            id: third.data[0].travel_request.employee_applicant_to_json.personal_code,
+            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+          }
+           this.returnObjectSearch(objetcThird) 
+        }  
+      })
     });
 
     this.advancesService.getAdvanceListTravel().subscribe((list: any) => {
@@ -126,7 +139,7 @@ export class NewAdvancesComponent implements OnInit {
 
   ngOnInit() {
     let fecha = new Date();
-    this.todayStandar = fecha.getFullYear().toString() +'-'+ (fecha.getMonth() + 1).toString() +'-'+ (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
+    this.todayStandar = fecha.getFullYear().toString() + '-' + (fecha.getMonth() + 1).toString() + '-' + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
   enterNameEmployee() {
