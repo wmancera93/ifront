@@ -263,7 +263,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               }
             }
 
-            
+
 
             this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
               if (result.success) {
@@ -284,8 +284,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   id_travel_legal: this.generalViajes[0].travel_request.legal_travels_type_id,
                   id_travel_specific: this.generalViajes[0].travel_request.specific_types_trip_id,
                   id_travel_activities: this.generalViajes[0].travel_request.travel_activity_id,
-                  name_travel_graph: this.generalViajes[0].travel_request.travel_graph_code + ' - ' + this.generalViajes[0].travel_request.travel_graph_name,
-                  name_travel_costs: this.generalViajes[0].travel_request.travel_cost_code + ' - ' + this.generalViajes[0].travel_request.travel_cost_name,
+                  name_travel_graph: this.generalViajes[0].travel_request.travel_graph_code === null ? '' : this.generalViajes[0].travel_request.travel_graph_code + ' - ' + this.generalViajes[0].travel_request.travel_graph_name,
+                  name_travel_costs: this.generalViajes[0].travel_request.travel_cost_code === null ? '' : this.generalViajes[0].travel_request.travel_cost_code + ' - ' + this.generalViajes[0].travel_request.travel_cost_name,
                   id_transport: '',
                   id_city: '',
                   id_country: '',
@@ -344,7 +344,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateTravelManagement")) {
-   
+
         this.activate_submit = false;
         if (!this.bedit) {
           if (!this.bnew) {
@@ -363,7 +363,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-          
+
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -492,6 +492,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   enterGraph(form) {
     this.travelManagementService.getFilterGraphs(form.id_element_imputation, form.name_travel_graph).
       subscribe((data: any) => {
+
         this.grahp = this.sortByAphabet(data.data);
         this.showListAutoCost = false;
       });
@@ -966,46 +967,46 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         }
       });
   }
-  // searchCostsCenterAndGrahp(form: any, acction: any) {
+  searchCostsCenterAndGrahp(form: any, acction: any) {
 
-  //   if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
-  //     this.kostl = true;
-  //     this.nplnr = false;
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
+      this.kostl = true;
+      this.nplnr = false;
 
-  //     // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
-  //     //   subscribe((data: any) => {
-  //     //     this.costs_travels = this.sortByAphabet(data.data);
-  //     //     if (this.costs_travels.length > 0) {
-  //     //       if (acction === 'new') {
-  //     //         this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
-  //     //       }
-  //     //     } else {
-  //     //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
-  //     //     }
-  //     //   })
+      // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.costs_travels = this.sortByAphabet(data.data);
+      //     if (this.costs_travels.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      //     }
+      //   })
 
-  //   } else {
-  //     this.kostl = false;
-  //   }
-  //   if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
-  //     this.kostl = false;
-  //     this.nplnr = true;
-  //     // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-  //     //   subscribe((data: any) => {
-  //     //     this.grahp = this.sortByAphabet(data.data);
-  //     //     if (this.grahp.length > 0) {
-  //     //       if (acction === 'new') {
-  //     //         this.formTravelManagement.controls['id_grahp'].setValue('-1');
-  //     //       }
-  //     //     } else {
-  //     //       this.formTravelManagement.controls['id_grahp'].setValue('');
-  //     //     }
-  //     //   })
-  //   } else {
-  //     this.nplnr = false;
-  //   }
+    } else {
+      this.kostl = false;
+    }
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
+      this.kostl = false;
+      this.nplnr = true;
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('-1');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
+    } else {
+      this.nplnr = false;
+    }
 
-  // }
+  }
 
   searchOperationsGrahp(form: any, acction: any) {
 

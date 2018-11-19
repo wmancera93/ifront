@@ -138,7 +138,7 @@ export class EditSpendComponent implements OnInit {
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
         this.stateRequestsSpend = editSpend.data[0].travel_allowance_request.status_request;
         this.ticketTravel = this.editSpendDetail.ticket;
-        this.nameSpend = this.editSpendDetail.name_travel
+        this.nameSpend = this.editSpendDetail.ticket + ' ' +this.editSpendDetail.name_travel
         this.editSpendTable = editSpend.data[0].travel_allowances;
         this.annexes = editSpend.data[0].travel_request_annexeds;
         this.buttonNewSpend = true;

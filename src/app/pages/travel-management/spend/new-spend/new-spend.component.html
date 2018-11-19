@@ -62,7 +62,7 @@
               <div class="col-lg-9 col-md-6 col-12">
                 <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" (change)="validateTravel(formSpendTravel.value)">
                   <option value="">Seleccione</option>
-                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
+                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
                 </select>
               </div>
             </div>
