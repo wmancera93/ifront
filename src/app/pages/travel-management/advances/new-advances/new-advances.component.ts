@@ -114,7 +114,7 @@ export class NewAdvancesComponent implements OnInit {
         debugger
         if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
           let objetcThird = {
-            id: third.data[0].travel_request.employee_applicant_to_json.personal_code,
+            id: third.data[0].travel_request.employee_applicant_to_json.id,
             name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
           }
            this.returnObjectSearch(objetcThird) 
