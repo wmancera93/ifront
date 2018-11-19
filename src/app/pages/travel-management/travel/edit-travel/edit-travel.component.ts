@@ -734,7 +734,12 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
     this.activate_submit = true;
     this.activate = true;
-    let hotell = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
+    let hotell = '';
+    if (modelEditPartial.id_hotels !== null) {
+       hotell = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
+    } else {
+       hotell = '';
+    }
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {
         element.field_1 = modelEditPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelEditPartial.id_transport.toString())[0].name : '',
