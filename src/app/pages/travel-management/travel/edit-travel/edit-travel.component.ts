@@ -670,6 +670,16 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     modelPartial.id_travel = 'temp_' + this.count + 1;
     this.activate_submit = true;
     this.activate = true;
+
+    let dateIn = modelPartial.date_begin.split('-');
+    let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
+    let dateOut = modelPartial.date_end.split('-');
+    let dateEndOut = dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
+    let dateInHotel = modelPartial.date_hotel_in.split('-');
+    let dateBeginHotel = dateInHotel[2] + '/' + dateInHotel[1] + '/' + dateInHotel[0];
+    let dateOutHotel = modelPartial.date_hotel_out.split('-');
+    let dateEndOutHotel = dateOutHotel[2] + '/' + dateOutHotel[1] + '/' + dateOutHotel[0];
+
     this.editEditTrip.push(modelPartial);
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.generalViajes[0].travel_managements.data.push({
@@ -677,13 +687,13 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
       field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      field_7: dateEndOut + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: modelPartial.date_hotel_in,
-      field_10: modelPartial.date_hotel_out,
+      field_9: dateBeginHotel,
+      field_10: dateEndOutHotel,
       field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -734,6 +744,16 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
     this.activate_submit = true;
     this.activate = true;
+    let dateIn = modelEditPartial.date_begin.split('-');
+    let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
+    let dateOut = modelEditPartial.date_end.split('-');
+    let dateEndOut = dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
+    let dateInHotel = modelEditPartial.date_hotel_in.split('-');
+    let dateBeginHotel = dateInHotel[2] + '/' + dateInHotel[1] + '/' + dateInHotel[0];
+    let dateOutHotel = modelEditPartial.date_hotel_out.split('-');
+    let dateEndOutHotel = dateOutHotel[2] + '/' + dateOutHotel[1] + '/' + dateOutHotel[0];
+
+
     let hotell = '';
     if (modelEditPartial.id_hotels !== null) {
        hotell = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
@@ -745,13 +765,13 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         element.field_1 = modelEditPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelEditPartial.id_transport.toString())[0].name : '',
           element.field_2 = modelEditPartial.id_city,
           element.field_3 = this.terminalLocations.filter((data) => data.id.toString() === modelEditPartial.id_terminal.toString())[0].name;
-        element.field_4 = modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin;
+        element.field_4 = dateBeginIn + ' ' + modelEditPartial.hour_begin;
         element.field_5 = modelEditPartial.id_cityto,
           element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
-        element.field_7 = modelEditPartial.date_end + ' ' + modelEditPartial.hour_end;
+        element.field_7 = dateEndOut + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
-        element.field_9 = modelEditPartial.date_hotel_in,
-          element.field_10 = modelEditPartial.date_hotel_out,
+        element.field_9 = dateBeginHotel,
+          element.field_10 = dateEndOutHotel,
           element.field_11 = modelEditPartial.travel_mileage;
         element.field_12 = {
           type_method: "UPDATE",

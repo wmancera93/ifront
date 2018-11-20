@@ -145,7 +145,7 @@ export class ViewSpendComponent implements OnInit {
   }
   exportExcel() {
     this.spendsService.getExportSpendExcel(this.ticket).subscribe((data: any) => {
-      
+      window.open(data.url);
     })
   }
 

@@ -69,6 +69,6 @@ export class SpendsService {
   }
   getExportSpendExcel(id: string) {
     return this.tokenService.get('travel_requests/expense_reporting?travel_request_id=' + id)
-      .map((data: any) => data.json());
+      .map((data: any) => data);
   }
 }

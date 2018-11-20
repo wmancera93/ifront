@@ -449,7 +449,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       case 'hour_end':
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
-        case 'date_begin_hotel':
+      case 'date_begin_hotel':
         this.formTravelManagement.controls['date_begin_hotel'].setValue('');
         break;
       case 'date_end_hotel':
@@ -575,6 +575,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   addDestination(modelPartial) {
     modelPartial.id_travel = this.count + 1;
+    let dateIn = modelPartial.date_begin.split('-');
+    let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
+    let dateOut = modelPartial.date_end.split('-');
+    let dateEndOut = dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
+    let dateInHotel = modelPartial.date_hotel_in.split('-');
+    let dateBeginHotel = dateInHotel[2] + '/' + dateInHotel[1] + '/' + dateInHotel[0];
+    let dateOutHotel = modelPartial.date_hotel_out.split('-');
+    let dateEndOutHotel = dateOutHotel[2] + '/' + dateOutHotel[1] + '/' + dateOutHotel[0];
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
@@ -583,13 +591,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
       field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      field_7: dateEndOut + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: modelPartial.date_hotel_in,
-      field_10: modelPartial.date_hotel_out,
+      field_9: dateBeginHotel,
+      field_10: dateEndOutHotel,
       field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
