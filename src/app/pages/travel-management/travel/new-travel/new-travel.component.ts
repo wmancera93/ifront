@@ -574,6 +574,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   addDestination(modelPartial) {
+
     modelPartial.id_travel = this.count + 1;
     let dateIn = modelPartial.date_begin.split('-');
     let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
@@ -596,8 +597,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: dateEndOut + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: dateBeginHotel,
-      field_10: dateEndOutHotel,
+      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
       field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -655,6 +656,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   colapseNew() {
+    debugger
     this.activate_submit = false;
     this.showMilenage = false;
     if (!this.bnew) {
@@ -662,11 +664,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.bnew = false
     }
-
-
-
     document.getElementById("funtionTravel").click();
-
     setTimeout(() => {
       document.getElementById('travel_new').scrollTo(0, 1000);
     }, 200);
@@ -1386,6 +1384,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['date_hotel_in'].setValue('');
     this.formTravelManagement.controls['date_hotel_out'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
+    
+    this.searchState(this.formTravelManagement.value, 'edit');
+    this.searchStateto(this.formTravelManagement.value, 'edit');
   }
   dateBeginValidate(days) {
 

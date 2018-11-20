@@ -106,9 +106,19 @@
                     {{travels.status_request}}
                   </span>
                 </h6>
+                <h6 *ngIf="travels.status_liq_code == 'LiqAnn'">
+                  <span class="badge badge-danger">
+                    {{travels.status_liq_name}}
+                  </span>
+                </h6>
                 <h6 *ngIf="travels.status_request == 'En proceso'">
                   <span class="badge badge-success">
                     {{travels.status_request}}
+                  </span>
+                </h6>
+                <h6 *ngIf="travels.status_liq_code == 'LiqApp'">
+                  <span class="badge badge-success">
+                    {{travels.status_liq_name}}
                   </span>
                 </h6>
                 <h6 *ngIf="travels.status_request == 'Registrado'">
@@ -116,7 +126,11 @@
                     {{travels.status_request}}
                   </span>
                 </h6>
-
+                <h6 *ngIf="travels.status_liq_code == 'LiqPen'">
+                  <span class="badge badge-default">
+                    {{travels.status_liq_name}}
+                  </span>
+                </h6>
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee != undefined">
                 <p class="font-title-general">

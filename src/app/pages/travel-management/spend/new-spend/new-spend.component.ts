@@ -336,14 +336,15 @@ export class NewSpendComponent implements OnInit {
   aditionSpend(objectSpend) {
     objectSpend.id_spend = this.idSpend + 1;
     this.objectProof.push(objectSpend)
-
+    let date = objectSpend.date.split('-');
+    let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
     this.infoTableSpends[0].data[0].data.push({
       field_0: this.idSpend + 1,
       field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
       field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
       field_3: objectSpend.value,
       field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_5: objectSpend.date,
+      field_5: objectSpend.date !== '' ? dateSpend : '',
       field_6: objectSpend.observation,
       field_7: objectSpend.bill_number,
       field_8: objectSpend.control_number,
@@ -441,11 +442,11 @@ export class NewSpendComponent implements OnInit {
     if (date_param == 'date_body') {
       this.formSpendTravel.controls['date'].setValue('');
     }
-    if (date_param == 'money') {
-      if (this.formSpendTravel.controls['value'].value > 300) {
-        this.formSpendTravel.controls['value'].setValue('');
-      }
-    }
+    // if (date_param == 'money') {
+    //   if (this.formSpendTravel.controls['value'].value > 300) {
+    //     this.formSpendTravel.controls['value'].setValue('');
+    //   }
+    // }
 
   }
 

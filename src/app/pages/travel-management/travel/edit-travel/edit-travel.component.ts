@@ -692,8 +692,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: dateEndOut + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: dateBeginHotel,
-      field_10: dateEndOutHotel,
+      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
       field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -770,8 +770,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           element.field_6 = this.terminalLocationsto.filter((data) => data.id.toString() === modelEditPartial.id_terminalto.toString())[0].name;
         element.field_7 = dateEndOut + ' ' + modelEditPartial.hour_end;
         element.field_8 = hotell;
-        element.field_9 = dateBeginHotel,
-          element.field_10 = dateEndOutHotel,
+        element.field_9 = modelEditPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+          element.field_10 = modelEditPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
           element.field_11 = modelEditPartial.travel_mileage;
         element.field_12 = {
           type_method: "UPDATE",

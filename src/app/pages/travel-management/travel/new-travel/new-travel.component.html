@@ -470,6 +470,7 @@
                   </label>
                   <select class="form-control" [formControl]="formTravelManagement.controls['id_hotels']">
                     <option *ngFor="let nameHotels of hotels" [value]="nameHotels.id">{{nameHotels.name}}</option>
+                    <option value="">Seleccione</option>
                   </select>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
