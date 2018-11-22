@@ -656,7 +656,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   colapseNew() {
-    debugger
     this.activate_submit = false;
     this.showMilenage = false;
     if (!this.bnew) {
@@ -664,7 +663,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.bnew = false
     }
+
+
+
     document.getElementById("funtionTravel").click();
+
     setTimeout(() => {
       document.getElementById('travel_new').scrollTo(0, 1000);
     }, 200);

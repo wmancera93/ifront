@@ -8,7 +8,9 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MainService } from '../../../services/main/main.service';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+
 declare const ga: any;
+
 @Component({
   selector: 'app-confirm-reset-acount',
   templateUrl: './confirm-reset-acount.component.html',
@@ -20,6 +22,7 @@ export class ConfirmResetAcountComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public eyePasswordVisible: boolean = false;
   public urlTokenPassword: string = '';
+
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     private route: ActivatedRoute,
@@ -35,23 +38,21 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     });
   }
+
+
   ngOnInit() {
     if (localStorage.getItem("enterprise") === null) {
       let url = window.location.href;
       let ambient;
+
       if (url.split("localhost").length === 1) {
-        if (url.split("//")[1].split("/")[0].toString() === "10.0.2.210:3003") {
-          ambient = "productivo";
-        }
-        if (url.split("//")[1].split("/")[0].toString() === "10.0.5.100:3003") {
-          ambient = "staging";
-        }
-        if (url.split("//")[1].split("/")[0].toString() === "10.0.7.192:3003") {
-          ambient = 'development';
+        if (url.split("-").length > 1) {
+          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
         }
       } else {
         ambient = 'development';
       }
+
       this.mainService.getDataEnterprise(ambient)
         .subscribe((result: any) => {
           this.dataEnterprise = result.data;
@@ -96,6 +97,7 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.urlTokenPassword = params.reset_password_token;
     });
   }
+
   restartPassword() {
     if (this.txtPassword !== this.txtConfirmPassword) {
       const alertWarning: Alerts[] = [{
@@ -107,6 +109,7 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.txtConfirmPassword = '';
     }
   }
+
   restartPasword() {
     let resultError: any;
     if (this.txtPassword !== '' && this.txtConfirmPassword !== '') {
@@ -146,25 +149,28 @@ export class ConfirmResetAcountComponent implements OnInit {
       );
     }
   }
+
   // events
   overEyePassword(input: string) {
     (<HTMLInputElement>document.getElementById(input)).type = 'text';
   }
+
   leaveEyePassword(input: string) {
     (<HTMLInputElement>document.getElementById(input)).type = 'password';
   }
+
   blurPasword() {
     if (this.txtPassword !== '') {
       let expressionRegular
       let validatePasword
-      if (this.dataEnterprise.login_ldap) {
+      if(this.dataEnterprise.login_ldap){
         expressionRegular = true;
         validatePasword = expressionRegular;
       } else {
         expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
         validatePasword = expressionRegular.test(this.txtPassword)
       }
-
+      
       if (!validatePasword) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
@@ -176,6 +182,7 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     }
   }
+
   blurConfirmPasword() {
     if (this.txtPassword !== '' && this.txtConfirmPassword !== '') {
       if (this.txtPassword !== this.txtConfirmPassword) {
@@ -190,6 +197,7 @@ export class ConfirmResetAcountComponent implements OnInit {
       }
     }
   }
+
   keyupPassword() {
     if (this.txtPassword === '' && this.txtConfirmPassword !== '') {
       const alertWarning: Alerts[] = [{
@@ -204,6 +212,7 @@ export class ConfirmResetAcountComponent implements OnInit {
       this.eyePasswordVisible = true;
     }
   }
+
   keyupConfirmPassword() {
     if (this.txtPassword === '') {
       const alertWarning: Alerts[] = [{

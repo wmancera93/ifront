@@ -1,7 +1,0 @@
-app:
-  build: ./nginx
-  restart: always
-  volumes:
-    - ./angular/:/var/www/html/angular
-  ports:
-    - "3003:3003"
