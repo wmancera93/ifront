@@ -12,11 +12,12 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center" *ngIf="trainingDetailInfo !== undefined">
-          <div class="col-12 col-lg-6" *ngIf="flagPDF">
+          <!-- <div class="col-12 col-lg-6" >
             <pdf-viewer [src]="urlPrevisualize" [original-size]="false" style="display: block;"></pdf-viewer>
             <iframe [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPrevisualize)' style="width:100% !important;height:500px;"></iframe>
-          </div>
-          <div class="col-lg-6 col-12">
+           
+          </div> -->
+          <div class="col-8">
             <strong>
               {{trainingDetailInfo.name | uppercase}}
             </strong>
@@ -56,6 +57,12 @@
                 {{trainingDetailInfo.nhours_for_days}} horas por día
               </div>
             </div>
+            <div class="row margin-row">
+              <div class="col-12 titleColor" *ngIf="flagPDF">
+                <i class="fa  text-primary-hr fa-file-pdf-o"></i>
+                <strong style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewPDF()">Ver PDF</strong>
+              </div>
+            </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa fa-history text-primary-hr"></i>
@@ -64,8 +71,8 @@
             </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
               <div class="col-12">
-                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones" style="width:100% !important;"
-                  required>                        
+                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones"
+                  style="width:100% !important;" required>
                 </textarea>
               </div>
             </div>
@@ -81,7 +88,6 @@
                   DECLINAR </button>
               </div>
             </div>
-
           </div>
         </div>
       </div>
