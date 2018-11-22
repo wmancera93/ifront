@@ -222,7 +222,7 @@ thead{
 body {
     font-family:-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif !important;
     background-color: #2f4050 !important;
-    font-size: 13px !important;
+    font-size: 15px !important;
     color: #676a6c !important;
     overflow-x: hidden !important;
 }
@@ -245,7 +245,7 @@ body {
 
 p {
     margin: 0 0 10px !important;
-    font-size: 12px !important;
+    font-size: 14px !important;
     -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
 }
 
@@ -280,7 +280,7 @@ a {
 }
 
 .font-title-general {
-    font-size: 14px !important;
+    font-size: 16px !important;
     color: #888888 !important;
     font-weight: 500 !important;
 }
@@ -507,14 +507,14 @@ button, input, optgroup, select, textarea {
 }
 
 header{
-    background-color: #2f4050 !important;
-    background-image: var(--img-header-login);    
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 100%;   
-    height: calc(100vh) !important;
-    padding: 40px 0 150px;
-    color: white;
+        background-color: #0146ae !important;
+        background-image: var(--img-header-login); 
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 69%;
+        height: calc(100vh) !important;
+        padding: 40px 0 150px;
+        color: white;
 }
 
 .img-explorer{
@@ -526,7 +526,6 @@ header{
     background-image: linear-gradient(rgba(28, 27, 31, 0.9),rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center;
-    
 }
 
 .img-user {
@@ -579,8 +578,8 @@ header{
 }
 
 .bg-login {    
-    max-width: 400px !important;
-    padding-top: 3pc;
+    max-width: 334px !important;
+    /* padding-top: 3pc; */
     background-color: rgba(0,0,0,0.5);
     height: auto;
     z-index: 1;
@@ -622,7 +621,7 @@ header{
 }
 
 .fooder-login{
-    margin-top: 40px
+    /* margin-top: 40px */
 }
 
 .float-general-login {
@@ -1869,7 +1868,7 @@ border-bottom: 1px solid  #dddd;
 }
 
 .AjustArrowDown{
-    padding-top:20px;
+    padding-top:0px;
 }
 
 
@@ -2687,7 +2686,7 @@ a.close-canvas-menu:hover {
 
 @media (min-width: 1500px)  and (min-height: 600px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 100px 0 150px;
     }   
      
@@ -2695,14 +2694,14 @@ a.close-canvas-menu:hover {
 @media (min-width: 1800px) and (min-height: 800px) 
 {
     header {
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 100px 0 150px;
     }
 }
 
 @media (min-width: 1300px)  and (min-height: 1000px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 150px 0 150px !important;
     }   
     
@@ -2711,7 +2710,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 70px !important;
+        /* margin-top: 70px !important; */
     }
 
     /* h3 {
@@ -2723,7 +2722,7 @@ a.close-canvas-menu:hover {
     } */
 
     .bg-login {
-        max-width:  600px !important;
+        max-width:  400px !important;
     }
 
     /* .font-controls-login {
@@ -2809,7 +2808,7 @@ a.close-canvas-menu:hover {
 
 @media (min-width: 1000px)  and (min-height: 1200px) {
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 300px 0 150px !important;
     }    
    
@@ -2818,7 +2817,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 70px !important;
+        /* margin-top: 70px !important; */
     }
 
     /* h3 {
@@ -2830,7 +2829,7 @@ a.close-canvas-menu:hover {
     } */
 
     .bg-login {
-        max-width:  600px !important;
+        max-width:  400px !important;
     }
 
     /* .font-controls-login {
@@ -2993,7 +2992,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 55px 0 150px !important;
     }
    
@@ -3002,7 +3001,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 60px !important;
+        /* margin-top: 60px !important; */
     }
 
     /* h3 {
@@ -3084,7 +3083,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 220px 0 150px !important;
     }
    
@@ -3093,7 +3092,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 60px !important;
+        /* margin-top: 60px !important; */
     }
 
     /* h3 {
@@ -3252,7 +3251,7 @@ a.close-canvas-menu:hover {
         margin-top: 20px;
     }
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 30px 0px 40px !important;
     }
 
@@ -3278,7 +3277,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 8px !important;
+        /* margin-top: 8px !important; */
     }
 
     .top-form {
@@ -3458,7 +3457,7 @@ a.close-canvas-menu:hover {
     }
 
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 90px 5px 40px !important;
     }
 
@@ -3471,7 +3470,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 60px !important;
+        /* margin-top: 60px !important; */
     }
 
     /* h3 {
@@ -3757,7 +3756,7 @@ a.close-canvas-menu:hover {
         }
 
     header{
-        background-position: center top !important;
+        /* background-position: center top !important; */
         padding: 30px 5px 40px !important;
     }
     .errorImg
@@ -3782,7 +3781,7 @@ a.close-canvas-menu:hover {
     }
 
     .fooder-login{
-        margin-top: 20px !important;
+        /* margin-top: 20px !important; */
     }   
     .hideText {
         display: none !important;

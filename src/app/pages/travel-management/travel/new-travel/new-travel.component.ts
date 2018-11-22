@@ -175,21 +175,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_grahp: '',
       id_operations: '',
       id_travel_legal: '',
-      id_travel_specific: '',
-      id_travel_activities: '',
+      id_travel_specific: '3',
+      id_travel_activities: '7',
       id_transport: '',
       id_city: '',
-      id_country: '44',
+      id_country: '28',
       id_state: '',
       id_terminal: '',
       date_begin: '',
-      hour_begin: '',
-      hour_end: '',
+      hour_begin: '00:00',
+      hour_end: '23:59',
       date_end: '',
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '44',
+      id_countryto: '28',
       id_hotels: '',
       travel_mileage: '',
     });
@@ -339,21 +339,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_grahp: '',
             id_operations: '',
             id_travel_legal: '',
-            id_travel_specific: '',
-            id_travel_activities: '',
+            id_travel_specific: '3',
+            id_travel_activities: '7',
             id_transport: '',
             id_city: '',
-            id_country: '44',
+            id_country: '28',
             id_state: '',
             id_terminal: '',
             date_begin: '',
-            hour_begin: '',
-            hour_end: '',
+            hour_begin: '00:00',
+            hour_end: '23:59',
             date_end: '',
             id_terminalto: '',
             id_cityto: '',
             id_stateto: '',
-            id_countryto: '44',
+            id_countryto: '28',
             id_hotels: '',
             travel_mileage: '',
           });
@@ -419,7 +419,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   returnGraphSearch(graph) {
-    debugger
+
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.grahp = [];
@@ -449,7 +449,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       case 'hour_end':
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
-        case 'date_begin_hotel':
+      case 'date_begin_hotel':
         this.formTravelManagement.controls['date_begin_hotel'].setValue('');
         break;
       case 'date_end_hotel':
@@ -503,7 +503,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   newTravel(model) {
-    debugger
+
     this.showSubmit = false;
     this.send = true;
 
@@ -574,7 +574,16 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   addDestination(modelPartial) {
+
     modelPartial.id_travel = this.count + 1;
+    let dateIn = modelPartial.date_begin.split('-');
+    let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
+    let dateOut = modelPartial.date_end.split('-');
+    let dateEndOut = dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
+    let dateInHotel = modelPartial.date_hotel_in.split('-');
+    let dateBeginHotel = dateInHotel[2] + '/' + dateInHotel[1] + '/' + dateInHotel[0];
+    let dateOutHotel = modelPartial.date_hotel_out.split('-');
+    let dateEndOutHotel = dateOutHotel[2] + '/' + dateOutHotel[1] + '/' + dateOutHotel[0];
     this.editTrip.push(modelPartial);
     this.activate_submit = true;
     let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
@@ -583,13 +592,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
       field_2: modelPartial.id_city,
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
-      field_4: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
       field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-      field_7: modelPartial.date_end + ' ' + modelPartial.hour_end,
+      field_7: dateEndOut + ' ' + modelPartial.hour_end,
       field_8: hotell,
-      field_9: modelPartial.date_hotel_in,
-      field_10: modelPartial.date_hotel_out,
+      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
       field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -647,6 +656,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
   colapseNew() {
+    debugger
     this.activate_submit = false;
     this.showMilenage = false;
     if (!this.bnew) {
@@ -654,11 +664,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.bnew = false
     }
-
-
-
     document.getElementById("funtionTravel").click();
-
     setTimeout(() => {
       document.getElementById('travel_new').scrollTo(0, 1000);
     }, 200);
@@ -797,7 +803,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   searchOperationsGrahp(form: any, acction: any) {
-    debugger
+
     this.travelManagementService.getTravelsOperations(form).
       subscribe((data: any) => {
         this.operations = this.sortByAphabet(data.data);
@@ -811,9 +817,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
   }
   changeTypeTravel(param) {
-    if (param.type_travel === '27') {
-      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === 'P')[0].id.toString());
-      this.changeTravelLegal('P');
+    if (param.type_travel === '3' || param.type_travel === '4') {
+      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === '03')[0].id.toString());
+      this.changeTravelLegal('03');
     } else {
       this.changeTravelLegal('');
 
@@ -822,7 +828,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   changeTravelLegal(travelLegal: any) {
-    if (travelLegal === 'P') {
+    if (travelLegal === '03') {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
       this.kostl = false;
       this.nplnr = true;
@@ -953,21 +959,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_grahp: '',
       id_operations: '',
       id_travel_legal: '',
-      id_travel_specific: '',
-      id_travel_activities: '',
+      id_travel_specific: '3',
+      id_travel_activities: '7',
       id_transport: '',
       id_city: '',
-      id_country: '44',
+      id_country: '28',
       id_state: '',
       id_terminal: '',
       date_begin: '',
-      hour_begin: '',
-      hour_end: '',
+      hour_begin: '00:00',
+      hour_end: '23:59',
       date_end: '',
       id_terminalto: '',
       id_cityto: '',
       id_stateto: '',
-      id_countryto: '44',
+      id_countryto: '28',
       id_hotels: '',
       date_hotel_in: '',
       date_hotel_out: '',
@@ -986,8 +992,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
-      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, '0')
+      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.eployee_selected == null ? '0' : this.eployee_selected.id.toString())
         .subscribe(data => {
+          debugger
           if ((dateEndCalculate - dateBeginCalculate) < 0 && data) {
 
             this.formTravelManagement.controls['date_requests_begin'].setValue('');
@@ -1362,21 +1369,24 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
-    this.formTravelManagement.controls['id_country'].setValue('44');
+    this.formTravelManagement.controls['id_country'].setValue('28');
     this.formTravelManagement.controls['id_state'].setValue('');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
-    this.formTravelManagement.controls['hour_begin'].setValue('');
-    this.formTravelManagement.controls['hour_end'].setValue('');
+    this.formTravelManagement.controls['hour_begin'].setValue('00:00');
+    this.formTravelManagement.controls['hour_end'].setValue('23:59');
     this.formTravelManagement.controls['date_end'].setValue('');
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('');
-    this.formTravelManagement.controls['id_countryto'].setValue('44');
+    this.formTravelManagement.controls['id_countryto'].setValue('28');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['date_hotel_in'].setValue('');
     this.formTravelManagement.controls['date_hotel_out'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('');
+
+    this.searchState(this.formTravelManagement.value, 'edit');
+    this.searchStateto(this.formTravelManagement.value, 'edit');
   }
   dateBeginValidate(days) {
 

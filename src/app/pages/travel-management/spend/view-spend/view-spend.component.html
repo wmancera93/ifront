@@ -18,7 +18,7 @@
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
-            <label>{{showTravelDetail.name_travel}}</label>
+            <label>{{showTravelDetail.ticket}} {{showTravelDetail.name_travel}}</label>
           </div>
         </div>
         <div class="row" style="margin-top:20px">
@@ -131,12 +131,18 @@
           </div>
         </div> -->
 
-        <div class="row justify-content-end" style="padding-bottom: 25px">
-          <div class="col-lg-4 col-md-6 col-12">
+        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
+          <div class="col-lg-4 col-md-6 col-12" *ngIf="allRequestsInSpend[0].travel_allowance_request.data.status_request != 'En proceso'">
             <button class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
               <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
           </div>
         </div>
+        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
+            <div class="col-lg-4 col-md-6 col-12">
+              <button class="btn btn-warning btn-block cursor-general" (click)="exportExcel()">
+                <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;Exportar Excel</button>
+            </div>
+          </div>
         <div class="modal-footerInfo justify-content-center">
           <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
             <h6> Cerrar </h6>

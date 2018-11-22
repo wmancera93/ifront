@@ -55,21 +55,21 @@
       <div class="col-12">
         <div class="widget bg-white-1x" *ngFor="let advance of advancesItems;">
           <div class="row align-items-center">
-            <div class="col-lg-2 col-md-3 col-12">
+            <div class="col-lg-4 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
                   Código # {{advance.id}}
                 </span>
               </h5>
-              <p>
+              <!-- <p>
                 <i class="fa fa-clock-o"></i>
                 Creada el {{advance.date_created_at}}
-              </p>
+              </p> -->
             </div>
             <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
               <h3 class="font-color-default">
-                {{advance.travel_request_name | slice: 0:20}}
-                <span [hidden]="advance.travel_request_name.length < 20">...</span>
+                {{advance.name_travel | slice: 0:59}}
+                <span [hidden]="advance.travel_request_name.length < 59"></span>
               </h3>
             </div>
             <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -82,7 +82,7 @@
                 </span>
               </h6>
             </div>
-            <div class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p">
+            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
               <p class="font-title-general">
                 Solicitud de viaje
               </p>

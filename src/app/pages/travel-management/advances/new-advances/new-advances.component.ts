@@ -9,6 +9,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 import { Router } from '@angular/router';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-new-advances',
@@ -32,6 +33,8 @@ export class NewAdvancesComponent implements OnInit {
   public today: any;
   public continue: boolean = false;
   public todayStandar: string;
+  public edit: boolean = false;
+  public objetcThird: any;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -44,7 +47,7 @@ export class NewAdvancesComponent implements OnInit {
     public advancesService: AdvancesService,
     public fb: FormBuilder,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService, public employeeService: EmployeeService, public router: Router) {
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router, public travelManagementService: TravelService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -60,7 +63,7 @@ export class NewAdvancesComponent implements OnInit {
       if (data === 'returnTravelsRequests') {
         this.router.navigate(['/ihr/travels']);
       }
-      
+
     })
 
     this.formAdvanceTravel = new FormGroup({});
@@ -70,7 +73,7 @@ export class NewAdvancesComponent implements OnInit {
       value: "",
       date: "",
       observation: "",
-      box:""
+      box: ""
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -91,7 +94,7 @@ export class NewAdvancesComponent implements OnInit {
         value: "",
         date: this.todayStandar,
         observation: "",
-        box:""
+        box: ""
       });
 
 
@@ -107,11 +110,23 @@ export class NewAdvancesComponent implements OnInit {
         this.continue = false;
       }
 
+      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+        if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
+          this.objetcThird = {
+            id: third.data[0].travel_request.employee_applicant_to_json.id,
+            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+          }
+          this.returnObjectSearch(this.objetcThird)
+        }else{
+          this.objetcThird = { }
+          this.advancesService.getAdvanceListTravel(this.eployee_selected).subscribe((list: any) => {
+            this.listTravelsFromAdvance = this.sortByNumber(list.data);
+          });
+        }
+      })
     });
 
-    this.advancesService.getAdvanceListTravel().subscribe((list: any) => {
-      this.listTravelsFromAdvance = list.data;
-    });
+
 
     this.advancesService.getAdvanceMoneyList().subscribe((money: any) => {
       this.listMoneyTypes = money.data;
@@ -126,9 +141,15 @@ export class NewAdvancesComponent implements OnInit {
 
   ngOnInit() {
     let fecha = new Date();
-    this.todayStandar = fecha.getFullYear().toString() +'-'+ (fecha.getMonth() + 1).toString() +'-'+ (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
+    this.todayStandar = fecha.getFullYear().toString() + '-' + (fecha.getMonth() + 1).toString() + '-' + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
+  sortByNumber(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
+  }
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
     if (this.nameEmployee !== null) {
@@ -150,6 +171,9 @@ export class NewAdvancesComponent implements OnInit {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+    this.advancesService.getAdvanceListTravel(this.eployee_selected.id.toString()).subscribe((list: any) => {
+      this.listTravelsFromAdvance = this.sortByNumber(list.data);
+    });
   }
 
   deleteEmployeeThird() {
@@ -218,7 +242,6 @@ export class NewAdvancesComponent implements OnInit {
       })
   }
   delete(date_param) {
-    debugger
     if (date_param == 'date_body') {
       this.formAdvanceTravel.controls['date'].setValue('');
     }

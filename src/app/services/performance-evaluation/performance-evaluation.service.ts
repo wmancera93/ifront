@@ -62,5 +62,9 @@ export class PerformanceEvaluationService {
     return this.tokenService.put('perfomance_evaluations/sender_complete/' + id, {})
       .map((data: any) => data.json());
   }
+  getExcelEvaluationObjectives(idEmployee) {
+    return this.tokenService.get('perfomance_evaluations/table_planning_export/'+ idEmployee + '.xlsx')
+      .map((data: any) => data);
+  }
 
 }

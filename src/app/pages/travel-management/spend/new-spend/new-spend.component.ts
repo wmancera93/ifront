@@ -11,6 +11,7 @@ import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_ma
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -56,6 +57,8 @@ export class NewSpendComponent implements OnInit {
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
   public ticket_allowance_request: string;
+  public edit: boolean = false;
+  public objetcThird: any;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -63,7 +66,7 @@ export class NewSpendComponent implements OnInit {
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService, public employeeService: EmployeeService) {
+    public formDataService: FormDataService, public employeeService: EmployeeService, public travelManagementService: TravelService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -74,7 +77,6 @@ export class NewSpendComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
-        debugger
         document.getElementById("btn_spend_new").click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
@@ -90,10 +92,22 @@ export class NewSpendComponent implements OnInit {
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
-      this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-        this.listTravelsFromSpend = this.sortByNumber(travel.data);
-
-        this.refreshTableSpends();
+      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+        if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
+          this.objetcThird = {
+            id: third.data[0].travel_request.employee_applicant_to_json.id,
+            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+          }
+           this.returnObjectSearch(this.objetcThird) 
+        }else{
+          this.objetcThird ={}
+          this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
+            this.listTravelsFromSpend = this.sortByNumber(travel.data);
+          });
+        }
+      })
+      
+      this.refreshTableSpends();
         this.formSpendTravel = new FormGroup({});
         this.formSpendTravel = fb.group({
           travel_request_id: data !== true ? data : '',
@@ -112,33 +126,28 @@ export class NewSpendComponent implements OnInit {
           formA: "",
           document: ""
         });
-
+        
         if (this.formSpendTravel.value.travel_request_id !== '') {
           this.continue = data !== true ? true : false;
           this.validateTravel(this.formSpendTravel.value);
         }
-
-      });
 
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
 
-
-
     });
 
     this.spendSharedService.getDeleteSpend().subscribe((data) => {
       if (data === 'deleteSpend') {
-        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-          this.listTravelsFromSpend = travel.data;
+        this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
+          this.listTravelsFromSpend = this.sortByNumber(travel.data);
         });
       }
     })
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      debugger
       if (data.action_method === "deleteSpend") {
         this.deleteSpend(data);
       }
@@ -229,7 +238,6 @@ export class NewSpendComponent implements OnInit {
     });
 
     this.spendsService.getTypesDocument().subscribe((document: any) => {
-      debugger
       this.listTypeDocument = this.sortByAphabet(document.data);
     });
   }
@@ -250,7 +258,6 @@ export class NewSpendComponent implements OnInit {
     return dataBySort;
   }
   sortByNumber(dataBySort: any) {
-    debugger
     dataBySort.sort(function (a, b) {
       return b.id - a.id;
     });
@@ -277,6 +284,9 @@ export class NewSpendComponent implements OnInit {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+    this.spendsService.getSpendListTravel(this.eployee_selected.id).subscribe((travel: any) => {
+      this.listTravelsFromSpend = this.sortByNumber(travel.data);
+    });
   }
 
   deleteEmployeeThird() {
@@ -340,14 +350,15 @@ export class NewSpendComponent implements OnInit {
   aditionSpend(objectSpend) {
     objectSpend.id_spend = this.idSpend + 1;
     this.objectProof.push(objectSpend)
-
+    let date = objectSpend.date.split('-');
+    let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
     this.infoTableSpends[0].data[0].data.push({
       field_0: this.idSpend + 1,
       field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
       field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
       field_3: objectSpend.value,
       field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_5: objectSpend.date,
+      field_5: objectSpend.date !== '' ? dateSpend : '',
       field_6: objectSpend.observation,
       field_7: objectSpend.bill_number,
       field_8: objectSpend.control_number,
@@ -432,7 +443,6 @@ export class NewSpendComponent implements OnInit {
 
   }
   closeSpend() {
-    debugger
     this.showSubmit = true;
     this.spendNew = false;
     this.spendEdit = false;
@@ -443,19 +453,19 @@ export class NewSpendComponent implements OnInit {
   }
 
   delete(date_param) {
-    debugger
     if (date_param == 'date_body') {
       this.formSpendTravel.controls['date'].setValue('');
     }
-    if (date_param == 'money') {
-      if (this.formSpendTravel.controls['value'].value > 300) {
-        this.formSpendTravel.controls['value'].setValue('');
-      }
-    }
+    // if (date_param == 'money') {
+    //   if (this.formSpendTravel.controls['value'].value > 300) {
+    //     this.formSpendTravel.controls['value'].setValue('');
+    //   }
+    // }
 
   }
 
   newSpend(param) {
+    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
@@ -470,19 +480,21 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
+        debugger
         this.ticket_allowance_request = data.data.travel_allowance_request_a.id
         document.getElementById("closeSpends").click();
-        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+        this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
           this.listTravelsFromSpend = travel.data;
         });
 
         const alertSuccess: Alerts[] = [{
           type: 'success',
           title: 'Alerta',
-          message: data.message + ' # ' + this.ticket_allowance_request,
+          message: data.message,
           confirmation: false
         }];
         this.showSubmit = true;
+        this.collapse_is = false;
         this.alert.setAlert(alertSuccess[0]);
         this.spendSharedService.setRefreshSpend({ success: true, third: this.eployee_selected == null ? false : true });
       },
@@ -496,6 +508,7 @@ export class NewSpendComponent implements OnInit {
           typeConfirmation: 'ValidationNewSpend'
         }];
         this.showSubmit = true;
+        this.collapse_is = false;
         this.alert.setAlert(alertWarning[0]);
       })
   }

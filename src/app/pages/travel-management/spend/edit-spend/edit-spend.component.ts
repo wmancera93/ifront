@@ -55,6 +55,8 @@ export class EditSpendComponent implements OnInit {
   public ticketTravel: string;
   public nameSpend: string;
   public listTypeDocument: any[] = [];
+  public stateRequestsSpend: string;
+  public idEmployee: string = '0';
 
   showSizeTable
   showPdf
@@ -131,13 +133,13 @@ export class EditSpendComponent implements OnInit {
 
       this.idSpendRequests = idEdit;
       this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
-
         this.editSpendDetail = [];
         this.editSpendTable = [];
         this.annexes = [];
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
+        this.stateRequestsSpend = editSpend.data[0].travel_allowance_request.status_request;
         this.ticketTravel = this.editSpendDetail.ticket;
-        this.nameSpend = this.editSpendDetail.name_travel
+        this.nameSpend = this.editSpendDetail.ticket + ' ' + this.editSpendDetail.name_travel
         this.editSpendTable = editSpend.data[0].travel_allowances;
         this.annexes = editSpend.data[0].travel_request_annexeds;
         this.buttonNewSpend = true;
@@ -301,7 +303,7 @@ export class EditSpendComponent implements OnInit {
 
   ngOnInit() {
 
-    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+    this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
@@ -337,12 +339,14 @@ export class EditSpendComponent implements OnInit {
   aditionSpend(objectSpend) {
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
+    let date = objectSpend.date.split('-');
+    let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
     this.editSpendTable.data.push({
       field_1: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].code,
       field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
       field_3: objectSpend.value,
       field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
-      field_5: objectSpend.date,
+      field_5: objectSpend.date !== '' ? dateSpend : '',
       field_6: objectSpend.observation,
       field_7: objectSpend.bill_number,
       field_8: objectSpend.control_number,
@@ -402,15 +406,16 @@ export class EditSpendComponent implements OnInit {
   }
 
   aditionSpendEdit(objectEditSpend) {
-    debugger
+
     this.editSpendTable.data.forEach(element => {
-      debugger
+      let date = objectEditSpend.date.split('-');
+      let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
       if (element.field_0 === objectEditSpend.id_spend) {
         element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].code;
         element.field_2 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
         element.field_3 = objectEditSpend.value;
         element.field_4 = this.listMoneyType.filter((data) => data.id.toString() === objectEditSpend.currency_id.toString())[0].name;
-        element.field_5 = objectEditSpend.date;
+        element.field_5 = objectEditSpend.date !== '' ? dateSpend : '';
         element.field_6 = objectEditSpend.observation;
         element.field_7 = objectEditSpend.bill_number;
         element.field_8 = objectEditSpend.control_number;

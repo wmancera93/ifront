@@ -62,7 +62,7 @@
               <div class="col-lg-9 col-md-6 col-12">
                 <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" (change)="validateTravel(formSpendTravel.value)">
                   <option value="">Seleccione</option>
-                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
+                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
                 </select>
               </div>
             </div>
@@ -182,7 +182,7 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="number" max="300" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="delete('money')">
+                  <input type="number"  class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -219,7 +219,7 @@
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
                     <strong>Código de Control:</strong>
                   </label>
-                  <input type="number" class="form-control" name="control_number" [formControl]="formSpendTravel.controls['control_number']">
+                  <input type="text" class="form-control" name="control_number" [formControl]="formSpendTravel.controls['control_number']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">

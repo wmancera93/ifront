@@ -70,6 +70,7 @@ export class QueriesService {
     return this.tokenService.get('consultations/aniversary_export/' + idEmployee + '.xlsx')
       .map((data: any) => data.json());
   }
+  
   getHistoricalPosts() {
     return this.tokenService.get('consultations/historical_positions')
       .map((data: any) => data.json());

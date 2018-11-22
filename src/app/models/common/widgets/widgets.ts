@@ -67,7 +67,7 @@ export interface Calendar {
 export interface Newspaper {
     id: number;
     titulo: string;
-    imagen: Url;
+    image: Url;
     cuerpo: string;
     ini: string;
     publicado: boolean;

@@ -10,33 +10,42 @@ export class FormDataService extends Angular2TokenService {
     public ambient;
 
     definitionServer() {
-        this.url = window.location.href;
-        if (this.url.split('localhost').length === 1) {
-            if (this.url.split('-').length > 1) {
-              this.ambient = this.url.split('-')[0].split('/')[this.url.split('-')[0].split('/').length - 1];
-            }
-          } else {
-            this.ambient = 'development';
+        let url = window.location.href;
+        let ambient;
+    
+        if (url.split("localhost").length === 1) {
+          if (url.split("//")[1].split("/")[0].toString() === "10.0.2.210:3003") {
+            ambient = "productivo";
           }
-
-          switch (this.ambient) {
-            case 'development':
-              this.baseUrl = environment.apiBaseHr_development;
-              break;
-            case 'dev':
-              this.baseUrl = environment.apiBaseHr_development;
-              break;
-            case 'staging':
-              this.baseUrl = environment.apiBaseHr_staging;
-              break;
-            case 'demo':
-              this.baseUrl = environment.apiBaseHr_staging;
-              break;
-
-            default:
-              this.baseUrl = environment.apiBaseHr_production;
-              break;
+          if (url.split("//")[1].split("/")[0].toString() === "10.0.5.100:3003") {
+            ambient = "staging";
           }
+          if (url.split("//")[1].split("/")[0].toString() === "10.0.7.192:3003") {
+            ambient = 'development';
+          }
+        } else {
+          ambient = 'development';
+        }
+    
+        switch (ambient) {
+          case 'development':
+            this.baseUrl = environment.apiBaseHr_development;
+            break;
+          case 'dev':
+            this.baseUrl = environment.apiBaseHr_development;
+            break;
+          case 'staging':
+            this.baseUrl = environment.apiBaseHr_staging;
+            break;
+          case 'demo':
+            this.baseUrl = environment.apiBaseHr_staging;
+            break;
+    
+    
+          default:
+            this.baseUrl = environment.apiBaseHr_production;
+            break;
+        }
 
         this.init({
             apiBase: this.baseUrl,

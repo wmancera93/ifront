@@ -37,7 +37,7 @@ export class ViewSpendComponent implements OnInit {
     public http: Http, public alert: AlertsService, public travelManagementService: TravelService) {
 
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
-      
+
       this.spendsService.getViewDetailSpends(idSpend, this.edit).subscribe((data: any) => {
         this.id_spend = idSpend;
         this.ticket = data.data[0].travel_allowance_request.travel_request_id;
@@ -58,7 +58,6 @@ export class ViewSpendComponent implements OnInit {
       });
       setTimeout(() => {
         this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
-          debugger
           this.allRequestsInSpend = detail.data;
           this.table_advances_spend = [];
           this.table_travels_spend = [];
@@ -143,6 +142,11 @@ export class ViewSpendComponent implements OnInit {
         window.URL.revokeObjectURL(url);
         a.remove();
       });
+  }
+  exportExcel() {
+    this.spendsService.getExportSpendExcel(this.ticket).subscribe((data: any) => {
+      window.open(data.url);
+    })
   }
 
 }

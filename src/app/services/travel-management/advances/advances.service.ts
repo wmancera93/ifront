@@ -15,8 +15,8 @@ export class AdvancesService {
     return this.tokenService.get('travel_advance_payments/my_travels_advances_requests')
       .map((data: any) => data.json());
   }
-  getAdvanceListTravel() {
-    return this.tokenService.get('travel_requests/index_for_select_advance_pay')
+  getAdvanceListTravel(idEmployee) {
+    return this.tokenService.get('travel_requests/index_for_select_advance_pay/' + idEmployee)
       .map((data: any) => data.json());
   }
   getAdvanceMoneyList() {
@@ -36,7 +36,7 @@ export class AdvancesService {
     return this.tokenService.get('travel_advance_payments/send_request_to_approve/' + id)
       .map((data: any) => data.json());
   }
-  
+
   deleteRequestAdvance(id){
     return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
     .map((data: any) => data.json());     

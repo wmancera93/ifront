@@ -49,10 +49,10 @@
         <div id="selfService" class="collapse">
           <ul class="nav nav-second-level flex-column" aria-expanded="false">
             <li *ngIf="dataEnterprise.show_certificates_labor">
-              <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado Laboral</a>
+              <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">Certificado de trabajo</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_payroll">
-              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Recibos de nómina</a>
+              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">Boleta de pago</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_certificates_income">
               <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">Certificado de ing. y ret.</a>
@@ -81,13 +81,13 @@
               <a id="aHistoricalSeverances" routerLink="/ihr/severances" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalSeverances', 'query')">Histórico de cesantías</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_embargoes">
-              <a id="aEmbargos" routerLink="/ihr/embargoes" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Embargos</a>
+              <a id="aEmbargos" routerLink="/ihr/embargoes" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">Retención judicial</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_loans">
               <a id="aPaydayLoans" routerLink="/ihr/loans" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">Préstamos</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations">
-              <a id="aVacationEnjoyed" routerLink="/ihr/vacation_enjoyed" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones disfrutadas</a>
+              <a id="aVacationEnjoyed" routerLink="/ihr/vacation_enjoyed" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">Vacaciones tomadas</a>
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations_c">
               <a id="aCompensatedVacations" routerLink="/ihr/compensated_vacations" routerLinkActive="active" class="nav-link bg-menu"
@@ -123,7 +123,7 @@
           </ul>
         </div>
       </li>
-      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && (this.dataUser.employee.is_admin  == 'true'  || this.dataUser.employee.see_rpgen  == 'true' )">
+      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && this.dataUser.employee.is_admin == 'true' && this.dataUser.employee.see_rpgen  == 'true'">
         <a class="nav-link bg-menu" data-toggle="collapse" href="#reportsRH" (click)="clickOptionMenu('liReportsRH','toggle-reportsRH', 'reportsRH')">
           <i class="fa fa-table"></i>
           <span class="nav-label">Reportes RH</span>

@@ -103,7 +103,7 @@ export class TravelComponent implements OnInit {
         });
 
     this.travelsService.getResultSaved().subscribe((data: any) => {
-      debugger
+   
       if (data.success) {
         this.third = data.third == false ? 'travels_request' : 'my_travels_request';
         switch (this.third) {

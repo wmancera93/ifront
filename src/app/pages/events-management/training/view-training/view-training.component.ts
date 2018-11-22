@@ -26,30 +26,30 @@ export class ViewTrainingComponent implements OnInit {
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
-    public sanitizer: DomSanitizer, public eventsEmployeeService:EventsEmployeeService) {
+    public sanitizer: DomSanitizer, public eventsEmployeeService: EventsEmployeeService) {
 
-      this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
-        if (this.countAfterEval === 0) {
-          if (document.getElementById('modal_viewTraining').className !== 'modal show') {
-            document.getElementById('btn-viewTraining').click();
-            document.getElementById("bodyGeneral").removeAttribute('style');
-            this.idTraining = activeModal;
-            this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
-              this.flagPDF = true;
-              setTimeout(() => {
-                this.trainingDetailInfo = info.data;
-                this.urlPrevisualize = info.data.pdf.url;
-              }, 100);
-  
-            });
-          }
+    this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
+      if (this.countAfterEval === 0) {
+        if (document.getElementById('modal_viewTraining').className !== 'modal show') {
+          document.getElementById('btn-viewTraining').click();
+          document.getElementById("bodyGeneral").removeAttribute('style');
+          this.idTraining = activeModal;
+          this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
+            this.flagPDF = true;
+            setTimeout(() => {
+              this.trainingDetailInfo = info.data;
+              this.urlPrevisualize = info.data.pdf.url;
+            }, 100);
+
+          });
         }
-      });
-    }
-  
-    ngOnInit() {
-  
-    }
+      }
+    });
+  }
+
+  ngOnInit() {
+
+  }
 
   acceptTraining(flag: boolean) {
     this.sendState = {
@@ -85,7 +85,7 @@ export class ViewTrainingComponent implements OnInit {
       });
   }
 
-  
+
   ngOnDestroy() {
     this.countAfterEval += 1;
   }

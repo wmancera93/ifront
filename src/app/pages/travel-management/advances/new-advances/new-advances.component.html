@@ -64,7 +64,7 @@
                   <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']"
                     paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
                     <option value="">Seleccione</option>
-                    <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.name_travel}}</option>
+                    <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
                   </select>
                 </fieldset>
               </div>

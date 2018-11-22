@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from '../../../services/travel-management/travels/travel.service';
+import { ReportTravelsService } from '../../../services/travel-management/report/report-travels.service';
+
 
 @Component({
   selector: 'app-reports',
@@ -11,7 +13,7 @@ export class ReportsComponent implements OnInit {
   public typesReport: any[] = [];
   public titleReport: string = 'Historico de modificaciones'
 
-  constructor(public travelService: TravelService) {
+  constructor(public travelService: TravelService, public reportTravelsService: ReportTravelsService) {
     this.typesReport.push(
       {
         id: 1,
@@ -30,6 +32,14 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.reportTravelsService.getTravelsRequestsReport('576').subscribe((data: any) => {
+      console.log(data)
+    })
+    this.reportTravelsService.getTravelsRequestsReportExcel('576').subscribe((data: any) => {
+      console.log(data)
+    })
+
   }
 
   selectTypeReport(report) {
@@ -42,7 +52,7 @@ export class ReportsComponent implements OnInit {
         });
         break;
       case 2:
-       console.log(2);
+        console.log(2);
         break;
 
       default:

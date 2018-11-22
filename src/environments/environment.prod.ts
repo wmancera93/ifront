@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiBaseHr_staging: 'http://apihr-staging.hrinteractive.co',
-  apiBaseHr_production: 'https://apihr.hrinteractive.co',
-  apiBaseHr_development: 'http://apihr-development.hrinteractive.co'
+  apiBaseHr_staging: 'http://10.0.5.200:3001',
+  apiBaseHr_production: 'http://10.0.2.100:3001',
+  apiBaseHr_development: 'http://10.0.7.112:3001',
 };
