@@ -51,6 +51,10 @@ export class ViewTrainingComponent implements OnInit {
 
   }
 
+  viewPDF(){
+    window.open(this.urlPrevisualize);
+  }
+
   acceptTraining(flag: boolean) {
     this.sendState = {
       id: this.idTraining,
