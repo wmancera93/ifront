@@ -37,14 +37,12 @@
     <div class="row top-containter" style="margin-top: 20px">
       <div class="col-12 text-left">
         <form>
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" checked (click)="checkAdvance('advance_request')"
-          />
+          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" checked (click)="checkAdvance('advance_request')" />
           <b>
             Mis anticipos registrados
           </b>
           &nbsp;&nbsp;
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" (click)="checkAdvance('my_advance_request')"
-          />
+          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" (click)="checkAdvance('my_advance_request')" />
           <b *ngIf="userAuthenticated.employee.trip_by_third">
             Anticipos registrados a terceros
           </b>

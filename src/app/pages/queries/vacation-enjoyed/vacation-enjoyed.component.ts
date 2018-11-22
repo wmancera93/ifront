@@ -12,7 +12,7 @@ import { User } from '../../../models/general/user';
 })
 export class VacationEnjoyedComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Vacaciones tomadas';
+  public nameReport: string = 'Vacaciones disfrutadas';
   public showExcel: boolean = true;
   public userAuthenticated:User;
   public countAfter: number = 0;
@@ -29,7 +29,7 @@ export class VacationEnjoyedComponent implements OnInit, OnDestroy {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Vacaciones tomadas" && this.countAfter === 0) {
+      if (data === "Vacaciones disfrutadas" && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getEnjoyedVacationExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

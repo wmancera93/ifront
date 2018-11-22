@@ -45,7 +45,6 @@ import { DrawCalendarComponent } from './common/draw-calendar/draw-calendar.comp
 import { CalendarDetailComponent } from './common/calendar-detail/calendar-detail.component';
 import { TooltipComponent } from './common/tooltip/tooltip.component';
 import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-details-travels/approvals-details-travels.component';
-import { PipesModule } from '../pipes/pipes.module';
 import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.component';
 
 
@@ -62,8 +61,7 @@ import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.compo
     NgxPaginationModule,
     ToasterModule.forRoot(),
     ReactiveFormsModule,
-    FileUploadModule,
-    PipesModule,
+    FileUploadModule
   ],
   declarations: [
     HeaderComponent,

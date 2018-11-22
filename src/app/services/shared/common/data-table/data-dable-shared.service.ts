@@ -10,10 +10,6 @@ export class DataDableSharedService {
     return this.objectDataTableAction;
   }
 
-  clearData() {
-    this.objectDataTableAction.next();
-  }
-
   setActionDataTable(accionDataTable: any) {
     return this.objectDataTableAction.next(accionDataTable);
   }

@@ -17,14 +17,14 @@ export class ShowEventsComponent implements OnInit {
   public objectInfoEvents: any;
   public titleEvent: string;
   public eventIcon: string;
-  public flagTypeOfEvent : boolean; 
+  public flagTypeOfEvent : boolean ; 
 
   constructor(public infoEventEmployee: EventsEmployeeService) {
     this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {     
       this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
-      if(this.titleEvent  === "Cumpleañeros")
+      if(this.titleEvent  === "Cumpleaños")
       {
         this.flagTypeOfEvent = true;
       }
@@ -52,6 +52,7 @@ export class ShowEventsComponent implements OnInit {
       document.getElementById('btn-' + modal).click();
       document.getElementById("bodyGeneral").removeAttribute('style');
     }
+
   }
 
 }
