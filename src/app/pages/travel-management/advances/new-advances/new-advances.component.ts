@@ -111,6 +111,7 @@ export class NewAdvancesComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+        debugger
         if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
           this.objetcThird = {
             id: third.data[0].travel_request.employee_applicant_to_json.id,
@@ -119,7 +120,7 @@ export class NewAdvancesComponent implements OnInit {
           this.returnObjectSearch(this.objetcThird)
         }else{
           this.objetcThird = { }
-          this.advancesService.getAdvanceListTravel(this.eployee_selected).subscribe((list: any) => {
+          this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
             this.listTravelsFromAdvance = this.sortByNumber(list.data);
           });
         }
