@@ -191,7 +191,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_stateto: '',
       id_countryto: '28',
       id_hotels: '',
-      travel_mileage: '',
+      travel_mileage: '1',
     });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -355,7 +355,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_stateto: '',
             id_countryto: '28',
             id_hotels: '',
-            travel_mileage: '',
+            travel_mileage: '1',
           });
           this.searchState(this.formTravelManagement.value, 'edit');
           this.searchStateto(this.formTravelManagement.value, 'edit');
@@ -686,6 +686,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   mileageTravel(param) {
     if (this.transport_types.filter((data) => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
+      this.formTravelManagement.controls['travel_mileage'].setValue('1');
     } else {
       this.showMilenage = false;
     }
@@ -822,9 +823,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.changeTravelLegal('03');
     } else {
       this.changeTravelLegal('');
-
     }
-
+    if(param.type_travel === '1' || param.type_travel === '3'){
+      this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.id === '249')[0].id.toString());
+      this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.id === '249')[0].id.toString());
+    }else{
+      this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.id === '248')[0].id.toString());
+      this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.id === '248')[0].id.toString());
+    }
   }
 
   changeTravelLegal(travelLegal: any) {
@@ -977,7 +983,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_hotels: '',
       date_hotel_in: '',
       date_hotel_out: '',
-      travel_mileage: '',
+      travel_mileage: '1',
     });
     this.searchState(this.formTravelManagement.value, 'edit');
     this.searchStateto(this.formTravelManagement.value, 'edit');
@@ -1370,7 +1376,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['id_transport'].setValue('');
     this.formTravelManagement.controls['id_city'].setValue('');
     this.formTravelManagement.controls['id_country'].setValue('28');
-    this.formTravelManagement.controls['id_state'].setValue('');
+    this.formTravelManagement.controls['id_state'].setValue('249');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
     this.formTravelManagement.controls['hour_begin'].setValue('00:00');
@@ -1378,12 +1384,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['date_end'].setValue('');
     this.formTravelManagement.controls['id_terminalto'].setValue('');
     this.formTravelManagement.controls['id_cityto'].setValue('');
-    this.formTravelManagement.controls['id_stateto'].setValue('');
+    this.formTravelManagement.controls['id_stateto'].setValue('249');
     this.formTravelManagement.controls['id_countryto'].setValue('28');
     this.formTravelManagement.controls['id_hotels'].setValue('');
     this.formTravelManagement.controls['date_hotel_in'].setValue('');
     this.formTravelManagement.controls['date_hotel_out'].setValue('');
-    this.formTravelManagement.controls['travel_mileage'].setValue('');
+    this.formTravelManagement.controls['travel_mileage'].setValue('1');
 
     this.searchState(this.formTravelManagement.value, 'edit');
     this.searchStateto(this.formTravelManagement.value, 'edit');

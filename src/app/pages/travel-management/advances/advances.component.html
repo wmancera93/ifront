@@ -55,17 +55,33 @@
       <div class="col-12">
         <div class="widget bg-white-1x" *ngFor="let advance of advancesItems;">
           <div class="row align-items-center">
-            <div class="col-lg-4 col-md-3 col-12">
+              <div class="col-lg-3 col-md-3 col-12">
+                  <h5>
+                    <span *ngIf="advance.ticket_cli !== null" class="badge badge-warning">
+                      No. Viaje SAP # {{advance.ticket_cli}}
+                    </span>
+                    <span class="badge badge-warning">
+                      No. Viaje iHR # {{advance.travel_request_id}}
+                    </span>
+                  </h5>
+                  <p>
+                    <i class="fa fa-plane"></i>
+                    Fecha salida {{advance.date_begin_format}}
+                  </p>
+                  <p>Fecha llegada {{advance.date_end_format}}
+                  </p>
+                </div>
+            <!-- <div class="col-lg-4 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                  Código # {{advance.id}}
+                  Código # {{advance.travel_request_id}}
                 </span>
               </h5>
               <!-- <p>
                 <i class="fa fa-clock-o"></i>
                 Creada el {{advance.date_created_at}}
               </p> -->
-            </div>
+            <!-- </div> -->
             <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
               <h3 class="font-color-default">
                 {{advance.name_travel | slice: 0:59}}
@@ -74,15 +90,45 @@
             </div>
             <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
               <p class="font-title-general">
-                Estado:
+                Estados:
               </p>
-              <h6>
-                <span class="badge badge-primary">
-                  {{advance.status_name}}
-                </span>
-              </h6>
+              <h6 *ngIf="advance.status_name == 'Aprobado'">
+                  <span class="badge badge-primary">
+                    {{advance.status_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_name == 'Cancelado'">
+                  <span class="badge badge-danger">
+                    {{advance.status_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_liq_code == 'LiqAnn'">
+                  <span class="badge badge-danger">
+                    {{advance.status_liq_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_name == 'En proceso'">
+                  <span class="badge badge-success">
+                    {{advance.status_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_liq_code == 'LiqApp'">
+                  <span class="badge badge-success">
+                    {{advance.status_liq_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_name == 'Registrado'">
+                  <span class="badge badge-default">
+                    {{advance.status_name}}
+                  </span>
+                </h6>
+                <h6 *ngIf="advance.status_liq_code == 'LiqPen'">
+                  <span class="badge badge-default">
+                    {{advance.status_liq_name}}
+                  </span>
+                </h6>
             </div>
-            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+            <!-- <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
               <p class="font-title-general">
                 Solicitud de viaje
               </p>
@@ -90,7 +136,24 @@
                 <i class="fa fa-hashtag fa-fw text-primary-hr"></i>
                 {{advance.travel_request_id}}
               </p>
-            </div>
+            </div> -->
+
+            <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="advance.next_approver_to_json.approver_employee != undefined">
+                <p class="font-title-general">
+                  {{advance.next_approver_to_json.approver_employee.short_name}}
+                </p>
+                <p class="">
+                  {{advance.next_approver_to_json.approver_employee.posicion}}
+                </p>
+                <p class="">
+                  Aprobador {{advance.next_approver_to_json.level}}
+                </p>
+              </div>
+              <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee == undefined">
+                <p class="font-title-general">
+                    No existe aprobador para esta solicitud ó ya fue aprobada
+                </p>
+              </div>
             <div class="col-lg-1 col-md-4 col-4 top-p text-align-center">
               <div class="row">
                 <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer" (click)="showAdvance(advance.id)">
