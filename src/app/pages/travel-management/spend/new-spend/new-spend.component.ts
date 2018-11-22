@@ -11,6 +11,7 @@ import { SpendsCreate, ObjectSpends } from '../../../../models/common/travels_ma
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -56,6 +57,8 @@ export class NewSpendComponent implements OnInit {
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
   public ticket_allowance_request: string;
+  public edit: boolean = false;
+  public objetcThird: any;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -63,7 +66,7 @@ export class NewSpendComponent implements OnInit {
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService, public employeeService: EmployeeService) {
+    public formDataService: FormDataService, public employeeService: EmployeeService, public travelManagementService: TravelService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -89,10 +92,22 @@ export class NewSpendComponent implements OnInit {
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
-      this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-        this.listTravelsFromSpend = this.sortByNumber(travel.data);
-
-        this.refreshTableSpends();
+      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+        if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
+          this.objetcThird = {
+            id: third.data[0].travel_request.employee_applicant_to_json.id,
+            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+          }
+           this.returnObjectSearch(this.objetcThird) 
+        }else{
+          this.objetcThird ={}
+          this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
+            this.listTravelsFromSpend = this.sortByNumber(travel.data);
+          });
+        }
+      })
+      
+      this.refreshTableSpends();
         this.formSpendTravel = new FormGroup({});
         this.formSpendTravel = fb.group({
           travel_request_id: data !== true ? data : '',
@@ -111,27 +126,23 @@ export class NewSpendComponent implements OnInit {
           formA: "",
           document: ""
         });
-
+        
         if (this.formSpendTravel.value.travel_request_id !== '') {
           this.continue = data !== true ? true : false;
           this.validateTravel(this.formSpendTravel.value);
         }
-
-      });
 
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
 
-
-
     });
 
     this.spendSharedService.getDeleteSpend().subscribe((data) => {
       if (data === 'deleteSpend') {
-        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
-          this.listTravelsFromSpend = travel.data;
+        this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
+          this.listTravelsFromSpend = this.sortByNumber(travel.data);
         });
       }
     })
@@ -273,6 +284,9 @@ export class NewSpendComponent implements OnInit {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+    this.spendsService.getSpendListTravel(this.eployee_selected.id).subscribe((travel: any) => {
+      this.listTravelsFromSpend = this.sortByNumber(travel.data);
+    });
   }
 
   deleteEmployeeThird() {
@@ -469,7 +483,7 @@ export class NewSpendComponent implements OnInit {
         debugger
         this.ticket_allowance_request = data.data.travel_allowance_request_a.id
         document.getElementById("closeSpends").click();
-        this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+        this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
           this.listTravelsFromSpend = travel.data;
         });
 

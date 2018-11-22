@@ -56,6 +56,7 @@ export class EditSpendComponent implements OnInit {
   public nameSpend: string;
   public listTypeDocument: any[] = [];
   public stateRequestsSpend: string;
+  public idEmployee: string = '0';
 
   showSizeTable
   showPdf
@@ -302,7 +303,7 @@ export class EditSpendComponent implements OnInit {
 
   ngOnInit() {
 
-    this.spendsService.getSpendListTravel().subscribe((travel: any) => {
+    this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
       this.listTravelsFromSpend = travel.data;
     });
     this.spendsService.getSpendsTypes().subscribe((select: any) => {

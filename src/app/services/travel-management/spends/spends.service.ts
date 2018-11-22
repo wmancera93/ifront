@@ -26,8 +26,8 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
 
-  getSpendListTravel() {
-    return this.tokenService.get('travel_requests/index_for_select_allowances')
+  getSpendListTravel(idEmployee) {
+    return this.tokenService.get('travel_requests/index_for_select_allowances/' + idEmployee)
       .map((data: any) => data.json());
   }
   getSpendMoneyList() {

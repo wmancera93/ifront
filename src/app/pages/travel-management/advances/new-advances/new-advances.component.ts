@@ -34,6 +34,7 @@ export class NewAdvancesComponent implements OnInit {
   public continue: boolean = false;
   public todayStandar: string;
   public edit: boolean = false;
+  public objetcThird: any;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -82,7 +83,6 @@ export class NewAdvancesComponent implements OnInit {
     })
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
-      debugger
       this.eployee_selected = null;
       this.objectAdvances = [];
       this.continue = false;
@@ -111,20 +111,22 @@ export class NewAdvancesComponent implements OnInit {
       }
 
       this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
-        debugger
-        if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
-          let objetcThird = {
+        if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
+          this.objetcThird = {
             id: third.data[0].travel_request.employee_applicant_to_json.id,
             name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
           }
-           this.returnObjectSearch(objetcThird) 
-        }  
+          this.returnObjectSearch(this.objetcThird)
+        }else{
+          this.objetcThird = { }
+          this.advancesService.getAdvanceListTravel(this.eployee_selected).subscribe((list: any) => {
+            this.listTravelsFromAdvance = this.sortByNumber(list.data);
+          });
+        }
       })
     });
 
-    this.advancesService.getAdvanceListTravel().subscribe((list: any) => {
-      this.listTravelsFromAdvance = list.data;
-    });
+
 
     this.advancesService.getAdvanceMoneyList().subscribe((money: any) => {
       this.listMoneyTypes = money.data;
@@ -142,6 +144,12 @@ export class NewAdvancesComponent implements OnInit {
     this.todayStandar = fecha.getFullYear().toString() + '-' + (fecha.getMonth() + 1).toString() + '-' + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
+  sortByNumber(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
+  }
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
     if (this.nameEmployee !== null) {
@@ -163,6 +171,9 @@ export class NewAdvancesComponent implements OnInit {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+    this.advancesService.getAdvanceListTravel(this.eployee_selected.id.toString()).subscribe((list: any) => {
+      this.listTravelsFromAdvance = this.sortByNumber(list.data);
+    });
   }
 
   deleteEmployeeThird() {
