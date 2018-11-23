@@ -91,7 +91,6 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
-      debugger
       this.eployee_selected = null;
       if (data !== true) {
         this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {

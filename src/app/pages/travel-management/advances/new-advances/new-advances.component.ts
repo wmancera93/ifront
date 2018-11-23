@@ -110,21 +110,26 @@ export class NewAdvancesComponent implements OnInit {
         this.continue = false;
       }
 
-      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
-        debugger
-        if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
-          this.objetcThird = {
-            id: third.data[0].travel_request.employee_applicant_to_json.id,
-            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+      if (data !== true) {
+        this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+          if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
+            this.objetcThird = {
+              id: third.data[0].travel_request.employee_applicant_to_json.id,
+              name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+            }
+            this.returnObjectSearch(this.objetcThird)
+          } else {
+            this.objetcThird = {}
+            this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
+              this.listTravelsFromAdvance = this.sortByNumber(list.data);
+            });
           }
-          this.returnObjectSearch(this.objetcThird)
-        }else{
-          this.objetcThird = { }
-          this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
-            this.listTravelsFromAdvance = this.sortByNumber(list.data);
-          });
-        }
-      })
+        })
+      } else {
+        this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
+          this.listTravelsFromAdvance = this.sortByNumber(list.data);
+        });
+      }
     });
 
 
