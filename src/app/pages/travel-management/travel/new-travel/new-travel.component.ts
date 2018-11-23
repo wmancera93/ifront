@@ -821,11 +821,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
   }
   changeTypeTravel(param) {
-    console.log(param)
     if (param.type_travel === '3' || param.type_travel === '16') {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
       this.changeTravelLegal('P');
-      console.log(JSON.stringify(this.legal_travels) + ' - 1')
     } else {
       this.changeTravelLegal('');
     }
@@ -836,8 +834,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'INTER')[0].id.toString());
       this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'INTER')[0].id.toString());
     }
-    console.log(JSON.stringify(this.stateLocations) + ' - 2')
-    console.log(JSON.stringify(this.stateLocationsto) + ' - 3')
   }
 
   changeTravelLegal(travelLegal: any) {
