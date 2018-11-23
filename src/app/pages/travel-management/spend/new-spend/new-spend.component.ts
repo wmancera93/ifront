@@ -91,47 +91,55 @@ export class NewSpendComponent implements OnInit {
 
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
+      debugger
       this.eployee_selected = null;
-      this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
-        if(third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr){
-          this.objetcThird = {
-            id: third.data[0].travel_request.employee_applicant_to_json.id,
-            name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+      if (data !== true) {
+        this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+          if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
+            this.objetcThird = {
+              id: third.data[0].travel_request.employee_applicant_to_json.id,
+              name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
+            }
+            this.returnObjectSearch(this.objetcThird)
+          } else {
+            this.objetcThird = {}
+            this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
+              this.listTravelsFromSpend = this.sortByNumber(travel.data);
+            });
           }
-           this.returnObjectSearch(this.objetcThird) 
-        }else{
-          this.objetcThird ={}
-          
-          this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
-            this.listTravelsFromSpend = this.sortByNumber(travel.data);
-          });
-        }
-      })
-      
-      this.refreshTableSpends();
-        this.formSpendTravel = new FormGroup({});
-        this.formSpendTravel = fb.group({
-          travel_request_id: data !== true ? data : '',
-          travel_allowance_type_id: "",
-          currency_id: "",
-          value: "",
-          date: "",
-          observation: "",
-          bill_number: "",
-          control_number: "",
-          nit: "",
-          bussines_name: "",
-          cod_provider: "",
-          authorization_number: "",
-          populated: "",
-          formA: "",
-          document: ""
+        })
+      } else {
+        this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
+          this.listTravelsFromSpend = this.sortByNumber(travel.data);
         });
-        
-        if (this.formSpendTravel.value.travel_request_id !== '') {
-          this.continue = data !== true ? true : false;
-          this.validateTravel(this.formSpendTravel.value);
-        }
+      }
+
+
+
+      this.refreshTableSpends();
+      this.formSpendTravel = new FormGroup({});
+      this.formSpendTravel = fb.group({
+        travel_request_id: data !== true ? data : '',
+        travel_allowance_type_id: "",
+        currency_id: "",
+        value: "",
+        date: "",
+        observation: "",
+        bill_number: "",
+        control_number: "",
+        nit: "",
+        bussines_name: "",
+        cod_provider: "",
+        authorization_number: "",
+        populated: "",
+        formA: "",
+        document: ""
+      });
+
+      if (this.formSpendTravel.value.travel_request_id !== '') {
+        this.continue = data !== true ? true : false;
+        this.validateTravel(this.formSpendTravel.value);
+      }
 
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
