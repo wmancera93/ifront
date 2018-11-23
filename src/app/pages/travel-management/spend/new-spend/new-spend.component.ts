@@ -102,7 +102,7 @@ export class NewSpendComponent implements OnInit {
         }else{
           this.objetcThird ={}
           
-          this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee.id.toString()).subscribe((travel: any) => {
+          this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
             this.listTravelsFromSpend = this.sortByNumber(travel.data);
           });
         }
