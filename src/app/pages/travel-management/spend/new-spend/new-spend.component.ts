@@ -126,7 +126,24 @@ export class NewSpendComponent implements OnInit {
           }
         })
         this.travelManagementService.getTravelsAllDetail(data).subscribe((detail: any) => {
-          console.log(detail)
+          if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
+            this.nplnr = false;
+            this.kostl = true;
+            this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+            this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
+            this.grahpSpend = '';
+            this.distribution = '100';
+            this.operationsSpend = '';
+          } else {
+            this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
+            this.nplnr = true;
+            this.kostl = false;
+            this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+            this.typeCenterCost = '';
+            this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
+            this.distribution = '100';
+            this.operationsSpend = detail.data[0].travel_request.travel_operation_id;
+          }
         });
       } else {
         this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
@@ -277,7 +294,7 @@ export class NewSpendComponent implements OnInit {
       });
     this.spendsService.getAccountContable().
       subscribe((data: any) => {
-        this.accountContable = this.sortByAphabet(data.data);
+        this.accountContable = data.data;
       });
   }
 
@@ -337,7 +354,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   validateTravel(travel: any) {
-
+    debugger
     if (travel.travel_request_id.toString() !== '') {
       this.continue = true;
       this.activate_submit_spend = false;
@@ -361,7 +378,25 @@ export class NewSpendComponent implements OnInit {
         }
       });
       this.travelManagementService.getTravelsAllDetail(travel.travel_request_id.toString()).subscribe((detail: any) => {
-        console.log(detail)
+
+        if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
+          this.nplnr = false;
+          this.kostl = true;
+          this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+          this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
+          this.grahpSpend = '';
+          this.distribution = '100';
+          this.operationsSpend = '';
+        } else {
+          this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
+          this.nplnr = true;
+          this.kostl = false;
+          this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+          this.typeCenterCost = '';
+          this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
+          this.distribution = '100';
+          this.operationsSpend = detail.data[0].travel_request.travel_operation_id;
+        }
       });
 
     } else {
@@ -598,7 +633,7 @@ export class NewSpendComponent implements OnInit {
     this.accountContableVariable = '';
   }
 
-  removeAccount(pinterDistributions){
+  removeAccount(pinterDistributions) {
     this.distributionAccount.splice(this.distributionAccount.findIndex(filter => filter.id === pinterDistributions.id), 1);
   }
 
