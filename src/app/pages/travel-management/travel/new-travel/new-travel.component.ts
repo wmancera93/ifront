@@ -97,6 +97,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public countAfter: number = 0;
   public countAfterAlert: number = 0;
 
+  public arrayHotel: any[] = [];
+
   constructor(public travelManagementService: TravelService,
     private tokenService: Angular2TokenService, private fb: FormBuilder,
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
@@ -366,6 +368,24 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     let fecha = new Date();
     this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
 
+  }
+
+  addHotel(form) {
+    this.arrayHotel.push(
+      {
+        id: form.id_hotels,
+        name: this.hotels.filter(data => data.id.toString() === form.id_hotels)[0].name,
+        date_begin: form.date_hotel_in,
+        date_end: form.date_hotel_out
+      });
+
+      this.formTravelManagement.controls['id_hotels'].setValue("");
+      this.formTravelManagement.controls['date_hotel_in'].setValue("");
+      this.formTravelManagement.controls['date_hotel_out'].setValue("");
+  }
+
+  removeHotel(hotel){
+    this.arrayHotel.splice(this.arrayHotel.findIndex(filter => filter.id === hotel.id), 1);
   }
 
   ngOnDestroy() {
@@ -827,7 +847,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.changeTravelLegal('');
     }
-    if (param.type_travel ==='1' || param.type_travel === '3') {
+    if (param.type_travel === 1 || param.type_travel === 3) {
       this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'NAL')[0].id.toString());
       this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'NAL')[0].id.toString());
     } else {
@@ -860,8 +880,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.activate = false;
     this.activate_submit = true;
     this.showSubmit = true;
-    // this.stateLocations = [];
-    // this.stateLocationsto = [];
+    this.stateLocations = [];
+    this.stateLocationsto = [];
     this.cityLocations = [];
     this.cityLocationsto = [];
     this.terminalLocations = [];
