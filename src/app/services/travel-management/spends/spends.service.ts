@@ -71,4 +71,8 @@ export class SpendsService {
     return this.tokenService.get('travel_requests/expense_reporting?travel_request_id=' + id)
       .map((data: any) => data);
   }
+  getAccountContable() {
+    return this.tokenService.get('travel_requests/accounting_accounts_allowawnces')
+      .map((data: any) => data);
+  }
 }
