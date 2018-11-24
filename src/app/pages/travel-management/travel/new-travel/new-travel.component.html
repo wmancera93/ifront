@@ -476,22 +476,44 @@
                     <strong class="text-primary-hr">Hoteles asignados</strong>
                   </div>
                 </div>
-                <div class="col-12">
-                  <div class="row" *ngFor="let hotel of arrayHotel" style="margin-top: 10px; margin-bottom: 10px">
-                    <div class="col-4">
-                      {{hotel.name}}
-                    </div>
-                    <div class="col-3">
-                      {{hotel.date_begin}}
-                    </div>
-                    <div class="col-3">
-                      {{hotel.date_end}}
-                    </div>
-                    <div class="col-2 align-self-center">
-                      <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeHotel(hotel)">
-                        <i class="fa fa-minus"></i>
-                      </button>
-                    </div>
+                <div class="col-12" *ngIf="arrayHotel.length > 0">
+                  <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th class="text-center">
+                            Hotel
+                          </th>
+                          <th class="text-center">
+                            Fecha Inicio
+                          </th>
+                          <th class="text-center">
+                            Fecha Fin
+                          </th>
+                          <th class="text-center">
+                            Eliminar
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let hotel of arrayHotel">
+                          <td>
+                            {{hotel.name}}
+                          </td>
+                          <td>
+                            {{hotel.date_begin}}
+                          </td>
+                          <td>
+                            {{hotel.date_end}}
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeHotel(hotel)">
+                              <i class="fa fa-minus"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
