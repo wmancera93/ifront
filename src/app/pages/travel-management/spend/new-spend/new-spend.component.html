@@ -389,8 +389,6 @@
                   </label>
                   <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
                     <option value="">Seleccione</option>
-                    <option value="1">1 - Prueba 1</option>
-                    <option value="2">1 - Prueba 2</option>
                     <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}</option>
                   </select>
                 </div>

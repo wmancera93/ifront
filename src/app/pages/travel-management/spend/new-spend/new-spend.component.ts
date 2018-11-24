@@ -277,7 +277,7 @@ export class NewSpendComponent implements OnInit {
       });
     this.spendsService.getAccountContable().
       subscribe((data: any) => {
-        this.accountContable = (data);
+        this.accountContable = this.sortByAphabet(data.data);
       });
   }
 
@@ -584,8 +584,8 @@ export class NewSpendComponent implements OnInit {
       center_cost: this.typeCenterCost === '' ? 'N/A' : this.typeCenterCost,
       graph_code: this.grahpSpend === '' ? 'N/A' : this.grahpSpend,
       operations: this.operationsSpend === '' ? 'N/A' : this.operations.filter(data => data.id.toString() === this.operationsSpend)[0].name,
-      account_contable: this.accountContableVariable + '- prueb'
-      // account_contable: this.accountContable.filter(data => data.id === this.accountContableVariable)[0].name,
+      // account_contable: this.accountContableVariable + '- prueb'
+      account_contable: this.accountContable.filter(data => data.id === this.accountContableVariable)[0].name,
     })
 
     this.elementImputation = '';
