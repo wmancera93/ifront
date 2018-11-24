@@ -279,6 +279,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           this.searchHotel(this.formTravelManagement.value, 'edit');
           this.searchCostsCenterAndGrahp(this.formTravelManagement.value, 'edit');
           this.searchOperationsGrahp(this.formTravelManagement.value, 'edit');
+
+          this.arrayHotel = this.traverlsDestination.filter((result) => result.travel_id.toString() === data.id.toString())[0].hotels
         }
       }
     });
@@ -370,10 +372,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   }
 
+  countSaveAccount: number = 0;
   addHotel(form) {
     this.arrayHotel.push(
       {
-        id: form.id_hotels,
+        id_save_hotel: this.countSaveAccount += 1,
+        hotel_id: form.id_hotels,
         name: this.hotels.filter(data => data.id.toString() === form.id_hotels)[0].name,
         date_begin: form.date_hotel_in,
         date_end: form.date_hotel_out
@@ -385,7 +389,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   removeHotel(hotel){
-    this.arrayHotel.splice(this.arrayHotel.findIndex(filter => filter.id === hotel.id), 1);
+    this.arrayHotel.splice(this.arrayHotel.findIndex(filter => filter.id_save_hotel === hotel.id_save_hotel), 1);
   }
 
   ngOnDestroy() {
@@ -647,20 +651,19 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       origin_location_id: modelPartial.id_state,
       origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
-      hotel_id: modelPartial.id_hotels,
+      hotels: this.arrayHotel,
       destination_location_id: modelPartial.id_stateto,
       destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end,
-      hotel_date_begin: modelPartial.date_hotel_in,
-      hotel_date_end: modelPartial.date_hotel_out,
+
     });
 
     this.count += 1
 
     this.objectReport.emit(this.travelProof[0]);
-
+    this.arrayHotel = [];
     this.closeTrip();
     this.activate_submit = true;
   }
@@ -1413,6 +1416,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['date_hotel_in'].setValue('');
     this.formTravelManagement.controls['date_hotel_out'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('1');
+    this.arrayHotel = [];
 
     this.searchState(this.formTravelManagement.value, 'edit');
     this.searchStateto(this.formTravelManagement.value, 'edit');
