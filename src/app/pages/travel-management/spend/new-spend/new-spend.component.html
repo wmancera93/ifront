@@ -1,7 +1,7 @@
 <button id="btn_spend_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spend_new" style="display:none;">
 </button>
 <div class="modal" data-backdrop="static" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" style="width: 1300px">
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -67,9 +67,6 @@
               </div>
             </div>
           </div>
-
-
-
 
           <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
             <h4>Gastos</h4>
@@ -270,53 +267,66 @@
               </div>
             </div>
             <div class="col-12" style="margin-top: 30px">
-              <div class="row">
-                <div class="col-2">
-                  {{pinterDistributions.element_imputation}}
+              <div class="row" *ngIf="distributionAccount.length > 0">
+                <div class="col-12">
+                  <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th class="text-center">
+                            Elemento de imputación
+                          </th>
+                          <th class="text-center">
+                            Centro de costo
+                          </th>
+                          <th class="text-center">
+                            Grafo
+                          </th>
+                          <th class="text-center">
+                            Operación
+                          </th>
+                          <th class="text-center">
+                            Cta contable
+                          </th>
+                          <th class="text-center">
+                            Distribución
+                          </th>
+                          <th class="text-center">
+                            Eliminar
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let pinterDistributions of distributionAccount">
+                          <td>
+                            {{pinterDistributions.element_imputation}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.center_cost}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.graph_code}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.operations}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.account_contable}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.distribution}} %
+                          </td>
+                          <td>
+                            <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeAccount(pinterDistributions)">
+                              <i class="fa fa-fw fa-minus"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="col-2">
-                  {{pinterDistributions.center_cost}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.graph_code}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.operations}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.account_contable}}
-                </div>
-                <div class="col-1">
-                  {{pinterDistributions.distribution}}
-                </div>
-                <div class="col-1">
 
-                </div>
-              </div>
-              <div class="row" *ngFor="let pinterDistributions of distributionAccount">
-                <div class="col-2">
-                  {{pinterDistributions.element_imputation}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.center_cost}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.graph_code}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.operations}}
-                </div>
-                <div class="col-2">
-                  {{pinterDistributions.account_contable}}
-                </div>
-                <div class="col-1">
-                  {{pinterDistributions.distribution}}
-                </div>
-                <div class="col-1">
-                    <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeAccount(pinterDistributions)">
-                        <i class="fa fa-fw fa-minus"></i>
-                      </button>
-                </div>
               </div>
             </div>
             <div class="col-12" style="margin-top: 15px">
@@ -395,9 +405,6 @@
                 <div class="col-2 align-self-end">
                   <button type="button" [attr.disabled]="
                 ( elementImputation == ''
-                  || typeCenterCost == ''
-                  || grahpSpend == ''
-                  || operationsSpend == ''
                   || accountContableVariable == ''
                   || distribution == '') ? true : null" class="btn btn-success btn-block btn-sm cursor-general" (click)="saveAccount()">
                     <i class="fa fa-fw fa-plus"></i>
@@ -430,8 +437,6 @@
                     || formSpendTravel.value.nit == -1
                     || formSpendTravel.value.bussines_name == ''
                     || formSpendTravel.value.bussines_name == -1
-                    || formSpendTravel.value.cod_provider == ''
-                    || formSpendTravel.value.cod_provider == -1
                     || formSpendTravel.value.authorization_number == ''
                     || formSpendTravel.value.authorization_number == -1
                     || formSpendTravel.value.populated == ''

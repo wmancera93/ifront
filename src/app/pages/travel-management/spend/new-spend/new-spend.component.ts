@@ -125,6 +125,9 @@ export class NewSpendComponent implements OnInit {
             });
           }
         })
+        this.travelManagementService.getTravelsAllDetail(data).subscribe((detail: any) => {
+          console.log(detail)
+        });
       } else {
         this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
           this.listTravelsFromSpend = this.sortByNumber(travel.data);
@@ -208,6 +211,8 @@ export class NewSpendComponent implements OnInit {
             formA: objectSpend[0].formA,
             document: objectSpend[0].document,
           });
+
+          this.distributionAccount = this.objectAllowances.filter(result => result.id_temp.toString() === data.id.toString())[0].cost_dist;
         }
         document.getElementById("funtionSpendTravel").click();
         setTimeout(() => {
@@ -355,6 +360,10 @@ export class NewSpendComponent implements OnInit {
 
         }
       });
+      this.travelManagementService.getTravelsAllDetail(travel.travel_request_id.toString()).subscribe((detail: any) => {
+        console.log(detail)
+      });
+
     } else {
       this.continue = false;
       this.refreshPartialSpend();
@@ -440,7 +449,8 @@ export class NewSpendComponent implements OnInit {
       provider_code: objectSpend.cod_provider,
       population: objectSpend.populated,
       have_format: objectSpend.formA == false ? 'false' : 'true',
-      type_of_expense_document: objectSpend.document
+      type_of_expense_document: objectSpend.document,
+      cost_dist: this.distributionAccount
     });
 
     setTimeout(() => {
@@ -453,6 +463,9 @@ export class NewSpendComponent implements OnInit {
     this.spendEdit = false;
     this.collapse_is = true;
     this.activate_submit_spend = true;
+
+    this.distributionAccount = [];
+
     document.getElementById('funtionSpendTravel').click();
   }
 
@@ -559,7 +572,6 @@ export class NewSpendComponent implements OnInit {
 
   countSaveAccount: number = 0;
   saveAccount() {
-    debugger
     this.distributionAccount.push({
       id: this.countSaveAccount += 1,
       travel_costs_id: this.typeCenterCost_id,
@@ -587,7 +599,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   removeAccount(pinterDistributions){
-    
+    this.distributionAccount.splice(this.distributionAccount.findIndex(filter => filter.id === pinterDistributions.id), 1);
   }
 
   newSpend(param) {
@@ -765,5 +777,6 @@ export class NewSpendComponent implements OnInit {
     this.formSpendTravel.controls['populated'].setValue('');
     this.formSpendTravel.controls['formA'].setValue('');
     this.formSpendTravel.controls['document'].setValue('');
+    this.distributionAccount = [];
   }
 }
