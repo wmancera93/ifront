@@ -293,8 +293,8 @@ export class NewSpendComponent implements OnInit {
         this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
       });
     this.spendsService.getAccountContable().
-      subscribe((data: any) => {
-        this.accountContable = data.data;
+      subscribe((account: any) => {
+        this.accountContable = account.data;
       });
   }
 
@@ -813,5 +813,10 @@ export class NewSpendComponent implements OnInit {
     this.formSpendTravel.controls['formA'].setValue('');
     this.formSpendTravel.controls['document'].setValue('');
     this.distributionAccount = [];
+    this.elementImputation = '';
+    this.typeCenterCost = '';
+    this.grahpSpend = '';
+    this.distribution = '';
+    this.operationsSpend = '';
   }
 }
