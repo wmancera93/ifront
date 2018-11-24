@@ -1,7 +1,7 @@
 <button id="btn_spend_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spend_new" style="display:none;">
 </button>
 <div class="modal" data-backdrop="static" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+  aria-hidden="true" style="width: 1300px">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
@@ -170,29 +170,26 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de gasto:</strong>
+                    <strong>Tipo de documento:</strong>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['document']" paceholder="Seleccione">
                     <option value="">Seleccione</option>
-                    <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}</option>
+                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-money text-primary-hr"></i>
-                    <strong>Importe:</strong>
+                    <i class="fa fa-fw fa-hospital-o text-primary-hr"></i>
+                    <strong>Establecimiento:</strong>
                   </label>
-                  <input type="number"  class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
+                  <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>Moneda:</strong>
+                    <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
+                    <strong>NIT:</strong>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione" >
-                    <option value="">Seleccione</option>
-                    <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
-                  </select>
+                  <input type="number" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -204,7 +201,6 @@
                 </div>
               </div>
             </div>
-
             <div class="col-12" style="margin-top: 15px">
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
@@ -216,6 +212,13 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
+                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                    <strong>No. de autorización:</strong>
+                  </label>
+                  <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
                     <strong>Código de Control:</strong>
                   </label>
@@ -223,36 +226,34 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
-                    <strong>NIT:</strong>
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Tipo de gasto:</strong>
                   </label>
-                  <input type="number" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-hospital-o text-primary-hr"></i>
-                    <strong>Establecimiento:</strong>
-                  </label>
-                  <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}</option>
+                  </select>
                 </div>
               </div>
             </div>
-
             <div class="col-12" style="margin-top: 15px">
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
-                    <strong>Código de proveedor:</strong>
+                    <i class="fa fa-fw fa-money text-primary-hr"></i>
+                    <strong>Importe:</strong>
                   </label>
-                  <input type="number" class="form-control" name="provider_number" [formControl]="formSpendTravel.controls['cod_provider']">
+                  <input type="number" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>No. de autorización:</strong>
+                    <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                    <strong>Moneda:</strong>
                   </label>
-                  <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
+                  </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -261,19 +262,149 @@
                   </label>
                   <input type="text" class="form-control" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
                 </div>
-                <div class="col-lg-3 col-md-6 col-12">
+              </div>
+            </div>
+            <div class="col-12" style="margin-top: 30px">
+              <div class="border">
+                <strong class="text-primary-hr">Distribución de elementos de imputación</strong>
+              </div>
+            </div>
+            <div class="col-12" style="margin-top: 30px">
+              <div class="row">
+                <div class="col-2">
+                  {{pinterDistributions.element_imputation}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.center_cost}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.graph_code}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.operations}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.account_contable}}
+                </div>
+                <div class="col-1">
+                  {{pinterDistributions.distribution}}
+                </div>
+                <div class="col-1">
+
+                </div>
+              </div>
+              <div class="row" *ngFor="let pinterDistributions of distributionAccount">
+                <div class="col-2">
+                  {{pinterDistributions.element_imputation}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.center_cost}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.graph_code}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.operations}}
+                </div>
+                <div class="col-2">
+                  {{pinterDistributions.account_contable}}
+                </div>
+                <div class="col-1">
+                  {{pinterDistributions.distribution}}
+                </div>
+                <div class="col-1">
+                    <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeAccount(pinterDistributions)">
+                        <i class="fa fa-fw fa-minus"></i>
+                      </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12" style="margin-top: 15px">
+              <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de documento:</strong>
+                    <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
+                    <a>Elemento de imputación:*</a>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['document']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
-                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
+                  <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
+                    (change)="selectTypeCenterImputations()">
+                    <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.code">{{costsTravelCenter.name}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
+                    <a>Centro de costo:*</a>
+                  </label>
+                  <input class="form-control" id="searchByAutoCompleteCostSpend" type="text" name="costList" [(ngModel)]="typeCenterCost" [ngModelOptions]="{standalone: true}"
+                    (keyup)="enterCostSpend()">
+                  <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
+                    <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
+                      {{costsTrip.code}} - {{costsTrip.name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                    <a>Grafo:*</a>
+                  </label>
+                  <input class="form-control" id="searchByAutoCompleteGraph" type="text" name="graphList" [(ngModel)]="grahpSpend" [ngModelOptions]="{standalone: true}"
+                    (keyup)="enterGraphSpend()">
+                  <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
+                    <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">
+                      {{grahpTravels.code}} - {{grahpTravels.name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
+                    <a>Operación:*</a>
+                  </label>
+                  <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
+                    <option value="-1">Seleccione</option>
+                    <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                   </select>
                 </div>
               </div>
             </div>
 
+            <div class="col-12" style="margin-top: 15px">
+              <div class="row">
+                <div class="col-lg-6 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-calculator text-primary-hr"></i>
+                    <a>Cuenta contable:*</a>
+                  </label>
+                  <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
+                    <option value="">Seleccione</option>
+                    <option value="1">1 - Prueba 1</option>
+                    <option value="2">1 - Prueba 2</option>
+                    <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12">
+                  <label for="dateEnd" class="titleColor">
+                    <i class="fa fa-fw fa-percent text-primary-hr"></i>
+                    Distribución*
+                  </label>
+                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" />
+                </div>
+
+                <div class="col-2 align-self-end">
+                  <button type="button" [attr.disabled]="
+                ( elementImputation == ''
+                  || typeCenterCost == ''
+                  || grahpSpend == ''
+                  || operationsSpend == ''
+                  || accountContableVariable == ''
+                  || distribution == '') ? true : null" class="btn btn-success btn-block btn-sm cursor-general" (click)="saveAccount()">
+                    <i class="fa fa-fw fa-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
 
             <div class="col-12" style="margin-top: 30px">
               <div class="row justify-content-end">

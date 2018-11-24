@@ -49,6 +49,14 @@ export class NewSpendComponent implements OnInit {
   public collapse_is: boolean = false;
   public objectProof: any[] = [];
   public spend_delete_local: string;
+  public center_costs_travels: any[] = [];
+  public grahp: any[] = [];
+  public costs_travels: any[] = [];
+  public showListAutoCost: boolean = false;
+  public showListAutoGraph: boolean = false;
+  public operations: any[] = [];
+  public accountContable: any[] = [];
+  public distributionAccount: any[] = [];
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -59,6 +67,16 @@ export class NewSpendComponent implements OnInit {
   public ticket_allowance_request: string;
   public edit: boolean = false;
   public objetcThird: any;
+  public elementImputation: string = '';
+  public typeCenterCost: string = '';
+  public typeCenterCost_id: string = '';
+  public grahpSpend: string = '';
+  public grahpSpend_id: string = '';
+  public distribution: string = '';
+  public accountContableVariable: string = 'Prueba';
+  public operationsSpend: string = '';
+  public kostl: boolean = true;
+  public nplnr: boolean = false;
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -248,6 +266,14 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getTypesDocument().subscribe((document: any) => {
       this.listTypeDocument = this.sortByAphabet(document.data);
     });
+    this.travelManagementService.getplanningTravelRequests().
+      subscribe((data: any) => {
+        this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
+      });
+    this.spendsService.getAccountContable().
+      subscribe((data: any) => {
+        this.accountContable = (data);
+      });
   }
 
   sortByAphabet(dataBySort: any) {
@@ -470,6 +496,98 @@ export class NewSpendComponent implements OnInit {
     //   }
     // }
 
+  }
+
+  selectTypeCenterImputations() {
+    debugger
+    console.log(this.elementImputation)
+    if (this.elementImputation === 'KOSTL') {
+      this.kostl = true;
+      this.nplnr = false;
+    } else {
+      this.kostl = false;
+      this.nplnr = true;
+    }
+  }
+
+
+  enterCostSpend() {
+
+    this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.typeCenterCost).
+      subscribe((data: any) => {
+        this.costs_travels = this.sortByAphabet(data.data);
+        this.showListAutoCost = true;
+      });
+  }
+
+  enterGraphSpend() {
+    this.travelManagementService.getFilterGraphs(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.grahpSpend).
+      subscribe((data: any) => {
+        this.grahp = this.sortByAphabet(data.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = true;
+      });
+  }
+
+  returnCostSearchSpend(cost: any) {
+    this.typeCenterCost = cost.code + '-' + cost.name;
+    this.typeCenterCost_id = cost.id;
+    this.costs_travels = [];
+  }
+
+  returnGraphSearchSpend(graph: any) {
+    this.grahpSpend = graph.code + '-' + graph.name;
+    this.grahp = [];
+    this.grahpSpend_id = graph.id;
+    this.searchOperationsGrahp(graph.code, 'edit')
+  }
+
+  searchOperationsGrahp(graphCode: any, acction: any) {
+
+    this.travelManagementService.getTravelsOperations(graphCode).
+      subscribe((data: any) => {
+        this.operations = this.sortByAphabet(data.data);
+        if (this.operations.length > 0) {
+          if (acction === 'new') {
+            this.operationsSpend = '-1';
+          }
+        } else {
+          this.operationsSpend = '';
+        }
+      })
+  }
+
+  countSaveAccount: number = 0;
+  saveAccount() {
+    debugger
+    this.distributionAccount.push({
+      id: this.countSaveAccount += 1,
+      travel_costs_id: this.typeCenterCost_id,
+      travel_graphs_id: this.grahpSpend_id,
+      travel_costs_types_id: this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id,
+      travel_operations_id: this.operationsSpend,
+      accounting_accounts_id: this.accountContableVariable,
+      distribution: this.distribution,
+      element_imputation: this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].name,
+      center_cost: this.typeCenterCost === '' ? 'N/A' : this.typeCenterCost,
+      graph_code: this.grahpSpend === '' ? 'N/A' : this.grahpSpend,
+      operations: this.operationsSpend === '' ? 'N/A' : this.operations.filter(data => data.id.toString() === this.operationsSpend)[0].name,
+      account_contable: this.accountContableVariable + '- prueb'
+      // account_contable: this.accountContable.filter(data => data.id === this.accountContableVariable)[0].name,
+    })
+
+    this.elementImputation = '';
+    this.grahpSpend_id = '';
+    this.typeCenterCost = '';
+    this.typeCenterCost_id = '';
+    this.grahpSpend = '';
+    this.distribution = '';
+    this.operationsSpend = '';
+    this.accountContableVariable = '';
+  }
+
+  removeAccount(pinterDistributions){
+    
   }
 
   newSpend(param) {
