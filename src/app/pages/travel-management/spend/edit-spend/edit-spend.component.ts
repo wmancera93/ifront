@@ -395,7 +395,6 @@ export class EditSpendComponent implements OnInit {
       population: objectSpend.populated,
       have_format: objectSpend.formA == false ? 'false' : 'true',
       type_of_expense_document: objectSpend.document
-
     });
 
     this.idSpend += 1

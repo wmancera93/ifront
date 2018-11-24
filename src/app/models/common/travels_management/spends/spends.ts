@@ -42,7 +42,7 @@ export interface ObjectSpends {
     population: string,
     have_format: string,
     type_of_expense_document: number,
-    cost_dist: any[]
+    cost_dist?: any[]
 }
 
 export interface Annexes {
