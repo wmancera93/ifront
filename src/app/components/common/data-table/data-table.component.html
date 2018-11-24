@@ -112,11 +112,11 @@
                       </div>
                     </div>
                     <div *ngIf="record[key].type_method != null" class="text-center">
-                      <div *ngIf="record[key].type_method == 'SHOW'" class="cursor-general  text-success text-center" [attr.disabled]="record[key].disable"
+                      <div *ngIf="record[key].type_method == 'SHOW'||record[key].type_method == 'DISTCOSTSHOW'" class="cursor-general  text-success text-center" [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])">
                         <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
-                      <div *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT' " class="cursor-general text-info text-center"
+                      <div *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT' || record[key].type_method == 'DISTCOST'" class="cursor-general text-info text-center"
                         [attr.disabled]="record[key].disable" (click)="accionTable(record[key])">
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>

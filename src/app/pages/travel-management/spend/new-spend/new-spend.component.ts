@@ -65,6 +65,7 @@ export class NewSpendComponent implements OnInit {
   public showListAutoC: boolean = false;
   public eployee_selected: any = null;
   public ticket_allowance_request: string;
+  public ticket_travel_request: string;
   public edit: boolean = false;
   public objetcThird: any;
   public elementImputation: string = '';
@@ -111,6 +112,7 @@ export class NewSpendComponent implements OnInit {
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
       if (data !== true) {
+        this.ticket_travel_request= data;
         this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
           if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
             this.objetcThird = {
@@ -134,6 +136,8 @@ export class NewSpendComponent implements OnInit {
             this.grahpSpend = '';
             this.distribution = '100';
             this.operationsSpend = '';
+            this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
+            this.grahpSpend_id = '';
           } else {
             this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
             this.nplnr = true;
@@ -142,7 +146,9 @@ export class NewSpendComponent implements OnInit {
             this.typeCenterCost = '';
             this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
             this.distribution = '100';
-            this.operationsSpend = detail.data[0].travel_request.travel_operation_id;
+            this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
+            this.typeCenterCost_id = '';
+            this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
           }
         });
       } else {
@@ -354,7 +360,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   validateTravel(travel: any) {
-    debugger
+
     if (travel.travel_request_id.toString() !== '') {
       this.continue = true;
       this.activate_submit_spend = false;
@@ -377,6 +383,7 @@ export class NewSpendComponent implements OnInit {
 
         }
       });
+      this.ticket_travel_request= travel.travel_request_id;
       this.travelManagementService.getTravelsAllDetail(travel.travel_request_id.toString()).subscribe((detail: any) => {
 
         if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
@@ -387,6 +394,9 @@ export class NewSpendComponent implements OnInit {
           this.grahpSpend = '';
           this.distribution = '100';
           this.operationsSpend = '';
+          this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
+          this.grahpSpend_id = '';
+
         } else {
           this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
           this.nplnr = true;
@@ -395,7 +405,9 @@ export class NewSpendComponent implements OnInit {
           this.typeCenterCost = '';
           this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
           this.distribution = '100';
-          this.operationsSpend = detail.data[0].travel_request.travel_operation_id;
+          this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
+          this.typeCenterCost_id = '';
+          this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
         }
       });
 
@@ -523,6 +535,31 @@ export class NewSpendComponent implements OnInit {
       document.getElementById('spend_new').scrollTo(0, 1200);
     }, 200);
 
+    this.travelManagementService.getTravelsAllDetail(this.ticket_travel_request).subscribe((detail: any) => {
+      if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
+        this.nplnr = false;
+        this.kostl = true;
+        this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+        this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
+        this.grahpSpend = '';
+        this.distribution = '100';
+        this.operationsSpend = '';
+        this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
+        this.grahpSpend_id = '';
+      } else {
+        this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
+        this.nplnr = true;
+        this.kostl = false;
+        this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+        this.typeCenterCost = '';
+        this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
+        this.distribution = '100';
+        this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
+        this.typeCenterCost_id = '';
+        this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
+      }
+    });
+
   }
   closeSpend() {
     this.showSubmit = true;
@@ -547,8 +584,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   selectTypeCenterImputations() {
-    debugger
-    console.log(this.elementImputation)
+
     if (this.elementImputation === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
@@ -607,6 +643,7 @@ export class NewSpendComponent implements OnInit {
 
   countSaveAccount: number = 0;
   saveAccount() {
+    debugger
     this.distributionAccount.push({
       id: this.countSaveAccount += 1,
       travel_costs_id: this.typeCenterCost_id,
@@ -618,9 +655,9 @@ export class NewSpendComponent implements OnInit {
       element_imputation: this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].name,
       center_cost: this.typeCenterCost === '' ? 'N/A' : this.typeCenterCost,
       graph_code: this.grahpSpend === '' ? 'N/A' : this.grahpSpend,
-      operations: this.operationsSpend === '' ? 'N/A' : this.operations.filter(data => data.id.toString() === this.operationsSpend)[0].name,
+      operations: this.operationsSpend === '' ? 'N/A' : this.operations.filter(data => data.id.toString() === this.operationsSpend.toString())[0].name,
       // account_contable: this.accountContableVariable + '- prueb'
-      account_contable: this.accountContable.filter(data => data.id === this.accountContableVariable)[0].name,
+      account_contable: this.accountContable.filter(data => data.id.toString() === this.accountContableVariable)[0].name,
     })
 
     this.elementImputation = '';
@@ -638,7 +675,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
-    debugger
+
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
@@ -653,7 +690,6 @@ export class NewSpendComponent implements OnInit {
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
-        debugger
         this.ticket_allowance_request = data.data.travel_allowance_request_a.id
         document.getElementById("closeSpends").click();
         this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
@@ -745,11 +781,11 @@ export class NewSpendComponent implements OnInit {
             type: "string",
             sortable: false,
           },
-          field_11: {
-            value: "Código de proveedor ",
-            type: "string",
-            sortable: false,
-          },
+          // field_11: {
+          //   value: "Código de proveedor ",
+          //   type: "string",
+          //   sortable: false,
+          // },
           field_12: {
             value: "Numero de autorización",
             type: "string",

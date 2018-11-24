@@ -73,6 +73,6 @@ export class SpendsService {
   }
   getAccountContable() {
     return this.tokenService.get('travel_requests/accounting_accounts_allowawnces')
-      .map((data: any) => data);
+      .map((data: any) => data.json());
   }
 }
