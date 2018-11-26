@@ -180,8 +180,10 @@ export class NewSpendComponent implements OnInit {
       });
 
       if (this.formSpendTravel.value.travel_request_id !== '') {
-        this.continue = data !== true ? true : false;
+        this.continue = true;
         this.validateTravel(this.formSpendTravel.value);
+      }else{
+        this.continue = false;
       }
 
       if (document.getElementById('spend_new').className !== 'modal show') {
@@ -853,5 +855,6 @@ export class NewSpendComponent implements OnInit {
     this.grahpSpend = '';
     this.distribution = '';
     this.operationsSpend = '';
+    this.accountContableVariable = '';
   }
 }

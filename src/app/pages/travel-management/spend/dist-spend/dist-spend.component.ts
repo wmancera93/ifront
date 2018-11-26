@@ -36,6 +36,7 @@ export class DistSpendComponent implements OnInit {
   public kostl: boolean = true;
   public nplnr: boolean = false;
   public is_collapse: boolean = true;
+  public accionDist: boolean;
 
   constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService,
     public travelManagementService: TravelService, public alert: AlertsService) {
@@ -68,6 +69,8 @@ export class DistSpendComponent implements OnInit {
     });
 
     this.spendSharedService.getViewDistCostSpend().subscribe((data: any) => {
+      this.accionDist = data.accion;
+
       if (document.getElementById('dist_spend').className !== 'modal show') {
         document.getElementById('btn_detail_distSpend').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
@@ -240,5 +243,34 @@ export class DistSpendComponent implements OnInit {
       })
   }
 
+  returnSpend() {
+    if (this.accionDist === false) {
+      debugger
+      if (document.getElementById('modal_viewSpends').className !== 'modal show') {
+        document.getElementById("closeDistSpend").click();
+        setTimeout(() => {
+          document.getElementById("btn-viewSpends").click();
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        }, 100);
+
+        this.printSpend = [];
+        this.detailDistCost = [];
+        
+      }
+    } else {
+
+      if (document.getElementById('spend_edit').className !== 'modal show') {
+        document.getElementById("closeDistSpend").click();
+        setTimeout(() => {
+          document.getElementById("btn_spend_edit").click();
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        }, 100);
+
+        this.printSpend = [];
+        this.detailDistCost = [];
+      }
+
+    }
+  }
 
 }
