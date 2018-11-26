@@ -39,7 +39,6 @@ export class ViewSpendComponent implements OnInit {
     private accionDataTableServiceView: DataDableSharedService) {
 
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
-      debugger
       if (data.action_method === 'ModalDistCostShow') {
         document.getElementById('btn-viewSpends').click();
         let viewDistCost = false;
