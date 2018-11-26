@@ -84,7 +84,7 @@ export class SpendsService {
       .map((data: any) => data.json());
   }
   postSpendDistributionsCost(objectDistrCost: any) {
-    return this.tokenService.post('travel_allowance_requests', objectDistrCost)
+    return this.tokenService.post('cost_distribution_allowance', objectDistrCost)
       .map((data: any) => data.json());
   }
 }

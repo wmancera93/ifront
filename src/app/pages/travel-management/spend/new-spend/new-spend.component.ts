@@ -643,7 +643,6 @@ export class NewSpendComponent implements OnInit {
 
   countSaveAccount: number = 0;
   saveAccount() {
-    debugger
     this.distributionAccount.push({
       id: this.countSaveAccount += 1,
       travel_costs_id: this.typeCenterCost_id,

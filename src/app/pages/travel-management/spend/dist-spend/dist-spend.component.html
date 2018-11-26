@@ -6,7 +6,7 @@
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Distribución de costos</h5>
-        <button id="closeDistSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeDistSpend" type="button" class="close " data-dismiss="modal" aria-label="Close" (click)="closeCollapse()">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -88,16 +88,16 @@
                       {{pinterDistributions.travel_costs_type_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_cost_code}} - {{pinterDistributions.travel_cost_name}}
+                      {{pinterDistributions.travel_cost_code}}  {{pinterDistributions.travel_cost_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_graph_code}} - {{pinterDistributions.travel_graph_name}}
+                      {{pinterDistributions.travel_graph_code}}  {{pinterDistributions.travel_graph_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_operation_code}} -
+                      {{pinterDistributions.travel_operation_code}}  {{pinterDistributions.travel_operation_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.accounting_account_code}} - {{pinterDistributions.accounting_account_name}}
+                      {{pinterDistributions.accounting_account_code}}  {{pinterDistributions.accounting_account_name}}
                     </td>
                     <td>
                       {{pinterDistributions.distribution}} %
@@ -113,7 +113,7 @@
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="is_collapse">
+          <div class="col-12" style="margin-top: 15px; padding-bottom: 30px" *ngIf="is_collapse && isEdit">
             <div class="row justify-content-end">
               <div class="col-3" style="margin-top: 15px">
                 <button type="button" class="btn btn-block btn-primary text-center" (click)="newDistributions()">
@@ -202,32 +202,25 @@
                 </div>
               </div>
             </div>
-            <div class="col-12" style="margin-top: 30px">
-                <div class="row justify-content-end">
-                  <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                    <button type="button" [attr.disabled]="
+            <div class="col-12" style="margin-top: 30px; padding-bottom: 30px">
+              <div class="row justify-content-end">
+                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+                  <button type="button" [attr.disabled]="
                     ( elementImputation == ''
                     || accountContableVariable == ''
                     || distribution == '') ? true : null" class="btn btn-primary btn-block cursor-general" (click)="saveAccountEdit()">
-                      <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar distribución</button>
-                  </div>
-                  <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                    <button type="button" class="btn btn-warning btn-block cursor-general"  data-toggle="collapse" data-target="#collapseNewDistribution" (click)="closeCollapse()">
-                      <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
-                  </div>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar distribución</button>
+                </div>
+                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
+                  <button type="button" class="btn btn-warning btn-block cursor-general" data-toggle="collapse" data-target="#collapseNewDistribution"
+                    (click)="closeCollapse()">
+                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                 </div>
               </div>
+            </div>
 
           </div>
         </div>
-        <!-- <div *ngIf="continue && objectAdvances.length > 0" class="row justify-content-end">
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newAdvance(formAdvanceTravel.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
-            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
