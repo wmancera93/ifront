@@ -245,7 +245,6 @@ export class DistSpendComponent implements OnInit {
 
   returnSpend() {
     if (this.accionDist === false) {
-      debugger
       if (document.getElementById('modal_viewSpends').className !== 'modal show') {
         document.getElementById("closeDistSpend").click();
         setTimeout(() => {

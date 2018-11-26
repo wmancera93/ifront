@@ -295,10 +295,13 @@ export class EditSpendComponent implements OnInit {
         this.alert.setAlert(alertSuccess[0]);
       }
       if (action.action_method == "ModalDistCost") {
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById("closeModalEditSpend").click();
         let editDistCost = true;
         let id_byspend = action.id
-        this.spendSharedService.setViewDistCostSpend({ accion: editDistCost, id: id_byspend });
+        setTimeout(() => {
+          this.spendSharedService.setViewDistCostSpend({ accion: editDistCost, id: id_byspend });
+        }, 100);
+
       }
 
     });
@@ -363,7 +366,8 @@ export class EditSpendComponent implements OnInit {
       field_13: objectSpend.populated,
       field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
       field_15: objectSpend.formA === true ? 'Si' : 'No',
-      field_16: {
+      field_16: '',
+      field_17: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -372,7 +376,7 @@ export class EditSpendComponent implements OnInit {
         action_method: "editSavedSpend",
         disable: false
       },
-      field_17: {
+      field_18: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -431,7 +435,8 @@ export class EditSpendComponent implements OnInit {
         element.field_13 = objectEditSpend.populated;
         element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;
         element.field_15 = objectEditSpend.formA === true ? 'Si' : 'No';
-        element.field_16 = {
+        element.field_16 = '';
+        element.field_17 = {
           type_method: "UPDATE",
           type_element: "button",
           icon: "fa-pencil",
@@ -440,7 +445,7 @@ export class EditSpendComponent implements OnInit {
           action_method: "updateTravelAllowance",
           disable: false
         };
-        element.field_17 = {
+        element.field_18 = {
           type_method: "DELETE",
           type_element: "button",
           icon: "fa-trash",

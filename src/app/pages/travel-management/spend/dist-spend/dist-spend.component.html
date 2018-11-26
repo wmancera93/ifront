@@ -66,7 +66,7 @@
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px">
+          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCost.length > 0">
             <div class="table-responsive">
               <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
@@ -122,6 +122,15 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div class="col-12" style="margin-top: 15px">
+            <div class="row justify-content-center top-containter" *ngIf="detailDistCost.length == 0">
+              <div class="col-lg-8 col-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                  No hay distribución de gastos asociadas.
+                </div>
+              </div>
             </div>
           </div>
 

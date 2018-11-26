@@ -40,10 +40,12 @@ export class ViewSpendComponent implements OnInit {
 
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === 'ModalDistCostShow') {
-        document.getElementById('btn-viewSpends').click();
+        document.getElementById("closeModalViewSpend").click();
         let viewDistCost = false;
         let id_by_spend = data.id
-        this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
+        setTimeout(() => {
+          this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
+        }, 100);
       }
     });
 
