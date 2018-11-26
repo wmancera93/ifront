@@ -174,6 +174,7 @@ export class EditSpendComponent implements OnInit {
 
 
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
+      debugger
       if (action.action_method == "updateTravelAllowance") {
         if (!this.edit_Spend) {
           if (this.buttonNewSpend) {
@@ -293,7 +294,13 @@ export class EditSpendComponent implements OnInit {
 
         this.alert.setAlert(alertSuccess[0]);
       }
-
+      if (action.action_method == "ModalDistCost") {
+        debugger
+        document.getElementById("btn_spend_edit").click();
+        let editDistCost = true;
+        let id_byspend = action.id
+        this.spendSharedService.setViewDistCostSpend({ accion: editDistCost, id: id_byspend });
+      }
 
     });
 

@@ -383,12 +383,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         date_end: form.date_hotel_out
       });
 
-      this.formTravelManagement.controls['id_hotels'].setValue("");
-      this.formTravelManagement.controls['date_hotel_in'].setValue("");
-      this.formTravelManagement.controls['date_hotel_out'].setValue("");
+    this.formTravelManagement.controls['id_hotels'].setValue("");
+    this.formTravelManagement.controls['date_hotel_in'].setValue("");
+    this.formTravelManagement.controls['date_hotel_out'].setValue("");
   }
 
-  removeHotel(hotel){
+  removeHotel(hotel) {
     this.arrayHotel.splice(this.arrayHotel.findIndex(filter => filter.id_save_hotel === hotel.id_save_hotel), 1);
   }
 
@@ -623,7 +623,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_8: hotell,
       field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
       field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
-      field_11: modelPartial.travel_mileage,
+      field_11: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
         type_element: "button",
@@ -647,7 +647,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.traverlsDestination.push({
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
-      total_mileage: modelPartial.travel_mileage,
+      total_mileage: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_state,
       origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,

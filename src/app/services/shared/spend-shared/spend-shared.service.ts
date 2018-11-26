@@ -8,6 +8,8 @@ export class SpendSharedService {
   editSpend: Subject<any> = new Subject<any>();
   viewSpend: Subject<any> = new Subject<any>();
   deleteSpend: Subject<any> = new Subject<any>();
+  showDistCost: Subject<any> = new Subject<any>();
+
   constructor() { }
 
   getRefreshSpend() {
@@ -41,6 +43,11 @@ export class SpendSharedService {
   setDeleteSpend(statusDelete: any) {
     return this.deleteSpend.next(statusDelete);
   }
-
+  getViewDistCostSpend() {
+    return this.showDistCost;
+  }
+  setViewDistCostSpend(showDistCost: any) {
+    return this.showDistCost.next(showDistCost);
+  }
 
 }

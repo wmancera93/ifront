@@ -75,4 +75,16 @@ export class SpendsService {
     return this.tokenService.get('travel_requests/accounting_accounts_allowawnces')
       .map((data: any) => data.json());
   }
+  getDetailDistCost(id_spend) {
+    return this.tokenService.get('cost_distribution_allowance/' + id_spend)
+      .map((data: any) => data.json());
+  }
+  deleteDetailDistCost(id_dist_spend) {
+    return this.tokenService.delete('cost_distribution_allowance/' + id_dist_spend)
+      .map((data: any) => data.json());
+  }
+  postSpendDistributionsCost(objectDistrCost: any) {
+    return this.tokenService.post('travel_allowance_requests', objectDistrCost)
+      .map((data: any) => data.json());
+  }
 }

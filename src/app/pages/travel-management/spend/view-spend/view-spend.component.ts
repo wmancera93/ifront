@@ -5,6 +5,7 @@ import { Http, ResponseContentType } from '@angular/http';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-view-spend',
@@ -34,7 +35,18 @@ export class ViewSpendComponent implements OnInit {
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
-    public http: Http, public alert: AlertsService, public travelManagementService: TravelService) {
+    public http: Http, public alert: AlertsService, public travelManagementService: TravelService,
+    private accionDataTableServiceView: DataDableSharedService) {
+
+    this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
+      debugger
+      if (data.action_method === 'ModalDistCostShow') {
+        document.getElementById('btn-viewSpends').click();
+        let viewDistCost = false;
+        let id_by_spend = data.id
+        this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
+      }
+    });
 
     this.spendSharedService.getViewSpend().subscribe((idSpend: any) => {
 

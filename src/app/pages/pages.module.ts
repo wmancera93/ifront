@@ -79,7 +79,6 @@ import { NewHotelComponent } from './travel-management/hotels/new-hotel/new-hote
 import { EditTravelComponent } from './travel-management/travel/edit-travel/edit-travel.component';
 import { ViewTravelComponent } from './travel-management/travel/view-travel/view-travel.component';
 import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
-
 import { EditPlanningDateComponent } from './performance-evaluation/planning-evaluation/edit-planning-date/edit-planning-date.component';
 import { TrainingComponent } from './events-management/training/training.component';
 import { ViewTrainingComponent } from './events-management/training/view-training/view-training.component';
@@ -94,6 +93,8 @@ import { PendingTravelComponent } from './travel-management/approver-travels/pen
 import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
 import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/view-evaluation-objetives/view-evaluation-objetives.component';
 import { ReportsComponent } from './travel-management/reports/reports.component';
+import { DistSpendComponent } from './travel-management/spend/dist-spend/dist-spend.component';
+
 
 
 @NgModule({
@@ -187,7 +188,7 @@ import { ReportsComponent } from './travel-management/reports/reports.component'
     ManagedTravelComponent,
     ViewEvaluationObjetivesComponent,
     ReportsComponent,
-  
+    DistSpendComponent,
   ],
   providers: [
 
