@@ -344,10 +344,16 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateHotels")) {
+      
+        let date_requests_begin = this.generalViajes[0].travel_request.date_begin;
+        let date_requests_end = this.generalViajes[0].travel_request.date_end;
+
         this.travelsService.setHotelsByJourney({
           acction: false,
           id_journey: data.id.toString(),
-          id_travel: this.ticket
+          id_travel: this.ticket,
+          date_travel_begin: date_requests_begin,
+          date_travel_end: date_requests_end
         });
       }
 
@@ -764,9 +770,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
     let hotell = '';
     if (modelEditPartial.id_hotels !== null) {
-       hotell = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
+      hotell = this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelEditPartial.id_hotels.toString())[0].name : '';
     } else {
-       hotell = '';
+      hotell = '';
     }
     this.generalViajes[0].travel_managements.data.forEach(element => {
       if (element.field_0.toString() === this.id_destinations.toString()) {

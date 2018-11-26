@@ -46,6 +46,8 @@ import { CalendarDetailComponent } from './common/calendar-detail/calendar-detai
 import { TooltipComponent } from './common/tooltip/tooltip.component';
 import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-details-travels/approvals-details-travels.component';
 import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.component';
+import { ShowDistSpendsComponent } from './common/travels/approvals-details-travels/show-dist-spends/show-dist-spends.component';
+import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-travels/show-hotels-journey/show-hotels-journey.component';
 
 
 
@@ -95,7 +97,9 @@ import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.compo
     CalendarDetailComponent,
     TooltipComponent,
     ApprovalsDetailsTravelsComponent,
-    PdfTravelComponent
+    PdfTravelComponent,
+    ShowDistSpendsComponent,
+    ShowHotelsJourneyComponent
   ],
   exports: [
     HeaderComponent,

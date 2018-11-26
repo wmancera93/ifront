@@ -5,6 +5,8 @@ import { ApproverTravelsService } from '../../../../services/travel-management/a
 import { TravelsApprovals } from '../../../../models/common/travels_management/travels-approvals/travels-approvals';
 import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { TravelsService } from '../../../../services/shared/travels/travels.service';
 
 @Component({
   selector: 'app-approvals-details-travels',
@@ -37,8 +39,19 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public countAfter: number = 0;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
-    public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService) {
+    public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService,
+    public accionDataTableService: DataDableSharedService, public travelsService: TravelsService) {
 
+      this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+        if ((data.action_method === "showHotels")) {
+  
+          this.travelsService.setHotelsByJourney({
+            acction: true,
+            id_journey: data.id.toString(),
+            id_travel: this.approvals[0].travel_request.ticket,
+          });
+        }
+      });
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueTravelRequestsApprover') {

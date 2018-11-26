@@ -154,10 +154,15 @@ export class ViewTravelComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if ((data.action_method === "showHotels")) {
+        let date_requests_begin = this.view_travels[0].date_begin;
+        let date_requests_end = this.view_travels[0].date_end;
+
         this.travelsService.setHotelsByJourney({
           acction: true,
           id_journey: data.id.toString(),
-          id_travel: this.ticket
+          id_travel: this.ticket,
+          date_travel_begin: date_requests_begin,
+          date_travel_end: date_requests_end
         });
       }
     });

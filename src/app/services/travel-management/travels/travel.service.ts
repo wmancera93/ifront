@@ -99,7 +99,12 @@ export class TravelService {
   }
 
   deleteHotelsByJourney(id: string, travel_management_id: string, travel_request_id: string) {
-    return this.tokenService.get('travel_requests/destroy_hotel/' + id + '/' + travel_management_id + '/' + travel_request_id)
+    return this.tokenService.delete('travel_requests/destroy_hotel/' + id + '/' + travel_management_id + '/' + travel_request_id)
       .map((data: any) => data.json());
+  }
+
+  postHotelNyJourney(object:any, travel_management_id: string, travel_request_id: string){
+    return this.tokenService.post('travel_requests/create_hotel/' + travel_management_id + '/' + travel_request_id, object)
+    .map((data: any) => data.json());
   }
 }

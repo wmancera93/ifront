@@ -31,13 +31,33 @@
             </div>
           </div>
         </div>
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-4 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+              <strong>Fecha inicial del Viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-6 col-12">
+            <label>{{objectHotelJourney.date_travel_begin}}</label>
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+              <strong>Fecha final del Viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-2 col-md-6 col-12">
+            <label>{{objectHotelJourney.date_travel_end}}</label>
+          </div>
+        </div>
         <div class="row" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
           <div class="col-12">
             <div class="border">
               <strong class="text-primary-hr">Hoteles asignados</strong>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 10px" >
+          <div class="col-12" style="margin-top: 10px">
             <div class="table-responsive">
               <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
@@ -85,7 +105,8 @@
             </div>
           </div>
         </div>
-        <!-- <div class="row" style="margin-top: 10px">
+        <form [formGroup]="formHotelsJourney" class="row justify-content-left" style="margin-top: 10px" (ngSubmit)="newTravel(formHotelsJourney.value)" 
+        *ngIf="!objectHotelJourney.acction">
           <div class="col-10">
             <div class="row">
               <div class="col-lg-4 col-md-6 col-12">
@@ -93,7 +114,7 @@
                   <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
                   <a>Hotel:</a>
                 </label>
-                <select class="form-control" [formControl]="formTravelManagement.controls['id_hotels']">
+                <select class="form-control" [formControl]="formHotelsJourney.controls['id_hotels']">
                   <option *ngFor="let nameHotels of hotels" [value]="nameHotels.id">{{nameHotels.name}}</option>
                   <option value="">Seleccione</option>
                 </select>
@@ -103,29 +124,29 @@
                   <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
                   <a>Fecha de ingreso:</a>
                 </label>
-                <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_in']"
-                  (change)="dateValidateHotel(formTravelManagement.value)" (keyup)="delete('date_begin_hotel')" />
+                <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_in']"
+                  (change)="dateValidateHotel(formHotelsJourney.value)" (keyup)="delete('date_begin_hotel')" />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
                   <a>Fecha de salida:</a>
                 </label>
-                <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_out']"
-                  (change)="dateValidateHotel(formTravelManagement.value)" (keyup)="delete('date_end_hotel')" />
+                <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_out']"
+                  (change)="dateValidateHotel(formHotelsJourney.value)" (keyup)="delete('date_end_hotel')" />
               </div>
             </div>
           </div>
           <div class="col-2 align-self-end">
-            <button type="button" class="btn btn-success btn-block btn-sm cursor-general" (click)="addHotel(formTravelManagement.value)"
+            <button type="button" class="btn btn-success btn-block btn-sm cursor-general" (click)="addHotel(formHotelsJourney.value)"
               [attr.disabled]="
-            ( formTravelManagement.value.id_hotels == ''
-              || formTravelManagement.value.date_hotel_in == ''
-              || formTravelManagement.value.date_hotel_out == '') ? true : null">
+            ( formHotelsJourney.value.id_hotels == ''
+              || formHotelsJourney.value.date_hotel_in == ''
+              || formHotelsJourney.value.date_hotel_out == '') ? true : null">
               <i class="fa fa-plus"></i>
             </button>
           </div>
-        </div> -->
+        </form>
       </div>
     </div>
   </div>
