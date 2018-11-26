@@ -8,6 +8,7 @@ export class TravelsService {
    newTravel : Subject<any> = new Subject<any>();
    viewTravel: Subject<any> = new Subject<any>();
    resutlSaved: Subject<any> = new Subject<any>();
+   hotelsByJourney: Subject<any> = new Subject<any>();
       
 
   constructor() { }
@@ -38,6 +39,13 @@ export class TravelsService {
   }
   setResultSaved(resutlSaved:any ) {
     return this.resutlSaved.next(resutlSaved);
+  } 
+
+  getHotelsByJourney() {
+    return this.hotelsByJourney;
+  }
+  setHotelsByJourney(hotelsByJourney:any ) {
+    return this.hotelsByJourney.next(hotelsByJourney);
   } 
      
 }

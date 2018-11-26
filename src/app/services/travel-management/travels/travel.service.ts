@@ -92,4 +92,14 @@ export class TravelService {
     return this.tokenService.get('geographic_locations/filter_travel_graphs/' + id + '/' + wordFind)
       .map((data: any) => data.json());
   }
+
+  getHotelsByJourney(travel_management_id: string, travel_request_id: string) {
+    return this.tokenService.get('travel_requests/show_hotels/' + travel_management_id + '/' + travel_request_id)
+      .map((data: any) => data.json());
+  }
+
+  deleteHotelsByJourney(id: string, travel_management_id: string, travel_request_id: string) {
+    return this.tokenService.get('travel_requests/destroy_hotel/' + id + '/' + travel_management_id + '/' + travel_request_id)
+      .map((data: any) => data.json());
+  }
 }

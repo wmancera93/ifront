@@ -343,6 +343,14 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       this.ticketDestinations = data.id;
 
+      if ((data.action_method === "updateHotels")) {
+        this.travelsService.setHotelsByJourney({
+          acction: false,
+          id_journey: data.id.toString(),
+          id_travel: this.ticket
+        });
+      }
+
       if ((data.action_method === "updateTravelManagement")) {
 
         this.activate_submit = false;

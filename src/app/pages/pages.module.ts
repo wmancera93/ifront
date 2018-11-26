@@ -94,6 +94,7 @@ import { ManagedTravelComponent } from './travel-management/approver-travels/man
 import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/view-evaluation-objetives/view-evaluation-objetives.component';
 import { ReportsComponent } from './travel-management/reports/reports.component';
 import { DistSpendComponent } from './travel-management/spend/dist-spend/dist-spend.component';
+import { HotelsJourneyComponent } from './travel-management/travel/hotels-journey/hotels-journey.component';
 
 
 
@@ -189,6 +190,7 @@ import { DistSpendComponent } from './travel-management/spend/dist-spend/dist-sp
     ViewEvaluationObjetivesComponent,
     ReportsComponent,
     DistSpendComponent,
+    HotelsJourneyComponent,
   ],
   providers: [
 

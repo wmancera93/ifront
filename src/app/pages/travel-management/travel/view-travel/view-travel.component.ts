@@ -7,6 +7,7 @@ import { Http, ResponseContentType } from '@angular/http';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
+import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-view-travel',
@@ -47,9 +48,9 @@ export class ViewTravelComponent implements OnInit {
 
 
   constructor(public travelManagementService: TravelService,
-    private tokenService: Angular2TokenService,
     public travelsService: TravelsService, public alert: AlertsService,
-    public sanitizer: DomSanitizer, public http: Http) {
+    public sanitizer: DomSanitizer, public http: Http,
+    private accionDataTableService: DataDableSharedService) {
 
 
 
@@ -151,6 +152,15 @@ export class ViewTravelComponent implements OnInit {
       })
     });
 
+    this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      if ((data.action_method === "showHotels")) {
+        this.travelsService.setHotelsByJourney({
+          acction: true,
+          id_journey: data.id.toString(),
+          id_travel: this.ticket
+        });
+      }
+    });
   }
 
   ngOnInit() {
