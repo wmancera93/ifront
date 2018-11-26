@@ -12,7 +12,19 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
-          <div class="col-12" *ngIf="printSpend !== null">
+          <div class="col-9">
+          </div>
+          <div class="col-3">
+            <div class="buttonBack img-zoom" (click)="returnSpend()">
+              <div style="margin-left: 15px;">
+                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <span>
+                  Atrás
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="col-12" style="margin-top: 20px" *ngIf="printSpend !== null">
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
@@ -54,7 +66,7 @@
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px">
+          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCost.length > 0">
             <div class="table-responsive">
               <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
@@ -88,16 +100,16 @@
                       {{pinterDistributions.travel_costs_type_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_cost_code}}  {{pinterDistributions.travel_cost_name}}
+                      {{pinterDistributions.travel_cost_code}} {{pinterDistributions.travel_cost_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_graph_code}}  {{pinterDistributions.travel_graph_name}}
+                      {{pinterDistributions.travel_graph_code}} {{pinterDistributions.travel_graph_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_operation_code}}  {{pinterDistributions.travel_operation_name}}
+                      {{pinterDistributions.travel_operation_code}} {{pinterDistributions.travel_operation_name}}
                     </td>
                     <td>
-                      {{pinterDistributions.accounting_account_code}}  {{pinterDistributions.accounting_account_name}}
+                      {{pinterDistributions.accounting_account_code}} {{pinterDistributions.accounting_account_name}}
                     </td>
                     <td>
                       {{pinterDistributions.distribution}} %
@@ -110,6 +122,15 @@
                   </tr>
                 </tbody>
               </table>
+            </div>
+          </div>
+          <div class="col-12" style="margin-top: 15px">
+            <div class="row justify-content-center top-containter" *ngIf="detailDistCost.length == 0">
+              <div class="col-lg-8 col-12 text-center">
+                <div class="alert alert-warning" role="alert">
+                  No hay distribución de gastos asociadas.
+                </div>
+              </div>
             </div>
           </div>
 

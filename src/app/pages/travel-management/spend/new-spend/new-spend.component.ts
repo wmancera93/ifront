@@ -74,7 +74,7 @@ export class NewSpendComponent implements OnInit {
   public grahpSpend: string = '';
   public grahpSpend_id: string = '';
   public distribution: string = '';
-  public accountContableVariable: string = 'Prueba';
+  public accountContableVariable: string = '';
   public operationsSpend: string = '';
   public kostl: boolean = true;
   public nplnr: boolean = false;
@@ -180,8 +180,10 @@ export class NewSpendComponent implements OnInit {
       });
 
       if (this.formSpendTravel.value.travel_request_id !== '') {
-        this.continue = data !== true ? true : false;
+        this.continue = true;
         this.validateTravel(this.formSpendTravel.value);
+      }else{
+        this.continue = false;
       }
 
       if (document.getElementById('spend_new').className !== 'modal show') {
@@ -853,5 +855,6 @@ export class NewSpendComponent implements OnInit {
     this.grahpSpend = '';
     this.distribution = '';
     this.operationsSpend = '';
+    this.accountContableVariable = '';
   }
 }

@@ -438,7 +438,8 @@
                     || formSpendTravel.value.authorization_number == ''
                     || formSpendTravel.value.authorization_number == -1
                     || formSpendTravel.value.populated == ''
-                    || formSpendTravel.value.populated == -1) ? true : null" class="btn btn-primary btn-block cursor-general"
+                    || formSpendTravel.value.populated == -1
+                    || distributionAccount.length == 0 ) ? true : null" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
                   <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
