@@ -74,7 +74,7 @@ export class NewSpendComponent implements OnInit {
   public grahpSpend: string = '';
   public grahpSpend_id: string = '';
   public distribution: string = '';
-  public accountContableVariable: string = 'Prueba';
+  public accountContableVariable: string = '';
   public operationsSpend: string = '';
   public kostl: boolean = true;
   public nplnr: boolean = false;

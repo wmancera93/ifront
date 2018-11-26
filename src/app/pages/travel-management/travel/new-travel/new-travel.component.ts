@@ -848,6 +848,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
       this.changeTravelLegal('P');
     } else {
+      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
       this.changeTravelLegal('');
     }
     if (param.type_travel === '1' || param.type_travel === '3') {
