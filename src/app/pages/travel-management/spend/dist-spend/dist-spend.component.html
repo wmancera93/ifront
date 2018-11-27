@@ -166,7 +166,7 @@
                         <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                         <a>Centro de costo:*</a>
                       </label>
-                      <input class="form-control" id="searchByAutoCompleteCostSpend" type="text" name="costList" [(ngModel)]="typeCenterCost" [ngModelOptions]="{standalone: true}"
+                      <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList" [(ngModel)]="typeCenterCost" [ngModelOptions]="{standalone: true}"
                         (keyup)="enterCostSpend()">
                       <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
                         <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
@@ -179,7 +179,7 @@
                         <i class="fa fa-fw fa-usd text-primary-hr"></i>
                         <a>Grafo:*</a>
                       </label>
-                      <input class="form-control" id="searchByAutoCompleteGraph" type="text" name="graphList" [(ngModel)]="grahpSpend" [ngModelOptions]="{standalone: true}"
+                      <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" [(ngModel)]="grahpSpend" [ngModelOptions]="{standalone: true}"
                         (keyup)="enterGraphSpend()">
                       <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
                         <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">

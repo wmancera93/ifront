@@ -169,7 +169,7 @@
                 </label>
                 <form name="searchAutoCompleteCost">
                   <p>
-                    <input id="searchByAutoCompleteCost" type="text" name="costList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_costs']"
+                    <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_costs']"
                       (keyup)="enterCost(formTravelManagement.value)">
                   </p>
                 </form>
@@ -192,7 +192,7 @@
                 </label>
                 <form name="searchAutoCompleteGraph">
                   <p>
-                    <input id="searchByAutoCompleteGraph" type="text" name="graphList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_graph']"
+                    <input id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_graph']"
                       (keyup)="enterGraph(formTravelManagement.value)">
                   </p>
                 </form>
