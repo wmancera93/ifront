@@ -476,7 +476,7 @@
                     <strong class="text-primary-hr">Hoteles asignados</strong>
                   </div>
                 </div>
-                <div class="col-12" style="margin-top: 10px"  *ngIf="arrayHotel.length > 0">
+                <div class="col-12" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
                   <div class="table-responsive">
                     <table class="table table-sm table-striped table-bordered table-hover">
                       <thead>
@@ -536,7 +536,7 @@
                         <a>Fecha de ingreso:</a>
                       </label>
                       <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_in']"
-                        (change)="dateValidateHotel(formTravelManagement.value)" (keyup)="delete('date_begin_hotel')" />
+                        (keyup)="delete('date_begin_hotel')" />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                       <label class="titleColor">
@@ -544,7 +544,7 @@
                         <a>Fecha de salida:</a>
                       </label>
                       <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formTravelManagement.controls['date_hotel_out']"
-                        (change)="dateValidateHotel(formTravelManagement.value)" (keyup)="delete('date_end_hotel')" />
+                        (keyup)="delete('date_end_hotel')" />
                     </div>
                   </div>
                 </div>
