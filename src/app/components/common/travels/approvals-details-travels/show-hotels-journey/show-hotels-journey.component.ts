@@ -27,7 +27,7 @@ export class ShowHotelsJourneyComponent implements OnInit {
   
             this.travelService.getHotelsByJourney(data.id_journey, data.id_travel).subscribe(
               (show: any) => {
-                this.arrayHotel = show.data;
+                this.arrayHotel = show.data.hotels;
 
               }, (error: any) => {
                 console.log(error)

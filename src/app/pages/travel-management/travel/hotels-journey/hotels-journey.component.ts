@@ -11,6 +11,7 @@ import { HotelsService } from '../../../../services/travel-management/hotels/hot
 })
 export class HotelsJourneyComponent implements OnInit, OnDestroy {
   public objectHotelJourney: any = null;
+  public objectHotel: any = null;
   public arrayHotel: any[] = [];
   public formHotelsJourney: any;
   public hotels: any[] = [];
@@ -47,12 +48,11 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
 
             this.travelService.getHotelsByJourney(data.id_journey, data.id_travel).subscribe(
               (show: any) => {
-                this.arrayHotel = show.data;
-                debugger
+                this.objectHotel = show.data;
+                this.arrayHotel = this.objectHotel.hotels;
                 this.hotels = [];
-                this.hotelsService.getshowHotels(this.arrayHotel[0].country_id.toString()).subscribe(
+                this.hotelsService.getshowHotels(this.objectHotel.country_id.toString()).subscribe(
                   (data: any) => {
-                    debugger
                     this.hotels = data.data;
                   });
 
@@ -79,7 +79,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
         this.travelService.getHotelsByJourney(this.objectHotelJourney.id_journey, this.objectHotelJourney.id_travel).subscribe(
           (show: any) => {
             this.arrayHotel = [];
-            this.arrayHotel = show.data;
+            this.arrayHotel = show.data.hotels;
 
           }, (error: any) => {
           }
@@ -132,7 +132,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
         this.travelService.getHotelsByJourney(this.objectHotelJourney.id_journey, this.objectHotelJourney.id_travel).subscribe(
           (show: any) => {
             this.arrayHotel = [];
-            this.arrayHotel = show.data;
+            this.arrayHotel = show.data.hotels;
             this.formHotelsJourney.controls['id_hotels'].setValue("");
             this.formHotelsJourney.controls['date_hotel_in'].setValue("");
             this.formHotelsJourney.controls['date_hotel_out'].setValue("");
