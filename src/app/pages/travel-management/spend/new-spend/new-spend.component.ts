@@ -112,7 +112,7 @@ export class NewSpendComponent implements OnInit {
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
       if (data !== true) {
-        this.ticket_travel_request= data;
+        this.ticket_travel_request = data;
         this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
           if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
             this.objetcThird = {
@@ -182,7 +182,7 @@ export class NewSpendComponent implements OnInit {
       if (this.formSpendTravel.value.travel_request_id !== '') {
         this.continue = true;
         this.validateTravel(this.formSpendTravel.value);
-      }else{
+      } else {
         this.continue = false;
       }
 
@@ -371,7 +371,8 @@ export class NewSpendComponent implements OnInit {
 
 
       this.spedsData.forEach(element => {
-        if (travel.travel_request_id.toString() === element.travel_request_id.toString()) {
+        debugger
+        if (travel.travel_request_id.toString() === element.ticket_travel.toString()) {
           document.getElementById("closeSpends").click();
           const alertWarning: Alerts[] = [{
             type: 'danger',
@@ -385,7 +386,7 @@ export class NewSpendComponent implements OnInit {
 
         }
       });
-      this.ticket_travel_request= travel.travel_request_id;
+      this.ticket_travel_request = travel.travel_request_id;
       this.travelManagementService.getTravelsAllDetail(travel.travel_request_id.toString()).subscribe((detail: any) => {
 
         if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
@@ -856,5 +857,47 @@ export class NewSpendComponent implements OnInit {
     this.distribution = '';
     this.operationsSpend = '';
     this.accountContableVariable = '';
+  }
+
+  onluNumberSpend(param, name) {
+    debugger
+    let out = '';
+    let filtro = '0123456789.,';
+    switch (name) {
+      case 'nit':
+        for (let i = 0; i < param.nit.length; i++) {
+          if (filtro.indexOf(param.nit.charAt(i)) != -1) {
+            out += param.nit.charAt(i);
+          }
+        }
+        this.formSpendTravel.controls['nit'].setValue(out);
+        break;
+      case 'bill':
+        for (let i = 0; i < param.bill_number.length; i++) {
+          if (filtro.indexOf(param.bill_number.charAt(i)) != -1) {
+            out += param.bill_number.charAt(i);
+          }
+        }
+        this.formSpendTravel.controls['bill_number'].setValue(out);
+        break;
+      case 'authorization':
+        for (let i = 0; i < param.authorization_number.length; i++) {
+          if (filtro.indexOf(param.authorization_number.charAt(i)) != -1) {
+            out += param.authorization_number.charAt(i);
+          }
+        }
+        this.formSpendTravel.controls['authorization_number'].setValue(out);
+        break;
+      case 'import':
+        for (let i = 0; i < param.value.length; i++) {
+          if (filtro.indexOf(param.value.charAt(i)) != -1) {
+            out += param.value.charAt(i);
+          }
+        }
+        this.formSpendTravel.controls['value'].setValue(out);
+        break;
+    }
+
+
   }
 }

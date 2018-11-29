@@ -133,19 +133,76 @@
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                 <strong>Descripción:</strong>
               </label>
-              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control"
+              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
                 [formControl]="formSpendEditTravel.controls['observation']"></textarea>
             </div>
 
             <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
               <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendEditTravel.controls['formA']">
               <label class="form-check-label titleColor" for="FormACheck">
-                <strong>Formato A</strong>
+                <strong>Formulario A</strong>
               </label>
             </div>
 
             <div class="col-12" style="margin-top: 30px">
               <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Tipo de documento:</strong>
+                  </label>
+                  <select class="form-control" [formControl]="formSpendEditTravel.controls['document']" paceholder="Seleccione">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
+                  </select>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Establecimiento:</strong>
+                  </label>
+                  <input type="text" class="form-control uppercase" name="bussines_name" [formControl]="formSpendEditTravel.controls['bussines_name']">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-usd text-primary-hr"></i>
+                    <strong>NIT:</strong>
+                  </label>
+                  <input type="text" class="form-control" name="nit" [formControl]="formSpendEditTravel.controls['nit']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'nit')">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    <strong>Fecha de Gasto:</strong>
+                  </label>
+                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendEditTravel.controls['date']" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="col-12" style="margin-top: 15px">
+              <div class="row">
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    <strong>Número Factura:</strong>
+                  </label>
+                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendEditTravel.controls['bill_number']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'bill')">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                    <strong>No de autorización:</strong>
+                  </label>
+                  <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']"
+                    (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'authorization')">
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-calculator text-primary-hr"></i>
+                    <strong>Código de Control:</strong>
+                  </label>
+                  <input type="text" class="form-control" name="control_number" [formControl]="formSpendEditTravel.controls['control_number']">
+                </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-bars text-primary-hr"></i>
@@ -155,12 +212,24 @@
                     <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}</option>
                   </select>
                 </div>
+              </div>
+            </div>
+
+            <div class="col-12" style="margin-top: 15px">
+              <div class="row">
+                <!-- <div class="col-lg-3 col-md-6 col-12">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
+                    <strong>Código de proveedor:</strong>
+                  </label>
+                  <input type="number" class="form-control" name="provider_number" [formControl]="formSpendEditTravel.controls['cod_provider']">
+                </div> -->
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="number" class="form-control" name="value" [formControl]="formSpendEditTravel.controls['value']">
+                  <input type="text" class="form-control" name="value" [formControl]="formSpendEditTravel.controls['value']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'import')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -173,79 +242,10 @@
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                    <strong>Fecha de Gasto:</strong>
-                  </label>
-                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendEditTravel.controls['date']" class="form-control" />
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12" style="margin-top: 15px">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Número Factura:</strong>
-                  </label>
-                  <input type="number" class="form-control" name="bill_number" [formControl]="formSpendEditTravel.controls['bill_number']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <strong>Número de Control:</strong>
-                  </label>
-                  <input type="number" class="form-control" name="control_number" [formControl]="formSpendEditTravel.controls['control_number']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>NIT:</strong>
-                  </label>
-                  <input type="number" class="form-control" name="nit" [formControl]="formSpendEditTravel.controls['nit']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Establecimiento:</strong>
-                  </label>
-                  <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendEditTravel.controls['bussines_name']">
-                </div>
-              </div>
-            </div>
-
-            <div class="col-12" style="margin-top: 15px">
-              <div class="row">
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-user-circle-o text-primary-hr"></i>
-                    <strong>Código de proveedor:</strong>
-                  </label>
-                  <input type="number" class="form-control" name="provider_number" [formControl]="formSpendEditTravel.controls['cod_provider']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>No de autorización:</strong>
-                  </label>
-                  <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
                     <strong>Poblado:</strong>
                   </label>
-                  <input type="text" class="form-control" name="populate_name" [formControl]="formSpendEditTravel.controls['populated']">
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                  <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de documento:</strong>
-                  </label>
-                  <select class="form-control" [formControl]="formSpendEditTravel.controls['document']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
-                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
-                  </select>
+                  <input type="text" class="form-control uppercase" name="populate_name" [formControl]="formSpendEditTravel.controls['populated']">
                 </div>
               </div>
             </div>

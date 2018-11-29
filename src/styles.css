@@ -75,6 +75,10 @@
     border-bottom: 2px solid var(--btn-primary-hover) !important;
 } */
 
+.uppercase {
+    text-transform: uppercase;
+}
+
 #loader .dot:nth-child(7n+1)::before {
     animation: 0.8s linear 0.1s normal none infinite running load;
     background: var(--btn-primary) none repeat scroll 0 0;

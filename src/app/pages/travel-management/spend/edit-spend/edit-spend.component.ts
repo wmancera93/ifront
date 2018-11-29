@@ -130,7 +130,9 @@ export class EditSpendComponent implements OnInit {
 
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-
+      // this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
+      //   this.listTravelsFromSpend = travel.data;
+      // });
       this.idSpendRequests = idEdit;
       this.spendsService.getViewDetailSpends(idEdit, this.edit).subscribe((editSpend: any) => {
         this.editSpendDetail = [];
@@ -312,9 +314,7 @@ export class EditSpendComponent implements OnInit {
 
   ngOnInit() {
 
-    this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
-      this.listTravelsFromSpend = travel.data;
-    });
+
     this.spendsService.getSpendsTypes().subscribe((select: any) => {
       this.listSpendType = this.sortByAphabet(select.data);
     });
@@ -643,6 +643,47 @@ export class EditSpendComponent implements OnInit {
   returnTravelsRequest() {
     document.getElementById("closeModalEditSpend").click();
     this.router.navigate(['/ihr/travels', this.idSpendRequests, this.ticketTravel]);
+  }
+  onlyNumberSpend(param, name) {
+    debugger
+    let out = '';
+    let filtro = '0123456789.,';
+    switch (name) {
+      case 'nit':
+        for (let i = 0; i < param.nit.length; i++) {
+          if (filtro.indexOf(param.nit.charAt(i)) != -1) {
+            out += param.nit.charAt(i);
+          }
+        }
+        this.formSpendEditTravel.controls['nit'].setValue(out);
+        break;
+      case 'bill':
+        for (let i = 0; i < param.bill_number.length; i++) {
+          if (filtro.indexOf(param.bill_number.charAt(i)) != -1) {
+            out += param.bill_number.charAt(i);
+          }
+        }
+        this.formSpendEditTravel.controls['bill_number'].setValue(out);
+        break;
+      case 'authorization':
+        for (let i = 0; i < param.authorization_number.length; i++) {
+          if (filtro.indexOf(param.authorization_number.charAt(i)) != -1) {
+            out += param.authorization_number.charAt(i);
+          }
+        }
+        this.formSpendEditTravel.controls['authorization_number'].setValue(out);
+        break;
+      case 'import':
+        for (let i = 0; i < param.value.length; i++) {
+          if (filtro.indexOf(param.value.charAt(i)) != -1) {
+            out += param.value.charAt(i);
+          }
+        }
+        this.formSpendEditTravel.controls['value'].setValue(out);
+        break;
+    }
+
+
   }
 
 }

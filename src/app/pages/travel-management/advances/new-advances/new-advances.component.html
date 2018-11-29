@@ -1,5 +1,4 @@
-<button id="btn_advances_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance_new"
-  style="display:none;">
+<button id="btn_advances_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#advance_new" style="display:none;">
 </button>
 <div data-backdrop="static" class="modal" id="advance_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -22,8 +21,7 @@
                 </label>
                 <form name="searchAutoComplete">
                   <p>
-                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter"
-                      (keyup)="enterNameEmployee()">
+                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
                   </p>
                 </form>
                 <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
@@ -41,7 +39,9 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  Usted va a realizar un anticipo para: <i class="fa fa-fw fa fa-user text-primary-hr"></i><strong>{{eployee_selected.name_complete}}</strong>
+                  Usted va a realizar un anticipo para:
+                  <i class="fa fa-fw fa fa-user text-primary-hr"></i>
+                  <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
                 <br>
                 <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
@@ -61,8 +61,7 @@
               </div>
               <div class="col-lg-9 col-md-6 col-12">
                 <fieldset [disabled]="objectAdvances.length > 0">
-                  <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']"
-                    paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
+                  <select class="form-control" [formControl]="formAdvanceTravel.controls['travel_request_id']" paceholder="Seleccione" (change)="validateTravel(formAdvanceTravel.value)">
                     <option value="">Seleccione</option>
                     <option *ngFor="let nameTravel of listTravelsFromAdvance" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
                   </select>
@@ -73,10 +72,10 @@
           <div *ngIf="continue" class="col-12" style="margin-top: 15px">
             <div class="row">
               <div class="col-12">
-                  <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="boxCheck" [formControl]="formAdvanceTravel.controls['box']">
-                  <label class="form-check-label titleColor" for="FormACheck">
-                    <strong>Método de pago caja</strong>
-                  </label>
+                <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="boxCheck" [formControl]="formAdvanceTravel.controls['box']">
+                <label class="form-check-label titleColor" for="FormACheck">
+                  <strong>Método de pago caja</strong>
+                </label>
               </div>
             </div>
             <div class="row" style="margin-top: 15px">
@@ -85,7 +84,7 @@
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
                   <strong>Importe*:</strong>
                 </label>
-                <input type="number" class="form-control" name="value" [formControl]="formAdvanceTravel.controls['value']">
+                <input type="text" class="form-control" name="value" [formControl]="formAdvanceTravel.controls['value']" (keyup)="onlyNumber(formAdvanceTravel.value)">
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -102,8 +101,8 @@
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong>Fecha*:</strong>
                 </label>
-                <input tabindex="-1" type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']"
-                  (change)="validateDateAdvance(formAdvanceTravel.value)" (keyup)="delete('date_body')" />
+                <input tabindex="-1" type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" (change)="validateDateAdvance(formAdvanceTravel.value)"
+                  (keyup)="delete('date_body')" />
               </div>
             </div>
           </div>
@@ -112,8 +111,7 @@
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong>Observación*:</strong>
             </label>
-            <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control"
-              [formControl]="formAdvanceTravel.controls['observation']"></textarea>
+            <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control uppercase" [formControl]="formAdvanceTravel.controls['observation']"></textarea>
           </div>
           <div class="col-12" *ngIf="continue">
             <div class="row justify-content-end">
@@ -123,8 +121,8 @@
                 ||formAdvanceTravel.value.currency_id == ''
                   || formAdvanceTravel.value.value == ''
                   || formAdvanceTravel.value.date == ''
-                  || formAdvanceTravel.value.observation == '') ? true : null"
-                  type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionAdvance(formAdvanceTravel.value)">
+                  || formAdvanceTravel.value.observation == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
+                  (click)="aditionAdvance(formAdvanceTravel.value)">
                   <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
               </div>
             </div>
@@ -134,8 +132,7 @@
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong>Anticipos</strong>
             </label>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
 
           </div>
         </form>
