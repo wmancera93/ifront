@@ -35,22 +35,13 @@
                   <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                 </select>
               </div>
-              <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                  <a>Ciudad:</a>
-                </label>
-                <select [attr.disabled]="cityLocations.length == 0 ? true : null" class="form-control" [formControl]="formHotels.controls['id_city']">
-                  <option value="-1">Seleccione</option>
-                  <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
-                </select>
-              </div>
+              
               <div class="col-lg-8 col-md-6 col-12" style="margin-top: 10px">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-hotel text-primary-hr"></i>
                   <a>Nombre del hotel:</a>
                 </label>
-                <input [attr.disabled]="(formHotels.value.id_country == -1 || formHotels.value.id_state == -1 || formHotels.value.id_city == -1 || formHotels.value.id_state == ''|| formHotels.value.id_city == '') ? true : null"
+                <input [attr.disabled]="(formHotels.value.id_country == -1 || formHotels.value.id_state == -1  || formHotels.value.id_state == '') ? true : null"
                   type="text" class="form-control" [formControl]="formHotels.controls['name_hotel']">
               </div>
             </div>
@@ -59,9 +50,7 @@
                 <button [attr.disabled]="
                 (formHotels.value.id_country == -1 
                 || formHotels.value.id_state == -1 
-                || formHotels.value.id_city == -1 
                 || formHotels.value.id_state == ''
-                || formHotels.value.id_city == '' 
                 || formHotels.value.name_hotel == ''
                 ) ? true :null" type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
                   <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>

@@ -88,6 +88,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public operations: any[] = [];
   public ticket_sap: string;
   public showListAutoCost: boolean = false;
+  public comentaryPlus: string;
 
   public searchByLetter: string;
   public nameEmployee: string = '';
@@ -231,8 +232,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
     this.travelsService.getEditTravels().subscribe((data) => {
       if (this.countAfter === 0) {
+        debugger
         this.ticket = data.id_travel;
         this.viewSendAprovals = data.send_travel;
+
 
         this.travelManagementService.getplanningTravelRequests().
           subscribe((tavelManagement: any) => {
@@ -262,12 +265,10 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                 this.bedit = false;
               }
             }
-
-
-
             this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
               if (result.success) {
                 this.generalViajes = result.data;
+                this.comentaryPlus = result.data[0].travel_request.commentary !== null ? result.data[0].travel_request.commentary : '';
 
                 this.objectPrint = this.generalViajes[0].travel_managements;
                 this.formTravelManagement = new FormGroup({});
@@ -334,7 +335,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                 }
 
               }
-
+              setTimeout(() => {
+                document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+              }, 500);
             });
           });
       }
@@ -344,7 +347,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.ticketDestinations = data.id;
 
       if ((data.action_method === "updateHotels")) {
-      
+
         let date_requests_begin = this.generalViajes[0].travel_request.date_begin;
         let date_requests_end = this.generalViajes[0].travel_request.date_end;
 
@@ -624,6 +627,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('observation', model.trip_text);
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
+    modelFromdata.append('commentary', this.comentaryPlus);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())

@@ -67,20 +67,20 @@ export class TravelManagementComponent implements OnInit {
           tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
           route: "/ihr/management_travel"
         },
-        {
-          title: "Reportes",
-          icon_primary: "fa fa-table",
-          icon_secundary: "fa fa-search",
-          tooltipText: "Haga clic aquí para ver los reportes",
-          route: "/ihr/reports_travel"
-        },
         // {
-        //   title: "Asignación de hoteles",
-        //   icon_primary: "fa fa-circle-thin",
-        //   icon_secundary: "fa fa-bed",
-        //   tooltipText: "Haga clic aquí para crear hoteles",
-        //   route: "/ihr/hotels"
+        //   title: "Reportes",
+        //   icon_primary: "fa fa-table",
+        //   icon_secundary: "fa fa-search",
+        //   tooltipText: "Haga clic aquí para ver los reportes",
+        //   route: "/ihr/reports_travel"
         // },
+        {
+          title: "Asignación de hoteles",
+          icon_primary: "fa fa-circle-thin",
+          icon_secundary: "fa fa-bed",
+          tooltipText: "Haga clic aquí para crear hoteles",
+          route: "/ihr/hotels"
+        },
       ];
     } else {
       if (this.dataUserTravels.employee.is_travel_approver) {
@@ -119,7 +119,14 @@ export class TravelManagementComponent implements OnInit {
             icon_secundary: "fa fa-check",
             tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
             route: "/ihr/management_travel"
-          }
+          },
+          {
+            title: "Asignación de hoteles",
+            icon_primary: "fa fa-circle-thin",
+            icon_secundary: "fa fa-bed",
+            tooltipText: "Haga clic aquí para crear hoteles",
+            route: "/ihr/hotels"
+          },
         ]
       } else {
         this.buttonInfo = [
@@ -143,7 +150,14 @@ export class TravelManagementComponent implements OnInit {
             icon_secundary: "fa fa-usd",
             tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
             route: "/ihr/spend"
-          }
+          },
+          {
+            title: "Asignación de hoteles",
+            icon_primary: "fa fa-circle-thin",
+            icon_secundary: "fa fa-bed",
+            tooltipText: "Haga clic aquí para crear hoteles",
+            route: "/ihr/hotels"
+          },
         ]
       }
 

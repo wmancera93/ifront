@@ -402,5 +402,14 @@ export class NewAdvancesComponent implements OnInit {
     }, 100);
 
   }
-
+  onlyNumber(param) {
+    let out = '';
+    let filtro = '0123456789.,';
+    for (let i = 0; i < param.value.length; i++) {
+      if (filtro.indexOf(param.value.charAt(i)) != -1) {
+        out += param.value.charAt(i);
+      }
+    }
+    this.formAdvanceTravel.controls['value'].setValue(out);
+  }
 }

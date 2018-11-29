@@ -80,6 +80,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public grahp: any[] = [];
   public operations: any[] = [];
   public idGrahpTravel: string = '';
+  public comentaryPlus: string;
 
   public searchByLetter: string;
   public nameEmployee: string = '';
@@ -544,6 +545,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
+    modelFromdata.append('commentary', this.comentaryPlus);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -598,7 +600,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   addDestination(modelPartial) {
-
+    debugger
     modelPartial.id_travel = this.count + 1;
     let dateIn = modelPartial.date_begin.split('-');
     let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
@@ -614,15 +616,15 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.travelProof[0].data[0].data.push({
       field_0: modelPartial.id_travel,
       field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
-      field_2: modelPartial.id_city,
+      field_2: modelPartial.id_city.toUpperCase(),
       field_3: this.terminalLocations.filter((data) => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
-      field_5: modelPartial.id_cityto,
+      field_5: modelPartial.id_cityto.toUpperCase(),
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: dateEndOut + ' ' + modelPartial.hour_end,
-      field_8: hotell,
-      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
-      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
+      // field_8: hotell,
+      // field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+      // field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
       field_11: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -848,8 +850,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
       this.changeTravelLegal('P');
     } else {
-      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
-      this.changeTravelLegal('');
+      // this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
+      // this.changeTravelLegal('');
     }
     if (param.type_travel === '1' || param.type_travel === '3') {
       this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'NAL')[0].id.toString());
@@ -938,21 +940,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             type: "string",
             sortable: false,
           },
-          field_8: {
-            value: "Hotel",
-            type: "string",
-            sortable: false,
-          },
-          field_9: {
-            value: "Ingreso al hotel",
-            type: "string",
-            sortable: false,
-          },
-          field_10: {
-            value: "Salida del hotel",
-            type: "string",
-            sortable: false,
-          },
+          // field_8: {
+          //   value: "Hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
+          // field_9: {
+          //   value: "Ingreso al hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
+          // field_10: {
+          //   value: "Salida del hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
           field_11: {
             value: "Kilometraje",
             type: "string",
@@ -1082,7 +1084,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                     setTimeout(() => {
                       this.objectReport.emit(this.travelProof[0]);
                     }, 100);
-
+                    setTimeout(() => {
+                      document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+                    }, 1000);
                   }
                 }
               } else {
@@ -1124,6 +1128,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                       setTimeout(() => {
                         this.objectReport.emit(this.travelProof[0]);
                       }, 100);
+                      setTimeout(() => {
+                        document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+                      }, 200);
                     }
                   }
                 }
@@ -1154,6 +1161,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 setTimeout(() => {
                   this.objectReport.emit(this.travelProof[0]);
                 }, 100);
+                setTimeout(() => {
+                  document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+                }, 1000);
               }
             }
           }
@@ -1178,8 +1188,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       setTimeout(() => {
         this.objectReport.emit(this.travelProof[0]);
       }, 100);
-    }
 
+    }
   }
   dateValidateTrayect(dateTrayect) {
 

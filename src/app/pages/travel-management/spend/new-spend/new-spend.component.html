@@ -151,7 +151,7 @@
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
               </label>
-              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control"
+              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
                 [formControl]="formSpendTravel.controls['observation']"></textarea>
             </div>
 
@@ -179,22 +179,21 @@
                     <i class="fa fa-fw fa-hospital-o text-primary-hr"></i>
                     <strong>Establecimiento:</strong>
                   </label>
-                  <input type="text" class="form-control" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
+                  <input type="text" class="form-control uppercase" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
                     <strong>NIT:</strong>
                   </label>
-                  <input type="number" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']">
+                  <input type="text" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']" (keyup)="onluNumberSpend(formSpendTravel.value, 'nit')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                     <strong>Fecha de Gasto:</strong>
                   </label>
-                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"
-                  />
+                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"/>
                 </div>
               </div>
             </div>
@@ -205,14 +204,14 @@
                     <i class="fa fa-fw fa-hashtag  text-primary-hr"></i>
                     <strong>Número Factura:</strong>
                   </label>
-                  <input type="number" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']">
+                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
                     <strong>No. de autorización:</strong>
                   </label>
-                  <input type="number" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']">
+                  <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'authorization')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -240,7 +239,7 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="number" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']">
+                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -257,7 +256,7 @@
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
                     <strong>Poblado:</strong>
                   </label>
-                  <input type="text" class="form-control" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
+                  <input type="text" class="form-control uppercase" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
                 </div>
               </div>
             </div>
@@ -397,7 +396,7 @@
                     <i class="fa fa-fw fa-percent text-primary-hr"></i>
                     Distribución*
                   </label>
-                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" />
+                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right" />
                 </div>
 
                 <div class="col-2 align-self-end">

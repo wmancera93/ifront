@@ -105,7 +105,8 @@
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
               <strong>Motivo del Viaje *</strong>
             </label>
-            <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control" [formControl]="formTravelManagement.controls['trip_text']"></textarea>
+            <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control uppercase"
+              [formControl]="formTravelManagement.controls['trip_text']"></textarea>
           </div>
 
           <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
@@ -169,8 +170,8 @@
                 </label>
                 <form name="searchAutoCompleteCost">
                   <p>
-                    <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_costs']"
-                      (keyup)="enterCost(formTravelManagement.value)">
+                    <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
+                      [formControl]="formTravelManagement.controls['name_travel_costs']" (keyup)="enterCost(formTravelManagement.value)">
                   </p>
                 </form>
                 <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
@@ -192,8 +193,8 @@
                 </label>
                 <form name="searchAutoCompleteGraph">
                   <p>
-                    <input id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" class="form-control" class="form-control" [formControl]="formTravelManagement.controls['name_travel_graph']"
-                      (keyup)="enterGraph(formTravelManagement.value)">
+                    <input id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" class="form-control" class="form-control"
+                      [formControl]="formTravelManagement.controls['name_travel_graph']" (keyup)="enterGraph(formTravelManagement.value)">
                   </p>
                 </form>
                 <div *ngIf="!showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
@@ -285,7 +286,8 @@
                               <span [hidden]="imgsaved.file.name.length < 30">...</span>
                             </h6>
                           </div>
-                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general " theme='dark'>
+                          <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                            theme='dark'>
                             <h6>{{index+1}}.
                               <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                               {{imgsaved.file.name |slice: 0:30 }}
@@ -390,7 +392,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Lugar:</a>
                       </label>
-                      <input type="text" class="form-control" name="id_city" [formControl]="formTravelManagement.controls['id_city']">
+                      <input type="text" class="form-control uppercase" name="id_city" [formControl]="formTravelManagement.controls['id_city']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCity of cityLocations" [value]="nameCity.id">{{nameCity.name}}</option>
@@ -421,7 +423,8 @@
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de Partida *</a>
                       </label>
-                      <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']" />
+                      <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"
+                      />
                     </div>
                   </div>
                 </div>
@@ -443,7 +446,8 @@
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>País:</a>
                       </label>
-                      <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_countryto']" (change)="searchStateto(formTravelManagement.value, 'new')">
+                      <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_countryto']"
+                        (change)="searchStateto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCountryto of countriesto" [value]="nameCountryto.id">{{nameCountryto.name}}</option>
                       </select>
@@ -463,7 +467,7 @@
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>Lugar:</a>
                       </label>
-                      <input type="text" class="form-control" name="id_cityto" [formControl]="formTravelManagement.controls['id_cityto']">
+                      <input type="text" class="form-control uppercase" name="id_cityto" [formControl]="formTravelManagement.controls['id_cityto']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCityto of cityLocationsto" [value]="nameCityto.id">{{nameCityto.name}}</option>
@@ -494,7 +498,8 @@
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a> Hora de llegada *</a>
                       </label>
-                      <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']" (change)="hourValidationsEdit(formTravelManagement.value)" />
+                      <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
+                        (change)="hourValidationsEdit(formTravelManagement.value)" />
                     </div>
                   </div>
                 </div>
@@ -547,7 +552,8 @@
                           || formTravelManagement.value.id_terminalto == -1
                           || formTravelManagement.value.id_terminalto == ''
                           || formTravelManagement.value.date_end == ''
-                          || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general" (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
+                          || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
+                        (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino
                       </button>
                     </div>
@@ -564,6 +570,11 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="col-12" style="margin-top: 15px">
+            <h6>Comentarios adicionales</h6>
+            <ckeditor debounce="100" name="body" [(ngModel)]="comentaryPlus" [ngModelOptions]="{standalone: true}">
+            </ckeditor>
           </div>
         </form>
 

@@ -126,8 +126,12 @@
               </div> -->
               <div class="col-xl-5 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
-                  {{requestManaged.type_request_to_json.description}}
+                  {{requestManaged.ticket_travel}} - {{requestManaged.type_request_to_json.description}}
                 </h3>
+                <p>
+                  <i class="fa fa-plane"></i>
+                  Fecha salida {{requestManaged.date_begin_format}} - Fecha llegada {{requestManaged.date_end_format}}
+                </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">

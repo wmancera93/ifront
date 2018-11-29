@@ -81,10 +81,11 @@ export class NewHotelComponent implements OnInit {
   }
 
   newHotel(param: any) {
+    debugger
     const hotel =
     {
       hotels: [{
-        geographic_location_id: param.id_city,
+        geographic_location_id: param.id_country,
         name: param.name_hotel
       }]
     }
