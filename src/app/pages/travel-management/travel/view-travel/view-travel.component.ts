@@ -45,6 +45,7 @@ export class ViewTravelComponent implements OnInit {
   public eployee_selected: any = null;
   public dateBeginRequest: string;
   public dateEndRequest: string;
+  public comentaryPlus:string;
 
 
   constructor(public travelManagementService: TravelService,
@@ -76,6 +77,7 @@ export class ViewTravelComponent implements OnInit {
       this.travelManagementService.getTravelRequestsByid(this.ticket, this.edit).subscribe((result: any) => {
         this.view_travels = [];
         this.observations = result.data[0].travel_request.observation;
+        this.comentaryPlus = result.data[0].travel_request.commentary;
         this.typeTravel = result.data[0].travel_request.travel_type_name;
         this.objectPrint = result.data[0].travel_managements;
         this.annexeds = result.data[0].travel_request_annexeds;
@@ -104,6 +106,10 @@ export class ViewTravelComponent implements OnInit {
         this.dateBeginRequest = split_begin[2] + '-' + split_begin[1] + '-' + split_begin[0];
         let split_end = this.view_travels[0].date_end.split('-');
         this.dateEndRequest = split_end[2] + '-' + split_end[1] + '-' + split_end[0];
+
+        setTimeout(() => {
+          document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+        }, 800);
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
         this.allRequests = detail;

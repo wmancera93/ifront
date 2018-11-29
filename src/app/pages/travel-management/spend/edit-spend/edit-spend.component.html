@@ -186,7 +186,7 @@
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                     <strong>Número Factura:</strong>
                   </label>
-                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendEditTravel.controls['bill_number']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'bill')">
+                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendEditTravel.controls['bill_number']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'bill')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -194,7 +194,7 @@
                     <strong>No de autorización:</strong>
                   </label>
                   <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']"
-                    (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'authorization')">
+                    (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'authorization')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -229,7 +229,7 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="text" class="form-control" name="value" [formControl]="formSpendEditTravel.controls['value']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'import')">
+                  <input type="text" class="form-control" name="value" [formControl]="formSpendEditTravel.controls['value']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'import')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">

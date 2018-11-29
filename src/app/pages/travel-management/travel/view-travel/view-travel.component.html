@@ -206,7 +206,8 @@
         <div id="accordion" class="col-12" style="margin-top: 15px">
           <div class="row">
             <div class="titleColor col-12 text-left" id="headingTwo">
-              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
+              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
             </div>
             <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
               <div class="row">
@@ -228,7 +229,8 @@
           </div>
           <div class="row">
             <div class=" titleColor  col-12 text-left" id="headingThree">
-              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
+              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
+                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
             </div>
             <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
               <div class="row">
@@ -262,11 +264,15 @@
             <app-pdf-travel [ticketTravel]="ticketSendPDF"></app-pdf-travel>
           </div>
         </div>
+        <div class="row" >
+          <div class="col-12" style="margin-top: 15px">
+            <h6>Comentarios adicionales</h6>
+            <ckeditor debounce="100" name="body" [readonly]="true" [(ngModel)]="comentaryPlus" style="cursor: no-drop !important">
+            </ckeditor>
+          </div>
+        </div>
 
-
-
-
-        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="view_travels[0].status_request != 'En proceso'">
+        <div class="row justify-content-end" style="padding-bottom: 25px; margin-top: 30px" *ngIf="view_travels[0].status_request != 'En proceso'">
           <div class="col-lg-4 col-md-6 col-12">
             <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
               <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>

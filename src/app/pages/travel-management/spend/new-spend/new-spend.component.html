@@ -204,14 +204,14 @@
                     <i class="fa fa-fw fa-hashtag  text-primary-hr"></i>
                     <strong>Número Factura:</strong>
                   </label>
-                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')">
+                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
                     <strong>No. de autorización:</strong>
                   </label>
-                  <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'authorization')">
+                  <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'authorization')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -239,7 +239,7 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')">
+                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -396,7 +396,7 @@
                     <i class="fa fa-fw fa-percent text-primary-hr"></i>
                     Distribución*
                   </label>
-                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" />
+                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right" />
                 </div>
 
                 <div class="col-2 align-self-end">
