@@ -7,6 +7,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { ApproverTravelsService } from '../../../services/travel-management/approver-travels/approver-travels.service';
 import { User } from '../../../models/general/user';
+import { FiltersGeneralsService } from '../../../services/travel-management/filters-generals/filters-generals.service';
 
 @Component({
   selector: 'app-travel',
@@ -25,6 +26,7 @@ export class TravelComponent implements OnInit {
   public checkThird: boolean = true;
 
   public userAuthenticated: User = null;
+  public is_collapse: boolean;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -33,7 +35,9 @@ export class TravelComponent implements OnInit {
     public travelsService: TravelsService,
     public travelService: TravelService, public alert: AlertsService,
     private aproversRequestsService: AproversRequestsService,
-    public approverTravelsService: ApproverTravelsService, public travelManagementService: TravelService) {
+    public approverTravelsService: ApproverTravelsService,
+    public travelManagementService: TravelService,
+    public filtersGeneralsService: FiltersGeneralsService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -103,7 +107,7 @@ export class TravelComponent implements OnInit {
         });
 
     this.travelsService.getResultSaved().subscribe((data: any) => {
-   
+
       if (data.success) {
         this.third = data.third == false ? 'travels_request' : 'my_travels_request';
         switch (this.third) {
@@ -154,6 +158,10 @@ export class TravelComponent implements OnInit {
       this.my_travels_list = data.data[0].my_travel_requests_list;
     });
 
+  }
+
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
   }
 
   checkTravels(travel) {

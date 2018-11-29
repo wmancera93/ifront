@@ -58,6 +58,7 @@ import { SpendsService } from './travel-management/spends/spends.service';
 import { ApproverTravelsService } from './travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from './shared/travel-approver/travel-approver.service';
 import { ReportTravelsService } from './travel-management/report/report-travels.service';
+import { FiltersGeneralsService } from './travel-management/filters-generals/filters-generals.service';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { ReportTravelsService } from './travel-management/report/report-travels.
     SpendsService,
     ApproverTravelsService,
     TravelApproverService,
-    ReportTravelsService
+    ReportTravelsService,
+    FiltersGeneralsService
   ]
 })
 export class ServicesModule { }
