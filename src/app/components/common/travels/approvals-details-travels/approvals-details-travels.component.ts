@@ -100,7 +100,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
 
-                    if (request.data[0].travel_allowance_request !== null) {
+                    if (request.data[0].travel_allowance_request.length > 0) {
                       request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                         this.table_spend.push(element)
                       });
@@ -147,7 +147,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     this.objectAdvanceReport.emit({ success: true, data: [object] });
                   }, 300);
 
-                  if (advance.data[0].travel_allowance_request !== null) {
+                  if (advance.data[0].travel_allowance_request.length > 0) {
                     advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                       this.table_spend.push(element)
                     });
@@ -189,7 +189,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
 
-                    if (spend.data[0].travel_allowance_request !== null) {
+                    if (spend.data[0].travel_allowance_request.length > 0) {
                       spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                         this.table_spend.push(element)
                       });

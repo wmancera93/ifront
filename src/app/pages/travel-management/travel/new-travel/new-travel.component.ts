@@ -620,9 +620,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: dateEndOut + ' ' + modelPartial.hour_end,
-      field_8: hotell,
-      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
-      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
+      // field_8: hotell,
+      // field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
+      // field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
       field_11: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
@@ -938,21 +938,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             type: "string",
             sortable: false,
           },
-          field_8: {
-            value: "Hotel",
-            type: "string",
-            sortable: false,
-          },
-          field_9: {
-            value: "Ingreso al hotel",
-            type: "string",
-            sortable: false,
-          },
-          field_10: {
-            value: "Salida del hotel",
-            type: "string",
-            sortable: false,
-          },
+          // field_8: {
+          //   value: "Hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
+          // field_9: {
+          //   value: "Ingreso al hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
+          // field_10: {
+          //   value: "Salida del hotel",
+          //   type: "string",
+          //   sortable: false,
+          // },
           field_11: {
             value: "Kilometraje",
             type: "string",

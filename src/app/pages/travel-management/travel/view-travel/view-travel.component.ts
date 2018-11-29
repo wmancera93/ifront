@@ -135,7 +135,7 @@ export class ViewTravelComponent implements OnInit {
           this.objectPrintAdvances.emit({ success: true, data: [] });
         }
 
-        if (detail.data[0].travel_allowance_request !== null) {
+        if (detail.data[0].travel_allowance_request.length > 0) {
           detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
             this.table_spend_view.push(element)
           });
