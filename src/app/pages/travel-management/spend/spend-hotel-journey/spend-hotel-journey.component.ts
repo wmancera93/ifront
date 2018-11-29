@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { TravelService } from '../../../../../services/travel-management/travels/travel.service';
-import { TravelsService } from '../../../../../services/shared/travels/travels.service';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { TravelsService } from '../../../../services/shared/travels/travels.service';
 
 @Component({
-  selector: 'app-show-hotels-journey',
-  templateUrl: './show-hotels-journey.component.html',
-  styleUrls: ['./show-hotels-journey.component.css']
+  selector: 'app-spend-hotel-journey',
+  templateUrl: './spend-hotel-journey.component.html',
+  styleUrls: ['./spend-hotel-journey.component.css']
 })
-export class ShowHotelsJourneyComponent implements OnInit {
+export class SpendHotelJourneyComponent implements OnInit {
   public objectHotelJourney: any = null;
   public arrayHotel: any[] = [];
 
@@ -17,11 +17,11 @@ export class ShowHotelsJourneyComponent implements OnInit {
         (data: any) => {
           this.objectHotelJourney = data;
           
-          document.getElementById('btn_close_aprovalstravels').click();
+          document.getElementById('closeModalViewSpend').click();
           
           setTimeout(() => {
-            if (document.getElementById('approvalHoteljourney_edit').className !== 'modal show') {
-              document.getElementById('btn_approvalHoteljourney_edit').click();
+            if (document.getElementById('spendsHoteljourney_edit').className !== 'modal show') {
+              document.getElementById('btn_spendsHoteljourney_edit').click();
               document.getElementById('bodyGeneral').removeAttribute('style');
             }
   
@@ -42,11 +42,11 @@ export class ShowHotelsJourneyComponent implements OnInit {
   ngOnInit() {
   }
 
-  returnTravel() {
-    if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
-        document.getElementById("close_approvalHotel_journey").click();
+  returnSpend() {
+    if (document.getElementById('modal_viewSpends').className !== 'modal show') {
+        document.getElementById("close_spendsHotel_journey").click();
         setTimeout(() => {
-          document.getElementById("btn_approvals_requests_travels").click();
+          document.getElementById("btn-viewSpends").click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 
@@ -54,6 +54,5 @@ export class ShowHotelsJourneyComponent implements OnInit {
         this.arrayHotel = [];
       }
   }
-
 
 }

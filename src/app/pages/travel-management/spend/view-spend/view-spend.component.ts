@@ -6,6 +6,7 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { TravelsService } from '../../../../services/shared/travels/travels.service';
 
 @Component({
   selector: 'app-view-spend',
@@ -36,9 +37,11 @@ export class ViewSpendComponent implements OnInit {
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public http: Http, public alert: AlertsService, public travelManagementService: TravelService,
-    private accionDataTableServiceView: DataDableSharedService) {
+    private accionDataTableServiceView: DataDableSharedService,
+    public travelsService: TravelsService) {
 
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
+      debugger
       if (data.action_method === 'ModalDistCostShow') {
         document.getElementById("closeModalViewSpend").click();
         let viewDistCost = false;
@@ -46,6 +49,15 @@ export class ViewSpendComponent implements OnInit {
         setTimeout(() => {
           this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
         }, 100);
+      }
+
+      if ((data.action_method === "showHotels")) {
+  
+        this.travelsService.setHotelsByJourney({
+          acction: true,
+          id_journey: data.id.toString(),
+          id_travel: this.ticket,
+        });
       }
     });
 
