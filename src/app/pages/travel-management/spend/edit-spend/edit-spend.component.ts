@@ -356,14 +356,14 @@ export class EditSpendComponent implements OnInit {
       field_3: objectSpend.value,
       field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
       field_5: objectSpend.date !== '' ? dateSpend : '',
-      field_6: objectSpend.observation,
+      field_6: objectSpend.observation.toUpperCase(),
       field_7: objectSpend.bill_number,
       field_8: objectSpend.control_number,
       field_9: objectSpend.nit,
-      field_10: objectSpend.bussines_name,
+      field_10: objectSpend.bussines_name.toUpperCase(),
       field_11: objectSpend.cod_provider,
       field_12: objectSpend.authorization_number,
-      field_13: objectSpend.populated,
+      field_13: objectSpend.populated.toUpperCase(),
       field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
       field_15: objectSpend.formA === true ? 'Si' : 'No',
       field_16: '',
@@ -425,14 +425,14 @@ export class EditSpendComponent implements OnInit {
         element.field_3 = objectEditSpend.value;
         element.field_4 = this.listMoneyType.filter((data) => data.id.toString() === objectEditSpend.currency_id.toString())[0].name;
         element.field_5 = objectEditSpend.date !== '' ? dateSpend : '';
-        element.field_6 = objectEditSpend.observation;
+        element.field_6 = objectEditSpend.observation.toUpperCase();
         element.field_7 = objectEditSpend.bill_number;
         element.field_8 = objectEditSpend.control_number;
         element.field_9 = objectEditSpend.nit;
-        element.field_10 = objectEditSpend.bussines_name;
+        element.field_10 = objectEditSpend.bussines_name.toUpperCase();
         element.field_11 = objectEditSpend.cod_provider;
         element.field_12 = objectEditSpend.authorization_number;
-        element.field_13 = objectEditSpend.populated;
+        element.field_13 = objectEditSpend.populated.toUpperCase();
         element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;
         element.field_15 = objectEditSpend.formA === true ? 'Si' : 'No';
         element.field_16 = '';
