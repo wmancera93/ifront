@@ -260,7 +260,7 @@ export class NewAdvancesComponent implements OnInit {
       field_2: this.listMoneyTypes.filter((data) => data.id.toString() === dataAgree.currency_id.toString())[0].name,
       field_3: dataAgree.date,
       field_4: dataAgree.value,
-      field_5: dataAgree.observation,
+      field_5: dataAgree.observation.toUpperCase(),
       field_6: dataAgree.box == true ? 'Si' : 'No',
       field_7: {
         type_method: "DELETE",
