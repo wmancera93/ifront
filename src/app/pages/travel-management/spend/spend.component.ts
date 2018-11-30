@@ -129,8 +129,7 @@ export class SpendComponent implements OnInit {
           if (this.codIHR !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -148,8 +147,7 @@ export class SpendComponent implements OnInit {
           if (this.codSAP !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -166,8 +164,7 @@ export class SpendComponent implements OnInit {
           if (this.datesBegin !== '' && this.datesEnd !== '') {
             this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -185,8 +182,7 @@ export class SpendComponent implements OnInit {
           if (this.status !== '') {
             this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -204,8 +200,7 @@ export class SpendComponent implements OnInit {
           if (this.statusLiquid !== '') {
             this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData =this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -223,8 +218,7 @@ export class SpendComponent implements OnInit {
           if (this.codEmployee !== '') {
             this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -250,12 +244,11 @@ export class SpendComponent implements OnInit {
           if (this.codIHR !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;
@@ -269,12 +262,11 @@ export class SpendComponent implements OnInit {
           if (this.codSAP !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;
@@ -287,12 +279,11 @@ export class SpendComponent implements OnInit {
           if (this.datesBegin !== '' && this.datesEnd !== '') {
             this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;
@@ -306,12 +297,11 @@ export class SpendComponent implements OnInit {
           if (this.status !== '') {
             this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;
@@ -325,12 +315,11 @@ export class SpendComponent implements OnInit {
           if (this.statusLiquid !== '') {
             this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;
@@ -344,12 +333,11 @@ export class SpendComponent implements OnInit {
           if (this.codEmployee !== '') {
             this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
               (data: any) => {
-                //  this.spedsData = data.data[0].my_travel_requests_list;
-                // valida
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getMySpendsRequest().subscribe((list: any) => {
-              this.spedsData = list.data;
+              this.spedsData = this.sortByNumber(list.data);
             });
           }
           break;

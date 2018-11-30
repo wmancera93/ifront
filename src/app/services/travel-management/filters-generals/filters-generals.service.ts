@@ -31,8 +31,8 @@ export class FiltersGeneralsService {
       .map((data: any) => data.json());
   }
 
-  getSearchTravelByEmployee(current_view: string, employee_id: string) {
-    return this.tokenService.get('travel_request_filters/search_by_travel_employee_id/' + current_view + '/' + employee_id)
+  getSearchTravelByEmployee(current_view: string, employee: string) {
+    return this.tokenService.get('travel_request_filters/search_by_travel_employee/' + current_view + '/' + employee)
       .map((data: any) => data.json());
   }
 

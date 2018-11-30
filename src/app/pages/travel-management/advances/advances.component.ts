@@ -75,11 +75,11 @@ export class AdvancesComponent implements OnInit {
           if (this.codIHR !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                 this.advancesItems = data.data;
+                
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -94,11 +94,10 @@ export class AdvancesComponent implements OnInit {
           if (this.codSAP !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -112,11 +111,10 @@ export class AdvancesComponent implements OnInit {
           if (this.datesBegin !== '' && this.datesEnd !== '') {
             this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -131,11 +129,10 @@ export class AdvancesComponent implements OnInit {
           if (this.status !== '') {
             this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -150,11 +147,10 @@ export class AdvancesComponent implements OnInit {
           if (this.statusLiquid !== '') {
             this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -169,11 +165,10 @@ export class AdvancesComponent implements OnInit {
           if (this.codEmployee !== '') {
             this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
-            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
               this.advancesItems = data.data;
             });
           }
@@ -196,8 +191,7 @@ export class AdvancesComponent implements OnInit {
           if (this.codIHR !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
@@ -215,8 +209,7 @@ export class AdvancesComponent implements OnInit {
           if (this.codSAP !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
@@ -233,8 +226,7 @@ export class AdvancesComponent implements OnInit {
           if (this.datesBegin !== '' && this.datesEnd !== '') {
             this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
@@ -252,8 +244,7 @@ export class AdvancesComponent implements OnInit {
           if (this.status !== '') {
             this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
@@ -271,8 +262,7 @@ export class AdvancesComponent implements OnInit {
           if (this.statusLiquid !== '') {
             this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
@@ -290,8 +280,7 @@ export class AdvancesComponent implements OnInit {
           if (this.codEmployee !== '') {
             this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
               (data: any) => {
-                // this.advancesItems = data.data;
-                // validar
+                this.advancesItems = data.data;
               });
           } else {
             this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
