@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-
+      <!-- begin filters -->
       <div class="border-botton-general">
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
@@ -62,10 +62,10 @@
                 <label>Codigo de IHR</label>
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control">
+                    <input type="text" [(ngModel)]="codIHR" class="form-control">
                   </div>
                   <div class="col-3">
-                    <button type="button" class="btn btn-block cursor-general tabDate">
+                    <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codIHR')">
                       <i class="fa fa-search" style="margin-left: -5px;"></i>
                     </button>
                   </div>
@@ -75,10 +75,10 @@
                 <label>Codigo de SAP</label>
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control">
+                    <input type="text" [(ngModel)]="codSAP" class="form-control">
                   </div>
                   <div class="col-3">
-                    <button type="button" class="btn btn-block cursor-general tabDate">
+                    <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codSAP')">
                       <i class="fa fa-search" style="margin-left: -5px;"></i>
                     </button>
                   </div>
@@ -88,14 +88,14 @@
                 <div class="row">
                   <div class="col-5">
                     <label>Fecha Inicio</label>
-                    <input type="date" class="form-control">
+                    <input type="date" [(ngModel)]="datesBegin" class="form-control">
                   </div>
                   <div class="col-5">
                     <label>Fecha Final</label>
-                    <input type="date" class="form-control">
+                    <input type="date" [(ngModel)]="datesEnd" class="form-control">
                   </div>
-                  <div class="col-2 align-self-end">                    
-                    <button type="button" class="btn btn-block cursor-general tabDate">
+                  <div class="col-2 align-self-end">
+                    <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('dates')">
                       <i class="fa fa-search" style="margin-left: -5px;"></i>
                     </button>
                   </div>
@@ -104,24 +104,32 @@
 
               <div class="col-lg-3 col-md-4 col-12">
                 <label>Estado</label>
-                <select type="date" class="form-control">
-                  <option value="">Seleccione</option>
+                <select type="date" [(ngModel)]="status" class="form-control" (change)="filter('status')">
+                  <option value="">Todos</option>
+                  <option value="ReqReg">Registrado</option>
+                  <option value="ReqPro">En proceso</option>
+                  <option value="ReqApp">Aprobado</option>
+                  <option value="ReqCan">Cancelado</option>
+                  <option value="ReqWai">En espera</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
                 <label>Estado Liquidacion</label>
-                <select type="date" class="form-control">
-                  <option value="">Seleccione</option>
+                <select type="date" [(ngModel)]="statusLiquid" class="form-control" (change)="filter('statusLiquid')">
+                  <option value="">Todos</option>
+                  <option value="LiqPen">A liquidar</option>
+                  <option value="LiqApp">Liquidado</option>
+                  <option value="LiqAnn">Anulado</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
                 <label>Número Empleado</label>
                 <div class="row">
                   <div class="col-9">
-                    <input type="text" class="form-control">
+                    <input type="text" [(ngModel)]="codEmployee" class="form-control">
                   </div>
                   <div class="col-3">
-                    <button type="button" class="btn btn-block cursor-general tabDate">
+                    <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codEmployee')">
                       <i class="fa fa-search" style="margin-left: -5px;"></i>
                     </button>
                   </div>
@@ -131,7 +139,7 @@
           </div>
         </div>
       </div>
-
+      <!-- end filters -->
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-12 text-left">
           <form>

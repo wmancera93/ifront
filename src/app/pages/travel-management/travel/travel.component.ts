@@ -26,8 +26,7 @@ export class TravelComponent implements OnInit {
   public checkThird: boolean = true;
 
   public userAuthenticated: User = null;
-  public is_collapse: boolean;
-
+  
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public router: Router,
@@ -160,9 +159,263 @@ export class TravelComponent implements OnInit {
 
   }
 
+  //begin filters
+
+  public codIHR: string = '';
+  public codSAP: string = '';
+  public datesBegin: string = '';
+  public datesEnd: string = '';
+  public status: string = '';
+  public statusLiquid: string = '';
+  public codEmployee: string = '';
+  public page: string = '';
+  public is_collapse: boolean;
+
+  filter(filter) {
+    if (this.checkThird) {
+      this.page = 'sol_vi_in';
+      switch (filter) {
+        case 'codIHR':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+
+          if (this.codIHR !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+        case 'codSAP':
+          this.codIHR = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.codSAP !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+        case 'dates':
+          this.codSAP = '';
+          this.codIHR = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.datesBegin !== '' && this.datesEnd !== '') {
+            this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+        case 'status':
+          this.codIHR = '';
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.status !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+        case 'statusLiquid':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.codIHR = '';
+          this.codEmployee = '';
+          if (this.statusLiquid !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+        case 'codEmployee':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codIHR = '';
+          if (this.codEmployee !== '') {
+            this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getTravelRequests().subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          }
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      this.page = 'sol_vi_third';
+      switch (filter) {
+        case 'codIHR':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+
+          if (this.codIHR !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+        case 'codSAP':
+          this.codIHR = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.codSAP !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+        case 'dates':
+          this.codSAP = '';
+          this.codIHR = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.datesBegin !== '' && this.datesEnd !== '') {
+            this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+        case 'status':
+          this.codIHR = '';
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.status !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+        case 'statusLiquid':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.codIHR = '';
+          this.codEmployee = '';
+          if (this.statusLiquid !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+        case 'codEmployee':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codIHR = '';
+          if (this.codEmployee !== '') {
+            this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+              (data: any) => {
+                this.my_travels_list = data.data[0].my_travel_requests_list;
+              });
+          } else {
+            this.travelService.getMyTravelRequests().subscribe((data: any) => {
+              this.my_travels_list = data.data[0].my_travel_requests_list;
+            });
+          }
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
+
+  //end filters
 
   checkTravels(travel) {
     switch (travel) {
