@@ -541,7 +541,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
     modelFromdata.append('date_begin', model.date_requests_begin);
     modelFromdata.append('date_end', model.date_requests_end);
-    modelFromdata.append('observation', model.trip_text);
+    modelFromdata.append('observation', model.trip_text.toUpperCase());
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
