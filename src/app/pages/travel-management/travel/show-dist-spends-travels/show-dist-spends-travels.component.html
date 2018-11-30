@@ -1,12 +1,12 @@
-<button id="btn_detail_distSpend_approval" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dist_spend_approval" style="display:none;">
+<button id="btn_detail_distSpend_travel" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dist_spend_travel" style="display:none;">
 </button>
-<div data-backdrop="static" class="modal" id="dist_spend_approval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div data-backdrop="static" class="modal" id="dist_spend_travel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Distribución de costos</h5>
-        <button id="closeDistSpendApproval" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <button id="closeDistSpendTravel" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -15,7 +15,7 @@
           <div class="col-9">
           </div>
           <div class="col-3">
-            <div class="buttonBack img-zoom" (click)="returnApproval()">
+            <div class="buttonBack img-zoom" (click)="returnTravel()">
               <div style="margin-left: 15px;">
                 <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
@@ -24,7 +24,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 20px" *ngIf="printSpendApproval !== null">
+          <div class="col-12" style="margin-top: 20px" *ngIf="printSpendTravel !== null">
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
@@ -32,7 +32,7 @@
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendApproval.allowance_type_code}}</label>
+                <label>{{printSpendTravel.allowance_type_code}}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -40,12 +40,12 @@
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendApproval.allowance_type_name}}</label>
+                <label>{{printSpendTravel.allowance_type_name}}</label>
               </div>
             </div>
           </div>
 
-          <div class="col-12" *ngIf="printSpendApproval !== null">
+          <div class="col-12" *ngIf="printSpendTravel !== null">
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
@@ -53,7 +53,7 @@
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendApproval.value}}</label>
+                <label>{{printSpendTravel.value}}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
@@ -61,12 +61,12 @@
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendApproval.date_time_format}}</label>
+                <label>{{printSpendTravel.date_time_format}}</label>
               </div>
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCostApproval.length > 0">
+          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCostTravel.length > 0">
             <div class="table-responsive">
               <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
@@ -92,7 +92,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pinterDistributions of detailDistCostApproval">
+                  <tr *ngFor="let pinterDistributions of detailDistCostTravel">
                     <td>
                       {{pinterDistributions.travel_costs_type_name}}
                     </td>
@@ -117,7 +117,7 @@
             </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
-            <div class="row justify-content-center top-containter" *ngIf="detailDistCostApproval.length == 0">
+            <div class="row justify-content-center top-containter" *ngIf="detailDistCostTravel.length == 0">
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
                   No hay distribución de gastos asociadas.

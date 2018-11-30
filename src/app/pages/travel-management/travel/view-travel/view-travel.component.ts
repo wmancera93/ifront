@@ -8,6 +8,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 
 @Component({
   selector: 'app-view-travel',
@@ -51,7 +52,7 @@ export class ViewTravelComponent implements OnInit {
   constructor(public travelManagementService: TravelService,
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http,
-    private accionDataTableService: DataDableSharedService) {
+    private accionDataTableService: DataDableSharedService, public spendSharedService: SpendSharedService) {
 
 
 
@@ -63,7 +64,6 @@ export class ViewTravelComponent implements OnInit {
           document.getElementById('bodyGeneral').removeAttribute('style');
         }
       }
-
     })
 
     this.travelsService.getViewTravels().subscribe((data) => {
@@ -141,7 +141,7 @@ export class ViewTravelComponent implements OnInit {
           this.objectPrintAdvances.emit({ success: true, data: [] });
         }
 
-        if (detail.data[0].travel_allowance_request.length > 0) {
+        if (detail.data[0].travel_allowance_request.data !== null && detail.data[0].travel_allowance_request.data.length === undefined) {
           detail.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
             this.table_spend_view.push(element)
           });
@@ -159,6 +159,7 @@ export class ViewTravelComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
+      debugger
       if ((data.action_method === "showHotels")) {
         let date_requests_begin = this.view_travels[0].date_begin;
         let date_requests_end = this.view_travels[0].date_end;
@@ -170,6 +171,14 @@ export class ViewTravelComponent implements OnInit {
           date_travel_begin: date_requests_begin,
           date_travel_end: date_requests_end
         });
+      }
+      if (data.action_method === 'ModalDistCostShow') {
+        document.getElementById("closeTravelsNew").click();
+        let viewDistCost = false;
+        let id_by_spend = data.id
+        setTimeout(() => {
+          this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
+        }, 100);
       }
     });
   }

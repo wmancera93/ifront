@@ -96,6 +96,7 @@ import { ReportsComponent } from './travel-management/reports/reports.component'
 import { DistSpendComponent } from './travel-management/spend/dist-spend/dist-spend.component';
 import { HotelsJourneyComponent } from './travel-management/travel/hotels-journey/hotels-journey.component';
 import { SpendHotelJourneyComponent } from './travel-management/spend/spend-hotel-journey/spend-hotel-journey.component';
+import { ShowDistSpendsTravelsComponent } from './travel-management/travel/show-dist-spends-travels/show-dist-spends-travels.component';
 
 
 
@@ -193,6 +194,7 @@ import { SpendHotelJourneyComponent } from './travel-management/spend/spend-hote
     DistSpendComponent,
     HotelsJourneyComponent,
     SpendHotelJourneyComponent,
+    ShowDistSpendsTravelsComponent,
   ],
   providers: [
 

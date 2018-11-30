@@ -361,7 +361,7 @@ export class EditSpendComponent implements OnInit {
       field_8: objectSpend.control_number,
       field_9: objectSpend.nit,
       field_10: objectSpend.bussines_name.toUpperCase(),
-      field_11: objectSpend.cod_provider,
+      field_11: objectSpend.cod_provider.toUpperCase(),
       field_12: objectSpend.authorization_number,
       field_13: objectSpend.populated.toUpperCase(),
       field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
@@ -430,7 +430,7 @@ export class EditSpendComponent implements OnInit {
         element.field_8 = objectEditSpend.control_number;
         element.field_9 = objectEditSpend.nit;
         element.field_10 = objectEditSpend.bussines_name.toUpperCase();
-        element.field_11 = objectEditSpend.cod_provider;
+        element.field_11 = objectEditSpend.cod_provider.toUpperCase();
         element.field_12 = objectEditSpend.authorization_number;
         element.field_13 = objectEditSpend.populated.toUpperCase();
         element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;

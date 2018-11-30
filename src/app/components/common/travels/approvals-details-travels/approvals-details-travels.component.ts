@@ -7,6 +7,7 @@ import { TravelApproverService } from '../../../../services/shared/travel-approv
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
+import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 
 @Component({
   selector: 'app-approvals-details-travels',
@@ -40,7 +41,8 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService,
-    public accionDataTableService: DataDableSharedService, public travelsService: TravelsService) {
+    public accionDataTableService: DataDableSharedService, public travelsService: TravelsService,
+    public spendSharedService: SpendSharedService) {
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if ((data.action_method === "showHotels")) {
@@ -50,6 +52,14 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           id_journey: data.id.toString(),
           id_travel: this.approvals[0].travel_request.ticket,
         });
+      }
+      if (data.action_method === 'ModalDistCostShow') {
+        document.getElementById("btn_close_aprovalstravels").click();
+        let viewDistCost = false;
+        let id_by_spend = data.id
+        setTimeout(() => {
+          this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
+        }, 100);
       }
     });
 

@@ -457,7 +457,7 @@ export class NewSpendComponent implements OnInit {
       field_8: objectSpend.control_number,
       field_9: objectSpend.nit,
       field_10: objectSpend.bussines_name.toUpperCase(),
-      field_11: objectSpend.cod_provider,
+      field_11: objectSpend.cod_provider.toUpperCase(),
       field_12: objectSpend.authorization_number,
       field_13: objectSpend.populated.toUpperCase(),
       field_14: objectSpend.formA === true ? 'Si' : 'No',
