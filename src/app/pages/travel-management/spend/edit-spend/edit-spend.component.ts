@@ -311,6 +311,42 @@ export class EditSpendComponent implements OnInit {
 
   }
 
+  public disabledCode: boolean = false;
+
+  maskCode(param) {
+    this.disabledCode = true;
+    let word = '';
+    let wordView = '';
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
+
+    for (let i = 0; i < param.control_number.length; i++) {
+      if (filtro.indexOf(param.control_number.charAt(i)) != -1) {
+        word += param.control_number.charAt(i);
+      }
+    }
+
+    wordView = word;
+
+    if (word.match(/^\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+
+    this.formSpendEditTravel.controls['control_number'].setValue(wordView);
+
+    if( this.formSpendEditTravel.value.control_number === wordView){
+      this.disabledCode = false;
+    }
+  }
+
 
   ngOnInit() {
 
