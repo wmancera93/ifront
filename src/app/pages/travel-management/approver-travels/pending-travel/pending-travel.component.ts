@@ -74,15 +74,21 @@ export class PendingTravelComponent implements OnInit {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsType = 'travels';
-        this.pendingsRequestTravels = data.data[0].requests;
+        this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
     })
   };
+  sortByNumber(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
+  }
   getRequestsPendingsAllowances() {
     this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsType = 'spend';
-        this.pendingsRequestTravels = data.data[0].requests;
+        this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
     })
   };
@@ -90,7 +96,7 @@ export class PendingTravelComponent implements OnInit {
     this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsType = 'advance';
-        this.pendingsRequestTravels = data.data[0].requests;
+        this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
     })
   };
@@ -109,7 +115,7 @@ export class PendingTravelComponent implements OnInit {
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
           if (data) {         
             this.travelsRequestsType = 'travels';
-            this.pendingsRequestTravels = data.data[0].requests;
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
         })
 
@@ -118,7 +124,7 @@ export class PendingTravelComponent implements OnInit {
         this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
           if (data) {
             this.travelsRequestsType = 'advance';
-            this.pendingsRequestTravels = data.data[0].requests;
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
         })
 
@@ -127,7 +133,7 @@ export class PendingTravelComponent implements OnInit {
         this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
           if (data) {
             this.travelsRequestsType = 'spend';
-            this.pendingsRequestTravels = data.data[0].requests;
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
         })
         break;

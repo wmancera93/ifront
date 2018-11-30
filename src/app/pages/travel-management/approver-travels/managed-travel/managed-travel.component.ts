@@ -60,12 +60,18 @@ export class ManagedTravelComponent implements OnInit {
     this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsManagedType = 'travels';
-        this.managedRequestTravel = data.data[0].requests;
+        this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
       }
     })
   };
   returnBackTravel() {
     this.router.navigate(['ihr/travel_management']);
+  }
+  sortByNumber(dataBySort: any) {
+    dataBySort.sort(function (a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
   }
 
   modalAproversTravelManaged(request: any, type: string) {
@@ -79,21 +85,21 @@ export class ManagedTravelComponent implements OnInit {
         this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
           if (data) {
             this.travelsRequestsManagedType = 'travels';
-            this.managedRequestTravel = data.data[0].requests;
+            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
           }
         })
         break;
       case '2':
         this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
           this.travelsRequestsManagedType = 'advance';
-          this.managedRequestTravel = data.data[0].requests;
+          this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
         })
         break;
       case '3':
         this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
           if (data) {
             this.travelsRequestsManagedType = 'spend';
-            this.managedRequestTravel = data.data[0].requests;
+            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
           }
         })
         break;
