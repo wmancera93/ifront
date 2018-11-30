@@ -32,16 +32,23 @@
         <div class="col-lg-4 col-12">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="fa fa-plus"></i>
                 Crear nueva solicitud
               </a>
-              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
-                <div *ngFor="let request of requests.request_types; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="newForm(request)">{{request.name
-                    | lowercase}}</a>
-                  <div *ngIf="requests.request_types.length !== (i + 1)" class="dropdown-divider"></div>
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-x: hidden !important; overflow-y: auto !important; max-height: 400px !important">
+                <div *ngFor="let request of requests.request_types; let i = index" class="row">
+                  <div class="col-9">
+                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="newForm(request)">{{request.name | lowercase}}
+                    </a>
+                  </div>
+                  <div class="col-3">
+                    <i class="fa fa-globe fa-stack-2x color-primary-button"></i>
+                    <i class="fa fa-plane fa-stack-1x color-secundary-button"></i>
+                  </div>
+
+                  <div *ngIf="requests.request_types.length !== (i + 1)" class="dropdown-divider col-12"></div>
                 </div>
               </div>
             </li>
@@ -56,10 +63,10 @@
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseExample" aria-expanded="false" (click)="collapse(true)"></i>
-            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseExample" aria-expanded="false" (click)="collapse(false)"></i>
+            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(true)"></i>
+            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
+              aria-expanded="false" (click)="collapse(false)"></i>
           </div>
         </div>
       </div>
@@ -157,8 +164,7 @@
 
               <div class="col-lg-2 col-md-3 col-12 text-center top-p">
                 <div class="row">
-                  <div class="col-6 number-size text-success" [attr.title]="request.action_employee_requets_index_view[0].title"
-                    [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true"
+                  <div class="col-6 number-size text-success" [attr.title]="request.action_employee_requets_index_view[0].title" [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true"
                     (click)="modalAprovers(request)">
                     <i class="fa fa-eye" aria-hidden="true"></i>
                   </div>
@@ -166,8 +172,7 @@
                     style="cursor: pointer" (click)="deleteRequest(request.ticket)">
                     <i class="fa fa-trash" aria-hidden="true"></i>
                   </div>
-                  <div class="col-6 number-size" id="hideTrash" *ngIf=" request.action_employee_requets_index_view[1].is_active == false"
-                    style="cursor: no-drop">
+                  <div class="col-6 number-size" id="hideTrash" *ngIf=" request.action_employee_requets_index_view[1].is_active == false" style="cursor: no-drop">
                     <i class="fa fa-trash" aria-hidden="false"></i>
                   </div>
                   <div class="col-6" (click)="modalAprovers(request)">
