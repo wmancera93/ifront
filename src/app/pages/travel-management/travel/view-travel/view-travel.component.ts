@@ -48,6 +48,8 @@ export class ViewTravelComponent implements OnInit {
   public dateEndRequest: string;
   public comentaryPlus:string;
 
+  public is_sender_approval: boolean = false;
+
 
   constructor(public travelManagementService: TravelService,
     public travelsService: TravelsService, public alert: AlertsService,
@@ -83,6 +85,7 @@ export class ViewTravelComponent implements OnInit {
         this.annexeds = result.data[0].travel_request_annexeds;
         this.view_travels.push(result.data[0].travel_request);
         this.maintenance = result.data[0].travel_request.is_maintenance;
+        this.is_sender_approval = result.data[0].is_sender_approval;
 
         if (result.data[0].travel_request.employee_applicant_to_json !== null) {
           this.eployee_selected = {
@@ -97,15 +100,17 @@ export class ViewTravelComponent implements OnInit {
 
         if (this.maintenance == true) {
           this.maintenance_travel = 'Con manutención'
+        }else{
+          this.maintenance_travel = 'Sin manutención'
         }
         setTimeout(() => {
           this.objectReport.emit({ success: true, data: [this.objectPrint] });
         }, 100);
 
         let split_begin = this.view_travels[0].date_begin.split('-');
-        this.dateBeginRequest = split_begin[2] + '-' + split_begin[1] + '-' + split_begin[0];
+        this.dateBeginRequest = this.view_travels[0].date_begin;
         let split_end = this.view_travels[0].date_end.split('-');
-        this.dateEndRequest = split_end[2] + '-' + split_end[1] + '-' + split_end[0];
+        this.dateEndRequest = this.view_travels[0].date_end;
 
         setTimeout(() => {
           document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
@@ -159,7 +164,6 @@ export class ViewTravelComponent implements OnInit {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      debugger
       if ((data.action_method === "showHotels")) {
         let date_requests_begin = this.view_travels[0].date_begin;
         let date_requests_end = this.view_travels[0].date_end;
