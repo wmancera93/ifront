@@ -84,7 +84,10 @@ export class PdfTravelComponent implements OnInit {
       doc.text('FORMULARIO DE VIAJE', pageCenter, 25, 'center');
       doc.text(this.result.data[0].travel_request.travel_requests_type_name.toUpperCase(), pageCenter, 30, 'center');
       doc.text('FECHA DE SOLICITUD: ' + dateNow, (pageCenter * 2) - rMargin, 20, 'right');
-      doc.text('VIAJE NO: ' + this.result.data[0].travel_request.ticket_cli.toString(), (pageCenter * 2) - rMargin, 25, 'right');
+      if(this.result.data[0].travel_request.ticket_cli !== null){
+        doc.text('VIAJE NO: ' + this.result.data[0].travel_request.ticket_cli.toString(), (pageCenter * 2) - rMargin, 25, 'right');
+      }
+    
 
       let columnsMacro = ["DATOS MARCO", ""];
       let dataMacro
@@ -400,7 +403,7 @@ export class PdfTravelComponent implements OnInit {
       let recordsPrint = result.data[0].travel_allowance_request.data.travel_allowances;
 
       keys.forEach((element) => {
-        if (element !== 'field_7' && element !== 'field_8' && element !== 'field_9' && element !== 'field_13' && element !== 'field_11' && element !== 'field_12' && element !== 'field_14' && element !== 'field_15') {
+        if (element !== 'field_7' && element !== 'field_8' && element !== 'field_9' && element !== 'field_13' && element !== 'field_11' && element !== 'field_12' && element !== 'field_14' && element !== 'field_15' && element !== 'field_20') {
           let label: any;
           label = result.data[0].travel_allowance_request.labels[element];
 
