@@ -232,7 +232,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
     this.travelsService.getEditTravels().subscribe((data) => {
       if (this.countAfter === 0) {
-        debugger
         this.ticket = data.id_travel;
         this.viewSendAprovals = data.send_travel;
 
@@ -380,7 +379,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
         if ((this.bedit === true)) {
           this.travelManagementService.getDestinationsById(this.ticketDestinations, this.ticket).subscribe((resutlDestinations: any) => {
-
+            
             this.split_begin = resutlDestinations.data.ori_datetime.split(' ');
             this.split_end = resutlDestinations.data.destino_datetime.split(' ');
             this.id_destinations = resutlDestinations.data.id
@@ -417,9 +416,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               id_cityto: resutlDestinations.data.destination_location_text,
               id_stateto: resutlDestinations.data.destination_state,
               id_countryto: resutlDestinations.data.destination_country,
-              id_hotels: resutlDestinations.data.hotel_id,
-              date_hotel_in: resutlDestinations.data.hotel_date_begin,
-              date_hotel_out: resutlDestinations.data.hotel_date_end,
+              // id_hotels: resutlDestinations.data.hotel_id,
+              // date_hotel_in: resutlDestinations.data.hotel_date_begin,
+              // date_hotel_out: resutlDestinations.data.hotel_date_end,
               travel_mileage: resutlDestinations.data.total_mileage,
             };
 
@@ -699,7 +698,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     let dateEndOutHotel = dateOutHotel[2] + '/' + dateOutHotel[1] + '/' + dateOutHotel[0];
 
     this.editEditTrip.push(modelPartial);
-    let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
+    // let hotell = this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString()).length > 0 ? this.hotels.filter((data) => data.id.toString() === modelPartial.id_hotels.toString())[0].name : '';
     this.generalViajes[0].travel_managements.data.push({
       field_0: modelPartial.id_travel,
       field_1: modelPartial.id_transport.toString() !== '' ? this.transport_types.filter((data) => data.id.toString() === modelPartial.id_transport.toString())[0].name : '',
@@ -708,12 +707,18 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
       field_5: modelPartial.id_cityto,
       field_6: this.terminalLocationsto.filter((data) => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
-      field_7: dateEndOut + ' ' + modelPartial.hour_end,
-      field_8: hotell,
-      field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
-      field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
-      field_11: modelPartial.travel_mileage,
+      field_7: dateEndOut + ' ' + modelPartial.hour_end,   
+      field_8: modelPartial.travel_mileage,
       field_12: {
+        type_method: "HIDE",
+        type_element: "button",
+        icon: "fa-pencil",
+        id: modelPartial.id_travel,
+        title: "Editar",
+        action_method: "updateTrayectManagement",
+        disable: false
+      },
+      field_10: {
         type_method: "UPDATE",
         type_element: "button",
         icon: "fa-pencil",
@@ -722,7 +727,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         action_method: "updateTrayectManagement",
         disable: false
       },
-      field_13: {
+      field_11: {
         type_method: "DELETE",
         type_element: "button",
         icon: "fa-trash",
@@ -740,14 +745,14 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       origin_location_id: modelPartial.id_state,
       origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
-      hotel_id: modelPartial.id_hotels,
+      // hotel_id: modelPartial.id_hotels,
       destination_location_id: modelPartial.id_stateto,
       destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
       origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
       destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end,
-      hotel_date_begin: modelPartial.date_hotel_in,
-      hotel_date_end: modelPartial.date_hotel_out,
+      // hotel_date_begin: modelPartial.date_hotel_in,
+      // hotel_date_end: modelPartial.date_hotel_out,
     });
 
     this.count += 1
@@ -759,7 +764,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     document.getElementById("edit_funtionTravel").click();
   }
   editDestination(modelEditPartial) {
-
     this.activate_submit = true;
     this.activate = true;
     let dateIn = modelEditPartial.date_begin.split('-');
@@ -822,14 +826,14 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       origin_location_id: modelEditPartial.id_state,
       origin_location_text: modelEditPartial.id_city,
       origin_terminal_id: modelEditPartial.id_terminal,
-      hotel_id: modelEditPartial.id_hotels,
+      // hotel_id: modelEditPartial.id_hotels,
       destination_location_id: modelEditPartial.id_stateto,
       destination_location_text: modelEditPartial.id_cityto,
       destination_terminal_id: modelEditPartial.id_terminalto,
       origin_datetime: modelEditPartial.date_begin + ' ' + modelEditPartial.hour_begin,
       destination_datetime: modelEditPartial.date_end + ' ' + modelEditPartial.hour_end,
-      hotel_date_begin: modelEditPartial.date_hotel_in,
-      hotel_date_end: modelEditPartial.date_hotel_out,
+      // hotel_date_begin: modelEditPartial.date_hotel_in,
+      // hotel_date_end: modelEditPartial.date_hotel_out,
     });
 
     setTimeout(() => {
@@ -841,7 +845,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.id_destinations = 0;
   }
   editTravels(param: any) {
-
     if (param !== undefined) {
 
       this.formTravelManagement = new FormGroup({});
@@ -874,9 +877,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         id_cityto: param.id_cityto,
         id_stateto: param.id_stateto,
         id_countryto: param.id_countryto,
-        id_hotels: param.id_hotels,
-        date_hotel_in: param.date_hotel_in,
-        date_hotel_out: param.date_hotel_out,
+        // id_hotels: param.id_hotels,
+        // date_hotel_in: param.date_hotel_in,
+        // date_hotel_out: param.date_hotel_out,
         travel_mileage: param.travel_mileage,
       });
       this.searchState(param, 'edit');
@@ -1129,9 +1132,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       id_cityto: '',
       id_stateto: '',
       id_countryto: '',
-      id_hotels: '',
-      date_hotel_in: '',
-      date_hotel_out: '',
+      // id_hotels: '',
+      // date_hotel_in: '',
+      // date_hotel_out: '',
       travel_mileage: '',
     });
 

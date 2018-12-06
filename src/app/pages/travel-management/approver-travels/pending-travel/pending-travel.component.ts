@@ -4,6 +4,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { AproversRequestsService } from '../../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
+import { FiltersGeneralsService } from '../../../../services/travel-management/filters-generals/filters-generals.service';
 
 @Component({
   selector: 'app-pending-travel',
@@ -25,7 +26,8 @@ export class PendingTravelComponent implements OnInit {
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
-    public travelApproverServiceShared: TravelApproverService) {
+    public travelApproverServiceShared: TravelApproverService,
+    public filtersGeneralsService: FiltersGeneralsService) {
 
 
     this.travelApproverServiceShared.getrefreshIndexRequest().subscribe(data => {
@@ -70,6 +72,392 @@ export class PendingTravelComponent implements OnInit {
     this.getRequestsPendings();
   }
 
+  //begin filters
+
+  public codIHR: string = '';
+  public codSAP: string = '';
+  public datesBegin: string = '';
+  public datesEnd: string = '';
+  public status: string = '';
+  public statusLiquid: string = '';
+  public codEmployee: string = '';
+  public page: string = '';
+  public is_collapse: boolean;
+
+  filter(filter) {
+    switch (this.travelsRequestsType) {
+      case 'travels':
+        this.travels(filter)
+        break;
+      case 'spend':
+        this.spends(filter)
+        break;
+      case 'advance':
+        this.advances(filter);
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  travels(filter) {
+    this.page = 'app_sol_vi';
+    switch (filter) {
+      case 'codIHR':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+
+        if (this.codIHR !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codSAP':
+        this.codIHR = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.codSAP !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'dates':
+        this.codSAP = '';
+        this.codIHR = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.datesBegin !== '' && this.datesEnd !== '') {
+          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'status':
+        this.codIHR = '';
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.status !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'statusLiquid':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.codIHR = '';
+        this.codEmployee = '';
+        if (this.statusLiquid !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codEmployee':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codIHR = '';
+        if (this.codEmployee !== '') {
+          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  advances(filter) {
+    this.page = 'app_sol_anti';
+    switch (filter) {
+      case 'codIHR':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+
+        if (this.codIHR !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codSAP':
+        this.codIHR = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.codSAP !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'dates':
+        this.codSAP = '';
+        this.codIHR = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.datesBegin !== '' && this.datesEnd !== '') {
+          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'status':
+        this.codIHR = '';
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.status !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'statusLiquid':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.codIHR = '';
+        this.codEmployee = '';
+        if (this.statusLiquid !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codEmployee':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codIHR = '';
+        if (this.codEmployee !== '') {
+          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  spends(filter) {
+    this.page = 'app_sol_gas';
+    switch (filter) {
+      case 'codIHR':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+
+        if (this.codIHR !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codSAP':
+        this.codIHR = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.codSAP !== '') {
+          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'dates':
+        this.codSAP = '';
+        this.codIHR = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.datesBegin !== '' && this.datesEnd !== '') {
+          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'status':
+        this.codIHR = '';
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.statusLiquid = '';
+        this.codEmployee = '';
+        if (this.status !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'statusLiquid':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.codIHR = '';
+        this.codEmployee = '';
+        if (this.statusLiquid !== '') {
+          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+      case 'codEmployee':
+        this.codSAP = '';
+        this.datesBegin = '';
+        this.datesEnd = '';
+        this.status = '';
+        this.statusLiquid = '';
+        this.codIHR = '';
+        if (this.codEmployee !== '') {
+          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+            (data: any) => {
+              this.pendingsRequestTravels = this.sortByNumber(data.data);
+            });
+        } else {
+          this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
+            this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
+          })
+        }
+        break;
+
+      default:
+        break;
+    }
+  }
+
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
+  }
+
+  //end filters
+
   getRequestsPendings() {
     this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
       if (data) {
@@ -109,11 +497,18 @@ export class PendingTravelComponent implements OnInit {
     this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true, type: type })
   }
   selectTypeReques(param) {
-
+    this.codIHR = '';
+    this.codSAP = '';
+    this.datesBegin = '';
+    this.datesEnd = '';
+    this.status = '';
+    this.statusLiquid = '';
+    this.codEmployee = '';
+    
     switch (param.id.toString()) {
       case '1':
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
-          if (data) {         
+          if (data) {
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }

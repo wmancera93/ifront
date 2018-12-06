@@ -78,6 +78,8 @@ export class NewSpendComponent implements OnInit {
   public operationsSpend: string = '';
   public kostl: boolean = true;
   public nplnr: boolean = false;
+  public typeSpend: string;
+
 
   constructor(public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
@@ -114,6 +116,11 @@ export class NewSpendComponent implements OnInit {
       if (data !== true) {
         this.ticket_travel_request = data;
         this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
+          debugger
+          this.typeSpend = third.data[0].travel_request.travel_type_code;
+          this.spendsService.getSpendsTypes(this.typeSpend).subscribe((select: any) => {
+            this.listSpendType = this.sortByAphabet(select.data);
+          });
           if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
             this.objetcThird = {
               id: third.data[0].travel_request.employee_applicant_to_json.id,
@@ -280,11 +287,44 @@ export class NewSpendComponent implements OnInit {
     });
   }
 
+  public disabledCode: boolean = false;
+
+  maskCode(param) {
+    this.disabledCode = true;
+    let word = '';
+    let wordView = '';
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
+
+    for (let i = 0; i < param.control_number.length; i++) {
+      if (filtro.indexOf(param.control_number.charAt(i)) != -1) {
+        word += param.control_number.charAt(i);
+      }
+    }
+
+    wordView = word;
+
+    if (word.match(/^\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+
+    this.formSpendTravel.controls['control_number'].setValue(wordView);
+
+    if (this.formSpendTravel.value.control_number === wordView) {
+      this.disabledCode = false;
+    }
+  }
 
   ngOnInit() {
-    this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = this.sortByAphabet(select.data);
-    });
+
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
     });
@@ -303,6 +343,7 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getAccountContable().
       subscribe((account: any) => {
         this.accountContable = account.data;
+        console.log(this.accountContable)
       });
   }
 
@@ -388,7 +429,10 @@ export class NewSpendComponent implements OnInit {
       });
       this.ticket_travel_request = travel.travel_request_id;
       this.travelManagementService.getTravelsAllDetail(travel.travel_request_id.toString()).subscribe((detail: any) => {
-
+        this.typeSpend = detail.data[0].travel_request.travel_type_code;
+        this.spendsService.getSpendsTypes(this.typeSpend).subscribe((select: any) => {
+          this.listSpendType = this.sortByAphabet(select.data);
+        });
         if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
           this.nplnr = false;
           this.kostl = true;

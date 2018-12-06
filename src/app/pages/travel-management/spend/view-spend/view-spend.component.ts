@@ -34,6 +34,8 @@ export class ViewSpendComponent implements OnInit {
 
   public ticketSendPDF: any;
 
+  public is_sender_approval: boolean = false;
+
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public http: Http, public alert: AlertsService, public travelManagementService: TravelService,
@@ -41,7 +43,6 @@ export class ViewSpendComponent implements OnInit {
     public travelsService: TravelsService) {
 
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
-      debugger
       if (data.action_method === 'ModalDistCostShow') {
         document.getElementById("closeModalViewSpend").click();
         let viewDistCost = false;
@@ -71,6 +72,7 @@ export class ViewSpendComponent implements OnInit {
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
         this.showTableSpendsDetail = data.data[0].travel_allowances;
+        this.is_sender_approval =  data.data[0].is_sender_approval;
 
         setTimeout(() => {
           this.objectReport.emit({ data: [data.data[0].travel_allowances] });

@@ -5,6 +5,7 @@ import { AdvanceSharedService } from '../../../services/shared/advance-shared/ad
 import { AdvancesService } from '../../../services/travel-management/advances/advances.service';
 import { Advances } from '../../../models/common/travels_management/advances/advances';
 import { User } from '../../../models/general/user';
+import { FiltersGeneralsService } from '../../../services/travel-management/filters-generals/filters-generals.service';
 
 @Component({
   selector: 'app-advances',
@@ -15,10 +16,12 @@ export class AdvancesComponent implements OnInit {
   token
   public advancesItems: Advances;
   public userAuthenticated: User = null;
+  public checkThird: boolean = true;
 
   constructor(public router: Router,
     public advanceSharedService: AdvanceSharedService,
-    public advancesService: AdvancesService) {
+    public advancesService: AdvancesService,
+    public filtersGeneralsService: FiltersGeneralsService) {
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -45,16 +48,271 @@ export class AdvancesComponent implements OnInit {
   ngOnInit() {
   }
 
+  //begin filters
+
+  public codIHR: string = '';
+  public codSAP: string = '';
+  public datesBegin: string = '';
+  public datesEnd: string = '';
+  public status: string = '';
+  public statusLiquid: string = '';
+  public codEmployee: string = '';
+  public page: string = '';
+  public is_collapse: boolean;
+
+  filter(filter) {
+    if (this.checkThird) {
+      this.page = 'sol_anti_in';
+      switch (filter) {
+        case 'codIHR':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+
+          if (this.codIHR !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+              (data: any) => {
+                 this.advancesItems = data.data;
+                
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'codSAP':
+          this.codIHR = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.codSAP !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'dates':
+          this.codSAP = '';
+          this.codIHR = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.datesBegin !== '' && this.datesEnd !== '') {
+            this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'status':
+          this.codIHR = '';
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.status !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'statusLiquid':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.codIHR = '';
+          this.codEmployee = '';
+          if (this.statusLiquid !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'codEmployee':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codIHR = '';
+          if (this.codEmployee !== '') {
+            this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+
+        default:
+          break;
+      }
+    } else {
+      this.page = 'sol_anti_third';
+      switch (filter) {
+        case 'codIHR':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+
+          if (this.codIHR !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'codSAP':
+          this.codIHR = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.codSAP !== '') {
+            this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'dates':
+          this.codSAP = '';
+          this.codIHR = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.datesBegin !== '' && this.datesEnd !== '') {
+            this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'status':
+          this.codIHR = '';
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.statusLiquid = '';
+          this.codEmployee = '';
+          if (this.status !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'statusLiquid':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.codIHR = '';
+          this.codEmployee = '';
+          if (this.statusLiquid !== '') {
+            this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+        case 'codEmployee':
+          this.codSAP = '';
+          this.datesBegin = '';
+          this.datesEnd = '';
+          this.status = '';
+          this.statusLiquid = '';
+          this.codIHR = '';
+          if (this.codEmployee !== '') {
+            this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
+              (data: any) => {
+                this.advancesItems = data.data;
+              });
+          } else {
+            this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
+              this.advancesItems = data.data;
+            });
+          }
+          break;
+
+        default:
+          break;
+      }
+    }
+  }
+
+  collapse(is_collapse: boolean) {
+    this.is_collapse = is_collapse;
+  }
+
+  //end filters
+
   checkAdvance(advance) {
     switch (advance) {
       case 'advance_request':
         this.advancesService.getAdvancePayments().subscribe((advances: any) => {
           this.advancesItems = advances.data;
+          this.checkThird = true;
         });
         break;
       case 'my_advance_request':
         this.advancesService.getMyAdvancePayments().subscribe((data: any) => {
           this.advancesItems = data.data;
+          this.checkThird = false;
         });
         break;
 

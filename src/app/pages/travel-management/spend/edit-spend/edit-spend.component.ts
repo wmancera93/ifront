@@ -11,6 +11,7 @@ import { FileUploadService } from '../../../../services/shared/common/file-uploa
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
+import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 
 @Component({
   selector: 'app-edit-spend',
@@ -57,6 +58,7 @@ export class EditSpendComponent implements OnInit {
   public listTypeDocument: any[] = [];
   public stateRequestsSpend: string;
   public idEmployee: string = '0';
+  public type_spend: string;
 
   showSizeTable
   showPdf
@@ -67,7 +69,7 @@ export class EditSpendComponent implements OnInit {
     public alert: AlertsService,
     public fb: FormBuilder,
     public http: Http, public fileUploadService: FileUploadService,
-    public formDataService: FormDataService, public router: Router) {
+    public formDataService: FormDataService, public router: Router, public travelManagementService: TravelService) {
 
     this.formSpendEditTravel = new FormGroup({});
     this.formSpendEditTravel = fb.group({
@@ -109,13 +111,24 @@ export class EditSpendComponent implements OnInit {
       }
 
       if (data === 'deleteDetailSpendEdit') {
-        this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe((deleteSpend: any) => {
+        this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe(
+          (deleteSpend: any) => {
           this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
           this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
           this.objectReport.emit({ success: true, data: [this.editSpendTable] });
 
           document.getElementById("btn_spend_edit").click();
-        })
+        },
+        ((error:any)=>{
+
+          const alertSuccess: Alerts[] = [{
+            type: 'danger',
+            title: 'Confirmación',
+            message: error.json().errors.toString(),
+            confirmation: false,
+          }];
+          this.alert.setAlert(alertSuccess[0]);
+        }));
       }
       if (data === 'deleteDetailSpendEditCreated') {
         this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
@@ -130,6 +143,7 @@ export class EditSpendComponent implements OnInit {
 
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
+      debugger
       // this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
       //   this.listTravelsFromSpend = travel.data;
       // });
@@ -158,6 +172,16 @@ export class EditSpendComponent implements OnInit {
           document.getElementById("bodyGeneral").removeAttribute('style');
         }
       })
+      setTimeout(() => {
+        this.travelManagementService.getTravelsAllDetail(this.ticketTravel).subscribe((detail: any) => {
+          this.type_spend = detail.data[0].travel_request.travel_type_code;
+          this.spendsService.getSpendsTypes(this.type_spend).subscribe((select: any) => {
+            this.listSpendType = this.sortByAphabet(select.data);
+          });
+        });
+      }, 400);
+
+
     })
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -279,7 +303,6 @@ export class EditSpendComponent implements OnInit {
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEdit'
         }];
-
         this.alert.setAlert(alertSuccess[0]);
       }
 
@@ -311,13 +334,47 @@ export class EditSpendComponent implements OnInit {
 
   }
 
+  public disabledCode: boolean = false;
+
+  maskCode(param) {
+    this.disabledCode = true;
+    let word = '';
+    let wordView = '';
+    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
+
+    for (let i = 0; i < param.control_number.length; i++) {
+      if (filtro.indexOf(param.control_number.charAt(i)) != -1) {
+        word += param.control_number.charAt(i);
+      }
+    }
+
+    wordView = word;
+
+    if (word.match(/^\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    if (word.match(/^\w{2}-\w{2}-\w{2}-\w{2}-\w{2}$/) !== null) {
+      wordView = word + '-';
+    }
+    this.formSpendEditTravel.controls['control_number'].setValue(wordView);
+
+    if (this.formSpendEditTravel.value.control_number === wordView) {
+      this.disabledCode = false;
+    }
+  }
+
 
   ngOnInit() {
 
-
-    this.spendsService.getSpendsTypes().subscribe((select: any) => {
-      this.listSpendType = this.sortByAphabet(select.data);
-    });
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
     });
@@ -358,10 +415,10 @@ export class EditSpendComponent implements OnInit {
       field_5: objectSpend.date !== '' ? dateSpend : '',
       field_6: objectSpend.observation.toUpperCase(),
       field_7: objectSpend.bill_number,
-      field_8: objectSpend.control_number,
+      field_8: objectSpend.control_number.toUpperCase(),
       field_9: objectSpend.nit,
       field_10: objectSpend.bussines_name.toUpperCase(),
-      field_11: objectSpend.cod_provider.toUpperCase(),
+      field_11: objectSpend.cod_provider,
       field_12: objectSpend.authorization_number,
       field_13: objectSpend.populated.toUpperCase(),
       field_14: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
@@ -427,10 +484,10 @@ export class EditSpendComponent implements OnInit {
         element.field_5 = objectEditSpend.date !== '' ? dateSpend : '';
         element.field_6 = objectEditSpend.observation.toUpperCase();
         element.field_7 = objectEditSpend.bill_number;
-        element.field_8 = objectEditSpend.control_number;
+        element.field_8 = objectEditSpend.control_number.toUpperCase();
         element.field_9 = objectEditSpend.nit;
         element.field_10 = objectEditSpend.bussines_name.toUpperCase();
-        element.field_11 = objectEditSpend.cod_provider.toUpperCase();
+        element.field_11 = objectEditSpend.cod_provider;
         element.field_12 = objectEditSpend.authorization_number;
         element.field_13 = objectEditSpend.populated.toUpperCase();
         element.field_14 = this.listTypeDocument.filter((data) => data.id.toString() === objectEditSpend.document.toString())[0].name;
