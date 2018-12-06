@@ -16,8 +16,8 @@ export class SpendsService {
     return this.tokenService.get('travel_allowance_requests/my_travels_allowances_requests')
       .map((data: any) => data.json());
   }
-  getSpendsTypes() {
-    return this.tokenService.get('travel_requests/allowance_type_for_select')
+  getSpendsTypes(type_spend) {
+    return this.tokenService.get('travel_requests/allowance_type_for_select/' + type_spend)
       .map((data: any) => data.json());
   }
 
