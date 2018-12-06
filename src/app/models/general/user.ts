@@ -41,8 +41,8 @@ export interface Employee {
     is_travel_approver?: string,
     new_cont?: string,
     is_approver?: boolean,
-    trip_by_third?: boolean
-    
+    trip_by_third?: boolean,
+    is_travel_manager?:boolean    
 }
 export interface Boss{
     name_complete?: string;

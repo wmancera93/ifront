@@ -30,7 +30,7 @@ export class TravelManagementComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    if ((this.dataUserTravels.employee.is_admin == 'true') && (this.dataUserTravels.employee.is_approver == true)) {
+    if ((this.dataUserTravels.employee.is_travel_manager == true) && (this.dataUserTravels.employee.is_approver == true)) {
       this.buttonInfo = [
         {
           title: "Viajes",
@@ -119,48 +119,74 @@ export class TravelManagementComponent implements OnInit {
             icon_secundary: "fa fa-check",
             tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
             route: "/ihr/management_travel"
-          },
-          {
-            title: "Asignación de hoteles",
-            icon_primary: "fa fa-circle-thin",
-            icon_secundary: "fa fa-bed",
-            tooltipText: "Haga clic aquí para crear hoteles",
-            route: "/ihr/hotels"
-          },
+          }
         ]
-      } else {
-        this.buttonInfo = [
-          {
-            title: "Viajes",
-            icon_primary: "fa fa-globe",
-            icon_secundary: "fa fa-plane",
-            tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
-            route: "/ihr/travels"
-          },
-          {
-            title: "Anticipos",
-            icon_primary: "fa fa-money",
-            icon_secundary: "",
-            tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
-            route: "/ihr/advances"
-          },
-          {
-            title: "Gastos",
-            icon_primary: "fa fa-circle-thin",
-            icon_secundary: "fa fa-usd",
-            tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
-            route: "/ihr/spend"
-          },
-          {
-            title: "Asignación de hoteles",
-            icon_primary: "fa fa-circle-thin",
-            icon_secundary: "fa fa-bed",
-            tooltipText: "Haga clic aquí para crear hoteles",
-            route: "/ihr/hotels"
-          },
-        ]
+      } else{
+        if (this.dataUserTravels.employee.is_travel_manager){
+          this.buttonInfo = [
+            {
+              title: "Viajes",
+              icon_primary: "fa fa-globe",
+              icon_secundary: "fa fa-plane",
+              tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+              route: "/ihr/travels"
+            },
+            {
+              title: "Anticipos",
+              icon_primary: "fa fa-money",
+              icon_secundary: "",
+              tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+              route: "/ihr/advances"
+            },
+            {
+              title: "Gastos",
+              icon_primary: "fa fa-circle-thin",
+              icon_secundary: "fa fa-usd",
+              tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+              route: "/ihr/spend"
+            },
+            // {
+            //   title: "Reportes",
+            //   icon_primary: "fa fa-table",
+            //   icon_secundary: "fa fa-search",
+            //   tooltipText: "Haga clic aquí para ver los reportes",
+            //   route: "/ihr/reports_travel"
+            // },
+            {
+              title: "Asignación de hoteles",
+              icon_primary: "fa fa-circle-thin",
+              icon_secundary: "fa fa-bed",
+              tooltipText: "Haga clic aquí para crear hoteles",
+              route: "/ihr/hotels"
+            },
+          ];
+        }
+        else {
+          this.buttonInfo = [
+            {
+              title: "Viajes",
+              icon_primary: "fa fa-globe",
+              icon_secundary: "fa fa-plane",
+              tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+              route: "/ihr/travels"
+            },
+            {
+              title: "Anticipos",
+              icon_primary: "fa fa-money",
+              icon_secundary: "",
+              tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+              route: "/ihr/advances"
+            },
+            {
+              title: "Gastos",
+              icon_primary: "fa fa-circle-thin",
+              icon_secundary: "fa fa-usd",
+              tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+              route: "/ihr/spend"
+            }
+          ]
+        }
       }
-
     }
 
   }
