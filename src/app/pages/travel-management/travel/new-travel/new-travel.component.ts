@@ -240,7 +240,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
           this.formTravelManagement = new FormGroup({});
           this.formTravelManagement = this.fb.group({
-
+            id_travel: object[0].id_travel,
             type_travel: object[0].type_travel,
             date_requests_begin: object[0].date_requests_begin,
             date_requests_end: object[0].date_requests_end,
@@ -271,8 +271,15 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_hotels: object[0].id_hotels,
             date_hotel_in: object[0].date_hotel_in,
             date_hotel_out: object[0].date_hotel_out,
-            travel_mileage: object[0].travel_mileage,
+            travel_mileage: this.transport_types.filter((data) => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T' ? object[0].travel_mileage : '',
           });
+
+          if (this.transport_types.filter((data) => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T') {
+            this.showMilenage = true
+          } else {
+            this.showMilenage = false
+          }
+
           this.searchState(this.formTravelManagement.value, 'edit');
           this.searchStateto(this.formTravelManagement.value, 'edit');
           this.searchTerminal(this.formTravelManagement.value, 'edit');
@@ -600,7 +607,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   addDestination(modelPartial) {
-    debugger
     modelPartial.id_travel = this.count + 1;
     let dateIn = modelPartial.date_begin.split('-');
     let dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
@@ -625,7 +631,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       // field_8: hotell,
       // field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
       // field_10: modelPartial.date_hotel_out !== '' ? dateEndOutHotel : '',
-      field_11: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
+      field_11: modelPartial.travel_mileage,
       field_12: {
         type_method: "UPDATE",
         type_element: "button",
@@ -649,7 +655,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.traverlsDestination.push({
       travel_id: modelPartial.id_travel,
       transport_id: modelPartial.id_transport,
-      total_mileage: modelPartial.travel_mileage === '1' ? '' : modelPartial.travel_mileage,
+      total_mileage: modelPartial.travel_mileage,
       origin_location_id: modelPartial.id_state,
       origin_location_text: modelPartial.id_city,
       origin_terminal_id: modelPartial.id_terminal,
@@ -688,15 +694,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     } else {
       this.bnew = false
     }
-
-
-
     document.getElementById("funtionTravel").click();
-
     setTimeout(() => {
       document.getElementById('travel_new').scrollTo(0, 1000);
     }, 200);
-
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
@@ -717,6 +718,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['travel_mileage'].setValue('1');
     } else {
       this.showMilenage = false;
+      this.formTravelManagement.controls['travel_mileage'].setValue('');
     }
 
   }
@@ -755,7 +757,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.terminalLocations = [];
     this.travelManagementService.gettransportTerminals(form.id_country).
       subscribe((data: any) => {
-        this.terminalLocations = data.data;
+        this.terminalLocations = this.sortByAphabet(data.data);
         if (this.terminalLocations.length > 0) {
           if (acction === 'new') {
             this.formTravelManagement.controls['id_terminal'].setValue('-1');
@@ -769,7 +771,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.terminalLocationsto = [];
     this.travelManagementService.gettransportTerminals(form.id_countryto).
       subscribe((data: any) => {
-        this.terminalLocationsto = data.data;
+        this.terminalLocationsto = this.sortByAphabet(data.data);
         if (this.terminalLocationsto.length > 0) {
           if (acction === 'new') {
             this.formTravelManagement.controls['id_terminalto'].setValue('-1');
@@ -849,7 +851,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     if (param.type_travel === '3' || param.type_travel === '16') {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
       this.changeTravelLegal('P');
-    } else {
+    }
+    else {
       this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
       this.changeTravelLegal('');
     }
@@ -1029,7 +1032,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
       this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.eployee_selected == null ? '0' : this.eployee_selected.id.toString())
         .subscribe(data => {
-          debugger
           if ((dateEndCalculate - dateBeginCalculate) < 0 && data) {
 
             this.formTravelManagement.controls['date_requests_begin'].setValue('');
@@ -1086,7 +1088,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                     }, 100);
                     setTimeout(() => {
                       document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-                    }, 1000);
+                    }, 2000);
                   }
                 }
               } else {
