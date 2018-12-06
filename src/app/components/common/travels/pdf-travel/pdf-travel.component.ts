@@ -84,10 +84,10 @@ export class PdfTravelComponent implements OnInit {
       doc.text('FORMULARIO DE VIAJE', pageCenter, 25, 'center');
       doc.text(this.result.data[0].travel_request.travel_requests_type_name.toUpperCase(), pageCenter, 30, 'center');
       doc.text('FECHA DE SOLICITUD: ' + dateNow, (pageCenter * 2) - rMargin, 20, 'right');
-      if(this.result.data[0].travel_request.ticket_cli !== null){
+      if (this.result.data[0].travel_request.ticket_cli !== null) {
         doc.text('VIAJE NO: ' + this.result.data[0].travel_request.ticket_cli.toString(), (pageCenter * 2) - rMargin, 25, 'right');
       }
-    
+
 
       let columnsMacro = ["DATOS MARCO", ""];
       let dataMacro
@@ -95,7 +95,7 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "KOSTL") {
         dataMacro = [
           ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),"Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
+          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
           ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
           ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
           ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
@@ -108,7 +108,7 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "NPLNR") {
         dataMacro = [
           ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),"Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
+          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
           ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
           ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
           ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
@@ -171,38 +171,40 @@ export class PdfTravelComponent implements OnInit {
       );
 
       if (this.journeys(this.result, doc)) {
-        if (this.advances(this.result, doc)) {
-          if (this.allowance(this.result, doc)) {
-            if (this.approvals(this.result, doc)) {
-              let columnsSign = [""];
-              let dataSign = [["______________________________________________"],
-              [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
+        if (this.hotels(this.result, doc)) {
+          if (this.advances(this.result, doc)) {
+            if (this.allowance(this.result, doc)) {
+              if (this.approvals(this.result, doc)) {
+                let columnsSign = [""];
+                let dataSign = [["______________________________________________"],
+                [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
 
-              doc.autoTable(columnsSign, dataSign, {
-                startY: doc.autoTable.previous.finalY + 25,
-                pageBreak: 'avoid',
-                theme: 'plain',
-                styles: {
-                  cellPadding: 1,
-                  fontSize: 10,
-                  font: "helvetica",
-                  fontStyle: 'normal',
-                  overflow: 'hidden',
-                  textColor: 20,
-                  halign: 'left',
-                  valign: 'middle',
-                  columnWidth: 'auto',
-                },
-                headerStyles: {
-                  fillColor: [255, 255, 255],
-                  fontStyle: 'normal',
-                  halign: 'left',
-                  textColor: 20,
-                },
+                doc.autoTable(columnsSign, dataSign, {
+                  startY: doc.autoTable.previous.finalY + 25,
+                  pageBreak: 'avoid',
+                  theme: 'plain',
+                  styles: {
+                    cellPadding: 1,
+                    fontSize: 10,
+                    font: "helvetica",
+                    fontStyle: 'normal',
+                    overflow: 'hidden',
+                    textColor: 20,
+                    halign: 'left',
+                    valign: 'middle',
+                    columnWidth: 'auto',
+                  },
+                  headerStyles: {
+                    fillColor: [255, 255, 255],
+                    fontStyle: 'normal',
+                    halign: 'left',
+                    textColor: 20,
+                  },
+                }
+                );
+
+                doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
               }
-              );
-
-              doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
             }
           }
         }
@@ -213,6 +215,10 @@ export class PdfTravelComponent implements OnInit {
     });
 
   }
+
+  // and everythings all by the way -
+  //when i get older
+
 
   journeys(result, doc) {
     if (result.data[0].travel_managements.data.length > 0) {
@@ -519,6 +525,82 @@ export class PdfTravelComponent implements OnInit {
       );
 
     }
+    return true;
+  }
+
+  hotels(result, doc) {
+    if (result.data[0].travel_managements.hotels.length > 0) {
+      let recordsPrint = [];
+
+      result.data[0].travel_managements.hotels.forEach(element => {
+        element.hotels.forEach(hotel => {
+          recordsPrint.push({
+            hotel: hotel.hotel_name,
+            date_begin: hotel.date_begin.split('-')[2] + '/' + hotel.date_begin.split('-')[1] + '/' + hotel.date_begin.split('-')[0],
+            date_end: hotel.date_end.split('-')[2] + '/' + hotel.date_end.split('-')[1] + '/' + hotel.date_end.split('-')[0]
+          })
+        });
+      });
+
+      if (recordsPrint.length > 0) {
+        let columnsHeaderJourneys = ["HOTELES", ""];
+        let dataHeaderJourneys: string[] = [];
+
+        doc.autoTable(columnsHeaderJourneys, dataHeaderJourneys, {
+          startY: doc.autoTable.previous.finalY + 10,
+          pageBreak: 'avoid',
+          theme: 'plain',
+          styles: {
+            cellPadding: 1,
+            fontSize: 10,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [91, 105, 110],
+            fontStyle: 'bold',
+            halign: 'left',
+            textColor: 250,
+          },
+        });
+
+        let columnsPdf = [
+          { title: 'Hotel', dataKey: "hotel" },
+          { title: 'Fecha Inicio', dataKey: "date_begin" },
+          { title: 'Fecha Fin', dataKey: "date_end" }];
+
+        doc.autoTable(columnsPdf, recordsPrint, {
+          startY: doc.autoTable.previous.finalY,
+          pageBreak: 'avoid',
+          theme: 'grid',
+          styles: {
+            cellPadding: 1,
+            fontSize: 8,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [226, 226, 226],
+            fontStyle: 'normal',
+            halign: 'left',
+            textColor: 20,
+          },
+        });
+      }
+    }
+
+
+
     return true;
   }
 }
