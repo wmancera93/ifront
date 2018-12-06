@@ -174,36 +174,38 @@ export class PdfTravelComponent implements OnInit {
         if (this.hotels(this.result, doc)) {
           if (this.advances(this.result, doc)) {
             if (this.allowance(this.result, doc)) {
-              if (this.approvals(this.result, doc)) {
-                let columnsSign = [""];
-                let dataSign = [["______________________________________________"],
-                [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
+              if (this.distribution(this.result, doc)) {
+                if (this.approvals(this.result, doc)) {
+                  let columnsSign = [""];
+                  let dataSign = [["______________________________________________"],
+                  [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
 
-                doc.autoTable(columnsSign, dataSign, {
-                  startY: doc.autoTable.previous.finalY + 25,
-                  pageBreak: 'avoid',
-                  theme: 'plain',
-                  styles: {
-                    cellPadding: 1,
-                    fontSize: 10,
-                    font: "helvetica",
-                    fontStyle: 'normal',
-                    overflow: 'hidden',
-                    textColor: 20,
-                    halign: 'left',
-                    valign: 'middle',
-                    columnWidth: 'auto',
-                  },
-                  headerStyles: {
-                    fillColor: [255, 255, 255],
-                    fontStyle: 'normal',
-                    halign: 'left',
-                    textColor: 20,
-                  },
+                  doc.autoTable(columnsSign, dataSign, {
+                    startY: doc.autoTable.previous.finalY + 25,
+                    pageBreak: 'avoid',
+                    theme: 'plain',
+                    styles: {
+                      cellPadding: 1,
+                      fontSize: 10,
+                      font: "helvetica",
+                      fontStyle: 'normal',
+                      overflow: 'hidden',
+                      textColor: 20,
+                      halign: 'left',
+                      valign: 'middle',
+                      columnWidth: 'auto',
+                    },
+                    headerStyles: {
+                      fillColor: [255, 255, 255],
+                      fontStyle: 'normal',
+                      halign: 'left',
+                      textColor: 20,
+                    },
+                  }
+                  );
+
+                  doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
                 }
-                );
-
-                doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
               }
             }
           }
@@ -215,10 +217,6 @@ export class PdfTravelComponent implements OnInit {
     });
 
   }
-
-  // and everythings all by the way -
-  //when i get older
-
 
   journeys(result, doc) {
     if (result.data[0].travel_managements.data.length > 0) {
@@ -396,6 +394,82 @@ export class PdfTravelComponent implements OnInit {
     return true;
   }
 
+  hotels(result, doc) {
+    if (result.data[0].travel_managements.hotels.length > 0) {
+      let recordsPrint = [];
+
+      result.data[0].travel_managements.hotels.forEach(element => {
+        element.hotels.forEach(hotel => {
+          recordsPrint.push({
+            hotel: hotel.hotel_name,
+            date_begin: hotel.date_begin.split('-')[2] + '/' + hotel.date_begin.split('-')[1] + '/' + hotel.date_begin.split('-')[0],
+            date_end: hotel.date_end.split('-')[2] + '/' + hotel.date_end.split('-')[1] + '/' + hotel.date_end.split('-')[0]
+          })
+        });
+      });
+
+      if (recordsPrint.length > 0) {
+        let columnsHeaderJourneys = ["HOTELES", ""];
+        let dataHeaderJourneys: string[] = [];
+
+        doc.autoTable(columnsHeaderJourneys, dataHeaderJourneys, {
+          startY: doc.autoTable.previous.finalY + 10,
+          pageBreak: 'avoid',
+          theme: 'plain',
+          styles: {
+            cellPadding: 1,
+            fontSize: 10,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [91, 105, 110],
+            fontStyle: 'bold',
+            halign: 'left',
+            textColor: 250,
+          },
+        });
+
+        let columnsPdf = [
+          { title: 'Hotel', dataKey: "hotel" },
+          { title: 'Fecha Inicio', dataKey: "date_begin" },
+          { title: 'Fecha Fin', dataKey: "date_end" }];
+
+        doc.autoTable(columnsPdf, recordsPrint, {
+          startY: doc.autoTable.previous.finalY,
+          pageBreak: 'avoid',
+          theme: 'grid',
+          styles: {
+            cellPadding: 1,
+            fontSize: 8,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [226, 226, 226],
+            fontStyle: 'normal',
+            halign: 'left',
+            textColor: 20,
+          },
+        });
+      }
+    }
+
+
+
+    return true;
+  }
+
   allowance(result, doc) {
     if (result.data[0].travel_allowance_request.data !== null && result.data[0].travel_allowance_request.data.length === undefined) {
       let labels = [];
@@ -481,6 +555,91 @@ export class PdfTravelComponent implements OnInit {
     return true;
   }
 
+  distribution(result, doc) {
+    if (result.data[0].travel_allowance_request.data !== null && result.data[0].travel_allowance_request.data.length === undefined) {
+      let recordsPrint = [];
+
+      result.data[0].travel_allowance_request.cost_distribution.travel_allowances.forEach(element => {
+        let code_allowance = element.type_allowance_code;
+        element.cost_distribution_allowances.forEach(distribution => {
+          recordsPrint.push({
+            tipe_allowance: code_allowance,
+            element: distribution.travel_costs_type_name,
+            center_coast: distribution.travel_cost_code.toString() === '' ? '' : distribution.travel_cost_code.toString() + '-' + distribution.travel_cost_name,
+            travel_graph: distribution.travel_graph_code.toString() === '' ? '' : distribution.travel_graph_code.toString() + '-' + distribution.travel_graph_name,
+            travel_operation: distribution.travel_operation_code.toString() === '' ? '' : distribution.travel_operation_code.toString() + '-' + distribution.travel_operation_name,
+            account: distribution.accounting_account_code.toString() === '' ? '' : distribution.accounting_account_code.toString() + '-' + distribution.accounting_account_name,
+            distribution: distribution.distribution.toString() + '%'
+          })
+        });
+      });
+
+      if (recordsPrint.length > 0) {
+        let columnsHeaderJourneys = ["DISTRIBUCIÓN DE COSTOS", ""];
+        let dataHeaderJourneys: string[] = [];
+
+        doc.autoTable(columnsHeaderJourneys, dataHeaderJourneys, {
+          startY: doc.autoTable.previous.finalY + 10,
+          pageBreak: 'avoid',
+          theme: 'plain',
+          styles: {
+            cellPadding: 1,
+            fontSize: 10,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [91, 105, 110],
+            fontStyle: 'bold',
+            halign: 'left',
+            textColor: 250,
+          },
+        });
+
+        let columnsPdf = [
+          { title: 'Gasto', dataKey: "tipe_allowance" },
+          { title: 'E.Imputación', dataKey: "element" },
+          { title: 'C.Costo', dataKey: "center_coast" },
+          { title: 'Grafo', dataKey: "travel_graph" },
+          { title: 'Operación', dataKey: "travel_operation" },
+          { title: 'C.Contable', dataKey: "account" },
+          { title: 'Dist', dataKey: "distribution" }];
+
+        doc.autoTable(columnsPdf, recordsPrint, {
+          startY: doc.autoTable.previous.finalY,
+          pageBreak: 'avoid',
+          theme: 'grid',
+          styles: {
+            cellPadding: 1,
+            fontSize: 8,
+            font: "helvetica",
+            fontStyle: 'normal',
+            overflow: 'hidden',
+            textColor: 20,
+            halign: 'left',
+            valign: 'middle',
+            columnWidth: 'auto',
+          },
+          headerStyles: {
+            fillColor: [226, 226, 226],
+            fontStyle: 'normal',
+            halign: 'left',
+            textColor: 20,
+          },
+        });
+      }
+    }
+
+
+
+    return true;
+  }
+
   approvals(result, doc) {
     if (result.data[0].travel_request.approvers_to_json.length > 0) {
       let columnsHeaderJourneys = ["APROBADORES", "ESTADOS", "OBSERVACIONES"];
@@ -528,79 +687,5 @@ export class PdfTravelComponent implements OnInit {
     return true;
   }
 
-  hotels(result, doc) {
-    if (result.data[0].travel_managements.hotels.length > 0) {
-      let recordsPrint = [];
 
-      result.data[0].travel_managements.hotels.forEach(element => {
-        element.hotels.forEach(hotel => {
-          recordsPrint.push({
-            hotel: hotel.hotel_name,
-            date_begin: hotel.date_begin.split('-')[2] + '/' + hotel.date_begin.split('-')[1] + '/' + hotel.date_begin.split('-')[0],
-            date_end: hotel.date_end.split('-')[2] + '/' + hotel.date_end.split('-')[1] + '/' + hotel.date_end.split('-')[0]
-          })
-        });
-      });
-
-      if (recordsPrint.length > 0) {
-        let columnsHeaderJourneys = ["HOTELES", ""];
-        let dataHeaderJourneys: string[] = [];
-
-        doc.autoTable(columnsHeaderJourneys, dataHeaderJourneys, {
-          startY: doc.autoTable.previous.finalY + 10,
-          pageBreak: 'avoid',
-          theme: 'plain',
-          styles: {
-            cellPadding: 1,
-            fontSize: 10,
-            font: "helvetica",
-            fontStyle: 'normal',
-            overflow: 'hidden',
-            textColor: 20,
-            halign: 'left',
-            valign: 'middle',
-            columnWidth: 'auto',
-          },
-          headerStyles: {
-            fillColor: [91, 105, 110],
-            fontStyle: 'bold',
-            halign: 'left',
-            textColor: 250,
-          },
-        });
-
-        let columnsPdf = [
-          { title: 'Hotel', dataKey: "hotel" },
-          { title: 'Fecha Inicio', dataKey: "date_begin" },
-          { title: 'Fecha Fin', dataKey: "date_end" }];
-
-        doc.autoTable(columnsPdf, recordsPrint, {
-          startY: doc.autoTable.previous.finalY,
-          pageBreak: 'avoid',
-          theme: 'grid',
-          styles: {
-            cellPadding: 1,
-            fontSize: 8,
-            font: "helvetica",
-            fontStyle: 'normal',
-            overflow: 'hidden',
-            textColor: 20,
-            halign: 'left',
-            valign: 'middle',
-            columnWidth: 'auto',
-          },
-          headerStyles: {
-            fillColor: [226, 226, 226],
-            fontStyle: 'normal',
-            halign: 'left',
-            textColor: 20,
-          },
-        });
-      }
-    }
-
-
-
-    return true;
-  }
 }
