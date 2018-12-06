@@ -1,4 +1,5 @@
-<button id="btn-viewSpends" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_viewSpends" style="display:none;">
+<button id="btn-viewSpends" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_viewSpends"
+  style="display:none;">
 </button>
 <div class="modal" tabindex="-1" role="dialog" id="modal_viewSpends">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
@@ -51,7 +52,8 @@
         </div>
         <div class="row justify-content-center" style="margin-top:40px">
           <div class="col-12" style="min-height: 80px !important">
-            <app-data-table [records]="objectReport" id="tableViewSpends" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableViewSpends" [pdf]="showPdf" [sizeTable]="showSizeTable"
+              [title]="nameReport"></app-data-table>
           </div>
         </div>
         <div class="row" style="margin-top: 50px">
@@ -118,8 +120,8 @@
               </div>
               <div id="collapseAdvance" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
                 style="margin-top: 25px">
-                <app-data-table [records]="objectPrintAdvancesView" [pdf]="showPdf" id="tableAdvanceSaved"
-                  [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+                <app-data-table [records]="objectPrintAdvancesView" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable"
+                  [title]="nameReportAdvance"></app-data-table>
               </div>
             </div>
           </div>
@@ -131,18 +133,18 @@
           </div>
         </div> -->
 
-        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
-          <div class="col-lg-4 col-md-6 col-12" *ngIf="allRequestsInSpend[0].travel_allowance_request.data.status_request != 'En proceso'">
+        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="is_sender_approval">
+          <div class="col-lg-4 col-md-6 col-12">
             <button class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
               <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
           </div>
         </div>
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
-            <div class="col-lg-4 col-md-6 col-12">
-              <button class="btn btn-warning btn-block cursor-general" (click)="exportExcel()">
-                <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;Exportar Excel</button>
-            </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <button class="btn btn-warning btn-block cursor-general" (click)="exportExcel()">
+              <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;Exportar Excel</button>
           </div>
+        </div>
         <div class="modal-footerInfo justify-content-center">
           <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
             <h6> Cerrar </h6>
