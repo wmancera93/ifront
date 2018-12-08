@@ -1197,7 +1197,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
-      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.eployee_selected == null ? '0' : this.eployee_selected.id.toString())
+      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.ticket)
         .subscribe(data => {
           if ((dateEndCalculate - dateBeginCalculate) < 0 && data) {
             document.getElementById("btn_travel_edit").click();
