@@ -1030,146 +1030,148 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       let dateBeginCalculate = days.date_requests_begin.toString().replace('-', '').replace('-', '');
       let dateEndCalculate = days.date_requests_end.toString().replace('-', '').replace('-', '');
 
-      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.eployee_selected == null ? '0' : this.eployee_selected.id.toString())
+      this.travelManagementService.validateDatesTravelRequests(dateBeginCalculate, dateEndCalculate, this.eployee_selected == null ? '0' : this.eployee_selected.id.toString(), '0')
         .subscribe(data => {
-          if ((dateEndCalculate - dateBeginCalculate) < 0 && data) {
+          // if ((dateEndCalculate - dateBeginCalculate) < 0 && data) {
 
-            this.formTravelManagement.controls['date_requests_begin'].setValue('');
-            this.formTravelManagement.controls['date_requests_end'].setValue('');
+          //   this.formTravelManagement.controls['date_requests_begin'].setValue('');
+          //   this.formTravelManagement.controls['date_requests_end'].setValue('');
 
-            document.getElementById("btn_travel_new").click();
-            const alertDataWrong: Alerts[] = [{
-              type: 'danger',
-              title: 'Error',
-              message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud ¿Desea continuar con la solicitud?',
-              confirmation: true,
-              typeConfirmation: 'continueDestinationRequestsValidateDates'
+          //   document.getElementById("btn_travel_new").click();
+          //   const alertDataWrong: Alerts[] = [{
+          //     type: 'danger',
+          //     title: 'Error',
+          //     message: 'La fecha de inicio general de solicitud del viaje no puede ser mayor a la de finalizacion de la solicitud ¿Desea continuar con la solicitud?',
+          //     confirmation: true,
+          //     typeConfirmation: 'continueDestinationRequestsValidateDates'
 
-            }];
-            this.alert.setAlert(alertDataWrong[0]);
-          } else {
-            if ((days.date_begin !== '') || (days.date_end !== '')) {
-              if ((days.date_begin !== '')) {
-                if ((days.date_requests_begin > days.date_begin)) {
-                  document.getElementById("btn_travel_new").click();
-                  const alertDataWrong: Alerts[] = [{
-                    type: 'danger',
-                    title: 'Error',
-                    message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
-                    confirmation: true,
-                    typeConfirmation: 'continueDestinationRequests1'
+          //   }];
+          //   this.alert.setAlert(alertDataWrong[0]);
+          // } else {
+          //   if ((days.date_begin !== '') || (days.date_end !== '')) {
+          //     if ((days.date_begin !== '')) {
+          //       if ((days.date_requests_begin > days.date_begin)) {
+          //         document.getElementById("btn_travel_new").click();
+          //         const alertDataWrong: Alerts[] = [{
+          //           type: 'danger',
+          //           title: 'Error',
+          //           message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
+          //           confirmation: true,
+          //           typeConfirmation: 'continueDestinationRequests1'
 
-                  }];
-                  this.alert.setAlert(alertDataWrong[0]);
-                } else {
-                  if (this.travelProof[0].data[0].data.length > 0) {
-                    document.getElementById("btn_travel_new").click();
+          //         }];
+          //         this.alert.setAlert(alertDataWrong[0]);
+          //       } else {
+          //         if (this.travelProof[0].data[0].data.length > 0) {
+          //           document.getElementById("btn_travel_new").click();
 
-                    this.dateBeginValidate(days);
-                    this.dateEndValidate(days);
-                    setTimeout(() => {
-                      if (this.array_wrong.length > 0) {
-                        document.getElementById("btn_travel_new").click();
-                        const alertDataWrong: Alerts[] = [{
-                          type: 'danger',
-                          title: 'Error',
-                          message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
-                          confirmation: true,
-                          typeConfirmation: 'continueDestinationRequests1'
+          //           this.dateBeginValidate(days);
+          //           this.dateEndValidate(days);
+          //           setTimeout(() => {
+          //             if (this.array_wrong.length > 0) {
+          //               document.getElementById("btn_travel_new").click();
+          //               const alertDataWrong: Alerts[] = [{
+          //                 type: 'danger',
+          //                 title: 'Error',
+          //                 message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
+          //                 confirmation: true,
+          //                 typeConfirmation: 'continueDestinationRequests1'
 
-                        }];
-                        this.alert.setAlert(alertDataWrong[0]);
-                      }
-                    }, 500);
-                  } else {
-                    this.activate = true;
-                    setTimeout(() => {
-                      this.objectReport.emit(this.travelProof[0]);
-                    }, 100);
-                    setTimeout(() => {
-                      document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-                    }, 2000);
-                  }
-                }
-              } else {
-                if ((days.date_end !== '')) {
-                  if ((days.date_requests_end < days.date_end)) {
-                    document.getElementById("btn_travel_new").click();
-                    const alertDataWrong: Alerts[] = [{
-                      type: 'danger',
-                      title: 'Error',
-                      message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
-                      confirmation: true,
-                      typeConfirmation: 'continueDestinationRequests1'
+          //               }];
+          //               this.alert.setAlert(alertDataWrong[0]);
+          //             }
+          //           }, 500);
+          //         } else {
+          //           this.activate = true;
+          //           setTimeout(() => {
+          //             this.objectReport.emit(this.travelProof[0]);
+          //           }, 100);
+          //           setTimeout(() => {
+          //             document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+          //           }, 2000);
+          //         }
+          //       }
+          //     } else {
+          //       if ((days.date_end !== '')) {
+          //         if ((days.date_requests_end < days.date_end)) {
+          //           document.getElementById("btn_travel_new").click();
+          //           const alertDataWrong: Alerts[] = [{
+          //             type: 'danger',
+          //             title: 'Error',
+          //             message: 'Las fechas del trayecto estan fuera de las establecidas en la solicitud del viaje ¿Desea continuar con la solicitud?',
+          //             confirmation: true,
+          //             typeConfirmation: 'continueDestinationRequests1'
 
-                    }];
-                    this.alert.setAlert(alertDataWrong[0]);
-                  } else {
-                    if (this.travelProof[0].data[0].data.length > 0) {
-                      document.getElementById("btn_travel_new").click();
+          //           }];
+          //           this.alert.setAlert(alertDataWrong[0]);
+          //         } else {
+          //           if (this.travelProof[0].data[0].data.length > 0) {
+          //             document.getElementById("btn_travel_new").click();
 
-                      this.dateBeginValidate(days);
-                      this.dateEndValidate(days);
-                      setTimeout(() => {
-                        if (this.array_wrong.length > 0) {
+          //             this.dateBeginValidate(days);
+          //             this.dateEndValidate(days);
+          //             setTimeout(() => {
+          //               if (this.array_wrong.length > 0) {
 
-                          document.getElementById("btn_travel_new").click();
-                          const alertDataWrong: Alerts[] = [{
-                            type: 'danger',
-                            title: 'Error',
-                            message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
-                            confirmation: true,
-                            typeConfirmation: 'continueDestinationRequests1'
+          //                 document.getElementById("btn_travel_new").click();
+          //                 const alertDataWrong: Alerts[] = [{
+          //                   type: 'danger',
+          //                   title: 'Error',
+          //                   message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
+          //                   confirmation: true,
+          //                   typeConfirmation: 'continueDestinationRequests1'
 
-                          }];
-                          this.alert.setAlert(alertDataWrong[0]);
-                        }
-                      }, 500);
-                    } else {
-                      this.activate = true;
-                      setTimeout(() => {
-                        this.objectReport.emit(this.travelProof[0]);
-                      }, 100);
-                      setTimeout(() => {
-                        document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-                      }, 200);
-                    }
-                  }
-                }
-              }
-            } else {
-              if (this.travelProof[0].data[0].data.length > 0) {
-                this.validateDateHeader = [];
-                this.array_wrong = [];
+          //                 }];
+          //                 this.alert.setAlert(alertDataWrong[0]);
+          //               }
+          //             }, 500);
+          //           } else {
+          //             this.activate = true;
+          //             setTimeout(() => {
+          //               this.objectReport.emit(this.travelProof[0]);
+          //             }, 100);
+          //             setTimeout(() => {
+          //               document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+          //             }, 200);
+          //           }
+          //         }
+          //       }
+          //     }
+          //   } else {
+          //     if (this.travelProof[0].data[0].data.length > 0) {
+          //       this.validateDateHeader = [];
+          //       this.array_wrong = [];
 
-                this.dateBeginValidate(days);
-                this.dateEndValidate(days);
-                setTimeout(() => {
-                  if (this.array_wrong.length > 0) {
-                    document.getElementById("btn_travel_new").click();
-                    const alertDataWrong: Alerts[] = [{
-                      type: 'danger',
-                      title: 'Error',
-                      message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
-                      confirmation: true,
-                      typeConfirmation: 'continueDestinationRequests1'
+          //       this.dateBeginValidate(days);
+          //       this.dateEndValidate(days);
+          //       setTimeout(() => {
+          //         if (this.array_wrong.length > 0) {
+          //           document.getElementById("btn_travel_new").click();
+          //           const alertDataWrong: Alerts[] = [{
+          //             type: 'danger',
+          //             title: 'Error',
+          //             message: 'La fecha de los trayectos' + ' ' + this.array_wrong.join(",") + ' ' + 'se encuentra fuera del rango de la fecha del viaje ¿Desea continuar con la solicitud?',
+          //             confirmation: true,
+          //             typeConfirmation: 'continueDestinationRequests1'
 
-                    }];
-                    this.alert.setAlert(alertDataWrong[0]);
-                  }
-                }, 500);
-              } else {
-                this.activate = true;
-                setTimeout(() => {
-                  this.objectReport.emit(this.travelProof[0]);
-                }, 100);
-                setTimeout(() => {
-                  document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-                }, 1000);
-              }
-            }
-          }
+          //           }];
+          //           this.alert.setAlert(alertDataWrong[0]);
+          //         }
+          //       }, 500);
+          //     } else {
+          //       this.activate = true;
+          //       setTimeout(() => {
+          //         this.objectReport.emit(this.travelProof[0]);
+          //       }, 100);
+          //       setTimeout(() => {
+          //         document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+          //       }, 1000);
+          //     }
+          //   }
+          // }
+          this.activate = true;
         }, error => {
+          this.activate = false;
           this.formTravelManagement.controls['date_requests_begin'].setValue('');
           this.formTravelManagement.controls['date_requests_end'].setValue('');
           document.getElementById("btn_travel_new").click();

@@ -124,16 +124,14 @@
                   <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
                   <a>Fecha de ingreso:</a>
                 </label>
-                <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_in']"
-                  (change)="dateValidateHotel(formHotelsJourney.value)" (keyup)="delete('date_begin_hotel')" />
+                <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_in']"/>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
                   <a>Fecha de salida:</a>
                 </label>
-                <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_out']"
-                  (change)="dateValidateHotel(formHotelsJourney.value)" (keyup)="delete('date_end_hotel')" />
+                <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_out']"/>
               </div>
             </div>
           </div>
