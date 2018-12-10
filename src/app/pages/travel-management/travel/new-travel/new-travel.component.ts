@@ -93,6 +93,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public cost_selected: any = null;
   public kostl: boolean = false;
   public nplnr: boolean = false;
+  public aufnr: boolean = false;
   public today: any;
 
   public countAfter: number = 0;
@@ -800,6 +801,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
+      this.aufnr = false;
       // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.costs_travels = this.sortByAphabet(data.data);
@@ -811,12 +813,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
       //     }
       //   })
-    } else {
-      this.kostl = false;
     }
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
       this.kostl = false;
       this.nplnr = true;
+      this.aufnr = false;
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.grahp = this.sortByAphabet(data.data);
@@ -828,9 +829,23 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       //       this.formTravelManagement.controls['id_grahp'].setValue('');
       //     }
       //   })
-    } else {
+    } 
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
+      this.kostl = false;
       this.nplnr = false;
-    }
+      this.aufnr = true;
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
+    } 
   }
 
   searchOperationsGrahp(form: any, acction: any) {
@@ -848,21 +863,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
   }
   changeTypeTravel(param) {
-    if (param.type_travel === '3' || param.type_travel === '16') {
-      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
-      this.changeTravelLegal('P');
-    }
-    else {
-      this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
-      this.changeTravelLegal('');
-    }
-    if (param.type_travel === '1' || param.type_travel === '3') {
-      this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'NAL')[0].id.toString());
-      this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'NAL')[0].id.toString());
-    } else {
-      this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'INTER')[0].id.toString());
-      this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'INTER')[0].id.toString());
-    }
+    // if (param.type_travel === '3' || param.type_travel === '16') {
+    //   this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "P")[0].id.toString());
+    //   this.changeTravelLegal('P');
+    // }
+    // else {
+    //   this.formTravelManagement.controls['id_travel_legal'].setValue(this.legal_travels.filter(data => data.code === "M")[0].id.toString());
+    //   this.changeTravelLegal('');
+    // }
+    // if (param.type_travel === '1' || param.type_travel === '3') {
+    //   this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'NAL')[0].id.toString());
+    //   this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'NAL')[0].id.toString());
+    // } else {
+    //   this.formTravelManagement.controls['id_state'].setValue(this.stateLocations.filter(data => data.code === 'INTER')[0].id.toString());
+    //   this.formTravelManagement.controls['id_stateto'].setValue(this.stateLocationsto.filter(data => data.code === 'INTER')[0].id.toString());
+    // }
   }
 
   changeTravelLegal(travelLegal: any) {
@@ -1170,6 +1185,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           //   }
           // }
           this.activate = true;
+          setTimeout(() => {
+            this.objectReport.emit(this.travelProof[0]);
+          }, 100);
         }, error => {
           this.activate = false;
           this.formTravelManagement.controls['date_requests_begin'].setValue('');
@@ -1436,41 +1454,41 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.searchState(this.formTravelManagement.value, 'edit');
     this.searchStateto(this.formTravelManagement.value, 'edit');
   }
-  dateBeginValidate(days) {
+  // dateBeginValidate(days) {
 
-    this.validateDateHeader = [];
-    this.travelProof[0].data[0].data.forEach(element => {
+  //   this.validateDateHeader = [];
+  //   this.travelProof[0].data[0].data.forEach(element => {
 
-      if (days.date_requests_begin > element.field_4.split(' ')[0]) {
-        this.validateDateHeader.push({
-          id_travel_wrong: element.field_0
-        });
-      }
-    });
+  //     if (days.date_requests_begin > element.field_4.split(' ')[0]) {
+  //       this.validateDateHeader.push({
+  //         id_travel_wrong: element.field_0
+  //       });
+  //     }
+  //   });
 
-    for (let index = 0; index < this.validateDateHeader.length; index++) {
+  //   for (let index = 0; index < this.validateDateHeader.length; index++) {
 
-      const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.array_wrong.push(element);
-    }
-  }
-  dateEndValidate(days) {
+  //     const element = this.validateDateHeader[index].id_travel_wrong.toString();
+  //     this.array_wrong.push(element);
+  //   }
+  // }
+  // dateEndValidate(days) {
 
-    this.validateDateHeader = [];
+  //   this.validateDateHeader = [];
 
-    this.travelProof[0].data[0].data.forEach(element => {
+  //   this.travelProof[0].data[0].data.forEach(element => {
 
-      if (days.date_requests_end < element.field_7.split(' ')[0]) {
-        this.validateDateHeader.push({
-          id_travel_wrong: element.field_0
-        });
-      }
-    });
+  //     if (days.date_requests_end < element.field_7.split(' ')[0]) {
+  //       this.validateDateHeader.push({
+  //         id_travel_wrong: element.field_0
+  //       });
+  //     }
+  //   });
 
-    for (let index = 0; index < this.validateDateHeader.length; index++) {
+  //   for (let index = 0; index < this.validateDateHeader.length; index++) {
 
-      const element = this.validateDateHeader[index].id_travel_wrong.toString();
-      this.array_wrong.push(element);
-    }
-  }
+  //     const element = this.validateDateHeader[index].id_travel_wrong.toString();
+  //     this.array_wrong.push(element);
+  //   }
+  // }
 }
