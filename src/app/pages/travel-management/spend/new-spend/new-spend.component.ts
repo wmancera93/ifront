@@ -54,7 +54,9 @@ export class NewSpendComponent implements OnInit {
   public costs_travels: any[] = [];
   public showListAutoCost: boolean = false;
   public showListAutoGraph: boolean = false;
+  public showListAutoOrder: boolean = false;
   public operations: any[] = [];
+  public order_travels: any[] = [];
   public accountContable: any[] = [];
   public distributionAccount: any[] = [];
 
@@ -71,6 +73,8 @@ export class NewSpendComponent implements OnInit {
   public elementImputation: string = '';
   public typeCenterCost: string = '';
   public typeCenterCost_id: string = '';
+  public typeCenterOrder: string = '';
+  public typeCenterOrder_id: string = '';
   public grahpSpend: string = '';
   public grahpSpend_id: string = '';
   public distribution: string = '';
@@ -78,6 +82,8 @@ export class NewSpendComponent implements OnInit {
   public operationsSpend: string = '';
   public kostl: boolean = true;
   public nplnr: boolean = false;
+  public aufnr: boolean = false;
+
   public typeSpend: string;
 
 
@@ -138,24 +144,45 @@ export class NewSpendComponent implements OnInit {
           if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
             this.nplnr = false;
             this.kostl = true;
+            this.aufnr = false;
             this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
             this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
             this.grahpSpend = '';
             this.distribution = '100';
             this.operationsSpend = '';
+            this.typeCenterOrder = '';
             this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
             this.grahpSpend_id = '';
-          } else {
+            this.typeCenterOrder_id = ''
+          }
+          if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
             this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
             this.nplnr = true;
             this.kostl = false;
+            this.aufnr = false;
             this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
             this.typeCenterCost = '';
+            this.typeCenterOrder = '';
             this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
             this.distribution = '100';
             this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
             this.typeCenterCost_id = '';
+            this.typeCenterOrder_id = '';
             this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
+          }
+          if (detail.data[0].travel_request.travel_costs_type_code === 'AUFNR') {
+            this.nplnr = false;
+            this.kostl = false;
+            this.aufnr = true;
+            this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+            this.typeCenterCost = '';
+            this.typeCenterOrder = detail.data[0].travel_request.travel_order_code + '-' + detail.data[0].travel_request.travel_order_name;
+            this.grahpSpend = '';
+            this.distribution = '100';
+            this.operationsSpend = '';
+            this.typeCenterCost_id = '';
+            this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+            this.grahpSpend_id = '';
           }
         });
       } else {
@@ -436,25 +463,45 @@ export class NewSpendComponent implements OnInit {
         if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
           this.nplnr = false;
           this.kostl = true;
+          this.aufnr = false;
           this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
           this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
           this.grahpSpend = '';
           this.distribution = '100';
           this.operationsSpend = '';
+          this.typeCenterOrder = '';
           this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
           this.grahpSpend_id = '';
-
-        } else {
+          this.typeCenterOrder_id = ''
+        }
+        if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
           this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
           this.nplnr = true;
           this.kostl = false;
+          this.aufnr = false;
           this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
           this.typeCenterCost = '';
+          this.typeCenterOrder = '';
           this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
           this.distribution = '100';
           this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
           this.typeCenterCost_id = '';
+          this.typeCenterOrder_id = '';
           this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
+        }
+        if (detail.data[0].travel_request.travel_costs_type_code === 'AUFNR') {
+          this.nplnr = false;
+          this.kostl = false;
+          this.aufnr = true;
+          this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+          this.typeCenterCost = '';
+          this.typeCenterOrder = detail.data[0].travel_request.travel_order_code + '-' + detail.data[0].travel_request.travel_order_name;
+          this.grahpSpend = '';
+          this.distribution = '100';
+          this.operationsSpend = '';
+          this.typeCenterCost_id = '';
+          this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+          this.grahpSpend_id = '';
         }
       });
 
@@ -586,24 +633,45 @@ export class NewSpendComponent implements OnInit {
       if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
         this.nplnr = false;
         this.kostl = true;
+        this.aufnr = false;
         this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
         this.typeCenterCost = detail.data[0].travel_request.travel_cost_code + '-' + detail.data[0].travel_request.travel_cost_name;
         this.grahpSpend = '';
         this.distribution = '100';
         this.operationsSpend = '';
+        this.typeCenterOrder = '';
         this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
         this.grahpSpend_id = '';
-      } else {
+        this.typeCenterOrder_id = ''
+      }
+      if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
         this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
         this.nplnr = true;
         this.kostl = false;
+        this.aufnr = false;
         this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
         this.typeCenterCost = '';
+        this.typeCenterOrder = '';
         this.grahpSpend = detail.data[0].travel_request.travel_graph_code + '-' + detail.data[0].travel_request.travel_graph_name;
         this.distribution = '100';
         this.operationsSpend = detail.data[0].travel_request.travel_operation_id.toString();
         this.typeCenterCost_id = '';
+        this.typeCenterOrder_id = '';
         this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
+      }
+      if (detail.data[0].travel_request.travel_costs_type_code === 'AUFNR') {
+        this.nplnr = false;
+        this.kostl = false;
+        this.aufnr = true;
+        this.elementImputation = detail.data[0].travel_request.travel_costs_type_code;
+        this.typeCenterCost = '';
+        this.typeCenterOrder = detail.data[0].travel_request.travel_order_code + '-' + detail.data[0].travel_request.travel_order_name;
+        this.grahpSpend = '';
+        this.distribution = '100';
+        this.operationsSpend = '';
+        this.typeCenterCost_id = '';
+        this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+        this.grahpSpend_id = '';
       }
     });
 
@@ -631,13 +699,23 @@ export class NewSpendComponent implements OnInit {
   }
 
   selectTypeCenterImputations() {
-
+    debugger
     if (this.elementImputation === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
+      this.aufnr = false;
     } else {
-      this.kostl = false;
-      this.nplnr = true;
+      if (this.elementImputation === 'NPLNR') {
+        this.kostl = false;
+        this.nplnr = true;
+        this.aufnr = false;
+      } else {
+        if (this.elementImputation === 'AUFNR') {
+          this.kostl = false;
+          this.nplnr = false;
+          this.aufnr = true;
+        }
+      }
     }
   }
 
@@ -648,6 +726,8 @@ export class NewSpendComponent implements OnInit {
       subscribe((data: any) => {
         this.costs_travels = this.sortByAphabet(data.data);
         this.showListAutoCost = true;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = false;
       });
   }
 
@@ -657,9 +737,19 @@ export class NewSpendComponent implements OnInit {
         this.grahp = this.sortByAphabet(data.data);
         this.showListAutoCost = false;
         this.showListAutoGraph = true;
+        this.showListAutoOrder = false;
       });
   }
 
+  enterOrderSpend() {
+    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder).
+      subscribe((data: any) => {
+        this.costs_travels = this.sortByAphabet(data.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = true;
+      });
+  }
   returnCostSearchSpend(cost: any) {
     this.typeCenterCost = cost.code + '-' + cost.name;
     this.typeCenterCost_id = cost.id;
@@ -671,6 +761,11 @@ export class NewSpendComponent implements OnInit {
     this.grahp = [];
     this.grahpSpend_id = graph.id;
     this.searchOperationsGrahp(graph.code, 'edit')
+  }
+  returnOrderSearchOrder(order: any) {
+    this.typeCenterOrder = order.code + '-' + order.name;
+    this.order_travels = [];
+    this.typeCenterOrder_id = order.id;
   }
 
   searchOperationsGrahp(graphCode: any, acction: any) {
@@ -694,6 +789,7 @@ export class NewSpendComponent implements OnInit {
       id: this.countSaveAccount += 1,
       travel_costs_id: this.typeCenterCost_id,
       travel_graphs_id: this.grahpSpend_id,
+      travel_maintenance_order_id: this.typeCenterOrder_id,
       travel_costs_types_id: this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id,
       travel_operations_id: this.operationsSpend,
       accounting_accounts_id: this.accountContableVariable,
@@ -704,10 +800,13 @@ export class NewSpendComponent implements OnInit {
       operations: this.operationsSpend === '' ? 'N/A' : this.operations.filter(data => data.id.toString() === this.operationsSpend.toString())[0].name,
       // account_contable: this.accountContableVariable + '- prueb'
       account_contable: this.accountContable.filter(data => data.id.toString() === this.accountContableVariable)[0].name,
+      order_name: this.typeCenterOrder === '' ? 'N/A' : this.typeCenterOrder,
     })
 
     this.elementImputation = '';
     this.grahpSpend_id = '';
+    this.typeCenterOrder_id = '';
+    this.typeCenterOrder = '';
     this.typeCenterCost = '';
     this.typeCenterCost_id = '';
     this.grahpSpend = '';

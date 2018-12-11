@@ -107,4 +107,8 @@ export class TravelService {
     return this.tokenService.post('travel_requests/create_hotel/' + travel_management_id + '/' + travel_request_id, object)
     .map((data: any) => data.json());
   }
+  getFilterTravelOrders(filter: string) {
+    return this.tokenService.get('travel_costs_types/filter_travel_maintenance_orders/'+ filter)
+      .map((data: any) => data.json());
+  }
 }

@@ -88,9 +88,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public showListAutoC: boolean = false;
   public showListAutoCost: boolean = false;
   public showListAutoGraph: boolean = false;
+  public showListAutoOrder: boolean = false;
   public eployee_selected: any = null;
   public userAuthenticated: User = null;
   public cost_selected: any = null;
+  public order_travels: any = null
   public kostl: boolean = false;
   public nplnr: boolean = false;
   public aufnr: boolean = false;
@@ -196,6 +198,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_countryto: '28',
       id_hotels: '',
       travel_mileage: '1',
+      name_travel_order: '',
+      id_order: ''
     });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
@@ -273,6 +277,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             date_hotel_in: object[0].date_hotel_in,
             date_hotel_out: object[0].date_hotel_out,
             travel_mileage: this.transport_types.filter((data) => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T' ? object[0].travel_mileage : '',
+            name_travel_order: object[0].name_travel_order,
+            id_order: object[0].id_order,
           });
 
           if (this.transport_types.filter((data) => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T') {
@@ -369,6 +375,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_countryto: '28',
             id_hotels: '',
             travel_mileage: '1',
+            name_travel_order: '',
+            id_order: '',
           });
           this.searchState(this.formTravelManagement.value, 'edit');
           this.searchStateto(this.formTravelManagement.value, 'edit');
@@ -436,7 +444,18 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       subscribe((data: any) => {
         this.grahp = this.sortByAphabet(data.data);
         this.showListAutoCost = false;
+        this.showListAutoOrder = false;
         this.showListAutoGraph = true;
+      });
+  }
+  enterOrder(form) {
+    debugger
+    this.travelManagementService.getFilterTravelOrders(form.name_travel_order).
+      subscribe((orders: any) => {
+        this.order_travels = this.sortByAphabet(orders.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = true;
       });
   }
   returnObjectSearch(ObjectSearch: any) {
@@ -452,11 +471,16 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   returnGraphSearch(graph) {
-
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.grahp = [];
     this.searchOperationsGrahp(graph.code, 'edit')
+  }
+  returnOrderSearch(order) {
+    debugger
+    this.formTravelManagement.controls['id_order'].setValue(order.id);
+    this.formTravelManagement.controls['name_travel_order'].setValue(order.code + ' - ' + order.name);
+    this.order_travels = [];
   }
   deleteEmployeeThird() {
     this.eployee_selected = null;
@@ -554,6 +578,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('commentary', this.comentaryPlus);
+    modelFromdata.append('travel_maintenance_order_id', model.id_order);
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
     for (let index = 0; index < this.objectImg.length; index++) {
@@ -829,7 +854,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       //       this.formTravelManagement.controls['id_grahp'].setValue('');
       //     }
       //   })
-    } 
+    }
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
       this.kostl = false;
       this.nplnr = false;
@@ -845,7 +870,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       //       this.formTravelManagement.controls['id_grahp'].setValue('');
       //     }
       //   })
-    } 
+    }
   }
 
   searchOperationsGrahp(form: any, acction: any) {
@@ -893,11 +918,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString());
       this.kostl = true;
       this.nplnr = false;
-
-      this.travelManagementService.getTravelsCosts(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString()).
-        subscribe((data: any) => {
-          this.costs_travels = this.sortByAphabet(data.data);
-        })
+      // this.travelManagementService.getTravelsCosts(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString()).
+      //   subscribe((data: any) => {
+      //     this.costs_travels = this.sortByAphabet(data.data);
+      //   })
     }
   }
   clearFormGeneral() {
@@ -916,6 +940,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.grahp = [];
     this.travelProof = [];
     this.traverlsDestination = [];
+    this.order_travels = [];
     this.travelProof.push({
       success: true,
       data: [{
@@ -1031,6 +1056,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       date_hotel_in: '',
       date_hotel_out: '',
       travel_mileage: '1',
+      name_travel_order: '',
+      id_order: '',
     });
     this.searchState(this.formTravelManagement.value, 'edit');
     this.searchStateto(this.formTravelManagement.value, 'edit');
@@ -1188,6 +1215,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           setTimeout(() => {
             this.objectReport.emit(this.travelProof[0]);
           }, 100);
+          setTimeout(() => {
+            document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+          }, 2000);
         }, error => {
           this.activate = false;
           this.formTravelManagement.controls['date_requests_begin'].setValue('');
@@ -1445,9 +1475,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['id_cityto'].setValue('');
     this.formTravelManagement.controls['id_stateto'].setValue('249');
     this.formTravelManagement.controls['id_countryto'].setValue('28');
-    this.formTravelManagement.controls['id_hotels'].setValue('');
-    this.formTravelManagement.controls['date_hotel_in'].setValue('');
-    this.formTravelManagement.controls['date_hotel_out'].setValue('');
+    // this.formTravelManagement.controls['id_hotels'].setValue('');
+    // this.formTravelManagement.controls['date_hotel_in'].setValue('');
+    // this.formTravelManagement.controls['date_hotel_out'].setValue('');
     this.formTravelManagement.controls['travel_mileage'].setValue('1');
     this.arrayHotel = [];
 

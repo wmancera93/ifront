@@ -298,6 +298,9 @@
                             Operación
                           </th>
                           <th class="text-center">
+                            No Orden
+                          </th>
+                          <th class="text-center">
                             Cta contable
                           </th>
                           <th class="text-center">
@@ -321,6 +324,9 @@
                           </td>
                           <td>
                             {{pinterDistributions.operations}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.order_name}}
                           </td>
                           <td>
                             {{pinterDistributions.account_contable}}
@@ -363,6 +369,19 @@
                   <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
                     <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
                       {{costsTrip.code}} - {{costsTrip.name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
+                    <a>Número de orden:*</a>
+                  </label>
+                  <input class="form-control" id="searchByAutoCompleteOrderSpend" autocomplete="off" type="text" name="orderList"
+                    [(ngModel)]="typeCenterOrder" [ngModelOptions]="{standalone: true}" (keyup)="enterOrderSpend()">
+                  <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
+                    <div (click)="returnOrderSearchOrder(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
+                      {{orderTrip.code}} - {{orderTrip.name}}
                     </div>
                   </div>
                 </div>

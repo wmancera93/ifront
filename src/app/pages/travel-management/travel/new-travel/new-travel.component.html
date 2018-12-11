@@ -168,7 +168,7 @@
                   </option>
                 </select> -->
               </div>
-              <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                   <a>Número de orden:*</a>
@@ -176,19 +176,14 @@
                 <form name="searchAutoCompleteOrden">
                   <p>
                     <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
-                      [formControl]="formTravelManagement.controls['name_travel_costs']" (keyup)="enterCost(formTravelManagement.value)">
+                      [formControl]="formTravelManagement.controls['name_travel_order']" (keyup)="enterOrder(formTravelManagement.value)">
                   </p>
                 </form>
-                <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
-                  <div (click)="returnCostSearch(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
-                    {{costsTrip.code}} - {{costsTrip.name}}
+                <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnOrderSearch(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
+                    {{orderTrip.code}} - {{orderTrip.name}}
                   </div>
                 </div>
-                <!-- <select [attr.disabled]="costs_travels.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_travel_costs']">
-                  <option value="-1">Seleccione</option>
-                  <option *ngFor="let costsTrip of costs_travels" [value]="costsTrip.id">{{costsTrip.code}} - {{costsTrip.name}}
-                  </option>
-                </select> -->
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">

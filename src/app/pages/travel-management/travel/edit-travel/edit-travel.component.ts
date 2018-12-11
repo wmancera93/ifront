@@ -94,12 +94,16 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public nameEmployee: string = '';
   public searchEmployee: any[] = [];
   public showListAutoC: boolean = false;
+  public showListAutoGraph: boolean = false;
+  public showListAutoOrder: boolean = false;
   public eployee_selected: any = null;
   public eployee_selected_current: any = null;
   public userAuthenticated: User = null;
+  public order_travels: any = null
 
   public kostl: boolean = false;
   public nplnr: boolean = false;
+  public aufnr: boolean = false;
 
   public viewSendAprovals: boolean = true;
 
@@ -228,6 +232,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       date_hotel_in: '',
       date_hotel_out: '',
       travel_mileage: '',
+      name_travel_order: '',
+      id_order: ''
     });
 
     this.travelsService.getEditTravels().subscribe((data) => {
@@ -303,6 +309,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   date_hotel_in: '',
                   date_hotel_out: '',
                   travel_mileage: '',
+                  name_travel_order: this.generalViajes[0].travel_request.travel_order_code === null ? '' : this.generalViajes[0].travel_request.travel_order_code + ' - ' + this.generalViajes[0].travel_request.travel_order_name,
+                  id_order: this.generalViajes[0].travel_request.travel_order_id
                 });
 
                 if (result.data[0].travel_request.employee_applicant_to_json !== null) {
@@ -328,18 +336,25 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                 if (this.generalViajes[0].travel_request.travel_costs_type_code === "KOSTL") {
                   this.kostl = true;
                   this.nplnr = false;
-                } else {
+                  this.aufnr = false;
+                }
+                if (this.generalViajes[0].travel_request.travel_costs_type_code === "NPLNR") {
                   this.kostl = false;
                   this.nplnr = true;
+                  this.aufnr = false;
                 }
-
+                if (this.generalViajes[0].travel_request.travel_costs_type_code === "AUFNR") {
+                  this.kostl = false;
+                  this.nplnr = false;
+                  this.aufnr = true;
+                }
               }
-              setTimeout(() => {
-                document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-              }, 500);
             });
           });
       }
+      setTimeout(() => {
+        document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
+      }, 2000);
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -420,6 +435,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               // date_hotel_in: resutlDestinations.data.hotel_date_begin,
               // date_hotel_out: resutlDestinations.data.hotel_date_end,
               travel_mileage: resutlDestinations.data.total_mileage,
+              name_travel_order: this.generalViajes[0].travel_request.travel_order_code === null ? '' : this.generalViajes[0].travel_request.travel_order_code + ' - ' + this.generalViajes[0].travel_request.travel_order_name,
+              id_order: this.generalViajes[0].travel_request.travel_order_id,
             };
 
           })
@@ -502,15 +519,28 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       subscribe((data: any) => {
         this.costs_travels = this.sortByAphabet(data.data);
         this.showListAutoCost = true;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = false;
       });
   }
 
   enterGraph(form) {
     this.travelManagementService.getFilterGraphs(form.id_element_imputation, form.name_travel_graph).
       subscribe((data: any) => {
-
         this.grahp = this.sortByAphabet(data.data);
         this.showListAutoCost = false;
+        this.showListAutoGraph = true;
+        this.showListAutoOrder = false;
+      });
+  }
+  enterOrder(form) {
+    debugger
+    this.travelManagementService.getFilterTravelOrders(form.name_travel_order).
+      subscribe((orders: any) => {
+        this.order_travels = this.sortByAphabet(orders.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = true;
       });
   }
   returnObjectSearch(ObjectSearch: any) {
@@ -525,13 +555,17 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   }
 
   returnGraphSearch(graph) {
-
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.operations = [];
     this.formTravelManagement.controls['id_operations'].setValue('');
     this.grahp = [];
     this.searchOperationsGrahp(graph.code, 'edit')
+  }
+  returnOrderSearch(order) {
+    this.formTravelManagement.controls['id_order'].setValue(order.code);
+    this.formTravelManagement.controls['name_travel_order'].setValue(order.code + ' - ' + order.name);
+    this.order_travels = [];
   }
 
   deleteEmployeeThird() {
