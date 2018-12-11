@@ -534,8 +534,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       });
   }
   enterOrder(form) {
-    debugger
-    this.travelManagementService.getFilterTravelOrders(form.name_travel_order).
+    this.travelManagementService.getFilterTravelOrders(form.name_travel_order.toUpperCase()).
       subscribe((orders: any) => {
         this.order_travels = this.sortByAphabet(orders.data);
         this.showListAutoCost = false;
@@ -563,7 +562,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.searchOperationsGrahp(graph.code, 'edit')
   }
   returnOrderSearch(order) {
-    this.formTravelManagement.controls['id_order'].setValue(order.code);
+    this.formTravelManagement.controls['id_order'].setValue(order.id);
     this.formTravelManagement.controls['name_travel_order'].setValue(order.code + ' - ' + order.name);
     this.order_travels = [];
   }
@@ -661,6 +660,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('commentary', this.comentaryPlus);
+    modelFromdata.append('travel_maintenance_order_id', model.id_order);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
@@ -921,6 +921,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         // date_hotel_in: param.date_hotel_in,
         // date_hotel_out: param.date_hotel_out,
         travel_mileage: param.travel_mileage,
+        name_travel_order: param.name_travel_order,
+        id_order: param.id_order,
       });
       this.searchState(param, 'edit');
       this.searchStateto(param, 'edit');
@@ -1058,7 +1060,11 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
+      this.aufnr = false;
 
+      this.formTravelManagement.controls['id_grahp'].setValue('');
+      this.formTravelManagement.controls['id_operations'].setValue('');
+      this.formTravelManagement.controls['id_order'].setValue('');
       // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.costs_travels = this.sortByAphabet(data.data);
@@ -1071,12 +1077,13 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       //     }
       //   })
 
-    } else {
-      this.kostl = false;
     }
     if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
       this.kostl = false;
       this.nplnr = true;
+      this.aufnr = false;
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      this.formTravelManagement.controls['id_order'].setValue('');
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.grahp = this.sortByAphabet(data.data);
@@ -1088,8 +1095,25 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       //       this.formTravelManagement.controls['id_grahp'].setValue('');
       //     }
       //   })
-    } else {
+    }
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
+      this.kostl = false;
       this.nplnr = false;
+      this.aufnr = true;
+      this.formTravelManagement.controls['id_grahp'].setValue('');
+      this.formTravelManagement.controls['id_operations'].setValue('');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
     }
 
   }

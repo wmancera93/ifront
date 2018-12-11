@@ -742,9 +742,9 @@ export class NewSpendComponent implements OnInit {
   }
 
   enterOrderSpend() {
-    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder).
+    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder.toUpperCase()).
       subscribe((data: any) => {
-        this.costs_travels = this.sortByAphabet(data.data);
+        this.order_travels = this.sortByAphabet(data.data);
         this.showListAutoCost = false;
         this.showListAutoGraph = false;
         this.showListAutoOrder = true;

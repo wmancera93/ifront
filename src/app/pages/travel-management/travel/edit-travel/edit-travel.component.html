@@ -189,11 +189,11 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                  <a>Número de orden:*</a>
+                  <a>Orden:*</a>
                 </label>
                 <form name="searchAutoCompleteOrden">
                   <p>
-                    <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
+                    <input id="searchByAutoCompleteCost uppercase" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
                       [formControl]="formTravelManagement.controls['name_travel_order']" (keyup)="enterOrder(formTravelManagement.value)">
                   </p>
                 </form>
@@ -203,7 +203,6 @@
                   </div>
                 </div>
               </div>
-              _ 
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>

@@ -254,11 +254,15 @@ export class NewAdvancesComponent implements OnInit {
   }
 
   aditionAdvance(dataAgree) {
+    debugger
+    let dayPayment = dataAgree.date.split('-');
+    let dayFinally = dayPayment[2] + '/' + dayPayment[1] + '/' + dayPayment[0];
+
     this.infoTableAdvances[0].data[0].data.push({
       field_0: this.idAdvance + 1,
       field_1: this.listTravelsFromAdvance.filter((data) => data.id.toString() === dataAgree.travel_request_id.toString())[0].name_travel,
       field_2: this.listMoneyTypes.filter((data) => data.id.toString() === dataAgree.currency_id.toString())[0].name,
-      field_3: dataAgree.date,
+      field_3: dayFinally,
       field_4: dataAgree.value,
       field_5: dataAgree.observation.toUpperCase(),
       field_6: dataAgree.box == true ? 'Si' : 'No',

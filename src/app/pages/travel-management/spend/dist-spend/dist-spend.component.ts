@@ -37,6 +37,11 @@ export class DistSpendComponent implements OnInit {
   public nplnr: boolean = false;
   public is_collapse: boolean = true;
   public accionDist: boolean;
+  public aufnr: boolean = false;
+  public typeCenterOrder: string = '';
+  public typeCenterOrder_id: string = '';
+  public showListAutoOrder: boolean = false;
+  public order_travels: any[] = [];
 
   constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService,
     public travelManagementService: TravelService, public alert: AlertsService) {
@@ -111,6 +116,8 @@ export class DistSpendComponent implements OnInit {
     this.distribution = '';
     this.grahpSpend_id = '';
     this.typeCenterCost_id = '';
+    this.typeCenterOrder = '';
+    this.typeCenterOrder_id = '';
   }
 
 
@@ -123,6 +130,7 @@ export class DistSpendComponent implements OnInit {
       distribution: this.distribution,
       travel_graphs_id: this.grahpSpend_id,
       travel_costs_id: this.typeCenterCost_id,
+      travel_maintenance_order_id: this.typeCenterOrder_id,
     }
     this.spendsService.postSpendDistributionsCost(objectCostDist).subscribe(
       (dist: any) => {
@@ -148,13 +156,22 @@ export class DistSpendComponent implements OnInit {
       })
   }
   selectTypeCenterImputations() {
-
     if (this.elementImputation === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
+      this.aufnr = false;
     } else {
-      this.kostl = false;
-      this.nplnr = true;
+      if (this.elementImputation === 'NPLNR') {
+        this.kostl = false;
+        this.nplnr = true;
+        this.aufnr = false;
+      } else {
+        if (this.elementImputation === 'AUFNR') {
+          this.kostl = false;
+          this.nplnr = false;
+          this.aufnr = true;
+        }
+      }
     }
   }
 
@@ -189,6 +206,15 @@ export class DistSpendComponent implements OnInit {
         this.showListAutoGraph = true;
       });
   }
+  enterOrderSpend() {
+    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder.toUpperCase()).
+      subscribe((data: any) => {
+        this.order_travels = this.sortByAphabet(data.data);
+        this.showListAutoCost = false;
+        this.showListAutoGraph = false;
+        this.showListAutoOrder = true;
+      });
+  }
   returnCostSearchSpend(cost: any) {
     this.typeCenterCost = cost.code + '-' + cost.name;
     this.typeCenterCost_id = cost.id;
@@ -199,6 +225,12 @@ export class DistSpendComponent implements OnInit {
     this.grahp = [];
     this.grahpSpend_id = graph.id;
     this.searchOperationsGrahp(graph.code, 'edit')
+  }
+  returnOrderSearchOrder(order: any) {
+    debugger
+    this.typeCenterOrder = order.code + '-' + order.name;
+    this.order_travels = [];
+    this.typeCenterOrder_id = order.id;
   }
   searchOperationsGrahp(graphCode: any, acction: any) {
 
@@ -254,7 +286,7 @@ export class DistSpendComponent implements OnInit {
 
         this.printSpend = [];
         this.detailDistCost = [];
-        
+
       }
     } else {
 

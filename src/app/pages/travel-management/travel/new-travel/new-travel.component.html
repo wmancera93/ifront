@@ -171,11 +171,11 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                  <a>Número de orden:*</a>
+                  <a>Orden:*</a>
                 </label>
                 <form name="searchAutoCompleteOrden">
                   <p>
-                    <input id="searchByAutoCompleteCost" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
+                    <input id="searchByAutoCompleteCost uppercase" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
                       [formControl]="formTravelManagement.controls['name_travel_order']" (keyup)="enterOrder(formTravelManagement.value)">
                   </p>
                 </form>
@@ -678,7 +678,7 @@
           </div>
         </form>
 
-        <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate_submit">
+        <div class="row justify-content-end" style="margin-top: 30px" *ngIf="activate_submit && travelProof[0].data[0].data.length > 0">
           <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newTravel(formTravelManagement.value)">
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
