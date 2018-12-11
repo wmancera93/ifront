@@ -186,6 +186,23 @@
                   </option>
                 </select> -->
               </div>
+              <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
+                  <a>Orden:*</a>
+                </label>
+                <form name="searchAutoCompleteOrden">
+                  <p>
+                    <input id="searchByAutoCompleteCost uppercase" autocomplete="off" type="text" name="costList" class="form-control" class="form-control"
+                      [formControl]="formTravelManagement.controls['name_travel_order']" (keyup)="enterOrder(formTravelManagement.value)">
+                  </p>
+                </form>
+                <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
+                  <div (click)="returnOrderSearch(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
+                    {{orderTrip.code}} - {{orderTrip.name}}
+                  </div>
+                </div>
+              </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>

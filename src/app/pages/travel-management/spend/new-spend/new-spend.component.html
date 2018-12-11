@@ -21,8 +21,7 @@
                 </label>
                 <form name="searchAutoComplete">
                   <p>
-                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter"
-                      (keyup)="enterNameEmployee()">
+                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
                   </p>
                 </form>
                 <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
@@ -71,8 +70,7 @@
 
           <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
             <h4>Gastos</h4>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
 
           <div class="col-12 top-containter" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="margin-top: 20px">
@@ -100,8 +98,8 @@
                           {{imgsaved.file.name}}
                         </h6>
                       </div>
-                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' "
-                        class="cursor-general " theme='dark'>
+                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
+                        theme='dark'>
                         <h6>{{index+1}}.
                           <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                           {{imgsaved.file.name}}
@@ -140,8 +138,7 @@
                 <button type="button" *ngIf="collapse_is" class="btn btn-block btn-primary text-center" (click)="colapse()">
                   Nuevo gasto
                 </button>
-                <button type="button" id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend"
-                  style="display: none">
+                <button type="button" id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
                 </button>
               </div>
             </div>
@@ -154,13 +151,12 @@
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
                 <strong>Descripción:</strong>
               </label>
-              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation"
-                class="form-control uppercase" [formControl]="formSpendTravel.controls['observation']"></textarea>
+              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
+                [formControl]="formSpendTravel.controls['observation']"></textarea>
             </div>
 
             <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="continue" style="margin-top: 20px">
-              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck"
-                [formControl]="formSpendTravel.controls['formA']">
+              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendTravel.controls['formA']">
               <label class="form-check-label titleColor" for="FormACheck">
                 <strong>Formulario A</strong>
               </label>
@@ -190,16 +186,15 @@
                     <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
                     <strong>NIT:</strong>
                   </label>
-                  <input type="text" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']"
-                    (keyup)="onluNumberSpend(formSpendTravel.value, 'nit')">
+                  <input type="text" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']" (keyup)="onluNumberSpend(formSpendTravel.value, 'nit')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                     <strong>Fecha de Gasto:</strong>
                   </label>
-                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control"
-                    (keyup)="delete('date_body')" />
+                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"
+                  />
                 </div>
               </div>
             </div>
@@ -210,8 +205,8 @@
                     <i class="fa fa-fw fa-hashtag  text-primary-hr"></i>
                     <strong>Número Factura:</strong>
                   </label>
-                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']"
-                    (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')" style="text-align:right">
+                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')"
+                    style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -226,8 +221,7 @@
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
                     <strong>Código de Control:</strong>
                   </label>
-                  <input (keypress)="maskCode(formSpendTravel.value)"
-                    type="text" class="form-control uppercase" name="control_number" [formControl]="formSpendTravel.controls['control_number']"
+                  <input (keypress)="maskCode(formSpendTravel.value)" type="text" class="form-control uppercase" name="control_number" [formControl]="formSpendTravel.controls['control_number']"
                     placeholder="__-__-__-__-__" maxlength="14" [attr.disabled]="disabledCode == true ? true : null">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
@@ -235,11 +229,10 @@
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                     <strong>Tipo de gasto:</strong>
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']"
-                    paceholder="Seleccione">
+                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
                     <option value="">Seleccione</option>
-                    <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} -
-                      {{spendType.name}}</option>
+                    <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}
+                    </option>
                   </select>
                 </div>
               </div>
@@ -251,8 +244,8 @@
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
                     <strong>Importe:</strong>
                   </label>
-                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']"
-                    (keyup)="onluNumberSpend(formSpendTravel.value, 'import')" style="text-align:right">
+                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')"
+                    style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
@@ -298,6 +291,9 @@
                             Operación
                           </th>
                           <th class="text-center">
+                            Orden
+                          </th>
+                          <th class="text-center">
                             Cta contable
                           </th>
                           <th class="text-center">
@@ -321,6 +317,9 @@
                           </td>
                           <td>
                             {{pinterDistributions.operations}}
+                          </td>
+                          <td>
+                            {{pinterDistributions.order_name}}
                           </td>
                           <td>
                             {{pinterDistributions.account_contable}}
@@ -348,8 +347,8 @@
                     <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
                     <a>Elemento de imputación:*</a>
                   </label>
-                  <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}"
-                    placeholder="Seleccione" (change)="selectTypeCenterImputations()">
+                  <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
+                    (change)="selectTypeCenterImputations()">
                     <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.code">{{costsTravelCenter.name}}</option>
                   </select>
                 </div>
@@ -358,11 +357,24 @@
                     <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                     <a>Centro de costo:*</a>
                   </label>
-                  <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList"
-                    [(ngModel)]="typeCenterCost" [ngModelOptions]="{standalone: true}" (keyup)="enterCostSpend()">
+                  <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList" [(ngModel)]="typeCenterCost"
+                    [ngModelOptions]="{standalone: true}" (keyup)="enterCostSpend()">
                   <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
                     <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
                       {{costsTrip.code}} - {{costsTrip.name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
+                  <label class="titleColor">
+                    <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
+                    <a>Orden:*</a>
+                  </label>
+                  <input class="form-control uppercase" id="searchByAutoCompleteOrderSpend" autocomplete="off" type="text" name="orderList"
+                    [(ngModel)]="typeCenterOrder" [ngModelOptions]="{standalone: true}" (keyup)="enterOrderSpend()">
+                  <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
+                    <div (click)="returnOrderSearchOrder(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
+                      {{orderTrip.code}} - {{orderTrip.name}}
                     </div>
                   </div>
                 </div>
@@ -371,11 +383,10 @@
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
                     <a>Grafo:*</a>
                   </label>
-                  <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList"
-                    [(ngModel)]="grahpSpend" [ngModelOptions]="{standalone: true}" (keyup)="enterGraphSpend()">
+                  <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" [(ngModel)]="grahpSpend"
+                    [ngModelOptions]="{standalone: true}" (keyup)="enterGraphSpend()">
                   <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
-                    <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee"
-                      *ngFor="let grahpTravels of grahp">
+                    <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">
                       {{grahpTravels.code}} - {{grahpTravels.name}}
                     </div>
                   </div>
@@ -385,11 +396,9 @@
                     <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
                     <a>Operación:*</a>
                   </label>
-                  <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend"
-                    [ngModelOptions]="{standalone: true}">
+                  <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
                     <option value="-1">Seleccione</option>
-                    <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}}
-                      - {{operationsTravels.name}}</option>
+                    <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                   </select>
                 </div>
               </div>
@@ -404,8 +413,8 @@
                   </label>
                   <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
                     <option value="">Seleccione</option>
-                    <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} -
-                      {{accounting.name}}</option>
+                    <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}
+                    </option>
                   </select>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
@@ -413,16 +422,15 @@
                     <i class="fa fa-fw fa-percent text-primary-hr"></i>
                     Distribución*
                   </label>
-                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}"
-                    style="text-align:right" />
+                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right"
+                  />
                 </div>
 
                 <div class="col-2 align-self-end">
                   <button type="button" [attr.disabled]="
                 ( elementImputation == ''
                   || accountContableVariable == ''
-                  || distribution == '') ? true : null"
-                    class="btn btn-success btn-block btn-sm cursor-general" (click)="saveAccount()">
+                  || distribution == '') ? true : null" class="btn btn-success btn-block btn-sm cursor-general" (click)="saveAccount()">
                     <i class="fa fa-fw fa-plus"></i>
                   </button>
                 </div>
@@ -457,15 +465,14 @@
                     || formSpendTravel.value.authorization_number == -1
                     || formSpendTravel.value.populated == ''
                     || formSpendTravel.value.populated == -1
-                    || distributionAccount.length == 0 ) ? true : null"
-                    class="btn btn-primary btn-block cursor-general" (click)="aditionSpend(formSpendTravel.value)">
+                    || distributionAccount.length == 0 ) ? true : null" class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpend(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
                   <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
-                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()"
-                    data-toggle="collapse" data-target="#collapseNewSpend">
+                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse" data-target="#collapseNewSpend">
                     <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
                 </div>
               </div>
