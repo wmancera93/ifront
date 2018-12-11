@@ -92,30 +92,71 @@ export class PdfTravelComponent implements OnInit {
       let columnsMacro = ["DATOS MARCO", ""];
       let dataMacro
       let third = this.result.data[0].travel_request.managing_employee_to_json === null ? this.result.data[0].travel_request.employee_applicant_to_json.short_name : this.result.data[0].travel_request.managing_employee_to_json.short_name.toString();
+
+      let objectPDF = {
+        third: third,
+        personal_code: this.result.data[0].travel_request.employee_applicant_to_json.personal_code === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),
+        code_unit_organizative: this.result.data[0].travel_request.employee_applicant_to_json.div_person_code === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString(),
+        text_unit_organizative: this.result.data[0].travel_request.employee_applicant_to_json.division_per === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString(),
+        name_traveler: this.result.data[0].travel_request.employee_applicant_to_json.short_name === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(),
+        identification_traveler: this.result.data[0].travel_request.employee_applicant_to_json.number_document === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString(),
+        date_begin_travel: this.result.data[0].travel_request.date_begin_format === null ? '' : this.result.data[0].travel_request.date_begin_format.toString(),
+        date_end_travel: this.result.data[0].travel_request.date_end_format === null ? '' : this.result.data[0].travel_request.date_end_format.toString(),
+        activity_travel: this.result.data[0].travel_request.travel_activity_name === null ? '' : this.result.data[0].travel_request.travel_activity_name.toString(),
+        code_element_imputation: this.result.data[0].travel_request.travel_costs_type_code === null ? '' : this.result.data[0].travel_request.travel_costs_type_code.toString(),
+        text_element_imputation: this.result.data[0].travel_request.travel_costs_type_name === null ? '' : this.result.data[0].travel_request.travel_costs_type_name.toString(),
+        code_center_coast: this.result.data[0].travel_request.travel_cost_code === null ? '' : this.result.data[0].travel_request.travel_cost_code.toString(),
+        text_center_coast: this.result.data[0].travel_request.travel_cost_name === null ? '' : this.result.data[0].travel_request.travel_cost_name.toString(),
+        code_graph: this.result.data[0].travel_request.travel_graph_code === null ? '' : this.result.data[0].travel_request.travel_graph_code.toString(),
+        text_graph: this.result.data[0].travel_request.travel_graph_name === null ? '' : this.result.data[0].travel_request.travel_graph_name.toString(),
+        code_operation: this.result.data[0].travel_request.travel_operation_code === null ? '' : this.result.data[0].travel_request.travel_operation_code.toString(),
+        text_operation: this.result.data[0].travel_request.travel_operation_name === null ? '' : this.result.data[0].travel_request.travel_operation_name.toString(),
+        code_orders: this.result.data[0].travel_request.travel_order_code === null ? '' : this.result.data[0].travel_request.travel_order_code.toString(),
+        text_orders: this.result.data[0].travel_request.travel_order_name === null ? '' : this.result.data[0].travel_request.travel_order_name.toString(),
+        status_travel: this.result.data[0].travel_request.status_request === null ? '' : this.result.data[0].travel_request.status_request.toString(),
+        class_travel_legal: this.result.data[0].travel_request.legal_travels_type_name === null ? '' : this.result.data[0].travel_request.legal_travels_type_name.toString(),
+        class_travel_especial: this.result.data[0].travel_request.specific_types_trip_name === null ? '' : this.result.data[0].travel_request.specific_types_trip_name.toString(),
+        reason: this.result.data[0].travel_request.observation === null ? '' : this.result.data[0].travel_request.observation.toString()
+      }
+
       if (this.result.data[0].travel_request.travel_costs_type_code === "KOSTL") {
         dataMacro = [
-          ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
-          ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
-          ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
-          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
-          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Centro de costo: " + this.result.data[0].travel_request.travel_cost_code.toString() + ' - ' + this.result.data[0].travel_request.travel_cost_name.toString()],
-          ["Estatus de Viaje: " + this.result.data[0].travel_request.status_request.toString(), "Clase de viaje legal: " + this.result.data[0].travel_request.legal_travels_type_name.toString()],
-          ["", "Clase de viaje especial: " + this.result.data[0].travel_request.specific_types_trip_name.toString()]
+          ["Viaje registrado por: " + objectPDF.third, ""],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
+          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["Actividad de viaje: " + objectPDF.activity_travel, "Centro de costo: " + objectPDF.code_center_coast + ' - ' + objectPDF.text_center_coast],
+          ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
+          ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
         ];
       }
 
+
       if (this.result.data[0].travel_request.travel_costs_type_code === "NPLNR") {
         dataMacro = [
-          ["Viaje registrado por: " + third, ""],
-          ["No. Empleado: " + this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(), "Unidad Organizativa: " + this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString() + ' - ' + this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString()],
-          ["Nombre Viajero: " + this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString(), "Carné de Identidad: " + this.result.data[0].travel_request.employee_applicant_to_json.number_document.toString()],
-          ["", "Fecha: " + this.result.data[0].travel_request.date_begin_format.toString() + " hasta " + this.result.data[0].travel_request.date_end_format.toString()],
-          ["", "Elemento de imputación: " + this.result.data[0].travel_request.travel_costs_type_code.toString() + ' - ' + this.result.data[0].travel_request.travel_costs_type_name.toString()],
-          ["Actividad de viaje: " + this.result.data[0].travel_request.travel_activity_name.toString(), "Grafo: " + this.result.data[0].travel_request.travel_graph_code.toString() + ' - ' + this.result.data[0].travel_request.travel_graph_name.toString()],
-          ["", "Operación: " + this.result.data[0].travel_request.travel_operation_code.toString() + ' - ' + this.result.data[0].travel_request.travel_operation_name.toString()],
-          ["Estatus de Viaje: " + this.result.data[0].travel_request.status_request.toString(), "Clase de viaje legal: " + this.result.data[0].travel_request.legal_travels_type_name.toString()],
-          ["", "Clase de viaje especial: " + this.result.data[0].travel_request.specific_types_trip_name.toString()]
+          ["Viaje registrado por: " + objectPDF.third, ""],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
+          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["Actividad de viaje: " + objectPDF.activity_travel, "Grafo: " + objectPDF.code_graph + ' - ' + objectPDF.text_graph],
+          ["", "Operación: " + objectPDF.code_operation + ' - ' + objectPDF.text_operation],
+          ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
+          ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
+        ];
+      }
+
+      if (this.result.data[0].travel_request.travel_costs_type_code === "AUFNR") {
+        dataMacro = [
+          ["Viaje registrado por: " + objectPDF.third, ""],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
+          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["Actividad de viaje: " + objectPDF.activity_travel, "Orden Mantenimiento: " + objectPDF.code_orders + ' - ' + objectPDF.text_orders],
+          ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
+          ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
         ];
       }
 
@@ -144,7 +185,7 @@ export class PdfTravelComponent implements OnInit {
       );
 
       let columnsReasonJourneys = ["MOTIVO VIAJE"];
-      let dataReasonHeaderJourneys = [[this.result.data[0].travel_request.observation.toString()]];
+      let dataReasonHeaderJourneys = [[objectPDF.reason]];
 
       doc.autoTable(columnsReasonJourneys, dataReasonHeaderJourneys, {
         startY: doc.autoTable.previous.finalY,
@@ -230,7 +271,7 @@ export class PdfTravelComponent implements OnInit {
       let recordsPrint = result.data[0].travel_managements.data;
 
       keys.forEach((element) => {
-        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6' && element !== 'field_9' && element !== 'field_10' && element !== 'field_11') {
+        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6'&& element !== 'field_8' && element !== 'field_9' && element !== 'field_10' && element !== 'field_11') {
           let label: any;
           label = result.data[0].travel_managements.labels[element];
 
