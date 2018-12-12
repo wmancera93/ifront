@@ -114,7 +114,7 @@ export class ViewTravelComponent implements OnInit {
 
         setTimeout(() => {
           document.getElementsByClassName('cke_top cke_reset_all')[0].remove()
-        }, 800);
+        }, 2000);
       });
       this.travelManagementService.getTravelsAllDetail(this.ticket).subscribe((detail: any) => {
         this.allRequests = detail;
