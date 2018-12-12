@@ -310,7 +310,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
                   date_hotel_out: '',
                   travel_mileage: '',
                   name_travel_order: this.generalViajes[0].travel_request.travel_order_code === null ? '' : this.generalViajes[0].travel_request.travel_order_code + ' - ' + this.generalViajes[0].travel_request.travel_order_name,
-                  id_order: this.generalViajes[0].travel_request.travel_order_id
+                  id_order: this.generalViajes[0].travel_request.travel_maintenance_order_id
                 });
 
                 if (result.data[0].travel_request.employee_applicant_to_json !== null) {
@@ -436,7 +436,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
               // date_hotel_out: resutlDestinations.data.hotel_date_end,
               travel_mileage: resutlDestinations.data.total_mileage,
               name_travel_order: this.generalViajes[0].travel_request.travel_order_code === null ? '' : this.generalViajes[0].travel_request.travel_order_code + ' - ' + this.generalViajes[0].travel_request.travel_order_name,
-              id_order: this.generalViajes[0].travel_request.travel_order_id,
+              id_order: this.generalViajes[0].travel_request.travel_maintenance_order_id,
             };
 
           })
