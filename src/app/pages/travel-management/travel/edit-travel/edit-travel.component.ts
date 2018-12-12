@@ -493,6 +493,15 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
   }
 
+  addHourEnd(value) {
+    debugger
+    let begin = parseFloat(value.hour_begin.split(':')[0]);
+    let end = parseFloat(value.hour_begin.split(':')[1]) + 1;
+    let calculate_minutes = end.toString().length === 1 ? "0" + end.toString() : end > 59 ? "00" : end.toString();
+    let calculate_hour = calculate_minutes === "00" ? (begin + 1).toString().length === 1 ? "0" + (begin + 1).toString() : begin + 1 > 23 ? "00" : begin + 1 : begin.toString().length === 1 ? "0" + begin.toString() : begin;
+    this.formTravelManagement.controls['hour_end'].setValue(calculate_hour + ":" + calculate_minutes);
+  }
+
   ngOnDestroy() {
     this.countAfter += 1;
   }
