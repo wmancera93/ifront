@@ -216,36 +216,38 @@ export class PdfTravelComponent implements OnInit {
           if (this.advances(this.result, doc)) {
             if (this.allowance(this.result, doc)) {
               if (this.distribution(this.result, doc)) {
-                if (this.approvals(this.result, doc)) {
-                  let columnsSign = [""];
-                  let dataSign = [["______________________________________________"],
-                  [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
+                if (this.comentaries(this.result, doc)) {
+                  if (this.approvals(this.result, doc)) {
+                    let columnsSign = [""];
+                    let dataSign = [["______________________________________________"],
+                    [this.result.data[0].travel_request.employee_applicant_to_json.short_name.toString().toUpperCase()]];
 
-                  doc.autoTable(columnsSign, dataSign, {
-                    startY: doc.autoTable.previous.finalY + 25,
-                    pageBreak: 'avoid',
-                    theme: 'plain',
-                    styles: {
-                      cellPadding: 1,
-                      fontSize: 10,
-                      font: "helvetica",
-                      fontStyle: 'normal',
-                      overflow: 'hidden',
-                      textColor: 20,
-                      halign: 'left',
-                      valign: 'middle',
-                      columnWidth: 'auto',
-                    },
-                    headerStyles: {
-                      fillColor: [255, 255, 255],
-                      fontStyle: 'normal',
-                      halign: 'left',
-                      textColor: 20,
-                    },
+                    doc.autoTable(columnsSign, dataSign, {
+                      startY: doc.autoTable.previous.finalY + 25,
+                      pageBreak: 'avoid',
+                      theme: 'plain',
+                      styles: {
+                        cellPadding: 1,
+                        fontSize: 10,
+                        font: "helvetica",
+                        fontStyle: 'normal',
+                        overflow: 'hidden',
+                        textColor: 20,
+                        halign: 'left',
+                        valign: 'middle',
+                        columnWidth: 'auto',
+                      },
+                      headerStyles: {
+                        fillColor: [255, 255, 255],
+                        fontStyle: 'normal',
+                        halign: 'left',
+                        textColor: 20,
+                      },
+                    }
+                    );
+
+                    doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
                   }
-                  );
-
-                  doc.save('Solicitud de viaje No ' + this.result.data[0].travel_request.ticket.toString() + '.pdf');
                 }
               }
             }
@@ -271,7 +273,7 @@ export class PdfTravelComponent implements OnInit {
       let recordsPrint = result.data[0].travel_managements.data;
 
       keys.forEach((element) => {
-        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6'&& element !== 'field_8' && element !== 'field_9' && element !== 'field_10' && element !== 'field_11') {
+        if (element !== 'field_0' && element !== 'field_3' && element !== 'field_6' && element !== 'field_8' && element !== 'field_9' && element !== 'field_10' && element !== 'field_11') {
           let label: any;
           label = result.data[0].travel_managements.labels[element];
 
@@ -678,6 +680,38 @@ export class PdfTravelComponent implements OnInit {
 
 
 
+    return true;
+  }
+
+  comentaries(result, doc) {
+    if (result.data[0].travel_request.commentary !== null) {
+      let columnsReasonJourneys = ["COMENTARIOS"];
+      let dataReasonHeaderJourneys = [[result.data[0].travel_request.commentary.replace(/<p>/g, '').replace(/&nbsp;/g, '').split('/').join().replace(/<,p>/g, '')]];
+
+      doc.autoTable(columnsReasonJourneys, dataReasonHeaderJourneys, {
+        startY: doc.autoTable.previous.finalY + 10,
+        pageBreak: 'avoid',
+        theme: 'plain',
+        styles: {
+          cellPadding: 1,
+          fontSize: 10,
+          font: "helvetica",
+          fontStyle: 'normal',
+          overflow: 'hidden',
+          textColor: 20,
+          halign: 'left',
+          valign: 'middle',
+          columnWidth: 'auto',
+        },
+        headerStyles: {
+          fillColor: [226, 226, 226],
+          fontStyle: 'normal',
+          halign: 'left',
+          textColor: 20,
+        },
+      }
+      );
+    }
     return true;
   }
 
