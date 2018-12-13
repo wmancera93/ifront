@@ -122,7 +122,6 @@ export class NewSpendComponent implements OnInit {
       if (data !== true) {
         this.ticket_travel_request = data;
         this.travelManagementService.getTravelRequestsByid(data, this.edit).subscribe((third: any) => {
-          debugger
           this.typeSpend = third.data[0].travel_request.travel_type_code;
           this.spendsService.getSpendsTypes(this.typeSpend).subscribe((select: any) => {
             this.listSpendType = this.sortByAphabet(select.data);
@@ -370,7 +369,6 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getAccountContable().
       subscribe((account: any) => {
         this.accountContable = account.data;
-        console.log(this.accountContable)
       });
   }
 
@@ -419,10 +417,24 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getSpendListTravel(this.eployee_selected.id).subscribe((travel: any) => {
       this.listTravelsFromSpend = this.sortByNumber(travel.data);
     });
+
+    this.typeCenterCost = '';
+    this.typeCenterCost_id = '';
+    this.elementImputation = '';
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
   }
 
   deleteEmployeeThird() {
     this.eployee_selected = null;
+    this.typeCenterCost = '';
+    this.typeCenterCost_id = '';
+    this.elementImputation = '';
+    this.costs_travels = [];
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
   }
 
   deleteUpload(param) {
@@ -699,11 +711,22 @@ export class NewSpendComponent implements OnInit {
   }
 
   selectTypeCenterImputations() {
-    debugger
     if (this.elementImputation === 'KOSTL') {
       this.kostl = true;
       this.nplnr = false;
       this.aufnr = false;
+
+      let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
+
+      //let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
+
+      if (employee_center_coast !== null) {
+        this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter((data) => data.code === this.elementImputation)[0].id, employee_center_coast).
+          subscribe((data: any) => {
+            this.returnCostSearchSpend(data.data[0])
+          });
+      }
+
     } else {
       if (this.elementImputation === 'NPLNR') {
         this.kostl = false;

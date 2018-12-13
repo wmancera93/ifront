@@ -190,7 +190,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_terminal: '',
       date_begin: '',
       hour_begin: '00:00',
-      hour_end: '',
+      hour_end: '00:01',
       date_end: '',
       id_terminalto: '',
       id_cityto: '',
@@ -367,7 +367,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             id_terminal: '',
             date_begin: '',
             hour_begin: '00:00',
-            hour_end: '',
+            hour_end: '00:01',
             date_end: '',
             id_terminalto: '',
             id_cityto: '',
@@ -387,6 +387,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     let fecha = new Date();
     this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
 
+  }
+
+  addHourEnd(value) {
+    let begin = parseFloat(value.hour_begin.split(':')[0]);
+    let end = parseFloat(value.hour_begin.split(':')[1]) + 1;
+    let calculate_minutes = end.toString().length === 1 ? "0" + end.toString() : end > 59 ? "00" : end.toString();
+    let calculate_hour = calculate_minutes === "00" ? (begin + 1).toString().length === 1 ? "0" + (begin + 1).toString() : begin + 1 > 23 ? "00" : begin + 1 : begin.toString().length === 1 ? "0" + begin.toString() : begin;
+    this.formTravelManagement.controls['hour_end'].setValue(calculate_hour + ":" + calculate_minutes);
   }
 
   countSaveAccount: number = 0;
@@ -462,6 +470,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
+    this.costs_travels = [];
   }
 
   returnCostSearch(cost: any) {
@@ -469,7 +485,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['name_travel_costs'].setValue(cost.code + ' - ' + cost.name);
     this.costs_travels = [];
   }
-
   returnGraphSearch(graph) {
     this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
     this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
@@ -484,6 +499,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
   deleteEmployeeThird() {
     this.eployee_selected = null;
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
   }
 
   delete(date_param) {
@@ -823,54 +844,56 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       });
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
-    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
-      this.kostl = true;
-      this.nplnr = false;
-      this.aufnr = false;
-      // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
-      //   subscribe((data: any) => {
-      //     this.costs_travels = this.sortByAphabet(data.data);
-      //     if (this.costs_travels.length > 0) {
-      //       if (acction === 'new') {
-      //         this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
-      //       }
-      //     } else {
-      //       this.formTravelManagement.controls['id_travel_costs'].setValue('');
-      //     }
-      //   })
-    }
-    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
-      this.kostl = false;
-      this.nplnr = true;
-      this.aufnr = false;
-      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-      //   subscribe((data: any) => {
-      //     this.grahp = this.sortByAphabet(data.data);
-      //     if (this.grahp.length > 0) {
-      //       if (acction === 'new') {
-      //         this.formTravelManagement.controls['id_grahp'].setValue('');
-      //       }
-      //     } else {
-      //       this.formTravelManagement.controls['id_grahp'].setValue('');
-      //     }
-      //   })
-    }
-    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
-      this.kostl = false;
-      this.nplnr = false;
-      this.aufnr = true;
-      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-      //   subscribe((data: any) => {
-      //     this.grahp = this.sortByAphabet(data.data);
-      //     if (this.grahp.length > 0) {
-      //       if (acction === 'new') {
-      //         this.formTravelManagement.controls['id_grahp'].setValue('');
-      //       }
-      //     } else {
-      //       this.formTravelManagement.controls['id_grahp'].setValue('');
-      //     }
-      //   })
-    }
+      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
+        this.kostl = true;
+        this.nplnr = false;
+        this.aufnr = false;
+  
+  
+  
+      let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
+ 
+      // let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
+  
+        if (employee_center_coast !== null) {
+          this.travelManagementService.getFilterTravelCost(form.id_element_imputation, employee_center_coast).
+            subscribe((data: any) => {
+              this.returnCostSearch(data.data[0])
+            });
+        }
+      }
+      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
+        this.kostl = false;
+        this.nplnr = true;
+        this.aufnr = false;
+        // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+        //   subscribe((data: any) => {
+        //     this.grahp = this.sortByAphabet(data.data);
+        //     if (this.grahp.length > 0) {
+        //       if (acction === 'new') {
+        //         this.formTravelManagement.controls['id_grahp'].setValue('');
+        //       }
+        //     } else {
+        //       this.formTravelManagement.controls['id_grahp'].setValue('');
+        //     }
+        //   })
+      }
+      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
+        this.kostl = false;
+        this.nplnr = false;
+        this.aufnr = true;
+        // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+        //   subscribe((data: any) => {
+        //     this.grahp = this.sortByAphabet(data.data);
+        //     if (this.grahp.length > 0) {
+        //       if (acction === 'new') {
+        //         this.formTravelManagement.controls['id_grahp'].setValue('');
+        //       }
+        //     } else {
+        //       this.formTravelManagement.controls['id_grahp'].setValue('');
+        //     }
+        //   })
+      }
   }
 
   searchOperationsGrahp(form: any, acction: any) {
@@ -1046,7 +1069,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       id_terminal: '',
       date_begin: '',
       hour_begin: '00:00',
-      hour_end: '',
+      hour_end: '00:01',
       date_end: '',
       id_terminalto: '',
       id_cityto: '',

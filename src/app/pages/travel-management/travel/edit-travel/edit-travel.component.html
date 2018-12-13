@@ -441,7 +441,7 @@
                         <a> Hora de Partida *</a>
                       </label>
                       <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"
-                      />
+                      (change)="addHourEnd(formTravelManagement.value)" (click)="addHourEnd(formTravelManagement.value)"/>
                     </div>
                   </div>
                 </div>
@@ -516,7 +516,7 @@
                         <a> Hora de llegada *</a>
                       </label>
                       <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
-                        (change)="hourValidationsEdit(formTravelManagement.value)" />
+                        (change)="hourValidationsEdit(formTravelManagement.value)" readonly="readonly"/>
                     </div>
                   </div>
                 </div>

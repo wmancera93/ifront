@@ -95,6 +95,7 @@ export class PdfTravelComponent implements OnInit {
 
       let objectPDF = {
         third: third,
+        text_issue: this.result.data[0].travel_request.abrev_text_issue_doc === null ? '' : this.result.data[0].travel_request.abrev_text_issue_doc.toString(),
         personal_code: this.result.data[0].travel_request.employee_applicant_to_json.personal_code === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.personal_code.toString(),
         code_unit_organizative: this.result.data[0].travel_request.employee_applicant_to_json.div_person_code === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.div_person_code.toString(),
         text_unit_organizative: this.result.data[0].travel_request.employee_applicant_to_json.division_per === null ? '' : this.result.data[0].travel_request.employee_applicant_to_json.division_per.toString(),
@@ -124,6 +125,7 @@ export class PdfTravelComponent implements OnInit {
           ["Viaje registrado por: " + objectPDF.third, ""],
           ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
           ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
           ["Actividad de viaje: " + objectPDF.activity_travel, "Centro de costo: " + objectPDF.code_center_coast + ' - ' + objectPDF.text_center_coast],
@@ -138,6 +140,7 @@ export class PdfTravelComponent implements OnInit {
           ["Viaje registrado por: " + objectPDF.third, ""],
           ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
           ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
           ["Actividad de viaje: " + objectPDF.activity_travel, "Grafo: " + objectPDF.code_graph + ' - ' + objectPDF.text_graph],
@@ -152,6 +155,7 @@ export class PdfTravelComponent implements OnInit {
           ["Viaje registrado por: " + objectPDF.third, ""],
           ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
+          ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
           ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
           ["Actividad de viaje: " + objectPDF.activity_travel, "Orden Mantenimiento: " + objectPDF.code_orders + ' - ' + objectPDF.text_orders],
@@ -676,6 +680,46 @@ export class PdfTravelComponent implements OnInit {
           },
         });
       }
+
+      let bob:string = '0';
+      let usd:string = '0';
+
+      result.data[0].travel_allowance_request.total_importe.forEach((element) => {
+        if(element[1] === 'BOB'){
+          bob = element[2].toString();
+        }
+        if(element[1] === 'USD'){
+          usd = element[2].toString();
+        }
+      })
+
+      let columnsReasonJourneys = [{ title: 'Total gastos BOB', dataKey: "bob" }, { title: 'Total gastos USD', dataKey: "usd" }];
+      let dataReasonHeaderJourneys = [{ bob: bob, usd: usd }];
+
+      doc.autoTable(columnsReasonJourneys, dataReasonHeaderJourneys, {
+        startY: doc.autoTable.previous.finalY + 10,
+        pageBreak: 'avoid',
+        theme: 'grid',
+        styles: {
+          cellPadding: 1,
+          fontSize: 10,
+          font: "helvetica",
+          fontStyle: 'normal',
+          overflow: 'hidden',
+          textColor: 20,
+          halign: 'left',
+          valign: 'middle',
+          columnWidth: 'auto',
+        },
+        headerStyles: {
+          fillColor: [226, 226, 226],
+          fontStyle: 'normal',
+          halign: 'left',
+          textColor: 20,
+        },
+      }
+      );
+
     }
 
 
