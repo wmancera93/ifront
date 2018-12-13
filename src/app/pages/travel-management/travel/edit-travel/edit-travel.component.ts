@@ -660,7 +660,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
     modelFromdata.append('commentary', this.comentaryPlus);
-    modelFromdata.append('travel_maintenance_order_id', model.id_order);
+    modelFromdata.append('travel_maintenance_order_id', model.id_order == '-1' ? '' : model.id_order);
     modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
     modelFromdata.append('files_length', this.objectImg.length.toString())
@@ -1062,9 +1062,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.nplnr = false;
       this.aufnr = false;
 
-      this.formTravelManagement.controls['id_grahp'].setValue('');
-      this.formTravelManagement.controls['id_operations'].setValue('');
-      this.formTravelManagement.controls['id_order'].setValue('');
+      this.formTravelManagement.controls['id_grahp'].setValue('-1');
+      this.formTravelManagement.controls['id_operations'].setValue('-1');
+      this.formTravelManagement.controls['id_order'].setValue('-1');
       // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.costs_travels = this.sortByAphabet(data.data);
@@ -1082,8 +1082,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.kostl = false;
       this.nplnr = true;
       this.aufnr = false;
-      this.formTravelManagement.controls['id_travel_costs'].setValue('');
-      this.formTravelManagement.controls['id_order'].setValue('');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
+      this.formTravelManagement.controls['id_order'].setValue('-1');
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.grahp = this.sortByAphabet(data.data);
@@ -1100,9 +1100,9 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.kostl = false;
       this.nplnr = false;
       this.aufnr = true;
-      this.formTravelManagement.controls['id_grahp'].setValue('');
-      this.formTravelManagement.controls['id_operations'].setValue('');
-      this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      this.formTravelManagement.controls['id_grahp'].setValue('-1');
+      this.formTravelManagement.controls['id_operations'].setValue('-1');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('-1');
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.grahp = this.sortByAphabet(data.data);

@@ -320,12 +320,12 @@ export class EditSpendComponent implements OnInit {
         this.alert.setAlert(alertSuccess[0]);
       }
       if (action.action_method == "ModalDistCost") {
-        document.getElementById("closeModalEditSpend").click();
         let editDistCost = true;
         let id_byspend = action.id
+        document.getElementById("closeModalEditSpend").click();
         setTimeout(() => {
           this.spendSharedService.setViewDistCostSpend({ accion: editDistCost, id: id_byspend });
-        }, 100);
+        }, 1000);
 
       }
 

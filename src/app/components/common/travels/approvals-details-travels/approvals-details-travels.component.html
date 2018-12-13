@@ -16,13 +16,13 @@
             <div class="col-lg-3 col-12">
               <div class="widget bg-white">
                 <div class="row">
-                    <div class="col-12">
-                        <p class="font-title-general tops">
-                          Solicitud de viaje
-                          <i class="fa fa-hashtag text-primary-hr"></i>
-                          {{approvals[0].travel_request.ticket}}
-                        </p>
-                      </div>
+                  <div class="col-12">
+                    <p class="font-title-general tops">
+                      Solicitud de viaje
+                      <i class="fa fa-hashtag text-primary-hr"></i>
+                      {{approvals[0].travel_request.ticket}}
+                    </p>
+                  </div>
                   <div class="col-12">
                     <h3 class="font-color-default tops">
                       <i class="fa fa-user text-primary-hr"></i>
@@ -55,7 +55,7 @@
                       </div>
                     </div>
                   </div>
-                  
+
                 </div>
               </div>
             </div>
@@ -143,16 +143,14 @@
                   <div id="accordion" class="col-12" style="margin-top: 15px">
                     <div class="row">
                       <div class="col-12 text-left" id="headingOne">
-                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important"
-                          data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
+                          data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                           Ver pasaje, hotel y trayectos de solicitud</p>
                       </div>
-                      <div id="collapseOne" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion"
-                        style="margin-top: 25px">
+                      <div id="collapseOne" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion" style="margin-top: 25px">
                         <div class="row">
                           <div class="col-12">
-                            <app-data-table [records]="objectTravelsReport" [pdf]="showPdf" id="tableTravelsSaved"
-                              [sizeTable]="showSizeTable" [title]="nameReportTravel"></app-data-table>
+                            <app-data-table [records]="objectTravelsReport" [pdf]="showPdf" id="tableTravelsSaved" [sizeTable]="showSizeTable" [title]="nameReportTravel"></app-data-table>
                           </div>
                         </div>
                         <div class="row" style="padding-bottom: 40px">
@@ -177,28 +175,22 @@
                     </div>
                     <div class="row">
                       <div class="text-primary col-12 text-left" id="headingTwo">
-                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important"
-                          data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver
-                          anticipos de viaje</p>
+                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
+                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
                       </div>
-                      <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
-                        style="margin-top: 25px">
-                        <app-data-table [records]="objectAdvanceReport" [pdf]="showPdf" id="tableAdvanceSaved"
-                          [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+                      <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
+                        <app-data-table [records]="objectAdvanceReport" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
                       </div>
                     </div>
                     <div class="row">
                       <div class=" font-title-general  col-12 text-left" id="headingThree">
-                        <p class="font-title-general collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important"
-                          data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver
-                          gastos de viaje</p>
+                        <p class="font-title-general collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
+                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
                       </div>
-                      <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion"
-                        style="margin-top: 25px">
+                      <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
                         <div class="row">
                           <div class="col-12">
-                            <app-data-table [records]="objectSpendReport" [pdf]="showPdf" id="tableSpendSaved"
-                              [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
+                            <app-data-table [records]="objectSpendReport" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
                           </div>
                         </div>
                         <div class="row" style="padding-bottom: 40px" *ngIf="approvals[0].travel_allowance_request.data !== null">
@@ -236,8 +228,7 @@
                           <img src="{{approversTravels.image.url}}" class="img-employee">
                           <br>
                         </div>
-                        <p *ngIf="approversTravels.short_name != null" class="paddingInfo text-left text-md-center"
-                          style="font-weight: 100 !important">
+                        <p *ngIf="approversTravels.short_name != null" class="paddingInfo text-left text-md-center" style="font-weight: 100 !important">
                           {{approversTravels.short_name}}
                         </p>
                       </div>
@@ -248,14 +239,12 @@
                   <div class="col-12">
                     <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'I' || approvals[0].travel_request.approver_platform == null ">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequest">
-                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}"
-                          data-toggle="tab" href="#Approval">
+                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}" data-toggle="tab" href="#Approval">
                           Gestionar solicitud
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequest}"
-                          data-toggle="tab" href="#Detail">
+                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequest}" data-toggle="tab" href="#Detail">
                           Ver detalles
                         </a>
                       </li>
@@ -263,7 +252,7 @@
                     <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
-                          Ver detalles
+                          Ver detalles {{approvals[0].approver_platform}}
                         </a>
                       </li>
                     </ul>
@@ -342,8 +331,11 @@
                                 Descripción:
                               </h3>
                             </div>
-                            <div class="col-12 text-left">
+                            <div class="col-12 text-left" *ngIf="details.observation !== ''">
                               {{details.observation}}
+                            </div>
+                            <div class="col-12 text-left" *ngIf="details.observation == ''">
+                              No hay observaciones
                             </div>
                           </div>
                         </div>
@@ -359,18 +351,18 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="approvals[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div *ngIf="approvals[0].travel_request.approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
                         <div *ngIf="approvals[0].travel_request.answers_to_json.length > 0" class="">
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].travel_request.answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              Nivel de aprobación {{details.travel_request.approver_to_json.level}}
+                              Nivel de aprobación {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} por {{details.travel_request.approver_to_json.name}}
+                                {{details.status}} por {{details.approver_to_json.name}}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
@@ -378,8 +370,11 @@
                                 Descripción:
                               </h3>
                             </div>
-                            <div class="col-12 text-left">
-                              {{details.description}}
+                            <div class="col-12 text-left" *ngIf="details.observation !== ''">
+                              {{details.observation}}
+                            </div>
+                            <div class="col-12 text-left" *ngIf="details.observation == ''">
+                              No hay observaciones
                             </div>
                           </div>
                         </div>
