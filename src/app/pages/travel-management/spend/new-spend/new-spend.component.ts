@@ -716,6 +716,10 @@ export class NewSpendComponent implements OnInit {
       this.nplnr = false;
       this.aufnr = false;
 
+      this.formSpendTravel.controls['typeCenterOrder_id'].setValue('');
+      this.formSpendTravel.controls['grahpSpend_id'].setValue('');
+      this.formSpendTravel.controls['operationsSpend'].setValue('');
+
       let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
 
       //let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
@@ -732,11 +736,17 @@ export class NewSpendComponent implements OnInit {
         this.kostl = false;
         this.nplnr = true;
         this.aufnr = false;
+
+        this.formSpendTravel.controls['typeCenterCost_id'].setValue('');
+        this.formSpendTravel.controls['typeCenterOrder_id'].setValue('');
       } else {
         if (this.elementImputation === 'AUFNR') {
           this.kostl = false;
           this.nplnr = false;
           this.aufnr = true;
+          this.formSpendTravel.controls['typeCenterCost_id'].setValue('');
+          this.formSpendTravel.controls['grahpSpend_id'].setValue('');
+          this.formSpendTravel.controls['operationsSpend'].setValue('');
         }
       }
     }
