@@ -349,6 +349,7 @@
                   </label>
                   <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
                     (change)="selectTypeCenterImputations()">
+                    <option [value]=""></option>
                     <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.code">{{costsTravelCenter.name}}</option>
                   </select>
                 </div>

@@ -554,6 +554,14 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
+
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
+    this.costs_travels = [];
   }
   returnCostSearch(cost: any) {
     this.formTravelManagement.controls['id_travel_costs'].setValue(cost.id);
@@ -577,6 +585,12 @@ export class EditTravelComponent implements OnInit, OnDestroy {
 
   deleteEmployeeThird() {
     this.eployee_selected = null;
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
+    this.kostl = false;
+    this.nplnr = false;
+    this.aufnr = false;
   }
 
   sortByAphabet(dataBySort: any) {
@@ -1073,6 +1087,17 @@ export class EditTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_grahp'].setValue('');
       this.formTravelManagement.controls['id_operations'].setValue('');
       this.formTravelManagement.controls['id_order'].setValue('');
+
+      let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
+
+      // let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
+
+      if (employee_center_coast !== null) {
+        this.travelManagementService.getFilterTravelCost(form.id_element_imputation, employee_center_coast).
+          subscribe((data: any) => {
+            this.returnCostSearch(data.data[0])
+          });
+      }
       // this.travelManagementService.getTravelsCosts(form.id_element_imputation).
       //   subscribe((data: any) => {
       //     this.costs_travels = this.sortByAphabet(data.data);
