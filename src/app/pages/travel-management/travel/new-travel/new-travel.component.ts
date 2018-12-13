@@ -848,8 +848,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.kostl = true;
         this.nplnr = false;
         this.aufnr = false;
-  
-  
+   
+        this.formTravelManagement.controls['id_grahp'].setValue('');
+        this.formTravelManagement.controls['id_operations'].setValue('');
+        this.formTravelManagement.controls['id_order'].setValue('');  
   
       let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
  
@@ -866,6 +868,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.kostl = false;
         this.nplnr = true;
         this.aufnr = false;
+
+        this.formTravelManagement.controls['id_travel_costs'].setValue('');
+        this.formTravelManagement.controls['id_order'].setValue('');
+
         // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
         //   subscribe((data: any) => {
         //     this.grahp = this.sortByAphabet(data.data);
@@ -882,6 +888,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.kostl = false;
         this.nplnr = false;
         this.aufnr = true;
+
+        this.formTravelManagement.controls['id_grahp'].setValue('');
+        this.formTravelManagement.controls['id_operations'].setValue('');
+        this.formTravelManagement.controls['id_travel_costs'].setValue(''); 
+
+
         // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
         //   subscribe((data: any) => {
         //     this.grahp = this.sortByAphabet(data.data);
@@ -933,6 +945,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString());
       this.kostl = false;
       this.nplnr = true;
+      this.aufnr = false;
       this.travelManagementService.getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString()).
         subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
@@ -941,6 +954,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       this.formTravelManagement.controls['id_element_imputation'].setValue(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString());
       this.kostl = true;
       this.nplnr = false;
+      this.aufnr = false;
       // this.travelManagementService.getTravelsCosts(this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString()).
       //   subscribe((data: any) => {
       //     this.costs_travels = this.sortByAphabet(data.data);
