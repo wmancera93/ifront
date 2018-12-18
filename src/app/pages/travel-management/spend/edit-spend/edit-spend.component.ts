@@ -113,22 +113,22 @@ export class EditSpendComponent implements OnInit {
       if (data === 'deleteDetailSpendEdit') {
         this.spendsService.deleteDetailSpend(this.idEditSpend).subscribe(
           (deleteSpend: any) => {
-          this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
-          this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
-          this.objectReport.emit({ success: true, data: [this.editSpendTable] });
+            this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
+            this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
+            this.objectReport.emit({ success: true, data: [this.editSpendTable] });
 
-          document.getElementById("btn_spend_edit").click();
-        },
-        ((error:any)=>{
+            document.getElementById("btn_spend_edit").click();
+          },
+          ((error: any) => {
 
-          const alertSuccess: Alerts[] = [{
-            type: 'danger',
-            title: 'Confirmación',
-            message: error.json().errors.toString(),
-            confirmation: false,
-          }];
-          this.alert.setAlert(alertSuccess[0]);
-        }));
+            const alertSuccess: Alerts[] = [{
+              type: 'danger',
+              title: 'Confirmación',
+              message: error.json().errors.toString(),
+              confirmation: false,
+            }];
+            this.alert.setAlert(alertSuccess[0]);
+          }));
       }
       if (data === 'deleteDetailSpendEditCreated') {
         this.editSpendTable.data.splice(this.editSpendTable.data.findIndex(filter => filter.field_0 === this.idEditSpend), 1);
@@ -559,6 +559,7 @@ export class EditSpendComponent implements OnInit {
 
     this.formDataService.putEditSpendFormData(this.idSpendRequests, param).subscribe(
       (data: any) => {
+        this.objectAllowancesEdit = [];
         document.getElementById("closeModalEditSpend").click();
 
         const alertSuccess: Alerts[] = [{
@@ -572,6 +573,7 @@ export class EditSpendComponent implements OnInit {
         this.spendSharedService.setRefreshSpend({ success: true, third: false });
       },
       (error: any) => {
+        this.objectAllowancesEdit = [];
         document.getElementById("btn_spend_edit").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
