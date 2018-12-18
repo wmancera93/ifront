@@ -908,11 +908,11 @@ export class NewSpendComponent implements OnInit {
         title: "Gastos",
         title_table: "Gastos solicitados",
         labels: {
-          field_1: {
-            value: "Viaje",
-            type: "string",
-            sortable: false,
-          },
+          // field_1: {
+          //   value: "Viaje",
+          //   type: "string",
+          //   sortable: false,
+          // },
           field_2: {
             value: "Tipo de Gasto",
             type: "string",

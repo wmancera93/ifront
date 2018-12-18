@@ -36,6 +36,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public table_spend: any[] = [];
   public type_requests: string;
   public idGeneral: string;
+  public objectApproval: any[] = [];
 
   public countAfter: number = 0;
 
@@ -72,7 +73,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
-
+        
         if (this.countAfter === 0) {
           this.switchTravels = 'on';
           this.descriptionTravels = '';
@@ -81,16 +82,21 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.editRequest = data.edit;
           this.type_requests = data.type;
           this.idGeneral = this.requests_travels.ticket;
-          debugger
           switch (this.type_requests) {
             case 'travels':
+              this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsById(this.requests_travels.ticket)
                 .subscribe((request: any) => {
                   if (request) {
                     this.approvals = request.data;
-
+                    this.objectApproval.push({
+                      approver_platform: request.data[0].travel_request.approver_platform,
+                      approvers_to_json: request.data[0].travel_request.approvers_to_json,
+                      answers_to_json: request.data[0].travel_request.answers_to_json
+                    })
+                    
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                     }, 300);
@@ -109,7 +115,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     setTimeout(() => {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
-                    debugger
+
                     if (request.data[0].travel_allowance_request.data !== null && request.data[0].travel_allowance_request.data.length === undefined) {
 
                       request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
@@ -137,12 +143,17 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'advance':
+            this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsAdnvanceById(this.requests_travels.ticket)
                 .subscribe((advance: any) => {
-                  debugger
                   this.approvals = advance.data[0].request;
+                  this.objectApproval.push({
+                    approver_platform: advance.data[0].request[0].travel_advance_requests.approver_platform,
+                    approvers_to_json: advance.data[0].request[0].travel_advance_requests.approvers_to_json,
+                    answers_to_json: advance.data[0].request[0].travel_advance_requests.answers_to_json
+                  })
                   setTimeout(() => {
                     this.objectTravelsReport.emit({ success: true, data: [advance.data[0].request[0].travel_managements] });
                   }, 300);
@@ -160,7 +171,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                   setTimeout(() => {
                     this.objectAdvanceReport.emit({ success: true, data: [object] });
                   }, 300);
-                  debugger
+
                   if (advance.data[0].request[0].travel_allowance_request.data !== null && advance.data[0].request[0].travel_allowance_request.data.length === undefined) {
                     advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                       this.table_spend.push(element)
@@ -181,13 +192,18 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'spend':
+            this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)
                 .subscribe((spend: any) => {
                   if (spend) {
-                    debugger
                     this.approvals = spend.data;
+                    this.objectApproval.push({
+                      approver_platform: spend.data[0].travel_allowance_request.approver_platform,
+                      approvers_to_json: spend.data[0].travel_allowance_request.approvers_to_json,
+                      answers_to_json: spend.data[0].travel_allowance_request.answers_to_json
+                    })
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [spend.data[0].travel_managements] });
                     }, 300);
@@ -204,7 +220,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     setTimeout(() => {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
-                    debugger
+
                     if (spend.data[0].travel_allowance_request.data !== null && spend.data[0].travel_allowance_request.data.length === undefined) {
                       spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
                         this.table_spend.push(element)
@@ -265,7 +281,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
     this.switchTravels = 'off';
   }
   saveApprovalRequestsTravels() {
-    debugger
+
     this.showSubmit = false;
 
     switch (this.type_requests) {
@@ -296,7 +312,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
         break;
       case 'advance':
-        debugger
+
         this.approverTravelsService.postApprovalsRequestAdvance({
           request_id: this.idGeneral,
           answer: this.switchTravels,
@@ -321,7 +337,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
         break;
       case 'spend':
-        debugger
+
         this.approverTravelsService.postApprovalsRequestSpend({
           request_id: this.approvals[0].travel_allowance_request.data.id,
           answer: this.switchTravels,
