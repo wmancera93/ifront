@@ -373,11 +373,13 @@ export class PdfTravelComponent implements OnInit {
       let recordsPrint = object.data;
 
       keys.forEach((element) => {
-        let label: any;
-        label = result.data[0].travel_advance_requests.labels[element];
+        if (element !== 'field_7') {
+          let label: any;
+          label = result.data[0].travel_advance_requests.labels[element];
 
-        labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
-        columnsPdf.push({ title: label.value, dataKey: element });
+          labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
+          columnsPdf.push({ title: label.value, dataKey: element });
+        }
       })
 
 
@@ -437,7 +439,7 @@ export class PdfTravelComponent implements OnInit {
           fontStyle: 'normal',
           halign: 'center',
           textColor: 20,
-        }, 
+        },
         createdCell: function (cell, data) {
           align(cell, data);
         }
