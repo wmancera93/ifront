@@ -67,22 +67,22 @@
                       <h3 class="font-color-default col-md-2 col-4">
                         Estado:
                       </h3>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Aprobado'">
+                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == 'Aprobado'">
                         <span class="badge badge-primary" style="margin-top: 5px;">
                           {{approvals[0].travel_request.status_request}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Cancelado'">
+                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == 'Cancelado'">
                         <span class="badge badge-danger" style="margin-top: 5px;">
                           {{approvals[0].travel_request.status_request}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'En Proceso'">
+                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == 'En Proceso'">
                         <span class="badge badge-success" style="margin-top: 5px;">
                           {{approvals[0].travel_request.status_request}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Pendiente'">
+                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == 'Pendiente'">
                         <span class="badge badge-default" style="margin-top: 5px;">
                           {{approvals[0].travel_request.status_request}}
                         </span>
@@ -134,7 +134,7 @@
                         <p class="font-title-general">
                           <i class="fa fa-fw fa-users font-color-default"></i>
                           Aprobadores:
-                          <span style="font-weight: 100 !important">{{approvals[0].travel_request.approvers_to_json.length}}</span>
+                          <span style="font-weight: 100 !important">{{objectApproval[0].approvers_to_json.length}}</span>
                         </p>
                       </div>
                     </div>
@@ -223,7 +223,7 @@
                       </h3>
                     </div>
                     <div class="row justify-content-between">
-                      <div class="col-md-3 col-6 center-img-aprovers tops" *ngFor="let approversTravels of approvals[0].travel_request.approvers_to_json">
+                      <div class="col-md-3 col-6 center-img-aprovers tops" *ngFor="let approversTravels of objectApproval[0].approvers_to_json">
                         <div class="img-approvers" *ngIf="approversTravels.image != null">
                           <img src="{{approversTravels.image.url}}" class="img-employee">
                           <br>
@@ -237,7 +237,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'I' || approvals[0].travel_request.approver_platform == null ">
+                    <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'I' || objectApproval[0].approver_platform == null ">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequest">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}" data-toggle="tab" href="#Approval">
                           Gestionar solicitud
@@ -249,7 +249,7 @@
                         </a>
                       </li>
                     </ul>
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].travel_request.approver_platform == 'S'">
+                    <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
                           Ver detalles {{approvals[0].approver_platform}}
@@ -259,7 +259,7 @@
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div *ngIf="approvals[0].travel_request.approver_platform == 'I' || approvals[0].travel_request.approver_platform == null"
+                  <div *ngIf="objectApproval[0].approver_platform == 'I' || objectApproval[0].approver_platform == null"
                     class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': editRequest}" style="background-color: transparent !important">
                       <div class="row">
@@ -315,8 +315,8 @@
                     </div>
                     <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !editRequest}" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
-                        <div *ngIf="approvals[0].travel_request.answers_to_json.length > 0" class="">
-                          <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].travel_request.answers_to_json">
+                        <div *ngIf="objectApproval[0].answers_to_json.length > 0" class="">
+                          <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
                               Nivel de aprobación {{details.approver_to_json.level}}
@@ -339,7 +339,7 @@
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="approvals[0].travel_request.answers_to_json.length == 0">
+                        <div *ngIf="objectApproval[0].answers_to_json.length == 0">
                           <div class="row justify-content-center">
                             <div class="col-12 text-center top-general">
                               <h3 class="font-color-default">
@@ -351,11 +351,11 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="approvals[0].travel_request.approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
+                  <div *ngIf="objectApproval[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
                     <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
                       <div class="col-12 tab-pane">
-                        <div *ngIf="approvals[0].travel_request.answers_to_json.length > 0" class="">
-                          <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].travel_request.answers_to_json">
+                        <div *ngIf="objectApproval[0].answers_to_json.length > 0" class="">
+                          <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
                               Nivel de aprobación {{details.approver_to_json.level}}
@@ -378,7 +378,7 @@
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="approvals[0].travel_request.answers_to_json.length == 0">
+                        <div *ngIf="objectApproval[0].answers_to_json.length == 0">
                           <div class="row justify-content-center">
                             <div class="col-12 text-center top-general">
                               <h3 class="font-color-default">
