@@ -336,7 +336,7 @@ export class PdfTravelComponent implements OnInit {
         headerStyles: {
           fillColor: [226, 226, 226],
           fontStyle: 'normal',
-          halign: 'left',
+          halign: 'center',
           textColor: 20,
         },
       }
@@ -410,7 +410,12 @@ export class PdfTravelComponent implements OnInit {
       );
 
       let columnsBodyJourneys = columnsPdf;
-      let dataBodyHeaderJourneys = recordsPrint;
+      let dataBodyHeaderJourneys: any[] = [];
+
+      recordsPrint.forEach(element => {
+        element.field_1 = parseFloat(element.field_1).toLocaleString('es')
+        dataBodyHeaderJourneys.push(element)
+      });
 
       doc.autoTable(columnsBodyJourneys, dataBodyHeaderJourneys, {
         startY: doc.autoTable.previous.finalY,
@@ -430,12 +435,21 @@ export class PdfTravelComponent implements OnInit {
         headerStyles: {
           fillColor: [226, 226, 226],
           fontStyle: 'normal',
-          halign: 'left',
+          halign: 'center',
           textColor: 20,
-        },
+        }, 
+        createdCell: function (cell, data) {
+          align(cell, data);
+        }
       }
       );
 
+    }
+
+    function align(cell, data) {
+      if (data.column.dataKey === 'field_1') {
+        cell.styles.halign = 'right';
+      }
     }
 
     return true;
@@ -505,7 +519,7 @@ export class PdfTravelComponent implements OnInit {
           headerStyles: {
             fillColor: [226, 226, 226],
             fontStyle: 'normal',
-            halign: 'left',
+            halign: 'center',
             textColor: 20,
           },
         });
@@ -541,8 +555,6 @@ export class PdfTravelComponent implements OnInit {
         }
       })
 
-
-
       let columnsHeaderJourneys = ["GASTOS", ""];
       let dataHeaderJourneys: string[] = [];
 
@@ -570,8 +582,14 @@ export class PdfTravelComponent implements OnInit {
       }
       );
 
+      let dataBodyHeaderJourneys: any[] = [];
+
+      recordsPrint.forEach(element => {
+        element.field_3 = parseFloat(element.field_3).toLocaleString('es')
+        dataBodyHeaderJourneys.push(element)
+      });
+
       let columnsBodyJourneys = columnsPdf;
-      let dataBodyHeaderJourneys = recordsPrint;
 
       doc.autoTable(columnsBodyJourneys, dataBodyHeaderJourneys, {
         startY: doc.autoTable.previous.finalY,
@@ -591,14 +609,21 @@ export class PdfTravelComponent implements OnInit {
         headerStyles: {
           fillColor: [226, 226, 226],
           fontStyle: 'normal',
-          halign: 'left',
+          halign: 'center',
           textColor: 20,
         },
+        createdCell: function (cell, data) {
+          align(cell, data);
+        }
       }
       );
 
     }
-
+    function align(cell, data) {
+      if (data.column.dataKey === 'field_3') {
+        cell.styles.halign = 'right';
+      }
+    }
     return true;
   }
 
@@ -675,26 +700,26 @@ export class PdfTravelComponent implements OnInit {
           headerStyles: {
             fillColor: [226, 226, 226],
             fontStyle: 'normal',
-            halign: 'left',
+            halign: 'center',
             textColor: 20,
           },
         });
       }
 
-      let bob:string = '0';
-      let usd:string = '0';
+      let bob: string = '0';
+      let usd: string = '0';
 
       result.data[0].travel_allowance_request.total_importe.forEach((element) => {
-        if(element[1] === 'BOB'){
+        if (element[1] === 'BOB') {
           bob = element[2].toString();
         }
-        if(element[1] === 'USD'){
+        if (element[1] === 'USD') {
           usd = element[2].toString();
         }
       })
 
       let columnsReasonJourneys = [{ title: 'Total gastos BOB', dataKey: "bob" }, { title: 'Total gastos USD', dataKey: "usd" }];
-      let dataReasonHeaderJourneys = [{ bob: bob, usd: usd }];
+      let dataReasonHeaderJourneys = [{ bob: parseFloat(bob).toLocaleString('es'), usd: parseFloat(usd).toLocaleString('es') }];
 
       doc.autoTable(columnsReasonJourneys, dataReasonHeaderJourneys, {
         startY: doc.autoTable.previous.finalY + 10,
@@ -707,7 +732,7 @@ export class PdfTravelComponent implements OnInit {
           fontStyle: 'normal',
           overflow: 'hidden',
           textColor: 20,
-          halign: 'left',
+          halign: 'right',
           valign: 'middle',
           columnWidth: 'auto',
         },
