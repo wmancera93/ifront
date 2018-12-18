@@ -123,12 +123,12 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "KOSTL") {
         dataMacro = [
           ["Viaje registrado por: " + objectPDF.third, ""],
-          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa:\n" + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
           ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
-          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
-          ["Actividad de viaje: " + objectPDF.activity_travel, "Centro de costo: " + objectPDF.code_center_coast + ' - ' + objectPDF.text_center_coast],
+          ["", "Elemento de imputación:\n" + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["Actividad de viaje: " + objectPDF.activity_travel, "Centro de costo:\n" + objectPDF.code_center_coast + ' - ' + objectPDF.text_center_coast],
           ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
           ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
         ];
@@ -138,13 +138,13 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "NPLNR") {
         dataMacro = [
           ["Viaje registrado por: " + objectPDF.third, ""],
-          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa:\n" + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
           ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
-          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["", "Elemento de imputación:\n" + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
           ["Actividad de viaje: " + objectPDF.activity_travel, "Grafo: " + objectPDF.code_graph + ' - ' + objectPDF.text_graph],
-          ["", "Operación: " + objectPDF.code_operation + ' - ' + objectPDF.text_operation],
+          ["", "Operación:\n" + objectPDF.code_operation + ' - ' + objectPDF.text_operation],
           ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
           ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
         ];
@@ -153,12 +153,12 @@ export class PdfTravelComponent implements OnInit {
       if (this.result.data[0].travel_request.travel_costs_type_code === "AUFNR") {
         dataMacro = [
           ["Viaje registrado por: " + objectPDF.third, ""],
-          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa: " + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
+          ["No. Empleado: " + objectPDF.personal_code, "Unidad Organizativa:\n" + objectPDF.code_unit_organizative + ' - ' + objectPDF.text_unit_organizative],
           ["Nombre Viajero: " + objectPDF.name_traveler, "Carné de Identidad: " + objectPDF.identification_traveler],
           ["", "Lugar de expedición: " + objectPDF.text_issue],
           ["", "Fecha: " + objectPDF.date_begin_travel + " hasta " + objectPDF.date_end_travel],
-          ["", "Elemento de imputación: " + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
-          ["Actividad de viaje: " + objectPDF.activity_travel, "Orden Mantenimiento: " + objectPDF.code_orders + ' - ' + objectPDF.text_orders],
+          ["", "Elemento de imputación:\n" + objectPDF.code_element_imputation + ' - ' + objectPDF.text_element_imputation],
+          ["Actividad de viaje: " + objectPDF.activity_travel, "Orden Mantenimiento:\n" + objectPDF.code_orders + ' - ' + objectPDF.text_orders],
           ["Estatus de Viaje: " + objectPDF.status_travel, "Clase de viaje legal: " + objectPDF.class_travel_legal],
           ["", "Clase de viaje especial: " + objectPDF.class_travel_especial]
         ];
@@ -729,6 +729,7 @@ export class PdfTravelComponent implements OnInit {
 
   comentaries(result, doc) {
     if (result.data[0].travel_request.commentary !== null) {
+      debugger
       let columnsReasonJourneys = ["COMENTARIOS"];
       let dataReasonHeaderJourneys = [[result.data[0].travel_request.commentary.replace(/<p>/g, '').replace(/&nbsp;/g, '').split('/').join().replace(/<,p>/g, '')]];
 
