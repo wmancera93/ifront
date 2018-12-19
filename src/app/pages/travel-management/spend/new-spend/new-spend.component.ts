@@ -873,7 +873,6 @@ export class NewSpendComponent implements OnInit {
         this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
           this.listTravelsFromSpend = travel.data;
         });
-
         const alertSuccess: Alerts[] = [{
           type: 'success',
           title: 'Alerta',
@@ -886,11 +885,11 @@ export class NewSpendComponent implements OnInit {
         this.spendSharedService.setRefreshSpend({ success: true, third: this.eployee_selected == null ? false : true });
       },
       (error: any) => {
-        document.getElementById("btn_spend_new").click();
+        document.getElementById("closeSpends").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: 'Advertencia',
-          message: error.json().errors.toString(),
+          message: error.json().errors.toString() + '¿Desesa continuar con la solicitud de gatos?',
           confirmation: true,
           typeConfirmation: 'ValidationNewSpend'
         }];
