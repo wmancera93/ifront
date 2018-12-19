@@ -636,12 +636,16 @@ export class PdfTravelComponent implements OnInit {
       result.data[0].travel_allowance_request.cost_distribution.travel_allowances.forEach(element => {
         let code_allowance = element.type_allowance_code;
         element.cost_distribution_allowances.forEach(distribution => {
+
+          let coast = distribution.travel_cost_code.toString() === '' ? '' : distribution.travel_cost_code.toString() + '-' + distribution.travel_cost_name;
+          let graph_operation = distribution.travel_graph_code.toString() === '' ? '' : distribution.travel_graph_code.toString() + '-' + distribution.travel_graph_name + ' / ' + distribution.travel_operation_code.toString() + '-' + distribution.travel_operation_name;
+          let orders = distribution.travel_maintenance_order_code.toString() === '' ? '' : distribution.travel_maintenance_order_code.toString() + '-' + distribution.travel_maintenance_order_name;
+
+
           recordsPrint.push({
             tipe_allowance: code_allowance,
             element: distribution.travel_costs_type_name,
-            center_coast: distribution.travel_cost_code.toString() === '' ? '' : distribution.travel_cost_code.toString() + '-' + distribution.travel_cost_name,
-            travel_graph: distribution.travel_graph_code.toString() === '' ? '' : distribution.travel_graph_code.toString() + '-' + distribution.travel_graph_name,
-            travel_operation: distribution.travel_operation_code.toString() === '' ? '' : distribution.travel_operation_code.toString() + '-' + distribution.travel_operation_name,
+            concept: coast !== '' ? coast : graph_operation !== '' ? graph_operation : orders !== '' ? orders : '',
             account: distribution.accounting_account_code.toString() === '' ? '' : distribution.accounting_account_code.toString() + '-' + distribution.accounting_account_name,
             distribution: distribution.distribution.toString() + '%'
           })
@@ -675,14 +679,23 @@ export class PdfTravelComponent implements OnInit {
           },
         });
 
+
         let columnsPdf = [
           { title: 'Gasto', dataKey: "tipe_allowance" },
           { title: 'E.Imputación', dataKey: "element" },
-          { title: 'C.Costo', dataKey: "center_coast" },
-          { title: 'Grafo', dataKey: "travel_graph" },
-          { title: 'Operación', dataKey: "travel_operation" },
+          { title: 'Concepto', dataKey: "concept" }, ,
           { title: 'C.Contable', dataKey: "account" },
           { title: 'Dist', dataKey: "distribution" }];
+
+
+        // let columnsPdf = [
+        //   { title: 'Gasto', dataKey: "tipe_allowance" },
+        //   { title: 'E.Imputación', dataKey: "element" },
+        //   { title: 'C.Costo', dataKey: "center_coast" },
+        //   { title: 'Grafo', dataKey: "travel_graph" },
+        //   { title: 'Operación', dataKey: "travel_operation" },
+        //   { title: 'C.Contable', dataKey: "account" },
+        //   { title: 'Dist', dataKey: "distribution" }];
 
         doc.autoTable(columnsPdf, recordsPrint, {
           startY: doc.autoTable.previous.finalY,
