@@ -170,6 +170,7 @@ export class NewSpendComponent implements OnInit {
             this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
           }
           if (detail.data[0].travel_request.travel_costs_type_code === 'AUFNR') {
+            debugger
             this.nplnr = false;
             this.kostl = false;
             this.aufnr = true;
@@ -180,7 +181,7 @@ export class NewSpendComponent implements OnInit {
             this.distribution = '100';
             this.operationsSpend = '';
             this.typeCenterCost_id = '';
-            this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+            this.typeCenterOrder_id = detail.data[0].travel_request.travel_maintenance_order_id;
             this.grahpSpend_id = '';
           }
         });
@@ -512,7 +513,7 @@ export class NewSpendComponent implements OnInit {
           this.distribution = '100';
           this.operationsSpend = '';
           this.typeCenterCost_id = '';
-          this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+          this.typeCenterOrder_id = detail.data[0].travel_request.travel_maintenance_order_id;
           this.grahpSpend_id = '';
         }
       });
@@ -682,7 +683,7 @@ export class NewSpendComponent implements OnInit {
         this.distribution = '100';
         this.operationsSpend = '';
         this.typeCenterCost_id = '';
-        this.typeCenterOrder_id = detail.data[0].travel_request.travel_order_id;
+        this.typeCenterOrder_id = detail.data[0].travel_request.travel_maintenance_order_id;
         this.grahpSpend_id = '';
       }
     });
@@ -853,7 +854,7 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
-
+    debugger
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
