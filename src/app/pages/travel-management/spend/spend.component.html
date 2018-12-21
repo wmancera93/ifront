@@ -38,17 +38,17 @@
         </div>
       </div>
 
-       <!-- begin filters -->
-       <div class="border-botton-general">
+      <!-- begin filters -->
+      <div class="border-botton-general">
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilter" aria-expanded="false" (click)="collapse(true)"></i>
-            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilter" aria-expanded="false" (click)="collapse(false)"></i>
+            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
+              aria-expanded="false" (click)="collapse(true)"></i>
+            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
+              aria-expanded="false" (click)="collapse(false)"></i>
           </div>
         </div>
       </div>
@@ -143,14 +143,14 @@
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-12 text-left">
           <form>
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request"
-              [checked]="checkThird" (click)="checkSpends('spends_request')" />
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" [checked]="checkThird"
+              (click)="checkSpends('spends_request')" />
             <b>
               Mis gastos registrados
             </b>
             &nbsp;&nbsp;
-            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request"
-              [checked]="!checkThird" (click)="checkSpends('my_spends_request')" />
+            <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" [checked]="!checkThird"
+              (click)="checkSpends('my_spends_request')" />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
               Gastos registrados a terceros
             </b>
@@ -166,10 +166,12 @@
                   <span *ngIf="spend.ticket_cli !== null" class="badge badge-warning">
                     No. Viaje SAP # {{spend.ticket_cli}}
                   </span>
-                  <span *ngIf="spend.ticket_cli === null &&  spend.messages_server !== null &&  spend.synch_type_sap !== 'S'">
-                    <h6>
-                      <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
-                  </span>
+                  <div *ngIf="spend.ticket_cli === null && spend.ticket_cli !== 0000000000 ">
+                    <span *ngIf="spend.messages_server !== null &&  spend.synch_type_sap !== 'S'">
+                      <h6>
+                        <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
+                    </span>
+                  </div>
                   <span class="badge badge-warning">
                     No. Viaje iHR # {{spend.travel_request_id}}
                   </span>
