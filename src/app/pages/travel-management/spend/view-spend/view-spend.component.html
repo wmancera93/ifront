@@ -135,7 +135,7 @@
 
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="is_sender_approval">
           <div class="col-lg-4 col-md-6 col-12">
-            <button *ngIf="detail.data[0].travel_managements.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
+            <button *ngIf="allRequestsInSpend[0].travel_managements.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
               <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
           </div>
         </div>
