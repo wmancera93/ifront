@@ -40,10 +40,10 @@
           <b>
             Filtros de consulta
           </b>
-          <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-            data-target="#collapseFilter" aria-expanded="false" (click)="collapse(true)"></i>
-          <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-            data-target="#collapseFilter" aria-expanded="false" (click)="collapse(false)"></i>
+          <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
+            aria-expanded="false" (click)="collapse(true)"></i>
+          <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
+            aria-expanded="false" (click)="collapse(false)"></i>
         </div>
       </div>
     </div>
@@ -138,14 +138,14 @@
     <div class="row top-containter" style="margin-top: 20px">
       <div class="col-12 text-left">
         <form>
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request"
-            checked (click)="checkAdvance('advance_request')" />
+          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" checked (click)="checkAdvance('advance_request')"
+          />
           <b>
             Mis anticipos registrados
           </b>
           &nbsp;&nbsp;
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request"
-            (click)="checkAdvance('my_advance_request')" />
+          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" (click)="checkAdvance('my_advance_request')"
+          />
           <b *ngIf="userAuthenticated.employee.trip_by_third">
             Anticipos registrados a terceros
           </b>
@@ -161,10 +161,12 @@
                 <span *ngIf="advance.ticket_cli !== null" class="badge badge-warning">
                   No. Viaje SAP # {{advance.ticket_cli}}
                 </span>
-                <span *ngIf="advance.ticket_cli === null &&  advance.messages_server !== null &&  advance.synch_type_server !== 'S'">
-                  <h6>
-                    <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
-                </span>
+                <div *ngIf="advance.ticket_cli === null && advance.ticket_cli !== 0000000000 ">
+                  <span *ngIf="advance.messages_server !== null &&  advance.synch_type_server !== 'S'">
+                    <h6>
+                      <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
+                  </span>
+                </div>
                 <span class="badge badge-warning">
                   No. Viaje iHR # {{advance.travel_request_id}}
                 </span>
