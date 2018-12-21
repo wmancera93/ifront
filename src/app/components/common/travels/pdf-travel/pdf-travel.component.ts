@@ -415,7 +415,7 @@ export class PdfTravelComponent implements OnInit {
       let dataBodyHeaderJourneys: any[] = [];
 
       recordsPrint.forEach(element => {
-        element.field_1 = parseFloat(element.field_1).toLocaleString('es')
+        element.field_1 = parseFloat(element.field_1).toLocaleString('es', {minimumFractionDigits: 2});
         dataBodyHeaderJourneys.push(element)
       });
 
