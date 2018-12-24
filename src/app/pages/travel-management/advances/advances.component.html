@@ -161,7 +161,7 @@
                 <span *ngIf="advance.ticket_cli !== null" class="badge badge-warning">
                   No. Viaje SAP # {{advance.ticket_cli}}
                 </span>
-                <div *ngIf="advance.ticket_cli === null && advance.ticket_cli !== '0000000000' ">
+                <div *ngIf="advance.ticket_cli === null && advance.ticket_cli === '0000000000' ">
                   <span *ngIf="advance.messages_server !== null &&  advance.synch_type_server !== 'S'">
                     <h6>
                       <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
