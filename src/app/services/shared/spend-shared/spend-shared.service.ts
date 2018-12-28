@@ -9,6 +9,7 @@ export class SpendSharedService {
   viewSpend: Subject<any> = new Subject<any>();
   deleteSpend: Subject<any> = new Subject<any>();
   showDistCost: Subject<any> = new Subject<any>();
+  messageSynchSpend: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -48,6 +49,12 @@ export class SpendSharedService {
   }
   setViewDistCostSpend(showDistCost: any) {
     return this.showDistCost.next(showDistCost);
+  }
+  getMessageSynchSpend() {
+    return this.messageSynchSpend;
+  }
+  setMessageSynchSpend(messageSynchSpend: any) {
+    return this.messageSynchSpend.next(messageSynchSpend);
   }
 
 }

@@ -87,4 +87,8 @@ export class SpendsService {
     return this.tokenService.post('cost_distribution_allowance', objectDistrCost)
       .map((data: any) => data.json());
   }
+  getMessageSynchSpend(id) {
+    return this.tokenService.get('travel_allowance_request_synch_servers/index_allowance_synch_server/' + id)
+      .map((data: any) => data.json());
+  }
 }

@@ -75,8 +75,8 @@ export class AdvancesComponent implements OnInit {
           if (this.codIHR !== '') {
             this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
               (data: any) => {
-                 this.advancesItems = data.data;
-                
+                this.advancesItems = data.data;
+
               });
           } else {
             this.advancesService.getAdvancePayments().subscribe((data: any) => {
@@ -337,5 +337,8 @@ export class AdvancesComponent implements OnInit {
   showAdvance(id: number) {
     this.advanceSharedService.setViewAdvance(id);
 
+  }
+  messages_error_advances(idSpend) {
+    this.advanceSharedService.setMessageSynchAdvance(idSpend)
   }
 }

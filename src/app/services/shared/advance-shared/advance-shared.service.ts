@@ -8,7 +8,7 @@ export class AdvanceSharedService {
   viewAdvance: Subject<any> = new Subject<any>();
   editAdvance: Subject<any> = new Subject<any>();  
   refreshAdvance: Subject<any> = new Subject<any>();
-  
+  messagesSynch: Subject<any> = new Subject<any>();
 
   constructor() { }
 
@@ -36,5 +36,11 @@ export class AdvanceSharedService {
   }
   setRefreshAdvanceList(refreshAdvanceList:any ) {
     return this.refreshAdvance.next(refreshAdvanceList);
+  } 
+  getMessageSynchAdvance() {
+    return this.messagesSynch;
+  }
+  setMessageSynchAdvance(messagesSynch:any ) {
+    return this.messagesSynch.next(messagesSynch);
   } 
 }

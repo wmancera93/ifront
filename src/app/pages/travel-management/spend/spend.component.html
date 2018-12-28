@@ -168,8 +168,8 @@
                   </span>
                   <div *ngIf="spend.ticket_cli === null || spend.ticket_cli === '0000000000' ">
                     <span *ngIf="spend.messages_server !== null &&  spend.synch_type_sap !== 'S'">
-                      <h6>
-                        <i class="fa fa-fw fa-exclamation-triangle text-danger"></i>Error en sincronización</h6>
+                      <h6 class="wg-hover-general" (click)="messages_error_spend(spend)">
+                        <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_spend(spend)"></i>Error en sincronización</h6>
                     </span>
                   </div>
                   <span class="badge badge-warning">
@@ -349,3 +349,4 @@
 <app-new-spend *ngIf="!token"></app-new-spend>
 <app-view-spend *ngIf="!token"></app-view-spend>
 <app-edit-spend *ngIf="!token"></app-edit-spend>
+<app-message-synch-spend *ngIf="!token"></app-message-synch-spend>

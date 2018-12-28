@@ -401,6 +401,9 @@ export class SpendComponent implements OnInit {
   editSpend(objectSpend) {
     this.spendSharedService.setEditSpend(objectSpend.id);
   }
+  messages_error_spend(form){
+    this.spendSharedService.setMessageSynchSpend(form.id);
+  }
   deleteSpend(deleteSpend) {
     this.idSpenRequestsIndex = deleteSpend.id;
     let alertWarning = [{

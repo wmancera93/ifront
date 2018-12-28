@@ -98,6 +98,8 @@ import { HotelsJourneyComponent } from './travel-management/travel/hotels-journe
 import { SpendHotelJourneyComponent } from './travel-management/spend/spend-hotel-journey/spend-hotel-journey.component';
 import { ShowDistSpendsTravelsComponent } from './travel-management/travel/show-dist-spends-travels/show-dist-spends-travels.component';
 import { MessageSynchComponent } from './travel-management/travel/message-synch/message-synch.component';
+import { MessageSynchAdvanceComponent } from './travel-management/advances/message-synch-advance/message-synch-advance.component';
+import { MessageSynchSpendComponent } from './travel-management/spend/message-synch-spend/message-synch-spend.component';
 
 
 
@@ -197,6 +199,8 @@ import { MessageSynchComponent } from './travel-management/travel/message-synch/
     SpendHotelJourneyComponent,
     ShowDistSpendsTravelsComponent,
     MessageSynchComponent,
+    MessageSynchAdvanceComponent,
+    MessageSynchSpendComponent,
   ],
   providers: [
 
