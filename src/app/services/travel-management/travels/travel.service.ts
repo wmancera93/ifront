@@ -111,4 +111,8 @@ export class TravelService {
     return this.tokenService.get('travel_costs_types/filter_travel_maintenance_orders/'+ filter)
       .map((data: any) => data.json());
   }
+  getMessageErrorSAP(id: string) {
+    return this.tokenService.get('travel_request_synch_servers/index_travel_synch_server/'+ id)
+      .map((data: any) => data.json());
+  }
 }

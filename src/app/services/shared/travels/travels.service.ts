@@ -9,7 +9,7 @@ export class TravelsService {
    viewTravel: Subject<any> = new Subject<any>();
    resutlSaved: Subject<any> = new Subject<any>();
    hotelsByJourney: Subject<any> = new Subject<any>();
-      
+   messageSAP: Subject<any> = new Subject<any>(); 
 
   constructor() { }
 
@@ -46,6 +46,12 @@ export class TravelsService {
   }
   setHotelsByJourney(hotelsByJourney:any ) {
     return this.hotelsByJourney.next(hotelsByJourney);
+  } 
+  getMessageError() {
+    return this.messageSAP;
+  }
+  setMessageError(messageSAP:any ) {
+    return this.messageSAP.next(messageSAP);
   } 
      
 }

@@ -26,7 +26,7 @@ export class TravelComponent implements OnInit {
   public checkThird: boolean = true;
 
   public userAuthenticated: User = null;
-  
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public router: Router,
@@ -478,5 +478,7 @@ export class TravelComponent implements OnInit {
     }, 500);
 
   }
-
+  messages_error(id_travel) {
+    this.travelsService.setMessageError(id_travel);
+  }
 }
