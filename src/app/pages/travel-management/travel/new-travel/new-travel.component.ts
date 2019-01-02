@@ -385,8 +385,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       })
 
     let fecha = new Date();
-    this.today = fecha.getFullYear().toString() + (fecha.getMonth() + 1).toString() + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
-
+    this.today = fecha.getFullYear().toString() + '/' + (fecha.getMonth().toString().length == 1 ? '0' + (fecha.getMonth() + 1).toString() : (fecha.getMonth() + 1).toString()) + '/' + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
   addHourEnd(value) {
@@ -610,9 +609,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
-          debugger
           this.ticket_advance = 0;
-          let validate = parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - this.today;
+          let dayone = new Date(this.today).getTime();
+          let dayTwo = new Date(data.data[0].travel_request.date_end).getTime();
+          let validate = ((dayTwo - dayone) / (1000 * 60 * 60 * 24));
           this.ticket_advance = data.data[0].travel_request.ticket;
           if (validate >= 0) {
             if (data.success) {
@@ -625,8 +625,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             }
           } else {
             if (data.success) {
-              let tirthyDays = this.today - parseInt(data.data[0].travel_request.date_end.replace('-', '').replace('-', '')) - 100;
-              if ((tirthyDays < 30) || (tirthyDays < -30)) {
+              let tirthyDays = ((dayone - dayTwo) / (1000 * 60 * 60 * 24));
+              if ((tirthyDays < 30) && (tirthyDays > -30)) {
                 document.getElementById("closeTravels").click();
                 const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de gastos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAlowances' }];
                 this.alert.setAlert(alertWarning[0]);
@@ -845,68 +845,68 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       });
   }
   searchCostsCenterAndGrahp(form: any, acction: any) {
-      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
-        this.kostl = true;
-        this.nplnr = false;
-        this.aufnr = false;
-   
-        this.formTravelManagement.controls['id_grahp'].setValue('');
-        this.formTravelManagement.controls['id_operations'].setValue('');
-        this.formTravelManagement.controls['id_order'].setValue('');  
-  
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL') {
+      this.kostl = true;
+      this.nplnr = false;
+      this.aufnr = false;
+
+      this.formTravelManagement.controls['id_grahp'].setValue('');
+      this.formTravelManagement.controls['id_operations'].setValue('');
+      this.formTravelManagement.controls['id_order'].setValue('');
+
       let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
- 
+
       // let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
-  
-        if (employee_center_coast !== null) {
-          this.travelManagementService.getFilterTravelCost(form.id_element_imputation, employee_center_coast).
-            subscribe((data: any) => {
-              this.returnCostSearch(data.data[0])
-            });
-        }
+
+      if (employee_center_coast !== null) {
+        this.travelManagementService.getFilterTravelCost(form.id_element_imputation, employee_center_coast).
+          subscribe((data: any) => {
+            this.returnCostSearch(data.data[0])
+          });
       }
-      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
-        this.kostl = false;
-        this.nplnr = true;
-        this.aufnr = false;
+    }
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR') {
+      this.kostl = false;
+      this.nplnr = true;
+      this.aufnr = false;
 
-        this.formTravelManagement.controls['id_travel_costs'].setValue('');
-        this.formTravelManagement.controls['id_order'].setValue('');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
+      this.formTravelManagement.controls['id_order'].setValue('');
 
-        // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-        //   subscribe((data: any) => {
-        //     this.grahp = this.sortByAphabet(data.data);
-        //     if (this.grahp.length > 0) {
-        //       if (acction === 'new') {
-        //         this.formTravelManagement.controls['id_grahp'].setValue('');
-        //       }
-        //     } else {
-        //       this.formTravelManagement.controls['id_grahp'].setValue('');
-        //     }
-        //   })
-      }
-      if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
-        this.kostl = false;
-        this.nplnr = false;
-        this.aufnr = true;
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
+    }
+    if (this.center_costs_travels.filter((data) => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR') {
+      this.kostl = false;
+      this.nplnr = false;
+      this.aufnr = true;
 
-        this.formTravelManagement.controls['id_grahp'].setValue('');
-        this.formTravelManagement.controls['id_operations'].setValue('');
-        this.formTravelManagement.controls['id_travel_costs'].setValue(''); 
+      this.formTravelManagement.controls['id_grahp'].setValue('');
+      this.formTravelManagement.controls['id_operations'].setValue('');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
 
 
-        // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
-        //   subscribe((data: any) => {
-        //     this.grahp = this.sortByAphabet(data.data);
-        //     if (this.grahp.length > 0) {
-        //       if (acction === 'new') {
-        //         this.formTravelManagement.controls['id_grahp'].setValue('');
-        //       }
-        //     } else {
-        //       this.formTravelManagement.controls['id_grahp'].setValue('');
-        //     }
-        //   })
-      }
+      // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
+      //   subscribe((data: any) => {
+      //     this.grahp = this.sortByAphabet(data.data);
+      //     if (this.grahp.length > 0) {
+      //       if (acction === 'new') {
+      //         this.formTravelManagement.controls['id_grahp'].setValue('');
+      //       }
+      //     } else {
+      //       this.formTravelManagement.controls['id_grahp'].setValue('');
+      //     }
+      //   })
+    }
   }
 
   searchOperationsGrahp(form: any, acction: any) {

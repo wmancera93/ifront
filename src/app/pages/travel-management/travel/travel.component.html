@@ -166,19 +166,13 @@
                 <h5>
                   <span *ngIf="travels.ticket_cli !== null" class="badge badge-warning">
                     No. Viaje SAP # {{travels.ticket_cli}}
-                  </span>
-               
-                    <span *ngIf="travels.messages_server === null">
-                      <h6 class="wg-hover-general" (click)="messages_error(travels.ticket)">
-                        <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error(travels.ticket)"></i>Error en sincronización</h6>
-                    </span>
-                 
-                  <!-- <div *ngIf="travels.ticket_cli === null || travels.ticket_cli === '0000000000' ">
+                  </span>                
+                  <div *ngIf="travels.ticket_cli === null || travels.ticket_cli === '0000000000' ">
                     <span *ngIf="travels.messages_server !== null &&  travels.synch_type_server !== 'S'">
                       <h6 class="wg-hover-general" (click)="messages_error(travels.ticket)">
                         <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error(travels.ticket)"></i>Error en sincronización</h6>
                     </span>
-                  </div> -->
+                  </div>
                   <span class="badge badge-warning">
                     No. Viaje iHR # {{travels.ticket}}
                   </span>
