@@ -31,7 +31,6 @@ export class MessageSynchAdvanceComponent implements OnInit {
           if (result.data[0].synch_server.data.lenght > 0) {
             setTimeout(() => {
               this.objectPrintMessageAdvance.emit({ success: true, data: [this.message_data_advance] });
-              console.log(this.message_data_advance)
             }, 100);
           } else {
             setTimeout(() => {
