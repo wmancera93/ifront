@@ -11,7 +11,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 export class MessageSynchComponent implements OnInit {
 
   public message_data: any[] = [];
-  public generalObject: any[] = [];
+  public generalObject: any = null;
   public ticket_travel: string;
   public objectPrintMessage: EventEmitter<any> = new EventEmitter();
   public nameReportMessage: string = 'Mensajes de sincronización solicitud de viajes';
