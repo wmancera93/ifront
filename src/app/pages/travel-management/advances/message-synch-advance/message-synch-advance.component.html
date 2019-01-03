@@ -2,9 +2,9 @@
   style="display:none;">
 </button>
 <div data-backdrop="static" class="modal" id="message_synch_advance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true" *ngIf="generalObjectAdvance !== null">
+  aria-hidden="true">
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
-    <div class="modal-content ">
+    <div class="modal-content" *ngIf="generalObjectAdvance !== null">
       <div class="modal-header borderLine-title">
         <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Mensajes de sincronización viaje # {{generalObjectAdvance.travel_request_id}} </h5>
         <button id="closeMessages" type="button" class="close " data-dismiss="modal" aria-label="Close">

@@ -166,12 +166,10 @@
                   <span *ngIf="spend.ticket_cli !== null" class="badge badge-warning">
                     No. Viaje SAP # {{spend.ticket_cli}}
                   </span>
-                  <div *ngIf="spend.ticket_cli === null || spend.ticket_cli === '0000000000' ">
                     <span *ngIf="spend.messages_server !== null &&  spend.synch_type_sap !== 'S'">
                       <h6 class="wg-hover-general" (click)="messages_error_spend(spend)">
                         <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_spend(spend)"></i>Error en sincronización</h6>
                     </span>
-                  </div>
                   <span class="badge badge-warning">
                     No. Viaje iHR # {{spend.travel_request_id}}
                   </span>

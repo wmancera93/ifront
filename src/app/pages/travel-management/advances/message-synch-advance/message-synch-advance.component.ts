@@ -28,7 +28,7 @@ export class MessageSynchAdvanceComponent implements OnInit {
         this.generalObjectAdvance = result.data[0].travel_advance;
         this.message_data_advance = result.data[0].synch_server;
 
-        if (result.data[0].synch_server.data.lenght > 0) {
+        if (result.data[0].synch_server.data["length"] > 0) {
           setTimeout(() => {
             this.objectPrintMessageAdvance.emit({ success: true, data: [this.message_data_advance] });
           }, 100);

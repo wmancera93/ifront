@@ -20,6 +20,7 @@ export class MessageSynchComponent implements OnInit {
     public travelManagementService: TravelService) {
 
     this.travelsService.getMessageError().subscribe((data: any) => {
+      debugger
       this.ticket_travel = data;
       if (document.getElementById('message_synch').className !== 'modal show') {
         document.getElementById('btn_detail_message_synch').click();
@@ -29,12 +30,10 @@ export class MessageSynchComponent implements OnInit {
         this.generalObject=result.data[0].travel_request;
         this.message_data = result.data[0].synch_server;
 
-        if (result.data[0].synch_server.data.lenght > 0) {
+        if (result.data[0].synch_server.data["length"] > 0) {
           setTimeout(() => {
-
             this.objectPrintMessage.emit({ success: true, data: [this.message_data] });
-            console.log(this.message_data)
-          }, 300);
+          }, 200);
         } else {
           setTimeout(() => {
             this.objectPrintMessage.emit({ success: true, data: [] });

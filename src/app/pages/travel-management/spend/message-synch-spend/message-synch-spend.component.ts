@@ -28,11 +28,9 @@ export class MessageSynchSpendComponent implements OnInit {
         this.generalObjectSpend = result.data[0].travel_allowance_request;
         this.message_data_spend = result.data[0].synch_server;
 
-        if (result.data[0].synch_server.data.lenght > 0) {
+        if (result.data[0].synch_server.data["length"] > 0) {
           setTimeout(() => {
-
             this.objectPrintMessageSpend.emit({ success: true, data: [this.message_data_spend] });
-            console.log(this.message_data_spend)
           }, 100);
         } else {
           setTimeout(() => {

@@ -161,12 +161,10 @@
                 <span *ngIf="advance.ticket_cli !== null" class="badge badge-warning">
                   No. Viaje SAP # {{advance.ticket_cli}}
                 </span>
-                <div *ngIf="advance.ticket_cli === null || advance.ticket_cli === '0000000000' ">
                   <span *ngIf="advance.messages_server !== null &&  advance.synch_type_server !== 'S'">
                     <h6 class="wg-hover-general" (click)="messages_error_advances(advance.id)">
                       <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_advances(advance.id)"></i>Error en sincronización</h6>
                   </span>
-                </div>
                 <span class="badge badge-warning">
                   No. Viaje iHR # {{advance.travel_request_id}}
                 </span>
