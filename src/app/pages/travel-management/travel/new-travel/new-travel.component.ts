@@ -609,12 +609,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
+          debugger
           this.ticket_advance = 0;
           let dayone = new Date(this.today).getTime();
           let dayTwo = new Date(data.data[0].travel_request.date_end).getTime();
           let validate = ((dayTwo - dayone) / (1000 * 60 * 60 * 24));
           this.ticket_advance = data.data[0].travel_request.ticket;
-          if (validate >= 0) {
+          if (validate > -1) {
             if (data.success) {
               document.getElementById("closeTravels").click();
               const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje generado correctamente. ¿Desea crear una solicitud de anticipos para el viaje #' + this.ticket_advance + ' ?', confirmation: true, typeConfirmation: 'continueTravelAdvances' }];
