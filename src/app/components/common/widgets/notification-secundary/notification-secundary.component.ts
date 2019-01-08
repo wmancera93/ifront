@@ -23,7 +23,7 @@ export class NotificationSecundaryComponent implements OnInit {
     this.notificationSecundary.subscribe((data: NotificationSecundary) => {
       this.objectWidget = data;
       this.dataTitle = this.objectWidget.title;
-    })
+    });
   }
 
 }

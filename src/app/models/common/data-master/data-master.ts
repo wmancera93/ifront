@@ -4,3 +4,9 @@ export interface DataMaster {
     is_editable: boolean,
     value: string
 }
+
+export interface ListDataMaster {
+    code: number,
+    description: string,
+    method_name: string
+}

@@ -16,6 +16,7 @@ import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-ch
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
+// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
 import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
@@ -39,7 +40,24 @@ import { PendingsComponent } from './approver-requests/pendings/pendings.compone
 import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
-
+import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
+import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
+import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
+import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
+import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
+import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
+import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
+import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
+import { TravelManagementComponent } from './travel-management/travel-management.component';
+import { TravelComponent } from './travel-management/travel/travel.component';
+import { HotelsComponent } from './travel-management/hotels/hotels.component';
+import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
+import { TrainingComponent } from './events-management/training/training.component';
+import { AdvancesComponent } from './travel-management/advances/advances.component';
+import { SpendComponent } from './travel-management/spend/spend.component';
+import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
+import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
+import { ReportsComponent } from './travel-management/reports/reports.component';
 
 const routes: Routes = [
     {
@@ -180,19 +198,107 @@ const routes: Routes = [
         path: 'managed_approvers',
         component: ManagedComponent
     },
-    {        
-        path : 'master_data',
+    {
+        path: 'master_data',
         component: MasterDataComponent
     },
-    {        
-        path : 'help',
+    {
+        path: 'help',
         component: HelpComponent
     },
-    {        
-        path : 'evaluated',
+    {
+        path: 'evaluated',
         component: EvaluatedComponent
+    },
+    {
+        path: 'historical_posts',
+        component: HistoricalPostsComponent
+    },
+    {
+        path: 'requests-type',
+        component: RequestsApproversComponent
+    },
+    {
+        path: 'iva_employee',
+        component: IvaEmployeeComponent
+    },
+    {
+        path: 'calendar_modal',
+        component: CalendarModalComponent
+    },
+    {
+        path: 'evaluation_objectives',
+        component: EvaluationObjectivesComponent
+    },
+    {
+        path: 'planning_evaluation',
+        component: PlanningEvaluationComponent
+    },
+    
+    {
+        path: 'time_evaluation',
+        component: TimeEvaluationComponent
+    },
+    {
+        path: 'hour_extras',
+        component: HourExtrasComponent
+    },
+    {
+        path: 'my_hour_extras',
+        component: MyHourExtrasComponent
+    },
+    {
+        path: 'travel_management',
+        component: TravelManagementComponent
+    },
+    {
+        path: 'travels',
+        component: TravelComponent
+    },
+    {
+        path: 'travels/:idSpend/:idTravels',
+        component: TravelComponent
+    },
+    {
+        path:'hotels',
+        component: HotelsComponent
+    },
+    {
+        path:'training',
+        component: TrainingComponent
+    },
+    {
+        path:'advances/:id',
+        component: AdvancesComponent        
+    },
+    {
+        path:'advances',
+        component: AdvancesComponent        
+    },
+    {
+        path:'spend/:id',
+        component: SpendComponent        
+    },
+    {
+        path:'spend/:idTravels/:idSpend/:travel',
+        component: SpendComponent        
+    },
+    {
+        path:'spend',
+        component: SpendComponent        
+    },
+    {
+        path:'management_travel',
+        component: ManagedTravelComponent        
+    },
+    {
+        path:'pending_travel',
+        component: PendingTravelComponent        
+    },
+    {
+        path:'reports_travel',
+        component: ReportsComponent                
     }
-
     
 ];
 

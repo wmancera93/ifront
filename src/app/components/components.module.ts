@@ -39,6 +39,17 @@ import { ApprovalsDetailsComponent } from './common/approvals-details/approvals-
 import { ShowEventsComponent } from './common/show-events/show-events.component';
 import { GerencialModalComponent } from './common/gerencial-modal/gerencial-modal.component';
 import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http.component';
+import { DynamicFormComponent } from './common/dynamic-form/dynamic-form.component';
+import { CalendarModalComponent } from './common/calendar-modal/calendar-modal.component';
+import { DrawCalendarComponent } from './common/draw-calendar/draw-calendar.component';
+import { CalendarDetailComponent } from './common/calendar-detail/calendar-detail.component';
+import { TooltipComponent } from './common/tooltip/tooltip.component';
+import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-details-travels/approvals-details-travels.component';
+import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.component';
+import { ShowDistSpendsComponent } from './common/travels/approvals-details-travels/show-dist-spends/show-dist-spends.component';
+import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-travels/show-hotels-journey/show-hotels-journey.component';
+
+
 
 
 @NgModule({
@@ -79,7 +90,16 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     LoadingComponent,
     ErrorPageHttpComponent,
     ShowEventsComponent,
-    GerencialModalComponent
+    GerencialModalComponent,
+    DynamicFormComponent,
+    CalendarModalComponent,
+    DrawCalendarComponent,
+    CalendarDetailComponent,
+    TooltipComponent,
+    ApprovalsDetailsTravelsComponent,
+    PdfTravelComponent,
+    ShowDistSpendsComponent,
+    ShowHotelsJourneyComponent
   ],
   exports: [
     HeaderComponent,
@@ -104,7 +124,11 @@ import { ErrorPageHttpComponent } from './common/error-page-http/error-page-http
     CommentArticleComponent,
     LoadingComponent,
     GerencialModalComponent,
-    ErrorPageHttpComponent
+    ErrorPageHttpComponent,
+    DynamicFormComponent,
+    TooltipComponent,
+    ApprovalsDetailsTravelsComponent,
+    PdfTravelComponent
   ],
   providers: [
     // ToasterService

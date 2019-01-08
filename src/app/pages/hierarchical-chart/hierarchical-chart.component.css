@@ -123,46 +123,5 @@ transform: rotate(360deg);
 cursor: pointer;
 }
 
-.auto-complete, input {
-    display: block;
-     border: 1px solid #ccc; 
-     width: 200px;
-    height: 30px;
-  }
 
-  .list-search-autocomplete{
-    color : #707070;
-    position: absolute;
-    width: 200px;
-    max-height: 300px;
-    overflow-y: auto;
-    z-index: 10;
-    background-color: #ffffff;
-    opacity: 0.98; 
-}
-
-.search-results {
-    padding: 10px;
-    box-shadow: 0 1px 3px 0 rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);    
-    transition:all .5s ease-in-out;
-    border-radius: 2px;
-
-}
-
-.search-results:hover {
-    background: #707070;
-    color: #ffffff;
-    cursor: pointer;
-}
-
-  .inputSearch:hover{
-      background: var(--btn-primary);
-  }
-
-  .borderLineEmployee
-{
-    border-bottom: 1px solid var(--btn-primary) !important;   
-    height: 67px;
-    padding-top: 7px;
-}
   

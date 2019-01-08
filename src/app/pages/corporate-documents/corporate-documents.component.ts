@@ -69,16 +69,16 @@ export class CorporateDocumentsComponent implements OnInit {
 
   }
   downloadPDF(doc: any, idBtn: string) {
+
     this.urlPDF = this.urlDocs + doc.url;
+
     this.downloadName = doc.name;
     const headers = new Headers();
     headers.append('Accept', 'pdf');
 
     this.http.get(this.urlPDF).subscribe((data: any) => {
-
       this.urlSplit = data.url;
       this.namePDF = this.urlSplit.split('/')[this.urlSplit.split('/').length - 1];
-
       let FileSaver = require('file-saver');
       let blob = new Blob([data._body], { type: "application/pdf;charset=utf-8" });
       window.open(this.urlPDF, "_blank");

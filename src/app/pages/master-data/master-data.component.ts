@@ -1,8 +1,13 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
-import { DataMaster } from '../../models/common/data-master/data-master';
+import { DataMaster, ListDataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
+import { FormBuilder } from '@angular/forms';
+import { DataMasterSharedService } from '../../services/shared/common/data-master/data-master-shared.service';
+import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
+import { Alerts } from '../../models/common/alerts/alerts';
+import { Enterprise } from '../../models/general/enterprise';
 
 
 @Component({
@@ -16,13 +21,25 @@ export class MasterDataComponent implements OnInit {
   public lengthArray: number;
   public idType: string = 'PersonalData';
   public titleData: string = 'Datos personales';
-
+  public canEditData: boolean = false;
+  public detectCanEdit: any = null;
+  public showButton: boolean = false;
+  public formEditDataMaster: any;
+  public showSubmit = true;
+  public dataPrueba: any;
+  public dataEnterprise: Enterprise = null;
+  public listDataMaster: ListDataMaster;
   public token: boolean;
+
+  public codeGeneral: string;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public getDataMaster: MasterDataService,
+  constructor(public dataMasterService: MasterDataService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService,
+    private fb: FormBuilder,
+    public dataMasterSharedService: DataMasterSharedService,
+    public alert: AlertsService) {
 
     this.tokenService.validateToken()
       .subscribe(
@@ -36,7 +53,45 @@ export class MasterDataComponent implements OnInit {
           });
           document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
           this.token = true;
-        })
+        });
+
+
+    this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
+      if (object[0].count === 0) {
+        object[0].count += 1;
+        let dataMasterEdit = {
+          master_data_type: object[0].master_data_type,
+          employee_master_data: object
+        }
+        if (dataMasterEdit.employee_master_data.length == 0) {
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
+          this.alert.setAlert(alertWarning[0]);
+        }
+        else {
+          this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
+            const alertWarning: Alerts[] = [{
+              type: 'success',
+              title: 'Confirmación',
+              message: data.message,
+              confirmation: false,
+              typeConfirmation: ''
+            }];
+            this.alert.setAlert(alertWarning[0]);
+          },
+            (error: any) => {
+              const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+              this.alert.setAlert(alertWarning[0]);
+            })
+        }
+
+
+        if (document.getElementById("buttonDashManagerial")) {
+          document.getElementById("buttonDashManagerial").click();
+
+        }
+      }
+    });
+
   }
 
   ngOnInit() {
@@ -45,91 +100,217 @@ export class MasterDataComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+
+
+    this.masterDataList();
     this.showPersonalData();
+
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 2000);
+
+
+  }
+
+  masterDataList() {
+    this.dataMasterService.getMasterDataTypes().subscribe((list: any) => {
+      list.data.forEach(element => {
+        if (element.method_name === 'personal_data') {
+          this.codeGeneral = element.code;
+        }
+      });
+      this.listDataMaster = list.data;
+    })
+  }
+
+  activeEditButton(dataMaster: any) {
+    let countEdit = 0;
+    dataMaster.forEach(element => {
+      element.forEach(info => {
+        if (info !== undefined) {
+          this.detectCanEdit = info.control !== 'label' ? countEdit += 1 : countEdit += 0;
+          if (countEdit > 0 && this.dataEnterprise.show_edit_master_data) {
+            this.showButton = true;
+          }
+          else {
+            this.showButton = false;
+          }
+        }
+        else {
+          this.showButton = false;
+        }
+      });
+
+    });
+
   }
 
   showPersonalData() {
     this.dataMaster = [];
+    this.canEditData = false;
+    if (document.getElementById("buttonDashManagerial")) {
+      document.getElementById("buttonDashManagerial").click();
+    }
+
     this.titleData = 'Datos personales';
-    this.getDataMaster.getDataPersonal().subscribe((personal: any) => {
+
+    this.dataMasterService.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data;
-      this.lengthArray = personal.data.length;
+      this.activeEditButton(this.dataMaster);
+      this.noEdit();
+      this.lengthArray = this.dataMaster.length;
     })
   }
 
-  showData(idTag: string) {
-    document.getElementsByClassName('active-report')[0].classList.remove('active-report');
-    document.getElementById(idTag).className = 'nav-item navReport tabReport active-report text-left';
+  isEdit() {
+    this.canEditData = false;
+    setTimeout(() => {
+      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData, code: this.codeGeneral })
+    }, 200);
+  }
+
+  noEdit() {
+
+    this.canEditData = true;
+    setTimeout(() => {
+      this.dataMasterSharedService.setDataFormDynamic({ data: this.dataMaster, edit: this.canEditData, code: this.codeGeneral })
+    }, 200);
+  }
+
+  public idTagStastic
+
+  showData(i: any, idTag: string, code: string) {
+    this.idTagStastic = idTag
+    this.codeGeneral = code;
+    if (i !== '' && code !== '') {
+      document.getElementById('listData').getElementsByClassName('active-report')[0].classList.remove('active-report');
+      document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
+    }
 
     switch (idTag) {
-      case 'PersonalData':
+      case 'personal_data':
         this.showPersonalData();
         break;
 
-      case 'listContactData':
-        this.titleData = 'Datos de contacto';
-        this.dataMaster = [];
-        this.getDataMaster.getDataContact().subscribe((contact: any) => {
+      case 'contact_data':
+        this.dataMasterService.getDataContact().subscribe((contact: any) => {
+          this.titleData = 'Datos de contacto';
           this.dataMaster = contact.data;
-          this.lengthArray = contact.data.length;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
+          this.lengthArray = this.dataMaster.length;
         })
+
+
         break;
-      case 'listFamilyData':
+      case 'family_data':
         this.dataMaster = [];
         this.titleData = 'Datos familiares';
-        this.getDataMaster.getDataFamily().subscribe((family: any) => {
+        this.dataMasterService.getDataFamily().subscribe((family: any) => {
           this.dataMaster = family.data;
-          this.lengthArray = family.data.length;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+          }
+          this.lengthArray = this.dataMaster.length;
         })
         break;
-      case 'listAcademicData':
+      case 'study_data':
         this.dataMaster = [];
         this.titleData = 'Datos académicos';
-        this.getDataMaster.getDataStudies().subscribe((studies: any) => {
+        this.dataMasterService.getDataStudies().subscribe((studies: any) => {
           this.dataMaster = studies.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
           this.lengthArray = studies.data.length;
         })
         break;
-      case 'listEnterpriseData':
+      case 'business_data':
         this.dataMaster = [];
         this.titleData = 'Datos empresariales';
-        this.getDataMaster.getDataBussiness().subscribe((enterprise: any) => {
+        this.dataMasterService.getDataBussiness().subscribe((enterprise: any) => {
           this.dataMaster = enterprise.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
           this.lengthArray = enterprise.data.length;
         })
         break;
-      case 'listBankData':
+      case 'banking_data':
         this.dataMaster = [];
         this.titleData = 'Datos bancarios';
-        this.getDataMaster.getDataBanking().subscribe((bank: any) => {
+        this.dataMasterService.getDataBanking().subscribe((bank: any) => {
           this.dataMaster = bank.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
           this.lengthArray = bank.data.length;
         })
         break;
-      case 'listBeneficData':
+      case 'beneficiary_data':
         this.dataMaster = [];
         this.titleData = 'Datos de los beneficiaros';
-        this.getDataMaster.getDataBeneficiaries().subscribe((beneficiaries: any) => {
+        this.dataMasterService.getDataBeneficiaries().subscribe((beneficiaries: any) => {
           this.dataMaster = beneficiaries.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
           this.lengthArray = beneficiaries.data.length;
         })
         break;
-      case 'listSoSecurityData':
+      case 'social_security_data':
         this.dataMaster = [];
         this.titleData = 'Seguridad social';
-        this.getDataMaster.getDataSocialSecurity().subscribe((social: any) => {
+        this.dataMasterService.getDataSocialSecurity().subscribe((social: any) => {
           this.dataMaster = social.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+          }
           this.lengthArray = social.data.length;
         })
         break;
-      case 'listReteFuentData':
+      case 'retefuente_data':
         this.dataMaster = [];
         this.titleData = 'Retención en la fuente';
-        this.getDataMaster.getDataReteFuente().subscribe((retefuente: any) => {
+        this.dataMasterService.getDataReteFuente().subscribe((retefuente: any) => {
           this.dataMaster = retefuente.data;
+          this.activeEditButton(this.dataMaster);
+          this.canEditData = false;
+          this.noEdit();
+          if (document.getElementById("buttonDashManagerial")) {
+            document.getElementById("buttonDashManagerial").click();
+
+          }
           this.lengthArray = retefuente.data.length;
         })
         break;
@@ -139,5 +320,6 @@ export class MasterDataComponent implements OnInit {
     }
 
   }
+
 
 }

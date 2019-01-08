@@ -50,8 +50,9 @@ export interface DetailAproverRequest {
     created_date: string,
     approvers_to_json: Approvers[]
     answers_to_json: any[],
-    employee_applicant_to_json: EmployeeApplicant
-    type_request_to_json: TypeRequest
+    employee_applicant_to_json: EmployeeApplicant,
+    type_request_to_json: TypeRequest,  
+    image?: Url
 }
 
 export interface Approvers {

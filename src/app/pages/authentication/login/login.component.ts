@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
               this.dataEnterprise[0].body_text, '', '',
               '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
             )
-          }, 200);
+          }, 200);  
         }
 
         var link = document.createElement('link'),

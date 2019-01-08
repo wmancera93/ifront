@@ -38,9 +38,12 @@ export interface Employee {
     see_organ?: string;
     see_rpgen?:string,
     is_admin?: string,
+    is_travel_approver?: string,
     new_cont?: string,
-    is_approver?: boolean
-    
+    is_approver?: boolean,
+    trip_by_third?: boolean,
+    is_travel_manager?:boolean,
+    cost_center?:string  
 }
 export interface Boss{
     name_complete?: string;

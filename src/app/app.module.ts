@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
-import {ChartsModule} from 'ng2-charts/ng2-charts';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 import 'chart.piecelabel.js';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
@@ -19,15 +19,16 @@ import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent
   ],
-  imports: [     
+  imports: [
     CommonModule,
-    // BrowserModule, 
-    BrowserAnimationsModule,    
-    PagesModule,  
+    // BrowserModule,
+    BrowserAnimationsModule,
+    PagesModule,
     ChartsModule,
     ComponentsModule,
     AppRoutingModule,

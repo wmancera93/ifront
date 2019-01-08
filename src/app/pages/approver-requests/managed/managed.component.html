@@ -16,12 +16,12 @@
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-general-p" *ngIf="managed.length == 0">
-          <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
-            <div class="alert alert-warning" role="alert">
-              No se encontrarón aprobaciones gestionadas para mostrar
-            </div>
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div class="alert alert-warning" role="alert">
+            No se encontrarón aprobaciones gestionadas para mostrar
           </div>
         </div>
+      </div>
       <div class="row justify-content-center top-containter" *ngIf="managed.length > 0">
         <div class="col-12">
           <div class="widget bg-white-1x" *ngFor="let managed of managed">
@@ -85,13 +85,11 @@
                   </span>
                 </h6>
               </div>
-              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p">
-                <p class="font-title-general">
-                  Acción
-                </p>
-                <button class="btn btn-sm btn-secondary" (click)="modalAprovers(managed)">
-                  <i class="fa fa-eye" aria-hidden="true"></i>
-                </button>
+              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p" (click)="modalAprovers(managed)">
+                <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color:#23c6c8 "></i>
+                <div class="col-12">
+                  Ver
+                </div>
               </div>
             </div>
           </div>
