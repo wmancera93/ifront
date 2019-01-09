@@ -57,8 +57,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           weight: '',
           objetive_text: '',
         });
-
       }
+      this.performanceEvalSharedService.setRefrehsEval(true);
     })
 
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
