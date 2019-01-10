@@ -276,8 +276,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     this.countAfter += 1;
   }
 
-  // validatePercentage(param) {
-  //   debugger
+  // validatePercentage(param) {debugger
+  //   
   //   console.log(this.ObjectivesTable);
   // }
   evaluationComplete() {
