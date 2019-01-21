@@ -67,13 +67,13 @@ export class TravelManagementComponent implements OnInit {
           tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
           route: "/ihr/management_travel"
         },
-        // {
-        //   title: "Reportes",
-        //   icon_primary: "fa fa-table",
-        //   icon_secundary: "fa fa-search",
-        //   tooltipText: "Haga clic aquí para ver los reportes",
-        //   route: "/ihr/reports_travel"
-        // },
+        {
+          title: "Reportes",
+          icon_primary: "fa fa-table",
+          icon_secundary: "fa fa-search",
+          tooltipText: "Haga clic aquí para ver los reportes",
+          route: "/ihr/travel_report"
+        },
         {
           title: "Asignación de hoteles",
           icon_primary: "fa fa-circle-thin",
@@ -119,6 +119,13 @@ export class TravelManagementComponent implements OnInit {
             icon_secundary: "fa fa-check",
             tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
             route: "/ihr/management_travel"
+          },
+          {
+            title: "Reportes",
+            icon_primary: "fa fa-table",
+            icon_secundary: "fa fa-search",
+            tooltipText: "Haga clic aquí para ver los reportes",
+            route: "/ihr/travel_report"
           }
         ]
       } else{
@@ -145,13 +152,13 @@ export class TravelManagementComponent implements OnInit {
               tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
               route: "/ihr/spend"
             },
-            // {
-            //   title: "Reportes",
-            //   icon_primary: "fa fa-table",
-            //   icon_secundary: "fa fa-search",
-            //   tooltipText: "Haga clic aquí para ver los reportes",
-            //   route: "/ihr/reports_travel"
-            // },
+            {
+              title: "Reportes",
+              icon_primary: "fa fa-table",
+              icon_secundary: "fa fa-search",
+              tooltipText: "Haga clic aquí para ver los reportes",
+              route: "/ihr/travel_report"
+            },
             {
               title: "Asignación de hoteles",
               icon_primary: "fa fa-circle-thin",

@@ -1,0 +1,95 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-md-8 col-7 text-left title">
+          <i class="fa fa-table"></i>
+          Reporte de gestión de viajes
+        </div>
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnBackReportAppprovers()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atrás
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-12 text-left">
+            <h3 class="font-color-default">
+              {{title}}
+            </h3>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center">
+        <div class="col-6">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-plus"></i>
+                Filtrar reportes gestión de viajes
+              </a>
+              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
+                <div *ngFor="let listApprovers of reports_list_approvers; let i = index">
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReport(listApprovers)">{{listApprovers.name
+                    | lowercase}}</a>
+                  <div *ngIf="reports_list_approvers.length !== (i + 1)" class="dropdown-divider"></div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- begin filters -->
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-4 col-lg-4 col-12 text-left">
+            <b>
+              Filtros de consulta
+            </b>
+            <i *ngIf="!reports_list_approvers" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
+              data-target="#collapseFilter" aria-expanded="false" (click)="collapseReportApprovers(true)"></i>
+            <i *ngIf="reports_list_approvers" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
+              data-target="#collapseFilter" aria-expanded="false" (click)="collapseReportApprovers(false)"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse top-general-p border-botton-general" id="collapseFilter">
+        <div class="row align-items-center">
+          <div class="col-12" style="padding-bottom: 15px">
+           
+          </div>
+        </div>
+      </div>
+   
+
+      <div class="row justify-content-center top-general-p" *ngIf="!showDataTableApprover">
+        <div class="col-lg-8 col-12 text-center">
+          <div class="alert alert-warning" role="alert">
+            No se encontrarón registros para mostrar
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableApprover">
+        <div class="col-12">
+          <app-data-table  [records]="objectReportApprover" id="tableReportApprover" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>  
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

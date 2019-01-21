@@ -57,7 +57,10 @@ import { AdvancesComponent } from './travel-management/advances/advances.compone
 import { SpendComponent } from './travel-management/spend/spend.component';
 import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
 import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
-import { ReportsComponent } from './travel-management/reports/reports.component';
+import { TravelRequestsReportComponent } from './travel-management/reports/travel-requests-report/travel-requests-report.component';
+import { TravelAdvanceReportComponent } from './travel-management/reports/travel-advance-report/travel-advance-report.component';
+import { TravelAllowanceReportComponent } from './travel-management/reports/travel-allowance-report/travel-allowance-report.component';
+import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 
 const routes: Routes = [
     {
@@ -296,8 +299,23 @@ const routes: Routes = [
         component: PendingTravelComponent        
     },
     {
-        path:'reports_travel',
-        component: ReportsComponent                
+        path:'travel_report',
+        component:TravelRequestsReportComponent,      
+    }
+    ,
+    {
+        path:'advance_report',
+        component:TravelAdvanceReportComponent,      
+    }
+    ,
+    {
+        path:'allowance_report',
+        component:TravelAllowanceReportComponent,      
+    }
+    ,
+    {
+        path:'approver_report',
+        component:TravelApproverReportComponent,      
     }
     
 ];

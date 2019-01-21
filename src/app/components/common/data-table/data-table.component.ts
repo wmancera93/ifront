@@ -81,7 +81,6 @@ export class DataTableComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.records.subscribe((data) => {
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
