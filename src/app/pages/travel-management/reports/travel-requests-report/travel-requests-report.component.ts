@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReportTravelsService } from '../../../../services/travel-management/report/report-travels.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { User } from '../../../../models/general/user';
+import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 
 @Component({
   selector: 'app-travel-requests-report',
@@ -28,24 +30,36 @@ export class TravelRequestsReportComponent implements OnInit {
   public showDataTable: boolean = true;
   public typeTravelLegal: any[] = [];
   public type_element_imputation: any[] = [];
+  public userId: User = null;
+  public countAfter: number = 0;
 
 
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
-    public travelManagementService: TravelService, ) {
+    public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService) {
+
+
+
+    this.accionDataTableService.getActionDataTable().subscribe((data) => {
+
+      if (data === "Solicitudes de viaje" && this.countAfter === 0) {
+        this.getObjectPrint('excel')
+      }
+    });
 
     this.reports_list = travel_reports_list.getTravelsReportList();
     document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
   }
 
   ngOnInit() {
-    this.getObjectPrint();
+    this.getObjectPrint('general');
     this.travelManagementService.getplanningTravelRequests().
       subscribe((data: any) => {
         this.typeTravelLegal = this.sortByAphabet(data.data.legal_travels_types);
         this.type_element_imputation = this.sortByAphabet(data.data.travel_costs_types);
       })
 
+    this.userId = JSON.parse(localStorage.getItem("user")).employee_id
   }
   sortByAphabet(dataBySort: any) {
     dataBySort.sort(function (a, b) {
@@ -76,30 +90,40 @@ export class TravelRequestsReportComponent implements OnInit {
     this.date_begin = '';
     this.date_end = '';
     this.legat_travel_type = '-1';
-    this.getObjectPrint();
+    this.getObjectPrint('general');
 
   }
   returnBackReportTravel() {
     this.router.navigate(['ihr/travel_management']);
   }
 
-  getObjectPrint() {
-    debugger
+  getObjectPrint(param) {
+ 
     let personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
     let ticket_send = this.ticket === '' ? '-1' : this.ticket;
     let ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
     let date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
     let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
-    this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, this.travel_cost,
-      date_end_send, this.legat_travel_type).subscribe((data: any) => {
-        this.objectGeneralTravel = data.data[0].data;
-        if (this.objectGeneralTravel.length > 0) {
-          this.objectReportTravel.emit(data);
-        } else {
-          this.showDataTable = false;
-        }
-      })
-    this.showDataTable = true;
-  }
 
+    if (param === 'general') {
+      this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, this.travel_cost,
+        date_end_send, this.legat_travel_type).subscribe((data: any) => {
+          this.objectGeneralTravel = data.data[0].data;
+          if (this.objectGeneralTravel.length > 0) {
+            this.objectReportTravel.emit(data);
+          } else {
+            this.showDataTable = false;
+          }
+        })
+      this.showDataTable = true;
+    } else {
+      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, date_begin_send, this.travel_cost,
+        date_end_send, this.legat_travel_type).subscribe((data: any) => {
+          window.open(data.url);
+        })
+    }
+  }
+  ngOnDestroy() {
+    this.countAfter += 1;
+  }
 }

@@ -20,7 +20,7 @@ export class ReportTravelsService {
     {
       "id": 3,
       "name": "Reporte solicitud de Gastos",
-      "code" : "allowance_report"
+      "code": "allowance_report"
     },
     {
       "id": 4,
@@ -35,25 +35,25 @@ export class ReportTravelsService {
       .map((data: any) => data.json());
   }
   getTravelsAdvanceReport(id_employee: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any) {
-    return this.tokenService.get('travel_reports/travel_advance_report/' + id_employee + '/' + ticket + '/' + ticket_cli + '/'  + date_begin + '/' + date_end )
+    return this.tokenService.get('travel_reports/travel_advance_report/' + id_employee + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end)
       .map((data: any) => data.json());
   }
   getTravelsAllowanceReport(id_employee: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any, legal_travel: any) {
     return this.tokenService.get('travel_reports/travel_expenses_report/' + id_employee + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end + '/' + legal_travel)
       .map((data: any) => data.json());
   }
-  getTravelsApprovedReport(id_employee: any, ticket: any, ticket_cli: any,  date_begin: any, date_end: any, approver: any, level: any) {
+  getTravelsApprovedReport(id_employee: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any, approver: any, level: any) {
     return this.tokenService.get('travel_reports/travel_aprovals_report/' + id_employee + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end + '/' + approver + '/' + level)
       .map((data: any) => data.json());
   }
 
 
-  getTravelsReportList(){
+  getTravelsReportList() {
     return this.report_travels_list;
   }
 
-  // getTravelsRequestsReportExcel(id : any) {
-  //   return this.tokenService.get('travel_requests/travel_request_report/' + id)
-  //     .map((data: any) => data.json());
-  // }
+  getTravelsRequestsReportExcel(id_employee: any, personal_number: any, ticket: any, ticket_cli: any, travel_cost: any, date_begin: any, date_end: any, legal_travel: any) {
+    return this.tokenService.get('travel_reports/travel_request_report_export/' + id_employee + '/' + personal_number + '/' + ticket + '/' + ticket_cli + '/' + travel_cost + '/' + date_begin + '/' + date_end + '/' + legal_travel)
+      .map((data: any) => data);
+  }
 }
