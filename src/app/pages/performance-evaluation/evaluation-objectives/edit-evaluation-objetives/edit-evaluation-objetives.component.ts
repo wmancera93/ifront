@@ -57,8 +57,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           weight: '',
           objetive_text: '',
         });
-
       }
+      this.performanceEvalSharedService.setRefrehsEval(true);
     })
 
     this.performanceEvalSharedService.getEvaluationPerformanceData().subscribe((info: any) => {
@@ -276,8 +276,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     this.countAfter += 1;
   }
 
-  // validatePercentage(param) {
-  //   debugger
+  // validatePercentage(param) {debugger
+  //   
   //   console.log(this.ObjectivesTable);
   // }
   evaluationComplete() {

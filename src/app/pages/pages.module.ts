@@ -92,7 +92,6 @@ import { ViewSpendComponent } from './travel-management/spend/view-spend/view-sp
 import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
 import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
 import { ViewEvaluationObjetivesComponent } from './performance-evaluation/evaluation-objectives/view-evaluation-objetives/view-evaluation-objetives.component';
-import { ReportsComponent } from './travel-management/reports/reports.component';
 import { DistSpendComponent } from './travel-management/spend/dist-spend/dist-spend.component';
 import { HotelsJourneyComponent } from './travel-management/travel/hotels-journey/hotels-journey.component';
 import { SpendHotelJourneyComponent } from './travel-management/spend/spend-hotel-journey/spend-hotel-journey.component';
@@ -100,6 +99,11 @@ import { ShowDistSpendsTravelsComponent } from './travel-management/travel/show-
 import { MessageSynchComponent } from './travel-management/travel/message-synch/message-synch.component';
 import { MessageSynchAdvanceComponent } from './travel-management/advances/message-synch-advance/message-synch-advance.component';
 import { MessageSynchSpendComponent } from './travel-management/spend/message-synch-spend/message-synch-spend.component';
+import { TravelRequestsReportComponent } from './travel-management/reports/travel-requests-report/travel-requests-report.component';
+import { ReportTravelsService } from '../services/travel-management/report/report-travels.service';
+import { TravelAdvanceReportComponent } from './travel-management/reports/travel-advance-report/travel-advance-report.component';
+import { TravelAllowanceReportComponent } from './travel-management/reports/travel-allowance-report/travel-allowance-report.component';
+import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 
 
 
@@ -193,7 +197,6 @@ import { MessageSynchSpendComponent } from './travel-management/spend/message-sy
     PendingTravelComponent,
     ManagedTravelComponent,
     ViewEvaluationObjetivesComponent,
-    ReportsComponent,
     DistSpendComponent,
     HotelsJourneyComponent,
     SpendHotelJourneyComponent,
@@ -201,9 +204,13 @@ import { MessageSynchSpendComponent } from './travel-management/spend/message-sy
     MessageSynchComponent,
     MessageSynchAdvanceComponent,
     MessageSynchSpendComponent,
+    TravelRequestsReportComponent,
+    TravelAdvanceReportComponent,
+    TravelAllowanceReportComponent,
+    TravelApproverReportComponent,
   ],
   providers: [
-
+    ReportTravelsService
   ]
 })
 export class PagesModule { }

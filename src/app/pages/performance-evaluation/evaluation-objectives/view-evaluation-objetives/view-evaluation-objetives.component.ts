@@ -24,21 +24,28 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService) {
 
     this.performanceEvalSharedService.getViewEvaluationPerformanceData().subscribe((result: any) => {
-    debugger
-        this.EvaluacionPerView = result;
-        this.qualifierDataView = result.qualifier;
-        this.idEvaluation = result.perfomance_evaluation_id;
-        document.getElementById('btn-viewEvaluationObjetives').click();
-        document.getElementById('bodyGeneral').removeAttribute('style');
+      this.EvaluacionPerView = result;
+      this.qualifierDataView = result.qualifier;
+      this.idEvaluation = result.perfomance_evaluation_id;
+      document.getElementById('btn-viewEvaluationObjetives').click();
+      document.getElementById('bodyGeneral').removeAttribute('style');
 
-        this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status)
-          .subscribe((table: any) => {
+      this.performanceEvaluationService.getEvaluationObjetive(this.idEvaluation, this.status)
+        .subscribe((table: any) => {
+          if (table.data != null) {
             this.ObjectivesTableView = table;
             setTimeout(() => {
               this.objectReportEval.emit(this.ObjectivesTableView);
-            }, 500);
-          })
-      
+            }, 100);
+          } else {
+            this.ObjectivesTableView = [];
+            setTimeout(() => {
+              this.objectReportEval.emit({ success: true, data: [] });
+            }, 100);
+          }
+
+        })
+
     })
 
   }
