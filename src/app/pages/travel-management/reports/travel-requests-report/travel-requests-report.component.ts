@@ -116,7 +116,7 @@ export class TravelRequestsReportComponent implements OnInit {
         })
       this.showDataTable = true;
     } else {
-      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send,  this.travel_cost, date_begin_send,
+      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost,date_begin_send ,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
           window.open(data.url);
         });

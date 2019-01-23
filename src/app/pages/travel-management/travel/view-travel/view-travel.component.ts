@@ -211,13 +211,13 @@ export class ViewTravelComponent implements OnInit {
 
   viewCotization(paramView) {
 
-    window.open(paramView.file.url)
+    window.open(paramView.file_anexo.url)
 
   }
 
   downloadCotization(param: any) {
 
-    this.http.get(param.file.url, {
+    this.http.get(param.file_anexo.url, {
       responseType: ResponseContentType.Blob
     }).map(res => {
       return {
