@@ -38,8 +38,6 @@ export class TravelRequestsReportComponent implements OnInit {
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService) {
 
-
-
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
 
       if (data === "Solicitudes de viaje" && this.countAfter === 0) {
@@ -49,6 +47,7 @@ export class TravelRequestsReportComponent implements OnInit {
 
     this.reports_list = travel_reports_list.getTravelsReportList();
     document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+
   }
 
   ngOnInit() {
@@ -57,6 +56,7 @@ export class TravelRequestsReportComponent implements OnInit {
       subscribe((data: any) => {
         this.typeTravelLegal = this.sortByAphabet(data.data.legal_travels_types);
         this.type_element_imputation = this.sortByAphabet(data.data.travel_costs_types);
+
       })
 
     this.userId = JSON.parse(localStorage.getItem("user")).employee_id
@@ -98,13 +98,12 @@ export class TravelRequestsReportComponent implements OnInit {
   }
 
   getObjectPrint(param) {
- 
+
     let personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
     let ticket_send = this.ticket === '' ? '-1' : this.ticket;
     let ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
     let date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
     let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
-
     if (param === 'general') {
       this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, this.travel_cost, date_begin_send,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
@@ -120,7 +119,7 @@ export class TravelRequestsReportComponent implements OnInit {
       this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost,date_begin_send ,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
           window.open(data.url);
-        })
+        });
     }
   }
   ngOnDestroy() {
