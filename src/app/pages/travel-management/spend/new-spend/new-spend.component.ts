@@ -369,7 +369,7 @@ export class NewSpendComponent implements OnInit {
       });
     this.spendsService.getAccountContable().
       subscribe((account: any) => {
-        this.accountContable = account.data;
+        this.accountContable = this.sortByAphabet(account.data);
       });
   }
 

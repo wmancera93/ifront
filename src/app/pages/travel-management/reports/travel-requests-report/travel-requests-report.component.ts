@@ -106,7 +106,7 @@ export class TravelRequestsReportComponent implements OnInit {
     let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
 
     if (param === 'general') {
-      this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, this.travel_cost,
+      this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, this.travel_cost, date_begin_send,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
           this.objectGeneralTravel = data.data[0].data;
           if (this.objectGeneralTravel.length > 0) {
@@ -117,7 +117,7 @@ export class TravelRequestsReportComponent implements OnInit {
         })
       this.showDataTable = true;
     } else {
-      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, date_begin_send, this.travel_cost,
+      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost,date_begin_send ,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
           window.open(data.url);
         })

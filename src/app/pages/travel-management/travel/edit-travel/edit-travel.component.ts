@@ -1264,11 +1264,11 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['date_hotel_out'].setValue('');
   }
   viewCotization(param) {
-    window.open(param.file.url)
+    window.open(param.file_anexo.url)
   }
   downloadCotization(param: any) {
 
-    this.http.get(param.file.url, {
+    this.http.get(param.file_anexo.url, {
       responseType: ResponseContentType.Blob
     }).map(res => {
       return {
