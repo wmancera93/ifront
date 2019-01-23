@@ -56,4 +56,16 @@ export class ReportTravelsService {
     return this.tokenService.get('travel_reports/travel_request_report_export/' + id_employee + '/' + personal_number + '/' + ticket + '/' + ticket_cli + '/' + travel_cost + '/' + date_begin + '/' + date_end + '/' + legal_travel)
       .map((data: any) => data);
   }
+  getTravelsAllowanceReportExcel(id_employee: any, personal_number: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any, legal_travel: any) {
+    return this.tokenService.get('travel_reports/travel_expenses_report_export/' + id_employee + '/' + personal_number + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end + '/' + legal_travel)
+    .map((data) => data);
+  }
+  getTravelsAdvanceReportExcel(id_employee: any, personal_number: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any) {
+    return this.tokenService.get('travel_reports/travel_advance_report_export/' + id_employee + '/' + personal_number + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end)
+    .map((data) => data);
+  }
+  getTravelsApprovalsReportExcel(id_employee: any, personal_number: any, ticket: any, ticket_cli: any, date_begin: any, date_end: any, approver: any, level: any) {
+    return this.tokenService.get('travel_reports/travel_approvals_report_export/' + id_employee + '/' + personal_number + '/' + ticket + '/' + ticket_cli + '/' + date_begin + '/' + date_end + '/' + approver + '/' + level)
+    .map((data) => data);
+  }
 }

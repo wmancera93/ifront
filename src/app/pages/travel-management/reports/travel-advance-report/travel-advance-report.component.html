@@ -59,23 +59,47 @@
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!is_collapse_report_travel" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilter" aria-expanded="false" (click)="collapseReportAdvance(true)"></i>
-            <i *ngIf="is_collapse_report_travel" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilter" aria-expanded="false" (click)="collapseReportAdvance(false)"></i>
+            <i *ngIf="!is_collapse_report_advance" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
+              data-target="#collapseFilterAdvance" aria-expanded="false" (click)="collapseReportAdvance(true)"></i>
+            <i *ngIf="is_collapse_report_advance" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
+              data-target="#collapseFilterAdvance" aria-expanded="false" (click)="collapseReportAdvance(false)"></i>
           </div>
         </div>
       </div>
-
-      <div class="collapse top-general-p border-botton-general" id="collapseFilter">
+      <div class="collapse top-general-p border-botton-general" id="collapseFilterAdvance">
         <div class="row align-items-center">
-          <div class="col-12" style="padding-bottom: 15px">
-           
+          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+            <label>Número de empleado</label>
+            <input type="text" [(ngModel)]="personal_number" class="form-control">
+          </div>
+          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+            <label>Código de IHR</label>
+            <input type="text" [(ngModel)]="ticket" class="form-control">
+          </div>
+          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+            <label>Código de SAP</label>
+            <input type="text" [(ngModel)]="ticket_cli" class="form-control">
+          </div>
+        </div>
+
+        <div class="row align-items-center mb-3">
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>fecha de Inicio</label>
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>Fecha final</label>
+            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
+              <i class="fa fa-search-plus"></i>
+              Consulta
+            </div>
           </div>
         </div>
       </div>
-   
-
       <div class="row justify-content-center top-general-p" *ngIf="!showDataTableAdvance">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
@@ -87,7 +111,7 @@
 
       <div class="row justify-content-center top-containter" *ngIf="showDataTableAdvance">
         <div class="col-12">
-          <app-data-table  class="mt-3" [records]="objectReportAdvance" id="tableReportAdvance" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>  
+          <app-data-table  class="mt-3" [records]="objectReportAdvance" id="tableReportAdvance" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>
         </div>
       </div>
     </div>
