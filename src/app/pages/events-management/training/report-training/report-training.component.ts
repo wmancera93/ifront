@@ -28,6 +28,8 @@ export class ReportTrainingComponent implements OnInit {
   public date_end: string = '';
   public countAfter: number = 0;
 
+  title
+
   public objectGeneralTraining: any[] = [];
   public objectReportTraining: EventEmitter<any> = new EventEmitter();
 
