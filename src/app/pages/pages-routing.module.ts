@@ -1,3 +1,4 @@
+import { ReportTrainingComponent } from './events-management/training/report-training/report-training.component';
 // modules
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -237,7 +238,7 @@ const routes: Routes = [
         path: 'planning_evaluation',
         component: PlanningEvaluationComponent
     },
-    
+
     {
         path: 'time_evaluation',
         component: TimeEvaluationComponent
@@ -271,53 +272,57 @@ const routes: Routes = [
         component: TrainingComponent
     },
     {
+        path:'report_training',
+        component: ReportTrainingComponent
+    },
+    {
         path:'advances/:id',
-        component: AdvancesComponent        
+        component: AdvancesComponent
     },
     {
         path:'advances',
-        component: AdvancesComponent        
+        component: AdvancesComponent
     },
     {
         path:'spend/:id',
-        component: SpendComponent        
+        component: SpendComponent
     },
     {
         path:'spend/:idTravels/:idSpend/:travel',
-        component: SpendComponent        
+        component: SpendComponent
     },
     {
         path:'spend',
-        component: SpendComponent        
+        component: SpendComponent
     },
     {
         path:'management_travel',
-        component: ManagedTravelComponent        
+        component: ManagedTravelComponent
     },
     {
         path:'pending_travel',
-        component: PendingTravelComponent        
+        component: PendingTravelComponent
     },
     {
         path:'travel_report',
-        component:TravelRequestsReportComponent,      
+        component:TravelRequestsReportComponent,
     }
     ,
     {
         path:'advance_report',
-        component:TravelAdvanceReportComponent,      
+        component:TravelAdvanceReportComponent,
     }
     ,
     {
         path:'allowance_report',
-        component:TravelAllowanceReportComponent,      
+        component:TravelAllowanceReportComponent,
     }
     ,
     {
         path:'approver_report',
-        component:TravelApproverReportComponent,      
+        component:TravelApproverReportComponent,
     }
-    
+
 ];
 
 @NgModule({

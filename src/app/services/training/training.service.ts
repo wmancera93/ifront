@@ -21,6 +21,15 @@ export class TrainingService {
       .map((data: any) => data.json());
   }
 
+  getTrainingAgreementsReport(personal_number: any, code: any, status_id: any, date_begin: any, date_end: any) {
+    return this.tokenService.get('training_events/management_report/' + personal_number + '/' + code + '/' + status_id + '/' + date_begin + '/' + date_end)
+    .map((data: any) => data.json());
+  }
+
+  getTrainingAgreementsReportExcel(id_employee: any, personal_number: any, code: any, status_id: any, date_begin: any, date_end: any) {
+    return this.tokenService.get('training_events/management_report_export/' + id_employee + '/' + personal_number + '/' + code + '/' + status_id + '/' + date_begin + '/' + date_end)
+    .map((data: any) => data);
+  }
 
 }
 

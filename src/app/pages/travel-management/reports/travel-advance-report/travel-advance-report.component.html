@@ -32,7 +32,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6 mb-3">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -68,31 +68,31 @@
       </div>
       <div class="collapse top-general-p border-botton-general" id="collapseFilterAdvance">
         <div class="row align-items-center">
-          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
             <label>Número de empleado</label>
             <input type="text" [(ngModel)]="personal_number" class="form-control">
           </div>
-          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
             <label>Código de IHR</label>
             <input type="text" [(ngModel)]="ticket" class="form-control">
           </div>
-          <div class="col-lg-4 col-md-6 col-12" style="padding-bottom: 15px">
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
             <label>Código de SAP</label>
             <input type="text" [(ngModel)]="ticket_cli" class="form-control">
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
-          <div class="col-lg-4 col-md-6 col-12">
+          <div class="col-lg-4 col-md-4 col-12">
             <label>fecha de Inicio</label>
             <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
           </div>
-          <div class="col-lg-4 col-md-6 col-12">
+          <div class="col-lg-4 col-md-4 col-12">
             <label>Fecha final</label>
             <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
           </div>
 
-          <div class="col-lg-4 col-md-6 col-12">
+          <div class="col-lg-4 col-md-4 col-12 align-self-end">
             <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
               <i class="fa fa-search-plus"></i>
               Consulta
@@ -100,7 +100,7 @@
           </div>
         </div>
       </div>
-      <div class="row justify-content-center top-general-p" *ngIf="!showDataTableAdvance">
+      <div class="row justify-content-center top-general-p " *ngIf="!showDataTableAdvance">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             No se encontrarón registros para mostrar
@@ -109,7 +109,7 @@
       </div>
 
 
-      <div class="row justify-content-center top-containter" *ngIf="showDataTableAdvance">
+      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableAdvance">
         <div class="col-12">
           <app-data-table  class="mt-3" [records]="objectReportAdvance" id="tableReportAdvance" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>
         </div>

@@ -1,0 +1,93 @@
+<div class="heigth-content-general">
+    <div class="row-hr-container">
+      <div class="col-12">
+        <div class="row justify-content-left">
+          <div class="col-xl-10 col-md-8 col-7 text-left title">
+            <i class="fa fa-flag"></i>
+            Reporte de convenios de capacitación
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row-hr-container justify-content-center">
+      <div class="col-12  widget bg-white minHeight">
+          <div class="row top-containter">
+            <div class="col-12 text-left">
+              <h3 class="font-color-default">
+                {{title}}
+              </h3>
+            </div>
+          </div>
+
+        <!-- begin filters -->
+        <div class="border-botton-general">
+          <div class="row top-containter">
+            <div class="col-xl-4 col-lg-4 col-12 text-left">
+              <b>
+                Filtros de consulta
+              </b>
+              <i *ngIf="!collapseFilterTraining" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
+                data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(true)"></i>
+              <i *ngIf="collapseFilterTraining" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
+                data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(false)"></i>
+            </div>
+          </div>
+        </div>
+
+        <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
+          <div class="row align-items-center">
+            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+              <label>Código de empleado</label>
+              <input type="text" [(ngModel)]="personal_number" class="form-control">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+              <label>Código de capacitación</label>
+              <input type="text" [(ngModel)]="code_training" class="form-control">
+            </div>
+            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+                <label>Estado de la capacitación</label>
+                <select class="form-control" [(ngModel)]="status_id">
+                    <option [value]="-1">Seleccione</option>
+                    <option value="1">Aceptado</option>
+                    <option value="0">Pendiente</option>
+                  </select>
+              </div>
+          </div>
+          <div class="row align-items-center mb-3">
+            <div class="col-lg-4 col-md-4 col-12">
+              <label>Fecha de Inicio</label>
+              <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-12">
+              <label>Fecha final</label>
+              <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+            </div>
+            <div class="col-lg-4 col-md-4 col-12 align-self-end">
+              <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
+                <i class="fa fa-search-plus"></i>
+                Consulta
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row justify-content-center top-general-p" *ngIf="!showDataTableTraining">
+        <!-- <div class="row justify-content-center top-general-p" > -->
+          <div class="col-lg-8 col-12 text-center">
+            <div class="alert alert-warning" role="alert">
+              No se encontrarón registros para mostrar
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableTraining">
+          <div class="col-12">
+            <app-data-table class="mt-3" [records]="objectReportTraining" id="tableReportTravels" [excel]="showExcel" [pdf]="showPdf" [title]="nameReport"></app-data-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
