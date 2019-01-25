@@ -609,7 +609,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formDataService.postNewTravel(model)
       .subscribe(
         (data: any) => {
-          debugger
           this.ticket_advance = 0;
           let dayone = new Date(this.today).getTime();
           let dayTwo = new Date(data.data[0].travel_request.date_end).getTime();

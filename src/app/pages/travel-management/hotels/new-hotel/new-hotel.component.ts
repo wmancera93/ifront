@@ -92,6 +92,7 @@ export class NewHotelComponent implements OnInit {
 
     this.hotelsService.postHotelsByCompany(hotel).subscribe(
       (data: any) => {
+        debugger
         if (data.success) {
           document.getElementById("closeHotels").click();
           const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Hotel generado correctamente', confirmation: false }];

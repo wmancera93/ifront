@@ -42,6 +42,8 @@ export class TravelAdvanceReportComponent implements OnInit {
     this.reports_list_advance = travel_reports_list.getTravelsReportList();
     document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
 
+
+    
   }
 
 
@@ -104,8 +106,7 @@ export class TravelAdvanceReportComponent implements OnInit {
       });
       this.showDataTableAdvance = true;
     } else {
-      this.travel_reports_list
-        .getTravelsAdvanceReportExcel(
+      this.travel_reports_list.getTravelsAdvanceReportExcel(
           this.userId,
           personal_number_send,
           ticket_send,
