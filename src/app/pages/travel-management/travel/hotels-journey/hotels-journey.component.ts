@@ -34,19 +34,32 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       debugger
-      if (this.countAfterAlert === 0) {
-        if (data === 'continueHotelsJourney') {
-          if (document.getElementById('hoteljourney_edit').className !== 'modal show') {
+      if (this.countAfter === 0) {
+        if (this.countAfterAlert === 0) {
+          if (data === 'continueHotelsJourney') {
             this.formHotelsJourney.controls['id_hotels'].setValue('');
             this.formHotelsJourney.controls['date_hotel_out'].setValue('');
             this.formHotelsJourney.controls['date_hotel_in'].setValue('');
-            document.getElementById("btn_hoteljourney_edit").click();
+            if (document.getElementById('hoteljourney_edit').className !== 'modal show') {
+
+              document.getElementById("btn_hoteljourney_edit").click();
+              this.countAfterAlert += 1;
+            }
           }
         }
         if (data === 'closeAlertcontinueHotelsJourney') {
-          this.returnTravel();
+          this.formHotelsJourney.controls['id_hotels'].setValue('');
+          this.formHotelsJourney.controls['date_hotel_out'].setValue('');
+          this.formHotelsJourney.controls['date_hotel_in'].setValue('');
+          if (document.getElementById('travel_edit').className !== 'modal show') {
+            document.getElementById("btn_travel_edit").click();
+            document.getElementById('bodyGeneral').removeAttribute('style');
+            this.objectHotelJourney = null;
+            this.arrayHotel = [];
+          }
         }
       }
+      this.countAfterAlert = 0;
     });
 
 
