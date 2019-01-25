@@ -32,7 +32,7 @@
       </div>
 
       <div class="row justify-content-center">
-        <div class="col-6">
+        <div class="col-lg-6 col-md-12 mb-3">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -89,18 +89,18 @@
           </div>
         </div>
 
-        <div class="row align-items-center mb-3">
+        <div class="row align-items-center mb-3 d-flex">
           <div class="col-lg-3 col-md-6 col-12">
-            <label>fecha de Inicio</label>
+            <label>Fecha de Inicio</label>
             <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <label>Fecha final</label>
-            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+            <input tabindex="-1" type="date" name="date_end" class="form-control " [(ngModel)]="date_end" />
           </div>
 
-          <div class="col-lg-3 col-md-6 col-12">
-            <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
+          <div class="col-lg-3 col-md-12 col-12 align-self-end ">
+            <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')">
               <i class="fa fa-search-plus"></i>
               Consulta
             </div>
