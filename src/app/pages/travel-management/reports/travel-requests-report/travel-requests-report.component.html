@@ -70,15 +70,15 @@
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de empleado</label>
-            <input type="text" [(ngModel)]="personal_number" class="form-control">
+            <input type="text" [(ngModel)]="personal_number" class="form-control" (keyup)="validateNumber('personal_number', personal_number )">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de IHR</label>
-            <input type="text" [(ngModel)]="ticket" class="form-control">
+            <input type="text" [(ngModel)]="ticket" class="form-control" (keyup)="validateNumber('ticket', ticket)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de SAP</label>
-            <input type="text" [(ngModel)]="ticket_cli" class="form-control">
+            <input type="text" [(ngModel)]="ticket_cli" class="form-control" (keyup)="validateNumber('ticket_cli', ticket_cli)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Clase de viaje legal</label>
@@ -98,14 +98,21 @@
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <label>fecha de Inicio</label>
-            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" (change)="validateDate()"
+            />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
             <label>Fecha final</label>
-            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" (change)="validateDate()" />
           </div>
-          <div class="col-lg-3 col-md-6 col-12 align-self-end">
+          <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="btnConsult">
             <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')">
+              <i class="fa fa-search-plus"></i>
+              Consulta
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="!btnConsult">
+            <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')" style="cursor: no-drop">
               <i class="fa fa-search-plus"></i>
               Consulta
             </div>
