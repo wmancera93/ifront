@@ -4,6 +4,8 @@ import { ReportTravelsService } from '../../../../services/travel-management/rep
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 import { User } from '../../../../models/general/user';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-travel-requests-report',
@@ -32,11 +34,13 @@ export class TravelRequestsReportComponent implements OnInit {
   public type_element_imputation: any[] = [];
   public userId: User = null;
   public countAfter: number = 0;
+  public btnConsult: boolean = true;
 
 
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
-    public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService) {
+    public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService,
+    public alert: AlertsService) {
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
 
@@ -116,12 +120,62 @@ export class TravelRequestsReportComponent implements OnInit {
         })
       this.showDataTable = true;
     } else {
-      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost,date_begin_send ,
+      this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost, date_begin_send,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
           window.open(data.url);
         });
     }
   }
+  validateNumber(name: string, value: any) {
+    let proof = /^[0-9]+$/.test(value);
+    switch (name) {
+      case 'personal_number':
+        if (!proof) {
+          this.personal_number = value.split(value[value.length - 1])[0];
+        } else {
+          this.personal_number = value;
+        }
+        break;
+      case 'ticket':
+        if (!proof) {
+          this.ticket = value.split(value[value.length - 1])[0];
+        } else {
+          this.ticket = value;
+        }
+        break;
+      case 'ticket_cli':
+        if (!proof) {
+          this.ticket_cli = value.split(value[value.length - 1])[0];
+        } else {
+          this.ticket_cli = value;
+        }
+        break;
+    }
+  }
+
+  validateDate() {
+    if ((this.date_begin === '') && (this.date_end === '')) {
+      this.btnConsult = true;
+    } else {
+      if ((this.date_begin !== '') && (this.date_end !== '')) {
+        this.btnConsult = true;
+        let dayBegin = new Date(this.date_begin).getTime();
+        let dayEnd = new Date(this.date_end).getTime();
+        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        if (calculate < 0) {
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: 'La fecha inicial no puede ser mayor a la fecha final', confirmation: false }];
+          this.alert.setAlert(alertWarning[0]);
+          this.btnConsult = false;
+        }
+      } else {
+        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'Por favor ingrese las dos fechas para la consulta', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+        this.btnConsult = false;
+      }
+    }
+
+  }
+
   ngOnDestroy() {
     this.countAfter += 1;
   }

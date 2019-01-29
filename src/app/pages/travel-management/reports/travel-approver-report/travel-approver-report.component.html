@@ -35,15 +35,14 @@
         <div class="col-lg-6 col-md-12 mb-3">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
-                aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
                 <i class="fa fa-plus"></i>
                 Filtrar reportes gestión de viajes
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let listApprovers of reports_list_approvers; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReport(listApprovers)">{{listApprovers.name
-                    | lowercase}}</a>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReport(listApprovers)">{{listApprovers.name | lowercase}}</a>
                   <div *ngIf="reports_list_approvers.length !== (i + 1)" class="dropdown-divider"></div>
                 </div>
               </div>
@@ -59,10 +58,10 @@
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!collapseFilterAdvance" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilterAdvance" aria-expanded="false" (click)="collapseReportApprovers(true)"></i>
-            <i *ngIf="collapseFilterAdvance" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilterAdvance" aria-expanded="false" (click)="collapseReportApprovers(false)"></i>
+            <i *ngIf="!collapseFilterAdvance" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilterAdvance"
+              aria-expanded="false" (click)="collapseReportApprovers(true)"></i>
+            <i *ngIf="collapseFilterAdvance" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilterAdvance"
+              aria-expanded="false" (click)="collapseReportApprovers(false)"></i>
           </div>
         </div>
       </div>
@@ -71,46 +70,54 @@
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de empleado</label>
-            <input type="text" [(ngModel)]="personal_number" class="form-control">
+            <input type="text" [(ngModel)]="personal_number" class="form-control" (keyup)="validateNumberApprover('personal_number',personal_number)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de IHR</label>
-            <input type="text" [(ngModel)]="ticket" class="form-control">
+            <input type="text" [(ngModel)]="ticket" class="form-control" (keyup)="validateNumberApprover('ticket',ticket)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Código de SAP</label>
-            <input type="text" [(ngModel)]="ticket_cli" class="form-control">
+            <input type="text" [(ngModel)]="ticket_cli" class="form-control" (keyup)="validateNumberApprover('ticket_cli',ticket_cli)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Nivel de aprobación</label>
             <select class="form-control" [(ngModel)]="level">
-                <option [value]="-1">Seleccione</option>
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="6">6</option>
-              </select>
+              <option [value]="-1">Seleccione</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+            </select>
           </div>
         </div>
 
         <div class="row align-items-center mb-3">
-            <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-                <label>Código de aprobador</label>
-                <input type="text" [(ngModel)]="approver" class="form-control">
-              </div>
+          <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
+            <label>Código de aprobador</label>
+            <input type="text" [(ngModel)]="approver" class="form-control" (keyup)="validateNumberApprover('approver',approver)">
+          </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>fecha de Inicio</label>
-            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" (change)="validateDateAproover()"
+            />
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
             <label>Fecha final</label>
-            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" (change)="validateDateAproover()"
+            />
           </div>
 
-          <div class="col-lg-3 col-md-6 col-12 align-self-end" style="padding-bottom: 15px">
+          <div class="col-lg-3 col-md-6 col-12 align-self-end" style="padding-bottom: 15px" *ngIf="btnConsultApprover">
             <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')">
+              <i class="fa fa-search-plus"></i>
+              Consulta
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-12 align-self-end" style="padding-bottom: 15px" *ngIf="!btnConsultApprover">
+            <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')" style="cursor: no-drop">
               <i class="fa fa-search-plus"></i>
               Consulta
             </div>
@@ -130,7 +137,7 @@
 
       <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableApprover">
         <div class="col-12">
-          <app-data-table  [records]="objectReportApprover" id="tableReportApprover" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>
+          <app-data-table [records]="objectReportApprover" id="tableReportApprover" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>
         </div>
       </div>
     </div>

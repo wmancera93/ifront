@@ -14,7 +14,7 @@ export class TrainingComponent implements OnInit {
 
   public dataTabletraining: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: EventEmitter<any> = new EventEmitter();
+  public nameReport: 'Convenio de capacitación';
   token = false;
 
   constructor(public trainingService: TrainingService,

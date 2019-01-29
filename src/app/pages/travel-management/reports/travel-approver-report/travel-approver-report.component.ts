@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { ReportTravelsService } from '../../../../services/travel-management/report/report-travels.service';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../../models/general/user';
+import { Alerts } from '../../../../models/common/alerts/alerts';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 
 @Component({
   selector: 'app-travel-approver-report',
@@ -29,11 +31,13 @@ export class TravelApproverReportComponent implements OnInit {
   public nameReport: string = 'Aprobaciones solicitudes de viajes';
   public objectGeneralApprover: any[] = [];
   public showDataTableApprover: boolean = true;
+  public btnConsultApprover: boolean = true;
 
   public userId: User = null;
   public countAfter: number = 0;
 
-  constructor(public router: Router, public travel_reports_list: ReportTravelsService, private accionDataTableService: DataDableSharedService) {
+  constructor(public router: Router, public travel_reports_list: ReportTravelsService,
+    private accionDataTableService: DataDableSharedService, public alert: AlertsService) {
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if (data === 'Aprobaciones solicitudes de viajes' && this.countAfter === 0) {
         this.getObjectPrint("excel");
@@ -52,7 +56,7 @@ export class TravelApproverReportComponent implements OnInit {
 
   }
   sortByAphabet(dataBySort: any) {
-    dataBySort.sort(function(a, b) {
+    dataBySort.sort(function (a, b) {
       const nameA: String = a.name.toLowerCase();
       const nameB: String = b.name.toLowerCase();
 
@@ -124,6 +128,62 @@ export class TravelApproverReportComponent implements OnInit {
           window.open(data.url);
         });
     }
+  }
+
+  validateNumberApprover(name: string, value: any) {
+    let proof = /^[0-9]+$/.test(value);
+    switch (name) {
+      case 'personal_number':
+        if (!proof) {
+          this.personal_number = value.split(value[value.length - 1])[0];
+        } else {
+          this.personal_number = value;
+        }
+        break;
+      case 'ticket':
+        if (!proof) {
+          this.ticket = value.split(value[value.length - 1])[0];
+        } else {
+          this.ticket = value;
+        }
+        break;
+      case 'ticket_cli':
+        if (!proof) {
+          this.ticket_cli = value.split(value[value.length - 1])[0];
+        } else {
+          this.ticket_cli = value;
+        }
+        break;
+      case 'approver':
+        if (!proof) {
+          this.approver = value.split(value[value.length - 1])[0];
+        } else {
+          this.approver = value;
+        }
+        break;
+    }
+  }
+  validateDateAproover() {
+    if ((this.date_begin === '') && (this.date_end === '')) {
+      this.btnConsultApprover = true;
+    } else {
+      if ((this.date_begin !== '') && (this.date_end !== '')) {
+        this.btnConsultApprover = true;
+        let dayBegin = new Date(this.date_begin).getTime();
+        let dayEnd = new Date(this.date_end).getTime();
+        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        if (calculate < 0) {
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: 'La fecha inicial no puede ser mayor a la fecha final', confirmation: false }];
+          this.alert.setAlert(alertWarning[0]);
+          this.btnConsultApprover = false;
+        }
+      } else {
+        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'Por favor ingrese las dos fechas para la consulta', confirmation: false }];
+        this.alert.setAlert(alertWarning[0]);
+        this.btnConsultApprover = false;
+      }
+    }
+
   }
 
   ngOnDestroy() {
