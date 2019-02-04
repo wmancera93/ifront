@@ -281,7 +281,7 @@ export class RequestsComponent implements OnInit {
               Plataforma: element.next_platform + ' - #Nivel:' + element.next_level,
               FechaSolicitud: element.created,
               FechaInicial: element.date_begin_format,
-              FechaFinal: element.date_end_format,             
+              FechaFinal: element.date_end_format,
             });
           })
         }
@@ -304,6 +304,8 @@ export class RequestsComponent implements OnInit {
   }
 
   viewDetail(id: any) {
-    this.aproversRequestsService.setRequests({ ticket: id })
+    let objectSend = { ticket: id };
+    this.aproversRequestsService.setRequests({ request: objectSend, type_request: 'requestsOnly' });
+    // this.aproversRequestsService.setRequests({ ticket: id , type_requests_name:'requestsOnly'})
   }
 }

@@ -96,6 +96,7 @@ export class TimeLineApproversComponent implements OnInit {
           this.viewModal = true;
         }
 
+        console.log(this.detailRequets)
       });
   }
 

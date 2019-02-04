@@ -1,58 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Translate } from '../../../models/common/translate/translate';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class TranslateService {
   public translate: Translate = null;
 
-  constructor() {
+  constructor(private tokenService: Angular2TokenService) {
     if (this.translate === null) {
-      debugger
-      // this.translate = {
-      //   app: {
-      //     pages: {
-      //       dashboard: {
-      //         title: 'Inicio',
-      //         title_switch: 'Dashboard gerencial',
-      //         managerial: {
-
-      //         },
-      //         employee: {
-
-      //         }
-      //       },
-      //       herarchical_chart: {
-      //         title: 'Organigrama',
-      //         higher: 'Superior',
-      //         my_position: 'Mi posición',
-      //         subordinate: 'Subordinados',
-      //       }
-      //     }
-      //   }
-      // }
-
-      this.translate = {
-        app: {
-          pages: {
-            dashboard: {
-              title: 'Index',
-              title_switch: 'Managerial dashboard',
-              managerial: {
-
-              },
-              employee: {
-
-              }
-            },
-            herarchical_chart: {
-              title: 'Herarchical chart',
-              higher: 'Higher',
-              my_position: 'My position',
-              subordinate: 'Subordinate',
-            }
-          }
-        }
-      }
+      this.getTravelsApprovedReport('es').subscribe((data: any) => {
+        this.translate = data;
+      })
     }
   }
 
@@ -63,6 +21,10 @@ export class TranslateService {
   deleteTranslate() {
     this.translate = null;
     return this.translate;
+  }
+  getTravelsApprovedReport(languaje: any) {
+    return this.tokenService.get('companies_traslate/tree_language/' + languaje)
+      .map((data: any) => data.json());
   }
 
 
