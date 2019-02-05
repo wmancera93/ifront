@@ -235,7 +235,7 @@
             <li>
               <a id="aTraining" class="nav-link bg-menu" routerLink="training" (click)="clickOptionMenu('liEventsManagement','aTraining', 'eventsManagement')">Convenios de capacitación</a>
             </li>
-            <li class="bg-li">
+            <li class="bg-li" *ngIf="dataUser.employee.is_human_talent">
               <a id="cTraining" class="nav-link bg-menu" routerLink="report_training" (click)="clickOptionMenu('liEventsManagement','cTraining', 'eventsManagement')">Reportes de convenios</a>
             </li>
           </ul>
