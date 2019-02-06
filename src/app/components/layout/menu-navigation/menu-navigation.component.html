@@ -140,6 +140,9 @@
             <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
               <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">Aprobadores de Solicitudes</a>
             </li>
+            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
+              <a id="aRequestsApproversLogs" routerLink="/ihr/requests_approvers_logs" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApproversLogs', 'reportsRH')">Logs de Aprobadores de Solicitudes</a>
+            </li>
             <!-- <li class="bg-li" *ngIf="'true'">
               <a id="aHourExtra" routerLink="/ihr/hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aHourExtra', 'reportsRH')">Horas Extras</a>
             </li> -->

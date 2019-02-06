@@ -105,6 +105,7 @@ import { TravelAdvanceReportComponent } from './travel-management/reports/travel
 import { TravelAllowanceReportComponent } from './travel-management/reports/travel-allowance-report/travel-allowance-report.component';
 import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 import { ReportTrainingComponent } from './events-management/training/report-training/report-training.component';
+import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
 
 
 
@@ -210,6 +211,7 @@ import { ReportTrainingComponent } from './events-management/training/report-tra
     TravelAllowanceReportComponent,
     TravelApproverReportComponent,
     ReportTrainingComponent,
+    RequestsApproversLogsComponent,
   ],
   providers: [
     ReportTravelsService

@@ -62,6 +62,7 @@ import { TravelRequestsReportComponent } from './travel-management/reports/trave
 import { TravelAdvanceReportComponent } from './travel-management/reports/travel-advance-report/travel-advance-report.component';
 import { TravelAllowanceReportComponent } from './travel-management/reports/travel-allowance-report/travel-allowance-report.component';
 import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
+import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
 
 const routes: Routes = [
     {
@@ -321,6 +322,10 @@ const routes: Routes = [
     {
         path:'approver_report',
         component:TravelApproverReportComponent,
+    },
+    {
+        path: 'requests_approvers_logs',
+        component: RequestsApproversLogsComponent
     }
 
 ];
