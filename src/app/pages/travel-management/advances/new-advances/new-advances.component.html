@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Solicitud de Anticipos</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.advances.new_advance.tittle}}</h5>
         <button id="closeAdvances" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -17,7 +17,7 @@
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>Si va realizar un anticipo para un tercero, busque por el nombre en la caja de texto:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.message}}:</strong>
                 </label>
                 <form name="searchAutoComplete">
                   <p>
@@ -39,14 +39,14 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  Usted va a realizar un anticipo para:
+                  {{translate.app.frontEnd.pages.travel_management.advances.new_advance.message_third}}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
                 <br>
                 <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
                   (click)="deleteEmployeeThird()">
-                  Click para eliminar el tercero
+                  {{translate.app.frontEnd.pages.travel_management.advances.new_advance.message_erase_third}}
                 </span>
               </div>
             </div>
@@ -56,7 +56,7 @@
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-plane text-primary-hr"></i>
-                  <strong>Viaje asociado</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.select_travel}}</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
@@ -74,7 +74,7 @@
               <div class="col-12">
                 <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="boxCheck" [formControl]="formAdvanceTravel.controls['box']">
                 <label class="form-check-label titleColor" for="FormACheck">
-                  <strong>Método de pago caja</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.select_pay}}</strong>
                 </label>
               </div>
             </div>
@@ -82,24 +82,24 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
-                  <strong>Importe*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.import}}*:</strong>
                 </label>
                 <input type="text" class="form-control" name="value" [formControl]="formAdvanceTravel.controls['value']" (keyup)="onlyNumber(formAdvanceTravel.value)" style="text-align:right">
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <strong>Moneda*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.currency}}*:</strong>
                 </label>
                 <select class="form-control" [formControl]="formAdvanceTravel.controls['currency_id']" paceholder="Seleccione">
-                  <option value="">Seleccione</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.advances.new_advance.option_select}}</option>
                   <option *ngFor="let money of listMoneyTypes" [value]="money.id">{{money.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  <strong>Fecha*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.date_advance}}*:</strong>
                 </label>
                 <input tabindex="-1" type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" (change)="validateDateAdvance(formAdvanceTravel.value)"
                   (keyup)="delete('date_body')" />
@@ -109,7 +109,7 @@
           <div *ngIf="continue" class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>Observación*:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.observation}}*:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control uppercase" [formControl]="formAdvanceTravel.controls['observation']"></textarea>
           </div>
@@ -123,14 +123,14 @@
                   || formAdvanceTravel.value.date == ''
                   || formAdvanceTravel.value.observation == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
                   (click)="aditionAdvance(formAdvanceTravel.value)">
-                  <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Anticipo</button>
+                  <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.advances.new_advance.btn_add}}</button>
               </div>
             </div>
           </div>
           <div *ngIf="infoTableAdvances[0].data[0].data.length > 0 && continue" class="col-12" style="min-height: 100px !important">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>Anticipos</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.tittle_detail}}</strong>
             </label>
             <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
 
@@ -139,9 +139,9 @@
         <div *ngIf="continue && objectAdvances.length > 0" class="row justify-content-end">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newAdvance(formAdvanceTravel.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.advances.new_advance.save}}</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.advances.new_advance.loading}}</button>
           </div>
         </div>
       </div>

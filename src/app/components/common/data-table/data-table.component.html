@@ -6,7 +6,7 @@
     <div class="row justify-content-between" *ngIf="show">
       <div class="col-xl-3 col-12">
         <div class="form-group row" *ngIf="sizeTable">
-          <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+          <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center">{{translate.app.frontEnd.components.common.data_table.records_show}}:</label>
           <div class="col-xl-5 col-md-3 col-lg-3 col-6">
             <select class="form-control" [(ngModel)]="size_table">
               <option value="5">5</option>
@@ -59,8 +59,8 @@
     <div class="row justify-content-center top-containter" *ngIf="!show">
       <div class="col-lg-8 col-12 text-center" [attr.style]="heigth">
         <div class="alert alert-warning" role="alert">
-          No hay reportes de&nbsp;
-          <strong>{{title}}</strong>&nbsp;para el empleado
+          {{translate.app.frontEnd.components.common.data_table.without_reports}}&nbsp;
+          <strong>{{title}}</strong>&nbsp;{{translate.app.frontEnd.components.common.data_table.employee}}
         </div>
       </div>
     </div>

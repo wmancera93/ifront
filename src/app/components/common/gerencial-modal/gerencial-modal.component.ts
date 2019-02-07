@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ManagerialDataService } from '../../../services/shared/common/managerial-data/managerial-data.service';
 import { debug } from 'util';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-gerencial-modal',
@@ -20,8 +22,10 @@ export class GerencialModalComponent implements OnInit {
   public nameManagerial: string;
   public titleDataManagerial: string;
   public flagNoData: boolean = false;
+  public translate: Translate = null;
 
-  constructor(public mangerialDataShared: ManagerialDataService) {
+  constructor(public mangerialDataShared: ManagerialDataService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.mangerialDataShared.getDataManagerial().subscribe((dataM: any) => {
       this.getShowInfo(dataM.modal);
       this.dataManagerial = dataM.objectInfo;

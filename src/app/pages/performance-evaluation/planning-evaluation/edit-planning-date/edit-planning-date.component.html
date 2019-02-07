@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Editar fechas de planificación </h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.tittle}} </h5>
         <button id="closeModalPlanning" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
           <div class="col-11" style="border: 1px solid darkgray;border-style: groove">
             <div class="row border" style="margin-left: 2px">
-              <h4>Planificación de objetivos</h4>
+              <h4>{{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.sub_tittle}}</h4>
             </div>
           </div>
         </div>
@@ -24,7 +24,7 @@
           <div class="col-md-4 col-12 top-containter">
             <label for="dateBegin" class="font-title-general">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              Fecha Inicial *
+              {{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.date_begin}}*
             </label>
             <input type="date" name="date_begin" class="form-control" [formControl]="formDate.controls['start_planning']" placeholder="dd/mm/yyyy" disabled
             />
@@ -32,7 +32,7 @@
           <div class="col-md-4 col-12 top-containter">
             <label for="dateEnd" class="font-title-general">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              Fecha Final *
+              {{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.date_end}}*
             </label>
             <input type="date" name="date_end" class="form-control" [formControl]="formDate.controls['end_planning']" placeholder="dd/mm/yyyy"
             />
@@ -41,13 +41,13 @@
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
-                  <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                  <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.save}}</button>
                 <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                  <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.loading}}</button>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
                 <button class="btn btn-warning btn-block cursor-general" data-dismiss="modal" aria-label="Close">
-                  <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
+                  <i class="fa fa-fw fa-window-close"></i>{{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.button_cancel}}</button>
               </div>
             </div>
           </div>

@@ -11,8 +11,8 @@
       </div>
       <div class="row">
         <div class="col-12 text-center">
-          <h3>Bienvenidos</h3>
-          <p class="top">Restablecer contraseña</p>
+          <h3>{{translate.app.frontEnd.pages.authentication.reset_account.title_welcome}}</h3>
+          <p class="top">{{translate.app.frontEnd.pages.authentication.reset_account.text_restore_password}}</p>
         </div>
       </div>
       <div class="row align-self-end">
@@ -21,13 +21,13 @@
             <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email"  (keyup)='lowercasePassword()' maxlength="50" (blur)="blurEmail()">
           </div>
           <div class="text-center">
-            <p>Ingrese la cuenta correo a restablecer para iniciar el proceso.</p>
+            <p>{{translate.app.frontEnd.pages.authentication.reset_account.text_mail_reset_password}}</p>
           </div>
           <div class="float-general-login top">
-            <div class="btn btn-primary btn-block font-controls-login" (click)='restartSession()'>Restablecer</div>
+            <div class="btn btn-primary btn-block font-controls-login" (click)='restartSession()'>{{translate.app.frontEnd.pages.authentication.reset_account.text_restore}}</div>
           </div>
           <div class="text-center top">
-            <small class="reestablish" routerLink="/ihr/login" routerLinkActive="active">Inicia sesión</small>
+            <small class="reestablish" routerLink="/ihr/login" routerLinkActive="active">{{translate.app.frontEnd.pages.authentication.reset_account.text_login}}</small>
           </div>
           <div class="fooder-login">
             <p class="text-center">

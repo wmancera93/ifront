@@ -9,6 +9,8 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { User } from '../../../models/general/user';
 import { FiltersGeneralsService } from '../../../services/travel-management/filters-generals/filters-generals.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-spend',
@@ -23,13 +25,15 @@ export class SpendComponent implements OnInit {
   public userAuthenticated: User = null;
   public third: string = '';
   public checkThird: boolean = true;
+  public translate: Translate = null;
 
   constructor(public router: Router,
     public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
     public alert: AlertsService,
-    public filtersGeneralsService: FiltersGeneralsService) {
-
+    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
+    
+      this.translate = this.translateService.getTranslate();
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
@@ -200,7 +204,7 @@ export class SpendComponent implements OnInit {
           if (this.statusLiquid !== '') {
             this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
               (data: any) => {
-                this.spedsData =this.sortByNumber(data.data);
+                this.spedsData = this.sortByNumber(data.data);
               });
           } else {
             this.spendsService.getSpendsRequest().subscribe((list: any) => {
@@ -401,7 +405,7 @@ export class SpendComponent implements OnInit {
   editSpend(objectSpend) {
     this.spendSharedService.setEditSpend(objectSpend.id);
   }
-  messages_error_spend(form){
+  messages_error_spend(form) {
     this.spendSharedService.setMessageSynchSpend(form.id);
   }
   deleteSpend(deleteSpend) {

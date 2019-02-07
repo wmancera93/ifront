@@ -5,6 +5,8 @@ import { DetailAproverRequest } from '../../../models/common/approver-requests/a
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-approvals-details',
@@ -22,12 +24,14 @@ export class ApprovalsDetailsComponent implements OnInit {
   public description: string = "";
   public dateSince: string;
   public dateUntil: string;
-
+  public translate: Translate = null;
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
     public alert: AlertsService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {

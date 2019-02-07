@@ -1,6 +1,8 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PerformanceEvaluationService } from '../../../services/performance-evaluation/performance-evaluation.service';
 import { PerformanceEvalSharedService } from '../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-evaluation-objectives',
@@ -11,11 +13,12 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   public evaluationPerformanceList: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
+  public translate: Translate = null;
   token = false;
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
-    public performanceEvalSharedService: PerformanceEvalSharedService) {
-
+    public performanceEvalSharedService: PerformanceEvalSharedService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.performanceEvalSharedService.getRefrehsEval().subscribe((data: any) => {
       if (data) {
         this.performanceEvaluationService.getPerformanceEvaluations().subscribe((data: any) => {

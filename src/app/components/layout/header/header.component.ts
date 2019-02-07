@@ -8,6 +8,8 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Router } from '@angular/router';
 import { Enterprise } from '../../../models/general/enterprise';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-header',
@@ -24,13 +26,14 @@ export class HeaderComponent implements OnInit {
   public showCollapse: string = '';
   public heightContenGeneral: number;
   public showContactsList: boolean = true;
-
+  public translate: Translate = null;
   private alertWarning: Alerts[];
 
   constructor(private userSharedService: UserSharedService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -38,7 +41,7 @@ export class HeaderComponent implements OnInit {
     this.alert.getActionConfirm().subscribe(
       (data: any) => {
         if (data === "logout") {
-          
+
           this.tokenService.signOut().subscribe(
             (result) => {
               localStorage.setItem('user', null);

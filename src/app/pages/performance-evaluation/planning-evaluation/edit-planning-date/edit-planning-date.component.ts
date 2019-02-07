@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup } from '../../../../../../node_modules/@angular/
 import { PerformanceEvaluationService } from '../../../../services/performance-evaluation/performance-evaluation.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-edit-planning-date',
@@ -22,12 +24,13 @@ export class EditPlanningDateComponent implements OnInit {
   public startDate: any;
   public endDate: any;
   public countAfter: number = 0;
-
+  public translate: Translate = null;
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService,
     private fb: FormBuilder,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.formDate = new FormGroup({});
     this.formDate = fb.group({
       start_planning: "",
@@ -70,7 +73,7 @@ export class EditPlanningDateComponent implements OnInit {
       this.showSubmit = true;
       const alertWarning: Alerts[] = [{
         type: 'success',
-        title: 'Confirmación',
+        title: this.translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.type_alert_ts,
         message: response.message,
         confirmation: false,
         typeConfirmation: ''
@@ -81,8 +84,8 @@ export class EditPlanningDateComponent implements OnInit {
       (error: any) => {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: "Acción denegada",
+          title: this.translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.type_alert_ts,
+          message: this.translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.edit_planning_date.msg_alert_ts,
           confirmation: false,
           typeConfirmation: ''
         }];

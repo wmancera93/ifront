@@ -5,6 +5,8 @@ import { Evaluations, Questions, ResponseEvaluation, Sections, MultipleAnswer } 
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-fill-evaluation',
@@ -31,13 +33,14 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
   public totalQuestionsBySection: number = 0;
   public totalQuestions: number = 0;
   public countAfter: number = 0;
+  public translate: Translate = null;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
     private formBuilder: FormBuilder,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
 
-
+    this.translate = this.translateService.getTranslate();
     document.getElementById("bodyGeneral").removeAttribute('style');
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSendEvaluation') {
@@ -46,7 +49,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
       }
     })
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
-      if(this.countAfter === 0){
+      if (this.countAfter === 0) {
         this.object = [];
         this.evaluationService.getDataEvaluationById(info).subscribe((list: any) => {
           this.idEvaluation = info;
@@ -57,14 +60,14 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
         document.getElementById('btn_fillEvaluation').click();
         document.getElementById("bodyGeneral").removeAttribute('style');
       }
-      
+
     });
   }
 
   ngOnInit() {
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.countAfter += 1;
   }
 
@@ -85,7 +88,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
       if (data.success == true) {
         const alertConfirmation: Alerts[] = [{
           type: 'success',
-          title: 'Estado de la evaluación',
+          title: this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.text_success_ts,
           message: data.message,
           confirmation: false,
         }];
@@ -101,8 +104,8 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
         const alertWarning: Alerts[] =
           [{
             type: 'danger',
-            title: 'Solicitud Denegada',
-            message: error.json().errors.toString() + "¿Desea continuar con la encuesta ?",
+            title: this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.msg_deniedrequest_ts,
+            message: error.json().errors.toString() + this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.msg_continue_ts,
             confirmation: true,
             typeConfirmation: 'errorSendEvaluation'
           }];

@@ -5,6 +5,8 @@ import { MyTeamInfoService } from '../../../services/my-team/my-team-info.servic
 import { EILSEQ } from 'constants';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 @Component({
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
@@ -14,7 +16,7 @@ export class MyTeamReportsComponent implements OnInit {
   public reportsMyTeamInfo: EspecificMyTeam;
   public rowsOnPage = 5;
   public flagReturnBack: boolean = false;
-
+  public translate: Translate = null;
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string = '';
 
@@ -24,7 +26,9 @@ export class MyTeamReportsComponent implements OnInit {
   constructor(public myTeamSharedService: MyTeamReportService,
     public myTeamService: MyTeamInfoService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(

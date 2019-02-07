@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-error-page-http',
@@ -9,9 +11,12 @@ import { Router } from '@angular/router';
 export class ErrorPageHttpComponent implements OnInit {
   @Input() objectPage: any;
 
-  public statusCode: string = ''
-  public messageError: string = ''
-  constructor(public router: Router) { }
+  public statusCode: string = '';
+  public messageError: string = '';
+  public translate: Translate = null;
+  constructor(public router: Router, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+  }
 
   ngOnInit() {
     this.objectPage.subscribe((data) => {

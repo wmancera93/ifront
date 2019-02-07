@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          Certificado laboral
+          {{translate.app.frontEnd.pages.auto_services.labor_certificates.title_work_letter}}
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            No hay carta de
-            <strong>certificado laboral</strong>&nbsp;para el empleado
+            {{translate.app.frontEnd.pages.auto_services.labor_certificates.text_letter_not_found}}
+            <strong>{{translate.app.frontEnd.pages.auto_services.labor_certificates.text_work_letter}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.labor_certificates.text_for_the_employee}}
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
             </div>
             <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)" *ngIf="block_certificate">
               <i class="fa fa-qrcode"></i>
-              Certificado laboral con código de verificación
+              {{translate.app.frontEnd.pages.auto_services.labor_certificates.text_code_work_letter}}
             </div>
           </div>
         </div>
@@ -46,29 +46,29 @@
             <div class="row">
               <div class="col-12" style="margin-top: 60px">
                 <h1>
-                  Esta a punto de generar un código de verificación
+                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_one}}
                 </h1>
               </div>
               <div class="col-12 text-left" style="margin-top: 60px">
                 <i class="fa fa-fw fa-check"></i>
-                Si ya tiene un código de verificación activo, este se remplazara por el que está a punto generar.
+                {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_two}}
               </div>
               <div class="col-12 text-left" style="margin-top: 30px">
                 <i class="fa fa-fw fa-check"></i>
-                Recuerde que este código es único e intransferible.
+                {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_three}}
               </div>
             </div>
             <div class="row justify-content-center" style="margin-top: 60px">
               <div class="col-4">
                 <div class="btn btn-block btn-primary" (click)="acceptCertificateQR()">
                   <i class="fa fa-fw fa-check"></i>
-                  Aceptar
+                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.btn_accept}}
                 </div>
               </div>
               <div class="col-4">
                 <div class="btn btn-block btn-primary-second" (click)="declineCertificateQR()">
                   <i class="fa fa-fw fa-times"></i>
-                  Cancelar
+                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.btn_cancel}}
                 </div>
               </div>
             </div>

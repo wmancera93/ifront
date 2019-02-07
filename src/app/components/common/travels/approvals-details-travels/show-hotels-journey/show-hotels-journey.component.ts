@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from '../../../../../services/travel-management/travels/travel.service';
 import { TravelsService } from '../../../../../services/shared/travels/travels.service';
+import { Translate } from '../../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-show-hotels-journey',
@@ -10,9 +12,11 @@ import { TravelsService } from '../../../../../services/shared/travels/travels.s
 export class ShowHotelsJourneyComponent implements OnInit {
   public objectHotelJourney: any = null;
   public arrayHotel: any[] = [];
+  public translate: Translate = null;
 
   constructor(public travelService: TravelService,
-    public travelsSharedService: TravelsService) { 
+    public travelsSharedService: TravelsService, public translateService: TranslateService) { 
+      this.translate = this.translateService.getTranslate();
       this.travelsSharedService.getHotelsByJourney().subscribe(
         (data: any) => {
           this.objectHotelJourney = data;

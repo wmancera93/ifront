@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          Recibo de Nómina
+          {{translate.app.frontEnd.pages.auto_services.payroll_receipts.tittle}}
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            No hay
-            <strong>recibo de nómina</strong>&nbsp;para el empleado
+            {{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_one}}
+            <strong>{{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_tree}}
           </div>
         </div>
       </div>

@@ -54,7 +54,7 @@ export class HierarchicalChartComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   public translate: Translate = null;
-
+  
   constructor(public workTeamService: HierarchicalChartService,
     public employeeService: EmployeeService,
     public employeeSharedService: EmployeeInfoService,
@@ -64,7 +64,7 @@ export class HierarchicalChartComponent implements OnInit {
     private eRef: ElementRef,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-    this.translate = this.translateService.getTranslate()
+    this.translate = this.translateService.getTranslate();
     
     this.tokenService.validateToken()
       .subscribe(
@@ -98,7 +98,7 @@ export class HierarchicalChartComponent implements OnInit {
   clickout(event) {
     if (this.eRef.nativeElement.contains(event.target)) {
       if (document.getElementById('buttonSearchHierarchical') == event.target || document.getElementById('searchByAutoComplete') == event.target) {
-        this.text = "click en el boton";
+        this.text = this.translate.app.frontEnd.pages.hierarchical_chart.masg_click_button_ts;
         this.showListAutoC = true;
       }
       else {

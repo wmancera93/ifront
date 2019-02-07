@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../../../services/calendar/calendar.service';
 import { CalendarData } from '../../../models/common/calendar/calendar';
 import { CalendarDetailService } from '../../../services/shared/common/calendar-detail/calendar-detail.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 
 @Component({
@@ -31,11 +33,13 @@ export class DrawCalendarComponent implements OnInit {
   public wednesday = 'Miércoles';
   public thursday = 'Jueves';
   public friday = 'Viernes';
-
+  public translate: Translate = null;
   public responsive: boolean = false;
 
 
-  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
+  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService,public translateService: TranslateService ) {
+    this.translate = this.translateService.getTranslate();
+   }
   //ngOnInit() {}
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {

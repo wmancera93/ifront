@@ -38,9 +38,9 @@
         <div class="row justify-content-end" style="min-height: 100%;">
             <div class="col-md-5 col-12" style="margin-top: 10px;">
                 <button id="savebutton" type="submit" *ngIf="showSubmit" class="btn btn-success btn-block" disabled>
-                    <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                    <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.dynamic_form.save}}</button>
                 <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                    <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                    <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.dynamic_form.loading}}</button>
             </div>
         </div>
     </div>

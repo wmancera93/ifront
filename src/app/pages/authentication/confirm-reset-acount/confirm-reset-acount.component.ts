@@ -8,6 +8,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MainService } from '../../../services/main/main.service';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 declare const ga: any;
 
@@ -22,6 +24,7 @@ export class ConfirmResetAcountComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public eyePasswordVisible: boolean = false;
   public urlTokenPassword: string = '';
+  public translate: Translate = null;
 
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
@@ -29,8 +32,10 @@ export class ConfirmResetAcountComponent implements OnInit {
     public router: Router,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
   ) {
+
+    this.translate = this.translateService.getTranslate();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -102,8 +107,8 @@ export class ConfirmResetAcountComponent implements OnInit {
     if (this.txtPassword !== this.txtConfirmPassword) {
       const alertWarning: Alerts[] = [{
         type: 'danger',
-        title: 'Advertencia',
-        message: 'Ingrese la nueva contraseña para poder confirmarla.'
+        title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+        message: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_new_password_ts,
       }];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';
@@ -122,8 +127,8 @@ export class ConfirmResetAcountComponent implements OnInit {
           if (res.status === 200) {
             const alertWarning: Alerts[] = [{
               type: 'success',
-              title: 'Advertencia',
-              message: 'Cambio de contraseña exitoso.'
+              title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+              message: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_new_password_ts,
             }];
             this.alert.setAlert(alertWarning[0]);
             this.txtPassword = '';
@@ -139,7 +144,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           resultError = error.json()
           const alertWarning: Alerts[] = [{
             type: 'danger',
-            title: 'Advertencia',
+            title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
             message: resultError.errors[0]
           }];
           this.alert.setAlert(alertWarning[0]);
@@ -174,8 +179,8 @@ export class ConfirmResetAcountComponent implements OnInit {
       if (!validatePasword) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
+          title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+          message: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_characters_minimum_ts,
         }];
         this.alert.setAlert(alertWarning[0]);
         this.txtPassword = '';
@@ -188,8 +193,8 @@ export class ConfirmResetAcountComponent implements OnInit {
       if (this.txtPassword !== this.txtConfirmPassword) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: 'Las contraseñas no coinciden, por favor vuelva a ingresarlas.'
+          title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+          message: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_not_match_ts,
         }];
         this.alert.setAlert(alertWarning[0]);
         this.txtPassword = '';
@@ -202,8 +207,8 @@ export class ConfirmResetAcountComponent implements OnInit {
     if (this.txtPassword === '' && this.txtConfirmPassword !== '') {
       const alertWarning: Alerts[] = [{
         type: 'warning',
-        title: 'Advertencia',
-        message: 'Ingrese la nueva contraseña para poder confirmarla.'
+        title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+        message: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_enter_again_ts,
       }];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';
@@ -217,8 +222,8 @@ export class ConfirmResetAcountComponent implements OnInit {
     if (this.txtPassword === '') {
       const alertWarning: Alerts[] = [{
         type: 'warning',
-        title: 'Advertencia',
-        message: 'Ingrese la nueva contraseña para poder confirmarla.'
+        title: this.translate.app.frontEnd.pages.authentication.confirm_reset_account.title_warning_ts,
+        message:this.translate.app.frontEnd.pages.authentication.confirm_reset_account.msg_enter_again_ts,
       }];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';

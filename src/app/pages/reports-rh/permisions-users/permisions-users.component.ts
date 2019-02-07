@@ -7,6 +7,8 @@ import { Enterprise } from '../../../models/general/enterprise';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 
 declare var jsPDF: any;
@@ -24,7 +26,7 @@ export class PermisionsUsersComponent implements OnInit {
   public labels: any[] = [];
   public recordsPrint: any[] = [];
   public labelsCell: any[] = [];
-
+  public nameReport: string;
   public columnsPdf: any[] = [];
 
   public p: number = 1;
@@ -35,7 +37,7 @@ export class PermisionsUsersComponent implements OnInit {
   public value_search: string = '';
 
   public is_collapse: boolean = false;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -44,8 +46,11 @@ export class PermisionsUsersComponent implements OnInit {
     public excelService: ExcelService,
     private tokenService: Angular2TokenService,
     public router: Router,
-    public stylesExplorerService: StylesExplorerService) {
-   
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.reports_rh.permisions_users.tittle;
+
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -92,14 +97,14 @@ export class PermisionsUsersComponent implements OnInit {
         }
       })
 
-      setTimeout(() => {
-        if (this.stylesExplorerService.validateBrowser()) {
-          let dataEnterprise: Enterprise;
-          dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-          document.getElementById('with_permits').style.backgroundColor = dataEnterprise.primary_color;
-        }
-      }, 600);
-   
+    setTimeout(() => {
+      if (this.stylesExplorerService.validateBrowser()) {
+        let dataEnterprise: Enterprise;
+        dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+        document.getElementById('with_permits').style.backgroundColor = dataEnterprise.primary_color;
+      }
+    }, 600);
+
 
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();

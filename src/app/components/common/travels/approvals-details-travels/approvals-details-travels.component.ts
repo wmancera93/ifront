@@ -8,6 +8,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-approvals-details-travels',
@@ -37,14 +39,15 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public type_requests: string;
   public idGeneral: string;
   public objectApproval: any[] = [];
-
+  public translate: Translate = null;
   public countAfter: number = 0;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService,
     public accionDataTableService: DataDableSharedService, public travelsService: TravelsService,
-    public spendSharedService: SpendSharedService) {
+    public spendSharedService: SpendSharedService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if ((data.action_method === "showHotels")) {
 
@@ -73,7 +76,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
-        
+
         if (this.countAfter === 0) {
           this.switchTravels = 'on';
           this.descriptionTravels = '';
@@ -96,7 +99,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       approvers_to_json: request.data[0].travel_request.approvers_to_json,
                       answers_to_json: request.data[0].travel_request.answers_to_json
                     })
-                    
+
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                     }, 300);
@@ -143,7 +146,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'advance':
-            this.objectApproval = [];
+              this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsAdnvanceById(this.requests_travels.ticket)
@@ -192,7 +195,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'spend':
-            this.objectApproval = [];
+              this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)

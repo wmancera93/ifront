@@ -6,6 +6,8 @@ import { AdvancesService } from '../../../services/travel-management/advances/ad
 import { Advances } from '../../../models/common/travels_management/advances/advances';
 import { User } from '../../../models/general/user';
 import { FiltersGeneralsService } from '../../../services/travel-management/filters-generals/filters-generals.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-advances',
@@ -17,11 +19,12 @@ export class AdvancesComponent implements OnInit {
   public advancesItems: Advances;
   public userAuthenticated: User = null;
   public checkThird: boolean = true;
-
+  public translate: Translate = null;
   constructor(public router: Router,
     public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
-    public filtersGeneralsService: FiltersGeneralsService) {
+    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 

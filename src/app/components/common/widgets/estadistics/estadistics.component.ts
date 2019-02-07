@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Estadistics, Colors, DataEstadistics, Properties } from '../../../../models/common/widgets/widgets';
 import { Color } from 'ng2-charts';
 import { debug } from 'util';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-estadistics',
@@ -25,7 +27,7 @@ export class EstadisticsComponent implements OnInit {
   // public showChartLegendExtraHour: boolean = true;
   public hovered: boolean;
   public extraHours: boolean = false;
-
+  public translate: Translate = null;
   /* Bar Chart */
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
@@ -38,7 +40,8 @@ export class EstadisticsComponent implements OnInit {
   public barChartColors: any[];
 
 
-  constructor() {
+  constructor(public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {
@@ -49,7 +52,7 @@ export class EstadisticsComponent implements OnInit {
       //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
-        if (this.objectWidget[0].title === "Cantidad horas extra por tipo de hora") {
+        if (this.objectWidget[0].title === this.translate.app.frontEnd.components.common.widgets.estadistics.tittle_ts) {
           this.extraHours = true;
         }
         //Doughnut 

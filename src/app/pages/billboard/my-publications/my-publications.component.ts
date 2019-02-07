@@ -7,6 +7,8 @@ import { BillboardService } from '../../../services/shared/common/billboard/bill
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-my-publications',
@@ -20,7 +22,7 @@ export class MyPublicationsComponent implements OnInit {
   public totalNews: number = 0;
   private alertWarning: Alerts[];
   public idDelete: number = 0;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -29,7 +31,9 @@ export class MyPublicationsComponent implements OnInit {
     public billboardSharedService: BillboardService,
     public editEditSharedService: EditArticleService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(
@@ -68,8 +72,8 @@ export class MyPublicationsComponent implements OnInit {
               this.getDataPublications();
               this.alertWarning = [{
                 type: 'success',
-                title: 'Confirmación',
-                message: 'Artículo eliminado exitosamente',
+                title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts,
+                message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_confirmation_ts,
                 confirmation: false,
                 typeConfirmation: ''
               }];
@@ -141,8 +145,8 @@ export class MyPublicationsComponent implements OnInit {
     this.idDelete = infoPub.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el artículo?',
+      title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts,
+      message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_elimination_confirmation_ts,
       confirmation: true,
       typeConfirmation: 'deleteArticle'
     }];

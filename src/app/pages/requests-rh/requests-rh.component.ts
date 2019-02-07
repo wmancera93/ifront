@@ -10,6 +10,8 @@ import { StylesExplorerService } from '../../services/common/styles-explorer/sty
 import { FileUploadService } from '../../services/shared/common/file-upload/file-upload.service';
 import { filter } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 
 @Component({
@@ -21,6 +23,7 @@ export class RequestsRhComponent implements OnInit {
   public requests: RequestsRh;
   public requestStatic: ListRequests[] = [];
   public getListrequest: ListRequests;
+  public translate: Translate = null;
 
   public listTypesFilters: ListRequetsTypes[] = [];
 
@@ -43,8 +46,9 @@ export class RequestsRhComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
     public fileUploadService: FileUploadService,
-    public router: Router) {
+    public router: Router, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -77,12 +81,12 @@ export class RequestsRhComponent implements OnInit {
               (data: any) => {
                 this.getObjectRequests();
                 // tslint:disable-next-line:max-line-length
-                const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Se elimino correctamente.', confirmation: false }];
+                const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.requests_rh.type_alert_ts, message: this.translate.app.frontEnd.pages.requests_rh.message_alert_ts, confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               },
               (error: any) => {
                 // tslint:disable-next-line:max-line-length
-                const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+                const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.requests_rh.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
                 this.alert.setAlert(alertWarning[0]);
               }
             );
@@ -132,7 +136,7 @@ export class RequestsRhComponent implements OnInit {
 
   modalAprovers(request: ListRequests) {
     // request.flag_count = 0;   
-    this.aproversRequestsService.setRequests({request, type_request: 'requestsOnly'});
+    this.aproversRequestsService.setRequests({ request, type_request: 'requestsOnly' });
   }
 
   newForm(typeForm: TypesRequests) {
@@ -143,8 +147,8 @@ export class RequestsRhComponent implements OnInit {
     this.idDelete = id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar la solicitud con ticket #' + id.toString() + '?',
+      title: this.translate.app.frontEnd.pages.requests_rh.type_alert_two_ts,
+      message: this.translate.app.frontEnd.pages.requests_rh.type_alert_tree_ts + id.toString(),
       confirmation: true,
       typeConfirmation: 'deletRequest'
     }];

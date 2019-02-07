@@ -10,9 +10,9 @@
       </div>
       <div class="row">
         <div class="col-12 text-center">
-          <h3>Bienvenidos</h3>
-          <p class="top">Sistema de recursos humanos</p>
-          <p>Restablecer cuenta</p>
+          <h3>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.title_welcome}}</h3>
+          <p class="top">{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_system_hr}}</p>
+          <p>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_reset_account}}</p>
         </div>
       </div>
       <div class="row align-self-end">
@@ -30,7 +30,7 @@
               on-mouseleave="leaveEyePassword('passwordConfirm')"></i>
           </div>
           <div class="float-general-login">
-            <div class="btn btn-primary btn-block font-controls-login" (click)='restartPasword()'>Restablecer</div>
+            <div class="btn btn-primary btn-block font-controls-login" (click)='restartPasword()'>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_reset}}</div>
           </div>
           <div class="fooder-login float-general-login">
             <p class="text-center">

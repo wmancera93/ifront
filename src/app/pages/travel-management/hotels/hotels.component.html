@@ -3,14 +3,14 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 col-md-8 col-7 text-left title">
         <i class="fa fa-hotel"></i>
-        Asignacion de hoteles
+        {{translate.app.frontEnd.pages.travel_management.hotels.tittle}}
       </div>
       <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
         <div class="buttonBack img-zoom" (click)="returnBackPage()">
           <div class="padding-back">
             <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
             <span>
-              Atrás
+              {{translate.app.frontEnd.pages.travel_management.hotels.back}}
             </span>
           </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="col-12">
               <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newHotel()">
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                Nuevo Hotel
+                {{translate.app.frontEnd.pages.travel_management.hotels.btn_new}}
               </button>
             </div>
           </div>
@@ -42,7 +42,7 @@
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                 Código # {{hotel.id}}
+                  {{translate.app.frontEnd.pages.travel_management.hotels.hotel_cod}} # {{hotel.id}}
                 </span>
               </h5>
               <!-- <p>
@@ -83,10 +83,10 @@
                   <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                 </div>
                 <div class="col-12" *ngIf="hotel.is_delete" (click)="deleteHotels(hotel)">
-                  Eliminar
+                  {{translate.app.frontEnd.pages.travel_management.hotels.erase_hotel}}
                 </div>
                 <div class="col-12" *ngIf="!hotel.is_delete">
-                  Eliminar
+                  {{translate.app.frontEnd.pages.travel_management.hotels.erase_hotel}}
                 </div>
               </div>
             </div>

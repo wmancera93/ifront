@@ -4,7 +4,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header borderLine-title row-hr justify-content-center">
-        <h4 class="modal-title titleColor text-shadow">Formulario noticia</h4>
+        <h4 class="modal-title titleColor text-shadow">{{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.title_form_news}}</h4>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
@@ -12,7 +12,7 @@
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="title" class="font-title-general">
-                    <i class="fa fa-fw fa-minus text-primary-hr"></i>Título*
+                    <i class="fa fa-fw fa-minus text-primary-hr"></i>{{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.text_title}}*
                   </label>
                 </div>
                 <div class="col-9">
@@ -24,7 +24,7 @@
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
                     <i class="fa fa-fw fa-bars text-primary-hr"></i>
-                    Resumen*
+                    {{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.text_summary}}*
                   </label>
                 </div>
                 <div class="col-9">
@@ -35,7 +35,7 @@
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>Tema*
+                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>{{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.text_topic}}*
                   </label>
                 </div>
                 <div class="col-9">
@@ -49,7 +49,7 @@
               <div class="row">
                 <div class="col-3 text-left ">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> Cargar imagen*
+                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> {{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.text_upload_image}}*
                   </label>
                 </div>
                 <div class="col-9 " style="font-size:1rem !important">
@@ -76,16 +76,16 @@
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
                       <button type="submit" *ngIf="showSubmit" (click)="onSubmitSaveChanges()" class="btn btn-success btn-block">
-                        <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                        <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.btn_save}}</button>
                       <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                        <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                        <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.text_loading}}</button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="modal-footerInfo justify-content-center">
                 <div class="col-12 col-lg-3 buttonCloseForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
-                  <h6> Cerrar </h6>
+                  <h6> {{translate.app.frontEnd.pages.billboard.my_publication.edit_publication.btn_close}} </h6>
                 </div>
               </div>
           </div>

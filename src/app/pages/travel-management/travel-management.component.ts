@@ -5,6 +5,8 @@ import { debug } from 'util';
 import { TooltipSharedService } from '../../services/shared/common/tooltip/tooltip-shared.service';
 import { User } from '../../models/general/user';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-travel-management',
@@ -18,9 +20,11 @@ export class TravelManagementComponent implements OnInit {
   public eventPosition: any = [];
   token
   public dataUserTravels: User = null;
+  public translate: Translate = null;
 
   constructor(private userSharedService: UserSharedService,
-    public tooltipSharedService: TooltipSharedService) {
+    public tooltipSharedService: TooltipSharedService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {
@@ -33,52 +37,52 @@ export class TravelManagementComponent implements OnInit {
     if ((this.dataUserTravels.employee.is_travel_manager == true) && (this.dataUserTravels.employee.is_approver == true)) {
       this.buttonInfo = [
         {
-          title: "Viajes",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
           icon_primary: "fa fa-globe",
           icon_secundary: "fa fa-plane",
-          tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+          tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
           route: "/ihr/travels"
         },
         {
-          title: "Anticipos",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
           icon_primary: "fa fa-money",
           icon_secundary: "",
-          tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
           route: "/ihr/advances"
         },
         {
-          title: "Gastos",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
           icon_primary: "fa fa-circle-thin",
           icon_secundary: "fa fa-usd",
-          tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
           route: "/ihr/spend"
         },
         {
-          title: "Aprobaciones Pendientes",
+          title:this.translate.app.frontEnd.pages.travel_management.titlle_wiget_approver_ts,
           icon_primary: "fa fa fa-square-o",
           icon_secundary: "fa fa-clock-o",
-          tooltipText: "Haga clic aquí para aprobar trayectos, anticipos o gastos de viajes",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_approver_ts,
           route: "/ihr/pending_travel"
         },
         {
-          title: "Aprobaciones Gestionadas",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_pendinga_ts,
           icon_primary: "fa fa fa-square-o",
           icon_secundary: "fa fa-check",
-          tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_pendinga_ts,
           route: "/ihr/management_travel"
         },
         {
-          title: "Reportes",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
           icon_primary: "fa fa-table",
           icon_secundary: "fa fa-search",
-          tooltipText: "Haga clic aquí para ver los reportes",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
           route: "/ihr/travel_report"
         },
         {
-          title: "Asignación de hoteles",
+          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_hotel_ts,
           icon_primary: "fa fa-circle-thin",
           icon_secundary: "fa fa-bed",
-          tooltipText: "Haga clic aquí para crear hoteles",
+          tooltipText: this.translate.app.frontEnd.pages.travel_management. message_wiget_hotel_ts,
           route: "/ihr/hotels"
         },
       ];
@@ -86,84 +90,84 @@ export class TravelManagementComponent implements OnInit {
       if (this.dataUserTravels.employee.is_travel_approver) {
         this.buttonInfo = [
           {
-            title: "Viajes",
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
             icon_primary: "fa fa-globe",
             icon_secundary: "fa fa-plane",
-            tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+            tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
             route: "/ihr/travels"
           },
           {
-            title: "Anticipos",
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
             icon_primary: "fa fa-money",
             icon_secundary: "",
-            tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
             route: "/ihr/advances"
           },
           {
-            title: "Gastos",
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
             icon_primary: "fa fa-circle-thin",
             icon_secundary: "fa fa-usd",
-            tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
             route: "/ihr/spend"
           },
           {
-            title: "Aprobaciones Pendientes",
+            title:this.translate.app.frontEnd.pages.travel_management.titlle_wiget_approver_ts,
             icon_primary: "fa fa fa-square-o",
             icon_secundary: "fa fa-clock-o",
-            tooltipText: "Haga clic aquí para aprobar trayectos, anticipos o gastos de viajes",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_approver_ts,
             route: "/ihr/pending_travel"
           },
           {
-            title: "Aprobaciones Gestionadas",
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_pendinga_ts,
             icon_primary: "fa fa fa-square-o",
             icon_secundary: "fa fa-check",
-            tooltipText: "Haga clic aquí para ver las solictudes de viajes aprobadas por usted",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_pendinga_ts,
             route: "/ihr/management_travel"
           },
           {
-            title: "Reportes",
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
             icon_primary: "fa fa-table",
             icon_secundary: "fa fa-search",
-            tooltipText: "Haga clic aquí para ver los reportes",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
             route: "/ihr/travel_report"
           }
         ]
-      } else{
-        if (this.dataUserTravels.employee.is_travel_manager){
+      } else {
+        if (this.dataUserTravels.employee.is_travel_manager) {
           this.buttonInfo = [
             {
-              title: "Viajes",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
               icon_primary: "fa fa-globe",
               icon_secundary: "fa fa-plane",
-              tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+              tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
               route: "/ihr/travels"
             },
             {
-              title: "Anticipos",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
               icon_primary: "fa fa-money",
               icon_secundary: "",
-              tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
               route: "/ihr/advances"
             },
             {
-              title: "Gastos",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
               icon_primary: "fa fa-circle-thin",
               icon_secundary: "fa fa-usd",
-              tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
               route: "/ihr/spend"
             },
             {
-              title: "Reportes",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
               icon_primary: "fa fa-table",
               icon_secundary: "fa fa-search",
-              tooltipText: "Haga clic aquí para ver los reportes",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
               route: "/ihr/travel_report"
             },
             {
-              title: "Asignación de hoteles",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_hotel_ts,
               icon_primary: "fa fa-circle-thin",
               icon_secundary: "fa fa-bed",
-              tooltipText: "Haga clic aquí para crear hoteles",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management. message_wiget_hotel_ts,
               route: "/ihr/hotels"
             },
           ];
@@ -171,24 +175,24 @@ export class TravelManagementComponent implements OnInit {
         else {
           this.buttonInfo = [
             {
-              title: "Viajes",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
               icon_primary: "fa fa-globe",
               icon_secundary: "fa fa-plane",
-              tooltipText: "Haga clic aquí para solicitar trayectos, pasajes y hotel",
+              tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
               route: "/ihr/travels"
             },
             {
-              title: "Anticipos",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
               icon_primary: "fa fa-money",
               icon_secundary: "",
-              tooltipText: "Haga clic aquí para solicitar anticipos del viaje",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
               route: "/ihr/advances"
             },
             {
-              title: "Gastos",
+              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
               icon_primary: "fa fa-circle-thin",
               icon_secundary: "fa fa-usd",
-              tooltipText: "Haga clic aquí para legalizar los gastos de viaje",
+              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
               route: "/ihr/spend"
             }
           ]

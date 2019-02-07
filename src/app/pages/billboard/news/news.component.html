@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-bullhorn"></i>
-          Noticias
+          {{translate.app.frontEnd.pages.billboard.news.title_news}}
         </div>
       </div>
     </div>
@@ -29,8 +29,8 @@
           <div class="row justify-content-center top-containter" *ngIf="validateNoData">
             <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
-                No existe
-                <strong>Noticia</strong>&nbsp;con su búsqueda
+                {{translate.app.frontEnd.pages.billboard.news.text_not_exist_one}}
+                <strong>{{translate.app.frontEnd.pages.billboard.news.text_not_exist_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.billboard.news.text_not_exist_three}}
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
                   <div class="col-12">
                     <div class="row footer-newspaper">
                       <div class="col-xl-1 col-md-2 col-3">
-                        Temas:
+                        {{translate.app.frontEnd.pages.billboard.news.text_topics}}:
                       </div>
                       &nbsp;&nbsp; &nbsp;&nbsp;
                       <div class="col-xl-3 col-md-8 col-lg-4 col-8 padding-themes-news" *ngFor="let theme of new.themes">
@@ -71,15 +71,15 @@
               <div class="col-12 col-lg-2">
                 <div class="row text-lg-left">
                   <div class="col-12" style="font-size: 1rem;">
-                    <strong> Estadísticas</strong>
+                    <strong> {{translate.app.frontEnd.pages.billboard.news.text_statistics}}</strong>
                   </div>
                   <div class="col-12">
                     <i class="fa fa-eye"></i>
-                    {{new.total_views}} Vistas
+                    {{new.total_views}} {{translate.app.frontEnd.pages.billboard.news.text_views}}
                   </div>
                   <div class="col-12">
                     <i class="fa fa-comments-o"></i>
-                    {{new.total_comments}} Comentarios
+                    {{new.total_comments}} {{translate.app.frontEnd.pages.billboard.news.tex_comments}}
                   </div>
                 </div>
               </div>

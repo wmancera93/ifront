@@ -10,6 +10,8 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { debug } from 'util';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 
 @Component({
@@ -20,7 +22,7 @@ import { debug } from 'util';
 export class FormsRequestsComponent implements OnInit {
   public formRequests: TypesRequests = null;
   public showSubmit = true;
-
+  public translate: Translate = null;
   public file: any;
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
@@ -48,14 +50,15 @@ export class FormsRequestsComponent implements OnInit {
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
     public formDataService: FormDataService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.fileUploadService.getObjetFile()
       .subscribe((object) => {
         this.file = object;
       });
 
-    this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {    
+    this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
@@ -170,11 +173,11 @@ export class FormsRequestsComponent implements OnInit {
           (data: any) => {
 
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.data[0].id.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_ts, message: this.translate.app.frontEnd.pages.requests_rh.forms_requests.message_alert_ts + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
-            this.formsRequestsService.setRestartObject(true); 
-            
+            this.formsRequestsService.setRestartObject(true);
+
             // setTimeout(() => {
             //   document.getElementById("loginId").style.display = 'none'
             //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
@@ -182,7 +185,7 @@ export class FormsRequestsComponent implements OnInit {
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
 
@@ -196,7 +199,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud generada correctamente, ticket #' + data.json().data[0].id.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_ts, message: this.translate.app.frontEnd.pages.requests_rh.forms_requests.message_alert_ts + data.json().data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.formsRequestsService.setRestartObject(true);
@@ -208,7 +211,7 @@ export class FormsRequestsComponent implements OnInit {
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
 
@@ -234,7 +237,7 @@ export class FormsRequestsComponent implements OnInit {
   calculateDay() {
     let dateBegin = this.formPres.controls.date_begin.value === ' ' ? null : new Date(this.formPres.controls.date_begin.value);
     let dateEnd = this.formPres.controls.date_end.value === ' ' ? null : new Date(this.formPres.controls.date_end.value);
-    
+
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
@@ -243,7 +246,7 @@ export class FormsRequestsComponent implements OnInit {
       const alertDataWrong: Alerts[] = [{
         type: 'danger',
         title: 'Error',
-        message: 'Fecha inicial no puede ser superior a la fecha final',
+        message: this.translate.app.frontEnd.pages.requests_rh.forms_requests.message_alert_two_ts,
         confirmation: false
       }];
       this.alert.setAlert(alertDataWrong[0]);

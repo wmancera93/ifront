@@ -18,7 +18,7 @@
                 <div class="row">
                   <div class="col-12">
                     <p class="font-title-general tops">
-                      Solicitud de viaje
+                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_requests}}
                       <i class="fa fa-hashtag text-primary-hr"></i>
                       {{approvals[0].travel_request.ticket}}
                     </p>
@@ -26,7 +26,7 @@
                   <div class="col-12">
                     <h3 class="font-color-default tops">
                       <i class="fa fa-user text-primary-hr"></i>
-                      SOLICITANTE
+                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.applicants}}
                     </h3>
                   </div>
                   <div class="col-12 center-img-employee tops">
@@ -65,7 +65,7 @@
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left">
                       <h3 class="font-color-default col-md-2 col-4">
-                        Estado:
+                        {{translate.app.frontEnd.components.common.travels.approvals_details_travels.status}}:
                       </h3>
                       <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == 'Aprobado'">
                         <span class="badge badge-primary" style="margin-top: 5px;">
@@ -94,14 +94,14 @@
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.date_begin_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Fecha inicio solicitud:
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.date_begin}}:
                           <span style="font-weight: 100 !important">{{approvals[0].travel_request.date_begin_format}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.date_end_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Fecha final solicitud:
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.date_end}}:
                           <span style="font-weight: 100 !important">{{approvals[0].travel_request.date_end_format}}</span>
                         </p>
                       </div>
@@ -119,21 +119,21 @@
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.updated_date != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Última Actualización:
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.upgrade}}:
                           <span style="font-weight: 100 !important">{{approvals[0].travel_request.updated_date}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.created_date != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Creación:
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.create}}:
                           <span style="font-weight: 100 !important">{{approvals[0].travel_request.created_date}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
                           <i class="fa fa-fw fa-users font-color-default"></i>
-                          Aprobadores:
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approvers}}:
                           <span style="font-weight: 100 !important">{{objectApproval[0].approvers_to_json.length}}</span>
                         </p>
                       </div>
@@ -145,7 +145,7 @@
                       <div class="col-12 text-left" id="headingOne">
                         <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
                           data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                          Ver pasaje, hotel y trayectos de solicitud</p>
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_travels}}</p>
                       </div>
                       <div id="collapseOne" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion" style="margin-top: 25px">
                         <div class="row">
@@ -157,7 +157,7 @@
                           <div class="col-12">
                             <p class="font-title-general text-left">
                               <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                              Soportes adjuntos trayectos:</p>
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_attach}}:</p>
                             <div class="row text-left">
                               <div class="col-12" *ngFor="let approversTravels of approvals[0].travel_request_annexeds; let index = index">
                                 <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravels(approversTravels)">
@@ -176,7 +176,7 @@
                     <div class="row">
                       <div class="text-primary col-12 text-left" id="headingTwo">
                         <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
-                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Ver anticipos de viaje</p>
+                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_advance}}</p>
                       </div>
                       <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
                         <app-data-table [records]="objectAdvanceReport" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
@@ -185,7 +185,7 @@
                     <div class="row">
                       <div class=" font-title-general  col-12 text-left" id="headingThree">
                         <p class="font-title-general collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
-                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Ver gastos de viaje</p>
+                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_spend}}</p>
                       </div>
                       <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
                         <div class="row">
@@ -197,7 +197,7 @@
                           <div class="col-12">
                             <p class="font-title-general text-left">
                               <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                              Soportes adjuntos gastos: </p>
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_attach_spend}}: </p>
                             <div class="row text-left">
                               <div class="col-12" *ngFor="let anexedSpend of approvals[0].travel_allowance_request.data.travel_allowance_anexeds; let index = index">
                                 <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravelsSpend(approversTravels)">
@@ -219,7 +219,7 @@
                   <div class="col-12 text-md-left" style="margin-top: 15px">
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
-                        Aprobadores:
+                        {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver}}:
                       </h3>
                     </div>
                     <div class="row justify-content-between">
@@ -240,19 +240,19 @@
                     <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'I' || objectApproval[0].approver_platform == null ">
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequest">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}" data-toggle="tab" href="#Approval">
-                          Gestionar solicitud
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.request_manage}}
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequest}" data-toggle="tab" href="#Detail">
-                          Ver detalles
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_details}}
                         </a>
                       </li>
                     </ul>
                     <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
-                          Ver detalles {{approvals[0].approver_platform}}
+                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_details}} {{approvals[0].approver_platform}}
                         </a>
                       </li>
                     </ul>
@@ -270,7 +270,7 @@
                             <div class="col-md-4 col-12">
                               <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
                                 <i class="fa fa-fw fa-check"></i>
-                                Aceptar
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.accept}}
                               </div>
                             </div>
                           </div>
@@ -279,10 +279,10 @@
                           <div class="row justify-content-center">
                             <div class="col-lg-6 col-md-6 col-8">
                               <span *ngIf="switchTravels == 'off'">
-                                Rechazado
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.rejected}}
                               </span>
                               <span *ngIf="switchTravels == 'on'">
-                                Aprobado
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approved}}
                               </span>
                             </div>
                             <div class="col-4">
@@ -298,16 +298,16 @@
                               </div>
                             </div>
                             <div class="col-12 text-left">
-                              Descripción
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}
                             </div>
                             <div class="col-12">
                               <textarea class="form-control" [(ngModel)]="descriptionTravels" rows="3" style="height: auto !important;"></textarea>
                             </div>
                             <div class="col-md-4 col-12">
                               <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApprovalRequestsTravels()">
-                                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                                <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.save}}</button>
                               <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                                <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.loading}}</button>
                             </div>
                           </div>
                         </div>
@@ -319,23 +319,23 @@
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              Nivel de aprobación {{details.approver_to_json.level}}
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver_level}} {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} por {{details.approver_to_json.name}}
+                                {{details.status}} {{translate.app.frontEnd.components.common.travels.approvals_details_travels.for}} {{details.approver_to_json.name}}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                Descripción:
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}:
                               </h3>
                             </div>
                             <div class="col-12 text-left" *ngIf="details.observation !== ''">
                               {{details.observation}}
                             </div>
                             <div class="col-12 text-left" *ngIf="details.observation == ''">
-                              No hay observaciones
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_observation}}
                             </div>
                           </div>
                         </div>
@@ -343,7 +343,7 @@
                           <div class="row justify-content-center">
                             <div class="col-12 text-center top-general">
                               <h3 class="font-color-default">
-                                Aun no hay detalles
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_detail}}
                               </h3>
                             </div>
                           </div>
@@ -358,23 +358,23 @@
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              Nivel de aprobación {{details.approver_to_json.level}}
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver_level}} {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} por {{details.approver_to_json.name}}
+                                {{details.status}} {{details.status}} {{translate.app.frontEnd.components.common.travels.approvals_details_travels.for}} {{details.approver_to_json.name}}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                Descripción:
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}:
                               </h3>
                             </div>
                             <div class="col-12 text-left" *ngIf="details.observation !== ''">
                               {{details.observation}}
                             </div>
                             <div class="col-12 text-left" *ngIf="details.observation == ''">
-                              No hay observaciones
+                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_observation}}
                             </div>
                           </div>
                         </div>
@@ -382,7 +382,7 @@
                           <div class="row justify-content-center">
                             <div class="col-12 text-center top-general">
                               <h3 class="font-color-default">
-                                Aun no hay detalles
+                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_detail}}
                               </h3>
                             </div>
                           </div>

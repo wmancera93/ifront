@@ -3,7 +3,7 @@
   <div id="calendar_detail" class="modal-dinamic-calendar modal-dialog modal-dialog-centered" role="document">
     <div *ngIf="state_modal" class="modal-content">
       <div class="modal-header borderLine-title row-hr justify-content-center" style="height:100px">
-        <h5 class="modal-title titleColor1 justify-content-center" id="exampleModalCenterTitle">Detalles Agenda</h5>
+        <h5 class="modal-title titleColor1 justify-content-center" id="exampleModalCenterTitle">{{translate.app.frontEnd.components.common.calendar_detail.details}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
       </div>
@@ -11,28 +11,28 @@
         <div  *ngIf="detail_calendar.length > 0" class="row bodyColorInfo">
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-calendar-minus-o paddingInfo"></i>
-            <strong>&nbsp;Descripcion actividad:</strong>&nbsp;{{detail_calendar[0].descript}}
+            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.activity_descrption}}:</strong>&nbsp;{{detail_calendar[0].descript}}
             <br>
             <i class="fa fa-info-circle paddingInfo"></i>
-            <strong>&nbsp;Horas teoricas:</strong>&nbsp;{{detail_calendar[0].description_calendar}}
+            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.theoretical_hours}}:</strong>&nbsp;{{detail_calendar[0].description_calendar}}
             <br>
           </div>
           <div class="col-12 col-lg-6 col-md-4">
               <i class="fa fa-clock-o paddingInfo"></i>
-              <strong>&nbsp;Hora de inicio:</strong>&nbsp;{{detail_calendar[0].hour_begin}}
+              <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.hour_begin}}:</strong>&nbsp;{{detail_calendar[0].hour_begin}}
               <br>
             <i class="fa fa-hourglass paddingInfo"></i>
-            <strong>&nbsp;Hora de finalización:</strong>&nbsp;{{detail_calendar[0].hour_end}}
+            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.hour_end}}:</strong>&nbsp;{{detail_calendar[0].hour_end}}
             <br>           
           </div>
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-commenting-o paddingInfo"></i>
-            <strong>&nbsp;Texto de calendario:</strong>&nbsp;{{detail_calendar[0].calendar_text}}
+            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.calendar_text}}:</strong>&nbsp;{{detail_calendar[0].calendar_text}}
             <br>
           </div>
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-book paddingInfo"></i>
-            <strong>&nbsp;Descripción plan de trabajo:</strong>&nbsp;{{detail_calendar[0].description_work}}
+            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.description_work}}:</strong>&nbsp;{{detail_calendar[0].description_work}}
             <br>
           </div>
         </div>

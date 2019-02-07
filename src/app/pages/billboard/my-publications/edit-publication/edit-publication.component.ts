@@ -9,6 +9,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -34,7 +36,7 @@ export class EditPublicationComponent implements OnInit {
   public labelTags: string = "";
   public newImage: any;
   public flagRefresh: boolean = false;
-
+  public translate: Translate = null;
   items
 
   ngForm: FormGroup;
@@ -46,7 +48,9 @@ export class EditPublicationComponent implements OnInit {
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
     public formDataService: FormDataService,
-    public billboardService: BillboardService) {
+    public billboardService: BillboardService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.newImage = data;
@@ -91,13 +95,13 @@ export class EditPublicationComponent implements OnInit {
     this.labelTags = "";
     this.showSubmit = false;
     if (this.tags.length > 0) {
-      
-      this.tags.forEach((element:any) => {
+
+      this.tags.forEach((element: any) => {
         if (element.length !== undefined) {
-          this.labelTags += element + ',' ;
+          this.labelTags += element + ',';
         }
         else {
-            this.labelTags += element.value + ',';
+          this.labelTags += element.value + ',';
         }
       });
     }
@@ -113,7 +117,7 @@ export class EditPublicationComponent implements OnInit {
       if (response.success == true) {
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-        const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
+        const alertConfirmation: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.title_status_news_ts, message: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.msg_edited_news_ts }];
         this.alert.setAlert(alertConfirmation[0]);
         this.flagRefresh = true;
         this.billboardService.setRefreshEditNew(this.flagRefresh);
@@ -122,7 +126,7 @@ export class EditPublicationComponent implements OnInit {
       (error: any) => {
         this.showSubmit = true;
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.json().errors.toString(), confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.title_status_news_ts, message: error.json().errors.toString(), confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       })
 

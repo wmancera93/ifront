@@ -6,6 +6,8 @@ import { User } from '../../../../models/general/user';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-travel-requests-report',
@@ -15,7 +17,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 export class TravelRequestsReportComponent implements OnInit {
 
   public objectReportTravel: EventEmitter<any> = new EventEmitter();
-  public title: string = 'Solicitud de viajes';
+  public title: string;
   public is_collapse_report_travel: boolean = false;
   public reports_list = null;
   public personal_number: string = '';
@@ -27,7 +29,7 @@ export class TravelRequestsReportComponent implements OnInit {
   public legat_travel_type: string = '-1';
   public showPdf: boolean = false;
   public showExcel: boolean = true;
-  public nameReport: string = 'Solicitudes de viaje';
+  public nameReport: string;
   public objectGeneralTravel: any[] = [];
   public showDataTable: boolean = true;
   public typeTravelLegal: any[] = [];
@@ -35,16 +37,20 @@ export class TravelRequestsReportComponent implements OnInit {
   public userId: User = null;
   public countAfter: number = 0;
   public btnConsult: boolean = true;
-
+  public translate: Translate = null;
 
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.tittle_ts;
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.name_table_ts;
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
 
-      if (data === "Solicitudes de viaje" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.getObjectPrint('excel')
       }
     });
@@ -163,12 +169,12 @@ export class TravelRequestsReportComponent implements OnInit {
         let dayEnd = new Date(this.date_end).getTime();
         let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: 'La fecha inicial no puede ser mayor a la fecha final', confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.message_alert_one_ts, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
           this.btnConsult = false;
         }
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'Por favor ingrese las dos fechas para la consulta', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.message_alert_two_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
         this.btnConsult = false;
       }

@@ -6,6 +6,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
 import { FiltersGeneralsService } from '../../../../services/travel-management/filters-generals/filters-generals.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-managed-travel',
@@ -19,7 +21,7 @@ export class ManagedTravelComponent implements OnInit {
   public typesRequestManaged: any[] = [];
   public request_managed_id: string;
   public request_managed_type: string;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -28,20 +30,22 @@ export class ManagedTravelComponent implements OnInit {
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
     public travelApproverServiceShared: TravelApproverService,
-    public filtersGeneralsService: FiltersGeneralsService) {
+    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.typesRequestManaged.push(
       {
         id: 1,
-        name: "Solicitudes gestionadas de viajes"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_one,
       },
       {
         id: 2,
-        name: "Solicitudes gestionadas de anticipos"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_two,
       },
       {
         id: 3,
-        name: "Solicitudes gestionadas de gastos"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_tree,
       }
     )
 
@@ -57,7 +61,7 @@ export class ManagedTravelComponent implements OnInit {
 
   }
 
-  
+
   //begin filters
 
   public codIHR: string = '';
@@ -445,7 +449,7 @@ export class ManagedTravelComponent implements OnInit {
   //end filters
 
   getRequestsManaged() {
-    
+
     this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsManagedType = 'travels';
@@ -475,7 +479,7 @@ export class ManagedTravelComponent implements OnInit {
     this.status = '';
     this.statusLiquid = '';
     this.codEmployee = '';
-    
+
     switch (param.id.toString()) {
       case '1':
         this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {

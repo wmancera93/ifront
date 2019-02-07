@@ -7,6 +7,8 @@ import { Router, NavigationEnd } from '@angular/router';
 import { EstadisticsComponent } from '../../../components/common/widgets/estadistics/estadistics.component';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-employees',
@@ -31,12 +33,12 @@ export class EmployeesComponent implements OnInit {
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter();
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
-
+  public translate: Translate = null;
   constructor(
     public dashboardEmployeeService: DashboardEmployeeService,
     public router: Router,
-    public stylesExplorerService: StylesExplorerService) {
-
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+      this.translate = this.translateService.getTranslate();
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }

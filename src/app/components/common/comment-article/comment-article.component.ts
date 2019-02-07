@@ -7,6 +7,8 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { debug } from 'util';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 
 @Component({
@@ -19,7 +21,7 @@ export class CommentArticleComponent implements OnInit {
   public targetModal: string = '';
   public btnModal: string = '';
   public nameThisModal: string = '';
-
+  public translate: Translate = null;
   public infoArticle: PublicArticle = null;
 
   public commentsList: PublicArticle;
@@ -34,20 +36,22 @@ export class CommentArticleComponent implements OnInit {
   public is_collapse: boolean = false;
   public flagEditComment: boolean = false;
   public commentEdit: string;
-  public modalName : string = "";
-  public flagRefreshPublication : boolean = false;
+  public modalName: string = "";
+  public flagRefreshPublication: boolean = false;
 
 
   constructor(public billboardSharedService: BillboardService,
     public alert: AlertsService,
     public myPublicationService: MyPublicationsService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
       this.modalName = data.modal;
-          this.getDetailArticle(data.modal);
+      this.getDetailArticle(data.modal);
     })
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -59,7 +63,7 @@ export class CommentArticleComponent implements OnInit {
             }
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             this.getDetailArticle();
-            
+
           })
       }
     })
@@ -80,7 +84,7 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
-    if(modal !== undefined){
+    if (modal !== undefined) {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
         this.infoArticle = res.data;
@@ -91,7 +95,7 @@ export class CommentArticleComponent implements OnInit {
         }
       })
     }
-    else{
+    else {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
         this.infoArticle = res.data;
@@ -102,7 +106,7 @@ export class CommentArticleComponent implements OnInit {
         }
       })
     }
-  
+
   }
 
   sendComment() {
@@ -115,7 +119,7 @@ export class CommentArticleComponent implements OnInit {
           this.numberComments = data.total_comments;
           this.comment = '';
           this.getDetailArticle();
-        
+
         });
       this.flagEditComment = false;
     }
@@ -123,31 +127,33 @@ export class CommentArticleComponent implements OnInit {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
-            this.showSubmit = true;            
+            this.showSubmit = true;
             this.getDetailArticle();
             this.comment = '';
             this.numberComments = data.total_comments;
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{ 
-            type: 'success',
-            title: 'Confirmación',
-            message: 'Comentario guardado exitosamente',
-            confirmation: false,
-            typeConfirmation: ''}];
+            const alertWarning: Alerts[] = [{
+              type: 'success',
+              title: 'Confirmación',
+              message: 'Comentario guardado exitosamente',
+              confirmation: false,
+              typeConfirmation: ''
+            }];
             this.showSubmit = true;
             this.flagRefreshPublication = true;
-            this.alert.setAlert(alertWarning[0]);            
+            this.alert.setAlert(alertWarning[0]);
             this.billboardSharedService.setRefreshEditNew(this.flagRefreshPublication);
           },
           (error: any) => {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{ 
+            const alertWarning: Alerts[] = [{
               type: 'danger',
               title: 'Solicitud Denegada',
               message: error.error.errors.toString(),
-              confirmation: false }];
+              confirmation: false
+            }];
             this.showSubmit = true;
-            this.alert.setAlert(alertWarning[0]);   
+            this.alert.setAlert(alertWarning[0]);
           }
         )
     }

@@ -4,6 +4,8 @@ import { AproverRequests, Requests } from '../../../models/common/approver-reque
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-managed',
@@ -12,28 +14,29 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 })
 export class ManagedComponent implements OnInit {
   public managed: Requests[] = [];
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-      this.tokenService.validateToken()
-        .subscribe(
-          (res) => {
-            this.token = false;
-          },
-          (error) => {
-            this.objectToken.emit({
-              title: error.status.toString(),
-              message: error.json().errors[0].toString()
-            });
-            document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-            this.token = true;
-          })
+    this.translate = this.translateService.getTranslate();
+    this.tokenService.validateToken()
+      .subscribe(
+        (res) => {
+          this.token = false;
+        },
+        (error) => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString()
+          });
+          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.token = true;
+        })
 
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -63,7 +66,7 @@ export class ManagedComponent implements OnInit {
   }
 
   modalAprovers(request: Requests) {
-    this.aproversRequestsService.setAprovalsRequests({id:request.ticket, edit: false});
+    this.aproversRequestsService.setAprovalsRequests({ id: request.ticket, edit: false });
   }
 
 }

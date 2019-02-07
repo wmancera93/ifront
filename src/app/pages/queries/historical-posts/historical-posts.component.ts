@@ -4,6 +4,8 @@ import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-historical-posts',
@@ -16,14 +18,18 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
   public nameReport: string = 'Histórico de Puestos';
   public token: boolean;
   public showExcel: boolean = true;
-  public userAuthenticated:User;
+  public userAuthenticated: User;
   public countAfter: number = 0;
+  public translate: Translate = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public queriesService: QueriesService,
     private tokenService: Angular2TokenService,
-    private accionDataTableService: DataDableSharedService) {
+    private accionDataTableService: DataDableSharedService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.queries.historical_posts.name_table_ts;
+
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

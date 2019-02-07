@@ -8,6 +8,8 @@ import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized } from '@angular/router';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 declare var jsPDF: any;
 @Component({
@@ -23,7 +25,7 @@ export class RequestsComponent implements OnInit {
   public labels: any[] = [];
   public recordsPrint: any[] = [];
   public labelsCell: any[] = [];
-
+  public translate: Translate = null;
   public columnsPdf: any[] = [];
 
   public p: number = 1;
@@ -48,7 +50,8 @@ export class RequestsComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(
@@ -192,7 +195,7 @@ export class RequestsComponent implements OnInit {
   }
 
   pdfExport() {
-    let title: string = this.title === null ? 'Reporte de solicitudes' : this.title === undefined ? 'Reporte de solicitudes' : this.title === '' ? 'Reporte de solicitudes' : this.title;
+    let title: string = this.title === null ? this.translate.app.frontEnd.pages.reports_rh.requests.tittle_pdf_ts : this.title === undefined ? this.translate.app.frontEnd.pages.reports_rh.requests.tittle_pdf_ts : this.title === '' ? this.translate.app.frontEnd.pages.reports_rh.requests.tittle_pdf_ts : this.title;
     var today = new Date();
     let dd: number = today.getDate();
     let mm: number = today.getMonth() + 1;
@@ -258,9 +261,9 @@ export class RequestsComponent implements OnInit {
         // doc.setFontSize(12)
         // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
         doc.setFontSize(12)
-        doc.text(40, 95, 'Generado el ' + dateNow)
+        doc.text(40, 95, this.translate.app.frontEnd.pages.reports_rh.requests.generate_ts + dateNow)
         doc.setFontSize(10)
-        doc.text(positionPage, 60, 'pagina ' + doc.page);
+        doc.text(positionPage, 60, this.translate.app.frontEnd.pages.reports_rh.requests.page + doc.page);
         doc.page++;
       }
     });

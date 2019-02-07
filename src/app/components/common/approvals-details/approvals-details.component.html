@@ -18,7 +18,7 @@
                   <div class="col-12">
                     <h3 class="font-color-default tops">
                       <i class="fa fa-user text-primary-hr"></i>
-                      SOLICITANTE
+                      {{translate.app.frontEnd.components.common.approvals_details.apply_for}}
                     </h3>
                   </div>
                   <div class="col-12 center-img-employee tops">
@@ -56,7 +56,7 @@
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left">
                       <h3 class="font-color-default col-md-2 col-4">
-                        Estado:
+                        {{translate.app.frontEnd.components.common.approvals_details.status}}:
                       </h3>
                       <h6 class="col-4" *ngIf="approvals[0].status == 'Aprobado'">
                         <span class="badge badge-primary" style="margin-top: 5px;">
@@ -85,21 +85,21 @@
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_begin_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Desde:
+                          {{translate.app.frontEnd.components.common.approvals_details.since}}:
                           <span style="font-weight: 100 !important">{{dateSince}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Hasta:
+                          {{translate.app.frontEnd.components.common.approvals_details.until}}:
                           <span style="font-weight: 100 !important">{{dateUntil}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
                           <i class="fa fa-fw fa-clock-o font-color-default"></i>
-                          Dias Solicitados:
+                          {{translate.app.frontEnd.components.common.approvals_details.requested_days}}:
                           <span style="font-weight: 100 !important">{{approvals[0].days_request}}</span>
                         </p>
                       </div>
@@ -110,21 +110,21 @@
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].updated_date != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Última Actualización:
+                          {{translate.app.frontEnd.components.common.approvals_details.last_update}}:
                           <span style="font-weight: 100 !important">{{approvals[0].updated_date}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].created_date != null">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Creación:
+                          {{translate.app.frontEnd.components.common.approvals_details.creation}}:
                           <span style="font-weight: 100 !important">{{approvals[0].created_date}}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
                           <i class="fa fa-fw fa-users font-color-default"></i>
-                          Aprobadores:
+                          {{translate.app.frontEnd.components.common.approvals_details.approver}}:
                           <span style="font-weight: 100 !important">{{approvals[0].approvers_to_json.length}}</span>
                         </p>
                       </div>
@@ -133,7 +133,7 @@
                   <div class="col-12 text-left" *ngIf="approvals[0].observation_request != null">
                     <p class="font-title-general">
                       <i class="fa fa-fw fa-comment font-color-default"></i>
-                      Observaciones:
+                      {{translate.app.frontEnd.components.common.approvals_details.observations}}:
                       <span style="font-weight: 100 !important">{{approvals[0].observation_request}}</span>
                     </p>
                   </div>
@@ -141,7 +141,7 @@
                   <div class="col-12 text-left" *ngIf="approvals[0].image != undefined">
                     <p class="font-title-general">
                       <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                      Soporte adjunto:
+                      {{translate.app.frontEnd.components.common.approvals_details.attached}}:
                       <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">Ver</span>
                     </p>
                   </div>
@@ -149,7 +149,7 @@
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
-                        Aprobadores:
+                        {{translate.app.frontEnd.components.common.approvals_details.approver}}:
                       </h3>
                     </div>
                     <div class="row justify-content-between">
@@ -171,20 +171,20 @@
                       <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
                         <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab"
                           href="#Approval">
-                          Gestionar solicitud
+                          {{translate.app.frontEnd.components.common.approvals_details.manage_request}}
                         </a>
                       </li>
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab"
                           href="#Detail">
-                          Ver detalles
+                          {{translate.app.frontEnd.components.common.approvals_details.see_details}}
                         </a>
                       </li>
                     </ul>
                     <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'S'">
                       <li id="litab2" class="nav-item" style="width: 50%">
                         <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
-                          Ver detalles
+                          {{translate.app.frontEnd.components.common.approvals_details.see_details}}
                         </a>
                       </li>
                     </ul>
@@ -201,7 +201,7 @@
                             <div class="col-md-4 col-12">
                               <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
                                 <i class="fa fa-fw fa-check"></i>
-                                Aceptar
+                                {{translate.app.frontEnd.components.common.approvals_details.accept}}
                               </div>
                             </div>
                           </div>
@@ -210,10 +210,10 @@
                           <div class="row justify-content-center">
                             <div class="col-lg-6 col-md-6 col-8">                         
                               <span *ngIf="switch == 'off'">
-                                Rechazado
+                                {{translate.app.frontEnd.components.common.approvals_details.rejected}}
                               </span>
                               <span *ngIf="switch == 'on'">
-                                Aprobado
+                                {{translate.app.frontEnd.components.common.approvals_details.approved}}
                               </span>
                             </div>
                             <div class="col-4">
@@ -229,16 +229,16 @@
                               </div>
                             </div>
                             <div class="col-12 text-left">
-                              Descripción
+                              {{translate.app.frontEnd.components.common.approvals_details.description}}
                             </div>
                             <div class="col-12">
                               <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
                             </div>
                             <div class="col-md-4 col-12">
                               <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
-                                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                                <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.approvals_details.save}}</button>
                               <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                                <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.approvals_details.loading}}</button>
                             </div>
                           </div>
                         </div>
@@ -250,7 +250,7 @@
                           <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
                             <div class="col-12 text-left">
                               <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              Nivel de aprobación {{details.approver_to_json.level}}
+                              {{translate.app.frontEnd.components.common.approvals_details.level_approver}} {{details.approver_to_json.level}}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
@@ -259,7 +259,7 @@
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                Descripción:
+                                {{translate.app.frontEnd.components.common.approvals_details.description}}:
                               </h3>
                             </div>
                             <div class="col-12 text-left">
@@ -271,7 +271,7 @@
                           <div class="row justify-content-center">
                             <div class="col-12 text-center top-general">
                               <h3 class="font-color-default">
-                                Aun no hay detalles
+                                {{translate.app.frontEnd.components.common.approvals_details.lack_details}}
                               </h3>
                             </div>
                           </div>
@@ -286,7 +286,7 @@
                             <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
                               <div class="col-12 text-left">
                                 <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                                Nivel de aprobación {{details.approver_to_json.level}}
+                                {{translate.app.frontEnd.components.common.approvals_details.level_approver}} {{details.approver_to_json.level}}
                               </div>
                               <div class="col-12 text-left">
                                 <h3 class="font-color-default">
@@ -295,7 +295,7 @@
                               </div>
                               <div class="col-12 text-left">
                                 <h3 class="font-color-default">
-                                  Descripción:
+                                  {{translate.app.frontEnd.components.common.approvals_details.description}}:
                                 </h3>
                               </div>
                               <div class="col-12 text-left">
@@ -307,7 +307,7 @@
                             <div class="row justify-content-center">
                               <div class="col-12 text-center top-general">
                                 <h3 class="font-color-default">
-                                  Aun no hay detalles
+                                  {{translate.app.frontEnd.components.common.approvals_details.lack_details}}
                                 </h3>
                               </div>
                             </div>
@@ -323,7 +323,7 @@
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonApprovalsRequests buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.components.common.approvals_details.button_close}} </h6>
         </div>
       </div>
     </div>

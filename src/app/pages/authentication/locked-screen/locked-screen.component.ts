@@ -12,6 +12,8 @@ import { GoogleAnalyticsEventsService } from '../../../services/google-analytics
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { MainService } from '../../../services/main/main.service';
 import { Enterprise } from '../../../models/general/enterprise';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 declare const ga: any;
 
@@ -24,6 +26,7 @@ export class LockedScreenComponent implements OnInit {
   public userAuthenticated: User = null;
   public txtPassword: string = '';
   public dataEnterprise: Enterprise[] = [];
+  public translate: Translate = null;
 
   constructor(private tokenService: Angular2TokenService,
     public alert: AlertsService,
@@ -31,9 +34,9 @@ export class LockedScreenComponent implements OnInit {
     public router: Router,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
   ) {
-    
+    this.translate = this.translateService.getTranslate();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -115,18 +118,18 @@ export class LockedScreenComponent implements OnInit {
             }
             localStorage.setItem("user", JSON.stringify(''));
             resultError = error.json();
-            const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
+            const alertWarning: Alerts[] = [{ type: typeAlert, title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: resultError.errors[0] }];
             this.alert.setAlert(alertWarning[0]);
           }
           )
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'La contraseña es obligatoria.' }];
+        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: 'La contraseña es obligatoria.' }];
         this.alert.setAlert(alertWarning[0]);
       }
     } else {
       const alertWarning: Alerts[] = [{
         type: 'danger',
-        title: 'Advertencia',
+        title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts,
         message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
       }];
       this.alert.setAlert(alertWarning[0]);

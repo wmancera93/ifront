@@ -8,7 +8,7 @@
       <div class="row justify-content-center">
         <div class=" col-12 title">
           <i class="fa fa-user"></i>
-          Mis datos
+          {{translate.app.frontEnd.pages.master_data.title_my_data}}
         </div>
       </div>
     </div>
@@ -63,8 +63,8 @@
             <div class="row justify-content-center top-containter" *ngIf="lengthArray == 0  ">
               <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
                 <div class="alert alert-warning" role="alert">
-                  No hay
-                  <strong>{{titleData}}</strong>&nbsp;disponibles
+                  {{translate.app.frontEnd.pages.master_data.text_one}}
+                  <strong>{{titleData}}</strong>&nbsp;{{translate.app.frontEnd.pages.master_data.text_two}}
                 </div>
               </div>
             </div>
@@ -72,7 +72,7 @@
               <div class="row">
                 <div class="col-xl-10 col-md-9 col-8 text-right">
                   <div class="top-title-dbgerencial">
-                    Editar
+                    {{translate.app.frontEnd.pages.master_data.text_tree}}
                   </div>
                 </div>
                 <div class="col-xl-2 col-md-3 col-4">

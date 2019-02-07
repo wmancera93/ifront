@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de evaluacion</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.tittle}}</h5>
         <button id="closeModalObjectiveEvaluation" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -14,7 +14,7 @@
         <div class="row justify-content-center">
           <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
             <div class="row border" style="margin-left: 2px">
-              <h4>Datos de Evaluación</h4>
+              <h4>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.sub_tittle}}</h4>
             </div>
             <div class="row">
               <div class="col-12 top-containter" style="margin-top: 30px">
@@ -22,7 +22,7 @@
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-file-text text-primary-hr"></i>
-                      <strong>Tipo de evaluación:</strong>
+                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_evaluation}}:</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-6 col-12">
@@ -39,7 +39,7 @@
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-calendar-minus-o text-primary-hr"></i>
-                      <strong>Periodo de Evaluación:</strong>
+                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.time_evaluation}}:</strong>
                     </label>
                   </div>
                   <div class="col-lg-4 col-md-12 col-12">
@@ -47,7 +47,7 @@
                       <div class="col-lg-5 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-hourglass-start text-primary-hr"></i>
-                          <strong>Inicia:</strong>
+                          <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.start}}:</strong>
                         </label>
                       </div>
                       <div class="col-lg-7 col-md-6 col-6">
@@ -62,7 +62,7 @@
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-hourglass-end text-primary-hr"></i>
-                          <strong>Finaliza:</strong>
+                          <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.ended}}:</strong>
                         </label>
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
@@ -81,7 +81,7 @@
                   <div class="col-lg-4 col-md-4 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-user-o text-primary-hr"></i>
-                      <strong>Calificador</strong>
+                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.evaluator}}</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
@@ -111,14 +111,14 @@
           <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
             <div class="row border" style="margin-left: 2px">
               <div class="col-12">
-                <h4>Objetivos de Evaluación</h4>
+                <h4>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.evaluation_objetives}}</h4>
               </div>
             </div>
             <div class="row" style="margin-top: 30px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-check-circle-o text-primary-hr"></i>
-                  <strong>Total Objetivos:</strong>
+                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.number_objetives}}:</strong>
                 </label>
                 <label class="col-lg-4 col-md-6 col-12">
                   <a>{{EvaluacionPer.count_evaluation_objetives}}</a>
@@ -129,7 +129,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-thermometer-full text-primary-hr"></i>
-                  <strong>Porcentaje completado</strong>
+                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.percentage_full}}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -140,7 +140,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-thermometer-half text-primary-hr"></i>
-                  <strong>Porcentaje Faltante</strong>
+                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.percentage_missin}}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -159,13 +159,13 @@
                 <div class="row" *ngIf="!flag_complete">
                   <div class="col-lg-4 col-md-6 col-12">
                     <h5 *ngIf="bedit">
-                      Editar Objetivo
+                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.btn_edit}}
                     </h5>
                     <h5 *ngIf="bnew">
-                      Nuevo Objetivo
+                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.btn_new}}
                     </h5>
                     <button type="button" *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
-                      <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Nuevo
+                      <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.create}}
                     </button>
                     <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseEditObjetives" style="display: none">
                     </button>
@@ -183,7 +183,7 @@
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateBegin" class="font-title-general">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        Fecha Inicial *
+                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.date_begin}} *
                       </label>
                       <input *ngIf="!bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
                         placeholder="dd/mm/yyyy" />
@@ -193,7 +193,7 @@
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        Fecha Final *
+                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.date_end}} *
                       </label>
                       <input *ngIf="!bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']"
                         placeholder="dd/mm/yyyy" />
@@ -203,7 +203,7 @@
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                        Ponderación *
+                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.porridge}} *
                       </label>
                       <input *ngIf="!bedit" type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
                       <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight"
@@ -212,7 +212,7 @@
                     <div class="col-md-12 col-12 top-containter">
                       <label for="celulaInput" class="font-title-general">
                         <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                        Objetivo * (Max, 80 caracteres)
+                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.description}}
                       </label>
                       <textarea type="text" rows="2" maxlength="80" style="height: auto !important;" name="objective_request" class="form-control"
                         [formControl]="formObjetive.controls['objetive_text']"></textarea>
@@ -221,13 +221,13 @@
                       <div class="row justify-content-end">
                         <div class="col-lg-3 col-md-4 col-12">
                           <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
-                            <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                            <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.save}}</button>
                           <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                            <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                            <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.loading}}</button>
                         </div>
                         <div class="col-lg-3 col-md-4 col-12">
                           <button class="btn btn-warning btn-block cursor-general" (click)="closeObjetive()" data-toggle="collapse" data-target="#collapseExample">
-                            <i class="fa fa-fw fa-window-close"></i>Cancelar</button>
+                            <i class="fa fa-fw fa-window-close"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.button_cancel}}</button>
                         </div>
                       </div>
                     </div>
@@ -236,9 +236,9 @@
                 <div class="row justify-content-end" style="margin-top: 20px" *ngIf="flag_complete">
                   <div class="col-lg-4 col-md-6 col-12">
                     <button type="button" *ngIf="showCharge" class="btn btn-success btn-block cursor-general" (click)="evaluationComplete()">
-                      <i class="fa fa-fw fa-flag-checkered"></i>&nbsp;&nbsp;Concluir Planificacion</button>
+                      <i class="fa fa-fw fa-flag-checkered"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.finish}}</button>
                     <button type="button" *ngIf="!showCharge" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.loading}}</button>
                   </div>
                 </div>
               </div>

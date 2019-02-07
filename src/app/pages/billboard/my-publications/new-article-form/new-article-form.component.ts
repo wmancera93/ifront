@@ -12,6 +12,8 @@ import { BillboardService } from '../../../../services/shared/common/billboard/b
 import { EditArticleService } from '../../../../services/shared/common/edit-article/edit-article.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 
 const formData = new FormData();
@@ -34,7 +36,7 @@ export class NewArticleFormComponent implements OnInit {
   public extensions: string = '.gif, .png, .jpeg, .jpg ';
   public fileImageNew: string = 'fileImageNew';
   public showSubmit: boolean = true;
-
+  public translate: Translate = null;
   formNewArticle: FormGroup;
   fileToUpload: File = null;
 
@@ -50,8 +52,9 @@ export class NewArticleFormComponent implements OnInit {
     public fileUploadService: FileUploadService,
     public billboardSharedService: BillboardService,
     public editEditSharedService: EditArticleService,
-    public formDataService: FormDataService) {
+    public formDataService: FormDataService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.image = data;
     })
@@ -71,13 +74,13 @@ export class NewArticleFormComponent implements OnInit {
   onSubmitNewArticle(value: any): void {
     if (value.title == "" || value.summary == "" || value.body == "") {
       (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
-      const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: 'No puede tener campos vacios', confirmation: false }];
+      const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts_one, message: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_empty_fields_ts, confirmation: false }];
       this.showSubmit = true;
       this.alert.setAlert(alertWarning[0]);
 
     }
     else {
-      this.showSubmit = false;      
+      this.showSubmit = false;
       const selectedItems = value.tags.map(({ display }) => display);
       let newArticleForm = new FormData();
       newArticleForm.append('title', value.title);
@@ -90,7 +93,7 @@ export class NewArticleFormComponent implements OnInit {
           this.cleanFormData();
           this.fileUploadService.setCleanUpload(true);
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
-          const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia guardada' }];
+          const alertConfirmation: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_status_news_ts, message: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_saved_news_ts }];
           this.alert.setAlert(alertConfirmation[0]);
           this.showSubmit = true;
           this.uploadListNews = true;
@@ -100,7 +103,7 @@ export class NewArticleFormComponent implements OnInit {
       },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts_one, message: error.json().errors.toString(), confirmation: false }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
 

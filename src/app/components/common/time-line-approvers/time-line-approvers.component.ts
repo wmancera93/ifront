@@ -3,6 +3,8 @@ import { AproversRequestsService } from '../../../services/shared/common/aprover
 import { RequestsRh, ListRequests, DetailRequest } from '../../../models/common/requests-rh/requests-rh';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -17,14 +19,15 @@ export class TimeLineApproversComponent implements OnInit {
   public dateFirts: string;
   public dateFinally: string;
   public requests_print: string;
+  public translate: Translate = null;
 
   constructor(private aproversRequestsService: AproversRequestsService,
     private requestsRhService: RequestsRhService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
-        debugger
         if (data.type_request == 'requestsOnly') {
           this.requests_print = data.type_request;
           if (this.countAfter === 0) {
@@ -76,8 +79,8 @@ export class TimeLineApproversComponent implements OnInit {
               date_begin_format: data.request.date_begin,
               date_end_format: data.request.date_end,
               days_request: null,
-              observation_request:data.request.observation, 
-              created_date:data.request.created_date,
+              observation_request: data.request.observation,
+              created_date: data.request.created_date,
               answers_to_json: data.request.answers_to_json,
               employee_applicant_to_json: data.request.employee_applicant_to_json,
               image: {
@@ -85,7 +88,7 @@ export class TimeLineApproversComponent implements OnInit {
               },
               type_requests_name: data.request.travel_requests_type_name,
             },
-            title:'Detalles de solicitud #'+ data.request.ticket,
+            title: 'Detalles de solicitud #' + data.request.ticket,
           });
           this.fileSupport = null;
 

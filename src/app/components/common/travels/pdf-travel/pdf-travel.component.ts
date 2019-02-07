@@ -1,6 +1,8 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Enterprise } from '../../../../models/general/enterprise';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 declare var jsPDF: any;
 
@@ -12,10 +14,13 @@ declare var jsPDF: any;
 export class PdfTravelComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public result: any = null;
+  public translate: Translate = null;
 
   @Input('ticketTravel') ticketTravel: any;
 
-  constructor(public travelManagementService: TravelService) { }
+  constructor(public travelManagementService: TravelService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+   }
 
   ngOnInit() {
   }

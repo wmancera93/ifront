@@ -4,14 +4,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-circle-o-notch"></i>
-          Aprobaciones Pendientes
+          {{translate.app.frontEnd.pages.approver_requests.pendings.pendings.title_ppprovals_pending}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.approver_requests.pendings.pendings.icon_return}}
               </span>
             </div>
           </div>
@@ -26,19 +26,19 @@
           <div class="col-12 text-left" *ngIf="pendings.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendings.length}} solicitud pendiente
+              {{translate.app.frontEnd.pages.approver_requests.pendings.pendings.msg_pending_request_one}} {{pendings.length}} {{translate.app.frontEnd.pages.approver_requests.pendings.pendingsmsg_pending_request_two}}
             </h3>
           </div>
           <div class="col-12 text-left" *ngIf="pendings.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendings.length}} solicitudes pendientes
+              {{translate.app.frontEnd.pages.approver_requests.pendings.msg_pending_requests_one}} {{pendings.length}} {{translate.app.frontEnd.pages.approver_requests.pendings.msg_pending_requests_two}}
             </h3>
           </div>
           <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendings.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              Usted no tiene solicitudes pendientes
+              {{translate.app.frontEnd.pages.approver_requests.pendings.msg_no_pending_requests_one}}
             </h3>
           </div>
         </div>
@@ -46,7 +46,7 @@
       <div class="row justify-content-center top-general-p" *ngIf="pendings.length == 0">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            No se encontrarón registros para mostrar
+            {{translate.app.frontEnd.pages.approver_requests.pendings.msg_no_pending_requests_two}}
           </div>
         </div>
       </div>
@@ -57,7 +57,7 @@
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{pending.ticket}}
+                    {{translate.app.frontEnd.pages.approver_requests.pendings.text_ticket}} #{{pending.ticket}}
                   </span>
                 </h5>
               </div>
@@ -77,7 +77,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Solicitante
+                  {{translate.app.frontEnd.pages.approver_requests.pendings.text_Applicant}}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
@@ -86,7 +86,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Creada el
+                  {{translate.app.frontEnd.pages.approver_requests.pendings.text_created_on}}
                 </p>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
@@ -97,7 +97,7 @@
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p hoverColor" (click)="modalAprovers(pending)" >
                 <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color: #23c6c8"></i>
                 <div class="col-12">
-                  Ver
+                  {{translate.app.frontEnd.pages.approver_requests.pendings.icon_watch}}
                 </div>
               </div>
             </div>

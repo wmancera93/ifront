@@ -14,6 +14,8 @@ import { User } from '../../../models/general/user';
 import { Enterprise } from '../../../models/general/enterprise';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 declare const ga: any;
 
@@ -27,7 +29,7 @@ export class LoginComponent implements OnInit {
   public txtPassword: string = '';
   public dataEnterprise: Enterprise[] = [];
   public heightContenGeneral: number = 0;
-
+  public translate: Translate = null;
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -36,8 +38,9 @@ export class LoginComponent implements OnInit {
     public userSharedService: UserSharedService,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService) {
-
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    
+    this.translate = this.translateService.getTranslate();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -87,7 +90,7 @@ export class LoginComponent implements OnInit {
               this.dataEnterprise[0].body_text, '', '',
               '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
             )
-          }, 200);  
+          }, 200);
         }
 
         var link = document.createElement('link'),
@@ -111,14 +114,14 @@ export class LoginComponent implements OnInit {
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
       let expressionRegular
       let validatePasword
-      if(this.dataEnterprise[0].login_ldap){
+      if (this.dataEnterprise[0].login_ldap) {
         expressionRegular = true;
         validatePasword = expressionRegular;
       } else {
         expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
         validatePasword = expressionRegular.test(this.txtPassword);
       }
-      
+
       if (validatePasword) {
         this.tokenService.signIn({
           email: this.txtEmail,
@@ -142,7 +145,7 @@ export class LoginComponent implements OnInit {
             }
             localStorage.setItem("user", JSON.stringify(''));
             resultError = error.json();
-            const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
+            const alertWarning: Alerts[] = [{ type: typeAlert, title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one, message: resultError.errors[0] }];
             this.alert.setAlert(alertWarning[0]);
             this.googleAnalyticsEventsService.emitEvent("login", "errorSingInSession", "Error sing in session", 1);
           }
@@ -150,16 +153,16 @@ export class LoginComponent implements OnInit {
       } else {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
+          title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
+          message: this.translate.app.frontEnd.pages.authentication.login.msg_characters_minimum_ts,
         }];
         this.alert.setAlert(alertWarning[0]);
       }
     } else {
       const alertWarning: Alerts[] = [{
         type: 'warning',
-        title: 'Advertencia',
-        message: 'El email y contraseña son obligatorios.'
+        title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
+        message: this.translate.app.frontEnd.pages.authentication.login.msg_email_is_required_ts,
       }];
       this.alert.setAlert(alertWarning[0]);
     }
@@ -185,8 +188,8 @@ export class LoginComponent implements OnInit {
       if (!expressionRegular.test(this.txtEmail)) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx'
+          title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
+          message: this.translate.app.frontEnd.pages.authentication.login.msg_tincorrect_format_ts,
         }];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
@@ -207,8 +210,8 @@ export class LoginComponent implements OnInit {
     } else {
       const alertWarning: Alerts[] = [{
         type: 'warning',
-        title: 'Advertencia',
-        message: 'Debe ingresar usuario y contraseña para poder recordar.'
+        title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
+        message: this.translate.app.frontEnd.pages.authentication.login.msg_enter_your_data_ts,
       }];
       this.alert.setAlert(alertWarning[0]);
       (<HTMLInputElement>document.getElementById('chk_remember')).checked = false;

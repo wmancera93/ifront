@@ -5,6 +5,8 @@ import { HotelsService } from '../../../services/travel-management/hotels/hotels
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { HotelsSharedService } from '../../../services/shared/hotels-shared/hotels-shared.service';
 import { Router } from '../../../../../node_modules/@angular/router';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-hotels',
@@ -15,12 +17,13 @@ export class HotelsComponent implements OnInit {
   public objectHotels: any[] = [];
   public alertWarning: any[] = [];
   public hotel_id: string;
-
+  public translate: Translate = null;
   constructor(public hotelsService: HotelsService,
     public alert: AlertsService,
     public hotelsSharedService: HotelsSharedService,
-    public router: Router) {
+    public router: Router, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
     this.hotelsSharedService.getViewHotels().subscribe((data: any) => {
       if (data) {
         this.getHotels();
@@ -35,8 +38,8 @@ export class HotelsComponent implements OnInit {
             this.getHotels();
             this.alertWarning = [{
               type: 'danger',
-              title: 'Alerta',
-              message: 'Hotel eliminado correctamente',
+              title: this.translate.app.frontEnd.pages.travel_management.hotels.tittle_alert,
+              message: this.translate.app.frontEnd.pages.travel_management.hotels.message_alert,
               confirmation: false,
             }];
             this.alert.setAlert(this.alertWarning[0]);
@@ -79,8 +82,8 @@ export class HotelsComponent implements OnInit {
     this.hotel_id = hotel.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el hotel con código #' + hotel.id.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.hotels.tittle_alert_one_ts,
+      message: this.translate.app.frontEnd.pages.travel_management.hotels.message_alert_two_ts + hotel.id.toString(),
       confirmation: true,
       typeConfirmation: 'deletHotel'
     }];

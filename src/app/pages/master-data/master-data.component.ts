@@ -8,6 +8,8 @@ import { DataMasterSharedService } from '../../services/shared/common/data-maste
 import { AlertsService } from '../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../models/common/alerts/alerts';
 import { Enterprise } from '../../models/general/enterprise';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 
 @Component({
@@ -30,7 +32,7 @@ export class MasterDataComponent implements OnInit {
   public dataEnterprise: Enterprise = null;
   public listDataMaster: ListDataMaster;
   public token: boolean;
-
+  public translate: Translate = null;
   public codeGeneral: string;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -39,7 +41,8 @@ export class MasterDataComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService,
     private fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(
@@ -64,14 +67,14 @@ export class MasterDataComponent implements OnInit {
           employee_master_data: object
         }
         if (dataMasterEdit.employee_master_data.length == 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: "No hay modificaciones en los campos", confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.master_data.msg_denied_request_ts, message: this.translate.app.frontEnd.pages.master_data.ts_warning_text_two, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
         }
         else {
           this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe((data: any) => {
             const alertWarning: Alerts[] = [{
               type: 'success',
-              title: 'Confirmación',
+              title: this.translate.app.frontEnd.pages.master_data.ts_warning_text_tow,
               message: data.message,
               confirmation: false,
               typeConfirmation: ''
@@ -79,7 +82,7 @@ export class MasterDataComponent implements OnInit {
             this.alert.setAlert(alertWarning[0]);
           },
             (error: any) => {
-              const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+              const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.master_data.msg_denied_request_ts, message: error.json().errors.toString(), confirmation: false }];
               this.alert.setAlert(alertWarning[0]);
             })
         }
@@ -155,7 +158,7 @@ export class MasterDataComponent implements OnInit {
       document.getElementById("buttonDashManagerial").click();
     }
 
-    this.titleData = 'Datos personales';
+    this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_one;
 
     this.dataMasterService.getDataPersonal().subscribe((personal: any) => {
       this.dataMaster = personal.data;
@@ -197,7 +200,7 @@ export class MasterDataComponent implements OnInit {
 
       case 'contact_data':
         this.dataMasterService.getDataContact().subscribe((contact: any) => {
-          this.titleData = 'Datos de contacto';
+          this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_tree;
           this.dataMaster = contact.data;
           this.activeEditButton(this.dataMaster);
           this.canEditData = false;
@@ -213,7 +216,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'family_data':
         this.dataMaster = [];
-        this.titleData = 'Datos familiares';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_four;
         this.dataMasterService.getDataFamily().subscribe((family: any) => {
           this.dataMaster = family.data;
           this.activeEditButton(this.dataMaster);
@@ -227,7 +230,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'study_data':
         this.dataMaster = [];
-        this.titleData = 'Datos académicos';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_five;
         this.dataMasterService.getDataStudies().subscribe((studies: any) => {
           this.dataMaster = studies.data;
           this.activeEditButton(this.dataMaster);
@@ -242,7 +245,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'business_data':
         this.dataMaster = [];
-        this.titleData = 'Datos empresariales';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_six;
         this.dataMasterService.getDataBussiness().subscribe((enterprise: any) => {
           this.dataMaster = enterprise.data;
           this.activeEditButton(this.dataMaster);
@@ -257,7 +260,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'banking_data':
         this.dataMaster = [];
-        this.titleData = 'Datos bancarios';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_seven;
         this.dataMasterService.getDataBanking().subscribe((bank: any) => {
           this.dataMaster = bank.data;
           this.activeEditButton(this.dataMaster);
@@ -272,7 +275,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'beneficiary_data':
         this.dataMaster = [];
-        this.titleData = 'Datos de los beneficiaros';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_eight;
         this.dataMasterService.getDataBeneficiaries().subscribe((beneficiaries: any) => {
           this.dataMaster = beneficiaries.data;
           this.activeEditButton(this.dataMaster);
@@ -287,7 +290,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'social_security_data':
         this.dataMaster = [];
-        this.titleData = 'Seguridad social';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_nine;
         this.dataMasterService.getDataSocialSecurity().subscribe((social: any) => {
           this.dataMaster = social.data;
           this.activeEditButton(this.dataMaster);
@@ -301,7 +304,7 @@ export class MasterDataComponent implements OnInit {
         break;
       case 'retefuente_data':
         this.dataMaster = [];
-        this.titleData = 'Retención en la fuente';
+        this.titleData = this.translate.app.frontEnd.pages.master_data.ts_warning_text_teen;
         this.dataMasterService.getDataReteFuente().subscribe((retefuente: any) => {
           this.dataMaster = retefuente.data;
           this.activeEditButton(this.dataMaster);

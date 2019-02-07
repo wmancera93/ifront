@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-file-upload',
@@ -11,20 +13,21 @@ export class FileUploadComponent implements OnInit {
   @Input() extensions?: string = '';
   public progressBar: string = '0%';
   public textFileUpload: string = '';
-
+  public translate: Translate = null;
   public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
-  constructor(public fileUploadService:FileUploadService) {
+  constructor(public fileUploadService: FileUploadService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.fileUploadService.getCleanUpload()
-    .subscribe((clean) => {
-      if(clean){
-        this.progressBar = '0%';
-        this.textFileUpload = '';
-      }
-    })
+      .subscribe((clean) => {
+        if (clean) {
+          this.progressBar = '0%';
+          this.textFileUpload = '';
+        }
+      })
 
-   }
+  }
 
 
 
@@ -57,7 +60,7 @@ export class FileUploadComponent implements OnInit {
     if (this.textFileUpload === '') {
       this.progressBar = '0%';
     }
-    
+
     this.fileUploadService.setObjectFile(e.target.files[0]);
   }
 

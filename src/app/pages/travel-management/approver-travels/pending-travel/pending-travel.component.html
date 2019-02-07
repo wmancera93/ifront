@@ -4,14 +4,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-clock-o"></i>
-          Aprobaciones pendientes
+          {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackTravelPending()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.back}}
               </span>
             </div>
           </div>
@@ -26,19 +26,19 @@
           <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitud de viaje pendiente
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_travel_end}}
             </h3>
           </div>
           <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitudes de viajes pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_travel_ends}}
             </h3>
           </div>
           <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              Usted no tiene solicitudes de viaje pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_untravel}}
             </h3>
           </div>
         </div>
@@ -46,19 +46,19 @@
           <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitud de anticipos pendiente
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_end_advance}}
             </h3>
           </div>
           <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitudes de anticipos pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_end_advances}}
             </h3>
           </div>
           <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              Usted no tiene solicitudes de anticipos pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_unadvance}}
             </h3>
           </div>
         </div>
@@ -66,19 +66,19 @@
           <div class="col-12 text-left" *ngIf="pendingsRequestTravels.length == 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitud de gastos pendiente
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_travel_spend}}
             </h3>
           </div>
           <div class="col-6 text-left" *ngIf="pendingsRequestTravels.length > 1">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              Usted tiene {{pendingsRequestTravels.length}} solicitudes de gastos pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_start}} {{pendingsRequestTravels.length}} {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_travel_spends}}
             </h3>
           </div>
           <div class="col-xl-6 col-lg-4 col-12 text-left" *ngIf="pendingsRequestTravels.length == 0">
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              Usted no tiene solicitudes de gastos pendientes
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.message_unspend}}
             </h3>
           </div>
         </div>
@@ -91,7 +91,7 @@
               <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-plus"></i>
-                Filtrar Solicitudes
+                {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.btn_filter}}
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of typesRequest; let i = index">
@@ -110,7 +110,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
               data-target="#collapseFilter" aria-expanded="false" (click)="collapse(true)"></i>
@@ -125,7 +125,7 @@
           <div class="col-12" style="padding-bottom: 15px">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de IHR</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.btn_hr}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codIHR" class="form-control">
@@ -138,7 +138,7 @@
                 </div>
               </div>
               <!-- <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de SAP</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.btn_sap}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codSAP" class="form-control">
@@ -153,11 +153,11 @@
               <div class="col-lg-6 col-md-12 col-12">
                 <div class="row">
                   <div class="col-5">
-                    <label>Fecha Inicio</label>
+                    <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.date_begin}}</label>
                     <input type="date" [(ngModel)]="datesBegin" class="form-control">
                   </div>
                   <div class="col-5">
-                    <label>Fecha Final</label>
+                    <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.date_end}}</label>
                     <input type="date" [(ngModel)]="datesEnd" class="form-control">
                   </div>
                   <div class="col-2 align-self-end">
@@ -189,7 +189,7 @@
                 </select>
               </div> -->
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Solicitante</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.applicant}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codEmployee" class="form-control">
@@ -210,7 +210,7 @@
       <div class="row justify-content-center top-general-p" *ngIf="pendingsRequestTravels.length == 0">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
-            No se encontrarón registros para mostrar
+            {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.negative_message}}
           </div>
         </div>
       </div>
@@ -233,7 +233,7 @@
                 </h3>
                 <p>
                   <i class="fa fa-plane"></i>
-                  Fecha salida {{pending.date_begin_format}} - Fecha llegada {{pending.date_end_format}}
+                  {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.date_in}} {{pending.date_begin_format}} - {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.date_out}} {{pending.date_end_format}}
                 </p>
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
@@ -247,7 +247,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Solicitante
+                  {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.applicant}}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
@@ -256,7 +256,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Creada el
+                  {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.date_created}}
                 </p>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
@@ -267,7 +267,7 @@
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p hoverColor" (click)="modalAproversTravelPending(pending, travelsRequestsType)">
                 <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color: #23c6c8"></i>
                 <div class="col-12">
-                  Ver
+                  {{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.see}}
                 </div>
               </div>
             </div>

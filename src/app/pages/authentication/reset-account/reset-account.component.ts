@@ -10,6 +10,8 @@ import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { MainService } from '../../../services/main/main.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 declare const ga: any;
 
@@ -21,14 +23,16 @@ declare const ga: any;
 export class ResetAccountComponent implements OnInit {
   public txtEmail: string = '';
   public dataEnterprise: Enterprise;
+  public translate: Translate = null;
 
   constructor(public alert: AlertsService,
     private tokenService: Angular2TokenService,
     public router: Router,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService) {
-
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    
+    this.translate = this.translateService.getTranslate();
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -77,7 +81,7 @@ export class ResetAccountComponent implements OnInit {
           if (res.status === 200) {
             const alertWarning: Alerts[] = [{
               type: 'success',
-              title: 'Advertencia',
+              title: this.translate.app.frontEnd.pages.authentication.reset_account.title_warning_ts,
               message: res.json().message
             }];
             this.alert.setAlert(alertWarning[0]);
@@ -91,13 +95,13 @@ export class ResetAccountComponent implements OnInit {
           resultError = error.json();
           const alertError: Alerts[] = [{
             type: 'danger',
-            title: 'Advertencia',
+            title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login,
             message: resultError.errors[0]
           }];
           this.alert.setAlert(alertError[0]);
         });
     } else {
-      const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'El email es obligatorio.' }];
+      const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login, message: this.translate.app.frontEnd.pages.authentication.reset_account.msg_email_is_required_ts }];
       this.alert.setAlert(alertWarning[0]);
     }
   }
@@ -112,8 +116,8 @@ export class ResetAccountComponent implements OnInit {
       if (!expressionRegular.test(this.txtEmail)) {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: 'El formato del email es incorrecto, Ej: ejemplo@xxxx.xx'
+          title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login,
+          message: this.translate.app.frontEnd.pages.authentication.reset_account.msg_wrong_email_format_ts
         }];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';

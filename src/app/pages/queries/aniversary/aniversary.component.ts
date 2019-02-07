@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-aniversary',
@@ -10,13 +12,17 @@ import { User } from '../../../models/general/user';
 })
 export class AniversaryComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Aniversario de los empleados';
+  public nameReport: string;
   public showExcel: boolean = true;
-  public userAuthenticated:User;
+  public userAuthenticated: User;
   public countAfter: number = 0;
+  public translate: Translate = null;
 
   constructor(public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService) { }
+    private accionDataTableService: DataDableSharedService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.queries.aniversary.name_table_ts;
+  }
 
   ngOnInit() {
     window.scroll({

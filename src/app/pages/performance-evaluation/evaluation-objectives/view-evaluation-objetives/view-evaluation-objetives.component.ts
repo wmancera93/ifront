@@ -2,6 +2,8 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PerformanceEvaluationService } from '../../../../services/performance-evaluation/performance-evaluation.service';
 import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
 import { Qualifier } from '../../../../models/common/performance-evaluation/performance-evaluation';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-view-evaluation-objetives',
@@ -16,13 +18,15 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
   public idEvaluation: string;
   public status: boolean = false;
   public ObjectivesTableView: any[] = [];
-  public nameReport: string = 'Objetivos de Evaluación'
-
+  public nameReport: string;
+  public translate: Translate = null;
   public objectReportEval: EventEmitter<any> = new EventEmitter();
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
-    public performanceEvalSharedService: PerformanceEvalSharedService) {
+    public performanceEvalSharedService: PerformanceEvalSharedService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.view_evaluation_objetives.name_table_ts;
     this.performanceEvalSharedService.getViewEvaluationPerformanceData().subscribe((result: any) => {
       this.EvaluacionPerView = result;
       this.qualifierDataView = result.qualifier;

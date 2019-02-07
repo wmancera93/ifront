@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-line-chart"></i>
-          Estado de evaluaciones
+          {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.tittle}}
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              Evaluaciones creadas
+              {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.sub_tittle}}
             </b>
           </div>
         </div>
@@ -29,8 +29,8 @@
           <div class="row justify-content-center top-containter" *ngIf="evaluationPerformanceList.length === 0">
             <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
-                No hay
-                <strong>evaluaciones</strong>&nbsp;disponibles
+                {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_begin}}
+                <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_continue}}</strong>&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_end}}
               </div>
             </div>
           </div>
@@ -43,12 +43,12 @@
                   </h3>
                   <p>
                     <i class="fa fa-clock-o"></i>
-                    Creada el {{evaluation.created_date}}
+                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.date_create}} {{evaluation.created_date}}
                   </p>
                 </div>
                 <div class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
                   <p class="font-title-general">
-                    Estado:
+                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.status}}:
                   </p>
                   <h6 *ngIf="evaluation.status_code == '3'">
                     <span class="badge badge-warning">
@@ -79,12 +79,12 @@
                     {{evaluation.qualifier.unidad_org}}
                   </p>
                   <p class="">
-                    Calificador
+                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.evaluator}}
                   </p>
                 </div>
                 <div *ngIf="evaluation.qualifier === null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
                   <p class="">
-                    Esta evaluación no cuenta con calificador
+                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.negative_message}}
                   </p>
                 </div>
                 <div class="col-lg-3 col-md-3 col-12 text-center top-p">
@@ -108,13 +108,13 @@
                       <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>
                     <div class="col-4">
-                      Ver Objetivos
+                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.see}}
                     </div>
                     <div class="col-4">
-                      Modificar objetivos
+                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit}}
                     </div>
                     <div class="col-4">
-                      Descargar Evaluación
+                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.download_evaluation}}
                     </div>
                   </div>
                 </div>
