@@ -9,6 +9,7 @@ export class TranslateService {
   constructor(private tokenService: Angular2TokenService) {
     if (this.translate === null) {
       this.getTravelsApprovedReport('es').subscribe((data: any) => {
+        debugger
         this.translate = data;
       })
     }

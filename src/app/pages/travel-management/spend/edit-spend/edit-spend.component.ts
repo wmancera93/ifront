@@ -306,7 +306,7 @@ export class EditSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
-          message: 'Desea eliminar el gasto',
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEdit'
         }];
@@ -319,7 +319,7 @@ export class EditSpendComponent implements OnInit {
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
-          message: 'Desea eliminar el gasto #' + this.idEditSpend,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts +'#' + this.idEditSpend,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEditCreated'
         }];
@@ -571,7 +571,7 @@ export class EditSpendComponent implements OnInit {
 
         const alertSuccess: Alerts[] = [{
           type: 'success',
-          title: 'Alerta',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
           message: data.message,
           confirmation: false
         }];
@@ -584,7 +584,7 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("btn_spend_edit").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_one_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorSaveSpendEdit'
@@ -649,7 +649,7 @@ export class EditSpendComponent implements OnInit {
     this.alertWarning = [{
       type: 'warning',
       title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
-      message: '¿Desea eliminar el archivo #' + this.idFile.toString() + '?',
+      message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_one_ts + this.idFile.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteDocumentSavedSpend'
     }];
@@ -686,8 +686,8 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("closeModalEditSpend").click();
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Solicitud Exitosa',
-          message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_tree_ts,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_two_ts, confirmation: false
         }];
         this.alert.setAlert(alertWarning[0]);
       }
@@ -697,7 +697,7 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("closeModalEditSpend").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Solicitud Denegada',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_four_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorApproverSpend'

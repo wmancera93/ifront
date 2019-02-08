@@ -1,30 +1,34 @@
 import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
+import { TranslateService } from '../../common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Injectable()
 export class ReportTravelsService {
-
-  constructor(private tokenService: Angular2TokenService) { }
+  public translate: Translate = null;
+  constructor(private tokenService: Angular2TokenService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+   }
 
   report_travels_list: any = [
     {
       "id": 1,
-      "name": "Reporte solicitud de viajes",
+      "name": this.translate.app.frontEnd.services.travel_management.name_travel,
       "code": "travel_report"
     },
     {
       "id": 2,
-      "name": "Reporte solicitud de Anticipos",
+      "name": this.translate.app.frontEnd.services.travel_management.name_advance,
       "code": "advance_report"
     },
     {
       "id": 3,
-      "name": "Reporte solicitud de Gastos",
+      "name": this.translate.app.frontEnd.services.travel_management.mane_allowance,
       "code": "allowance_report"
     },
     {
       "id": 4,
-      "name": "Reporte de Aprobaciones",
+      "name": this.translate.app.frontEnd.services.travel_management.name_approver,
       "code": "approver_report"
     },
   ];

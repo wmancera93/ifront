@@ -8,14 +8,14 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-plane"></i>
-          Gestion de Viajes
+          {{translate.app.frontEnd.pages.travel_management.travel.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.travel_management.travel.back}}
               </span>
             </div>
           </div>
@@ -33,7 +33,7 @@
             <div class="col-12">
               <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newFormTravel()">
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                Nuevo Viaje
+                {{translate.app.frontEnd.pages.travel_management.travel.bnt_new}}
               </button>
             </div>
           </div>
@@ -44,7 +44,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.travel_management.travel.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -59,7 +59,7 @@
           <div class="col-12" style="padding-bottom: 15px">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de IHR</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.travel.btn_hr}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codIHR" class="form-control">
@@ -72,7 +72,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de SAP</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.travel.btn_sap}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codSAP" class="form-control">
@@ -87,11 +87,11 @@
               <div class="col-lg-6 col-md-12 col-12">
                 <div class="row">
                   <div class="col-5">
-                    <label>Fecha Inicio</label>
+                    <label>{{translate.app.frontEnd.pages.travel_management.travel.date_begin}}</label>
                     <input type="date" [(ngModel)]="datesBegin" class="form-control">
                   </div>
                   <div class="col-5">
-                    <label>Fecha Final</label>
+                    <label>{{translate.app.frontEnd.pages.travel_management.travel.date_end}}</label>
                     <input type="date" [(ngModel)]="datesEnd" class="form-control">
                   </div>
                   <div class="col-2 align-self-end">
@@ -103,27 +103,27 @@
               </div>
 
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Estado</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.travel.status}}</label>
                 <select type="date" [(ngModel)]="status" class="form-control" (change)="filter('status')">
-                  <option value="">Todos</option>
-                  <option value="ReqReg">Registrado</option>
-                  <option value="ReqPro">En proceso</option>
-                  <option value="ReqApp">Aprobado</option>
-                  <option value="ReqCan">Cancelado</option>
-                  <option value="ReqWai">En espera</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.travel.all_status}}</option>
+                  <option value="ReqReg">{{translate.app.frontEnd.pages.travel_management.travel.resgistered}}</option>
+                  <option value="ReqPro">{{translate.app.frontEnd.pages.travel_management.travel.process}}</option>
+                  <option value="ReqApp">{{translate.app.frontEnd.pages.travel_management.travel.approved}}</option>
+                  <option value="ReqCan">{{translate.app.frontEnd.pages.travel_management.travel.cancelled}}</option>
+                  <option value="ReqWai">{{translate.app.frontEnd.pages.travel_management.travel.hold_on}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Estado Liquidacion</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.travel.status_settle}}</label>
                 <select type="date" [(ngModel)]="statusLiquid" class="form-control" (change)="filter('statusLiquid')">
-                  <option value="">Todos</option>
-                  <option value="LiqPen">A liquidar</option>
-                  <option value="LiqApp">Liquidado</option>
-                  <option value="LiqAnn">Anulado</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.travel.all_status}}</option>
+                  <option value="LiqPen">{{translate.app.frontEnd.pages.travel_management.travel.to_settle}}</option>
+                  <option value="LiqApp">{{translate.app.frontEnd.pages.travel_management.travel.settlement}}</option>
+                  <option value="LiqAnn">{{translate.app.frontEnd.pages.travel_management.travel.canceled}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Empleado</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.travel.employee}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codEmployee" class="form-control">
@@ -146,13 +146,13 @@
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="travels_request" [checked]="checkThird"
               (click)="checkTravels('travels_request')" />
             <b>
-              Mis viajes registrados
+              {{translate.app.frontEnd.pages.travel_management.travel.select_my}}
             </b>
             &nbsp;&nbsp;
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_travels_request" [checked]="!checkThird"
               (click)="checkTravels('my_travels_request')" />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
-              Viajes registrados a terceros
+              {{translate.app.frontEnd.pages.travel_management.travel.select_third}}
             </b>
           </form>
         </div>
@@ -165,21 +165,21 @@
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span *ngIf="travels.ticket_cli !== null" class="badge badge-warning">
-                    No. Viaje SAP # {{travels.ticket_cli}}
+                    {{translate.app.frontEnd.pages.travel_management.travel.travel_sap}} # {{travels.ticket_cli}}
                   </span>
                   <span *ngIf="travels.messages_server !== null &&  travels.synch_type_server !== 'S'">
                     <h6 class="wg-hover-general" (click)="messages_error(travels.ticket)">
-                      <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error(travels.ticket)"></i>Error en sincronización</h6>
+                      <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error(travels.ticket)"></i>{{translate.app.frontEnd.pages.travel_management.travel.error_synch}}</h6>
                   </span>
                   <span class="badge badge-warning">
-                    No. Viaje iHR # {{travels.ticket}}
+                    {{translate.app.frontEnd.pages.travel_management.travel.travel_ihr}} # {{travels.ticket}}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-plane"></i>
-                  Fecha salida {{travels.date_begin_format}}
+                  {{translate.app.frontEnd.pages.travel_management.travel.date_in}} {{travels.date_begin_format}}
                 </p>
-                <p>Fecha llegada {{travels.date_end_format}}
+                <p>{{translate.app.frontEnd.pages.travel_management.travel.date_out}} {{travels.date_end_format}}
                 </p>
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p" *ngIf="travels.observation != null">
@@ -194,7 +194,7 @@
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
                 <p class="font-title-general">
-                  Estados:
+                  {{translate.app.frontEnd.pages.travel_management.travel.status_label}}:
                 </p>
                 <h6 *ngIf="travels.status_request == 'Aprobado'">
                   <span class="badge badge-primary">
@@ -240,10 +240,10 @@
                   {{travels.next_approver_to_json.approver_employee.posicion}}
                 </p>
                 <p class="">
-                  Aprobador {{travels.next_approver_to_json.level}}
+                  {{translate.app.frontEnd.pages.travel_management.travel.approver}} {{travels.next_approver_to_json.level}}
                 </p>
                 <p class="text-primary cursor-general" style="text-decoration: underline  #0275d8!important" (click)="seeAproverFlow(travels.ticket)">
-                  Ver flujo aprobaciones
+                  {{translate.app.frontEnd.pages.travel_management.travel.flow_approver}}
                 </p>
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="travels.next_approver_to_json.approver_employee == undefined">
@@ -251,7 +251,7 @@
                   {{aproover}}
                 </p>
                 <p class="text-primary cursor-general" style="text-decoration: underline  #0275d8!important" (click)="seeAproverFlow(travels.ticket)">
-                  Ver flujo aprobaciones
+                  {{translate.app.frontEnd.pages.travel_management.travel.flow_approver}}
                 </p>
               </div>
               <div class="col-lg-2 col-md-3 col-12 text-center top-p">
@@ -276,22 +276,22 @@
                     <i class="fa fa-trash" style="font-size:2em"></i>
                   </div>
                   <div class="col-4" (click)="viewTravels(travels.ticket)" *ngIf="travels.action_travel_requests_index_view[0].is_active">
-                    Ver
+                    {{translate.app.frontEnd.pages.travel_management.travel.see}}
                   </div>
                   <div class="col-4" style="cursor: no-drop" *ngIf="!travels.action_travel_requests_index_view[0].is_active">
-                    Ver
+                    {{translate.app.frontEnd.pages.travel_management.travel.see}}
                   </div>
                   <div class="col-4" (click)="editTravels(travels.ticket)" *ngIf="travels.action_travel_requests_index_view[1].is_active">
-                    Editar
+                    {{translate.app.frontEnd.pages.travel_management.travel.edit}}
                   </div>
                   <div class="col-4" style="cursor: no-drop" *ngIf="!travels.action_travel_requests_index_view[1].is_active">
-                    Editar
+                    {{translate.app.frontEnd.pages.travel_management.travel.edit}}
                   </div>
                   <div class="col-4" *ngIf="travels.action_travel_requests_index_view[2].is_active" (click)="deleteTravels(travels.ticket)">
-                    Eliminar
+                    {{translate.app.frontEnd.pages.travel_management.travel.erase}}
                   </div>
                   <div class="col-4" style="cursor: no-drop" *ngIf="!travels.action_travel_requests_index_view[2].is_active">
-                    Eliminar
+                    {{translate.app.frontEnd.pages.travel_management.travel.erase}}
                   </div>
                 </div>
               </div>

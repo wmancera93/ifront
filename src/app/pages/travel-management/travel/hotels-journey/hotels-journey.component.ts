@@ -5,6 +5,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { HotelsService } from '../../../../services/travel-management/hotels/hotels.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-hotels-journey',
@@ -19,11 +21,14 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
   public hotels: any[] = [];
   public countAfter: number = 0;
   public countAfterAlert: number = 0;
+  public translate: Translate = null;
 
   constructor(public travelService: TravelService,
     private fb: FormBuilder,
     public travelsSharedService: TravelsService,
-    public hotelsService: HotelsService, public alert: AlertsService) {
+    public hotelsService: HotelsService, public alert: AlertsService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.formHotelsJourney = new FormGroup({});
     this.formHotelsJourney = this.fb.group({
@@ -180,7 +185,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
       }, (error: any) => {
         document.getElementById("close_hotel_journey").click();
         const alertWarning: Alerts[] = [{
-          type: 'danger', title: 'Solicitud Denegada', message: 'No es posible solicitar hoteles con la fecha de entrada igual a la de salida. ¿Desea regresar a la solicitud de hoteles?',
+          type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.hotels_journey.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.travel.hotels_journey.message_alert_ts,
           confirmation: true, typeConfirmation: 'continueHotelsJourney'
         }];
         this.alert.setAlert(alertWarning[0]);

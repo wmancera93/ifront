@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Legalización de Gastos</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle}}</h5>
         <button id="closeSpends" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -17,7 +17,7 @@
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>Si va realizar un gasto para un tercero, busque por el nombre en la caja de texto:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.spend_third}}:</strong>
                 </label>
                 <form name="searchAutoComplete">
                   <p>
@@ -39,14 +39,14 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  Usted va a realizar un gasto para:
+                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.employee_third}}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
                 <br>
                 <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
                   (click)="deleteEmployeeThird()">
-                  Click para eliminar el tercero
+                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.erase_third}}
                 </span>
               </div>
             </div>
@@ -56,12 +56,12 @@
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-globe text-primary-hr"></i>
-                  <strong>Viaje asociado</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.travel}}</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
                 <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" (change)="validateTravel(formSpendTravel.value)">
-                  <option value="">Seleccione</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                   <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
                 </select>
               </div>
@@ -69,7 +69,7 @@
           </div>
 
           <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
-            <h4>Gastos</h4>
+            <h4>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.subtittle}}</h4>
             <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
 
@@ -77,7 +77,7 @@
             <div class="row">
               <div class="col-12">
                 <label class="titleColor" *ngIf="imgSpend.length > 0">
-                  <strong>Archivos adjuntos</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.attach}}</strong>
                 </label>
               </div>
             </div>
@@ -116,7 +116,7 @@
             <div class="row">
               <div class="col-12">
                 <label class="titleColor">
-                  <strong>Adjuntar Soporte de gastos</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.message_attach}}</strong>
                 </label>
                 <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
               </div>
@@ -125,7 +125,7 @@
 
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 15px" *ngIf="continue">
             <h5 *ngIf="spendNew">
-              Nuevo gasto
+              {{translate.app.frontEnd.pages.travel_management.spend.new_spend.btn_new}}
             </h5>
           </div>
 
@@ -133,10 +133,10 @@
             <div class="row justify-content-end">
               <div class="col-3" style="padding-bottom: 20px">
                 <h5 class="titleColor" *ngIf="spendEdit && !spendNew">
-                  Editar gasto
+                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.label_edit}}
                 </h5>
                 <button type="button" *ngIf="collapse_is" class="btn btn-block btn-primary text-center" (click)="colapse()">
-                  Nuevo gasto
+                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.label_new}}
                 </button>
                 <button type="button" id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
                 </button>
@@ -149,7 +149,7 @@
             <div class="col-12" style="margin-top: 15px">
               <label class="titleColor">
                 <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
-                <strong>Descripción:</strong>
+                <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.description}}:</strong>
               </label>
               <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
                 [formControl]="formSpendTravel.controls['observation']"></textarea>
@@ -158,7 +158,7 @@
             <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="continue" style="margin-top: 20px">
               <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendTravel.controls['formA']">
               <label class="form-check-label titleColor" for="FormACheck">
-                <strong>Formulario A</strong>
+                <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.form_a}}</strong>
               </label>
             </div>
 
@@ -167,31 +167,31 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de documento:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.type_document}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendTravel.controls['document']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
+                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                     <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hospital-o text-primary-hr"></i>
-                    <strong>Establecimiento:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.store}}:</strong>
                   </label>
                   <input type="text" class="form-control uppercase" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
-                    <strong>NIT:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.nit}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']" (keyup)="onluNumberSpend(formSpendTravel.value, 'nit')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                    <strong>Fecha de Gasto:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.date_spend}}:</strong>
                   </label>
                   <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"
                   />
@@ -203,7 +203,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag  text-primary-hr"></i>
-                    <strong>Número Factura:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.bill_number}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')"
                     style="text-align:right">
@@ -211,7 +211,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>No. de autorización:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.authorization}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']"
                     (keyup)="onluNumberSpend(formSpendTravel.value, 'authorization')" style="text-align:right">
@@ -219,7 +219,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <strong>Código de Control:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.control_number}}:</strong>
                   </label>
                   <input (keypress)="maskCode(formSpendTravel.value)" type="text" class="form-control uppercase" name="control_number" [formControl]="formSpendTravel.controls['control_number']"
                     placeholder="__-__-__-__-__" maxlength="14" [attr.disabled]="disabledCode == true ? true : null">
@@ -227,10 +227,10 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de gasto:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.type_spend}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
+                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                     <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}
                     </option>
                   </select>
@@ -242,7 +242,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
-                    <strong>Importe:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.import}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')"
                     style="text-align:right">
@@ -250,17 +250,17 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>Moneda:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.money}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
+                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                     <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
-                    <strong>Población:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.populate}}:</strong>
                   </label>
                   <input type="text" class="form-control uppercase" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
                 </div>
@@ -268,7 +268,7 @@
             </div>
             <div class="col-12" style="margin-top: 30px">
               <div class="border">
-                <strong class="text-primary-hr">Distribución de elementos de imputación</strong>
+                <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.seccion_dist}}</strong>
               </div>
             </div>
             <div class="col-12" style="margin-top: 30px">
@@ -279,28 +279,28 @@
                       <thead>
                         <tr>
                           <th class="text-center">
-                            Elemento de imputación
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_cero}}
                           </th>
                           <th class="text-center">
-                            Centro de costo
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_one}}
                           </th>
                           <th class="text-center">
-                            Grafo
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_two}}
                           </th>
                           <th class="text-center">
-                            Operación
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_tree}}
                           </th>
                           <th class="text-center">
-                            Orden
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_four}}
                           </th>
                           <th class="text-center">
-                            Cta contable
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_five}}
                           </th>
                           <th class="text-center">
-                            Distribución
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_six}}
                           </th>
                           <th class="text-center">
-                            Eliminar
+                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_seven}}
                           </th>
                         </tr>
                       </thead>
@@ -345,7 +345,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                    <a>Elemento de imputación:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_cero}}:*</a>
                   </label>
                   <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
                     (change)="selectTypeCenterImputations()">
@@ -356,7 +356,7 @@
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                    <a>Centro de costo:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_one}}:*</a>
                   </label>
                   <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList" [(ngModel)]="typeCenterCost"
                     [ngModelOptions]="{standalone: true}" (keyup)="enterCostSpend()">
@@ -369,7 +369,7 @@
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                    <a>Orden:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_four}}:*</a>
                   </label>
                   <input class="form-control uppercase" id="searchByAutoCompleteOrderSpend" autocomplete="off" type="text" name="orderList"
                     [(ngModel)]="typeCenterOrder" [ngModelOptions]="{standalone: true}" (keyup)="enterOrderSpend()">
@@ -382,7 +382,7 @@
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <a>Grafo:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_two}}:*</a>
                   </label>
                   <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" [(ngModel)]="grahpSpend"
                     [ngModelOptions]="{standalone: true}" (keyup)="enterGraphSpend()">
@@ -395,10 +395,10 @@
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
-                    <a>Operación:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_tree}}:*</a>
                   </label>
                   <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
-                    <option value="-1">Seleccione</option>
+                    <option value="-1">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                     <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                   </select>
                 </div>
@@ -410,10 +410,10 @@
                 <div class="col-lg-6 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <a>Cuenta contable:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_five}}:*</a>
                   </label>
                   <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
-                    <option value="">Seleccione</option>
+                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
                     <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}
                     </option>
                   </select>
@@ -421,7 +421,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                   <label for="dateEnd" class="titleColor">
                     <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                    Distribución*
+                    {{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_six}}*
                   </label>
                   <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right"
                   />
@@ -468,13 +468,13 @@
                     || formSpendTravel.value.populated == -1
                     || distributionAccount.length == 0 ) ? true : null" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.bnt_add}}</button>
                   <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.save_edit}}</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
                   <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse" data-target="#collapseNewSpend">
-                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
+                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.btn_cancel}}</button>
                 </div>
               </div>
             </div>
@@ -484,9 +484,9 @@
         <div class="row justify-content-end" *ngIf="activate_submit_spend">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="continue">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar Solicitud</button>
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.save_requests}}</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.loading}}</button>
           </div>
         </div>
 

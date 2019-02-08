@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 import { SpendsService } from '../../../../services/travel-management/spends/spends.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-show-dist-spends-travels',
@@ -13,8 +15,12 @@ export class ShowDistSpendsTravelsComponent implements OnInit {
   public detailDistCostTravel: any[] = [];
   public printSpendTravel: any[] = [];
   public is_collapse = false
+  public translate: Translate = null;
 
-  constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService) {
+  constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService
+    , public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.spendSharedService.getViewDistCostSpend().subscribe((data: any) => {
       this.accionDist = data.accion;
