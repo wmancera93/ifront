@@ -27,7 +27,10 @@ export class MenuNavigationComponent implements OnInit {
     public companieService: MainService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-    this.translate = this.translateService.getTranslate();
+      setTimeout(() => {
+        this.translate = this.translateService.getTranslate();
+        console.log(this.translate)
+      }, 500);
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });

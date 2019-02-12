@@ -35,7 +35,7 @@ export class IncomeWithholdingsComponent implements OnInit, OnDestroy {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Ingresos y retenciones" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getIncomeWithholdingsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

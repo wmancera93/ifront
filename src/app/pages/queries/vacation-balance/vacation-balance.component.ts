@@ -35,7 +35,7 @@ export class VacationBalanceComponent implements OnInit, OnDestroy {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Saldo de vacaciones" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getBalanceVacationExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

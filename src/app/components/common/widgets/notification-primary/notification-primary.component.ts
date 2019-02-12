@@ -16,7 +16,7 @@ export class NotificationPrimaryComponent implements OnInit {
   public translate: Translate = null;
 
   constructor(public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
+      this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {

@@ -1,6 +1,6 @@
 <button id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-alert" data-backdrop="static" style="display: none"></button>
 <div class="modal" id="modal-alert" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog" role="document" *ngIf="translate !== null">
     <div class="modal-content" *ngIf="bodyAlert.type == 'primary'" style="background-color: rgb(2, 90, 165) !important">
       <div class="modal-header">
         <h5 class="modal-title font-controls-login" id="exampleModalLabel">{{ bodyAlert.title }}</h5>

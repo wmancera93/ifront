@@ -6,7 +6,7 @@
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
-        <div class=" col-12 title">
+        <div class=" col-12 title" *ngIf="translate !== null">
           <i class="fa fa-user"></i>
           {{translate.app.frontEnd.pages.master_data.title_my_data}}
         </div>
@@ -62,17 +62,17 @@
           <div class="row-hr-container  widget bg-white-1x" style="min-height: calc(70vh)">
             <div class="row justify-content-center top-containter" *ngIf="lengthArray == 0  ">
               <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
-                <div class="alert alert-warning" role="alert">
-                  {{translate.app.frontEnd.pages.master_data.text_one}}
-                  <strong>{{titleData}}</strong>&nbsp;{{translate.app.frontEnd.pages.master_data.text_two}}
+                <div class="alert alert-warning" role="alert" *ngIf="translate !== null">
+                  {{translate.app.frontEnd.pages.master_data.text_no_information}}
+                  <strong>{{titleData}}</strong>&nbsp;{{translate.app.frontEnd.pages.master_data.text_available}}
                 </div>
               </div>
             </div>
             <div class="col-12" *ngIf="lengthArray !== 0 && showButton">
               <div class="row">
-                <div class="col-xl-10 col-md-9 col-8 text-right">
+                <div class="col-xl-10 col-md-9 col-8 text-right" *ngIf="translate !== null">
                   <div class="top-title-dbgerencial">
-                    {{translate.app.frontEnd.pages.master_data.text_tree}}
+                    {{translate.app.frontEnd.pages.master_data.text_edit}}
                   </div>
                 </div>
                 <div class="col-xl-2 col-md-3 col-4">

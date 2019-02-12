@@ -57,6 +57,7 @@ export class EditPublicationComponent implements OnInit {
     })
 
     this.EditSharedService.getEditNew().subscribe((data: any) => {
+
       this.infoMyPublication = data;
       this.tags = this.infoMyPublication.themes
       this.idEdit = this.infoMyPublication.id;
@@ -67,7 +68,7 @@ export class EditPublicationComponent implements OnInit {
 
       this.showLabelTheme = this.infoMyPublication.themes;
       this.showLabelImage = this.infoMyPublication.image.url;
-      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
+      this.showLabelImage =  this.showLabelImage == null ? '' : this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
       this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
 
       this.showEditArticle();

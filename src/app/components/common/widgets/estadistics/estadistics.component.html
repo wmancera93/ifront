@@ -38,7 +38,7 @@
           <canvas baseChart id="doughnutChartHov" [data]="doughnutChartData" [legend]="false" [labels]="doughnutChartLabels" [colors]="doughnutChartColors"
             [chartType]="doughnutChartType" [options]="doughnutOptions" (mouseover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
         </div>
-        <div class="row" style="margin-top: 20px">
+        <div class="row" style="margin-top: 20px"  *ngIf="translate !== null">
           <div class="col-6 text-left">
             <i class="fa fa-square" aria-hidden="true" style="color: #070B19"></i>
             {{translate.app.frontEnd.components.common.widgets.estadistics.hour_night_festive}}

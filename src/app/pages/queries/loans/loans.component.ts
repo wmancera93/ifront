@@ -31,7 +31,7 @@ export class LoansComponent implements OnInit, OnDestroy {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Préstamos" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getLoansExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

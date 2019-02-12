@@ -18,11 +18,11 @@ export class NotificationSecundaryComponent implements OnInit {
   public dataTitle: string;
   public sendDataMangerial: any;
   public translate: Translate = null;
-  
+
   constructor(public managerialDataShared: ManagerialDataService,
-    public dasboardManagerialService: DashboardManagerialService, public translateService: TranslateService) { 
-      this.translate = this.translateService.getTranslate();
-    }
+    public dasboardManagerialService: DashboardManagerialService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+  }
 
   ngOnInit() {
     this.notificationSecundary.subscribe((data: NotificationSecundary) => {

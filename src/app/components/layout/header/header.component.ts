@@ -57,20 +57,23 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getDataLocalStorage();
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
-    this.logoHeader = this.dataEnterprise.logo_inside.url;
+    setTimeout(() => {
+      this.getDataLocalStorage();
+      this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+      this.logoHeader = this.dataEnterprise.logo_inside.url;
 
-    if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
-      this.showMenu = false;
-      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
-      document.getElementById('footer_general').style.display = 'block';
-    } else {
-      if (this.showMenu === true) {
-        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
-        document.getElementById('footer_general').style.display = 'none';
+      if (window.getComputedStyle(document.getElementById("btnMobile"), null).getPropertyValue('display') === 'none') {
+        this.showMenu = false;
+        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+        document.getElementById('footer_general').style.display = 'block';
+      } else {
+        if (this.showMenu === true) {
+          (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
+          document.getElementById('footer_general').style.display = 'none';
+        }
       }
-    }
+    }, 100);
+
   }
 
   LogOut() {

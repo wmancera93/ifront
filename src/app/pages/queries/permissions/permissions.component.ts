@@ -13,7 +13,7 @@ import { Translate } from '../../../models/common/translate/translate';
 })
 export class PermissionsComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Permisos';
+  public nameReport: string;
   public showExcel: boolean = true;
   public userAuthenticated: User;
   public countAfter: number = 0;
@@ -33,7 +33,7 @@ export class PermissionsComponent implements OnInit, OnDestroy {
       behavior: 'smooth'
     });
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Permisos" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getPermissionsExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

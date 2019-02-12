@@ -3,18 +3,18 @@
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
-  <div class="row-hr-container">
+  <div class="row-hr-container" >
     <div class="col-12">
       <div class="row align-items-center">
-        <div class="col-xl-8 col-md-6 col-5 title">
+        <div class="col-xl-8 col-md-6 col-5 title" *ngIf="translate !== null">
           <i class="fa fa-fw fa-th-large fa-x1"></i>
-          {{translate.app.pages.dashboard.title}}
+          {{translate.app.frontEnd.pages.dashboard.tittle}}
         </div>
         <div class="col-xl-4 col-md-6 col-7" *ngIf="showButtonDashManagement">
           <div class="row">
             <div class="col-xl-10 col-md-9 col-8 text-right">
-              <div class="top-title-dbgerencial">
-                {{translate.app.pages.dashboard.title_switch}}
+              <div class="top-title-dbgerencial" *ngIf="translate !== null">
+                {{translate.app.frontEnd.pages.dashboard.text_management_dashboard}}
               </div>
             </div>
             <div class="col-xl-2 col-md-3 col-4 text-right">

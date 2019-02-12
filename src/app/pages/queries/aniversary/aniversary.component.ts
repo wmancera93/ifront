@@ -32,7 +32,7 @@ export class AniversaryComponent implements OnInit, OnDestroy {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Aniversario de los empleados" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getAniversaryExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

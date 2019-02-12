@@ -74,7 +74,7 @@ export class NewArticleFormComponent implements OnInit {
   onSubmitNewArticle(value: any): void {
     if (value.title == "" || value.summary == "" || value.body == "") {
       (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
-      const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts_one, message: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_empty_fields_ts, confirmation: false }];
+      const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts, message: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_empty_fields_ts, confirmation: false }];
       this.showSubmit = true;
       this.alert.setAlert(alertWarning[0]);
 
@@ -103,7 +103,7 @@ export class NewArticleFormComponent implements OnInit {
       },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts_one, message: error.json().errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.msg_denied_request_ts, message: error.json().errors.toString(), confirmation: false }];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
 

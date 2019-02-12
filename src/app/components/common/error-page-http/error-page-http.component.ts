@@ -15,7 +15,10 @@ export class ErrorPageHttpComponent implements OnInit {
   public messageError: string = '';
   public translate: Translate = null;
   constructor(public router: Router, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
+    setTimeout(() => {
+      this.translate = this.translateService.getTranslate();
+      console.log(this.translate)
+    }, 500);
   }
 
   ngOnInit() {

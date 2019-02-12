@@ -72,7 +72,7 @@ export class MyPublicationsComponent implements OnInit {
               this.getDataPublications();
               this.alertWarning = [{
                 type: 'success',
-                title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts,
+                title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts_one,
                 message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_confirmation_ts,
                 confirmation: false,
                 typeConfirmation: ''
@@ -145,7 +145,7 @@ export class MyPublicationsComponent implements OnInit {
     this.idDelete = infoPub.id;
     this.alertWarning = [{
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts,
+      title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts_one,
       message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_elimination_confirmation_ts,
       confirmation: true,
       typeConfirmation: 'deleteArticle'

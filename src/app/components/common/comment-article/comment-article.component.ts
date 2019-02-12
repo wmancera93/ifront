@@ -84,6 +84,7 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
+    debugger
     if (modal !== undefined) {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
@@ -110,10 +111,12 @@ export class CommentArticleComponent implements OnInit {
   }
 
   sendComment() {
+    debugger
     this.showSubmit = false;
     if (this.flagEditComment == true) {
       this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
         (data: any) => {
+          debugger
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
           this.showSubmit = true;
           this.numberComments = data.total_comments;
@@ -127,6 +130,7 @@ export class CommentArticleComponent implements OnInit {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
+            debugger
             this.showSubmit = true;
             this.getDetailArticle();
             this.comment = '';
@@ -134,8 +138,8 @@ export class CommentArticleComponent implements OnInit {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             const alertWarning: Alerts[] = [{
               type: 'success',
-              title: 'Confirmación',
-              message: 'Comentario guardado exitosamente',
+              title: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
+              message:  this.translate.app.frontEnd.components.common.comment_article.msg_alert_save_ts,
               confirmation: false,
               typeConfirmation: ''
             }];
@@ -148,7 +152,7 @@ export class CommentArticleComponent implements OnInit {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             const alertWarning: Alerts[] = [{
               type: 'danger',
-              title: 'Solicitud Denegada',
+              title: this.translate.app.frontEnd.components.common.comment_article.type_alert_denied_ts,
               message: error.error.errors.toString(),
               confirmation: false
             }];
@@ -164,8 +168,8 @@ export class CommentArticleComponent implements OnInit {
     this.idComment = commentObject.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el comentario?',
+      title: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
+      message: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
       confirmation: true,
       typeConfirmation: 'deleteComment'
     }];

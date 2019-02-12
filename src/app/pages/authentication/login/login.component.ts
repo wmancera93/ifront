@@ -39,8 +39,13 @@ export class LoginComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-    
-    this.translate = this.translateService.getTranslate();
+
+    setTimeout(() => {
+      this.translate = this.translateService.getTranslate();
+      console.log(this.translate)
+    }, 500);
+
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -50,6 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+
     let rememeberObject = JSON.parse(localStorage.getItem("remember"));
 
     this.txtEmail = rememeberObject == null ? '' : rememeberObject[0].email;

@@ -27,15 +27,15 @@
                     <div class="row justify-content-end">
                         <div *ngIf="showContactsList" id="togglePartners" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)="clickPartnersIcon()">
                             <i class="fa fa-fw fa-users fa-lg"></i>
-                            <span class="hideText font-size-responsive ">{{translate.app.frontEnd.components.layout.header.partner}}</span>
+                            <span class="hideText font-size-responsive "  *ngIf="translate !== null">{{translate.app.frontEnd.components.layout.header.partner}}</span>
                         </div>
                         <div *ngIf="!showContactsList" id="togglePartnersHide" class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom" (click)="clickPartnersIconHide()">
                                 <i class="fa fa-fw fa-users fa-lg"></i>
-                                <span class="hideText font-size-responsive ">{{translate.app.frontEnd.components.layout.header.partner}}</span>
+                                <span class="hideText font-size-responsive "  *ngIf="translate !== null">{{translate.app.frontEnd.components.layout.header.partner}}</span>
                             </div>
                         <div class="col-md-4 col-lg-6 col-xl-5  col-6 text-center cursor-general img-zoom" (click)='LogOut()'>
                             <i class="fa fa-fw fa-sign-out fa-lg"></i>
-                            <span class="hideText font-size-responsive">{{translate.app.frontEnd.components.layout.header.out_door}}</span>
+                            <span class="hideText font-size-responsive"  *ngIf="translate !== null">{{translate.app.frontEnd.components.layout.header.out_door}}</span>
                         </div>
                     </div>
                 </div>

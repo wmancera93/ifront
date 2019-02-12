@@ -21,10 +21,10 @@ export class EventsEmployeesComponent implements OnInit {
 
   constructor(public infoEventEmployee: EventsEmployeeService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-      this.translate = this.translateService.getTranslate();
+    this.translate = this.translateService.getTranslate();
   }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
       if (data.length === 0) {

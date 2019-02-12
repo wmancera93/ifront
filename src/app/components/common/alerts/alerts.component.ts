@@ -26,7 +26,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
   constructor(public alert: AlertsService, public route: Router,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-   this.translate = this.translateService.getTranslate()
+    this.translate = this.translateService.getTranslate();
 
     this.alert.getAlert().subscribe(
       (data) => {

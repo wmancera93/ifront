@@ -85,6 +85,10 @@ interface Comment_article {
     save: string,
     loading: string,
     btn_close: string,
+    type_alert_confirmation_ts: string,
+    msg_alert_save_ts: string,
+    type_alert_denied_ts: string,
+    msg_alert_erase_ts: string
 }
 
 interface Data_table {
@@ -473,7 +477,7 @@ interface My_publication {
     text_comments: string,
     text_edit: string,
     text_remove: string,
-    title_confirmation_ts: string,
+    title_confirmation_ts_one: string,
     msg_confirmation_ts: string,
     msg_elimination_confirmation_ts: string,
     edit_publication: Edit_publication,
@@ -500,7 +504,7 @@ interface New_article_form {
     btn_save: string,
     text_loading: string,
     btn_close: string,
-    msg_denied_request_ts_one: string,
+    msg_denied_request_ts: string,
     msg_empty_fields_ts: string,
     text_status_news_ts: string,
     msg_saved_news_ts: string,
@@ -510,7 +514,7 @@ interface Corporate_documents {
 }
 interface Dashboard {
     text_management_dashboard: string,
-    msg_welcome_ts: string,
+    tittle: string,
 }
 interface Error_page {
     title_not_found: string,
@@ -623,21 +627,21 @@ interface Hierarchical_chart {
 }
 interface Master_data {
     title_my_data: string,
-    text_one: string,
-    text_two: string,
-    text_tree: string,
-    ts_warning_text_one: string,
+    text_no_information: string,
+    text_available: string,
+    text_edit: string,
+    ts_warningone_text_one: string,
     msg_denied_request_ts: string,
-    ts_warning_text_two: string,
-    ts_warning_text_tow: string,
-    ts_warning_text_tree: string,
-    ts_warning_text_four: string,
-    ts_warning_text_five: string,
-    ts_warning_text_six: string,
-    ts_warning_text_seven: string,
-    ts_warning_text_eight: string,
-    ts_warning_text_nine: string,
-    ts_warning_text_teen: string,
+    msg_no_modification_ts: string,
+    title_confirmation_ts: string;
+    title_contact_information_ts: string;
+    title_family_information_ts: string;
+    title_academic_information_ts: string;
+    title_business_information_ts: string;
+    title_Bank_information_ts: string;
+    title_beneficiaries_information_ts: string;
+    title_social_security_information_ts: string;
+    title_withholding_information_ts: string;
 }
 interface My_team {
     title_my_team: string,
@@ -1609,7 +1613,7 @@ interface New_travel {
 interface Show_dist_spends_travels {
     tittle: string,
     back: string,
-    code_spend:string,
+    code_spend: string,
     type_spend: string,
     import: string,
     date: string,
