@@ -47,6 +47,12 @@ export class CommentArticleComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
 
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if(data ==='continueExit'){
+        this.getDetailArticle()
+      }
+    })
+
     this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
@@ -84,10 +90,11 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
-    debugger
+    
     if (modal !== undefined) {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
+        debugger
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
         if (document.getElementById(modal).className !== 'modal show') {
@@ -116,7 +123,6 @@ export class CommentArticleComponent implements OnInit {
     if (this.flagEditComment == true) {
       this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
         (data: any) => {
-          debugger
           (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
           this.showSubmit = true;
           this.numberComments = data.total_comments;
@@ -130,18 +136,17 @@ export class CommentArticleComponent implements OnInit {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
-            debugger
             this.showSubmit = true;
-            this.getDetailArticle();
             this.comment = '';
             this.numberComments = data.total_comments;
+            debugger
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             const alertWarning: Alerts[] = [{
               type: 'success',
               title: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
               message:  this.translate.app.frontEnd.components.common.comment_article.msg_alert_save_ts,
-              confirmation: false,
-              typeConfirmation: ''
+              confirmation: true,
+              typeConfirmation: 'continueExit'
             }];
             this.showSubmit = true;
             this.flagRefreshPublication = true;
@@ -154,7 +159,8 @@ export class CommentArticleComponent implements OnInit {
               type: 'danger',
               title: this.translate.app.frontEnd.components.common.comment_article.type_alert_denied_ts,
               message: error.error.errors.toString(),
-              confirmation: false
+              confirmation: true,
+              typeConfirmation: 'continueError'
             }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
