@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.events_management.training.view_training.title_training_agreements}} </h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel" *ngIf="translate !== null">{{translate.app.frontEnd.pages.events_management.training.view_training.title_training_agreements}} </h5>
         <button id="closeModalTraining" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -22,70 +22,70 @@
               {{trainingDetailInfo.name | uppercase}}
             </strong>
             <div class="row margin-row">
-              <div class="col-lg-6 col-12 titleColor">
+              <div class="col-lg-6 col-12 titleColor" *ngIf="translate !== null">
                 <i class="fa fa-calendar text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_start}}:</strong>
+                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_start}}</strong>
               </div>
               <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.start_date_trainig}}
               </div>
             </div>
             <div class="row margin-row">
-              <div class="col-lg-6 col-12 titleColor">
+              <div class="col-lg-6 col-12 titleColor" *ngIf="translate !== null">
                 <i class="fa fa-calendar text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_end}}:</strong>
+                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_end}}</strong>
               </div>
               <div class="col-lg-6 col-12">
                 {{trainingDetailInfo.end_date_trainnig}}
               </div>
             </div>
-            <div class="row margin-row">
+            <div class="row margin-row" *ngIf="translate !== null">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-history text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.events_management.training.text_duration_days}}:</strong>
+                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_duration_days}}:</strong>
               </div>
               <div class="col-lg-6 col-12">
-                {{trainingDetailInfo.ndays}} {{translate.app.frontEnd.pages.events_management.training.text_days}}
+                {{trainingDetailInfo.ndays}} {{translate.app.frontEnd.pages.events_management.training.view_training.text_days}}
               </div>
             </div>
-            <div class="row margin-row">
+            <div class="row margin-row" *ngIf="translate !== null">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-clock-o text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.events_management.training.text_duration_hours}}:</strong>
+                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_duration_hours}}:</strong>
               </div>
               <div class="col-lg-6 col-12">
-                {{trainingDetailInfo.nhours_for_days}} {{translate.app.frontEnd.pages.events_management.training.text_hours_day}}
+                {{trainingDetailInfo.nhours_for_days}} {{translate.app.frontEnd.pages.events_management.training.view_training.text_hours_day}}
               </div>
             </div>
-            <div class="row margin-row">
+            <div class="row margin-row" *ngIf="translate !== null">
               <div class="col-12 titleColor" *ngIf="flagPDF">
                 <i class="fa  text-primary-hr fa-file-pdf-o"></i>
-                <strong style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewPDF()">{{translate.app.frontEnd.pages.events_management.training.text_view_pdf}}</strong>
+                <strong style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewPDF()">{{translate.app.frontEnd.pages.events_management.training.view_training.text_view_pdf}}</strong>
               </div>
             </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
-              <div class="col-lg-6 col-12 titleColor">
+              <div class="col-lg-6 col-12 titleColor" *ngIf="translate !== null">
                 <i class="fa fa fa-history text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.events_management.training.text_observations}}:</strong>
+                <strong>{{translate.app.frontEnd.pages.events_management.training.view_training.text_observations}}:</strong>
               </div>
             </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
               <div class="col-12">
-                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones"
-                  style="width:100% !important;" required>
+                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones" style="width:100% !important;"
+                  required>
                 </textarea>
               </div>
             </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
-              <div class="col-6">
+              <div class="col-6" *ngIf="translate !== null">
                 <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(true)">
                   <i class="fa fa-check"></i>
-                  {{translate.app.frontEnd.pages.events_management.training.btn_accept}} </button>
+                  {{translate.app.frontEnd.pages.events_management.training.view_training.btn_accept}} </button>
               </div>
-              <div class="col-6">
+              <div class="col-6" *ngIf="translate !== null">
                 <button class="btn btn-block btn-primary text-center" (click)="acceptTraining(false)">
                   <i class="fa fa-times"></i>
-                  {{translate.app.frontEnd.pages.events_management.training.btn_decline}} </button>
+                  {{translate.app.frontEnd.pages.events_management.training.view_training.btn_decline}} </button>
               </div>
             </div>
           </div>

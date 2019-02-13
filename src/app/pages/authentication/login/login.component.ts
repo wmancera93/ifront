@@ -54,6 +54,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  changeLanguaje(param: string) {
+    this.translateService.changeLanguaje(param);
+    setTimeout(() => {
+      this.translate = this.translateService.getTranslate();
+      console.log(this.translate)
+    }, 500);
+  }
+
   ngOnInit() {
 
     let rememeberObject = JSON.parse(localStorage.getItem("remember"));

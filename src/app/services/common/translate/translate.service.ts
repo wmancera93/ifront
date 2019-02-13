@@ -9,10 +9,14 @@ export class TranslateService {
 
   constructor(private http: HttpClient) {
     if (this.translate === null) {
-      this.getTravelsApprovedReport('ES').subscribe((data: any) => {
-        this.translate = JSON.parse(data.data[0].data[0].language_json_file);        
-      })
+      this.changeLanguaje('es');
     }
+  }
+
+  changeLanguaje(param: string){
+    this.getTravelsApprovedReport(param).subscribe((data: any) => {
+      this.translate = JSON.parse(data.data[0].data[0].language_json_file);     
+    })   
   }
 
   getTranslate() {
@@ -57,7 +61,7 @@ export class TranslateService {
         baseUrl = environment.apiBaseHr_production;
         break;
     }
-    return this.http.get(baseUrl + '/api/v2/companies/tree_language/' + languaje)
+    return this.http.get(baseUrl +'/'+languaje +'/api/v2/companies/tree_language')
       .map((data: any) => data);
   }
 

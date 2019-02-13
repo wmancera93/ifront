@@ -574,6 +574,7 @@ interface Events_management {
 }
 interface Training {
     text_trainings: string,
+    tittle_table_ts:string,
     report_training: Report_training,
     view_training: View_training,
 }
@@ -1666,6 +1667,9 @@ interface Services {
     travel_management: Travel_management_Service,
 }
 interface Travel_management_Service {
+    report:Report
+}
+interface Report {
     name_travel: string,
     name_advance: string,
     mane_allowance: string,
