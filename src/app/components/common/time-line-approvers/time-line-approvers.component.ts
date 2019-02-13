@@ -88,7 +88,7 @@ export class TimeLineApproversComponent implements OnInit {
               },
               type_requests_name: data.request.travel_requests_type_name,
             },
-            title: 'Detalles de solicitud #' + data.request.ticket,
+            title: this.translate.app.frontEnd.components.common.time_line_approvers.detail_requests + data.request.ticket,
           });
           this.fileSupport = null;
 
@@ -98,8 +98,6 @@ export class TimeLineApproversComponent implements OnInit {
           }
           this.viewModal = true;
         }
-
-        console.log(this.detailRequets)
       });
   }
 

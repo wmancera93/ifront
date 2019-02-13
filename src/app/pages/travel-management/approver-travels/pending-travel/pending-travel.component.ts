@@ -58,7 +58,7 @@ export class PendingTravelComponent implements OnInit {
       },
       {
         id: 3,
-        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_tree
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_three
       }
     )
   }

@@ -147,8 +147,8 @@ export class RequestsRhComponent implements OnInit {
     this.idDelete = id;
     this.alertWarning = [{
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.requests_rh.type_alert_two_ts,
-      message: this.translate.app.frontEnd.pages.requests_rh.type_alert_tree_ts + id.toString(),
+      title: this.translate.app.frontEnd.pages.requests_rh.type_alert_one_ts,
+      message: this.translate.app.frontEnd.pages.requests_rh.type_alert_two_ts +' '+ id.toString(),
       confirmation: true,
       typeConfirmation: 'deletRequest'
     }];

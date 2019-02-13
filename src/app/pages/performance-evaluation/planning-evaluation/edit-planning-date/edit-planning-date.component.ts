@@ -30,7 +30,10 @@ export class EditPlanningDateComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService,
     private fb: FormBuilder,
     public alert: AlertsService, public translateService: TranslateService) {
+
     this.translate = this.translateService.getTranslate();
+
+
     this.formDate = new FormGroup({});
     this.formDate = fb.group({
       start_planning: "",

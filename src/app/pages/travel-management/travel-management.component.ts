@@ -34,7 +34,9 @@ export class TravelManagementComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
+
     if ((this.dataUserTravels.employee.is_travel_manager == true) && (this.dataUserTravels.employee.is_approver == true)) {
+
       this.buttonInfo = [
         {
           title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
@@ -88,6 +90,7 @@ export class TravelManagementComponent implements OnInit {
       ];
     } else {
       if (this.dataUserTravels.employee.is_travel_approver) {
+
         this.buttonInfo = [
           {
             title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,

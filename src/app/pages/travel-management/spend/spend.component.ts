@@ -32,8 +32,8 @@ export class SpendComponent implements OnInit {
     public spendsService: SpendsService,
     public alert: AlertsService,
     public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
-    
-      this.translate = this.translateService.getTranslate();
+
+    this.translate = this.translateService.getTranslate();
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {

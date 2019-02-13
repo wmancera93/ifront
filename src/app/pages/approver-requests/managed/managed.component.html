@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-circle-o-notch"></i>
-          {{translate.app.frontEnd.pages.approver_requests.managed.title_ppprovals_managed}}
+          {{translate.app.frontEnd.pages.approver_request.managed.title_ppprovals_managed}}
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
       <div class="row justify-content-center top-general-p" *ngIf="managed.length == 0">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.approver_requests.managed.message_approvals}}
+            {{translate.app.frontEnd.pages.approver_request.managed.message_approvals}}
           </div>
         </div>
       </div>
@@ -29,12 +29,12 @@
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    {{translate.app.frontEnd.pages.approver_requests.managed.text_ticket}} #{{managed.ticket}}
+                    {{translate.app.frontEnd.pages.approver_request.managed.text_ticket}} #{{managed.ticket}}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.approver_requests.managed.text_created_on}} {{managed.created_date}}
+                  {{translate.app.frontEnd.pages.approver_request.managed.text_created_on}} {{managed.created_date}}
                 </p>
               </div>
               <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
@@ -53,7 +53,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  {{translate.app.frontEnd.pages.approver_requests.managed.text_Applicant}}
+                  {{translate.app.frontEnd.pages.approver_request.managed.text_Applicant}}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
@@ -62,7 +62,7 @@
               </div>
               <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  {{translate.app.frontEnd.pages.approver_requests.managed.text_status}}
+                  {{translate.app.frontEnd.pages.approver_request.managed.text_status}}
                 </p>
                 <h6 *ngIf="managed.status == 'Aprobado'">
                   <span class="badge badge-primary">
@@ -88,7 +88,7 @@
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p" (click)="modalAprovers(managed)">
                 <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color:#23c6c8 "></i>
                 <div class="col-12">
-                  {{translate.app.frontEnd.pages.approver_requests.managed.icon_watch}}
+                  {{translate.app.frontEnd.pages.approver_request.managed.icon_watch}}
                 </div>
               </div>
             </div>

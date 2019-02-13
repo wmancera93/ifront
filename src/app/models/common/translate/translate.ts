@@ -154,6 +154,7 @@ interface Time_line_approvers {
     approver: string,
     pending: string,
     button_close: string,
+    detail_requests: string
 }
 interface Travels {
     approvals_details_travels: Approvals_details_travels,
@@ -335,7 +336,7 @@ interface Pages {
     corporate_documents: Corporate_documents,
     dashboard: Dashboard,
     error_page: Error_page,
-    evaluation: Evaluation,
+    evaluations: Evaluations,
     events_management: Events_management,
     help: Help,
     hierarchical_chart: Hierarchical_chart,
@@ -531,7 +532,7 @@ interface News {
     text_views: string,
     tex_comments: string,
 }
-interface Evaluation {
+interface Evaluations {
     evaluated: Evaluated,
 }
 interface Evaluated {
@@ -546,16 +547,16 @@ interface Evaluated {
     text_managed_evaluations_two: string,
     text_managed_evaluations_three: string,
     icon_watch: string,
-    fill_evaluation: Fill_evaluation,
+    fill_evalaution: Fill_evalaution,
     show_evaluation: Show_evaluation,
 }
-interface Fill_evaluation {
+interface Fill_evalaution {
     btn_save: string,
     text_loading: string,
     btn_close: string,
     text_success_ts: string,
     ts_warning_text: string,
-    msg_deniedrequest_ts: string,
+    msg_denied_request_ts: string,
     msg_continue_ts: string,
 }
 interface Show_evaluation {
@@ -871,7 +872,6 @@ interface Requests_rh {
     message_alert_ts: string,
     type_alert_one_ts: string,
     type_alert_two_ts: string,
-    type_alert_tree_ts: string,
 }
 interface Forms_requests {
     tittle: string,
@@ -1021,7 +1021,7 @@ interface Manged_travel {
     see: string,
     filter_one: string,
     filter_two: string,
-    filter_tree: string,
+    filter_three: string,
 }
 interface Pending_travel {
     tittle: string,
@@ -1051,7 +1051,7 @@ interface Pending_travel {
     see: string,
     filter_one: string,
     filter_two: string,
-    filter_tree: string,
+    filter_three: string,
 }
 interface Hotels {
     new_hotel: New_hotel,

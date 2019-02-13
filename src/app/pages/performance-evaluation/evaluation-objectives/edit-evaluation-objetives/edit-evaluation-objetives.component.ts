@@ -47,9 +47,9 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     public performanceEvalSharedService: PerformanceEvalSharedService,
     public alert: AlertsService, public translateService: TranslateService) {
 
-    this.nameReport = this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.name_table_ts;
-
     this.translate = this.translateService.getTranslate();
+    
+    this.nameReport = this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.name_table_ts;
     this.alert.getActionConfirm().subscribe((data) => {
       if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
         this.dataTableConsult();

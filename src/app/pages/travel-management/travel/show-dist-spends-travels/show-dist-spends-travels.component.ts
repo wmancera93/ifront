@@ -21,7 +21,7 @@ export class ShowDistSpendsTravelsComponent implements OnInit {
     , public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-
+    
     this.spendSharedService.getViewDistCostSpend().subscribe((data: any) => {
       this.accionDist = data.accion;
 

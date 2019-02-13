@@ -43,9 +43,10 @@ export class TravelRequestsReportComponent implements OnInit {
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService,
     public alert: AlertsService, public translateService: TranslateService) {
-
+    debugger
     this.translate = this.translateService.getTranslate();
     this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.tittle_ts;
+    console.log(this.title);
     this.nameReport = this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.name_table_ts;
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {

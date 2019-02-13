@@ -88,7 +88,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
       if (data.success == true) {
         const alertConfirmation: Alerts[] = [{
           type: 'success',
-          title: this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.text_success_ts,
+          title: this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.ts_warning_text,
           message: data.message,
           confirmation: false,
         }];
@@ -104,8 +104,8 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
         const alertWarning: Alerts[] =
           [{
             type: 'danger',
-            title: this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.msg_deniedrequest_ts,
-            message: error.json().errors.toString() + this.translate.app.frontEnd.pages.evaluation.evaluated.fill_evaluation.msg_continue_ts,
+            title: this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.msg_denied_request_ts,
+            message: error.json().errors.toString() + this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.msg_continue_ts,
             confirmation: true,
             typeConfirmation: 'errorSendEvaluation'
           }];

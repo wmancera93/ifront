@@ -35,6 +35,7 @@ export class EvaluationObjectivesComponent implements OnInit {
   }
 
   goToModalEval(infoEval: any) {
+    debugger
     this.performanceEvalSharedService.setEvaluationPerformanceData(infoEval);
   }
 
@@ -44,6 +45,7 @@ export class EvaluationObjectivesComponent implements OnInit {
     })
   }
   goToModalEvalView(viewEval: any) {
+    debugger
     this.performanceEvalSharedService.setViewEvaluationPerformanceData(viewEval);
   }
 

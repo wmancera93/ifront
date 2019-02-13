@@ -28,6 +28,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit {
     this.translate = this.translateService.getTranslate();
     this.nameReport = this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.view_evaluation_objetives.name_table_ts;
     this.performanceEvalSharedService.getViewEvaluationPerformanceData().subscribe((result: any) => {
+      debugger
       this.EvaluacionPerView = result;
       this.qualifierDataView = result.qualifier;
       this.idEvaluation = result.perfomance_evaluation_id;
