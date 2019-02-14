@@ -14,9 +14,13 @@ export class TranslateService {
   }
 
   changeLanguaje(param: string){
-    this.getTravelsApprovedReport(param).subscribe((data: any) => {
+    this.getTransalate(param).subscribe((data: any) => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);     
     })   
+  }
+
+  changeLanguajeFirst(param: string) {    
+    return this.getTransalate(param);
   }
 
   getTranslate() {
@@ -28,7 +32,8 @@ export class TranslateService {
     return this.translate;
   }
 
-  getTravelsApprovedReport(languaje: any) {
+  getTransalate(languaje: any): any {
+   
     let baseUrl: string;
    
     let url = window.location.href;
@@ -61,8 +66,14 @@ export class TranslateService {
         baseUrl = environment.apiBaseHr_production;
         break;
     }
-    return this.http.get(baseUrl +'/'+languaje +'/api/v2/companies/tree_language')
-      .map((data: any) => data);
+
+    
+    this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
+    .map((data: any) => data).subscribe(object => {
+      this.translate = JSON.parse(object.data[0].data[0].language_json_file)
+    });
+    return this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
+    .map((data: any) => data);
   }
 
 

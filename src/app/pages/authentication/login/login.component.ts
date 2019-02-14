@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
   public dataEnterprise: Enterprise[] = [];
   public heightContenGeneral: number = 0;
   public translate: Translate = null;
+  public languaje: string = 'es';
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -40,11 +41,13 @@ export class LoginComponent implements OnInit {
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-    setTimeout(() => {
-      this.translate = this.translateService.getTranslate();
-      console.log(this.translate)
-    }, 500);
+    this.translate = this.translateService.getTranslate();
 
+    if (this.translate === null) {
+      this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
+        this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+      });
+    }
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -55,11 +58,10 @@ export class LoginComponent implements OnInit {
   }
 
   changeLanguaje(param: string) {
-    this.translateService.changeLanguaje(param);
-    setTimeout(() => {
-      this.translate = this.translateService.getTranslate();
-      console.log(this.translate)
-    }, 500);
+    this.languaje = param;
+    this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
+      this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+    });
   }
 
   ngOnInit() {
@@ -125,6 +127,9 @@ export class LoginComponent implements OnInit {
   }
 
   singInSession() {
+
+    this.changeLanguaje(this.languaje);
+
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
       let expressionRegular
       let validatePasword

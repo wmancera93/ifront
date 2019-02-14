@@ -46,7 +46,8 @@ export class HeaderComponent implements OnInit {
             (result) => {
               localStorage.setItem('user', null);
               this.userSharedService.setUser(null);
-              this.router.navigate(['/ihr/login'])
+              this.router.navigate(['/ihr/login']);
+              this.translateService.deleteTranslate();
             },
             (error) => {
               console.log(error);
