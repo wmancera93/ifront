@@ -25,7 +25,10 @@ export class EmployeesComponent implements OnInit {
   @Output() objectBirthDay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectAnniversay: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectNewEmployee: EventEmitter<EventsEmployess[]> = new EventEmitter();
-  // @Output() InterestChartType: EventEmitter<string> = new EventEmitter(); 
+  @Output() objectQinquennials: EventEmitter<EventsEmployess[]> = new EventEmitter();
+  @Output() objectQinquennialsPayment: EventEmitter<EventsEmployess[]> = new EventEmitter();
+
+  // @Output() InterestChartType: EventEmitter<string> = new EventEmitter();
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
 
@@ -33,25 +36,6 @@ export class EmployeesComponent implements OnInit {
     public dashboardEmployeeService: DashboardEmployeeService,
     public router: Router,
     public stylesExplorerService: StylesExplorerService) {
-     
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if (event.urlAfterRedirects === '/index') {
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[0]).click();
-          }, 20000)
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[1]).click();
-          }, 30000)
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[2]).click();
-          }, 40000)
-          setInterval(() => {
-            (<HTMLInputElement>document.getElementsByClassName('carousel-control-next')[3]).click();
-          }, 50000)
-        }
-      }
-    })
 
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -63,28 +47,28 @@ export class EmployeesComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.dashboardEmployeeService.getRequest()
       .subscribe((data: any) => {
-        this.objectRequest.emit(data.data)
+        this.objectRequest.emit(data.data);
       });
 
     this.dashboardEmployeeService.getVacations()
       .subscribe((data: any) => {
-        this.objectVacations.emit(data.data)
+        this.objectVacations.emit(data.data);
       });
 
     this.dashboardEmployeeService.getCalendar()
       .subscribe((data: any) => {
-        this.objectCalendar.emit(data.data)
+        this.objectCalendar.emit(data.data);
       });
 
     this.dashboardEmployeeService.getSeverancesData()
-      .subscribe((data: any) => {
+      .subscribe((data: any) => {        
         this.objectMyLayoffs.emit({ graph_type: data.data.graph_type, properties: data.data.severances });
         this.objectMyInterestsLayoffs.emit({ graph_type: data.data.graph_type, properties: data.data.severances_interests });
+        
 
       });
 
@@ -92,14 +76,7 @@ export class EmployeesComponent implements OnInit {
       .subscribe((data: any) => {
         this.objectIncome.emit({ graph_type: data.data.graph_type, properties: data.data.total_incomes });
         this.objectDeductions.emit({ graph_type: data.data.graph_type, properties: data.data.total_deductions });
-      })
-
-    // setTimeout(() => {
-    //   this.objectMyLayoffs.emit(myLayoffs[0]);
-    //   this.objectMyInterestsLayoffs.emit(myInterestsLayoffs[0]);
-    //   this.objectIncome.emit(income[0]);
-    //   this.objectDeductions.emit(deductions[0]);
-    // },200)     
+      });
 
     this.dashboardEmployeeService.getNewspaper()
       .subscribe((data: any) => {
@@ -117,14 +94,26 @@ export class EmployeesComponent implements OnInit {
         }
       });
 
-      setTimeout(() => {
-        this.stylesExplorerService.addStylesCommon();
-      }, 3000);
+    this.dashboardEmployeeService.getQuinquennialsData()
+      .subscribe((data: any) => {
+        this.objectQinquennials.emit(data.data);
+      });
+
+    this.dashboardEmployeeService.getQuinquennialsPaymentsData()
+      .subscribe((data: any) => {
+        this.objectQinquennialsPayment.emit(data.data);
+      });
+
+
+
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 3000);
 
     setTimeout(() => {
       // document.getElementById("loginId").style.display = 'none'
       // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-    }, 1000)
+    }, 1000);
   }
 
 }

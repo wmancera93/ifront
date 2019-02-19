@@ -29,8 +29,28 @@ export class ReportsHrService {
     return this.tokenService.get('hr_reports/requests/' + status)
       .map((data: any) => data.json());
   }
-  getExcelRequestsByStatus(status: string) {
-    return this.tokenService.get('hr_reports/requests_export_file/' + status+ '.xls')
+
+  getRequestsExcelByStatus(status: any) {
+    return this.tokenService.get('hr_reports/requests_employee_report/' + status)
       .map((data: any) => data.json());
   }
+  getRequestsApprovers(type: string, approver: string, platform: string) {
+    return this.tokenService.get('hr_reports/consultation_approvers_filter/' + type + '/' + approver + '/' + platform)
+      .map((data: any) => data.json());
+  }
+  getSelectRequestsByType() {
+    return this.tokenService.get('employee_requets/select_activities')
+      .map((data: any) => data.json());
+  }
+
+  getRequestsLogsApprovers(request_employee_id: string, type_request: string, applicant_pernr: string, approver_pernr: string, start_date: string, end_date: string) {
+    return this.tokenService.get('answer_request/answer_request_report/' + request_employee_id + '/' + type_request + '/' + applicant_pernr + '/' + approver_pernr + '/' + start_date + '/' + end_date)
+      .map((data: any) => data.json());
+  }
+  getRequestsLogsApproversExcel(employee_id: number, request_employee_id: string, type_request: string, applicant_pernr: string, approver_pernr: string, start_date: string, end_date: string) {
+    return this.tokenService.get('answer_request/answer_request_report_export/' + employee_id + '/' + request_employee_id + '/' + type_request + '/' + applicant_pernr + '/' + approver_pernr + '/' + start_date + '/' + end_date)
+      .map((data: any) => data);
+  }
 }
+
+

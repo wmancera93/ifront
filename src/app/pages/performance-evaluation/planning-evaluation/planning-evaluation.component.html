@@ -1,0 +1,22 @@
+<div *ngIf="token">
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+</div>
+
+<div *ngIf="!token" class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row align-items-center">
+        <div class="col-xl-8 col-md-12 col-12 title">
+          <i class="fa fa-line-chart"></i>
+          Planificación de periodos de objetivos de evaluación
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [excel]="showExcel"></app-data-table>
+    </div>
+  </div>
+</div>
+<app-edit-planning-date></app-edit-planning-date>

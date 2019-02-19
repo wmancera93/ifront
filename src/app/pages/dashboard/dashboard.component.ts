@@ -94,6 +94,14 @@ export class DashboardComponent implements OnInit {
           }
         }, 100);
 
+        setTimeout(() => {
+
+          this.urlBeforePending = event[0].urlAfterRedirects.toString();
+          if (this.urlBeforePending === '/ihr/hour_extras') {
+            document.getElementById('buttonDashEmployee').click();
+          }
+        }, 100);
+
       })
 
     this.tokenService.validateToken()
@@ -118,7 +126,6 @@ export class DashboardComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-
 
 
   }
@@ -152,7 +159,7 @@ export class DashboardComponent implements OnInit {
           this.showButtonDashManagement = true;
         } else {
           this.showButtonDashManagement = false;
-        }
+        }       
       }
       else {
         this.showButtonDashManagement = false;

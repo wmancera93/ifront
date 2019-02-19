@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 // services
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
-import { debug } from 'util';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+
 
 
 @Component({
@@ -13,50 +13,54 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
   templateUrl: './alerts.component.html',
   styleUrls: ['./alerts.component.css']
 })
-export class AlertsComponent implements OnInit {
-  public bodyAlert: Alerts = { type: '', title: '', message: '' };
+export class AlertsComponent implements OnInit, OnDestroy {
+  public bodyAlert: Alerts = { type: 'primary', title: '', message: '' };
   public icon: string;
-  public confirmationShow: boolean = false;
+  public confirmationShow = false;
+  public cancelation: string;
+  public count: number = 0;
 
 
   constructor(public alert: AlertsService, public route: Router,
     public stylesExplorerService: StylesExplorerService) {
 
-    this.alert.getAlert().subscribe((data) => {
-      document.getElementById('closeModal').click();
-      this.bodyAlert = data;
-      if (this.bodyAlert.type === 'primary') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(2, 90, 165, 0.7)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(2, 90, 165, 0.7)', '', '', '', '', '', '', '', );
-        this.icon = 'fa-check';
-      }
-      if (this.bodyAlert.type === 'success') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(92, 184, 92, 0.7)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('', '', '', '', 'rgba(92, 184, 92, 0.7)', '', '', '', '', '', '', '', );
-        this.icon = 'fa-check';
-      }
-      if (this.bodyAlert.type === 'danger') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(217, 83, 79, 0.7)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('','','','','rgba(217, 83, 79, 0.7)','','','','','','','',);
-        this.icon = 'fa-exclamation-triangle';
-      }
-      if (this.bodyAlert.type === 'warning') {
-        document.documentElement.style.setProperty(`--color-alert`, `rgba(240, 173, 78, 0.7)`);
-        this.stylesExplorerService.stylesInExplorerOrEdge('','','','','rgba(240, 173, 78, 0.7)','','','','','','','',);
-        this.icon = 'fa-exclamation-triangle';
-      }
+    this.alert.getAlert().subscribe(
+      (data) => {
+        if (this.count === 0) {
+          document.getElementById('closeModal').click();
+          this.bodyAlert = data;
 
-      if (this.bodyAlert.confirmation !== null) {
-        this.confirmationShow = this.bodyAlert.confirmation;
-      }
+          document.getElementById('btnModal').click();
+          document.getElementById('bodyGeneral').removeAttribute('style');
 
-      document.getElementById("btnModal").click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
-    })
+
+          if (this.bodyAlert.type === 'primary') {
+            this.icon = 'fa-check';
+          }
+          if (this.bodyAlert.type === 'success') {
+            this.icon = 'fa-check';
+          }
+          if (this.bodyAlert.type === 'danger') {
+            this.icon = 'fa-exclamation-triangle';
+          }
+          if (this.bodyAlert.type === 'warning') {
+            this.icon = 'fa-exclamation-triangle';
+          }
+
+          if (this.bodyAlert.confirmation !== null) {
+            this.confirmationShow = this.bodyAlert.confirmation;
+          }
+
+        }
+      });
   }
 
   ngOnInit() {
 
+  }
+
+  ngOnDestroy() {
+    this.count += 1;
   }
 
   clickConfirmate() {
@@ -64,4 +68,9 @@ export class AlertsComponent implements OnInit {
     this.alert.setActionConfirm(this.bodyAlert.typeConfirmation);
   }
 
+  clickCancel() {
+    this.cancelation = 'closeAlert' + this.bodyAlert.typeConfirmation;
+    document.getElementById('closeModal').click();
+    this.alert.setActionConfirm(this.cancelation);
+  }
 }

@@ -1,17 +1,27 @@
-<div *ngIf="objectWidget" class="widget wg-hover-general wg-hover-bg p-lg text-center widget-height-notification" style="padding-top:50px;" [ngStyle]="{'background-color': objectWidget.background}">
+<div *ngIf="objectWidget" class="widget wg-hover-general wg-hover-bg p-lg text-center widget-height-notification" style="padding-top:50px;"
+  [ngStyle]="{'background-color': objectWidget.background}">
 
-    <div class="" >
+  <div class="">
     <i [ngStyle]="{'color': objectWidget.color_icon}" class="fa {{objectWidget.icon}} fa-4x"></i>
     <h1 [ngStyle]="{'color': objectWidget.color}" class="m-xs">{{objectWidget.number}}</h1>
     <h1 [ngStyle]="{'color': objectWidget.color}" class="m-xs">{{objectWidget.percentage}}</h1>
     <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
       {{objectWidget.title}}
     </h3>
-    <small [ngStyle]="{'color': objectWidget.color}" style="margin-left: -22px;margin-right: -30px;"> {{objectWidget.comment}}</small>
+    <small [ngStyle]="{'background-color': objectWidget.color}" style="margin-left: -22px;margin-right: -30px;"> {{objectWidget.comment}}</small>
+
+    <!-- <div>
+      <small [ngStyle]="{'color': objectWidget.color}" class="m-l-n" style="margin-right: -22px">Pagado</small>
+      <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
+        05/06/2018
+      </h3>
+    </div>  -->
+    
   </div>
 
 </div>
-<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg p-lg text-center widget-height-notification" style="padding-top:60px;" >
+<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg p-lg text-center widget-height-notification"
+  style="padding-top:60px;">
   <div>
     <i class="fa fa-exclamation fa-4x"></i>
     <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">

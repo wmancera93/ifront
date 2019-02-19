@@ -1,4 +1,5 @@
-<div *ngIf="objectWidget" class="widget wg-hover-general wg-hover-bg  text-center widget-height-notification" [ngStyle]="{'background-color': objectWidget.background}"   style="padding-top:50px;" >
+<div *ngIf="objectWidget" class="widget wg-hover-general wg-hover-bg  text-center widget-height-notification" [ngStyle]="{'background-color': objectWidget.background}"
+  style="padding-top:50px;">
   <div class="col align-self-center">
     <span class="fa-stack" style="height: 53px; font-size: 2.7em;">
       <i [ngStyle]="{'color': objectWidget.color_iconPrimary}" class="{{objectWidget.icon_primary}} fa-stack-2x " style="margin-top:-10px"></i>
@@ -11,13 +12,25 @@
     <h3 [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
       {{objectWidget.title}}
     </h3>
+
+    <div>
+      <small [ngStyle]="{'color': objectWidget.color}" class="m-l-n" style="margin-right: -22px">{{objectWidget.date_text}}</small>
+      <div [ngStyle]="{'color': objectWidget.color}" class="font-bold m-l-n" style="margin-right: -20px">
+        {{objectWidget.date_law}}
+      </div>
+    </div> 
+
+
+
+    </div>
   </div>
-</div>
-<div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg p-lg text-center widget-height-notification"  style="padding-top:60px;">
-  <div>
-    <i class="fa fa-exclamation fa-4x"></i>
-    <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
-      No se encontraron datos disponibles.
-    </h3>
+  <div *ngIf="!objectWidget" class="widget bg-white wg-hover-general wg-hover-bg p-lg text-center widget-height-notification"
+    style="padding-top:60px;">
+    <div>
+      <i class="fa fa-exclamation fa-4x"></i>
+      <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
+        No se encontraron datos disponibles.
+      </h3>
+    </div>
   </div>
-</div>
+  

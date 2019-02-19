@@ -1,44 +1,58 @@
-import { Url } from "../url/url";
+import { Url } from '../url/url';
 
 
 export interface RequestsRh {
-    title: string,
-    request_types: TypesRequests[],
-    my_requests_list: ListRequests[]
+    title: string;
+    request_types: TypesRequests[];
+    my_requests_list: ListRequests[];
+    list_requets_types: ListRequetsTypes[] ;
 }
 
 export interface TypesRequests {
-    id: number,
-    id_activity: string,
-    name: string,
-    available_days: number
+    id: number;
+    id_activity: string;
+    name: string;
+    available_days: number;
+    maximum_days: number;
+    minimum_days: number;
 }
 
+
 export interface ListRequests {
-    ticket: number,
-    observation_request: string,
-    is_finished: boolean,
-    type_requests_name: string,
-    created_date: string,
-    status: string,
-    next_approver_to_json: NextApprover,
-    action_employee_requets_index_view: Action[]
+    ticket: number;
+    observation_request: string;
+    is_finished: boolean;
+    type_requests_id: number;
+    type_requests_name: string;
+    created_date: string;
+    status: string;
+    next_approver_to_json: NextApprover;
+    action_employee_requets_index_view: Action[];
+    flag_count?: number;
+}
+
+
+export interface ListRequetsTypes {
+    id: number;
+    id_activity: string;
+    name: string;
+    active?: boolean;
 }
 
 export interface NextApprover {
     level: number,
     platform: string,
-    approver_employee: AproverEmployee
+    approver_employee: AproverEmployee;
 }
 
 export interface Action {
     title: string,
-    is_active: boolean
+    is_active: boolean;
 }
 
 export interface AproverEmployee {
-    posicion: string,
-    short_name: string
+    posicion: string;
+    short_name: string;
 }
 
 export interface DetailRequest {
@@ -46,14 +60,14 @@ export interface DetailRequest {
     pending_level_approver: PendingLevelApprover,
     request: Request,
     total_request_answers: number,
-    title: string
+    title: string;
 }
 
 export interface Request {
     observation_request: string,
     days_request: number,
     id_activity: string,
-    file_support: Url
+    image: Url
     is_finished: boolean,
     ticket: number,
     type_requests_name: string,

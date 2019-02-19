@@ -1,0 +1,47 @@
+<button id="btn_detail_message_synch_spend" type="button" class="btn btn-primary" data-toggle="modal" data-target="#message_synch_spend"
+  style="display:none;">
+</button>
+<div data-backdrop="static" class="modal" id="message_synch_spend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+    <div class="modal-content" *ngIf="generalObjectSpend !== null">
+      <div class="modal-header borderLine-title">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Mensajes de sincronización de gasto para el viaje # {{generalObjectSpend.travel_request_id}} </h5>
+        <button id="closeMessages" type="button" class="close " data-dismiss="modal" aria-label="Close">
+          <h4 class="text-primary-hr">X</h4>
+        </button>
+      </div>
+      <div class="modal-body bodyColorInfo" *ngIf="generalObjectSpend !== null">
+
+        <div class="row">
+          <div class="col-lg-6 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
+              <strong>Gasto generado para la solicitud de viaje número:</strong>
+            </label>
+          </div>
+          <div class="col-lg-6 col-md-6 col-12">
+            <label>{{generalObjectSpend.travel_request_id}}</label>
+          </div>
+        </div>
+
+        <div class="row" style="margin-top: 20px">
+          <div class="col-lg-4 col-md-6 col-12">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
+              <strong>Detalle de viaje:</strong>
+            </label>
+          </div>
+          <div class="col-lg-8 col-md-6 col-12">
+            <label>{{generalObjectSpend.name_travel}}</label>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 30px">
+          <div class="col-12">
+            <app-data-table [records]="objectPrintMessageSpend" [pdf]="showPdf" id="tableMessagesSynch" [sizeTable]="showSizeTable" [title]="nameReportMessageSpend"></app-data-table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -27,7 +27,7 @@
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
         <div class="row top-containter">
-          <div class="col-xl-2 col-lg-4 col-12 text-left">
+          <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
               Filtros de consulta
             </b>
@@ -279,9 +279,9 @@
                       {{record[key]}}
                     </div>
                     <div *ngIf="record[key].title != null">
-                      <button type="button" class="btn btn-sm btn-secondary cursor-general" [attr.title]="record[key].title" (click)="viewDetail(record[key].id)">
-                        <i class="fa fa-eye" aria-hidden="true"></i>
-                      </button>
+                      <div class="cursor-general text-success" [attr.title]="record[key].title" (click)="viewDetail(record[key].id)" style="margin-top: 5px">
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.7em"></i>
+                      </div>
                     </div>
                   </td>
                 </tr>

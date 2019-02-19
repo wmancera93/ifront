@@ -349,9 +349,10 @@ export class StylesExplorerService {
 
     }
 
-    if (color_alert !== '' && color_alert !== null) {
+    if (color_alert !== '' && color_alert !== null) {      
       if (document.getElementsByClassName('modal-content').length > 0) {
         for (let index = 0; index < document.getElementsByClassName('modal-content').length; index++) {
+          debugger
           (<HTMLInputElement>document.getElementsByClassName('modal-content')[index]).style.backgroundColor = color_alert;
         }
       }
@@ -457,7 +458,7 @@ export class StylesExplorerService {
         '',
         dataEnterprise.background_header_menu.url
         , '0 0 0 220px', '220px', 'block', '-20px', '219px', '', ''
-      )
+      );
     }
   }
 
