@@ -99,7 +99,7 @@ export class ApprovalsDetailsComponent implements OnInit {
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.json().errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.approvals_details.type_alert_ts, message: error.json().errors.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
           // setTimeout(() => {

@@ -29,8 +29,8 @@ export class AppComponent {
   constructor(public router: Router,
     public mainService: MainService,
     public userSharedService: UserSharedService,
-    public tokenService: Angular2TokenService, ) {
-
+    public tokenService: Angular2TokenService) {
+    debugger
     let url = window.location.href;
     let ambient;
 
@@ -66,7 +66,7 @@ export class AppComponent {
     this.tokenService.init(
       {
         apiBase: this.baseUrl,
-        apiPath: 'api/v2',
+        apiPath: 'api/v2/',
         signInPath: 'auth/sign_in',
         signOutPath: 'auth/sign_out',
         validateTokenPath: 'auth/validate_token',

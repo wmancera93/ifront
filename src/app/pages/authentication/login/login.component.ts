@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-
+  
     this.translate = this.translateService.getTranslate();
 
     if (this.translate === null) {
@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit {
     this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);
     });
+    this.tokenService.atOptions.apiPath = 'api/v2/'+this.languaje;
   }
 
   ngOnInit() {

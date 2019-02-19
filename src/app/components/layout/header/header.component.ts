@@ -19,7 +19,7 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 
 export class HeaderComponent implements OnInit {
   private dataUser: User = null;
-  title: string = 'Mis datos';
+  public title: string;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
   public showMenu: boolean = true;
@@ -29,11 +29,13 @@ export class HeaderComponent implements OnInit {
   public translate: Translate = null;
   private alertWarning: Alerts[];
 
+
   constructor(private userSharedService: UserSharedService,
     public router: Router,
     private tokenService: Angular2TokenService,
     public alert: AlertsService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
+    this.title=this.translate.app.frontEnd.components.layout.header.my_data;
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
@@ -80,8 +82,8 @@ export class HeaderComponent implements OnInit {
   LogOut() {
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea cerrar la sesión?',
+      title: this.translate.app.frontEnd.components.layout.header.type_alert_ts,
+      message: this.translate.app.frontEnd.components.layout.header.message_alert_ts,
       confirmation: true,
       typeConfirmation: 'logout'
     }];

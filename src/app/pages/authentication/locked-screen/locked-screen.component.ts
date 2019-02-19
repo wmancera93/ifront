@@ -123,14 +123,14 @@ export class LockedScreenComponent implements OnInit {
           }
           )
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: 'La contraseña es obligatoria.' }];
+        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: this.translate.app.frontEnd.pages.authentication.locket_screen.msg_required_password_ts }];
         this.alert.setAlert(alertWarning[0]);
       }
     } else {
       const alertWarning: Alerts[] = [{
         type: 'danger',
         title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts,
-        message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
+        message: this.translate.app.frontEnd.pages.authentication.locket_screen.msg_characters_minimum_ts
       }];
       this.alert.setAlert(alertWarning[0]);
     }

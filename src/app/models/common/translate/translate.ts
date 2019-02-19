@@ -59,6 +59,7 @@ interface Approvals_details {
     level_approver: string,
     lack_details: string,
     button_close: string,
+    type_alert_ts: string,
 }
 
 interface Calendar_detail {
@@ -98,6 +99,40 @@ interface Data_table {
 }
 interface Draw_calendar {
     today: string,
+    rest: string,
+    monday: string,
+    tuesday: string,
+    wednesday: string,
+    thursday: string,
+    friday: string,
+    saturday: string,
+    sunday: string,
+    monday_abr: string,
+    tuesday_abr: string,
+    wednesday_abr: string,
+    thursday_abr: string,
+    friday_abr: string,
+    saturday_abr: string,
+    sunday_abr: string,
+    monday_ser: string,
+    tuesday_ser: string,
+    wednesday_ser: string,
+    thursday_ser: string,
+    friday_ser: string,
+    saturday_ser: string,
+    sunday_ser: string,
+    january: string,
+    february: string,
+    march: string,
+    april: string,
+    may: string,
+    june: string,
+    july: string,
+    august: string,
+    september: string,
+    october: string,
+    november: string,
+    december: string,
 }
 interface Dynamic_form {
     save: string,
@@ -140,6 +175,7 @@ interface Gerencial_modal {
 }
 interface Show_events {
     button_close: string,
+    birthday: string,
 }
 interface Time_line_approvers {
     request: string,
@@ -158,6 +194,7 @@ interface Time_line_approvers {
 }
 interface Travels {
     approvals_details_travels: Approvals_details_travels,
+    pdf_travel: Pdf_travel,
 }
 interface Approvals_details_travels {
     show_dist_spends: Show_dist_spends,
@@ -190,6 +227,13 @@ interface Approvals_details_travels {
     negative_observation: string,
     negative_detail: string,
     button_close: string,
+    travel_journeys: string,
+    travel_advances: string,
+    travel_expenses: string,
+    type_alert_ts: string,
+    message_alert_ts: string,
+    type_alert_one_ts: string,
+    message_alert_one_ts: string,
 }
 interface Show_dist_spends {
     distribution_cost: string,
@@ -276,6 +320,9 @@ interface Contacts_list {
 interface Header {
     partner: string,
     out_door: string,
+    my_data: string,
+    type_alert_ts: string,
+    message_alert_ts: string,
 }
 interface Menu_navigation {
     start: string,
@@ -574,7 +621,7 @@ interface Events_management {
 }
 interface Training {
     text_trainings: string,
-    tittle_table_ts:string,
+    tittle_table_ts: string,
     report_training: Report_training,
     view_training: View_training,
 }
@@ -1667,7 +1714,7 @@ interface Services {
     travel_management: Travel_management_Service,
 }
 interface Travel_management_Service {
-    report:Report
+    report: Report
 }
 interface Report {
     name_travel: string,

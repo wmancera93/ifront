@@ -21,14 +21,16 @@ export class ShowEventsComponent implements OnInit {
   public eventIcon: string;
   public flagTypeOfEvent: boolean;
   public translate: Translate = null;
+  public birthday:string;
 
   constructor(public infoEventEmployee: EventsEmployeeService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
+    this.birthday=this.translate.app.frontEnd.components.common.show_events.birthday;
     this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
       this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
-      if (this.titleEvent === "Cumpleaños") {
+      if (this.titleEvent === this.birthday) {
         this.flagTypeOfEvent = true;
       }
       else {
