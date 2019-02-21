@@ -64,22 +64,22 @@
                 <p class="font-title-general">
                   {{translate.app.frontEnd.pages.approver_request.managed.text_status}}
                 </p>
-                <h6 *ngIf="managed.status == 'Aprobado'">
+                <h6 *ngIf="managed.status == statusApprover">
                   <span class="badge badge-primary">
                     {{managed.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == 'Cancelado'">
+                <h6 *ngIf="managed.status == statusCancelled">
                   <span class="badge badge-danger">
                     {{managed.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == 'En Proceso'">
+                <h6 *ngIf="managed.status == statusInProcess">
                   <span class="badge badge-success">
                     {{managed.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == 'Pendiente'">
+                <h6 *ngIf="managed.status == statusPending">
                   <span class="badge badge-default">
                     {{managed.status}}
                   </span>

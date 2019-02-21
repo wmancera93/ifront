@@ -147,22 +147,22 @@
                                     </p>
                                   </div>
                                   <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                    <h6 class="col-4" *ngIf="answer.status == 'Aprobado'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusApprover">
                                       <span class="badge badge-primary" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'Cancelado'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusCancelled">
                                       <span class="badge badge-danger" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'En Proceso'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusInProcess ">
                                       <span class="badge badge-success" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'Pendiente'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusPending">
                                       <span class="badge badge-default" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>

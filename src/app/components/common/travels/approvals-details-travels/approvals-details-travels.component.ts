@@ -41,6 +41,10 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public objectApproval: any[] = [];
   public translate: Translate = null;
   public countAfter: number = 0;
+  public statusApprover: string;
+  public statusCancelled: string;
+  public statusInProcess: string;
+  public statusPending: string;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService,
@@ -49,9 +53,14 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
     this.translate = this.translateService.getTranslate();
 
-    this.nameReportTravel=this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_journeys;
-    this.nameReportAdvance=this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_advances;
-    this.nameReportSpend=this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_expenses;
+    this.nameReportTravel = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_journeys;
+    this.nameReportAdvance = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_advances;
+    this.nameReportSpend = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_expenses;
+    this.statusApprover = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_Approver;
+    this.statusCancelled = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_cancelled;
+    this.statusInProcess = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_inProcess;
+    this.statusPending = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_pending;
+
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if ((data.action_method === "showHotels")) {
 

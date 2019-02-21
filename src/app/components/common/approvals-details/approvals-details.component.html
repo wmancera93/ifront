@@ -58,22 +58,22 @@
                       <h3 class="font-color-default col-md-2 col-4"  *ngIf="translate !== null">
                         {{translate.app.frontEnd.components.common.approvals_details.status}}:
                       </h3>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Aprobado'">
+                      <h6 class="col-4" *ngIf="approvals[0].status == 'approver'">
                         <span class="badge badge-primary" style="margin-top: 5px;">
                           {{approvals[0].status}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Cancelado'">
+                      <h6 class="col-4" *ngIf="approvals[0].status == 'cancelled'">
                         <span class="badge badge-danger" style="margin-top: 5px;">
                           {{approvals[0].status}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'En Proceso'">
+                      <h6 class="col-4" *ngIf="approvals[0].status == 'inProcess'">
                         <span class="badge badge-success" style="margin-top: 5px;">
                           {{approvals[0].status}}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'Pendiente'">
+                      <h6 class="col-4" *ngIf="approvals[0].status == 'pending'">
                         <span class="badge badge-default" style="margin-top: 5px;">
                           {{approvals[0].status}}
                         </span>

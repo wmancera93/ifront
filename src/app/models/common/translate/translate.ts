@@ -1,3 +1,5 @@
+import { PerformanceEvalSharedService } from "../../../services/shared/common/performance-evaluation/performance-eval-shared.service";
+
 export interface Translate {
     app: App
 }
@@ -60,6 +62,10 @@ interface Approvals_details {
     lack_details: string,
     button_close: string,
     type_alert_ts: string,
+    status_approved: string,
+    status_cancelled: string,
+    status_inprocess: string,
+    status_pending: string,
 }
 
 interface Calendar_detail {
@@ -190,7 +196,11 @@ interface Time_line_approvers {
     approver: string,
     pending: string,
     button_close: string,
-    detail_requests: string
+    detail_requests: string,
+    status_Approver: string,
+    status_cancelled: string,
+    status_inProcess: string,
+    status_pending: string,
 }
 interface Travels {
     approvals_details_travels: Approvals_details_travels,
@@ -230,6 +240,10 @@ interface Approvals_details_travels {
     travel_journeys: string,
     travel_advances: string,
     travel_expenses: string,
+    status_Approver: string,
+    status_cancelled: string,
+    status_inProcess: string,
+    status_pending: string,
     type_alert_ts: string,
     message_alert_ts: string,
     type_alert_one_ts: string,
@@ -316,6 +330,7 @@ interface Layout {
 interface Contacts_list {
     partner: string,
     negative_message: string,
+    search_parner: string
 }
 interface Header {
     partner: string,
@@ -407,6 +422,10 @@ interface Managed {
     text_Applicant: string,
     text_status: string,
     icon_watch: string,
+    status_approver: string;
+    status_cancelled: string;
+    status_inProcess: string;
+    status_pending: string;
 }
 interface Pendings {
     title_ppprovals_pending: string,
@@ -435,6 +454,8 @@ interface Confirm_reset_account {
     text_system_hr: string,
     text_reset_account: string,
     text_reset: string,
+    new_password: string,
+    confirmation_password: string,
     title_warning_ts: string,
     msg_new_password_ts: string,
     ts_warning_text_two: string,
@@ -445,6 +466,7 @@ interface Confirm_reset_account {
 interface Locket_screen {
     text_enter_mail: string,
     btn_start: string,
+    password: string,
     title_warning_ts: string,
     title_warning_ts_one: string,
     msg_required_password_ts: string,
@@ -458,6 +480,7 @@ interface Login {
     btn_start: string,
     text_remember: string,
     text_forget_pass: string,
+    password: string;
     title_warning_ts_one: string,
     msg_characters_minimum_ts: string,
     msg_email_is_required_ts: string,
@@ -540,6 +563,8 @@ interface Edit_publication {
     btn_save: string,
     text_loading: string,
     btn_close: string,
+    placeholder_tittle: string,
+    placeholder_view: string,
     title_status_news_ts: string,
     msg_edited_news_ts: string,
 }
@@ -578,6 +603,7 @@ interface News {
     text_statistics: string,
     text_views: string,
     tex_comments: string,
+    placeholder_search: string,
 }
 interface Evaluations {
     evaluated: Evaluated,
@@ -601,6 +627,8 @@ interface Fill_evalaution {
     btn_save: string,
     text_loading: string,
     btn_close: string,
+    placeholder_answer: string,
+    placeholder_commentary: string,
     text_success_ts: string,
     ts_warning_text: string,
     msg_denied_request_ts: string,
@@ -895,6 +923,10 @@ interface Request {
     generate_ts: string,
     page: string,
     tittle_pdf_ts: string,
+    status_pending: string,
+    status_approved: string,
+    status_inProcess: string,
+    status_cancelled: string,
 }
 interface Requests_approver {
     name_table_ts: string,
@@ -920,6 +952,10 @@ interface Requests_rh {
     message_alert_ts: string,
     type_alert_one_ts: string,
     type_alert_two_ts: string,
+    status_approved: string,
+    status_cancelled: string,
+    status_inProcess: string,
+    status_pending: string,
 }
 interface Forms_requests {
     tittle: string,

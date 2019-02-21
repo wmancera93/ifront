@@ -128,22 +128,22 @@
                 <p class="font-title-general">
                   {{translate.app.frontEnd.pages.requests_rh.status}}:
                 </p>
-                <h6 *ngIf="request.status == 'Aprobado'">
+                <h6 *ngIf="request.status == status_approved">
                   <span class="badge badge-primary">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'Cancelado'">
+                <h6 *ngIf="request.status == status_cancelled">
                   <span class="badge badge-danger">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'En proceso'">
+                <h6 *ngIf="request.status == status_inProcess">
                   <span class="badge badge-success">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'Pendiente'">
+                <h6 *ngIf="request.status == status_pending">
                   <span class="badge badge-default">
                     {{request.status}}
                   </span>

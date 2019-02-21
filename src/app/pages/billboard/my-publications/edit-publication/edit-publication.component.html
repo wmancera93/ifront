@@ -16,7 +16,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" [(ngModel)]="title" id="title" placeholder="Título de la noticia" style="width:100% !important;"
+                  <input type="text" [(ngModel)]="title" id="title" [attr.placeholder]="placeholder_tittle" style="width:100% !important;"
                     required/>
                 </div>
               </div>
@@ -28,7 +28,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea [(ngModel)]='summary' rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;"
+                  <textarea [(ngModel)]='summary' rows="2" cols="50" [attr.placeholder]="placeholder_message" style="width:100% !important;"
                     required></textarea>
                 </div>
               </div>

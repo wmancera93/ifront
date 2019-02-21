@@ -25,6 +25,12 @@ export class ApprovalsDetailsComponent implements OnInit {
   public dateSince: string;
   public dateUntil: string;
   public translate: Translate = null;
+  public approver: string;
+  public cancelled: string;
+  public inProcess: string;
+  public pending: string;
+  public close: string;
+
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
@@ -32,6 +38,11 @@ export class ApprovalsDetailsComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+
+  this.approver=this.translate.app.frontEnd.components.common.approvals_details.status_approved;
+  this.cancelled=this.translate.app.frontEnd.components.common.approvals_details.status_cancelled;
+  this.inProcess=this.translate.app.frontEnd.components.common.approvals_details.status_inprocess;
+  this.pending=this.translate.app.frontEnd.components.common.approvals_details.status_pending;
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {

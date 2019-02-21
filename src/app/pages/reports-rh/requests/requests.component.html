@@ -233,30 +233,30 @@
                           <span class="font-size-07"> {{translate.app.frontEnd.pages.reports_rh.requests.not}}</span>
                         </i>
                       </div>
-                      <div style="text-align:left; margin-top: 5px" *ngIf="record[key] == 'Pendiente'">
+                      <div style="text-align:left; margin-top: 5px" *ngIf="record[key] == pending">
                         <span class="badge badge badge-default" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'Aprobado'">
+                      <div style="text-align:left" *ngIf="record[key] == approved">
                         <span class="badge badge-primary" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'En Proceso'">
+                      <div style="text-align:left" *ngIf="record[key] == inProcess">
                         <span class="badge badge-success" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'Cancelado'">
+                      <div style="text-align:left" *ngIf="record[key] == cancelled">
                         <span class="badge badge-danger" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] != 'Pendiente'
-                      && record[key] != 'Aprobado'
-                      && record[key] != 'Cancelado'
-                      && record[key] != 'En Proceso'">
+                      <div style="text-align:left" *ngIf="record[key] != pending
+                      && record[key] != approved
+                      && record[key] != cancelled
+                      && record[key] != inProcess">
                         <div *ngIf="(record[key] | split:'-':'1') != ''">
                           <p>
                             <b>{{record[key] | split:'-':'1'}}</b>
@@ -292,8 +292,8 @@
       </div>
       <div class="row" *ngIf="show">
         <div class="col-12">
-          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
-            nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="<<"
+            nextLabel=">>" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
         </div>
       </div>
     </div>

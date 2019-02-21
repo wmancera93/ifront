@@ -22,7 +22,7 @@
                             maxlength="50" (blur)="blurEmail()">
                     </div>
                     <div class="form-group float-general-login width-input-login">
-                        <input id="password" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="Contraseña"
+                        <input id="password" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" *ngIf="password !== null" [attr.placeholder]="password"
                             maxlength="20" (keyup.enter)="singInSession()">
                         <i *ngIf="txtPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover='overEyePassword()' on-mouseleave='leaveEyePassword()'></i>
                     </div>

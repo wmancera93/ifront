@@ -38,6 +38,7 @@ export class ContactsListComponent implements OnInit {
   public showContactsList: boolean = true;
   public infoEmployee: Employee;
   public translate: Translate = null;
+  public search_partner: string;
 
   constructor(public employeeService: EmployeeService,
     public router: Router,
@@ -46,6 +47,7 @@ export class ContactsListComponent implements OnInit {
   ) {
 
     this.translate = this.translateService.getTranslate();
+    this.search_partner=this.translate.app.frontEnd.components.layout.contacts_list.search_parner;
   }
   ngOnInit() {
     this.numberPage = 1;

@@ -34,6 +34,7 @@ export class DrawCalendarComponent implements OnInit {
   public thursday: string;
   public friday: string;
   public translate: Translate = null;
+  public rest: string;
   public responsive: boolean = false;
 
 
@@ -47,6 +48,7 @@ export class DrawCalendarComponent implements OnInit {
     this.wednesday = this.translate.app.frontEnd.components.common.draw_calendar.wednesday;
     this.thursday = this.translate.app.frontEnd.components.common.draw_calendar.thursday;
     this.friday = this.translate.app.frontEnd.components.common.draw_calendar.friday;
+    this.rest = this.translate.app.frontEnd.components.common.draw_calendar.rest;
   }
   //ngOnInit() {}
   ngOnInit() {
@@ -687,7 +689,7 @@ export class DrawCalendarComponent implements OnInit {
           date: "",
           id: "",
           is_now: "",
-          weekday:this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -717,7 +719,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday:this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -814,7 +816,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday:this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",

@@ -34,6 +34,8 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
   public totalQuestions: number = 0;
   public countAfter: number = 0;
   public translate: Translate = null;
+  public addCommentary:string;
+  public writeAnswer:string;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
@@ -41,6 +43,9 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     public alert: AlertsService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.addCommentary=this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_answer;
+    this.writeAnswer=this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_commentary;
+
     document.getElementById("bodyGeneral").removeAttribute('style');
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSendEvaluation') {

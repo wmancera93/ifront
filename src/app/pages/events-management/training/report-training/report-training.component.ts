@@ -41,7 +41,7 @@ export class ReportTrainingComponent implements OnInit {
     this.nameReport = this.translate.app.frontEnd.pages.events_management.training.report_training.text_training_agreements_ts;
 
     this.actionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data === 'Convenios de capacitación' && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.getObjectPrint('Excel');
       }
       if (data.action_method === 'showConvenio' && this.countAfter === 0) {

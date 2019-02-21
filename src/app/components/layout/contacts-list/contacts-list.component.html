@@ -17,7 +17,7 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="Buscar compañeros"
+            <input [(ngModel)]="searchByLetter" type="text" class="form-control" [attr.placeholder]="search_partner"
               (keyup.enter)="searchByName()" maxlength="25" (keyup)="enterNameEmployee()">
             <i class="search-input-icon fa fa-search icon-search  detectLetter cursor general" (click)='searchByName()'
               [ngClass]="{detectLetter : searchIconActive == true}"></i>

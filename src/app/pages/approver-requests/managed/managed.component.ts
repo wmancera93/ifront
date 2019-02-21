@@ -16,6 +16,11 @@ export class ManagedComponent implements OnInit {
   public managed: Requests[] = [];
   public translate: Translate = null;
   public token: boolean;
+  public statusApprover: string;
+  public statusCancelled: string;
+  public statusInProcess: string;
+  public statusPending: string;
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public approverRequestsService: ApproverRequestsService,
@@ -24,6 +29,11 @@ export class ManagedComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.statusApprover = this.translate.app.frontEnd.pages.approver_request.managed.status_approver;
+    this.statusCancelled = this.translate.app.frontEnd.pages.approver_request.managed.status_cancelled;
+    this.statusInProcess = this.translate.app.frontEnd.pages.approver_request.managed.status_inProcess;
+    this.statusPending = this.translate.app.frontEnd.pages.approver_request.managed.status_pending;
+
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

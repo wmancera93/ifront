@@ -22,14 +22,16 @@ export class NewsComponent implements OnInit {
   public validateNoData: boolean = false;
   public translate: Translate = null;
   public token: boolean;
+  public seacrhNew: string
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public myPublicationsService: MyPublicationsService,
     public billboardSharedService: BillboardService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-    
+
     this.translate = this.translateService.getTranslate();
+    this.seacrhNew = this.translate.app.frontEnd.pages.billboard.news.placeholder_search;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

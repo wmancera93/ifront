@@ -33,7 +33,7 @@ export class PlanningEvaluationComponent implements OnInit {
       if (action.action_method === "editPerfomanceEvaluation") {
         this.performanceEvalSharedService.setPlanningEvaluationData(action);
       }
-      if (action === "Planificación de periodos de objetivos") {
+      if (action === this.nameReport) {
         this.userAuthenticatedObjetives = JSON.parse(localStorage.getItem("user"));
         this.performanceEvaluationService.getExcelEvaluationObjectives(this.userAuthenticatedObjetives.employee_id.toString()).subscribe((data: any) => {
           window.open(data.url);

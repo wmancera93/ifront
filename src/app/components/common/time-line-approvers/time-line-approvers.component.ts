@@ -20,12 +20,21 @@ export class TimeLineApproversComponent implements OnInit {
   public dateFinally: string;
   public requests_print: string;
   public translate: Translate = null;
+  public statusApprover: string;
+  public statusCancelled: string;
+  public statusInProcess: string;
+  public statusPending: string;
 
   constructor(private aproversRequestsService: AproversRequestsService,
     private requestsRhService: RequestsRhService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.statusApprover = this.translate.app.frontEnd.components.common.time_line_approvers.status_Approver;
+    this.statusCancelled = this.translate.app.frontEnd.components.common.time_line_approvers.status_cancelled;
+    this.statusInProcess = this.translate.app.frontEnd.components.common.time_line_approvers.status_inProcess;
+    this.statusPending = this.translate.app.frontEnd.components.common.time_line_approvers.status_pending;
+
     this.aproversRequestsService.getRequests().subscribe(
       (data: any) => {
         if (data.type_request == 'requestsOnly') {

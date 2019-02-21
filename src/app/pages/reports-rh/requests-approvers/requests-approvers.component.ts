@@ -24,7 +24,7 @@ export class RequestsApproversComponent implements OnInit {
   public requests: RequestsRh;
   public viewContainer: boolean = false;
   public is_collapse: boolean = false;
-  public approver_selected: string = "Con aprobador";
+  public approver_selected: string;
   public platform_selected: string = "IHR";
   public type_selected: string = "VACA";
   public translate: Translate = null;

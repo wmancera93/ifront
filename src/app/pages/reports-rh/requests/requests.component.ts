@@ -40,6 +40,10 @@ export class RequestsComponent implements OnInit {
 
   public token: boolean;
   public showButtonReturn: boolean;
+  public pending: string;
+  public approved: string;
+  public inProcess: string;
+  public cancelled: string;
 
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -52,6 +56,11 @@ export class RequestsComponent implements OnInit {
     public aproversRequestsService: AproversRequestsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
+
+    this.pending = this.translate.app.frontEnd.pages.reports_rh.requests.status_pending;
+    this.approved = this.translate.app.frontEnd.pages.reports_rh.requests.status_approved;
+    this.inProcess = this.translate.app.frontEnd.pages.reports_rh.requests.status_inProcess;
+    this.cancelled = this.translate.app.frontEnd.pages.reports_rh.requests.status_cancelled;
 
     this.tokenService.validateToken()
       .subscribe(
