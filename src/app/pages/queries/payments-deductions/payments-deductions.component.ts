@@ -23,7 +23,7 @@ export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
     private accionDataTableService: DataDableSharedService,
     private tokenService: Angular2TokenService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
-    this.nameReport = this.translate.app.frontEnd.pages.queries.my_hour_extras.name_table_ts;
+    this.nameReport = this.translate.app.frontEnd.pages.queries.payments_deductions.name_table_ts;
   }
 
   ngOnInit() {

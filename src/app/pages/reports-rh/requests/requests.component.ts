@@ -31,7 +31,7 @@ export class RequestsComponent implements OnInit {
   public p: number = 1;
   public size_table: number = 10;
   public show: boolean = true;
-
+  public placeholder_search: string;
 
   public filter_active: string = 'all';
   public value_search: string = '';
@@ -57,6 +57,7 @@ export class RequestsComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
 
+    this.placeholder_search=this.translate.app.frontEnd.pages.reports_rh.requests.placeholder_search;
     this.pending = this.translate.app.frontEnd.pages.reports_rh.requests.status_pending;
     this.approved = this.translate.app.frontEnd.pages.reports_rh.requests.status_approved;
     this.inProcess = this.translate.app.frontEnd.pages.reports_rh.requests.status_inProcess;

@@ -18,7 +18,7 @@
       <div class="row justify-content-center top-containter">
         <div class="col-10 col-xl-6 cursor-general">
           <div class="searchBar-new">
-            <input [(ngModel)]="titleNew" type="text" class="form-control" (keyup)="enterTitleNew()" [attr.placeholder]="seacrhNew"
+            <input [(ngModel)]="titleNew" type="text" class="form-control" (keyup)="enterTitleNew()" placeholder="{{seacrhNew}}"
               maxlength="25" (keyup.enter)="goToSearchTitleNew()">
             <i class="search-news-icon fa fa-search icon-search  detectLetter general-cursor" (click)="goToSearchTitleNew()"></i>
           </div>

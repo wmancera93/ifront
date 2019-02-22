@@ -17,7 +17,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" [(ngModel)]='title_form' placeholder="Título de la noticia" name="title" style="width:100% !important;" ngModel
+                  <input type="text" [(ngModel)]='title_form' placeholder="{{placeholder_tittle}}" name="title" style="width:100% !important;" ngModel
                     required/>
                 </div>
               </div>
@@ -29,7 +29,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea name="summary" [(ngModel)]='summary' rows="2" cols="50" placeholder="Sólo visible para dashboard y noticias." style="width:100% !important;" ngModel
+                  <textarea name="summary" [(ngModel)]='summary' rows="2" cols="50" placeholder="{{placeholder_visualization}}" style="width:100% !important;" ngModel
                   required></textarea>
                 </div>
               </div>
@@ -40,7 +40,7 @@
                   </label>
                 </div>
                 <div class="col-9">
-                  <tag-input name="tags" [(ngModel)]='tags' theme='dark' secondaryPlaceholder="Escriba un tema + enter" placeholder="Escriba un tema + enter" ngModel required></tag-input>
+                  <tag-input name="tags" [(ngModel)]='tags' theme='dark' secondaryPlaceholder="{{secondary_placeholder}}" placeholder="{{secondary_placeholder}}" ngModel required></tag-input>
                 </div>
               </div>
               <div class="row">
@@ -73,7 +73,7 @@
               </div>
               <div class=" modal-footerInfo justify-content-center">
                 <div class="col-6 col-lg-3 buttonCloseNewForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
-                  <h6> {{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.btn_close}} </h6>
+                  <h6> {{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.btn_cerrar}} </h6>
                 </div>
               </div>
             </form>

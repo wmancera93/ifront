@@ -49,7 +49,7 @@ export class DataTableComponent implements OnInit {
   public rowsColsPdf: any[] = [];
   public translate: Translate = null;
   public recordsStatic: any[] = [];
-
+  public filter: string;
   public objectTable: any[] = [];
 
 
@@ -64,6 +64,7 @@ export class DataTableComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.filter = this.translate.app.frontEnd.components.common.data_table.filter;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

@@ -37,6 +37,10 @@ export class NewArticleFormComponent implements OnInit {
   public fileImageNew: string = 'fileImageNew';
   public showSubmit: boolean = true;
   public translate: Translate = null;
+  public placeholder_tittle: string;
+  public placeholder_visualization: string;
+  public secondary_placeholder: string;
+
   formNewArticle: FormGroup;
   fileToUpload: File = null;
 
@@ -55,6 +59,10 @@ export class NewArticleFormComponent implements OnInit {
     public formDataService: FormDataService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.placeholder_tittle=this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.placeholder_tittle;
+    this.placeholder_visualization=this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.placeholder_visualization;
+    this.secondary_placeholder=this.translate.app.frontEnd.pages.billboard.my_publication.new_article_form.secondary_placeholder;
+
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.image = data;
     })

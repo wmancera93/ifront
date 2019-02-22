@@ -71,7 +71,7 @@
             </div>
             <div class="row margin-row" *ngIf="trainingDetailInfo.status_id == 0">
               <div class="col-12">
-                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="Escriba observaciones" style="width:100% !important;"
+                <textarea name="observations" [(ngModel)]='observations' rows="2" cols="50" placeholder="{{placeholder_observations}}" style="width:100% !important;"
                   required>
                 </textarea>
               </div>

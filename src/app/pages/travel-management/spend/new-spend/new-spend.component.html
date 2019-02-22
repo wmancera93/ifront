@@ -395,7 +395,7 @@
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_tree}}:*</a>
+                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_three}}:*</a>
                   </label>
                   <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
                     <option value="-1">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
@@ -421,7 +421,7 @@
                 <div class="col-lg-4 col-md-6 col-12">
                   <label for="dateEnd" class="titleColor">
                     <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                    {{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_six}}*
+                    {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_six}}*
                   </label>
                   <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right"
                   />

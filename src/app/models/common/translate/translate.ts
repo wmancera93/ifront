@@ -102,6 +102,7 @@ interface Data_table {
     records_show: string,
     without_reports: string,
     employee: string,
+    filter: string,
 }
 interface Draw_calendar {
     today: string,
@@ -330,7 +331,7 @@ interface Layout {
 interface Contacts_list {
     partner: string,
     negative_message: string,
-    search_parner: string
+    search_partner: string
 }
 interface Header {
     partner: string,
@@ -576,11 +577,14 @@ interface New_article_form {
     text_upload_image: string,
     btn_save: string,
     text_loading: string,
-    btn_close: string,
+    btn_cerrar: string,
     msg_denied_request_ts: string,
     msg_empty_fields_ts: string,
     text_status_news_ts: string,
     msg_saved_news_ts: string,
+    placeholder_tittle: string,
+    placeholder_visualization: string,
+    secondary_placeholder: string,
 }
 interface Corporate_documents {
     title_corporate_documents: string,
@@ -684,6 +688,7 @@ interface View_training {
     title_confirmation_ts: string,
     text_status_training: string,
     title_warning_ts: string,
+    placeholder_observations: string,
 }
 interface Help {
     title_help: string,
@@ -907,6 +912,7 @@ interface Permisions_user {
     not: string,
     generate_ts: string,
     page: string,
+    placeholder_search: string;
 }
 interface Request {
     tittle: string,
@@ -927,6 +933,7 @@ interface Request {
     status_approved: string,
     status_inProcess: string,
     status_cancelled: string,
+    placeholder_search: string;
 }
 interface Requests_approver {
     name_table_ts: string,
@@ -1063,7 +1070,7 @@ interface New_advance {
     message_alert_date_one_ts: string,
     field_one: string,
     field_two: string,
-    field_tree: string,
+    field_three: string,
     field_four: string,
     field_five: string,
     field_six: string,
@@ -1298,7 +1305,7 @@ interface Dist_spend {
     column_cero: string,
     column_one: string,
     column_two: string,
-    column_tree: string,
+    column_three: string,
     column_four: string,
     column_five: string,
     column_six: string,
@@ -1339,6 +1346,7 @@ interface Edit_spend {
     populate: string,
     btn_cancel: string,
     bnt_add: string,
+    bnt_addNew:string,
     btn_changes: string,
     save: string,
     loading: string,
@@ -1417,7 +1425,7 @@ interface New_spend {
     field_cero: string;
     field_one: string;
     field_two: string;
-    field_tree: string;
+    field_three: string;
     field_four: string;
     field_five: string;
     field_six: string;
@@ -1427,7 +1435,7 @@ interface New_spend {
     field_onecero: string;
     field_oneone: string;
     field_onetwo: string;
-    field_onetree: string;
+    field_onethree: string;
     field_onefour: string;
 }
 interface Spend_hotel_journey {

@@ -12,8 +12,11 @@ export class HelpComponent implements OnInit {
  
   public dataHelp : Help[]=[] ;
   public translate: Translate = null;
-  constructor(public translateService: TranslateService) { }
+  constructor(public translateService: TranslateService) { 
+    this.translate = this.translateService.getTranslate();
+  }
 
+  
   ngOnInit() {
     this.dataHelp = [{title:this.translate.app.frontEnd.pages.help.text_dashboard_ts, image:"", description:this.translate.app.frontEnd.pages.help.text_operation_dashboard_ts}, 
     {title:this.translate.app.frontEnd.pages.help.text_organization_chart_ts, image:"", description:this.translate.app.frontEnd.pages.help.text_functioning_organization_chart_ts},

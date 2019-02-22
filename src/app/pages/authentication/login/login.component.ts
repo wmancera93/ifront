@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   public heightContenGeneral: number = 0;
   public translate: Translate = null;
   public languaje: string = 'es';
-  public password: string;
+  public passwordLogin: string;
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -48,7 +48,10 @@ export class LoginComponent implements OnInit {
     if (this.translate === null) {
       this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
         this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+        this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
       });
+    }else{
+        this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
     }
 
     this.router.events.subscribe(event => {
@@ -57,9 +60,7 @@ export class LoginComponent implements OnInit {
         ga('send', 'pageview');
       }
     });
-    setTimeout(() => {
-      this.password = this.translate.app.frontEnd.pages.authentication.login.password;
-    }, 100);
+  
     
   }
 
@@ -69,6 +70,7 @@ export class LoginComponent implements OnInit {
     this.languaje = param;
     this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+      this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
     });
     this.tokenService.atOptions.apiPath = 'api/v2/' + this.languaje;
   }

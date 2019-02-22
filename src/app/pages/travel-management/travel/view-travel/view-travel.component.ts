@@ -61,6 +61,7 @@ export class ViewTravelComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
     this.maintenance_travel = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.maintenance_with;
+    this.nameReport=this.translate.app.frontEnd.pages.travel_management.travel.view_travel.trayect;
     this.nameReportAdvance = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.name_table_advance_ts;
     this.nameReportSpend = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.name_table_allowance_ts;
 

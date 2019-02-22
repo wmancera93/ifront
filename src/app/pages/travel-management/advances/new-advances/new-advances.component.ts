@@ -376,7 +376,7 @@ export class NewAdvancesComponent implements OnInit {
           },
 
           field_3: {
-            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_tree,
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_three,
             type: "string",
             sortable: false,
           },

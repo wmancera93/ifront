@@ -934,7 +934,7 @@ export class NewSpendComponent implements OnInit {
             sortable: false,
           },
           field_5: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_tree,
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_three,
             type: "string",
             sortable: false,
           },
@@ -989,7 +989,7 @@ export class NewSpendComponent implements OnInit {
             sortable: false,
           },
           field_16: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onetree,
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onethree,
             type: "string",
             sortable: false,
           },

@@ -47,7 +47,7 @@ export class ContactsListComponent implements OnInit {
   ) {
 
     this.translate = this.translateService.getTranslate();
-    this.search_partner=this.translate.app.frontEnd.components.layout.contacts_list.search_parner;
+    this.search_partner=this.translate.app.frontEnd.components.layout.contacts_list.search_partner;
   }
   ngOnInit() {
     this.numberPage = 1;

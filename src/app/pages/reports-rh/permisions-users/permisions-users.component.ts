@@ -38,6 +38,7 @@ export class PermisionsUsersComponent implements OnInit {
 
   public is_collapse: boolean = false;
   public translate: Translate = null;
+  public placeholder_search: string;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -50,7 +51,7 @@ export class PermisionsUsersComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
     this.nameReport = this.translate.app.frontEnd.pages.reports_rh.permisions_users.tittle;
-
+this.placeholder_search= this.translate.app.frontEnd.pages.reports_rh.permisions_users.placeholder_search;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

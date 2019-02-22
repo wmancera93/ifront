@@ -22,7 +22,7 @@
       <div class="row align-self-end">
         <div class="col-12 top-form">
           <div class="form-group float-general-login">
-            <input id="passwordLocked" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" [attr.placeholder]="password">
+            <input id="passwordLocked" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="{{passwordLogin}}">
             <i *ngIf="txtPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover='overEyePassword()' on-mouseleave='leaveEyePassword()'></i>
           </div>
           <div class="float-general-login top">

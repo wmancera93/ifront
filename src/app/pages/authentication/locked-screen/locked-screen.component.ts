@@ -27,7 +27,7 @@ export class LockedScreenComponent implements OnInit {
   public txtPassword: string = '';
   public dataEnterprise: Enterprise[] = [];
   public translate: Translate = null;
-  public password: string;
+  public passwordLogin: string;
 
   constructor(private tokenService: Angular2TokenService,
     public alert: AlertsService,
@@ -38,7 +38,7 @@ export class LockedScreenComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
   ) {
     this.translate = this.translateService.getTranslate();
-    this.password = this.translate.app.frontEnd.pages.authentication.locket_screen.password;
+    this.passwordLogin = this.translate.app.frontEnd.pages.authentication.locket_screen.password;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);

@@ -266,7 +266,7 @@
                     || formSpendEditTravel.value.nit == ''
                     || formSpendEditTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendEditTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_add}}</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_addNew}}</button>
                   <button *ngIf="edit_Spend" [attr.disabled]="
                   (formSpendEditTravel.value.observation == ''
                     || formSpendEditTravel.value.travel_allowance_type_id == ''
@@ -278,7 +278,7 @@
                     || formSpendEditTravel.value.nit == ''
                     || formSpendEditTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpendEdit(formSpendEditTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.btn_changes}}</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_add}}</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
                   <button class="btn btn-warning btn-block cursor-general" (click)="closeEditSpend()" data-toggle="collapse" data-target="#collapseNewSpend">

@@ -39,7 +39,7 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  {{translate.app.frontEnd.pages.travel_management.advances.new_advance.message_third}}:
+                  {{translate.app.frontEnd.pages.travel_management.advances.new_advance.message_third}}
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
@@ -82,14 +82,14 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.import}}*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.import}}:</strong>
                 </label>
                 <input type="text" class="form-control" name="value" [formControl]="formAdvanceTravel.controls['value']" (keyup)="onlyNumber(formAdvanceTravel.value)" style="text-align:right">
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.currency}}*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.currency}}:</strong>
                 </label>
                 <select class="form-control" [formControl]="formAdvanceTravel.controls['currency_id']" paceholder="Seleccione">
                   <option value="">{{translate.app.frontEnd.pages.travel_management.advances.new_advance.option_select}}</option>
@@ -99,7 +99,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.date_advance}}*:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.date_advance}}:</strong>
                 </label>
                 <input tabindex="-1" type="date" name="date" class="form-control" [formControl]="formAdvanceTravel.controls['date']" (change)="validateDateAdvance(formAdvanceTravel.value)"
                   (keyup)="delete('date_body')" />
@@ -109,7 +109,7 @@
           <div *ngIf="continue" class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.observation}}*:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.new_advance.observation}}:</strong>
             </label>
             <textarea style="margin-top: 10px; width:100%;" type="text" rows="4" cols="50" name="observation" class="form-control uppercase" [formControl]="formAdvanceTravel.controls['observation']"></textarea>
           </div>

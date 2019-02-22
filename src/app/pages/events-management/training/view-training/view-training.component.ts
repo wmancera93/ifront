@@ -25,6 +25,7 @@ export class ViewTrainingComponent implements OnInit {
   public flagPDF: boolean = false;
   public countAfterEval: number = 0;
   public translate: Translate = null;
+  public placeholder_observations: string;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
@@ -32,6 +33,7 @@ export class ViewTrainingComponent implements OnInit {
     public sanitizer: DomSanitizer, public eventsEmployeeService: EventsEmployeeService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
+    this.placeholder_observations = this.translate.app.frontEnd.pages.events_management.training.view_training.placeholder_observations;
 
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
       if (this.countAfterEval === 0) {
