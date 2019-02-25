@@ -9,6 +9,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-view-travel',
@@ -19,7 +21,7 @@ export class ViewTravelComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
   public ticketSendPDF: any;
-  public nameReport: string = 'Gestión de viajes'
+  public nameReport: string;
   public objectReport: EventEmitter<any> = new EventEmitter();
   public objectPrintAdvances: EventEmitter<any> = new EventEmitter();
   public objectPrintSpend: EventEmitter<any> = new EventEmitter();
@@ -32,13 +34,13 @@ export class ViewTravelComponent implements OnInit {
   public annexeds: any[] = [];
   public edit: boolean = false;
   public view_travels: any[] = [];
-  public maintenance_travel: string = 'Sin manutención';
+  public maintenance_travel: string;
   public maintenance: boolean = false;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public allRequests: any[];
-  public nameReportAdvance: string = 'Anticipos de viaje';
-  public nameReportSpend: string = 'Gastos de viaje';
+  public nameReportAdvance: string;
+  public nameReportSpend: string;
   public table_advances_view: any[] = [];
   public table_spend_view: any[] = [];
   public arrayAdvanceRequest: any[] = [];
@@ -46,17 +48,22 @@ export class ViewTravelComponent implements OnInit {
   public eployee_selected: any = null;
   public dateBeginRequest: string;
   public dateEndRequest: string;
-  public comentaryPlus:string;
-
+  public comentaryPlus: string;
+  public translate: Translate = null;
   public is_sender_approval: boolean = false;
 
 
   constructor(public travelManagementService: TravelService,
     public travelsService: TravelsService, public alert: AlertsService,
     public sanitizer: DomSanitizer, public http: Http,
-    private accionDataTableService: DataDableSharedService, public spendSharedService: SpendSharedService) {
+    private accionDataTableService: DataDableSharedService, public spendSharedService: SpendSharedService
+    , public translateService: TranslateService) {
 
-
+    this.translate = this.translateService.getTranslate();
+    this.maintenance_travel = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.maintenance_with;
+    this.nameReport=this.translate.app.frontEnd.pages.travel_management.travel.view_travel.trayect;
+    this.nameReportAdvance = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.name_table_advance_ts;
+    this.nameReportSpend = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.name_table_allowance_ts;
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -99,9 +106,9 @@ export class ViewTravelComponent implements OnInit {
         }
 
         if (this.maintenance == true) {
-          this.maintenance_travel = 'Con manutención'
-        }else{
-          this.maintenance_travel = 'Sin manutención'
+          this.maintenance_travel = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.maintenance_with;
+        } else {
+          this.maintenance_travel = this.translate.app.frontEnd.pages.travel_management.travel.view_travel.maintenance;
         }
         setTimeout(() => {
           this.objectReport.emit({ success: true, data: [this.objectPrint] });
@@ -195,7 +202,7 @@ export class ViewTravelComponent implements OnInit {
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data: any) => {
       if (data) {
         document.getElementById("closeTravelsNew").click();
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
+        const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.travel.view_travel.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.travel.view_travel.message_alert_ts, confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       }
 
@@ -203,7 +210,7 @@ export class ViewTravelComponent implements OnInit {
     },
       (error: any) => {
         document.getElementById("closeTravelsNew").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
+        const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.view_travel.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'continueViewTravelRequests' }];
         this.alert.setAlert(alertWarning[0]);
       });
 

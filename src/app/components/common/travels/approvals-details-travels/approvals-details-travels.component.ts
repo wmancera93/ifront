@@ -8,6 +8,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-approvals-details-travels',
@@ -28,22 +30,36 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public objectTravelsReport: EventEmitter<any> = new EventEmitter();
   public objectSpendReport: EventEmitter<any> = new EventEmitter();
   public objectAdvanceReport: EventEmitter<any> = new EventEmitter();
-  public nameReportTravel: string = 'Trayectos de viaje';
-  public nameReportAdvance: string = 'Anticipos de viaje';
-  public nameReportSpend: string = 'Gastos de viaje';
+  public nameReportTravel: string;
+  public nameReportAdvance: string;
+  public nameReportSpend: string;
   public editRequest: boolean;
   public table_advances: any[] = [];
   public table_spend: any[] = [];
   public type_requests: string;
   public idGeneral: string;
   public objectApproval: any[] = [];
-
+  public translate: Translate = null;
   public countAfter: number = 0;
+  public statusApprover: string;
+  public statusCancelled: string;
+  public statusInProcess: string;
+  public statusPending: string;
 
   constructor(public approverTravelsService: ApproverTravelsService, public alert: AlertsService,
     public stylesExplorerService: StylesExplorerService, public travelApproverServiceShared: TravelApproverService,
     public accionDataTableService: DataDableSharedService, public travelsService: TravelsService,
-    public spendSharedService: SpendSharedService) {
+    public spendSharedService: SpendSharedService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+
+    this.nameReportTravel = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_journeys;
+    this.nameReportAdvance = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_advances;
+    this.nameReportSpend = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_expenses;
+    this.statusApprover = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_Approver;
+    this.statusCancelled = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_cancelled;
+    this.statusInProcess = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_inProcess;
+    this.statusPending = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_pending;
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if ((data.action_method === "showHotels")) {
@@ -73,7 +89,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
     this.travelApproverServiceShared.getviewDetailRequests()
       .subscribe((data: any) => {
-        
+
         if (this.countAfter === 0) {
           this.switchTravels = 'on';
           this.descriptionTravels = '';
@@ -96,7 +112,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       approvers_to_json: request.data[0].travel_request.approvers_to_json,
                       answers_to_json: request.data[0].travel_request.answers_to_json
                     })
-                    
+
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
                     }, 300);
@@ -143,7 +159,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'advance':
-            this.objectApproval = [];
+              this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsAdnvanceById(this.requests_travels.ticket)
@@ -192,7 +208,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
               break;
             case 'spend':
-            this.objectApproval = [];
+              this.objectApproval = [];
               this.table_advances = [];
               this.table_spend = [];
               this.approverTravelsService.getApprovalsRequestsSpendById(this.requests_travels.ticket)
@@ -296,7 +312,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.showSubmit = true;
           if (data.success) {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.travelApproverServiceShared.setrefreshIndexRequest(true);
@@ -304,7 +320,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
@@ -321,7 +337,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.showSubmit = true;
           if (data.success) {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.travelApproverServiceShared.setrefreshIndexAdvance(true);
@@ -329,7 +345,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
@@ -346,7 +362,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           this.showSubmit = true;
           if (data.success) {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud aprobada con exito', confirmation: false }];
+            const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
             this.travelApproverServiceShared.setrefreshIndexAllowance(true);
@@ -354,7 +370,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         },
           (error: any) => {
             document.getElementById("btn_approvals_requests_travels").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la aprobación de la solicitud?', confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }

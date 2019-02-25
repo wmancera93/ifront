@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viaje # {{ticket}}</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.tittle}} # {{ticket}}</h5>
         <button id="close_edit_travel" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -15,7 +15,7 @@
 
           <div class="col-12 align-self-center" *ngIf="generalViajes[0].travel_request.ticket_cli !== null">
             <label class="titleColor">
-              <strong class="text-primary-hr">Ticket generado en SAP</strong>
+              <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.ticket_sap}}</strong>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               <strong>{{generalViajes[0].travel_request.ticket_cli}}</strong>
             </label>
@@ -23,7 +23,7 @@
           </div>
           <div class="col-12 align-self-center" *ngIf="eployee_selected_current !== null">
             <label class="titleColor">
-              Viaje creado para:
+              {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.travel_third}}:
               <i class="fa fa-fw fa fa-user text-primary-hr"></i>
               <strong>{{eployee_selected_current.name_complete}}</strong>
             </label>
@@ -34,7 +34,7 @@
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>Si va a actualizar un viaje para un tercero, busque por el nombre en la caja de texto:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_third}}:</strong>
                 </label>
                 <form name="searchAutoComplete">
                   <p>
@@ -56,14 +56,14 @@
               </div>
               <div class="col-8 align-self-center">
                 <label class="titleColor" *ngIf="eployee_selected !== null">
-                  Usted va a actualizar el viaje para:
+                  {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.travel_for_third}}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{eployee_selected.name_complete}}</strong>
                 </label>
                 <br>
                 <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
                   (click)="deleteEmployeeThird()">
-                  Click para eliminar el tercero
+                  {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.erase_third}}
                 </span>
               </div>
             </div>
@@ -74,18 +74,18 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-                  <strong>Tipo de viaje:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_travel}}:</strong>
                 </label>
                 <select *ngIf="travel_types.length > 0" class="form-control" [formControl]="formTravelManagement.controls['type_travel']"
                   paceholder="Seleccione">
-                  <option value="">Seleccione</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                   <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{nameTravel.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
-                  <strong>Fecha inicial de solicitud:*</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.date_begin}}:*</strong>
                 </label>
                 <input tabindex="-1" type="date" name="date_requests_begin" class="form-control" [formControl]="formTravelManagement.controls['date_requests_begin']"
                   (change)="dateComplete(formTravelManagement.value)" (keydown)="delete('date_begin_header')" />
@@ -93,7 +93,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
-                  <strong>Fecha final de solicitud:*</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.date_end}}:*</strong>
                 </label>
                 <input tabindex="-1" type="date" name="date_requests_end" class="form-control" [formControl]="formTravelManagement.controls['date_requests_end']"
                   (keydown)="delete('date_end_header')" (change)="dateComplete(formTravelManagement.value)" />
@@ -103,7 +103,7 @@
           <div class="col-12 top-containter" style="margin-top: 20px">
             <label for="celulaInput" class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
-              <strong>Motivo del Viaje *</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.reason_travel}} *</strong>
             </label>
             <textarea style="margin-top: 10px" type="text" rows="5" style="height: auto !important;" name="reason_trip" class="form-control uppercase"
               [formControl]="formTravelManagement.controls['trip_text']"></textarea>
@@ -112,7 +112,7 @@
           <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
             <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" id="manutencionCheck" [formControl]="formTravelManagement.controls['maintenance']">
             <label class="form-check-label titleColor" for="manutencionCheck">
-              <strong>Manutención</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.check_maintenance}}</strong>
             </label>
           </div>
 
@@ -121,7 +121,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-                  <a>Clase de viaje legal:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_legal}}:*</a>
                 </label>
                 <select *ngIf="legal_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_legal']">
                   <option value="-1">Seleccione</option>
@@ -131,20 +131,20 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-ship text-primary-hr"></i>
-                  <a>Clase de viaje empresarial:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_especific}}:*</a>
                 </label>
                 <select *ngIf="trips_specific.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_specific']">
-                  <option value="-1">Seleccione</option>
+                  <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                   <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{specificTravel.name}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-                  <a>Actividad de viaje:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_activity}}:*</a>
                 </label>
                 <select *ngIf="trips_activities.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_travel_activities']">
-                  <option value="-1">Seleccione</option>
+                  <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                   <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{activitiesTravel.name}}</option>
                 </select>
               </div>
@@ -156,7 +156,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                  <a>Elemento de imputación:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.imputation_element}}:*</a>
                 </label>
                 <select *ngIf="center_costs_travels.length > 0" class="form-control" [formControl]="formTravelManagement.controls['id_element_imputation']"
                   (change)="searchCostsCenterAndGrahp(formTravelManagement.value, 'new')" placeholder="Seleccione">
@@ -166,7 +166,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Centro de costo:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.cost_center}}:*</a>
                 </label>
                 <form name="searchAutoCompleteCost">
                   <p>
@@ -189,7 +189,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                  <a>Orden:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.order}}:*</a>
                 </label>
                 <form name="searchAutoCompleteOrden">
                   <p>
@@ -206,7 +206,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Grafo:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.graph}}:*</a>
                 </label>
                 <form name="searchAutoCompleteGraph">
                   <p>
@@ -229,10 +229,10 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a>Operacion:*</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.operation}}:*</a>
                 </label>
                 <select [attr.disabled]="operations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_operations']">
-                  <option value="-1">Seleccione</option>
+                  <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                   <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
                 </select>
               </div>
@@ -241,7 +241,7 @@
 
           <div class="col-12" style="margin-top: 15px" *ngIf="objectPrint.data.length > 0">
             <div class="row border" style="margin-left: 15px">
-              <h4>Trayectos</h4>
+              <h4>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.trayect}}</h4>
             </div>
           </div>
 
@@ -260,10 +260,10 @@
                       <h6 *ngIf="imgsaved.name !== null">{{imgsaved.name |slice: 0:20}}
                         <span [hidden]="imgsaved.name.length < 20">...</span>
                       </h6>
-                      <h6 *ngIf="imgsaved.name === null">Sin nombre
+                      <h6 *ngIf="imgsaved.name === null">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.no_name}}
                       </h6>
-                      <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">Ver</p>
-                      <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">Descargar</p>
+                      <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.see_attach}}</p>
+                      <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.download_attach}}</p>
                     </div>
                     <div class="col-1 text-center">
                       <h6 (click)="deleteUploadSaved(imgsaved)" class="text-primary-hr cursor-general">x</h6>
@@ -280,7 +280,7 @@
                   <div class="col-12">
                     <label *ngIf="objectImg.length > 0" class="titleColor">
                       <i class="fa fa-fw fa-check text-primary-hr"></i>
-                      <strong>Archivos adjuntos</strong>
+                      <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.attach_saved}}</strong>
                     </label>
                   </div>
                 </div>
@@ -323,7 +323,7 @@
                   <div class="col-lg-3 col-md-6 col-12">
                     <label *ngIf="objectImg.length == 0" class="titleColor">
                       <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                      <strong>Adjuntar Cotización</strong>
+                      <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.attach}}</strong>
                     </label>
                     <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
                   </div>
@@ -334,13 +334,13 @@
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <h5 *ngIf="bedit">
-                  Editar trayecto
+                  {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.label_edit}}
                 </h5>
                 <h5 class="titleColor" *ngIf="bnew">
-                  Crear trayecto
+                  {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.label_create}}
                 </h5>
                 <button *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseEdit()">
-                  Crear trayecto
+                  {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.label_create}}
                 </button>
                 <button id="edit_funtionTravel" data-toggle="collapse" data-target="#collapseTravelEdit" style="display: none">
                 </button>
@@ -352,7 +352,7 @@
                 <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-bus text-primary-hr"></i>
-                    <strong>Transporte:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.transport}}:</strong>
                   </label>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
@@ -363,7 +363,7 @@
                 <div class="col-lg-2 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-car text-primary-hr"></i>
-                    <strong>Kilometraje:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.mileage}}:</strong>
                   </label>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
@@ -376,7 +376,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="border">
-                        <strong class="text-primary-hr">Lugar de origen</strong>
+                        <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.origin_place}}</strong>
                       </div>
                     </div>
                   </div>
@@ -386,28 +386,28 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
-                        <a>País:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.country}}:</a>
                       </label>
                       <select [attr.disabled]="countries.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_country']"
                         (change)="searchState(formTravelManagement.value, 'new')">
-                        <option value="-1">Seleccione</option>
+                        <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                         <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{nameCountry.name}}</option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                        <a>Región:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.region}}:</a>
                       </label>
                       <select [attr.disabled]="stateLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_state']">
-                        <option value="-1">Seleccione</option>
+                        <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                         <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{nameState.name}}</option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                        <a>Lugar:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.place}}:</a>
                       </label>
                       <input type="text" class="form-control uppercase" name="id_city" [formControl]="formTravelManagement.controls['id_city']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
@@ -420,17 +420,17 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
-                        <a>Terminal de origen:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.origin_terminal}}:</a>
                       </label>
                       <select [attr.disabled]="terminalLocations.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminal']">
-                        <option value="-1">Seleccione</option>
+                        <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                         <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{nameTerminal.name}}</option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        <a> Fecha Inicial del Trayecto *</a>
+                        <a> {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.date_begin_trayect}} *</a>
                       </label>
                       <input tabindex="-1" type="date" name="date_begin" class="form-control" [formControl]="formTravelManagement.controls['date_begin']"
                         (change)="dateValidateTrayect(formTravelManagement.value)" (keydown)="delete('date_begin_body')" />
@@ -438,7 +438,7 @@
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
-                        <a> Hora de Partida *</a>
+                        <a> {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.hour_begin}} *</a>
                       </label>
                       <input type="time" name="hour_begin" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_begin']"
                         (change)="addHourEnd(formTravelManagement.value)" (click)="addHourEnd(formTravelManagement.value)"
@@ -452,7 +452,7 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="border">
-                        <strong class="text-primary-hr">Lugar de destino</strong>
+                        <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.destination_place}}</strong>
                       </div>
                     </div>
                   </div>
@@ -462,18 +462,19 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
-                        <a>País:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.country}}:</a>
                       </label>
                       <select [attr.disabled]="countriesto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_countryto']"
                         (change)="searchStateto(formTravelManagement.value, 'new')">
                         <option value="-1">Seleccione</option>
                         <option *ngFor="let nameCountryto of countriesto" [value]="nameCountryto.id">{{nameCountryto.name}}</option>
                       </select>
+
                     </div>
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
-                        <a>Región:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.region}}:</a>
                       </label>
                       <select [attr.disabled]="stateLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_stateto']">
                         <option value="-1">Seleccione</option>
@@ -483,7 +484,7 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
-                        <a>Lugar:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.place}}:</a>
                       </label>
                       <input type="text" class="form-control uppercase" name="id_cityto" [formControl]="formTravelManagement.controls['id_cityto']">
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
@@ -496,17 +497,17 @@
                     <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
-                        <a>Terminal de destino:</a>
+                        <a>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.origin_terminal}}:</a>
                       </label>
                       <select [attr.disabled]="terminalLocationsto.length == 0 ? true : null" class="form-control" [formControl]="formTravelManagement.controls['id_terminalto']">
-                        <option value="-1">Seleccione</option>
+                        <option value="-1">{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.option_select}}</option>
                         <option *ngFor="let nameTerminalto of terminalLocationsto" [value]="nameTerminalto.id">{{nameTerminalto.name}}</option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        <a> Fecha final del Trayecto *</a>
+                        <a> {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.date_end_trayect}} *</a>
                       </label>
                       <input tabindex="-1" type="date" name="date_end" class="form-control" [formControl]="formTravelManagement.controls['date_end']"
                         (change)="dateValidateTrayect(formTravelManagement.value)" (keydown)="delete('date_end_body')" />
@@ -514,7 +515,7 @@
                     <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
                         <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
-                        <a> Hora de llegada *</a>
+                        <a> {{translate.app.frontEnd.pages.travel_management.travel.edit_travel.hour_end}} *</a>
                       </label>
                       <input type="time" name="hour_end" min="00:00:01" max="23:59:59" class="form-control" [formControl]="formTravelManagement.controls['hour_end']"
                         (change)="hourValidationsEdit(formTravelManagement.value)" readonly="readonly" />
@@ -574,17 +575,17 @@
                           || formTravelManagement.value.date_end == ''
                           || formTravelManagement.value.hour_end == '') ? true : null" class="btn btn-primary btn-block cursor-general"
                         (click)="addDestination(formTravelManagement.value)" data-toggle="collapse" data-target="#collapseTravel">
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar destino
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.btn_add_trayect}}
                       </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12" *ngIf="bedit">
                       <button type="button" class="btn btn-primary btn-block cursor-general" (click)="editDestination(formTravelManagement.value)"
                         data-toggle="collapse" data-target="#collapseTravel">
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar cambios</button>
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.btn_add_changes}}</button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
                       <button class="btn btn-warning btn-block cursor-general" (click)="closeTrip()" data-toggle="collapse" data-target="#collapseTravelEdit">
-                        <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
+                        <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.button_cancel}}</button>
                     </div>
                   </div>
                 </div>
@@ -592,7 +593,7 @@
             </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
-            <h6>Comentarios adicionales</h6>
+            <h6>{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.comments}}</h6>
             <ckeditor debounce="100" name="body" [(ngModel)]="comentaryPlus" [ngModelOptions]="{standalone: true}">
             </ckeditor>
           </div>
@@ -602,9 +603,9 @@
 
           <div class="col-lg-3 col-md-4 col-12">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditTravel(formTravelManagement.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar</button>
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.save}}</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.edit_travel.loading}}</button>
           </div>
         </div>
         <!-- <div class="row justify-content-end" style="margin-top: 30px" *ngIf="generalViajes[0].travel_request.status_request != 'En proceso'">

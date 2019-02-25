@@ -7,6 +7,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
 import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-view-training',
@@ -22,11 +24,16 @@ export class ViewTrainingComponent implements OnInit {
   public urlPrevisualize: string;
   public flagPDF: boolean = false;
   public countAfterEval: number = 0;
+  public translate: Translate = null;
+  public placeholder_observations: string;
 
   constructor(public trainingSharedService: TrainingSharedService,
     public trainingService: TrainingService,
     public alert: AlertsService,
-    public sanitizer: DomSanitizer, public eventsEmployeeService: EventsEmployeeService) {
+    public sanitizer: DomSanitizer, public eventsEmployeeService: EventsEmployeeService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.placeholder_observations = this.translate.app.frontEnd.pages.events_management.training.view_training.placeholder_observations;
 
     this.trainingSharedService.getDataTraining().subscribe((activeModal: any) => {
       if (this.countAfterEval === 0) {
@@ -51,7 +58,7 @@ export class ViewTrainingComponent implements OnInit {
 
   }
 
-  viewPDF(){
+  viewPDF() {
     window.open(this.urlPrevisualize);
   }
 
@@ -66,8 +73,8 @@ export class ViewTrainingComponent implements OnInit {
         document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Confirmación',
-          message: "Estado de la capacitación guardado",
+          title: this.translate.app.frontEnd.pages.events_management.training.view_training.title_confirmation_ts,
+          message: this.translate.app.frontEnd.pages.events_management.training.view_training.text_status_training,
           confirmation: false,
           typeConfirmation: ''
         }];
@@ -80,7 +87,7 @@ export class ViewTrainingComponent implements OnInit {
         document.getElementById("closeModalTraining").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.events_management.training.view_training.title_warning_ts,
           message: error.json().errors.toString(),
           confirmation: false,
           typeConfirmation: ''

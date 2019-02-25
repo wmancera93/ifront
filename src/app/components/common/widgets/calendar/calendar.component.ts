@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Calendar } from '../../../../models/common/widgets/widgets';
 import { Enterprise } from '../../../../models/general/enterprise';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-calendar',
@@ -11,9 +13,9 @@ export class CalendarComponent implements OnInit {
   @Input('calendar') calendar: any
   public objectWidget: Calendar;
   public dataEnterprise: Enterprise = null;
-
-  constructor() {
-
+  public translate: Translate = null;
+  constructor(public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {

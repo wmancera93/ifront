@@ -12,6 +12,8 @@ import { FormDataService } from '../../../../services/common/form-data/form-data
 import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 import { Router } from '@angular/router';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-edit-spend',
@@ -23,7 +25,7 @@ export class EditSpendComponent implements OnInit {
   public editSpendDetail: any;
   public editSpendTable: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Gastos';
+  public nameReport: string;
   public idEditSpend: string;
   public spedsData: any[] = [];
   public listTravelsFromSpend: any[] = [];
@@ -59,6 +61,7 @@ export class EditSpendComponent implements OnInit {
   public stateRequestsSpend: string;
   public idEmployee: string = '0';
   public type_spend: string;
+  public translate: Translate = null;
 
   showSizeTable
   showPdf
@@ -69,8 +72,12 @@ export class EditSpendComponent implements OnInit {
     public alert: AlertsService,
     public fb: FormBuilder,
     public http: Http, public fileUploadService: FileUploadService,
-    public formDataService: FormDataService, public router: Router, public travelManagementService: TravelService) {
+    public formDataService: FormDataService, public router: Router, public travelManagementService: TravelService
+    , public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+
+    this.nameReport=this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts
     this.formSpendEditTravel = new FormGroup({});
     this.formSpendEditTravel = fb.group({
       travel_request_id: "",
@@ -123,7 +130,7 @@ export class EditSpendComponent implements OnInit {
 
             const alertSuccess: Alerts[] = [{
               type: 'danger',
-              title: 'Confirmación',
+              title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
               message: error.json().errors.toString(),
               confirmation: false,
             }];
@@ -298,8 +305,8 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("btn_spend_edit").click();
         const alertSuccess: Alerts[] = [{
           type: 'warning',
-          title: 'Confirmación',
-          message: 'Desea eliminar el gasto',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEdit'
         }];
@@ -311,8 +318,8 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("btn_spend_edit").click();
         const alertSuccess: Alerts[] = [{
           type: 'warning',
-          title: 'Confirmación',
-          message: 'Desea eliminar el gasto #' + this.idEditSpend,
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts +'#' + this.idEditSpend,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEditCreated'
         }];
@@ -564,7 +571,7 @@ export class EditSpendComponent implements OnInit {
 
         const alertSuccess: Alerts[] = [{
           type: 'success',
-          title: 'Alerta',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
           message: data.message,
           confirmation: false
         }];
@@ -577,7 +584,7 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("btn_spend_edit").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_one_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorSaveSpendEdit'
@@ -641,8 +648,8 @@ export class EditSpendComponent implements OnInit {
     this.idFile = param.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el archivo #' + this.idFile.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
+      message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_one_ts + this.idFile.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteDocumentSavedSpend'
     }];
@@ -679,8 +686,8 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("closeModalEditSpend").click();
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Solicitud Exitosa',
-          message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_tree_ts,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_two_ts, confirmation: false
         }];
         this.alert.setAlert(alertWarning[0]);
       }
@@ -690,7 +697,7 @@ export class EditSpendComponent implements OnInit {
         document.getElementById("closeModalEditSpend").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Solicitud Denegada',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_four_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorApproverSpend'

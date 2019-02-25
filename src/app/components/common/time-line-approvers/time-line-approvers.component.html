@@ -21,7 +21,7 @@
                 <i class="fa fa-file-text"></i>
               </div>
               <div class="panel-heading" *ngIf="requests_print == 'requestsOnly'">
-                <h2 class="panel-title text-capitalize">Solicitud de {{detailRequets[0].request.type_requests_name |
+                <h2 class="panel-title text-capitalize">{{translate.app.frontEnd.components.common.time_line_approvers.request}} {{detailRequets[0].request.type_requests_name |
                   lowercase}}</h2>
               </div>
               <div class="panel-heading" *ngIf="requests_print !='requestsOnly'">
@@ -55,14 +55,14 @@
                               <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_begin_format != null">
                                 <p class="font-title-general">
                                   <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                                  Fecha Inicial:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.date_begin}}:
                                   <span style="font-weight: 100 !important">{{dateFirts}}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_end_format != null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-calendar"></i>
-                                  Fecha Final:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.date_end}}:
                                   <span style="font-weight: 100 !important">
                                     {{dateFinally}}</span>
                                 </p>
@@ -70,27 +70,27 @@
                               <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.days_request !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-sun-o"></i>
-                                  Dias Solicitados:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.requested_days}}:
                                   <span style="font-weight: 100 !important">{{detailRequets[0].request.days_request}}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-md-left text-center" *ngIf="fileSupport !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-paperclip"></i>
-                                  Soporte Adjunto:
-                                  <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">Ver</span>
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.attached}}:
+                                  <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">{{translate.app.frontEnd.components.common.time_line_approvers.see_attached}}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-md-left text-center">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                  Observaciones:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
                                   <span style="font-weight: 100 !important">{{detailRequets[0].request.observation_request}}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-center">
                                 <p class="font-title-general">
-                                  Creada:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.created}}:
                                   <time class="font-color-default">{{detailRequets[0].request.created_date}}</time>
                                 </p>
                               </div>
@@ -143,26 +143,26 @@
                                   <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
                                     <p class="font-title-general">
                                       <i class="font-color-default fa fa-fw fa-question-circle"></i>
-                                      Estado:
+                                      {{translate.app.frontEnd.components.common.time_line_approvers.status}}:
                                     </p>
                                   </div>
                                   <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                    <h6 class="col-4" *ngIf="answer.status == 'Aprobado'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusApprover">
                                       <span class="badge badge-primary" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'Cancelado'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusCancelled">
                                       <span class="badge badge-danger" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'En Proceso'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusInProcess ">
                                       <span class="badge badge-success" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == 'Pendiente'">
+                                    <h6 class="col-4" *ngIf="answer.status == statusPending">
                                       <span class="badge badge-default" style="margin-top: 5px;">
                                         {{answer.status}}
                                       </span>
@@ -171,14 +171,14 @@
                                   <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null && answer.description !== undefined">
                                     <p class="font-title-general text-center">
                                       <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                      Observaciones:
+                                      {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
                                       <span style="font-weight: 100 !important">{{answer.description}}</span>
                                     </p>
                                   </div>
                                   <div class="col-12 text-md-left text-center" *ngIf="answer.description == undefined">
                                     <p class="font-title-general text-center">
                                       <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                      Observaciones:
+                                      {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
                                       <span style="font-weight: 100 !important">{{answer.observation}}</span>
                                     </p>
                                   </div>
@@ -186,7 +186,7 @@
                               </div>
                               <div class="col-12 text-center">
                                 <p class="font-title-general">
-                                  Creada:
+                                  {{translate.app.frontEnd.components.common.time_line_approvers.created}}:
                                   <time class="font-color-default">{{answer.created_date}}</time>
                                 </p>
                               </div>
@@ -209,7 +209,7 @@
                   <i class="fa fa-question"></i>
                 </div>
                 <div class="panel-heading">
-                  <h2 class="panel-title">Aprobador {{detailRequets[0].pending_level_approver.level}}</h2>
+                  <h2 class="panel-title">{{translate.app.frontEnd.components.common.time_line_approvers.approver}} {{detailRequets[0].pending_level_approver.level}}</h2>
                 </div>
                 <div class="row">
                   <div class="col-12">
@@ -238,13 +238,13 @@
                                 <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-question-circle"></i>
-                                    Estado:
+                                    {{translate.app.frontEnd.components.common.time_line_approvers.status}}:
                                   </p>
                                 </div>
                                 <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
                                   <h6>
                                     <span class="badge badge-default">
-                                      Pendiente
+                                      {{translate.app.frontEnd.components.common.time_line_approvers.pending}}
                                     </span>
                                   </h6>
                                 </div>
@@ -294,7 +294,7 @@
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.components.common.time_line_approvers.button_close}} </h6>
         </div>
       </div>
     </div>

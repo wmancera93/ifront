@@ -5,6 +5,8 @@ import { Enterprise } from '../../../models/general/enterprise';
 import { MainService } from '../../../services/main/main.service';
 import { truncate } from 'fs';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-menu-navigation',
@@ -19,10 +21,16 @@ export class MenuNavigationComponent implements OnInit {
   public aActive = 'aIndex';
   public showCollapse = '';
   public heightContenGeneral = 0;
+  public translate: Translate = null;
 
   constructor(private userSharedService: UserSharedService,
     public companieService: MainService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+      setTimeout(() => {
+        this.translate = this.translateService.getTranslate();
+        console.log(this.translate)
+      }, 500);
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });

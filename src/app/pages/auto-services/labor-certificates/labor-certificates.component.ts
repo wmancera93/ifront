@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-labor-certificates',
@@ -16,7 +18,7 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDF: string = '';
   public urlPDFSecure: any;
   public flagEmpty: boolean;
-
+  public translate: Translate = null;
   public idCertificate: number = 0;
 
   public certificated_qr: boolean = false;
@@ -30,7 +32,9 @@ export class LaborCertificatesComponent implements OnInit {
   constructor(public autoServiceService: AutoServicesService,
     public domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.companyAuthenticated = JSON.parse(localStorage.getItem("enterprise"));
     this.block_certificate = this.companyAuthenticated.show_verification_code_pdf;

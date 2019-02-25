@@ -14,6 +14,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { Translate } from '../../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-edit-travel',
@@ -53,7 +55,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public bedit: boolean = false;
   public bnew: boolean = false;
   public is_collapse: boolean = false;
-  public nameReport: string = 'Gestión de viajes'
+  public nameReport: string;
   public filequotation = 'fileQuotationTravel';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public objectImg: any[] = [];
@@ -106,7 +108,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   public aufnr: boolean = false;
 
   public viewSendAprovals: boolean = true;
-
+  public translate: Translate = null;
   public countAfter: number = 0;
 
   constructor(public travelManagementService: TravelService,
@@ -114,8 +116,11 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     public hotelsService: HotelsService, private accionDataTableService: DataDableSharedService,
     public fileUploadService: FileUploadService, public travelsService: TravelsService,
     public http: Http, public formDataService: FormDataService,
-    public alert: AlertsService, public employeeService: EmployeeService, public router: Router) {
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router, 
+    public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.name_table_ts;
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -644,8 +649,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.idFile = param.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el archivo #' + this.idFile.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_ts,
+      message: '¿'+this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_ts + this.idFile.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteDocumentSaved'
     }];
@@ -657,8 +662,8 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.id_destination_delete = param.id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el destino con ticket #' + this.id_destination_delete.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_ts,
+      message: '¿'+ this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_one_ts + this.id_destination_delete.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteDestinations'
     }];
@@ -697,15 +702,15 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           if (data.success) {
             document.getElementById("close_edit_travel").click();
             if (this.viewSendAprovals) {
-              const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Viaje modificado correctamente', confirmation: false }];
+              const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_one_ts, message:this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_two_ts, confirmation: false }];
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
               this.travelsService.setResultSaved(true);
             } else {
               const alertWarning: Alerts[] = [{
                 type: 'success',
-                title: 'Solicitud Exitosa',
-                message: 'Viaje modificado correctamente - ¿Desea volver a la solicitud de gasto?',
+                title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_one_ts,
+                message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_tree_ts,
                 confirmation: true,
                 typeConfirmation: 'goSpendsEditTravel'
               }];
@@ -719,15 +724,15 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         (error: any) => {
           if (this.viewSendAprovals) {
             document.getElementById("close_edit_travel").click();
-            const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con la edición de su solicitud de viaje?', confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
+            const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_two_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_four_ts, confirmation: true, typeConfirmation: 'continueEditTravelRequests' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           } else {
             document.getElementById("close_edit_travel").click();
             const alertWarning: Alerts[] = [{
               type: 'danger',
-              title: 'Solicitud Denegada',
-              message: error.json().errors.toString() + ' - ¿Desea volver a la solicitud de gasto?',
+              title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_two_ts,
+              message: error.json().errors.toString() + this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_five_ts,
               confirmation: true,
               typeConfirmation: 'goSpendsEditTravel'
             }];
@@ -1426,7 +1431,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: error.json().errors.toString() + ', modifiquela para continuar. ¿Desea continuar con la solicitud?',
+            message: error.json().errors.toString() + this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_six_ts,
             confirmation: true,
             typeConfirmation: 'continueEditDestinationRequestsValidateDates'
           }];
@@ -1452,7 +1457,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de origen del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_seven_ts,
             confirmation: true,
             typeConfirmation: 'continueEditDestinationRequests'
           }];
@@ -1468,7 +1473,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de finalizacion del trayecto no se encuentra en el rango de fecha de la solicitud general',
+            message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_eight_ts,
             confirmation: true,
             typeConfirmation: 'continueEditDestinationRequests'
           }];
@@ -1487,7 +1492,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'La fecha de origen del trayecto no puede ser mayor a la de destino.',
+            message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_nine_ts,
             confirmation: true,
             typeConfirmation: 'continueEditDestinationRequests'
           }];
@@ -1509,7 +1514,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'El trayecto se realizara el mismo día, la hora de llegada no puede ser menor a la de partida',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_sten_ts,
           confirmation: true,
           typeConfirmation: 'continueEditDestinationRequests'
 
@@ -1570,7 +1575,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'El ingreso al hotel no puede ser menor a la fecha de llegada del destino, ¿Desea continuar con la solicitud?',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_eleven_ts,
           confirmation: true,
           typeConfirmation: 'continueDestinationHotel'
 
@@ -1583,7 +1588,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'El ingreso al hotel no puede ser mayor a la fecha de final de la solicitud, ¿Desea continuar con la solicitud?',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_twelve_ts,
           confirmation: true,
           typeConfirmation: 'continueDestinationHotel'
 
@@ -1597,7 +1602,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
           const alertDataWrong: Alerts[] = [{
             type: 'danger',
             title: 'Error',
-            message: 'El ingreso al hotel no puede ser mayor a la fecha de salida del hotel, ¿Desea continuar con la solicitud?',
+            message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_thirteen_ts,
             confirmation: true,
             typeConfirmation: 'continueDestinationHotel'
 
@@ -1614,7 +1619,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La salida del hotel no puede ser menor a la fecha de llegada al destino, ¿Desea continuar con la solicitud?',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_fourteen_ts,
           confirmation: true,
           typeConfirmation: 'continueDestinationHotel'
 
@@ -1627,7 +1632,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La salida del hotel no puede superar la fecha de finalizacion de la solicitud, ¿Desea continuar con la solicitud?',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_fiveteen_ts,
           confirmation: true,
           typeConfirmation: 'continueDestinationHotel'
 
@@ -1640,7 +1645,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const alertDataWrong: Alerts[] = [{
           type: 'danger',
           title: 'Error',
-          message: 'La salida del hotel no puede ser menor a la fecha de ingreso al hotel, ¿Desea continuar con la solicitud?',
+          message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_seventeen_ts,
           confirmation: true,
           typeConfirmation: 'continueDestinationHotel'
 
@@ -1656,14 +1661,14 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     this.travelManagementService.putSendRequestsTravels(this.ticket).subscribe((data: any) => {
       if (data) {
         document.getElementById("btn_travel_edit").click();
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de viajes enviada a primer aprobador', confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
+        const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_one_ts, message: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.message_alert_eighteen_ts, confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.travelsService.setResultSaved({ success: true, third: this.eployee_selected == null ? true : false });
     },
       (error: any) => {
         document.getElementById("btn_travel_edit").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
+        const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.edit_travel.type_alert_two_ts, message: error.json().errors.toString(), confirmation: false, typeConfirmation: 'sendApprobalAlert' }];
         this.alert.setAlert(alertWarning[0]);
 
       });

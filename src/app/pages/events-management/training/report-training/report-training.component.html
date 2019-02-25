@@ -4,7 +4,7 @@
         <div class="row justify-content-left">
           <div class="col-xl-10 col-md-8 col-7 text-left title">
             <i class="fa fa-flag"></i>
-            Reporte de convenios de capacitación
+            {{translate.app.frontEnd.pages.events_management.training.report_training.title_report_training}}
           </div>
         </div>
       </div>
@@ -24,7 +24,7 @@
           <div class="row top-containter">
             <div class="col-xl-4 col-lg-4 col-12 text-left">
               <b>
-                Filtros de consulta
+                {{translate.app.frontEnd.pages.events_management.training.report_training.text_query_filters}}
               </b>
               <i *ngIf="!collapseFilterTraining" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
                 data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(true)"></i>
@@ -37,35 +37,35 @@
         <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
           <div class="row align-items-center">
             <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-              <label>Código de empleado</label>
+              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_employee_code}}</label>
               <input type="text" [(ngModel)]="personal_number" class="form-control">
             </div>
             <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-              <label>Código de capacitación</label>
+              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_training_code}}</label>
               <input type="text" [(ngModel)]="code_training" class="form-control">
             </div>
             <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-                <label>Estado de la capacitación</label>
+                <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_training_status}}</label>
                 <select class="form-control" [(ngModel)]="status_id">
-                    <option [value]="-1">Seleccione</option>
-                    <option value="1">Aceptado</option>
-                    <option value="0">Pendiente</option>
+                    <option [value]="-1">{{translate.app.frontEnd.pages.events_management.training.report_training.text_select}}</option>
+                    <option value="1">{{translate.app.frontEnd.pages.events_management.training.report_training.text_accepted}}</option>
+                    <option value="0">{{translate.app.frontEnd.pages.events_management.training.report_training.text_pending}}</option>
                   </select>
               </div>
           </div>
           <div class="row align-items-center mb-3">
             <div class="col-lg-4 col-md-4 col-12">
-              <label>Fecha de Inicio</label>
+              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_start_date}}</label>
               <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
             </div>
             <div class="col-lg-4 col-md-4 col-12">
-              <label>Fecha final</label>
+              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_end_date}}</label>
               <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
             </div>
             <div class="col-lg-4 col-md-4 col-12 align-self-end">
               <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
                 <i class="fa fa-search-plus"></i>
-                Consulta
+                {{translate.app.frontEnd.pages.events_management.training.report_training.text_query}}
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@
         <!-- <div class="row justify-content-center top-general-p" > -->
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              No se encontrarón registros para mostrar
+              {{translate.app.frontEnd.pages.events_management.training.report_training.text_no_records_found}}
             </div>
           </div>
         </div>

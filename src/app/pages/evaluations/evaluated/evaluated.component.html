@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-list"></i>
-          Estado de evaluaciones
+          {{translate.app.frontEnd.pages.evaluations.evaluated.title_valuation_status}}
         </div>
       </div>
     </div>
@@ -19,7 +19,7 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              Pendientes
+              {{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_one}}
             </b>
           </div>
         </div>
@@ -29,8 +29,8 @@
           <div class="row justify-content-center top-containter" *ngIf="evaluationsListPendind.length === 0" style="margin-top:25px;">
             <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
-                No hay
-                <strong>evaluaciones pendientes</strong>&nbsp;para el empleado
+                {{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_four}}
+                <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_three}}
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@
                         <i class="fa fa-pencil "></i>
                       </div>
                       <div class="col-12" (click)="fillEvaluation(evaluation) ">
-                        Presentar
+                        {{translate.app.frontEnd.pages.evaluations.evaluated.text_present}}
                       </div>
                     </div>
                   </div>
@@ -84,7 +84,7 @@
         <div class="row top-containter ">
           <div class="col-xl-2 col-lg-4 col-12 text-left ">
             <b>
-              Gestionadas
+              {{translate.app.frontEnd.pages.evaluations.evaluated.text_managed}}
             </b>
           </div>
         </div>
@@ -94,8 +94,8 @@
           <div class="row justify-content-center top-containter " *ngIf="evaluationsListSubmitted.length===0 " style="margin-top:25px; ">
             <div class="col-lg-8 col-12 text-center " style="min-height: 200px; ">
               <div class="alert alert-warning " role="alert ">
-                No hay
-                <strong>evaluaciones gestionadas</strong>&nbsp;para el empleado
+                {{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_one}}
+                <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_three}}
               </div>
             </div>
           </div>
@@ -136,7 +136,7 @@
                         <i class="fa fa-eye "></i>
                       </div>
                       <div class="col-12 " (click)="seeEvaluation(evaluationSub) ">
-                        Ver
+                        {{translate.app.frontEnd.pages.evaluations.evaluated.icon_watch}}
                       </div>
                     </div>
                   </div>

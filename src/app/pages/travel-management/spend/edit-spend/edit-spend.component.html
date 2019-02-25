@@ -4,7 +4,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Editar Gastos Viaje # {{ticketTravel}}</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.tittle}} {{ticketTravel}}</h5>
         <button id="closeModalEditSpend" type="button" class="close" data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -17,7 +17,7 @@
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-plane text-primary-hr"></i>
-                  <strong>Viaje asociado</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.travel}}</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
@@ -27,7 +27,7 @@
           </div>
 
           <div class="col-12" id="table" style="min-height: 80px !important; margin-top: 30px">
-            <h4>Gastos</h4>
+            <h4>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.subtittle}}</h4>
             <app-data-table [records]="objectReport" id="tableEditSpend" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
           </div>
 
@@ -35,7 +35,7 @@
             <div class="row">
               <div class="col-12">
                 <label class="titleColor">
-                  <strong>Archivos adjuntos</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.attach}}</strong>
                 </label>
               </div>
             </div>
@@ -50,8 +50,8 @@
                       <h6>{{imgsavedSpend.name | slice: 0:40}}
                         <span [hidden]="imgsavedSpend.name.length < 40">...</span>
                       </h6>
-                      <p class="badge badge-light wg-hover-general" (click)="viewDocumentSaved(imgsavedSpend)">Ver</p>
-                      <p class="badge badge-light wg-hover-general" (click)="downloadDocumentSaved(imgsavedSpend)">Descargar</p>
+                      <p class="badge badge-light wg-hover-general" (click)="viewDocumentSaved(imgsavedSpend)">{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.see_attach}}</p>
+                      <p class="badge badge-light wg-hover-general" (click)="downloadDocumentSaved(imgsavedSpend)">{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.download_attach}}</p>
                     </div>
                     <div class="col-1 text-center">
                       <h6 (click)="deleteUploadSavedEdit(imgsavedSpend)" class="text-primary-hr cursor-general">x</h6>
@@ -98,7 +98,7 @@
             <div class="row">
               <div class="col-12">
                 <label class="titleColor">
-                  <strong>Adjuntar Soporte de gastos</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_attach}}</strong>
                 </label>
                 <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
               </div>
@@ -107,7 +107,7 @@
 
           <div class="col-12" style="margin-top: 15px" *ngIf="labelNewSpend">
             <h5>
-              Nuevo gasto
+                {{translate.app.frontEnd.pages.travel_management.spend.edit_spend.btn_new}}
             </h5>
           </div>
 
@@ -115,10 +115,10 @@
             <div class="row justify-content-end">
               <div class="col-3" style="padding-bottom: 20px">
                 <h5 class="titleColor" *ngIf="edit_Spend">
-                  Editar gasto
+                    {{translate.app.frontEnd.pages.travel_management.spend.edit_spend.label_edit}}
                 </h5>
                 <button type="button" class="btn btn-block btn-primary text-center" *ngIf="buttonNewSpend" (click)="colapseEdit()">
-                  Nuevo gasto
+                    {{translate.app.frontEnd.pages.travel_management.spend.edit_spend.label_new}}
                 </button>
                 <button id="EditfuntionSpend" data-toggle="collapse" data-target="#collapseEditSpend" style="display: none">
                 </button>
@@ -131,7 +131,7 @@
             <div class="col-12" style="margin-top: 15px">
               <label class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                <strong>Descripción:</strong>
+                <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.description}}:</strong>
               </label>
               <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
                 [formControl]="formSpendEditTravel.controls['observation']"></textarea>
@@ -140,7 +140,7 @@
             <div class="col-lg-3 col-md-6 col-12 form-check" style="margin-top: 20px">
               <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendEditTravel.controls['formA']">
               <label class="form-check-label titleColor" for="FormACheck">
-                <strong>Formulario A</strong>
+                <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.form_a}}</strong>
               </label>
             </div>
 
@@ -149,31 +149,31 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Tipo de documento:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_document}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendEditTravel.controls['document']" paceholder="Seleccione">
-                    <option value="">Seleccione</option>
+                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.option_select}}</option>
                     <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Establecimiento:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.store}}:</strong>
                   </label>
                   <input type="text" class="form-control uppercase" name="bussines_name" [formControl]="formSpendEditTravel.controls['bussines_name']">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>NIT:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.nit}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="nit" [formControl]="formSpendEditTravel.controls['nit']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'nit')">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                    <strong>Fecha de Gasto:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.date_spend}}:</strong>
                   </label>
                   <input tabindex="-1" type="date" name="date" [formControl]="formSpendEditTravel.controls['date']" class="form-control" />
                 </div>
@@ -184,14 +184,14 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>Número Factura:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bill_number}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="bill_number" [formControl]="formSpendEditTravel.controls['bill_number']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'bill')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>No de autorización:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.authorization}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendEditTravel.controls['authorization_number']"
                     (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'authorization')" style="text-align:right">
@@ -199,7 +199,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <strong>Código de Control:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.control_number}}:</strong>
                   </label>
                   <input (keypress)="maskCode(formSpendEditTravel.value)"
                     type="text" class="form-control uppercase" name="control_number" [formControl]="formSpendEditTravel.controls['control_number']"
@@ -208,7 +208,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-bars text-primary-hr"></i>
-                    <strong>Tipo de gasto:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_spend}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendEditTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
                     <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}</option>
@@ -229,14 +229,14 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
-                    <strong>Importe:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.import}}:</strong>
                   </label>
                   <input type="text" class="form-control" name="value" [formControl]="formSpendEditTravel.controls['value']" (keyup)="onlyNumberSpend(formSpendEditTravel.value, 'import')" style="text-align:right">
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>Moneda:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.money}}:</strong>
                   </label>
                   <select class="form-control" [formControl]="formSpendEditTravel.controls['currency_id']" paceholder="Seleccione">
                     <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
@@ -245,7 +245,7 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
-                    <strong>Poblado:</strong>
+                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.populate}}:</strong>
                   </label>
                   <input type="text" class="form-control uppercase" name="populate_name" [formControl]="formSpendEditTravel.controls['populated']">
                 </div>
@@ -266,7 +266,7 @@
                     || formSpendEditTravel.value.nit == ''
                     || formSpendEditTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpend(formSpendEditTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Gasto</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_addNew}}</button>
                   <button *ngIf="edit_Spend" [attr.disabled]="
                   (formSpendEditTravel.value.observation == ''
                     || formSpendEditTravel.value.travel_allowance_type_id == ''
@@ -278,11 +278,11 @@
                     || formSpendEditTravel.value.nit == ''
                     || formSpendEditTravel.value.bussines_name == '') ? true : null" type="button" class="btn btn-primary btn-block cursor-general"
                     (click)="aditionSpendEdit(formSpendEditTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;Agregar Cambios</button>
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_add}}</button>
                 </div>
                 <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
                   <button class="btn btn-warning btn-block cursor-general" (click)="closeEditSpend()" data-toggle="collapse" data-target="#collapseNewSpend">
-                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;Cancelar</button>
+                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.btn_cancel}}</button>
                 </div>
               </div>
             </div>
@@ -291,9 +291,9 @@
         <div class="row justify-content-end" *ngIf="show_submit_editSpend">
           <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
             <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newEditSpend(formSpendEditTravel.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;Guardar Solicitud</button>
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.save}}</button>
             <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;Cargando</button>
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.loading}}</button>
           </div>
         </div>
         <!-- <div class="row justify-content-end" style="margin-top: 30px" *ngIf="stateRequestsSpend != 'En proceso'">
@@ -305,7 +305,7 @@
         <div class="row justify-content-start" style="margin-top: 30px">
           <div class="col-lg-4 col-md-6 col-12">
             <button class="btn btn-primary btn-block cursor-general" (click)="returnTravelsRequest()">
-              <i class="fa fa-fw fa-backward"></i>&nbsp;Modificación de trayectos</button>
+              <i class="fa fa-fw fa-backward"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.edit_spend.bnt_edit}}</button>
           </div>
         </div>
       </div>

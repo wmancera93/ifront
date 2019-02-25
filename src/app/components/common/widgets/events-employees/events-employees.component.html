@@ -51,8 +51,8 @@
   <div class="iconColor-primary">
     <i class="fa fa-user-times fa-3x"></i>
   </div>
-  <h3 class="font-bold m-l-n letterColor-primary" style="margin-left: -22px; margin-right: -30px;">
-    No tiene compañeros a cargo.
+  <h3 class="font-bold m-l-n letterColor-primary" style="margin-left: -22px; margin-right: -30px;" *ngIf="translate !== null">
+    {{translate.app.frontEnd.components.common.widgets.events_employees.negative_message}}
   </h3>
 </div>
 <app-show-events [nameModal]='modalInfoEvent'></app-show-events>

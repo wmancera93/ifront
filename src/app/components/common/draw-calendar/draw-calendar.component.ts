@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../../../services/calendar/calendar.service';
 import { CalendarData } from '../../../models/common/calendar/calendar';
 import { CalendarDetailService } from '../../../services/shared/common/calendar-detail/calendar-detail.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 
 @Component({
@@ -24,37 +26,48 @@ export class DrawCalendarComponent implements OnInit {
   public numberDay: any;
   public changeMonth: number = 0;
 
-  public saturday = 'Sábado';
-  public sunday = 'Domingo';
-  public monday = 'Lunes';
-  public tuesday = 'Martes';
-  public wednesday = 'Miércoles';
-  public thursday = 'Jueves';
-  public friday = 'Viernes';
-
+  public saturday: string;
+  public sunday: string;
+  public monday: string;
+  public tuesday: string;
+  public wednesday: string;
+  public thursday: string;
+  public friday: string;
+  public translate: Translate = null;
+  public rest: string;
   public responsive: boolean = false;
 
 
-  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService) { }
+  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+
+    this.saturday = this.translate.app.frontEnd.components.common.draw_calendar.saturday;
+    this.sunday = this.translate.app.frontEnd.components.common.draw_calendar.sunday;
+    this.monday = this.translate.app.frontEnd.components.common.draw_calendar.monday;
+    this.tuesday = this.translate.app.frontEnd.components.common.draw_calendar.tuesday;
+    this.wednesday = this.translate.app.frontEnd.components.common.draw_calendar.wednesday;
+    this.thursday = this.translate.app.frontEnd.components.common.draw_calendar.thursday;
+    this.friday = this.translate.app.frontEnd.components.common.draw_calendar.friday;
+    this.rest = this.translate.app.frontEnd.components.common.draw_calendar.rest;
+  }
   //ngOnInit() {}
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
       let count = 0;
       if (screen.width <= 1000) {
-        if (screen.width <= 500)
-        {
+        if (screen.width <= 500) {
 
           this.responsive = true;
         }
 
-        this.saturday = 'S';
-        this.sunday = 'D';
-        this.monday = 'L';
-        this.tuesday = 'M';
-        this.wednesday = 'Mi';
-        this.thursday = 'J';
-        this.friday = 'V';
+        this.saturday = this.translate.app.frontEnd.components.common.draw_calendar.saturday_abr;
+        this.sunday = this.translate.app.frontEnd.components.common.draw_calendar.sunday_abr;
+        this.monday = this.translate.app.frontEnd.components.common.draw_calendar.monday_abr;
+        this.tuesday = this.translate.app.frontEnd.components.common.draw_calendar.tuesday_abr;
+        this.wednesday = this.translate.app.frontEnd.components.common.draw_calendar.wednesday_abr;
+        this.thursday = this.translate.app.frontEnd.components.common.draw_calendar.thursday_abr;
+        this.friday = this.translate.app.frontEnd.components.common.draw_calendar.friday_abr;
       }
       this.objectDateCurrent.forEach(element => {
         if (element.date !== null) {
@@ -112,17 +125,17 @@ export class DrawCalendarComponent implements OnInit {
   showDataCalendar() {
     switch (this.objectPerMonthData[0].weekday) {
 
-      case 'DO':
+      case this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser:
         this.newObjectDate = this.objectPerMonthData;
 
         break;
-      case 'LU':
+      case this.translate.app.frontEnd.components.common.draw_calendar.monday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -131,20 +144,20 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
               work_schedule_plan_text: ""
             }
           ]
         });
         this.pushLastObjectDate();
         break;
-      case 'MA':
+      case this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -153,7 +166,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
               work_schedule_plan_text: ""
             }
           ]
@@ -162,7 +175,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "LU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [
               {
                 calendar_text: " ",
@@ -171,7 +184,7 @@ export class DrawCalendarComponent implements OnInit {
                 hour_finish: "",
                 schedule_plan_for_periods: "",
                 theorist_hours: "",
-                type_schedule_plan_description: 'descanso',
+                type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
                 work_schedule_plan_text: ""
               }
             ]
@@ -179,13 +192,13 @@ export class DrawCalendarComponent implements OnInit {
         this.pushLastObjectDate();
 
         break;
-      case 'MI':
+      case this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [
             {
               calendar_text: " ",
@@ -194,7 +207,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }
           ]
@@ -203,7 +216,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "LU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [
               {
                 calendar_text: " ",
@@ -212,7 +225,7 @@ export class DrawCalendarComponent implements OnInit {
                 hour_finish: "",
                 schedule_plan_for_periods: "",
                 theorist_hours: "",
-                type_schedule_plan_description: 'descanso',
+                type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
                 work_schedule_plan_text: ""
               }
             ]
@@ -221,7 +234,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -229,20 +242,20 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         this.pushLastObjectDate();
 
         break;
-      case 'JU':
+      case this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -250,7 +263,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         },
@@ -258,7 +271,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "LU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -266,7 +279,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -274,7 +287,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -282,7 +295,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -290,7 +303,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -298,20 +311,20 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         this.pushLastObjectDate();
         break;
 
-      case 'VI':
+      case this.translate.app.frontEnd.components.common.draw_calendar.friday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -319,7 +332,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         },
@@ -327,7 +340,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "LU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -335,7 +348,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -343,7 +356,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -351,7 +364,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -359,7 +372,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -367,7 +380,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -375,7 +388,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "JU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -383,19 +396,19 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         this.pushLastObjectDate();
         break;
-      case 'SA':
+      case this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser:
         this.newObjectDate = [];
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "DO",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -403,7 +416,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         },
@@ -411,7 +424,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "LU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -419,7 +432,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -427,7 +440,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -435,7 +448,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -443,7 +456,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -451,7 +464,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -459,7 +472,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "JU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -467,7 +480,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -475,7 +488,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "VI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -483,7 +496,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
@@ -493,14 +506,14 @@ export class DrawCalendarComponent implements OnInit {
     }
 
     switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
-      case 'SA':
+      case this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser:
         break;
-      case 'DO':
+      case this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser:
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "LU",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -508,7 +521,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         },
@@ -516,7 +529,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -524,7 +537,7 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           },
@@ -532,7 +545,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -540,14 +553,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "JU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -555,14 +568,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "VI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -570,14 +583,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "SA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -585,18 +598,18 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         break;
-      case 'LU':
+      case this.translate.app.frontEnd.components.common.draw_calendar.monday_ser:
 
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "MA",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -604,7 +617,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         },
@@ -612,7 +625,7 @@ export class DrawCalendarComponent implements OnInit {
             date: "",
             id: "",
             is_now: "",
-            weekday: "MI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -620,14 +633,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "JU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -635,14 +648,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "VI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -650,14 +663,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "SA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -665,18 +678,18 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
 
         break;
-      case 'MA':
+      case this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser:
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "MI",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -684,14 +697,14 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "JU",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -699,14 +712,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "VI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -714,14 +727,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "SA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -729,18 +742,18 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
 
         break;
-      case 'MI':
+      case this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser:
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "JU",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -748,14 +761,14 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "VI",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -763,14 +776,14 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "SA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -778,17 +791,17 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         break;
-      case 'JU':
+      case this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser:
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "VI",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -796,14 +809,14 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         }, {
             date: "",
             id: "",
             is_now: "",
-            weekday: "SA",
+            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
             work_schedule_plan: [{
               calendar_text: " ",
               holiday_calendar: "",
@@ -811,17 +824,17 @@ export class DrawCalendarComponent implements OnInit {
               hour_finish: "",
               schedule_plan_for_periods: "",
               theorist_hours: "",
-              type_schedule_plan_description: 'descanso',
+              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
               work_schedule_plan_text: ""
             }]
           });
         break;
-      case 'VI':
+      case this.translate.app.frontEnd.components.common.draw_calendar.friday_ser:
         this.newObjectDate.push({
           date: "",
           id: "",
           is_now: "",
-          weekday: "SA",
+          weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
           work_schedule_plan: [{
             calendar_text: " ",
             holiday_calendar: "",
@@ -829,7 +842,7 @@ export class DrawCalendarComponent implements OnInit {
             hour_finish: "",
             schedule_plan_for_periods: "",
             theorist_hours: "",
-            type_schedule_plan_description: 'descanso',
+            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
             work_schedule_plan_text: ""
           }]
         });
@@ -843,40 +856,40 @@ export class DrawCalendarComponent implements OnInit {
 
     switch (this.month[1]) {
       case "01":
-        this.nameMonth = "Enero"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.january
         return;
       case "02":
-        this.nameMonth = "Febrero"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.february
         return;
       case "03":
-        this.nameMonth = "Marzo"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.march
         return;
       case "04":
-        this.nameMonth = "Abril"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.april
         return;
       case "05":
-        this.nameMonth = "Mayo"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.may
         return;
       case "06":
-        this.nameMonth = "Junio"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.june
         return;
       case "07":
-        this.nameMonth = "Julio"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.july
         return;
       case "08":
-        this.nameMonth = "Agosto"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.august
         return;
       case "09":
-        this.nameMonth = "Septiembre"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.september
         return;
       case "10":
-        this.nameMonth = "Octubre"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.october
         return;
       case "11":
-        this.nameMonth = "Noviembre"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.november
         return;
       case "12":
-        this.nameMonth = "Diciembre"
+        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.december
         return;
     }
 

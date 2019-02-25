@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-payroll-receipts',
@@ -14,14 +16,15 @@ export class PayrollReceiptsComponent implements OnInit {
   public listPayRoll: Certificate;
   public urlPDF: string = '';
   public flagEmpty: boolean;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public autoServiceService: AutoServicesService,
     public sanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(

@@ -4,6 +4,8 @@ import { ReportsHrService } from '../../../services/reports-rh/reports-hr.servic
 import { Router } from '@angular/router';
 import { RequestsRh } from '../../../models/common/requests-rh/requests-rh';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-requests-approvers',
@@ -13,7 +15,7 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 export class RequestsApproversComponent implements OnInit {
 
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Aprobadores de solicitudes';
+  public nameReport: string;
   public token: boolean;
   public type_requests: string = "VACA";
   public newtype_requests: any[] = [];
@@ -22,17 +24,22 @@ export class RequestsApproversComponent implements OnInit {
   public requests: RequestsRh;
   public viewContainer: boolean = false;
   public is_collapse: boolean = false;
-  public approver_selected: string = "Con aprobador";
+  public approver_selected: string;
   public platform_selected: string = "IHR";
   public type_selected: string = "VACA";
-
+  public translate: Translate = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public reportsHrService: ReportsHrService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public requestsRhService: RequestsRhService) {
+    public requestsRhService: RequestsRhService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.reports_rh.requests_approvers.name_table_ts;
+
+    this.approver_selected = this.translate.app.frontEnd.pages.reports_rh.requests_approvers.approver_with;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

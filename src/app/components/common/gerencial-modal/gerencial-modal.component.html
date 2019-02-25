@@ -25,8 +25,8 @@
           <div class="row justify-content-center top-containter" *ngIf="flagNoData">
             <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
-                No hay datos de
-                <strong>{{nameManagerial}}</strong>&nbsp;para el empleado
+                {{translate.app.frontEnd.components.common.gerencial_modal.without_reports}}
+                <strong>{{nameManagerial}}</strong>&nbsp;{{translate.app.frontEnd.components.common.gerencial_modal.employee}}
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.components.common.gerencial_modal.button_close}} </h6>
         </div>
       </div>
     </div>

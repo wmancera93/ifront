@@ -1,5 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-hour-extras',
@@ -8,8 +10,12 @@ import { Router } from '@angular/router';
 })
 export class HourExtrasComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Horas extras';
-  constructor(public router: Router) { }
+  public nameReport: string;
+  public translate: Translate = null;
+  constructor(public router: Router, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.reports_rh.hour_extras.name_table_ts;
+  }
 
   ngOnInit() {
     window.scroll({
@@ -134,7 +140,7 @@ export class HourExtrasComponent implements OnInit {
       }]
     }
 
-   
+
 
     setTimeout(() => {
       this.objectReport.emit(dataTemporal);

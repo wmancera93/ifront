@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CalendarDetailService } from '../../../services/shared/common/calendar-detail/calendar-detail.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-calendar-detail',
@@ -9,8 +11,11 @@ import { CalendarDetailService } from '../../../services/shared/common/calendar-
 export class CalendarDetailComponent implements OnInit {
   public detail_calendar: any[] = [];
   public state_modal: boolean = false;
+  public translate: Translate = null;
 
-  constructor(public calendarDetailService: CalendarDetailService) {
+  constructor(public calendarDetailService: CalendarDetailService,public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.calendarDetailService.getDetailCalendar()
       .subscribe((detail_calendar) => {

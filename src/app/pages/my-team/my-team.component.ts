@@ -6,6 +6,8 @@ import { MyTeamReportService } from '../../services/shared/common/my-team/my-tea
 import { timeout } from 'q';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-my-team',
@@ -18,7 +20,7 @@ export class MyTeamComponent implements OnInit {
   public ajustWidth: boolean;
   public flagHideMyteam: boolean = true;
   public flagReturnBack: boolean = false;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -26,7 +28,9 @@ export class MyTeamComponent implements OnInit {
     public myTeamSharedService: MyTeamReportService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(
@@ -63,9 +67,9 @@ export class MyTeamComponent implements OnInit {
         }
       })
 
-      setTimeout(() => {
-        this.stylesExplorerService.addStylesCommon();
-      }, 1000);
+    setTimeout(() => {
+      this.stylesExplorerService.addStylesCommon();
+    }, 1000);
   }
 
   goToMyTeamReports(employeesInMyTeam) {

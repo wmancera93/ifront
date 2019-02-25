@@ -5,6 +5,8 @@ import { DetailAproverRequest } from '../../../models/common/approver-requests/a
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-approvals-details',
@@ -22,12 +24,25 @@ export class ApprovalsDetailsComponent implements OnInit {
   public description: string = "";
   public dateSince: string;
   public dateUntil: string;
+  public translate: Translate = null;
+  public approver: string;
+  public cancelled: string;
+  public inProcess: string;
+  public pending: string;
+  public close: string;
 
 
   constructor(public approverRequestsService: ApproverRequestsService,
     public aproversRequestsService: AproversRequestsService,
     public alert: AlertsService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+
+  this.approver=this.translate.app.frontEnd.components.common.approvals_details.status_approved;
+  this.cancelled=this.translate.app.frontEnd.components.common.approvals_details.status_cancelled;
+  this.inProcess=this.translate.app.frontEnd.components.common.approvals_details.status_inprocess;
+  this.pending=this.translate.app.frontEnd.components.common.approvals_details.status_pending;
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
@@ -96,7 +111,7 @@ export class ApprovalsDetailsComponent implements OnInit {
         },
         (error: any) => {
           (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Aprobación Denegada', message: error.json().errors.toString(), confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.approvals_details.type_alert_ts, message: error.json().errors.toString(), confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
           // setTimeout(() => {

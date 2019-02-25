@@ -6,7 +6,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content " *ngIf="objectHotelJourney !== null">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viaje #
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.tittle}} #
           {{objectHotelJourney.id_travel}}</h5>
         <button id="close_spendsHotel_journey" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
@@ -17,7 +17,7 @@
           <div class="col-9">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>Trayecto: {{objectHotelJourney.id_journey}}</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.trayect}}: {{objectHotelJourney.id_journey}}</strong>
             </label>
           </div>
           <div class="col-3">
@@ -25,7 +25,7 @@
               <div style="margin-left: 15px;">
                 <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
-                  Atrás
+                  {{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.back}}
                 </span>
               </div>
             </div>
@@ -34,7 +34,7 @@
         <div class="row" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
           <div class="col-12">
             <div class="border">
-              <strong class="text-primary-hr">Hoteles asignados</strong>
+              <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.hotel_asig}}</strong>
             </div>
           </div>
           <div class="col-12" style="margin-top: 10px">
@@ -43,13 +43,13 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      Hotel
+                      {{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.column_cero}}
                     </th>
                     <th class="text-center">
-                      Fecha Inicio
+                      {{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.column_one}}
                     </th>
                     <th class="text-center">
-                      Fecha Fin
+                      {{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.column_two}}
                     </th>
                   </tr>
                 </thead>
@@ -73,7 +73,7 @@
         <div class="row justify-content-center top-containter" *ngIf="arrayHotel.length === 0">
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              No hay Hoteles asociados
+              {{translate.app.frontEnd.pages.travel_management.spend.spend_hotel_journey.negative_message}}
             </div>
           </div>
         </div>

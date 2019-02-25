@@ -4,7 +4,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Agenda</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel"  *ngIf="translate !== null">{{translate.app.frontEnd.components.common.calendar_modal.schedule}}</h5>
         <button type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>

@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Gastos</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle}}</h5>
         <button id="closeModalViewSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -15,7 +15,7 @@
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>Nombre del Viaje:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.name_travel}}:</strong>
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
@@ -28,7 +28,7 @@
               <div class="col-lg-6 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-globe text-primary-hr"></i>
-                  <strong>Tipo de Viaje</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.type_travel}}</strong>
                 </label>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
@@ -41,7 +41,7 @@
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-check-square-o text-primary-hr"></i>
-              <strong>Estado:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.status}}:</strong>
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
@@ -66,8 +66,8 @@
                       <h6>{{imgsaved.name |slice: 0:40}}
                         <span [hidden]="imgsaved.name.length < 20">...</span>
                       </h6>
-                      <p class="badge badge-light wg-hover-general" (click)="viewAnnex(imgsaved)">Ver</p>
-                      <p class="badge badge-light wg-hover-general" (click)="downloadAnnex(imgsaved)">Descargar</p>
+                      <p class="badge badge-light wg-hover-general" (click)="viewAnnex(imgsaved)">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.see_attach}}</p>
+                      <p class="badge badge-light wg-hover-general" (click)="downloadAnnex(imgsaved)">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.download_attach}}</p>
                     </div>
                   </div>
                 </div>
@@ -82,14 +82,14 @@
               <div class="col-12 text-left" id="headingOne">
                 <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
                   data-toggle="collapse" data-target="#collapseTravels" aria-expanded="false" aria-controls="collapseTravels">
-                  Ver pasaje, hotel y trayectos de solicitud</p>
+                  {{translate.app.frontEnd.pages.travel_management.spend.view_spend.view_trayect}}</p>
               </div>
               <div id="collapseTravels" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion"
                 style="margin-top: 25px">
                 <div class="row">
                   <div class="col-lg-3 col-md-6 col-12">
                     <label class="titleColor">
-                      <strong>Fecha inicial de solicitud:</strong>
+                      <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.date_requests_travel}}:</strong>
                     </label>
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
@@ -97,7 +97,7 @@
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
                     <label class="titleColor">
-                      <strong>Fecha final de solicitud:</strong>
+                      <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.date_requests_travel_end}}:</strong>
                     </label>
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
@@ -115,8 +115,8 @@
             <div class="row">
               <div class="text-primary col-12 text-left" id="headingTwo">
                 <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
-                  data-toggle="collapse" data-target="#collapseAdvance" aria-expanded="false" aria-controls="collapseAdvance">Ver
-                  anticipos de viaje</p>
+                  data-toggle="collapse" data-target="#collapseAdvance" aria-expanded="false" aria-controls="collapseAdvance">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.see_attach}}
+                  {{translate.app.frontEnd.pages.travel_management.spend.view_spend.view_advances}}</p>
               </div>
               <div id="collapseAdvance" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
                 style="margin-top: 25px">
@@ -136,18 +136,18 @@
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="is_sender_approval">
           <div class="col-lg-4 col-md-6 col-12">
             <button *ngIf="allRequestsInSpend[0].travel_managements.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
-              <i class="fa fa-fw fa-save"></i>&nbsp;Enviar aprobación</button>
+              <i class="fa fa-fw fa-save"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_send}}</button>
           </div>
         </div>
         <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
           <div class="col-lg-4 col-md-6 col-12">
             <button class="btn btn-warning btn-block cursor-general" (click)="exportExcel()">
-              <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;Exportar Excel</button>
+              <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_export}}</button>
           </div>
         </div>
         <div class="modal-footerInfo justify-content-center">
           <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-            <h6> Cerrar </h6>
+            <h6> {{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_close}} </h6>
           </div>
         </div>
       </div>

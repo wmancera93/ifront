@@ -6,7 +6,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content " *ngIf="objectHotelJourney !== null">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Modificación de viaje #
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.tittle}} #
           {{objectHotelJourney.id_travel}}</h5>
         <button id="close_hotel_journey" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
@@ -17,7 +17,7 @@
           <div class="col-9">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>Trayecto: {{objectHotelJourney.id_journey}}</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.trayect}}: {{objectHotelJourney.id_journey}}</strong>
             </label>
           </div>
           <div class="col-3">
@@ -25,7 +25,7 @@
               <div style="margin-left: 15px;">
                 <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
-                  Atrás
+                    {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.back}}
                 </span>
               </div>
             </div>
@@ -35,7 +35,7 @@
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
-              <strong>Fecha inicial del Viaje:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.date_begin}}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -44,7 +44,7 @@
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
-              <strong>Fecha final del Viaje:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.date_end}}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -54,7 +54,7 @@
         <div class="row" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
           <div class="col-12">
             <div class="border">
-              <strong class="text-primary-hr">Hoteles asignados</strong>
+              <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.hotel_assigned}}</strong>
             </div>
           </div>
           <div class="col-12" style="margin-top: 10px">
@@ -63,16 +63,16 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      Hotel
+                        {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_cero}}
                     </th>
                     <th class="text-center">
-                      Fecha Inicio
+                        {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_one}}
                     </th>
                     <th class="text-center">
-                      Fecha Fin
+                        {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_two}}
                     </th>
                     <th class="text-center" *ngIf="!objectHotelJourney.acction">
-                      Eliminar
+                        {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_tree}}
                     </th>
                   </tr>
                 </thead>
@@ -101,7 +101,7 @@
         <div class="row justify-content-center top-containter" *ngIf="arrayHotel.length === 0">
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              No hay Hoteles asociados
+                {{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.negative_hotel}}
             </div>
           </div>
         </div>
@@ -112,24 +112,24 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
-                  <a>Hotel:</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_cero}}:</a>
                 </label>
                 <select class="form-control" [formControl]="formHotelsJourney.controls['id_hotels']">
                   <option *ngFor="let nameHotels of hotels" [value]="nameHotels.id">{{nameHotels.name}}</option>
-                  <option value="">Seleccione</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.option_select}}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
-                  <a>Fecha de ingreso:</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_one}}:</a>
                 </label>
                 <input tabindex="-1" type="date" name="date_begin_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_in']"/>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
-                  <a>Fecha de salida:</a>
+                  <a>{{translate.app.frontEnd.pages.travel_management.travel.hotels_journey.column_two}}:</a>
                 </label>
                 <input tabindex="-1" type="date" name="date_end_hotel" class="form-control" [formControl]="formHotelsJourney.controls['date_hotel_out']"/>
               </div>

@@ -4,6 +4,8 @@ import { SpendsService } from '../../../../services/travel-management/spends/spe
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-dist-spend',
@@ -42,11 +44,12 @@ export class DistSpendComponent implements OnInit {
   public typeCenterOrder_id: string = '';
   public showListAutoOrder: boolean = false;
   public order_travels: any[] = [];
+  public translate: Translate = null;
 
   constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService,
-    public travelManagementService: TravelService, public alert: AlertsService) {
-
-
+    public travelManagementService: TravelService, public alert: AlertsService, public translateService: TranslateService) {
+  
+    this.translate = this.translateService.getTranslate();
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'confirmContinueDist' || data === 'editDitsCost') {
         this.spendsService.getDetailDistCost(this.id_spend).subscribe((result: any) => {
@@ -137,8 +140,8 @@ export class DistSpendComponent implements OnInit {
         document.getElementById('btn_detail_distSpend').click();
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Confirmación',
-          message: dist.message + ' ¿desea continuar modificando la distribucion de elementos de imputación?',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.dist_spend.type_alert_ts,
+          message: dist.message + this.translate.app.frontEnd.pages.travel_management.spend.dist_spend.message_alert_ts,
           confirmation: true,
           typeConfirmation: 'confirmContinueDist'
         }];
@@ -147,7 +150,7 @@ export class DistSpendComponent implements OnInit {
       (error: any) => {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.dist_spend.type_alert_one_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'editDitsCost'
@@ -255,7 +258,7 @@ export class DistSpendComponent implements OnInit {
       document.getElementById('btn_detail_distSpend').click();
       const alertWarning: Alerts[] = [{
         type: 'success',
-        title: 'Confirmación',
+        title: this.translate.app.frontEnd.pages.travel_management.spend.dist_spend.type_alert_ts,
         message: data.message,
         confirmation: true,
         typeConfirmation: 'confirmContinueDistDelete'
@@ -266,7 +269,7 @@ export class DistSpendComponent implements OnInit {
       (error: any) => {
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.dist_spend.type_alert_one_ts,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'editDitsCost'

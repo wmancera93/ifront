@@ -1,9 +1,9 @@
-<div id="right-sidebar" class="sidebar-open sidebar-top container-contacts">
+<div id="right-sidebar" class="sidebar-open sidebar-top container-contacts" *ngIf="translate !== null">
   <div class="sidebar-container" style=" overflow: hidden;width: auto;  height: 100%;">
     <ul class="nav nav-tabs">
       <li id="litab1" class="nav-item" style="width: 50%">
         <a id="atab1" class="nav-link a-contacts bg-tabs active" data-toggle="tab" href="#tab-1">
-          Compañeros
+          {{translate.app.frontEnd.components.layout.contacts_list.partner}}
         </a>
       </li>
       <!-- <li id="litab2" class="nav-item" style="width: 50%">
@@ -17,7 +17,7 @@
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="Buscar compañeros"
+            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="{{search_partner}}"
               (keyup.enter)="searchByName()" maxlength="25" (keyup)="enterNameEmployee()">
             <i class="search-input-icon fa fa-search icon-search  detectLetter cursor general" (click)='searchByName()'
               [ngClass]="{detectLetter : searchIconActive == true}"></i>
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="bg-white">
-            No tienes más conversaciones
+            {{translate.app.frontEnd.components.layout.contacts_list.negative_message}}
           </div>
         </div>
       </div>

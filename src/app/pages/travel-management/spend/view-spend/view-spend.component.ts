@@ -7,6 +7,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { TravelsService } from '../../../../services/shared/travels/travels.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-view-spend',
@@ -21,7 +23,7 @@ export class ViewSpendComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public objectPrintAdvancesView: EventEmitter<any> = new EventEmitter();
   public objectPrintTravelView: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Gastos';
+  public nameReport: string;
   public edit: boolean = false;
   public anexes: any[] = [];
   public id_spend: string;
@@ -29,9 +31,9 @@ export class ViewSpendComponent implements OnInit {
   public table_advances_spend: any[];
   public table_travels_spend: any[];
   public ticket: string;
-  public nameReportAdvance: string = 'Anticipos de viaje';
-  public nameReportTravels: string = 'Trayectos de viaje';
-
+  public nameReportAdvance: string;
+  public nameReportTravels: string;
+  public translate: Translate = null;
   public ticketSendPDF: any;
 
   public is_sender_approval: boolean = false;
@@ -40,8 +42,12 @@ export class ViewSpendComponent implements OnInit {
     public spendsService: SpendsService,
     public http: Http, public alert: AlertsService, public travelManagementService: TravelService,
     private accionDataTableServiceView: DataDableSharedService,
-    public travelsService: TravelsService) {
+    public travelsService: TravelsService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle_ts;
+    this.nameReportAdvance = this.translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle_advances_ts;
+    this.nameReportTravels = this.translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle_trayect_ts;
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === 'ModalDistCostShow') {
         document.getElementById("closeModalViewSpend").click();
@@ -53,7 +59,7 @@ export class ViewSpendComponent implements OnInit {
       }
 
       if ((data.action_method === "showHotels")) {
-  
+
         this.travelsService.setHotelsByJourney({
           acction: true,
           id_journey: data.id.toString(),
@@ -72,7 +78,7 @@ export class ViewSpendComponent implements OnInit {
         this.anexes = data.data[0].travel_request_annexeds;
         this.showTravelDetail = data.data[0].travel_allowance_request.info_travel;
         this.showTableSpendsDetail = data.data[0].travel_allowances;
-        this.is_sender_approval =  data.data[0].is_sender_approval;
+        this.is_sender_approval = data.data[0].is_sender_approval;
 
         setTimeout(() => {
           this.objectReport.emit({ data: [data.data[0].travel_allowances] });
@@ -133,14 +139,14 @@ export class ViewSpendComponent implements OnInit {
     this.spendsService.putSendRequestsSpend(this.id_spend).subscribe((data: any) => {
       if (data) {
         document.getElementById("closeModalViewSpend").click();
-        const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Solicitud de gastos enviada a primer aprobador', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.message_alert_one_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.spendSharedService.setRefreshSpend({ success: true, third: false });
     },
       (error: any) => {
         document.getElementById("closeModalViewSpend").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString() + ' - ¿Desea continuar con su solicitud de gastos?', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.type_alert_two_ts, message: error.json().errors.toString() + ' - ' + this.translate.app.frontEnd.pages.travel_management.spend.view_spend.message_alert_two_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
 
       });

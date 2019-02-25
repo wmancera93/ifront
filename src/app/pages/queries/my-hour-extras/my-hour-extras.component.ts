@@ -2,21 +2,27 @@ import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
 import { QueriesService } from '../../../services/queries/queries.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-my-hour-extras',
   templateUrl: './my-hour-extras.component.html',
   styleUrls: ['./my-hour-extras.component.css']
 })
-export class MyHourExtrasComponent implements OnInit,  OnDestroy {
+export class MyHourExtrasComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Mis horas extras';
-  public showExcel : boolean =  true;
-  public userAuthenticated:User;
+  public nameReport: string;
+  public showExcel: boolean = true;
+  public userAuthenticated: User;
   public countAfter: number = 0;
-  
-  constructor( private accionDataTableService: DataDableSharedService,
-    public queriesService: QueriesService) { }
+  public translate: Translate = null;
+
+  constructor(private accionDataTableService: DataDableSharedService,
+    public queriesService: QueriesService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.queries.my_hour_extras.name_table_ts;
+  }
 
   ngOnInit() {
     window.scroll({
@@ -25,9 +31,8 @@ export class MyHourExtrasComponent implements OnInit,  OnDestroy {
       behavior: 'smooth'
     });
 
-    this.accionDataTableService.getActionDataTable().subscribe((data)=>{
-      if(data ==="Mis horas extras" && this.countAfter === 0)
-      {
+    this.accionDataTableService.getActionDataTable().subscribe((data) => {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getExtraHoursExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
           window.open(info.url);

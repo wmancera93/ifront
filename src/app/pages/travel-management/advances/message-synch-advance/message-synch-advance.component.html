@@ -6,7 +6,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="generalObjectAdvance !== null">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Mensajes de sincronización viaje # {{generalObjectAdvance.travel_request_id}} </h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.advances.message_synch_advance.message_head}} {{generalObjectAdvance.travel_request_id}} </h5>
         <button id="closeMessages" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -17,7 +17,7 @@
           <div class="col-lg-6 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-money text-primary-hr"></i>
-              <strong>Avance de viaje solicitado para el viaje número:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.message_synch_advance.message_body}}:</strong>
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">

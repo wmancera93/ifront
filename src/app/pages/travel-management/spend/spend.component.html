@@ -8,14 +8,14 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-usd"></i>
-          Gastos
+          {{translate.app.frontEnd.pages.travel_management.spend.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.travel_management.spend.back}}
               </span>
             </div>
           </div>
@@ -31,7 +31,7 @@
             <div class="col-12">
               <button id="btn-travelManagement" type="button" class="btn tabDate btn-block" (click)="newSpendTravel()">
                 <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                Nuevo Gasto
+                {{translate.app.frontEnd.pages.travel_management.spend.btn_new}}
               </button>
             </div>
           </div>
@@ -43,7 +43,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.travel_management.spend.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -58,7 +58,7 @@
           <div class="col-12" style="padding-bottom: 15px">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de IHR</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.spend.btn_hr}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codIHR" class="form-control">
@@ -71,7 +71,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
-                <label>Codigo de SAP</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.spend.btn_sap}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codSAP" class="form-control">
@@ -86,11 +86,11 @@
               <div class="col-lg-6 col-md-12 col-12">
                 <div class="row">
                   <div class="col-5">
-                    <label>Fecha Inicio</label>
+                    <label>{{translate.app.frontEnd.pages.travel_management.spend.date_begin}}</label>
                     <input type="date" [(ngModel)]="datesBegin" class="form-control">
                   </div>
                   <div class="col-5">
-                    <label>Fecha Final</label>
+                    <label>>{{translate.app.frontEnd.pages.travel_management.spend.date_end}}</label>
                     <input type="date" [(ngModel)]="datesEnd" class="form-control">
                   </div>
                   <div class="col-2 align-self-end">
@@ -102,27 +102,27 @@
               </div>
 
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Estado</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.spend.status}}</label>
                 <select type="date" [(ngModel)]="status" class="form-control" (change)="filter('status')">
-                  <option value="">Todos</option>
-                  <option value="ReqReg">Registrado</option>
-                  <option value="ReqPro">En proceso</option>
-                  <option value="ReqApp">Aprobado</option>
-                  <option value="ReqCan">Cancelado</option>
-                  <option value="ReqWai">En espera</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.spend.all_status}}</option>
+                  <option value="ReqReg">{{translate.app.frontEnd.pages.travel_management.spend.resgistered}}</option>
+                  <option value="ReqPro">{{translate.app.frontEnd.pages.travel_management.spend.process}}</option>
+                  <option value="ReqApp">{{translate.app.frontEnd.pages.travel_management.spend.approved}}</option>
+                  <option value="ReqCan">{{translate.app.frontEnd.pages.travel_management.spend.cancelled}}</option>
+                  <option value="ReqWai">{{translate.app.frontEnd.pages.travel_management.spend.hold_on}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Estado Liquidacion</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.spend.status_settle}}</label>
                 <select type="date" [(ngModel)]="statusLiquid" class="form-control" (change)="filter('statusLiquid')">
-                  <option value="">Todos</option>
-                  <option value="LiqPen">A liquidar</option>
-                  <option value="LiqApp">Liquidado</option>
-                  <option value="LiqAnn">Anulado</option>
+                  <option value="">{{translate.app.frontEnd.pages.travel_management.spend.all_status}}</option>
+                  <option value="LiqPen">{{translate.app.frontEnd.pages.travel_management.spend.to_settle}}</option>
+                  <option value="LiqApp">{{translate.app.frontEnd.pages.travel_management.spend.settlement}}</option>
+                  <option value="LiqAnn">{{translate.app.frontEnd.pages.travel_management.spend.canceled}}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <label>Empleado</label>
+                <label>{{translate.app.frontEnd.pages.travel_management.spend.employee}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codEmployee" class="form-control">
@@ -146,13 +146,13 @@
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" [checked]="checkThird"
               (click)="checkSpends('spends_request')" />
             <b>
-              Mis gastos registrados
+              {{translate.app.frontEnd.pages.travel_management.spend.select_my}}
             </b>
             &nbsp;&nbsp;
             <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" [checked]="!checkThird"
               (click)="checkSpends('my_spends_request')" />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
-              Gastos registrados a terceros
+              {{translate.app.frontEnd.pages.travel_management.spend.select_third}}
             </b>
           </form>
         </div>
@@ -164,21 +164,21 @@
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span *ngIf="spend.ticket_cli !== null" class="badge badge-warning">
-                    No. Viaje SAP # {{spend.ticket_cli}}
+                    {{translate.app.frontEnd.pages.travel_management.spend.travel_sap}} {{spend.ticket_cli}}
                   </span>
                     <span *ngIf="spend.messages_server !== null &&  spend.synch_type_sap !== 'S'">
                       <h6 class="wg-hover-general" (click)="messages_error_spend(spend)">
-                        <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_spend(spend)"></i>Error en sincronización</h6>
+                        <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_spend(spend)"></i>{{translate.app.frontEnd.pages.travel_management.spend.error_synch}}</h6>
                     </span>
                   <span class="badge badge-warning">
-                    No. Viaje iHR # {{spend.travel_request_id}}
+                    {{translate.app.frontEnd.pages.travel_management.spend.travel_ihr}} {{spend.travel_request_id}}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-plane"></i>
-                  Fecha salida {{spend.date_begin_format}}
+                  {{translate.app.frontEnd.pages.travel_management.spend.date_in}} {{spend.date_begin_format}}
                 </p>
-                <p>Fecha llegada {{spend.date_end_format}}
+                <p>{{translate.app.frontEnd.pages.travel_management.spend.date_out}} {{spend.date_end_format}}
                 </p>
               </div>
               <!-- <div class="col-lg-2 col-md-3 col-12">
@@ -195,7 +195,7 @@
               </div>
               <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
                 <p class="font-title-general">
-                  Estado:
+                  {{translate.app.frontEnd.pages.travel_management.spend.status_label}}:
                 </p>
                 <h6 *ngIf="spend.status_request == 'Aprobado'">
                   <span class="badge badge-primary">
@@ -250,12 +250,12 @@
                   {{spend.next_approver_to_json.approver_employee.posicion}}
                 </p>
                 <p class="">
-                  Aprobador {{spend.next_approver_to_json.level}}
+                  {{translate.app.frontEnd.pages.travel_management.spend.approver}} {{spend.next_approver_to_json.level}}
                 </p>
               </div>
               <div class="col-lg-2 col-md-6 col-12 text-left top-p" *ngIf="spend.next_approver_to_json.approver_employee == undefined">
                 <p class="font-title-general">
-                  No existe aprobador para esta solicitud ó ya fue aprobada
+                  {{translate.app.frontEnd.pages.travel_management.spend.message_approver}}
                 </p>
               </div>
               <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
@@ -266,7 +266,7 @@
                         <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12" (click)="viewSpend(spend)">
-                        Ver
+                        {{translate.app.frontEnd.pages.travel_management.spend.see}}
                       </div>
                     </div>
                   </div>
@@ -276,7 +276,7 @@
                         <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
-                        Ver
+                        {{translate.app.frontEnd.pages.travel_management.spend.see}}
                       </div>
                     </div>
                   </div>
@@ -286,7 +286,7 @@
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12" (click)="editSpend(spend)">
-                        Editar
+                        {{translate.app.frontEnd.pages.travel_management.spend.edit}}
                       </div>
                     </div>
                   </div>
@@ -296,7 +296,7 @@
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
-                        Editar
+                        {{translate.app.frontEnd.pages.travel_management.spend.edit}}
                       </div>
                     </div>
                   </div>
@@ -306,7 +306,7 @@
                         <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12" (click)="deleteSpend(spend)">
-                        Eliminar
+                        {{translate.app.frontEnd.pages.travel_management.spend.erase}}
                       </div>
                     </div>
                   </div>
@@ -316,7 +316,7 @@
                         <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
-                        Eliminar
+                        {{translate.app.frontEnd.pages.travel_management.spend.erase}}
                       </div>
                     </div>
                   </div>

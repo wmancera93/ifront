@@ -7,14 +7,14 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-table"></i>
-          Aprobadores de solicitudes
+          {{nameReport}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.reports_rh.requests_approvers.back}}
               </span>
             </div>
           </div>
@@ -28,7 +28,7 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.reports_rh.requests_approvers.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -65,9 +65,9 @@
                   {{approver_selected}}
                 </a>
                 <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','0','Con aprobador')">Con aprobador</a>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','0','Con aprobador')">{{translate.app.frontEnd.pages.reports_rh.requests_approvers.approver_with}}</a>
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','1','Sin aprobador')">Sin aprobador</a>
+                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('approver','1','Sin aprobador')">{{translate.app.frontEnd.pages.reports_rh.requests_approvers.approver}}</a>
                 </div>
               </li>
             </ul>

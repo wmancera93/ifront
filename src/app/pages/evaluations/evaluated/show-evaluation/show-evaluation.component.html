@@ -16,17 +16,17 @@
             <div class="row" style="margin-top: 15px;">
               <div class="col-6">
                 <div class="alert alert-success" role="alert">
-                  <strong>Total de preguntas :</strong> {{dataEvaluation[0].total_questions}}
+                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_total_questions}} </strong> {{dataEvaluation[0].total_questions}}
                 </div>
               </div>
               <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers > 0 ">
                 <div class="alert alert-success" role="alert">
-                  <strong>Total de preguntas correctas :</strong> {{dataEvaluation[0].total_correct_answers}}
+                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_totalcorrect_questions}}</strong> {{dataEvaluation[0].total_correct_answers}}
                 </div>
               </div>
               <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers == -1 ">
                 <div class="alert alert-success" role="alert">
-                  <strong>Total de preguntas correctas :</strong> No aplica
+                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_totalcorrect_questions_one}}</strong> {{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_not_apply}}
                 </div>
               </div>
             </div>
@@ -56,7 +56,7 @@
                                     <strong>{{question.answer_option.description}}</strong>
                                   </div>
                                   <div class="col-6">
-                                    <label>Correcta</label>
+                                    <label>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_correct}}</label>
                                   </div>
                                 </div>
                               </div>
@@ -83,7 +83,7 @@
                                     <strong>{{question.answer_option.description}}</strong>
                                   </div>
                                   <div class="col-6">
-                                    <label>Incorrecta</label>
+                                    <label>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_incorrect}}</label>
                                   </div>
                                 </div>
                               </div>
@@ -150,7 +150,7 @@
       <div class="modal-footerInfo justify-content-center">
         <div class="col-12 col-lg-3 buttonCloseShowEvaluation btn-close-modals text-center" style="width:100% !important;"
           data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.btn_close}} </h6>
         </div>
       </div>
     </div>

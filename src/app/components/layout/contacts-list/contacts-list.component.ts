@@ -5,6 +5,8 @@ import { EmployeeInfoService } from '../../../services/shared/common/employee/em
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 
 
@@ -35,13 +37,17 @@ export class ContactsListComponent implements OnInit {
   public hideCollapse: string = '';
   public showContactsList: boolean = true;
   public infoEmployee: Employee;
-
+  public translate: Translate = null;
+  public search_partner: string;
 
   constructor(public employeeService: EmployeeService,
     public router: Router,
     public employeeSharedService: EmployeeInfoService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
   ) {
+
+    this.translate = this.translateService.getTranslate();
+    this.search_partner=this.translate.app.frontEnd.components.layout.contacts_list.search_partner;
   }
   ngOnInit() {
     this.numberPage = 1;

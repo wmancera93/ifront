@@ -9,14 +9,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-edit"></i>
-          Solicitudes
+          {{translate.app.frontEnd.pages.requests_rh.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.requests_rh.back}}
               </span>
             </div>
           </div>
@@ -35,7 +35,7 @@
               <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="fa fa-plus"></i>
-                Crear nueva solicitud
+                {{translate.app.frontEnd.pages.requests_rh.btn_new}}
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-x: hidden !important; overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let request of requests.request_types; let i = index" class="row">
@@ -64,7 +64,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.requests_rh.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -98,7 +98,7 @@
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-xl-2 col-lg-4 col-12 text-left">
           <b>
-            Mis Solicitudes
+            {{translate.app.frontEnd.pages.requests_rh.my_queries}}
           </b>
         </div>
       </div>
@@ -111,12 +111,12 @@
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket #{{request.ticket}}
+                    {{translate.app.frontEnd.pages.requests_rh.ticket}} #{{request.ticket}}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-clock-o"></i>
-                  Creada el {{request.created_date}}
+                  {{translate.app.frontEnd.pages.requests_rh.date_created}} {{request.created_date}}
                 </p>
               </div>
               <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
@@ -126,24 +126,24 @@
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
                 <p class="font-title-general">
-                  Estado:
+                  {{translate.app.frontEnd.pages.requests_rh.status}}:
                 </p>
-                <h6 *ngIf="request.status == 'Aprobado'">
+                <h6 *ngIf="request.status == status_approved">
                   <span class="badge badge-primary">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'Cancelado'">
+                <h6 *ngIf="request.status == status_cancelled">
                   <span class="badge badge-danger">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'En Proceso'">
+                <h6 *ngIf="request.status == status_inProcess">
                   <span class="badge badge-success">
                     {{request.status}}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == 'Pendiente'">
+                <h6 *ngIf="request.status == status_pending">
                   <span class="badge badge-default">
                     {{request.status}}
                   </span>
@@ -157,7 +157,7 @@
                   {{request.next_approver_to_json.approver_employee.posicion}}
                 </p>
                 <p class="" *ngIf="request.next_approver_to_json.approver_employee != undefined">
-                  Aprobador {{request.next_approver_to_json.level}}
+                  {{translate.app.frontEnd.pages.requests_rh.approver}} {{request.next_approver_to_json.level}}
                 </p>
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p" *ngIf="request.next_approver_to_json == null">
@@ -179,13 +179,13 @@
                     <i class="fa fa-trash" aria-hidden="false"></i>
                   </div>
                   <div class="col-6" (click)="modalAprovers(request)">
-                    Ver
+                    {{translate.app.frontEnd.pages.requests_rh.see}}
                   </div>
                   <div class="col-6" *ngIf=" request.action_employee_requets_index_view[1].is_active == true" (click)="deleteRequest(request.ticket)">
-                    Eliminar
+                    {{translate.app.frontEnd.pages.requests_rh.erase}}
                   </div>
                   <div class="col-6" *ngIf=" request.action_employee_requets_index_view[1].is_active == false">
-                    Eliminar
+                    {{translate.app.frontEnd.pages.requests_rh.erase}}
                   </div>
                 </div>
               </div>

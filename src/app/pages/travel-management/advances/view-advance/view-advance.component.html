@@ -5,7 +5,7 @@
   <div  *ngIf="infoAdvance != null" style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Detalle de Anticipo</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.advances.view_advance.tittle}}</h5>
         <button id="closeModalViewAdvance" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -15,7 +15,7 @@
           <div class="col-lg-2 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>Viaje:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.view_advance.travel}}:</strong>
             </label>
           </div>
           <div class="col-lg-5 col-md-6 col-12">
@@ -24,7 +24,7 @@
           <div class="col-lg-2 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-circle text-primary-hr"></i>
-              <strong>Estado:</strong>
+              <strong>{{translate.app.frontEnd.pages.travel_management.advances.view_advance.status}}:</strong>
             </label>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
@@ -49,7 +49,7 @@
 
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.pages.travel_management.advances.view_advance.button_close}} </h6>
         </div>
       </div>
     </div>

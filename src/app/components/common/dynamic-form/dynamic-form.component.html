@@ -12,16 +12,16 @@
                 <fieldset class="text-left center-data-master" [disabled]="edit">
                     <div class="text-left" *ngIf="config.control === 'input'" [ngSwitch]="config.type">
                         <input (keyup)="kewUptext($event)" id="input-text" class="form-control" *ngSwitchCase="'text'"
-                            (blur)="detectChange(config)" type="text" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            (blur)="detectChange(config)" type="text" [formControlName]="config.id" placeholder="{{config.place_holder}}"
                             [disabled]="edit" />
                         <input id="input-number" class="form-control" *ngSwitchCase="'number'" (blur)="detectChange(config)"
-                            type="number" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            type="number" [formControlName]="config.id" placeholder="{{config.place_holder}}"
                             [disabled]="edit" />
                         <input id="input-date" class="form-control" *ngSwitchCase="'date'" (blur)="detectChange(config)"
-                            type="date" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            type="date" [formControlName]="config.id" placeholder="{{config.place_holder}}"
                             [disabled]="edit" />
                         <input id="input-time" class="form-control" *ngSwitchCase="'time'" (blur)="detectChange(config)"
-                            type="time" [formControlName]="config.id" [attr.placeHolder]="config.place_holder"
+                            type="time" [formControlName]="config.id" placeholder="{{config.place_holder}}"
                             [disabled]="edit" />
                         <fieldset [disabled]="config.is_prerequisite && config.option.length === 0">
                             <select id="input-select" class="form-control" *ngSwitchCase="'select'" (change)="detectChange(config, form.value)"
@@ -38,9 +38,9 @@
         <div class="row justify-content-end" style="min-height: 100%;">
             <div class="col-md-5 col-12" style="margin-top: 10px;">
                 <button id="savebutton" type="submit" *ngIf="showSubmit" class="btn btn-success btn-block" disabled>
-                    <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                    <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.dynamic_form.save}}</button>
                 <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                    <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                    <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.dynamic_form.loading}}</button>
             </div>
         </div>
     </div>

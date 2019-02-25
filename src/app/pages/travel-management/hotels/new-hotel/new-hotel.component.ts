@@ -5,6 +5,8 @@ import { TravelService } from '../../../../services/travel-management/travels/tr
 import { HotelsService } from '../../../../services/travel-management/hotels/hotels.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-new-hotel',
@@ -17,12 +19,15 @@ export class NewHotelComponent implements OnInit {
   public stateLocations: any[] = [];
   public cityLocations: any[] = [];
   public showSubmit: boolean = true;
+  public translate: Translate = null;
 
   constructor(public hotelsSharedService: HotelsSharedService,
     private fb: FormBuilder,
     public travelManagementService: TravelService,
     public hotelsService: HotelsService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.hotelsSharedService.getNewHotel().subscribe(
       (data: any) => {
@@ -95,14 +100,14 @@ export class NewHotelComponent implements OnInit {
         debugger
         if (data.success) {
           document.getElementById("closeHotels").click();
-          const alertWarning: Alerts[] = [{ type: 'success', title: 'Solicitud Exitosa', message: 'Hotel generado correctamente', confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.hotels.new_hotel.type_alert_one_ts, message: this.translate.app.frontEnd.pages.travel_management.hotels.new_hotel.message_alert, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
           this.hotelsSharedService.setViewHotels(true);
         }
       },
       (error: any) => {
         document.getElementById("closeHotels").click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.hotels.new_hotel.type_alert_two_ts, message: error.json().errors.toString(), confirmation: false }];
         this.showSubmit = true;
         this.alert.setAlert(alertWarning[0]);
       });
