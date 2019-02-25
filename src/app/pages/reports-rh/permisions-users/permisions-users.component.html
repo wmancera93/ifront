@@ -8,14 +8,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-table"></i>
-          Permisos de usuarios
+         {{nameReport}}
         </div>
         <div  class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.reports_rh.permisions_users.back}}
               </span>
             </div>
           </div>
@@ -29,7 +29,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.reports_rh.permisions_users.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -49,7 +49,7 @@
                       <p class="btn btn-primary-second fa fa-check-circle text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Con Permisos
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.permtits_with}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -70,7 +70,7 @@
                       <p class="btn btn-primary-second fa fa-bullhorn text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Crear Contenido
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.create}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -91,7 +91,7 @@
                       <p class="btn btn-primary-second fa fa-sitemap text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Ver Organigrama
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.see_chart}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -112,7 +112,7 @@
                       <p class="btn btn-primary-second fa fa-ban text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Sin Permisos
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.permtits}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -133,7 +133,7 @@
                       <p class="btn btn-primary-second fa fa-users text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Reporte Gerencial
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.manage_report}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -154,7 +154,7 @@
                       <p class="btn btn-primary-second fa fa-user-circle text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Administrador
+                      {{translate.app.frontEnd.pages.reports_rh.permisions_users.managed}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -174,7 +174,7 @@
             <div class="row justify-content-between">
               <div class="col-xl-4 col-12 ">
                 <div class="form-group row">
-                  <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+                  <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center">{{translate.app.frontEnd.pages.reports_rh.permisions_users.show_records}}:</label>
                   <div class="col-xl-7 col-md-3 col-lg-3 col-6">
                     <select class="form-control" [(ngModel)]="size_table">
                       <option value="5">5</option>
@@ -218,7 +218,7 @@
             </b>
           </div>
           <div class="col-xl-4 col-12 top-containter align-self-center text-rigth">
-            <input [(ngModel)]="value_search" class="form-control" placeholder="Buscar por Nombre y Apellido..." (keyup)="searcheByName()">
+            <input [(ngModel)]="value_search" class="form-control" placeholder="{{placeholder_search}}" (keyup)="searcheByName()">
           </div>
         </div>
       </div>
@@ -246,12 +246,12 @@
                     <div *ngIf="labelsCell[key].type == 'string'">
                       <div style="text-align:center" *ngIf="record[key] == 'true'" style="margin-top: 6px;">
                         <i class="fa fa-lg fa-check-circle text-primary">
-                          <span class="font-size-07"> SI</span>
+                          <span class="font-size-07"> {{translate.app.frontEnd.pages.reports_rh.permisions_users.yes}}</span>
                         </i>
                       </div>
                       <div style="text-align:center" *ngIf="record[key] == 'false'" style="margin-top: 6px;">
                         <i class="fa  fa-lg fa-ban text-danger">
-                          <span class="font-size-07"> No</span>
+                          <span class="font-size-07"> {{translate.app.frontEnd.pages.reports_rh.permisions_users.not}}</span>
                         </i>
                       </div>
                       <div style="text-align:left" *ngIf="record[key] != 'false' && record[key] != 'true'">

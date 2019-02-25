@@ -4,14 +4,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-table"></i>
-          Reporte de gestión de viajes
+          {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackReportTravel()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.back}}
               </span>
             </div>
           </div>
@@ -38,7 +38,7 @@
               <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
                 <i class="fa fa-plus"></i>
-                Filtrar reportes gestión de viajes
+                {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_filter}}
               </a>
               <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
                 <div *ngFor="let list of reports_list; let i = index">
@@ -56,7 +56,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.query_filters}}
             </b>
             <i *ngIf="!is_collapse_report_travel" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
               data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTravel(true)"></i>
@@ -69,52 +69,52 @@
       <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
         <div class="row align-items-center">
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>Código de empleado</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.employee_code}}</label>
             <input type="text" [(ngModel)]="personal_number" class="form-control" (keyup)="validateNumber('personal_number', personal_number )">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>Código de IHR</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.code_ihr}}</label>
             <input type="text" [(ngModel)]="ticket" class="form-control" (keyup)="validateNumber('ticket', ticket)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>Código de SAP</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.code_sap}}</label>
             <input type="text" [(ngModel)]="ticket_cli" class="form-control" (keyup)="validateNumber('ticket_cli', ticket_cli)">
           </div>
           <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>Clase de viaje legal</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.type_legal}}</label>
             <select class="form-control" [(ngModel)]="legat_travel_type">
-              <option [value]="-1">Seleccione</option>
+              <option [value]="-1">{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.option_select}}</option>
               <option *ngFor="let legalTravel of typeTravelLegal" [value]="legalTravel.code">{{legalTravel.name}}</option>
             </select>
           </div>
         </div>
         <div class="row align-items-center mb-3">
           <div class="col-lg-3 col-md-6 col-12">
-            <label>Elemento de imputación</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.type_element}}</label>
             <select class="form-control" [(ngModel)]="travel_cost">
-              <option [value]='-1'>Seleccione</option>
+              <option [value]='-1'>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.option_select}}</option>
               <option *ngFor="let imputation of type_element_imputation" [value]="imputation.code">{{imputation.name}}</option>
             </select>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>fecha de Inicio</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.date_begin}}</label>
             <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" (change)="validateDate()"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>Fecha final</label>
+            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.date_end}}</label>
             <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" (change)="validateDate()" />
           </div>
           <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="btnConsult">
             <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')">
               <i class="fa fa-search-plus"></i>
-              Consulta
+              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_query}}
             </div>
           </div>
           <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="!btnConsult">
             <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')" style="cursor: no-drop">
               <i class="fa fa-search-plus"></i>
-              Consulta
+              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_query}}
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@
       <div class="row justify-content-center top-general-p" *ngIf="!showDataTable">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
-            No se encontrarón registros para mostrar
+            {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.negative_query}}
           </div>
         </div>
       </div>

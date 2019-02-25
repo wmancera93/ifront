@@ -6,6 +6,8 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-time-evaluation',
@@ -14,7 +16,7 @@ import { User } from '../../../models/general/user';
 })
 export class TimeEvaluationComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Evaluación de tiempos';
+  public nameReport: string;
   public token: boolean;
   public is_collapse: boolean = false;
   public allevaluationmessage: any[] = [];
@@ -26,8 +28,9 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
   public arreglo: string = "";
   public finalDate: number;
   public showExcel: boolean = true;
-  public userAuthenticated:User;
+  public userAuthenticated: User;
   public countAfter: number = 0;
+  public translate: Translate = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -35,7 +38,10 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
     public router: Router,
     private tokenService: Angular2TokenService,
     public alertsService: AlertsService,
-    private accionDataTableService: DataDableSharedService) {
+    private accionDataTableService: DataDableSharedService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.queries.time_evaluation.name_table_ts;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -59,7 +65,7 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === "Evaluación de tiempos" && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
         this.queriesService.getTimeEvaluationExcel(this.userAuthenticated.employee_id.toString()).subscribe((excel: any) => {
           window.open(excel.url);
@@ -110,7 +116,7 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
       const alertDataWrong: Alerts[] = [{
         type: 'danger',
         title: 'Error',
-        message: 'La fecha inicial no puede ser mayor que la final',
+        message: this.translate.app.frontEnd.pages.queries.time_evaluation.message_alert_ts,
         confirmation: false
       }];
       this.alertsService.setAlert(alertDataWrong[0]);

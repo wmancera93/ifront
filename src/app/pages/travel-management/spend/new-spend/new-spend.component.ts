@@ -12,6 +12,8 @@ import { FormDataService } from '../../../../services/common/form-data/form-data
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-new-spend',
@@ -41,7 +43,7 @@ export class NewSpendComponent implements OnInit {
   showPdf
   showSizeTable
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Gastos';
+  public nameReport: string;
   public spendEdit: boolean = false;
   public spendNew: boolean = false;
   public activate_submit_spend: boolean = true;
@@ -83,7 +85,7 @@ export class NewSpendComponent implements OnInit {
   public kostl: boolean = true;
   public nplnr: boolean = false;
   public aufnr: boolean = false;
-
+  public translate: Translate = null;
   public typeSpend: string;
 
 
@@ -93,10 +95,12 @@ export class NewSpendComponent implements OnInit {
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService, public employeeService: EmployeeService, public travelManagementService: TravelService) {
+    public formDataService: FormDataService, public employeeService: EmployeeService,
+    public travelManagementService: TravelService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle_ts;
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-
     this.infoTableSpends = [{
       success: true,
       data: [{ data: [] }]
@@ -457,8 +461,8 @@ export class NewSpendComponent implements OnInit {
           document.getElementById("closeSpends").click();
           const alertWarning: Alerts[] = [{
             type: 'danger',
-            title: 'Advertencia',
-            message: "Ya existe una solicitud de gastos para el viaje",
+            title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_one_ts,
+            message: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_tree_ts,
             confirmation: true,
             typeConfirmation: 'ConfirmTravelSpendID'
 
@@ -535,8 +539,8 @@ export class NewSpendComponent implements OnInit {
 
     let alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar el gasto?',
+      title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_two_ts,
+      message: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_four_ts,
       confirmation: true,
       typeConfirmation: 'deleteSpendNew'
     }];
@@ -876,7 +880,7 @@ export class NewSpendComponent implements OnInit {
         });
         const alertSuccess: Alerts[] = [{
           type: 'success',
-          title: 'Alerta',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_ts,
           message: data.message,
           confirmation: false
         }];
@@ -889,8 +893,8 @@ export class NewSpendComponent implements OnInit {
         document.getElementById("closeSpends").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: error.json().errors.toString() + '¿Desesa continuar con la solicitud de gatos?',
+          title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_one_ts,
+          message: error.json().errors.toString() + this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_five_ts,
           confirmation: true,
           typeConfirmation: 'ValidationNewSpend'
         }];
@@ -906,7 +910,7 @@ export class NewSpendComponent implements OnInit {
       success: true,
       data: [{
         title: "Gastos",
-        title_table: "Gastos solicitados",
+        title_table: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle_table_ts,
         labels: {
           // field_1: {
           //   value: "Viaje",
@@ -914,48 +918,48 @@ export class NewSpendComponent implements OnInit {
           //   sortable: false,
           // },
           field_2: {
-            value: "Tipo de Gasto",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_cero,
             type: "string",
             sortable: false,
           },
 
           field_3: {
-            value: "Valor",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_one,
             type: "string",
             sortable: false,
           },
           field_4: {
-            value: "Moneda",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_two,
             type: "string",
             sortable: false,
           },
           field_5: {
-            value: "Fecha",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_three,
             type: "string",
             sortable: false,
           },
           field_6: {
-            value: "Descripción",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_four,
             type: "string",
             sortable: false,
           },
           field_7: {
-            value: "N° Factura",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_five,
             type: "string",
             sortable: false,
           },
           field_8: {
-            value: "N° Control",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_six,
             type: "string",
             sortable: false,
           },
           field_9: {
-            value: "NIT",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_seven,
             type: "string",
             sortable: false,
           },
           field_10: {
-            value: "Establecimiento",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_eight,
             type: "string",
             sortable: false,
           },
@@ -965,32 +969,32 @@ export class NewSpendComponent implements OnInit {
           //   sortable: false,
           // },
           field_12: {
-            value: "Numero de autorización",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_nine,
             type: "string",
             sortable: false,
           },
           field_13: {
-            value: "Poblado",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onecero,
             type: "string",
             sortable: false,
           },
           field_14: {
-            value: "Diligencia formato",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_oneone,
             type: "string",
             sortable: false,
           },
           field_15: {
-            value: "Tipo de documento",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onetwo,
             type: "string",
             sortable: false,
           },
           field_16: {
-            value: "Editar",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onethree,
             type: "string",
             sortable: false,
           },
           field_17: {
-            value: "Eliminar",
+            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onefour,
             type: "string",
             sortable: false,
           }

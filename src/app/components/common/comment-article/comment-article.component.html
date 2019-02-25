@@ -28,7 +28,7 @@
             <div class="col-12">
               <div class="row">
                 <div class=" col-3 font-title-general">
-                  Temas:
+                  {{translate.app.frontEnd.components.common.comment_article.themes}}:
                 </div>
                 &nbsp;&nbsp; &nbsp;&nbsp;
                 <div class=" col-lg-4 col-6 padding-themes-news" *ngFor="let theme of infoArticle.themes">
@@ -59,10 +59,10 @@
                   </div>
                   <div>
                     <div *ngIf="!is_collapse" style="color:white;">
-                      Ver comentarios
+                      {{translate.app.frontEnd.components.common.comment_article.see_comments}}
                     </div>
                     <div *ngIf="is_collapse" style="color:white;">
-                      Ocultar comentarios
+                      {{translate.app.frontEnd.components.common.comment_article.hide_comments}}
                     </div>
                   </div>
                 </div>
@@ -70,9 +70,9 @@
 
               <div class="col-lg-6 col-12 text-center font-title-general" style="margin-top: 10px;">
                 <i class="fa fa-eye"></i>
-                {{infoArticle.total_views}} Vistas
+                {{infoArticle.total_views}} {{translate.app.frontEnd.components.common.comment_article.views}}
                 <i class="fa fa-comments-o"></i>
-                {{infoArticle.total_comments}} Comentarios
+                {{infoArticle.total_comments}} {{translate.app.frontEnd.components.common.comment_article.comment}}
               </div>
             </div>
           </div>
@@ -86,7 +86,7 @@
                     </div>
                   </div>
                   <div class="col-8 col-lg-8 text-lg-left">
-                    <strong>{{comment.created_by.short_name}}</strong> el día {{comment.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
+                    <strong>{{comment.created_by.short_name}}</strong> {{infoArticle.total_comments}} {{translate.app.frontEnd.components.common.comment_article.the_day}} {{comment.created_at | date: 'dd/MM/yyyy HH:mm:ss'}}
                     <div>
                       {{comment.comment_text}}
                     </div>
@@ -105,25 +105,25 @@
           </div>
           <div class="row">
             <div class="col-12" style="margin-top: 10px;" *ngIf="flagEditComment">
-              <textarea [(ngModel)]="commentEdit" id="commentEdit" rows="2" cols="50" placeholder="Edite su comentario..." style="width:100% !important;"></textarea>
+              <textarea [(ngModel)]="commentEdit" id="commentEdit" rows="2" cols="50" style="width:100% !important;"></textarea>
             </div>
             <div id="insertComment" class="col-12" style="margin-top: 10px;">
-              <textarea [(ngModel)]="comment" id="comment" rows="2" cols="50" placeholder="Escriba su comentario..." style="width:100% !important;"></textarea>
+              <textarea [(ngModel)]="comment" id="comment" rows="2" cols="50" style="width:100% !important;"></textarea>
             </div>
           </div>
           <div class="row justify-content-end">
             <div class="col-lg-3 col-md-4 col-12">
               <button *ngIf="showSubmit" class="btn btn-success btn-block" (click)="sendComment()">
-                <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.comment_article.save}}</button>
               <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.comment_article.loading}}</button>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.components.common.comment_article.btn_close}} </h6>
         </div>
       </div>
     </div>

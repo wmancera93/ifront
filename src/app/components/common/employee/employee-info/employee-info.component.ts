@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { EmployeeInfoService } from '../../../../services/shared/common/employee/employee-info.service';
 import { Employee } from '../../../../models/general/user';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 @Component({
   selector: 'app-employee-info',
   templateUrl: './employee-info.component.html',
@@ -13,7 +15,7 @@ export class EmployeeInfoComponent implements OnInit {
   public target: string = '';
   public button: string = '';
   public id: string = '';
-
+  public translate: Translate = null;
   public employeeInfo: Employee = null;
   public flagShowModal: boolean = false;
   public isBoss: boolean = false;
@@ -22,8 +24,8 @@ export class EmployeeInfoComponent implements OnInit {
   public datebirth: string;
 
   constructor(public employeeSharedService: EmployeeInfoService,
-    public stylesExplorerService: StylesExplorerService) {
-
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.employeeSharedService.getInfoEmployee().subscribe((data: any) => {
       this.employeeInfo = null;
       this.employeeInfo = data;
@@ -33,7 +35,7 @@ export class EmployeeInfoComponent implements OnInit {
 
       let dateBorn = data.fecha_nac.split('-');
       this.datebirth = dateBorn[2] + '/' + dateBorn[1] + '/' + dateBorn[0];
-     
+
       if (this.employeeInfo !== null) {
         this.flagShowModal = true;
       } else {

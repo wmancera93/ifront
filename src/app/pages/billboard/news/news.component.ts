@@ -4,6 +4,8 @@ import { PublicArticle } from '../../../models/common/billboard/my_publications'
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-news',
@@ -18,15 +20,18 @@ export class NewsComponent implements OnInit {
   public uploadNewList: PublicArticle[] = [];
   public searchNotice: string = '';
   public validateNoData: boolean = false;
-
+  public translate: Translate = null;
   public token: boolean;
+  public seacrhNew: string
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public myPublicationsService: MyPublicationsService,
     public billboardSharedService: BillboardService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.seacrhNew = this.translate.app.frontEnd.pages.billboard.news.placeholder_search;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {
@@ -41,9 +46,9 @@ export class NewsComponent implements OnInit {
           this.token = true;
         });
 
-        this.billboardSharedService.getRefreshEditNew().subscribe((data:any)=>{
-          this.consultAllArticles();
-        })
+    this.billboardSharedService.getRefreshEditNew().subscribe((data: any) => {
+      this.consultAllArticles();
+    })
   }
 
   ngOnInit() {

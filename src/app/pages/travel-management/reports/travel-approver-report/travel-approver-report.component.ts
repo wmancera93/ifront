@@ -5,6 +5,8 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { User } from '../../../../models/general/user';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-travel-approver-report',
@@ -13,7 +15,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 })
 export class TravelApproverReportComponent implements OnInit {
 
-  public title: string = 'Aprobadores';
+  public title: string;
   public is_collapse_report_approvers: boolean = false;
   public collapseFilterAdvance: boolean = false;
   public reports_list_approvers = null;
@@ -28,18 +30,23 @@ export class TravelApproverReportComponent implements OnInit {
   public level: number = -1;
   public showPdf: boolean = false;
   public showExcel: boolean = true;
-  public nameReport: string = 'Aprobaciones solicitudes de viajes';
+  public nameReport: string;
   public objectGeneralApprover: any[] = [];
   public showDataTableApprover: boolean = true;
   public btnConsultApprover: boolean = true;
-
+  public translate: Translate = null;
   public userId: User = null;
   public countAfter: number = 0;
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
-    private accionDataTableService: DataDableSharedService, public alert: AlertsService) {
+    private accionDataTableService: DataDableSharedService, public alert: AlertsService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+    this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.tittle_ts;
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.name_table_ts;
+
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data === 'Aprobaciones solicitudes de viajes' && this.countAfter === 0) {
+      if (data === this.nameReport && this.countAfter === 0) {
         this.getObjectPrint("excel");
       }
     });
@@ -173,12 +180,12 @@ export class TravelApproverReportComponent implements OnInit {
         let dayEnd = new Date(this.date_end).getTime();
         let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: 'La fecha inicial no puede ser mayor a la fecha final', confirmation: false }];
+          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.message_alert_one_ts, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);
           this.btnConsultApprover = false;
         }
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'Por favor ingrese las dos fechas para la consulta', confirmation: false }];
+        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.message_alert_two_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
         this.btnConsultApprover = false;
       }

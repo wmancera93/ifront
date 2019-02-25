@@ -8,6 +8,8 @@ import { Angular2TokenService } from 'angular2-token';
 
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 declare var jsPDF: any;
 
@@ -45,9 +47,9 @@ export class DataTableComponent implements OnInit {
 
   public columnsPdf: any[] = [];
   public rowsColsPdf: any[] = [];
-
+  public translate: Translate = null;
   public recordsStatic: any[] = [];
-
+  public filter: string;
   public objectTable: any[] = [];
 
 
@@ -59,8 +61,10 @@ export class DataTableComponent implements OnInit {
     public router: Router,
     private tokenService: Angular2TokenService,
     private accionDataTableService: DataDableSharedService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.filter = this.translate.app.frontEnd.components.common.data_table.filter;
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

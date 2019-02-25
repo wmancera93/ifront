@@ -5,7 +5,7 @@
   <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">Distribución de costos</h5>
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.tittle}}</h5>
         <button id="closeDistSpendTravel" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
@@ -19,7 +19,7 @@
               <div style="margin-left: 15px;">
                 <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
-                  Atrás
+                    {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.back}}
                 </span>
               </div>
             </div>
@@ -28,7 +28,7 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>Código de Gasto:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.code_spend}}:</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -36,7 +36,7 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>Tipo de Gasto:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.type_spend}}:</strong>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -49,7 +49,7 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>Importe:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.import}}:</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -57,7 +57,7 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>Fecha:</strong>
+                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.date}}:</strong>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -72,25 +72,25 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      Elemento de imputación
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_cero}}
                     </th>
                     <th class="text-center">
-                      Centro de costo
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_one}}
                     </th>
                     <th class="text-center">
-                      Grafo
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_two}}
                     </th>
                     <th class="text-center">
-                      Operación
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_tree}}
                     </th>
                     <th class="text-center">
-                      Orden
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_four}}
                     </th>
                     <th class="text-center">
-                      Cta contable
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_five}}
                     </th>
                     <th class="text-center">
-                      Distribución
+                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_six}}
                     </th>
                   </tr>
                 </thead>
@@ -126,7 +126,7 @@
             <div class="row justify-content-center top-containter" *ngIf="detailDistCostTravel.length == 0">
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                  No hay distribución de gastos asociadas.
+                    {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.negative_message}}
                 </div>
               </div>
             </div>

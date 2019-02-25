@@ -10,6 +10,8 @@ import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 import { Router } from '@angular/router';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-new-advances',
@@ -26,7 +28,7 @@ export class NewAdvancesComponent implements OnInit {
   public idAdvance: number = 0;
   public advancesItems: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Anticipos';
+  public nameReport: string;
   public dd: any;
   public mm: any;
   public yyyy: any;
@@ -35,6 +37,7 @@ export class NewAdvancesComponent implements OnInit {
   public todayStandar: string;
   public edit: boolean = false;
   public objetcThird: any;
+  public translate: Translate = null;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
@@ -47,8 +50,10 @@ export class NewAdvancesComponent implements OnInit {
     public advancesService: AdvancesService,
     public fb: FormBuilder,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService, public employeeService: EmployeeService, public router: Router, public travelManagementService: TravelService) {
-
+    public alert: AlertsService, public employeeService: EmployeeService, public router: Router, public travelManagementService: TravelService
+    , public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.nameReport= this.translate.app.frontEnd.pages.travel_management.advances.new_advance.name_data_table_ts;
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
     this.infoTableAdvances = [{
@@ -202,8 +207,8 @@ export class NewAdvancesComponent implements OnInit {
             document.getElementById("btn_advances_new").click();
             const alertSuccess: Alerts[] = [{
               type: 'success',
-              title: 'Confirmación',
-              message: response.message + '¿Desea dirigirse al menu de solicitudes de viaje?',
+              title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts,
+              message: response.message + this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts,
               confirmation: true,
               typeConfirmation: 'returnTravelsRequests'
             }];
@@ -219,7 +224,7 @@ export class NewAdvancesComponent implements OnInit {
               document.getElementById("btn_advances_new").click();
               const alertWarning: Alerts[] = [{
                 type: 'danger',
-                title: 'Advertencia',
+                title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
                 message: error.json().errors.toString(),
                 confirmation: false,
                 typeConfirmation: 'errorValidationAdvance'
@@ -237,7 +242,7 @@ export class NewAdvancesComponent implements OnInit {
         document.getElementById("btn_advances_new").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
+          title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
           message: error.json().errors.toString(),
           confirmation: true,
           typeConfirmation: 'errorValidationAdvance'
@@ -335,8 +340,8 @@ export class NewAdvancesComponent implements OnInit {
         document.getElementById("closeAdvances").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: "la fecha es menor a la actual, ¿Desea continuar con la solicitud?",
+          title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
+          message: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
           confirmation: true,
           typeConfirmation: 'confirmDate'
         }];
@@ -356,42 +361,42 @@ export class NewAdvancesComponent implements OnInit {
     this.infoTableAdvances.push({
       success: true,
       data: [{
-        title: "Anticipos",
+        title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.name_data_table_ts,
         title_table: "Anticipos solicitados",
         labels: {
           field_1: {
-            value: "Viaje",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_one,
             type: "string",
             sortable: false,
           },
           field_2: {
-            value: "Moneda",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_two,
             type: "string",
             sortable: false,
           },
 
           field_3: {
-            value: "Fecha",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_three,
             type: "string",
             sortable: false,
           },
           field_4: {
-            value: "Valor",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_four,
             type: "string",
             sortable: false,
           },
           field_5: {
-            value: "Observación",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_five,
             type: "string",
             sortable: false,
           },
           field_6: {
-            value: "Caja",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_six,
             type: "string",
             sortable: false,
           },
           field_7: {
-            value: "Eliminar",
+            value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_seven,
             type: "string",
             sortable: false,
           }

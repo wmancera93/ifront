@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { EventsEmployess } from '../../../../models/common/widgets/widgets';
 import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-events-employees',
@@ -15,14 +17,14 @@ export class EventsEmployeesComponent implements OnInit {
   public cauruselIdGeneral: string = '';
   public cauruselId: string = '';
   public nohaveTeam: boolean;
-
+  public translate: Translate = null;
 
   constructor(public infoEventEmployee: EventsEmployeeService,
-    public stylesExplorerService: StylesExplorerService) {
-
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
   }
 
-  ngOnInit() {   
+  ngOnInit() {
     this.eventsEmployee.subscribe((data: EventsEmployess[]) => {
       this.objectWidget = data;
       if (data.length === 0) {

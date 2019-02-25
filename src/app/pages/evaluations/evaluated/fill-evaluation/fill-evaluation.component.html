@@ -47,7 +47,7 @@
                   <div class="row justify-content-center">
                     <div *ngIf="question.question_type.code === 'open'">
                       <div class="col-12">
-                        <textarea id="{{question.id}}openResponse" name="response" rows="2" cols="50" placeholder="Escribir respuesta" (blur)="detectResponse(question.id,question.parent_id,section)"
+                        <textarea id="{{question.id}}openResponse" name="response" rows="2" cols="50" placeholder="{{writeAnswer}}" (blur)="detectResponse(question.id,question.parent_id,section)"
                           style="width: 100%;"></textarea>
                       </div>
                     </div>
@@ -55,7 +55,7 @@
                 </div>
                 <div class="row justify-content-center">
                   <div class="col-12" *ngIf="question.question_type.code !== 'open'">
-                    <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="Agregar comentario"
+                    <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="{{addCommentary}}"
                       style="width: 100%;"></textarea>
                   </div>
                 </div>
@@ -94,7 +94,7 @@
                 </label>
               </div>
             </div>
-            <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="Agregar comentario"
+            <textarea id="{{question.id}}commentAnswer" name="comments" rows="2" cols="50" (blur)="detectComment(question.id)" placeholder="{{addCommentary}}"
               style="width: 70%;"></textarea>
           </div>
         </div>
@@ -104,9 +104,9 @@
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="onSubmitSendEval()">
-                  <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                  <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.btn_save}}</button>
                 <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                  <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.text_loading}}</button>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="col-12 col-lg-3 buttonCloseEvaluation btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.btn_close}} </h6>
         </div>
       </div>
     </div>

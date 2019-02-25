@@ -28,8 +28,8 @@
     style="padding-top:60px;">
     <div>
       <i class="fa fa-exclamation fa-4x"></i>
-      <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px">
-        No se encontraron datos disponibles.
+      <h3 class="font-bold m-l-n" style="margin-left: -22px; margin-right: -30px" *ngIf="translate !== null ">
+        {{translate.app.frontEnd.components.common.widgets.notification_secundary.negative_message}}.
       </h3>
     </div>
   </div>

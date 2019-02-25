@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-bullhorn"></i>
-          Mis publicaciones
+          {{translate.app.frontEnd.pages.billboard.my_publication.title_my_publications}}
         </div>
       </div>
     </div>
@@ -17,7 +17,7 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
         <div class="col-10 col-xl-3 cursor-general tabDate" (click)="goToForm()">
-          <i class="fa fa-plus"></i> &nbsp;&nbsp; Crear nueva noticia
+          <i class="fa fa-plus"></i> &nbsp;&nbsp; {{translate.app.frontEnd.pages.billboard.my_publication.btn_create_news}}
         </div>
       </div>
       <div class="row">
@@ -25,10 +25,10 @@
           <div class="border-botton-general">
             <div class="row top-containter">
               <div class="col-12 col-xl-9 text-left">
-                <strong> Mis noticias</strong>
+                <strong> {{translate.app.frontEnd.pages.billboard.my_publication.text_my_news}}</strong>
               </div>
               <div class="col-12 col-xl-3">
-                Total de noticias: {{myPublications.length}}
+                {{translate.app.frontEnd.pages.billboard.my_publication.text_total_news}} {{myPublications.length}}
               </div>
             </div>
           </div>
@@ -47,7 +47,7 @@
                         </div>
                       </div>
                       <div class="col-12">
-                        Ocultar publicación
+                        {{translate.app.frontEnd.pages.billboard.my_publication.text_hide_post}}
                       </div>
                     </div>
                   </div>
@@ -67,7 +67,7 @@
                         {{publication.total_views}}
                       </div>
                       <div class="col-12 ">
-                        Visitas
+                        {{translate.app.frontEnd.pages.billboard.my_publication.text_visits}}
                       </div>
                     </div>
                   </div>
@@ -77,7 +77,7 @@
                         {{publication.total_comments}}
                       </div>
                       <div class="col-12">
-                        Comentarios
+                        {{translate.app.frontEnd.pages.billboard.my_publication.text_comments}}
                       </div>
                     </div>
                   </div>
@@ -87,7 +87,7 @@
                         <i class="fa fa-pencil"></i>
                       </div>
                       <div class="col-12">
-                        Editar
+                        {{translate.app.frontEnd.pages.billboard.my_publication.text_edit}}
                       </div>
                     </div>
                   </div>
@@ -100,7 +100,7 @@
                           <i class="fa fa-ban"></i>
                         </div>
                       <div class="col-12">
-                        Eliminar
+                        {{translate.app.frontEnd.pages.billboard.my_publication.text_remove}}
                       </div>
                     </div>
                   </div>

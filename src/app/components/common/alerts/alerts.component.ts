@@ -5,6 +5,8 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 
 
@@ -19,10 +21,12 @@ export class AlertsComponent implements OnInit, OnDestroy {
   public confirmationShow = false;
   public cancelation: string;
   public count: number = 0;
-
+  public translate: Translate = null;
 
   constructor(public alert: AlertsService, public route: Router,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.alert.getAlert().subscribe(
       (data) => {

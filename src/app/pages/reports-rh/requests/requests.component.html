@@ -8,14 +8,14 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-table"></i>
-          Reporte de solicitudes
+          {{translate.app.frontEnd.pages.reports_rh.requests.tittle}}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atrás
+                {{translate.app.frontEnd.pages.reports_rh.requests.back}}
               </span>
             </div>
           </div>
@@ -29,7 +29,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{translate.app.frontEnd.pages.reports_rh.requests.query_filters}}
             </b>
             <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseExample"
               aria-expanded="false" (click)="collapse(true)"></i>
@@ -49,7 +49,7 @@
                       <p class="btn btn-primary-second fa fa-table text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Todos
+                      {{translate.app.frontEnd.pages.reports_rh.requests.all}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -70,7 +70,7 @@
                       <p class="btn btn-primary-second fa fa-cog text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      En proceso
+                      {{translate.app.frontEnd.pages.reports_rh.requests.in_proces}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -91,7 +91,7 @@
                       <p class="btn btn-primary-second fa fa-ban text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Cancelado
+                      {{translate.app.frontEnd.pages.reports_rh.requests.cancel}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -112,7 +112,7 @@
                       <p class="btn btn-primary-second fa fa-hourglass-start text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Pendiente
+                      {{translate.app.frontEnd.pages.reports_rh.requests.pending}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -133,7 +133,7 @@
                       <p class="btn btn-primary-second fa fa-check-circle text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      Aprobado
+                      {{translate.app.frontEnd.pages.reports_rh.requests.approver}}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -153,7 +153,7 @@
             <div class="row justify-content-end">
               <div class="col-xl-8 col-12 ">
                 <div class="form-group row">
-                  <label class="col-xl-2 col-md-4  col-lg-3 col-6 text-left align-self-center">Registros a mostrar:</label>
+                  <label class="col-xl-2 col-md-4  col-lg-3 col-6 text-left align-self-center">{{translate.app.frontEnd.pages.reports_rh.requests.show_records}}:</label>
                   <div class="col-xl-2 col-md-3 col-lg-3 col-6">
                     <select class="form-control" [(ngModel)]="size_table">
                       <option value="5">5</option>
@@ -197,7 +197,7 @@
             </b>
           </div>
           <div class="col-xl-4 col-12 top-containter align-self-center text-rigth">
-            <input [(ngModel)]="value_search" class="form-control" placeholder="Buscar por Nombre y Apellido..." (keyup)="searcheByName()">
+            <input [(ngModel)]="value_search" class="form-control" placeholder="{{placeholder_search}}" (keyup)="searcheByName()">
           </div>
         </div>
       </div>
@@ -225,38 +225,38 @@
                     <div *ngIf="labelsCell[key].type == 'string'">
                       <div style="text-align:center" *ngIf="record[key] == 'true'">
                         <i class="fa fa-lg fa-check-circle text-primary">
-                          <span class="font-size-07"> SI</span>
+                          <span class="font-size-07"> {{translate.app.frontEnd.pages.reports_rh.requests.yes}}</span>
                         </i>
                       </div>
                       <div style="text-align:center" *ngIf="record[key] == 'false'">
                         <i class="fa  fa-lg fa-ban text-danger">
-                          <span class="font-size-07"> No</span>
+                          <span class="font-size-07"> {{translate.app.frontEnd.pages.reports_rh.requests.not}}</span>
                         </i>
                       </div>
-                      <div style="text-align:left; margin-top: 5px" *ngIf="record[key] == 'Pendiente'">
+                      <div style="text-align:left; margin-top: 5px" *ngIf="record[key] == pending">
                         <span class="badge badge badge-default" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'Aprobado'">
+                      <div style="text-align:left" *ngIf="record[key] == approved">
                         <span class="badge badge-primary" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'En Proceso'">
+                      <div style="text-align:left" *ngIf="record[key] == inProcess">
                         <span class="badge badge-success" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] == 'Cancelado'">
+                      <div style="text-align:left" *ngIf="record[key] == cancelled">
                         <span class="badge badge-danger" style="width: 100%; padding-top: 5px; padding-bottom: 8px">
                           {{record[key]}}
                         </span>
                       </div>
-                      <div style="text-align:left" *ngIf="record[key] != 'Pendiente'
-                      && record[key] != 'Aprobado'
-                      && record[key] != 'Cancelado'
-                      && record[key] != 'En Proceso'">
+                      <div style="text-align:left" *ngIf="record[key] != pending
+                      && record[key] != approved
+                      && record[key] != cancelled
+                      && record[key] != inProcess">
                         <div *ngIf="(record[key] | split:'-':'1') != ''">
                           <p>
                             <b>{{record[key] | split:'-':'1'}}</b>
@@ -292,8 +292,8 @@
       </div>
       <div class="row" *ngIf="show">
         <div class="col-12">
-          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="Anterior"
-            nextLabel="Siguiente" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
+          <pagination-controls (pageChange)="p = $event" maxSize="9" directionLinks="true" autoHide="true" previousLabel="<<"
+            nextLabel=">>" screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page"></pagination-controls>
         </div>
       </div>
     </div>

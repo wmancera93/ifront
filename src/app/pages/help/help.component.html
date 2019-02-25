@@ -1,10 +1,10 @@
 <div class="heigth-content-general">
   <div class="row-hr-container">
-    <div class="col-12">
+    <div class="col-12" *ngIf="translate !== null">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-question-circle"></i>
-          Ayuda
+          {{translate.app.frontEnd.pages.help.title_help}}
         </div>
       </div>
     </div>

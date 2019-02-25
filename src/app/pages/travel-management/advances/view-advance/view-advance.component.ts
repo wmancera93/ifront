@@ -3,6 +3,8 @@ import { AdvanceSharedService } from '../../../../services/shared/advance-shared
 import { AdvancesService } from '../../../../services/travel-management/advances/advances.service';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-view-advance',
@@ -12,10 +14,10 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 export class ViewAdvanceComponent implements OnInit {
   public infoAdvance: any = null;
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Anticipos';
+  public nameReport: string;
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
-
+  public translate: Translate = null;
   public idDelete: string;
 
   public alertWarning: any[] = [];
@@ -27,8 +29,10 @@ export class ViewAdvanceComponent implements OnInit {
   constructor(public advanceSharedService: AdvanceSharedService,
     public advancesService: AdvancesService,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.advances.view_advance.name_data_table_ts;
     this.advanceSharedService.getViewAdvance().subscribe((id: any) => {
       if (this.countAfter === 0) {
         this.advancesService.getAdvanceByID(id).subscribe((advance: any) => {

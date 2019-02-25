@@ -7,8 +7,8 @@
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
-          <i class="fa fa-sitemap"></i>
-          Organigrama
+          <i class="fa fa-sitemap" *ngIf="translate !== null"></i>
+          {{translate.app.frontEnd.pages.hierarchical_chart.title_organization_chart}}
         </div>
       </div>
     </div>
@@ -51,18 +51,18 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-6  align-items-center" style="padding-top:15px;">
+            <div class="col-12 col-xl-6  align-items-center" style="padding-top:15px;" *ngIf="translate !== null">
               <div class="row justify-content-center">
                 <div class="col-xl-10 col-12  align-items-center" style="text-align:left;">
                   <div class="row">
                     <div class="col-4">
-                      <i class="fa fa-square iconFirstLevel"> </i> Superior
+                      <i class="fa fa-square iconFirstLevel"> </i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_superior}}
                     </div>
                     <div class="col-4">
-                      <i class="fa fa-square iconSecondLevel"></i> Mi posición
+                      <i class="fa fa-square iconSecondLevel"></i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_my_position}}
                     </div>
                     <div class="col-4">
-                      <i class="fa fa-square iconThirdLevel"></i> Subordinados
+                      <i class="fa fa-square iconThirdLevel"></i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_subordinates}}
                     </div>
                   </div>
                 </div>
@@ -202,7 +202,7 @@
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 30px;">
+          <div class="col-12" style="margin-top: 30px;" *ngIf="translate !== null">
             <div class="row justify-content-center" *ngIf="topEmployee.work_team[0].relationship !== '001' && topEmployee.work_team[0].relationship !== '011' && topEmployee.work_team[0].relationship !== '010'">
               <div class="col-2">
                 <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="upLevelTeam()">
@@ -210,7 +210,7 @@
                 </div>
                 <div class="animated infinite flash" style="margin-top:5px !important; cursor: pointer;" (click)="upLevelTeam()">
                   <strong>
-                    Subir posición
+                    {{translate.app.frontEnd.pages.hierarchical_chart.text_up_position}}
                   </strong>
                 </div>
                 

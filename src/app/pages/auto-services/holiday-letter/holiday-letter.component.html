@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          Carta de Vacaciones
+          {{translate.app.frontEnd.pages.auto_services.holiday_letter.title_letter_vacation}}
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            No hay carta de
-            <strong>Vacaciones</strong>&nbsp;para el empleado
+            {{translate.app.frontEnd.pages.auto_services.holiday_letter.text_vacation_letter_not_found}}
+            <strong>{{translate.app.frontEnd.pages.auto_services.holiday_letter.text_vacation}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.holiday_letter.text_for_the_employee}}
           </div>
         </div>
       </div>

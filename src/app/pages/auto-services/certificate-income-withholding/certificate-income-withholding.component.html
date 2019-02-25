@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          Certificado de Ingresos y Retenciones
+          {{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.title_income_withholdings}}
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            No hay certificado de
-            <strong>Ingresos y retenciones</strong>&nbsp;para el empleado
+            {{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_certificate_not_found}}
+            <strong>{{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_income_withholdings}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_for_the_employee}}
           </div>
         </div>
       </div>

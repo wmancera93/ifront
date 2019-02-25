@@ -5,7 +5,7 @@
     <div class="modal-content" *ngIf="formRequests != null">
       <div class="modal-header borderLine-title row-hr justify-content-center">
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">Solicitud de {{formRequests.name | lowercase}}</h4>
+          <h4 class="modal-title titleColor text-shadow">{{translate.app.frontEnd.pages.requests_rh.forms_requests.tittle}} {{formRequests.name | lowercase}}</h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
@@ -19,10 +19,10 @@
                 </span>
                 <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
                 <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  Dias disponibles
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
                 </h3>
                 <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  Dia disponible
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
                 </h3>
               </div>
             </div>
@@ -32,7 +32,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Inicial *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
                 </label>
                 <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" placeholder="dd/mm/yyyy"
                 />
@@ -40,7 +40,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Final *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
                 </label>
                 <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" placeholder="dd/mm/yyyy"
                 />
@@ -48,7 +48,7 @@
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  Observaciones
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}} 
                 </label>
                 <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formVaca.controls['observation_request']"></textarea>
               </div>
@@ -56,9 +56,9 @@
                 <div class="row justify-content-end">
                   <div class="col-md-5 col-12">
                     <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}} </button>
                     <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                   </div>
                 </div>
               </div>
@@ -77,10 +77,10 @@
                 <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
 
                 <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  Dias disponibles
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
                 </h3>
                 <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  Dia disponible
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
                 </h3>
               </div>
             </div>
@@ -90,7 +90,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
                   <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                  Dias requeridos *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_required}} *
                 </label>
                 <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter" (keyup)="noAcceptMinus()"
                   [formControl]="formVacaComp.controls['days_request']" />
@@ -98,7 +98,7 @@
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  Observaciones *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}} *
                 </label>
                 <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formVacaComp.controls['observation_request']"></textarea>
               </div>
@@ -106,9 +106,9 @@
                 <div class="row justify-content-end">
                   <div class="col-md-5 col-12">
                     <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
                     <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                   </div>
                 </div>
               </div>
@@ -122,7 +122,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Inicial *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
                 </label>
                 <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']" placeholder="dd/mm/yyyy"
                 />
@@ -130,7 +130,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Final *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
                 </label>
                 <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" placeholder="dd/mm/yyyy"
                 />
@@ -138,14 +138,14 @@
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  Adjuntar soporte *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
                 </label>
                 <app-file-upload [nameFile]='filePermisionMarriage' [extensions]="extensions"></app-file-upload>
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  Observaciones
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
                 </label>
                 <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPerm.controls['observation_request']"></textarea>
               </div>
@@ -153,9 +153,9 @@
                 <div class="row justify-content-end">
                   <div class="col-lg-3 col-md-4 col-12">
                     <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
                     <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                   </div>
                 </div>
               </div>
@@ -172,7 +172,7 @@
                   <div class="col-md-6 col-12 top-containter">
                     <label for="dateBegin" class="font-title-general">
                       <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                      Fecha Inicial *
+                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
                     </label>
                     <input type="date" name="date_begin" class="form-control" [formControl]="formPres.controls['date_begin']" placeholder="dd/mm/yyyy"
                       (blur)="calculateDay()" />
@@ -181,7 +181,7 @@
                   <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
                     <label for="dateEnd" class="font-title-general">
                       <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                      Fecha Final *
+                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}}*
                     </label>
                     <input type="date" name="date_end" class="form-control" [formControl]="formPres.controls['date_end']" placeholder="dd/mm/yyyy"
                       (blur)="calculateDay()" />
@@ -191,7 +191,7 @@
                   <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
                     <label for="startTime" class="font-title-general">
                       <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
-                      Hora inicio *
+                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}} *
                     </label>
                     <input type="time" name="start_time" class="form-control" [formControl]="formPres.controls['start_time']" placeholder="HH-MM am/pm"
                     />
@@ -200,7 +200,7 @@
                   <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
                     <label for="endTime" class="font-title-general">
                       <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
-                      Hora Fin *
+                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_end}}*
                     </label>
                     <input type="time" name="end_time" class="form-control" [formControl]="formPres.controls['end_time']" placeholder="HH-MM am/pm"
                     />
@@ -210,7 +210,7 @@
                   <div class="col-md-12 col-12 top-containter">
                     <label for="celulaInput" class="font-title-general">
                       <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                      Observaciones
+                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
                     </label>
                     <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPres.controls['observation_request']"></textarea>
                   </div>
@@ -220,9 +220,9 @@
                     <div class="row justify-content-end">
                       <div class="col-lg-4 col-md-4 col-12">
                         <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                          <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                          <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
                         <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                          <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                          <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                       </div>
                     </div>
                   </div>
@@ -237,7 +237,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Inicial *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}}*
                 </label>
                 <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']" placeholder="dd/mm/yyyy"
                 />
@@ -245,7 +245,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha Final *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
                 </label>
                 <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']" placeholder="dd/mm/yyyy"
                 />
@@ -253,14 +253,14 @@
               <div class="col-md-12 col-12 top-containter">
                 <label for="dateEnd" class="font-title-general">
                   <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  Adjuntar soporte *
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
                 </label>
                 <app-file-upload [nameFile]='fileInability' [extensions]="extensions"></app-file-upload>
               </div>
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="font-title-general">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  Observaciones
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
                 </label>
                 <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formInca.controls['observation_request']"></textarea>
               </div>
@@ -268,9 +268,9 @@
                 <div class="row justify-content-end">
                   <div class="col-lg-3 col-md-4 col-12">
                     <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>Guardar</button>
+                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
                     <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>Cargando</button>
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                   </div>
                 </div>
               </div>
@@ -281,7 +281,7 @@
       </div>
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> Cerrar </h6>
+          <h6> {{translate.app.frontEnd.pages.requests_rh.forms_requests.button_close}} </h6>
         </div>
       </div>
     </div>

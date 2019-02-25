@@ -3,6 +3,8 @@ import { EvaluationsService } from '../../../services/evaluations/evaluations.se
 import { EvaluationsSharedService } from '../../../services/shared/common/evaluations/evaluations-shared.service';
 import { Evaluations } from '../../../models/common/evaluations/evaluations';
 import { Angular2TokenService } from 'angular2-token';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-evaluated',
@@ -13,12 +15,14 @@ export class EvaluatedComponent implements OnInit {
   public evaluationsListPendind: Evaluations[] = [];
   public evaluationsListSubmitted: Evaluations[] = [];
   public token: boolean;
+  public translate: Translate = null;
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public evaluationService: EvaluationsService,
     public evaluationSharedService: EvaluationsSharedService,
-    private tokenService: Angular2TokenService) {
-
+    private tokenService: Angular2TokenService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.tokenService.validateToken()
       .subscribe(
         (res) => {

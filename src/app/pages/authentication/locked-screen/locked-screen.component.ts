@@ -7,11 +7,13 @@ import { Angular2TokenService } from 'angular2-token';
 import { environment } from '../../../../environments/environment';
 import { User } from '../../../models/general/user';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
-import { Router,NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { MainService } from '../../../services/main/main.service';
 import { Enterprise } from '../../../models/general/enterprise';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 declare const ga: any;
 
@@ -24,6 +26,8 @@ export class LockedScreenComponent implements OnInit {
   public userAuthenticated: User = null;
   public txtPassword: string = '';
   public dataEnterprise: Enterprise[] = [];
+  public translate: Translate = null;
+  public passwordLogin: string;
 
   constructor(private tokenService: Angular2TokenService,
     public alert: AlertsService,
@@ -31,9 +35,10 @@ export class LockedScreenComponent implements OnInit {
     public router: Router,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
   ) {
-    
+    this.translate = this.translateService.getTranslate();
+    this.passwordLogin = this.translate.app.frontEnd.pages.authentication.locket_screen.password;
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -44,7 +49,7 @@ export class LockedScreenComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-    
+
     if (this.stylesExplorerService.validateBrowser()) {
       let url = window.location.href;
       let ambient;
@@ -83,14 +88,14 @@ export class LockedScreenComponent implements OnInit {
   singInSession() {
     let expressionRegular
     let validatePasword
-    if(this.dataEnterprise[0].login_ldap){
+    if (this.dataEnterprise[0].login_ldap) {
       expressionRegular = true;
       validatePasword = expressionRegular;
     } else {
       expressionRegular = /^(?=(?:.*\d){1})(?=(?:.*[A-Z]){1})(?=(?:.*[a-z]){1})\S{8,}$/;
       validatePasword = expressionRegular.test(this.txtPassword)
     }
-    
+
     if (validatePasword) {
       if (this.txtPassword.length !== 0) {
         this.tokenService.signIn({
@@ -115,19 +120,19 @@ export class LockedScreenComponent implements OnInit {
             }
             localStorage.setItem("user", JSON.stringify(''));
             resultError = error.json();
-            const alertWarning: Alerts[] = [{ type: typeAlert, title: 'Advertencia', message: resultError.errors[0] }];
+            const alertWarning: Alerts[] = [{ type: typeAlert, title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: resultError.errors[0] }];
             this.alert.setAlert(alertWarning[0]);
           }
-          )
+        )
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: 'Advertencia', message: 'La contraseña es obligatoria.' }];
+        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts, message: this.translate.app.frontEnd.pages.authentication.locket_screen.msg_required_password_ts }];
         this.alert.setAlert(alertWarning[0]);
       }
     } else {
       const alertWarning: Alerts[] = [{
         type: 'danger',
-        title: 'Advertencia',
-        message: 'La contraseña debe contener minimo 8 caracteres, una letra minuscula, una letra mayuscula y almenos un número.'
+        title: this.translate.app.frontEnd.pages.authentication.locket_screen.title_warning_ts,
+        message: this.translate.app.frontEnd.pages.authentication.locket_screen.msg_characters_minimum_ts
       }];
       this.alert.setAlert(alertWarning[0]);
     }

@@ -7,6 +7,8 @@ import { environment } from '../../../environments/environment';
 import { Toast } from 'angular2-toaster';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
+import { TranslateService } from '../../services/common/translate/translate.service';
+import { Translate } from '../../models/common/translate/translate';
 
 
 @Component({
@@ -28,6 +30,7 @@ export class DashboardComponent implements OnInit {
   public urlBeforePending: string = "";
   public urlBeforeReports: string = "";
   public toast: Toast;
+  public translate: Translate = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -35,7 +38,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(public userSharedService: UserSharedService,
     public router: Router, public companieService: MainService,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService, public translateService: TranslateService) {
+      
+    this.translate = this.translateService.getTranslate();
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
@@ -121,6 +126,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getDataLocalStorage() {
+    document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:block");
     window.scroll({
       top: 1,
       left: 0,
@@ -151,7 +157,7 @@ export class DashboardComponent implements OnInit {
       ambient = 'development';
     }
 
-    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {      
+    this.companieService.getDataEnterprise(ambient).subscribe((data: any) => {
       this.showServiceManagement = data.data.show_services_management;
 
       if (this.showServiceManagement == true) {
@@ -159,7 +165,7 @@ export class DashboardComponent implements OnInit {
           this.showButtonDashManagement = true;
         } else {
           this.showButtonDashManagement = false;
-        }       
+        }
       }
       else {
         this.showButtonDashManagement = false;

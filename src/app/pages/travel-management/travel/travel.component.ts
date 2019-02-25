@@ -8,6 +8,8 @@ import { AproversRequestsService } from '../../../services/shared/common/aprover
 import { ApproverTravelsService } from '../../../services/travel-management/approver-travels/approver-travels.service';
 import { User } from '../../../models/general/user';
 import { FiltersGeneralsService } from '../../../services/travel-management/filters-generals/filters-generals.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-travel',
@@ -19,12 +21,12 @@ export class TravelComponent implements OnInit {
   public token: boolean;
   public alertWarning: any[] = [];
   public id_requests_travel: string;
-  public aproover: string = 'No existe aprobador para esta solicitud ó ya fue aprobada';
+  public aproover: string;
   public edit = false;
   public objectSend: any[];
   public third: string = '';
   public checkThird: boolean = true;
-
+  public translate: Translate = null;
   public userAuthenticated: User = null;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -36,8 +38,10 @@ export class TravelComponent implements OnInit {
     private aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
     public travelManagementService: TravelService,
-    public filtersGeneralsService: FiltersGeneralsService) {
+    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    this.aproover = this.translate.app.frontEnd.pages.travel_management.travel.approver_ts;
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
     this.alert.getActionConfirm().subscribe((data: any) => {
       document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
@@ -46,8 +50,8 @@ export class TravelComponent implements OnInit {
           (data: any) => {
             this.alertWarning = [{
               type: 'success',
-              title: 'Solicitud exitosa',
-              message: 'La solicitud de viaje se elimino correctamente',
+              title: this.translate.app.frontEnd.pages.travel_management.travel.type_alert_ts,
+              message: this.translate.app.frontEnd.pages.travel_management.travel.message_alert_ts,
               confirmation: false,
             }];
             this.alert.setAlert(this.alertWarning[0]);
@@ -73,7 +77,7 @@ export class TravelComponent implements OnInit {
             }
           },
           (error: any) => {
-            const alertWarning = [{ type: 'danger', title: 'Solicitud Denegada', message: error.json().errors.toString(), confirmation: false }];
+            const alertWarning = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
           });
       }
@@ -461,8 +465,8 @@ export class TravelComponent implements OnInit {
     this.id_requests_travel = id;
     this.alertWarning = [{
       type: 'warning',
-      title: 'Confirmación',
-      message: '¿Desea eliminar la solicitud de viaje con ticket #' + id.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.travel.type_alert_two_ts,
+      message: this.translate.app.frontEnd.pages.travel_management.travel.message_alert_one_ts + id.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deletRequestTravel'
     }];

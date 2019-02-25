@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { DataMasterSharedService } from '../../../services/shared/common/data-master/data-master-shared.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 @Component({
   selector: 'app-dynamic-form',
   templateUrl: './dynamic-form.component.html',
@@ -22,10 +24,12 @@ export class DynamicFormComponent implements OnInit {
   public staticGeneralObject: any[] = [];
   public countAfter: number = 0;
   public codeStatic: number = -1;
+  public translate: Translate = null;
 
   constructor(public fb: FormBuilder,
     public dataMasterSharedService: DataMasterSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
     this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
       if (this.countAfter === 0) {
 

@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { TranslateService } from '../../../services/common/translate/translate.service';
+import { Translate } from '../../../models/common/translate/translate';
 
 @Component({
   selector: 'app-holiday-letter',
@@ -14,14 +16,17 @@ export class HolidayLetterComponent implements OnInit {
   public holidayLetter: Certificate[] = [];
   public urlPDF: string = '';
   public flagEmpty: boolean;
+  public translate: Translate = null;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public autoServiceService: AutoServicesService, 
+  constructor(public autoServiceService: AutoServicesService,
     public sanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService) {
+    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(
@@ -38,7 +43,7 @@ export class HolidayLetterComponent implements OnInit {
         })
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-   }
+  }
 
   ngOnInit() {
     window.scroll({
@@ -47,7 +52,7 @@ export class HolidayLetterComponent implements OnInit {
       behavior: 'smooth'
     });
     this.autoServiceService.getHolidayLetter().subscribe((data: any) => {
-      this.holidayLetter = data.data;      
+      this.holidayLetter = data.data;
       if (this.holidayLetter.length === 0) {
         this.flagEmpty = true;
       }

@@ -9,6 +9,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-edit-publication',
@@ -34,8 +36,10 @@ export class EditPublicationComponent implements OnInit {
   public labelTags: string = "";
   public newImage: any;
   public flagRefresh: boolean = false;
-
+  public translate: Translate = null;
   items
+  public placeholder_tittle: string;
+  public placeholder_message: string;
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -46,85 +50,91 @@ export class EditPublicationComponent implements OnInit {
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
     public formDataService: FormDataService,
-    public billboardService: BillboardService) {
+    public billboardService: BillboardService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
+
+    this.placeholder_tittle=this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.placeholder_tittle;
+    this.placeholder_message=this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.placeholder_view;
 
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
-      this.newImage = data;
-    })
+  this.newImage = data;
+})
 
-    this.EditSharedService.getEditNew().subscribe((data: any) => {
-      this.infoMyPublication = data;
-      this.tags = this.infoMyPublication.themes
-      this.idEdit = this.infoMyPublication.id;
-      this.title = this.infoMyPublication.title;
-      this.summary = this.infoMyPublication.summary;
-      this.body = this.infoMyPublication.body;
-      this.image = this.infoMyPublication.image;
+this.EditSharedService.getEditNew().subscribe((data: any) => {
 
-      this.showLabelTheme = this.infoMyPublication.themes;
-      this.showLabelImage = this.infoMyPublication.image.url;
-      this.showLabelImage = this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
-      this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
+  this.infoMyPublication = data;
+  this.tags = this.infoMyPublication.themes
+  this.idEdit = this.infoMyPublication.id;
+  this.title = this.infoMyPublication.title;
+  this.summary = this.infoMyPublication.summary;
+  this.body = this.infoMyPublication.body;
+  this.image = this.infoMyPublication.image;
 
-      this.showEditArticle();
-    })
+  this.showLabelTheme = this.infoMyPublication.themes;
+  this.showLabelImage = this.infoMyPublication.image.url;
+  this.showLabelImage = this.showLabelImage == null ? '' : this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
+  this.nameImage = this.showLabelImage.split('/')[this.showLabelImage.split('/').length - 1];
 
-  }
-
-  ngOnInit() {
+  this.showEditArticle();
+})
 
   }
 
-  showEditArticle() {
-    document.getElementById('btn_editNew').click();
-    document.getElementById("bodyGeneral").removeAttribute('style');
-  }
+ngOnInit() {
 
-  deleteTag(theme: any) {
-    let index = this.showLabelTheme.indexOf(theme);
-    if (index > -1) {
-      this.showLabelTheme.splice(index, 1);
+}
+
+showEditArticle() {
+  document.getElementById('btn_editNew').click();
+  document.getElementById("bodyGeneral").removeAttribute('style');
+}
+
+deleteTag(theme: any) {
+  let index = this.showLabelTheme.indexOf(theme);
+  if (index > -1) {
+    this.showLabelTheme.splice(index, 1);
+  }
+}
+
+onSubmitSaveChanges(): void {
+  this.labelTags = "";
+  this.showSubmit = false;
+  if(this.tags.length > 0) {
+
+  this.tags.forEach((element: any) => {
+    if (element.length !== undefined) {
+      this.labelTags += element + ',';
     }
-  }
-
-  onSubmitSaveChanges(): void {
-    this.labelTags = "";
-    this.showSubmit = false;
-    if (this.tags.length > 0) {
-      
-      this.tags.forEach((element:any) => {
-        if (element.length !== undefined) {
-          this.labelTags += element + ',' ;
-        }
-        else {
-            this.labelTags += element.value + ',';
-        }
-      });
+    else {
+      this.labelTags += element.value + ',';
     }
+  });
+}
 
-    let editArticleForm = new FormData();
-    editArticleForm.append('title', this.title);
-    editArticleForm.append('summary', this.summary);
-    editArticleForm.append('body', this.body);
-    editArticleForm.append('tags', this.labelTags);
-    editArticleForm.append('image', this.newImage);
+let editArticleForm = new FormData();
+editArticleForm.append('title', this.title);
+editArticleForm.append('summary', this.summary);
+editArticleForm.append('body', this.body);
+editArticleForm.append('tags', this.labelTags);
+editArticleForm.append('image', this.newImage);
 
-    this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
-      if (response.success == true) {
-        this.showSubmit = true;
-        (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-        const alertConfirmation: Alerts[] = [{ type: 'success', title: 'Estado de la noticia', message: 'Noticia editada' }];
-        this.alert.setAlert(alertConfirmation[0]);
-        this.flagRefresh = true;
-        this.billboardService.setRefreshEditNew(this.flagRefresh);
-      }
-    },
-      (error: any) => {
-        this.showSubmit = true;
-        (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
-        const alertWarning: Alerts[] = [{ type: 'danger', title: 'Estado de la noticia', message: error.json().errors.toString(), confirmation: false }];
-        this.alert.setAlert(alertWarning[0]);
-      })
+this.formDataService.putEditArticlesFormData(this.idEdit, editArticleForm).subscribe((response: any) => {
+  if (response.success == true) {
+    this.showSubmit = true;
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+    const alertConfirmation: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.title_status_news_ts, message: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.msg_edited_news_ts }];
+    this.alert.setAlert(alertConfirmation[0]);
+    this.flagRefresh = true;
+    this.billboardService.setRefreshEditNew(this.flagRefresh);
+  }
+},
+  (error: any) => {
+    this.showSubmit = true;
+    (<HTMLInputElement>document.getElementsByClassName('buttonCloseForm')[0]).click();
+    const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.billboard.my_publication.edit_publication.title_status_news_ts, message: error.json().errors.toString(), confirmation: false }];
+    this.alert.setAlert(alertWarning[0]);
+  })
 
 
   }

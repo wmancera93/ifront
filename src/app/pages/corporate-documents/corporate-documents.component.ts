@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Headers } from '@angular/http';
 import { timeout } from 'q';
 import { Angular2TokenService } from 'angular2-token';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 
 @Component({
@@ -23,14 +25,16 @@ export class CorporateDocumentsComponent implements OnInit {
   public urlPDF: any;
   public urlSplit: string;
   public namePDF: string;
-
+  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   constructor(public corporateDocsService: CorporateDocsService,
     public downloadFilesService: DownloadFilesService,
     public http: Http,
-    private tokenService: Angular2TokenService) {
+    private tokenService: Angular2TokenService, public translateService: TranslateService) {
+
+    this.translate = this.translateService.getTranslate();
 
     this.tokenService.validateToken()
       .subscribe(

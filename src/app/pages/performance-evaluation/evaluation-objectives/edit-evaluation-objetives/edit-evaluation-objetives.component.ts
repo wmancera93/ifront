@@ -8,6 +8,8 @@ import { PerformanceEvalSharedService } from '../../../../services/shared/common
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { start } from 'repl';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-edit-evaluation-objetives',
@@ -31,11 +33,11 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   public showPdf: boolean = false;
   public showSizeTable: boolean = false;
   public is_collapse: boolean = false;
-  public nameReport: string = 'Objetivos de Evaluación';
+  public nameReport: string;
   public flag_complete: boolean = false;
   public showCharge: boolean = true;
   public status: boolean = true;
-
+  public translate: Translate = null;
   public countAfter: number = 0;
 
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -43,8 +45,11 @@ export class EditEvaluationObjetivesComponent implements OnInit {
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
     private fb: FormBuilder, private accionDataTableService: DataDableSharedService,
     public performanceEvalSharedService: PerformanceEvalSharedService,
-    public alert: AlertsService) {
+    public alert: AlertsService, public translateService: TranslateService) {
 
+    this.translate = this.translateService.getTranslate();
+    
+    this.nameReport = this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.name_table_ts;
     this.alert.getActionConfirm().subscribe((data) => {
       if (data === 'closeAlertevaluationObjectives' || 'evaluationObjectives' || 'deleteEvaluationByObjetive' || 'closeAlertdeleteEvaluationByObjetive') {
         this.dataTableConsult();
@@ -101,7 +106,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           let startDate = dataID.data.start_date_obj.split("/");
           let endDate = dataID.data.end_date_obj.split("/");
           this.formObjetive = new FormGroup({});
-         
+
           this.formObjetive = fb.group({
             start_date: (startDate[2] + "-" + startDate[1] + "-" + startDate[0]).toString(),
             end_date: (endDate[2] + "-" + endDate[1] + "-" + endDate[0]).toString(),
@@ -122,7 +127,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           }
           const alertWarning: Alerts[] = [{
             type: 'success',
-            title: 'Confirmación',
+            title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_ts,
             message: state.message,
             confirmation: true,
             typeConfirmation: 'deleteEvaluationByObjetive'
@@ -146,7 +151,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         }, 500);
       } else {
         this.ObjectivesTable = [];
-        this.objectReport.emit( {success: true, data: this.ObjectivesTable});
+        this.objectReport.emit({ success: true, data: this.ObjectivesTable });
       }
 
     })
@@ -176,7 +181,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Confirmación',
+          title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_ts,
           message: edit.message,
           confirmation: true,
           typeConfirmation: 'evaluationObjectives'
@@ -189,7 +194,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         (error: any) => {
           const alertWarning: Alerts[] = [{
             type: 'danger',
-            title: 'Advertencia',
+            title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_one_ts,
             message: error.json().errors.toString(),
             confirmation: true,
             typeConfirmation: 'evaluationObjectives'
@@ -211,7 +216,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         this.showSubmit = true;
         const alertWarning: Alerts[] = [{
           type: 'success',
-          title: 'Confirmación',
+          title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_ts,
           message: info.message,
           confirmation: true,
           typeConfirmation: 'evaluationObjectives'
@@ -226,7 +231,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         (error: any) => {
           const alertWarning: Alerts[] = [{
             type: 'danger',
-            title: 'Advertencia',
+            title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_one_ts,
             message: error.json().errors.toString(),
             confirmation: true,
             typeConfirmation: 'evaluationObjectives'
@@ -286,7 +291,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       document.getElementById("closeModalObjectiveEvaluation").click();
       const alertWarning: Alerts[] = [{
         type: 'success',
-        title: 'Confirmación',
+        title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_ts,
         message: data.message,
         confirmation: false,
       }];
@@ -297,8 +302,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
         document.getElementById("closeModalObjectiveEvaluation").click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
-          title: 'Advertencia',
-          message: error.json().errors.toString() + '¿desea continuar con los objetivos de evaluación?',
+          title: this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_alert_one_ts,
+          message: error.json().errors.toString() + this.translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.message_alert_ts,
           confirmation: true,
           typeConfirmation: 'evaluationObjectives'
         }];

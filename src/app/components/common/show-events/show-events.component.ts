@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EventsEmployeeService } from '../../../services/shared/common/events-employee/events-employee.service';
 import { EventsEmployess } from '../../../models/common/widgets/widgets';
+import { Translate } from '../../../models/common/translate/translate';
+import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-show-events',
@@ -17,19 +19,21 @@ export class ShowEventsComponent implements OnInit {
   public objectInfoEvents: any;
   public titleEvent: string;
   public eventIcon: string;
-  public flagTypeOfEvent : boolean ; 
+  public flagTypeOfEvent: boolean;
+  public translate: Translate = null;
+  public birthday:string;
 
-  constructor(public infoEventEmployee: EventsEmployeeService) {
-    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {     
+  constructor(public infoEventEmployee: EventsEmployeeService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
+    this.birthday=this.translate.app.frontEnd.components.common.show_events.birthday;
+    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
       this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
-      if(this.titleEvent  === "Cumpleaños")
-      {
+      if (this.titleEvent === this.birthday) {
         this.flagTypeOfEvent = true;
       }
-      else 
-      {
+      else {
         this.flagTypeOfEvent = false;
       }
       this.getShowInfo(data.modal);
@@ -46,8 +50,7 @@ export class ShowEventsComponent implements OnInit {
 
   }
 
-  getShowInfo(modal?: any)
-  {
+  getShowInfo(modal?: any) {
     if (document.getElementById(modal).className !== 'modal show') {
       document.getElementById('btn-' + modal).click();
       document.getElementById("bodyGeneral").removeAttribute('style');

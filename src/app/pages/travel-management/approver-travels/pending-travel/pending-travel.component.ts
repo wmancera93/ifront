@@ -5,6 +5,8 @@ import { AproversRequestsService } from '../../../../services/shared/common/apro
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
 import { FiltersGeneralsService } from '../../../../services/travel-management/filters-generals/filters-generals.service';
+import { Translate } from '../../../../models/common/translate/translate';
+import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-pending-travel',
@@ -20,15 +22,15 @@ export class PendingTravelComponent implements OnInit {
   public request_type: string;
   public typesRequestFirts: any[] = [];
   public global_ticket: string;
-
+  public translate: Translate = null;
 
   constructor(public alert: AlertsService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
     public travelApproverServiceShared: TravelApproverService,
-    public filtersGeneralsService: FiltersGeneralsService) {
-
+    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
 
     this.travelApproverServiceShared.getrefreshIndexRequest().subscribe(data => {
       if (data) {
@@ -48,15 +50,15 @@ export class PendingTravelComponent implements OnInit {
     this.typesRequest.push(
       {
         id: 1,
-        name: "Solicitudes pendientes de viajes"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_one
       },
       {
         id: 2,
-        name: "Solicitudes pendientes de anticipos"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_two
       },
       {
         id: 3,
-        name: "Solicitudes pendientes de gastos"
+        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_three
       }
     )
   }
@@ -504,7 +506,7 @@ export class PendingTravelComponent implements OnInit {
     this.status = '';
     this.statusLiquid = '';
     this.codEmployee = '';
-    
+
     switch (param.id.toString()) {
       case '1':
         this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {

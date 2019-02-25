@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MainService } from '../../services/main/main.service';
 import { Enterprise } from '../../models/general/enterprise';
 import { Router } from '@angular/router';
+import { Translate } from '../../models/common/translate/translate';
+import { TranslateService } from '../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-error-page',
@@ -10,10 +12,10 @@ import { Router } from '@angular/router';
 })
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
+  public translate: Translate = null;
 
-
-  constructor(private mainService: MainService, public router: Router) {
-
+  constructor(private mainService: MainService, public router: Router, public translateService: TranslateService) {
+    this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {
