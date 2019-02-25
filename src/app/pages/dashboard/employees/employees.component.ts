@@ -38,6 +38,7 @@ export class EmployeesComponent implements OnInit {
     public dashboardEmployeeService: DashboardEmployeeService,
     public router: Router,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+      
       this.translate = this.translateService.getTranslate();
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");

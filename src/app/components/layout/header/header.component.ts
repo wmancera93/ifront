@@ -34,8 +34,10 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     private tokenService: Angular2TokenService,
     public alert: AlertsService, public translateService: TranslateService) {
+  
     this.translate = this.translateService.getTranslate();
-    this.title=this.translate.app.frontEnd.components.layout.header.my_data;
+    this.title = this.translate.app.frontEnd.components.layout.header.my_data;
+    
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });

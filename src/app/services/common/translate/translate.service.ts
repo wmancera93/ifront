@@ -6,25 +6,45 @@ import { environment } from '../../../../environments/environment.prod';
 @Injectable()
 export class TranslateService {
   public translate: Translate = null;
+  public test;
 
   constructor(private http: HttpClient) {
     if (this.translate === null) {
-      this.changeLanguaje('es');
+      if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
+        this.changeLanguaje(JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase());
+      } else {
+        this.changeLanguaje('es');
+      }
+    } else {
+      this.translate = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].language_json_file;
     }
   }
 
-  changeLanguaje(param: string){
+  changeLanguaje(param: string) {
     this.getTransalate(param).subscribe((data: any) => {
-      this.translate = JSON.parse(data.data[0].data[0].language_json_file);     
-    })   
+      this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+      localStorage.setItem("treeLanguaje", JSON.stringify(data));
+    })
   }
 
-  changeLanguajeFirst(param: string) {    
-    return this.getTransalate(param);
+  changeLanguajeFirst(param: string) {
+    let object = this.getTransalate(param)
+    object.subscribe(data => {
+      this.translate = JSON.parse(data.data[0].data[0].language_json_file);
+      localStorage.setItem("treeLanguaje", JSON.stringify(data));
+    })
+    return object;
   }
 
   getTranslate() {
+    if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
+      this.translate = JSON.parse(JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].language_json_file);      
+    } 
     return this.translate;
+  }
+
+  getTranslateTest() {
+    return this.test;
   }
 
   deleteTranslate() {
@@ -33,9 +53,9 @@ export class TranslateService {
   }
 
   getTransalate(languaje: any): any {
-   
+
     let baseUrl: string;
-   
+
     let url = window.location.href;
     let ambient;
 
@@ -66,14 +86,9 @@ export class TranslateService {
         baseUrl = environment.apiBaseHr_production;
         break;
     }
-
-    
-    this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
-    .map((data: any) => data).subscribe(object => {
-      this.translate = JSON.parse(object.data[0].data[0].language_json_file)
-    });
-    return this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
-    .map((data: any) => data);
+    this.test = this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
+      .map((data: any) => data)
+    return this.test;
   }
 
 

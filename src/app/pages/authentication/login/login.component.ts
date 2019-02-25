@@ -32,6 +32,8 @@ export class LoginComponent implements OnInit {
   public translate: Translate = null;
   public languaje: string = 'es';
   public passwordLogin: string;
+  public checkedLocal: string;
+
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -42,16 +44,18 @@ export class LoginComponent implements OnInit {
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
-    this.translate = this.translateService.getTranslate();
 
+    this.translate = this.translateService.getTranslate();
 
     if (this.translate === null) {
       this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
         this.translate = JSON.parse(data.data[0].data[0].language_json_file);
         this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
       });
-    }else{
-        this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
+    } else {
+      this.checkedLocal = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase();
+      this.languaje = this.checkedLocal;
+      this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
     }
 
     this.router.events.subscribe(event => {
@@ -60,11 +64,9 @@ export class LoginComponent implements OnInit {
         ga('send', 'pageview');
       }
     });
-  
-    
+
+
   }
-
-
 
   changeLanguaje(param: string) {
     this.languaje = param;
@@ -74,6 +76,7 @@ export class LoginComponent implements OnInit {
     });
     this.tokenService.atOptions.apiPath = 'api/v2/' + this.languaje;
   }
+
 
   ngOnInit() {
 
@@ -102,19 +105,27 @@ export class LoginComponent implements OnInit {
     this.mainService.getDataEnterprise(ambient)
       .subscribe((result: any) => {
         this.dataEnterprise[0] = result.data;
+        const {
+          background_login,
+          primary_color,
+          body_text,
+        } = this.dataEnterprise[0]
         if (!this.stylesExplorerService.validateBrowser()) {
-          document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise[0].background_login.url + `)`);
-          document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise[0].primary_color);
-          document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise[0].body_text);
-          document.documentElement.style.setProperty(`--primary`, this.dataEnterprise[0].primary_color);
+          const setProp = (a, b) => {
+            document.documentElement.style.setProperty(a, b)
+          }
+          setProp(`--img-header-login`, `url(${background_login.url})`);
+          setProp(`--btn-primary`, primary_color);
+          setProp(`--btn-primary-hover`, body_text);
+          setProp(`--primary`, primary_color);
         } else {
           document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
           setTimeout(() => {
             this.stylesExplorerService.stylesInExplorerOrEdge(
-              this.dataEnterprise[0].background_login.url,
-              this.dataEnterprise[0].primary_color,
-              this.dataEnterprise[0].primary_color,
-              this.dataEnterprise[0].body_text, '', '',
+              background_login.url,
+              primary_color,
+              primary_color,
+              body_text, '', '',
               '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
             )
           }, 200);

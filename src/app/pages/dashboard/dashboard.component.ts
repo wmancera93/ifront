@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
   constructor(public userSharedService: UserSharedService,
     public router: Router, public companieService: MainService,
     private tokenService: Angular2TokenService, public translateService: TranslateService) {
+      
     this.translate = this.translateService.getTranslate();
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
