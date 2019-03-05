@@ -11,7 +11,9 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 export class FileUploadComponent implements OnInit {
   @Input() nameFile: string = '';
   @Input() extensions?: string = '';
+  @Input() drageable = true;
   public progressBar: string = '0%';
+  public dragHover = false;
   public textFileUpload: string = '';
   public translate: Translate = null;
   public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
@@ -25,8 +27,7 @@ export class FileUploadComponent implements OnInit {
           this.progressBar = '0%';
           this.textFileUpload = '';
         }
-      })
-
+      });
   }
 
 
@@ -47,6 +48,7 @@ export class FileUploadComponent implements OnInit {
   }
 
   fileEvent(e) {
+    console.log(e);
     var file = e.currentTarget.value;
     var fileName = file.split("\\")[file.split("\\").length - 1];
     this.textFileUpload = fileName.toString();
@@ -64,4 +66,44 @@ export class FileUploadComponent implements OnInit {
     this.fileUploadService.setObjectFile(e.target.files[0]);
   }
 
+  onDrop(event) {
+    if (this.drageable) {
+      event.preventDefault();
+      this.dragHover = false;
+      const fileList = event.dataTransfer.files;
+      if (fileList.length > 0) {
+        Array.from(fileList).map((file: File, key): any => {
+          setTimeout(() => {
+            this.textFileUpload = file.name.toString();
+            this.fileUploadService.setObjectFile(file);
+            let i = 0;
+            const max = 100;
+            const interval = setInterval(() => {
+              const increment = 20;
+              if (i >= max) {
+                if (i >= max + (increment * 2)) {
+                  clearInterval(interval);
+                  this.progressBar = '0%';
+                  if (fileList.length - 1 === key) {
+                    this.textFileUpload = '';
+                  }
+                }
+                i += increment;
+              } else if (i < max) {
+                this.progressBar = (i = Math.min(Math.max(i + increment, 0), max)).toString() + '%';
+              }
+            }, 50);
+          }, 200 * key);
+        });
+      }
+    }
+  }
+
+  onDragOver(event) {
+    if (this.drageable) {
+      this.dragHover = true;
+      event.stopPropagation();
+      event.preventDefault();
+    }
+  }
 }
