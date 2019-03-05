@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
+    "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@ngx-formly/bootstrap": "^2.0.0-rc.55",
     "@ngx-formly/core": "^2.0.0-rc.55",
     "angular2-toaster": "^5.0.0-alpha.1",

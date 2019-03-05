@@ -1,288 +1,310 @@
-<button id="btn_form_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#form_requests" style="display:none;">
-</button>
-<div class="modal" id="form_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" *ngIf="formRequests != null">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
-        <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{translate.app.frontEnd.pages.requests_rh.forms_requests.tittle}} {{formRequests.name | lowercase}}</h4>
+<ng-template #modalForms let-modal ng-init="typeCase = formRequests.id_activity">
+  <div class="modal-content" [ngClass]="{'d-none': modalState === false }" *ngIf="formRequests != null">
+    <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div class="col-12 col-lg-10 text-center text-lg-left">
+        <h4 class="modal-title titleColor text-shadow">
+          {{translate.app.frontEnd.pages.requests_rh.forms_requests.tittle}} {{formRequests.name | lowercase}}</h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login">
+      <div *ngIf="formRequests.id_activity == 'VACA'" class="row justify-content-center">
+        <div class="col-12 col-lg-4">
+          <div class="widget bg-white top-containter" style="margin-top: 0px !important">
+            <div class="col align-self-center">
+              <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+                <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
+                <i class="fa fa-plane fa-stack-1x text-origin"></i>
+              </span>
+              <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
+              <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue"
+                style="margin-right: -20px">
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
+              </h3>
+              <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue"
+                style="margin-right: -20px">
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
+              </h3>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-8" *ngIf="formRequests.available_days != 0">
+          <form [formGroup]="formVaca" class="row justify-content-end" (ngSubmit)="newRequest(formVaca.value)">
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateBegin" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
+              </label>
+              <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateEnd" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
+              </label>
+              <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="celulaInput" class="font-title-general">
+                <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
+              </label>
+              <textarea type="text" rows="3" style="height: auto !important;" name="observation_request"
+                class="form-control" [formControl]="formVaca.controls['observation_request']"></textarea>
+            </div>
+            <div class="col-md-12 top-containter">
+              <div class="row justify-content-end">
+                <div class="col-md-5 col-12">
+                  <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                    <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}
+                  </button>
+                  <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                    <i
+                      class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
-      <div class="modal-body font-controls-login">
-        <div *ngIf="formRequests.id_activity == 'VACA'" class="row justify-content-center">
-          <div class="col-12 col-lg-4">
-            <div class="widget bg-white top-containter" style="margin-top: 0px !important">
-              <div class="col align-self-center">
-                <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
-                  <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
-                  <i class="fa fa-plane fa-stack-1x text-origin"></i>
-                </span>
-                <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
-                <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
-                </h3>
-                <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
-                </h3>
-              </div>
+      <div *ngIf="formRequests.id_activity == 'VCCP'" class="row justify-content-center">
+        <div class="col-12 col-lg-4">
+          <div class="widget bg-white top-containter" style="margin-top: 0px !important">
+            <div class="col align-self-center">
+              <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+                <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
+                <i class="fa fa-plane fa-stack-1x text-origin"></i>
+              </span>
+
+              <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
+
+              <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue"
+                style="margin-right: -20px">
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
+              </h3>
+              <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue"
+                style="margin-right: -20px">
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
+              </h3>
             </div>
           </div>
-          <div class="col-12 col-lg-8" *ngIf="formRequests.available_days != 0">
-            <form [formGroup]="formVaca" class="row justify-content-end" (ngSubmit)="newRequest(formVaca.value)">
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateBegin" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
-                </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formVaca.controls['date_begin']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
-                </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formVaca.controls['date_end']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="celulaInput" class="font-title-general">
-                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}} 
-                </label>
-                <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formVaca.controls['observation_request']"></textarea>
-              </div>
-              <div class="col-md-12 top-containter">
-                <div class="row justify-content-end">
-                  <div class="col-md-5 col-12">
-                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}} </button>
-                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
-        <div *ngIf="formRequests.id_activity == 'VCCP'" class="row justify-content-center">
-          <div class="col-12 col-lg-4">
-            <div class="widget bg-white top-containter" style="margin-top: 0px !important">
-              <div class="col align-self-center">
-                <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
-                  <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
-                  <i class="fa fa-plane fa-stack-1x text-origin"></i>
-                </span>
-
-                <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
-
-                <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
-                </h3>
-                <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
-                </h3>
+        <div class="col-12 col-lg-8" *ngIf="formRequests.available_days != 0">
+          <form [formGroup]="formVacaComp" class="row justify-content-left" (ngSubmit)="newRequest(formVacaComp.value)">
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateBegin" class="font-title-general">
+                <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_required}} *
+              </label>
+              <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter"
+                (keyup)="noAcceptMinus()" [formControl]="formVacaComp.controls['days_request']" />
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="celulaInput" class="font-title-general">
+                <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}} *
+              </label>
+              <textarea type="text" rows="3" style="height: auto !important;" name="observation_request"
+                class="form-control" [formControl]="formVacaComp.controls['observation_request']"></textarea>
+            </div>
+            <div class="col-md-12 top-containter">
+              <div class="row justify-content-end">
+                <div class="col-md-5 col-12">
+                  <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                    <i
+                      class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
+                  <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                    <i
+                      class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-12 col-lg-8" *ngIf="formRequests.available_days != 0">
-            <form [formGroup]="formVacaComp" class="row justify-content-left" (ngSubmit)="newRequest(formVacaComp.value)">
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateBegin" class="font-title-general">
-                  <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_required}} *
-                </label>
-                <input type="number" name="days_request" min="0" class="form-control" [(ngModel)]="detectLetter" (keyup)="noAcceptMinus()"
-                  [formControl]="formVacaComp.controls['days_request']" />
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="celulaInput" class="font-title-general">
-                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}} *
-                </label>
-                <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formVacaComp.controls['observation_request']"></textarea>
-              </div>
-              <div class="col-md-12 top-containter">
-                <div class="row justify-content-end">
-                  <div class="col-md-5 col-12">
-                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
-                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          </div>
+          </form>
         </div>
-
-        <div *ngIf="formRequests.id_activity == 'PERM'" class="row justify-content-left">
-          <div class="col-12 col-lg-12">
-            <form [formGroup]="formPerm" class="row justify-content-left" (ngSubmit)="newRequest(formPerm.value)">
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateBegin" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
-                </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
-                </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
-                </label>
-                <app-file-upload [nameFile]='filePermisionMarriage' [extensions]="extensions"></app-file-upload>
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="celulaInput" class="font-title-general">
-                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
-                </label>
-                <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPerm.controls['observation_request']"></textarea>
-              </div>
-              <div class="col-md-12 top-containter">
-                <div class="row justify-content-end">
-                  <div class="col-lg-3 col-md-4 col-12">
-                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
-                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
-                  </div>
+      </div>
+      <div>
+        <app-form-benefist *ngIf="['EDUB', 'EDUS', 'EDUU', 'EDUI' ].includes(formRequests.id_activity) ? true : false"
+          [formRequests]="formRequests" (submit)="newRequest($event)" [translate]="translate" [showSubmit]="showSubmit"
+          (setModalState)="setModalState($event)">
+        </app-form-benefist>
+      </div>
+      <div *ngIf="formRequests.id_activity == 'PERM'" class="row justify-content-left">
+        <div class="col-12 col-lg-12">
+          <form [formGroup]="formPerm" class="row justify-content-left" (ngSubmit)="newRequest(formPerm.value)">
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateBegin" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
+              </label>
+              <input type="date" name="date_begin" class="form-control" [formControl]="formPerm.controls['date_begin']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateEnd" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
+              </label>
+              <input type="date" name="date_end" class="form-control" [formControl]="formPerm.controls['date_end']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="dateEnd" class="font-title-general">
+                <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
+              </label>
+              <app-file-upload [nameFile]='filePermisionMarriage' [extensions]="extensions"></app-file-upload>
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="celulaInput" class="font-title-general">
+                <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
+              </label>
+              <textarea type="text" rows="3" style="height: auto !important;" name="observation_request"
+                class="form-control" [formControl]="formPerm.controls['observation_request']"></textarea>
+            </div>
+            <div class="col-md-12 top-containter">
+              <div class="row justify-content-end">
+                <div class="col-lg-3 col-md-4 col-12">
+                  <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                    <i
+                      class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
+                  <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                    <i
+                      class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
+      </div>
 
-        <div *ngIf="formRequests.id_activity == 'PRSC'" class="row justify-content-center">
-          <div class="col-12 col-lg-8">
-            <form [formGroup]="formPres" class="row justify-content-start" (ngSubmit)="newRequest(formPres.value)">
+      <div *ngIf="formRequests.id_activity == 'PRSC'" class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+          <form [formGroup]="formPres" class="row justify-content-start" (ngSubmit)="newRequest(formPres.value)">
 
-              <div class="col-12">
-                <div class="row">
-                  <div class="col-md-6 col-12 top-containter">
-                    <label for="dateBegin" class="font-title-general">
-                      <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
-                    </label>
-                    <input type="date" name="date_begin" class="form-control" [formControl]="formPres.controls['date_begin']" placeholder="dd/mm/yyyy"
-                      (blur)="calculateDay()" />
-                  </div>
-
-                  <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
-                    <label for="dateEnd" class="font-title-general">
-                      <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}}*
-                    </label>
-                    <input type="date" name="date_end" class="form-control" [formControl]="formPres.controls['date_end']" placeholder="dd/mm/yyyy"
-                      (blur)="calculateDay()" />
-                  </div>
+            <div class="col-12">
+              <div class="row">
+                <div class="col-md-6 col-12 top-containter">
+                  <label for="dateBegin" class="font-title-general">
+                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_begin}} *
+                  </label>
+                  <input type="date" name="date_begin" class="form-control"
+                    [formControl]="formPres.controls['date_begin']" placeholder="dd/mm/yyyy" (blur)="calculateDay()" />
                 </div>
-                <div class="row">
-                  <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
-                    <label for="startTime" class="font-title-general">
-                      <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
-                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}} *
-                    </label>
-                    <input type="time" name="start_time" class="form-control" [formControl]="formPres.controls['start_time']" placeholder="HH-MM am/pm"
-                    />
-                  </div>
 
-                  <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
-                    <label for="endTime" class="font-title-general">
-                      <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
-                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_end}}*
-                    </label>
-                    <input type="time" name="end_time" class="form-control" [formControl]="formPres.controls['end_time']" placeholder="HH-MM am/pm"
-                    />
-                  </div>
+                <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
+                  <label for="dateEnd" class="font-title-general">
+                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}}*
+                  </label>
+                  <input type="date" name="date_end" class="form-control" [formControl]="formPres.controls['date_end']"
+                    placeholder="dd/mm/yyyy" (blur)="calculateDay()" />
                 </div>
-                <div class="row">
-                  <div class="col-md-12 col-12 top-containter">
-                    <label for="celulaInput" class="font-title-general">
-                      <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                      {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
-                    </label>
-                    <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formPres.controls['observation_request']"></textarea>
-                  </div>
+              </div>
+              <div class="row">
+                <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                  <label for="startTime" class="font-title-general">
+                    <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
+                    {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}} *
+                  </label>
+                  <input type="time" name="start_time" class="form-control"
+                    [formControl]="formPres.controls['start_time']" placeholder="HH-MM am/pm" />
                 </div>
-                <div class="row">
-                  <div class="col-md-12 top-containter">
-                    <div class="row justify-content-end">
-                      <div class="col-lg-4 col-md-4 col-12">
-                        <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                          <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
-                        <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                          <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
-                      </div>
+
+                <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                  <label for="endTime" class="font-title-general">
+                    <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
+                    {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_end}}*
+                  </label>
+                  <input type="time" name="end_time" class="form-control" [formControl]="formPres.controls['end_time']"
+                    placeholder="HH-MM am/pm" />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 col-12 top-containter">
+                  <label for="celulaInput" class="font-title-general">
+                    <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                    {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
+                  </label>
+                  <textarea type="text" rows="3" style="height: auto !important;" name="observation_request"
+                    class="form-control" [formControl]="formPres.controls['observation_request']"></textarea>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 top-containter">
+                  <div class="row justify-content-end">
+                    <div class="col-lg-4 col-md-4 col-12">
+                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                        <i
+                          class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
+                      <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                        <i
+                          class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                     </div>
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-        <div *ngIf="formRequests.id_activity == 'INCA'" class="row justify-content-left">
-          <div class="col-12 col-lg-12">
-            <form [formGroup]="formInca" class="row justify-content-left" (ngSubmit)="newRequest(formInca.value)">
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateBegin" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}}*
-                </label>
-                <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-6 col-12 top-containter">
-                <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
-                </label>
-                <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']" placeholder="dd/mm/yyyy"
-                />
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="dateEnd" class="font-title-general">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
-                </label>
-                <app-file-upload [nameFile]='fileInability' [extensions]="extensions"></app-file-upload>
-              </div>
-              <div class="col-md-12 col-12 top-containter">
-                <label for="celulaInput" class="font-title-general">
-                  <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
-                </label>
-                <textarea type="text" rows="3" style="height: auto !important;" name="observation_request" class="form-control" [formControl]="formInca.controls['observation_request']"></textarea>
-              </div>
-              <div class="col-md-12 top-containter">
-                <div class="row justify-content-end">
-                  <div class="col-lg-3 col-md-4 col-12">
-                    <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                      <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
-                    <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
-                  </div>
+      </div>
+      <div *ngIf="formRequests.id_activity == 'INCA'" class="row justify-content-left">
+        <div class="col-12 col-lg-12">
+          <form [formGroup]="formInca" class="row justify-content-left" (ngSubmit)="newRequest(formInca.value)">
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateBegin" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.hour_begin}}*
+              </label>
+              <input type="date" name="date_begin" class="form-control" [formControl]="formInca.controls['date_begin']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-6 col-12 top-containter">
+              <label for="dateEnd" class="font-title-general">
+                <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.date_end}} *
+              </label>
+              <input type="date" name="date_end" class="form-control" [formControl]="formInca.controls['date_end']"
+                placeholder="dd/mm/yyyy" />
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="dateEnd" class="font-title-general">
+                <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.message_attach}}*
+              </label>
+              <app-file-upload [nameFile]='fileInability' [extensions]="extensions"></app-file-upload>
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="celulaInput" class="font-title-general">
+                <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
+              </label>
+              <textarea type="text" rows="3" style="height: auto !important;" name="observation_request"
+                class="form-control" [formControl]="formInca.controls['observation_request']"></textarea>
+            </div>
+            <div class="col-md-12 top-containter">
+              <div class="row justify-content-end">
+                <div class="col-lg-3 col-md-4 col-12">
+                  <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
+                    <i
+                      class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.save}}</button>
+                  <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                    <i
+                      class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.requests_rh.forms_requests.loading}}</button>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
         </div>
-        <app-alerts></app-alerts>
       </div>
-      <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> {{translate.app.frontEnd.pages.requests_rh.forms_requests.button_close}} </h6>
-        </div>
+      <app-alerts></app-alerts>
+    </div>
+    <div class="modal-footerInfo justify-content-center">
+      <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" (click)="modalActions.close()">
+        <h6> {{translate.app.frontEnd.pages.requests_rh.forms_requests.button_close}} </h6>
       </div>
     </div>
   </div>
+</ng-template>

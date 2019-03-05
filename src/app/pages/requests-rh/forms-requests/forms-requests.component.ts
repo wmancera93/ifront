@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { FormsRequestsService } from '../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -9,9 +11,10 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { debug } from 'util';
 import { Translate } from '../../../models/common/translate/translate';
 import { TranslateService } from '../../../services/common/translate/translate.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { FormBenefistComponent } from '../form-benefist/form-benefist.component';
 
 
 @Component({
@@ -19,7 +22,11 @@ import { TranslateService } from '../../../services/common/translate/translate.s
   templateUrl: './forms-requests.component.html',
   styleUrls: ['./forms-requests.component.css']
 })
-export class FormsRequestsComponent implements OnInit {
+export class FormsRequestsComponent implements OnInit, OnDestroy {
+  @ViewChild('modalForms')
+  public modalTemplate: TemplateRef<any>;
+  modalActions: { close: Function } = { close: () => { } };
+
   public formRequests: TypesRequests = null;
   public showSubmit = true;
   public translate: Translate = null;
@@ -41,24 +48,32 @@ export class FormsRequestsComponent implements OnInit {
 
   public showTime = true;
   public showDate = false;
+  public modalState = true;
+
   diffDays: number;
   lowerDate: boolean;
 
-  constructor(private requestsRhService: RequestsRhService,
+  private subscription: ISubscription;
+
+
+  constructor(
+    private requestsRhService: RequestsRhService,
+    private modalService: NgbModal,
     public formsRequestsService: FormsRequestsService,
     public alert: AlertsService,
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
     public formDataService: FormDataService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+    public stylesExplorerService: StylesExplorerService,
+    public translateService: TranslateService
+  ) {
     this.translate = this.translateService.getTranslate();
 
     this.fileUploadService.getObjetFile()
       .subscribe((object) => {
         this.file = object;
       });
-
-    this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
+    this.subscription = this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
       this.formVaca = new FormGroup({});
       this.formVacaComp = new FormGroup({});
       this.formPerm = new FormGroup({});
@@ -134,28 +149,29 @@ export class FormsRequestsComponent implements OnInit {
         default:
           break;
       }
-
-      if (document.getElementById('form_requests').className !== 'modal show') {
+      setTimeout(() => {
+        this.stylesExplorerService.addStylesCommon();
+      }, 300);
+      const modal = this.modalService.open(this.modalTemplate, { size: 'lg', windowClass: 'modal-md-personalized modal-dialog-scroll', centered: true });
+      this.modalActions.close = () => { modal.close(); };
+      document.getElementById('bodyGeneral').removeAttribute('style');
+      /* if (document.getElementById('form_requests').className !== 'modal show') {
         document.getElementById('btn_form_requests').click();
-        document.getElementById('bodyGeneral').removeAttribute('style');
-
-        setTimeout(() => {
-          this.stylesExplorerService.addStylesCommon();
-        }, 300);
-      }
+      } */
 
     });
   }
 
   ngOnInit() {
-
   }
 
-
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   newRequest(model) {
-
-
+    console.log(model);
+    return;
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
@@ -172,7 +188,7 @@ export class FormsRequestsComponent implements OnInit {
         .subscribe(
           (data: any) => {
 
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            this.modalActions.close();
             const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_ts, message: this.translate.app.frontEnd.pages.requests_rh.forms_requests.message_alert_ts + data.data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
@@ -184,7 +200,7 @@ export class FormsRequestsComponent implements OnInit {
             // }, 2000)
           },
           (error: any) => {
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            this.modalActions.close();
             const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
@@ -198,7 +214,7 @@ export class FormsRequestsComponent implements OnInit {
       this.requestsRhService.postRequests(model)
         .subscribe(
           (data: any) => {
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            this.modalActions.close();
             const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_ts, message: this.translate.app.frontEnd.pages.requests_rh.forms_requests.message_alert_ts + data.json().data[0].id.toString(), confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
@@ -210,7 +226,7 @@ export class FormsRequestsComponent implements OnInit {
             // }, 2000)
           },
           (error: any) => {
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
+            this.modalActions.close();
             const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.requests_rh.forms_requests.type_alert_one_ts, message: error.json().errors.toString(), confirmation: false }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
@@ -220,8 +236,12 @@ export class FormsRequestsComponent implements OnInit {
             //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
             // }, 1000)
           },
-      );
+        );
     }
+  }
+
+  setModalState(state: boolean) {
+    this.modalState = state;
   }
 
   noAcceptMinus() {
@@ -235,8 +255,10 @@ export class FormsRequestsComponent implements OnInit {
   }
 
   calculateDay() {
-    let dateBegin = this.formPres.controls.date_begin.value === ' ' ? null : new Date(this.formPres.controls.date_begin.value);
-    let dateEnd = this.formPres.controls.date_end.value === ' ' ? null : new Date(this.formPres.controls.date_end.value);
+    const { date_begin, date_end } = this.formPres.controls;
+
+    let dateBegin = date_begin.value === ' ' ? null : new Date(date_begin.value);
+    let dateEnd = date_end.value === ' ' ? null : new Date(date_end.value);
 
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
@@ -261,13 +283,12 @@ export class FormsRequestsComponent implements OnInit {
 
       dateBegin = null;
       dateEnd = null;
-
     }
     if (dateBegin !== null && this.formRequests.maximum_days === 1) {
-      this.formPres.controls.date_end.value = this.formPres.controls.date_begin.value;
+      date_end.value = date_begin.value;
     }
     if (dateBegin !== null || dateEnd !== null) {
-      if (this.formPres.controls.date_begin.value === this.formPres.controls.date_end.value) {
+      if (date_begin.value === date_end.value) {
         this.showTime = true;
       } else {
         this.showTime = false;
@@ -275,5 +296,4 @@ export class FormsRequestsComponent implements OnInit {
     }
 
   }
-
 }

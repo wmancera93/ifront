@@ -27,7 +27,6 @@ export class AlertsComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-
     this.alert.getAlert().subscribe(
       (data) => {
         if (this.count === 0) {

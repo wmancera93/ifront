@@ -1,27 +1,25 @@
-.modal-content {   
+.modal-content {
     /*background-color: #f5f5f5 !important;  */
-    background-color: rgba(47, 64, 80, 0.9)!important;
+    background-color: rgba(47, 64, 80, 0.9) !important;
     border-radius: 0 !important;
-    -webkit-box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
-    box-shadow: -5px 8px 9px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: -5px 8px 9px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -5px 8px 9px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -5px 8px 9px 0px rgba(0, 0, 0, 0.75);
 }
-
 
 .end-line {
     border-bottom: 1px solid var(--btn-primary) !important;
     margin-bottom: 10px;
 }
 
-.titleColor
-{
+.titleColor {
     color: #ffff !important;
 }
-.bodyColorInfo{
-    color:#b5b4b4 !important;
+
+.bodyColorInfo {
+    color: #b5b4b4 !important;
 }
 
-.paddingInfo
-{
+.paddingInfo {
     padding-top: 10px;
 }

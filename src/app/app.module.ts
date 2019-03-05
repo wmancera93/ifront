@@ -10,6 +10,7 @@ import { ServicesModule } from './services/services.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -22,7 +23,7 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     CommonModule,
@@ -35,7 +36,8 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [
     Angular2TokenService
