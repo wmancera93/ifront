@@ -31,7 +31,7 @@ export class ManagedComponent implements OnInit {
     this.translate = this.translateService.getTranslate();
     this.statusApprover = this.translate.app.frontEnd.pages.approver_request.managed.status_approver;
     this.statusCancelled = this.translate.app.frontEnd.pages.approver_request.managed.status_cancelled;
-    this.statusInProcess = this.translate.app.frontEnd.pages.approver_request.managed.status_inProcess;
+    this.statusInProcess = this.translate.app.frontEnd.pages.approver_request.managed.status_in_Process;
     this.statusPending = this.translate.app.frontEnd.pages.approver_request.managed.status_pending;
 
     this.tokenService.validateToken()

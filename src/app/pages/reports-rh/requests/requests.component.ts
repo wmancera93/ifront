@@ -60,7 +60,7 @@ export class RequestsComponent implements OnInit {
     this.placeholder_search=this.translate.app.frontEnd.pages.reports_rh.requests.placeholder_search;
     this.pending = this.translate.app.frontEnd.pages.reports_rh.requests.status_pending;
     this.approved = this.translate.app.frontEnd.pages.reports_rh.requests.status_approved;
-    this.inProcess = this.translate.app.frontEnd.pages.reports_rh.requests.status_inProcess;
+    this.inProcess = this.translate.app.frontEnd.pages.reports_rh.requests.status_in_Process;
     this.cancelled = this.translate.app.frontEnd.pages.reports_rh.requests.status_cancelled;
 
     this.tokenService.validateToken()
