@@ -41,7 +41,7 @@ export class ApprovalsDetailsComponent implements OnInit {
 
   this.approver=this.translate.app.frontEnd.components.common.approvals_details.status_approved;
   this.cancelled=this.translate.app.frontEnd.components.common.approvals_details.status_cancelled;
-  this.inProcess=this.translate.app.frontEnd.components.common.approvals_details.status_inprocess;
+  this.inProcess=this.translate.app.frontEnd.components.common.approvals_details.status_in_Process;
   this.pending=this.translate.app.frontEnd.components.common.approvals_details.status_pending;
 
     this.aproversRequestsService.getAprovalsRequests()

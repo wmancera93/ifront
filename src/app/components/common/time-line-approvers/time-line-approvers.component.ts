@@ -32,7 +32,7 @@ export class TimeLineApproversComponent implements OnInit {
     this.translate = this.translateService.getTranslate();
     this.statusApprover = this.translate.app.frontEnd.components.common.time_line_approvers.status_Approver;
     this.statusCancelled = this.translate.app.frontEnd.components.common.time_line_approvers.status_cancelled;
-    this.statusInProcess = this.translate.app.frontEnd.components.common.time_line_approvers.status_inProcess;
+    this.statusInProcess = this.translate.app.frontEnd.components.common.time_line_approvers.status_in_Process;
     this.statusPending = this.translate.app.frontEnd.components.common.time_line_approvers.status_pending;
 
     this.aproversRequestsService.getRequests().subscribe(
