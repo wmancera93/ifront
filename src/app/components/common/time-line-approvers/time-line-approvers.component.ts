@@ -46,7 +46,7 @@ export class TimeLineApproversComponent implements OnInit {
                 this.detailRequets = [];
                 if (detail.success) {
                   this.detailRequets = detail.data;
-                  this.fileSupport = this.detailRequets[0].request.file_support.url;
+                  this.fileSupport = this.detailRequets[0].request.image.url;
 
                   let dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
                   if (dateBegin !== null) {

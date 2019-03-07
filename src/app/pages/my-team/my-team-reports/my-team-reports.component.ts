@@ -74,7 +74,7 @@ export class MyTeamReportsComponent implements OnInit {
     this.myTeamService.getReportWorkTeam(report.url, idReport.toString()).subscribe(
       (data: any) => {
         if (data.data.length > 0) {
-          this.nameReport = data.data[0].title;
+          this.nameReport = data.data[0].title_table;
           this.objectReport.emit(data);
         } else {
           this.nameReport = '';

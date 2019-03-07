@@ -4,9 +4,9 @@
 <div class="modal" [attr.id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf='flagShowModal'>
-      <div class="modal-header borderLine-title row-hr justify-content-center">
-        <div class="col-4 col-lg-2">
-          <div class="menu-img-employee">
+      <div class="modal-header borderLine-title justify-content-center">
+        <div class="col-4 col-lg-2" style="margin-bottom: -5.6rem">
+          <div class="menu-img-employee mb-4">
             <img src="{{employeeInfo.image.url}}" class="roundPhoto-employee">
             <br>
           </div>
@@ -15,39 +15,41 @@
           <h4 class="modal-title titleColor text-shadow">{{employeeInfo.short_name}}</h4>
         </div>
       </div>
-      <div class="modal-body font-controls-login">
+      <div class="modal-body font-controls-login mt-3"> 
         <div>
-          <h5 class="titleColor text-shadow">{{translate.app.frontEnd.components.common.employee.employee_info.working_information}}</h5>
+          <h5 class="titleColor text-shadow mt-3">{{translate.app.frontEnd.components.common.employee.employee_info.working_information}}</h5>
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
-              <div *ngIf="employeeInfo.email">
-                <i class="fa fa-at paddingInfo"></i>
-                <strong> {{translate.app.frontEnd.components.common.employee.employee_info.email}}:</strong> {{employeeInfo.email}}
-              </div>
-              <div *ngIf="employeeInfo.phone">
-                <i class="fa fa-phone paddingInfo"></i>
-                <strong>{{translate.app.frontEnd.components.common.employee.employee_info.phone}}:</strong>&nbsp;{{employeeInfo.phone}}
-              </div>
-              <div *ngIf="employeeInfo.posicion">
-                <i class="fa fa-users paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.position}}:</strong>&nbsp;
-                <span class="text-capitalize">
-                  {{employeeInfo.posicion | lowercase}}
-                </span>
-              </div>
-              <div *ngIf="employeeInfo.unidad_org">
-                <i class="fa fa-building paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.unit_org}}:</strong>&nbsp;
-                <span class="text-capitalize">
-                  {{employeeInfo.unidad_org | lowercase}}
-                </span>
-              </div>
-              <div *ngIf="employeeInfo.area">
-                <i class="fa fa-puzzle-piece paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.area}}:</strong>&nbsp;
-                <span class="text-capitalize">
-                  {{employeeInfo.area| lowercase}}
-                </span>
+              <div class="container-fluid mr-3">
+                <div *ngIf="employeeInfo.email">
+                  <i class="fa fa-at paddingInfo"></i>
+                  <strong> {{translate.app.frontEnd.components.common.employee.employee_info.email}}:</strong> {{employeeInfo.email}}
+                </div>
+                <div *ngIf="employeeInfo.phone">
+                  <i class="fa fa-phone paddingInfo"></i>
+                  <strong>{{translate.app.frontEnd.components.common.employee.employee_info.phone}}:</strong>&nbsp;{{employeeInfo.phone}}
+                </div>
+                <div *ngIf="employeeInfo.posicion">
+                  <i class="fa fa-users paddingInfo"></i>
+                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.position}}:</strong>&nbsp;
+                  <span class="text-capitalize">
+                    {{employeeInfo.posicion | lowercase}}
+                  </span>
+                </div>
+                <div *ngIf="employeeInfo.unidad_org">
+                  <i class="fa fa-building paddingInfo"></i>
+                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.unit_org}}:</strong>&nbsp;
+                  <span class="text-capitalize">
+                    {{employeeInfo.unidad_org | lowercase}}
+                  </span>
+                </div>
+                <div *ngIf="employeeInfo.area">
+                  <i class="fa fa-puzzle-piece paddingInfo"></i>
+                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.area}}:</strong>&nbsp;
+                  <span class="text-capitalize">
+                    {{employeeInfo.area| lowercase}}
+                  </span>
+                </div>
               </div>
             </div>
             <div class="col-12 col-lg-6">
