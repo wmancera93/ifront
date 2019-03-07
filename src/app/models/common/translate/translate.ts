@@ -659,7 +659,7 @@ interface Training {
 }
 interface Report_training {
     title_report_training: string,
-    text_Query_filters: string,
+    text_query_filters: string,
     text_employee_code: string,
     text_training_code: string,
     text_training_status: string,
