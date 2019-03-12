@@ -66,6 +66,7 @@ export class MenuNavigationComponent implements OnInit {
   }
 
   getDataLocalStorage() {
+    debugger
     if (this.dataUser === null || this.dataUser === undefined) {
       this.dataUser = JSON.parse(localStorage.getItem('user'));
     }
