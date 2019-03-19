@@ -412,7 +412,7 @@ select,
 textarea {
     font-size: 100% !important;
     line-height: 1.15 !important;
-    margin: 0 !important;
+    /* margin: 0 !important; */
 }
 
 .btn {

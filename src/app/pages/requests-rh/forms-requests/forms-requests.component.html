@@ -129,6 +129,12 @@
           (setModalState)="setModalState($event)">
         </app-form-benefist>
       </div>
+      <div>
+        <app-lenses-auxilium *ngIf="['AUXL'].includes(formRequests.id_activity) ? true : false"
+          [formRequests]="formRequests" (submit)="newRequest($event)" [translate]="translate" [showSubmit]="showSubmit"
+          (setModalState)="setModalState($event)">
+        </app-lenses-auxilium>
+      </div>
       <div *ngIf="formRequests.id_activity == 'PERM'" class="row justify-content-left">
         <div class="col-12 col-lg-12">
           <form [formGroup]="formPerm" class="row justify-content-left" (ngSubmit)="newRequest(formPerm.value)">

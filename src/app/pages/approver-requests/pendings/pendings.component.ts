@@ -10,6 +10,7 @@ import { ButtonReturnService } from '../../../services/shared/common/managerial-
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { Translate } from '../../../models/common/translate/translate';
 import { TranslateService } from '../../../services/common/translate/translate.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pendings',
@@ -45,7 +46,7 @@ export class PendingsComponent implements OnInit {
       left: 0,
       behavior: 'smooth'
     });
-    this.router.events.filter(data => data instanceof RoutesRecognized)
+    this.router.events.pipe(filter(data => data instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
         setTimeout(() => {

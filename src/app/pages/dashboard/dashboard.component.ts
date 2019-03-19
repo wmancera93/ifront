@@ -5,6 +5,7 @@ import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { environment } from '../../../environments/environment';
 import { Toast } from 'angular2-toaster';
+import { filter } from 'rxjs/operators';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '../../services/common/translate/translate.service';
@@ -39,12 +40,12 @@ export class DashboardComponent implements OnInit {
   constructor(public userSharedService: UserSharedService,
     public router: Router, public companieService: MainService,
     private tokenService: Angular2TokenService, public translateService: TranslateService) {
-      
+
     this.translate = this.translateService.getTranslate();
 
     this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
 
-    this.router.events.filter(e => e instanceof RoutesRecognized)
+    this.router.events.pipe(filter(e => e instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
         if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
@@ -107,7 +108,7 @@ export class DashboardComponent implements OnInit {
           }
         }, 100);
 
-      })
+      });
 
     this.tokenService.validateToken()
       .subscribe(

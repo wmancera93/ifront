@@ -171,7 +171,6 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   newRequest(model) {
     console.log(model);
-    return;
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;

@@ -10,6 +10,7 @@ import { AproversRequestsService } from '../../../services/shared/common/aprover
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '../../../services/common/translate/translate.service';
 import { Translate } from '../../../models/common/translate/translate';
+import { filter } from 'rxjs/operators';
 
 declare var jsPDF: any;
 @Component({
@@ -57,7 +58,7 @@ export class RequestsComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
 
-    this.placeholder_search=this.translate.app.frontEnd.pages.reports_rh.requests.placeholder_search;
+    this.placeholder_search = this.translate.app.frontEnd.pages.reports_rh.requests.placeholder_search;
     this.pending = this.translate.app.frontEnd.pages.reports_rh.requests.status_pending;
     this.approved = this.translate.app.frontEnd.pages.reports_rh.requests.status_approved;
     this.inProcess = this.translate.app.frontEnd.pages.reports_rh.requests.status_inProcess;
@@ -77,7 +78,7 @@ export class RequestsComponent implements OnInit {
           this.token = true;
         });
 
-    this.router.events.filter(data => data instanceof RoutesRecognized)
+    this.router.events.pipe(filter(data => data instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
         setTimeout(() => {

@@ -107,6 +107,7 @@ import { TravelApproverReportComponent } from './travel-management/reports/trave
 import { ReportTrainingComponent } from './events-management/training/report-training/report-training.component';
 import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
 import { FormBenefistComponent } from './requests-rh/form-benefist/form-benefist.component';
+import { LensesAuxiliumComponent } from './requests-rh/lenses-auxilium/lenses-auxilium.component';
 
 
 
@@ -214,6 +215,7 @@ import { FormBenefistComponent } from './requests-rh/form-benefist/form-benefist
     ReportTrainingComponent,
     RequestsApproversLogsComponent,
     FormBenefistComponent,
+    LensesAuxiliumComponent,
   ],
   providers: [
     ReportTravelsService

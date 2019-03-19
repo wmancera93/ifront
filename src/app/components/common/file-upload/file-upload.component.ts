@@ -11,7 +11,7 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 export class FileUploadComponent implements OnInit {
   @Input() nameFile: string = '';
   @Input() extensions?: string = '';
-  @Input() drageable = true;
+  @Input() drageable = false;
   public progressBar: string = '0%';
   public dragHover = false;
   public textFileUpload: string = '';
