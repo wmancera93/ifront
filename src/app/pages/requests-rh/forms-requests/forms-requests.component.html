@@ -5,25 +5,23 @@
         <h4 class="modal-title titleColor text-shadow">
           {{translate.app.frontEnd.pages.requests_rh.forms_requests.tittle}} {{formRequests.name | lowercase}}</h4>
       </div>
-    </div>
-    <div class="modal-body font-controls-login">
-      <div *ngIf="formRequests.id_activity == 'VACA'" class="row justify-content-center">
-        <div class="col-12 col-lg-4">
-          <div class="widget bg-white top-containter" style="margin-top: 0px !important">
-            <div class="col align-self-center">
-              <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
-                <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
-                <i class="fa fa-plane fa-stack-1x text-origin"></i>
-              </span>
-              <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
-              <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue"
-                style="margin-right: -20px">
-                {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
-              </h3>
-              <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue"
-                style="margin-right: -20px">
-                {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
-              </h3>
+      <div class="modal-body font-controls-login">
+        <div *ngIf="formRequests.id_activity == 'VACA' || formRequests.id_activity == 'VITD'" class="row justify-content-center">
+          <div class="col-12 col-lg-4">
+            <div class="widget bg-white top-containter" style="margin-top: 0px !important">
+              <div class="col align-self-center">
+                <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+                  <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
+                  <i class="fa fa-plane fa-stack-1x text-origin"></i>
+                </span>
+                <h1 class="m-xs top-form">{{formRequests.available_days}}</h1>
+                <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.days_available}}
+                </h3>
+                <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+                  {{translate.app.frontEnd.pages.requests_rh.forms_requests.day_available}}
+                </h3>
+              </div>
             </div>
           </div>
         </div>

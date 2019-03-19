@@ -163,7 +163,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           document.getElementById("btn_travel_new").click();
           this.activate_submit = true;
         }
-        if (data === 'closeAlertcontinueDestinationRequestsValidateDates' || data === 'closeAlertcontinueTravelRequests' || data === 'closeAlertcontinueDestinationRequests' || data === 'closeAlertcontinueTravelAdvances') {
+        if (data === 'closeAlertcontinueDestinationRequestsValidateDates' || data === 'closeAlertcontinueTravelRequests' || data === 'closeAlertcontinueDestinationRequests' || data === 'closeAlertcontinueTravelAdvances' ||  data === 'closeAlertdeleteNewDocumentSaved') {
+          document.getElementById("btn_travel_new").click();
           document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
         }
       }

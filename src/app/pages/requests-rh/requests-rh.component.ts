@@ -55,7 +55,7 @@ export class RequestsRhComponent implements OnInit {
     this.translate = this.translateService.getTranslate();
     this.status_approved = this.translate.app.frontEnd.pages.requests_rh.status_approved;
     this.status_cancelled = this.translate.app.frontEnd.pages.requests_rh.status_cancelled;
-    this.status_inProcess = this.translate.app.frontEnd.pages.requests_rh.status_inProcess;
+    this.status_inProcess = this.translate.app.frontEnd.pages.requests_rh.status_in_Process;
     this.status_pending = this.translate.app.frontEnd.pages.requests_rh.status_pending;
     this.tokenService.validateToken()
       .subscribe(

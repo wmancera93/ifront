@@ -64,7 +64,7 @@ interface Approvals_details {
     type_alert_ts: string,
     status_approved: string,
     status_cancelled: string,
-    status_inprocess: string,
+    status_in_Process: string,
     status_pending: string,
 }
 
@@ -200,7 +200,7 @@ interface Time_line_approvers {
     detail_requests: string,
     status_Approver: string,
     status_cancelled: string,
-    status_inProcess: string,
+    status_in_Process: string,
     status_pending: string,
 }
 interface Travels {
@@ -243,7 +243,7 @@ interface Approvals_details_travels {
     travel_expenses: string,
     status_Approver: string,
     status_cancelled: string,
-    status_inProcess: string,
+    status_in_Process: string,
     status_pending: string,
     type_alert_ts: string,
     message_alert_ts: string,
@@ -425,7 +425,7 @@ interface Managed {
     icon_watch: string,
     status_approver: string;
     status_cancelled: string;
-    status_inProcess: string;
+    status_in_Process: string;
     status_pending: string;
 }
 interface Pendings {
@@ -659,7 +659,7 @@ interface Training {
 }
 interface Report_training {
     title_report_training: string,
-    text_Query_filters: string,
+    text_query_filters: string,
     text_employee_code: string,
     text_training_code: string,
     text_training_status: string,
@@ -931,7 +931,7 @@ interface Request {
     tittle_pdf_ts: string,
     status_pending: string,
     status_approved: string,
-    status_inProcess: string,
+    status_in_Process: string,
     status_cancelled: string,
     placeholder_search: string;
 }
@@ -961,7 +961,7 @@ interface Requests_rh {
     type_alert_two_ts: string,
     status_approved: string,
     status_cancelled: string,
-    status_inProcess: string,
+    status_in_Process: string,
     status_pending: string,
 }
 interface Forms_requests {

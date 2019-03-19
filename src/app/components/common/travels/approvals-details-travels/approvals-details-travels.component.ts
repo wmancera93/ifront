@@ -58,7 +58,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
     this.nameReportSpend = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_expenses;
     this.statusApprover = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_Approver;
     this.statusCancelled = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_cancelled;
-    this.statusInProcess = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_inProcess;
+    this.statusInProcess = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_in_Process;
     this.statusPending = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_pending;
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
