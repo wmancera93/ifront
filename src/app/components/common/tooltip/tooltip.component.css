@@ -16,3 +16,7 @@
 .modal-header-tooltip {
     border-bottom: 1px solid rgb(110, 110, 110) !important;
 }
+
+.position-absolute{
+    position: absolute;
+}
