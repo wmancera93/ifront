@@ -133,7 +133,14 @@ export class TravelManagementComponent implements OnInit {
             icon_secundary: "fa fa-search",
             tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
             route: "/ihr/travel_report"
-          }
+          },
+          {
+            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_hotel_ts,
+            icon_primary: "fa fa-circle-thin",
+            icon_secundary: "fa fa-bed",
+            tooltipText: this.translate.app.frontEnd.pages.travel_management. message_wiget_hotel_ts,
+            route: "/ihr/hotels"
+          },
         ]
       } else {
         if (this.dataUserTravels.employee.is_travel_manager) {
