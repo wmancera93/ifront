@@ -1,3 +1,320 @@
-<p>
-  new-transport works!
-</p>
+<ng-template
+  #modalForms
+  let-modal
+  ng-init="typeCase = formRequests.id_activity"
+>
+  <div class="modal-content">
+    <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div class="col-12 col-lg-10 text-center text-lg-left">
+        <h4 class="modal-title titleColor text-shadow">
+          Solicitud de transporte
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-12">
+          <form
+            [formGroup]="form"
+            class="row align-content-center justify-content-center"
+          >
+            <div class="col-12">
+              <div class="row">
+                <div class="col-12 col-md-6 top-containter">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-user-o text-primary-hr"></i>
+                    Beneficiado *
+                  </label>
+                  <select
+                    class="form-control"
+                    [formControl]="forms.employee_family_id"
+                  >
+                    <option value="">Seleccione</option>
+                    <option
+                      *ngFor="
+                        let employee_family_idList of employee_family_id_types
+                      "
+                      [value]="employee_family_idList.id"
+                    >
+                      {{ employee_family_idList.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6 top-containter">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+                    Tipo de documento *
+                  </label>
+                  <select
+                    class="form-control"
+                    [formControl]="forms.type_identification"
+                  >
+                    <option value="">Seleccione</option>
+                    <option
+                      *ngFor="let identificationList of document_types_list"
+                      [value]="identificationList.id"
+                    >
+                      {{ identificationList.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-12 col-md-6 top-containter">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                    Numero de documento *
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [formControl]="forms.number_identification"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div
+                    class="border-title h5"
+                    style="color: rgba(255, 255, 255, 0.81);"
+                  >
+                    Detalles de solicitud de educacion
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-university text-primary-hr"></i>
+                    Institución *
+                  </label>
+                </div>
+                <div class="col-12 col-md-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-book text-primary-hr"></i>
+                    Carrera *
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [formControl]="forms.career"
+                  />
+                </div>
+                <div class="col-12 col-md-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    Semestre *
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [formControl]="forms.semester"
+                  />
+                </div>
+                <div class="col-12">
+                  <div class="container-fluid widget">
+                    <div class="row">
+                      <div class="col-12">
+                        <div class="table-responsive mt-3">
+                          <table
+                            class="table table-sm table-striped table-bordered table-hover"
+                          >
+                            <thead>
+                              <tr>
+                                <th class="text-center">
+                                  Concepto
+                                </th>
+                                <th class="text-center">
+                                  Valor
+                                </th>
+                                <th class="text-center">
+                                  Eliminar
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody style="color: #fff;">
+                              <tr *ngFor="let concept of arrayConcept">
+                                <td>
+                                  {{ concept.concept.name }}
+                                </td>
+                                <td>
+                                  {{ concept.value }}
+                                </td>
+                                <td width="10px">
+                                  <button
+                                    type="button"
+                                    class="btn btn-danger btn-block btn-sm cursor-general"
+                                    (click)="removeConcept(concept.concept.id)"
+                                  >
+                                    <i class="fa fa-minus"></i>
+                                  </button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-10 col-xl-11">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-12 col-sm-6 text-truncate">
+                              <label class="font-title-general">
+                                <i
+                                  class="fa fa-fw fa-list-ol text-primary-hr"
+                                ></i>
+                                Concepto *
+                              </label>
+                              <select
+                                class="form-control"
+                                [formControl]="forms.concept"
+                              >
+                                <option value="">Seleccione</option>
+                              </select>
+                            </div>
+                            <div class="col-12 col-sm-6 text-truncate">
+                              <label class="font-title-general">
+                                <i
+                                  class="fa fa-fw fa-money text-primary-hr"
+                                ></i>
+                                Valor *
+                              </label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                [formControl]="forms.value"
+                              />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+                        <div class="w-100 my-auto">
+                          <button
+                            type="button"
+                            class="btn btn-success btn-block cursor-general mt-4 w-100"
+                            (click)="addConcept()"
+                            [attr.disabled]="
+                              forms.value.value == '' ||
+                              forms.concept.value == ''
+                                ? true
+                                : null
+                            "
+                          >
+                            <i class=" fa fa-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 top-containter">
+              <div class="container">
+                <div class="row">
+                  <div
+                    class="col-12"
+                    *ngFor="let imgsaved of objectImg; let index = index"
+                  >
+                    <div
+                      class="alert pr-0"
+                      style="background-color:rgba(0,0,0,.2) "
+                      role="alert"
+                    >
+                      <div class="row cursor-general w-100">
+                        <div class="col-auto px-2">{{ index + 1 }}.</div>
+                        <div class="col-auto">
+                          <i
+                            aria-hidden="true"
+                            style="font-size: 1.5em; color: white"
+                            class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
+                          ></i>
+                        </div>
+                        <div class="col text-truncate">
+                          {{ imgsaved.file.name }}
+                        </div>
+                        <div
+                          (click)="deleteUpload(imgsaved)"
+                          class="col-auto text-center d-flex align-items-center pl-3"
+                        >
+                          <h6 class="text-primary-hr cursor-general my-auto">
+                            x
+                          </h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 text-left mb-3">
+              <div class="container-fluid">
+                <label class="titleColor">
+                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                  <strong>{{
+                    translate.app.frontEnd.pages.travel_management.travel
+                      .new_travel.attach
+                  }}</strong>
+                </label>
+                <app-file-upload
+                  [drageable]="true"
+                  [nameFile]="filequotation"
+                  [extensions]="extensions"
+                ></app-file-upload>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="celulaInput" class="font-title-general">
+                <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                {{
+                  translate.app.frontEnd.pages.requests_rh.forms_requests
+                    .observation
+                }}
+              </label>
+              <textarea
+                type="text"
+                rows="3"
+                style="height: auto !important;"
+                class="form-control"
+                [formControl]="forms.observation_request"
+              >
+              </textarea>
+            </div>
+            <div class="col-md-12 mt-2">
+              <div class="row justify-content-end">
+                <div class="col-lg-3 col-md-6 col-lg-4 col-12">
+                  <button
+                    type="button"
+                    class="btn btn-success btn-block"
+                    (click)="submitSend()"
+                    [attr.disabled]="validateForms ? null : true"
+                  >
+                    <i class="fa fa-fw fa-floppy-o"></i
+                    >{{
+                      translate.app.frontEnd.pages.requests_rh.forms_requests
+                        .save
+                    }}
+                  </button>
+                  <button type="button" class="btn btn-warning btn-block">
+                    <i class="fa fa-fw fa-spinner fa-spin"></i
+                    >{{
+                      translate.app.frontEnd.pages.requests_rh.forms_requests
+                        .loading
+                    }}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <app-alerts></app-alerts>
+    <div class="modal-footerInfo justify-content-center">
+      <div
+        class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center"
+        (click)="modalActions.close()"
+      >
+        <h6>Close</h6>
+      </div>
+    </div>
+  </div>
+</ng-template>

@@ -14,7 +14,6 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 import { Translate } from '../../../models/common/translate/translate';
 import { TranslateService } from '../../../services/common/translate/translate.service';
 import { ISubscription } from 'rxjs/Subscription';
-import { FormBenefistComponent } from '../form-benefist/form-benefist.component';
 
 
 @Component({

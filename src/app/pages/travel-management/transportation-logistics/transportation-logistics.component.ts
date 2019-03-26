@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-transportation-logistics',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transportation-logistics.component.css']
 })
 export class TransportationLogisticsComponent implements OnInit {
+  public modalForm: Subject<any> = new Subject<any>();
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  newSpendTravel() {
+    this.modalForm.next({ open: true });
   }
-
 }
