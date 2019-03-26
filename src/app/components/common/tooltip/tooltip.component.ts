@@ -23,21 +23,23 @@ export class TooltipComponent implements OnInit {
       this.positionData = data.position;
       this.infoTooltip = data.text.tooltipText;
       this.openTooltip = data.show;
-      
+      const tooltip = document.getElementById('tooltip_data').style
       if (this.openTooltip) {
         if (screen.width > 1100) {
           if (this.positionData.positionY < (0.90 * screen.height)) {
-            let calculatey = this.positionData.positionY - 350;
-            document.getElementById('tooltip_data').style.marginTop = calculatey + 'px';
+            //let calculatey = this.positionData.positionY - 350;
+            //document.getElementById('tooltip_data').style.top = calculatey + 'px';
           }
-          if (this.positionData.positionX < (0.8 * screen.width)) {
+          tooltip.top = this.positionData.positionY + 'px';
+          tooltip.left = this.positionData.positionX + 'px';
+          /* if (this.positionData.positionX < (0.8 * screen.width)) {
             let calculatex = this.positionData.positionX - 250;
-            document.getElementById('tooltip_data').style.marginLeft = calculatex + 'px';
+            tooltip.left = calculatex + 'px';
           }
           else {
-            let calculatex = this.positionData.positionX - (0.38 * screen.width)
-            document.getElementById('tooltip_data').style.marginLeft = calculatex + 'px';
-          }
+            let calculatex = this.positionData.positionX - (0.45 * screen.width)
+            tooltip.left = calculatex + 'px';
+          } */
 
         }
 
@@ -47,9 +49,9 @@ export class TooltipComponent implements OnInit {
 
       // if ((screen.width < 500) && (screen.width < screen.height)) {
       //   let calculatey = (screen.height * (-0.12));
-      //   document.getElementById('tooltip_data').style.marginTop = calculatey + 'px';
+      //   tooltip.marginTop = calculatey + 'px';
       //   let calculatex = 0;
-      //   document.getElementById('tooltip_data').style.marginLeft = calculatex + 'px';
+      //   tooltip.marginLeft = calculatex + 'px';
       // }
       // if ((screen.width > 500) && (screen.width < 1100)) {
       //   console.log(screen.width)
