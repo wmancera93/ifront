@@ -7,7 +7,7 @@ import {
   Input
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -28,7 +28,7 @@ import { Observable } from 'rxjs';
   templateUrl: './new-transport.component.html',
   styleUrls: ['./new-transport.component.css']
 })
-export class NewTransportComponent implements OnInit {
+export class NewTransportComponent implements OnInit, OnDestroy {
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
   modalActions: { close: Function } = { close: () => {} };
@@ -43,6 +43,7 @@ export class NewTransportComponent implements OnInit {
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public form: any;
+  public stepActive = 0;
 
   public detectLetter = ' ';
 
@@ -52,6 +53,13 @@ export class NewTransportComponent implements OnInit {
   public showTime = true;
   public showDate = false;
   public modalState = true;
+
+  public arrayTrayects: any[] = [];
+  public servicesList: any[] = [];
+  public companiesList: any[] = [];
+  public identificationsList: any[] = [];
+  public concept_types_list: any[] = [];
+  public institution_types_list: any[] = [];
 
   diffDays: number;
   lowerDate: boolean;
@@ -79,19 +87,34 @@ export class NewTransportComponent implements OnInit {
     this.fileUploadService.getObjetFile().subscribe(object => {
       this.file = object;
     });
+
+    this.servicesList = [
+      { id: 1, name: 'Preescolar' },
+      { id: 2, name: 'Primaria' },
+      { id: 3, name: 'Bachiderato' },
+      { id: 4, name: 'Tecnico' },
+      { id: 5, name: 'Tecnologo' },
+      { id: 6, name: 'Universitario' }
+    ];
+    this.companiesList = [
+      { id: 1, name: 'Preescolar' },
+      { id: 2, name: 'Primaria' }
+    ];
+
     this.form = new FormGroup({});
     this.form = this.fb.group({
-      academic_level: [''],
-      employee_family_id: [''],
-      number_identification: [''],
-      type_identification: [''],
-      institution: [''],
-      career: [''],
-      semester: [''],
-      concept: '',
-      value: '',
-      file: [],
-      observation_request: ['']
+      vehicle_plate: [''],
+      driver: [''],
+      company: [''],
+      number_positions: [''],
+      type_service: [''],
+      phone_driver: [''],
+      concept: [''],
+      value: [''],
+      origin: [''],
+      destiny: [''],
+      date_time_departure: [''],
+      durationTrayect: ['']
     });
   }
 
@@ -111,8 +134,6 @@ export class NewTransportComponent implements OnInit {
 
   ngOnDestroy(): void {
     this.modalFormSubscription.unsubscribe();
-
-    this.subscription.unsubscribe();
   }
 
   newRequest(model) {
@@ -123,5 +144,41 @@ export class NewTransportComponent implements OnInit {
 
   setModalState(state: boolean) {
     this.modalState = state;
+  }
+
+  handleStep({ next, back }) {
+    if (next) {
+      this.stepActive++;
+    }
+    if (back) {
+      this.stepActive--;
+    }
+  }
+
+  addTrayect() {
+    const {
+      origin,
+      destiny,
+      date_time_departure,
+      durationTrayect
+    } = this.form.controls;
+    this.arrayTrayects.push({
+      origin: origin.value,
+      destiny: destiny.value,
+      date_time_departure: date_time_departure.value,
+      durationTrayect: durationTrayect.value,
+      key: uuid.v4()
+    });
+    origin.setValue('');
+    destiny.setValue('');
+    date_time_departure.setValue('');
+    durationTrayect.setValue('');
+  }
+
+  removeTrayect(keyTrayect) {
+    this.arrayTrayects.splice(
+      this.arrayTrayects.findIndex(filter => filter.key === keyTrayect),
+      1
+    );
   }
 }

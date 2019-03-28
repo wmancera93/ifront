@@ -5,7 +5,7 @@
 >
   <div class="modal-content">
     <div class="modal-header borderLine-title row-hr justify-content-center">
-      <div class="col-12 col-lg-10 text-center text-lg-left">
+      <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
           Solicitud de transporte
         </h4>
@@ -13,102 +13,109 @@
     </div>
     <div class="modal-body font-controls-login">
       <div class="row justify-content-center">
-        <div class="col-12 col-lg-12">
-          <form
-            [formGroup]="form"
-            class="row align-content-center justify-content-center"
-          >
-            <div class="col-12">
-              <div class="row">
-                <div class="col-12 col-md-6 top-containter">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-user-o text-primary-hr"></i>
-                    Beneficiado *
-                  </label>
-                  <select
-                    class="form-control"
-                    [formControl]="forms.employee_family_id"
-                  >
-                    <option value="">Seleccione</option>
-                    <option
-                      *ngFor="
-                        let employee_family_idList of employee_family_id_types
-                      "
-                      [value]="employee_family_idList.id"
-                    >
-                      {{ employee_family_idList.name }}
-                    </option>
-                  </select>
-                </div>
-                <div class="col-12 col-md-6 top-containter">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-                    Tipo de documento *
-                  </label>
-                  <select
-                    class="form-control"
-                    [formControl]="forms.type_identification"
-                  >
-                    <option value="">Seleccione</option>
-                    <option
-                      *ngFor="let identificationList of document_types_list"
-                      [value]="identificationList.id"
-                    >
-                      {{ identificationList.name }}
-                    </option>
-                  </select>
-                </div>
-                <div class="col-12 col-md-6 top-containter">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    Numero de documento *
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [formControl]="forms.number_identification"
-                  />
-                </div>
-              </div>
-            </div>
-            <div class="col-12">
-              <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="msform">
+            <!-- progressbar -->
+            <ul class="progressbar p-0 d-flex justify-content-center">
+              <li [ngClass]="{ active: stepActive >= 0 }">
+                Registro del vehiculo
+              </li>
+              <li [ngClass]="{ active: stepActive >= 1 }">
+                Registro de trayectos
+              </li>
+            </ul>
+            <!-- steps -->
+            <form
+              [formGroup]="form"
+              class="row align-content-center justify-content-center"
+            >
+              <ng-container *ngIf="stepActive === 0">
                 <div class="col-12">
-                  <div
-                    class="border-title h5"
-                    style="color: rgba(255, 255, 255, 0.81);"
-                  >
-                    Detalles de solicitud de educacion
+                  <div class="row">
+                    <div class="col-12 col-md-6 text-truncate">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw fa-bus text-primary-hr"></i>
+                        Placa del vehiculo *
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [formControl]="forms.vehicle_plate"
+                      />
+                    </div>
+                    <div class="col-12 col-md-6 text-truncate">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw  fa-user-o text-primary-hr"></i>
+                        Conductor *
+                      </label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        [formControl]="forms.driver"
+                      />
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw fa-users text-primary-hr"></i>
+                        Empresa *
+                      </label>
+                      <select
+                        class="form-control"
+                        [formControl]="forms.company"
+                      >
+                        <option value="">Seleccione</option>
+                        <option
+                          *ngFor="let companyList of companiesList"
+                          [value]="companyList.id"
+                        >
+                          {{ companyList.name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6 text-truncate">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw fa-braille text-primary-hr"></i>
+                        Cantidad de puestos *
+                      </label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        [formControl]="forms.number_positions"
+                      />
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw fa-lightbulb-o text-primary-hr"></i>
+                        Tipo de servicio *
+                      </label>
+                      <select
+                        class="form-control"
+                        [formControl]="forms.type_service"
+                      >
+                        <option value="">Seleccione</option>
+                        <option
+                          *ngFor="let service of servicesList"
+                          [value]="service.id"
+                        >
+                          {{ service.name }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="font-title-general">
+                        <i class="fa fa-fw fa-phone-square text-primary-hr"></i>
+                        Telefono del conductor *
+                      </label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        [formControl]="forms.phone_driver"
+                      />
+                    </div>
                   </div>
                 </div>
-                <div class="col-12">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-university text-primary-hr"></i>
-                    Institución *
-                  </label>
-                </div>
-                <div class="col-12 col-md-6 text-truncate">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-book text-primary-hr"></i>
-                    Carrera *
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [formControl]="forms.career"
-                  />
-                </div>
-                <div class="col-12 col-md-6 text-truncate">
-                  <label class="font-title-general">
-                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                    Semestre *
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    [formControl]="forms.semester"
-                  />
-                </div>
+              </ng-container>
+              <ng-container *ngIf="stepActive === 1">
                 <div class="col-12">
                   <div class="container-fluid widget">
                     <div class="row">
@@ -120,10 +127,16 @@
                             <thead>
                               <tr>
                                 <th class="text-center">
-                                  Concepto
+                                  Origen
                                 </th>
                                 <th class="text-center">
-                                  Valor
+                                  Destino
+                                </th>
+                                <th class="text-center">
+                                  Fecha y hora de salida
+                                </th>
+                                <th class="text-center">
+                                  Duración
                                 </th>
                                 <th class="text-center">
                                   Eliminar
@@ -131,18 +144,24 @@
                               </tr>
                             </thead>
                             <tbody style="color: #fff;">
-                              <tr *ngFor="let concept of arrayConcept">
+                              <tr *ngFor="let trayects of arrayTrayects">
                                 <td>
-                                  {{ concept.concept.name }}
+                                  {{ trayects.origin }}
                                 </td>
                                 <td>
-                                  {{ concept.value }}
+                                  {{ trayects.destiny }}
+                                </td>
+                                <td>
+                                  {{ trayects.date_time_departure }}
+                                </td>
+                                <td>
+                                  {{ trayects.durationTrayect }}
                                 </td>
                                 <td width="10px">
                                   <button
                                     type="button"
                                     class="btn btn-danger btn-block btn-sm cursor-general"
-                                    (click)="removeConcept(concept.concept.id)"
+                                    (click)="removeTrayect(trayects.key)"
                                   >
                                     <i class="fa fa-minus"></i>
                                   </button>
@@ -160,26 +179,55 @@
                                 <i
                                   class="fa fa-fw fa-list-ol text-primary-hr"
                                 ></i>
-                                Concepto *
+                                Origen *
                               </label>
                               <select
                                 class="form-control"
-                                [formControl]="forms.concept"
+                                [formControl]="forms.origin"
                               >
                                 <option value="">Seleccione</option>
+                                <option value="233">dsfdssf</option>
                               </select>
                             </div>
                             <div class="col-12 col-sm-6 text-truncate">
                               <label class="font-title-general">
                                 <i
-                                  class="fa fa-fw fa-money text-primary-hr"
+                                  class="fa fa-fw fa-list-ol text-primary-hr"
                                 ></i>
-                                Valor *
+                                Destino *
+                              </label>
+                              <select
+                                class="form-control"
+                                [formControl]="forms.destiny"
+                              >
+                                <option value="">Seleccione</option>
+                                <option value="3443">dfsdfdsf</option>
+                              </select>
+                            </div>
+                            <div class="col-12 col-sm-6 text-truncate">
+                              <label class="font-title-general">
+                                <i
+                                  class="fa fa-fw fa-calendar text-primary-hr"
+                                ></i>
+                                Fecha y hora de salida *
                               </label>
                               <input
-                                type="text"
+                                type="datetime-local"
                                 class="form-control"
-                                [formControl]="forms.value"
+                                [formControl]="forms.date_time_departure"
+                              />
+                            </div>
+                            <div class="col-12 col-sm-6 text-truncate">
+                              <label class="font-title-general">
+                                <i
+                                  class="fa fa-fw hourglass-start text-primary-hr"
+                                ></i>
+                                Duración del trayecto *
+                              </label>
+                              <input
+                                type="time"
+                                class="form-control"
+                                [formControl]="forms.durationTrayect"
                               />
                             </div>
                           </div>
@@ -190,10 +238,12 @@
                           <button
                             type="button"
                             class="btn btn-success btn-block cursor-general mt-4 w-100"
-                            (click)="addConcept()"
+                            (click)="addTrayect()"
                             [attr.disabled]="
-                              forms.value.value == '' ||
-                              forms.concept.value == ''
+                              forms.origin.value == '' ||
+                              forms.destiny.value == '' ||
+                              forms.date_time_departure.value == '' ||
+                              forms.durationTrayect.value == ''
                                 ? true
                                 : null
                             "
@@ -205,115 +255,46 @@
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-12 top-containter">
-              <div class="container">
-                <div class="row">
-                  <div
-                    class="col-12"
-                    *ngFor="let imgsaved of objectImg; let index = index"
-                  >
-                    <div
-                      class="alert pr-0"
-                      style="background-color:rgba(0,0,0,.2) "
-                      role="alert"
-                    >
-                      <div class="row cursor-general w-100">
-                        <div class="col-auto px-2">{{ index + 1 }}.</div>
-                        <div class="col-auto">
-                          <i
-                            aria-hidden="true"
-                            style="font-size: 1.5em; color: white"
-                            class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
-                          ></i>
-                        </div>
-                        <div class="col text-truncate">
-                          {{ imgsaved.file.name }}
-                        </div>
-                        <div
-                          (click)="deleteUpload(imgsaved)"
-                          class="col-auto text-center d-flex align-items-center pl-3"
-                        >
-                          <h6 class="text-primary-hr cursor-general my-auto">
-                            x
-                          </h6>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-12 text-left mb-3">
-              <div class="container-fluid">
-                <label class="titleColor">
-                  <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                  <strong>{{
-                    translate.app.frontEnd.pages.travel_management.travel
-                      .new_travel.attach
-                  }}</strong>
-                </label>
-                <app-file-upload
-                  [drageable]="true"
-                  [nameFile]="filequotation"
-                  [extensions]="extensions"
-                ></app-file-upload>
-              </div>
-            </div>
-            <div class="col-12">
-              <label for="celulaInput" class="font-title-general">
-                <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .observation
-                }}
-              </label>
-              <textarea
-                type="text"
-                rows="3"
-                style="height: auto !important;"
-                class="form-control"
-                [formControl]="forms.observation_request"
-              >
-              </textarea>
-            </div>
-            <div class="col-md-12 mt-2">
-              <div class="row justify-content-end">
-                <div class="col-lg-3 col-md-6 col-lg-4 col-12">
-                  <button
-                    type="button"
-                    class="btn btn-success btn-block"
-                    (click)="submitSend()"
-                    [attr.disabled]="validateForms ? null : true"
-                  >
-                    <i class="fa fa-fw fa-floppy-o"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .save
-                    }}
-                  </button>
-                  <button type="button" class="btn btn-warning btn-block">
-                    <i class="fa fa-fw fa-spinner fa-spin"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .loading
-                    }}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </form>
+              </ng-container>
+            </form>
+          </div>
         </div>
       </div>
     </div>
     <app-alerts></app-alerts>
     <div class="modal-footerInfo justify-content-center">
-      <div
-        class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center"
-        (click)="modalActions.close()"
-      >
-        <h6>Close</h6>
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div
+              class="btn text-center btn-secondary btn-block"
+              (click)="handleStep({ back: true })"
+            >
+              <h6>Atras</h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn text-center btn-success btn-block"
+              (click)="handleStep({ next: true })"
+            >
+              <ng-container *ngIf="stepActive === 0">
+                <h6>Siguiente</h6>
+              </ng-container>
+              <ng-container *ngIf="stepActive === 1">
+                <h6>Guardar</h6>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn btn-primary text-center btn-block"
+              (click)="modalActions.close()"
+            >
+              <h6>Close</h6>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
