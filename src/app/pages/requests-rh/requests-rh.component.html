@@ -32,7 +32,7 @@
         <div class="col-lg-6 col-12">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button"
+              <a class="nav-link dropdown-toggle cursor-general tabDate btn-block" id="navbarDropdown" role="button"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-plus"></i>
                 {{translate.app.frontEnd.pages.requests_rh.btn_new}}
@@ -138,7 +138,7 @@
                 </h3>
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
-                <p class="font-title-general">
+                <p class="titleColor">
                   {{translate.app.frontEnd.pages.requests_rh.status}}:
                 </p>
                 <h6 *ngIf="request.status == status_approved">
@@ -164,7 +164,7 @@
               </div>
               <div class="col-xl-4 col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
                 *ngIf="request.next_approver_to_json != null">
-                <p class="font-title-general" *ngIf="request.next_approver_to_json.approver_employee != undefined">
+                <p class="titleColor" *ngIf="request.next_approver_to_json.approver_employee != undefined">
                   {{request.next_approver_to_json.approver_employee.short_name}}
                 </p>
                 <p class="" *ngIf="request.next_approver_to_json.approver_employee != undefined">

@@ -4,7 +4,7 @@
       <div class="col-12">
         <div class="row">
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('academic_level')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
               Escolaridad *
             </label>
@@ -16,7 +16,7 @@
             </select>
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('employee_family_id')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-user-o text-primary-hr"></i>
               Beneficiado *
             </label>
@@ -29,7 +29,7 @@
             </select>
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('type_identification')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
               Tipo de documento *
             </label>
@@ -41,7 +41,7 @@
             </select>
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('number_identification')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               Numero de documento *
             </label>
@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="col-12">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-university text-primary-hr"></i>
               Institución *
             </label>
@@ -75,14 +75,14 @@
             </ng-container>
           </div>
           <div class="col-12 col-md-6 text-truncate" *ngIf="formState('career')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-book text-primary-hr"></i>
               Carrera *
             </label>
             <input type="text" class="form-control" [formControl]="forms.career" />
           </div>
           <div class="col-12 col-md-6 text-truncate" *ngIf="formState('semester')">
-            <label class="font-title-general">
+            <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               Semestre *
             </label>
@@ -130,7 +130,7 @@
                   <div class="container">
                     <div class="row">
                       <div class="col-12 col-sm-6 text-truncate">
-                        <label class="font-title-general">
+                        <label class="titleColor">
                           <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                           Concepto *
                         </label>
@@ -144,7 +144,7 @@
                         </select>
                       </div>
                       <div class="col-12 col-sm-6 text-truncate">
-                        <label class="font-title-general">
+                        <label class="titleColor">
                           <i class="fa fa-fw fa-money text-primary-hr"></i>
                           Valor *
                         </label>
@@ -202,7 +202,7 @@
         </div>
       </div>
       <div class="col-12">
-        <label for="celulaInput" class="font-title-general">
+        <label for="celulaInput" class="titleColor">
           <i class="fa fa-fw fa-comment text-primary-hr"></i>
           {{translate.app.frontEnd.pages.requests_rh.forms_requests.observation}}
         </label>

@@ -1,0 +1,317 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-12">
+    <form
+      [formGroup]="form"
+      class="row align-content-center justify-content-center"
+    >
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('name')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Nombre *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.name"
+            />
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('type_identification')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+              Tipo de documento *
+            </label>
+            <select
+              class="form-control"
+              [formControl]="forms.type_identification"
+            >
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let identificationList of document_types_list"
+                [value]="identificationList.id"
+              >
+                {{ identificationList.name }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('number_identification')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Numero de documento *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.number_identification"
+            />
+          </div>
+          <div class="col-12 top-containter" *ngIf="formState('benefist')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+              Beneficiario *
+            </label>
+            <select class="form-control" [formControl]="forms.benefist">
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let benefist of benefists_list"
+                [value]="benefist.id"
+              >
+                {{ benefist.name }}
+              </option>
+            </select>
+          </div>
+          <ng-container *ngIf="!isHigherBenefist">
+            <div class="col-12">
+              <div class="container-fluid widget">
+                <div class="row">
+                  <div class="col-12 top-containter">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+                      Nombre del Acompañante *
+                    </label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [formControl]="forms.accompanying_beneficiary"
+                    />
+                  </div>
+                  <div class="col-12 col-md-6 top-containter">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+                      Tipo de documento del Acompañante *
+                    </label>
+                    <select
+                      class="form-control"
+                      [formControl]="forms.type_identification_accompanying"
+                    >
+                      <option value="">Seleccione</option>
+                      <option
+                        *ngFor="let identificationList of document_types_list"
+                        [value]="identificationList.id"
+                      >
+                        {{ identificationList.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-12 col-md-6 top-containter">
+                    <label class="titleColor">
+                      <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                      Numero de documento del Acompañante *
+                    </label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      [formControl]="forms.number_identification_accompanying"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('date_departure')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Fecha de Salida *
+            </label>
+            <input
+              type="date"
+              class="form-control"
+              [formControl]="forms.date_departure"
+            />
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('origin')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+              Origen *
+            </label>
+            <select class="form-control" [formControl]="forms.origin">
+              <option value="">Seleccione</option>
+              <option *ngFor="let origin of origins_list" [value]="origin.id">
+                {{ origin.name }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('destiny')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-user-o text-primary-hr"></i>
+              Destino *
+            </label>
+            <select class="form-control" [formControl]="forms.destiny">
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let destiny of destinations_list"
+                [value]="destiny.id"
+              >
+                {{ destiny.name }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('cost_center')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Centro de costo *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.cost_center"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div
+              class="border-title h5"
+              style="color: rgba(255, 255, 255, 0.81);"
+            >
+              Lugar de recogida
+            </div>
+          </div>
+          <div class="col-12 col-md-6" *ngIf="formState('city')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-university text-primary-hr"></i>
+              Ciudad *
+            </label>
+            <select class="form-control" [formControl]="forms.city">
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let city of citiesList"
+                [value]="JSON.stringify(city)"
+              >
+                {{ city.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6" *ngIf="formState('address')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-university text-primary-hr"></i>
+              Dirreccion *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.address"
+            />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12 top-containter">
+        <div class="container">
+          <div class="row">
+            <div
+              class="col-12"
+              *ngFor="let imgsaved of objectImg; let index = index"
+            >
+              <div
+                class="alert pr-0"
+                style="background-color:rgba(0,0,0,.2) "
+                role="alert"
+              >
+                <div class="row cursor-general w-100">
+                  <div class="col-auto px-2">{{ index + 1 }}.</div>
+                  <div class="col-auto">
+                    <i
+                      aria-hidden="true"
+                      style="font-size: 1.5em; color: white"
+                      class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
+                    ></i>
+                  </div>
+                  <div class="col text-truncate">
+                    {{ imgsaved.file.name }}
+                  </div>
+                  <div
+                    (click)="deleteUpload(imgsaved)"
+                    class="col-auto text-center d-flex align-items-center pl-3"
+                  >
+                    <h6 class="text-primary-hr cursor-general my-auto">x</h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-left mb-3">
+        <div class="container-fluid">
+          <label *ngIf="objectImg.length == 0" class="titleColor">
+            <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+            <strong>{{
+              translate.app.frontEnd.pages.travel_management.travel.new_travel
+                .attach
+            }}</strong>
+          </label>
+          <app-file-upload
+            [drageable]="true"
+            [nameFile]="filequotation"
+            [extensions]="extensions"
+          ></app-file-upload>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="celulaInput" class="titleColor">
+          <i class="fa fa-fw fa-comment text-primary-hr"></i>
+          {{
+            translate.app.frontEnd.pages.requests_rh.forms_requests.observation
+          }}
+        </label>
+        <textarea
+          type="text"
+          rows="3"
+          style="height: auto !important;"
+          class="form-control"
+          [formControl]="forms.observation_request"
+        >
+        </textarea>
+      </div> -->
+      <div class="col-md-12 mt-2">
+        <div class="row justify-content-end">
+          <div class="col-lg-3 col-md-6 col-lg-4 col-12">
+            <button
+              type="button"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block"
+              (click)="submitSend()"
+              [attr.disabled]="validateForms ? null : true"
+            >
+              <i class="fa fa-fw fa-floppy-o"></i
+              >{{
+                translate.app.frontEnd.pages.requests_rh.forms_requests.save
+              }}
+            </button>
+            <button
+              type="button"
+              *ngIf="!showSubmit"
+              class="btn btn-warning btn-block"
+            >
+              <i class="fa fa-fw fa-spinner fa-spin"></i
+              >{{
+                translate.app.frontEnd.pages.requests_rh.forms_requests.loading
+              }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
