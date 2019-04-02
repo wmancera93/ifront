@@ -106,6 +106,12 @@ import { TravelAllowanceReportComponent } from './travel-management/reports/trav
 import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 import { ReportTrainingComponent } from './events-management/training/report-training/report-training.component';
 import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
+import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
+import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
+import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
+import { HousingComponent } from './travel-management/housing/housing.component';
+import { NewHousingComponent } from './travel-management/housing/new-housing/new-housing.component';
+import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 
 
 
@@ -212,6 +218,12 @@ import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-
     TravelApproverReportComponent,
     ReportTrainingComponent,
     RequestsApproversLogsComponent,
+    TransportationLogisticsComponent,
+    TrasnportationReportComponent,
+    NewTransportComponent,
+    HousingComponent,
+    NewHousingComponent,
+    HousingReportComponent,
   ],
   providers: [
     ReportTravelsService

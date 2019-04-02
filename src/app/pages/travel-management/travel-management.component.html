@@ -2,13 +2,13 @@
   <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
-<div *ngIf="!token" class="heigth-content-general"  >
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-bars"></i>
-          {{translate.app.frontEnd.pages.travel_management.tittle}}
+          {{translate.tittle}}
         </div>
       </div>
     </div>
@@ -16,12 +16,12 @@
   <div class="row-hr-container justify-content-left">
     <div class="col-12">
       <div class="row justify-content-left">
-        <div routerLink="{{button.route}}" class="col five-col-no" style="margin-left: -15px;" *ngFor="let button of buttonInfo;" (mouseleave)="closeTooltip()"
-        (mouseover)="showTooltip($event,button)">
-          <div class="widget-travel wg-hover-bg  bg-white height-notification-travel cursor-general" style="padding-top:25px;" >
-            <div class="row justify-content-center" >
+        <div routerLink="{{button.route}}" class="col-12 col-sm-6 col-md-4 five-col-no" *ngFor="let button of buttonInfo;" (mouseleave)="closeTooltip()"
+          (mouseover)="showTooltip($event,button)">
+          <div class="widget-travel wg-hover-bg  bg-white height-notification-travel cursor-general" style="padding-top:25px;">
+            <div class="row justify-content-center">
               <div class="col-12 fontName top-general-p" style="font-size: 16px;">
-                <div class="row align-items-center" >
+                <div class="row align-items-center">
                   <div class="col-12">
                     <span class="fa-stack" style="height: 80px; font-size: 2.7em;">
                       <i class="{{button.icon_primary}} fa-stack-2x color-primary-button"></i>

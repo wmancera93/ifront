@@ -20,11 +20,12 @@ export class TravelManagementComponent implements OnInit {
   public eventPosition: any = [];
   token
   public dataUserTravels: User = null;
-  public translate: Translate = null;
+  public translate: any = null;
 
   constructor(private userSharedService: UserSharedService,
     public tooltipSharedService: TooltipSharedService, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
+
+    this.translate = this.translateService.getTranslate().app.frontEnd.pages.travel_management;
   }
 
   ngOnInit() {
@@ -35,173 +36,191 @@ export class TravelManagementComponent implements OnInit {
       behavior: 'smooth'
     });
 
-    if ((this.dataUserTravels.employee.is_travel_manager == true) && (this.dataUserTravels.employee.is_approver == true)) {
+    const {
+      titlle_wiget_travel_ts,
+      message_wiget_travel_ts,
+      titlle_wiget_advance_ts,
+      message_wiget_advance_ts,
+      titlle_wiget_allowance_ts,
+      message_wiget_allowance_ts,
+      titlle_wiget_approver_ts,
+      message_wiget_approver_ts,
+      titlle_wiget_pendinga_ts,
+      message_wiget_pendinga_ts,
+      titlle_wiget_report_ts,
+      message_wiget_report_ts,
+      titlle_wiget_hotel_ts,
+      message_wiget_hotel_ts,
+    } = this.translate
 
+    const commonButtons = [{
+      title: titlle_wiget_travel_ts,
+      icon_primary: "fa fa-globe",
+      icon_secundary: "fa fa-plane",
+      tooltipText: message_wiget_travel_ts,
+      route: "/ihr/travels"
+    },
+    {
+      title: titlle_wiget_advance_ts,
+      icon_primary: "fa fa-money",
+      icon_secundary: "",
+      tooltipText: message_wiget_advance_ts,
+      route: "/ihr/advances"
+    },
+    {
+      title: titlle_wiget_allowance_ts,
+      icon_primary: "fa fa-circle-thin",
+      icon_secundary: "fa fa-usd",
+      tooltipText: message_wiget_allowance_ts,
+      route: "/ihr/spend"
+    }
+    ];
+
+    const { employee } = this.dataUserTravels;
+    if ((employee.is_travel_manager) && (employee.is_approver)) {
       this.buttonInfo = [
+        ...commonButtons,
         {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
-          icon_primary: "fa fa-globe",
-          icon_secundary: "fa fa-plane",
-          tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
-          route: "/ihr/travels"
-        },
-        {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
-          icon_primary: "fa fa-money",
-          icon_secundary: "",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
-          route: "/ihr/advances"
-        },
-        {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
-          icon_primary: "fa fa-circle-thin",
-          icon_secundary: "fa fa-usd",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
-          route: "/ihr/spend"
-        },
-        {
-          title:this.translate.app.frontEnd.pages.travel_management.titlle_wiget_approver_ts,
+          title: titlle_wiget_approver_ts,
           icon_primary: "fa fa fa-square-o",
           icon_secundary: "fa fa-clock-o",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_approver_ts,
+          tooltipText: message_wiget_approver_ts,
           route: "/ihr/pending_travel"
         },
         {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_pendinga_ts,
+          title: titlle_wiget_pendinga_ts,
           icon_primary: "fa fa fa-square-o",
           icon_secundary: "fa fa-check",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_pendinga_ts,
+          tooltipText: message_wiget_pendinga_ts,
           route: "/ihr/management_travel"
         },
         {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
+          title: titlle_wiget_report_ts,
           icon_primary: "fa fa-table",
           icon_secundary: "fa fa-search",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
+          tooltipText: message_wiget_report_ts,
           route: "/ihr/travel_report"
         },
         {
-          title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_hotel_ts,
+          title: titlle_wiget_hotel_ts,
           icon_primary: "fa fa-circle-thin",
           icon_secundary: "fa fa-bed",
-          tooltipText: this.translate.app.frontEnd.pages.travel_management. message_wiget_hotel_ts,
+          tooltipText: message_wiget_hotel_ts,
           route: "/ihr/hotels"
         },
       ];
     } else {
-      if (this.dataUserTravels.employee.is_travel_approver) {
+      if (employee.is_travel_approver) {
 
         this.buttonInfo = [
+          ...commonButtons,
           {
-            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
-            icon_primary: "fa fa-globe",
-            icon_secundary: "fa fa-plane",
-            tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
-            route: "/ihr/travels"
-          },
-          {
-            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
-            icon_primary: "fa fa-money",
-            icon_secundary: "",
-            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
-            route: "/ihr/advances"
-          },
-          {
-            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
-            icon_primary: "fa fa-circle-thin",
-            icon_secundary: "fa fa-usd",
-            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
-            route: "/ihr/spend"
-          },
-          {
-            title:this.translate.app.frontEnd.pages.travel_management.titlle_wiget_approver_ts,
+            title: titlle_wiget_approver_ts,
             icon_primary: "fa fa fa-square-o",
             icon_secundary: "fa fa-clock-o",
-            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_approver_ts,
+            tooltipText: message_wiget_approver_ts,
             route: "/ihr/pending_travel"
           },
           {
-            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_pendinga_ts,
+            title: titlle_wiget_pendinga_ts,
             icon_primary: "fa fa fa-square-o",
             icon_secundary: "fa fa-check",
-            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_pendinga_ts,
+            tooltipText: message_wiget_pendinga_ts,
             route: "/ihr/management_travel"
           },
           {
-            title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
+            title: titlle_wiget_report_ts,
             icon_primary: "fa fa-table",
             icon_secundary: "fa fa-search",
-            tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
+            tooltipText: message_wiget_report_ts,
             route: "/ihr/travel_report"
-          }
+          },
         ]
       } else {
-        if (this.dataUserTravels.employee.is_travel_manager) {
+        if (employee.is_travel_manager) {
           this.buttonInfo = [
+            ...commonButtons,
             {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
-              icon_primary: "fa fa-globe",
-              icon_secundary: "fa fa-plane",
-              tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
-              route: "/ihr/travels"
-            },
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
-              icon_primary: "fa fa-money",
-              icon_secundary: "",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
-              route: "/ihr/advances"
-            },
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
-              icon_primary: "fa fa-circle-thin",
-              icon_secundary: "fa fa-usd",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
-              route: "/ihr/spend"
-            },
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_report_ts,
+              title: titlle_wiget_report_ts,
               icon_primary: "fa fa-table",
               icon_secundary: "fa fa-search",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_report_ts,
+              tooltipText: message_wiget_report_ts,
               route: "/ihr/travel_report"
             },
             {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_hotel_ts,
+              title: titlle_wiget_hotel_ts,
               icon_primary: "fa fa-circle-thin",
               icon_secundary: "fa fa-bed",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management. message_wiget_hotel_ts,
+              tooltipText: message_wiget_hotel_ts,
               route: "/ihr/hotels"
             },
           ];
         }
         else {
           this.buttonInfo = [
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_travel_ts,
-              icon_primary: "fa fa-globe",
-              icon_secundary: "fa fa-plane",
-              tooltipText:this.translate.app.frontEnd.pages.travel_management.message_wiget_travel_ts,
-              route: "/ihr/travels"
-            },
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_advance_ts,
-              icon_primary: "fa fa-money",
-              icon_secundary: "",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_advance_ts,
-              route: "/ihr/advances"
-            },
-            {
-              title: this.translate.app.frontEnd.pages.travel_management.titlle_wiget_allowance_ts,
-              icon_primary: "fa fa-circle-thin",
-              icon_secundary: "fa fa-usd",
-              tooltipText: this.translate.app.frontEnd.pages.travel_management.message_wiget_allowance_ts,
-              route: "/ihr/spend"
-            }
+            ...commonButtons,
           ]
         }
       }
     }
+    switch (this.dataUserTravels.company_id) {
+      case 38:
+        if (employee.is_travel_manager) {
+          this.buttonInfo = [
+            {
+              title: 'Gestión de alojamientos',
+              icon_primary: "fa fa-circle-thin",
+              icon_secundary: "fa fa-bed",
+              tooltipText: 'Aqui puede crear campamentos',
+              route: "/ihr/housing"
+            },
+            {
+              title: 'Gestión de Transporte',
+              icon_primary: "fa fa-bus",
+              icon_secundary: "fa fa-users",
+              tooltipText: 'Aqui puede organizar flotas',
+              route: "/ihr/logistics_transportations"
+            },
+            {
+              title: 'Reporte de Flotas',
+              icon_primary: "fa fa-table",
+              icon_secundary: "fa fa-bus",
+              tooltipText: 'Aqui puede ver los cupos de viaje',
+              route: "/ihr/logistics_transportations"
+            }
+          ]
+        }
+        break;
+      case 4:
+        if (!employee.is_travel_manager) {
+          this.buttonInfo = [...this.buttonInfo, {
+            title: 'Gestión de alojamientos',
+            icon_primary: "fa fa-circle-thin",
+            icon_secundary: "fa fa-bed",
+            tooltipText: 'Aqui puede crear campamentos',
+            route: "/ihr/housing"
+          },
+          {
+            title: 'Gestión de Transporte',
+            icon_primary: "fa fa-bus z-index-10",
+            icon_secundary: "fa fa-users z-index-1",
+            tooltipText: 'Aqui puede organizar flotas',
+            route: "/ihr/logistics_transportations"
+          },
+          {
+            title: 'Reporte de Flotas',
+            icon_primary: "fa fa-table",
+            icon_secundary: "fa fa-bus",
+            tooltipText: 'Aqui puede ver los cupos de viaje',
+            route: "/ihr/logistics_transportations"
+          }]
+        }
+        break;
+
+      default:
+        break;
+    }
+
 
   }
 
@@ -217,6 +236,8 @@ export class TravelManagementComponent implements OnInit {
       positionX: event.clientX,
       positionY: event.clientY
     }
+    console.log(this.eventPosition);
+
     setTimeout(() => {
       this.tooltipSharedService.setDataTooltip({ text: data, show: this.flagShowTooltip, position: this.eventPosition });
     }, 100);

@@ -138,7 +138,7 @@
                     </p>
                   </div>
 
-                  <div class="col-12 text-left" *ngIf="approvals[0].image != undefined">
+                  <div class="col-12 text-left" *ngIf="approvals[0].image?.url">
                     <p class="font-title-general"  *ngIf="translate !== null">
                       <i class="fa fa-fw fa-paperclip font-color-default"></i>
                       {{translate.app.frontEnd.components.common.approvals_details.attached}}:
