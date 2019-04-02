@@ -1,0 +1,16 @@
+<div class="msform">
+  <ul class="progressbar p-0 d-flex justify-content-center">
+    <li
+      *ngFor="let step of steps; index as i"
+      [ngClass]="{ active: stepActive >= i }"
+    >
+      {{ step.label }}
+    </li>
+  </ul>
+  <ng-container *ngFor="let step of steps; index as i">
+    <ng-template
+      [ngTemplateOutlet]="step.component"
+      *ngIf="stepActive === i"
+    ></ng-template>
+  </ng-container>
+</div>
