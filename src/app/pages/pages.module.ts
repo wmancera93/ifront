@@ -109,6 +109,9 @@ import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-
 import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
+import { HousingComponent } from './travel-management/housing/housing.component';
+import { NewHousingComponent } from './travel-management/housing/new-housing/new-housing.component';
+import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 
 
 
@@ -218,6 +221,9 @@ import { NewTransportComponent } from './travel-management/transportation-logist
     TransportationLogisticsComponent,
     TrasnportationReportComponent,
     NewTransportComponent,
+    HousingComponent,
+    NewHousingComponent,
+    HousingReportComponent,
   ],
   providers: [
     ReportTravelsService

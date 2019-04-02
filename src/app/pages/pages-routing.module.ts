@@ -65,6 +65,7 @@ import { TravelApproverReportComponent } from './travel-management/reports/trave
 import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
 import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
+import { HousingComponent } from './travel-management/housing/housing.component';
 
 const routes: Routes = [
     {
@@ -331,7 +332,7 @@ const routes: Routes = [
     },
     {
         path: 'housing',
-        component: TravelManagementComponent
+        component: HousingComponent
     },
     {
         path: 'logistics_transportations',
