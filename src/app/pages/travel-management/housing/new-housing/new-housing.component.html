@@ -1,0 +1,199 @@
+<ng-template #stepOne>
+  <div class="col-12">
+    <div class="row py-4">
+      <div class="col-12 col-md-6 text-truncate">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-bus text-primary-hr"></i>
+          Nombre *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="forms.name"
+          [ngStyle]="{ property: expression }"
+        />
+      </div>
+      <div class="col-12 col-md-6 top-containter">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-users text-primary-hr"></i>
+          Ciudad *
+        </label>
+        <select class="form-control" [formControl]="forms.city">
+          <option value="">Seleccione</option>
+          <option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #stepTwo>
+  <div class="col-12">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-lg-10 col-xl-11">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Cantidad de habitaciones *
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [formControl]="forms.bedrooms"
+                />
+              </div>
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i class="fa fa-fw hourglass-start text-primary-hr"></i>
+                  Cantidad de camas *
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [formControl]="forms.beds"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+          <div class="w-100 my-auto">
+            <button
+              type="button"
+              class="btn btn-success btn-block cursor-general mt-4 w-100"
+              (click)="addTrayect()"
+              [attr.disabled]="
+                forms.bedrooms.value == '' || forms.beds.value == ''
+                  ? true
+                  : null
+              "
+            >
+              <i class=" fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="table-responsive mt-3">
+            <ng-container *ngIf="arrayBedrooms.length > 0; else elseTemplate">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th class="text-center">
+                      Cantidad de habitaciones
+                    </th>
+                    <th class="text-center">
+                      Cantidad de camas
+                    </th>
+                    <th class="text-center">
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="color: #fff;">
+                  <tr *ngFor="let bedroom of arrayBedrooms">
+                    <td>
+                      {{ bedroom.bedrooms }}
+                    </td>
+                    <td>
+                      {{ bedroom.beds }}
+                    </td>
+                    <td width="10px">
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-block btn-sm cursor-general"
+                        (click)="removeTrayect(bedroom.key)"
+                      >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="alert alert-warning text-center" role="alert">
+                No tienes habitaciones agregadas.
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template
+  #modalForms
+  let-modal
+  ng-init="typeCase = formRequests.id_activity"
+>
+  <div class="modal-content bodyColorInfo">
+    <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div class="col-12 col-lg-10 text-center">
+        <h4 class="modal-title titleColor text-shadow">
+          Solicitud de alojamiento
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <app-stepper-components
+            [steps]="[
+              {
+                label: 'Registro de alojamiento',
+                component: stepOne
+              },
+              {
+                label: 'Registro de habitaciones',
+                component: stepTwo
+              }
+            ]"
+            [stepActive]="stepActive"
+          ></app-stepper-components>
+        </div>
+      </div>
+    </div>
+    <app-alerts></app-alerts>
+    <div class="modal-footerInfo justify-content-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div
+              class="btn text-center btn-secondary btn-block"
+              (click)="handleStep({ back: true })"
+            >
+              <h6>Atras</h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn text-center btn-success btn-block"
+              (click)="handleStep({ next: true })"
+            >
+              <ng-container *ngIf="stepActive === 0">
+                <h6>Siguiente</h6>
+              </ng-container>
+              <ng-container *ngIf="stepActive === 1">
+                <h6>Guardar</h6>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn btn-primary text-center btn-block"
+              (click)="modalActions.close()"
+            >
+              <h6>Close</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

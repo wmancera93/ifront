@@ -10,7 +10,10 @@ import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigatio
 import { FooterComponent } from './layout/footer/footer.component';
 import { ToasterContainerComponent } from './common/toaster-container/toaster-container.component';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
-import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {
+  BrowserAnimationsModule,
+  NoopAnimationsModule
+} from '@angular/platform-browser/animations';
 import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 import { CalendarComponent } from './common/widgets/calendar/calendar.component';
 import { NewspaperComponent } from './common/widgets/newspaper/newspaper.component';
@@ -48,9 +51,7 @@ import { ApprovalsDetailsTravelsComponent } from './common/travels/approvals-det
 import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.component';
 import { ShowDistSpendsComponent } from './common/travels/approvals-details-travels/show-dist-spends/show-dist-spends.component';
 import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-travels/show-hotels-journey/show-hotels-journey.component';
-
-
-
+import { StepperComponentsComponent } from './common/stepper-components/stepper-components.component';
 
 @NgModule({
   imports: [
@@ -99,7 +100,8 @@ import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-t
     ApprovalsDetailsTravelsComponent,
     PdfTravelComponent,
     ShowDistSpendsComponent,
-    ShowHotelsJourneyComponent
+    ShowHotelsJourneyComponent,
+    StepperComponentsComponent
   ],
   exports: [
     HeaderComponent,
@@ -128,10 +130,11 @@ import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-t
     DynamicFormComponent,
     TooltipComponent,
     ApprovalsDetailsTravelsComponent,
-    PdfTravelComponent
+    PdfTravelComponent,
+    StepperComponentsComponent
   ],
   providers: [
     // ToasterService
   ]
 })
-export class ComponentsModule { }
+export class ComponentsModule {}

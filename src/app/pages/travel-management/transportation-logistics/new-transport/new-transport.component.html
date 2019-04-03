@@ -73,58 +73,65 @@
 </ng-template>
 <ng-template #stepTwo>
   <div class="col-12">
-    <div class="container-fluid widget">
+    <div class="container-fluid py-3">
       <div class="row">
         <div class="col-12">
           <div class="table-responsive mt-3">
-            <table
-              class="table table-sm table-striped table-bordered table-hover"
-            >
-              <thead>
-                <tr>
-                  <th class="text-center">
-                    Origen
-                  </th>
-                  <th class="text-center">
-                    Destino
-                  </th>
-                  <th class="text-center">
-                    Fecha y hora de salida
-                  </th>
-                  <th class="text-center">
-                    Duración
-                  </th>
-                  <th class="text-center">
-                    Eliminar
-                  </th>
-                </tr>
-              </thead>
-              <tbody style="color: #fff;">
-                <tr *ngFor="let trayects of arrayTrayects">
-                  <td>
-                    {{ trayects.origin }}
-                  </td>
-                  <td>
-                    {{ trayects.destiny }}
-                  </td>
-                  <td>
-                    {{ trayects.date_time_departure }}
-                  </td>
-                  <td>
-                    {{ trayects.durationTrayect }}
-                  </td>
-                  <td width="10px">
-                    <button
-                      type="button"
-                      class="btn btn-danger btn-block btn-sm cursor-general"
-                      (click)="removeTrayect(trayects.key)"
-                    >
-                      <i class="fa fa-minus"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            <ng-container *ngIf="arrayTrayects.length > 0; else elseTemplate">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th class="text-center">
+                      Origen
+                    </th>
+                    <th class="text-center">
+                      Destino
+                    </th>
+                    <th class="text-center">
+                      Fecha y hora de salida
+                    </th>
+                    <th class="text-center">
+                      Duración
+                    </th>
+                    <th class="text-center">
+                      Eliminar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="color: #fff;">
+                  <tr *ngFor="let trayects of arrayTrayects">
+                    <td>
+                      {{ trayects.origin }}
+                    </td>
+                    <td>
+                      {{ trayects.destiny }}
+                    </td>
+                    <td>
+                      {{ trayects.date_time_departure }}
+                    </td>
+                    <td>
+                      {{ trayects.durationTrayect }}
+                    </td>
+                    <td width="10px">
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-block btn-sm cursor-general"
+                        (click)="removeTrayect(trayects.key)"
+                      >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div class="alert alert-warning text-center" role="alert">
+                No tienes trayectos agregados.
+              </div>
+            </ng-template>
           </div>
         </div>
         <div class="col-12 col-lg-10 col-xl-11">
