@@ -46,6 +46,7 @@ export class ApprovalsDetailsComponent implements OnInit {
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
+        debugger
         this.switch = 'on';
         this.description = '';
         this.approvals = [];
