@@ -30,7 +30,7 @@ export class AppComponent {
     public mainService: MainService,
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService) {
-    
+
     let url = window.location.href;
     let ambient;
 
@@ -64,8 +64,28 @@ export class AppComponent {
 
     let languaje = 'es';
 
-    if(JSON.parse(localStorage.getItem("treeLanguaje")) !== null){
+    if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
       languaje = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase();
+
+      this.tokenService.init(
+        {
+          apiBase: this.baseUrl,
+          apiPath: 'api/v2/' + languaje,
+          signInPath: 'auth/sign_in',
+          signOutPath: 'auth/sign_out',
+          validateTokenPath: 'auth/validate_token',
+          signOutFailedValidate: false,
+          registerAccountPath: 'auth/password/new',
+          updatePasswordPath: 'auth/password',
+          resetPasswordPath: 'auth/password',
+          globalOptions: {
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            }
+          }
+        }
+      );
     }
 
     this.userSharedService.getUser().subscribe((data) => {
