@@ -11,6 +11,8 @@ export class TransportationLogisticsComponent implements OnInit {
   public fleets: any[] = [];
   public idFleets: number;
   public is_collapse: boolean;
+  token
+  
   constructor(public router: Router, public alert: AlertsService) { }
 
   ngOnInit() {

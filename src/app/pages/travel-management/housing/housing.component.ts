@@ -11,6 +11,8 @@ export class HousingComponent implements OnInit {
   public housing: any[] = [];
   public idHousing: number;
   public is_collapse: boolean;
+  token
+  
   constructor(public router: Router, public alert: AlertsService) { }
 
   ngOnInit() {

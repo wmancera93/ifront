@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
   public passwordLogin: string;
   public checkedLocal: string;
 
+  public baseUrl: string;
 
   constructor(private tokenService: Angular2TokenService,
     public router: Router,
@@ -44,6 +45,36 @@ export class LoginComponent implements OnInit {
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
 
+    let url = window.location.href;
+    let ambient;
+
+    if (url.split("localhost").length === 1) {
+      if (url.split("-").length > 1) {
+        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+      }
+    } else {
+      ambient = 'development';
+    }
+
+    switch (ambient) {
+      case 'development':
+        this.baseUrl = environment.apiBaseHr_development;
+        break;
+      case 'dev':
+        this.baseUrl = environment.apiBaseHr_development;
+        break;
+      case 'staging':
+        this.baseUrl = environment.apiBaseHr_staging;
+        break;
+      case 'demo':
+        this.baseUrl = environment.apiBaseHr_staging;
+        break;
+
+
+      default:
+        this.baseUrl = environment.apiBaseHr_production;
+        break;
+    }
 
     this.translate = this.translateService.getTranslate();
 
@@ -58,6 +89,8 @@ export class LoginComponent implements OnInit {
       this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
     }
 
+    this.initApp();
+
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -68,18 +101,39 @@ export class LoginComponent implements OnInit {
 
   }
 
+  initApp() {
+    this.tokenService.init(
+      {
+        apiBase: this.baseUrl,
+        apiPath: 'api/v2/' + this.languaje,
+        signInPath: 'auth/sign_in',
+        signOutPath: 'auth/sign_out',
+        validateTokenPath: 'auth/validate_token',
+        signOutFailedValidate: false,
+        registerAccountPath: 'auth/password/new',
+        updatePasswordPath: 'auth/password',
+        resetPasswordPath: 'auth/password',
+        globalOptions: {
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          }
+        }
+      }
+    );
+  }
+
   changeLanguaje(param: string) {
     this.languaje = param;
     this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);
       this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
+      this.initApp();
     });
-    this.tokenService.atOptions.apiPath = 'api/v2/' + this.languaje;
   }
 
 
   ngOnInit() {
-
     let rememeberObject = JSON.parse(localStorage.getItem("remember"));
 
     this.txtEmail = rememeberObject == null ? '' : rememeberObject[0].email;
@@ -149,7 +203,6 @@ export class LoginComponent implements OnInit {
   }
 
   singInSession() {
-
     this.changeLanguaje(this.languaje);
 
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
