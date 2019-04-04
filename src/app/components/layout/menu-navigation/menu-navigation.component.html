@@ -198,13 +198,13 @@
           <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.banners}}</span>
         </a>
       </li>
-      <li id="liEvaluations">
+      <li id="liEvaluations" *ngIf="dataEnterprise.show_evaluations">
         <a class="nav-link bg-menu" routerLink="/ihr/evaluated" (click)="clickOptionMenu('liEvaluations','toggle-Evaluations', 'evaluations')">
           <i class="fa fa-list"></i>
           <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.evaluations}}</span>
         </a>
       </li>
-      <li id="liPerformanceEvaluation" >
+      <li id="liPerformanceEvaluation"  *ngIf="dataEnterprise.show_performance_evaluacion">
         <a id="aPerformanceEvaluation" class="nav-link bg-menu" data-toggle="collapse" href="#performanceEval" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-PerformanceEval', 'performanceEval')">
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.performance_evaluation}}</span>
@@ -227,7 +227,7 @@
           <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.manage_travel}}</span>
         </a>
       </li>
-      <li id="liEventsManagement">
+      <li id="liEventsManagement" *ngIf="dataEnterprise.show_event_management">
         <a id="aEventsManagement" class="nav-link bg-menu" data-toggle="collapse" href="#eventsManagement" (click)="clickOptionMenu('liEventsManagement','toggle-eventsManagement', 'eventsManagement')">
           <i class="fa fa-flag"></i>
           <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.manage_training}}</span>

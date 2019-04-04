@@ -112,7 +112,7 @@ export class QueriesService {
   }
   getLoansExcel(idEmployee: string) {
     return this.tokenService.get('consultations/loans_export/' + idEmployee + '.xlsx')
-      .map((data: any) => data.json());
+      .map((data: any) => data);
   }
   getEnjoyedVacationExcel(idEmployee: string) {
     return this.tokenService.get('consultations/vacation_enjoyed_export/' + idEmployee + '.xlsx')

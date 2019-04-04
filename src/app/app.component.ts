@@ -23,6 +23,7 @@ export class AppComponent {
   public pageWrapper: string;
   public heightContenGeneral: number = 0;
   public dataUser: User = null;
+  public isExplorer: boolean;
 
   public baseUrl: string;
 
@@ -30,7 +31,7 @@ export class AppComponent {
     public mainService: MainService,
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService) {
-    
+
     let url = window.location.href;
     let ambient;
 
@@ -64,7 +65,7 @@ export class AppComponent {
 
     let languaje = 'es';
 
-    if(JSON.parse(localStorage.getItem("treeLanguaje")) !== null){
+    if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
       languaje = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase();
     }
 
@@ -137,6 +138,14 @@ export class AppComponent {
         document.head.removeChild(oldLink);
       }
       document.head.appendChild(link)
+    }
+    this.validateBrowser();
+  }
+
+  validateBrowser() {
+    this.isExplorer = /msie\s|trident\/|edge\//i.test(window.navigator.userAgent);
+    if (this.isExplorer){
+      alert("Recuerde que para una mejor funcionalidad del portal se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari")
     }
   }
 
