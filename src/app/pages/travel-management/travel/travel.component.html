@@ -10,10 +10,7 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-plane"></i>
-          {{
-            translate.app.frontEnd.pages.travel_management.travel
-              .tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5 text-center cursor-general"
@@ -23,10 +20,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.back
-                }}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -50,10 +44,7 @@
                 <i class="fa fa-plus"
                   >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
                 >
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.bnt_new
-                }}
+                {{ parseT('bnt_new') | translate }}
               </button>
             </div>
           </div>
@@ -64,10 +55,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .query_filters
-              }}
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse"
@@ -97,10 +85,7 @@
           <div class="col-12" style="padding-bottom: 15px">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.btn_hr
-                }}</label>
+                <label>{{ parseT('btn_hr') | translate }}</label>
                 <div class="row">
                   <div class="col-9">
                     <input
@@ -124,10 +109,7 @@
                 </div>
               </div>
               <div class="col-lg-3 col-md-6 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.btn_sap
-                }}</label>
+                <label>{{ parseT('btn_sap') | translate }}</label>
                 <div class="row">
                   <div class="col-9">
                     <input
@@ -154,8 +136,7 @@
                 <div class="row">
                   <div class="col-5">
                     <label>{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.date_begin
+                      parseT('date_begin') | translate
                     }}</label>
                     <input
                       type="date"
@@ -165,8 +146,7 @@
                   </div>
                   <div class="col-5">
                     <label>{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.date_end
+                      parseT('date_end') | translate
                     }}</label>
                     <input
                       type="date"
@@ -190,10 +170,7 @@
               </div>
 
               <div class="col-lg-3 col-md-4 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.status
-                }}</label>
+                <label>{{ parseT('status') | translate }}</label>
                 <select
                   type="date"
                   [(ngModel)]="status"
@@ -201,35 +178,28 @@
                   (change)="filter('status')"
                 >
                   <option value="">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.all_status
+                    parseT('all_status') | translate
                   }}</option>
                   <option value="ReqReg">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.resgistered
+                    parseT('resgistered') | translate
                   }}</option>
                   <option value="ReqPro">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.process
+                    parseT('process') | translate
                   }}</option>
                   <option value="ReqApp">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.approved
+                    parseT('approved') | translate
                   }}</option>
                   <option value="ReqCan">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.cancelled
+                    parseT('cancelled') | translate
                   }}</option>
                   <option value="ReqWai">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.hold_on
+                    parseT('hold_on') | translate
                   }}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
                 <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.status_settle
+                  parseT('status_settle') | translate
                 }}</label>
                 <select
                   type="date"
@@ -238,28 +208,21 @@
                   (change)="filter('statusLiquid')"
                 >
                   <option value="">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.all_status
+                    parseT('all_status') | translate
                   }}</option>
                   <option value="LiqPen">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.to_settle
+                    parseT('to_settle') | translate
                   }}</option>
                   <option value="LiqApp">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.settlement
+                    parseT('settlement') | translate
                   }}</option>
                   <option value="LiqAnn">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.canceled
+                    parseT('canceled') | translate
                   }}</option>
                 </select>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.employee
-                }}</label>
+                <label>{{ parseT('employee') | translate }}</label>
                 <div class="row">
                   <div class="col-9">
                     <input
@@ -299,10 +262,7 @@
               (click)="checkTravels('travels_request')"
             />
             <b>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .select_my
-              }}
+              {{ parseT('select_my') | translate }}
             </b>
             &nbsp;&nbsp;
             <input
@@ -314,10 +274,7 @@
               (click)="checkTravels('my_travels_request')"
             />
             <b *ngIf="userAuthenticated.employee.trip_by_third">
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .select_third
-              }}
+              {{ parseT('select_third') | translate }}
             </b>
           </form>
         </div>
@@ -336,10 +293,7 @@
                     *ngIf="travels.ticket_cli !== null"
                     class="badge badge-warning"
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.travel_sap
-                    }}
+                    {{ parseT('travel_sap') | translate }}
                     # {{ travels.ticket_cli }}
                   </span>
                   <span
@@ -356,33 +310,21 @@
                         class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general"
                         (click)="messages_error(travels.ticket)"
                       ></i
-                      >{{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.error_synch
-                      }}
+                      >{{ parseT('error_synch') | translate }}
                     </h6>
                   </span>
                   <span class="badge badge-warning">
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.travel_ihr
-                    }}
+                    {{ parseT('travel_ihr') | translate }}
                     # {{ travels.ticket }}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-plane"></i>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.date_in
-                  }}
+                  {{ parseT('date_in') | translate }}
                   {{ travels.date_begin_format }}
                 </p>
                 <p>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.date_out
-                  }}
+                  {{ parseT('date_out') | translate }}
                   {{ travels.date_end_format }}
                 </p>
               </div>
@@ -406,10 +348,7 @@
                 class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.status_label
-                  }}:
+                  {{ parseT('status_label') | translate }}:
                 </p>
                 <h6 *ngIf="travels.status_request == 'Aprobado'">
                   <span class="badge badge-primary">
@@ -467,10 +406,7 @@
                   }}
                 </p>
                 <p class="">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.approver
-                  }}
+                  {{ parseT('approver') | translate }}
                   {{ travels.next_approver_to_json.level }}
                 </p>
                 <p
@@ -478,10 +414,7 @@
                   style="text-decoration: underline  #0275d8!important"
                   (click)="seeAproverFlow(travels.ticket)"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.flow_approver
-                  }}
+                  {{ parseT('flow_approver') | translate }}
                 </p>
               </div>
               <div
@@ -492,17 +425,14 @@
                 "
               >
                 <p class="font-title-general">
-                  {{ aproover }}
+                  {{ aproover | translate }}
                 </p>
                 <p
                   class="text-primary cursor-general"
                   style="text-decoration: underline  #0275d8!important"
                   (click)="seeAproverFlow(travels.ticket)"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.flow_approver
-                  }}
+                  {{ parseT('flow_approver') | translate }}
                 </p>
               </div>
               <div class="col-lg-2 col-md-3 col-12 text-center top-p">
@@ -577,10 +507,7 @@
                         .is_active
                     "
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.see
-                    }}
+                    {{ parseT('see') | translate }}
                   </div>
                   <div
                     class="col-4"
@@ -590,10 +517,7 @@
                         .is_active
                     "
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.see
-                    }}
+                    {{ parseT('see') | translate }}
                   </div>
                   <div
                     class="col-4"
@@ -603,10 +527,7 @@
                         .is_active
                     "
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit
-                    }}
+                    {{ parseT('edit') | translate }}
                   </div>
                   <div
                     class="col-4"
@@ -616,10 +537,7 @@
                         .is_active
                     "
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit
-                    }}
+                    {{ parseT('edit') | translate }}
                   </div>
                   <div
                     class="col-4"
@@ -629,10 +547,7 @@
                     "
                     (click)="deleteTravels(travels.ticket)"
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.erase
-                    }}
+                    {{ parseT('erase') | translate }}
                   </div>
                   <div
                     class="col-4"
@@ -642,10 +557,7 @@
                         .is_active
                     "
                   >
-                    {{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.erase
-                    }}
+                    {{ parseT('erase') | translate }}
                   </div>
                 </div>
               </div>

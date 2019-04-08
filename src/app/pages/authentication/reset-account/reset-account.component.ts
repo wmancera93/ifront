@@ -16,7 +16,7 @@ declare const ga: any;
 @Component({
   selector: 'app-reset-account',
   templateUrl: './reset-account.component.html',
-  styleUrls: ['./reset-account.component.css']
+  styleUrls: ['./reset-account.component.css'],
 })
 export class ResetAccountComponent implements OnInit {
   public txtEmail = '';
@@ -37,7 +37,7 @@ export class ResetAccountComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -80,7 +80,7 @@ export class ResetAccountComponent implements OnInit {
             '-1px',
             '-12px',
             '',
-            ''
+            '',
           );
         }, 200);
       });
@@ -91,7 +91,7 @@ export class ResetAccountComponent implements OnInit {
     if (this.txtEmail.length !== 0) {
       this.tokenService
         .resetPassword({
-          email: this.txtEmail
+          email: this.txtEmail,
         })
         .subscribe(
           res => {
@@ -100,8 +100,8 @@ export class ResetAccountComponent implements OnInit {
                 {
                   type: 'success',
                   title: this.t('title_warning_ts'),
-                  message: res.json().message
-                }
+                  message: res.json().message,
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
               this.txtEmail = '';
@@ -109,7 +109,7 @@ export class ResetAccountComponent implements OnInit {
                 'authentication',
                 'restartAccount',
                 'Restart Account',
-                1
+                1,
               );
             }
           },
@@ -120,19 +120,19 @@ export class ResetAccountComponent implements OnInit {
               {
                 type: 'danger',
                 title: this.t('text_login'),
-                message: resultError.errors[0]
-              }
+                message: resultError.errors[0],
+              },
             ];
             this.alert.setAlert(alertError[0]);
-          }
+          },
         );
     } else {
       const alertWarning: Alerts[] = [
         {
           type: 'warning',
           title: this.t('text_login'),
-          message: this.t('msg_email_is_required_ts')
-        }
+          message: this.t('msg_email_is_required_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
     }
@@ -150,8 +150,8 @@ export class ResetAccountComponent implements OnInit {
           {
             type: 'danger',
             title: this.t('text_login'),
-            message: this.t('msg_wrong_email_format_ts')
-          }
+            message: this.t('msg_wrong_email_format_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';

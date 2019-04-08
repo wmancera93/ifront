@@ -21,7 +21,7 @@
         <div class="col-12 top-general-p">
           <app-data-table
             [records]="objectReport"
-            [title]="nameReport"
+            [title]="parseT('tittle_table_ts') | translate"
             [excel]="showExcel"
           ></app-data-table>
         </div>

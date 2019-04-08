@@ -8,7 +8,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 @Component({
   selector: 'app-certificate-income-withholding',
   templateUrl: './certificate-income-withholding.component.html',
-  styleUrls: ['./certificate-income-withholding.component.css']
+  styleUrls: ['./certificate-income-withholding.component.css'],
 })
 export class CertificateIncomeWithholdingComponent implements OnInit {
   public incomingCertificate: Certificate[] = [];
@@ -26,7 +26,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
     public autoServiceService: AutoServicesService,
     public sanitizer: DomSanitizer,
     public tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -35,13 +35,13 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -51,7 +51,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.autoServiceService.getIncomeWithHolding().subscribe((data: any) => {
       this.incomingCertificate = data.data;

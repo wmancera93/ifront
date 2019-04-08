@@ -4,13 +4,13 @@ import {
   Input,
   OnDestroy,
   Output,
-  EventEmitter
+  EventEmitter,
 } from '@angular/core';
 import {
   FormGroup,
   Validators,
   FormBuilder,
-  AbstractControl
+  AbstractControl,
 } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { Translate } from '../../../models/common/translate/translate';
@@ -20,7 +20,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-form-transportation',
   templateUrl: './form-transportation.component.html',
-  styleUrls: ['./form-transportation.component.css']
+  styleUrls: ['./form-transportation.component.css'],
 })
 export class FormTransportationComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
@@ -52,19 +52,19 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       TRANS: {
         benefist: false,
         type_identification: false,
-        number_identification: false
+        number_identification: false,
       },
       TRANS_BEN: {
         benefist: true,
         type_identification: false,
-        number_identification: false
+        number_identification: false,
       },
       TRANS_TER: {
         name: true,
         benefist: false,
         type_identification: true,
-        number_identification: true
-      }
+        number_identification: true,
+      },
     },
     allCases: {
       date_departure: true,
@@ -72,8 +72,8 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       destiny: true,
       cost_center: true,
       city: true,
-      address: true
-    }
+      address: true,
+    },
   };
 
   private subscription: ISubscription;
@@ -93,20 +93,20 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   constructor(
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
-    public alert: AlertsService
+    public alert: AlertsService,
   ) {
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
         this.objectImg.splice(
           this.objectImg.findIndex(
-            filter => filter.file.name === this.deleteDocumenFile
+            filter => filter.file.name === this.deleteDocumenFile,
           ),
-          1
+          1,
         );
         this.file.splice(
           this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
-          1
+          1,
         );
       }
       this.setModalState.emit(true);
@@ -118,32 +118,32 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       { id: 3, name: 'Bachiderato' },
       { id: 4, name: 'Tecnico' },
       { id: 5, name: 'Tecnologo' },
-      { id: 6, name: 'Universitario' }
+      { id: 6, name: 'Universitario' },
     ];
     this.benefists_list = [
       { id: 1, name: 'Maria', isHigher: true },
       { id: 2, name: 'Andres', isHigher: false },
       { id: 3, name: 'Carlos', isHigher: true },
-      { id: 4, name: 'Julio', isHigher: false }
+      { id: 4, name: 'Julio', isHigher: false },
     ];
     this.destinations_list = [
       { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' }
+      { id: 2, name: 'Primaria' },
     ];
     this.document_types_list = [
       { id: 1, name: 'Cedula' },
-      { id: 2, name: 'Tarjeta de identidad' }
+      { id: 2, name: 'Tarjeta de identidad' },
     ];
     this.concept_types_list = [
       { id: 'enrollment', name: 'Monto de Matricula' },
       { id: 'transport', name: 'monto de transporte' },
       { id: 'pension', name: 'Monto de pension' },
-      { id: 'feeding', name: 'Monto de alimentacion' }
+      { id: 'feeding', name: 'Monto de alimentacion' },
     ];
     this.institution_types_list = [
       { id: 1, name: 'Wall Strere Englis Institute' },
       { id: 2, name: 'Brith Council' },
-      { id: 3, name: 'Centro Colombo Americano Institute' }
+      { id: 3, name: 'Centro Colombo Americano Institute' },
     ];
   }
 
@@ -153,7 +153,10 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
       this.file.push(data);
-      this.objectImg.push({ file: data, extension: this.iconDocument });
+      this.objectImg.push({
+        file: data,
+        extension: this.iconDocument,
+      });
     });
 
     this.form = new FormGroup({});
@@ -181,7 +184,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
             }
           }
           return null;
-        }
+        },
       ],
       name: '',
       accompanying_beneficiary: '',
@@ -191,9 +194,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         '',
         (control: AbstractControl) => {
           return this.formState('academic_level') ? required(control) : null;
-        }
+        },
       ],
-      file: []
+      file: [],
     });
   }
 
@@ -262,7 +265,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       this.arrayConcept.map(obj => {
         request_educations = {
           ...request_educations,
-          [obj.concept.id]: obj.value
+          [obj.concept.id]: obj.value,
         };
       });
       this.submit.emit({ ...this.form.value, request_educations });
@@ -272,7 +275,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   removeConcept(idConcept) {
     this.arrayConcept.splice(
       this.arrayConcept.findIndex(filter => filter.concept.id === idConcept),
-      1
+      1,
     );
   }
 
@@ -280,7 +283,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     const { concept, value } = this.form.controls;
     this.arrayConcept.push({
       concept: JSON.parse(concept.value),
-      value: value.value
+      value: value.value,
     });
     concept.setValue('');
     value.setValue('');
@@ -299,7 +302,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         param.file.name.toString() +
         '?',
       confirmation: true,
-      typeConfirmation: 'deleteNewDocumentSaved'
+      typeConfirmation: 'deleteNewDocumentSaved',
     });
   }
 }

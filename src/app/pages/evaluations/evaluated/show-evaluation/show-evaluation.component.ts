@@ -8,7 +8,7 @@ import { TranslateService } from '../../../../services/common/translate/translat
 @Component({
   selector: 'app-show-evaluation',
   templateUrl: './show-evaluation.component.html',
-  styleUrls: ['./show-evaluation.component.css']
+  styleUrls: ['./show-evaluation.component.css'],
 })
 export class ShowEvaluationComponent implements OnInit, OnDestroy {
   public showSubmit = true;
@@ -17,27 +17,32 @@ export class ShowEvaluationComponent implements OnInit, OnDestroy {
   public countAfter = 0;
   public translate: Translate = null;
 
-  constructor(public evaluationSharedService: EvaluationsSharedService,
-    public evaluationService: EvaluationsService, public translateService: TranslateService) {
+  constructor(
+    public evaluationSharedService: EvaluationsSharedService,
+    public evaluationService: EvaluationsService,
+    public translateService: TranslateService,
+  ) {
     this.translate = this.translateService.getTranslate();
-    this.evaluationSharedService.getInfoViewEvaluation().subscribe((info: any) => {
-      if (this.countAfter === 0) {
-        this.receiveData = info;
-        this.evaluationService.getShowEvaluation(info.id).subscribe((list: any) => {
-          this.dataEvaluation = list.data;
-        });
+    this.evaluationSharedService
+      .getInfoViewEvaluation()
+      .subscribe((info: any) => {
+        if (this.countAfter === 0) {
+          this.receiveData = info;
+          this.evaluationService
+            .getShowEvaluation(info.id)
+            .subscribe((list: any) => {
+              this.dataEvaluation = list.data;
+            });
 
-        document.getElementById('btn_showEvaluation').click();
-        document.getElementById('bodyGeneral').removeAttribute('style');
-      }
-    });
+          document.getElementById('btn_showEvaluation').click();
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        }
+      });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.countAfter += 1;
   }
-
 }

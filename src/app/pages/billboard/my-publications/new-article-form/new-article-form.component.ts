@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-new-article-form',
   templateUrl: './new-article-form.component.html',
-  styleUrls: ['./new-article-form.component.css']
+  styleUrls: ['./new-article-form.component.css'],
 })
 export class NewArticleFormComponent implements OnInit {
   public uploader: FileUploader = new FileUploader({});
@@ -51,7 +51,7 @@ export class NewArticleFormComponent implements OnInit {
     public billboardSharedService: BillboardService,
     public editEditSharedService: EditArticleService,
     public formDataService: FormDataService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.fileUploadService.getObjetFile().subscribe((data: any) => {
       this.image = data;
@@ -78,8 +78,8 @@ export class NewArticleFormComponent implements OnInit {
           type: 'danger',
           title: this.t('msg_denied_request_ts'),
           message: this.t('msg_empty_fields_ts'),
-          confirmation: false
-        }
+          confirmation: false,
+        },
       ];
       this.showSubmit = true;
       this.alert.setAlert(alertWarning[0]);
@@ -104,8 +104,8 @@ export class NewArticleFormComponent implements OnInit {
               {
                 type: 'success',
                 title: this.t('text_status_news_ts'),
-                message: this.t('msg_saved_news_ts')
-              }
+                message: this.t('msg_saved_news_ts'),
+              },
             ];
             this.alert.setAlert(alertConfirmation[0]);
             this.showSubmit = true;
@@ -122,12 +122,12 @@ export class NewArticleFormComponent implements OnInit {
               type: 'danger',
               title: this.t('msg_denied_request_ts'),
               message: error.json().errors.toString(),
-              confirmation: false
-            }
+              confirmation: false,
+            },
           ];
           this.showSubmit = true;
           this.alert.setAlert(alertWarning[0]);
-        }
+        },
       );
     }
   }

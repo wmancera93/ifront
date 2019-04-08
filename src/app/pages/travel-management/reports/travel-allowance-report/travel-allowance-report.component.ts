@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReportTravelsService } from '../../../../services/travel-management/report/report-travels.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
@@ -6,15 +6,15 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
 import { User } from '../../../../models/general/user';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-travel-allowance-report',
   templateUrl: './travel-allowance-report.component.html',
-  styleUrls: ['./travel-allowance-report.component.css']
+  styleUrls: ['./travel-allowance-report.component.css'],
 })
-export class TravelAllowanceReportComponent implements OnInit {
+export class TravelAllowanceReportComponent implements OnInit, OnDestroy {
   public title: string;
   public is_collapse_report_allowances = false;
   public reports_list_allowances = null;
@@ -29,32 +29,36 @@ export class TravelAllowanceReportComponent implements OnInit {
   public objectGeneralAllowances: any[] = [];
   public showPdf = false;
   public showExcel = true;
-  public nameReport: string;
   public objectGeneralAllowance: any[] = [];
   public showDataTableAllowance = true;
   public typeTravelLegal: any[] = [];
   public btnConsultSpend = true;
-  public translate: Translate = null;
   public userId: User = null;
-  public countAfter = 0;
+  private subscriptions: ISubscription[] = [];
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.travel_management.reports.travel_allowance_report.${key}`;
+  }
 
   constructor(
     public router: Router,
     public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService,
     private accionDataTableService: DataDableSharedService,
-    public alert: AlertsService, public translateService: TranslateService
+    public alert: AlertsService,
+    public translate: TranslateService,
   ) {
-
-    this.translate = this.translateService.getTranslate();
-    this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_allowance_report.tittle_ts;
-    this.nameReport = this.translate.app.frontEnd.pages.travel_management.reports.travel_allowance_report.name_table_ts;
-
-    this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data === this.nameReport && this.countAfter === 0) {
-        this.getObjectPrint('excel');
-      }
-    });
+    this.subscriptions = [
+      this.accionDataTableService
+        .getActionDataTable()
+        .subscribe((data: any) => {
+          this.getObjectPrint('excel');
+        }),
+    ];
     this.reports_list_allowances = travel_reports_list.getTravelsReportList();
     document
       .getElementsByTagName('body')[0]
@@ -63,19 +67,22 @@ export class TravelAllowanceReportComponent implements OnInit {
 
   ngOnInit() {
     this.getObjectPrint('general');
-    this.travelManagementService
-      .getplanningTravelRequests()
-      .subscribe((data: any) => {
-        this.typeTravelLegal = this.sortByAphabet(
-          data.data.legal_travels_types
-        );
-      });
+    this.subscriptions = [
+      ...this.subscriptions,
+      this.travelManagementService
+        .getplanningTravelRequests()
+        .subscribe((data: any) => {
+          this.typeTravelLegal = this.sortByAphabet(
+            data.data.legal_travels_types,
+          );
+        }),
+    ];
 
     this.userId = JSON.parse(localStorage.getItem('user')).employee_id;
   }
 
   sortByAphabet(dataBySort: any) {
-    dataBySort.sort(function (a, b) {
+    dataBySort.sort(function(a, b) {
       const nameA: String = a.name.toLowerCase();
       const nameB: String = b.name.toLowerCase();
 
@@ -110,40 +117,66 @@ export class TravelAllowanceReportComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
   getObjectPrint(param) {
-    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const personal_number_send =
+      this.personal_number === '' ? '-1' : this.personal_number;
     const ticket_send = this.ticket === '' ? '-1' : this.ticket;
     const ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
-    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
-    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
+    const date_begin_send =
+      this.date_begin === ''
+        ? '-1'
+        : this.date_begin
+            .replace('-', '')
+            .toString()
+            .replace('-', '');
+    const date_end_send =
+      this.date_end === ''
+        ? '-1'
+        : this.date_end
+            .replace('-', '')
+            .toString()
+            .replace('-', '');
 
     if (param === 'general') {
-      this.travel_reports_list.getTravelsAllowanceReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, date_end_send, this.legat_travel_type)
-        .subscribe((data: any) => {
-          this.objectGeneralAllowances = data.data[0].data;
-          if (this.objectGeneralAllowances.length > 0) {
-            this.objectReportAllowances.emit(data);
-          } else {
-            this.showDataTableAllowance = false;
-          }
-        });
+      this.subscriptions = [
+        ...this.subscriptions,
+        this.travel_reports_list
+          .getTravelsAllowanceReport(
+            personal_number_send,
+            ticket_send,
+            ticket_cli_send,
+            date_begin_send,
+            date_end_send,
+            this.legat_travel_type,
+          )
+          .subscribe((data: any) => {
+            this.objectGeneralAllowances = data.data[0].data;
+            if (this.objectGeneralAllowances.length > 0) {
+              this.objectReportAllowances.emit(data);
+            } else {
+              this.showDataTableAllowance = false;
+            }
+          }),
+      ];
       this.showDataTableAllowance = true;
     } else {
-      this.travel_reports_list
-        .getTravelsAllowanceReportExcel(
-          this.userId,
-          personal_number_send,
-          ticket_send,
-          ticket_cli_send,
-          date_begin_send,
-          date_end_send,
-          this.legat_travel_type
-        )
-        .subscribe((data: any) => {
-          window.open(data.url);
-        });
+      this.subscriptions = [
+        ...this.subscriptions,
+        this.travel_reports_list
+          .getTravelsAllowanceReportExcel(
+            this.userId,
+            personal_number_send,
+            ticket_send,
+            ticket_cli_send,
+            date_begin_send,
+            date_end_send,
+            this.legat_travel_type,
+          )
+          .subscribe((data: any) => {
+            window.open(data.url);
+          }),
+      ];
     }
   }
-
 
   validateNumberSpend(name: string, value: any) {
     const proof = /^[0-9]+$/.test(value);
@@ -172,28 +205,44 @@ export class TravelAllowanceReportComponent implements OnInit {
     }
   }
   validateDateAllowance() {
-    if ((this.date_begin === '') && (this.date_end === '')) {
+    if (this.date_begin === '' && this.date_end === '') {
       this.btnConsultSpend = true;
     } else {
-      if ((this.date_begin !== '') && (this.date_end !== '')) {
+      if (this.date_begin !== '' && this.date_end !== '') {
         this.btnConsultSpend = true;
         const dayBegin = new Date(this.date_begin).getTime();
         const dayEnd = new Date(this.date_end).getTime();
-        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const calculate = (dayEnd - dayBegin) / (1000 * 60 * 60 * 24);
         if (calculate < 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_allowance_report.message_alert_one_ts, confirmation: false }];
+          const alertWarning: Alerts[] = [
+            {
+              type: 'danger',
+              title: 'Error',
+              message: this.t('message_alert_one_ts'),
+              confirmation: false,
+            },
+          ];
           this.alert.setAlert(alertWarning[0]);
           this.btnConsultSpend = false;
         }
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.travel_management.reports.travel_allowance_report.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.reports.travel_allowance_report.message_alert_two_ts, confirmation: false }];
+        const alertWarning: Alerts[] = [
+          {
+            type: 'warning',
+            title: this.t('type_alert_ts'),
+            message: this.t('message_alert_two_ts'),
+            confirmation: false,
+          },
+        ];
         this.alert.setAlert(alertWarning[0]);
         this.btnConsultSpend = false;
       }
     }
-
   }
+
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }

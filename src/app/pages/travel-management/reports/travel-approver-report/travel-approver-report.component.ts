@@ -1,21 +1,19 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReportTravelsService } from '../../../../services/travel-management/report/report-travels.service';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../../models/general/user';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-travel-approver-report',
   templateUrl: './travel-approver-report.component.html',
-  styleUrls: ['./travel-approver-report.component.css']
+  styleUrls: ['./travel-approver-report.component.css'],
 })
-export class TravelApproverReportComponent implements OnInit {
-
-  public title: string;
+export class TravelApproverReportComponent implements OnInit, OnDestroy {
   public is_collapse_report_approvers = false;
   public collapseFilterAdvance = false;
   public reports_list_approvers = null;
@@ -30,40 +28,44 @@ export class TravelApproverReportComponent implements OnInit {
   public level = -1;
   public showPdf = false;
   public showExcel = true;
-  public nameReport: string;
   public objectGeneralApprover: any[] = [];
   public showDataTableApprover = true;
   public btnConsultApprover = true;
-  public translate: Translate = null;
   public userId: User = null;
-  public countAfter = 0;
+  private subscriptions: ISubscription[] = [];
 
-  constructor(public router: Router, public travel_reports_list: ReportTravelsService,
-    private accionDataTableService: DataDableSharedService, public alert: AlertsService, public translateService: TranslateService) {
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
 
-    this.translate = this.translateService.getTranslate();
-    this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.tittle_ts;
-    this.nameReport = this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.name_table_ts;
+  parseT(key) {
+    return `pages.travel_management.reports.travel_approver_report.${key}`;
+  }
 
-    this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data === this.nameReport && this.countAfter === 0) {
+  constructor(
+    public router: Router,
+    public travel_reports_list: ReportTravelsService,
+    private accionDataTableService: DataDableSharedService,
+    public alert: AlertsService,
+    public translate: TranslateService,
+  ) {
+    this.subscriptions = [
+      this.accionDataTableService.getActionDataTable().subscribe(() => {
         this.getObjectPrint('excel');
-      }
-    });
+      }),
+    ];
     this.reports_list_approvers = travel_reports_list.getTravelsReportList();
     document
       .getElementsByTagName('body')[0]
       .setAttribute('style', 'overflow-y:auto');
   }
 
-
   ngOnInit() {
     this.getObjectPrint('general');
     this.userId = JSON.parse(localStorage.getItem('user')).employee_id;
-
   }
   sortByAphabet(dataBySort: any) {
-    dataBySort.sort(function (a, b) {
+    dataBySort.sort(function(a, b) {
       const nameA: String = a.name.toLowerCase();
       const nameB: String = b.name.toLowerCase();
 
@@ -77,7 +79,6 @@ export class TravelApproverReportComponent implements OnInit {
 
     return dataBySort;
   }
-
 
   selectTypeReport(array: any) {
     this.router.navigate(['ihr/' + array.code]);
@@ -100,40 +101,68 @@ export class TravelApproverReportComponent implements OnInit {
   }
 
   getObjectPrint(param) {
-
-    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const personal_number_send =
+      this.personal_number === '' ? '-1' : this.personal_number;
     const ticket_send = this.ticket === '' ? '-1' : this.ticket;
     const ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
     const approver_send = this.approver === '' ? '-1' : this.approver;
-    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
-    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
+    const date_begin_send =
+      this.date_begin === ''
+        ? '-1'
+        : this.date_begin
+            .replace('-', '')
+            .toString()
+            .replace('-', '');
+    const date_end_send =
+      this.date_end === ''
+        ? '-1'
+        : this.date_end
+            .replace('-', '')
+            .toString()
+            .replace('-', '');
 
     if (param === 'general') {
-      this.travel_reports_list.getTravelsApprovedReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, date_end_send, approver_send, this.level).subscribe((data: any) => {
-        this.objectGeneralApprover = data.data[0].data;
+      this.subscriptions = [
+        ...this.subscriptions,
+        this.travel_reports_list
+          .getTravelsApprovedReport(
+            personal_number_send,
+            ticket_send,
+            ticket_cli_send,
+            date_begin_send,
+            date_end_send,
+            approver_send,
+            this.level,
+          )
+          .subscribe((data: any) => {
+            this.objectGeneralApprover = data.data[0].data;
 
-        if (this.objectGeneralApprover.length > 0) {
-          this.objectReportApprover.emit(data);
-        } else {
-          this.showDataTableApprover = false;
-        }
-      });
+            if (this.objectGeneralApprover.length > 0) {
+              this.objectReportApprover.emit(data);
+            } else {
+              this.showDataTableApprover = false;
+            }
+          }),
+      ];
       this.showDataTableApprover = true;
     } else {
-      this.travel_reports_list
-        .getTravelsApprovalsReportExcel(
-          this.userId,
-          personal_number_send,
-          ticket_send,
-          ticket_cli_send,
-          date_begin_send,
-          date_end_send,
-          approver_send,
-          this.level
-        )
-        .subscribe((data: any) => {
-          window.open(data.url);
-        });
+      this.subscriptions = [
+        ...this.subscriptions,
+        this.travel_reports_list
+          .getTravelsApprovalsReportExcel(
+            this.userId,
+            personal_number_send,
+            ticket_send,
+            ticket_cli_send,
+            date_begin_send,
+            date_end_send,
+            approver_send,
+            this.level,
+          )
+          .subscribe((data: any) => {
+            window.open(data.url);
+          }),
+      ];
     }
   }
 
@@ -171,30 +200,44 @@ export class TravelApproverReportComponent implements OnInit {
     }
   }
   validateDateAproover() {
-    if ((this.date_begin === '') && (this.date_end === '')) {
+    if (this.date_begin === '' && this.date_end === '') {
       this.btnConsultApprover = true;
     } else {
-      if ((this.date_begin !== '') && (this.date_end !== '')) {
+      if (this.date_begin !== '' && this.date_end !== '') {
         this.btnConsultApprover = true;
         const dayBegin = new Date(this.date_begin).getTime();
         const dayEnd = new Date(this.date_end).getTime();
-        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const calculate = (dayEnd - dayBegin) / (1000 * 60 * 60 * 24);
         if (calculate < 0) {
-          const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.message_alert_one_ts, confirmation: false }];
+          const alertWarning: Alerts[] = [
+            {
+              type: 'danger',
+              title: 'Error',
+              message: this.t('message_alert_one_ts'),
+              confirmation: false,
+            },
+          ];
           this.alert.setAlert(alertWarning[0]);
           this.btnConsultApprover = false;
         }
       } else {
-        const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.message_alert_two_ts, confirmation: false }];
+        const alertWarning: Alerts[] = [
+          {
+            type: 'warning',
+            title: this.t('type_alert_ts'),
+            message: this.t('message_alert_two_ts'),
+            confirmation: false,
+          },
+        ];
         this.alert.setAlert(alertWarning[0]);
         this.btnConsultApprover = false;
       }
     }
-
   }
 
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
-
 }

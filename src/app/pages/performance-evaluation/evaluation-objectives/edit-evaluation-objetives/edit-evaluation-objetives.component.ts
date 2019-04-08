@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter } from '@angular/core';
 import { PerformanceEvaluationService } from '../../../../services/performance-evaluation/performance-evaluation.service';
 import {
   PerformanceEvaluation,
-  Qualifier
+  Qualifier,
 } from '../../../../models/common/performance-evaluation/performance-evaluation';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataDableSharedService } from '../../../../services/shared/common/data-table/data-dable-shared.service';
@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-evaluation-objetives',
   templateUrl: './edit-evaluation-objetives.component.html',
-  styleUrls: ['./edit-evaluation-objetives.component.css']
+  styleUrls: ['./edit-evaluation-objetives.component.css'],
 })
 export class EditEvaluationObjetivesComponent implements OnInit {
   public idEvaluation = '';
@@ -53,7 +53,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
     private accionDataTableService: DataDableSharedService,
     public performanceEvalSharedService: PerformanceEvalSharedService,
     public alert: AlertsService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.alert.getActionConfirm().subscribe(data => {
       if (
@@ -70,7 +70,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           start_date: '',
           end_date: '',
           weight: '',
-          objetive_text: ''
+          objetive_text: '',
         });
       }
       this.performanceEvalSharedService.setRefrehsEval(true);
@@ -101,7 +101,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       start_date: '',
       end_date: '',
       weight: '',
-      objetive_text: ''
+      objetive_text: '',
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
@@ -136,7 +136,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 endDate[0]
               ).toString(),
               weight: dataID.data.weight_value * 100,
-              objetive_text: dataID.data.objetive_text
+              objetive_text: dataID.data.objetive_text,
             });
           });
       }
@@ -156,8 +156,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 title: this.t('type_alert_ts'),
                 message: state.message,
                 confirmation: true,
-                typeConfirmation: 'deleteEvaluationByObjetive'
-              }
+                typeConfirmation: 'deleteEvaluationByObjetive',
+              },
             ];
             this.dataTableConsult();
             document.getElementById('closeModalObjectiveEvaluation').click();
@@ -179,7 +179,10 @@ export class EditEvaluationObjetivesComponent implements OnInit {
           }, 500);
         } else {
           this.ObjectivesTable = [];
-          this.objectReport.emit({ success: true, data: this.ObjectivesTable });
+          this.objectReport.emit({
+            success: true,
+            data: this.ObjectivesTable,
+          });
         }
       });
   }
@@ -193,7 +196,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       target_agrement_date: new Date(),
       start_date: model.start_date,
       end_date: model.end_date,
-      weight: model.weight / 100
+      weight: model.weight / 100,
     };
     if (this.bedit) {
       this.performanceEvaluationService
@@ -213,8 +216,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 title: this.t('type_alert_ts'),
                 message: edit.message,
                 confirmation: true,
-                typeConfirmation: 'evaluationObjectives'
-              }
+                typeConfirmation: 'evaluationObjectives',
+              },
             ];
             this.closeObjetive();
             document.getElementById('closeModalObjectiveEvaluation').click();
@@ -228,14 +231,14 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 title: this.t('type_alert_one_ts'),
                 message: error.json().errors.toString(),
                 confirmation: true,
-                typeConfirmation: 'evaluationObjectives'
-              }
+                typeConfirmation: 'evaluationObjectives',
+              },
             ];
             this.closeObjetive();
             document.getElementById('closeModalObjectiveEvaluation').click();
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
-          }
+          },
         );
     } else {
       this.performanceEvaluationService
@@ -255,8 +258,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 title: this.t('type_alert_ts'),
                 message: info.message,
                 confirmation: true,
-                typeConfirmation: 'evaluationObjectives'
-              }
+                typeConfirmation: 'evaluationObjectives',
+              },
             ];
             this.closeObjetive();
             this.dataTableConsult();
@@ -271,14 +274,14 @@ export class EditEvaluationObjetivesComponent implements OnInit {
                 title: this.t('type_alert_one_ts'),
                 message: error.json().errors.toString(),
                 confirmation: true,
-                typeConfirmation: 'evaluationObjectives'
-              }
+                typeConfirmation: 'evaluationObjectives',
+              },
             ];
             this.closeObjetive();
             document.getElementById('closeModalObjectiveEvaluation').click();
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
-          }
+          },
         );
     }
   }
@@ -309,7 +312,7 @@ export class EditEvaluationObjetivesComponent implements OnInit {
       start_date: '',
       end_date: '',
       weight: '',
-      objetive_text: ''
+      objetive_text: '',
     });
   }
 
@@ -333,8 +336,8 @@ export class EditEvaluationObjetivesComponent implements OnInit {
               type: 'success',
               title: this.t('type_alert_ts'),
               message: data.message,
-              confirmation: false
-            }
+              confirmation: false,
+            },
           ];
           this.alert.setAlert(alertWarning[0]);
           this.performanceEvalSharedService.setRefrehsEval(true);
@@ -348,12 +351,12 @@ export class EditEvaluationObjetivesComponent implements OnInit {
               message:
                 error.json().errors.toString() + this.t('message_alert_ts'),
               confirmation: true,
-              typeConfirmation: 'evaluationObjectives'
-            }
+              typeConfirmation: 'evaluationObjectives',
+            },
           ];
           this.alert.setAlert(alertWarning[0]);
           this.showSubmit = true;
-        }
+        },
       );
   }
 }

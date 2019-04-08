@@ -14,7 +14,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-edit-publication',
   templateUrl: './edit-publication.component.html',
-  styleUrls: ['./edit-publication.component.css']
+  styleUrls: ['./edit-publication.component.css'],
 })
 export class EditPublicationComponent implements OnInit {
   public idEdit: number;
@@ -56,7 +56,7 @@ export class EditPublicationComponent implements OnInit {
     public alert: AlertsService,
     public formDataService: FormDataService,
     public billboardService: BillboardService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.placeholder_tittle = this.t('placeholder_tittle');
     this.placeholder_message = this.t('placeholder_view');
@@ -135,8 +135,8 @@ export class EditPublicationComponent implements OnInit {
               {
                 type: 'success',
                 title: this.t('title_status_news_ts'),
-                message: this.t('msg_edited_news_ts')
-              }
+                message: this.t('msg_edited_news_ts'),
+              },
             ];
             this.alert.setAlert(alertConfirmation[0]);
             this.flagRefresh = true;
@@ -153,11 +153,11 @@ export class EditPublicationComponent implements OnInit {
               type: 'danger',
               title: this.t('title_status_news_ts'),
               message: error.json().errors.toString(),
-              confirmation: false
-            }
+              confirmation: false,
+            },
           ];
           this.alert.setAlert(alertWarning[0]);
-        }
+        },
       );
   }
 }

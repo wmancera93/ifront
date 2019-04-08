@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-disabilities',
   templateUrl: './disabilities.component.html',
-  styleUrls: ['./disabilities.component.css']
+  styleUrls: ['./disabilities.component.css'],
 })
 export class DisabilitiesComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -27,14 +27,14 @@ export class DisabilitiesComponent implements OnInit, OnDestroy {
   constructor(
     public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.accionDataTableService.getActionDataTable().subscribe(data => {
       if (data === this.t('name_table_ts') && this.countAfter === 0) {
@@ -52,7 +52,7 @@ export class DisabilitiesComponent implements OnInit, OnDestroy {
       },
       error => {
         console.log(error.error);
-      }
+      },
     );
   }
 

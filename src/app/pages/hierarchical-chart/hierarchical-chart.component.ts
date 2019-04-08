@@ -4,7 +4,7 @@ import {
   Output,
   EventEmitter,
   HostListener,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
@@ -19,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-hierarchical-chart',
   templateUrl: './hierarchical-chart.component.html',
-  styleUrls: ['./hierarchical-chart.component.css']
+  styleUrls: ['./hierarchical-chart.component.css'],
 })
 export class HierarchicalChartComponent implements OnInit {
   // @Output() name: string = 'hierarhical';
@@ -72,7 +72,7 @@ export class HierarchicalChartComponent implements OnInit {
     private tokenService: Angular2TokenService,
     private eRef: ElementRef,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -81,13 +81,13 @@ export class HierarchicalChartComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
   }
 
@@ -95,7 +95,7 @@ export class HierarchicalChartComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.getHierarchical();

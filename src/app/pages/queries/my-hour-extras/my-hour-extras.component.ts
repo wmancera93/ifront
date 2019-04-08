@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
 import { QueriesService } from '../../../services/queries/queries.service';
@@ -21,6 +16,10 @@ export class MyHourExtrasComponent implements OnInit, OnDestroy {
   public userAuthenticated: User;
   private subscriptions: ISubscription[];
 
+  parseT(key) {
+    return `pages.queries.my_hour_extras.${key}`;
+  }
+
   constructor(
     private accionDataTableService: DataDableSharedService,
     public queriesService: QueriesService,
@@ -34,20 +33,14 @@ export class MyHourExtrasComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions = [
-      this.accionDataTableService
-        .getActionDataTable()
-        .subscribe(() => {
-          this.userAuthenticated = JSON.parse(
-            localStorage.getItem('user'),
-          );
-          this.queriesService
-            .getExtraHoursExcel(
-              this.userAuthenticated.employee_id.toString(),
-            )
-            .subscribe((info: any) => {
-              window.open(info.url);
-            });
-        }),
+      this.accionDataTableService.getActionDataTable().subscribe(() => {
+        this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+        this.queriesService
+          .getExtraHoursExcel(this.userAuthenticated.employee_id.toString())
+          .subscribe((info: any) => {
+            window.open(info.url);
+          });
+      }),
     ];
 
     const dataTemporal = {

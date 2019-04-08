@@ -3,7 +3,7 @@ import {
   OnInit,
   EventEmitter,
   Output,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
@@ -14,7 +14,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-historical-posts',
   templateUrl: './historical-posts.component.html',
-  styleUrls: ['./historical-posts.component.css']
+  styleUrls: ['./historical-posts.component.css'],
 })
 export class HistoricalPostsComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -34,7 +34,7 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
   constructor(
     public queriesService: QueriesService,
     private tokenService: Angular2TokenService,
-    private accionDataTableService: DataDableSharedService
+    private accionDataTableService: DataDableSharedService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -44,14 +44,14 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
-      )
+        },
+      ),
     ];
   }
 
@@ -59,7 +59,7 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       ...this.subscriptions,
@@ -68,7 +68,7 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
           this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
           this.queriesService
             .getHistoricalPositionExcel(
-              this.userAuthenticated.employee_id.toString()
+              this.userAuthenticated.employee_id.toString(),
             )
             .subscribe((info: any) => {
               window.open(info.url);
@@ -77,7 +77,7 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
       }),
       this.queriesService.getHistoricalPosts().subscribe((data: any) => {
         this.objectReport.emit(data);
-      })
+      }),
     ];
   }
 

@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-payments-deductions',
   templateUrl: './payments-deductions.component.html',
-  styleUrls: ['./payments-deductions.component.css']
+  styleUrls: ['./payments-deductions.component.css'],
 })
 export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -22,21 +22,21 @@ export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
 
   constructor(
     public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService
+    private accionDataTableService: DataDableSharedService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(data => {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
         this.queriesService
           .getPaymentsAndDeductionsExcel(
-            this.userAuthenticated.employee_id.toString()
+            this.userAuthenticated.employee_id.toString(),
           )
           .subscribe((info: any) => {
             window.open(info.url);
@@ -48,8 +48,8 @@ export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -13,7 +20,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-form-benefist',
   templateUrl: './form-benefist.component.html',
-  styleUrls: ['./form-benefist.component.css']
+  styleUrls: ['./form-benefist.component.css'],
 })
 export class FormBenefistComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
@@ -46,7 +53,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         type_identification: true,
         number_identification: true,
         career: false,
-        semester: false
+        semester: false,
       },
       EDUU: {
         academic_level: true,
@@ -62,7 +69,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         type_identification: false,
         number_identification: false,
         career: false,
-        semester: false
+        semester: false,
       },
       EDUI: {
         academic_level: false,
@@ -70,7 +77,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         type_identification: false,
         number_identification: false,
         career: false,
-        semester: false
+        semester: false,
       },
     },
     allCases: {
@@ -78,7 +85,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       concept: true,
       value: true,
       observation_request: true,
-    }
+    },
   };
 
   private subscription: ISubscription;
@@ -95,13 +102,24 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
-  constructor(private fb: FormBuilder, public fileUploadService: FileUploadService, public alert: AlertsService,
+  constructor(
+    private fb: FormBuilder,
+    public fileUploadService: FileUploadService,
+    public alert: AlertsService,
   ) {
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
-        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+        this.objectImg.splice(
+          this.objectImg.findIndex(
+            filter => filter.file.name === this.deleteDocumenFile,
+          ),
+          1,
+        );
+        this.file.splice(
+          this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
+          1,
+        );
       }
       this.setModalState.emit(true);
     });
@@ -120,13 +138,13 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     ];
     this.document_types_list = [
       { id: 1, name: 'Cedula' },
-      { id: 2, name: 'Tarjeta de identidad' }
+      { id: 2, name: 'Tarjeta de identidad' },
     ];
     this.concept_types_list = [
       { id: 'enrollment', name: 'Monto de Matricula' },
       { id: 'transport', name: 'monto de transporte' },
       { id: 'pension', name: 'Monto de pension' },
-      { id: 'feeding', name: 'Monto de alimentacion' }
+      { id: 'feeding', name: 'Monto de alimentacion' },
     ];
     this.institution_types_list = [
       { id: 1, name: 'Wall Strere Englis Institute' },
@@ -136,45 +154,80 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.fileUploadService.getObjetFile().subscribe((data) => {
+    this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
       this.file.push(data);
-      this.objectImg.push({ file: data, extension: this.iconDocument });
+      this.objectImg.push({
+        file: data,
+        extension: this.iconDocument,
+      });
     });
 
     this.form = new FormGroup({});
     const { required } = Validators;
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
-      academic_level: ['', (control: AbstractControl) => {
-        return this.formState('academic_level') ? required(control) : null;
-      }],
-      employee_family_id: ['', (control: AbstractControl) => {
-        return this.formState('employee_family_id') ? required(control) : null;
-      }],
-      number_identification: ['', (control: AbstractControl) => {
-        return this.formState('number_identification') ? required(control) : null;
-      }],
-      type_identification: ['', (control: AbstractControl) => {
-        return this.formState('type_identification') ? required(control) : null;
-      }],
-      institution: ['', (control: AbstractControl) => {
-        return required(control);
-      }],
-      career: ['', (control: AbstractControl) => {
-        return this.formState('career') ? required(control) : null;
-      }],
-      semester: ['', (control: AbstractControl) => {
-        return this.formState('semester') ? required(control) : null;
-      }],
+      academic_level: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('academic_level') ? required(control) : null;
+        },
+      ],
+      employee_family_id: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('employee_family_id')
+            ? required(control)
+            : null;
+        },
+      ],
+      number_identification: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('number_identification')
+            ? required(control)
+            : null;
+        },
+      ],
+      type_identification: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('type_identification')
+            ? required(control)
+            : null;
+        },
+      ],
+      institution: [
+        '',
+        (control: AbstractControl) => {
+          return required(control);
+        },
+      ],
+      career: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('career') ? required(control) : null;
+        },
+      ],
+      semester: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('semester') ? required(control) : null;
+        },
+      ],
       concept: '',
       value: '',
       file: [],
-      observation_request: ['', (control: AbstractControl) => {
-        return this.formState('observation_request') ? required(control) : null;
-      }],
+      observation_request: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('observation_request')
+            ? required(control)
+            : null;
+        },
+      ],
     });
   }
 
@@ -207,11 +260,12 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     }
   }
 
-
   conceptValidation(id: any) {
     let state = true;
-    this.arrayConcept.filter((value) => {
-      if (value.concept.id === id) { state = false; }
+    this.arrayConcept.filter(value => {
+      if (value.concept.id === id) {
+        state = false;
+      }
     });
     if (this.idActivity !== 'EDUB' && id !== 'enrollment') {
       state = false;
@@ -224,12 +278,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
      * @param Array
      * Se realizan valiaciones de los conceptos segun el tipo de solicitud.
      */
-    [
-      'enrollment',
-      'feeding',
-      'pension',
-      'transport'
-    ].map(concept => {
+    ['enrollment', 'feeding', 'pension', 'transport'].map(concept => {
       if (this.conceptValidation(concept)) {
         alert('Tiene que llenar ' + concept);
       }
@@ -239,48 +288,52 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
     if (this.validateForms) {
       let request_educations: {
-        enrollment?: number,
-        feeding?: number,
-        pension?: number,
-        transport?: number
+        enrollment?: number;
+        feeding?: number;
+        pension?: number;
+        transport?: number;
       } = {};
       this.arrayConcept.map(obj => {
-        request_educations = ({ ...request_educations, [obj.concept.id]: obj.value });
+        request_educations = {
+          ...request_educations,
+          [obj.concept.id]: obj.value,
+        };
       });
       this.submit.emit({ ...this.form.value, request_educations });
     }
   }
 
-
   removeConcept(idConcept) {
-    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
+    this.arrayConcept.splice(
+      this.arrayConcept.findIndex(filter => filter.concept.id === idConcept),
+      1,
+    );
   }
 
-
   addConcept() {
-    const {
-      concept,
-      value
-    } = this.form.controls;
-    this.arrayConcept.push(
-      {
-        concept: JSON.parse(concept.value),
-        value: value.value,
-      });
+    const { concept, value } = this.form.controls;
+    this.arrayConcept.push({
+      concept: JSON.parse(concept.value),
+      value: value.value,
+    });
     concept.setValue('');
     value.setValue('');
   }
-
 
   deleteUpload(param: any) {
     this.deleteDocumenFile = param.file.name;
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.travel.new_travel.type_alert_ts,
-      message: this.translate.app.frontEnd.pages.travel_management.travel.new_travel.message_alert_ts + param.file.name.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.travel
+        .new_travel.type_alert_ts,
+      message:
+        this.translate.app.frontEnd.pages.travel_management.travel.new_travel
+          .message_alert_ts +
+        param.file.name.toString() +
+        '?',
       confirmation: true,
-      typeConfirmation: 'deleteNewDocumentSaved'
+      typeConfirmation: 'deleteNewDocumentSaved',
     });
   }
 }

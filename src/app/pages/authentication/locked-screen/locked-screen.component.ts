@@ -18,7 +18,7 @@ declare const ga: any;
 @Component({
   selector: 'app-locked-screen',
   templateUrl: './locked-screen.component.html',
-  styleUrls: ['./locked-screen.component.css']
+  styleUrls: ['./locked-screen.component.css'],
 })
 export class LockedScreenComponent implements OnInit {
   public userAuthenticated: User = null;
@@ -41,7 +41,7 @@ export class LockedScreenComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -85,7 +85,7 @@ export class LockedScreenComponent implements OnInit {
             '-1px',
             '-12px',
             '',
-            ''
+            '',
           );
         }, 200);
       });
@@ -117,7 +117,7 @@ export class LockedScreenComponent implements OnInit {
         this.tokenService
           .signIn({
             email: this.userAuthenticated.email,
-            password: this.txtPassword
+            password: this.txtPassword,
           })
           .subscribe(
             res => {
@@ -131,7 +131,7 @@ export class LockedScreenComponent implements OnInit {
                   'authentication',
                   'RestartSession',
                   'Restart Session',
-                  1
+                  1,
                 );
               }
             },
@@ -147,19 +147,19 @@ export class LockedScreenComponent implements OnInit {
                 {
                   type: typeAlert,
                   title: this.t('title_warning_ts'),
-                  message: resultError.errors[0]
-                }
+                  message: resultError.errors[0],
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
-            }
+            },
           );
       } else {
         const alertWarning: Alerts[] = [
           {
             type: 'warning',
             title: this.t('title_warning_ts'),
-            message: this.t('msg_required_password_ts')
-          }
+            message: this.t('msg_required_password_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
       }
@@ -168,8 +168,8 @@ export class LockedScreenComponent implements OnInit {
         {
           type: 'danger',
           title: this.t('title_warning_ts'),
-          message: this.t('msg_characters_minimum_ts')
-        }
+          message: this.t('msg_characters_minimum_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
     }

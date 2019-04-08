@@ -1,9 +1,4 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { PerformanceEvaluationService } from '../../../services/performance-evaluation/performance-evaluation.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { PerformanceEvalSharedService } from '../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
@@ -15,8 +10,7 @@ import { ISubscription } from 'rxjs/Subscription';
   templateUrl: './planning-evaluation.component.html',
   styleUrls: ['./planning-evaluation.component.css'],
 })
-export class PlanningEvaluationComponent
-  implements OnInit, OnDestroy {
+export class PlanningEvaluationComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public showExcel = true;
   public userAuthenticatedObjetives: User;
@@ -39,9 +33,7 @@ export class PlanningEvaluationComponent
         .getActionDataTable()
         .subscribe((action: any) => {
           if (action.action_method === 'editPerfomanceEvaluation') {
-            this.performanceEvalSharedService.setPlanningEvaluationData(
-              action,
-            );
+            this.performanceEvalSharedService.setPlanningEvaluationData(action);
           }
           this.userAuthenticatedObjetives = JSON.parse(
             localStorage.getItem('user'),

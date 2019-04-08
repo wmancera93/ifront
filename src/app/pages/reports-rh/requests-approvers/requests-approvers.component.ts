@@ -8,7 +8,7 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 @Component({
   selector: 'app-requests-approvers',
   templateUrl: './requests-approvers.component.html',
-  styleUrls: ['./requests-approvers.component.css']
+  styleUrls: ['./requests-approvers.component.css'],
 })
 export class RequestsApproversComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -34,7 +34,7 @@ export class RequestsApproversComponent implements OnInit {
     public reportsHrService: ReportsHrService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public requestsRhService: RequestsRhService
+    public requestsRhService: RequestsRhService,
   ) {
     this.approver_selected = this.parseT('approver_with');
     this.tokenService.validateToken().subscribe(
@@ -44,13 +44,13 @@ export class RequestsApproversComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
   }
 
@@ -58,7 +58,7 @@ export class RequestsApproversComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {

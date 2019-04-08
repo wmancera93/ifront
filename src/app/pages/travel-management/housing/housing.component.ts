@@ -6,7 +6,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 @Component({
   selector: 'app-housing',
   templateUrl: './housing.component.html',
-  styleUrls: ['./housing.component.css']
+  styleUrls: ['./housing.component.css'],
 })
 export class HousingComponent implements OnInit {
   public modalForm: Subject<any> = new Subject<any>();
@@ -29,7 +29,7 @@ export class HousingComponent implements OnInit {
         action_housing_index_view: [
           { title: 'Ver', is_active: true },
           { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: true }
+          { title: 'Editar', is_active: true },
         ],
         created_date: '03/10/2018',
         id: 1,
@@ -37,13 +37,13 @@ export class HousingComponent implements OnInit {
         total_bed: 25,
         assigned_bed: 18,
         busy_bed: 4,
-        available_bed: 3
+        available_bed: 3,
       },
       {
         action_housing_index_view: [
           { title: 'Ver', is_active: true },
           { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: false }
+          { title: 'Editar', is_active: false },
         ],
         created_date: '03/10/2018',
         id: 2,
@@ -51,8 +51,8 @@ export class HousingComponent implements OnInit {
         total_bed: 80,
         assigned_bed: 65,
         busy_bed: 0,
-        available_bed: 25
-      }
+        available_bed: 25,
+      },
     ];
   }
   returnBackHousing() {
@@ -66,8 +66,8 @@ export class HousingComponent implements OnInit {
         title: 'Confirmación',
         message: '¿Desea eliminar el alojamiento?',
         confirmation: true,
-        typeConfirmation: 'deleteHousing'
-      }
+        typeConfirmation: 'deleteHousing',
+      },
     ];
     this.alert.setAlert(alertWarning[0]);
   }

@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
   public userAuthenticated: User = null;
@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     public router: Router,
     public companieService: MainService,
     private tokenService: Angular2TokenService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
 
@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
               this.toast = {
                 type: 'success',
                 title: this.userAuthenticated.employee.short_name,
-                body: 'Bienvenido'
+                body: 'Bienvenido',
               };
             }, 100);
 
@@ -114,13 +114,13 @@ export class DashboardComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
   }
 
@@ -131,7 +131,7 @@ export class DashboardComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 

@@ -26,10 +26,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.travel
-              .hotels_journey.tittle
-          }}
+          {{ parseT('tittle') | translate }}
           # {{ objectHotelJourney.id_travel }}
         </h5>
         <button
@@ -48,10 +45,8 @@
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.hotels_journey.trayect
-                }}: {{ objectHotelJourney.id_journey }}</strong
+                >{{ parseT('trayect') | translate }}:
+                {{ objectHotelJourney.id_journey }}</strong
               >
             </label>
           </div>
@@ -62,10 +57,7 @@
                   class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
                 ></i>
                 <span>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.hotels_journey.back
-                  }}
+                  {{ parseT('back') | translate }}
                 </span>
               </div>
             </div>
@@ -77,12 +69,7 @@
               <i
                 class="fa fa-fw fa-calendar-check-o text-primary-hr"
               ></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.hotels_journey.date_begin
-                }}:</strong
-              >
+              <strong>{{ parseT('date_begin') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -93,12 +80,7 @@
               <i
                 class="fa fa-fw fa-calendar-minus-o text-primary-hr"
               ></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.hotels_journey.date_end
-                }}:</strong
-              >
+              <strong>{{ parseT('date_end') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -113,8 +95,7 @@
           <div class="col-12">
             <div class="border">
               <strong class="text-primary-hr">{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .hotels_journey.hotel_assigned
+                parseT('hotel_assigned') | translate
               }}</strong>
             </div>
           </div>
@@ -126,31 +107,19 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.hotels_journey.column_cero
-                      }}
+                      {{ parseT('column_cero') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.hotels_journey.column_one
-                      }}
+                      {{ parseT('column_one') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.hotels_journey.column_two
-                      }}
+                      {{ parseT('column_two') | translate }}
                     </th>
                     <th
                       class="text-center"
                       *ngIf="!objectHotelJourney.acction"
                     >
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.hotels_journey.column_tree
-                      }}
+                      {{ parseT('column_tree') | translate }}
                     </th>
                   </tr>
                 </thead>
@@ -186,10 +155,7 @@
         >
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .hotels_journey.negative_hotel
-              }}
+              {{ parseT('negative_hotel') | translate }}
             </div>
           </div>
         </div>
@@ -205,12 +171,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.hotels_journey.column_cero
-                    }}:</a
-                  >
+                  <a>{{ parseT('column_cero') | translate }}:</a>
                 </label>
                 <select
                   class="form-control"
@@ -224,8 +185,7 @@
                     >{{ nameHotels.name }}</option
                   >
                   <option value="">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.hotels_journey.option_select
+                    parseT('option_select') | translate
                   }}</option>
                 </select>
               </div>
@@ -234,12 +194,7 @@
                   <i
                     class="fa fa-fw fa-calendar-check-o text-primary-hr"
                   ></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.hotels_journey.column_one
-                    }}:</a
-                  >
+                  <a>{{ parseT('column_one') | translate }}:</a>
                 </label>
                 <input
                   tabindex="-1"
@@ -256,12 +211,7 @@
                   <i
                     class="fa fa-fw fa-calendar-minus-o text-primary-hr"
                   ></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.hotels_journey.column_two
-                    }}:</a
-                  >
+                  <a>{{ parseT('column_two') | translate }}:</a>
                 </label>
                 <input
                   tabindex="-1"

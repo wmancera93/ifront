@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-embargoes',
   templateUrl: './embargoes.component.html',
-  styleUrls: ['./embargoes.component.css']
+  styleUrls: ['./embargoes.component.css'],
 })
 export class EmbargoesComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -22,14 +22,14 @@ export class EmbargoesComponent implements OnInit, OnDestroy {
 
   constructor(
     public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService
+    private accionDataTableService: DataDableSharedService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {
@@ -46,8 +46,8 @@ export class EmbargoesComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

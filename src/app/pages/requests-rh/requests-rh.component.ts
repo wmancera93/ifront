@@ -3,14 +3,14 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { RequestsRhService } from '../../services/requests-rh/requests-rh.service';
 import {
   RequestsRh,
   ListRequests,
   TypesRequests,
-  ListRequetsTypes
+  ListRequetsTypes,
 } from '../../models/common/requests-rh/requests-rh';
 import { AproversRequestsService } from '../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { FormsRequestsService } from '../../services/shared/forms-requests/forms-requests.service';
@@ -26,7 +26,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-requests-rh',
   templateUrl: './requests-rh.component.html',
-  styleUrls: ['./requests-rh.component.css']
+  styleUrls: ['./requests-rh.component.css'],
 })
 export class RequestsRhComponent implements OnInit, OnDestroy {
   public requests: RequestsRh;
@@ -65,7 +65,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public fileUploadService: FileUploadService,
     public router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -75,13 +75,13 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.formsRequestsService.getRestartObject().subscribe(restart => {
         if (restart) {
@@ -100,8 +100,8 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                   type: 'success',
                   title: this.t('type_alert_ts'),
                   message: this.t('message_alert_ts'),
-                  confirmation: false
-                }
+                  confirmation: false,
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
             },
@@ -112,14 +112,14 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                   type: 'danger',
                   title: this.t('type_alert_one_ts'),
                   message: error.json().errors.toString(),
-                  confirmation: false
-                }
+                  confirmation: false,
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
-            }
+            },
           );
         }
-      })
+      }),
     ];
   }
 
@@ -127,7 +127,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.getObjectRequests();
@@ -153,7 +153,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                 is_payment: true,
                 maximum_days: null,
                 minimum_days: null,
-                name: 'Solicitud de transporte'
+                name: 'Solicitud de transporte',
               },
               {
                 id: 188,
@@ -161,7 +161,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                 is_payment: true,
                 maximum_days: null,
                 minimum_days: null,
-                name: 'Solicitud de transporte benefeciario'
+                name: 'Solicitud de transporte benefeciario',
               },
               {
                 id: 187,
@@ -169,9 +169,9 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                 is_payment: true,
                 maximum_days: null,
                 minimum_days: null,
-                name: 'Solicitud de transporte para un tercero'
-              }
-            ]
+                name: 'Solicitud de transporte para un tercero',
+              },
+            ],
           };
           this.requestStatic = this.requests.my_requests_list;
           this.viewContainer = true;
@@ -180,7 +180,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
               id: element.id,
               id_activity: element.id_activity,
               name: element.name,
-              active: false
+              active: false,
             });
           });
         } else {
@@ -191,7 +191,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
         //   document.getElementById("loginId").style.display = 'none'
         //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
         // }, 1000)
-      })
+      }),
     ];
   }
 
@@ -203,7 +203,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     // request.flag_count = 0;
     this.aproversRequestsService.setRequests({
       request,
-      type_request: 'requestsOnly'
+      type_request: 'requestsOnly',
     });
   }
 
@@ -219,8 +219,8 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
         title: this.t('type_alert_one_ts'),
         message: this.t('type_alert_two_ts') + ' ' + id.toString(),
         confirmation: true,
-        typeConfirmation: 'deletRequest'
-      }
+        typeConfirmation: 'deletRequest',
+      },
     ];
     this.alert.setAlert(this.alertWarning[0]);
   }

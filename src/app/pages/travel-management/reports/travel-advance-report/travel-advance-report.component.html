@@ -4,10 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-table"></i>
-          {{
-            translate.app.frontEnd.pages.travel_management.reports
-              .travel_advance_report.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5 text-center cursor-general"
@@ -20,10 +17,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .reports.travel_advance_report.back
-                }}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -37,7 +31,7 @@
         <div class="row top-containter">
           <div class="col-12 text-left">
             <h3 class="font-color-default">
-              {{ title }}
+              {{ parseT('tittle_ts') | translate }}
             </h3>
           </div>
         </div>
@@ -56,10 +50,7 @@
                 aria-expanded="false"
               >
                 <i class="fa fa-plus"></i>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .reports.travel_advance_report.btn_filter
-                }}
+                {{ parseT('btn_filter') | translate }}
               </a>
               <div
                 class="dropdown-menu col-12"
@@ -93,10 +84,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{
-                translate.app.frontEnd.pages.travel_management.reports
-                  .travel_advance_report.query_filters
-              }}
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse_report_advance"
@@ -126,10 +114,7 @@
             class="col-lg-4 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>{{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.employee_code
-            }}</label>
+            <label>{{ parseT('employee_code') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="personal_number"
@@ -146,10 +131,7 @@
             class="col-lg-4 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>{{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.code_ihr
-            }}</label>
+            <label>{{ parseT('code_ihr') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="ticket"
@@ -161,10 +143,7 @@
             class="col-lg-4 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>{{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.code_sap
-            }}</label>
+            <label>{{ parseT('code_sap') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="ticket_cli"
@@ -178,10 +157,7 @@
 
         <div class="row align-items-center mb-3">
           <div class="col-lg-4 col-md-4 col-12">
-            <label>{{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.date_begin
-            }}</label>
+            <label>{{ parseT('date_begin') | translate }}</label>
             <input
               tabindex="-1"
               type="date"
@@ -192,10 +168,7 @@
             />
           </div>
           <div class="col-lg-4 col-md-4 col-12">
-            <label>{{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.date_end
-            }}</label>
+            <label>{{ parseT('date_end') | translate }}</label>
             <input
               tabindex="-1"
               type="date"
@@ -215,10 +188,7 @@
               (click)="getObjectPrint('general')"
             >
               <i class="fa fa-search-plus"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management.reports
-                  .travel_advance_report.btn_query
-              }}
+              {{ parseT('btn_query') | translate }}
             </div>
           </div>
           <div
@@ -231,10 +201,7 @@
               style="cursor: no-drop"
             >
               <i class="fa fa-search-plus"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management.reports
-                  .travel_advance_report.btn_query
-              }}
+              {{ parseT('btn_query') | translate }}
             </div>
           </div>
         </div>
@@ -245,10 +212,7 @@
       >
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
-            {{
-              translate.app.frontEnd.pages.travel_management.reports
-                .travel_advance_report.negative_query
-            }}
+            {{ parseT('negative_query') | translate }}
           </div>
         </div>
       </div>
@@ -264,7 +228,7 @@
             id="tableReportAdvance"
             [pdf]="showPdf"
             [excel]="showExcel"
-            [title]="nameReport"
+            [title]="parseT('name_table_ts') | translate"
           ></app-data-table>
         </div>
       </div>

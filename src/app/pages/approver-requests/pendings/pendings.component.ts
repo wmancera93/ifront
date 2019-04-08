@@ -13,7 +13,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-pendings',
   templateUrl: './pendings.component.html',
-  styleUrls: ['./pendings.component.css']
+  styleUrls: ['./pendings.component.css'],
 })
 export class PendingsComponent implements OnInit, OnDestroy {
   public pendings: Requests[] = [];
@@ -35,7 +35,7 @@ export class PendingsComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public router: Router,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.subscriptions = [
       this.aproversRequestsService
@@ -50,13 +50,13 @@ export class PendingsComponent implements OnInit, OnDestroy {
                 type: 'success',
                 title: this.t('msg_sf_transaction_ts'),
                 message: this.t('msg_cf_transaction_ts'),
-                confirmation: false
-              }
+                confirmation: false,
+              },
             ];
             this.alert.setAlert(alertWarning[0]);
             this.getApprovals();
           }
-        })
+        }),
     ];
   }
 
@@ -64,7 +64,7 @@ export class PendingsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       ...this.subscriptions,
@@ -77,7 +77,7 @@ export class PendingsComponent implements OnInit, OnDestroy {
               this.showButtonBack = true;
             }
           }, 100);
-        })
+        }),
     ];
     this.getApprovals();
     setTimeout(() => {
@@ -94,7 +94,7 @@ export class PendingsComponent implements OnInit, OnDestroy {
           if (data.success) {
             this.pendings = data.data[0].requests;
           }
-        })
+        }),
     ];
   }
 
@@ -105,7 +105,7 @@ export class PendingsComponent implements OnInit, OnDestroy {
   modalAprovers(request: Requests) {
     this.aproversRequestsService.setAprovalsRequests({
       id: request.ticket,
-      edit: true
+      edit: true,
     });
   }
   ngOnDestroy() {

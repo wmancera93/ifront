@@ -1,44 +1,13 @@
-<button
-  id="btn_spendsHoteljourney_edit"
-  type="button"
-  class="btn btn-primary"
-  data-toggle="modal"
-  data-target="#spendsHoteljourney_edit"
-  style="display:none;"
-></button>
-<div
-  class="modal"
-  data-backdrop="static"
-  id="spendsHoteljourney_edit"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div
-    style="margin-top: 10px !important"
-    class="modal-dialog modal-lg"
-    role="document"
-  >
+<button id="btn_spendsHoteljourney_edit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spendsHoteljourney_edit" style="display:none;"></button>
+<div class="modal" data-backdrop="static" id="spendsHoteljourney_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content " *ngIf="objectHotelJourney !== null">
       <div class="modal-header borderLine-title">
-        <h5
-          class="modal-title titleColor text-shadow"
-          id="exampleModalLabel"
-        >
-          {{
-            translate.app.frontEnd.pages.travel_management.spend
-              .spend_hotel_journey.tittle
-          }}
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">
+          {{ parseT('tittle') | translate }}
           # {{ objectHotelJourney.id_travel }}
         </h5>
-        <button
-          id="close_spendsHotel_journey"
-          type="button"
-          class="close "
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button id="close_spendsHotel_journey" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -47,67 +16,39 @@
           <div class="col-9">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management.spend
-                    .spend_hotel_journey.trayect
-                }}: {{ objectHotelJourney.id_journey }}</strong
-              >
+              <strong>{{ parseT('trayect') | translate }}: {{ objectHotelJourney.id_journey }}</strong>
             </label>
           </div>
           <div class="col-3">
             <div class="buttonBack img-zoom" (click)="returnSpend()">
               <div style="margin-left: 15px;">
-                <i
-                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
-                ></i>
+                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.spend_hotel_journey.back
-                  }}
+                  {{ parseT('back') | translate }}
                 </span>
               </div>
             </div>
           </div>
         </div>
-        <div
-          class="row"
-          style="margin-top: 10px"
-          *ngIf="arrayHotel.length > 0"
-        >
+        <div class="row" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
           <div class="col-12">
             <div class="border">
-              <strong class="text-primary-hr">{{
-                translate.app.frontEnd.pages.travel_management.spend
-                  .spend_hotel_journey.hotel_asig
-              }}</strong>
+              <strong class="text-primary-hr">{{ parseT('hotel_asig') | translate }}</strong>
             </div>
           </div>
           <div class="col-12" style="margin-top: 10px">
             <div class="table-responsive">
-              <table
-                class="table table-sm table-striped table-bordered table-hover"
-              >
+              <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.spend_hotel_journey.column_cero
-                      }}
+                      {{ parseT('column_cero') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.spend_hotel_journey.column_one
-                      }}
+                      {{ parseT('column_one') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.spend_hotel_journey.column_two
-                      }}
+                      {{ parseT('column_two') | translate }}
                     </th>
                   </tr>
                 </thead>
@@ -128,16 +69,10 @@
             </div>
           </div>
         </div>
-        <div
-          class="row justify-content-center top-containter"
-          *ngIf="arrayHotel.length === 0"
-        >
+        <div class="row justify-content-center top-containter" *ngIf="arrayHotel.length === 0">
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              {{
-                translate.app.frontEnd.pages.travel_management.spend
-                  .spend_hotel_journey.negative_message
-              }}
+              {{ parseT('negative_message') | translate }}
             </div>
           </div>
         </div>

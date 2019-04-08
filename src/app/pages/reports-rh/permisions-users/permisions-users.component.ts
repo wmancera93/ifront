@@ -3,7 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { ReportsHrService } from '../../../services/reports-rh/reports-hr.service';
 import { TablesPermisions } from '../../../models/common/tables/tables';
@@ -21,7 +21,7 @@ declare var jsPDF: any;
 @Component({
   selector: 'app-permisions-users',
   templateUrl: './permisions-users.component.html',
-  styleUrls: ['./permisions-users.component.css']
+  styleUrls: ['./permisions-users.component.css'],
 })
 export class PermisionsUsersComponent implements OnInit, OnDestroy {
   public permisionsUsers: TablesPermisions[] = [];
@@ -62,7 +62,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     private tokenService: Angular2TokenService,
     public router: Router,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -72,14 +72,14 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
-      )
+        },
+      ),
     ];
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -89,7 +89,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       ...this.subscriptions,
@@ -107,9 +107,12 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
             this.labels.push({
               value: label.value,
               type: label.type,
-              label: element
+              label: element,
             });
-            this.columnsPdf.push({ title: label.value, dataKey: element });
+            this.columnsPdf.push({
+              title: label.value,
+              dataKey: element,
+            });
           });
         }
         if (res.success) {
@@ -118,7 +121,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
           //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
           // }, 2000)
         }
-      })
+      }),
     ];
 
     setTimeout(() => {
@@ -159,9 +162,12 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
             this.labels.push({
               value: label.value,
               type: label.type,
-              label: element
+              label: element,
             });
-            this.columnsPdf.push({ title: label.value, dataKey: element });
+            this.columnsPdf.push({
+              title: label.value,
+              dataKey: element,
+            });
           });
           if (this.stylesExplorerService.validateBrowser()) {
             let dataEnterprise: Enterprise;
@@ -175,7 +181,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
               'see_organ',
               'without_permits',
               'see_rpgen',
-              'is_admin'
+              'is_admin',
             ].forEach(ele => {
               document.getElementById(ele).removeAttribute('style');
             });
@@ -214,7 +220,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
           prod[parameter]
             .toString()
             .toUpperCase()
-            .indexOf(this.value_search.toUpperCase()) >= 0
+            .indexOf(this.value_search.toUpperCase()) >= 0,
       );
     } else {
       this.recordsPrint = this.recordsStatic;
@@ -252,13 +258,13 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
         textColor: 20,
         halign: 'left',
         valign: 'middle',
-        columnWidth: 'auto'
+        columnWidth: 'auto',
       },
       headerStyles: {
         fillColor: [91, 105, 110],
         fontStyle: 'bold',
         halign: 'center',
-        textColor: 250
+        textColor: 250,
       },
       margin: { top: 110 },
       addPageContent: function() {
@@ -271,7 +277,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
         doc.setFontSize(10);
         doc.text(500, 60, 'pagina ' + doc.page);
         doc.page++;
-      }
+      },
     });
 
     doc.save(title + '.pdf');
@@ -290,7 +296,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     objectTable.push({
       title: this.title,
       labels: this.labelsCell,
-      cells: this.recordsPrint
+      cells: this.recordsPrint,
     });
     this.printDataTableService.setObjectForPrint(objectTable);
   }

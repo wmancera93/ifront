@@ -8,7 +8,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 @Component({
   selector: 'app-labor-certificates',
   templateUrl: './labor-certificates.component.html',
-  styleUrls: ['./labor-certificates.component.css']
+  styleUrls: ['./labor-certificates.component.css'],
 })
 export class LaborCertificatesComponent implements OnInit {
   public typeCertificate: string;
@@ -34,7 +34,7 @@ export class LaborCertificatesComponent implements OnInit {
     public autoServiceService: AutoServicesService,
     public domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.companyAuthenticated = JSON.parse(localStorage.getItem('enterprise'));
     this.block_certificate = this.companyAuthenticated.show_verification_code_pdf;
@@ -46,13 +46,13 @@ export class LaborCertificatesComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -62,7 +62,7 @@ export class LaborCertificatesComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.autoServiceService.getLaboralCertificate().subscribe((data: any) => {
       this.laboralType = data.data;
@@ -72,7 +72,7 @@ export class LaborCertificatesComponent implements OnInit {
         this.flagEmpty = false;
         this.urlPDF = this.laboralType[0].file.url;
         this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(
-          this.urlPDF
+          this.urlPDF,
         );
       }
 
@@ -109,7 +109,7 @@ export class LaborCertificatesComponent implements OnInit {
   acceptCertificateQR() {
     this.autoServiceService
       .getLaboralCertificateQR(
-        this.laboralType[this.idCertificate].id.toString()
+        this.laboralType[this.idCertificate].id.toString(),
       )
       .subscribe((data: any) => {
         this.urlPDF = data.data.file.url;

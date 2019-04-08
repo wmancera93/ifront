@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-view-evaluation-objetives',
   templateUrl: './view-evaluation-objetives.component.html',
-  styleUrls: ['./view-evaluation-objetives.component.css']
+  styleUrls: ['./view-evaluation-objetives.component.css'],
 })
 export class ViewEvaluationObjetivesComponent implements OnInit, OnDestroy {
   public countAfter = 0;
@@ -25,7 +25,7 @@ export class ViewEvaluationObjetivesComponent implements OnInit, OnDestroy {
 
   constructor(
     public performanceEvaluationService: PerformanceEvaluationService,
-    public performanceEvalSharedService: PerformanceEvalSharedService
+    public performanceEvalSharedService: PerformanceEvalSharedService,
   ) {
     this.subscriptions = this.performanceEvalSharedService
       .getViewEvaluationPerformanceData()
@@ -47,7 +47,10 @@ export class ViewEvaluationObjetivesComponent implements OnInit, OnDestroy {
             } else {
               this.ObjectivesTableView = [];
               setTimeout(() => {
-                this.objectReportEval.emit({ success: true, data: [] });
+                this.objectReportEval.emit({
+                  success: true,
+                  data: [],
+                });
               }, 100);
             }
           });

@@ -4,7 +4,7 @@ import {
   TemplateRef,
   ViewChild,
   OnDestroy,
-  Input
+  Input,
 } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
@@ -19,7 +19,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-new-housing',
   templateUrl: './new-housing.component.html',
-  styleUrls: ['./new-housing.component.css']
+  styleUrls: ['./new-housing.component.css'],
 })
 export class NewHousingComponent implements OnInit, OnDestroy {
   @ViewChild('modalForms')
@@ -53,7 +53,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     private fb: FormBuilder,
     public formDataService: FormDataService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.cities = [{ id: 1, name: 'Bogota' }, { id: 2, name: 'Medellin' }];
 
@@ -62,7 +62,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       name: [''],
       city: [''],
       bedrooms: [''],
-      beds: ['']
+      beds: [''],
     });
   }
 
@@ -71,7 +71,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       const modal = this.modalService.open(this.modalTemplate, {
         size: 'lg',
         windowClass: 'modal-md-personalized modal-dialog-scroll',
-        centered: true
+        centered: true,
       });
       this.modalActions.close = () => {
         modal.close();
@@ -108,7 +108,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.arrayBedrooms.push({
       bedrooms: bedrooms.value,
       beds: beds.value,
-      key: uuid.v4()
+      key: uuid.v4(),
     });
     bedrooms.setValue('');
     beds.setValue('');
@@ -117,7 +117,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   removeTrayect(keyBedrooms) {
     this.arrayBedrooms.splice(
       this.arrayBedrooms.findIndex(filter => filter.key === keyBedrooms),
-      1
+      1,
     );
   }
 }

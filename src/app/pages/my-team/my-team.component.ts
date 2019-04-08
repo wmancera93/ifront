@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-my-team',
   templateUrl: './my-team.component.html',
-  styleUrls: ['./my-team.component.css']
+  styleUrls: ['./my-team.component.css'],
 })
 export class MyTeamComponent implements OnInit {
   public employeesInMyTeam: MyTeam[] = [];
@@ -31,7 +31,7 @@ export class MyTeamComponent implements OnInit {
     public router: Router,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -40,13 +40,13 @@ export class MyTeamComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -56,7 +56,7 @@ export class MyTeamComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.myTeamInfoService.getMyTeamData().subscribe((data: any) => {

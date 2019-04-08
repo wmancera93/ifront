@@ -7,7 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-error-page',
   templateUrl: './error-page.component.html',
-  styleUrls: ['./error-page.component.css']
+  styleUrls: ['./error-page.component.css'],
 })
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
@@ -19,14 +19,14 @@ export class ErrorPageComponent implements OnInit {
   constructor(
     private mainService: MainService,
     public router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     if (localStorage.getItem('enterprise') === null) {
       const url = window.location.href;
@@ -48,14 +48,14 @@ export class ErrorPageComponent implements OnInit {
         this.dataEnterprise = result.data;
         document.documentElement.style.setProperty(
           `--img-header-login`,
-          `url(` + this.dataEnterprise.background_login.url + `)`
+          `url(` + this.dataEnterprise.background_login.url + `)`,
         );
       });
     } else {
       this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
       document.documentElement.style.setProperty(
         `--img-header-login`,
-        `url(` + this.dataEnterprise.background_login.url + `)`
+        `url(` + this.dataEnterprise.background_login.url + `)`,
       );
     }
   }

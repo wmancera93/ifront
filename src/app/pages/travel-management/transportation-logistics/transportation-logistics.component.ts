@@ -6,7 +6,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 @Component({
   selector: 'app-transportation-logistics',
   templateUrl: './transportation-logistics.component.html',
-  styleUrls: ['./transportation-logistics.component.css']
+  styleUrls: ['./transportation-logistics.component.css'],
 })
 export class TransportationLogisticsComponent implements OnInit {
   public modalForm: Subject<any> = new Subject<any>();
@@ -30,7 +30,7 @@ export class TransportationLogisticsComponent implements OnInit {
         action_tranportation_index_view: [
           { title: 'Ver', is_active: true },
           { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: true }
+          { title: 'Editar', is_active: true },
         ],
         created_date: '03/10/2018',
         is_avalable: false,
@@ -39,13 +39,13 @@ export class TransportationLogisticsComponent implements OnInit {
         plate: 'XML 152',
         total_chairs: 25,
         assigned_spaces: 18,
-        available_spaces: 7
+        available_spaces: 7,
       },
       {
         action_tranportation_index_view: [
           { title: 'Ver', is_active: true },
           { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: false }
+          { title: 'Editar', is_active: false },
         ],
         created_date: '03/10/2018',
         is_avalable: false,
@@ -54,8 +54,8 @@ export class TransportationLogisticsComponent implements OnInit {
         plate: 'JCG 152',
         total_chairs: 80,
         assigned_spaces: 65,
-        available_spaces: 25
-      }
+        available_spaces: 25,
+      },
     ];
   }
   returnBack() {
@@ -69,8 +69,8 @@ export class TransportationLogisticsComponent implements OnInit {
         title: 'Confirmación',
         message: '¿Desea eliminar la flota vehicular?',
         confirmation: true,
-        typeConfirmation: 'deleteFleets'
-      }
+        typeConfirmation: 'deleteFleets',
+      },
     ];
     this.alert.setAlert(alertWarning[0]);
   }

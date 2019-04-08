@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import {
   FormGroup,
   Validators,
@@ -10,11 +17,10 @@ import { Translate } from '../../../models/common/translate/translate';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 
-
 @Component({
   selector: 'app-lenses-auxilium',
   templateUrl: './lenses-auxilium.component.html',
-  styleUrls: ['./lenses-auxilium.component.css']
+  styleUrls: ['./lenses-auxilium.component.css'],
 })
 export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
@@ -36,12 +42,11 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   public deleteDocumenFile: string;
   public formCases = {
     cases: {
-      AUXL: {
-      },
+      AUXL: {},
     },
     allCases: {
       observation_request: true,
-    }
+    },
   };
 
   private subscription: ISubscription;
@@ -58,25 +63,39 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
-  constructor(private fb: FormBuilder, public fileUploadService: FileUploadService, public alert: AlertsService,
+  constructor(
+    private fb: FormBuilder,
+    public fileUploadService: FileUploadService,
+    public alert: AlertsService,
   ) {
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
-        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+        this.objectImg.splice(
+          this.objectImg.findIndex(
+            filter => filter.file.name === this.deleteDocumenFile,
+          ),
+          1,
+        );
+        this.file.splice(
+          this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
+          1,
+        );
       }
       this.setModalState.emit(true);
     });
   }
 
   ngOnInit() {
-    this.fileUploadService.getObjetFile().subscribe((data) => {
+    this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
       this.file.push(data);
-      this.objectImg.push({ file: data, extension: this.iconDocument });
+      this.objectImg.push({
+        file: data,
+        extension: this.iconDocument,
+      });
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
       }, 500);
@@ -87,9 +106,14 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
       file: [],
-      observation_request: ['', (control: AbstractControl) => {
-        return this.formState('observation_request') ? required(control) : null;
-      }],
+      observation_request: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('observation_request')
+            ? required(control)
+            : null;
+        },
+      ],
     });
   }
 
@@ -134,10 +158,15 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.travel.new_travel.type_alert_ts,
-      message: this.translate.app.frontEnd.pages.travel_management.travel.new_travel.message_alert_ts + param.file.name.toString() + '?',
+      title: this.translate.app.frontEnd.pages.travel_management.travel
+        .new_travel.type_alert_ts,
+      message:
+        this.translate.app.frontEnd.pages.travel_management.travel.new_travel
+          .message_alert_ts +
+        param.file.name.toString() +
+        '?',
       confirmation: true,
-      typeConfirmation: 'deleteNewDocumentSaved'
+      typeConfirmation: 'deleteNewDocumentSaved',
     });
   }
 }

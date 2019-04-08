@@ -18,10 +18,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.spend
-              .view_spend.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </h5>
         <button
           id="closeModalViewSpend"
@@ -42,10 +39,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management.spend
-                    .view_spend.name_travel
-                }}:</strong
+                >{{ parseT('name_travel') | translate }}:</strong
               >
             </label>
           </div>
@@ -63,8 +57,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa-globe text-primary-hr"></i>
                   <strong>{{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.view_spend.type_travel
+                    parseT('type_travel') | translate
                   }}</strong>
                 </label>
               </div>
@@ -80,12 +73,7 @@
               <i
                 class="fa fa-fw fa-check-square-o text-primary-hr"
               ></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management.spend
-                    .view_spend.status
-                }}:</strong
-              >
+              <strong>{{ parseT('status') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
@@ -104,7 +92,7 @@
               id="tableViewSpends"
               [pdf]="showPdf"
               [sizeTable]="showSizeTable"
-              [title]="nameReport"
+              [title]="parseT('tittle_ts') | translate"
             ></app-data-table>
           </div>
         </div>
@@ -132,21 +120,13 @@
                         class="badge badge-light wg-hover-general"
                         (click)="viewAnnex(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.view_spend
-                            .see_attach
-                        }}
+                        {{ parseT('see_attach') | translate }}
                       </p>
                       <p
                         class="badge badge-light wg-hover-general"
                         (click)="downloadAnnex(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.view_spend
-                            .download_attach
-                        }}
+                        {{ parseT('download_attach') | translate }}
                       </p>
                     </div>
                   </div>
@@ -168,10 +148,7 @@
                   aria-expanded="false"
                   aria-controls="collapseTravels"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.view_spend.view_trayect
-                  }}
+                  {{ parseT('view_trayect') | translate }}
                 </p>
               </div>
               <div
@@ -186,9 +163,7 @@
                     <label class="titleColor">
                       <strong
                         >{{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.view_spend
-                            .date_requests_travel
+                          parseT('date_requests_travel') | translate
                         }}:</strong
                       >
                     </label>
@@ -203,9 +178,8 @@
                     <label class="titleColor">
                       <strong
                         >{{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.view_spend
-                            .date_requests_travel_end
+                          parseT('date_requests_travel_end')
+                            | translate
                         }}:</strong
                       >
                     </label>
@@ -224,7 +198,9 @@
                       [pdf]="showPdf"
                       id="tableTravelsSaved"
                       [sizeTable]="showSizeTable"
-                      [title]="nameReportTravels"
+                      [title]="
+                        parseT('tittle_trayect_ts') | translate
+                      "
                     ></app-data-table>
                   </div>
                 </div>
@@ -243,14 +219,8 @@
                   aria-expanded="false"
                   aria-controls="collapseAdvance"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.view_spend.see_attach
-                  }}
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.view_spend.view_advances
-                  }}
+                  {{ parseT('see_attach') | translate }}
+                  {{ parseT('view_advances') | translate }}
                 </p>
               </div>
               <div
@@ -265,7 +235,7 @@
                   [pdf]="showPdf"
                   id="tableAdvanceSaved"
                   [sizeTable]="showSizeTable"
-                  [title]="nameReportAdvance"
+                  [title]="parseT('tittle_advances_ts') | translate"
                 ></app-data-table>
               </div>
             </div>
@@ -286,15 +256,14 @@
           <div class="col-lg-4 col-md-6 col-12">
             <button
               *ngIf="
-                allRequestsInSpend[0].travel_managements.data.length >
-                0
+                allRequestsInSpend[0]?.travel_managements.data
+                  .length > 0
               "
               class="btn btn-success btn-block cursor-general"
               (click)="sedRequestsSpend()"
             >
               <i class="fa fa-fw fa-save"></i>&nbsp;{{
-                translate.app.frontEnd.pages.travel_management.spend
-                  .view_spend.btn_send
+                parseT('btn_send') | translate
               }}
             </button>
           </div>
@@ -310,8 +279,7 @@
               (click)="exportExcel()"
             >
               <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;{{
-                translate.app.frontEnd.pages.travel_management.spend
-                  .view_spend.btn_export
+                parseT('btn_export') | translate
               }}
             </button>
           </div>
@@ -322,10 +290,7 @@
             data-dismiss="modal"
           >
             <h6>
-              {{
-                translate.app.frontEnd.pages.travel_management.spend
-                  .view_spend.btn_close
-              }}
+              {{ parseT('btn_close') | translate }}
             </h6>
           </div>
         </div>

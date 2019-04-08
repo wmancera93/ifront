@@ -3,7 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
@@ -15,7 +15,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
-  styleUrls: ['./news.component.css']
+  styleUrls: ['./news.component.css'],
 })
 export class NewsComponent implements OnInit, OnDestroy {
   @Output() newModal: EventEmitter<string> = new EventEmitter();
@@ -40,7 +40,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     public myPublicationsService: MyPublicationsService,
     public billboardSharedService: BillboardService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -50,17 +50,17 @@ export class NewsComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.billboardSharedService.getRefreshEditNew().subscribe(() => {
         this.consultAllArticles();
-      })
+      }),
     ];
   }
 
@@ -68,7 +68,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.consultAllArticles();
     setTimeout(() => {
@@ -95,7 +95,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       this.consultAllArticles();
     } else {
       this.newList = this.newList.filter(
-        (pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0
+        (pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0,
       );
       if (this.newList.length == 0) {
         this.validateNoData = true;
@@ -109,7 +109,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({
         objectPublication: article,
-        modal: 'newModal'
+        modal: 'newModal',
       });
     }, 500);
   }

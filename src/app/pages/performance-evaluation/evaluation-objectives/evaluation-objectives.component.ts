@@ -5,7 +5,7 @@ import { PerformanceEvalSharedService } from '../../../services/shared/common/pe
 @Component({
   selector: 'app-evaluation-objectives',
   templateUrl: './evaluation-objectives.component.html',
-  styleUrls: ['./evaluation-objectives.component.css']
+  styleUrls: ['./evaluation-objectives.component.css'],
 })
 export class EvaluationObjectivesComponent implements OnInit {
   public evaluationPerformanceList: any[] = [];
@@ -18,19 +18,17 @@ export class EvaluationObjectivesComponent implements OnInit {
 
   constructor(
     public performanceEvaluationService: PerformanceEvaluationService,
-    public performanceEvalSharedService: PerformanceEvalSharedService
+    public performanceEvalSharedService: PerformanceEvalSharedService,
   ) {
-    this.performanceEvalSharedService
-      .getRefrehsEval()
-      .subscribe((res: any) => {
-        if (res) {
-          this.performanceEvaluationService
-            .getPerformanceEvaluations()
-            .subscribe((data: any) => {
-              this.evaluationPerformanceList = data.data;
-            });
-        }
-      });
+    this.performanceEvalSharedService.getRefrehsEval().subscribe((res: any) => {
+      if (res) {
+        this.performanceEvaluationService
+          .getPerformanceEvaluations()
+          .subscribe((data: any) => {
+            this.evaluationPerformanceList = data.data;
+          });
+      }
+    });
   }
 
   ngOnInit() {
@@ -54,7 +52,7 @@ export class EvaluationObjectivesComponent implements OnInit {
   }
   goToModalEvalView(viewEval: any) {
     this.performanceEvalSharedService.setViewEvaluationPerformanceData(
-      viewEval
+      viewEval,
     );
   }
 }

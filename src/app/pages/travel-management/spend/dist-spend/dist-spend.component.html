@@ -26,10 +26,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.spend
-              .dist_spend.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </h5>
         <button
           id="closeDistSpend"
@@ -52,10 +49,7 @@
                   class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
                 ></i>
                 <span>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.dist_spend.back
-                  }}
+                  {{ parseT('back') | translate }}
                 </span>
               </div>
             </div>
@@ -69,10 +63,7 @@
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.code_spend
-                    }}:</strong
+                    >{{ parseT('code_spend') | translate }}:</strong
                   >
                 </label>
               </div>
@@ -82,10 +73,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.type_spend
-                    }}:</strong
+                    >{{ parseT('type_spend') | translate }}:</strong
                   >
                 </label>
               </div>
@@ -99,12 +87,7 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.import
-                    }}:</strong
-                  >
+                  <strong>{{ parseT('import') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -112,12 +95,7 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.date
-                    }}:</strong
-                  >
+                  <strong>{{ parseT('date') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -138,52 +116,28 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_cero
-                      }}
+                      {{ parseT('column_cero') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_one
-                      }}
+                      {{ parseT('column_one') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_two
-                      }}
+                      {{ parseT('column_two') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_three
-                      }}
+                      {{ parseT('column_three') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_four
-                      }}
+                      {{ parseT('column_four') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_five
-                      }}
+                      {{ parseT('column_five') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_six
-                      }}
+                      {{ parseT('column_six') | translate }}
                     </th>
                     <th class="text-center" *ngIf="isEdit">
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .spend.dist_spend.column_seven
-                      }}
+                      {{ parseT('column_seven') | translate }}
                     </th>
                   </tr>
                 </thead>
@@ -246,10 +200,7 @@
             >
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.dist_spend.negative_message
-                  }}
+                  {{ parseT('negative_message') | translate }}
                 </div>
               </div>
             </div>
@@ -267,10 +218,7 @@
                   class="btn btn-block btn-primary text-center"
                   (click)="newDistributions()"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .spend.dist_spend.add_dist
-                  }}
+                  {{ parseT('add_dist') | translate }}
                 </button>
                 <button
                   type="button"
@@ -298,9 +246,7 @@
                         ></i>
                         <a
                           >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .column_cero
+                            parseT('column_cero') | translate
                           }}:*</a
                         >
                       </label>
@@ -329,11 +275,7 @@
                           class="fa fa-fw fa-usd text-primary-hr detectLetter"
                         ></i>
                         <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .column_one
-                          }}:*</a
+                          >{{ parseT('column_one') | translate }}:*</a
                         >
                       </label>
                       <input
@@ -370,9 +312,7 @@
                         ></i>
                         <a
                           >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .column_four
+                            parseT('column_four') | translate
                           }}:*</a
                         >
                       </label>
@@ -409,11 +349,7 @@
                           class="fa fa-fw fa-usd text-primary-hr"
                         ></i>
                         <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .column_two
-                          }}:*</a
+                          >{{ parseT('column_two') | translate }}:*</a
                         >
                       </label>
                       <input
@@ -453,9 +389,7 @@
                         ></i>
                         <a
                           >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .column_tree
+                            parseT('column_tree') | translate
                           }}:*</a
                         >
                       </label>
@@ -468,9 +402,7 @@
                         [ngModelOptions]="{ standalone: true }"
                       >
                         <option value="-1">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.dist_spend
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="let operationsTravels of operations"
@@ -490,13 +422,7 @@
                         <i
                           class="fa fa-fw fa-calculator text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.spend.dist_spend
-                              .account
-                          }}:*</a
-                        >
+                        <a>{{ parseT('account') | translate }}:*</a>
                       </label>
                       <select
                         class="form-control"
@@ -504,9 +430,7 @@
                         [ngModelOptions]="{ standalone: true }"
                       >
                         <option value="">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.dist_spend
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="let accounting of accountContable"
@@ -521,11 +445,7 @@
                         <i
                           class="fa fa-fw fa-percent text-primary-hr"
                         ></i>
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.spend.dist_spend
-                            .column_six
-                        }}*
+                        {{ parseT('column_six') | translate }}*
                       </label>
                       <input
                         class="form-control"
@@ -560,8 +480,7 @@
                     (click)="saveAccountEdit()"
                   >
                     <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.add_dist
+                      parseT('add_dist') | translate
                     }}
                   </button>
                 </div>
@@ -578,8 +497,7 @@
                   >
                     <i class="fa fa-fw fa-fw fa-window-close"></i
                     >&nbsp;&nbsp;{{
-                      translate.app.frontEnd.pages.travel_management
-                        .spend.dist_spend.btn_cancel
+                      parseT('btn_cancel') | translate
                     }}
                   </button>
                 </div>

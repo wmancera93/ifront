@@ -21,7 +21,7 @@ declare const ga: any;
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
   public txtEmail = '';
@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.initApp();
 
@@ -76,9 +76,9 @@ export class LoginComponent implements OnInit {
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
-        }
-      }
+          Accept: 'application/json',
+        },
+      },
     });
   }
 
@@ -119,7 +119,7 @@ export class LoginComponent implements OnInit {
       const {
         background_login,
         primary_color,
-        body_text
+        body_text,
       } = this.dataEnterprise[0];
       if (!this.stylesExplorerService.validateBrowser()) {
         const setProp = (a, b) => {
@@ -145,7 +145,7 @@ export class LoginComponent implements OnInit {
             '-1px',
             '-12px',
             '',
-            ''
+            '',
           );
         }, 200);
       }
@@ -185,7 +185,7 @@ export class LoginComponent implements OnInit {
         this.tokenService
           .signIn({
             email: this.txtEmail,
-            password: this.txtPassword
+            password: this.txtPassword,
           })
           .subscribe(
             res => {
@@ -199,7 +199,7 @@ export class LoginComponent implements OnInit {
                   'authentication',
                   'singInSession',
                   'Sing in session',
-                  1
+                  1,
                 );
               }
             },
@@ -215,25 +215,25 @@ export class LoginComponent implements OnInit {
                 {
                   type: typeAlert,
                   title: this.t('title_warning_ts_one'),
-                  message: resultError.errors[0]
-                }
+                  message: resultError.errors[0],
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
               this.googleAnalyticsEventsService.emitEvent(
                 'login',
                 'errorSingInSession',
                 'Error sing in session',
-                1
+                1,
               );
-            }
+            },
           );
       } else {
         const alertWarning: Alerts[] = [
           {
             type: 'danger',
             title: this.t('title_warning_ts_one'),
-            message: this.t('msg_characters_minimum_ts')
-          }
+            message: this.t('msg_characters_minimum_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
       }
@@ -242,8 +242,8 @@ export class LoginComponent implements OnInit {
         {
           type: 'warning',
           title: this.t('title_warning_ts_one'),
-          message: this.t('msg_email_is_required_ts')
-        }
+          message: this.t('msg_email_is_required_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
     }
@@ -270,8 +270,8 @@ export class LoginComponent implements OnInit {
           {
             type: 'danger',
             title: this.t('title_warning_ts_one'),
-            message: this.t('msg_tincorrect_format_ts')
-          }
+            message: this.t('msg_tincorrect_format_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
@@ -285,7 +285,7 @@ export class LoginComponent implements OnInit {
       if ((<HTMLInputElement>document.getElementById('chk_remember')).checked) {
         objectRemember.push({
           email: this.txtEmail,
-          password: this.txtPassword
+          password: this.txtPassword,
         });
       } else {
         objectRemember.push({ email: '', password: '' });
@@ -297,8 +297,8 @@ export class LoginComponent implements OnInit {
         {
           type: 'warning',
           title: this.t('title_warning_ts_one'),
-          message: this.t('msg_enter_your_data_ts')
-        }
+          message: this.t('msg_enter_your_data_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
       (<HTMLInputElement>(

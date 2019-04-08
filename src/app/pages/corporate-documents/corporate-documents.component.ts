@@ -3,12 +3,12 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { CorporateDocsService } from '../../services/corporate-documents/corporate-docs.service';
 import {
   Documents,
-  TypeDocuments
+  TypeDocuments,
 } from '../../models/common/corporate_documents/corporate_documents';
 import { DownloadFilesService } from '../../services/download-files/download-files.service';
 import { Http, Headers } from '@angular/http';
@@ -18,7 +18,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-corporate-documents',
   templateUrl: './corporate-documents.component.html',
-  styleUrls: ['./corporate-documents.component.css']
+  styleUrls: ['./corporate-documents.component.css'],
 })
 export class CorporateDocumentsComponent implements OnInit, OnDestroy {
   public downloadName: string;
@@ -41,7 +41,7 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
     public corporateDocsService: CorporateDocsService,
     public downloadFilesService: DownloadFilesService,
     public http: Http,
-    private tokenService: Angular2TokenService
+    private tokenService: Angular2TokenService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -51,14 +51,14 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
-      )
+        },
+      ),
     ];
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -68,7 +68,7 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.subscriptions = [
@@ -84,7 +84,7 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
           //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
           // }, 3000)
         }
-      })
+      }),
     ];
   }
   downloadPDF(doc: any) {
@@ -106,7 +106,7 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
 
         // var file = new File([data._body], "hello world.pdf", { type: "application/pdf;charset=utf-8" });
         // FileSaver.saveAs(file);
-      })
+      }),
     ];
     // window.open(this.urlPDF, "_blank");
   }
@@ -127,7 +127,7 @@ export class CorporateDocumentsComponent implements OnInit, OnDestroy {
         .getDocumentsByType(type.id)
         .subscribe((data: any) => {
           this.infoDocs = data.data[0].documents;
-        })
+        }),
     ];
   }
 

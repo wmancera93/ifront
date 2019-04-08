@@ -8,7 +8,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-loans',
   templateUrl: './loans.component.html',
-  styleUrls: ['./loans.component.css']
+  styleUrls: ['./loans.component.css'],
 })
 export class LoansComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -26,14 +26,14 @@ export class LoansComponent implements OnInit, OnDestroy {
   constructor(
     public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.subscriptions = [
@@ -51,8 +51,8 @@ export class LoansComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

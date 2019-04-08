@@ -6,61 +6,56 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { ApproverTravelsService } from '../../../../services/travel-management/approver-travels/approver-travels.service';
 import { TravelApproverService } from '../../../../services/shared/travel-approver/travel-approver.service';
 import { FiltersGeneralsService } from '../../../../services/travel-management/filters-generals/filters-generals.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-managed-travel',
   templateUrl: './managed-travel.component.html',
-  styleUrls: ['./managed-travel.component.css']
+  styleUrls: ['./managed-travel.component.css'],
 })
 export class ManagedTravelComponent implements OnInit {
-
   public managedRequestTravel: any[] = [];
   public travelsRequestsManagedType = 'travels';
   public typesRequestManaged: any[] = [];
   public request_managed_id: string;
   public request_managed_type: string;
-  public translate: Translate = null;
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public alert: AlertsService,
+  parseT(key) {
+    return `pages.travel_management.approver_travels.manged_travel.${key}`;
+  }
+
+  constructor(
+    public alert: AlertsService,
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public approverTravelsService: ApproverTravelsService,
     public travelApproverServiceShared: TravelApproverService,
-    public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
-
-    this.translate = this.translateService.getTranslate();
-
+    public filtersGeneralsService: FiltersGeneralsService,
+  ) {
     this.typesRequestManaged.push(
       {
         id: 1,
-        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_one,
+        name: 'filter_one',
       },
       {
         id: 2,
-        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_two,
+        name: 'filter_two',
       },
       {
         id: 3,
-        name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_three,
-      }
+        name: 'filter_three',
+      },
     );
-
-
   }
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.getRequestsManaged();
-
   }
-
 
   //begin filters
 
@@ -103,14 +98,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
 
         if (this.codIHR !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberIHR(this.page, this.codIHR)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codSAP':
@@ -121,14 +121,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.codSAP !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberSAP(this.page, this.codSAP)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'dates':
@@ -138,14 +143,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
-          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'status':
@@ -156,14 +166,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.status !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatus(this.page, this.status)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'statusLiquid':
@@ -174,14 +189,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codIHR = '';
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codEmployee':
@@ -192,14 +212,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codIHR = '';
         if (this.codEmployee !== '') {
-          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByEmployee(this.page, this.codEmployee)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsTravelsManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
 
@@ -220,14 +245,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
 
         if (this.codIHR !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberIHR(this.page, this.codIHR)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codSAP':
@@ -238,14 +268,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.codSAP !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberSAP(this.page, this.codSAP)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'dates':
@@ -255,14 +290,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
-          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'status':
@@ -273,14 +313,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.status !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatus(this.page, this.status)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'statusLiquid':
@@ -291,14 +336,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codIHR = '';
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codEmployee':
@@ -309,14 +359,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codIHR = '';
         if (this.codEmployee !== '') {
-          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByEmployee(this.page, this.codEmployee)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsAdvanceManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
 
@@ -337,14 +392,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
 
         if (this.codIHR !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberIHR(this.page, this.codIHR).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberIHR(this.page, this.codIHR)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codSAP':
@@ -355,14 +415,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.codSAP !== '') {
-          this.filtersGeneralsService.getSearchByTravelNumberSAP(this.page, this.codSAP).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchByTravelNumberSAP(this.page, this.codSAP)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'dates':
@@ -372,14 +437,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
-          this.filtersGeneralsService.getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'status':
@@ -390,14 +460,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codEmployee = '';
         if (this.status !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatus(this.page, this.status).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatus(this.page, this.status)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'statusLiquid':
@@ -408,14 +483,19 @@ export class ManagedTravelComponent implements OnInit {
         this.codIHR = '';
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
-          this.filtersGeneralsService.getSearchTravelByStatusLiquid(this.page, this.statusLiquid).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
       case 'codEmployee':
@@ -426,14 +506,19 @@ export class ManagedTravelComponent implements OnInit {
         this.statusLiquid = '';
         this.codIHR = '';
         if (this.codEmployee !== '') {
-          this.filtersGeneralsService.getSearchTravelByEmployee(this.page, this.codEmployee).subscribe(
-            (data: any) => {
+          this.filtersGeneralsService
+            .getSearchTravelByEmployee(this.page, this.codEmployee)
+            .subscribe((data: any) => {
               this.managedRequestTravel = this.sortByNumber(data.data);
             });
         } else {
-          this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          });
+          this.approverTravelsService
+            .getApprovalsSpendManaged()
+            .subscribe((data: any) => {
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            });
         }
         break;
 
@@ -449,26 +534,31 @@ export class ManagedTravelComponent implements OnInit {
   //end filters
 
   getRequestsManaged() {
-
-    this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-      if (data) {
-        this.travelsRequestsManagedType = 'travels';
-        this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-      }
-    });
+    this.approverTravelsService
+      .getApprovalsTravelsManaged()
+      .subscribe((data: any) => {
+        if (data) {
+          this.travelsRequestsManagedType = 'travels';
+          this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
+        }
+      });
   }
   returnBackTravel() {
     this.router.navigate(['ihr/travel_management']);
   }
   sortByNumber(dataBySort: any) {
-    dataBySort.sort(function (a, b) {
+    dataBySort.sort(function(a, b) {
       return b.id - a.id;
     });
     return dataBySort;
   }
 
   modalAproversTravelManaged(request: any, type: string) {
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false, type: type });
+    this.travelApproverServiceShared.setviewDetailRequests({
+      request,
+      edit: false,
+      type: type,
+    });
   }
 
   selectTypeRequestsManaged(param) {
@@ -482,29 +572,40 @@ export class ManagedTravelComponent implements OnInit {
 
     switch (param.id.toString()) {
       case '1':
-        this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
-          if (data) {
-            this.travelsRequestsManagedType = 'travels';
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          }
-        });
+        this.approverTravelsService
+          .getApprovalsTravelsManaged()
+          .subscribe((data: any) => {
+            if (data) {
+              this.travelsRequestsManagedType = 'travels';
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            }
+          });
         break;
       case '2':
-        this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
-          this.travelsRequestsManagedType = 'advance';
-          this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-        });
+        this.approverTravelsService
+          .getApprovalsAdvanceManaged()
+          .subscribe((data: any) => {
+            this.travelsRequestsManagedType = 'advance';
+            this.managedRequestTravel = this.sortByNumber(
+              data.data[0].requests,
+            );
+          });
         break;
       case '3':
-        this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
-          if (data) {
-            this.travelsRequestsManagedType = 'spend';
-            this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          }
-        });
+        this.approverTravelsService
+          .getApprovalsSpendManaged()
+          .subscribe((data: any) => {
+            if (data) {
+              this.travelsRequestsManagedType = 'spend';
+              this.managedRequestTravel = this.sortByNumber(
+                data.data[0].requests,
+              );
+            }
+          });
         break;
       default:
-
         break;
     }
   }

@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-aniversary',
   templateUrl: './aniversary.component.html',
-  styleUrls: ['./aniversary.component.css']
+  styleUrls: ['./aniversary.component.css'],
 })
 export class AniversaryComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -23,14 +23,14 @@ export class AniversaryComponent implements OnInit, OnDestroy {
 
   constructor(
     public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService
+    private accionDataTableService: DataDableSharedService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.subscriptions = [
@@ -48,8 +48,8 @@ export class AniversaryComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

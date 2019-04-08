@@ -4,10 +4,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-clock-o"></i>
-          {{
-            translate.app.frontEnd.pages.travel_management
-              .approver_travels.pending_travel.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5 text-center cursor-general"
@@ -20,10 +17,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .approver_travels.pending_travel.back
-                }}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -44,15 +38,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_travel_end
-              }}
+              {{ parseT('message_travel_end') | translate }}
             </h3>
           </div>
           <div
@@ -61,15 +49,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_travel_ends
-              }}
+              {{ parseT('message_travel_ends') | translate }}
             </h3>
           </div>
           <div
@@ -78,10 +60,7 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_untravel
-              }}
+              {{ parseT('message_untravel') | translate }}
             </h3>
           </div>
         </div>
@@ -95,15 +74,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_end_advance
-              }}
+              {{ parseT('message_end_advance') | translate }}
             </h3>
           </div>
           <div
@@ -112,16 +85,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel
-                  .message_end_advances
-              }}
+              {{ parseT('message_end_advances') | translate }}
             </h3>
           </div>
           <div
@@ -130,10 +96,7 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_unadvance
-              }}
+              {{ parseT('message_unadvance') | translate }}
             </h3>
           </div>
         </div>
@@ -147,16 +110,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel
-                  .message_travel_spend
-              }}
+              {{ parseT('message_travel_spend') | translate }}
             </h3>
           </div>
           <div
@@ -165,16 +121,9 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog fa-spin text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_start
-              }}
+              {{ parseT('message_start') | translate }}
               {{ pendingsRequestTravels.length }}
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel
-                  .message_travel_spends
-              }}
+              {{ parseT('message_travel_spends') | translate }}
             </h3>
           </div>
           <div
@@ -183,10 +132,7 @@
           >
             <h3 class="font-color-default">
               <i class="fa fa-fw fa-cog text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.message_unspend
-              }}
+              {{ parseT('message_unspend') | translate }}
             </h3>
           </div>
         </div>
@@ -205,10 +151,7 @@
                 aria-expanded="false"
               >
                 <i class="fa fa-plus"></i>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .approver_travels.pending_travel.btn_filter
-                }}
+                {{ parseT('btn_filter') | translate }}
               </a>
               <div
                 class="dropdown-menu col-12"
@@ -221,7 +164,9 @@
                   <a
                     class="dropdown-item color-font-gree text-capitalize cursor-general"
                     (click)="selectTypeReques(request)"
-                    >{{ request.name | lowercase }}</a
+                    >{{
+                      parseT(request.name) | translate | lowercase
+                    }}</a
                   >
                   <div
                     *ngIf="typesRequest.length !== i + 1"
@@ -239,10 +184,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{
-                translate.app.frontEnd.pages.travel_management
-                  .approver_travels.pending_travel.query_filters
-              }}
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse"
@@ -272,10 +214,7 @@
           <div class="col-12" style="padding-bottom: 15px">
             <div class="row align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .approver_travels.pending_travel.btn_hr
-                }}</label>
+                <label>{{ parseT('btn_hr') | translate }}</label>
                 <div class="row">
                   <div class="col-9">
                     <input
@@ -299,7 +238,7 @@
                 </div>
               </div>
               <!-- <div class="col-lg-3 col-md-6 col-12">
-                <label>{{translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.btn_sap}}</label>
+                <label>{{parseT('btn_sap')| translate}}</label>
                 <div class="row">
                   <div class="col-9">
                     <input type="text" [(ngModel)]="codSAP" class="form-control">
@@ -315,8 +254,7 @@
                 <div class="row">
                   <div class="col-5">
                     <label>{{
-                      translate.app.frontEnd.pages.travel_management
-                        .approver_travels.pending_travel.date_begin
+                      parseT('date_begin') | translate
                     }}</label>
                     <input
                       type="date"
@@ -326,8 +264,7 @@
                   </div>
                   <div class="col-5">
                     <label>{{
-                      translate.app.frontEnd.pages.travel_management
-                        .approver_travels.pending_travel.date_end
+                      parseT('date_end') | translate
                     }}</label>
                     <input
                       type="date"
@@ -371,10 +308,7 @@
                 </select>
               </div> -->
               <div class="col-lg-3 col-md-4 col-12">
-                <label>{{
-                  translate.app.frontEnd.pages.travel_management
-                    .approver_travels.pending_travel.applicant
-                }}</label>
+                <label>{{ parseT('applicant') | translate }}</label>
                 <div class="row">
                   <div class="col-9">
                     <input
@@ -409,10 +343,7 @@
       >
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
-            {{
-              translate.app.frontEnd.pages.travel_management
-                .approver_travels.pending_travel.negative_message
-            }}
+            {{ parseT('negative_message') | translate }}
           </div>
         </div>
       </div>
@@ -443,15 +374,9 @@
                 </h3>
                 <p>
                   <i class="fa fa-plane"></i>
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .approver_travels.pending_travel.date_in
-                  }}
+                  {{ parseT('date_in') | translate }}
                   {{ pending.date_begin_format }} -
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .approver_travels.pending_travel.date_out
-                  }}
+                  {{ parseT('date_out') | translate }}
                   {{ pending.date_end_format }}
                 </p>
               </div>
@@ -472,10 +397,7 @@
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .approver_travels.pending_travel.applicant
-                  }}
+                  {{ parseT('applicant') | translate }}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
@@ -486,10 +408,7 @@
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .approver_travels.pending_travel.date_created
-                  }}
+                  {{ parseT('date_created') | translate }}
                 </p>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
@@ -515,10 +434,7 @@
                   style="font-size: 2em; color: #23c6c8"
                 ></i>
                 <div class="col-12">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .approver_travels.pending_travel.see
-                  }}
+                  {{ parseT('see') | translate }}
                 </div>
               </div>
             </div>

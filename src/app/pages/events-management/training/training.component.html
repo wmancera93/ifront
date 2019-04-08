@@ -10,10 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-flag"></i>
-          {{
-            translate.app.frontEnd.pages.events_management.training
-              .text_trainings
-          }}
+          {{ parseT('text_trainings') | translate }}
         </div>
       </div>
     </div>
@@ -27,7 +24,7 @@
               <app-data-table
                 [records]="objectReport"
                 id="tableEvaluation"
-                [title]="nameReport"
+                [title]="parseT('tittle_table_ts') | translate"
                 [pdf]="showPdf"
                 [sizeTable]="showSizeTable"
               ></app-data-table>

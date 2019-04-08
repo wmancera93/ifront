@@ -26,10 +26,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.advances
-              .new_advance.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </h5>
         <button
           id="closeAdvances"
@@ -56,10 +53,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .advances.new_advance.message
-                    }}:</strong
+                    >{{ parseT('message') | translate }}:</strong
                   >
                 </label>
                 <form name="searchAutoComplete">
@@ -104,10 +98,7 @@
                   class="titleColor"
                   *ngIf="eployee_selected !== null"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.message_third
-                  }}
+                  {{ parseT('message_third') | translate }}
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{
                     eployee_selected.name_complete
@@ -120,10 +111,7 @@
                   style="text-decoration: underline  rgb(185, 190, 206)!important"
                   (click)="deleteEmployeeThird()"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.message_erase_third
-                  }}
+                  {{ parseT('message_erase_third') | translate }}
                 </span>
               </div>
             </div>
@@ -134,8 +122,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa-plane text-primary-hr"></i>
                   <strong>{{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.select_travel
+                    parseT('select_travel') | translate
                   }}</strong>
                 </label>
               </div>
@@ -184,8 +171,7 @@
                   for="FormACheck"
                 >
                   <strong>{{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.select_pay
+                    parseT('select_pay') | translate
                   }}</strong>
                 </label>
               </div>
@@ -194,12 +180,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-money text-primary-hr"></i>
-                  <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .advances.new_advance.import
-                    }}:</strong
-                  >
+                  <strong>{{ parseT('import') | translate }}:</strong>
                 </label>
                 <input
                   type="text"
@@ -214,10 +195,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .advances.new_advance.currency
-                    }}:</strong
+                    >{{ parseT('currency') | translate }}:</strong
                   >
                 </label>
                 <select
@@ -228,8 +206,7 @@
                   paceholder="Seleccione"
                 >
                   <option value="">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.option_select
+                    parseT('option_select') | translate
                   }}</option>
                   <option
                     *ngFor="let money of listMoneyTypes"
@@ -242,10 +219,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .advances.new_advance.date_advance
-                    }}:</strong
+                    >{{ parseT('date_advance') | translate }}:</strong
                   >
                 </label>
                 <input
@@ -266,10 +240,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .advances.new_advance.observation
-                }}:</strong
+                >{{ parseT('observation') | translate }}:</strong
               >
             </label>
             <textarea
@@ -305,8 +276,7 @@
                   (click)="aditionAdvance(formAdvanceTravel.value)"
                 >
                   <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                    translate.app.frontEnd.pages.travel_management
-                      .advances.new_advance.btn_add
+                    parseT('btn_add') | translate
                   }}
                 </button>
               </div>
@@ -322,8 +292,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
               <strong>{{
-                translate.app.frontEnd.pages.travel_management
-                  .advances.new_advance.tittle_detail
+                parseT('tittle_detail') | translate
               }}</strong>
             </label>
             <app-data-table
@@ -331,7 +300,7 @@
               id="tableAdvances"
               [pdf]="showPdf"
               [sizeTable]="showSizeTable"
-              [title]="nameReport"
+              [title]="parseT('name_data_table_ts') | translate"
             ></app-data-table>
           </div>
         </form>
@@ -350,8 +319,7 @@
               (click)="newAdvance(formAdvanceTravel.value)"
             >
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{
-                translate.app.frontEnd.pages.travel_management
-                  .advances.new_advance.save
+                parseT('save') | translate
               }}
             </button>
             <button
@@ -360,10 +328,7 @@
               class="btn btn-warning btn-block"
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
-              >&nbsp;&nbsp;{{
-                translate.app.frontEnd.pages.travel_management
-                  .advances.new_advance.loading
-              }}
+              >&nbsp;&nbsp;{{ parseT('loading') | translate }}
             </button>
           </div>
         </div>

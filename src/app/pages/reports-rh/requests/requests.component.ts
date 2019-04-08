@@ -3,7 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TablesPermisions } from '../../../models/common/tables/tables';
@@ -22,7 +22,7 @@ declare var jsPDF: any;
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
-  styleUrls: ['./requests.component.css']
+  styleUrls: ['./requests.component.css'],
 })
 export class RequestsComponent implements OnInit, OnDestroy {
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -69,7 +69,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     public router: Router,
     public aproversRequestsService: AproversRequestsService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -79,13 +79,13 @@ export class RequestsComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.router.events
         .pipe(filter(data => data instanceof RoutesRecognized))
@@ -111,9 +111,12 @@ export class RequestsComponent implements OnInit, OnDestroy {
             this.labels.push({
               value: label.value,
               type: label.type,
-              label: element
+              label: element,
             });
-            this.columnsPdf.push({ title: label.value, dataKey: element });
+            this.columnsPdf.push({
+              title: label.value,
+              dataKey: element,
+            });
           });
         }
 
@@ -123,7 +126,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
           //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
           // }, 2000)
         }
-      })
+      }),
     ];
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
@@ -133,7 +136,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     setTimeout(() => {
@@ -176,9 +179,12 @@ export class RequestsComponent implements OnInit, OnDestroy {
           this.labels.push({
             value: label.value,
             type: label.type,
-            label: element
+            label: element,
           });
-          this.columnsPdf.push({ title: label.value, dataKey: element });
+          this.columnsPdf.push({
+            title: label.value,
+            dataKey: element,
+          });
         });
 
         if (this.stylesExplorerService.validateBrowser()) {
@@ -190,7 +196,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
           ['all', 'process', 'cancel', 'pending', 'aproved'].forEach(
             element => {
               document.getElementById(element).removeAttribute('style');
-            }
+            },
           );
           document.getElementById(parameter).style.backgroundColor =
             dataEnterprise.primary_color;
@@ -229,7 +235,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
           prod[parameter]
             .toString()
             .toUpperCase()
-            .indexOf(this.value_search.toUpperCase()) >= 0
+            .indexOf(this.value_search.toUpperCase()) >= 0,
       );
     } else {
       this.recordsPrint = this.recordsStatic;
@@ -288,13 +294,13 @@ export class RequestsComponent implements OnInit, OnDestroy {
         textColor: 20,
         halign: 'left',
         valign: 'middle',
-        columnWidth: 'auto'
+        columnWidth: 'auto',
       },
       headerStyles: {
         fillColor: [91, 105, 110],
         fontStyle: 'bold',
         halign: 'center',
-        textColor: 250
+        textColor: 250,
       },
       margin: { top: 110 },
       addPageContent: function() {
@@ -307,7 +313,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
         doc.setFontSize(10);
         doc.text(positionPage, 60, self.t('page') + doc.page);
         doc.page++;
-      }
+      },
     });
     doc.save(title + '.pdf');
   }
@@ -329,7 +335,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
                 element.next_platform + ' - #Nivel:' + element.next_level,
               FechaSolicitud: element.created,
               FechaInicial: element.date_begin_format,
-              FechaFinal: element.date_end_format
+              FechaFinal: element.date_end_format,
             });
           });
         }
@@ -347,7 +353,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     objectTable.push({
       title: this.title,
       labels: this.labelsCell,
-      cells: this.recordsPrint
+      cells: this.recordsPrint,
     });
     this.printDataTableService.setObjectForPrint(objectTable);
   }
@@ -359,7 +365,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     const objectSend = { ticket: id };
     this.aproversRequestsService.setRequests({
       request: objectSend,
-      type_request: 'requestsOnly'
+      type_request: 'requestsOnly',
     });
     // this.aproversRequestsService.setRequests({ ticket: id , type_requests_name:'requestsOnly'})
   }

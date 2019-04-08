@@ -3,7 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
@@ -19,7 +19,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-my-publications',
   templateUrl: './my-publications.component.html',
-  styleUrls: ['./my-publications.component.css']
+  styleUrls: ['./my-publications.component.css'],
 })
 export class MyPublicationsComponent implements OnInit, OnDestroy {
   @Output() myPublicationModal: EventEmitter<string> = new EventEmitter();
@@ -48,7 +48,7 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
     public editEditSharedService: EditArticleService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -58,13 +58,13 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
         if (data == true) {
@@ -93,8 +93,8 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
                     title: this.t('title_confirmation_ts_one'),
                     message: this.t('msg_confirmation_ts'),
                     confirmation: false,
-                    typeConfirmation: ''
-                  }
+                    typeConfirmation: '',
+                  },
                 ];
                 this.alert.setAlert(this.alertWarning[0]);
               }
@@ -104,7 +104,7 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
               // }, 2000)
             });
         }
-      })
+      }),
     ];
   }
 
@@ -112,7 +112,7 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.getDataPublications();
@@ -157,7 +157,7 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({
         objectPublication: infoPub,
-        modal: 'myPublicationModal'
+        modal: 'myPublicationModal',
       });
     }, 500);
   }
@@ -174,8 +174,8 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
         title: this.t('title_confirmation_ts_one'),
         message: this.t('msg_elimination_confirmation_ts'),
         confirmation: true,
-        typeConfirmation: 'deleteArticle'
-      }
+        typeConfirmation: 'deleteArticle',
+      },
     ];
     this.alert.setAlert(this.alertWarning[0]);
   }

@@ -8,7 +8,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-extra-hours',
   templateUrl: './extra-hours.component.html',
-  styleUrls: ['./extra-hours.component.css']
+  styleUrls: ['./extra-hours.component.css'],
 })
 export class ExtraHoursComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -29,14 +29,14 @@ export class ExtraHoursComponent implements OnInit, OnDestroy {
   constructor(
     public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {
@@ -53,8 +53,8 @@ export class ExtraHoursComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

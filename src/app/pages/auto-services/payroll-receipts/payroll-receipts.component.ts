@@ -8,7 +8,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 @Component({
   selector: 'app-payroll-receipts',
   templateUrl: './payroll-receipts.component.html',
-  styleUrls: ['./payroll-receipts.component.css']
+  styleUrls: ['./payroll-receipts.component.css'],
 })
 export class PayrollReceiptsComponent implements OnInit {
   public listPayRoll: Certificate;
@@ -25,7 +25,7 @@ export class PayrollReceiptsComponent implements OnInit {
     public autoServiceService: AutoServicesService,
     public sanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -34,13 +34,13 @@ export class PayrollReceiptsComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
   }
 
@@ -48,7 +48,7 @@ export class PayrollReceiptsComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
       this.listPayRoll = data.data;

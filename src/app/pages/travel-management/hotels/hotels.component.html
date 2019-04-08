@@ -3,9 +3,7 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 col-md-8 col-7 text-left title">
         <i class="fa fa-hotel"></i>
-        {{
-          translate.app.frontEnd.pages.travel_management.hotels.tittle
-        }}
+        {{ parseT('tittle') | translate }}
       </div>
       <div
         class="col-xl-2 col-md-4 col-5  text-center cursor-general"
@@ -15,10 +13,7 @@
           <div class="padding-back">
             <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
             <span>
-              {{
-                translate.app.frontEnd.pages.travel_management.hotels
-                  .back
-              }}
+              {{ parseT('back') | translate }}
             </span>
           </div>
         </div>
@@ -43,10 +38,7 @@
                 <i class="fa fa-plus"
                   >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
                 >
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .hotels.btn_new
-                }}
+                {{ parseT('btn_new') | translate }}
               </button>
             </div>
           </div>
@@ -63,10 +55,7 @@
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .hotels.hotel_cod
-                  }}
+                  {{ parseT('hotel_cod') | translate }}
                   # {{ hotel.id }}
                 </span>
               </h5>
@@ -138,16 +127,10 @@
                   *ngIf="hotel.is_delete"
                   (click)="deleteHotels(hotel)"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .hotels.erase_hotel
-                  }}
+                  {{ parseT('erase_hotel') | translate }}
                 </div>
                 <div class="col-12" *ngIf="!hotel.is_delete">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .hotels.erase_hotel
-                  }}
+                  {{ parseT('erase_hotel') | translate }}
                 </div>
               </div>
             </div>

@@ -7,7 +7,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-vacation-enjoyed',
   templateUrl: './vacation-enjoyed.component.html',
-  styleUrls: ['./vacation-enjoyed.component.css']
+  styleUrls: ['./vacation-enjoyed.component.css'],
 })
 export class VacationEnjoyedComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -23,14 +23,14 @@ export class VacationEnjoyedComponent implements OnInit, OnDestroy {
 
   constructor(
     public queriesService: QueriesService,
-    private accionDataTableService: DataDableSharedService
+    private accionDataTableService: DataDableSharedService,
   ) {}
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.subscriptions = [
@@ -38,7 +38,7 @@ export class VacationEnjoyedComponent implements OnInit, OnDestroy {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
         this.queriesService
           .getEnjoyedVacationExcel(
-            this.userAuthenticated.employee_id.toString()
+            this.userAuthenticated.employee_id.toString(),
           )
           .subscribe((info: any) => {
             window.open(info.url);
@@ -50,8 +50,8 @@ export class VacationEnjoyedComponent implements OnInit, OnDestroy {
         },
         error => {
           console.log(error.error);
-        }
-      )
+        },
+      ),
     ];
   }
 

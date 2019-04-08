@@ -3,7 +3,7 @@ import {
   OnInit,
   Output,
   EventEmitter,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { EvaluationsService } from '../../../services/evaluations/evaluations.service';
 import { EvaluationsSharedService } from '../../../services/shared/common/evaluations/evaluations-shared.service';
@@ -14,7 +14,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-evaluated',
   templateUrl: './evaluated.component.html',
-  styleUrls: ['./evaluated.component.css']
+  styleUrls: ['./evaluated.component.css'],
 })
 export class EvaluatedComponent implements OnInit, OnDestroy {
   public evaluationsListPendind: Evaluations[] = [];
@@ -31,7 +31,7 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
   constructor(
     public evaluationService: EvaluationsService,
     public evaluationSharedService: EvaluationsSharedService,
-    private tokenService: Angular2TokenService
+    private tokenService: Angular2TokenService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -41,13 +41,13 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.evaluationSharedService
         .getRefreshEvaluationData()
@@ -55,7 +55,7 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
           if (refresh == true) {
             this.getDataEvaluation();
           }
-        })
+        }),
     ];
     this.getDataEvaluation();
   }
@@ -64,7 +64,7 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 
@@ -76,7 +76,7 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
           this.evaluationsListPendind = res.data[0].pendind;
           this.evaluationsListSubmitted = res.data[0].submitted;
         }, 100);
-      })
+      }),
     ];
   }
 

@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-my-team-reports',
   templateUrl: './my-team-reports.component.html',
-  styleUrls: ['./my-team-reports.component.css']
+  styleUrls: ['./my-team-reports.component.css'],
 })
 export class MyTeamReportsComponent implements OnInit {
   public reportsMyTeamInfo: EspecificMyTeam;
@@ -30,7 +30,7 @@ export class MyTeamReportsComponent implements OnInit {
     public myTeamService: MyTeamInfoService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -39,13 +39,13 @@ export class MyTeamReportsComponent implements OnInit {
       error => {
         this.objectToken.emit({
           title: error.status.toString(),
-          message: error.json().errors[0].toString()
+          message: error.json().errors[0].toString(),
         });
         document
           .getElementsByTagName('body')[0]
           .setAttribute('style', 'overflow-y:hidden');
         this.token = true;
-      }
+      },
     );
     this.myTeamSharedService.getReportMyTeam().subscribe(data => {
       this.reportsMyTeamInfo = data;
@@ -59,7 +59,7 @@ export class MyTeamReportsComponent implements OnInit {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     setTimeout(() => {

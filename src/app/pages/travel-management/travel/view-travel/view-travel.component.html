@@ -25,10 +25,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.travel
-              .view_travel.tittle
-          }}
+          {{ parseT('tittle') | translate }}
           # {{ ticket }}
         </h5>
         <button
@@ -50,8 +47,7 @@
           <div class="col-12 align-self-center">
             <label class="titleColor">
               <strong class="text-primary-hr">{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.ticket_sap
+                parseT('ticket_sap') | translate
               }}</strong>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               <strong>{{ view_travels[0].ticket_cli }}</strong>
@@ -74,8 +70,7 @@
                 style="font-size:2em"
               ></i>
               <strong class="titleColor">{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.message_synch
+                parseT('message_synch') | translate
               }}</strong>
               <strong>{{ view_travels[0].synch_message_sap }}</strong>
             </label>
@@ -86,10 +81,7 @@
         <div class="row" *ngIf="eployee_selected !== null">
           <div class="col-12 align-self-center">
             <label class="titleColor">
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.employee
-              }}:
+              {{ parseT('employee') | translate }}:
               <i class="fa fa-fw fa fa-user text-primary-hr"></i>
               <strong>{{ eployee_selected.name_complete }}</strong>
             </label>
@@ -102,17 +94,14 @@
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.type_travel
-                }}:</strong
+                >{{ parseT('type_travel') | translate }}:</strong
               >
             </label>
           </div>
           <div class="col-lg-8 col-md-6 col-12">
             <label
               >{{ view_travels[0].travel_requests_type_name }} -
-              {{ maintenance_travel }}</label
+              {{ parseT(maintenance_travel) | translate }}</label
             >
           </div>
         </div>
@@ -123,12 +112,7 @@
               <i
                 class="fa fa-fw fa-calendar-check-o text-primary-hr"
               ></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.date_begin
-                }}:</strong
-              >
+              <strong>{{ parseT('date_begin') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -139,12 +123,7 @@
               <i
                 class="fa fa-fw fa-calendar-minus-o text-primary-hr"
               ></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.date_end
-                }}:</strong
-              >
+              <strong>{{ parseT('date_end') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
@@ -157,10 +136,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.reason_travel
-                }}:</strong
+                >{{ parseT('reason_travel') | translate }}:</strong
               >
             </label>
           </div>
@@ -179,8 +155,7 @@
               <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
               <strong
                 >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.imputation_element
+                  parseT('imputation_element') | translate
                 }}:</strong
               >
             </label>
@@ -201,10 +176,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.cost_center
-                }}:</strong
+                >{{ parseT('cost_center') | translate }}:</strong
               >
             </label>
           </div>
@@ -223,12 +195,7 @@
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.order
-                }}:</strong
-              >
+              <strong>{{ parseT('order') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
@@ -248,12 +215,7 @@
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.graph
-                }}:</strong
-              >
+              <strong>{{ parseT('graph') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
@@ -271,12 +233,7 @@
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.operation
-                }}:</strong
-              >
+              <strong>{{ parseT('operation') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
@@ -291,12 +248,7 @@
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-              <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.type_legal
-                }}:</strong
-              >
+              <strong>{{ parseT('type_legal') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
@@ -310,10 +262,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa-ship text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.type_especific
-                }}:</strong
+                >{{ parseT('type_especific') | translate }}:</strong
               >
             </label>
           </div>
@@ -328,10 +277,7 @@
             <label class="titleColor">
               <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.type_activity
-                }}:</strong
+                >{{ parseT('type_activity') | translate }}:</strong
               >
             </label>
           </div>
@@ -346,10 +292,7 @@
         >
           <div class="col-12">
             <h4>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.trayect
-              }}
+              {{ parseT('trayect') | translate }}
             </h4>
           </div>
         </div>
@@ -361,7 +304,7 @@
               id="tableTravelsview"
               [pdf]="showPdf"
               [sizeTable]="showSizeTable"
-              [title]="nameReport"
+              [title]="parseT('trayect') | translate"
             ></app-data-table>
           </div>
         </div>
@@ -387,31 +330,19 @@
                         >
                       </h6>
                       <h6 *ngIf="imgsaved.name === null">
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.view_travel
-                            .no_name
-                        }}
+                        {{ parseT('no_name') | translate }}
                       </h6>
                       <p
                         class="badge badge-light wg-hover-general"
                         (click)="viewCotization(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.view_travel
-                            .see_attach
-                        }}
+                        {{ parseT('see_attach') | translate }}
                       </p>
                       <p
                         class="badge badge-light wg-hover-general"
                         (click)="downloadCotization(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.view_travel
-                            .download_attach
-                        }}
+                        {{ parseT('download_attach') | translate }}
                       </p>
                     </div>
                   </div>
@@ -432,10 +363,7 @@
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.see_advance
-                }}
+                {{ parseT('see_advance') | translate }}
               </p>
             </div>
             <div
@@ -449,10 +377,7 @@
                 <div class="col-lg-7 col-md-6 col-12">
                   <label class="titleColor">
                     <p>
-                      {{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.view_travel.message_advance
-                      }}:
+                      {{ parseT('message_advance') | translate }}:
                     </p>
                   </label>
                 </div>
@@ -472,7 +397,9 @@
                     [pdf]="showPdf"
                     id="tableAdvanceSaved"
                     [sizeTable]="showSizeTable"
-                    [title]="nameReportAdvance"
+                    [title]="
+                      parseT('name_table_advance_ts') | translate
+                    "
                   ></app-data-table>
                 </div>
               </div>
@@ -491,10 +418,7 @@
                 aria-expanded="false"
                 aria-controls="collapseThree"
               >
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.view_travel.see_spend
-                }}
+                {{ parseT('see_spend') | translate }}
               </p>
             </div>
             <div
@@ -511,7 +435,9 @@
                     [pdf]="showPdf"
                     id="tableSpendSaved"
                     [sizeTable]="showSizeTable"
-                    [title]="nameReportSpend"
+                    [title]="
+                      parseT('name_table_allowance_ts') | translate
+                    "
                   ></app-data-table>
                 </div>
               </div>
@@ -549,10 +475,7 @@
         <div class="row">
           <div class="col-12" style="margin-top: 15px">
             <h6>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.comments
-              }}
+              {{ parseT('comments') | translate }}
             </h6>
             <ckeditor
               debounce="100"
@@ -576,8 +499,7 @@
               (click)="sedRequestsTravel()"
             >
               <i class="fa fa-fw fa-save"></i>&nbsp;{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.btn_send
+                parseT('btn_send') | translate
               }}
             </button>
           </div>
@@ -589,10 +511,7 @@
             (click)="cleanObjectShowDetail()"
           >
             <h6>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .view_travel.btn_close
-              }}
+              {{ parseT('btn_close') | translate }}
             </h6>
           </div>
         </div>

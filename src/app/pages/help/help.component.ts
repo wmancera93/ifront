@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-help',
   templateUrl: './help.component.html',
-  styleUrls: ['./help.component.css']
+  styleUrls: ['./help.component.css'],
 })
 export class HelpComponent implements OnInit {
   public dataHelp: Help[] = [];
@@ -25,18 +25,18 @@ export class HelpComponent implements OnInit {
       {
         title: 'text_dashboard_ts',
         image: '',
-        description: 'text_operation_dashboard_ts'
+        description: 'text_operation_dashboard_ts',
       },
       {
         title: 'text_organization_chart_ts',
         image: '',
-        description: 'text_functioning_organization_chart_ts'
+        description: 'text_functioning_organization_chart_ts',
       },
       {
         title: 'text_my_data_ts',
         image: '',
-        description: 'text_functioning_my_datat_ts'
-      }
+        description: 'text_functioning_my_datat_ts',
+      },
     ];
   }
 }

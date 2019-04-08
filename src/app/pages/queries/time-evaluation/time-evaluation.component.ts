@@ -80,25 +80,17 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
           this.token = true;
         },
       ),
-      this.accionDataTableService
-        .getActionDataTable()
-        .subscribe(() => {
-          this.userAuthenticated = JSON.parse(
-            localStorage.getItem('user'),
-          );
-          this.queriesService
-            .getTimeEvaluationExcel(
-              this.userAuthenticated.employee_id.toString(),
-            )
-            .subscribe((excel: any) => {
-              window.open(excel.url);
-            });
-        }),
-      this.queriesService
-        .getAllEvaluationTime()
-        .subscribe((data: any) => {
-          this.objectReport.emit(data);
-        }),
+      this.accionDataTableService.getActionDataTable().subscribe(() => {
+        this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+        this.queriesService
+          .getTimeEvaluationExcel(this.userAuthenticated.employee_id.toString())
+          .subscribe((excel: any) => {
+            window.open(excel.url);
+          });
+      }),
+      this.queriesService.getAllEvaluationTime().subscribe((data: any) => {
+        this.objectReport.emit(data);
+      }),
     ];
   }
   // getFilterMessagesByMonth() {
@@ -145,8 +137,7 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
       .toString()
       .replace('-', '')
       .replace('-', '');
-    this.finalDate =
-      parseInt(this.dateEnd) - parseInt(this.dateBegin);
+    this.finalDate = parseInt(this.dateEnd) - parseInt(this.dateBegin);
 
     if (this.finalDate < 0) {
       const alertDataWrong: Alerts[] = [
@@ -161,11 +152,9 @@ export class TimeEvaluationComponent implements OnInit, OnDestroy {
     }
   }
   allTimeEvaluation() {
-    this.queriesService
-      .getAllEvaluationTime()
-      .subscribe((data: any) => {
-        this.objectReport.emit(data);
-      });
+    this.queriesService.getAllEvaluationTime().subscribe((data: any) => {
+      this.objectReport.emit(data);
+    });
   }
   getFilterMessagesByPeriod() {
     this.objectReport.emit({ success: true, data: [] });

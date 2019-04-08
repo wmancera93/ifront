@@ -14,7 +14,7 @@ declare const ga: any;
 @Component({
   selector: 'app-confirm-reset-acount',
   templateUrl: './confirm-reset-acount.component.html',
-  styleUrls: ['./confirm-reset-acount.component.css']
+  styleUrls: ['./confirm-reset-acount.component.css'],
 })
 export class ConfirmResetAcountComponent implements OnInit {
   public txtPassword = '';
@@ -39,7 +39,7 @@ export class ConfirmResetAcountComponent implements OnInit {
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
     public stylesExplorerService: StylesExplorerService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -69,12 +69,12 @@ export class ConfirmResetAcountComponent implements OnInit {
         const {
           background_login,
           primary_color,
-          body_text
+          body_text,
         } = this.dataEnterprise;
         this.defineSyles({
           background_login,
           primary_color,
-          body_text
+          body_text,
         });
         localStorage.setItem('enterprise', JSON.stringify(result.data));
       });
@@ -83,12 +83,12 @@ export class ConfirmResetAcountComponent implements OnInit {
       const {
         background_login,
         primary_color,
-        body_text
+        body_text,
       } = this.dataEnterprise;
       this.defineSyles({
         background_login,
         primary_color,
-        body_text
+        body_text,
       });
     }
     this.route.queryParams.subscribe(params => {
@@ -102,8 +102,8 @@ export class ConfirmResetAcountComponent implements OnInit {
         {
           type: 'danger',
           title: this.t('title_warning_ts'),
-          message: this.t('msg_new_password_ts')
-        }
+          message: this.t('msg_new_password_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';
@@ -117,7 +117,7 @@ export class ConfirmResetAcountComponent implements OnInit {
         .updatePassword({
           password: this.txtPassword,
           passwordConfirmation: this.txtConfirmPassword,
-          resetPasswordToken: this.urlTokenPassword
+          resetPasswordToken: this.urlTokenPassword,
         })
         .subscribe(
           res => {
@@ -126,8 +126,8 @@ export class ConfirmResetAcountComponent implements OnInit {
                 {
                   type: 'success',
                   title: this.t('title_warning_ts'),
-                  message: this.t('msg_new_password_ts')
-                }
+                  message: this.t('msg_new_password_ts'),
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
               this.txtPassword = '';
@@ -140,7 +140,7 @@ export class ConfirmResetAcountComponent implements OnInit {
                 'authentication',
                 'ConfirmResetPassword',
                 'Reset Password Account',
-                1
+                1,
               );
             }
           },
@@ -150,13 +150,13 @@ export class ConfirmResetAcountComponent implements OnInit {
               {
                 type: 'danger',
                 title: this.t('title_warning_ts'),
-                message: resultError.errors[0]
-              }
+                message: resultError.errors[0],
+              },
             ];
             this.alert.setAlert(alertWarning[0]);
             this.txtPassword = '';
             this.txtConfirmPassword = '';
-          }
+          },
         );
     }
   }
@@ -166,7 +166,7 @@ export class ConfirmResetAcountComponent implements OnInit {
     if (!this.stylesExplorerService.validateBrowser()) {
       element.style.setProperty(
         `--img-header-login`,
-        `url(` + background_login.url + `)`
+        `url(` + background_login.url + `)`,
       );
       element.style.setProperty(`--btn-primary`, primary_color);
       element.style.setProperty(`--btn-primary-hover`, body_text);
@@ -184,7 +184,7 @@ export class ConfirmResetAcountComponent implements OnInit {
           '-1px',
           '-12px',
           '',
-          ''
+          '',
         );
       });
     }
@@ -216,8 +216,8 @@ export class ConfirmResetAcountComponent implements OnInit {
           {
             type: 'danger',
             title: this.t('title_warning_ts'),
-            message: this.t('msg_characters_minimum_ts')
-          }
+            message: this.t('msg_characters_minimum_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
         this.txtPassword = '';
@@ -232,8 +232,8 @@ export class ConfirmResetAcountComponent implements OnInit {
           {
             type: 'danger',
             title: this.t('title_warning_ts'),
-            message: this.t('msg_not_match_ts')
-          }
+            message: this.t('msg_not_match_ts'),
+          },
         ];
         this.alert.setAlert(alertWarning[0]);
         this.txtPassword = '';
@@ -248,8 +248,8 @@ export class ConfirmResetAcountComponent implements OnInit {
         {
           type: 'warning',
           title: this.t('title_warning_ts'),
-          message: this.t('msg_enter_again_ts')
-        }
+          message: this.t('msg_enter_again_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';
@@ -265,8 +265,8 @@ export class ConfirmResetAcountComponent implements OnInit {
         {
           type: 'warning',
           title: this.t('title_warning_ts'),
-          message: this.t('msg_enter_again_ts')
-        }
+          message: this.t('msg_enter_again_ts'),
+        },
       ];
       this.alert.setAlert(alertWarning[0]);
       this.txtConfirmPassword = '';

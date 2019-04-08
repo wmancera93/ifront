@@ -3,12 +3,12 @@ import {
   OnInit,
   EventEmitter,
   Output,
-  OnDestroy
+  OnDestroy,
 } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
 import {
   DataMaster,
-  ListDataMaster
+  ListDataMaster,
 } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
@@ -22,7 +22,7 @@ import { ISubscription } from 'rxjs/Subscription';
 @Component({
   selector: 'app-master-data',
   templateUrl: './master-data.component.html',
-  styleUrls: ['./master-data.component.css']
+  styleUrls: ['./master-data.component.css'],
 })
 export class MasterDataComponent implements OnInit, OnDestroy {
   public dataMaster: DataMaster[] = [];
@@ -56,7 +56,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     this.titleData = this.t('ts_warningone_text_one');
     this.subscriptions = [
@@ -67,13 +67,13 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         error => {
           this.objectToken.emit({
             title: error.status.toString(),
-            message: error.json().errors[0].toString()
+            message: error.json().errors[0].toString(),
           });
           document
             .getElementsByTagName('body')[0]
             .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        }
+        },
       ),
       this.dataMasterSharedService
         .getReturnDataFormDynamic()
@@ -82,7 +82,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
             object[0].count += 1;
             const dataMasterEdit = {
               master_data_type: object[0].master_data_type,
-              employee_master_data: object
+              employee_master_data: object,
             };
             if (dataMasterEdit.employee_master_data.length == 0) {
               const alertWarning: Alerts[] = [
@@ -90,8 +90,8 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                   type: 'danger',
                   title: this.t('msg_denied_request_ts'),
                   message: this.t('msg_no_modification_ts'),
-                  confirmation: false
-                }
+                  confirmation: false,
+                },
               ];
               this.alert.setAlert(alertWarning[0]);
             } else {
@@ -105,8 +105,8 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                         title: this.t('title_confirmation_ts'),
                         message: data.message,
                         confirmation: false,
-                        typeConfirmation: ''
-                      }
+                        typeConfirmation: '',
+                      },
                     ];
                     this.alert.setAlert(alertWarning[0]);
                   },
@@ -116,18 +116,18 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                         type: 'danger',
                         title: this.t('msg_denied_request_ts'),
                         message: error.json().errors.toString(),
-                        confirmation: false
-                      }
+                        confirmation: false,
+                      },
                     ];
                     this.alert.setAlert(alertWarning[0]);
-                  }
+                  },
                 );
             }
             if (document.getElementById('buttonDashManagerial')) {
               document.getElementById('buttonDashManagerial').click();
             }
           }
-        })
+        }),
     ];
   }
 
@@ -135,7 +135,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
@@ -158,7 +158,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
           }
         });
         this.listDataMaster = list.data;
-      })
+      }),
     ];
   }
 
@@ -195,7 +195,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         this.activeEditButton(this.dataMaster);
         this.noEdit();
         this.lengthArray = this.dataMaster.length;
-      })
+      }),
     ];
   }
 
@@ -205,7 +205,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
       this.dataMasterSharedService.setDataFormDynamic({
         data: this.dataMaster,
         edit: this.canEditData,
-        code: this.codeGeneral
+        code: this.codeGeneral,
       });
     }, 200);
   }
@@ -216,7 +216,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
       this.dataMasterSharedService.setDataFormDynamic({
         data: this.dataMaster,
         edit: this.canEditData,
-        code: this.codeGeneral
+        code: this.codeGeneral,
       });
     }, 200);
   }
@@ -253,7 +253,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
               document.getElementById('buttonDashManagerial').click();
             }
             this.lengthArray = this.dataMaster.length;
-          })
+          }),
         ];
 
         break;
@@ -272,7 +272,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
               document.getElementById('buttonDashManagerial').click();
             }
             this.lengthArray = this.dataMaster.length;
-          })
+          }),
         ];
         break;
       case 'study_data':
@@ -290,7 +290,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
               document.getElementById('buttonDashManagerial').click();
             }
             this.lengthArray = studies.data.length;
-          })
+          }),
         ];
         break;
       case 'business_data':
@@ -310,7 +310,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 document.getElementById('buttonDashManagerial').click();
               }
               this.lengthArray = enterprise.data.length;
-            })
+            }),
         ];
         break;
       case 'banking_data':
@@ -328,7 +328,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
               document.getElementById('buttonDashManagerial').click();
             }
             this.lengthArray = bank.data.length;
-          })
+          }),
         ];
         break;
       case 'beneficiary_data':
@@ -348,7 +348,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 document.getElementById('buttonDashManagerial').click();
               }
               this.lengthArray = beneficiaries.data.length;
-            })
+            }),
         ];
         break;
       case 'social_security_data':
@@ -368,7 +368,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 document.getElementById('buttonDashManagerial').click();
               }
               this.lengthArray = social.data.length;
-            })
+            }),
         ];
         break;
       case 'retefuente_data':
@@ -388,7 +388,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 document.getElementById('buttonDashManagerial').click();
               }
               this.lengthArray = retefuente.data.length;
-            })
+            }),
         ];
         break;
 
