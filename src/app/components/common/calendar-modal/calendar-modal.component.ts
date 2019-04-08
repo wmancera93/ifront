@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Enterprise } from '../../../models/general/enterprise';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-calendar-modal',
@@ -10,15 +8,13 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 })
 export class CalendarModalComponent implements OnInit {
   public dataEnterprise: Enterprise = null;
-  public activeCalendar: boolean = false;
-  public translate: Translate = null;
-  constructor(public translateService: TranslateService) { 
-    this.translate = this.translateService.getTranslate();
+  public activeCalendar = false;
 
+  parseT(key) {
+    return `components.common.calendar_modal.${key}`;
   }
 
-  ngOnInit() {
+  constructor() {}
 
-  }
-
+  ngOnInit() {}
 }

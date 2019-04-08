@@ -52,6 +52,7 @@ import { PdfTravelComponent } from './common/travels/pdf-travel/pdf-travel.compo
 import { ShowDistSpendsComponent } from './common/travels/approvals-details-travels/show-dist-spends/show-dist-spends.component';
 import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-travels/show-hotels-journey/show-hotels-journey.component';
 import { StepperComponentsComponent } from './common/stepper-components/stepper-components.component';
+import { PipesModule } from '../pipes/pipes.module';
 
 @NgModule({
   imports: [
@@ -64,7 +65,8 @@ import { StepperComponentsComponent } from './common/stepper-components/stepper-
     NgxPaginationModule,
     ToasterModule.forRoot(),
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
+    PipesModule
   ],
   declarations: [
     HeaderComponent,

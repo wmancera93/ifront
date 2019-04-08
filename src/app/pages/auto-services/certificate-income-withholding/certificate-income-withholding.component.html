@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          {{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.title_income_withholdings}}
+          {{ parseT("title_income_withholdings") | translate }}
         </div>
       </div>
     </div>
@@ -18,23 +18,37 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_certificate_not_found}}
-            <strong>{{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_income_withholdings}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.certificate_income_whithholding.text_for_the_employee}}
+            {{ parseT("text_certificate_not_found") | translate }}
+            <strong>{{ parseT("text_income_withholdings") | translate }}</strong
+            >&nbsp;{{ parseT("text_for_the_employee") | translate }}
           </div>
         </div>
       </div>
       <div class="row justify-content-between" *ngIf="!flagEmpty">
         <div class="col-3">
-          <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
-            <div id="{{i}}certificate" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}"
-              *ngFor="let certificate of incomingCertificate; let i=index" (click)="selectedObject(i, certificate)">
+          <div
+            id="listCertificates"
+            class="nav nav-tabs navtab-vertical navtab-left cursor-general"
+            role="navigation"
+          >
+            <div
+              id="{{ i }}certificate"
+              class="nav-item navReport tabReport"
+              [ngClass]="{ 'active-report': i == '0' }"
+              *ngFor="let certificate of incomingCertificate; let i = index"
+              (click)="selectedObject(i, certificate)"
+            >
               <i class="fa fa-file-pdf-o"></i>
-              {{certificate.pdf_name2}}
+              {{ certificate.pdf_name2 }}
             </div>
           </div>
         </div>
         <div class="col-9">
-          <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:1000px;"></iframe>
+          <iframe
+            id="frameAutoService"
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(urlPDF)"
+            style="width:100% !important;height:1000px;"
+          ></iframe>
         </div>
       </div>
     </div>

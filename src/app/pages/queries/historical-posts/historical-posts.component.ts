@@ -1,11 +1,15 @@
-import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
-import { TablesPermisions } from '../../../models/common/tables/tables';
+import {
+  Component,
+  OnInit,
+  EventEmitter,
+  Output,
+  OnDestroy
+} from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
 import { User } from '../../../models/general/user';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-historical-posts',
@@ -13,38 +17,43 @@ import { TranslateService } from '../../../services/common/translate/translate.s
   styleUrls: ['./historical-posts.component.css']
 })
 export class HistoricalPostsComponent implements OnInit, OnDestroy {
-
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string;
   public token: boolean;
-  public showExcel: boolean = true;
+  public showExcel = true;
   public userAuthenticated: User;
-  public countAfter: number = 0;
-  public translate: Translate = null;
+  public countAfter = 0;
+  private subscriptions: ISubscription[];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public queriesService: QueriesService,
-    private tokenService: Angular2TokenService,
-    private accionDataTableService: DataDableSharedService, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
-    this.nameReport = this.translate.app.frontEnd.pages.queries.historical_posts.name_table_ts;
+  parseT(key) {
+    return `pages.queries.historical_posts.${key}`;
+  }
 
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
+  constructor(
+    public queriesService: QueriesService,
+    private tokenService: Angular2TokenService,
+    private accionDataTableService: DataDableSharedService
+  ) {
+    this.subscriptions = [
+      this.tokenService.validateToken().subscribe(
+        () => {
           this.token = false;
         },
-        (error) => {
+        error => {
           this.objectToken.emit({
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          document
+            .getElementsByTagName('body')[0]
+            .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        })
+        }
+      )
+    ];
   }
-
 
   ngOnInit() {
     window.scroll({
@@ -52,25 +61,29 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
       left: 0,
       behavior: 'smooth'
     });
-    this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === this.nameReport && this.countAfter === 0) {
-        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-        this.queriesService.getHistoricalPositionExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
-          window.open(info.url);
-
-        })
-      }
-    });
-    this.queriesService.getHistoricalPosts()
-      .subscribe((data: any) => {
+    this.subscriptions = [
+      ...this.subscriptions,
+      this.accionDataTableService.getActionDataTable().subscribe(data => {
+        if (data === this.nameReport && this.countAfter === 0) {
+          this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+          this.queriesService
+            .getHistoricalPositionExcel(
+              this.userAuthenticated.employee_id.toString()
+            )
+            .subscribe((info: any) => {
+              window.open(info.url);
+            });
+        }
+      }),
+      this.queriesService.getHistoricalPosts().subscribe((data: any) => {
         this.objectReport.emit(data);
-
-      });
+      })
+    ];
   }
 
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
-
-
 }

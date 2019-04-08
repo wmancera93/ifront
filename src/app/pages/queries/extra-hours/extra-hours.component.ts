@@ -1,10 +1,9 @@
 import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { QueriesService } from '../../../services/queries/queries.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
-import { Angular2TokenService } from 'angular2-token';
 import { User } from '../../../models/general/user';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-extra-hours',
@@ -14,17 +13,24 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 export class ExtraHoursComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string;
-  public showExcel: boolean = true;
+  public showExcel = true;
   public userAuthenticated: User;
-  public countAfter: number = 0;
-  public translate: Translate = null;
 
-  constructor(public queriesService: QueriesService,
+  private subscriptions: ISubscription[];
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.queries.extra_hours.${key}`;
+  }
+
+  constructor(
+    public queriesService: QueriesService,
     private accionDataTableService: DataDableSharedService,
-    private tokenService: Angular2TokenService, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
-    this.nameReport = this.translate.app.frontEnd.pages.queries.extra_hours.name_table_ts;
-    }
+    public translate: TranslateService
+  ) {}
 
   ngOnInit() {
     window.scroll({
@@ -32,24 +38,27 @@ export class ExtraHoursComponent implements OnInit, OnDestroy {
       left: 0,
       behavior: 'smooth'
     });
-    this.accionDataTableService.getActionDataTable().subscribe((data) => {
-      if (data === this.nameReport && this.countAfter === 0) {
-        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-        this.queriesService.getExtraHoursExcel(this.userAuthenticated.employee_id.toString()).subscribe((info: any) => {
-          window.open(info.url);
-        })
-      }
-    });
-    this.queriesService.getExtraHours()
-      .subscribe((data: any) => {
-        this.objectReport.emit(data);
-      },
+    this.subscriptions = [
+      this.accionDataTableService.getActionDataTable().subscribe(() => {
+        this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+        this.queriesService
+          .getExtraHoursExcel(this.userAuthenticated.employee_id.toString())
+          .subscribe((info: any) => {
+            window.open(info.url);
+          });
+      }),
+      this.queriesService.getExtraHours().subscribe(
+        (data: any) => {
+          this.objectReport.emit(data);
+        },
         error => {
           console.log(error.error);
-        })
+        }
+      )
+    ];
   }
 
   ngOnDestroy() {
-    this.countAfter += 1;
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

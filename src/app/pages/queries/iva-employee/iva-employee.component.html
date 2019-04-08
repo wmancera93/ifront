@@ -7,7 +7,7 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-paste"></i>
-          {{nameReport}}
+          {{ parseT("name_table_ts") | translate }}
         </div>
       </div>
     </div>
@@ -17,7 +17,11 @@
     <div class="col-12 widget bg-white">
       <div class="row">
         <div class="col-12 top-general-p">
-          <app-data-table [records]="objectReport" [title]="nameReport" [excel]="showExcel"></app-data-table>
+          <app-data-table
+            [records]="objectReport"
+            [title]="parseT('name_table_ts') | translate"
+            [excel]="showExcel"
+          ></app-data-table>
         </div>
       </div>
     </div>

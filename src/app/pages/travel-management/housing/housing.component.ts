@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { Subject } from "rxjs";
-import { Router } from "@angular/router";
-import { AlertsService } from "../../../services/shared/common/alerts/alerts.service";
+import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 
 @Component({
-  selector: "app-housing",
-  templateUrl: "./housing.component.html",
-  styleUrls: ["./housing.component.css"]
+  selector: 'app-housing',
+  templateUrl: './housing.component.html',
+  styleUrls: ['./housing.component.css']
 })
 export class HousingComponent implements OnInit {
   public modalForm: Subject<any> = new Subject<any>();
@@ -27,13 +27,13 @@ export class HousingComponent implements OnInit {
     this.housing = [
       {
         action_housing_index_view: [
-          { title: "Ver", is_active: true },
-          { title: "Borrar", is_active: true },
-          { title: "Editar", is_active: true }
+          { title: 'Ver', is_active: true },
+          { title: 'Borrar', is_active: true },
+          { title: 'Editar', is_active: true }
         ],
-        created_date: "03/10/2018",
+        created_date: '03/10/2018',
         id: 1,
-        name: "Paloquemado",
+        name: 'Paloquemado',
         total_bed: 25,
         assigned_bed: 18,
         busy_bed: 4,
@@ -41,13 +41,13 @@ export class HousingComponent implements OnInit {
       },
       {
         action_housing_index_view: [
-          { title: "Ver", is_active: true },
-          { title: "Borrar", is_active: true },
-          { title: "Editar", is_active: false }
+          { title: 'Ver', is_active: true },
+          { title: 'Borrar', is_active: true },
+          { title: 'Editar', is_active: false }
         ],
-        created_date: "03/10/2018",
+        created_date: '03/10/2018',
         id: 2,
-        name: "BBQ",
+        name: 'BBQ',
         total_bed: 80,
         assigned_bed: 65,
         busy_bed: 0,
@@ -56,17 +56,17 @@ export class HousingComponent implements OnInit {
     ];
   }
   returnBackHousing() {
-    this.router.navigate(["ihr/travel_management"]);
+    this.router.navigate(['ihr/travel_management']);
   }
   deleteHousing(quarter) {
     this.idHousing = quarter.id;
     const alertWarning = [
       {
-        type: "warning",
-        title: "Confirmación",
-        message: "¿Desea eliminar el alojamiento?",
+        type: 'warning',
+        title: 'Confirmación',
+        message: '¿Desea eliminar el alojamiento?',
         confirmation: true,
-        typeConfirmation: "deleteHousing"
+        typeConfirmation: 'deleteHousing'
       }
     ];
     this.alert.setAlert(alertWarning[0]);

@@ -68,285 +68,279 @@ import { TrasnportationReportComponent } from './travel-management/transportatio
 import { HousingComponent } from './travel-management/housing/housing.component';
 
 const routes: Routes = [
-    {
-        path: 'login',
-        component: LoginComponent
-    },
-    {
-        path: 'reset_account',
-        component: ResetAccountComponent
-    },
-    {
-        path: 'locked_screen',
-        component: LockedScreenComponent
-    },
-    {
-        path: 'confirm_reset_account',
-        component: ConfirmResetAcountComponent
-    },
-    {
-        path: 'index',
-        component: DashboardComponent
-    },
-    {
-        path: 'error',
-        component: ErrorPageComponent
-    },
-    {
-        path: 'my_team',
-        component: MyTeamComponent
-    },
-    {
-        path: 'my_team_reports',
-        component: MyTeamReportsComponent,
-    },
-    {
-        path: 'disabilities',
-        component: DisabilitiesComponent
-    },
-    {
-        path: 'hierarchical_chart',
-        component: HierarchicalChartComponent,
-    },
-    {
-        path: 'holiday_letter',
-        component: HolidayLetterComponent,
-    },
-    {
-        path: 'work_certificate',
-        component: LaborCertificatesComponent,
-    },
-    {
-        path: 'payroll_receipts',
-        component: PayrollReceiptsComponent,
-    },
-    {
-        path: 'certificate_income_withholding',
-        component: CertificateIncomeWithholdingComponent,
-    },
-    {
-        path: 'income_withholdings',
-        component: IncomeWithholdingsComponent,
-    },
-    {
-        path: 'compensated_vacations',
-        component: CompnsatedVacationsComponent,
-    },
-    {
-        path: 'embargoes',
-        component: EmbargoesComponent,
-    },
-    {
-        path: 'extra_hours',
-        component: ExtraHoursComponent,
-    },
-    {
-        path: 'loans',
-        component: LoansComponent,
-    },
-    {
-        path: 'payments_deductions',
-        component: PaymentsDeductionsComponent,
-    },
-    {
-        path: 'permissions',
-        component: PermissionsComponent,
-    },
-    {
-        path: 'vacation_balance',
-        component: VacationBalanceComponent,
-    },
-    {
-        path: 'vacation_enjoyed',
-        component: VacationEnjoyedComponent,
-    },
-    {
-        path: 'aniversary',
-        component: AniversaryComponent,
-    },
-    {
-        path: 'severances',
-        component: SeverancesComponent,
-    },
-    {
-        path: 'reports_requests',
-        component: RequestsComponent,
-    },
-    {
-        path: 'users_permisions',
-        component: PermisionsUsersComponent,
-    },
-    {
+  {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'reset_account',
+    component: ResetAccountComponent
+  },
+  {
+    path: 'locked_screen',
+    component: LockedScreenComponent
+  },
+  {
+    path: 'confirm_reset_account',
+    component: ConfirmResetAcountComponent
+  },
+  {
+    path: 'index',
+    component: DashboardComponent
+  },
+  {
+    path: 'error',
+    component: ErrorPageComponent
+  },
+  {
+    path: 'my_team',
+    component: MyTeamComponent
+  },
+  {
+    path: 'my_team_reports',
+    component: MyTeamReportsComponent
+  },
+  {
+    path: 'disabilities',
+    component: DisabilitiesComponent
+  },
+  {
+    path: 'hierarchical_chart',
+    component: HierarchicalChartComponent
+  },
+  {
+    path: 'holiday_letter',
+    component: HolidayLetterComponent
+  },
+  {
+    path: 'work_certificate',
+    component: LaborCertificatesComponent
+  },
+  {
+    path: 'payroll_receipts',
+    component: PayrollReceiptsComponent
+  },
+  {
+    path: 'certificate_income_withholding',
+    component: CertificateIncomeWithholdingComponent
+  },
+  {
+    path: 'income_withholdings',
+    component: IncomeWithholdingsComponent
+  },
+  {
+    path: 'compensated_vacations',
+    component: CompnsatedVacationsComponent
+  },
+  {
+    path: 'embargoes',
+    component: EmbargoesComponent
+  },
+  {
+    path: 'extra_hours',
+    component: ExtraHoursComponent
+  },
+  {
+    path: 'loans',
+    component: LoansComponent
+  },
+  {
+    path: 'payments_deductions',
+    component: PaymentsDeductionsComponent
+  },
+  {
+    path: 'permissions',
+    component: PermissionsComponent
+  },
+  {
+    path: 'vacation_balance',
+    component: VacationBalanceComponent
+  },
+  {
+    path: 'vacation_enjoyed',
+    component: VacationEnjoyedComponent
+  },
+  {
+    path: 'aniversary',
+    component: AniversaryComponent
+  },
+  {
+    path: 'severances',
+    component: SeverancesComponent
+  },
+  {
+    path: 'reports_requests',
+    component: RequestsComponent
+  },
+  {
+    path: 'users_permisions',
+    component: PermisionsUsersComponent
+  },
+  {
+    path: 'my_publications',
+    component: MyPublicationsComponent
+  },
+  {
+    path: 'news',
+    component: NewsComponent
+  },
+  {
+    path: 'requests',
+    component: RequestsComponent
+  },
+  {
+    path: 'requests_rh',
+    component: RequestsRhComponent
+  },
+  {
+    path: 'corporate_documents',
+    component: CorporateDocumentsComponent
+  },
+  {
+    path: 'pending_approvers',
+    component: PendingsComponent
+  },
+  {
+    path: 'managed_approvers',
+    component: ManagedComponent
+  },
+  {
+    path: 'master_data',
+    component: MasterDataComponent
+  },
+  {
+    path: 'help',
+    component: HelpComponent
+  },
+  {
+    path: 'evaluated',
+    component: EvaluatedComponent
+  },
+  {
+    path: 'historical_posts',
+    component: HistoricalPostsComponent
+  },
+  {
+    path: 'requests-type',
+    component: RequestsApproversComponent
+  },
+  {
+    path: 'iva_employee',
+    component: IvaEmployeeComponent
+  },
+  {
+    path: 'calendar_modal',
+    component: CalendarModalComponent
+  },
+  {
+    path: 'evaluation_objectives',
+    component: EvaluationObjectivesComponent
+  },
+  {
+    path: 'planning_evaluation',
+    component: PlanningEvaluationComponent
+  },
 
-        path: 'my_publications',
-        component: MyPublicationsComponent,
-    },
-    {
-
-        path: 'news',
-        component: NewsComponent,
-    },
-    {
-        path: 'requests',
-        component: RequestsComponent
-    },
-    {
-        path: 'requests_rh',
-        component: RequestsRhComponent
-    },
-    {
-        path: 'corporate_documents',
-        component: CorporateDocumentsComponent,
-    },
-    {
-        path: 'pending_approvers',
-        component: PendingsComponent
-    },
-    {
-        path: 'managed_approvers',
-        component: ManagedComponent
-    },
-    {
-        path: 'master_data',
-        component: MasterDataComponent
-    },
-    {
-        path: 'help',
-        component: HelpComponent
-    },
-    {
-        path: 'evaluated',
-        component: EvaluatedComponent
-    },
-    {
-        path: 'historical_posts',
-        component: HistoricalPostsComponent
-    },
-    {
-        path: 'requests-type',
-        component: RequestsApproversComponent
-    },
-    {
-        path: 'iva_employee',
-        component: IvaEmployeeComponent
-    },
-    {
-        path: 'calendar_modal',
-        component: CalendarModalComponent
-    },
-    {
-        path: 'evaluation_objectives',
-        component: EvaluationObjectivesComponent
-    },
-    {
-        path: 'planning_evaluation',
-        component: PlanningEvaluationComponent
-    },
-
-    {
-        path: 'time_evaluation',
-        component: TimeEvaluationComponent
-    },
-    {
-        path: 'hour_extras',
-        component: HourExtrasComponent
-    },
-    {
-        path: 'my_hour_extras',
-        component: MyHourExtrasComponent
-    },
-    {
-        path: 'travel_management',
-        component: TravelManagementComponent
-    },
-    {
-        path: 'travels',
-        component: TravelComponent
-    },
-    {
-        path: 'travels/:idSpend/:idTravels',
-        component: TravelComponent
-    },
-    {
-        path:'hotels',
-        component: HotelsComponent
-    },
-    {
-        path:'training',
-        component: TrainingComponent
-    },
-    {
-        path:'report_training',
-        component: ReportTrainingComponent
-    },
-    {
-        path:'advances/:id',
-        component: AdvancesComponent
-    },
-    {
-        path:'advances',
-        component: AdvancesComponent
-    },
-    {
-        path:'spend/:id',
-        component: SpendComponent
-    },
-    {
-        path:'spend/:idTravels/:idSpend/:travel',
-        component: SpendComponent
-    },
-    {
-        path:'spend',
-        component: SpendComponent
-    },
-    {
-        path:'management_travel',
-        component: ManagedTravelComponent
-    },
-    {
-        path:'pending_travel',
-        component: PendingTravelComponent
-    },
-    {
-        path:'travel_report',
-        component:TravelRequestsReportComponent,
-    }
-    ,
-    {
-        path:'advance_report',
-        component:TravelAdvanceReportComponent,
-    }
-    ,
-    {
-        path:'allowance_report',
-        component:TravelAllowanceReportComponent,
-    }
-    ,
-    {
-        path:'approver_report',
-        component:TravelApproverReportComponent,
-    },
-    {
-        path: 'requests_approvers_logs',
-        component: RequestsApproversLogsComponent
-    },
-    {
-        path: 'housing',
-        component: HousingComponent
-    },
-    {
-        path: 'logistics_transportations',
-        component: TransportationLogisticsComponent
-    },
-    {
-        path: 'logistics_reports',
-        component: TrasnportationReportComponent
-    }
-
+  {
+    path: 'time_evaluation',
+    component: TimeEvaluationComponent
+  },
+  {
+    path: 'hour_extras',
+    component: HourExtrasComponent
+  },
+  {
+    path: 'my_hour_extras',
+    component: MyHourExtrasComponent
+  },
+  {
+    path: 'travel_management',
+    component: TravelManagementComponent
+  },
+  {
+    path: 'travels',
+    component: TravelComponent
+  },
+  {
+    path: 'travels/:idSpend/:idTravels',
+    component: TravelComponent
+  },
+  {
+    path: 'hotels',
+    component: HotelsComponent
+  },
+  {
+    path: 'training',
+    component: TrainingComponent
+  },
+  {
+    path: 'report_training',
+    component: ReportTrainingComponent
+  },
+  {
+    path: 'advances/:id',
+    component: AdvancesComponent
+  },
+  {
+    path: 'advances',
+    component: AdvancesComponent
+  },
+  {
+    path: 'spend/:id',
+    component: SpendComponent
+  },
+  {
+    path: 'spend/:idTravels/:idSpend/:travel',
+    component: SpendComponent
+  },
+  {
+    path: 'spend',
+    component: SpendComponent
+  },
+  {
+    path: 'management_travel',
+    component: ManagedTravelComponent
+  },
+  {
+    path: 'pending_travel',
+    component: PendingTravelComponent
+  },
+  {
+    path: 'travel_report',
+    component: TravelRequestsReportComponent
+  },
+  {
+    path: 'advance_report',
+    component: TravelAdvanceReportComponent
+  },
+  {
+    path: 'allowance_report',
+    component: TravelAllowanceReportComponent
+  },
+  {
+    path: 'approver_report',
+    component: TravelApproverReportComponent
+  },
+  {
+    path: 'requests_approvers_logs',
+    component: RequestsApproversLogsComponent
+  },
+  {
+    path: 'housing',
+    component: HousingComponent
+  },
+  {
+    path: 'logistics_transportations',
+    component: TransportationLogisticsComponent
+  },
+  {
+    path: 'logistics_reports',
+    component: TrasnportationReportComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forChild(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class PagesRoutingModule { }
+export class PagesRoutingModule {}

@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { Alerts } from '../../../models/common/alerts/alerts';
@@ -7,85 +13,99 @@ import { BillboardService } from '../../../services/shared/common/billboard/bill
 import { EditArticleService } from '../../../services/shared/common/edit-article/edit-article.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-my-publications',
   templateUrl: './my-publications.component.html',
   styleUrls: ['./my-publications.component.css']
 })
-export class MyPublicationsComponent implements OnInit {
+export class MyPublicationsComponent implements OnInit, OnDestroy {
   @Output() myPublicationModal: EventEmitter<string> = new EventEmitter();
-
-  public myPublications: PublicArticle[] = [];
-  public totalNews: number = 0;
-  private alertWarning: Alerts[];
-  public idDelete: number = 0;
-  public translate: Translate = null;
-  public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public myPublicationsService: MyPublicationsService,
+  public myPublications: PublicArticle[] = [];
+  public totalNews = 0;
+  private alertWarning: Alerts[];
+  public idDelete = 0;
+  public token: boolean;
+
+  private subscriptions: ISubscription[];
+  private subscriptionArticles: ISubscription;
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.billboard.my_publication.${key}`;
+  }
+
+  constructor(
+    public myPublicationsService: MyPublicationsService,
     public alert: AlertsService,
     public billboardSharedService: BillboardService,
     public editEditSharedService: EditArticleService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-
-    this.translate = this.translateService.getTranslate();
-
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
+    public stylesExplorerService: StylesExplorerService,
+    public translate: TranslateService
+  ) {
+    this.subscriptions = [
+      this.tokenService.validateToken().subscribe(
+        () => {
           this.token = false;
         },
-        (error) => {
+        error => {
           this.objectToken.emit({
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          document
+            .getElementsByTagName('body')[0]
+            .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        })
-
-    this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
-      if (data == true) {
-        this.getDataPublications();
-      }
-    });
-
-    this.billboardSharedService.getRefreshEditNew().subscribe((response: any) => {
-      if (response == true) {
-        this.getDataPublications();
-      }
-    });
-
-    this.alert.getActionConfirm().subscribe((data: any) => {
-
-      if (data == "deleteArticle") {
-        // document.getElementById("loginId").style.display = 'block'
-        // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-        this.myPublicationsService.deleteArticles(this.idDelete)
-          .subscribe((data: any) => {
-            if (data.success == true) {
-              this.getDataPublications();
-              this.alertWarning = [{
-                type: 'success',
-                title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts_one,
-                message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_confirmation_ts,
-                confirmation: false,
-                typeConfirmation: ''
-              }];
-              this.alert.setAlert(this.alertWarning[0]);
-            }
-            // setTimeout(() => {
-            //   document.getElementById("loginId").style.display = 'none'
-            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-            // }, 2000)
-          })
-      }
-    })
+        }
+      ),
+      this.billboardSharedService.getUpdateNew().subscribe((data: any) => {
+        if (data == true) {
+          this.getDataPublications();
+        }
+      }),
+      this.billboardSharedService
+        .getRefreshEditNew()
+        .subscribe((response: any) => {
+          if (response == true) {
+            this.getDataPublications();
+          }
+        }),
+      this.alert.getActionConfirm().subscribe((data: any) => {
+        if (data == 'deleteArticle') {
+          // document.getElementById("loginId").style.display = 'block'
+          // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          this.subscriptionArticles = this.myPublicationsService
+            .deleteArticles(this.idDelete)
+            .subscribe((res: any) => {
+              if (res.success == true) {
+                this.getDataPublications();
+                this.alertWarning = [
+                  {
+                    type: 'success',
+                    title: this.t('title_confirmation_ts_one'),
+                    message: this.t('msg_confirmation_ts'),
+                    confirmation: false,
+                    typeConfirmation: ''
+                  }
+                ];
+                this.alert.setAlert(this.alertWarning[0]);
+              }
+              // setTimeout(() => {
+              //   document.getElementById("loginId").style.display = 'none'
+              //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+              // }, 2000)
+            });
+        }
+      })
+    ];
   }
 
   ngOnInit() {
@@ -103,10 +123,11 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   getDataPublications() {
-    this.myPublicationsService.getMyArticles().subscribe((data: any) => {
-      this.myPublications = data.data;
-
-    })
+    this.subscriptionArticles = this.myPublicationsService
+      .getMyArticles()
+      .subscribe((data: any) => {
+        this.myPublications = data.data;
+      });
   }
 
   goToForm() {
@@ -115,24 +136,29 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   publishArticle(infoPub: PublicArticle) {
-
     const parameter = infoPub.id;
-    this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
-      infoPub.publish = data.data[0].publish;
-    });
-
+    this.subscriptionArticles = this.myPublicationsService
+      .putPublishNews(parameter)
+      .subscribe((data: any) => {
+        infoPub.publish = data.data[0].publish;
+      });
   }
   hideArticle(infoPub: PublicArticle) {
     const parameter = infoPub.id;
-    this.myPublicationsService.putPublishNews(parameter).subscribe((data: any) => {
-      infoPub.publish = data.data[0].publish;
-    });
+    this.subscriptionArticles = this.myPublicationsService
+      .putPublishNews(parameter)
+      .subscribe((data: any) => {
+        infoPub.publish = data.data[0].publish;
+      });
   }
 
   viewDetailArticle(infoPub: any) {
     this.myPublicationModal.emit('myPublicationModal');
     setTimeout(() => {
-      this.billboardSharedService.setShowCommentNew({ objectPublication: infoPub, modal: 'myPublicationModal' });
+      this.billboardSharedService.setShowCommentNew({
+        objectPublication: infoPub,
+        modal: 'myPublicationModal'
+      });
     }, 500);
   }
 
@@ -141,16 +167,21 @@ export class MyPublicationsComponent implements OnInit {
   }
 
   deleteNew(infoPub: PublicArticle) {
-
     this.idDelete = infoPub.id;
-    this.alertWarning = [{
-      type: 'warning',
-      title: this.translate.app.frontEnd.pages.billboard.my_publication.title_confirmation_ts_one,
-      message: this.translate.app.frontEnd.pages.billboard.my_publication.msg_elimination_confirmation_ts,
-      confirmation: true,
-      typeConfirmation: 'deleteArticle'
-    }];
+    this.alertWarning = [
+      {
+        type: 'warning',
+        title: this.t('title_confirmation_ts_one'),
+        message: this.t('msg_elimination_confirmation_ts'),
+        confirmation: true,
+        typeConfirmation: 'deleteArticle'
+      }
+    ];
     this.alert.setAlert(this.alertWarning[0]);
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptionArticles.unsubscribe();
+  }
 }

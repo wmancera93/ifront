@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Help } from '../../models/common/help/help';
-import { Translate } from '../../models/common/translate/translate';
-import { TranslateService } from '../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-help',
@@ -9,18 +8,35 @@ import { TranslateService } from '../../services/common/translate/translate.serv
   styleUrls: ['./help.component.css']
 })
 export class HelpComponent implements OnInit {
- 
-  public dataHelp : Help[]=[] ;
-  public translate: Translate = null;
-  constructor(public translateService: TranslateService) { 
-    this.translate = this.translateService.getTranslate();
+  public dataHelp: Help[] = [];
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
   }
 
-  
+  parseT(key) {
+    return `pages.help.${key}`;
+  }
+
+  constructor(public translate: TranslateService) {}
+
   ngOnInit() {
-    this.dataHelp = [{title:this.translate.app.frontEnd.pages.help.text_dashboard_ts, image:"", description:this.translate.app.frontEnd.pages.help.text_operation_dashboard_ts}, 
-    {title:this.translate.app.frontEnd.pages.help.text_organization_chart_ts, image:"", description:this.translate.app.frontEnd.pages.help.text_functioning_organization_chart_ts},
-    {title:this.translate.app.frontEnd.pages.help.text_my_data_ts, image:"", description:this.translate.app.frontEnd.pages.help.text_functioning_my_datat_ts}];
+    this.dataHelp = [
+      {
+        title: 'text_dashboard_ts',
+        image: '',
+        description: 'text_operation_dashboard_ts'
+      },
+      {
+        title: 'text_organization_chart_ts',
+        image: '',
+        description: 'text_functioning_organization_chart_ts'
+      },
+      {
+        title: 'text_my_data_ts',
+        image: '',
+        description: 'text_functioning_my_datat_ts'
+      }
+    ];
   }
-
 }

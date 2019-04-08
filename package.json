@@ -24,6 +24,8 @@
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@ngx-formly/bootstrap": "^2.0.0-rc.55",
     "@ngx-formly/core": "^2.0.0-rc.55",
+    "@ngx-translate/core": "^9.1.1",
+    "@ngx-translate/http-loader": "^2.0.1",
     "angular2-toaster": "^5.0.0-alpha.1",
     "angular2-token": "^0.2.0-beta.14",
     "angular4-data-table": "^1.0.0",

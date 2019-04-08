@@ -9,14 +9,17 @@
         <div class="row justify-content-center">
           <div class="col-xl-10 col-md-8 col-7 title">
             <i class="fa fa-users"></i>
-            {{translate.app.frontEnd.pages.my_team.title_my_team}}
+            {{ parseT("title_my_team") | translate }}
           </div>
-          <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div
+            class="col-xl-2 col-md-4 col-5 text-center cursor-general"
+            style="padding-right: 0px"
+          >
             <div class="buttonBack img-zoom" (click)="returnBackPage()">
               <div class="padding-back">
                 <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
                 <span>
-                  {{translate.app.frontEnd.pages.my_team.btn_back}}
+                  {{ parseT("btn_back") | translate }}
                 </span>
               </div>
             </div>
@@ -27,34 +30,62 @@
     <div class="row-hr-container justify-content-center">
       <div class="col-12 widget bg-white">
         <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]">
-          <div class="col-xl-3 col-lg-4 col-md-6 col-12" *ngFor="let employee of employeesInMyTeam[0].subordinates_list; let colorEmployeePrimary =odd; let colorEmployeeSecundary =even;">
-            <div class="widget employee-height-notification" [ngClass]="{  colorEmployeePrimary:  colorEmployeePrimary, colorEmployeeSecundary: colorEmployeeSecundary}">
+          <div
+            class="col-xl-3 col-lg-4 col-md-6 col-12"
+            *ngFor="
+              let employee of employeesInMyTeam[0].subordinates_list;
+              let colorEmployeePrimary = odd;
+              let colorEmployeeSecundary = even
+            "
+          >
+            <div
+              class="widget employee-height-notification"
+              [ngClass]="{
+                colorEmployeePrimary: colorEmployeePrimary,
+                colorEmployeeSecundary: colorEmployeeSecundary
+              }"
+            >
               <div class="row justify-content-center">
-                <div class="col-12" style="padding-left: 50%; padding-right: 50%">
+                <div
+                  class="col-12"
+                  style="padding-left: 50%; padding-right: 50%"
+                >
                   <div class="menu-img-myTeam">
-                    <img src="{{employee.image.url}}" class=" roundPhotoMyTeam">
+                    <img
+                      src="{{ employee.image.url }}"
+                      class=" roundPhotoMyTeam"
+                    />
                   </div>
                 </div>
-                <div class="col-12 fontName top-general-p" style="color: #e0e0e0;font-size: 18px;">
+                <div
+                  class="col-12 fontName top-general-p"
+                  style="color: #e0e0e0;font-size: 18px;"
+                >
                   <strong class="font-bold text-shadow">
-                    {{employee.name}} {{employee.lastname}}
+                    {{ employee.name }} {{ employee.lastname }}
                   </strong>
                 </div>
                 <div class="col-12 top-general-p">
                   <span class="text-capitalize" style="font-size: 16px;">
-                    {{employee.posicion | lowercase}}
+                    {{ employee.posicion | lowercase }}
                   </span>
                 </div>
                 <div class="col-12 top-general-p">
                   <span class="text-capitalize" style="font-size: 14px;">
-                    {{employee.unidad_org|lowercase}}
+                    {{ employee.unidad_org | lowercase }}
                   </span>
                 </div>
               </div>
               <div class="row justify-content-center">
-                <div class="col-12 top-general-p" style="padding-left: 50%; padding-right: 50%">
+                <div
+                  class="col-12 top-general-p"
+                  style="padding-left: 50%; padding-right: 50%"
+                >
                   <div class="shadowRoundMoreInfo" style="margin-left: -20px;">
-                    <div class="roundMoreInfo" (click)="goToMyTeamReports(employee)">
+                    <div
+                      class="roundMoreInfo"
+                      (click)="goToMyTeamReports(employee)"
+                    >
                       <i class="fa fa-plus"></i>
                     </div>
                   </div>

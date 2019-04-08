@@ -8,7 +8,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          {{translate.app.frontEnd.pages.auto_services.labor_certificates.title_work_letter}}
+          {{ parseT("title_work_letter") | translate }}
         </div>
       </div>
     </div>
@@ -18,27 +18,46 @@
       <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
         <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.auto_services.labor_certificates.text_letter_not_found}}
-            <strong>{{translate.app.frontEnd.pages.auto_services.labor_certificates.text_work_letter}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.labor_certificates.text_for_the_employee}}
+            {{ parseT("text_letter_not_found") | translate }}
+            <strong>{{ parseT("text_work_letter") | translate }}</strong
+            >&nbsp;{{ parseT("text_for_the_employee") | translate }}
           </div>
         </div>
       </div>
       <div class="row" *ngIf="!flagEmpty">
         <div class="col-12 col-xl-3">
-          <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
-            <div id="{{i}}certificate" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}" *ngFor="let certificate of laboralType; let i=index"
-              (click)="selectedObject(i, certificate)">
+          <div
+            id="listCertificates"
+            class="nav nav-tabs navtab-vertical navtab-left cursor-general"
+            role="navigation"
+          >
+            <div
+              id="{{ i }}certificate"
+              class="nav-item navReport tabReport"
+              [ngClass]="{ 'active-report': i == '0' }"
+              *ngFor="let certificate of laboralType; let i = index"
+              (click)="selectedObject(i, certificate)"
+            >
               <i class="fa fa-file-pdf-o"></i>
-              {{certificate.pdf_name2}}
+              {{ certificate.pdf_name2 }}
             </div>
-            <div id="qrcertificate" class="nav-item navReport tabReport" (click)="selectedObject('qr', certificate)" *ngIf="block_certificate">
+            <div
+              id="qrcertificate"
+              class="nav-item navReport tabReport"
+              (click)="selectedObject('qr', certificate)"
+              *ngIf="block_certificate"
+            >
               <i class="fa fa-qrcode"></i>
-              {{translate.app.frontEnd.pages.auto_services.labor_certificates.text_code_work_letter}}
+              {{ parseT("text_code_work_letter") | translate }}
             </div>
           </div>
         </div>
         <div class="col-9 col-xl-9" *ngIf="!certificated_qr">
-          <iframe [src]='urlPDF | safeHtml' width="100% !important;" height="1000">
+          <iframe
+            [src]="urlPDF | safeHtml"
+            width="100% !important;"
+            height="1000"
+          >
           </iframe>
         </div>
         <div class="col-9 col-xl-9" *ngIf="certificated_qr">
@@ -46,29 +65,35 @@
             <div class="row">
               <div class="col-12" style="margin-top: 60px">
                 <h1>
-                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_one}}
+                  {{ parseT("msg_verification_code_one") | translate }}
                 </h1>
               </div>
               <div class="col-12 text-left" style="margin-top: 60px">
                 <i class="fa fa-fw fa-check"></i>
-                {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_two}}
+                {{ parseT("msg_verification_code_two") | translate }}
               </div>
               <div class="col-12 text-left" style="margin-top: 30px">
                 <i class="fa fa-fw fa-check"></i>
-                {{translate.app.frontEnd.pages.auto_services.labor_certificates.msg_verification_code_three}}
+                {{ parseT("msg_verification_code_three") | translate }}
               </div>
             </div>
             <div class="row justify-content-center" style="margin-top: 60px">
               <div class="col-4">
-                <div class="btn btn-block btn-primary" (click)="acceptCertificateQR()">
+                <div
+                  class="btn btn-block btn-primary"
+                  (click)="acceptCertificateQR()"
+                >
                   <i class="fa fa-fw fa-check"></i>
-                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.btn_accept}}
+                  {{ parseT("btn_accept") | translate }}
                 </div>
               </div>
               <div class="col-4">
-                <div class="btn btn-block btn-primary-second" (click)="declineCertificateQR()">
+                <div
+                  class="btn btn-block btn-primary-second"
+                  (click)="declineCertificateQR()"
+                >
                   <i class="fa fa-fw fa-times"></i>
-                  {{translate.app.frontEnd.pages.auto_services.labor_certificates.btn_cancel}}
+                  {{ parseT("btn_cancel") | translate }}
                 </div>
               </div>
             </div>

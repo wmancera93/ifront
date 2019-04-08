@@ -5,13 +5,11 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Angular2TokenService } from 'angular2-token';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { Enterprise } from '../../../models/general/enterprise';
-import { environment } from '../../../../environments/environment';
-import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { MainService } from '../../../services/main/main.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 declare const ga: any;
 
@@ -21,18 +19,26 @@ declare const ga: any;
   styleUrls: ['./reset-account.component.css']
 })
 export class ResetAccountComponent implements OnInit {
-  public txtEmail: string = '';
+  public txtEmail = '';
   public dataEnterprise: Enterprise;
-  public translate: Translate = null;
 
-  constructor(public alert: AlertsService,
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.authentication.reset_account.${key}`;
+  }
+
+  constructor(
+    public alert: AlertsService,
     private tokenService: Angular2TokenService,
     public router: Router,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-    
-    this.translate = this.translateService.getTranslate();
+    public stylesExplorerService: StylesExplorerService,
+    public translate: TranslateService
+  ) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         ga('set', 'page', event.urlAfterRedirects);
@@ -42,66 +48,92 @@ export class ResetAccountComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
     if (this.stylesExplorerService.validateBrowser()) {
-      let url = window.location.href;
+      const url = window.location.href;
       let ambient;
 
-      if (url.split("localhost").length === 1) {
-        if (url.split("-").length > 1) {
-          ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+      if (url.split('localhost').length === 1) {
+        if (url.split('-').length > 1) {
+          ambient = url.split('-')[0].split('/')[
+            url.split('-')[0].split('/').length - 1
+          ];
         }
       } else {
         ambient = 'development';
       }
-      this.mainService.getDataEnterprise(ambient)
-        .subscribe((result: any) => {
-          this.dataEnterprise[0] = result.data;
+      this.mainService.getDataEnterprise(ambient).subscribe((result: any) => {
+        this.dataEnterprise[0] = result.data;
 
-          document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
-          setTimeout(() => {
-            this.stylesExplorerService.stylesInExplorerOrEdge(
-              this.dataEnterprise[0].background_login.url,
-              this.dataEnterprise[0].primary_color,
-              this.dataEnterprise[0].primary_color,
-              this.dataEnterprise[0].body_text, '', '',
-              '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
-            )
-          }, 200);
-        });
+        document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
+        setTimeout(() => {
+          this.stylesExplorerService.stylesInExplorerOrEdge(
+            this.dataEnterprise[0].background_login.url,
+            this.dataEnterprise[0].primary_color,
+            this.dataEnterprise[0].primary_color,
+            this.dataEnterprise[0].body_text,
+            '',
+            '',
+            '0 0 0 0',
+            '0px',
+            'none',
+            '-1px',
+            '-12px',
+            '',
+            ''
+          );
+        }, 200);
+      });
     }
   }
 
   restartSession() {
     if (this.txtEmail.length !== 0) {
-      this.tokenService.resetPassword({
-        email: this.txtEmail
-      }).subscribe(
-        res => {
-          if (res.status === 200) {
-            const alertWarning: Alerts[] = [{
-              type: 'success',
-              title: this.translate.app.frontEnd.pages.authentication.reset_account.title_warning_ts,
-              message: res.json().message
-            }];
-            this.alert.setAlert(alertWarning[0]);
-            this.txtEmail = '';
-            this.googleAnalyticsEventsService.emitEvent("authentication", "restartAccount", "Restart Account", 1);
+      this.tokenService
+        .resetPassword({
+          email: this.txtEmail
+        })
+        .subscribe(
+          res => {
+            if (res.status === 200) {
+              const alertWarning: Alerts[] = [
+                {
+                  type: 'success',
+                  title: this.t('title_warning_ts'),
+                  message: res.json().message
+                }
+              ];
+              this.alert.setAlert(alertWarning[0]);
+              this.txtEmail = '';
+              this.googleAnalyticsEventsService.emitEvent(
+                'authentication',
+                'restartAccount',
+                'Restart Account',
+                1
+              );
+            }
+          },
+          error => {
+            let resultError: any;
+            resultError = error.json();
+            const alertError: Alerts[] = [
+              {
+                type: 'danger',
+                title: this.t('text_login'),
+                message: resultError.errors[0]
+              }
+            ];
+            this.alert.setAlert(alertError[0]);
           }
-
-        },
-        error => {
-          let resultError: any;
-          resultError = error.json();
-          const alertError: Alerts[] = [{
-            type: 'danger',
-            title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login,
-            message: resultError.errors[0]
-          }];
-          this.alert.setAlert(alertError[0]);
-        });
+        );
     } else {
-      const alertWarning: Alerts[] = [{ type: 'warning', title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login, message: this.translate.app.frontEnd.pages.authentication.reset_account.msg_email_is_required_ts }];
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: this.t('text_login'),
+          message: this.t('msg_email_is_required_ts')
+        }
+      ];
       this.alert.setAlert(alertWarning[0]);
     }
   }
@@ -111,18 +143,19 @@ export class ResetAccountComponent implements OnInit {
     this.txtEmail = this.txtEmail.toLowerCase();
   }
   blurEmail() {
-    let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    const expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     if (this.txtEmail !== '') {
       if (!expressionRegular.test(this.txtEmail)) {
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: this.translate.app.frontEnd.pages.authentication.reset_account.text_login,
-          message: this.translate.app.frontEnd.pages.authentication.reset_account.msg_wrong_email_format_ts
-        }];
+        const alertWarning: Alerts[] = [
+          {
+            type: 'danger',
+            title: this.t('text_login'),
+            message: this.t('msg_wrong_email_format_ts')
+          }
+        ];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
       }
     }
   }
-
 }

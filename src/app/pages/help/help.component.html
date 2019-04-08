@@ -4,7 +4,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-question-circle"></i>
-          {{translate.app.frontEnd.pages.help.title_help}}
+          {{ parseT("title_help") | translate }}
         </div>
       </div>
     </div>
@@ -13,21 +13,28 @@
     <div class=" col-12 widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let item of dataHelp;">
+          <div class="widget bg-white-1x" *ngFor="let item of dataHelp">
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
-                <img alt="image" class="radius-image m-t-xs" src="" style="height: 100px; width: 100px">
+                <img
+                  alt="image"
+                  class="radius-image m-t-xs"
+                  src=""
+                  style="height: 100px; width: 100px"
+                />
               </div>
               <div class="col-12 col-lg-4">
                 <div class="col-12 font-color-default text-center hoverTitle">
-                    <strong>{{item.title |uppercase}} </strong>
+                  <strong>
+                    {{ parseT(item.title) | translate | uppercase }}
+                  </strong>
                 </div>
               </div>
               <div class="col-12 col-lg-5">
-                  <div class="col-12  text-center">
-                      <strong>{{item.description}} </strong>
-                  </div>
+                <div class="col-12  text-center">
+                  <strong>{{ parseT(item.description) | translate }} </strong>
                 </div>
+              </div>
             </div>
           </div>
         </div>

@@ -5,33 +5,30 @@ import {
   ViewChild,
   OnDestroy,
   Input
-} from "@angular/core";
-import { NgbModal } from "@ng-bootstrap/ng-bootstrap";
-import uuid from "uuid";
-import { FormsRequestsService } from "../../../../services/shared/forms-requests/forms-requests.service";
-import { TypesRequests } from "../../../../models/common/requests-rh/requests-rh";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { AlertsService } from "../../../../services/shared/common/alerts/alerts.service";
-import { FormDataService } from "../../../../services/common/form-data/form-data.service";
-import { StylesExplorerService } from "../../../../services/common/styles-explorer/styles-explorer.service";
-import { Translate } from "../../../../models/common/translate/translate";
-import { TranslateService } from "../../../../services/common/translate/translate.service";
-import { Observable } from "rxjs";
+} from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import uuid from 'uuid';
+import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
+import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
+import { FormDataService } from '../../../../services/common/form-data/form-data.service';
+import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: "app-new-housing",
-  templateUrl: "./new-housing.component.html",
-  styleUrls: ["./new-housing.component.css"]
+  selector: 'app-new-housing',
+  templateUrl: './new-housing.component.html',
+  styleUrls: ['./new-housing.component.css']
 })
 export class NewHousingComponent implements OnInit, OnDestroy {
-  @ViewChild("modalForms")
+  @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
   modalActions: { close: Function } = { close: () => {} };
   @Input() modalForm: Observable<any>;
 
   public formRequests: TypesRequests = null;
   public showSubmit = true;
-  public translate: Translate = null;
   public form: any;
   public stepActive = 0;
 
@@ -56,32 +53,30 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     private fb: FormBuilder,
     public formDataService: FormDataService,
-    public stylesExplorerService: StylesExplorerService,
-    public translateService: TranslateService
+    public stylesExplorerService: StylesExplorerService
   ) {
-    this.translate = this.translateService.getTranslate();
-    this.cities = [{ id: 1, name: "Bogota" }, { id: 2, name: "Medellin" }];
+    this.cities = [{ id: 1, name: 'Bogota' }, { id: 2, name: 'Medellin' }];
 
     this.form = new FormGroup({});
     this.form = this.fb.group({
-      name: [""],
-      city: [""],
-      bedrooms: [""],
-      beds: [""]
+      name: [''],
+      city: [''],
+      bedrooms: [''],
+      beds: ['']
     });
   }
 
   ngOnInit() {
     this.modalFormSubscription = this.modalForm.subscribe(() => {
       const modal = this.modalService.open(this.modalTemplate, {
-        size: "lg",
-        windowClass: "modal-md-personalized modal-dialog-scroll",
+        size: 'lg',
+        windowClass: 'modal-md-personalized modal-dialog-scroll',
         centered: true
       });
       this.modalActions.close = () => {
         modal.close();
       };
-      document.getElementById("bodyGeneral").removeAttribute("style");
+      document.getElementById('bodyGeneral').removeAttribute('style');
     });
   }
 
@@ -115,8 +110,8 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       beds: beds.value,
       key: uuid.v4()
     });
-    bedrooms.setValue("");
-    beds.setValue("");
+    bedrooms.setValue('');
+    beds.setValue('');
   }
 
   removeTrayect(keyBedrooms) {

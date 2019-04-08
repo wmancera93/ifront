@@ -4,14 +4,18 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-paste"></i>
-          {{translate.app.frontEnd.pages.queries.extra_hours.name_table_ts}}
+          {{ parseT("name_table_ts") | translate }}
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
-        <app-data-table [records]="objectReport" [title]="nameReport" [excel]="showExcel"></app-data-table>
+      <app-data-table
+        [records]="objectReport"
+        [title]="parseT('name_table_ts') | translate"
+        [excel]="showExcel"
+      ></app-data-table>
     </div>
   </div>
 </div>

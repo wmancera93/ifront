@@ -10,36 +10,36 @@ export class TranslateService {
 
   constructor(private http: HttpClient) {
     if (this.translate === null) {
-      if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
-        this.changeLanguaje(JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase());
+      if (JSON.parse(localStorage.getItem('treeLanguaje')) !== null) {
+        this.changeLanguaje(JSON.parse(localStorage.getItem('treeLanguaje')).data[0].data[0].code_language.toLowerCase());
       } else {
         this.changeLanguaje('es');
       }
     } else {
-      this.translate = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].language_json_file;
+      this.translate = JSON.parse(localStorage.getItem('treeLanguaje')).data[0].data[0].language_json_file;
     }
   }
 
   changeLanguaje(param: string) {
     this.getTransalate(param).subscribe((data: any) => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);
-      localStorage.setItem("treeLanguaje", JSON.stringify(data));
-    })
+      localStorage.setItem('treeLanguaje', JSON.stringify(data));
+    });
   }
 
   changeLanguajeFirst(param: string) {
-    let object = this.getTransalate(param)
+    const object = this.getTransalate(param);
     object.subscribe(data => {
       this.translate = JSON.parse(data.data[0].data[0].language_json_file);
-      localStorage.setItem("treeLanguaje", JSON.stringify(data));
-    })
+      localStorage.setItem('treeLanguaje', JSON.stringify(data));
+    });
     return object;
   }
 
   getTranslate() {
-    if (JSON.parse(localStorage.getItem("treeLanguaje")) !== null) {
-      this.translate = JSON.parse(JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].language_json_file);      
-    } 
+    if (JSON.parse(localStorage.getItem('treeLanguaje')) !== null) {
+      this.translate = JSON.parse(JSON.parse(localStorage.getItem('treeLanguaje')).data[0].data[0].language_json_file);
+    }
     return this.translate;
   }
 
@@ -56,12 +56,12 @@ export class TranslateService {
 
     let baseUrl: string;
 
-    let url = window.location.href;
+    const url = window.location.href;
     let ambient;
 
-    if (url.split("localhost").length === 1) {
-      if (url.split("-").length > 1) {
-        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+    if (url.split('localhost').length === 1) {
+      if (url.split('-').length > 1) {
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       }
     } else {
       ambient = 'development';
@@ -87,7 +87,7 @@ export class TranslateService {
         break;
     }
     this.test = this.http.get(baseUrl + '/api/v2/' + languaje + '/companies/tree_language')
-      .map((data: any) => data)
+      .map((data: any) => data);
     return this.test;
   }
 

@@ -1,54 +1,67 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  OnDestroy
+} from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-news',
   templateUrl: './news.component.html',
   styleUrls: ['./news.component.css']
 })
-export class NewsComponent implements OnInit {
+export class NewsComponent implements OnInit, OnDestroy {
   @Output() newModal: EventEmitter<string> = new EventEmitter();
 
   public titleNew: string;
   public newList: PublicArticle[] = [];
   public uploadNewList: PublicArticle[] = [];
-  public searchNotice: string = '';
-  public validateNoData: boolean = false;
-  public translate: Translate = null;
+  public searchNotice = '';
+  public validateNoData = false;
   public token: boolean;
-  public seacrhNew: string
+  public seacrhNew: string;
+  private subscriptions: ISubscription[];
+  private subscriptionArticles: ISubscription;
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public myPublicationsService: MyPublicationsService,
+  parseT(key) {
+    return `pages.billboard.news.${key}`;
+  }
+
+  constructor(
+    public myPublicationsService: MyPublicationsService,
     public billboardSharedService: BillboardService,
     private tokenService: Angular2TokenService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-
-    this.translate = this.translateService.getTranslate();
-    this.seacrhNew = this.translate.app.frontEnd.pages.billboard.news.placeholder_search;
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
+    public stylesExplorerService: StylesExplorerService
+  ) {
+    this.subscriptions = [
+      this.tokenService.validateToken().subscribe(
+        () => {
           this.token = false;
         },
-        (error) => {
+        error => {
           this.objectToken.emit({
             title: error.status.toString(),
             message: error.json().errors[0].toString()
           });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
+          document
+            .getElementsByTagName('body')[0]
+            .setAttribute('style', 'overflow-y:hidden');
           this.token = true;
-        });
-
-    this.billboardSharedService.getRefreshEditNew().subscribe((data: any) => {
-      this.consultAllArticles();
-    })
+        }
+      ),
+      this.billboardSharedService.getRefreshEditNew().subscribe(() => {
+        this.consultAllArticles();
+      })
+    ];
   }
 
   ngOnInit() {
@@ -64,9 +77,11 @@ export class NewsComponent implements OnInit {
   }
 
   consultAllArticles() {
-    this.myPublicationsService.getAllArticles().subscribe((data: any) => {
-      this.newList = data.data;
-    })
+    this.subscriptionArticles = this.myPublicationsService
+      .getAllArticles()
+      .subscribe((data: any) => {
+        this.newList = data.data;
+      });
   }
 
   enterTitleNew() {
@@ -78,9 +93,10 @@ export class NewsComponent implements OnInit {
     if (this.searchNotice == '') {
       this.validateNoData = false;
       this.consultAllArticles();
-    }
-    else {
-      this.newList = this.newList.filter((pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0);
+    } else {
+      this.newList = this.newList.filter(
+        (pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0
+      );
       if (this.newList.length == 0) {
         this.validateNoData = true;
       }
@@ -91,8 +107,15 @@ export class NewsComponent implements OnInit {
     this.newModal.emit('newModal');
 
     setTimeout(() => {
-      this.billboardSharedService.setShowCommentNew({ objectPublication: article, modal: 'newModal' });
+      this.billboardSharedService.setShowCommentNew({
+        objectPublication: article,
+        modal: 'newModal'
+      });
     }, 500);
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptionArticles.unsubscribe();
+  }
 }

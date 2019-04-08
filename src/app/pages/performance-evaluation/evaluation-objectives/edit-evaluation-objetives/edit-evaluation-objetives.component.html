@@ -1,20 +1,41 @@
-<button id="btn-evaluationObjetives" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_evaluationObjetives"
-  style="display:none;">
-</button>
+<button
+  id="btn-evaluationObjetives"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#modal_evaluationObjetives"
+  style="display:none;"
+></button>
 <div class="modal" tabindex="-1" role="dialog" id="modal_evaluationObjetives">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.tittle}}</h5>
-        <button id="closeModalObjectiveEvaluation" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">
+          {{ parseT("tittle") | translate }}
+        </h5>
+        <button
+          id="closeModalObjectiveEvaluation"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center">
-          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
+          <div
+            class="col-11"
+            style="border: 1px solid darkgray;border-style: groove"
+            *ngIf="EvaluacionPer !== null"
+          >
             <div class="row border" style="margin-left: 2px">
-              <h4>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.sub_tittle}}</h4>
+              <h4>{{ parseT("sub_tittle") | translate }}</h4>
             </div>
             <div class="row">
               <div class="col-12 top-containter" style="margin-top: 30px">
@@ -22,12 +43,14 @@
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-file-text text-primary-hr"></i>
-                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.type_evaluation}}:</strong>
+                      <strong
+                        >{{ parseT("type_evaluation") | translate }}:</strong
+                      >
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
-                      {{EvaluacionPer.name}}
+                      {{ EvaluacionPer.name }}
                     </label>
                   </div>
                 </div>
@@ -39,7 +62,9 @@
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-calendar-minus-o text-primary-hr"></i>
-                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.time_evaluation}}:</strong>
+                      <strong
+                        >{{ parseT("time_evaluation") | translate }}:</strong
+                      >
                     </label>
                   </div>
                   <div class="col-lg-4 col-md-12 col-12">
@@ -47,12 +72,12 @@
                       <div class="col-lg-5 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-hourglass-start text-primary-hr"></i>
-                          <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.start}}:</strong>
+                          <strong>{{ parseT("start") | translate }}:</strong>
                         </label>
                       </div>
                       <div class="col-lg-7 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          {{EvaluacionPer.start_evaluation_date}}
+                          {{ EvaluacionPer.start_evaluation_date }}
                         </label>
                       </div>
                     </div>
@@ -62,12 +87,12 @@
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-hourglass-end text-primary-hr"></i>
-                          <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.ended}}:</strong>
+                          <strong>{{ parseT("ended") | translate }}:</strong>
                         </label>
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          {{EvaluacionPer.end_evaluation_date}}
+                          {{ EvaluacionPer.end_evaluation_date }}
                         </label>
                       </div>
                     </div>
@@ -81,21 +106,24 @@
                   <div class="col-lg-4 col-md-4 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-user-o text-primary-hr"></i>
-                      <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.evaluator}}</strong>
+                      <strong>{{ parseT("evaluator") | translate }}</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
                     <div class="row text-center">
                       <div class="col-lg-4 col-md-4 col-12">
-                        <img class="roundPhoto-employee" src="{{qualifierData.image.Url}}">
+                        <img
+                          class="roundPhoto-employee"
+                          src="{{ qualifierData.image.Url }}"
+                        />
                       </div>
                       <div class="col-lg-8 col-md-8 col-12">
                         <label for="nomEvaluation" class="titleColor">
                           <i class="fa fa-graduation-cap text-primary-hr"></i>
-                          {{qualifierData.name_complete}}
+                          {{ qualifierData.name_complete }}
                         </label>
                         <label for="nomEvaluation" class="titleColor">
-                          {{qualifierData.position}}
+                          {{ qualifierData.position }}
                         </label>
                       </div>
                     </div>
@@ -108,20 +136,24 @@
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row justify-content-center">
-          <div class="col-11" style="border: 1px solid darkgray;border-style: groove" *ngIf="EvaluacionPer !== null">
+          <div
+            class="col-11"
+            style="border: 1px solid darkgray;border-style: groove"
+            *ngIf="EvaluacionPer !== null"
+          >
             <div class="row border" style="margin-left: 2px">
               <div class="col-12">
-                <h4>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.evaluation_objetives}}</h4>
+                <h4>{{ parseT("evaluation_objetives") | translate }}</h4>
               </div>
             </div>
             <div class="row" style="margin-top: 30px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-check-circle-o text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.number_objetives}}:</strong>
+                  <strong>{{ parseT("number_objetives") | translate }}:</strong>
                 </label>
                 <label class="col-lg-4 col-md-6 col-12">
-                  <a>{{EvaluacionPer.count_evaluation_objetives}}</a>
+                  <a>{{ EvaluacionPer.count_evaluation_objetives }}</a>
                 </label>
               </div>
             </div>
@@ -129,23 +161,25 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-thermometer-full text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.percentage_full}}</strong>
+                  <strong>{{ parseT("percentage_full") | translate }}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <a>{{EvaluacionPer.current_weight}}%</a>
+                  <a>{{ EvaluacionPer.current_weight }}%</a>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-thermometer-half text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.percentage_missing}}</strong>
+                  <strong>{{
+                    parseT("percentage_missing") | translate
+                  }}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <a> {{EvaluacionPer.missing_weight}}%</a>
+                  <a> {{ EvaluacionPer.missing_weight }}%</a>
                 </label>
               </div>
             </div>
@@ -153,92 +187,195 @@
               <div class="col-12 widget">
                 <div class="row">
                   <div class="col-12 top-general-p">
-                    <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
+                    <app-data-table
+                      [records]="objectReport"
+                      id="tableEvaluation"
+                      [title]="parseT('name_table_ts') | translate"
+                      [pdf]="showPdf"
+                      [sizeTable]="showSizeTable"
+                    ></app-data-table>
                   </div>
                 </div>
                 <div class="row" *ngIf="!flag_complete">
                   <div class="col-lg-4 col-md-6 col-12">
                     <h5 *ngIf="bedit">
-                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.btn_edit}}
+                      {{ parseT("btn_edit") | translate }}
                     </h5>
                     <h5 *ngIf="bnew">
-                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.btn_new}}
+                      {{ parseT("btn_new") | translate }}
                     </h5>
-                    <button type="button" *ngIf="!bedit && !bnew" class="btn btn-block btn-primary text-center" (click)="colapseNew()">
-                      <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.create}}
+                    <button
+                      type="button"
+                      *ngIf="!bedit && !bnew"
+                      class="btn btn-block btn-primary text-center"
+                      (click)="colapseNew()"
+                    >
+                      <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;
+                      {{ parseT("create") | translate }}
                     </button>
-                    <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseEditObjetives" style="display: none">
-                    </button>
+                    <button
+                      id="funtionObjectives"
+                      data-toggle="collapse"
+                      data-target="#collapseEditObjetives"
+                      style="display: none"
+                    ></button>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-lg-4 col-md-6 col-12">
-                    <button id="funtionObjectives" data-toggle="collapse" data-target="#collapseEditObjetives" style="display: none">
-                    </button>
+                    <button
+                      id="funtionObjectives"
+                      data-toggle="collapse"
+                      data-target="#collapseEditObjetives"
+                      style="display: none"
+                    ></button>
                   </div>
                 </div>
 
                 <div class="collapse top-general-p " id="collapseEditObjetives">
-                  <form [formGroup]="formObjetive" class="row justify-content-left" (ngSubmit)="newObjetive(formObjetive.value)">
+                  <form
+                    [formGroup]="formObjetive"
+                    class="row justify-content-left"
+                    (ngSubmit)="newObjetive(formObjetive.value)"
+                  >
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateBegin" class="font-title-general">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.date_begin}} *
+                        {{ parseT("date_begin") | translate }} *
                       </label>
-                      <input *ngIf="!bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
-                        placeholder="dd/mm/yyyy" />
-                      <input *ngIf="bedit" type="date" name="date_begin" class="form-control" [formControl]="formObjetive.controls['start_date']"
-                        value="formObjetive.start_date" />
+                      <input
+                        *ngIf="!bedit"
+                        type="date"
+                        name="date_begin"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['start_date']"
+                        placeholder="dd/mm/yyyy"
+                      />
+                      <input
+                        *ngIf="bedit"
+                        type="date"
+                        name="date_begin"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['start_date']"
+                        value="formObjetive.start_date"
+                      />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.date_end}} *
+                        {{ parseT("date_end") | translate }} *
                       </label>
-                      <input *ngIf="!bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']"
-                        placeholder="dd/mm/yyyy" />
-                      <input *ngIf="bedit" type="date" name="date_end" class="form-control" [formControl]="formObjetive.controls['end_date']" value="formObjetive.end_date"
+                      <input
+                        *ngIf="!bedit"
+                        type="date"
+                        name="date_end"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['end_date']"
+                        placeholder="dd/mm/yyyy"
+                      />
+                      <input
+                        *ngIf="bedit"
+                        type="date"
+                        name="date_end"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['end_date']"
+                        value="formObjetive.end_date"
                       />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
                         <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.porridge}} *
+                        {{ parseT("porridge") | translate }} *
                       </label>
-                      <input *ngIf="!bedit" type="number" class="form-control" [formControl]="formObjetive.controls['weight']" />
-                      <input *ngIf="bedit" type="text" class="form-control" [formControl]="formObjetive.controls['weight']" value="formObjetive.weight"
+                      <input
+                        *ngIf="!bedit"
+                        type="number"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['weight']"
+                      />
+                      <input
+                        *ngIf="bedit"
+                        type="text"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['weight']"
+                        value="formObjetive.weight"
                       />
                     </div>
                     <div class="col-md-12 col-12 top-containter">
                       <label for="celulaInput" class="font-title-general">
                         <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                        {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.description}}
+                        {{ parseT("description") | translate }}
                       </label>
-                      <textarea type="text" rows="2" maxlength="80" style="height: auto !important;" name="objective_request" class="form-control"
-                        [formControl]="formObjetive.controls['objetive_text']"></textarea>
+                      <textarea
+                        type="text"
+                        rows="2"
+                        maxlength="80"
+                        style="height: auto !important;"
+                        name="objective_request"
+                        class="form-control"
+                        [formControl]="formObjetive.controls['objetive_text']"
+                      ></textarea>
                     </div>
                     <div class="col-md-12 top-containter">
                       <div class="row justify-content-end">
                         <div class="col-lg-3 col-md-4 col-12">
-                          <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general">
-                            <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.save}}</button>
-                          <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                            <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.loading}}</button>
+                          <button
+                            type="submit"
+                            *ngIf="showSubmit"
+                            class="btn btn-success btn-block cursor-general"
+                          >
+                            <i class="fa fa-fw fa-floppy-o"></i
+                            >{{ parseT("save") | translate }}
+                          </button>
+                          <button
+                            type="button"
+                            *ngIf="!showSubmit"
+                            class="btn btn-warning btn-block"
+                          >
+                            <i class="fa fa-fw fa-spinner fa-spin"></i
+                            >{{ parseT("loading") | translate }}
+                          </button>
                         </div>
                         <div class="col-lg-3 col-md-4 col-12">
-                          <button class="btn btn-warning btn-block cursor-general" (click)="closeObjetive()" data-toggle="collapse" data-target="#collapseExample">
-                            <i class="fa fa-fw fa-window-close"></i>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.button_cancel}}</button>
+                          <button
+                            class="btn btn-warning btn-block cursor-general"
+                            (click)="closeObjetive()"
+                            data-toggle="collapse"
+                            data-target="#collapseExample"
+                          >
+                            <i class="fa fa-fw fa-window-close"></i
+                            >{{ parseT("button_cancel") | translate }}
+                          </button>
                         </div>
                       </div>
                     </div>
                   </form>
                 </div>
-                <div class="row justify-content-end" style="margin-top: 20px" *ngIf="flag_complete">
+                <div
+                  class="row justify-content-end"
+                  style="margin-top: 20px"
+                  *ngIf="flag_complete"
+                >
                   <div class="col-lg-4 col-md-6 col-12">
-                    <button type="button" *ngIf="showCharge" class="btn btn-success btn-block cursor-general" (click)="evaluationComplete()">
-                      <i class="fa fa-fw fa-flag-checkered"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.finish}}</button>
-                    <button type="button" *ngIf="!showCharge" class="btn btn-warning btn-block">
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit_evaluation_objetives.loading}}</button>
+                    <button
+                      type="button"
+                      *ngIf="showCharge"
+                      class="btn btn-success btn-block cursor-general"
+                      (click)="evaluationComplete()"
+                    >
+                      <i class="fa fa-fw fa-flag-checkered"></i>&nbsp;&nbsp;{{
+                        parseT("finish") | translate
+                      }}
+                    </button>
+                    <button
+                      type="button"
+                      *ngIf="!showCharge"
+                      class="btn btn-warning btn-block"
+                    >
+                      <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{
+                        parseT("loading") | translate
+                      }}
+                    </button>
                   </div>
                 </div>
               </div>

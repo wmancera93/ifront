@@ -13,24 +13,24 @@ import { TranslateService } from '../../../../services/common/translate/translat
 })
 export class ReportTrainingComponent implements OnInit {
 
-  public collapseFilterTraining: boolean = false;
-  public showDataTableTraining: boolean = true;
-  public is_collapse_report_training: boolean = false
-  public showExcel: boolean = true;
-  public showPdf: boolean = false;
+  public collapseFilterTraining = false;
+  public showDataTableTraining = true;
+  public is_collapse_report_training = false;
+  public showExcel = true;
+  public showPdf = false;
   public nameReport: string;
 
   public report_list_training = null;
   public userId: User = null;
 
   public personal_number = '';
-  public code_training: string = '-1';
-  public status_id: number = -1;
-  public date_begin: string = '';
-  public date_end: string = '';
-  public countAfter: number = 0;
+  public code_training = '-1';
+  public status_id = -1;
+  public date_begin = '';
+  public date_end = '';
+  public countAfter = 0;
   public translate: Translate = null;
-  title
+  title;
 
   public objectGeneralTraining: any[] = [];
   public objectReportTraining: EventEmitter<any> = new EventEmitter();
@@ -46,7 +46,7 @@ export class ReportTrainingComponent implements OnInit {
       }
       if (data.action_method === 'showConvenio' && this.countAfter === 0) {
         this.training_report_list.getTrainingEventsByID(data.id).subscribe((data: any) => {
-          let viewAgreement = data.data.pdf.url;
+          const viewAgreement = data.data.pdf.url;
           window.open(viewAgreement);
         });
       }
@@ -72,10 +72,10 @@ export class ReportTrainingComponent implements OnInit {
   }
 
   getObjectPrint(param) {
-    let personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
-    let code_training_send = this.code_training === '' ? '-1' : this.code_training;
-    let date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
-    let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
+    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const code_training_send = this.code_training === '' ? '-1' : this.code_training;
+    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
+    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
 
     if (param === 'general') {
       this.training_report_list.getTrainingAgreementsReport(personal_number_send, code_training_send, this.status_id, date_begin_send, date_end_send)
