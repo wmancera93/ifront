@@ -9,14 +9,14 @@ import { TranslateService } from '../../../services/common/translate/translate.s
   styleUrls: ['./file-upload.component.css']
 })
 export class FileUploadComponent implements OnInit {
-  @Input() nameFile: string = '';
-  @Input() extensions?: string = '';
+  @Input() nameFile = '';
+  @Input() extensions = '';
   @Input() drageable = false;
-  public progressBar: string = '0%';
+  public progressBar = '0%';
   public dragHover = false;
-  public textFileUpload: string = '';
+  public textFileUpload = '';
   public translate: Translate = null;
-  public acceptExtensions: string = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
+  public acceptExtensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
   constructor(public fileUploadService: FileUploadService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
@@ -49,14 +49,14 @@ export class FileUploadComponent implements OnInit {
 
   fileEvent(e) {
     console.log(e);
-    var file = e.currentTarget.value;
-    var fileName = file.split("\\")[file.split("\\").length - 1];
+    const file = e.currentTarget.value;
+    const fileName = file.split('\\')[file.split('\\').length - 1];
     this.textFileUpload = fileName.toString();
     if (this.textFileUpload === fileName.toString()) {
       for (let i = 0; i < 101; i++) {
         setTimeout(() => {
           this.progressBar = i.toString() + '%';
-        }, 500)
+        }, 500);
       }
     }
     if (this.textFileUpload === '') {

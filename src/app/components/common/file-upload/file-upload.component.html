@@ -1,23 +1,51 @@
-<div class="row" (drop)="onDrop($event)" (dragover)="onDragOver($event)" (dragenter)="dragHover=true"
-  (dragleave)="dragHover=false">
-  <div class="col-12"
-    [ngClass]="{'p-5 text-center border rounded border-dotted-2 bg-drag': drageable, 'is-active': dragHover }">
-    <div [ngClass]="{'file-upload btn btn-primary': !drageable }" (click)="clickFile()">
-      <div *ngIf="textFileUpload ==''">
-        <i class="fa fa-cloud-upload" [ngClass]="{'d-block fa-5x': drageable }" aria-hidden="true"></i>
-        {{translate.app.frontEnd.components.common.file_upload.upload}}
+<div
+  class="row"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)"
+  (dragenter)="dragHover = true"
+  (dragleave)="dragHover = false"
+>
+  <div
+    class="col-12"
+    [ngClass]="{
+      'p-5 text-center border rounded border-dotted-2 bg-drag': drageable,
+      'is-active': dragHover
+    }"
+  >
+    <div
+      [ngClass]="{ 'file-upload btn btn-primary': !drageable }"
+      (click)="clickFile()"
+    >
+      <div *ngIf="textFileUpload == ''">
+        <i
+          class="fa fa-cloud-upload"
+          [ngClass]="{ 'd-block fa-5x': drageable }"
+          aria-hidden="true"
+        ></i>
+        {{
+          translate.app.frontEnd.components.common.file_upload.upload
+        }}
       </div>
       <div class="text-truncate" *ngIf="textFileUpload != ''">
-        {{textFileUpload}}
+        {{ textFileUpload }}
       </div>
     </div>
-    <input [attr.id]="nameFile" type="file" class="form-control-file" [attr.accept]="acceptExtensions"
-      (change)="fileEvent($event)">
+    <input
+      [attr.id]="nameFile"
+      type="file"
+      class="form-control-file"
+      [attr.accept]="acceptExtensions"
+      (change)="fileEvent($event)"
+    />
   </div>
   <div class="col-12">
     <div class="progress top-form" *ngIf="progressBar != '0%'">
-      <div class="bginfo progress-bar progress-bar-striped progress-bar-animated" [ngStyle]="{'width':progressBar }">
-        {{progressBar}}</div>
+      <div
+        class="bginfo progress-bar progress-bar-striped progress-bar-animated"
+        [ngStyle]="{ width: progressBar }"
+      >
+        {{ progressBar }}
+      </div>
     </div>
   </div>
 </div>

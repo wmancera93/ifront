@@ -17,27 +17,27 @@ import { TranslateService } from '../../../services/common/translate/translate.s
   styleUrls: ['./comment-article.component.css']
 })
 export class CommentArticleComponent implements OnInit {
-  @Input('nameModal') nameModal: any
-  public targetModal: string = '';
-  public btnModal: string = '';
-  public nameThisModal: string = '';
+  @Input('nameModal') nameModal: any;
+  public targetModal = '';
+  public btnModal = '';
+  public nameThisModal = '';
   public translate: Translate = null;
   public infoArticle: PublicArticle = null;
 
   public commentsList: PublicArticle;
   public newComment: PublicArticle;
-  public viewModal: boolean = true;
-  public showSubmit: boolean = true;
+  public viewModal = true;
+  public showSubmit = true;
   public idArticle: number = null;
   public numberComments: number = null;
   public comment: string;
   public idComment: number;
   private alertWarning: Alerts[];
-  public is_collapse: boolean = false;
-  public flagEditComment: boolean = false;
+  public is_collapse = false;
+  public flagEditComment = false;
   public commentEdit: string;
-  public modalName: string = "";
-  public flagRefreshPublication: boolean = false;
+  public modalName = '';
+  public flagRefreshPublication = false;
 
 
   constructor(public billboardSharedService: BillboardService,
@@ -48,20 +48,20 @@ export class CommentArticleComponent implements OnInit {
     this.translate = this.translateService.getTranslate();
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if(data ==='continueExit'){
-        this.getDetailArticle()
+      if (data === 'continueExit') {
+        this.getDetailArticle();
       }
-    })
+    });
 
     this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
       this.idArticle = data.objectPublication.id;
       this.numberComments = data.objectPublication.total_comments;
       this.modalName = data.modal;
       this.getDetailArticle(data.modal);
-    })
+    });
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data == "deleteComment") {
+      if (data == 'deleteComment') {
 
         this.myPublicationService.deleteComment(this.idArticle, this.idComment)
           .subscribe((data: any) => {
@@ -70,9 +70,9 @@ export class CommentArticleComponent implements OnInit {
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             this.getDetailArticle();
 
-          })
+          });
       }
-    })
+    });
 
   }
 
@@ -81,7 +81,7 @@ export class CommentArticleComponent implements OnInit {
       this.targetModal = '#' + data;
       this.btnModal = 'btn-' + data;
       this.nameThisModal = data;
-    })
+    });
 
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
@@ -90,35 +90,34 @@ export class CommentArticleComponent implements OnInit {
 
 
   getDetailArticle(modal?: string) {
-    
+
     if (modal !== undefined) {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
-        debugger
+        debugger;
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
         if (document.getElementById(modal).className !== 'modal show') {
           document.getElementById('btn-' + modal).click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
-      })
-    }
-    else {
+      });
+    } else {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
         if (document.getElementById(this.modalName).className !== 'modal show') {
           document.getElementById('btn-' + this.modalName).click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
-      })
+      });
     }
 
   }
 
   sendComment() {
-    debugger
+    debugger;
     this.showSubmit = false;
     if (this.flagEditComment == true) {
       this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
@@ -131,15 +130,14 @@ export class CommentArticleComponent implements OnInit {
 
         });
       this.flagEditComment = false;
-    }
-    else {
+    } else {
       this.myPublicationService.postComment(this.idArticle, this.comment)
         .subscribe(
           (data: any) => {
             this.showSubmit = true;
             this.comment = '';
             this.numberComments = data.total_comments;
-            debugger
+            debugger;
             (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
             const alertWarning: Alerts[] = [{
               type: 'success',
@@ -165,7 +163,7 @@ export class CommentArticleComponent implements OnInit {
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
-        )
+        );
     }
   }
 

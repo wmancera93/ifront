@@ -6,7 +6,10 @@
     >
       <div class="col-12">
         <div class="row">
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('name')">
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('name')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               Nombre *
@@ -22,7 +25,9 @@
             *ngIf="formState('type_identification')"
           >
             <label class="titleColor">
-              <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+              <i
+                class="fa fa-fw fa-address-card-o text-primary-hr"
+              ></i>
               Tipo de documento *
             </label>
             <select
@@ -52,12 +57,18 @@
               [formControl]="forms.number_identification"
             />
           </div>
-          <div class="col-12 top-containter" *ngIf="formState('benefist')">
+          <div
+            class="col-12 top-containter"
+            *ngIf="formState('benefist')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
               Beneficiario *
             </label>
-            <select class="form-control" [formControl]="forms.benefist">
+            <select
+              class="form-control"
+              [formControl]="forms.benefist"
+            >
               <option value="">Seleccione</option>
               <option
                 *ngFor="let benefist of benefists_list"
@@ -73,7 +84,9 @@
                 <div class="row">
                   <div class="col-12 top-containter">
                     <label class="titleColor">
-                      <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+                      <i
+                        class="fa fa-fw fa-mortar-board text-primary-hr"
+                      ></i>
                       Nombre del Acompañante *
                     </label>
                     <input
@@ -84,16 +97,22 @@
                   </div>
                   <div class="col-12 col-md-6 top-containter">
                     <label class="titleColor">
-                      <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+                      <i
+                        class="fa fa-fw fa-address-card-o text-primary-hr"
+                      ></i>
                       Tipo de documento del Acompañante *
                     </label>
                     <select
                       class="form-control"
-                      [formControl]="forms.type_identification_accompanying"
+                      [formControl]="
+                        forms.type_identification_accompanying
+                      "
                     >
                       <option value="">Seleccione</option>
                       <option
-                        *ngFor="let identificationList of document_types_list"
+                        *ngFor="
+                          let identificationList of document_types_list
+                        "
                         [value]="identificationList.id"
                       >
                         {{ identificationList.name }}
@@ -102,13 +121,17 @@
                   </div>
                   <div class="col-12 col-md-6 top-containter">
                     <label class="titleColor">
-                      <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                      <i
+                        class="fa fa-fw fa-hashtag text-primary-hr"
+                      ></i>
                       Numero de documento del Acompañante *
                     </label>
                     <input
                       type="number"
                       class="form-control"
-                      [formControl]="forms.number_identification_accompanying"
+                      [formControl]="
+                        forms.number_identification_accompanying
+                      "
                     />
                   </div>
                 </div>
@@ -139,7 +162,10 @@
             </label>
             <select class="form-control" [formControl]="forms.origin">
               <option value="">Seleccione</option>
-              <option *ngFor="let origin of origins_list" [value]="origin.id">
+              <option
+                *ngFor="let origin of origins_list"
+                [value]="origin.id"
+              >
                 {{ origin.name }}
               </option>
             </select>
@@ -152,7 +178,10 @@
               <i class="fa fa-fw fa-user-o text-primary-hr"></i>
               Destino *
             </label>
-            <select class="form-control" [formControl]="forms.destiny">
+            <select
+              class="form-control"
+              [formControl]="forms.destiny"
+            >
               <option value="">Seleccione</option>
               <option
                 *ngFor="let destiny of destinations_list"
@@ -296,7 +325,8 @@
             >
               <i class="fa fa-fw fa-floppy-o"></i
               >{{
-                translate.app.frontEnd.pages.requests_rh.forms_requests.save
+                translate.app.frontEnd.pages.requests_rh
+                  .forms_requests.save
               }}
             </button>
             <button
@@ -306,7 +336,8 @@
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
               >{{
-                translate.app.frontEnd.pages.requests_rh.forms_requests.loading
+                translate.app.frontEnd.pages.requests_rh
+                  .forms_requests.loading
               }}
             </button>
           </div>

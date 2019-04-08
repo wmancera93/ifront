@@ -18,7 +18,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
   public questions: Questions[] = [];
   public questionsChildren: Questions[] = [];
   public sections: Sections[] = [];
-  public showSubmit: boolean = true;
+  public showSubmit = true;
   public idQuestion: number;
   public radioData: any;
   public answerEvalForm: any;
@@ -27,15 +27,15 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
   public dataQuestions: ResponseEvaluation[] = [];
   public object: ResponseEvaluation[] = [];
   public idEvaluation: number;
-  public refreshData: boolean = false;
+  public refreshData = false;
   public multipleAnswer: MultipleAnswer[] = [];
   public objectBySection: any[] = [];
-  public totalQuestionsBySection: number = 0;
-  public totalQuestions: number = 0;
-  public countAfter: number = 0;
+  public totalQuestionsBySection = 0;
+  public totalQuestions = 0;
+  public countAfter = 0;
   public translate: Translate = null;
-  public addCommentary:string;
-  public writeAnswer:string;
+  public addCommentary: string;
+  public writeAnswer: string;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
@@ -43,16 +43,16 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     public alert: AlertsService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-    this.addCommentary=this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_answer;
-    this.writeAnswer=this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_commentary;
+    this.addCommentary = this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_answer;
+    this.writeAnswer = this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_commentary;
 
-    document.getElementById("bodyGeneral").removeAttribute('style');
+    document.getElementById('bodyGeneral').removeAttribute('style');
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSendEvaluation') {
-        document.getElementById("btn_fillEvaluation").click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('btn_fillEvaluation').click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
-    })
+    });
     this.evaluationSharedService.getInfoEvaluation().subscribe((info: number) => {
       if (this.countAfter === 0) {
         this.object = [];
@@ -63,7 +63,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
           this.questions = list.data.questions_to_json;
         });
         document.getElementById('btn_fillEvaluation').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
 
     });
@@ -84,8 +84,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
         this.totalQuestionsBySection = element.question_childrens_to_json.length;
         this.totalQuestions = this.totalQuestions + this.totalQuestionsBySection;
       });
-    }
-    else {
+    } else {
       this.totalQuestions = this.infoEvaluation.questions_to_json.length;
     }
 
@@ -116,13 +115,13 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
           }];
         (<HTMLInputElement>document.getElementsByClassName('buttonCloseEvaluation')[0]).click();
         this.alert.setAlert(alertWarning[0]);
-      })
+      });
 
   }
 
   changeAnswer(idAnswer: any, idQuestion: any, type_question: string, parent_section: number, section?: Sections) {
     switch (type_question) {
-      case "unique":
+      case 'unique':
         if (this.object.filter(data => data.question_id === idQuestion).length > 0) {
 
           this.object.splice(this.object.findIndex(obj => obj.question_id === idQuestion), 1);
@@ -138,17 +137,17 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
         });
 
         break;
-      case "multiple":
-        let _question = this.object.filter(data => data.question_id === idQuestion);
+      case 'multiple':
+        const _question = this.object.filter(data => data.question_id === idQuestion);
 
         if (_question.length > 0) {
 
-          let _answer = _question[0].answers.filter((data: any) => data.answer_id === idAnswer);
+          const _answer = _question[0].answers.filter((data: any) => data.answer_id === idAnswer);
 
           if (_answer.length > 0) {
             _question[0].answers.splice(_question[0].answers.findIndex(obj => obj.answer_id === idAnswer), 1);
             if (_question[0].answers.length === 0) {
-              this.object.splice(this.object.findIndex(obj => obj.question_id === idQuestion), 1)
+              this.object.splice(this.object.findIndex(obj => obj.question_id === idQuestion), 1);
             }
           } else {
             _question[0].answers.push({ answer_id: idAnswer });
@@ -163,7 +162,7 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
             parent_id: parent_section,
             evaluation_id: this.idEvaluation,
             question_type: type_question
-          })
+          });
         }
 
         break;
@@ -178,31 +177,29 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     if (this.object.filter(data => data.question_id === question_id).length > 0) {
       this.object.filter(data => data.question_id === question_id)[0].comments = (<HTMLInputElement>document.getElementById(question_id + 'commentAnswer')).value;
 
-    }
-    else {
+    } else {
       this.object.push({
         section_id: section == null ? null : section.id,
         question_id: question_id,
         comments: (<HTMLInputElement>document.getElementById(question_id + 'commentAnswer')).value,
         parent_id: parent_section,
         evaluation_id: this.idEvaluation,
-        question_type: ""
-      })
+        question_type: ''
+      });
     }
   }
   detectResponse(question_id: any, parent_section: number, section?: Sections) {
     if (this.object.filter(data => data.question_id === question_id).length > 0) {
       this.object.filter(data => data.question_id === question_id)[0].comments = (<HTMLInputElement>document.getElementById(question_id + 'commentAnswer')).value;
-    }
-    else {
+    } else {
       this.object.push({
         section_id: section == null ? null : section.id,
         question_id: question_id,
         openAnswer: (<HTMLInputElement>document.getElementById(question_id + 'openResponse')).value,
-        comments: "",
+        comments: '',
         parent_id: parent_section,
         evaluation_id: this.idEvaluation,
-        question_type: "open"
+        question_type: 'open'
       });
     }
   }

@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-circle-o-notch"></i>
-          {{ parseT("title_ppprovals_managed") | translate }}
+          {{ parseT('title_ppprovals_managed') | translate }}
         </div>
       </div>
     </div>
@@ -19,9 +21,12 @@
         class="row justify-content-center top-general-p"
         *ngIf="managed.length == 0"
       >
-        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+        <div
+          class="col-lg-8 col-12 text-center"
+          style="min-height: 370px;"
+        >
           <div class="alert alert-warning" role="alert">
-            {{ parseT("message_approvals") | translate }}
+            {{ parseT('message_approvals') | translate }}
           </div>
         </div>
       </div>
@@ -30,50 +35,56 @@
         *ngIf="managed.length > 0"
       >
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let managed of managed">
+          <div
+            class="widget bg-white-1x"
+            *ngFor="let managed of managed"
+          >
             <div class="row align-items-center">
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    {{ parseT("text_ticket") | translate }} #{{
+                    {{ parseT('text_ticket') | translate }} #{{
                       managed.ticket
                     }}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
-                  {{ parseT("text_created_on") | translate }}
-                  {{ parseT("created_date") | translate }}
+                  {{ parseT('text_created_on') | translate }}
+                  {{ parseT('created_date') | translate }}
                 </p>
               </div>
               <div
                 class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p"
               >
                 <h3 class="font-color-default">
-                  {{ parseT("level_answer_description") | translate }}
+                  {{ parseT('level_answer_description') | translate }}
                 </h3>
               </div>
               <div
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{ parseT("level_answer_description") | translate }}
+                  {{ parseT('level_answer_description') | translate }}
                 </p>
                 <p class="">
-                  <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
-                  {{ parseT("level_answer") | translate }}
+                  <i
+                    class="fa fa-user fa-check-square-o text-primary-hr"
+                  ></i>
+                  {{ parseT('level_answer') | translate }}
                 </p>
               </div>
               <div
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{ parseT("text_Applicant") | translate }}
+                  {{ parseT('text_Applicant') | translate }}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
                   {{
-                    parseT("employee_applicant_to_json.short_name") | translate
+                    parseT('employee_applicant_to_json.short_name')
+                      | translate
                   }}
                 </p>
               </div>
@@ -81,42 +92,46 @@
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{ parseT("text_status") | translate }}
+                  {{ parseT('text_status') | translate }}
                 </p>
                 <h6
                   *ngIf="
-                    managed.status == (parseT('status_approver') | translate)
+                    managed.status ==
+                    (parseT('status_approver') | translate)
                   "
                 >
                   <span class="badge badge-primary">
-                    {{ parseT("status") | translate }}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
                 <h6
                   *ngIf="
-                    managed.status == (parseT('status_cancelled') | translate)
+                    managed.status ==
+                    (parseT('status_cancelled') | translate)
                   "
                 >
                   <span class="badge badge-danger">
-                    {{ parseT("status") | translate }}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
                 <h6
                   *ngIf="
-                    managed.status == (parseT('status_in_Process') | translate)
+                    managed.status ==
+                    (parseT('status_in_Process') | translate)
                   "
                 >
                   <span class="badge badge-success">
-                    {{ parseT("status") | translate }}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
                 <h6
                   *ngIf="
-                    managed.status == (parseT('status_pending') | translate)
+                    managed.status ==
+                    (parseT('status_pending') | translate)
                   "
                 >
                   <span class="badge badge-default">
-                    {{ parseT("status") | translate }}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
               </div>
@@ -130,7 +145,7 @@
                   style="font-size: 2em; color:#23c6c8 "
                 ></i>
                 <div class="col-12">
-                  {{ parseT("icon_watch") | translate }}
+                  {{ parseT('icon_watch') | translate }}
                 </div>
               </div>
             </div>

@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-sitemap" *ngIf="translate !== null"></i>
-          {{ parseT("title_organization_chart") | translate }}
+          {{ parseT('title_organization_chart') | translate }}
         </div>
       </div>
     </div>
@@ -35,7 +37,9 @@
                   class="col-xl-10 col-10 align-items-left searchInput"
                   *ngIf="activateSearch"
                 >
-                  <div class="workTeam-search animate-bounce  bounceInLeft">
+                  <div
+                    class="workTeam-search animate-bounce  bounceInLeft"
+                  >
                     <form name="searchAutoComplete">
                       <p>
                         <input
@@ -90,15 +94,15 @@
                   <div class="row">
                     <div class="col-4">
                       <i class="fa fa-square iconFirstLevel"> </i>
-                      {{ parseT("text_superior") | translate }}
+                      {{ parseT('text_superior') | translate }}
                     </div>
                     <div class="col-4">
                       <i class="fa fa-square iconSecondLevel"></i>
-                      {{ parseT("text_my_position") | translate }}
+                      {{ parseT('text_my_position') | translate }}
                     </div>
                     <div class="col-4">
                       <i class="fa fa-square iconThirdLevel"></i>
-                      {{ parseT("text_subordinates") | translate }}
+                      {{ parseT('text_subordinates') | translate }}
                     </div>
                   </div>
                 </div>
@@ -211,8 +215,14 @@
       </div>
       <!-- third level -->
       <div *ngIf="topEmployee">
-        <div class="row justify-content-center" *ngIf="!flagActivatethirdLevel">
-          <div class="row justify-content-center" *ngIf="activeArrowLeft">
+        <div
+          class="row justify-content-center"
+          *ngIf="!flagActivatethirdLevel"
+        >
+          <div
+            class="row justify-content-center"
+            *ngIf="activeArrowLeft"
+          >
             <div class="col-1">
               <div
                 class="navigateButton animated infinite flash font-icon"
@@ -227,10 +237,15 @@
           </div>
           <div
             class="col-10 col-xl-2 cardEmployee btn-widget position"
-            *ngFor="let employee of topEmployee.work_team[0].work_team"
+            *ngFor="
+              let employee of topEmployee.work_team[0].work_team
+            "
           >
             <div class="row">
-              <div class="col-12" (click)="showInfoEmployee(employee)">
+              <div
+                class="col-12"
+                (click)="showInfoEmployee(employee)"
+              >
                 <div class="row">
                   <div class="col-12 thirdLevel"></div>
                 </div>
@@ -276,13 +291,19 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-start" *ngIf="activeArrowRight">
+          <div
+            class="row justify-content-start"
+            *ngIf="activeArrowRight"
+          >
             <div class="col-1 ajustArrow">
               <div
                 class="navigateButton animated infinite flash font-icon"
                 (click)="goToNextPage(page)"
               >
-                <i class="fa fa-chevron-right " aria-hidden="true"></i>
+                <i
+                  class="fa fa-chevron-right "
+                  aria-hidden="true"
+                ></i>
               </div>
             </div>
           </div>
@@ -313,7 +334,7 @@
                   (click)="upLevelTeam()"
                 >
                   <strong>
-                    {{ parseT("text_up_position") | translate }}
+                    {{ parseT('text_up_position') | translate }}
                   </strong>
                 </div>
               </div>
@@ -324,4 +345,7 @@
     </div>
   </div>
 </div>
-<app-employee-info *ngIf="!token" [nameModal]="name"></app-employee-info>
+<app-employee-info
+  *ngIf="!token"
+  [nameModal]="name"
+></app-employee-info>

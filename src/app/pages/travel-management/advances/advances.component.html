@@ -3,14 +3,23 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 col-md-8 col-7 text-left title">
         <i class="fa fa-money"></i>
-        {{translate.app.frontEnd.pages.travel_management.advances.tittle}}
+        {{
+          translate.app.frontEnd.pages.travel_management.advances
+            .tittle
+        }}
       </div>
-      <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
+      <div
+        class="col-xl-2 col-md-4 col-5  text-center cursor-general"
+        style="padding-right: 0px"
+      >
         <div class="buttonBack img-zoom" (click)="returnBackPage()">
           <div class="padding-back">
             <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
             <span>
-              {{translate.app.frontEnd.pages.travel_management.advances.back}}
+              {{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.back
+              }}
             </span>
           </div>
         </div>
@@ -24,9 +33,17 @@
       <div class="col-lg-4 col-12">
         <div class="row" style="margin-top: 10px">
           <div class="col-12">
-            <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newAdvanceTravel()">
+            <button
+              id="btn-travelManagement"
+              type="button"
+              class="btn tabDate btn-block cursor-general"
+              (click)="newAdvanceTravel()"
+            >
               <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-              {{translate.app.frontEnd.pages.travel_management.advances.btn_new}}
+              {{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.btn_new
+              }}
             </button>
           </div>
         </div>
@@ -38,42 +55,90 @@
       <div class="row top-containter">
         <div class="col-xl-4 col-lg-4 col-12 text-left">
           <b>
-            {{translate.app.frontEnd.pages.travel_management.advances.query_filters}}
+            {{
+              translate.app.frontEnd.pages.travel_management.advances
+                .query_filters
+            }}
           </b>
-          <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
-            aria-expanded="false" (click)="collapse(true)"></i>
-          <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
-            aria-expanded="false" (click)="collapse(false)"></i>
+          <i
+            *ngIf="!is_collapse"
+            class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
+            data-toggle="collapse"
+            data-target="#collapseFilter"
+            aria-expanded="false"
+            (click)="collapse(true)"
+          ></i>
+          <i
+            *ngIf="is_collapse"
+            class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
+            data-toggle="collapse"
+            data-target="#collapseFilter"
+            aria-expanded="false"
+            (click)="collapse(false)"
+          ></i>
         </div>
       </div>
     </div>
 
-    <div class="collapse top-general-p border-botton-general" id="collapseFilter">
+    <div
+      class="collapse top-general-p border-botton-general"
+      id="collapseFilter"
+    >
       <div class="row align-items-center">
         <div class="col-12" style="padding-bottom: 15px">
           <div class="row align-items-center">
             <div class="col-lg-3 col-md-6 col-12">
-              <label> {{translate.app.frontEnd.pages.travel_management.advances.btn_hr}}</label>
+              <label>
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.btn_hr
+                }}</label
+              >
               <div class="row">
                 <div class="col-9">
-                  <input type="text" [(ngModel)]="codIHR" class="form-control">
+                  <input
+                    type="text"
+                    [(ngModel)]="codIHR"
+                    class="form-control"
+                  />
                 </div>
                 <div class="col-3">
-                  <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codIHR')">
-                    <i class="fa fa-search" style="margin-left: -5px;"></i>
+                  <button
+                    type="button"
+                    class="btn btn-block cursor-general tabDate"
+                    (click)="filter('codIHR')"
+                  >
+                    <i
+                      class="fa fa-search"
+                      style="margin-left: -5px;"
+                    ></i>
                   </button>
                 </div>
               </div>
             </div>
             <div class="col-lg-3 col-md-6 col-12">
-              <label>{{translate.app.frontEnd.pages.travel_management.advances.btn_sap}}</label>
+              <label>{{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.btn_sap
+              }}</label>
               <div class="row">
                 <div class="col-9">
-                  <input type="text" [(ngModel)]="codSAP" class="form-control">
+                  <input
+                    type="text"
+                    [(ngModel)]="codSAP"
+                    class="form-control"
+                  />
                 </div>
                 <div class="col-3">
-                  <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codSAP')">
-                    <i class="fa fa-search" style="margin-left: -5px;"></i>
+                  <button
+                    type="button"
+                    class="btn btn-block cursor-general tabDate"
+                    (click)="filter('codSAP')"
+                  >
+                    <i
+                      class="fa fa-search"
+                      style="margin-left: -5px;"
+                    ></i>
                   </button>
                 </div>
               </div>
@@ -81,50 +146,131 @@
             <div class="col-lg-6 col-md-12 col-12">
               <div class="row">
                 <div class="col-5">
-                  <label>{{translate.app.frontEnd.pages.travel_management.advances.date_begin}}</label>
-                  <input type="date" [(ngModel)]="datesBegin" class="form-control">
+                  <label>{{
+                    translate.app.frontEnd.pages.travel_management
+                      .advances.date_begin
+                  }}</label>
+                  <input
+                    type="date"
+                    [(ngModel)]="datesBegin"
+                    class="form-control"
+                  />
                 </div>
                 <div class="col-5">
-                  <label>{{translate.app.frontEnd.pages.travel_management.advances.date_end}}</label>
-                  <input type="date" [(ngModel)]="datesEnd" class="form-control">
+                  <label>{{
+                    translate.app.frontEnd.pages.travel_management
+                      .advances.date_end
+                  }}</label>
+                  <input
+                    type="date"
+                    [(ngModel)]="datesEnd"
+                    class="form-control"
+                  />
                 </div>
                 <div class="col-2 align-self-end">
-                  <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('dates')">
-                    <i class="fa fa-search" style="margin-left: -5px;"></i>
+                  <button
+                    type="button"
+                    class="btn btn-block cursor-general tabDate"
+                    (click)="filter('dates')"
+                  >
+                    <i
+                      class="fa fa-search"
+                      style="margin-left: -5px;"
+                    ></i>
                   </button>
                 </div>
               </div>
             </div>
 
             <div class="col-lg-3 col-md-4 col-12">
-              <label>{{translate.app.frontEnd.pages.travel_management.advances.status}}</label>
-              <select type="date" [(ngModel)]="status" class="form-control" (change)="filter('status')">
-                <option value="">{{translate.app.frontEnd.pages.travel_management.advances.all_status}}</option>
-                <option value="ReqReg">{{translate.app.frontEnd.pages.travel_management.advances.resgistered}}</option>
-                <option value="ReqPro">{{translate.app.frontEnd.pages.travel_management.advances.process}}</option>
-                <option value="ReqApp">{{translate.app.frontEnd.pages.travel_management.advances.approved}}</option>
-                <option value="ReqCan">{{translate.app.frontEnd.pages.travel_management.advances.cancelled}}</option>
-                <option value="ReqWai">{{translate.app.frontEnd.pages.travel_management.advances.hold_on}}</option>
+              <label>{{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.status
+              }}</label>
+              <select
+                type="date"
+                [(ngModel)]="status"
+                class="form-control"
+                (change)="filter('status')"
+              >
+                <option value="">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.all_status
+                }}</option>
+                <option value="ReqReg">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.resgistered
+                }}</option>
+                <option value="ReqPro">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.process
+                }}</option>
+                <option value="ReqApp">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.approved
+                }}</option>
+                <option value="ReqCan">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.cancelled
+                }}</option>
+                <option value="ReqWai">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.hold_on
+                }}</option>
               </select>
             </div>
             <div class="col-lg-3 col-md-4 col-12">
-              <label>{{translate.app.frontEnd.pages.travel_management.advances.status_settle}}</label>
-              <select type="date" [(ngModel)]="statusLiquid" class="form-control" (change)="filter('statusLiquid')">
-                <option value="">{{translate.app.frontEnd.pages.travel_management.advances.all_status}}</option>
-                <option value="LiqPen">{{translate.app.frontEnd.pages.travel_management.advances.to_settle}}</option>
-                <option value="LiqApp">{{translate.app.frontEnd.pages.travel_management.advances.settlement}}</option>
-                <option value="LiqAnn">{{translate.app.frontEnd.pages.travel_management.advances.cancelled}}</option>
+              <label>{{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.status_settle
+              }}</label>
+              <select
+                type="date"
+                [(ngModel)]="statusLiquid"
+                class="form-control"
+                (change)="filter('statusLiquid')"
+              >
+                <option value="">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.all_status
+                }}</option>
+                <option value="LiqPen">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.to_settle
+                }}</option>
+                <option value="LiqApp">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.settlement
+                }}</option>
+                <option value="LiqAnn">{{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.cancelled
+                }}</option>
               </select>
             </div>
             <div class="col-lg-3 col-md-4 col-12">
-              <label>{{translate.app.frontEnd.pages.travel_management.advances.employee}}</label>
+              <label>{{
+                translate.app.frontEnd.pages.travel_management
+                  .advances.employee
+              }}</label>
               <div class="row">
                 <div class="col-9">
-                  <input type="text" [(ngModel)]="codEmployee" class="form-control">
+                  <input
+                    type="text"
+                    [(ngModel)]="codEmployee"
+                    class="form-control"
+                  />
                 </div>
                 <div class="col-3">
-                  <button type="button" class="btn btn-block cursor-general tabDate" (click)="filter('codEmployee')">
-                    <i class="fa fa-search" style="margin-left: -5px;"></i>
+                  <button
+                    type="button"
+                    class="btn btn-block cursor-general tabDate"
+                    (click)="filter('codEmployee')"
+                  >
+                    <i
+                      class="fa fa-search"
+                      style="margin-left: -5px;"
+                    ></i>
                   </button>
                 </div>
               </div>
@@ -138,42 +284,98 @@
     <div class="row top-containter" style="margin-top: 20px">
       <div class="col-12 text-left">
         <form>
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="advance_request" checked (click)="checkAdvance('advance_request')"
+          <input
+            *ngIf="userAuthenticated.employee.trip_by_third"
+            type="radio"
+            name="travel"
+            id="advance_request"
+            checked
+            (click)="checkAdvance('advance_request')"
           />
           <b>
-            {{translate.app.frontEnd.pages.travel_management.advances.select_my}}
+            {{
+              translate.app.frontEnd.pages.travel_management.advances
+                .select_my
+            }}
           </b>
           &nbsp;&nbsp;
-          <input *ngIf="userAuthenticated.employee.trip_by_third" type="radio" name="travel" id="my_advance_request" (click)="checkAdvance('my_advance_request')"
+          <input
+            *ngIf="userAuthenticated.employee.trip_by_third"
+            type="radio"
+            name="travel"
+            id="my_advance_request"
+            (click)="checkAdvance('my_advance_request')"
           />
           <b *ngIf="userAuthenticated.employee.trip_by_third">
-            {{translate.app.frontEnd.pages.travel_management.advances.select_third}}
+            {{
+              translate.app.frontEnd.pages.travel_management.advances
+                .select_third
+            }}
           </b>
         </form>
       </div>
     </div>
     <div class="row justify-content-center top-containter">
       <div class="col-12">
-        <div class="widget bg-white-1x" *ngFor="let advance of advancesItems;">
+        <div
+          class="widget bg-white-1x"
+          *ngFor="let advance of advancesItems"
+        >
           <div class="row align-items-center">
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
-                <span *ngIf="advance.ticket_cli !== null" class="badge badge-warning">
-                  {{translate.app.frontEnd.pages.travel_management.advances.travel_sap}} {{advance.ticket_cli}}
+                <span
+                  *ngIf="advance.ticket_cli !== null"
+                  class="badge badge-warning"
+                >
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .advances.travel_sap
+                  }}
+                  {{ advance.ticket_cli }}
                 </span>
-                  <span *ngIf="advance.messages_server !== null &&  advance.synch_type_server !== 'S'">
-                    <h6 class="wg-hover-general" (click)="messages_error_advances(advance.id)">
-                      <i class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general" (click)="messages_error_advances(advance.id)"></i>{{translate.app.frontEnd.pages.travel_management.advances.error_synch}}</h6>
-                  </span>
+                <span
+                  *ngIf="
+                    advance.messages_server !== null &&
+                    advance.synch_type_server !== 'S'
+                  "
+                >
+                  <h6
+                    class="wg-hover-general"
+                    (click)="messages_error_advances(advance.id)"
+                  >
+                    <i
+                      class="fa fa-fw fa-exclamation-triangle text-danger wg-hover-general"
+                      (click)="messages_error_advances(advance.id)"
+                    ></i
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .advances.error_synch
+                    }}
+                  </h6>
+                </span>
                 <span class="badge badge-warning">
-                  {{translate.app.frontEnd.pages.travel_management.advances.travel_ihr}} {{advance.travel_request_id}}
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .advances.travel_ihr
+                  }}
+                  {{ advance.travel_request_id }}
                 </span>
               </h5>
               <p>
                 <i class="fa fa-plane"></i>
-                {{translate.app.frontEnd.pages.travel_management.advances.date_in}} {{advance.date_begin_format}}
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.date_in
+                }}
+                {{ advance.date_begin_format }}
               </p>
-              <p>{{translate.app.frontEnd.pages.travel_management.advances.date_out}} {{advance.date_end_format}}
+              <p>
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.date_out
+                }}
+                {{ advance.date_end_format }}
               </p>
             </div>
             <!-- <div class="col-lg-4 col-md-3 col-12">
@@ -187,49 +389,58 @@
                 Creada el {{advance.date_created_at}}
               </p> -->
             <!-- </div> -->
-            <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+            <div
+              class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p"
+            >
               <h3 class="font-color-default">
-                {{advance.name_travel | slice: 0:59}}
-                <span [hidden]="advance.travel_request_name.length < 59"></span>
+                {{ advance.name_travel | slice: 0:59 }}
+                <span
+                  [hidden]="advance.travel_request_name.length < 59"
+                ></span>
               </h3>
             </div>
-            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+            <div
+              class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
+            >
               <p class="font-title-general">
-                {{translate.app.frontEnd.pages.travel_management.advances.status_label}}:
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.status_label
+                }}:
               </p>
               <h6 *ngIf="advance.status_name == 'Aprobado'">
                 <span class="badge badge-primary">
-                  {{advance.status_name}}
+                  {{ advance.status_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_name == 'Cancelado'">
                 <span class="badge badge-danger">
-                  {{advance.status_name}}
+                  {{ advance.status_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_liq_code == 'LiqAnn'">
                 <span class="badge badge-danger">
-                  {{advance.status_liq_name}}
+                  {{ advance.status_liq_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_name == 'En proceso'">
                 <span class="badge badge-success">
-                  {{advance.status_name}}
+                  {{ advance.status_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_liq_code == 'LiqApp'">
                 <span class="badge badge-success">
-                  {{advance.status_liq_name}}
+                  {{ advance.status_liq_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_name == 'Registrado'">
                 <span class="badge badge-default">
-                  {{advance.status_name}}
+                  {{ advance.status_name }}
                 </span>
               </h6>
               <h6 *ngIf="advance.status_liq_code == 'LiqPen'">
                 <span class="badge badge-default">
-                  {{advance.status_liq_name}}
+                  {{ advance.status_liq_name }}
                 </span>
               </h6>
             </div>
@@ -243,29 +454,68 @@
               </p>
             </div> -->
 
-            <div class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p" *ngIf="advance.next_approver_to_json.approver_employee != undefined">
+            <div
+              class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p"
+              *ngIf="
+                advance.next_approver_to_json.approver_employee !=
+                undefined
+              "
+            >
               <p class="font-title-general">
-                {{advance.next_approver_to_json.approver_employee.short_name}}
+                {{
+                  advance.next_approver_to_json.approver_employee
+                    .short_name
+                }}
               </p>
               <p class="">
-                {{advance.next_approver_to_json.approver_employee.posicion}}
+                {{
+                  advance.next_approver_to_json.approver_employee
+                    .posicion
+                }}
               </p>
               <p class="">
-                {{translate.app.frontEnd.pages.travel_management.advances.approver}} {{advance.next_approver_to_json.level}}
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.approver
+                }}
+                {{ advance.next_approver_to_json.level }}
               </p>
             </div>
-            <div class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p" *ngIf="advance.next_approver_to_json.approver_employee == undefined">
+            <div
+              class="col-lg-4 col-md-9 col-12 text-md-left text-center top-p"
+              *ngIf="
+                advance.next_approver_to_json.approver_employee ==
+                undefined
+              "
+            >
               <p class="font-title-general">
-                {{translate.app.frontEnd.pages.travel_management.advances.message_approver}}
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .advances.message_approver
+                }}
               </p>
             </div>
-            <div class="col-lg-1 col-md-4 col-4 top-p text-align-center">
+            <div
+              class="col-lg-1 col-md-4 col-4 top-p text-align-center"
+            >
               <div class="row">
-                <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer" (click)="showAdvance(advance.id)">
-                  <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                <div
+                  class="col-12 text-success number-size"
+                  id="hideTrash"
+                  style="cursor: pointer"
+                  (click)="showAdvance(advance.id)"
+                >
+                  <i
+                    class="fa fa-eye"
+                    aria-hidden="true"
+                    style="font-size:2em"
+                  ></i>
                 </div>
                 <div class="col-12" (click)="showAdvance(advance.id)">
-                  {{translate.app.frontEnd.pages.travel_management.advances.see}}
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .advances.see
+                  }}
                 </div>
               </div>
             </div>

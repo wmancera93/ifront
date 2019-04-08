@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-bullhorn"></i>
-          {{ parseT("title_news") | translate }}
+          {{ parseT('title_news') | translate }}
         </div>
       </div>
     </div>
@@ -23,7 +25,9 @@
               type="text"
               class="form-control"
               (keyup)="enterTitleNew()"
-              placeholder="{{ parseT('placeholder_search') | translate }}"
+              placeholder="{{
+                parseT('placeholder_search') | translate
+              }}"
               maxlength="25"
               (keyup.enter)="goToSearchTitleNew()"
             />
@@ -40,15 +44,25 @@
             class="row justify-content-center top-containter"
             *ngIf="validateNoData"
           >
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{ parseT("text_not_exist_one") | translate }}
-                <strong>{{ parseT("text_not_exist_two") | translate }}</strong
-                >&nbsp;{{ parseT("text_not_exist_three") | translate }}
+                {{ parseT('text_not_exist_one') | translate }}
+                <strong>{{
+                  parseT('text_not_exist_two') | translate
+                }}</strong
+                >&nbsp;{{
+                  parseT('text_not_exist_three') | translate
+                }}
               </div>
             </div>
           </div>
-          <div class="widget bg-white-1x-news" *ngFor="let new of newList">
+          <div
+            class="widget bg-white-1x-news"
+            *ngFor="let new of newList"
+          >
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
                 <img
@@ -72,7 +86,7 @@
                   <div class="col-12">
                     <div class="row footer-newspaper">
                       <div class="col-xl-1 col-md-2 col-3">
-                        {{ parseT("text_topics") | translate }}
+                        {{ parseT('text_topics') | translate }}
                       </div>
                       &nbsp;&nbsp; &nbsp;&nbsp;
                       <div
@@ -97,18 +111,20 @@
                 <div class="row text-lg-left">
                   <div class="col-12" style="font-size: 1rem;">
                     <strong>
-                      {{ parseT("text_statistics") | translate }}</strong
+                      {{
+                        parseT('text_statistics') | translate
+                      }}</strong
                     >
                   </div>
                   <div class="col-12">
                     <i class="fa fa-eye"></i>
                     {{ new.total_views }}
-                    {{ parseT("text_views") | translate }}
+                    {{ parseT('text_views') | translate }}
                   </div>
                   <div class="col-12">
                     <i class="fa fa-comments-o"></i>
                     {{ new.total_comments }}
-                    {{ parseT("tex_comments") | translate }}
+                    {{ parseT('tex_comments') | translate }}
                   </div>
                 </div>
               </div>

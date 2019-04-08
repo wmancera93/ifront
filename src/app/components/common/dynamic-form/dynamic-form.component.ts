@@ -13,17 +13,17 @@ export class DynamicFormComponent implements OnInit {
   form: FormGroup;
   objectForm: any[] = null;
   public questionModel: any;
-  public showSubmit: boolean = true;
-  public showForm: boolean = false;
+  public showSubmit = true;
+  public showForm = false;
   public id: any;
   public name: any;
   public idEdit: any[] = [];
   public objectEditBlur: any[] = [];
-  public edit: boolean = false;
+  public edit = false;
   public generalObject: any[] = [];
   public staticGeneralObject: any[] = [];
-  public countAfter: number = 0;
-  public codeStatic: number = -1;
+  public countAfter = 0;
+  public codeStatic = -1;
   public translate: Translate = null;
 
   constructor(public fb: FormBuilder,
@@ -45,7 +45,7 @@ export class DynamicFormComponent implements OnInit {
               data.data.forEach(index => {
                 index.forEach(element => {
                   if (element.type === 'date' && element.control === 'input') {
-                    let split = element.value.split('/')
+                    const split = element.value.split('/');
                     if (split.length > 1) {
                       element.value = split[2] + '-' + split[1] + '-' + split[0];
                     }
@@ -65,11 +65,11 @@ export class DynamicFormComponent implements OnInit {
           if (this.staticGeneralObject.length > 0) {
             this.generalObject.forEach((object) => {
               object.filter(data => data.is_prerequisite.toString() === 'true').forEach(change => {
-                let newOptions
+                let newOptions;
                 if (change.prerequisite_id !== null) {
                   newOptions = this.staticGeneralObject.filter(staticObject => staticObject.id_static === change.id)[0].options_static.filter(select => select.filter === object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0].value);
                 } else {
-                  newOptions = [{ code: '', description: '' }]
+                  newOptions = [{ code: '', description: '' }];
                 }
 
                 change.option = newOptions;
@@ -86,7 +86,7 @@ export class DynamicFormComponent implements OnInit {
           this.showForm = true;
         }
       }
-    })
+    });
   }
   ngOnInit() {
   }
@@ -95,7 +95,7 @@ export class DynamicFormComponent implements OnInit {
     const group = this.fb.group({});
     this.generalObject.forEach(element => {
       element.forEach(control => {
-        group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')))
+        group.addControl(control.id, this.fb.control(control.value.toString().split(',').join('.')));
       });
       this.objectForm.push(element);
       if (this.generalObject.length <= 1) {
@@ -110,21 +110,20 @@ export class DynamicFormComponent implements OnInit {
   public valueSend;
   public code;
   sendDynamicForm(form) {
-    let objectForm: any[] = [];
-    let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
+    const objectForm: any[] = [];
+    const recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
     for (let index = 0; index < recorrer.length; index++) {
       if (((index / 2) % 1) === 0) {
         this.idSend = recorrer[index];
-      }
-      else {
+      } else {
         this.valueSend = recorrer[index];
         objectForm.push({
           id: this.idSend,
           value_to_change: this.valueSend
-        })
+        });
       }
     }
-    let objectSend: any[] = [];
+    const objectSend: any[] = [];
     objectForm.forEach(data => {
       this.objectEditBlur.forEach(element => {
         if (data.id.toString() === element.id.toString()) {
@@ -134,15 +133,15 @@ export class DynamicFormComponent implements OnInit {
               value_to_change: data.value_to_change,
               master_data_type: this.code,
               count: 0
-            })
+            });
           }
         }
       });
-    })
+    });
     this.dataMasterSharedService.setReturnDataFormDynamic(objectSend);
-    this.idSend = "";
-    this.valueSend = "";
-    this.code = "";
+    this.idSend = '';
+    this.valueSend = '';
+    this.code = '';
   }
   detectChange(params: any, form) {
     if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
@@ -153,25 +152,24 @@ export class DynamicFormComponent implements OnInit {
 
 
       if (element.id_requesite === params.id) {
-        let objectForm: any[] = [];
-        let recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
+        const objectForm: any[] = [];
+        const recorrer = JSON.stringify(form).split('"').join('').replace('{', '').replace('}', '').split(':').toString().split(',');
         for (let index = 0; index < recorrer.length; index++) {
           if (((index / 2) % 1) === 0) {
             this.idSend = recorrer[index];
-          }
-          else {
+          } else {
             this.valueSend = recorrer[index];
             objectForm.push({
               id: this.idSend,
               value_to_change: this.valueSend,
-            })
+            });
           }
         }
-        let newOptions
+        let newOptions;
         if (element.prerequisite_id !== null) {
           newOptions = element.options_static.filter(option => option.filter === objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change);
         } else {
-          newOptions = [{ code: '', description: '' }]
+          newOptions = [{ code: '', description: '' }];
         }
         this.generalObject.forEach((object) => {
           object.forEach(change => {
@@ -182,11 +180,11 @@ export class DynamicFormComponent implements OnInit {
         });
       }
     });
-    document.getElementById("savebutton").removeAttribute('disabled');
+    document.getElementById('savebutton').removeAttribute('disabled');
   }
   kewUptext(value) {
     let out = '';
-    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
+    const filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
     for (let i = 0; i < value.currentTarget.value.length; i++) {
       if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
         out += value.currentTarget.value.charAt(i);
@@ -196,7 +194,7 @@ export class DynamicFormComponent implements OnInit {
         }
       }
     }
-    value.currentTarget.value = out
+    value.currentTarget.value = out;
   }
   ngOnDestroy() {
     this.countAfter += 1;

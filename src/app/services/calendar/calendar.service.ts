@@ -5,9 +5,9 @@ export class CalendarService {
 
   constructor(private tokenService: Angular2TokenService) { }
 
-  getDataCalendar(){    
+  getDataCalendar() {
     return this.tokenService.get('work_schedule_plans')
-      .map((data: any) => data.json()); 
+      .map((data: any) => data.json());
   }
 
 }

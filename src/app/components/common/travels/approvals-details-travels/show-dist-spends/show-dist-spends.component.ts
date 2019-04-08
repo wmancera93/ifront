@@ -25,13 +25,13 @@ export class ShowDistSpendsComponent implements OnInit {
 
       if (document.getElementById('dist_spend_approval').className !== 'modal show') {
         document.getElementById('btn_detail_distSpend_approval').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
       this.id_spend_approval = data.id;
       this.spendsService.getDetailDistCost(this.id_spend_approval).subscribe((result: any) => {
         this.detailDistCostApproval = result.data[0].cost_distribution;
         this.printSpendApproval = result.data[0].travel_allowance;
-      })
+      });
     });
   }
 
@@ -40,9 +40,9 @@ export class ShowDistSpendsComponent implements OnInit {
   returnApproval() {
     if (this.accionDist === false) {
       if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
-        document.getElementById("closeDistSpendApproval").click();
+        document.getElementById('closeDistSpendApproval').click();
         setTimeout(() => {
-          document.getElementById("btn_approvals_requests_travels").click();
+          document.getElementById('btn_approvals_requests_travels').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 

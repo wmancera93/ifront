@@ -22,20 +22,20 @@ export class ContactsListComponent implements OnInit {
 
   public contacts: Employee[] = [];
   public searchListContacts: Employee[] = [];
-  public nameEmployee: string = '';
-  public numberLengthLetter: number = 0;
-  public numberPage: number = 1;
-  public numberPageScroll: number = 2;
+  public nameEmployee = '';
+  public numberLengthLetter = 0;
+  public numberPage = 1;
+  public numberPageScroll = 2;
   public chats: any = [];
-  public valuename: string = '';
-  public searchByLetter: string = '';
+  public valuename = '';
+  public searchByLetter = '';
   private scrollState: any;
   public scrollbarAction: any;
   public error: string;
   public validateError: boolean;
   public searchIconActive: boolean;
-  public hideCollapse: string = '';
-  public showContactsList: boolean = true;
+  public hideCollapse = '';
+  public showContactsList = true;
   public infoEmployee: Employee;
   public translate: Translate = null;
   public search_partner: string;
@@ -47,7 +47,7 @@ export class ContactsListComponent implements OnInit {
   ) {
 
     this.translate = this.translateService.getTranslate();
-    this.search_partner=this.translate.app.frontEnd.components.layout.contacts_list.search_partner;
+    this.search_partner = this.translate.app.frontEnd.components.layout.contacts_list.search_partner;
   }
   ngOnInit() {
     this.numberPage = 1;
@@ -78,8 +78,8 @@ export class ContactsListComponent implements OnInit {
 
   }
   searchByName() {
-    let numberContacts: number = 0;
-    let filterContacts: number = 0;
+    const numberContacts = 0;
+    const filterContacts = 0;
     this.contacts = [];
 
     if (this.nameEmployee == '') {
@@ -89,8 +89,7 @@ export class ContactsListComponent implements OnInit {
             this.contacts = result.data;
           }
         });
-    }
-    else {
+    } else {
       this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (1).toString())
         .subscribe((result: any) => {
 
@@ -113,8 +112,7 @@ export class ContactsListComponent implements OnInit {
     if (this.scrollbarAction.scrollHeight - this.scrollbarAction.scrollTop === this.scrollbarAction.clientHeight) {
 
       this.scrollState = true;
-    }
-    else {
+    } else {
       this.scrollState = false;
     }
     if (this.scrollState == undefined) {
@@ -122,7 +120,7 @@ export class ContactsListComponent implements OnInit {
     } else
       if (this.scrollState == true) {
         if (this.nameEmployee !== '') {
-          let numberContacts: number = 0;
+          let numberContacts = 0;
           this.contacts = this.contacts.filter(
             (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
 
@@ -152,7 +150,7 @@ export class ContactsListComponent implements OnInit {
 
 
         } else {
-          let numberContacts: number = 0;
+          let numberContacts = 0;
           this.employeeService.getAllEmployees(this.numberPageScroll.toString())
             .subscribe((result: any) => {
               if (result.success === true) {

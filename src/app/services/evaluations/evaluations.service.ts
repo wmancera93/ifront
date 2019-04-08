@@ -25,7 +25,7 @@ export class EvaluationsService {
   }
 
   postDataEvaluation(objectData: any, lengthArray: number) {
-    console.log( { data: objectData, total_questions: lengthArray })
+    console.log( { data: objectData, total_questions: lengthArray });
     return this.tokenService.post('evaluations', {data: objectData, total_questions: lengthArray})
       .map((data: any) => data.json());
   }

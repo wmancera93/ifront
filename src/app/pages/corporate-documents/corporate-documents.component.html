@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-folder-open-o"></i>
-          {{ parseT("title_corporate_documents") | translate }}
+          {{ parseT('title_corporate_documents') | translate }}
         </div>
       </div>
     </div>
@@ -17,7 +19,10 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="row">
         <div class="col-12 col-xl-3">
-          <div *ngFor="let type of docsType" (click)="selectedObject(type)">
+          <div
+            *ngFor="let type of docsType"
+            (click)="selectedObject(type)"
+          >
             <div class="row">
               <div class="col-10 cursor-general tabDocumentsType">
                 <i class="fa fa-folder"></i> &nbsp; {{ type.name }}

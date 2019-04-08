@@ -1,97 +1,232 @@
-<button id="btn_aprovers_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#aprovers_requests"
-  style="display:none;">
-</button>
-<div class="modal" id="aprovers_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<button
+  id="btn_aprovers_requests"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#aprovers_requests"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  id="aprovers_requests"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="viewModal">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{detailRequets[0].title}}</h4>
+          <h4 class="modal-title titleColor text-shadow">
+            {{ detailRequets[0].title }}
+          </h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
         <div class="container">
           <div class="timeline">
             <div class="line text-muted"></div>
-            <div class="separator text-muted">
-            </div>
+            <div class="separator text-muted"></div>
 
             <article class="panel panel-success panel">
               <div class="panel-heading icon">
                 <i class="fa fa-file-text"></i>
               </div>
-              <div class="panel-heading" *ngIf="requests_print == 'requestsOnly'">
-                <h2 class="panel-title text-capitalize">{{translate.app.frontEnd.components.common.time_line_approvers.request}} {{detailRequets[0].request.type_requests_name |
-                  lowercase}}</h2>
+              <div
+                class="panel-heading"
+                *ngIf="requests_print == 'requestsOnly'"
+              >
+                <h2 class="panel-title text-capitalize">
+                  {{
+                    translate.app.frontEnd.components.common
+                      .time_line_approvers.request
+                  }}
+                  {{
+                    detailRequets[0].request.type_requests_name
+                      | lowercase
+                  }}
+                </h2>
               </div>
-              <div class="panel-heading" *ngIf="requests_print !='requestsOnly'">
-                <h2 class="panel-title text-capitalize">{{detailRequets[0].request.type_requests_name |
-                  lowercase}}</h2>
+              <div
+                class="panel-heading"
+                *ngIf="requests_print != 'requestsOnly'"
+              >
+                <h2 class="panel-title text-capitalize">
+                  {{
+                    detailRequets[0].request.type_requests_name
+                      | lowercase
+                  }}
+                </h2>
               </div>
               <div class="row">
                 <div class="col-12">
                   <div class="widget bg-white">
                     <div class="row">
-                      <div class="col-12 col-md-4 col-lg-2 center-img-employee">
+                      <div
+                        class="col-12 col-md-4 col-lg-2 center-img-employee"
+                      >
                         <div class="menu-img-employee">
-                          <img src="{{detailRequets[0].request.employee_applicant_to_json.image.url}}" class="roundPhoto-employee">
-                          <br>
+                          <img
+                            src="{{
+                              detailRequets[0].request
+                                .employee_applicant_to_json.image.url
+                            }}"
+                            class="roundPhoto-employee"
+                          />
+                          <br />
                         </div>
                       </div>
                       <div class="col-12 col-md-8 col-lg-10">
                         <div class="row">
                           <div class="col-12">
                             <h3 class="font-color-default">
-                              {{detailRequets[0].request.employee_applicant_to_json.short_name}}
+                              {{
+                                detailRequets[0].request
+                                  .employee_applicant_to_json
+                                  .short_name
+                              }}
                             </h3>
                           </div>
                           <div class="col-12">
                             <p class="font-title-general">
-                              {{detailRequets[0].request.employee_applicant_to_json.posicion}}
+                              {{
+                                detailRequets[0].request
+                                  .employee_applicant_to_json.posicion
+                              }}
                             </p>
                           </div>
                           <div class="col-12 text-left">
                             <div class="row">
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_begin_format != null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="
+                                  detailRequets[0].request
+                                    .date_begin_format != null
+                                "
+                              >
                                 <p class="font-title-general">
-                                  <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.date_begin}}:
-                                  <span style="font-weight: 100 !important">{{dateFirts}}</span>
+                                  <i
+                                    class=" font-color-default fa fa-fw fa-calendar"
+                                  ></i>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .date_begin
+                                  }}:
+                                  <span
+                                    style="font-weight: 100 !important"
+                                    >{{ dateFirts }}</span
+                                  >
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_end_format != null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="
+                                  detailRequets[0].request
+                                    .date_end_format != null
+                                "
+                              >
                                 <p class="font-title-general">
-                                  <i class="font-color-default fa fa-fw fa-calendar"></i>
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.date_end}}:
-                                  <span style="font-weight: 100 !important">
-                                    {{dateFinally}}</span>
+                                  <i
+                                    class="font-color-default fa fa-fw fa-calendar"
+                                  ></i>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .date_end
+                                  }}:
+                                  <span
+                                    style="font-weight: 100 !important"
+                                  >
+                                    {{ dateFinally }}</span
+                                  >
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.days_request !== null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="
+                                  detailRequets[0].request
+                                    .days_request !== null
+                                "
+                              >
                                 <p class="font-title-general">
-                                  <i class="font-color-default fa fa-fw fa-sun-o"></i>
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.requested_days}}:
-                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.days_request}}</span>
+                                  <i
+                                    class="font-color-default fa fa-fw fa-sun-o"
+                                  ></i>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .requested_days
+                                  }}:
+                                  <span
+                                    style="font-weight: 100 !important"
+                                    >{{
+                                      detailRequets[0].request
+                                        .days_request
+                                    }}</span
+                                  >
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="fileSupport !== null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="fileSupport !== null"
+                              >
                                 <p class="font-title-general">
-                                  <i class="font-color-default fa fa-fw fa-paperclip"></i>
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.attached}}:
-                                  <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">{{translate.app.frontEnd.components.common.time_line_approvers.see_attached}}</span>
+                                  <i
+                                    class="font-color-default fa fa-fw fa-paperclip"
+                                  ></i>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .attached
+                                  }}:
+                                  <span
+                                    style=" color: rgb(60, 211, 211); cursor: pointer;"
+                                    (click)="viewSupport()"
+                                    >{{
+                                      translate.app.frontEnd
+                                        .components.common
+                                        .time_line_approvers
+                                        .see_attached
+                                    }}</span
+                                  >
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center">
+                              <div
+                                class="col-12 text-md-left text-center"
+                              >
                                 <p class="font-title-general">
-                                  <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
-                                  <span style="font-weight: 100 !important">{{detailRequets[0].request.observation_request}}</span>
+                                  <i
+                                    class="font-color-default fa fa-fw fa fa-comment"
+                                  ></i>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .observations
+                                  }}:
+                                  <span
+                                    style="font-weight: 100 !important"
+                                    >{{
+                                      detailRequets[0].request
+                                        .observation_request
+                                    }}</span
+                                  >
                                 </p>
                               </div>
                               <div class="col-12 text-center">
                                 <p class="font-title-general">
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.created}}:
-                                  <time class="font-color-default">{{detailRequets[0].request.created_date}}</time>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .created
+                                  }}:
+                                  <time class="font-color-default">{{
+                                    detailRequets[0].request
+                                      .created_date
+                                  }}</time>
                                 </p>
                               </div>
                             </div>
@@ -105,89 +240,199 @@
             </article>
 
             <div *ngIf="detailRequets[0].request.answers_to_json">
-              <div *ngFor="let answer of detailRequets[0].request.answers_to_json">
-                <div class="separator text-muted">
-                </div>
+              <div
+                *ngFor="
+                  let answer of detailRequets[0].request
+                    .answers_to_json
+                "
+              >
+                <div class="separator text-muted"></div>
 
                 <article class="panel panel-success">
                   <div class="panel-heading icon">
                     <i class="fa fa-check"></i>
                   </div>
                   <div class="panel-heading">
-                    <h2 class="panel-title">Aprobador {{answer.approver_to_json.level}}</h2>
+                    <h2 class="panel-title">
+                      Aprobador {{ answer.approver_to_json.level }}
+                    </h2>
                   </div>
                   <div class="row">
                     <div class="col-12">
                       <div class="widget bg-white">
                         <div class="row">
-                          <div class="col-12 col-md-4 col-lg-2 center-img-employee">
+                          <div
+                            class="col-12 col-md-4 col-lg-2 center-img-employee"
+                          >
                             <div class="menu-img-employee">
-                              <img src="{{answer.approver_to_json.image.url}}" class="roundPhoto-employee">
-                              <br>
+                              <img
+                                src="{{
+                                  answer.approver_to_json.image.url
+                                }}"
+                                class="roundPhoto-employee"
+                              />
+                              <br />
                             </div>
                           </div>
                           <div class="col-12 col-md-8 col-lg-10">
                             <div class="row">
                               <div class="col-12">
                                 <h3 class="font-color-default">
-                                  {{answer.approver_to_json.name_complete}}
+                                  {{
+                                    answer.approver_to_json
+                                      .name_complete
+                                  }}
                                 </h3>
                               </div>
                               <div class="col-12">
                                 <p class="font-title-general">
-                                  {{answer.approver_to_json.position}}
+                                  {{
+                                    answer.approver_to_json.position
+                                  }}
                                 </p>
                               </div>
                               <div class="col-12 text-left">
-                                <div class="row justify-content-center">
-                                  <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
+                                <div
+                                  class="row justify-content-center"
+                                >
+                                  <div
+                                    class="col-lg-3 col-md-6 col-12 text-md-left text-center"
+                                  >
                                     <p class="font-title-general">
-                                      <i class="font-color-default fa fa-fw fa-question-circle"></i>
-                                      {{translate.app.frontEnd.components.common.time_line_approvers.status}}:
+                                      <i
+                                        class="font-color-default fa fa-fw fa-question-circle"
+                                      ></i>
+                                      {{
+                                        translate.app.frontEnd
+                                          .components.common
+                                          .time_line_approvers.status
+                                      }}:
                                     </p>
                                   </div>
-                                  <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                    <h6 class="col-4" *ngIf="answer.status == statusApprover">
-                                      <span class="badge badge-primary" style="margin-top: 5px;">
-                                        {{answer.status}}
+                                  <div
+                                    class="col-lg-2 col-md-6 col-12 text-md-left text-center"
+                                  >
+                                    <h6
+                                      class="col-4"
+                                      *ngIf="
+                                        answer.status ==
+                                        statusApprover
+                                      "
+                                    >
+                                      <span
+                                        class="badge badge-primary"
+                                        style="margin-top: 5px;"
+                                      >
+                                        {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == statusCancelled">
-                                      <span class="badge badge-danger" style="margin-top: 5px;">
-                                        {{answer.status}}
+                                    <h6
+                                      class="col-4"
+                                      *ngIf="
+                                        answer.status ==
+                                        statusCancelled
+                                      "
+                                    >
+                                      <span
+                                        class="badge badge-danger"
+                                        style="margin-top: 5px;"
+                                      >
+                                        {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == statusInProcess ">
-                                      <span class="badge badge-success" style="margin-top: 5px;">
-                                        {{answer.status}}
+                                    <h6
+                                      class="col-4"
+                                      *ngIf="
+                                        answer.status ==
+                                        statusInProcess
+                                      "
+                                    >
+                                      <span
+                                        class="badge badge-success"
+                                        style="margin-top: 5px;"
+                                      >
+                                        {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == statusPending">
-                                      <span class="badge badge-default" style="margin-top: 5px;">
-                                        {{answer.status}}
+                                    <h6
+                                      class="col-4"
+                                      *ngIf="
+                                        answer.status == statusPending
+                                      "
+                                    >
+                                      <span
+                                        class="badge badge-default"
+                                        style="margin-top: 5px;"
+                                      >
+                                        {{ answer.status }}
                                       </span>
                                     </h6>
                                   </div>
-                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null && answer.description !== undefined">
-                                    <p class="font-title-general text-center">
-                                      <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                      {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
-                                      <span style="font-weight: 100 !important">{{answer.description}}</span>
+                                  <div
+                                    class="col-12 text-md-left text-center"
+                                    *ngIf="
+                                      answer.description !== null &&
+                                      answer.description !== undefined
+                                    "
+                                  >
+                                    <p
+                                      class="font-title-general text-center"
+                                    >
+                                      <i
+                                        class="font-color-default fa fa-fw fa fa-comment"
+                                      ></i>
+                                      {{
+                                        translate.app.frontEnd
+                                          .components.common
+                                          .time_line_approvers
+                                          .observations
+                                      }}:
+                                      <span
+                                        style="font-weight: 100 !important"
+                                        >{{
+                                          answer.description
+                                        }}</span
+                                      >
                                     </p>
                                   </div>
-                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description == undefined">
-                                    <p class="font-title-general text-center">
-                                      <i class="font-color-default fa fa-fw fa fa-comment"></i>
-                                      {{translate.app.frontEnd.components.common.time_line_approvers.observations}}:
-                                      <span style="font-weight: 100 !important">{{answer.observation}}</span>
+                                  <div
+                                    class="col-12 text-md-left text-center"
+                                    *ngIf="
+                                      answer.description == undefined
+                                    "
+                                  >
+                                    <p
+                                      class="font-title-general text-center"
+                                    >
+                                      <i
+                                        class="font-color-default fa fa-fw fa fa-comment"
+                                      ></i>
+                                      {{
+                                        translate.app.frontEnd
+                                          .components.common
+                                          .time_line_approvers
+                                          .observations
+                                      }}:
+                                      <span
+                                        style="font-weight: 100 !important"
+                                        >{{
+                                          answer.observation
+                                        }}</span
+                                      >
                                     </p>
                                   </div>
                                 </div>
                               </div>
                               <div class="col-12 text-center">
                                 <p class="font-title-general">
-                                  {{translate.app.frontEnd.components.common.time_line_approvers.created}}:
-                                  <time class="font-color-default">{{answer.created_date}}</time>
+                                  {{
+                                    translate.app.frontEnd.components
+                                      .common.time_line_approvers
+                                      .created
+                                  }}:
+                                  <time class="font-color-default">{{
+                                    answer.created_date
+                                  }}</time>
                                 </p>
                               </div>
                             </div>
@@ -200,51 +445,91 @@
               </div>
             </div>
 
-            <div *ngIf="detailRequets[0].pending_level_approver?.level">
-              <div class="separator text-muted">
-              </div>
+            <div
+              *ngIf="detailRequets[0].pending_level_approver?.level"
+            >
+              <div class="separator text-muted"></div>
 
               <article class="panel panel-danger">
                 <div class="panel-heading icon">
                   <i class="fa fa-question"></i>
                 </div>
                 <div class="panel-heading">
-                  <h2 class="panel-title">{{translate.app.frontEnd.components.common.time_line_approvers.approver}} {{detailRequets[0].pending_level_approver.level}}</h2>
+                  <h2 class="panel-title">
+                    {{
+                      translate.app.frontEnd.components.common
+                        .time_line_approvers.approver
+                    }}
+                    {{
+                      detailRequets[0].pending_level_approver.level
+                    }}
+                  </h2>
                 </div>
                 <div class="row">
                   <div class="col-12">
                     <div class="widget bg-white">
                       <div class="row">
-                        <div class="col-12 col-md-4 col-lg-2 center-img-employee">
+                        <div
+                          class="col-12 col-md-4 col-lg-2 center-img-employee"
+                        >
                           <div class="menu-img-employee">
-                            <img src="{{detailRequets[0].pending_level_approver.approver_employee.image.url}}" class="roundPhoto-employee">
-                            <br>
+                            <img
+                              src="{{
+                                detailRequets[0]
+                                  .pending_level_approver
+                                  .approver_employee.image.url
+                              }}"
+                              class="roundPhoto-employee"
+                            />
+                            <br />
                           </div>
                         </div>
                         <div class="col-12 col-md-8 col-lg-10">
                           <div class="row">
                             <div class="col-12">
                               <h3 class="font-color-default">
-                                {{detailRequets[0].pending_level_approver.approver_employee.name_complete}}
+                                {{
+                                  detailRequets[0]
+                                    .pending_level_approver
+                                    .approver_employee.name_complete
+                                }}
                               </h3>
                             </div>
                             <div class="col-12">
                               <p class="font-title-general">
-                                {{detailRequets[0].pending_level_approver.approver_employee.position}}
+                                {{
+                                  detailRequets[0]
+                                    .pending_level_approver
+                                    .approver_employee.position
+                                }}
                               </p>
                             </div>
                             <div class="col-12 text-left">
                               <div class="row justify-content-center">
-                                <div class="col-lg-3 col-md-6 col-12 text-md-left text-center">
+                                <div
+                                  class="col-lg-3 col-md-6 col-12 text-md-left text-center"
+                                >
                                   <p class="font-title-general">
-                                    <i class="font-color-default fa fa-fw fa-question-circle"></i>
-                                    {{translate.app.frontEnd.components.common.time_line_approvers.status}}:
+                                    <i
+                                      class="font-color-default fa fa-fw fa-question-circle"
+                                    ></i>
+                                    {{
+                                      translate.app.frontEnd
+                                        .components.common
+                                        .time_line_approvers.status
+                                    }}:
                                   </p>
                                 </div>
-                                <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
+                                <div
+                                  class="col-lg-2 col-md-6 col-12 text-md-left text-center"
+                                >
                                   <h6>
                                     <span class="badge badge-default">
-                                      {{translate.app.frontEnd.components.common.time_line_approvers.pending}}
+                                      {{
+                                        translate.app.frontEnd
+                                          .components.common
+                                          .time_line_approvers.pending
+                                      }}
                                     </span>
                                   </h6>
                                 </div>
@@ -259,9 +544,13 @@
               </article>
             </div>
 
-            <div *ngIf="detailRequets[0].message_pending_level_approver !== null">
-              <div class="separator text-muted">
-              </div>
+            <div
+              *ngIf="
+                detailRequets[0].message_pending_level_approver !==
+                null
+              "
+            >
+              <div class="separator text-muted"></div>
 
               <article class="panel panel-danger">
                 <div class="panel-heading icon">
@@ -274,11 +563,16 @@
                         <div class="col-12">
                           <div class="row">
                             <div class="col-12">
-                              <i class="font-color-default fa fa-warning"></i>
+                              <i
+                                class="font-color-default fa fa-warning"
+                              ></i>
                             </div>
                             <div class="col-12">
                               <p class="font-title-general">
-                                {{detailRequets[0].message_pending_level_approver}}
+                                {{
+                                  detailRequets[0]
+                                    .message_pending_level_approver
+                                }}
                               </p>
                             </div>
                           </div>
@@ -293,9 +587,18 @@
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> {{translate.app.frontEnd.components.common.time_line_approvers.button_close}} </h6>
+        <div
+          class="buttonCloseEmployee btn-close-modals text-center"
+          data-dismiss="modal"
+        >
+          <h6>
+            {{
+              translate.app.frontEnd.components.common
+                .time_line_approvers.button_close
+            }}
+          </h6>
         </div>
       </div>
     </div>
   </div>
+</div>

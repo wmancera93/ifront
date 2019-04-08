@@ -1,13 +1,13 @@
-import { Component, OnInit, EventEmitter, OnDestroy } from "@angular/core";
-import { QueriesService } from "../../../services/queries/queries.service";
-import { DataDableSharedService } from "../../../services/shared/common/data-table/data-dable-shared.service";
-import { User } from "../../../models/general/user";
-import { ISubscription } from "rxjs/Subscription";
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
+import { QueriesService } from '../../../services/queries/queries.service';
+import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { User } from '../../../models/general/user';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: "app-embargoes",
-  templateUrl: "./embargoes.component.html",
-  styleUrls: ["./embargoes.component.css"]
+  selector: 'app-embargoes',
+  templateUrl: './embargoes.component.html',
+  styleUrls: ['./embargoes.component.css']
 })
 export class EmbargoesComponent implements OnInit, OnDestroy {
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -29,11 +29,11 @@ export class EmbargoesComponent implements OnInit, OnDestroy {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: "smooth"
+      behavior: 'smooth'
     });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {
-        this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+        this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
         this.queriesService
           .getEmbargoesExcel(this.userAuthenticated.employee_id.toString())
           .subscribe((info: any) => {

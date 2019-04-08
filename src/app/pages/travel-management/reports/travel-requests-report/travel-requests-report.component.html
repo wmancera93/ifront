@@ -4,14 +4,26 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-table"></i>
-          {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.tittle}}
+          {{
+            translate.app.frontEnd.pages.travel_management.reports
+              .travel_request_report.tittle
+          }}
         </div>
-        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
-          <div class="buttonBack img-zoom" (click)="returnBackReportTravel()">
+        <div
+          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
+          style="padding-right: 0px"
+        >
+          <div
+            class="buttonBack img-zoom"
+            (click)="returnBackReportTravel()"
+          >
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.back}}
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .reports.travel_request_report.back
+                }}
               </span>
             </div>
           </div>
@@ -25,7 +37,7 @@
         <div class="row top-containter">
           <div class="col-12 text-left">
             <h3 class="font-color-default">
-              {{title}}
+              {{ title }}
             </h3>
           </div>
         </div>
@@ -35,15 +47,35 @@
         <div class="col-12 col-lg-6 mb-3">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
+              <a
+                class="nav-link dropdown-toggle cursor-general tabDate"
+                id="navbarDropdown"
+                role="button"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
                 <i class="fa fa-plus"></i>
-                {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_filter}}
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .reports.travel_request_report.btn_filter
+                }}
               </a>
-              <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown" style="overflow-y: auto !important; max-height: 400px !important">
+              <div
+                class="dropdown-menu col-12"
+                aria-labelledby="navbarDropdown"
+                style="overflow-y: auto !important; max-height: 400px !important"
+              >
                 <div *ngFor="let list of reports_list; let i = index">
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="selectTypeReport(list)">{{list.name | lowercase}}</a>
-                  <div *ngIf="reports_list.length !== (i + 1)" class="dropdown-divider"></div>
+                  <a
+                    class="dropdown-item color-font-gree text-capitalize cursor-general"
+                    (click)="selectTypeReport(list)"
+                    >{{ list.name | lowercase }}</a
+                  >
+                  <div
+                    *ngIf="reports_list.length !== i + 1"
+                    class="dropdown-divider"
+                  ></div>
                 </div>
               </div>
             </li>
@@ -56,84 +88,214 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.query_filters}}
+              {{
+                translate.app.frontEnd.pages.travel_management.reports
+                  .travel_request_report.query_filters
+              }}
             </b>
-            <i *ngIf="!is_collapse_report_travel" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTravel(true)"></i>
-            <i *ngIf="is_collapse_report_travel" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTravel(false)"></i>
+            <i
+              *ngIf="!is_collapse_report_travel"
+              class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseFilterTravel"
+              aria-expanded="false"
+              (click)="collapseReportTravel(true)"
+            ></i>
+            <i
+              *ngIf="is_collapse_report_travel"
+              class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseFilterTravel"
+              aria-expanded="false"
+              (click)="collapseReportTravel(false)"
+            ></i>
           </div>
         </div>
       </div>
 
-      <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
+      <div
+        class="collapse top-general-p border-botton-general"
+        id="collapseFilterTravel"
+      >
         <div class="row align-items-center">
-          <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.employee_code}}</label>
-            <input type="text" [(ngModel)]="personal_number" class="form-control" (keyup)="validateNumber('personal_number', personal_number )">
+          <div
+            class="col-lg-3 col-md-6 col-12"
+            style="padding-bottom: 15px"
+          >
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.employee_code
+            }}</label>
+            <input
+              type="text"
+              [(ngModel)]="personal_number"
+              class="form-control"
+              (keyup)="
+                validateNumber('personal_number', personal_number)
+              "
+            />
           </div>
-          <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.code_ihr}}</label>
-            <input type="text" [(ngModel)]="ticket" class="form-control" (keyup)="validateNumber('ticket', ticket)">
+          <div
+            class="col-lg-3 col-md-6 col-12"
+            style="padding-bottom: 15px"
+          >
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.code_ihr
+            }}</label>
+            <input
+              type="text"
+              [(ngModel)]="ticket"
+              class="form-control"
+              (keyup)="validateNumber('ticket', ticket)"
+            />
           </div>
-          <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.code_sap}}</label>
-            <input type="text" [(ngModel)]="ticket_cli" class="form-control" (keyup)="validateNumber('ticket_cli', ticket_cli)">
+          <div
+            class="col-lg-3 col-md-6 col-12"
+            style="padding-bottom: 15px"
+          >
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.code_sap
+            }}</label>
+            <input
+              type="text"
+              [(ngModel)]="ticket_cli"
+              class="form-control"
+              (keyup)="validateNumber('ticket_cli', ticket_cli)"
+            />
           </div>
-          <div class="col-lg-3 col-md-6 col-12" style="padding-bottom: 15px">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.type_legal}}</label>
-            <select class="form-control" [(ngModel)]="legat_travel_type">
-              <option [value]="-1">{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.option_select}}</option>
-              <option *ngFor="let legalTravel of typeTravelLegal" [value]="legalTravel.code">{{legalTravel.name}}</option>
+          <div
+            class="col-lg-3 col-md-6 col-12"
+            style="padding-bottom: 15px"
+          >
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.type_legal
+            }}</label>
+            <select
+              class="form-control"
+              [(ngModel)]="legat_travel_type"
+            >
+              <option [value]="-1">{{
+                translate.app.frontEnd.pages.travel_management.reports
+                  .travel_request_report.option_select
+              }}</option>
+              <option
+                *ngFor="let legalTravel of typeTravelLegal"
+                [value]="legalTravel.code"
+                >{{ legalTravel.name }}</option
+              >
             </select>
           </div>
         </div>
         <div class="row align-items-center mb-3">
           <div class="col-lg-3 col-md-6 col-12">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.type_element}}</label>
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.type_element
+            }}</label>
             <select class="form-control" [(ngModel)]="travel_cost">
-              <option [value]='-1'>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.option_select}}</option>
-              <option *ngFor="let imputation of type_element_imputation" [value]="imputation.code">{{imputation.name}}</option>
+              <option [value]="-1">{{
+                translate.app.frontEnd.pages.travel_management.reports
+                  .travel_request_report.option_select
+              }}</option>
+              <option
+                *ngFor="let imputation of type_element_imputation"
+                [value]="imputation.code"
+                >{{ imputation.name }}</option
+              >
             </select>
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.date_begin}}</label>
-            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" (change)="validateDate()"
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.date_begin
+            }}</label>
+            <input
+              tabindex="-1"
+              type="date"
+              name="date_begin"
+              class="form-control"
+              [(ngModel)]="date_begin"
+              (change)="validateDate()"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
-            <label>{{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.date_end}}</label>
-            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" (change)="validateDate()" />
+            <label>{{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.date_end
+            }}</label>
+            <input
+              tabindex="-1"
+              type="date"
+              name="date_end"
+              class="form-control"
+              [(ngModel)]="date_end"
+              (change)="validateDate()"
+            />
           </div>
-          <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="btnConsult">
-            <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')">
+          <div
+            class="col-lg-3 col-md-6 col-12 align-self-end"
+            *ngIf="btnConsult"
+          >
+            <div
+              class="btn btn-block btn-primary-second fontDate "
+              (click)="getObjectPrint('general')"
+            >
               <i class="fa fa-search-plus"></i>
-              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_query}}
+              {{
+                translate.app.frontEnd.pages.travel_management.reports
+                  .travel_request_report.btn_query
+              }}
             </div>
           </div>
-          <div class="col-lg-3 col-md-6 col-12 align-self-end" *ngIf="!btnConsult">
-            <div class="btn btn-block btn-primary-second fontDate " (click)="getObjectPrint('general')" style="cursor: no-drop">
+          <div
+            class="col-lg-3 col-md-6 col-12 align-self-end"
+            *ngIf="!btnConsult"
+          >
+            <div
+              class="btn btn-block btn-primary-second fontDate "
+              (click)="getObjectPrint('general')"
+              style="cursor: no-drop"
+            >
               <i class="fa fa-search-plus"></i>
-              {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.btn_query}}
+              {{
+                translate.app.frontEnd.pages.travel_management.reports
+                  .travel_request_report.btn_query
+              }}
             </div>
           </div>
         </div>
-
       </div>
 
-
-      <div class="row justify-content-center top-general-p" *ngIf="!showDataTable">
+      <div
+        class="row justify-content-center top-general-p"
+        *ngIf="!showDataTable"
+      >
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.travel_management.reports.travel_request_report.negative_query}}
+            {{
+              translate.app.frontEnd.pages.travel_management.reports
+                .travel_request_report.negative_query
+            }}
           </div>
         </div>
       </div>
 
-
-      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTable">
+      <div
+        class="row justify-content-center top-containter mt-3"
+        *ngIf="showDataTable"
+      >
         <div class="col-12">
-          <app-data-table class="mt-3" [records]="objectReportTravel" id="tableReportTravels" [pdf]="showPdf" [excel]="showExcel" [title]="nameReport"></app-data-table>
+          <app-data-table
+            class="mt-3"
+            [records]="objectReportTravel"
+            id="tableReportTravels"
+            [pdf]="showPdf"
+            [excel]="showExcel"
+            [title]="nameReport"
+          ></app-data-table>
         </div>
       </div>
     </div>

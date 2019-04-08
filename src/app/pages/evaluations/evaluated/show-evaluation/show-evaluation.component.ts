@@ -11,10 +11,10 @@ import { TranslateService } from '../../../../services/common/translate/translat
   styleUrls: ['./show-evaluation.component.css']
 })
 export class ShowEvaluationComponent implements OnInit, OnDestroy {
-  public showSubmit: boolean = true;
+  public showSubmit = true;
   public dataEvaluation: Evaluations = null;
   public receiveData: any = null;
-  public countAfter: number = 0;
+  public countAfter = 0;
   public translate: Translate = null;
 
   constructor(public evaluationSharedService: EvaluationsSharedService,
@@ -25,12 +25,12 @@ export class ShowEvaluationComponent implements OnInit, OnDestroy {
         this.receiveData = info;
         this.evaluationService.getShowEvaluation(info.id).subscribe((list: any) => {
           this.dataEvaluation = list.data;
-        })
+        });
 
         document.getElementById('btn_showEvaluation').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
-    })
+    });
   }
 
   ngOnInit() {

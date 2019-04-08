@@ -48,7 +48,9 @@
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label class="font-title-general">
-                  <i class="fa fa-fw hourglass-start text-primary-hr"></i>
+                  <i
+                    class="fa fa-fw hourglass-start text-primary-hr"
+                  ></i>
                   Cantidad de camas *
                 </label>
                 <input
@@ -78,7 +80,9 @@
         </div>
         <div class="col-12">
           <div class="table-responsive mt-3">
-            <ng-container *ngIf="arrayBedrooms.length > 0; else elseTemplate">
+            <ng-container
+              *ngIf="arrayBedrooms.length > 0; else elseTemplate"
+            >
               <table
                 class="table table-sm table-striped table-bordered table-hover"
               >
@@ -117,7 +121,10 @@
               </table>
             </ng-container>
             <ng-template #elseTemplate>
-              <div class="alert alert-warning text-center" role="alert">
+              <div
+                class="alert alert-warning text-center"
+                role="alert"
+              >
                 No tienes habitaciones agregadas.
               </div>
             </ng-template>
@@ -133,7 +140,9 @@
   ng-init="typeCase = formRequests.id_activity"
 >
   <div class="modal-content bodyColorInfo">
-    <div class="modal-header borderLine-title row-hr justify-content-center">
+    <div
+      class="modal-header borderLine-title row-hr justify-content-center"
+    >
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
           Solicitud de alojamiento

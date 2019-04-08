@@ -6,7 +6,7 @@ export class AdvanceSharedService {
 
   newAdvance: Subject<any> = new Subject<any>();
   viewAdvance: Subject<any> = new Subject<any>();
-  editAdvance: Subject<any> = new Subject<any>();  
+  editAdvance: Subject<any> = new Subject<any>();
   refreshAdvance: Subject<any> = new Subject<any>();
   messagesSynch: Subject<any> = new Subject<any>();
 
@@ -15,32 +15,32 @@ export class AdvanceSharedService {
   getNewAdvance() {
     return this.newAdvance;
   }
-  setNewAdvance(newAdvance:any ) {
+  setNewAdvance(newAdvance: any ) {
     return this.newAdvance.next(newAdvance);
-  } 
+  }
   getEditAdvance() {
     return this.editAdvance;
   }
-  setEditAdvance(editAdvance:any ) {
+  setEditAdvance(editAdvance: any ) {
     return this.editAdvance.next(editAdvance);
   }
   getViewAdvance() {
     return this.viewAdvance;
   }
-  setViewAdvance(viewAdvance:any ) {
+  setViewAdvance(viewAdvance: any ) {
     return this.viewAdvance.next(viewAdvance);
-  } 
+  }
 
   getRefreshAdvanceList() {
     return this.refreshAdvance;
   }
-  setRefreshAdvanceList(refreshAdvanceList:any ) {
+  setRefreshAdvanceList(refreshAdvanceList: any ) {
     return this.refreshAdvance.next(refreshAdvanceList);
-  } 
+  }
   getMessageSynchAdvance() {
     return this.messagesSynch;
   }
-  setMessageSynchAdvance(messagesSynch:any ) {
+  setMessageSynchAdvance(messagesSynch: any ) {
     return this.messagesSynch.next(messagesSynch);
-  } 
+  }
 }

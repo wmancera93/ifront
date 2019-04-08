@@ -4,8 +4,8 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class EventsEmployeeService {
 
-  infoEventEmployee: Subject<any> = new Subject<any>();  
-  refreshEvent: Subject<any> = new Subject<any>(); 
+  infoEventEmployee: Subject<any> = new Subject<any>();
+  refreshEvent: Subject<any> = new Subject<any>();
 
   constructor() { }
 

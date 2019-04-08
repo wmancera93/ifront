@@ -1,14 +1,45 @@
-<button id="btn_approvalHoteljourney_edit" type="button" class="btn btn-primary" data-toggle="modal" data-target="#approvalHoteljourney_edit"
-  style="display:none;">
-</button>
-<div class="modal" data-backdrop="static" id="approvalHoteljourney_edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_approvalHoteljourney_edit"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#approvalHoteljourney_edit"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  data-backdrop="static"
+  id="approvalHoteljourney_edit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content " *ngIf="objectHotelJourney !== null">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.change_travel}} #
-          {{objectHotelJourney.id_travel}}</h5>
-        <button id="close_approvalHotel_journey" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{
+            translate.app.frontEnd.components.common.travels
+              .approvals_details_travels.show_hotels_journey
+              .change_travel
+          }}
+          # {{ objectHotelJourney.id_travel }}
+        </h5>
+        <button
+          id="close_approvalHotel_journey"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -17,52 +48,82 @@
           <div class="col-9">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>Trayecto: {{objectHotelJourney.id_journey}}</strong>
+              <strong
+                >Trayecto: {{ objectHotelJourney.id_journey }}</strong
+              >
             </label>
           </div>
           <div class="col-3">
             <div class="buttonBack img-zoom" (click)="returnTravel()">
               <div style="margin-left: 15px;">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                  {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.back}}
+                  {{
+                    translate.app.frontEnd.components.common.travels
+                      .approvals_details_travels.show_hotels_journey
+                      .back
+                  }}
                 </span>
               </div>
             </div>
           </div>
         </div>
-        <div class="row" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
+        <div
+          class="row"
+          style="margin-top: 10px"
+          *ngIf="arrayHotel.length > 0"
+        >
           <div class="col-12">
             <div class="border">
-              <strong class="text-primary-hr">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.hotel_assigned}}</strong>
+              <strong class="text-primary-hr">{{
+                translate.app.frontEnd.components.common.travels
+                  .approvals_details_travels.show_hotels_journey
+                  .hotel_assigned
+              }}</strong>
             </div>
           </div>
           <div class="col-12" style="margin-top: 10px">
             <div class="table-responsive">
-              <table class="table table-sm table-striped table-bordered table-hover">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.hotel}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_hotels_journey.hotel
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.date_begin}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_hotels_journey.date_begin
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.date_end}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_hotels_journey.date_end
+                      }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let hotel of arrayHotel">
                     <td>
-                      {{hotel.hotel_name}}
+                      {{ hotel.hotel_name }}
                     </td>
                     <td>
-                      {{hotel.date_begin}}
+                      {{ hotel.date_begin }}
                     </td>
                     <td>
-                      {{hotel.date_end}}
+                      {{ hotel.date_end }}
                     </td>
                   </tr>
                 </tbody>
@@ -70,10 +131,17 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-center top-containter" *ngIf="arrayHotel.length === 0">
+        <div
+          class="row justify-content-center top-containter"
+          *ngIf="arrayHotel.length === 0"
+        >
           <div class="col-lg-8 col-12 text-center">
             <div class="alert alert-warning" role="alert">
-              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_hotels_journey.negative_hoteL}}
+              {{
+                translate.app.frontEnd.components.common.travels
+                  .approvals_details_travels.show_hotels_journey
+                  .negative_hoteL
+              }}
             </div>
           </div>
         </div>

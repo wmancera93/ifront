@@ -10,7 +10,7 @@ import { TranslateService } from '../../../../services/common/translate/translat
   styleUrls: ['./calendar.component.css']
 })
 export class CalendarComponent implements OnInit {
-  @Input('calendar') calendar: any
+  @Input('calendar') calendar: any;
   public objectWidget: Calendar;
   public dataEnterprise: Enterprise = null;
   public translate: Translate = null;
@@ -21,7 +21,7 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.calendar.subscribe((data: Calendar) => {
       this.objectWidget = data;
-    })
+    });
   }
 
   showModalCalendar() {
@@ -30,7 +30,7 @@ export class CalendarComponent implements OnInit {
     if (this.dataEnterprise.show_employee_calendar !== null) {
       if (this.dataEnterprise.show_employee_calendar === true) {
         document.getElementById('btn-calendar').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
 
     }

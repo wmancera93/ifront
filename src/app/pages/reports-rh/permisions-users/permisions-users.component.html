@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-table"></i>
-          {{ parseT("tittle") | translate }}
+          {{ parseT('tittle') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5 text-center cursor-general"
@@ -18,7 +20,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{ parseT("back") | translate }}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -26,13 +28,16 @@
       </div>
     </div>
   </div>
-  <div id="data_table" class="row-hr-container justify-content-center">
+  <div
+    id="data_table"
+    class="row-hr-container justify-content-center"
+  >
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{ parseT("query_filters") | translate }}
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse"
@@ -74,7 +79,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("permtits_with") | translate }}
+                      {{ parseT('permtits_with') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -102,7 +107,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("create") | translate }}
+                      {{ parseT('create') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -130,7 +135,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("see_chart") | translate }}
+                      {{ parseT('see_chart') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -158,7 +163,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("permtits") | translate }}
+                      {{ parseT('permtits') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -186,7 +191,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("manage_report") | translate }}
+                      {{ parseT('manage_report') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -214,7 +219,7 @@
                       ></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
-                      {{ parseT("managed") | translate }}
+                      {{ parseT('managed') | translate }}
                     </div>
                     <div class="col-lg-3 col-md-2 col-3">
                       <b>
@@ -236,10 +241,13 @@
                 <div class="form-group row">
                   <label
                     class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center"
-                    >{{ parseT("show_records") | translate }}:</label
+                    >{{ parseT('show_records') | translate }}:</label
                   >
                   <div class="col-xl-7 col-md-3 col-lg-3 col-6">
-                    <select class="form-control" [(ngModel)]="size_table">
+                    <select
+                      class="form-control"
+                      [(ngModel)]="size_table"
+                    >
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="20">20</option>
@@ -291,7 +299,9 @@
             <input
               [(ngModel)]="value_search"
               class="form-control"
-              placeholder="{{ parseT('placeholder_search') | translate }}"
+              placeholder="{{
+                parseT('placeholder_search') | translate
+              }}"
               (keyup)="searcheByName()"
             />
           </div>
@@ -305,7 +315,10 @@
             >
               <thead>
                 <tr>
-                  <th class="text-center" *ngFor="let label of labels">
+                  <th
+                    class="text-center"
+                    *ngFor="let label of labels"
+                  >
                     <div style="width: 100%">
                       <div class="name-table">
                         {{ label.value }}
@@ -318,7 +331,11 @@
                 <tr
                   *ngFor="
                     let record of (recordsPrint
-                      | paginate: { itemsPerPage: size_table, currentPage: p })
+                      | paginate
+                        : {
+                            itemsPerPage: size_table,
+                            currentPage: p
+                          })
                   "
                 >
                   <td *ngFor="let key of keys">
@@ -334,20 +351,30 @@
                         *ngIf="record[key] == 'true'"
                         style="margin-top: 6px;"
                       >
-                        <i class="fa fa-lg fa-check-circle text-primary">
+                        <i
+                          class="fa fa-lg fa-check-circle text-primary"
+                        >
                           <span class="font-size-07">
-                            {{ "pages.reports_rh.requests.yes" | translate }}
+                            {{
+                              'pages.reports_rh.requests.yes'
+                                | translate
+                            }}
                           </span>
                         </i>
                       </div>
                       <div
                         style="text-align:center"
-                        *ngIf="record[key] == 'false' || record[key] == 'f'"
+                        *ngIf="
+                          record[key] == 'false' || record[key] == 'f'
+                        "
                         style="margin-top: 6px;"
                       >
                         <i class="fa  fa-lg fa-ban text-danger">
                           <span class="font-size-07">
-                            {{ "pages.reports_rh.requests.not" | translate }}
+                            {{
+                              'pages.reports_rh.requests.not'
+                                | translate
+                            }}
                           </span>
                         </i>
                       </div>
@@ -359,17 +386,21 @@
                           record[key] != 'f'
                         "
                       >
-                        <div *ngIf="(record[key] | split: '-':'1') != ''">
+                        <div
+                          *ngIf="(record[key] | split: '-':'1') != ''"
+                        >
                           <p>
-                            <b>{{ record[key] | split: "-":"1" }}</b>
+                            <b>{{ record[key] | split: '-':'1' }}</b>
                           </p>
                           <p>
-                            <b>#{{ record[key] | split: "-":"0" }}</b>
+                            <b>#{{ record[key] | split: '-':'0' }}</b>
                           </p>
                         </div>
-                        <div *ngIf="(record[key] | split: '-':'1') == ''">
+                        <div
+                          *ngIf="(record[key] | split: '-':'1') == ''"
+                        >
                           <p>
-                            {{ record[key] | split: "-":"0" }}
+                            {{ record[key] | split: '-':'0' }}
                           </p>
                         </div>
                       </div>

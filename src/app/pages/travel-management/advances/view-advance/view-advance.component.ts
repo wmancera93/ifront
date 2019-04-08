@@ -15,14 +15,14 @@ export class ViewAdvanceComponent implements OnInit {
   public infoAdvance: any = null;
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string;
-  public showPdf: boolean = false;
-  public showSizeTable: boolean = false;
+  public showPdf = false;
+  public showSizeTable = false;
   public translate: Translate = null;
   public idDelete: string;
 
   public alertWarning: any[] = [];
 
-  public countAfter: number = 0;
+  public countAfter = 0;
 
   public ticketSendPDF: any;
 
@@ -38,10 +38,10 @@ export class ViewAdvanceComponent implements OnInit {
         this.advancesService.getAdvanceByID(id).subscribe((advance: any) => {
           if (document.getElementById('modal_viewAdvance').className !== 'modal show') {
             document.getElementById('btn-viewAdvance').click();
-            document.getElementById("bodyGeneral").removeAttribute('style');
+            document.getElementById('bodyGeneral').removeAttribute('style');
             this.infoAdvance = advance.data;
             this.ticketSendPDF = this.infoAdvance.travel_request_id;
-            let infoTableAdvances = [];
+            const infoTableAdvances = [];
             infoTableAdvances.push({
               success: true,
               data: [this.infoAdvance.table_advances_payment]
@@ -52,9 +52,9 @@ export class ViewAdvanceComponent implements OnInit {
             }, 200);
           }
 
-        })
+        });
       }
-    })
+    });
 
   }
 

@@ -1,5 +1,4 @@
-export interface Managerial
-{
-    title: string,
-    
+export interface Managerial {
+    title: string;
+
 }

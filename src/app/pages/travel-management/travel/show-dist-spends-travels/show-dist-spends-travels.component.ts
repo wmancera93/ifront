@@ -14,26 +14,26 @@ export class ShowDistSpendsTravelsComponent implements OnInit {
   public id_spend_travel: string;
   public detailDistCostTravel: any[] = [];
   public printSpendTravel: any[] = [];
-  public is_collapse = false
+  public is_collapse = false;
   public translate: Translate = null;
 
   constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService
     , public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-    
+
     this.spendSharedService.getViewDistCostSpend().subscribe((data: any) => {
       this.accionDist = data.accion;
 
       if (document.getElementById('dist_spend_travel').className !== 'modal show') {
         document.getElementById('btn_detail_distSpend_travel').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
       this.id_spend_travel = data.id;
       this.spendsService.getDetailDistCost(this.id_spend_travel).subscribe((result: any) => {
         this.detailDistCostTravel = result.data[0].cost_distribution;
         this.printSpendTravel = result.data[0].travel_allowance;
-      })
+      });
     });
   }
 
@@ -42,9 +42,9 @@ export class ShowDistSpendsTravelsComponent implements OnInit {
   returnTravel() {
     if (this.accionDist === false) {
       if (document.getElementById('travel_view').className !== 'modal show') {
-        document.getElementById("closeDistSpendTravel").click();
+        document.getElementById('closeDistSpendTravel').click();
         setTimeout(() => {
-          document.getElementById("btn_travel_view").click();
+          document.getElementById('btn_travel_view').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 

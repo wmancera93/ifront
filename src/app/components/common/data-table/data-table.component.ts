@@ -36,12 +36,12 @@ export class DataTableComponent implements OnInit {
   @Input() sizeTable?: any = true;
   @Input() minHeight?: any = true;
 
-  public height = "min-height: 370px;";
+  public height = 'min-height: 370px;';
 
   public keys: any[] = [];
   public labels: any[] = [];
   public p = 1;
-  public size_table: number = 10;
+  public size_table = 10;
 
   public labelsCell: any[] = [];
 
@@ -111,7 +111,7 @@ export class DataTableComponent implements OnInit {
 
             this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
             this.columnsPdf.push({ title: label.value, dataKey: element });
-          })
+          });
         } else {
           this.show = false;
         }
@@ -133,11 +133,11 @@ export class DataTableComponent implements OnInit {
   }
 
   pdfExport() {
-    let title: string = this.title;
-    var today = new Date();
-    let dd: number = today.getDate();
-    let mm: number = today.getMonth() + 1;
-    let yyyy: number = today.getFullYear();
+    const title: string = this.title;
+    const today = new Date();
+    const dd: number = today.getDate();
+    const mm: number = today.getMonth() + 1;
+    const yyyy: number = today.getFullYear();
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
 
@@ -151,8 +151,8 @@ export class DataTableComponent implements OnInit {
       mmNew = '0' + mm.toString();
     }
 
-    let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
-    let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
+    const dateNow = ddNew + '/' + mmNew + '/' + yyyy;
+    const dataEnterprise: Enterprise = JSON.parse(localStorage.getItem('enterprise'));
     if (this.columnsPdf.length > 5) {
       alineation = 'l';
       positionPage = 740;
@@ -161,7 +161,7 @@ export class DataTableComponent implements OnInit {
       positionPage = 500;
     }
 
-    var doc = new jsPDF(alineation, 'pt');
+    const doc = new jsPDF(alineation, 'pt');
     doc.page = 1;
 
     doc.autoTable(this.columnsPdf, this.recordsPrint, {
@@ -169,7 +169,7 @@ export class DataTableComponent implements OnInit {
       styles: {
         cellPadding: 5,
         fontSize: 10,
-        font: "helvetica",
+        font: 'helvetica',
         fontStyle: 'normal',
         overflow: 'hidden',
         textColor: 20,
@@ -185,16 +185,16 @@ export class DataTableComponent implements OnInit {
       },
       margin: { top: 110 },
       addPageContent: function (data) {
-        doc.setFontSize(16)
-        doc.text(40, 60, title)
-        doc.setFontSize(12)
-        doc.text(40, 95, 'Generado el ' + dateNow)
-        doc.setFontSize(10)
+        doc.setFontSize(16);
+        doc.text(40, 60, title);
+        doc.setFontSize(12);
+        doc.text(40, 95, 'Generado el ' + dateNow);
+        doc.setFontSize(10);
         doc.text(positionPage, 60, 'pagina ' + doc.page);
         doc.page++;
       }
     });
-    doc.save(title + '.pdf')
+    doc.save(title + '.pdf');
   }
 
   excelExport() {
@@ -206,16 +206,16 @@ export class DataTableComponent implements OnInit {
   }
 
   printTable() {
-    this.objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint })
+    this.objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint });
     this.printDataTableService.setObjectForPrint(this.objectTable);
     this.objectTable = [];
   }
 
   sortable(label: any) {
-    let descending: boolean = true;
-    let idPrevius: string = '';
+    let descending = true;
+    let idPrevius = '';
     if (document.getElementsByClassName('fa-chevron-up').length > 0) {
-      idPrevius = (<HTMLInputElement>document.getElementsByClassName('fa-chevron-up')[0]).id
+      idPrevius = (<HTMLInputElement>document.getElementsByClassName('fa-chevron-up')[0]).id;
       if (idPrevius !== label.id) {
         document.getElementById(idPrevius).classList.remove('fa');
         document.getElementById(idPrevius).classList.remove('fa-chevron-up');
@@ -276,8 +276,8 @@ export class DataTableComponent implements OnInit {
       }
       case 'date': {
         this.recordsPrint = this.recordsPrint.sort(function (a, b) {
-          let dateA: any = new Date(a[label.label]);
-          let dateB: any = new Date(b[label.label]);
+          const dateA: any = new Date(a[label.label]);
+          const dateB: any = new Date(b[label.label]);
           if (!descending) {
             return dateA - dateB;
           } else {
@@ -299,8 +299,8 @@ export class DataTableComponent implements OnInit {
       }
     }
 
-    let input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
-    let parameter = label.label;
+    const input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
+    const parameter = label.label;
     this.recordsPrint = this.recordsStatic.filter((prod: any) => prod[parameter].toString().toUpperCase().indexOf(input.toUpperCase()) >= 0);
 
   }

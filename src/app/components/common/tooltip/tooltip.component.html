@@ -1,9 +1,18 @@
 <!-- <button id="btnModal" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-alert" style="display: none"></button> -->
-<div id="tooltip_data" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  class="position-absolute">
+<div
+  id="tooltip_data"
+  data-backdrop="false"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  class="position-absolute"
+>
   <div class="modal-dialog bgn-tooltip" role="document">
     <div class="modal-content-tooltip" *ngIf="infoTooltip != ''">
-      <h5 class="font-controls-login" id="exampleModalLabel">{{infoTooltip}}</h5>
+      <h5 class="font-controls-login" id="exampleModalLabel">
+        {{ infoTooltip }}
+      </h5>
     </div>
   </div>
 </div>

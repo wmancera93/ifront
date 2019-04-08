@@ -23,7 +23,7 @@ export class EditPlanningDateComponent implements OnInit {
   public endPlanning: any;
   public startDate: any;
   public endDate: any;
-  public countAfter: number = 0;
+  public countAfter = 0;
   public translate: Translate = null;
 
   constructor(public performanceEvaluationService: PerformanceEvaluationService,
@@ -36,8 +36,8 @@ export class EditPlanningDateComponent implements OnInit {
 
     this.formDate = new FormGroup({});
     this.formDate = fb.group({
-      start_planning: "",
-      end_planning: ""
+      start_planning: '',
+      end_planning: ''
     });
 
     this.performanceEvalSharedService.getPlanningEvaluationData().subscribe((actionInfo: any) => {
@@ -48,22 +48,22 @@ export class EditPlanningDateComponent implements OnInit {
           // this.startPlanning = data.data.start_planning_date;
           // this.endPlanning = data.data.end_planning_date;
 
-          this.startPlanning = data.data.start_planning_date.split("-");
-          this.endPlanning = data.data.end_planning_date.split("-");
-          this.startDate = (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString();
-          this.endDate = (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString();
+          this.startPlanning = data.data.start_planning_date.split('-');
+          this.endPlanning = data.data.end_planning_date.split('-');
+          this.startDate = (this.startPlanning[2] + '-' + this.startPlanning[1] + '-' + this.startPlanning[0]).toString();
+          this.endDate = (this.endPlanning[2] + '-' + this.endPlanning[1] + '-' + this.endPlanning[0]).toString();
           this.formDate = new FormGroup({});
           this.formDate = fb.group({
-            start_planning: (this.startPlanning[2] + "-" + this.startPlanning[1] + "-" + this.startPlanning[0]).toString(),
-            end_planning: (this.endPlanning[2] + "-" + this.endPlanning[1] + "-" + this.endPlanning[0]).toString()
+            start_planning: (this.startPlanning[2] + '-' + this.startPlanning[1] + '-' + this.startPlanning[0]).toString(),
+            end_planning: (this.endPlanning[2] + '-' + this.endPlanning[1] + '-' + this.endPlanning[0]).toString()
           });
-        })
+        });
 
         document.getElementById('btn-planningEvaluation').click();
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
 
-    })
+    });
 
   }
 
@@ -81,7 +81,7 @@ export class EditPlanningDateComponent implements OnInit {
         confirmation: false,
         typeConfirmation: ''
       }];
-      document.getElementById("closeModalPlanning").click();
+      document.getElementById('closeModalPlanning').click();
       this.alert.setAlert(alertWarning[0]);
     },
       (error: any) => {
@@ -92,9 +92,9 @@ export class EditPlanningDateComponent implements OnInit {
           confirmation: false,
           typeConfirmation: ''
         }];
-        document.getElementById("closeModalPlanning").click();
+        document.getElementById('closeModalPlanning').click();
         this.alert.setAlert(alertWarning[0]);
-      })
+      });
   }
 
 

@@ -16,27 +16,27 @@ import { TranslateService } from '../../../../services/common/translate/translat
 export class TravelApproverReportComponent implements OnInit {
 
   public title: string;
-  public is_collapse_report_approvers: boolean = false;
-  public collapseFilterAdvance: boolean = false;
+  public is_collapse_report_approvers = false;
+  public collapseFilterAdvance = false;
   public reports_list_approvers = null;
   public objectReportApprover: EventEmitter<any> = new EventEmitter();
-  public id_employee: string = '-1';
-  public personal_number = "";
-  public ticket: string = '-1';
-  public ticket_cli: string = '-1';
-  public date_begin: string = '';
-  public date_end: string = '';
-  public approver: string = '-1';
-  public level: number = -1;
-  public showPdf: boolean = false;
-  public showExcel: boolean = true;
+  public id_employee = '-1';
+  public personal_number = '';
+  public ticket = '-1';
+  public ticket_cli = '-1';
+  public date_begin = '';
+  public date_end = '';
+  public approver = '-1';
+  public level = -1;
+  public showPdf = false;
+  public showExcel = true;
   public nameReport: string;
   public objectGeneralApprover: any[] = [];
-  public showDataTableApprover: boolean = true;
-  public btnConsultApprover: boolean = true;
+  public showDataTableApprover = true;
+  public btnConsultApprover = true;
   public translate: Translate = null;
   public userId: User = null;
-  public countAfter: number = 0;
+  public countAfter = 0;
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     private accionDataTableService: DataDableSharedService, public alert: AlertsService, public translateService: TranslateService) {
@@ -47,19 +47,19 @@ export class TravelApproverReportComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
       if (data === this.nameReport && this.countAfter === 0) {
-        this.getObjectPrint("excel");
+        this.getObjectPrint('excel');
       }
     });
     this.reports_list_approvers = travel_reports_list.getTravelsReportList();
     document
-      .getElementsByTagName("body")[0]
-      .setAttribute("style", "overflow-y:auto");
+      .getElementsByTagName('body')[0]
+      .setAttribute('style', 'overflow-y:auto');
   }
 
 
   ngOnInit() {
-    this.getObjectPrint("general");
-    this.userId = JSON.parse(localStorage.getItem("user")).employee_id;
+    this.getObjectPrint('general');
+    this.userId = JSON.parse(localStorage.getItem('user')).employee_id;
 
   }
   sortByAphabet(dataBySort: any) {
@@ -93,7 +93,7 @@ export class TravelApproverReportComponent implements OnInit {
     this.date_begin = '';
     this.date_end = '';
 
-    this.getObjectPrint("general");
+    this.getObjectPrint('general');
   }
   returnBackReportApprovers() {
     this.router.navigate(['ihr/travel_management']);
@@ -101,12 +101,12 @@ export class TravelApproverReportComponent implements OnInit {
 
   getObjectPrint(param) {
 
-    let personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
-    let ticket_send = this.ticket === '' ? '-1' : this.ticket;
-    let ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
-    let approver_send = this.approver === '' ? '-1' : this.approver;
-    let date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
-    let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
+    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const ticket_send = this.ticket === '' ? '-1' : this.ticket;
+    const ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
+    const approver_send = this.approver === '' ? '-1' : this.approver;
+    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
+    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
 
     if (param === 'general') {
       this.travel_reports_list.getTravelsApprovedReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, date_end_send, approver_send, this.level).subscribe((data: any) => {
@@ -138,7 +138,7 @@ export class TravelApproverReportComponent implements OnInit {
   }
 
   validateNumberApprover(name: string, value: any) {
-    let proof = /^[0-9]+$/.test(value);
+    const proof = /^[0-9]+$/.test(value);
     switch (name) {
       case 'personal_number':
         if (!proof) {
@@ -176,9 +176,9 @@ export class TravelApproverReportComponent implements OnInit {
     } else {
       if ((this.date_begin !== '') && (this.date_end !== '')) {
         this.btnConsultApprover = true;
-        let dayBegin = new Date(this.date_begin).getTime();
-        let dayEnd = new Date(this.date_end).getTime();
-        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const dayBegin = new Date(this.date_begin).getTime();
+        const dayEnd = new Date(this.date_end).getTime();
+        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_approver_report.message_alert_one_ts, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);

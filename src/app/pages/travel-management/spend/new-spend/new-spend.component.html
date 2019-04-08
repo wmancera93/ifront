@@ -1,52 +1,129 @@
-<button id="btn_spend_new" type="button" class="btn btn-primary" data-toggle="modal" data-target="#spend_new" style="display:none;">
-</button>
-<div class="modal" data-backdrop="static" id="spend_new" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_spend_new"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#spend_new"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  data-backdrop="static"
+  id="spend_new"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle}}</h5>
-        <button id="closeSpends" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{
+            translate.app.frontEnd.pages.travel_management.spend
+              .new_spend.tittle
+          }}
+        </h5>
+        <button
+          id="closeSpends"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
-        <form [formGroup]="formSpendTravel" class="row" (ngSubmit)="newSpend(formSpendTravel.value)">
-          <div class="col-12" *ngIf="userAuthenticated.employee.trip_by_third">
+        <form
+          [formGroup]="formSpendTravel"
+          class="row"
+          (ngSubmit)="newSpend(formSpendTravel.value)"
+        >
+          <div
+            class="col-12"
+            *ngIf="userAuthenticated.employee.trip_by_third"
+          >
             <div class="row">
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.spend_third}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.spend_third
+                    }}:</strong
+                  >
                 </label>
                 <form name="searchAutoComplete">
                   <p>
-                    <input id="searchByAutoComplete" type="text" name="employeeList" class="form-control" [(ngModel)]="searchByLetter" (keyup)="enterNameEmployee()">
+                    <input
+                      id="searchByAutoComplete"
+                      type="text"
+                      name="employeeList"
+                      class="form-control"
+                      [(ngModel)]="searchByLetter"
+                      (keyup)="enterNameEmployee()"
+                    />
                   </p>
                 </form>
-                <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
-                  <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
+                <div
+                  *ngIf="showListAutoC"
+                  class="list-search-autocomplete "
+                  style="overflow-x: hidden;"
+                >
+                  <div
+                    (click)="returnObjectSearch(employee)"
+                    class="search-results borderLineEmployee"
+                    *ngFor="let employee of searchEmployee"
+                  >
                     <div class="row align-items-center">
                       <div class="col-4">
-                        <img src="{{employee.image.url}}" class="roundPhotoChart">
+                        <img
+                          src="{{ employee.image.url }}"
+                          class="roundPhotoChart"
+                        />
                       </div>
                       <div class="col-8 text-left">
-                        <i class="fa fa-user-o"></i> {{employee.name_complete}}
+                        <i class="fa fa-user-o"></i>
+                        {{ employee.name_complete }}
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               <div class="col-8 align-self-center">
-                <label class="titleColor" *ngIf="eployee_selected !== null">
-                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.employee_third}}:
+                <label
+                  class="titleColor"
+                  *ngIf="eployee_selected !== null"
+                >
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.employee_third
+                  }}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>{{eployee_selected.name_complete}}</strong>
+                  <strong>{{
+                    eployee_selected.name_complete
+                  }}</strong>
                 </label>
-                <br>
-                <span *ngIf="eployee_selected !== null" class="cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important"
-                  (click)="deleteEmployeeThird()">
-                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.erase_third}}
+                <br />
+                <span
+                  *ngIf="eployee_selected !== null"
+                  class="cursor-general"
+                  style="text-decoration: underline  rgb(185, 190, 206)!important"
+                  (click)="deleteEmployeeThird()"
+                >
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.erase_third
+                  }}
                 </span>
               </div>
             </div>
@@ -56,58 +133,141 @@
               <div class="col-lg-3 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-globe text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.travel}}</strong>
+                  <strong>{{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.travel
+                  }}</strong>
                 </label>
               </div>
               <div class="col-lg-9 col-md-6 col-12">
-                <select class="form-control" [formControl]="formSpendTravel.controls['travel_request_id']" (change)="validateTravel(formSpendTravel.value)">
-                  <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                  <option *ngFor="let nameTravel of listTravelsFromSpend" [value]="nameTravel.id">{{nameTravel.ticket}}-{{nameTravel.name_travel}}</option>
+                <select
+                  class="form-control"
+                  [formControl]="
+                    formSpendTravel.controls['travel_request_id']
+                  "
+                  (change)="validateTravel(formSpendTravel.value)"
+                >
+                  <option value="">{{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.option_select
+                  }}</option>
+                  <option
+                    *ngFor="let nameTravel of listTravelsFromSpend"
+                    [value]="nameTravel.id"
+                    >{{ nameTravel.ticket }}-{{
+                      nameTravel.name_travel
+                    }}</option
+                  >
                 </select>
               </div>
             </div>
           </div>
 
-          <div class="col-12" id="table" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="min-height: 80px !important; margin-top: 30px">
-            <h4>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.subtittle}}</h4>
-            <app-data-table [records]="objectReport" id="tableAdvances" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+          <div
+            class="col-12"
+            id="table"
+            *ngIf="infoTableSpends[0].data[0].data.length > 0"
+            style="min-height: 80px !important; margin-top: 30px"
+          >
+            <h4>
+              {{
+                translate.app.frontEnd.pages.travel_management.spend
+                  .new_spend.subtittle
+              }}
+            </h4>
+            <app-data-table
+              [records]="objectReport"
+              id="tableAdvances"
+              [pdf]="showPdf"
+              [sizeTable]="showSizeTable"
+              [title]="nameReport"
+            ></app-data-table>
           </div>
 
-          <div class="col-12 top-containter" *ngIf="infoTableSpends[0].data[0].data.length > 0" style="margin-top: 20px">
+          <div
+            class="col-12 top-containter"
+            *ngIf="infoTableSpends[0].data[0].data.length > 0"
+            style="margin-top: 20px"
+          >
             <div class="row">
               <div class="col-12">
                 <label class="titleColor" *ngIf="imgSpend.length > 0">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.attach}}</strong>
+                  <strong>{{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.attach
+                  }}</strong>
                 </label>
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-8 col-md-12 col-12" *ngFor="let imgsaved of imgSpend; let index = index">
-                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+              <div
+                class="col-lg-8 col-md-12 col-12"
+                *ngFor="let imgsaved of imgSpend; let index = index"
+              >
+                <div
+                  class="alert"
+                  style="background-color:rgba(0,0,0,.2) "
+                  role="alert"
+                >
                   <div class="row">
                     <div class="col-md-11 col-10">
-                      <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme='dark'>
-                        <h6>{{index+1}}.
-                          <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
-                          {{imgsaved.file.name}}
+                      <div
+                        *ngIf="imgsaved.extension == 'pdf'"
+                        class="cursor-general "
+                        theme="dark"
+                      >
+                        <h6>
+                          {{ index + 1 }}.
+                          <i
+                            class="fa fa-fw fa-file-pdf-o"
+                            aria-hidden="true"
+                            style="font-size: 1.5em; color: white"
+                          ></i>
+                          {{ imgsaved.file.name }}
                         </h6>
                       </div>
-                      <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme='dark'>
-                        <h6>{{index+1}}.
-                          <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
-                          {{imgsaved.file.name}}
+                      <div
+                        *ngIf="imgsaved.extension == 'docx'"
+                        class="cursor-general "
+                        theme="dark"
+                      >
+                        <h6>
+                          {{ index + 1 }}.
+                          <i
+                            class="fa fa-fw fa-file-word-o"
+                            aria-hidden="true"
+                            style="font-size: 1.5em; color:white"
+                          ></i>
+                          {{ imgsaved.file.name }}
                         </h6>
                       </div>
-                      <div *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg' " class="cursor-general "
-                        theme='dark'>
-                        <h6>{{index+1}}.
-                          <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
-                          {{imgsaved.file.name}}
+                      <div
+                        *ngIf="
+                          imgsaved.extension == 'jpeg' ||
+                          imgsaved.extension == 'png' ||
+                          imgsaved.extension == 'jpg'
+                        "
+                        class="cursor-general "
+                        theme="dark"
+                      >
+                        <h6>
+                          {{ index + 1 }}.
+                          <i
+                            class="fa fa-fw fa-file-image-o"
+                            aria-hidden="true"
+                            style="font-size: 1.5em; color:white"
+                          ></i>
+                          {{ imgsaved.file.name }}
                         </h6>
                       </div>
                     </div>
                     <div class="col-md-1 col-2 text-center">
-                      <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">x</h6>
+                      <h6
+                        (click)="deleteUpload(imgsaved)"
+                        class="text-primary-hr cursor-general"
+                      >
+                        x
+                      </h6>
                     </div>
                   </div>
                 </div>
@@ -116,16 +276,29 @@
             <div class="row">
               <div class="col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.message_attach}}</strong>
+                  <strong>{{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.message_attach
+                  }}</strong>
                 </label>
-                <app-file-upload [nameFile]='filequotation' [extensions]="extensions"></app-file-upload>
+                <app-file-upload
+                  [nameFile]="filequotation"
+                  [extensions]="extensions"
+                ></app-file-upload>
               </div>
             </div>
           </div>
 
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 15px" *ngIf="continue">
+          <div
+            class="col-lg-3 col-md-4 col-12"
+            style="margin-top: 15px"
+            *ngIf="continue"
+          >
             <h5 *ngIf="spendNew">
-              {{translate.app.frontEnd.pages.travel_management.spend.new_spend.btn_new}}
+              {{
+                translate.app.frontEnd.pages.travel_management.spend
+                  .new_spend.btn_new
+              }}
             </h5>
           </div>
 
@@ -133,32 +306,84 @@
             <div class="row justify-content-end">
               <div class="col-3" style="padding-bottom: 20px">
                 <h5 class="titleColor" *ngIf="spendEdit && !spendNew">
-                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.label_edit}}
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.label_edit
+                  }}
                 </h5>
-                <button type="button" *ngIf="collapse_is" class="btn btn-block btn-primary text-center" (click)="colapse()">
-                  {{translate.app.frontEnd.pages.travel_management.spend.new_spend.label_new}}
+                <button
+                  type="button"
+                  *ngIf="collapse_is"
+                  class="btn btn-block btn-primary text-center"
+                  (click)="colapse()"
+                >
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.label_new
+                  }}
                 </button>
-                <button type="button" id="funtionSpendTravel" data-toggle="collapse" data-target="#collapseNewSpend" style="display: none">
-                </button>
+                <button
+                  type="button"
+                  id="funtionSpendTravel"
+                  data-toggle="collapse"
+                  data-target="#collapseNewSpend"
+                  style="display: none"
+                ></button>
               </div>
             </div>
           </div>
 
-
-          <div class="collapse top-general-p" id="collapseNewSpend" *ngIf="continue">
+          <div
+            class="collapse top-general-p"
+            id="collapseNewSpend"
+            *ngIf="continue"
+          >
             <div class="col-12" style="margin-top: 15px">
               <label class="titleColor">
-                <i class="fa fa-fw fa-commenting-o text-primary-hr"></i>
-                <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.description}}:</strong>
+                <i
+                  class="fa fa-fw fa-commenting-o text-primary-hr"
+                ></i>
+                <strong
+                  >{{
+                    translate.app.frontEnd.pages.travel_management
+                      .spend.new_spend.description
+                  }}:</strong
+                >
               </label>
-              <textarea style="margin-top: 10px" type="text" rows="4" style="height: auto !important;" name="observation" class="form-control uppercase"
-                [formControl]="formSpendTravel.controls['observation']"></textarea>
+              <textarea
+                style="margin-top: 10px"
+                type="text"
+                rows="4"
+                style="height: auto !important;"
+                name="observation"
+                class="form-control uppercase"
+                [formControl]="
+                  formSpendTravel.controls['observation']
+                "
+              ></textarea>
             </div>
 
-            <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="continue" style="margin-top: 20px">
-              <input class="form-check-input" style="margin-top: 4px !important" type="checkbox" value="true" id="FormACheck" [formControl]="formSpendTravel.controls['formA']">
-              <label class="form-check-label titleColor" for="FormACheck">
-                <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.form_a}}</strong>
+            <div
+              class="col-lg-3 col-md-6 col-12 form-check"
+              *ngIf="continue"
+              style="margin-top: 20px"
+            >
+              <input
+                class="form-check-input"
+                style="margin-top: 4px !important"
+                type="checkbox"
+                value="true"
+                id="FormACheck"
+                [formControl]="formSpendTravel.controls['formA']"
+              />
+              <label
+                class="form-check-label titleColor"
+                for="FormACheck"
+              >
+                <strong>{{
+                  translate.app.frontEnd.pages.travel_management.spend
+                    .new_spend.form_a
+                }}</strong>
               </label>
             </div>
 
@@ -166,34 +391,96 @@
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.type_document}}:</strong>
+                    <i
+                      class="fa fa-fw fa-list-ol text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.type_document
+                      }}:</strong
+                    >
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['document']" paceholder="Seleccione">
-                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                    <option *ngFor="let document of listTypeDocument" [value]="document.id">{{document.name}}</option>
+                  <select
+                    class="form-control"
+                    [formControl]="
+                      formSpendTravel.controls['document']
+                    "
+                    paceholder="Seleccione"
+                  >
+                    <option value="">{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.option_select
+                    }}</option>
+                    <option
+                      *ngFor="let document of listTypeDocument"
+                      [value]="document.id"
+                      >{{ document.name }}</option
+                    >
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-hospital-o text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.store}}:</strong>
+                    <i
+                      class="fa fa-fw fa-hospital-o text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.store
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control uppercase" name="bussines_name" [formControl]="formSpendTravel.controls['bussines_name']">
+                  <input
+                    type="text"
+                    class="form-control uppercase"
+                    name="bussines_name"
+                    [formControl]="
+                      formSpendTravel.controls['bussines_name']
+                    "
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-id-card-o text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.nit}}:</strong>
+                    <i
+                      class="fa fa-fw fa-id-card-o text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.nit
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control" name="nit" [formControl]="formSpendTravel.controls['nit']" (keyup)="onluNumberSpend(formSpendTravel.value, 'nit')">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="nit"
+                    [formControl]="formSpendTravel.controls['nit']"
+                    (keyup)="
+                      onluNumberSpend(formSpendTravel.value, 'nit')
+                    "
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.date_spend}}:</strong>
+                    <i
+                      class="fa fa-fw fa-calendar text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.date_spend
+                      }}:</strong
+                    >
                   </label>
-                  <input tabindex="-1" type="date" name="date" [formControl]="formSpendTravel.controls['date']" class="form-control" (keyup)="delete('date_body')"
+                  <input
+                    tabindex="-1"
+                    type="date"
+                    name="date"
+                    [formControl]="formSpendTravel.controls['date']"
+                    class="form-control"
+                    (keyup)="delete('date_body')"
                   />
                 </div>
               </div>
@@ -202,36 +489,113 @@
               <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-hashtag  text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.bill_number}}:</strong>
+                    <i
+                      class="fa fa-fw fa-hashtag  text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.bill_number
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control" name="bill_number" [formControl]="formSpendTravel.controls['bill_number']" (keyup)="onluNumberSpend(formSpendTravel.value, 'bill')"
-                    style="text-align:right">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="bill_number"
+                    [formControl]="
+                      formSpendTravel.controls['bill_number']
+                    "
+                    (keyup)="
+                      onluNumberSpend(formSpendTravel.value, 'bill')
+                    "
+                    style="text-align:right"
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.authorization}}:</strong>
+                    <i
+                      class="fa fa-fw fa-hashtag text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.authorization
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control" name="authozton_number" [formControl]="formSpendTravel.controls['authorization_number']"
-                    (keyup)="onluNumberSpend(formSpendTravel.value, 'authorization')" style="text-align:right">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="authozton_number"
+                    [formControl]="
+                      formSpendTravel.controls['authorization_number']
+                    "
+                    (keyup)="
+                      onluNumberSpend(
+                        formSpendTravel.value,
+                        'authorization'
+                      )
+                    "
+                    style="text-align:right"
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.control_number}}:</strong>
+                    <i
+                      class="fa fa-fw fa-calculator text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.control_number
+                      }}:</strong
+                    >
                   </label>
-                  <input (keypress)="maskCode(formSpendTravel.value)" type="text" class="form-control uppercase" name="control_number" [formControl]="formSpendTravel.controls['control_number']"
-                    placeholder="__-__-__-__-__" maxlength="14" [attr.disabled]="disabledCode == true ? true : null">
+                  <input
+                    (keypress)="maskCode(formSpendTravel.value)"
+                    type="text"
+                    class="form-control uppercase"
+                    name="control_number"
+                    [formControl]="
+                      formSpendTravel.controls['control_number']
+                    "
+                    placeholder="__-__-__-__-__"
+                    maxlength="14"
+                    [attr.disabled]="
+                      disabledCode == true ? true : null
+                    "
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.type_spend}}:</strong>
+                    <i
+                      class="fa fa-fw fa-list-ol text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.type_spend
+                      }}:</strong
+                    >
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['travel_allowance_type_id']" paceholder="Seleccione">
-                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                    <option *ngFor="let spendType of listSpendType" [value]="spendType.id">{{spendType.code}} - {{spendType.name}}
+                  <select
+                    class="form-control"
+                    [formControl]="
+                      formSpendTravel.controls[
+                        'travel_allowance_type_id'
+                      ]
+                    "
+                    paceholder="Seleccione"
+                  >
+                    <option value="">{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.option_select
+                    }}</option>
+                    <option
+                      *ngFor="let spendType of listSpendType"
+                      [value]="spendType.id"
+                      >{{ spendType.code }} - {{ spendType.name }}
                     </option>
                   </select>
                 </div>
@@ -242,93 +606,187 @@
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-money text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.import}}:</strong>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.import
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control" name="value" [formControl]="formSpendTravel.controls['value']" (keyup)="onluNumberSpend(formSpendTravel.value, 'import')"
-                    style="text-align:right">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="value"
+                    [formControl]="formSpendTravel.controls['value']"
+                    (keyup)="
+                      onluNumberSpend(formSpendTravel.value, 'import')
+                    "
+                    style="text-align:right"
+                  />
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.money}}:</strong>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.money
+                      }}:</strong
+                    >
                   </label>
-                  <select class="form-control" [formControl]="formSpendTravel.controls['currency_id']" paceholder="Seleccione">
-                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                    <option *ngFor="let money of listMoneyType" [value]="money.id">{{money.name}}</option>
+                  <select
+                    class="form-control"
+                    [formControl]="
+                      formSpendTravel.controls['currency_id']
+                    "
+                    paceholder="Seleccione"
+                  >
+                    <option value="">{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.option_select
+                    }}</option>
+                    <option
+                      *ngFor="let money of listMoneyType"
+                      [value]="money.id"
+                      >{{ money.name }}</option
+                    >
                   </select>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
-                    <strong>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.populate}}:</strong>
+                    <i
+                      class="fa fa-fw fa-map-marker text-primary-hr"
+                    ></i>
+                    <strong
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.populate
+                      }}:</strong
+                    >
                   </label>
-                  <input type="text" class="form-control uppercase" name="populate_name" [formControl]="formSpendTravel.controls['populated']">
+                  <input
+                    type="text"
+                    class="form-control uppercase"
+                    name="populate_name"
+                    [formControl]="
+                      formSpendTravel.controls['populated']
+                    "
+                  />
                 </div>
               </div>
             </div>
             <div class="col-12" style="margin-top: 30px">
               <div class="border">
-                <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.seccion_dist}}</strong>
+                <strong class="text-primary-hr">{{
+                  translate.app.frontEnd.pages.travel_management.spend
+                    .new_spend.seccion_dist
+                }}</strong>
               </div>
             </div>
             <div class="col-12" style="margin-top: 30px">
               <div class="row" *ngIf="distributionAccount.length > 0">
                 <div class="col-12">
                   <div class="table-responsive">
-                    <table class="table table-sm table-striped table-bordered table-hover">
+                    <table
+                      class="table table-sm table-striped table-bordered table-hover"
+                    >
                       <thead>
                         <tr>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_cero}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_cero
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_one}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_one
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_two}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_two
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_tree}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_tree
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_four}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_four
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_five}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_five
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_six}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_six
+                            }}
                           </th>
                           <th class="text-center">
-                            {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_seven}}
+                            {{
+                              translate.app.frontEnd.pages
+                                .travel_management.spend.new_spend
+                                .column_seven
+                            }}
                           </th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr *ngFor="let pinterDistributions of distributionAccount">
+                        <tr
+                          *ngFor="
+                            let pinterDistributions of distributionAccount
+                          "
+                        >
                           <td>
-                            {{pinterDistributions.element_imputation}}
+                            {{
+                              pinterDistributions.element_imputation
+                            }}
                           </td>
                           <td>
-                            {{pinterDistributions.center_cost}}
+                            {{ pinterDistributions.center_cost }}
                           </td>
                           <td>
-                            {{pinterDistributions.graph_code}}
+                            {{ pinterDistributions.graph_code }}
                           </td>
                           <td>
-                            {{pinterDistributions.operations}}
+                            {{ pinterDistributions.operations }}
                           </td>
                           <td>
-                            {{pinterDistributions.order_name}}
+                            {{ pinterDistributions.order_name }}
                           </td>
                           <td>
-                            {{pinterDistributions.account_contable}}
+                            {{ pinterDistributions.account_contable }}
                           </td>
                           <td>
-                            {{pinterDistributions.distribution}} %
+                            {{ pinterDistributions.distribution }} %
                           </td>
                           <td>
-                            <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeAccount(pinterDistributions)">
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="
+                                removeAccount(pinterDistributions)
+                              "
+                            >
                               <i class="fa fa-fw fa-minus"></i>
                             </button>
                           </td>
@@ -337,69 +795,176 @@
                     </table>
                   </div>
                 </div>
-
               </div>
             </div>
             <div class="col-12" style="margin-top: 15px">
               <div class="row">
                 <div class="col-lg-4 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_cero}}:*</a>
+                    <i
+                      class="fa fa-fw fa-pie-chart text-primary-hr"
+                    ></i>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_cero
+                      }}:*</a
+                    >
                   </label>
-                  <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
-                    (change)="selectTypeCenterImputations()">
+                  <select
+                    class="form-control"
+                    [(ngModel)]="elementImputation"
+                    [ngModelOptions]="{ standalone: true }"
+                    placeholder="Seleccione"
+                    (change)="selectTypeCenterImputations()"
+                  >
                     <option [value]=""></option>
-                    <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.code">{{costsTravelCenter.name}}</option>
+                    <option
+                      *ngFor="
+                        let costsTravelCenter of center_costs_travels
+                      "
+                      [value]="costsTravelCenter.code"
+                      >{{ costsTravelCenter.name }}</option
+                    >
                   </select>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_one}}:*</a>
+                    <i
+                      class="fa fa-fw fa-usd text-primary-hr detectLetter"
+                    ></i>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_one
+                      }}:*</a
+                    >
                   </label>
-                  <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList" [(ngModel)]="typeCenterCost"
-                    [ngModelOptions]="{standalone: true}" (keyup)="enterCostSpend()">
-                  <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
-                    <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
-                      {{costsTrip.code}} - {{costsTrip.name}}
+                  <input
+                    class="form-control"
+                    id="searchByAutoCompleteCostSpend"
+                    autocomplete="off"
+                    type="text"
+                    name="costList"
+                    [(ngModel)]="typeCenterCost"
+                    [ngModelOptions]="{ standalone: true }"
+                    (keyup)="enterCostSpend()"
+                  />
+                  <div
+                    *ngIf="showListAutoCost"
+                    class="list-search-autocomplete "
+                    style="overflow-x: hidden;"
+                  >
+                    <div
+                      (click)="returnCostSearchSpend(costsTrip)"
+                      class="search-results borderLineEmployee"
+                      *ngFor="let costsTrip of costs_travels"
+                    >
+                      {{ costsTrip.code }} - {{ costsTrip.name }}
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_four}}:*</a>
+                    <i
+                      class="fa fa-fw fa-usd text-primary-hr detectLetter"
+                    ></i>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_four
+                      }}:*</a
+                    >
                   </label>
-                  <input class="form-control uppercase" id="searchByAutoCompleteOrderSpend" autocomplete="off" type="text" name="orderList"
-                    [(ngModel)]="typeCenterOrder" [ngModelOptions]="{standalone: true}" (keyup)="enterOrderSpend()">
-                  <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
-                    <div (click)="returnOrderSearchOrder(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
-                      {{orderTrip.code}} - {{orderTrip.name}}
+                  <input
+                    class="form-control uppercase"
+                    id="searchByAutoCompleteOrderSpend"
+                    autocomplete="off"
+                    type="text"
+                    name="orderList"
+                    [(ngModel)]="typeCenterOrder"
+                    [ngModelOptions]="{ standalone: true }"
+                    (keyup)="enterOrderSpend()"
+                  />
+                  <div
+                    *ngIf="showListAutoOrder"
+                    class="list-search-autocomplete "
+                    style="overflow-x: hidden;"
+                  >
+                    <div
+                      (click)="returnOrderSearchOrder(orderTrip)"
+                      class="search-results borderLineEmployee"
+                      *ngFor="let orderTrip of order_travels"
+                    >
+                      {{ orderTrip.code }} - {{ orderTrip.name }}
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                   <label class="titleColor">
                     <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_two}}:*</a>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_two
+                      }}:*</a
+                    >
                   </label>
-                  <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" [(ngModel)]="grahpSpend"
-                    [ngModelOptions]="{standalone: true}" (keyup)="enterGraphSpend()">
-                  <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
-                    <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">
-                      {{grahpTravels.code}} - {{grahpTravels.name}}
+                  <input
+                    class="form-control"
+                    id="searchByAutoCompleteGraph"
+                    autocomplete="off"
+                    type="text"
+                    name="graphList"
+                    [(ngModel)]="grahpSpend"
+                    [ngModelOptions]="{ standalone: true }"
+                    (keyup)="enterGraphSpend()"
+                  />
+                  <div
+                    *ngIf="showListAutoGraph"
+                    class="list-search-autocomplete "
+                    style="overflow-x: hidden;"
+                  >
+                    <div
+                      (click)="returnGraphSearchSpend(grahpTravels)"
+                      class="search-results borderLineEmployee"
+                      *ngFor="let grahpTravels of grahp"
+                    >
+                      {{ grahpTravels.code }} -
+                      {{ grahpTravels.name }}
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_three}}:*</a>
+                    <i
+                      class="fa fa-fw fa-object-ungroup text-primary-hr"
+                    ></i>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_three
+                      }}:*</a
+                    >
                   </label>
-                  <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
-                    <option value="-1">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                    <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
+                  <select
+                    class="form-control"
+                    [attr.disabled]="
+                      operations.length == 0 ? true : null
+                    "
+                    [(ngModel)]="operationsSpend"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="-1">{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.option_select
+                    }}</option>
+                    <option
+                      *ngFor="let operationsTravels of operations"
+                      [value]="operationsTravels.id"
+                      >{{ operationsTravels.code }} -
+                      {{ operationsTravels.name }}</option
+                    >
                   </select>
                 </div>
               </div>
@@ -409,29 +974,64 @@
               <div class="row">
                 <div class="col-lg-6 col-md-6 col-12">
                   <label class="titleColor">
-                    <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                    <a>{{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_five}}:*</a>
+                    <i
+                      class="fa fa-fw fa-calculator text-primary-hr"
+                    ></i>
+                    <a
+                      >{{
+                        translate.app.frontEnd.pages.travel_management
+                          .spend.new_spend.column_five
+                      }}:*</a
+                    >
                   </label>
-                  <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
-                    <option value="">{{translate.app.frontEnd.pages.travel_management.spend.new_spend.option_select}}</option>
-                    <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}
+                  <select
+                    class="form-control"
+                    [(ngModel)]="accountContableVariable"
+                    [ngModelOptions]="{ standalone: true }"
+                  >
+                    <option value="">{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.option_select
+                    }}</option>
+                    <option
+                      *ngFor="let accounting of accountContable"
+                      [value]="accounting.id"
+                      >{{ accounting.code }} - {{ accounting.name }}
                     </option>
                   </select>
                 </div>
                 <div class="col-lg-4 col-md-6 col-12">
                   <label for="dateEnd" class="titleColor">
-                    <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                    {{translate.app.frontEnd.pages.travel_management.spend.new_spend.column_six}}*
+                    <i
+                      class="fa fa-fw fa-percent text-primary-hr"
+                    ></i>
+                    {{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.column_six
+                    }}*
                   </label>
-                  <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" style="text-align:right"
+                  <input
+                    class="form-control"
+                    type="number"
+                    [(ngModel)]="distribution"
+                    [ngModelOptions]="{ standalone: true }"
+                    style="text-align:right"
                   />
                 </div>
 
                 <div class="col-2 align-self-end">
-                  <button type="button" [attr.disabled]="
-                ( elementImputation == ''
-                  || accountContableVariable == ''
-                  || distribution == '') ? true : null" class="btn btn-success btn-block btn-sm cursor-general" (click)="saveAccount()">
+                  <button
+                    type="button"
+                    [attr.disabled]="
+                      elementImputation == '' ||
+                      accountContableVariable == '' ||
+                      distribution == ''
+                        ? true
+                        : null
+                    "
+                    class="btn btn-success btn-block btn-sm cursor-general"
+                    (click)="saveAccount()"
+                  >
                     <i class="fa fa-fw fa-plus"></i>
                   </button>
                 </div>
@@ -440,56 +1040,123 @@
 
             <div class="col-12" style="margin-top: 30px">
               <div class="row justify-content-end">
-                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                  <button *ngIf="spendNew" type="button" [attr.disabled]="
-                  ( formSpendTravel.value.travel_allowance_type_id == -1
-                    || formSpendTravel.value.travel_allowance_type_id == ''
-                    || formSpendTravel.value.travel_request_id == -1
-                    || formSpendTravel.value.travel_request_id == ''
-                    || formSpendTravel.value.observation == ''
-                    || formSpendTravel.value.observation == -1
-                    || formSpendTravel.value.value == ''
-                    || formSpendTravel.value.value == -1
-                    || formSpendTravel.value.currency_id == ''
-                    || formSpendTravel.value.currency_id == -1
-                    || formSpendTravel.value.date == ''
-                    || formSpendTravel.value.date == -1
-                    || formSpendTravel.value.bill_number == ''
-                    || formSpendTravel.value.bill_number == -1
-                    || formSpendTravel.value.control_number == ''
-                    || formSpendTravel.value.control_number == -1
-                    || formSpendTravel.value.nit == ''
-                    || formSpendTravel.value.nit == -1
-                    || formSpendTravel.value.bussines_name == ''
-                    || formSpendTravel.value.bussines_name == -1
-                    || formSpendTravel.value.authorization_number == ''
-                    || formSpendTravel.value.authorization_number == -1
-                    || formSpendTravel.value.populated == ''
-                    || formSpendTravel.value.populated == -1
-                    || distributionAccount.length == 0 ) ? true : null" class="btn btn-primary btn-block cursor-general"
-                    (click)="aditionSpend(formSpendTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.bnt_add}}</button>
-                  <button *ngIf="spendEdit" type="button" class="btn btn-primary btn-block cursor-general" (click)="aditionSpendEdit(formSpendTravel.value)">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.save_edit}}</button>
+                <div
+                  class="col-lg-3 col-md-4 col-12"
+                  style="margin-top: 10px"
+                >
+                  <button
+                    *ngIf="spendNew"
+                    type="button"
+                    [attr.disabled]="
+                      formSpendTravel.value
+                        .travel_allowance_type_id == -1 ||
+                      formSpendTravel.value
+                        .travel_allowance_type_id == '' ||
+                      formSpendTravel.value.travel_request_id == -1 ||
+                      formSpendTravel.value.travel_request_id == '' ||
+                      formSpendTravel.value.observation == '' ||
+                      formSpendTravel.value.observation == -1 ||
+                      formSpendTravel.value.value == '' ||
+                      formSpendTravel.value.value == -1 ||
+                      formSpendTravel.value.currency_id == '' ||
+                      formSpendTravel.value.currency_id == -1 ||
+                      formSpendTravel.value.date == '' ||
+                      formSpendTravel.value.date == -1 ||
+                      formSpendTravel.value.bill_number == '' ||
+                      formSpendTravel.value.bill_number == -1 ||
+                      formSpendTravel.value.control_number == '' ||
+                      formSpendTravel.value.control_number == -1 ||
+                      formSpendTravel.value.nit == '' ||
+                      formSpendTravel.value.nit == -1 ||
+                      formSpendTravel.value.bussines_name == '' ||
+                      formSpendTravel.value.bussines_name == -1 ||
+                      formSpendTravel.value.authorization_number ==
+                        '' ||
+                      formSpendTravel.value.authorization_number ==
+                        -1 ||
+                      formSpendTravel.value.populated == '' ||
+                      formSpendTravel.value.populated == -1 ||
+                      distributionAccount.length == 0
+                        ? true
+                        : null
+                    "
+                    class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpend(formSpendTravel.value)"
+                  >
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.bnt_add
+                    }}
+                  </button>
+                  <button
+                    *ngIf="spendEdit"
+                    type="button"
+                    class="btn btn-primary btn-block cursor-general"
+                    (click)="aditionSpendEdit(formSpendTravel.value)"
+                  >
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.save_edit
+                    }}
+                  </button>
                 </div>
-                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="infoTableSpends[0].data[0].data.length > 0">
-                  <button type="button" class="btn btn-warning btn-block cursor-general" (click)="closeSpend()" data-toggle="collapse" data-target="#collapseNewSpend">
-                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.btn_cancel}}</button>
+                <div
+                  class="col-lg-3 col-md-4 col-12"
+                  style="margin-top: 10px"
+                  *ngIf="infoTableSpends[0].data[0].data.length > 0"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-block cursor-general"
+                    (click)="closeSpend()"
+                    data-toggle="collapse"
+                    data-target="#collapseNewSpend"
+                  >
+                    <i class="fa fa-fw fa-fw fa-window-close"></i
+                    >&nbsp;&nbsp;{{
+                      translate.app.frontEnd.pages.travel_management
+                        .spend.new_spend.btn_cancel
+                    }}
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </form>
 
-        <div class="row justify-content-end" *ngIf="activate_submit_spend">
-          <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px" *ngIf="continue">
-            <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block cursor-general" (click)="newSpend(formSpendTravel.value)">
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.save_requests}}</button>
-            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.new_spend.loading}}</button>
+        <div
+          class="row justify-content-end"
+          *ngIf="activate_submit_spend"
+        >
+          <div
+            class="col-lg-3 col-md-4 col-12"
+            style="margin-top: 10px"
+            *ngIf="continue"
+          >
+            <button
+              type="submit"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block cursor-general"
+              (click)="newSpend(formSpendTravel.value)"
+            >
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{
+                translate.app.frontEnd.pages.travel_management.spend
+                  .new_spend.save_requests
+              }}
+            </button>
+            <button
+              type="button"
+              *ngIf="!showSubmit"
+              class="btn btn-warning btn-block"
+            >
+              <i class="fa fa-fw fa-spinner fa-spin"></i
+              >&nbsp;&nbsp;{{
+                translate.app.frontEnd.pages.travel_management.spend
+                  .new_spend.loading
+              }}
+            </button>
           </div>
         </div>
-
       </div>
     </div>
   </div>

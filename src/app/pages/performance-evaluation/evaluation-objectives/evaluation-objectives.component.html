@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-line-chart"></i>
-          {{ parseT("tittle") | translate }}
+          {{ parseT('tittle') | translate }}
         </div>
       </div>
     </div>
@@ -19,7 +21,7 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              {{ parseT("sub_tittle") | translate }}
+              {{ parseT('sub_tittle') | translate }}
             </b>
           </div>
         </div>
@@ -30,11 +32,16 @@
             class="row justify-content-center top-containter"
             *ngIf="evaluationPerformanceList.length === 0"
           >
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{ parseT("message_begin") | translate }}
-                <strong>{{ parseT("message_continue") | translate }}</strong
-                >&nbsp;{{ parseT("message_end") | translate }}
+                {{ parseT('message_begin') | translate }}
+                <strong>{{
+                  parseT('message_continue') | translate
+                }}</strong
+                >&nbsp;{{ parseT('message_end') | translate }}
               </div>
             </div>
           </div>
@@ -52,7 +59,7 @@
                   </h3>
                   <p>
                     <i class="fa fa-clock-o"></i>
-                    {{ parseT("date_create") | translate }}
+                    {{ parseT('date_create') | translate }}
                     {{ evaluation.created_date }}
                   </p>
                 </div>
@@ -60,7 +67,7 @@
                   class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
                 >
                   <p class="font-title-general">
-                    {{ parseT("status") | translate }}:
+                    {{ parseT('status') | translate }}:
                   </p>
                   <h6 *ngIf="evaluation.status_code == '3'">
                     <span class="badge badge-warning">
@@ -94,7 +101,7 @@
                     {{ evaluation.qualifier.unidad_org }}
                   </p>
                   <p class="">
-                    {{ parseT("evaluator") | translate }}
+                    {{ parseT('evaluator') | translate }}
                   </p>
                 </div>
                 <div
@@ -102,10 +109,12 @@
                   class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
                 >
                   <p class="">
-                    {{ parseT("negative_message") | translate }}
+                    {{ parseT('negative_message') | translate }}
                   </p>
                 </div>
-                <div class="col-lg-3 col-md-3 col-12 text-center top-p">
+                <div
+                  class="col-lg-3 col-md-3 col-12 text-center top-p"
+                >
                   <div class="row">
                     <div
                       class="col-4 number-size"
@@ -155,7 +164,10 @@
                       (click)="goToViewEval(evaluation)"
                       *ngIf="evaluation.status_code !== '2'"
                     >
-                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                      <i
+                        class="fa fa-file-pdf-o"
+                        aria-hidden="true"
+                      ></i>
                     </div>
                     <div
                       class="col-4 number-size "
@@ -163,16 +175,19 @@
                       *ngIf="evaluation.status_code === '2'"
                       style="cursor: no-drop"
                     >
-                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                      <i
+                        class="fa fa-file-pdf-o"
+                        aria-hidden="true"
+                      ></i>
                     </div>
                     <div class="col-4">
-                      {{ parseT("see") | translate }}
+                      {{ parseT('see') | translate }}
                     </div>
                     <div class="col-4">
-                      {{ parseT("edit") | translate }}
+                      {{ parseT('edit') | translate }}
                     </div>
                     <div class="col-4">
-                      {{ parseT("download_evaluation") | translate }}
+                      {{ parseT('download_evaluation') | translate }}
                     </div>
                   </div>
                 </div>

@@ -26,21 +26,21 @@ export class TrainingComponent implements OnInit {
     public eventsEmployeeService: EventsEmployeeService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-    this.nameReport= this.translate.app.frontEnd.pages.events_management.training.tittle_table_ts;
+    this.nameReport = this.translate.app.frontEnd.pages.events_management.training.tittle_table_ts;
 
     this.eventsEmployeeService.getRefreshEventEmployee().subscribe((data: any) => {
       if (data == true) {
         this.searchEvents();
       }
-    })
+    });
 
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.action_method = "showConvenio") {
+      if (data.action_method = 'showConvenio') {
         this.trainingSharedService.setDataTraining(data.id);
       }
 
-    })
+    });
 
   }
 
@@ -60,7 +60,7 @@ export class TrainingComponent implements OnInit {
           this.objectReport.emit({ succes: true, data: [] });
         }, 100);
       }
-    })
+    });
   }
 
 }

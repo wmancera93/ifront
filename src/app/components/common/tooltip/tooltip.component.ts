@@ -9,10 +9,10 @@ import { TooltipSharedService } from '../../../services/shared/common/tooltip/to
 })
 export class TooltipComponent implements OnInit {
   @Input('tooltipMsg') tooltipMsg: any;
-  public tooltipShow: boolean = false;
-  public openTooltip: boolean = false;
-  public showTooltip: boolean = false;
-  public infoTooltip: string = "";
+  public tooltipShow = false;
+  public openTooltip = false;
+  public showTooltip = false;
+  public infoTooltip = '';
   public positionData: any = [];
 
   constructor(public tooltipSharedService: TooltipSharedService) { }
@@ -23,7 +23,7 @@ export class TooltipComponent implements OnInit {
       this.positionData = data.position;
       this.infoTooltip = data.text.tooltipText;
       this.openTooltip = data.show;
-      const tooltip = document.getElementById('tooltip_data').style
+      const tooltip = document.getElementById('tooltip_data').style;
       if (this.openTooltip) {
         if (screen.width > 1100) {
           if (this.positionData.positionY < (0.90 * screen.height)) {
@@ -60,7 +60,7 @@ export class TooltipComponent implements OnInit {
       // if ((screen.height < 500) && (screen.width > screen.height)) {
       //   console.log(screen.width)
       // }
-    })
+    });
   }
 
 }

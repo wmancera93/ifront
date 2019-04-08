@@ -11,13 +11,13 @@ import { Translate } from '../../../models/common/translate/translate';
 export class ErrorPageHttpComponent implements OnInit {
   @Input() objectPage: any;
 
-  public statusCode: string = '';
-  public messageError: string = '';
+  public statusCode = '';
+  public messageError = '';
   public translate: Translate = null;
   constructor(public router: Router, public translateService: TranslateService) {
     setTimeout(() => {
       this.translate = this.translateService.getTranslate();
-      console.log(this.translate)
+      console.log(this.translate);
     }, 500);
   }
 
@@ -25,7 +25,7 @@ export class ErrorPageHttpComponent implements OnInit {
     this.objectPage.subscribe((data) => {
       this.statusCode = data.title;
       this.messageError = data.message;
-    })
+    });
   }
 
   RedirectInit() {

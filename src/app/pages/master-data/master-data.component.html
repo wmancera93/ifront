@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row justify-content-center">
         <div class=" col-12 title" *ngIf="translate !== null">
           <i class="fa fa-user"></i>
-          {{ parseT("title_my_data") | translate }}
+          {{ parseT('title_my_data') | translate }}
         </div>
       </div>
     </div>
@@ -39,10 +41,12 @@
                 <i class="fa fa-users"></i> {{ item.description }}
               </div>
               <div *ngIf="item.code == 4">
-                <i class="fa fa-file-text-o"></i> {{ item.description }}
+                <i class="fa fa-file-text-o"></i>
+                {{ item.description }}
               </div>
               <div *ngIf="item.code == 5">
-                <i class="fa fa-graduation-cap"></i> {{ item.description }}
+                <i class="fa fa-graduation-cap"></i>
+                {{ item.description }}
               </div>
               <div *ngIf="item.code == 6">
                 <i class="fa fa-industry"></i> {{ item.description }}
@@ -66,7 +70,7 @@
         </div>
         <div class="col-12 col-xl-9 text-left">
           <b style="margin-left: 28px;">
-            {{ parseT("ts_warningone_text_one") | translate }}
+            {{ parseT('ts_warningone_text_one') | translate }}
           </b>
           <div
             class="row-hr-container  widget bg-white-1x"
@@ -85,27 +89,34 @@
                   role="alert"
                   *ngIf="translate !== null"
                 >
-                  {{ parseT("text_no_information") | translate }}
+                  {{ parseT('text_no_information') | translate }}
                   <strong>
-                    {{ parseT("ts_warningone_text_one") | translate }}
+                    {{ parseT('ts_warningone_text_one') | translate }}
                   </strong>
-                  &nbsp;{{ parseT("text_available") | translate }}
+                  &nbsp;{{ parseT('text_available') | translate }}
                 </div>
               </div>
             </div>
-            <div class="col-12" *ngIf="lengthArray !== 0 && showButton">
+            <div
+              class="col-12"
+              *ngIf="lengthArray !== 0 && showButton"
+            >
               <div class="row">
                 <div
                   class="col-xl-10 col-md-9 col-8 text-right"
                   *ngIf="translate !== null"
                 >
                   <div class="top-title-dbgerencial">
-                    {{ parseT("text_edit") | translate }}
+                    {{ parseT('text_edit') | translate }}
                   </div>
                 </div>
                 <div class="col-xl-2 col-md-3 col-4">
                   <div class="top-interruptor">
-                    <input type="radio" name="interruptor" id="prendido" />
+                    <input
+                      type="radio"
+                      name="interruptor"
+                      id="prendido"
+                    />
                     <input
                       type="radio"
                       name="interruptor"
@@ -132,7 +143,9 @@
             </div>
             <div class="col-12 col-md-12">
               <!-- <app-dynamic-form *ngIf="!canEditData"></app-dynamic-form> -->
-              <app-dynamic-form *ngIf="lengthArray !== 0"></app-dynamic-form>
+              <app-dynamic-form
+                *ngIf="lengthArray !== 0"
+              ></app-dynamic-form>
             </div>
           </div>
         </div>

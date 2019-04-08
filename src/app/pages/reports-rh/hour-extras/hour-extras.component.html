@@ -4,14 +4,17 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-table"></i>
-          {{nameReport}}
+          {{ parseT('name_table_ts') | translate }}
         </div>
-        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+        <div
+          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
+          style="padding-right: 0px"
+        >
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{this.translate.app.frontEnd.pages.reports_rh.hour_extras.back}}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -21,7 +24,10 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
-      <app-data-table [records]="objectReport" [title]="nameReport"></app-data-table>
+      <app-data-table
+        [records]="objectReport"
+        [title]="parseT('name_table_ts') | translate"
+      ></app-data-table>
     </div>
   </div>
 </div>

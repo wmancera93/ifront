@@ -19,19 +19,19 @@ export class NewspaperComponent implements OnInit {
   public translate: Translate = null;
   constructor(public billboardSharedService: BillboardService,
     public router: Router, public translateService: TranslateService) {
-      
+
     this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {
     this.newspaper.subscribe((data: Newspaper[]) => {
-      this.objectWidget = data
+      this.objectWidget = data;
     });
   }
 
   viewDetailArticle(objectArticle: any) {
     // document.getElementById("loginId").style.display = 'block'
-    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden"); 
+    // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.newspaperModal.emit('newspaperModal');
     setTimeout(() => {
       this.billboardSharedService.setShowCommentNew({ objectPublication: objectArticle, modal: 'newspaperModal' });

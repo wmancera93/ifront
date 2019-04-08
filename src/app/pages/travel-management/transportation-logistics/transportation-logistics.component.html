@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -37,7 +39,9 @@
                 type="button"
                 class="btn tabDate btn-block"
               >
-                <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+                <i class="fa fa-plus"
+                  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
+                >
                 Crear nueva flota vehicular
               </button>
             </div>
@@ -77,19 +81,31 @@
         id="collapseFilter"
       >
         <div class="row align-items-center">
-          <div class="col-lg-3 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-3 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Destino</label>
             <input type="text" class="form-control" />
           </div>
-          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-2 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Ticket</label>
             <input type="text" class="form-control" />
           </div>
-          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-2 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Placa</label>
             <input type="text" class="form-control" />
           </div>
-          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-2 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Estado</label>
             <select class="form-control">
               <option>Disponible</option>
@@ -111,7 +127,10 @@
 
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="fleets.length > 0">
-          <div class="widget bg-white-1x" *ngFor="let logistics of fleets">
+          <div
+            class="widget bg-white-1x"
+            *ngFor="let logistics of fleets"
+          >
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-4 col-12">
                 <h5>
@@ -149,7 +168,9 @@
                   </span>
                 </h6>
               </div>
-              <div class="col-lg-4 col-md-6 col-12 text-md-left text-center">
+              <div
+                class="col-lg-4 col-md-6 col-12 text-md-left text-center"
+              >
                 <div class="row tex">
                   <div class="col-lg-4 col-md-4 col-12 text-md-left">
                     <h5>
@@ -184,7 +205,8 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      logistics.action_tranportation_index_view[0].is_active
+                      logistics.action_tranportation_index_view[0]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">
@@ -207,7 +229,8 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      !logistics.action_tranportation_index_view[0].is_active
+                      !logistics.action_tranportation_index_view[0]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">
@@ -230,12 +253,21 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      logistics.action_tranportation_index_view[2].is_active
+                      logistics.action_tranportation_index_view[2]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size text-info" id="hideTrash" style="cursor: pointer">
-                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size text-info"
+                        id="hideTrash"
+                        style="cursor: pointer"
+                      >
+                        <i
+                          class="fa fa-pencil"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Editar
@@ -245,7 +277,8 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      !logistics.action_tranportation_index_view[2].is_active
+                      !logistics.action_tranportation_index_view[2]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">
@@ -268,12 +301,21 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      logistics.action_tranportation_index_view[1].is_active
+                      logistics.action_tranportation_index_view[1]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
-                        <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size text-danger"
+                        id="hideTrash"
+                        style="cursor: pointer"
+                      >
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Borrar
@@ -283,7 +325,8 @@
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      !logistics.action_tranportation_index_view[1].is_active
+                      !logistics.action_tranportation_index_view[1]
+                        .is_active
                     "
                   >
                     <div class="row justify-content-center">

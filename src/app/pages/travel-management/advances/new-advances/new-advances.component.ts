@@ -19,13 +19,13 @@ import { TranslateService } from '../../../../services/common/translate/translat
   styleUrls: ['./new-advances.component.css']
 })
 export class NewAdvancesComponent implements OnInit {
-  public showSubmit: boolean = true
+  public showSubmit = true;
   public formAdvanceTravel: any;
   public listTravelsFromAdvance: any;
   public listMoneyTypes: any;
   public infoTableAdvances: any[] = [];
   public objectAdvances: any[] = [];
-  public idAdvance: number = 0;
+  public idAdvance = 0;
   public advancesItems: any[] = [];
   public objectReport: EventEmitter<any> = new EventEmitter();
   public nameReport: string;
@@ -33,17 +33,17 @@ export class NewAdvancesComponent implements OnInit {
   public mm: any;
   public yyyy: any;
   public today: any;
-  public continue: boolean = false;
+  public continue = false;
   public todayStandar: string;
-  public edit: boolean = false;
+  public edit = false;
   public objetcThird: any;
   public translate: Translate = null;
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
-  public nameEmployee: string = '';
+  public nameEmployee = '';
   public searchEmployee: any[] = [];
-  public showListAutoC: boolean = false;
+  public showListAutoC = false;
   public eployee_selected: any = null;
 
   constructor(public advanceSharedService: AdvanceSharedService,
@@ -53,8 +53,8 @@ export class NewAdvancesComponent implements OnInit {
     public alert: AlertsService, public employeeService: EmployeeService, public router: Router, public travelManagementService: TravelService
     , public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
-    this.nameReport= this.translate.app.frontEnd.pages.travel_management.advances.new_advance.name_data_table_ts;
-    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.advances.new_advance.name_data_table_ts;
+    this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
 
     this.infoTableAdvances = [{
       success: true,
@@ -63,29 +63,29 @@ export class NewAdvancesComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'confirmSaveAdvance' || data === 'errorConfirmTravelID' || data === 'errorValidationAdvance' || data === 'confirmDate') {
-        document.getElementById("btn_advances_new").click();
+        document.getElementById('btn_advances_new').click();
       }
       if (data === 'returnTravelsRequests') {
         this.router.navigate(['/ihr/travels']);
       }
 
-    })
+    });
 
     this.formAdvanceTravel = new FormGroup({});
     this.formAdvanceTravel = fb.group({
-      travel_request_id: "",
-      currency_id: "",
-      value: "",
-      date: "",
-      observation: "",
-      box: ""
+      travel_request_id: '',
+      currency_id: '',
+      value: '',
+      date: '',
+      observation: '',
+      box: ''
     });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.action_method === "deleteAdvance") {
+      if (data.action_method === 'deleteAdvance') {
         this.deleteAdvance(data);
       }
-    })
+    });
 
     this.advanceSharedService.getNewAdvance().subscribe((data: any) => {
       this.eployee_selected = null;
@@ -94,19 +94,19 @@ export class NewAdvancesComponent implements OnInit {
 
       this.formAdvanceTravel = new FormGroup({});
       this.formAdvanceTravel = fb.group({
-        travel_request_id: data == true ? "" : data,
-        currency_id: "",
-        value: "",
+        travel_request_id: data == true ? '' : data,
+        currency_id: '',
+        value: '',
         date: this.todayStandar,
-        observation: "",
-        box: ""
+        observation: '',
+        box: ''
       });
 
 
       this.refreshTableAdvances();
       if (document.getElementById('advance_new').className !== 'modal show') {
         document.getElementById('btn_advances_new').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
 
       if (data !== true) {
@@ -121,15 +121,15 @@ export class NewAdvancesComponent implements OnInit {
             this.objetcThird = {
               id: third.data[0].travel_request.employee_applicant_to_json.id,
               name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
-            }
-            this.returnObjectSearch(this.objetcThird)
+            };
+            this.returnObjectSearch(this.objetcThird);
           } else {
-            this.objetcThird = {}
+            this.objetcThird = {};
             this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
               this.listTravelsFromAdvance = this.sortByNumber(list.data);
             });
           }
-        })
+        });
       } else {
         this.advancesService.getAdvanceListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((list: any) => {
           this.listTravelsFromAdvance = this.sortByNumber(list.data);
@@ -145,13 +145,13 @@ export class NewAdvancesComponent implements OnInit {
 
     this.advancesService.getAdvancePayments().subscribe((advances: any) => {
       this.advancesItems = advances.data;
-    })
+    });
 
   }
 
 
   ngOnInit() {
-    let fecha = new Date();
+    const fecha = new Date();
     this.todayStandar = fecha.getFullYear().toString() + '-' + (fecha.getMonth() + 1).toString() + '-' + (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
@@ -173,7 +173,7 @@ export class NewAdvancesComponent implements OnInit {
             this.searchEmployee = [];
             this.showListAutoC = true;
           }
-        })
+        });
     }
 
   }
@@ -193,18 +193,17 @@ export class NewAdvancesComponent implements OnInit {
 
   newAdvance(param) {
     this.showSubmit = false;
-    let objectSendAdvance =
-    {
+    const objectSendAdvance = {
       travel_request_id: this.formAdvanceTravel.controls['travel_request_id'].value,
       employee_id: this.eployee_selected == null ? '' : this.eployee_selected.id.toString(),
       advances: this.objectAdvances
-    }
+    };
 
     this.advancesService.postAdvanceList(objectSendAdvance).subscribe(
       (response: any) => {
         this.advancesService.sendRequestToApprove(response.data.travel_advance_request.id.toString()).subscribe(
           (data: any) => {
-            document.getElementById("btn_advances_new").click();
+            document.getElementById('btn_advances_new').click();
             const alertSuccess: Alerts[] = [{
               type: 'success',
               title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts,
@@ -213,7 +212,7 @@ export class NewAdvancesComponent implements OnInit {
               typeConfirmation: 'returnTravelsRequests'
             }];
 
-            document.getElementById("closeAdvances").click();
+            document.getElementById('closeAdvances').click();
             this.alert.setAlert(alertSuccess[0]);
             this.advanceSharedService.setRefreshAdvanceList(true);
             this.showSubmit = true;
@@ -221,7 +220,7 @@ export class NewAdvancesComponent implements OnInit {
           (error: any) => {
 
             this.advancesService.deleteRequestAdvance(response.data.travel_advance_request.id.toString()).subscribe((response) => {
-              document.getElementById("btn_advances_new").click();
+              document.getElementById('btn_advances_new').click();
               const alertWarning: Alerts[] = [{
                 type: 'danger',
                 title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
@@ -232,14 +231,14 @@ export class NewAdvancesComponent implements OnInit {
 
               this.alert.setAlert(alertWarning[0]);
               this.showSubmit = true;
-            })
+            });
           }
 
-        )
+        );
 
       },
       (error: any) => {
-        document.getElementById("btn_advances_new").click();
+        document.getElementById('btn_advances_new').click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
@@ -250,7 +249,7 @@ export class NewAdvancesComponent implements OnInit {
 
         this.alert.setAlert(alertWarning[0]);
         this.showSubmit = true;
-      })
+      });
   }
   delete(date_param) {
     if (date_param == 'date_body') {
@@ -259,9 +258,9 @@ export class NewAdvancesComponent implements OnInit {
   }
 
   aditionAdvance(dataAgree) {
-    debugger
-    let dayPayment = dataAgree.date.split('-');
-    let dayFinally = dayPayment[2] + '/' + dayPayment[1] + '/' + dayPayment[0];
+    debugger;
+    const dayPayment = dataAgree.date.split('-');
+    const dayFinally = dayPayment[2] + '/' + dayPayment[1] + '/' + dayPayment[0];
 
     this.infoTableAdvances[0].data[0].data.push({
       field_0: this.idAdvance + 1,
@@ -272,12 +271,12 @@ export class NewAdvancesComponent implements OnInit {
       field_5: dataAgree.observation.toUpperCase(),
       field_6: dataAgree.box == true ? 'Si' : 'No',
       field_7: {
-        type_method: "DELETE",
-        type_element: "button",
-        icon: "fa-trash",
+        type_method: 'DELETE',
+        type_element: 'button',
+        icon: 'fa-trash',
         id: this.idAdvance + 1,
-        title: "Eliminar",
-        action_method: "deleteAdvance",
+        title: 'Eliminar',
+        action_method: 'deleteAdvance',
         disable: false
       }
     });
@@ -292,7 +291,7 @@ export class NewAdvancesComponent implements OnInit {
       box: dataAgree.box
     });
 
-    this.idAdvance += 1
+    this.idAdvance += 1;
 
     this.formAdvanceTravel.controls['currency_id'].setValue('');
     this.formAdvanceTravel.controls['value'].setValue('');
@@ -323,21 +322,20 @@ export class NewAdvancesComponent implements OnInit {
     this.mm = this.today.getMonth() + 1;
     this.yyyy = this.today.getFullYear();
     if (this.dd < 10) {
-      this.dd = '0' + this.dd
+      this.dd = '0' + this.dd;
     }
 
     if (this.mm < 10) {
-      this.mm = '0' + this.mm
+      this.mm = '0' + this.mm;
     }
     this.today = (this.yyyy + '-' + this.mm + '-' + this.dd).toString();
     if (date.date !== this.today) {
-      let enterDate = date.date.replace("-", "").replace("-", "");
-      let actualDate = this.today.replace("-", "").replace("-", "");
+      const enterDate = date.date.replace('-', '').replace('-', '');
+      const actualDate = this.today.replace('-', '').replace('-', '');
       if (actualDate - enterDate < 1) {
 
-      }
-      else {
-        document.getElementById("closeAdvances").click();
+      } else {
+        document.getElementById('closeAdvances').click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.message_alert_ts_one,
@@ -362,42 +360,42 @@ export class NewAdvancesComponent implements OnInit {
       success: true,
       data: [{
         title: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.name_data_table_ts,
-        title_table: "Anticipos solicitados",
+        title_table: 'Anticipos solicitados',
         labels: {
           field_1: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_one,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
           field_2: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_two,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
 
           field_3: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_three,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
           field_4: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_four,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
           field_5: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_five,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
           field_6: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_six,
-            type: "string",
+            type: 'string',
             sortable: false,
           },
           field_7: {
             value: this.translate.app.frontEnd.pages.travel_management.advances.new_advance.field_seven,
-            type: "string",
+            type: 'string',
             sortable: false,
           }
         },
@@ -413,7 +411,7 @@ export class NewAdvancesComponent implements OnInit {
   }
   onlyNumber(param) {
     let out = '';
-    let filtro = '0123456789.,';
+    const filtro = '0123456789.,';
     for (let i = 0; i < param.value.length; i++) {
       if (filtro.indexOf(param.value.charAt(i)) != -1) {
         out += param.value.charAt(i);

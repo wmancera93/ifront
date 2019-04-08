@@ -31,7 +31,7 @@
                 style="width: 60px !important;"
                 *ngIf="translate !== null"
               >
-                {{ parseT("today") | translate }}
+                {{ parseT('today') | translate }}
               </div>
             </div>
           </div>
@@ -86,20 +86,25 @@
                 class="text-center"
                 [ngClass]="{
                   'col-4':
-                    day.weekday !== 'sabado' && day.weekday !== 'domingo',
-                  'col-6': day.weekday == 'sabado' || day.weekday == 'domingo'
+                    day.weekday !== 'sabado' &&
+                    day.weekday !== 'domingo',
+                  'col-6':
+                    day.weekday == 'sabado' ||
+                    day.weekday == 'domingo'
                 }"
               >
-                <div [ngClass]="{ borderNumber: day.is_now === true }">
-                  {{ day.date | date: "dd" }}
+                <div
+                  [ngClass]="{ borderNumber: day.is_now === true }"
+                >
+                  {{ day.date | date: 'dd' }}
                 </div>
               </div>
             </div>
             <div
               class="row justify-content-center"
               *ngIf="
-                day.work_schedule_plan[0].type_schedule_plan_description !==
-                rest
+                day.work_schedule_plan[0]
+                  .type_schedule_plan_description !== rest
               "
             >
               <div
@@ -135,16 +140,18 @@
           >
             <div class="row justify-content-end">
               <div class="text-right col-12">
-                <div [ngClass]="{ borderNumber: day.is_now === true }">
-                  {{ day.date | date: "dd" }}
+                <div
+                  [ngClass]="{ borderNumber: day.is_now === true }"
+                >
+                  {{ day.date | date: 'dd' }}
                 </div>
               </div>
             </div>
             <div
               class="row justify-content-center"
               *ngIf="
-                day.work_schedule_plan[0].type_schedule_plan_description !==
-                rest
+                day.work_schedule_plan[0]
+                  .type_schedule_plan_description !== rest
               "
             >
               <div

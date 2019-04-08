@@ -20,12 +20,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  public approvals: any[] = []
-  public editRequests: boolean = false;
-  public showSubmit: boolean = true;
-  public prerequisit_travel: boolean = true;
-  public switchTravels: string = "on";
-  public descriptionTravels: string = "";
+  public approvals: any[] = [];
+  public editRequests = false;
+  public showSubmit = true;
+  public prerequisit_travel = true;
+  public switchTravels = 'on';
+  public descriptionTravels = '';
   public requests_travels: any;
   public objectTravelsReport: EventEmitter<any> = new EventEmitter();
   public objectSpendReport: EventEmitter<any> = new EventEmitter();
@@ -40,7 +40,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
   public idGeneral: string;
   public objectApproval: any[] = [];
   public translate: Translate = null;
-  public countAfter: number = 0;
+  public countAfter = 0;
   public statusApprover: string;
   public statusCancelled: string;
   public statusInProcess: string;
@@ -62,7 +62,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
     this.statusPending = this.translate.app.frontEnd.components.common.travels.approvals_details_travels.status_pending;
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if ((data.action_method === "showHotels")) {
+      if ((data.action_method === 'showHotels')) {
 
         this.travelsService.setHotelsByJourney({
           acction: true,
@@ -71,9 +71,9 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         });
       }
       if (data.action_method === 'ModalDistCostShow') {
-        document.getElementById("btn_close_aprovalstravels").click();
-        let viewDistCost = false;
-        let id_by_spend = data.id
+        document.getElementById('btn_close_aprovalstravels').click();
+        const viewDistCost = false;
+        const id_by_spend = data.id;
         setTimeout(() => {
           this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
         }, 100);
@@ -82,7 +82,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueTravelRequestsApprover') {
-        document.getElementById("btn_approvals_requests_travels").click();
+        document.getElementById('btn_approvals_requests_travels').click();
       }
 
     });
@@ -111,7 +111,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       approver_platform: request.data[0].travel_request.approver_platform,
                       approvers_to_json: request.data[0].travel_request.approvers_to_json,
                       answers_to_json: request.data[0].travel_request.answers_to_json
-                    })
+                    });
 
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [request.data[0].travel_managements] });
@@ -119,14 +119,14 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
                     request.data[0].travel_advance_requests.data.forEach(element => {
                       element.travel_advance_payments.forEach(dataObject => {
-                        this.table_advances.push(dataObject)
+                        this.table_advances.push(dataObject);
                       });
                     });
 
-                    let object = {
+                    const object = {
                       labels: request.data[0].travel_advance_requests.labels,
                       data: this.table_advances,
-                    }
+                    };
 
                     setTimeout(() => {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
@@ -135,12 +135,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     if (request.data[0].travel_allowance_request.data !== null && request.data[0].travel_allowance_request.data.length === undefined) {
 
                       request.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                        this.table_spend.push(element)
+                        this.table_spend.push(element);
                       });
-                      let objectSpend = {
+                      const objectSpend = {
                         labels: request.data[0].travel_allowance_request.labels,
                         data: this.table_spend,
-                      }
+                      };
                       setTimeout(() => {
 
                         this.objectSpendReport.emit({ success: true, data: [objectSpend] });
@@ -169,20 +169,20 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                     approver_platform: advance.data[0].request[0].travel_advance_requests.approver_platform,
                     approvers_to_json: advance.data[0].request[0].travel_advance_requests.approvers_to_json,
                     answers_to_json: advance.data[0].request[0].travel_advance_requests.answers_to_json
-                  })
+                  });
                   setTimeout(() => {
                     this.objectTravelsReport.emit({ success: true, data: [advance.data[0].request[0].travel_managements] });
                   }, 300);
 
                   advance.data[0].request[0].travel_advance_requests.data.forEach(element => {
                     element.travel_advance_payments.forEach(dataObject => {
-                      this.table_advances.push(dataObject)
+                      this.table_advances.push(dataObject);
                     });
                   });
-                  let object = {
+                  const object = {
                     labels: advance.data[0].request[0].travel_advance_requests.labels,
                     data: this.table_advances,
-                  }
+                  };
 
                   setTimeout(() => {
                     this.objectAdvanceReport.emit({ success: true, data: [object] });
@@ -190,12 +190,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
                   if (advance.data[0].request[0].travel_allowance_request.data !== null && advance.data[0].request[0].travel_allowance_request.data.length === undefined) {
                     advance.data[0].request[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                      this.table_spend.push(element)
+                      this.table_spend.push(element);
                     });
-                    let objectAdvance = {
+                    const objectAdvance = {
                       labels: advance.data[0].request[0].travel_allowance_request.labels,
                       data: this.table_spend,
-                    }
+                    };
                     setTimeout(() => {
                       this.objectSpendReport.emit({ success: true, data: [objectAdvance] });
                     }, 300);
@@ -204,7 +204,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       this.objectSpendReport.emit({ success: true, data: [] });
                     }, 300);
                   }
-                })
+                });
 
               break;
             case 'spend':
@@ -219,32 +219,32 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       approver_platform: spend.data[0].travel_allowance_request.approver_platform,
                       approvers_to_json: spend.data[0].travel_allowance_request.approvers_to_json,
                       answers_to_json: spend.data[0].travel_allowance_request.answers_to_json
-                    })
+                    });
                     setTimeout(() => {
                       this.objectTravelsReport.emit({ success: true, data: [spend.data[0].travel_managements] });
                     }, 300);
 
                     spend.data[0].travel_advance_requests.data.forEach(element => {
                       element.travel_advance_payments.forEach(dataObject => {
-                        this.table_advances.push(dataObject)
+                        this.table_advances.push(dataObject);
                       });
                     });
-                    let object = {
+                    const object = {
                       labels: spend.data[0].travel_advance_requests.labels,
                       data: this.table_advances,
-                    }
+                    };
                     setTimeout(() => {
                       this.objectAdvanceReport.emit({ success: true, data: [object] });
                     }, 300);
 
                     if (spend.data[0].travel_allowance_request.data !== null && spend.data[0].travel_allowance_request.data.length === undefined) {
                       spend.data[0].travel_allowance_request.data.travel_allowances.forEach(element => {
-                        this.table_spend.push(element)
+                        this.table_spend.push(element);
                       });
-                      let objectSpend = {
+                      const objectSpend = {
                         labels: spend.data[0].travel_allowance_request.labels,
                         data: this.table_spend,
-                      }
+                      };
                       setTimeout(() => {
                         this.objectSpendReport.emit({ success: true, data: [objectSpend] });
                       }, 300);
@@ -254,7 +254,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
                       }, 300);
                     }
                   }
-                })
+                });
               break;
             default:
 
@@ -262,7 +262,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           }
           if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
             document.getElementById('btn_approvals_requests_travels').click();
-            document.getElementById("bodyGeneral").removeAttribute('style');
+            document.getElementById('bodyGeneral').removeAttribute('style');
           }
 
           setTimeout(() => {
@@ -272,7 +272,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
 
 
 
-      })
+      });
   }
 
   ngOnInit() {
@@ -311,7 +311,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         }).subscribe((data: any) => {
           this.showSubmit = true;
           if (data.success) {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
@@ -319,12 +319,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           }
         },
           (error: any) => {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
-        )
+        );
 
         break;
       case 'advance':
@@ -336,7 +336,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         }).subscribe((data: any) => {
           this.showSubmit = true;
           if (data.success) {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
@@ -344,12 +344,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           }
         },
           (error: any) => {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
-        )
+        );
 
         break;
       case 'spend':
@@ -361,7 +361,7 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
         }).subscribe((data: any) => {
           this.showSubmit = true;
           if (data.success) {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_ts, message: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_ts, confirmation: false }];
             this.alert.setAlert(alertWarning[0]);
             this.showSubmit = true;
@@ -369,12 +369,12 @@ export class ApprovalsDetailsTravelsComponent implements OnInit, OnDestroy {
           }
         },
           (error: any) => {
-            document.getElementById("btn_approvals_requests_travels").click();
+            document.getElementById('btn_approvals_requests_travels').click();
             const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.components.common.travels.approvals_details_travels.type_alert_one_ts, message: error.json().errors.toString() + this.translate.app.frontEnd.components.common.travels.approvals_details_travels.message_alert_one_ts, confirmation: true, typeConfirmation: 'continueTravelRequestsApprover' }];
             this.showSubmit = true;
             this.alert.setAlert(alertWarning[0]);
           }
-        )
+        );
 
         break;
       default:

@@ -13,9 +13,9 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 })
 export class TimeLineApproversComponent implements OnInit {
   public detailRequets: any[] = [];
-  public fileSupport: string = '';
-  public viewModal: boolean = false;
-  public countAfter: number = 0;
+  public fileSupport = '';
+  public viewModal = false;
+  public countAfter = 0;
   public dateFirts: string;
   public dateFinally: string;
   public requests_print: string;
@@ -48,11 +48,11 @@ export class TimeLineApproversComponent implements OnInit {
                   this.detailRequets = detail.data;
                   this.fileSupport = this.detailRequets[0].request.image.url;
 
-                  let dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
+                  const dateBegin = this.detailRequets[0].request.date_begin_format !== null ? this.detailRequets[0].request.date_begin_format.split('/') : null;
                   if (dateBegin !== null) {
                     this.dateFirts = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
                   }
-                  let dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
+                  const dateEnd = this.detailRequets[0].request.date_end_format !== null ? this.detailRequets[0].request.date_end_format.split('/') : null;
                   if (dateEnd) {
                     this.dateFinally = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
                   }
@@ -60,23 +60,23 @@ export class TimeLineApproversComponent implements OnInit {
 
                   if (document.getElementById('aprovers_requests').className !== 'modal show') {
                     document.getElementById('btn_aprovers_requests').click();
-                    document.getElementById("bodyGeneral").removeAttribute('style');
+                    document.getElementById('bodyGeneral').removeAttribute('style');
                   }
                   this.viewModal = true;
                 }
-              })
+              });
           }
         }
         if (data.type_request == 'requestsTravels') {
-          debugger
+          debugger;
           this.detailRequets = [];
           this.requests_print = data.type_request;
 
-          let dateBegin = data.request.date_begin !== null ? data.request.date_begin.split('-') : null;
+          const dateBegin = data.request.date_begin !== null ? data.request.date_begin.split('-') : null;
           if (dateBegin !== null) {
             this.dateFirts = dateBegin[2] + '/' + dateBegin[1] + '/' + dateBegin[0];
           }
-          let dateEnd = data.request.date_end !== null ? data.request.date_end.split('-') : null;
+          const dateEnd = data.request.date_end !== null ? data.request.date_end.split('-') : null;
           if (dateEnd) {
             this.dateFinally = dateEnd[2] + '/' + dateEnd[1] + '/' + dateEnd[0];
           }
@@ -93,7 +93,7 @@ export class TimeLineApproversComponent implements OnInit {
               answers_to_json: data.request.answers_to_json,
               employee_applicant_to_json: data.request.employee_applicant_to_json,
               image: {
-                url: ""
+                url: ''
               },
               type_requests_name: data.request.travel_requests_type_name,
             },
@@ -103,7 +103,7 @@ export class TimeLineApproversComponent implements OnInit {
 
           if (document.getElementById('aprovers_requests').className !== 'modal show') {
             document.getElementById('btn_aprovers_requests').click();
-            document.getElementById("bodyGeneral").removeAttribute('style');
+            document.getElementById('bodyGeneral').removeAttribute('style');
           }
           this.viewModal = true;
         }

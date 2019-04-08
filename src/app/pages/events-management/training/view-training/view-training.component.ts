@@ -20,10 +20,10 @@ export class ViewTrainingComponent implements OnInit {
   public trainingDetailInfo: TrainingDetail[] = [];
   public idTraining: number;
   public sendState: any;
-  public observations: string = "";
+  public observations = '';
   public urlPrevisualize: string;
-  public flagPDF: boolean = false;
-  public countAfterEval: number = 0;
+  public flagPDF = false;
+  public countAfterEval = 0;
   public translate: Translate = null;
   public placeholder_observations: string;
 
@@ -39,7 +39,7 @@ export class ViewTrainingComponent implements OnInit {
       if (this.countAfterEval === 0) {
         if (document.getElementById('modal_viewTraining').className !== 'modal show') {
           document.getElementById('btn-viewTraining').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
           this.idTraining = activeModal;
           this.trainingService.getTrainingEventsByID(activeModal).subscribe((info: any) => {
             this.flagPDF = true;
@@ -67,10 +67,10 @@ export class ViewTrainingComponent implements OnInit {
       id: this.idTraining,
       is_confirmed: flag,
       observation: this.observations
-    }
+    };
     this.trainingService.putTrainingEventsByID(this.idTraining, this.sendState).subscribe((response: any) => {
       if (response.success) {
-        document.getElementById("closeModalTraining").click();
+        document.getElementById('closeModalTraining').click();
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: this.translate.app.frontEnd.pages.events_management.training.view_training.title_confirmation_ts,
@@ -84,7 +84,7 @@ export class ViewTrainingComponent implements OnInit {
 
     },
       (error: any) => {
-        document.getElementById("closeModalTraining").click();
+        document.getElementById('closeModalTraining').click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: this.translate.app.frontEnd.pages.events_management.training.view_training.title_warning_ts,

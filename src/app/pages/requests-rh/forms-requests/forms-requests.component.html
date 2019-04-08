@@ -8,10 +8,15 @@
     [ngClass]="{ 'd-none': modalState === false }"
     *ngIf="formRequests != null"
   >
-    <div class="modal-header borderLine-title row-hr justify-content-center">
+    <div
+      class="modal-header borderLine-title row-hr justify-content-center"
+    >
       <div class="col-12 col-lg-10 text-center text-lg-left">
         <h4 class="modal-title titleColor text-shadow">
-          {{ translate.app.frontEnd.pages.requests_rh.forms_requests.tittle }}
+          {{
+            translate.app.frontEnd.pages.requests_rh.forms_requests
+              .tittle
+          }}
           {{ formRequests.name | lowercase }}
         </h4>
       </div>
@@ -30,22 +35,27 @@
             style="margin-top: 0px !important"
           >
             <div class="col align-self-center">
-              <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+              <span
+                class="fa-stack "
+                style="height: 53px; font-size: 2.7em;"
+              >
                 <i
                   class="fa fa-globe fa-stack-2x text-blue"
                   style="margin-top:-10px"
                 ></i>
                 <i class="fa fa-plane fa-stack-1x text-origin"></i>
               </span>
-              <h1 class="m-xs top-form">{{ formRequests.available_days }}</h1>
+              <h1 class="m-xs top-form">
+                {{ formRequests.available_days }}
+              </h1>
               <h3
                 *ngIf="formRequests.available_days != 1"
                 class="font-bold m-l-n top-form text-blue"
                 style="margin-right: -20px"
               >
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .days_available
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.days_available
                 }}
               </h3>
               <h3
@@ -54,8 +64,8 @@
                 style="margin-right: -20px"
               >
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .day_available
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.day_available
                 }}
               </h3>
             </div>
@@ -73,8 +83,8 @@
                 <label for="dateBegin" class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   {{
-                    translate.app.frontEnd.pages.requests_rh.forms_requests
-                      .date_begin
+                    translate.app.frontEnd.pages.requests_rh
+                      .forms_requests.date_begin
                   }}
                   *
                 </label>
@@ -90,8 +100,8 @@
                 <label for="dateEnd" class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                   {{
-                    translate.app.frontEnd.pages.requests_rh.forms_requests
-                      .date_end
+                    translate.app.frontEnd.pages.requests_rh
+                      .forms_requests.date_end
                   }}
                   *
                 </label>
@@ -107,8 +117,8 @@
                 <label for="celulaInput" class="titleColor">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
                   {{
-                    translate.app.frontEnd.pages.requests_rh.forms_requests
-                      .observation
+                    translate.app.frontEnd.pages.requests_rh
+                      .forms_requests.observation
                   }}
                 </label>
                 <textarea
@@ -117,7 +127,9 @@
                   style="height: auto !important;"
                   name="observation_request"
                   class="form-control"
-                  [formControl]="formVaca.controls['observation_request']"
+                  [formControl]="
+                    formVaca.controls['observation_request']
+                  "
                 ></textarea>
               </div>
               <div class="col-md-12 top-containter">
@@ -130,8 +142,8 @@
                     >
                       <i class="fa fa-fw fa-floppy-o"></i
                       >{{
-                        translate.app.frontEnd.pages.requests_rh.forms_requests
-                          .save
+                        translate.app.frontEnd.pages.requests_rh
+                          .forms_requests.save
                       }}
                     </button>
                     <button
@@ -141,8 +153,8 @@
                     >
                       <i class="fa fa-fw fa-spinner fa-spin"></i
                       >{{
-                        translate.app.frontEnd.pages.requests_rh.forms_requests
-                          .loading
+                        translate.app.frontEnd.pages.requests_rh
+                          .forms_requests.loading
                       }}
                     </button>
                   </div>
@@ -162,7 +174,10 @@
             style="margin-top: 0px !important"
           >
             <div class="col align-self-center">
-              <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+              <span
+                class="fa-stack "
+                style="height: 53px; font-size: 2.7em;"
+              >
                 <i
                   class="fa fa-globe fa-stack-2x text-blue"
                   style="margin-top:-10px"
@@ -170,7 +185,9 @@
                 <i class="fa fa-plane fa-stack-1x text-origin"></i>
               </span>
 
-              <h1 class="m-xs top-form">{{ formRequests.available_days }}</h1>
+              <h1 class="m-xs top-form">
+                {{ formRequests.available_days }}
+              </h1>
 
               <h3
                 *ngIf="formRequests.available_days != 1"
@@ -178,8 +195,8 @@
                 style="margin-right: -20px"
               >
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .days_available
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.days_available
                 }}
               </h3>
               <h3
@@ -188,14 +205,17 @@
                 style="margin-right: -20px"
               >
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .day_available
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.day_available
                 }}
               </h3>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-8" *ngIf="formRequests.available_days != 0">
+        <div
+          class="col-12 col-lg-8"
+          *ngIf="formRequests.available_days != 0"
+        >
           <form
             [formGroup]="formVacaComp"
             class="row justify-content-left"
@@ -205,8 +225,8 @@
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .day_required
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.day_required
                 }}
                 *
               </label>
@@ -224,8 +244,8 @@
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .observation
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.observation
                 }}
                 *
               </label>
@@ -235,7 +255,9 @@
                 style="height: auto !important;"
                 name="observation_request"
                 class="form-control"
-                [formControl]="formVacaComp.controls['observation_request']"
+                [formControl]="
+                  formVacaComp.controls['observation_request']
+                "
               ></textarea>
             </div>
             <div class="col-md-12 top-containter">
@@ -248,8 +270,8 @@
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .save
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.save
                     }}
                   </button>
                   <button
@@ -259,8 +281,8 @@
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .loading
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.loading
                     }}
                   </button>
                 </div>
@@ -272,7 +294,9 @@
       <div>
         <app-form-benefist
           *ngIf="
-            ['EDUB', 'EDUS', 'EDUU', 'EDUI'].includes(formRequests.id_activity)
+            ['EDUB', 'EDUS', 'EDUU', 'EDUI'].includes(
+              formRequests.id_activity
+            )
               ? true
               : false
           "
@@ -303,7 +327,9 @@
       </div>
       <div>
         <app-lenses-auxilium
-          *ngIf="['AUXL'].includes(formRequests.id_activity) ? true : false"
+          *ngIf="
+            ['AUXL'].includes(formRequests.id_activity) ? true : false
+          "
           [formRequests]="formRequests"
           (submit)="newRequest($event)"
           [translate]="translate"
@@ -326,8 +352,8 @@
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .date_begin
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.date_begin
                 }}
                 *
               </label>
@@ -343,8 +369,8 @@
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .date_end
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.date_end
                 }}
                 *
               </label>
@@ -360,8 +386,8 @@
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .message_attach
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.message_attach
                 }}*
               </label>
               <app-file-upload
@@ -373,8 +399,8 @@
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .observation
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.observation
                 }}
               </label>
               <textarea
@@ -383,7 +409,9 @@
                 style="height: auto !important;"
                 name="observation_request"
                 class="form-control"
-                [formControl]="formPerm.controls['observation_request']"
+                [formControl]="
+                  formPerm.controls['observation_request']
+                "
               ></textarea>
             </div>
             <div class="col-md-12 top-containter">
@@ -396,8 +424,8 @@
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .save
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.save
                     }}
                   </button>
                   <button
@@ -407,8 +435,8 @@
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .loading
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.loading
                     }}
                   </button>
                 </div>
@@ -432,10 +460,12 @@
               <div class="row">
                 <div class="col-md-6 col-12 top-containter">
                   <label for="dateBegin" class="titleColor">
-                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    <i
+                      class="fa fa-fw fa-calendar text-primary-hr"
+                    ></i>
                     {{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .date_begin
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.date_begin
                     }}
                     *
                   </label>
@@ -449,12 +479,17 @@
                   />
                 </div>
 
-                <div *ngIf="showDate" class="col-md-6 col-12 top-containter">
+                <div
+                  *ngIf="showDate"
+                  class="col-md-6 col-12 top-containter"
+                >
                   <label for="dateEnd" class="titleColor">
-                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    <i
+                      class="fa fa-fw fa-calendar text-primary-hr"
+                    ></i>
                     {{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .date_end
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.date_end
                     }}*
                   </label>
                   <input
@@ -468,12 +503,17 @@
                 </div>
               </div>
               <div class="row">
-                <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                <div
+                  *ngIf="showTime"
+                  class="col-md-6 col-12 top-containter"
+                >
                   <label for="startTime" class="titleColor">
-                    <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
+                    <i
+                      class="fa fa-fw fa-hourglass-start text-primary-hr"
+                    ></i>
                     {{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .hour_begin
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.hour_begin
                     }}
                     *
                   </label>
@@ -486,12 +526,17 @@
                   />
                 </div>
 
-                <div *ngIf="showTime" class="col-md-6 col-12 top-containter">
+                <div
+                  *ngIf="showTime"
+                  class="col-md-6 col-12 top-containter"
+                >
                   <label for="endTime" class="titleColor">
-                    <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
+                    <i
+                      class="fa fa-fw fa-hourglass-end text-primary-hr"
+                    ></i>
                     {{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .hour_end
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.hour_end
                     }}*
                   </label>
                   <input
@@ -506,10 +551,12 @@
               <div class="row">
                 <div class="col-md-12 col-12 top-containter">
                   <label for="celulaInput" class="titleColor">
-                    <i class="fa fa-fw fa-comment text-primary-hr"></i>
+                    <i
+                      class="fa fa-fw fa-comment text-primary-hr"
+                    ></i>
                     {{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .observation
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.observation
                     }}
                   </label>
                   <textarea
@@ -518,7 +565,9 @@
                     style="height: auto !important;"
                     name="observation_request"
                     class="form-control"
-                    [formControl]="formPres.controls['observation_request']"
+                    [formControl]="
+                      formPres.controls['observation_request']
+                    "
                   ></textarea>
                 </div>
               </div>
@@ -570,8 +619,8 @@
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .hour_begin
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.hour_begin
                 }}*
               </label>
               <input
@@ -586,8 +635,8 @@
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .date_end
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.date_end
                 }}
                 *
               </label>
@@ -603,8 +652,8 @@
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .message_attach
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.message_attach
                 }}*
               </label>
               <app-file-upload
@@ -616,8 +665,8 @@
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
                 {{
-                  translate.app.frontEnd.pages.requests_rh.forms_requests
-                    .observation
+                  translate.app.frontEnd.pages.requests_rh
+                    .forms_requests.observation
                 }}
               </label>
               <textarea
@@ -626,7 +675,9 @@
                 style="height: auto !important;"
                 name="observation_request"
                 class="form-control"
-                [formControl]="formInca.controls['observation_request']"
+                [formControl]="
+                  formInca.controls['observation_request']
+                "
               ></textarea>
             </div>
             <div class="col-md-12 top-containter">
@@ -639,8 +690,8 @@
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .save
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.save
                     }}
                   </button>
                   <button
@@ -650,8 +701,8 @@
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
                     >{{
-                      translate.app.frontEnd.pages.requests_rh.forms_requests
-                        .loading
+                      translate.app.frontEnd.pages.requests_rh
+                        .forms_requests.loading
                     }}
                   </button>
                 </div>
@@ -669,7 +720,8 @@
       >
         <h6>
           {{
-            translate.app.frontEnd.pages.requests_rh.forms_requests.button_close
+            translate.app.frontEnd.pages.requests_rh.forms_requests
+              .button_close
           }}
         </h6>
       </div>

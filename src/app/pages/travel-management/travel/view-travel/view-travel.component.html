@@ -1,45 +1,99 @@
-<button id="btn_travel_view" type="button" class="btn btn-primary" data-toggle="modal" data-target="#travel_view" style="display:none;">
-</button>
-<div class="modal" id="travel_view" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_travel_view"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#travel_view"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  id="travel_view"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.tittle}} # {{ticket}}</h5>
-        <button id="closeTravelsNew" type="button" class="close " data-dismiss="modal" aria-label="Close" (click)="cleanObjectShowDetail()">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{
+            translate.app.frontEnd.pages.travel_management.travel
+              .view_travel.tittle
+          }}
+          # {{ ticket }}
+        </h5>
+        <button
+          id="closeTravelsNew"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="cleanObjectShowDetail()"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
-      <div class="modal-body bodyColorInfo" *ngIf="view_travels.length > 0">
-
+      <div
+        class="modal-body bodyColorInfo"
+        *ngIf="view_travels.length > 0"
+      >
         <div class="row" *ngIf="view_travels[0].ticket_cli !== null">
           <div class="col-12 align-self-center">
             <label class="titleColor">
-              <strong class="text-primary-hr">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.ticket_sap}}</strong>
+              <strong class="text-primary-hr">{{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.ticket_sap
+              }}</strong>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              <strong>{{view_travels[0].ticket_cli}}</strong>
+              <strong>{{ view_travels[0].ticket_cli }}</strong>
             </label>
-            <br>
+            <br />
           </div>
         </div>
-        <div class="row" *ngIf="view_travels[0].ticket_cli === null && view_travels[0].synch_type_server !== 'S' && view_travels[0].synch_type_server !== null">
+        <div
+          class="row"
+          *ngIf="
+            view_travels[0].ticket_cli === null &&
+            view_travels[0].synch_type_server !== 'S' &&
+            view_travels[0].synch_type_server !== null
+          "
+        >
           <div class="col-12 align-self-center">
             <label class="titleColor">
-              <i class="fa fa-fw fa-exclamation-triangle text-danger" style="font-size:2em"></i>
-              <strong class="titleColor">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.message_synch}}</strong>
-              <strong>{{view_travels[0].synch_message_sap}}</strong>
+              <i
+                class="fa fa-fw fa-exclamation-triangle text-danger"
+                style="font-size:2em"
+              ></i>
+              <strong class="titleColor">{{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.message_synch
+              }}</strong>
+              <strong>{{ view_travels[0].synch_message_sap }}</strong>
             </label>
-            <br>
+            <br />
           </div>
         </div>
 
         <div class="row" *ngIf="eployee_selected !== null">
           <div class="col-12 align-self-center">
             <label class="titleColor">
-                {{translate.app.frontEnd.pages.travel_management.travel.view_travel.employee}}:
+              {{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.employee
+              }}:
               <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-              <strong>{{eployee_selected.name_complete}}</strong>
+              <strong>{{ eployee_selected.name_complete }}</strong>
             </label>
-            <br>
+            <br />
           </div>
         </div>
 
@@ -47,32 +101,54 @@
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.type_travel}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.type_travel
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-8 col-md-6 col-12">
-            <label>{{view_travels[0].travel_requests_type_name}} - {{maintenance_travel}}</label>
+            <label
+              >{{ view_travels[0].travel_requests_type_name }} -
+              {{ maintenance_travel }}</label
+            >
           </div>
         </div>
 
         <div class="row" style="margin-top: 20px">
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
-              <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.date_begin}}:</strong>
+              <i
+                class="fa fa-fw fa-calendar-check-o text-primary-hr"
+              ></i>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.date_begin
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
-            <label>{{dateBeginRequest}}</label>
+            <label>{{ dateBeginRequest }}</label>
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label class="titleColor">
-              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.date_end}}:</strong>
+              <i
+                class="fa fa-fw fa-calendar-minus-o text-primary-hr"
+              ></i>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.date_end
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-2 col-md-6 col-12">
-            <label>{{dateEndRequest}}</label>
+            <label>{{ dateEndRequest }}</label>
           </div>
         </div>
 
@@ -80,132 +156,263 @@
           <div class="col-12 top-containter" style="margin-top: 20px">
             <label class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.reason_travel}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.reason_travel
+                }}:</strong
+              >
             </label>
           </div>
         </div>
         <div class="row">
-          <div class="col-12" style="margin-left: 20px; font-size:1.2em">
-            <label id="objectivesTravel">{{observations}}</label>
+          <div
+            class="col-12"
+            style="margin-left: 20px; font-size:1.2em"
+          >
+            <label id="objectivesTravel">{{ observations }}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-usd text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.imputation_element}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.imputation_element
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_costs_type_code}} - {{view_travels[0].travel_costs_type_name}}</label>
+            <label
+              >{{ view_travels[0].travel_costs_type_code }} -
+              {{ view_travels[0].travel_costs_type_name }}</label
+            >
           </div>
         </div>
-        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='KOSTL'">
+        <div
+          class="row"
+          style="margin-top: 20px"
+          *ngIf="view_travels[0].travel_costs_type_code == 'KOSTL'"
+        >
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.cost_center}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.cost_center
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_cost_code}} - {{view_travels[0].travel_cost_name}}</label>
+            <label
+              >{{ view_travels[0].travel_cost_code }} -
+              {{ view_travels[0].travel_cost_name }}</label
+            >
           </div>
         </div>
-        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='AUFNR'">
+        <div
+          class="row"
+          style="margin-top: 20px"
+          *ngIf="view_travels[0].travel_costs_type_code == 'AUFNR'"
+        >
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.order}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.order
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_maintenance_order_code}} - {{view_travels[0].travel_maintenance_order_name}}</label>
+            <label
+              >{{ view_travels[0].travel_maintenance_order_code }} -
+              {{
+                view_travels[0].travel_maintenance_order_name
+              }}</label
+            >
           </div>
         </div>
-        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        <div
+          class="row"
+          style="margin-top: 20px"
+          *ngIf="view_travels[0].travel_costs_type_code == 'NPLNR'"
+        >
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.graph}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.graph
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_graph_code}} - {{view_travels[0].travel_graph_name}}</label>
+            <label
+              >{{ view_travels[0].travel_graph_code }} -
+              {{ view_travels[0].travel_graph_name }}</label
+            >
           </div>
         </div>
-        <div class="row" style="margin-top: 20px" *ngIf="view_travels[0].travel_costs_type_code =='NPLNR'">
+        <div
+          class="row"
+          style="margin-top: 20px"
+          *ngIf="view_travels[0].travel_costs_type_code == 'NPLNR'"
+        >
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-pie-chart text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.operation}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.operation
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_operation_code}} - {{view_travels[0].travel_operation_name}}</label>
+            <label
+              >{{ view_travels[0].travel_operation_code }} -
+              {{ view_travels[0].travel_operation_name }}</label
+            >
           </div>
         </div>
-
 
         <div class="row" style="margin-top: 20px">
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.type_legal}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.type_legal
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].legal_travels_type_name}}</label>
+            <label>{{
+              view_travels[0].legal_travels_type_name
+            }}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-ship text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.type_especific}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.type_especific
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].specific_types_trip_name}}</label>
+            <label>{{
+              view_travels[0].specific_types_trip_name
+            }}</label>
           </div>
         </div>
         <div class="row" style="margin-top: 20px">
           <div class="col-lg-5 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.type_activity}}:</strong>
+              <strong
+                >{{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.type_activity
+                }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-7 col-md-6 col-12">
-            <label>{{view_travels[0].travel_activity_name}}</label>
+            <label>{{ view_travels[0].travel_activity_name }}</label>
           </div>
         </div>
 
-        <div class="row border justify-content-center titleColor" style="margin-top: 15px">
+        <div
+          class="row border justify-content-center titleColor"
+          style="margin-top: 15px"
+        >
           <div class="col-12">
-            <h4>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.trayect}}</h4>
+            <h4>
+              {{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.trayect
+              }}
+            </h4>
           </div>
         </div>
 
         <div class="row" style="margin-top: 15px">
           <div class="col-12 top-general-p">
-            <app-data-table [records]="objectReport" id="tableTravelsview" [pdf]="showPdf" [sizeTable]="showSizeTable" [title]="nameReport"></app-data-table>
+            <app-data-table
+              [records]="objectReport"
+              id="tableTravelsview"
+              [pdf]="showPdf"
+              [sizeTable]="showSizeTable"
+              [title]="nameReport"
+            ></app-data-table>
           </div>
         </div>
 
         <div class="row" style="margin-top: 50px">
           <div class="col-12 top-containter">
             <div class="row">
-              <div class="col-lg-8 col-12" *ngFor="let imgsaved of annexeds; let index = index">
-                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+              <div
+                class="col-lg-8 col-12"
+                *ngFor="let imgsaved of annexeds; let index = index"
+              >
+                <div
+                  class="alert"
+                  style="background-color:rgba(0,0,0,.2) "
+                  role="alert"
+                >
                   <div class="row">
                     <div class="col-11">
-                      <h6 *ngIf="imgsaved.name !== null">{{imgsaved.name |slice: 0:20}}
-                        <span [hidden]="imgsaved.name.length < 20">...</span>
+                      <h6 *ngIf="imgsaved.name !== null">
+                        {{ imgsaved.name | slice: 0:20 }}
+                        <span [hidden]="imgsaved.name.length < 20"
+                          >...</span
+                        >
                       </h6>
-                      <h6 *ngIf="imgsaved.name === null">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.no_name}}
+                      <h6 *ngIf="imgsaved.name === null">
+                        {{
+                          translate.app.frontEnd.pages
+                            .travel_management.travel.view_travel
+                            .no_name
+                        }}
                       </h6>
-                      <p class="badge badge-light wg-hover-general" (click)="viewCotization(imgsaved)">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.see_attach}}</p>
-                      <p class="badge badge-light wg-hover-general" (click)="downloadCotization(imgsaved)">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.download_attach}}</p>
+                      <p
+                        class="badge badge-light wg-hover-general"
+                        (click)="viewCotization(imgsaved)"
+                      >
+                        {{
+                          translate.app.frontEnd.pages
+                            .travel_management.travel.view_travel
+                            .see_attach
+                        }}
+                      </p>
+                      <p
+                        class="badge badge-light wg-hover-general"
+                        (click)="downloadCotization(imgsaved)"
+                      >
+                        {{
+                          translate.app.frontEnd.pages
+                            .travel_management.travel.view_travel
+                            .download_attach
+                        }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -217,36 +424,95 @@
         <div id="accordion" class="col-12" style="margin-top: 15px">
           <div class="row">
             <div class="titleColor col-12 text-left" id="headingTwo">
-              <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
-                data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.see_advance}}</p>
+              <p
+                class="titleColor  collapsed cursor-general"
+                style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse"
+                data-target="#collapseTwo"
+                aria-expanded="false"
+                aria-controls="collapseTwo"
+              >
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.see_advance
+                }}
+              </p>
             </div>
-            <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
+            <div
+              id="collapseTwo"
+              class="collapse col-12"
+              aria-labelledby="headingTwo"
+              data-parent="#accordion"
+              style="margin-top: 25px"
+            >
               <div class="row">
                 <div class="col-lg-7 col-md-6 col-12">
                   <label class="titleColor">
-                    <p>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.message_advance}}:</p>
+                    <p>
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.view_travel.message_advance
+                      }}:
+                    </p>
                   </label>
                 </div>
-                <div class="col-lg-5 col-md-6 col-12" *ngFor="let requestAdvanceSaved of arrayAdvanceRequest">
-                  <label>{{requestAdvanceSaved}}</label>
+                <div
+                  class="col-lg-5 col-md-6 col-12"
+                  *ngFor="
+                    let requestAdvanceSaved of arrayAdvanceRequest
+                  "
+                >
+                  <label>{{ requestAdvanceSaved }}</label>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12">
-                  <app-data-table [records]="objectPrintAdvances" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+                  <app-data-table
+                    [records]="objectPrintAdvances"
+                    [pdf]="showPdf"
+                    id="tableAdvanceSaved"
+                    [sizeTable]="showSizeTable"
+                    [title]="nameReportAdvance"
+                  ></app-data-table>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class=" titleColor  col-12 text-left" id="headingThree">
-              <p class="titleColor collapsed cursor-general" style="text-decoration: underline  rgb(185, 190, 206)!important" data-toggle="collapse"
-                data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{{translate.app.frontEnd.pages.travel_management.travel.view_travel.see_spend}}</p>
+            <div
+              class=" titleColor  col-12 text-left"
+              id="headingThree"
+            >
+              <p
+                class="titleColor collapsed cursor-general"
+                style="text-decoration: underline  rgb(185, 190, 206)!important"
+                data-toggle="collapse"
+                data-target="#collapseThree"
+                aria-expanded="false"
+                aria-controls="collapseThree"
+              >
+                {{
+                  translate.app.frontEnd.pages.travel_management
+                    .travel.view_travel.see_spend
+                }}
+              </p>
             </div>
-            <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
+            <div
+              id="collapseThree"
+              class="collapse col-12"
+              aria-labelledby="headingThree"
+              data-parent="#accordion"
+              style="margin-top: 25px"
+            >
               <div class="row">
                 <div class="col-12">
-                  <app-data-table [records]="objectPrintSpend" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
+                  <app-data-table
+                    [records]="objectPrintSpend"
+                    [pdf]="showPdf"
+                    id="tableSpendSaved"
+                    [sizeTable]="showSizeTable"
+                    [title]="nameReportSpend"
+                  ></app-data-table>
                 </div>
               </div>
               <!-- <div class="row" style="padding-bottom: 40px">
@@ -270,27 +536,64 @@
             </div>
           </div>
         </div>
-        <div class="row justify-content-end" style="padding-bottom: 25px">
+        <div
+          class="row justify-content-end"
+          style="padding-bottom: 25px"
+        >
           <div class="col-lg-4 col-md-6 col-12">
-            <app-pdf-travel [ticketTravel]="ticketSendPDF"></app-pdf-travel>
+            <app-pdf-travel
+              [ticketTravel]="ticketSendPDF"
+            ></app-pdf-travel>
           </div>
         </div>
-        <div class="row" >
+        <div class="row">
           <div class="col-12" style="margin-top: 15px">
-            <h6>{{translate.app.frontEnd.pages.travel_management.travel.view_travel.comments}}</h6>
-            <ckeditor debounce="100" name="body" [readonly]="true" [(ngModel)]="comentaryPlus" style="cursor: no-drop !important">
+            <h6>
+              {{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.comments
+              }}
+            </h6>
+            <ckeditor
+              debounce="100"
+              name="body"
+              [readonly]="true"
+              [(ngModel)]="comentaryPlus"
+              style="cursor: no-drop !important"
+            >
             </ckeditor>
           </div>
         </div>
-        <div class="row justify-content-end" style="padding-bottom: 25px; margin-top: 30px" *ngIf="is_sender_approval">
+        <div
+          class="row justify-content-end"
+          style="padding-bottom: 25px; margin-top: 30px"
+          *ngIf="is_sender_approval"
+        >
           <div class="col-lg-4 col-md-6 col-12">
-            <button *ngIf="objectPrint.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsTravel()">
-              <i class="fa fa-fw fa-save"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.travel.view_travel.btn_send}}</button>
+            <button
+              *ngIf="objectPrint.data.length > 0"
+              class="btn btn-success btn-block cursor-general"
+              (click)="sedRequestsTravel()"
+            >
+              <i class="fa fa-fw fa-save"></i>&nbsp;{{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.btn_send
+              }}
+            </button>
           </div>
         </div>
         <div class="modal-footerInfo justify-content-center">
-          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal" (click)="cleanObjectShowDetail()">
-            <h6> {{translate.app.frontEnd.pages.travel_management.travel.view_travel.btn_close}} </h6>
+          <div
+            class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center"
+            data-dismiss="modal"
+            (click)="cleanObjectShowDetail()"
+          >
+            <h6>
+              {{
+                translate.app.frontEnd.pages.travel_management.travel
+                  .view_travel.btn_close
+              }}
+            </h6>
           </div>
         </div>
       </div>

@@ -19,8 +19,8 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
   public arrayHotel: any[] = [];
   public formHotelsJourney: any;
   public hotels: any[] = [];
-  public countAfter: number = 0;
-  public countAfterAlert: number = 0;
+  public countAfter = 0;
+  public countAfterAlert = 0;
   public translate: Translate = null;
 
   constructor(public travelService: TravelService,
@@ -38,7 +38,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
     });
 
     this.alert.getActionConfirm().subscribe((data: any) => {
-      debugger
+      debugger;
       if (this.countAfter === 0) {
         if (this.countAfterAlert === 0) {
           if (data === 'continueHotelsJourney') {
@@ -47,7 +47,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
             this.formHotelsJourney.controls['date_hotel_in'].setValue('');
             if (document.getElementById('hoteljourney_edit').className !== 'modal show') {
 
-              document.getElementById("btn_hoteljourney_edit").click();
+              document.getElementById('btn_hoteljourney_edit').click();
               this.countAfterAlert += 1;
             }
           }
@@ -57,7 +57,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
           this.formHotelsJourney.controls['date_hotel_out'].setValue('');
           this.formHotelsJourney.controls['date_hotel_in'].setValue('');
           if (document.getElementById('travel_edit').className !== 'modal show') {
-            document.getElementById("btn_travel_edit").click();
+            document.getElementById('btn_travel_edit').click();
             document.getElementById('bodyGeneral').removeAttribute('style');
             this.objectHotelJourney = null;
             this.arrayHotel = [];
@@ -97,7 +97,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
                   });
 
               }, (error: any) => {
-                console.log(error)
+                console.log(error);
               }
             );
           }, 100);
@@ -110,7 +110,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy() {
-    debugger
+    debugger;
     this.countAfter += 1;
     this.countAfterAlert += 1;
   }
@@ -128,17 +128,17 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
         );
       },
       (error: any) => {
-        console.log(error)
+        console.log(error);
       });
   }
 
   returnTravel() {
-    debugger
+    debugger;
     if (this.objectHotelJourney.acction) {
       if (document.getElementById('travel_view').className !== 'modal show') {
-        document.getElementById("close_hotel_journey").click();
+        document.getElementById('close_hotel_journey').click();
         setTimeout(() => {
-          document.getElementById("btn_travel_view").click();
+          document.getElementById('btn_travel_view').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 
@@ -148,9 +148,9 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
     } else {
 
       if (document.getElementById('travel_edit').className !== 'modal show') {
-        document.getElementById("close_hotel_journey").click();
+        document.getElementById('close_hotel_journey').click();
         setTimeout(() => {
-          document.getElementById("btn_travel_edit").click();
+          document.getElementById('btn_travel_edit').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 
@@ -162,7 +162,7 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
   }
 
   addHotel(param) {
-    let object = {
+    const object = {
       travel_management_id: this.objectHotelJourney.id_journey,
       travel_request_id: this.objectHotelJourney.id_travel,
       hotel_id: param.id_hotels,
@@ -176,14 +176,14 @@ export class HotelsJourneyComponent implements OnInit, OnDestroy {
           (show: any) => {
             this.arrayHotel = [];
             this.arrayHotel = show.data.hotels;
-            this.formHotelsJourney.controls['id_hotels'].setValue("");
-            this.formHotelsJourney.controls['date_hotel_in'].setValue("");
-            this.formHotelsJourney.controls['date_hotel_out'].setValue("");
+            this.formHotelsJourney.controls['id_hotels'].setValue('');
+            this.formHotelsJourney.controls['date_hotel_in'].setValue('');
+            this.formHotelsJourney.controls['date_hotel_out'].setValue('');
           }, (error: any) => {
           }
         );
       }, (error: any) => {
-        document.getElementById("close_hotel_journey").click();
+        document.getElementById('close_hotel_journey').click();
         const alertWarning: Alerts[] = [{
           type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.travel.hotels_journey.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.travel.hotels_journey.message_alert_ts,
           confirmation: true, typeConfirmation: 'continueHotelsJourney'

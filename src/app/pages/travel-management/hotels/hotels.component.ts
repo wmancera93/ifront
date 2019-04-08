@@ -28,7 +28,7 @@ export class HotelsComponent implements OnInit {
       if (data) {
         this.getHotels();
       }
-    })
+    });
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deletHotel') {
@@ -43,9 +43,9 @@ export class HotelsComponent implements OnInit {
               confirmation: false,
             }];
             this.alert.setAlert(this.alertWarning[0]);
-          })
+          });
       }
-    })
+    });
 
   }
 

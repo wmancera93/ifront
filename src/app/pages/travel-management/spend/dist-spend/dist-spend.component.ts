@@ -18,12 +18,12 @@ export class DistSpendComponent implements OnInit {
   public id_dist_spend: string;
   public detailDistCost: any[] = [];
   public printSpend: any[] = [];
-  public isEdit: boolean = false;
+  public isEdit = false;
   public center_costs_travels: any[] = [];
   public grahp: any[] = [];
   public costs_travels: any[] = [];
-  public showListAutoCost: boolean = false;
-  public showListAutoGraph: boolean = false;
+  public showListAutoCost = false;
+  public showListAutoGraph = false;
   public operations: any[] = [];
   public accountContable: any[] = [];
   public distributionAccount: any[] = [];
@@ -33,32 +33,32 @@ export class DistSpendComponent implements OnInit {
   public operationsSpend: string;
   public accountContableVariable: string;
   public distribution: string;
-  public typeCenterCost_id: string = '';
-  public grahpSpend_id: string = '';
-  public kostl: boolean = true;
-  public nplnr: boolean = false;
-  public is_collapse: boolean = true;
+  public typeCenterCost_id = '';
+  public grahpSpend_id = '';
+  public kostl = true;
+  public nplnr = false;
+  public is_collapse = true;
   public accionDist: boolean;
-  public aufnr: boolean = false;
-  public typeCenterOrder: string = '';
-  public typeCenterOrder_id: string = '';
-  public showListAutoOrder: boolean = false;
+  public aufnr = false;
+  public typeCenterOrder = '';
+  public typeCenterOrder_id = '';
+  public showListAutoOrder = false;
   public order_travels: any[] = [];
   public translate: Translate = null;
 
   constructor(public spendSharedService: SpendSharedService, public spendsService: SpendsService,
     public travelManagementService: TravelService, public alert: AlertsService, public translateService: TranslateService) {
-  
+
     this.translate = this.translateService.getTranslate();
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'confirmContinueDist' || data === 'editDitsCost') {
         this.spendsService.getDetailDistCost(this.id_spend).subscribe((result: any) => {
           this.detailDistCost = result.data[0].cost_distribution;
           this.printSpend = result.data[0].travel_allowance;
-        })
+        });
         if (document.getElementById('dist_spend').className !== 'modal show') {
           document.getElementById('btn_detail_distSpend').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
         this.is_collapse = true;
         document.getElementById('funtionNewSpend').click();
@@ -67,10 +67,10 @@ export class DistSpendComponent implements OnInit {
         this.spendsService.getDetailDistCost(this.id_spend).subscribe((result: any) => {
           this.detailDistCost = result.data[0].cost_distribution;
           this.printSpend = result.data[0].travel_allowance;
-        })
+        });
         if (document.getElementById('dist_spend').className !== 'modal show') {
           document.getElementById('btn_detail_distSpend').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
       }
 
@@ -81,7 +81,7 @@ export class DistSpendComponent implements OnInit {
 
       if (document.getElementById('dist_spend').className !== 'modal show') {
         document.getElementById('btn_detail_distSpend').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
       if (!data.accion) {
         this.isEdit = false;
@@ -92,7 +92,7 @@ export class DistSpendComponent implements OnInit {
       this.spendsService.getDetailDistCost(this.id_spend).subscribe((result: any) => {
         this.detailDistCost = result.data[0].cost_distribution;
         this.printSpend = result.data[0].travel_allowance;
-      })
+      });
     });
   }
 
@@ -125,7 +125,7 @@ export class DistSpendComponent implements OnInit {
 
 
   saveAccountEdit() {
-    let objectCostDist = {
+    const objectCostDist = {
       travel_allowance_id: this.id_spend,
       travel_costs_types_id: this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id,
       travel_operations_id: this.operationsSpend,
@@ -134,7 +134,7 @@ export class DistSpendComponent implements OnInit {
       travel_graphs_id: this.grahpSpend_id,
       travel_costs_id: this.typeCenterCost_id,
       travel_maintenance_order_id: this.typeCenterOrder_id,
-    }
+    };
     this.spendsService.postSpendDistributionsCost(objectCostDist).subscribe(
       (dist: any) => {
         document.getElementById('btn_detail_distSpend').click();
@@ -156,7 +156,7 @@ export class DistSpendComponent implements OnInit {
           typeConfirmation: 'editDitsCost'
         }];
         this.alert.setAlert(alertWarning[0]);
-      })
+      });
   }
   selectTypeCenterImputations() {
     if (this.elementImputation === 'KOSTL') {
@@ -227,10 +227,10 @@ export class DistSpendComponent implements OnInit {
     this.grahpSpend = graph.code + '-' + graph.name;
     this.grahp = [];
     this.grahpSpend_id = graph.id;
-    this.searchOperationsGrahp(graph.code, 'edit')
+    this.searchOperationsGrahp(graph.code, 'edit');
   }
   returnOrderSearchOrder(order: any) {
-    debugger
+    debugger;
     this.typeCenterOrder = order.code + '-' + order.name;
     this.order_travels = [];
     this.typeCenterOrder_id = order.id;
@@ -247,7 +247,7 @@ export class DistSpendComponent implements OnInit {
         } else {
           this.operationsSpend = '';
         }
-      })
+      });
   }
   closeCollapse() {
     this.is_collapse = true;
@@ -275,15 +275,15 @@ export class DistSpendComponent implements OnInit {
           typeConfirmation: 'editDitsCost'
         }];
         this.alert.setAlert(alertWarning[0]);
-      })
+      });
   }
 
   returnSpend() {
     if (this.accionDist === false) {
       if (document.getElementById('modal_viewSpends').className !== 'modal show') {
-        document.getElementById("closeDistSpend").click();
+        document.getElementById('closeDistSpend').click();
         setTimeout(() => {
-          document.getElementById("btn-viewSpends").click();
+          document.getElementById('btn-viewSpends').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 
@@ -294,9 +294,9 @@ export class DistSpendComponent implements OnInit {
     } else {
 
       if (document.getElementById('spend_edit').className !== 'modal show') {
-        document.getElementById("closeDistSpend").click();
+        document.getElementById('closeDistSpend').click();
         setTimeout(() => {
-          document.getElementById("btn_spend_edit").click();
+          document.getElementById('btn_spend_edit').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 

@@ -20,7 +20,7 @@ export class AlertsComponent implements OnInit, OnDestroy {
   public icon: string;
   public confirmationShow = false;
   public cancelation: string;
-  public count: number = 0;
+  public count = 0;
   public translate: Translate = null;
 
   constructor(public alert: AlertsService, public route: Router,

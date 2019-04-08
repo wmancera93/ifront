@@ -22,11 +22,11 @@ export class EstadisticsComponent implements OnInit {
   public doughnutChartData: number[];
   public doughnutChartColors: any[];
   public doughnutOptions: any;
-  public doughnutChartType: string = 'doughnut';
-  public showChartLegend: boolean = false;
+  public doughnutChartType = 'doughnut';
+  public showChartLegend = false;
   // public showChartLegendExtraHour: boolean = true;
   public hovered: boolean;
-  public extraHours: boolean = false;
+  public extraHours = false;
   public translate: Translate = null;
   /* Bar Chart */
   public barChartOptions: any = {
@@ -34,8 +34,8 @@ export class EstadisticsComponent implements OnInit {
     responsive: true
   };
   public barChartLabels: string[];
-  public barChartType: string = 'bar';
-  public barChartLegend: boolean = false;
+  public barChartType = 'bar';
+  public barChartLegend = false;
   public barChartData: Array<any> = [];
   public barChartColors: any[];
 
@@ -48,22 +48,22 @@ export class EstadisticsComponent implements OnInit {
     this.estadistics.subscribe((data: any) => {
       this.objectWidget[0] = data.properties;
       this.typeGraph = data.graph_type;
-      let newChartData: Array<any> = [];
+      const newChartData: Array<any> = [];
       //newChartData.push(this.objectWidget[0].data.values);
 
       if (this.typeGraph === 'Doughnut') {
         if (this.objectWidget[0].title === this.translate.app.frontEnd.components.common.widgets.estadistics.tittle_ts) {
           this.extraHours = true;
         }
-        //Doughnut 
+        //Doughnut
         this.activeDoughnutChartType = true;
         this.doughnutChartType = 'doughnut';
         this.doughnutChartLabels = this.objectWidget[0].data.names;
         this.doughnutChartData = this.objectWidget[0].data.values;
         this.doughnutChartColors = [{ backgroundColor: this.objectWidget[0].data.colors }];
         this.doughnutOptions = {
-          legend:{
-            position: 'right'          
+          legend: {
+            position: 'right'
           },
           responsive: true,
           tooltips:
@@ -72,9 +72,9 @@ export class EstadisticsComponent implements OnInit {
             mode: 'single',
             callbacks: {
               label: function (tooltipItem, data) {
-                let label = data.labels[tooltipItem.index];
-                let datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                let dataNumber = new Number(datasetLabel);
+                const label = data.labels[tooltipItem.index];
+                const datasetLabel = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                const dataNumber = new Number(datasetLabel);
                 return label + ': ' + dataNumber.toLocaleString();
               }
             }
@@ -132,7 +132,7 @@ export class EstadisticsComponent implements OnInit {
               //     return barChartLabels.datasetLabel + ': ' + barChartLabels.value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
               //   }
             }
-          }
+          };
 
 
         }

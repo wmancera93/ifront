@@ -18,18 +18,21 @@
       <div class="col-12 ">
         <div class="row justify-content-center fontTitle-error">
           <div class="col-6">
-            {{ parseT("title_not_found") | translate }}
+            {{ parseT('title_not_found') | translate }}
           </div>
         </div>
         <div class="row justify-content-center">
           <div class="fontMessage-error col-8">
-            {{ parseT("text_not_found") | translate }}
+            {{ parseT('text_not_found') | translate }}
           </div>
         </div>
-        <div class="row justify-content-center" style="margin-bottom:15px;">
+        <div
+          class="row justify-content-center"
+          style="margin-bottom:15px;"
+        >
           <div class="col-lg-2 col-6">
             <div class="buttonError" (click)="RedirectInit()">
-              <h6>{{ parseT("text_go_to_home") | translate }}</h6>
+              <h6>{{ parseT('text_go_to_home') | translate }}</h6>
             </div>
           </div>
         </div>

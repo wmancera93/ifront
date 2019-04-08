@@ -24,8 +24,8 @@ export class TravelComponent implements OnInit {
   public aproover: string;
   public edit = false;
   public objectSend: any[];
-  public third: string = '';
-  public checkThird: boolean = true;
+  public third = '';
+  public checkThird = true;
   public translate: Translate = null;
   public userAuthenticated: User = null;
 
@@ -42,7 +42,7 @@ export class TravelComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
     this.aproover = this.translate.app.frontEnd.pages.travel_management.travel.approver_ts;
-    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+    this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
     this.alert.getActionConfirm().subscribe((data: any) => {
       document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
       if (data === 'deletRequestTravel') {
@@ -84,11 +84,11 @@ export class TravelComponent implements OnInit {
       if (data === 'closeAlertdeletRequestTravel') {
         document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
       }
-    })
+    });
 
 
     this.travelService.getTravelRequests().subscribe((list: any) => {
-      let url = window.location.href;
+      const url = window.location.href;
       url.split('/')[url.split('/').length - 1];
       if (url.split('/')[url.split('/').length - 1] !== 'travels') {
         this.travelsService.setEditTravels({ id_travel: url.split('/')[url.split('/').length - 1], send_travel: false });
@@ -120,7 +120,7 @@ export class TravelComponent implements OnInit {
             this.my_travels_list = [];
             this.travelService.getTravelRequests().subscribe((data: any) => {
               this.my_travels_list = data.data[0].my_travel_requests_list;
-              this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee
+              this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee;
               if (this.aproover !== '') {
                 this.aproover = this.aproover;
               }
@@ -132,7 +132,7 @@ export class TravelComponent implements OnInit {
             this.my_travels_list = [];
             this.travelService.getMyTravelRequests().subscribe((data: any) => {
               this.my_travels_list = data.data[0].my_travel_requests_list;
-              this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee
+              this.aproover = this.my_travels_list[0].next_approver_to_json.approver_employee;
               if (this.aproover !== '') {
                 this.aproover = this.aproover;
               }
@@ -165,14 +165,14 @@ export class TravelComponent implements OnInit {
 
   //begin filters
 
-  public codIHR: string = '';
-  public codSAP: string = '';
-  public datesBegin: string = '';
-  public datesEnd: string = '';
-  public status: string = '';
-  public statusLiquid: string = '';
-  public codEmployee: string = '';
-  public page: string = '';
+  public codIHR = '';
+  public codSAP = '';
+  public datesBegin = '';
+  public datesEnd = '';
+  public status = '';
+  public statusLiquid = '';
+  public codEmployee = '';
+  public page = '';
   public is_collapse: boolean;
 
   filter(filter) {
@@ -450,7 +450,7 @@ export class TravelComponent implements OnInit {
   }
 
   newFormTravel() {
-    this.travelsService.setNewTravels(true)
+    this.travelsService.setNewTravels(true);
   }
 
   viewTravels(id_travel: number) {

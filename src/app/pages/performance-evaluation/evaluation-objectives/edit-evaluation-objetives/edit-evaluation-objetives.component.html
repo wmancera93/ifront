@@ -6,7 +6,12 @@
   data-target="#modal_evaluationObjetives"
   style="display:none;"
 ></button>
-<div class="modal" tabindex="-1" role="dialog" id="modal_evaluationObjetives">
+<div
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  id="modal_evaluationObjetives"
+>
   <div
     style="margin-top: 10px !important"
     class="modal-dialog modal-lg"
@@ -14,8 +19,11 @@
   >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">
-          {{ parseT("tittle") | translate }}
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{ parseT('tittle') | translate }}
         </h5>
         <button
           id="closeModalObjectiveEvaluation"
@@ -35,16 +43,21 @@
             *ngIf="EvaluacionPer !== null"
           >
             <div class="row border" style="margin-left: 2px">
-              <h4>{{ parseT("sub_tittle") | translate }}</h4>
+              <h4>{{ parseT('sub_tittle') | translate }}</h4>
             </div>
             <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 30px">
+              <div
+                class="col-12 top-containter"
+                style="margin-top: 30px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-file-text text-primary-hr"></i>
                       <strong
-                        >{{ parseT("type_evaluation") | translate }}:</strong
+                        >{{
+                          parseT('type_evaluation') | translate
+                        }}:</strong
                       >
                     </label>
                   </div>
@@ -57,13 +70,20 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 15px">
+              <div
+                class="col-12 top-containter"
+                style="margin-top: 15px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
-                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
+                      <i
+                        class="fa fa-calendar-minus-o text-primary-hr"
+                      ></i>
                       <strong
-                        >{{ parseT("time_evaluation") | translate }}:</strong
+                        >{{
+                          parseT('time_evaluation') | translate
+                        }}:</strong
                       >
                     </label>
                   </div>
@@ -71,8 +91,14 @@
                     <div class="row">
                       <div class="col-lg-5 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-start text-primary-hr"></i>
-                          <strong>{{ parseT("start") | translate }}:</strong>
+                          <i
+                            class="fa fa-hourglass-start text-primary-hr"
+                          ></i>
+                          <strong
+                            >{{
+                              parseT('start') | translate
+                            }}:</strong
+                          >
                         </label>
                       </div>
                       <div class="col-lg-7 col-md-6 col-6">
@@ -86,8 +112,14 @@
                     <div class="row">
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-end text-primary-hr"></i>
-                          <strong>{{ parseT("ended") | translate }}:</strong>
+                          <i
+                            class="fa fa-hourglass-end text-primary-hr"
+                          ></i>
+                          <strong
+                            >{{
+                              parseT('ended') | translate
+                            }}:</strong
+                          >
                         </label>
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
@@ -101,12 +133,17 @@
               </div>
             </div>
             <div class="row">
-              <div class=" col-12 top-containter" style="margin-top: 15px">
+              <div
+                class=" col-12 top-containter"
+                style="margin-top: 15px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-user-o text-primary-hr"></i>
-                      <strong>{{ parseT("evaluator") | translate }}</strong>
+                      <strong>{{
+                        parseT('evaluator') | translate
+                      }}</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
@@ -119,7 +156,9 @@
                       </div>
                       <div class="col-lg-8 col-md-8 col-12">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-graduation-cap text-primary-hr"></i>
+                          <i
+                            class="fa fa-graduation-cap text-primary-hr"
+                          ></i>
                           {{ qualifierData.name_complete }}
                         </label>
                         <label for="nomEvaluation" class="titleColor">
@@ -143,25 +182,39 @@
           >
             <div class="row border" style="margin-left: 2px">
               <div class="col-12">
-                <h4>{{ parseT("evaluation_objetives") | translate }}</h4>
+                <h4>
+                  {{ parseT('evaluation_objetives') | translate }}
+                </h4>
               </div>
             </div>
             <div class="row" style="margin-top: 30px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-check-circle-o text-primary-hr"></i>
-                  <strong>{{ parseT("number_objetives") | translate }}:</strong>
+                  <i
+                    class="fa fa-fw fa-check-circle-o text-primary-hr"
+                  ></i>
+                  <strong
+                    >{{
+                      parseT('number_objetives') | translate
+                    }}:</strong
+                  >
                 </label>
                 <label class="col-lg-4 col-md-6 col-12">
-                  <a>{{ EvaluacionPer.count_evaluation_objetives }}</a>
+                  <a>{{
+                    EvaluacionPer.count_evaluation_objetives
+                  }}</a>
                 </label>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-thermometer-full text-primary-hr"></i>
-                  <strong>{{ parseT("percentage_full") | translate }}</strong>
+                  <i
+                    class="fa fa-fw fa-thermometer-full text-primary-hr"
+                  ></i>
+                  <strong>{{
+                    parseT('percentage_full') | translate
+                  }}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -171,9 +224,11 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-thermometer-half text-primary-hr"></i>
+                  <i
+                    class="fa fa-fw fa-thermometer-half text-primary-hr"
+                  ></i>
                   <strong>{{
-                    parseT("percentage_missing") | translate
+                    parseT('percentage_missing') | translate
                   }}</strong>
                 </label>
               </div>
@@ -199,10 +254,10 @@
                 <div class="row" *ngIf="!flag_complete">
                   <div class="col-lg-4 col-md-6 col-12">
                     <h5 *ngIf="bedit">
-                      {{ parseT("btn_edit") | translate }}
+                      {{ parseT('btn_edit') | translate }}
                     </h5>
                     <h5 *ngIf="bnew">
-                      {{ parseT("btn_new") | translate }}
+                      {{ parseT('btn_new') | translate }}
                     </h5>
                     <button
                       type="button"
@@ -211,7 +266,7 @@
                       (click)="colapseNew()"
                     >
                       <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;
-                      {{ parseT("create") | translate }}
+                      {{ parseT('create') | translate }}
                     </button>
                     <button
                       id="funtionObjectives"
@@ -232,23 +287,33 @@
                   </div>
                 </div>
 
-                <div class="collapse top-general-p " id="collapseEditObjetives">
+                <div
+                  class="collapse top-general-p "
+                  id="collapseEditObjetives"
+                >
                   <form
                     [formGroup]="formObjetive"
                     class="row justify-content-left"
                     (ngSubmit)="newObjetive(formObjetive.value)"
                   >
                     <div class="col-md-4 col-12 top-containter">
-                      <label for="dateBegin" class="font-title-general">
-                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        {{ parseT("date_begin") | translate }} *
+                      <label
+                        for="dateBegin"
+                        class="font-title-general"
+                      >
+                        <i
+                          class="fa fa-fw fa-calendar text-primary-hr"
+                        ></i>
+                        {{ parseT('date_begin') | translate }} *
                       </label>
                       <input
                         *ngIf="!bedit"
                         type="date"
                         name="date_begin"
                         class="form-control"
-                        [formControl]="formObjetive.controls['start_date']"
+                        [formControl]="
+                          formObjetive.controls['start_date']
+                        "
                         placeholder="dd/mm/yyyy"
                       />
                       <input
@@ -256,21 +321,27 @@
                         type="date"
                         name="date_begin"
                         class="form-control"
-                        [formControl]="formObjetive.controls['start_date']"
+                        [formControl]="
+                          formObjetive.controls['start_date']
+                        "
                         value="formObjetive.start_date"
                       />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
-                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                        {{ parseT("date_end") | translate }} *
+                        <i
+                          class="fa fa-fw fa-calendar text-primary-hr"
+                        ></i>
+                        {{ parseT('date_end') | translate }} *
                       </label>
                       <input
                         *ngIf="!bedit"
                         type="date"
                         name="date_end"
                         class="form-control"
-                        [formControl]="formObjetive.controls['end_date']"
+                        [formControl]="
+                          formObjetive.controls['end_date']
+                        "
                         placeholder="dd/mm/yyyy"
                       />
                       <input
@@ -278,33 +349,46 @@
                         type="date"
                         name="date_end"
                         class="form-control"
-                        [formControl]="formObjetive.controls['end_date']"
+                        [formControl]="
+                          formObjetive.controls['end_date']
+                        "
                         value="formObjetive.end_date"
                       />
                     </div>
                     <div class="col-md-4 col-12 top-containter">
                       <label for="dateEnd" class="font-title-general">
-                        <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                        {{ parseT("porridge") | translate }} *
+                        <i
+                          class="fa fa-fw fa-percent text-primary-hr"
+                        ></i>
+                        {{ parseT('porridge') | translate }} *
                       </label>
                       <input
                         *ngIf="!bedit"
                         type="number"
                         class="form-control"
-                        [formControl]="formObjetive.controls['weight']"
+                        [formControl]="
+                          formObjetive.controls['weight']
+                        "
                       />
                       <input
                         *ngIf="bedit"
                         type="text"
                         class="form-control"
-                        [formControl]="formObjetive.controls['weight']"
+                        [formControl]="
+                          formObjetive.controls['weight']
+                        "
                         value="formObjetive.weight"
                       />
                     </div>
                     <div class="col-md-12 col-12 top-containter">
-                      <label for="celulaInput" class="font-title-general">
-                        <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                        {{ parseT("description") | translate }}
+                      <label
+                        for="celulaInput"
+                        class="font-title-general"
+                      >
+                        <i
+                          class="fa fa-fw fa-comment text-primary-hr"
+                        ></i>
+                        {{ parseT('description') | translate }}
                       </label>
                       <textarea
                         type="text"
@@ -313,7 +397,9 @@
                         style="height: auto !important;"
                         name="objective_request"
                         class="form-control"
-                        [formControl]="formObjetive.controls['objetive_text']"
+                        [formControl]="
+                          formObjetive.controls['objetive_text']
+                        "
                       ></textarea>
                     </div>
                     <div class="col-md-12 top-containter">
@@ -325,7 +411,7 @@
                             class="btn btn-success btn-block cursor-general"
                           >
                             <i class="fa fa-fw fa-floppy-o"></i
-                            >{{ parseT("save") | translate }}
+                            >{{ parseT('save') | translate }}
                           </button>
                           <button
                             type="button"
@@ -333,7 +419,7 @@
                             class="btn btn-warning btn-block"
                           >
                             <i class="fa fa-fw fa-spinner fa-spin"></i
-                            >{{ parseT("loading") | translate }}
+                            >{{ parseT('loading') | translate }}
                           </button>
                         </div>
                         <div class="col-lg-3 col-md-4 col-12">
@@ -344,7 +430,7 @@
                             data-target="#collapseExample"
                           >
                             <i class="fa fa-fw fa-window-close"></i
-                            >{{ parseT("button_cancel") | translate }}
+                            >{{ parseT('button_cancel') | translate }}
                           </button>
                         </div>
                       </div>
@@ -363,18 +449,16 @@
                       class="btn btn-success btn-block cursor-general"
                       (click)="evaluationComplete()"
                     >
-                      <i class="fa fa-fw fa-flag-checkered"></i>&nbsp;&nbsp;{{
-                        parseT("finish") | translate
-                      }}
+                      <i class="fa fa-fw fa-flag-checkered"></i
+                      >&nbsp;&nbsp;{{ parseT('finish') | translate }}
                     </button>
                     <button
                       type="button"
                       *ngIf="!showCharge"
                       class="btn btn-warning btn-block"
                     >
-                      <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{
-                        parseT("loading") | translate
-                      }}
+                      <i class="fa fa-fw fa-spinner fa-spin"></i
+                      >&nbsp;&nbsp;{{ parseT('loading') | translate }}
                     </button>
                   </div>
                 </div>

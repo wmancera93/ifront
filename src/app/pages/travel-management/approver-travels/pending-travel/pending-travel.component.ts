@@ -16,7 +16,7 @@ import { TranslateService } from '../../../../services/common/translate/translat
 export class PendingTravelComponent implements OnInit {
 
   public pendingsRequestTravels: any[] = [];
-  public travelsRequestsType: string = 'travels';
+  public travelsRequestsType = 'travels';
   public typesRequest: any[] = [];
   public request_id: string;
   public request_type: string;
@@ -60,7 +60,7 @@ export class PendingTravelComponent implements OnInit {
         id: 3,
         name: this.translate.app.frontEnd.pages.travel_management.approver_travels.pending_travel.filter_three
       }
-    )
+    );
   }
 
 
@@ -76,23 +76,23 @@ export class PendingTravelComponent implements OnInit {
 
   //begin filters
 
-  public codIHR: string = '';
-  public codSAP: string = '';
-  public datesBegin: string = '';
-  public datesEnd: string = '';
-  public status: string = '';
-  public statusLiquid: string = '';
-  public codEmployee: string = '';
-  public page: string = '';
+  public codIHR = '';
+  public codSAP = '';
+  public datesBegin = '';
+  public datesEnd = '';
+  public status = '';
+  public statusLiquid = '';
+  public codEmployee = '';
+  public page = '';
   public is_collapse: boolean;
 
   filter(filter) {
     switch (this.travelsRequestsType) {
       case 'travels':
-        this.travels(filter)
+        this.travels(filter);
         break;
       case 'spend':
-        this.spends(filter)
+        this.spends(filter);
         break;
       case 'advance':
         this.advances(filter);
@@ -122,7 +122,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -140,7 +140,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -157,7 +157,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -175,7 +175,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -193,7 +193,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -211,7 +211,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -239,7 +239,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -257,7 +257,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -274,7 +274,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -292,7 +292,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -310,7 +310,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -328,7 +328,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -356,7 +356,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -374,7 +374,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -391,7 +391,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -409,7 +409,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -427,7 +427,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -445,7 +445,7 @@ export class PendingTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendPending().subscribe((data: any) => {
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -466,8 +466,8 @@ export class PendingTravelComponent implements OnInit {
         this.travelsRequestsType = 'travels';
         this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
-    })
-  };
+    });
+  }
   sortByNumber(dataBySort: any) {
     dataBySort.sort(function (a, b) {
       return b.id - a.id;
@@ -480,23 +480,23 @@ export class PendingTravelComponent implements OnInit {
         this.travelsRequestsType = 'spend';
         this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
-    })
-  };
+    });
+  }
   getRequestsPendingsAdvance() {
     this.approverTravelsService.getApprovalsAdvancePending().subscribe((data: any) => {
       if (data) {
         this.travelsRequestsType = 'advance';
         this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
       }
-    })
-  };
+    });
+  }
 
   returnBackTravelPending() {
     this.router.navigate(['ihr/travel_management']);
   }
   modalAproversTravelPending(request: any, type: string) {
 
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true, type: type })
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: true, type: type });
   }
   selectTypeReques(param) {
     this.codIHR = '';
@@ -514,7 +514,7 @@ export class PendingTravelComponent implements OnInit {
             this.travelsRequestsType = 'travels';
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
-        })
+        });
 
         break;
       case '2':
@@ -523,7 +523,7 @@ export class PendingTravelComponent implements OnInit {
             this.travelsRequestsType = 'advance';
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
-        })
+        });
 
         break;
       case '3':
@@ -532,7 +532,7 @@ export class PendingTravelComponent implements OnInit {
             this.travelsRequestsType = 'spend';
             this.pendingsRequestTravels = this.sortByNumber(data.data[0].requests);
           }
-        })
+        });
         break;
       default:
 

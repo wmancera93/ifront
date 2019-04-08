@@ -1,13 +1,32 @@
-<button id="btn_approvals_requests_travels" type="button" class="btn btn-primary" data-toggle="modal" data-target="#approvals_requests_travels"
-  style="display:none;">
-</button>
-<div class="modal" data-backdrop="static" id="approvals_requests_travels" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
+<button
+  id="btn_approvals_requests_travels"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#approvals_requests_travels"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  data-backdrop="static"
+  id="approvals_requests_travels"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="approvals.length > 0">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{approvals[0].travel_request.type_request_to_json.description}}</h4>
+          <h4 class="modal-title titleColor text-shadow">
+            {{
+              approvals[0].travel_request.type_request_to_json
+                .description
+            }}
+          </h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
@@ -18,44 +37,69 @@
                 <div class="row">
                   <div class="col-12">
                     <p class="font-title-general tops">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.travel_requests}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .travel_requests
+                      }}
                       <i class="fa fa-hashtag text-primary-hr"></i>
-                      {{approvals[0].travel_request.ticket}}
+                      {{ approvals[0].travel_request.ticket }}
                     </p>
                   </div>
                   <div class="col-12">
                     <h3 class="font-color-default tops">
                       <i class="fa fa-user text-primary-hr"></i>
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.applicants}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .applicants
+                      }}
                     </h3>
                   </div>
                   <div class="col-12 center-img-employee tops">
                     <div class="menu-img-employee">
-                      <img src="{{approvals[0].travel_request.employee_applicant_to_json.image.url}}" class="roundPhoto-employee">
-                      <br>
+                      <img
+                        src="{{
+                          approvals[0].travel_request
+                            .employee_applicant_to_json.image.url
+                        }}"
+                        class="roundPhoto-employee"
+                      />
+                      <br />
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="row">
                       <div class="col-12">
                         <h3 class="font-color-default tops">
-                          {{approvals[0].travel_request.employee_applicant_to_json.short_name}}
+                          {{
+                            approvals[0].travel_request
+                              .employee_applicant_to_json.short_name
+                          }}
                         </h3>
                       </div>
                       <div class="col-12">
                         <p class="font-title-general tops">
-                          {{approvals[0].travel_request.employee_applicant_to_json.position}}
+                          {{
+                            approvals[0].travel_request
+                              .employee_applicant_to_json.position
+                          }}
                         </p>
                       </div>
                       <div class="col-12">
                         <p class="font-title-general tops">
-                          <i class="fa fa-map-marker text-primary-hr"></i>
-                          {{approvals[0].travel_request.employee_applicant_to_json.subdivision_per}}
+                          <i
+                            class="fa fa-map-marker text-primary-hr"
+                          ></i>
+                          {{
+                            approvals[0].travel_request
+                              .employee_applicant_to_json
+                              .subdivision_per
+                          }}
                         </p>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </div>
             </div>
@@ -65,44 +109,121 @@
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left">
                       <h3 class="font-color-default col-md-2 col-4">
-                        {{translate.app.frontEnd.components.common.travels.approvals_details_travels.status}}:
+                        {{
+                          translate.app.frontEnd.components.common
+                            .travels.approvals_details_travels.status
+                        }}:
                       </h3>
-                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == statusApprover">
-                        <span class="badge badge-primary" style="margin-top: 5px;">
-                          {{approvals[0].travel_request.status_request}}
+                      <h6
+                        class="col-4"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .status_request == statusApprover
+                        "
+                      >
+                        <span
+                          class="badge badge-primary"
+                          style="margin-top: 5px;"
+                        >
+                          {{
+                            approvals[0].travel_request.status_request
+                          }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == statusCancelled">
-                        <span class="badge badge-danger" style="margin-top: 5px;">
-                          {{approvals[0].travel_request.status_request}}
+                      <h6
+                        class="col-4"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .status_request == statusCancelled
+                        "
+                      >
+                        <span
+                          class="badge badge-danger"
+                          style="margin-top: 5px;"
+                        >
+                          {{
+                            approvals[0].travel_request.status_request
+                          }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == statusInProcess">
-                        <span class="badge badge-success" style="margin-top: 5px;">
-                          {{approvals[0].travel_request.status_request}}
+                      <h6
+                        class="col-4"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .status_request == statusInProcess
+                        "
+                      >
+                        <span
+                          class="badge badge-success"
+                          style="margin-top: 5px;"
+                        >
+                          {{
+                            approvals[0].travel_request.status_request
+                          }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].travel_request.status_request == statusPending">
-                        <span class="badge badge-default" style="margin-top: 5px;">
-                          {{approvals[0].travel_request.status_request}}
+                      <h6
+                        class="col-4"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .status_request == statusPending
+                        "
+                      >
+                        <span
+                          class="badge badge-default"
+                          style="margin-top: 5px;"
+                        >
+                          {{
+                            approvals[0].travel_request.status_request
+                          }}
                         </span>
                       </h6>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12 text-md-left text-left">
                     <div class="row">
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.date_begin_format != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .date_begin_format != null
+                        "
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.date_begin}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].travel_request.date_begin_format}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .date_begin
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].travel_request
+                              .date_begin_format
+                          }}</span>
                         </p>
                       </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.date_end_format != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="
+                          approvals[0].travel_request
+                            .date_end_format != null
+                        "
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.date_end}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].travel_request.date_end_format}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .date_end
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].travel_request
+                              .date_end_format
+                          }}</span>
                         </p>
                       </div>
                       <!-- <div class="col-12 text-md-left text-left">
@@ -116,55 +237,154 @@
                   </div>
                   <div class="col-lg-6 col-12 text-md-left text-left">
                     <div class="row">
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.updated_date != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="
+                          approvals[0].travel_request.updated_date !=
+                          null
+                        "
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.upgrade}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].travel_request.updated_date}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .upgrade
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].travel_request.updated_date
+                          }}</span>
                         </p>
                       </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].travel_request.created_date != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="
+                          approvals[0].travel_request.created_date !=
+                          null
+                        "
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.create}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].travel_request.created_date}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .create
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].travel_request.created_date
+                          }}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
-                          <i class="fa fa-fw fa-users font-color-default"></i>
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approvers}}:
-                          <span style="font-weight: 100 !important">{{objectApproval[0].approvers_to_json.length}}</span>
+                          <i
+                            class="fa fa-fw fa-users font-color-default"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .approvers
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            objectApproval[0].approvers_to_json.length
+                          }}</span>
                         </p>
                       </div>
                     </div>
                   </div>
 
-                  <div id="accordion" class="col-12" style="margin-top: 15px">
+                  <div
+                    id="accordion"
+                    class="col-12"
+                    style="margin-top: 15px"
+                  >
                     <div class="row">
                       <div class="col-12 text-left" id="headingOne">
-                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
-                          data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_travels}}</p>
+                        <p
+                          class="font-title-general  collapsed cursor-general"
+                          style="text-decoration: underline  rgb(39, 85, 236)!important"
+                          data-toggle="collapse"
+                          data-target="#collapseOne"
+                          aria-expanded="false"
+                          aria-controls="collapseOne"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .see_travels
+                          }}
+                        </p>
                       </div>
-                      <div id="collapseOne" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion" style="margin-top: 25px">
+                      <div
+                        id="collapseOne"
+                        class="collapse col-12"
+                        aria-labelledby="headingOne"
+                        data-parent="#accordion"
+                        style="margin-top: 25px"
+                      >
                         <div class="row">
                           <div class="col-12">
-                            <app-data-table [records]="objectTravelsReport" [pdf]="showPdf" id="tableTravelsSaved" [sizeTable]="showSizeTable" [title]="nameReportTravel"></app-data-table>
+                            <app-data-table
+                              [records]="objectTravelsReport"
+                              [pdf]="showPdf"
+                              id="tableTravelsSaved"
+                              [sizeTable]="showSizeTable"
+                              [title]="nameReportTravel"
+                            ></app-data-table>
                           </div>
                         </div>
                         <div class="row" style="padding-bottom: 40px">
                           <div class="col-12">
                             <p class="font-title-general text-left">
-                              <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_attach}}:</p>
+                              <i
+                                class="fa fa-fw fa-paperclip font-color-default"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .see_attach
+                              }}:
+                            </p>
                             <div class="row text-left">
-                              <div class="col-12" *ngFor="let approversTravels of approvals[0].travel_request_annexeds; let index = index">
-                                <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravels(approversTravels)">
-                                  <p>{{index+1}}.
-                                    <i aria-hidden="true" style="font-size: 1.5em; color: white"></i>
-                                    {{approversTravels.name |slice: 0:40}}
-                                    <span [hidden]="approversTravels.name.length < 40">...</span>
+                              <div
+                                class="col-12"
+                                *ngFor="
+                                  let approversTravels of approvals[0]
+                                    .travel_request_annexeds;
+                                  let index = index
+                                "
+                              >
+                                <div
+                                  class="badge"
+                                  style="color: rgb(0, 27, 87); cursor: pointer"
+                                  (click)="
+                                    viewAnexedTravels(
+                                      approversTravels
+                                    )
+                                  "
+                                >
+                                  <p>
+                                    {{ index + 1 }}.
+                                    <i
+                                      aria-hidden="true"
+                                      style="font-size: 1.5em; color: white"
+                                    ></i>
+                                    {{
+                                      approversTravels.name
+                                        | slice: 0:40
+                                    }}
+                                    <span
+                                      [hidden]="
+                                        approversTravels.name.length <
+                                        40
+                                      "
+                                      >...</span
+                                    >
                                   </p>
                                 </div>
                               </div>
@@ -174,37 +394,133 @@
                       </div>
                     </div>
                     <div class="row">
-                      <div class="text-primary col-12 text-left" id="headingTwo">
-                        <p class="font-title-general  collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
-                          data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_advance}}</p>
+                      <div
+                        class="text-primary col-12 text-left"
+                        id="headingTwo"
+                      >
+                        <p
+                          class="font-title-general  collapsed cursor-general"
+                          style="text-decoration: underline  rgb(39, 85, 236)!important"
+                          data-toggle="collapse"
+                          data-target="#collapseTwo"
+                          aria-expanded="false"
+                          aria-controls="collapseTwo"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .see_advance
+                          }}
+                        </p>
                       </div>
-                      <div id="collapseTwo" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion" style="margin-top: 25px">
-                        <app-data-table [records]="objectAdvanceReport" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable" [title]="nameReportAdvance"></app-data-table>
+                      <div
+                        id="collapseTwo"
+                        class="collapse col-12"
+                        aria-labelledby="headingTwo"
+                        data-parent="#accordion"
+                        style="margin-top: 25px"
+                      >
+                        <app-data-table
+                          [records]="objectAdvanceReport"
+                          [pdf]="showPdf"
+                          id="tableAdvanceSaved"
+                          [sizeTable]="showSizeTable"
+                          [title]="nameReportAdvance"
+                        ></app-data-table>
                       </div>
                     </div>
                     <div class="row">
-                      <div class=" font-title-general  col-12 text-left" id="headingThree">
-                        <p class="font-title-general collapsed cursor-general" style="text-decoration: underline  rgb(39, 85, 236)!important" data-toggle="collapse"
-                          data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_spend}}</p>
+                      <div
+                        class=" font-title-general  col-12 text-left"
+                        id="headingThree"
+                      >
+                        <p
+                          class="font-title-general collapsed cursor-general"
+                          style="text-decoration: underline  rgb(39, 85, 236)!important"
+                          data-toggle="collapse"
+                          data-target="#collapseThree"
+                          aria-expanded="false"
+                          aria-controls="collapseThree"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .see_spend
+                          }}
+                        </p>
                       </div>
-                      <div id="collapseThree" class="collapse col-12" aria-labelledby="headingThree" data-parent="#accordion" style="margin-top: 25px">
+                      <div
+                        id="collapseThree"
+                        class="collapse col-12"
+                        aria-labelledby="headingThree"
+                        data-parent="#accordion"
+                        style="margin-top: 25px"
+                      >
                         <div class="row">
                           <div class="col-12">
-                            <app-data-table [records]="objectSpendReport" [pdf]="showPdf" id="tableSpendSaved" [sizeTable]="showSizeTable" [title]="nameReportSpend"></app-data-table>
+                            <app-data-table
+                              [records]="objectSpendReport"
+                              [pdf]="showPdf"
+                              id="tableSpendSaved"
+                              [sizeTable]="showSizeTable"
+                              [title]="nameReportSpend"
+                            ></app-data-table>
                           </div>
                         </div>
-                        <div class="row" style="padding-bottom: 40px" *ngIf="approvals[0].travel_allowance_request.data !== null">
+                        <div
+                          class="row"
+                          style="padding-bottom: 40px"
+                          *ngIf="
+                            approvals[0].travel_allowance_request
+                              .data !== null
+                          "
+                        >
                           <div class="col-12">
                             <p class="font-title-general text-left">
-                              <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_attach_spend}}: </p>
+                              <i
+                                class="fa fa-fw fa-paperclip font-color-default"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .see_attach_spend
+                              }}:
+                            </p>
                             <div class="row text-left">
-                              <div class="col-12" *ngFor="let anexedSpend of approvals[0].travel_allowance_request.data.travel_allowance_anexeds; let index = index">
-                                <div class="badge" style="color: rgb(0, 27, 87); cursor: pointer" (click)="viewAnexedTravelsSpend(approversTravels)">
-                                  <p>{{index+1}}.
-                                    <i aria-hidden="true" style="font-size: 1.5em; color: white"></i>
-                                    {{anexedSpend.name |slice: 0:40}}
-                                    <span [hidden]="anexedSpend.name.length < 40">...</span>
+                              <div
+                                class="col-12"
+                                *ngFor="
+                                  let anexedSpend of approvals[0]
+                                    .travel_allowance_request.data
+                                    .travel_allowance_anexeds;
+                                  let index = index
+                                "
+                              >
+                                <div
+                                  class="badge"
+                                  style="color: rgb(0, 27, 87); cursor: pointer"
+                                  (click)="
+                                    viewAnexedTravelsSpend(
+                                      approversTravels
+                                    )
+                                  "
+                                >
+                                  <p>
+                                    {{ index + 1 }}.
+                                    <i
+                                      aria-hidden="true"
+                                      style="font-size: 1.5em; color: white"
+                                    ></i>
+                                    {{
+                                      anexedSpend.name | slice: 0:40
+                                    }}
+                                    <span
+                                      [hidden]="
+                                        anexedSpend.name.length < 40
+                                      "
+                                      >...</span
+                                    >
                                   </p>
                                 </div>
                               </div>
@@ -212,24 +528,46 @@
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
 
-                  <div class="col-12 text-md-left" style="margin-top: 15px">
+                  <div
+                    class="col-12 text-md-left"
+                    style="margin-top: 15px"
+                  >
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
-                        {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver}}:
+                        {{
+                          translate.app.frontEnd.components.common
+                            .travels.approvals_details_travels
+                            .approver
+                        }}:
                       </h3>
                     </div>
                     <div class="row justify-content-between">
-                      <div class="col-md-3 col-6 center-img-aprovers tops" *ngFor="let approversTravels of objectApproval[0].approvers_to_json">
-                        <div class="img-approvers" *ngIf="approversTravels.image != null">
-                          <img src="{{approversTravels.image.url}}" class="img-employee">
-                          <br>
+                      <div
+                        class="col-md-3 col-6 center-img-aprovers tops"
+                        *ngFor="
+                          let approversTravels of objectApproval[0]
+                            .approvers_to_json
+                        "
+                      >
+                        <div
+                          class="img-approvers"
+                          *ngIf="approversTravels.image != null"
+                        >
+                          <img
+                            src="{{ approversTravels.image.url }}"
+                            class="img-employee"
+                          />
+                          <br />
                         </div>
-                        <p *ngIf="approversTravels.short_name != null" class="paddingInfo text-left text-md-center" style="font-weight: 100 !important">
-                          {{approversTravels.short_name}}
+                        <p
+                          *ngIf="approversTravels.short_name != null"
+                          class="paddingInfo text-left text-md-center"
+                          style="font-weight: 100 !important"
+                        >
+                          {{ approversTravels.short_name }}
                         </p>
                       </div>
                     </div>
@@ -237,40 +575,122 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'I' || objectApproval[0].approver_platform == null ">
-                      <li id="litab1" class="nav-item" style="width: 50%" *ngIf="editRequest">
-                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': editRequest}" data-toggle="tab" href="#Approval">
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.request_manage}}
+                    <ul
+                      class="nav nav-tabs"
+                      *ngIf="
+                        objectApproval[0].approver_platform == 'I' ||
+                        objectApproval[0].approver_platform == null
+                      "
+                    >
+                      <li
+                        id="litab1"
+                        class="nav-item"
+                        style="width: 50%"
+                        *ngIf="editRequest"
+                      >
+                        <a
+                          id="atab1"
+                          class="nav-link a-contacts bg-tabs"
+                          [ngClass]="{ active: editRequest }"
+                          data-toggle="tab"
+                          href="#Approval"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .request_manage
+                          }}
                         </a>
                       </li>
-                      <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !editRequest}" data-toggle="tab" href="#Detail">
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_details}}
+                      <li
+                        id="litab2"
+                        class="nav-item"
+                        style="width: 50%"
+                      >
+                        <a
+                          id="atab2"
+                          class="nav-link a-contacts bg-tabs"
+                          [ngClass]="{ active: !editRequest }"
+                          data-toggle="tab"
+                          href="#Detail"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .see_details
+                          }}
                         </a>
                       </li>
                     </ul>
-                    <ul class="nav nav-tabs" *ngIf="objectApproval[0].approver_platform == 'S'">
-                      <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail">
-                          {{translate.app.frontEnd.components.common.travels.approvals_details_travels.see_details}} {{approvals[0].approver_platform}}
+                    <ul
+                      class="nav nav-tabs"
+                      *ngIf="
+                        objectApproval[0].approver_platform == 'S'
+                      "
+                    >
+                      <li
+                        id="litab2"
+                        class="nav-item"
+                        style="width: 50%"
+                      >
+                        <a
+                          id="atab2"
+                          class="nav-link a-contacts bg-tabs"
+                          class="active"
+                          data-toggle="tab"
+                          href="#Detail"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .travels.approvals_details_travels
+                              .see_details
+                          }}
+                          {{ approvals[0].approver_platform }}
                         </a>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div *ngIf="objectApproval[0].approver_platform == 'I' || objectApproval[0].approver_platform == null" class="tab-content"
-                    style="margin-left: 5% !important; width: 90% !important">
-                    <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': editRequest}" style="background-color: transparent !important">
+                  <div
+                    *ngIf="
+                      objectApproval[0].approver_platform == 'I' ||
+                      objectApproval[0].approver_platform == null
+                    "
+                    class="tab-content"
+                    style="margin-left: 5% !important; width: 90% !important"
+                  >
+                    <div
+                      id="Approval"
+                      class="tab-pane text-muted"
+                      [ngClass]="{ active: editRequest }"
+                      style="background-color: transparent !important"
+                    >
                       <div class="row">
-                        <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
+                        <div
+                          class="col-12"
+                          *ngIf="prerequisit"
+                          style="text-align: justify !important"
+                        >
                           <div class="row justify-content-center">
-                            <div class="col-12" [innerHTML]="approvals[0].travel_request.type_request_to_json.prerequisites">
-                            </div>
+                            <div
+                              class="col-12"
+                              [innerHTML]="
+                                approvals[0].travel_request
+                                  .type_request_to_json.prerequisites
+                              "
+                            ></div>
                             <div class="col-md-4 col-12">
-                              <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
+                              <div
+                                class="btn btn-success top-general-p cursor-general btn-block"
+                                (click)="aceptPrerequisit()"
+                              >
                                 <i class="fa fa-fw fa-check"></i>
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.accept}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels.accept
+                                }}
                               </div>
                             </div>
                           </div>
@@ -279,71 +699,191 @@
                           <div class="row justify-content-center">
                             <div class="col-lg-6 col-md-6 col-8">
                               <span *ngIf="switchTravels == 'off'">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.rejected}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .rejected
+                                }}
                               </span>
                               <span *ngIf="switchTravels == 'on'">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approved}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .approved
+                                }}
                               </span>
                             </div>
                             <div class="col-4">
                               <div class="top-interruptor">
-                                <input type="radio" name="interruptor" id="prendido" checked>
-                                <input type="radio" name="interruptor" id="apagado">
+                                <input
+                                  type="radio"
+                                  name="interruptor"
+                                  id="prendido"
+                                  checked
+                                />
+                                <input
+                                  type="radio"
+                                  name="interruptor"
+                                  id="apagado"
+                                />
                                 <div class="interruptor-cuerpo">
                                   <div class="interruptor-tecla">
-                                    <label for="prendido" (click)="onAprovlasTravels()"></label>
-                                    <label for="apagado" (click)="offAprovlasTravels()"></label>
+                                    <label
+                                      for="prendido"
+                                      (click)="onAprovlasTravels()"
+                                    ></label>
+                                    <label
+                                      for="apagado"
+                                      (click)="offAprovlasTravels()"
+                                    ></label>
                                   </div>
                                 </div>
                               </div>
                             </div>
                             <div class="col-12 text-left">
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .description
+                              }}
                             </div>
                             <div class="col-12">
-                              <textarea class="form-control" [(ngModel)]="descriptionTravels" rows="3" style="height: auto !important;"></textarea>
+                              <textarea
+                                class="form-control"
+                                [(ngModel)]="descriptionTravels"
+                                rows="3"
+                                style="height: auto !important;"
+                              ></textarea>
                             </div>
                             <div class="col-md-4 col-12">
-                              <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApprovalRequestsTravels()">
-                                <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.save}}</button>
-                              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                                <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.loading}}</button>
+                              <button
+                                type="button"
+                                *ngIf="showSubmit"
+                                class="btn btn-success btn-block"
+                                (click)="
+                                  saveApprovalRequestsTravels()
+                                "
+                              >
+                                <i class="fa fa-fw fa-floppy-o"></i
+                                >{{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels.save
+                                }}
+                              </button>
+                              <button
+                                type="button"
+                                *ngIf="!showSubmit"
+                                class="btn btn-warning btn-block"
+                              >
+                                <i
+                                  class="fa fa-fw fa-spinner fa-spin"
+                                ></i
+                                >{{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels.loading
+                                }}
+                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !editRequest}" style="background-color: transparent !important">
+                    <div
+                      id="Detail"
+                      class="tab-pane text-muted"
+                      [ngClass]="{ active: !editRequest }"
+                      style="background-color: transparent !important"
+                    >
                       <div class="col-12 tab-pane">
-                        <div *ngIf="objectApproval[0].answers_to_json.length > 0" class="">
-                          <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
+                        <div
+                          *ngIf="
+                            objectApproval[0].answers_to_json.length >
+                            0
+                          "
+                          class=""
+                        >
+                          <div
+                            class="row justify-content-center border-botton-general"
+                            *ngFor="
+                              let details of objectApproval[0]
+                                .answers_to_json
+                            "
+                          >
                             <div class="col-12 text-left">
-                              <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver_level}} {{details.approver_to_json.level}}
+                              <i
+                                class="fa fa-fw fa-spin fa-spinner"
+                                aria-hidden="true"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .approver_level
+                              }}
+                              {{ details.approver_to_json.level }}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} {{translate.app.frontEnd.components.common.travels.approvals_details_travels.for}} {{details.approver_to_json.name}}
+                                {{ details.status }}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels.for
+                                }}
+                                {{ details.approver_to_json.name }}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}:
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .description
+                                }}:
                               </h3>
                             </div>
-                            <div class="col-12 text-left" *ngIf="details.observation !== ''">
-                              {{details.observation}}
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="details.observation !== ''"
+                            >
+                              {{ details.observation }}
                             </div>
-                            <div class="col-12 text-left" *ngIf="details.observation == ''">
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_observation}}
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="details.observation == ''"
+                            >
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .negative_observation
+                              }}
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="objectApproval[0].answers_to_json.length == 0">
+                        <div
+                          *ngIf="
+                            objectApproval[0].answers_to_json
+                              .length == 0
+                          "
+                        >
                           <div class="row justify-content-center">
-                            <div class="col-12 text-center top-general">
+                            <div
+                              class="col-12 text-center top-general"
+                            >
                               <h3 class="font-color-default">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_detail}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .negative_detail
+                                }}
                               </h3>
                             </div>
                           </div>
@@ -351,39 +891,102 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="objectApproval[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
-                    <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
+                  <div
+                    *ngIf="objectApproval[0].approver_platform == 'S'"
+                    class="tab-content"
+                    style="margin-left: 5% !important; width: 90% !important"
+                  >
+                    <div
+                      id="Detail"
+                      class="tab-pane text-muted active"
+                      style="background-color: transparent !important"
+                    >
                       <div class="col-12 tab-pane">
-                        <div *ngIf="objectApproval[0].answers_to_json.length > 0" class="">
-                          <div class="row justify-content-center border-botton-general" *ngFor="let details of objectApproval[0].answers_to_json">
+                        <div
+                          *ngIf="
+                            objectApproval[0].answers_to_json.length >
+                            0
+                          "
+                          class=""
+                        >
+                          <div
+                            class="row justify-content-center border-botton-general"
+                            *ngFor="
+                              let details of objectApproval[0]
+                                .answers_to_json
+                            "
+                          >
                             <div class="col-12 text-left">
-                              <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.approver_level}} {{details.approver_to_json.level}}
+                              <i
+                                class="fa fa-fw fa-spin fa-spinner"
+                                aria-hidden="true"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .approver_level
+                              }}
+                              {{ details.approver_to_json.level }}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} {{details.status}} {{translate.app.frontEnd.components.common.travels.approvals_details_travels.for}}
-                                {{details.approver_to_json.name}}
+                                {{ details.status }}
+                                {{ details.status }}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels.for
+                                }}
+                                {{ details.approver_to_json.name }}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.description}}:
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .description
+                                }}:
                               </h3>
                             </div>
-                            <div class="col-12 text-left" *ngIf="details.observation !== ''">
-                              {{details.observation}}
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="details.observation !== ''"
+                            >
+                              {{ details.observation }}
                             </div>
-                            <div class="col-12 text-left" *ngIf="details.observation == ''">
-                              {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_observation}}
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="details.observation == ''"
+                            >
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.travels
+                                  .approvals_details_travels
+                                  .negative_observation
+                              }}
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="objectApproval[0].answers_to_json.length == 0">
+                        <div
+                          *ngIf="
+                            objectApproval[0].answers_to_json
+                              .length == 0
+                          "
+                        >
                           <div class="row justify-content-center">
-                            <div class="col-12 text-center top-general">
+                            <div
+                              class="col-12 text-center top-general"
+                            >
                               <h3 class="font-color-default">
-                                {{translate.app.frontEnd.components.common.travels.approvals_details_travels.negative_detail}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.travels
+                                    .approvals_details_travels
+                                    .negative_detail
+                                }}
                               </h3>
                             </div>
                           </div>
@@ -398,8 +1001,12 @@
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonApprovalsRequests buttonCloseEmployee btn-close-modals text-center" id="btn_close_aprovalstravels" data-dismiss="modal">
-          <h6> Cerrar </h6>
+        <div
+          class="buttonApprovalsRequests buttonCloseEmployee btn-close-modals text-center"
+          id="btn_close_aprovalstravels"
+          data-dismiss="modal"
+        >
+          <h6>Cerrar</h6>
         </div>
       </div>
     </div>

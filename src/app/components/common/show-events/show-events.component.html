@@ -1,47 +1,88 @@
-<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal" style="display:none;">
-</button>
-<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="display:none;">
+<button
+  [attr.id]="btnModal"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  [attr.data-target]="targetModal"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  [attr.id]="nameThisModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  style="display:none;"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
         <div class="col-12 col-lg-10 text-center ">
           <h4 class="modal-title titleColor text-shadow">
-            <i class="{{eventIcon}}"></i> {{titleEvent |uppercase}}
+            <i class="{{ eventIcon }}"></i>
+            {{ titleEvent | uppercase }}
           </h4>
         </div>
       </div>
       <div class="modal-body">
         <div class="container">
           <div class="row">
-            <div class="col-12 borderEmployee" *ngFor=" let employeeList of objectInfoEvents">
+            <div
+              class="col-12 borderEmployee"
+              *ngFor="let employeeList of objectInfoEvents"
+            >
               <div class="row justify-content-center">
                 <div class="col-3 align-self-center text-center">
-                  <img src="{{employeeList.image.url}}" class="roundPhotoEventE">
+                  <img
+                    src="{{ employeeList.image.url }}"
+                    class="roundPhotoEventE"
+                  />
                 </div>
-                <div class="col-6 titleColor align-self-center text-center">
-                  {{employeeList.name |uppercase}} {{employeeList.lastname |uppercase }}
+                <div
+                  class="col-6 titleColor align-self-center text-center"
+                >
+                  {{ employeeList.name | uppercase }}
+                  {{ employeeList.lastname | uppercase }}
                   <div style="color: #bbbbbb;">
                     <span class="text-capitalize">
-                      {{employeeList.posicion | lowercase}}
+                      {{ employeeList.posicion | lowercase }}
                     </span>
                   </div>
                 </div>
-                <div *ngIf="flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.time_birthday}}</strong>
+                <div
+                  *ngIf="flagTypeOfEvent"
+                  class="col-3 titleColor align-self-center text-center"
+                >
+                  <strong>{{ employeeList.time_birthday }}</strong>
                 </div>
-                <div *ngIf="!flagTypeOfEvent" class="col-3 titleColor align-self-center text-center">
-                  <strong>{{employeeList.time_anniversary}}</strong>
+                <div
+                  *ngIf="!flagTypeOfEvent"
+                  class="col-3 titleColor align-self-center text-center"
+                >
+                  <strong>{{ employeeList.time_anniversary }}</strong>
                 </div>
               </div>
             </div>
           </div>
         </div>
-
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal"  *ngIf="translate !== null">
-          <h6> {{translate.app.frontEnd.components.common.show_events.button_close}} </h6>
+        <div
+          class="buttonCloseComment btn-close-modals text-center"
+          data-dismiss="modal"
+          *ngIf="translate !== null"
+        >
+          <h6>
+            {{
+              translate.app.frontEnd.components.common.show_events
+                .button_close
+            }}
+          </h6>
         </div>
       </div>
     </div>
   </div>
+</div>

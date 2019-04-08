@@ -3,9 +3,9 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class EvaluationsSharedService {
-  infoEvaluation: Subject<any> = new Subject<any>();   
-  infoViewEvaluation: Subject<any> = new Subject<any>(); 
-  refreshEvaluation: Subject<any> = new Subject<any>(); 
+  infoEvaluation: Subject<any> = new Subject<any>();
+  infoViewEvaluation: Subject<any> = new Subject<any>();
+  refreshEvaluation: Subject<any> = new Subject<any>();
 
   constructor() { }
 

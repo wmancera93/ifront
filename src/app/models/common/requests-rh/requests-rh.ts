@@ -40,13 +40,13 @@ export interface ListRequetsTypes {
 }
 
 export interface NextApprover {
-    level: number,
-    platform: string,
+    level: number;
+    platform: string;
     approver_employee: AproverEmployee;
 }
 
 export interface Action {
-    title: string,
+    title: string;
     is_active: boolean;
 }
 
@@ -56,55 +56,55 @@ export interface AproverEmployee {
 }
 
 export interface DetailRequest {
-    message_pending_level_approver?: string,
-    pending_level_approver: PendingLevelApprover,
-    request: Request,
-    total_request_answers: number,
+    message_pending_level_approver?: string;
+    pending_level_approver: PendingLevelApprover;
+    request: Request;
+    total_request_answers: number;
     title: string;
 }
 
 export interface Request {
-    observation_request: string,
-    days_request: number,
-    id_activity: string,
-    image: Url
-    is_finished: boolean,
-    ticket: number,
-    type_requests_name: string,
-    date_begin_format: string,
-    date_end_format: string,
-    employee_applicant_to_json: EmployeeRequest,
-    answers_to_json: AnswersToJson[],
-    created_date: string
+    observation_request: string;
+    days_request: number;
+    id_activity: string;
+    image: Url;
+    is_finished: boolean;
+    ticket: number;
+    type_requests_name: string;
+    date_begin_format: string;
+    date_end_format: string;
+    employee_applicant_to_json: EmployeeRequest;
+    answers_to_json: AnswersToJson[];
+    created_date: string;
 }
 
 export interface EmployeeRequest {
-    posicion: string,
-    division_per: string,
-    subdivision_per: string,
-    image: Url,
-    short_name: string,
-    personal_code: number
+    posicion: string;
+    division_per: string;
+    subdivision_per: string;
+    image: Url;
+    short_name: string;
+    personal_code: number;
 }
 
 export interface PendingLevelApprover {
-    level: number,
-    approver_employee: ApproverEmployee
+    level: number;
+    approver_employee: ApproverEmployee;
 }
 
 export interface AnswersToJson {
-    description: string,
-    approver_to_json: ApproverEmployee
-    created_date: string,
+    description: string;
+    approver_to_json: ApproverEmployee;
+    created_date: string;
 }
 
 export interface ApproverEmployee {
-    name: string,
-    lastname: string,
-    personal_code: number,
-    image: Url,
-    position: string,
-    name_complete: string,
-    short_name: string,
-    level?: number
+    name: string;
+    lastname: string;
+    personal_code: number;
+    image: Url;
+    position: string;
+    name_complete: string;
+    short_name: string;
+    level?: number;
 }

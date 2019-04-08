@@ -29,13 +29,13 @@ export class MessageSynchComponent implements OnInit {
       this.ticket_travel = data;
       if (document.getElementById('message_synch').className !== 'modal show') {
         document.getElementById('btn_detail_message_synch').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
       this.travelManagementService.getMessageErrorSAP(data).subscribe((result: any) => {
         this.generalObject = result.data[0].travel_request;
         this.message_data = result.data[0].synch_server;
 
-        if (result.data[0].synch_server.data["length"] > 0) {
+        if (result.data[0].synch_server.data['length'] > 0) {
           setTimeout(() => {
             this.objectPrintMessage.emit({ success: true, data: [this.message_data] });
           }, 200);
@@ -44,8 +44,8 @@ export class MessageSynchComponent implements OnInit {
             this.objectPrintMessage.emit({ success: true, data: [] });
           }, 150);
         }
-      })
-    })
+      });
+    });
 
   }
 

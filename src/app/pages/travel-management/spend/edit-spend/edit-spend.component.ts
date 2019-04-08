@@ -21,7 +21,7 @@ import { TranslateService } from '../../../../services/common/translate/translat
   styleUrls: ['./edit-spend.component.css']
 })
 export class EditSpendComponent implements OnInit {
-  public showSubmit: boolean = true;
+  public showSubmit = true;
   public editSpendDetail: any;
   public editSpendTable: any;
   public objectReport: EventEmitter<any> = new EventEmitter();
@@ -34,22 +34,22 @@ export class EditSpendComponent implements OnInit {
   public formSpendEditTravel: any;
   public annexes: any[] = [];
   public formatDate: any;
-  public idSpend: number = 0;
+  public idSpend = 0;
   public objectSpends: SpendsCreate;
   public objectAllowancesEdit: ObjectSpends[] = [];
-  public edit: boolean = true;
+  public edit = true;
   public icon: any[] = [];
-  public iconDocument: string = '';
-  public is_upload: boolean = false;
+  public iconDocument = '';
+  public is_upload = false;
   public file: any[] = [];
   public objectImg: any[] = [];
   public iconUpload: any[] = [];
   public filequotation = 'fileQuotationSpendEdit';
-  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls'
-  public buttonNewSpend: boolean = true;
-  public labelNewSpend: boolean = false;
-  public show_submit_editSpend: boolean = true;
-  public edit_Spend: boolean = false;
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public buttonNewSpend = true;
+  public labelNewSpend = false;
+  public show_submit_editSpend = true;
+  public edit_Spend = false;
   public alertWarning: any[] = [];
   public idFile: number;
   public id_Spend_Save: string;
@@ -59,12 +59,12 @@ export class EditSpendComponent implements OnInit {
   public nameSpend: string;
   public listTypeDocument: any[] = [];
   public stateRequestsSpend: string;
-  public idEmployee: string = '0';
+  public idEmployee = '0';
   public type_spend: string;
   public translate: Translate = null;
 
-  showSizeTable
-  showPdf
+  showSizeTable;
+  showPdf;
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
@@ -77,31 +77,31 @@ export class EditSpendComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
 
-    this.nameReport=this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts
+    this.nameReport = this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts;
     this.formSpendEditTravel = new FormGroup({});
     this.formSpendEditTravel = fb.group({
-      travel_request_id: "",
-      travel_allowance_type_id: "",
-      currency_id: "",
-      value: "",
-      date: "",
-      observation: "",
-      bill_number: "",
-      control_number: "",
-      nit: "",
-      bussines_name: "",
-      cod_provider: "",
-      authorization_number: "",
-      populated: "",
-      formA: "",
-      document: ""
+      travel_request_id: '',
+      travel_allowance_type_id: '',
+      currency_id: '',
+      value: '',
+      date: '',
+      observation: '',
+      bill_number: '',
+      control_number: '',
+      nit: '',
+      bussines_name: '',
+      cod_provider: '',
+      authorization_number: '',
+      populated: '',
+      formA: '',
+      document: ''
     });
 
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSaveSpendEdit' || data === 'closeAlertdeleteSavedSpend' || data === 'closeAlerterrorSaveSpendEdit'
         || data === 'closeAlertdeleteDocumentSavedSpend' || data === 'closeAlertdeleteDetailSpendEdit' || data === 'errorApproverSpend') {
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
       }
 
       if (data === 'deleteDocumentSavedSpend') {
@@ -109,12 +109,12 @@ export class EditSpendComponent implements OnInit {
         this.labelNewSpend = false;
         this.show_submit_editSpend = true;
         this.showSubmit = true;
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
 
         this.spendsService.deleteFileSpendData(this.idFile.toString()).subscribe((deleteSpend: any) => {
           this.annexes.splice(this.annexes.findIndex(filter => filter.id === this.idFile), 1);
-        })
-        document.getElementById("btn_spend_edit").click();
+        });
+        document.getElementById('btn_spend_edit').click();
       }
 
       if (data === 'deleteDetailSpendEdit') {
@@ -124,7 +124,7 @@ export class EditSpendComponent implements OnInit {
             this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
             this.objectReport.emit({ success: true, data: [this.editSpendTable] });
 
-            document.getElementById("btn_spend_edit").click();
+            document.getElementById('btn_spend_edit').click();
           },
           ((error: any) => {
 
@@ -142,7 +142,7 @@ export class EditSpendComponent implements OnInit {
         this.objectAllowancesEdit.splice(this.objectAllowancesEdit.findIndex(filter => filter.id === this.idEditSpend), 1);
         this.objectReport.emit({ success: true, data: [this.editSpendTable] });
 
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
       }
 
     });
@@ -150,7 +150,7 @@ export class EditSpendComponent implements OnInit {
 
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-      debugger
+      debugger;
       // this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
       //   this.listTravelsFromSpend = travel.data;
       // });
@@ -162,7 +162,7 @@ export class EditSpendComponent implements OnInit {
         this.editSpendDetail = editSpend.data[0].travel_allowance_request.info_travel;
         this.stateRequestsSpend = editSpend.data[0].travel_allowance_request.status_request;
         this.ticketTravel = this.editSpendDetail.ticket;
-        this.nameSpend = this.editSpendDetail.ticket + ' ' + this.editSpendDetail.name_travel
+        this.nameSpend = this.editSpendDetail.ticket + ' ' + this.editSpendDetail.name_travel;
         this.editSpendTable = editSpend.data[0].travel_allowances;
         this.annexes = editSpend.data[0].travel_request_annexeds;
         this.buttonNewSpend = true;
@@ -176,9 +176,9 @@ export class EditSpendComponent implements OnInit {
 
         if (document.getElementById('spend_edit').className !== 'modal show') {
           document.getElementById('btn_spend_edit').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
-      })
+      });
       setTimeout(() => {
         this.travelManagementService.getTravelsAllDetail(this.ticketTravel).subscribe((detail: any) => {
           this.type_spend = detail.data[0].travel_request.travel_type_code;
@@ -189,7 +189,7 @@ export class EditSpendComponent implements OnInit {
       }, 400);
 
 
-    })
+    });
 
     this.fileUploadService.getObjetFile().subscribe((data) => {
       setTimeout(() => {
@@ -208,7 +208,7 @@ export class EditSpendComponent implements OnInit {
 
     this.accionDataTableService.getActionDataTable().subscribe((action: any) => {
 
-      if (action.action_method == "updateTravelAllowance") {
+      if (action.action_method == 'updateTravelAllowance') {
         if (!this.edit_Spend) {
           if (this.buttonNewSpend) {
             document.getElementById('EditfuntionSpend').click();
@@ -231,11 +231,11 @@ export class EditSpendComponent implements OnInit {
         if ((this.edit_Spend === true)) {
           this.idEditSpend = action.id;
           this.spendsService.getDetailSpendEdit(this.idEditSpend).subscribe((data: any) => {
-            this.formatDate = data.data.date_time.split("T")[0];
+            this.formatDate = data.data.date_time.split('T')[0];
             this.formSpendEditTravel = new FormGroup({});
             this.formSpendEditTravel = fb.group({
               id_spend: this.idEditSpend,
-              travel_request_id: "",
+              travel_request_id: '',
               travel_allowance_type_id: data.data.travel_allowance_type_id,
               currency_id: data.data.currency_id,
               value: data.data.value,
@@ -251,11 +251,11 @@ export class EditSpendComponent implements OnInit {
               formA: data.data.have_format,
               document: data.data.type_of_expense_document_id,
             });
-          })
+          });
         }
       }
 
-      if (action.action_method == "editSavedSpend") {
+      if (action.action_method == 'editSavedSpend') {
 
         if (!this.edit_Spend) {
           if (!this.buttonNewSpend) {
@@ -266,7 +266,7 @@ export class EditSpendComponent implements OnInit {
 
             this.edit_Spend = true;
           } else {
-            this.buttonNewSpend = false
+            this.buttonNewSpend = false;
             this.edit_Spend = true;
           }
         }
@@ -276,7 +276,7 @@ export class EditSpendComponent implements OnInit {
         this.showSubmit = false;
         if ((this.edit_Spend === true)) {
 
-          let spendEditNew: any = this.objectSpendProvitional.filter((result) => result.id === action.id);
+          const spendEditNew: any = this.objectSpendProvitional.filter((result) => result.id === action.id);
 
           this.formSpendEditTravel = new FormGroup({});
           this.formSpendEditTravel = fb.group({
@@ -300,9 +300,9 @@ export class EditSpendComponent implements OnInit {
         }
       }
 
-      if (action.action_method == "destroyTravelAllowance") {
+      if (action.action_method == 'destroyTravelAllowance') {
         this.idEditSpend = action.id;
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
@@ -313,23 +313,23 @@ export class EditSpendComponent implements OnInit {
         this.alert.setAlert(alertSuccess[0]);
       }
 
-      if (action.action_method == "deleteSavedSpend") {
+      if (action.action_method == 'deleteSavedSpend') {
         this.idEditSpend = action.id;
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
         const alertSuccess: Alerts[] = [{
           type: 'warning',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_ts,
-          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts +'#' + this.idEditSpend,
+          message: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.message_alert_ts + '#' + this.idEditSpend,
           confirmation: true,
           typeConfirmation: 'deleteDetailSpendEditCreated'
         }];
 
         this.alert.setAlert(alertSuccess[0]);
       }
-      if (action.action_method == "ModalDistCost") {
-        let editDistCost = true;
-        let id_byspend = action.id
-        document.getElementById("closeModalEditSpend").click();
+      if (action.action_method == 'ModalDistCost') {
+        const editDistCost = true;
+        const id_byspend = action.id;
+        document.getElementById('closeModalEditSpend').click();
         setTimeout(() => {
           this.spendSharedService.setViewDistCostSpend({ accion: editDistCost, id: id_byspend });
         }, 1000);
@@ -341,13 +341,13 @@ export class EditSpendComponent implements OnInit {
 
   }
 
-  public disabledCode: boolean = false;
+  public disabledCode = false;
 
   maskCode(param) {
     this.disabledCode = true;
     let word = '';
     let wordView = '';
-    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
+    const filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
 
     for (let i = 0; i < param.control_number.length; i++) {
       if (filtro.indexOf(param.control_number.charAt(i)) != -1) {
@@ -412,8 +412,8 @@ export class EditSpendComponent implements OnInit {
   aditionSpend(objectSpend) {
     objectSpend.id = 'temp_' + this.idSpend + 1;
     this.objectSpendProvitional.push(objectSpend);
-    let date = objectSpend.date.split('-');
-    let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
+    const date = objectSpend.date.split('-');
+    const dateSpend = date[2] + '/' + date[1] + '/' + date[0];
     this.editSpendTable.data.push({
       field_1: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].code,
       field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
@@ -432,21 +432,21 @@ export class EditSpendComponent implements OnInit {
       field_15: objectSpend.formA === true ? 'Si' : 'No',
       field_16: '',
       field_17: {
-        type_method: "UPDATE",
-        type_element: "button",
-        icon: "fa-pencil",
+        type_method: 'UPDATE',
+        type_element: 'button',
+        icon: 'fa-pencil',
         id: objectSpend.id,
-        title: "Editar",
-        action_method: "editSavedSpend",
+        title: 'Editar',
+        action_method: 'editSavedSpend',
         disable: false
       },
       field_18: {
-        type_method: "DELETE",
-        type_element: "button",
-        icon: "fa-trash",
+        type_method: 'DELETE',
+        type_element: 'button',
+        icon: 'fa-trash',
         id: objectSpend.id,
-        title: "Eliminar",
-        action_method: "deleteSavedSpend",
+        title: 'Eliminar',
+        action_method: 'deleteSavedSpend',
         disable: false
       }
 
@@ -471,7 +471,7 @@ export class EditSpendComponent implements OnInit {
       type_of_expense_document: objectSpend.document
     });
 
-    this.idSpend += 1
+    this.idSpend += 1;
     setTimeout(() => {
       this.objectReport.emit({ success: true, data: [this.editSpendTable] });
     }, 500);
@@ -481,8 +481,8 @@ export class EditSpendComponent implements OnInit {
   aditionSpendEdit(objectEditSpend) {
 
     this.editSpendTable.data.forEach(element => {
-      let date = objectEditSpend.date.split('-');
-      let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
+      const date = objectEditSpend.date.split('-');
+      const dateSpend = date[2] + '/' + date[1] + '/' + date[0];
       if (element.field_0 === objectEditSpend.id_spend) {
         element.field_1 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].code;
         element.field_2 = this.listSpendType.filter((data) => data.id.toString() === objectEditSpend.travel_allowance_type_id.toString())[0].name;
@@ -501,23 +501,23 @@ export class EditSpendComponent implements OnInit {
         element.field_15 = objectEditSpend.formA === true ? 'Si' : 'No';
         element.field_16 = '';
         element.field_17 = {
-          type_method: "UPDATE",
-          type_element: "button",
-          icon: "fa-pencil",
+          type_method: 'UPDATE',
+          type_element: 'button',
+          icon: 'fa-pencil',
           id: objectEditSpend.id_spend,
-          title: "Editar",
-          action_method: "updateTravelAllowance",
+          title: 'Editar',
+          action_method: 'updateTravelAllowance',
           disable: false
         };
         element.field_18 = {
-          type_method: "DELETE",
-          type_element: "button",
-          icon: "fa-trash",
+          type_method: 'DELETE',
+          type_element: 'button',
+          icon: 'fa-trash',
           id: objectEditSpend.id_spend,
-          title: "Eliminar",
-          action_method: "destroyTravelAllowance",
+          title: 'Eliminar',
+          action_method: 'destroyTravelAllowance',
           disable: false
-        }
+        };
       }
     });
 
@@ -556,10 +556,10 @@ export class EditSpendComponent implements OnInit {
     const spendsFormDataEdit = new FormData();
     spendsFormDataEdit.append('travel_request_id', this.ticketTravel);
     spendsFormDataEdit.append('allowances', JSON.stringify(this.objectAllowancesEdit));
-    spendsFormDataEdit.append('files_length', this.objectImg.length.toString())
+    spendsFormDataEdit.append('files_length', this.objectImg.length.toString());
     for (let index = 0; index < this.objectImg.length; index++) {
       spendsFormDataEdit.append('files_' + (index + 1).toString(), this.file[index]);
-    };
+    }
 
 
     param = spendsFormDataEdit;
@@ -567,7 +567,7 @@ export class EditSpendComponent implements OnInit {
     this.formDataService.putEditSpendFormData(this.idSpendRequests, param).subscribe(
       (data: any) => {
         this.objectAllowancesEdit = [];
-        document.getElementById("closeModalEditSpend").click();
+        document.getElementById('closeModalEditSpend').click();
 
         const alertSuccess: Alerts[] = [{
           type: 'success',
@@ -581,7 +581,7 @@ export class EditSpendComponent implements OnInit {
       },
       (error: any) => {
         this.objectAllowancesEdit = [];
-        document.getElementById("btn_spend_edit").click();
+        document.getElementById('btn_spend_edit').click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_one_ts,
@@ -591,12 +591,12 @@ export class EditSpendComponent implements OnInit {
         }];
         this.showSubmit = true;
         this.alert.setAlert(alertWarning[0]);
-      })
+      });
   }
 
 
   viewDocumentSaved(paramView) {
-    window.open(paramView.file.url)
+    window.open(paramView.file.url);
   }
   downloadDocumentSaved(param) {
     this.http.get(param.file.url, {
@@ -608,8 +608,8 @@ export class EditSpendComponent implements OnInit {
       };
     })
       .subscribe(res => {
-        var url = window.URL.createObjectURL(res.data);
-        var a = document.createElement('a');
+        const url = window.URL.createObjectURL(res.data);
+        const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');
         a.href = url;
@@ -640,7 +640,7 @@ export class EditSpendComponent implements OnInit {
     this.showSubmit = true;
     this.edit_Spend = false;
 
-    document.getElementById("EditfuntionSpend").click();
+    document.getElementById('EditfuntionSpend').click();
     this.refreshPartialSpend();
   }
 
@@ -683,7 +683,7 @@ export class EditSpendComponent implements OnInit {
 
     this.spendsService.putSendRequestsSpend(this.idSpendRequests).subscribe((data: any) => {
       if (data) {
-        document.getElementById("closeModalEditSpend").click();
+        document.getElementById('closeModalEditSpend').click();
         const alertWarning: Alerts[] = [{
           type: 'success',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_tree_ts,
@@ -694,7 +694,7 @@ export class EditSpendComponent implements OnInit {
       this.spendSharedService.setRefreshSpend({ success: true, third: false });
     },
       (error: any) => {
-        document.getElementById("closeModalEditSpend").click();
+        document.getElementById('closeModalEditSpend').click();
         const alertWarning: Alerts[] = [{
           type: 'danger',
           title: this.translate.app.frontEnd.pages.travel_management.spend.edit_spend.type_alert_four_ts,
@@ -707,13 +707,13 @@ export class EditSpendComponent implements OnInit {
       });
   }
   returnTravelsRequest() {
-    document.getElementById("closeModalEditSpend").click();
+    document.getElementById('closeModalEditSpend').click();
     this.router.navigate(['/ihr/travels', this.idSpendRequests, this.ticketTravel]);
   }
   onlyNumberSpend(param, name) {
-    debugger
+    debugger;
     let out = '';
-    let filtro = '0123456789.,';
+    const filtro = '0123456789.,';
     switch (name) {
       case 'nit':
         for (let i = 0; i < param.nit.length; i++) {

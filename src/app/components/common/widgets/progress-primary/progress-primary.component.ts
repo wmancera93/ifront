@@ -12,13 +12,13 @@ export class ProgressPrimaryComponent implements OnInit {
   @Input('progressPrimary') progressPrimary: any;
   public objectWidget: ProgressPrimary[] = [];
   public translate: Translate = null;
-  constructor(public translateService: TranslateService) { 
+  constructor(public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
   }
 
   ngOnInit() {
     this.progressPrimary.subscribe((data: ProgressPrimary[]) => {
       this.objectWidget = data;
-    })
+    });
   }
 }

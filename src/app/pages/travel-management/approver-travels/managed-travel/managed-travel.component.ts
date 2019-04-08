@@ -17,7 +17,7 @@ import { TranslateService } from '../../../../services/common/translate/translat
 export class ManagedTravelComponent implements OnInit {
 
   public managedRequestTravel: any[] = [];
-  public travelsRequestsManagedType: string = 'travels';
+  public travelsRequestsManagedType = 'travels';
   public typesRequestManaged: any[] = [];
   public request_managed_id: string;
   public request_managed_type: string;
@@ -47,7 +47,7 @@ export class ManagedTravelComponent implements OnInit {
         id: 3,
         name: this.translate.app.frontEnd.pages.travel_management.approver_travels.manged_travel.filter_three,
       }
-    )
+    );
 
 
   }
@@ -64,23 +64,23 @@ export class ManagedTravelComponent implements OnInit {
 
   //begin filters
 
-  public codIHR: string = '';
-  public codSAP: string = '';
-  public datesBegin: string = '';
-  public datesEnd: string = '';
-  public status: string = '';
-  public statusLiquid: string = '';
-  public codEmployee: string = '';
-  public page: string = '';
+  public codIHR = '';
+  public codSAP = '';
+  public datesBegin = '';
+  public datesEnd = '';
+  public status = '';
+  public statusLiquid = '';
+  public codEmployee = '';
+  public page = '';
   public is_collapse: boolean;
 
   filter(filter) {
     switch (this.travelsRequestsManagedType) {
       case 'travels':
-        this.travels(filter)
+        this.travels(filter);
         break;
       case 'spend':
-        this.spends(filter)
+        this.spends(filter);
         break;
       case 'advance':
         this.advances(filter);
@@ -110,7 +110,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -128,7 +128,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -145,7 +145,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -163,7 +163,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -181,7 +181,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -199,7 +199,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsTravelsManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -227,7 +227,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -245,7 +245,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -262,7 +262,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -280,7 +280,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -298,7 +298,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -316,7 +316,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -344,7 +344,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codSAP':
@@ -362,7 +362,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'dates':
@@ -379,7 +379,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'status':
@@ -397,7 +397,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'statusLiquid':
@@ -415,7 +415,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
       case 'codEmployee':
@@ -433,7 +433,7 @@ export class ManagedTravelComponent implements OnInit {
         } else {
           this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-          })
+          });
         }
         break;
 
@@ -455,8 +455,8 @@ export class ManagedTravelComponent implements OnInit {
         this.travelsRequestsManagedType = 'travels';
         this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
       }
-    })
-  };
+    });
+  }
   returnBackTravel() {
     this.router.navigate(['ihr/travel_management']);
   }
@@ -468,7 +468,7 @@ export class ManagedTravelComponent implements OnInit {
   }
 
   modalAproversTravelManaged(request: any, type: string) {
-    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false, type: type })
+    this.travelApproverServiceShared.setviewDetailRequests({ request, edit: false, type: type });
   }
 
   selectTypeRequestsManaged(param) {
@@ -487,13 +487,13 @@ export class ManagedTravelComponent implements OnInit {
             this.travelsRequestsManagedType = 'travels';
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
           }
-        })
+        });
         break;
       case '2':
         this.approverTravelsService.getApprovalsAdvanceManaged().subscribe((data: any) => {
           this.travelsRequestsManagedType = 'advance';
           this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
-        })
+        });
         break;
       case '3':
         this.approverTravelsService.getApprovalsSpendManaged().subscribe((data: any) => {
@@ -501,7 +501,7 @@ export class ManagedTravelComponent implements OnInit {
             this.travelsRequestsManagedType = 'spend';
             this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
           }
-        })
+        });
         break;
       default:
 

@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,14 +10,20 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-line-chart"></i>
-          {{translate.app.frontEnd.pages.performance_evaluation.planning_evaluation.tittle}}
+          {{ parseT('tittle') | translate }}
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [excel]="showExcel"></app-data-table>
+      <app-data-table
+        [records]="objectReport"
+        id="tableEvaluation"
+        [title]="parseT('name_table_ts') | translate"
+        [pdf]="showPdf"
+        [excel]="showExcel"
+      ></app-data-table>
     </div>
   </div>
 </div>

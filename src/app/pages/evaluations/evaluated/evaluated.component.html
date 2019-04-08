@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-list"></i>
-          {{ parseT("title_valuation_status") | translate }}
+          {{ parseT('title_valuation_status') | translate }}
         </div>
       </div>
     </div>
@@ -19,7 +21,7 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              {{ parseT("text_pending_evaluations_one") | translate }}
+              {{ parseT('text_pending_evaluations_one') | translate }}
             </b>
           </div>
         </div>
@@ -31,14 +33,19 @@
             *ngIf="evaluationsListPendind.length === 0"
             style="margin-top:25px;"
           >
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{ parseT("text_pending_evaluations_four") | translate }}
+                {{
+                  parseT('text_pending_evaluations_four') | translate
+                }}
                 <strong>{{
-                  parseT("text_pending_evaluations_two") | translate
+                  parseT('text_pending_evaluations_two') | translate
                 }}</strong
                 >&nbsp;{{
-                  parseT("text_pending_evaluations_three") | translate
+                  parseT('text_pending_evaluations_three') | translate
                 }}
               </div>
             </div>
@@ -51,7 +58,10 @@
               "
             >
               <section *ngIf="index == 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                >
                   <div class="col-12 text-left">
                     <i
                       class="fa fa-circle-o-notch fa-spin"
@@ -67,7 +77,8 @@
                   class="row"
                   style="padding-top: 5px; padding-bottom: 5px"
                   *ngIf="
-                    evaluationsListPendind[index - 1].evaluation_type_id !==
+                    evaluationsListPendind[index - 1]
+                      .evaluation_type_id !==
                     evaluation.evaluation_type_id
                   "
                 >
@@ -89,7 +100,9 @@
                         class="col-12 font-color-default text-lg-left title-size hoverTitle"
                         (click)="fillEvaluation(evaluation)"
                       >
-                        <strong>{{ evaluation.title | uppercase }} </strong>
+                        <strong
+                          >{{ evaluation.title | uppercase }}
+                        </strong>
                       </div>
                       <div class=" col-12 text-lg-left ">
                         {{ evaluation.subtitle }}
@@ -104,8 +117,11 @@
                       >
                         <i class="fa fa-pencil "></i>
                       </div>
-                      <div class="col-12" (click)="fillEvaluation(evaluation)">
-                        {{ parseT("text_present") | translate }}
+                      <div
+                        class="col-12"
+                        (click)="fillEvaluation(evaluation)"
+                      >
+                        {{ parseT('text_present') | translate }}
                       </div>
                     </div>
                   </div>
@@ -119,7 +135,7 @@
         <div class="row top-containter ">
           <div class="col-xl-2 col-lg-4 col-12 text-left ">
             <b>
-              {{ parseT("text_managed") | translate }}
+              {{ parseT('text_managed') | translate }}
             </b>
           </div>
         </div>
@@ -136,12 +152,14 @@
               style="min-height: 200px; "
             >
               <div class="alert alert-warning " role="alert ">
-                {{ parseT("text_managed_evaluations_one") | translate }}
+                {{
+                  parseT('text_managed_evaluations_one') | translate
+                }}
                 <strong>{{
-                  parseT("text_managed_evaluations_two") | translate
+                  parseT('text_managed_evaluations_two') | translate
                 }}</strong
                 >&nbsp;{{
-                  parseT("text_managed_evaluations_three") | translate
+                  parseT('text_managed_evaluations_three') | translate
                 }}
               </div>
             </div>
@@ -154,7 +172,10 @@
               "
             >
               <section *ngIf="index == 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                >
                   <div class="col-12 text-left">
                     <i
                       class="fa fa-circle-o-notch fa-spin"
@@ -170,7 +191,8 @@
                   class="row"
                   style="padding-top: 5px; padding-bottom: 5px"
                   *ngIf="
-                    evaluationsListSubmitted[index - 1].evaluation_type_id !==
+                    evaluationsListSubmitted[index - 1]
+                      .evaluation_type_id !==
                     evaluationSub.evaluation_type_id
                   "
                 >
@@ -193,7 +215,9 @@
                         class="col-12 font-color-default text-lg-left title-size hoverTitle"
                         (click)="seeEvaluation(evaluationSub)"
                       >
-                        <strong>{{ evaluationSub.title | uppercase }} </strong>
+                        <strong
+                          >{{ evaluationSub.title | uppercase }}
+                        </strong>
                       </div>
                       <div class="col-12 text-lg-left ">
                         {{ evaluationSub.subtitle }}
@@ -213,7 +237,7 @@
                         class="col-12 "
                         (click)="seeEvaluation(evaluationSub)"
                       >
-                        {{ parseT("icon_watch") | translate }}
+                        {{ parseT('icon_watch') | translate }}
                       </div>
                     </div>
                   </div>

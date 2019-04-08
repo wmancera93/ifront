@@ -1,46 +1,99 @@
-<button id="btn_detail_distSpend_travel" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dist_spend_travel" style="display:none;">
-</button>
-<div data-backdrop="static" class="modal" id="dist_spend_travel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_detail_distSpend_travel"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#dist_spend_travel"
+  style="display:none;"
+></button>
+<div
+  data-backdrop="static"
+  class="modal"
+  id="dist_spend_travel"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.tittle}}</h5>
-        <button id="closeDistSpendTravel" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{
+            translate.app.frontEnd.pages.travel_management.travel
+              .show_dist_spends_travels.tittle
+          }}
+        </h5>
+        <button
+          id="closeDistSpendTravel"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
-          <div class="col-9">
-          </div>
+          <div class="col-9"></div>
           <div class="col-3">
             <div class="buttonBack img-zoom" (click)="returnTravel()">
               <div style="margin-left: 15px;">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                    {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.back}}
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .travel.show_dist_spends_travels.back
+                  }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 20px" *ngIf="printSpendTravel !== null">
+          <div
+            class="col-12"
+            style="margin-top: 20px"
+            *ngIf="printSpendTravel !== null"
+          >
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.code_spend}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .travel.show_dist_spends_travels.code_spend
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendTravel.allowance_type_code}}</label>
+                <label>{{
+                  printSpendTravel.allowance_type_code
+                }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.type_spend}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .travel.show_dist_spends_travels.type_spend
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendTravel.allowance_type_name}}</label>
+                <label>{{
+                  printSpendTravel.allowance_type_name
+                }}</label>
               </div>
             </div>
           </div>
@@ -49,84 +102,143 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.import}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .travel.show_dist_spends_travels.import
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendTravel.value}}</label>
+                <label>{{ printSpendTravel.value }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.date}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.pages.travel_management
+                        .travel.show_dist_spends_travels.date
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendTravel.date_time_format}}</label>
+                <label>{{ printSpendTravel.date_time_format }}</label>
               </div>
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCostTravel.length > 0">
+          <div
+            class="col-12"
+            style="margin-top: 15px"
+            *ngIf="detailDistCostTravel.length > 0"
+          >
             <div class="table-responsive">
-              <table class="table table-sm table-striped table-bordered table-hover">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
                 <thead>
                   <tr>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_cero}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_cero
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_one}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_one
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_two}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_two
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_tree}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_tree
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_four}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_four
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_five}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_five
+                      }}
                     </th>
                     <th class="text-center">
-                        {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.column_six}}
+                      {{
+                        translate.app.frontEnd.pages.travel_management
+                          .travel.show_dist_spends_travels.column_six
+                      }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pinterDistributions of detailDistCostTravel">
+                  <tr
+                    *ngFor="
+                      let pinterDistributions of detailDistCostTravel
+                    "
+                  >
                     <td>
-                      {{pinterDistributions.travel_costs_type_name}}
+                      {{ pinterDistributions.travel_costs_type_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_cost_code}} {{pinterDistributions.travel_cost_name}}
+                      {{ pinterDistributions.travel_cost_code }}
+                      {{ pinterDistributions.travel_cost_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_graph_code}} {{pinterDistributions.travel_graph_name}}
+                      {{ pinterDistributions.travel_graph_code }}
+                      {{ pinterDistributions.travel_graph_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_operation_code}} {{pinterDistributions.travel_operation_name}}
+                      {{ pinterDistributions.travel_operation_code }}
+                      {{ pinterDistributions.travel_operation_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_maintenance_order_code}} {{pinterDistributions.travel_maintenance_order_name}}
+                      {{
+                        pinterDistributions.travel_maintenance_order_code
+                      }}
+                      {{
+                        pinterDistributions.travel_maintenance_order_name
+                      }}
                     </td>
                     <td>
-                      {{pinterDistributions.accounting_account_code}} {{pinterDistributions.accounting_account_name}}
+                      {{
+                        pinterDistributions.accounting_account_code
+                      }}
+                      {{
+                        pinterDistributions.accounting_account_name
+                      }}
                     </td>
-                    <td>
-                      {{pinterDistributions.distribution}} %
-                    </td>
+                    <td>{{ pinterDistributions.distribution }} %</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
-            <div class="row justify-content-center top-containter" *ngIf="detailDistCostTravel.length == 0">
+            <div
+              class="row justify-content-center top-containter"
+              *ngIf="detailDistCostTravel.length == 0"
+            >
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                    {{translate.app.frontEnd.pages.travel_management.travel.show_dist_spends_travels.negative_message}}
+                  {{
+                    translate.app.frontEnd.pages.travel_management
+                      .travel.show_dist_spends_travels
+                      .negative_message
+                  }}
                 </div>
               </div>
             </div>

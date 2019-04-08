@@ -14,14 +14,14 @@ import { TranslateService } from '../../../services/common/translate/translate.s
   styleUrls: ['./approvals-details.component.css']
 })
 export class ApprovalsDetailsComponent implements OnInit {
-  public approvals: DetailAproverRequest[] = []
-  public edit: boolean = false;
+  public approvals: DetailAproverRequest[] = [];
+  public edit = false;
 
-  public showSubmit: boolean = true;
+  public showSubmit = true;
 
-  public prerequisit: boolean = true;
-  public switch: string = "on";
-  public description: string = "";
+  public prerequisit = true;
+  public switch = 'on';
+  public description = '';
   public dateSince: string;
   public dateUntil: string;
   public translate: Translate = null;
@@ -39,14 +39,14 @@ export class ApprovalsDetailsComponent implements OnInit {
 
     this.translate = this.translateService.getTranslate();
 
-  this.approver=this.translate.app.frontEnd.components.common.approvals_details.status_approved;
-  this.cancelled=this.translate.app.frontEnd.components.common.approvals_details.status_cancelled;
-  this.inProcess=this.translate.app.frontEnd.components.common.approvals_details.status_in_Process;
-  this.pending=this.translate.app.frontEnd.components.common.approvals_details.status_pending;
+  this.approver = this.translate.app.frontEnd.components.common.approvals_details.status_approved;
+  this.cancelled = this.translate.app.frontEnd.components.common.approvals_details.status_cancelled;
+  this.inProcess = this.translate.app.frontEnd.components.common.approvals_details.status_in_Process;
+  this.pending = this.translate.app.frontEnd.components.common.approvals_details.status_pending;
 
     this.aproversRequestsService.getAprovalsRequests()
       .subscribe((data: any) => {
-        debugger
+        debugger;
         this.switch = 'on';
         this.description = '';
         this.approvals = [];
@@ -54,28 +54,28 @@ export class ApprovalsDetailsComponent implements OnInit {
         this.approverRequestsService.getDetailApprovalsRequests(data.id)
           .subscribe((request: any) => {
             this.approvals[0] = request.data[0].request;
-            let dateBegin = request.data[0].request.date_begin_format.split('/');
+            const dateBegin = request.data[0].request.date_begin_format.split('/');
             this.dateSince = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
-            let dateEnd = request.data[0].request.date_end_format.split('/');
+            const dateEnd = request.data[0].request.date_end_format.split('/');
             this.dateUntil = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
 
-            if (this.approvals[0].type_request_to_json.prerequisites != "" && this.approvals[0].type_request_to_json.prerequisites != null) {
+            if (this.approvals[0].type_request_to_json.prerequisites != '' && this.approvals[0].type_request_to_json.prerequisites != null) {
               this.prerequisit = true;
             } else {
               this.prerequisit = false;
             }
-          })
+          });
 
         if (document.getElementById('approvals_requests').className !== 'modal show') {
           document.getElementById('btn_approvals_requests').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
 
         setTimeout(() => {
           this.stylesExplorerService.addStylesCommon();
         }, 1000);
 
-      })
+      });
   }
 
   ngOnInit() {
@@ -106,7 +106,7 @@ export class ApprovalsDetailsComponent implements OnInit {
       })
       .subscribe(
         (data: any) => {
-          this.aproversRequestsService.setConfirmApproval("true");
+          this.aproversRequestsService.setConfirmApproval('true');
           this.showSubmit = true;
         },
         (error: any) => {
@@ -118,7 +118,7 @@ export class ApprovalsDetailsComponent implements OnInit {
           //   document.getElementById("loginId").style.display = 'none'
           //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
           // }, 1000)
-        })
+        });
   }
 
   viewSupport() {

@@ -17,22 +17,22 @@ export class StylesExplorerService {
 
     if (primary !== '' && primary !== null) {
       if (document.getElementById('position_logged') !== null) {
-        document.getElementById("position_logged").setAttribute('style', 'color:' + primary + ' !important; font-weight: 500; text-shadow: 1px 1px 2px #000000,0 0 5px ' + primary + ' !important;');
+        document.getElementById('position_logged').setAttribute('style', 'color:' + primary + ' !important; font-weight: 500; text-shadow: 1px 1px 2px #000000,0 0 5px ' + primary + ' !important;');
       }
 
-      if (document.getElementById("birthdays") !== null) {
-        (<HTMLInputElement>document.getElementById("birthdays").childNodes[3]).style.width = '330px';
+      if (document.getElementById('birthdays') !== null) {
+        (<HTMLInputElement>document.getElementById('birthdays').childNodes[3]).style.width = '330px';
       }
-      if (document.getElementById("anniversaries") !== null) {
-        (<HTMLInputElement>document.getElementById("anniversaries").childNodes[3]).style.width = '330px';
+      if (document.getElementById('anniversaries') !== null) {
+        (<HTMLInputElement>document.getElementById('anniversaries').childNodes[3]).style.width = '330px';
       }
-      if (document.getElementById("new_employees") !== null) {
-        (<HTMLInputElement>document.getElementById("new_employees").childNodes[3]).style.width = '330px';
+      if (document.getElementById('new_employees') !== null) {
+        (<HTMLInputElement>document.getElementById('new_employees').childNodes[3]).style.width = '330px';
       }
-      if (document.getElementById("my_team") !== null) {
-        (<HTMLInputElement>document.getElementById("my_team").childNodes[3]).style.width = '500px';
+      if (document.getElementById('my_team') !== null) {
+        (<HTMLInputElement>document.getElementById('my_team').childNodes[3]).style.width = '500px';
       }
-      
+
       if (document.getElementsByClassName('bg-tabs').length > 0) {
         for (let index = 0; index < document.getElementsByClassName('bg-tabs').length; index++) {
           (<HTMLInputElement>document.getElementsByClassName('bg-tabs')[index]).style.backgroundColor = primary + ' !important';
@@ -349,10 +349,10 @@ export class StylesExplorerService {
 
     }
 
-    if (color_alert !== '' && color_alert !== null) {      
+    if (color_alert !== '' && color_alert !== null) {
       if (document.getElementsByClassName('modal-content').length > 0) {
         for (let index = 0; index < document.getElementsByClassName('modal-content').length; index++) {
-          debugger
+          debugger;
           (<HTMLInputElement>document.getElementsByClassName('modal-content')[index]).style.backgroundColor = color_alert;
         }
       }
@@ -449,7 +449,7 @@ export class StylesExplorerService {
   addStylesCommon() {
     let dataEnterprise: Enterprise;
     if (this.validateBrowser()) {
-      dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+      dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
       this.stylesInExplorerOrEdge(
         '',
         dataEnterprise.primary_color,

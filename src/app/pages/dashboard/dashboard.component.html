@@ -1,26 +1,46 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
-        <div class="col-xl-8 col-md-6 col-5 title" *ngIf="translate !== null">
+        <div
+          class="col-xl-8 col-md-6 col-5 title"
+          *ngIf="translate !== null"
+        >
           <i class="fa fa-fw fa-th-large fa-x1"></i>
-          {{ parseT("tittle") | translate }}
+          {{ parseT('tittle') | translate }}
         </div>
-        <div class="col-xl-4 col-md-6 col-7" *ngIf="showButtonDashManagement">
+        <div
+          class="col-xl-4 col-md-6 col-7"
+          *ngIf="showButtonDashManagement"
+        >
           <div class="row">
             <div class="col-xl-10 col-md-9 col-8 text-right">
-              <div class="top-title-dbgerencial" *ngIf="translate !== null">
-                {{ parseT("text_management_dashboard") | translate }}
+              <div
+                class="top-title-dbgerencial"
+                *ngIf="translate !== null"
+              >
+                {{ parseT('text_management_dashboard') | translate }}
               </div>
             </div>
             <div class="col-xl-2 col-md-3 col-4 text-right">
               <div class="top-interruptor">
-                <input type="radio" name="interruptor" id="prendido" />
-                <input type="radio" name="interruptor" id="apagado" checked />
+                <input
+                  type="radio"
+                  name="interruptor"
+                  id="prendido"
+                />
+                <input
+                  type="radio"
+                  name="interruptor"
+                  id="apagado"
+                  checked
+                />
                 <div class="interruptor-cuerpo">
                   <div class="interruptor-tecla">
                     <label

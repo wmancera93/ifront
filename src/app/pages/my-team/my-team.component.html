@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -9,17 +11,22 @@
         <div class="row justify-content-center">
           <div class="col-xl-10 col-md-8 col-7 title">
             <i class="fa fa-users"></i>
-            {{ parseT("title_my_team") | translate }}
+            {{ parseT('title_my_team') | translate }}
           </div>
           <div
             class="col-xl-2 col-md-4 col-5 text-center cursor-general"
             style="padding-right: 0px"
           >
-            <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div
+              class="buttonBack img-zoom"
+              (click)="returnBackPage()"
+            >
               <div class="padding-back">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                  {{ parseT("btn_back") | translate }}
+                  {{ parseT('btn_back') | translate }}
                 </span>
               </div>
             </div>
@@ -29,7 +36,10 @@
     </div>
     <div class="row-hr-container justify-content-center">
       <div class="col-12 widget bg-white">
-        <div class="row justify-content-center" *ngIf="employeesInMyTeam[0]">
+        <div
+          class="row justify-content-center"
+          *ngIf="employeesInMyTeam[0]"
+        >
           <div
             class="col-xl-3 col-lg-4 col-md-6 col-12"
             *ngFor="
@@ -66,12 +76,18 @@
                   </strong>
                 </div>
                 <div class="col-12 top-general-p">
-                  <span class="text-capitalize" style="font-size: 16px;">
+                  <span
+                    class="text-capitalize"
+                    style="font-size: 16px;"
+                  >
                     {{ employee.posicion | lowercase }}
                   </span>
                 </div>
                 <div class="col-12 top-general-p">
-                  <span class="text-capitalize" style="font-size: 14px;">
+                  <span
+                    class="text-capitalize"
+                    style="font-size: 14px;"
+                  >
                     {{ employee.unidad_org | lowercase }}
                   </span>
                 </div>
@@ -81,7 +97,10 @@
                   class="col-12 top-general-p"
                   style="padding-left: 50%; padding-right: 50%"
                 >
-                  <div class="shadowRoundMoreInfo" style="margin-left: -20px;">
+                  <div
+                    class="shadowRoundMoreInfo"
+                    style="margin-left: -20px;"
+                  >
                     <div
                       class="roundMoreInfo"
                       (click)="goToMyTeamReports(employee)"

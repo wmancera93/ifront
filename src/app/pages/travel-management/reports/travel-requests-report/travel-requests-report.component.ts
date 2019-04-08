@@ -18,32 +18,32 @@ export class TravelRequestsReportComponent implements OnInit {
 
   public objectReportTravel: EventEmitter<any> = new EventEmitter();
   public title: string;
-  public is_collapse_report_travel: boolean = false;
+  public is_collapse_report_travel = false;
   public reports_list = null;
-  public personal_number: string = '';
-  public ticket: string = '';
-  public ticket_cli: string = '';
-  public travel_cost: string = '-1';
-  public date_begin: string = '';
-  public date_end: string = '';
-  public legat_travel_type: string = '-1';
-  public showPdf: boolean = false;
-  public showExcel: boolean = true;
+  public personal_number = '';
+  public ticket = '';
+  public ticket_cli = '';
+  public travel_cost = '-1';
+  public date_begin = '';
+  public date_end = '';
+  public legat_travel_type = '-1';
+  public showPdf = false;
+  public showExcel = true;
   public nameReport: string;
   public objectGeneralTravel: any[] = [];
-  public showDataTable: boolean = true;
+  public showDataTable = true;
   public typeTravelLegal: any[] = [];
   public type_element_imputation: any[] = [];
   public userId: User = null;
-  public countAfter: number = 0;
-  public btnConsult: boolean = true;
+  public countAfter = 0;
+  public btnConsult = true;
   public translate: Translate = null;
 
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService,
     public alert: AlertsService, public translateService: TranslateService) {
-    debugger
+    debugger;
     this.translate = this.translateService.getTranslate();
     this.title = this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.tittle_ts;
     console.log(this.title);
@@ -52,7 +52,7 @@ export class TravelRequestsReportComponent implements OnInit {
     this.accionDataTableService.getActionDataTable().subscribe((data) => {
 
       if (data === this.nameReport && this.countAfter === 0) {
-        this.getObjectPrint('excel')
+        this.getObjectPrint('excel');
       }
     });
 
@@ -68,9 +68,9 @@ export class TravelRequestsReportComponent implements OnInit {
         this.typeTravelLegal = this.sortByAphabet(data.data.legal_travels_types);
         this.type_element_imputation = this.sortByAphabet(data.data.travel_costs_types);
 
-      })
+      });
 
-    this.userId = JSON.parse(localStorage.getItem("user")).employee_id
+    this.userId = JSON.parse(localStorage.getItem('user')).employee_id;
   }
   sortByAphabet(dataBySort: any) {
     dataBySort.sort(function (a, b) {
@@ -110,11 +110,11 @@ export class TravelRequestsReportComponent implements OnInit {
 
   getObjectPrint(param) {
 
-    let personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
-    let ticket_send = this.ticket === '' ? '-1' : this.ticket;
-    let ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
-    let date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
-    let date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
+    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const ticket_send = this.ticket === '' ? '-1' : this.ticket;
+    const ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
+    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
+    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
     if (param === 'general') {
       this.travel_reports_list.getTravelsRequestsReport(personal_number_send, ticket_send, ticket_cli_send, this.travel_cost, date_begin_send,
         date_end_send, this.legat_travel_type).subscribe((data: any) => {
@@ -124,7 +124,7 @@ export class TravelRequestsReportComponent implements OnInit {
           } else {
             this.showDataTable = false;
           }
-        })
+        });
       this.showDataTable = true;
     } else {
       this.travel_reports_list.getTravelsRequestsReportExcel(this.userId, personal_number_send, ticket_send, ticket_cli_send, this.travel_cost, date_begin_send,
@@ -134,7 +134,7 @@ export class TravelRequestsReportComponent implements OnInit {
     }
   }
   validateNumber(name: string, value: any) {
-    let proof = /^[0-9]+$/.test(value);
+    const proof = /^[0-9]+$/.test(value);
     switch (name) {
       case 'personal_number':
         if (!proof) {
@@ -166,9 +166,9 @@ export class TravelRequestsReportComponent implements OnInit {
     } else {
       if ((this.date_begin !== '') && (this.date_end !== '')) {
         this.btnConsult = true;
-        let dayBegin = new Date(this.date_begin).getTime();
-        let dayEnd = new Date(this.date_end).getTime();
-        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const dayBegin = new Date(this.date_begin).getTime();
+        const dayEnd = new Date(this.date_end).getTime();
+        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_request_report.message_alert_one_ts, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);

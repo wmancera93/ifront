@@ -6,31 +6,31 @@ import { Translate } from '../../../models/common/translate/translate';
 @Injectable()
 export class ReportTravelsService {
   public translate: Translate = null;
-  public report_travels_list: any
+  public report_travels_list: any;
   constructor(private tokenService: Angular2TokenService, public translateService: TranslateService) {
- 
+
     this.translate = this.translateService.getTranslate();
 
     this.report_travels_list = [
       {
-        "id": 1,
-        "name": this.translate.app.frontEnd.services.travel_management.report.name_travel,
-        "code": "travel_report"
+        'id': 1,
+        'name': this.translate.app.frontEnd.services.travel_management.report.name_travel,
+        'code': 'travel_report'
       },
       {
-        "id": 2,
-        "name": this.translate.app.frontEnd.services.travel_management.report.name_advance,
-        "code": "advance_report"
+        'id': 2,
+        'name': this.translate.app.frontEnd.services.travel_management.report.name_advance,
+        'code': 'advance_report'
       },
       {
-        "id": 3,
-        "name": this.translate.app.frontEnd.services.travel_management.report.mane_allowance,
-        "code": "allowance_report"
+        'id': 3,
+        'name': this.translate.app.frontEnd.services.travel_management.report.mane_allowance,
+        'code': 'allowance_report'
       },
       {
-        "id": 4,
-        "name": this.translate.app.frontEnd.services.travel_management.report.name_approver,
-        "code": "approver_report"
+        'id': 4,
+        'name': this.translate.app.frontEnd.services.travel_management.report.name_approver,
+        'code': 'approver_report'
       },
     ];
 

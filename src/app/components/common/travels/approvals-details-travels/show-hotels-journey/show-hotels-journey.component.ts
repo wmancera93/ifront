@@ -15,31 +15,31 @@ export class ShowHotelsJourneyComponent implements OnInit {
   public translate: Translate = null;
 
   constructor(public travelService: TravelService,
-    public travelsSharedService: TravelsService, public translateService: TranslateService) { 
+    public travelsSharedService: TravelsService, public translateService: TranslateService) {
       this.translate = this.translateService.getTranslate();
       this.travelsSharedService.getHotelsByJourney().subscribe(
         (data: any) => {
           this.objectHotelJourney = data;
-          
+
           document.getElementById('btn_close_aprovalstravels').click();
-          
+
           setTimeout(() => {
             if (document.getElementById('approvalHoteljourney_edit').className !== 'modal show') {
               document.getElementById('btn_approvalHoteljourney_edit').click();
               document.getElementById('bodyGeneral').removeAttribute('style');
             }
-  
+
             this.travelService.getHotelsByJourney(data.id_journey, data.id_travel).subscribe(
               (show: any) => {
                 this.arrayHotel = show.data.hotels;
 
               }, (error: any) => {
-                console.log(error)
+                console.log(error);
               }
             );
           }, 100);
-  
-  
+
+
         });
     }
 
@@ -48,9 +48,9 @@ export class ShowHotelsJourneyComponent implements OnInit {
 
   returnTravel() {
     if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
-        document.getElementById("close_approvalHotel_journey").click();
+        document.getElementById('close_approvalHotel_journey').click();
         setTimeout(() => {
-          document.getElementById("btn_approvals_requests_travels").click();
+          document.getElementById('btn_approvals_requests_travels').click();
           document.getElementById('bodyGeneral').removeAttribute('style');
         }, 100);
 

@@ -13,31 +13,30 @@ export class ShowEventsComponent implements OnInit {
 
   @Input('nameModal') nameModal: any;
 
-  public targetModal: string = '';
-  public btnModal: string = '';
-  public nameThisModal: string = '';
+  public targetModal = '';
+  public btnModal = '';
+  public nameThisModal = '';
   public objectInfoEvents: any;
   public titleEvent: string;
   public eventIcon: string;
   public flagTypeOfEvent: boolean;
   public translate: Translate = null;
-  public birthday:string;
+  public birthday: string;
 
   constructor(public infoEventEmployee: EventsEmployeeService, public translateService: TranslateService) {
     this.translate = this.translateService.getTranslate();
-    this.birthday=this.translate.app.frontEnd.components.common.show_events.birthday;
+    this.birthday = this.translate.app.frontEnd.components.common.show_events.birthday;
     this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
       this.objectInfoEvents = data.objectInfo;
       this.titleEvent = this.objectInfoEvents[0].event;
       this.eventIcon = this.objectInfoEvents[0].icon;
       if (this.titleEvent === this.birthday) {
         this.flagTypeOfEvent = true;
-      }
-      else {
+      } else {
         this.flagTypeOfEvent = false;
       }
       this.getShowInfo(data.modal);
-    })
+    });
 
   }
 
@@ -46,14 +45,14 @@ export class ShowEventsComponent implements OnInit {
       this.targetModal = '#' + data;
       this.btnModal = 'btn-' + data;
       this.nameThisModal = data;
-    })
+    });
 
   }
 
   getShowInfo(modal?: any) {
     if (document.getElementById(modal).className !== 'modal show') {
       document.getElementById('btn-' + modal).click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+      document.getElementById('bodyGeneral').removeAttribute('style');
     }
 
   }

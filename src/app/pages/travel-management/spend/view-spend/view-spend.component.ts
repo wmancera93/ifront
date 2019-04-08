@@ -24,7 +24,7 @@ export class ViewSpendComponent implements OnInit {
   public objectPrintAdvancesView: EventEmitter<any> = new EventEmitter();
   public objectPrintTravelView: EventEmitter<any> = new EventEmitter();
   public nameReport: string;
-  public edit: boolean = false;
+  public edit = false;
   public anexes: any[] = [];
   public id_spend: string;
   public allRequestsInSpend: any[] = [];
@@ -36,7 +36,7 @@ export class ViewSpendComponent implements OnInit {
   public translate: Translate = null;
   public ticketSendPDF: any;
 
-  public is_sender_approval: boolean = false;
+  public is_sender_approval = false;
 
   constructor(public spendSharedService: SpendSharedService,
     public spendsService: SpendsService,
@@ -50,15 +50,15 @@ export class ViewSpendComponent implements OnInit {
     this.nameReportTravels = this.translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle_trayect_ts;
     this.accionDataTableServiceView.getActionDataTable().subscribe((data: any) => {
       if (data.action_method === 'ModalDistCostShow') {
-        document.getElementById("closeModalViewSpend").click();
-        let viewDistCost = false;
-        let id_by_spend = data.id
+        document.getElementById('closeModalViewSpend').click();
+        const viewDistCost = false;
+        const id_by_spend = data.id;
         setTimeout(() => {
           this.spendSharedService.setViewDistCostSpend({ accion: viewDistCost, id: id_by_spend });
         }, 100);
       }
 
-      if ((data.action_method === "showHotels")) {
+      if ((data.action_method === 'showHotels')) {
 
         this.travelsService.setHotelsByJourney({
           acction: true,
@@ -86,7 +86,7 @@ export class ViewSpendComponent implements OnInit {
 
         if (document.getElementById('modal_viewSpends').className !== 'modal show') {
           document.getElementById('btn-viewSpends').click();
-          document.getElementById("bodyGeneral").removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
       });
       setTimeout(() => {
@@ -98,14 +98,14 @@ export class ViewSpendComponent implements OnInit {
 
             detail.data[0].travel_advance_requests.data.forEach(element => {
               element.travel_advance_payments.forEach(dataObject => {
-                this.table_advances_spend.push(dataObject)
+                this.table_advances_spend.push(dataObject);
               });
             });
 
-            let object = {
+            const object = {
               labels: detail.data[0].travel_advance_requests.labels,
               data: this.table_advances_spend,
-            }
+            };
             setTimeout(() => {
               this.objectPrintAdvancesView.emit({ success: true, data: [object] });
             }, 500);
@@ -124,11 +124,11 @@ export class ViewSpendComponent implements OnInit {
               this.objectPrintTravelView.emit({ success: true, data: [] });
             }, 500);
           }
-        })
+        });
       }, 1000);
 
 
-    })
+    });
   }
 
   ngOnInit() {
@@ -138,21 +138,21 @@ export class ViewSpendComponent implements OnInit {
 
     this.spendsService.putSendRequestsSpend(this.id_spend).subscribe((data: any) => {
       if (data) {
-        document.getElementById("closeModalViewSpend").click();
+        document.getElementById('closeModalViewSpend').click();
         const alertWarning: Alerts[] = [{ type: 'success', title: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.type_alert_ts, message: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.message_alert_one_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
       }
       this.spendSharedService.setRefreshSpend({ success: true, third: false });
     },
       (error: any) => {
-        document.getElementById("closeModalViewSpend").click();
+        document.getElementById('closeModalViewSpend').click();
         const alertWarning: Alerts[] = [{ type: 'danger', title: this.translate.app.frontEnd.pages.travel_management.spend.view_spend.type_alert_two_ts, message: error.json().errors.toString() + ' - ' + this.translate.app.frontEnd.pages.travel_management.spend.view_spend.message_alert_two_ts, confirmation: false }];
         this.alert.setAlert(alertWarning[0]);
 
       });
   }
   viewAnnex(paramView) {
-    window.open(paramView.file.url)
+    window.open(paramView.file.url);
   }
 
   downloadAnnex(param: any) {
@@ -165,8 +165,8 @@ export class ViewSpendComponent implements OnInit {
       };
     })
       .subscribe(res => {
-        var url = window.URL.createObjectURL(res.data);
-        var a = document.createElement('a');
+        const url = window.URL.createObjectURL(res.data);
+        const a = document.createElement('a');
         document.body.appendChild(a);
         a.setAttribute('style', 'display: none');
         a.href = url;
@@ -179,7 +179,7 @@ export class ViewSpendComponent implements OnInit {
   exportExcel() {
     this.spendsService.getExportSpendExcel(this.ticket).subscribe((data: any) => {
       window.open(data.url);
-    })
+    });
   }
 
 }

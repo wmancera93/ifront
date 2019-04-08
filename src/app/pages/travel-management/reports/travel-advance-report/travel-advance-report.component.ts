@@ -17,25 +17,25 @@ import { TranslateService } from '../../../../services/common/translate/translat
 export class TravelAdvanceReportComponent implements OnInit {
 
   public title: string;
-  public is_collapse_report_advance: boolean = false;
+  public is_collapse_report_advance = false;
   public reports_list_advance = null;
   public objectReportAdvance: EventEmitter<any> = new EventEmitter();
   public translate: Translate = null;
-  public personal_number: string = '-1';
-  public id_employee: string = '-1';
-  public ticket: string = '-1';
-  public ticket_cli: string = '-1';
-  public date_begin: string = '';
-  public date_end: string = '';
+  public personal_number = '-1';
+  public id_employee = '-1';
+  public ticket = '-1';
+  public ticket_cli = '-1';
+  public date_begin = '';
+  public date_end = '';
 
-  public showPdf: boolean = false;
-  public showExcel: boolean = true;
+  public showPdf = false;
+  public showExcel = true;
   public nameReport: string;
   public objectGeneralAdvance: any[] = [];
-  public showDataTableAdvance: boolean = true;
+  public showDataTableAdvance = true;
   public userId: User = null;
-  public countAfter: number = 0;
-  public btnConsultAdvance: boolean = true;
+  public countAfter = 0;
+  public btnConsultAdvance = true;
 
   constructor(public router: Router, public travel_reports_list: ReportTravelsService,
     public travelManagementService: TravelService, private accionDataTableService: DataDableSharedService,
@@ -85,23 +85,23 @@ export class TravelAdvanceReportComponent implements OnInit {
   collapseReportAdvance(is_collapse: boolean) {
     this.is_collapse_report_advance = is_collapse;
 
-    this.personal_number = "";
-    this.ticket = "";
-    this.ticket_cli = "";
-    this.date_begin = "";
-    this.date_end = "";
-    this.getObjectPrint("general");
+    this.personal_number = '';
+    this.ticket = '';
+    this.ticket_cli = '';
+    this.date_begin = '';
+    this.date_end = '';
+    this.getObjectPrint('general');
   }
   returnBackReportAdvance() {
     this.router.navigate(['ihr/travel_management']);
   }
 
   getObjectPrint(param) {
-    let personal_number_send = this.personal_number === "" ? "-1" : this.personal_number;
-    let ticket_send = this.ticket === "" ? "-1" : this.ticket;
-    let ticket_cli_send = this.ticket_cli === "" ? "-1" : this.ticket_cli;
-    let date_begin_send = this.date_begin === "" ? "-1" : this.date_begin.replace("-", "").toString().replace("-", "");
-    let date_end_send = this.date_end === "" ? "-1" : this.date_end.replace("-", "").toString().replace("-", "");
+    const personal_number_send = this.personal_number === '' ? '-1' : this.personal_number;
+    const ticket_send = this.ticket === '' ? '-1' : this.ticket;
+    const ticket_cli_send = this.ticket_cli === '' ? '-1' : this.ticket_cli;
+    const date_begin_send = this.date_begin === '' ? '-1' : this.date_begin.replace('-', '').toString().replace('-', '');
+    const date_end_send = this.date_end === '' ? '-1' : this.date_end.replace('-', '').toString().replace('-', '');
 
     if (param === 'general') {
       this.travel_reports_list.getTravelsAdvanceReport(personal_number_send, ticket_send, ticket_cli_send, date_begin_send, date_end_send).subscribe((data: any) => {
@@ -129,7 +129,7 @@ export class TravelAdvanceReportComponent implements OnInit {
     }
   }
   validateNumberAdvance(name: string, value: any) {
-    let proof = /^[0-9]+$/.test(value);
+    const proof = /^[0-9]+$/.test(value);
     switch (name) {
       case 'personal_number':
         if (!proof) {
@@ -160,9 +160,9 @@ export class TravelAdvanceReportComponent implements OnInit {
     } else {
       if ((this.date_begin !== '') && (this.date_end !== '')) {
         this.btnConsultAdvance = true;
-        let dayBegin = new Date(this.date_begin).getTime();
-        let dayEnd = new Date(this.date_end).getTime();
-        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const dayBegin = new Date(this.date_begin).getTime();
+        const dayEnd = new Date(this.date_end).getTime();
+        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: this.translate.app.frontEnd.pages.travel_management.reports.travel_advance_report.message_alert_one_ts, confirmation: false }];
           this.alert.setAlert(alertWarning[0]);

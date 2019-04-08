@@ -1,46 +1,105 @@
-<button id="btn_detail_distSpend_approval" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dist_spend_approval" style="display:none;">
-</button>
-<div data-backdrop="static" class="modal" id="dist_spend_approval" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_detail_distSpend_approval"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#dist_spend_approval"
+  style="display:none;"
+></button>
+<div
+  data-backdrop="static"
+  class="modal"
+  id="dist_spend_approval"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.distribution_cost}}</h5>
-        <button id="closeDistSpendApproval" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{
+            translate.app.frontEnd.components.common.travels
+              .approvals_details_travels.show_dist_spends
+              .distribution_cost
+          }}
+        </h5>
+        <button
+          id="closeDistSpendApproval"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
-          <div class="col-9">
-          </div>
+          <div class="col-9"></div>
           <div class="col-3">
-            <div class="buttonBack img-zoom" (click)="returnApproval()">
+            <div
+              class="buttonBack img-zoom"
+              (click)="returnApproval()"
+            >
               <div style="margin-left: 15px;">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                  {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.back}}
+                  {{
+                    translate.app.frontEnd.components.common.travels
+                      .approvals_details_travels.show_dist_spends.back
+                  }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 20px" *ngIf="printSpendApproval !== null">
+          <div
+            class="col-12"
+            style="margin-top: 20px"
+            *ngIf="printSpendApproval !== null"
+          >
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.code_spending}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.components.common.travels
+                        .approvals_details_travels.show_dist_spends
+                        .code_spending
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendApproval.allowance_type_code}}</label>
+                <label>{{
+                  printSpendApproval.allowance_type_code
+                }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.type_expense}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.components.common.travels
+                        .approvals_details_travels.show_dist_spends
+                        .type_expense
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendApproval.allowance_type_name}}</label>
+                <label>{{
+                  printSpendApproval.allowance_type_name
+                }}</label>
               </div>
             </div>
           </div>
@@ -49,84 +108,154 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.amount}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.components.common.travels
+                        .approvals_details_travels.show_dist_spends
+                        .amount
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpendApproval.value}}</label>
+                <label>{{ printSpendApproval.value }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.date}}:</strong>
+                  <strong
+                    >{{
+                      translate.app.frontEnd.components.common.travels
+                        .approvals_details_travels.show_dist_spends
+                        .date
+                    }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpendApproval.date_time_format}}</label>
+                <label>{{
+                  printSpendApproval.date_time_format
+                }}</label>
               </div>
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCostApproval.length > 0">
+          <div
+            class="col-12"
+            style="margin-top: 15px"
+            *ngIf="detailDistCostApproval.length > 0"
+          >
             <div class="table-responsive">
-              <table class="table table-sm table-striped table-bordered table-hover">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.imputation_element}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.imputation_element
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.cost_center}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.cost_center
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.graph}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.graph
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.operation}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.operation
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.order}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.order
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.account_contable}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.account_contable
+                      }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.distribution}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .travels.approvals_details_travels
+                          .show_dist_spends.distribution
+                      }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pinterDistributions of detailDistCostApproval">
+                  <tr
+                    *ngFor="
+                      let pinterDistributions of detailDistCostApproval
+                    "
+                  >
                     <td>
-                      {{pinterDistributions.travel_costs_type_name}}
+                      {{ pinterDistributions.travel_costs_type_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_cost_code}} {{pinterDistributions.travel_cost_name}}
+                      {{ pinterDistributions.travel_cost_code }}
+                      {{ pinterDistributions.travel_cost_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_graph_code}} {{pinterDistributions.travel_graph_name}}
+                      {{ pinterDistributions.travel_graph_code }}
+                      {{ pinterDistributions.travel_graph_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_operation_code}} {{pinterDistributions.travel_operation_name}}
+                      {{ pinterDistributions.travel_operation_code }}
+                      {{ pinterDistributions.travel_operation_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_maintenance_order_code}} {{pinterDistributions.travel_maintenance_order_name}}
+                      {{
+                        pinterDistributions.travel_maintenance_order_code
+                      }}
+                      {{
+                        pinterDistributions.travel_maintenance_order_name
+                      }}
                     </td>
                     <td>
-                      {{pinterDistributions.accounting_account_code}} {{pinterDistributions.accounting_account_name}}
+                      {{
+                        pinterDistributions.accounting_account_code
+                      }}
+                      {{
+                        pinterDistributions.accounting_account_name
+                      }}
                     </td>
-                    <td>
-                      {{pinterDistributions.distribution}} %
-                    </td>
+                    <td>{{ pinterDistributions.distribution }} %</td>
                   </tr>
                 </tbody>
               </table>
             </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
-            <div class="row justify-content-center top-containter" *ngIf="detailDistCostApproval.length == 0">
+            <div
+              class="row justify-content-center top-containter"
+              *ngIf="detailDistCostApproval.length == 0"
+            >
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                  {{translate.app.frontEnd.components.common.travels.approvals_details_travels.show_dist_spends.negative_distribution}}.
+                  {{
+                    translate.app.frontEnd.components.common.travels
+                      .approvals_details_travels.show_dist_spends
+                      .negative_distribution
+                  }}.
                 </div>
               </div>
             </div>

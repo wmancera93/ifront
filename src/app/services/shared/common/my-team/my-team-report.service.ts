@@ -5,18 +5,16 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class MyTeamReportService {
-  exportMyTeamReports: Subject<any> = new Subject<any>();  
+  exportMyTeamReports: Subject<any> = new Subject<any>();
 
-  constructor(public router:Router) { }
+  constructor(public router: Router) { }
 
-  getReportMyTeam()
-  {    
+  getReportMyTeam() {
     return this.exportMyTeamReports;
   }
 
-  setReportMyteam(objectMyTeamReport:any)
-  {    
-    return this.exportMyTeamReports.next(objectMyTeamReport);    
+  setReportMyteam(objectMyTeamReport: any) {
+    return this.exportMyTeamReports.next(objectMyTeamReport);
   }
 
 }

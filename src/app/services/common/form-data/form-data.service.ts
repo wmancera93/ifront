@@ -56,11 +56,11 @@ export class FormDataService extends Angular2TokenService {
     }
 
     postRequestsFormData(data: FormData) {
-        this.definitionServer()
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Post,
             headers: hdrs,
             url: this.baseUrl + '/api/v2/' + 'employee_requets',
@@ -73,11 +73,11 @@ export class FormDataService extends Angular2TokenService {
     }
 
     postSpendsFormData(data: FormData) {
-        this.definitionServer()
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Post,
             headers: hdrs,
             url: this.baseUrl + '/api/v2/' + 'travel_allowance_requests',
@@ -90,11 +90,11 @@ export class FormDataService extends Angular2TokenService {
     }
 
     postNoticeFormData(data: FormData) {
-        this.definitionServer()
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Post,
             headers: hdrs,
             url: this.baseUrl + '/api/v2/' + 'articles',
@@ -106,29 +106,29 @@ export class FormDataService extends Angular2TokenService {
 
     }
 
-    putEditArticlesFormData(objectID: number,data: FormData){
-        this.definitionServer()
+    putEditArticlesFormData(objectID: number, data: FormData) {
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Put,
             headers: hdrs,
-            url: this.baseUrl + '/api/v2/' + 'articles/'+ objectID,
+            url: this.baseUrl + '/api/v2/' + 'articles/' + objectID,
             body: data
         });
         return this.request(requestOptions).map(
             (response) => response.json()
         );
-  
+
       }
 
-      postTest(data: FormData){
-        this.definitionServer()
+      postTest(data: FormData) {
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Post,
             headers: hdrs,
             url: this.baseUrl + '/api/v2/' + 'travel_requests/test_files',
@@ -137,14 +137,14 @@ export class FormDataService extends Angular2TokenService {
         return this.request(requestOptions).map(
             (response) => response.json()
         );
-  
-      }
-      postNewTravel(data: FormData){
-        this.definitionServer()
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+      }
+      postNewTravel(data: FormData) {
+        this.definitionServer();
+
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Post,
             headers: hdrs,
             url: this.baseUrl + '/api/v2/' + 'travel_requests',
@@ -153,40 +153,40 @@ export class FormDataService extends Angular2TokenService {
         return this.request(requestOptions).map(
             (response) => response.json()
         );
-  
-      }
-      putEditTravelsFormData(objectID: string,data: FormData){
-        this.definitionServer()
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+      }
+      putEditTravelsFormData(objectID: string, data: FormData) {
+        this.definitionServer();
+
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Put,
             headers: hdrs,
-            url: this.baseUrl + '/api/v2/travel_requests/'+ objectID,
+            url: this.baseUrl + '/api/v2/travel_requests/' + objectID,
             body: data
         });
         return this.request(requestOptions).map(
             (response) => response.json()
         );
-  
+
       }
 
-      putEditSpendFormData(objectID: string,data: FormData){
-        this.definitionServer()
+      putEditSpendFormData(objectID: string, data: FormData) {
+        this.definitionServer();
 
-        let hdrs = this.currentAuthHeaders;
-        hdrs.append('enctype', "multipart/form-data")
-        let requestOptions = new RequestOptions({
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
             method: RequestMethod.Put,
             headers: hdrs,
-            url: this.baseUrl + '/api/v2/travel_allowance_requests/'+ objectID,
+            url: this.baseUrl + '/api/v2/travel_allowance_requests/' + objectID,
             body: data
         });
         return this.request(requestOptions).map(
             (response) => response.json()
         );
-  
+
       }
 
 

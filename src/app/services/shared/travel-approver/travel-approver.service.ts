@@ -9,35 +9,35 @@ export class TravelApproverService {
   refreshListIndexAllowance: Subject<any> = new Subject<any>();
   refreshListIndexAdvance: Subject<any> = new Subject<any>();
   type_request: Subject<any> = new Subject<any>();
-  
+
   constructor() { }
 
   getviewDetailRequests() {
     return this.viewDetailRequest;
   }
 
-  setviewDetailRequests(viewDetailRequest:any) {
+  setviewDetailRequests(viewDetailRequest: any) {
     return this.viewDetailRequest.next(viewDetailRequest);
   }
   getrefreshIndexRequest() {
     return this.refreshListIndex;
   }
 
-  setrefreshIndexRequest(refreshListIndex:any ) {
+  setrefreshIndexRequest(refreshListIndex: any ) {
     return this.refreshListIndex.next(refreshListIndex);
   }
   getrefreshIndexAllowance() {
     return this.refreshListIndexAllowance;
   }
 
-  setrefreshIndexAllowance(refreshListIndexAllowance:any ) {
+  setrefreshIndexAllowance(refreshListIndexAllowance: any ) {
     return this.refreshListIndexAllowance.next(refreshListIndexAllowance);
   }
   getrefreshIndexAdvance() {
     return this.refreshListIndexAdvance;
   }
 
-  setrefreshIndexAdvance(refreshListIndexAdvance:any ) {
+  setrefreshIndexAdvance(refreshListIndexAdvance: any ) {
     return this.refreshListIndexAdvance.next(refreshListIndexAdvance);
   }
 }

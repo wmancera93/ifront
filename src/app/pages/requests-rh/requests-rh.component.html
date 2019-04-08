@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-edit"></i>
-          {{ parseT("tittle") | translate }}
+          {{ parseT('tittle') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5  text-center cursor-general"
@@ -18,7 +20,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                {{ parseT("back") | translate }}
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -27,7 +29,10 @@
     </div>
   </div>
 
-  <div class="row-hr-container justify-content-center" *ngIf="viewContainer">
+  <div
+    class="row-hr-container justify-content-center"
+    *ngIf="viewContainer"
+  >
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
         <div class="col-lg-6 col-12">
@@ -42,7 +47,7 @@
                 aria-expanded="false"
               >
                 <i class="fa fa-plus"></i>
-                {{ parseT("btn_new") | translate }}
+                {{ parseT('btn_new') | translate }}
               </a>
               <div
                 class="dropdown-menu col-12"
@@ -50,7 +55,10 @@
                 style="overflow-x: hidden !important; overflow-y: auto !important; max-height: 400px !important"
               >
                 <div
-                  *ngFor="let request of requests.request_types; let i = index"
+                  *ngFor="
+                    let request of requests.request_types;
+                    let i = index
+                  "
                   class="row"
                 >
                   <div
@@ -76,28 +84,32 @@
                         ></i>
                         <i
                           *ngIf="
-                            request.is_payment && request.id_activity != 'VACA'
+                            request.is_payment &&
+                            request.id_activity != 'VACA'
                           "
                           style="font-size: 20px"
                           class="fa fa-money fa-stack-2x color-primary-button"
                         ></i>
                         <i
                           *ngIf="
-                            request.is_payment && request.id_activity != 'VACA'
+                            request.is_payment &&
+                            request.id_activity != 'VACA'
                           "
                           style="font-size: 20px"
                           class="fa fa-check fa-stack-1x text-success"
                         ></i>
                         <i
                           *ngIf="
-                            !request.is_payment && request.id_activity != 'VACA'
+                            !request.is_payment &&
+                            request.id_activity != 'VACA'
                           "
                           style="font-size: 20px"
                           class="fa fa-money fa-stack-2x color-primary-button"
                         ></i>
                         <i
                           *ngIf="
-                            !request.is_payment && request.id_activity != 'VACA'
+                            !request.is_payment &&
+                            request.id_activity != 'VACA'
                           "
                           style="font-size: 20px"
                           class="fa fa-times fa-stack-1x text-danger"
@@ -120,7 +132,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              {{ parseT("query_filters") | translate }}
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse"
@@ -179,7 +191,7 @@
       <div class="row top-containter" style="margin-top: 20px">
         <div class="col-xl-2 col-lg-4 col-12 text-left">
           <b>
-            {{ parseT("my_queries") | translate }}
+            {{ parseT('my_queries') | translate }}
           </b>
         </div>
       </div>
@@ -194,12 +206,14 @@
               <div class="col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    {{ parseT("ticket") | translate }} #{{ request.ticket }}
+                    {{ parseT('ticket') | translate }} #{{
+                      request.ticket
+                    }}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-clock-o"></i>
-                  {{ parseT("date_created") | translate }}
+                  {{ parseT('date_created') | translate }}
                   {{ request.created_date }}
                 </p>
               </div>
@@ -213,10 +227,13 @@
               <div
                 class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
               >
-                <p class="titleColor">{{ parseT("status") | translate }}:</p>
+                <p class="titleColor">
+                  {{ parseT('status') | translate }}:
+                </p>
                 <h6
                   *ngIf="
-                    request.status == (parseT('status_approved') | translate)
+                    request.status ==
+                    (parseT('status_approved') | translate)
                   "
                 >
                   <span class="badge badge-primary">
@@ -225,7 +242,8 @@
                 </h6>
                 <h6
                   *ngIf="
-                    request.status == (parseT('status_cancelled') | translate)
+                    request.status ==
+                    (parseT('status_cancelled') | translate)
                   "
                 >
                   <span class="badge badge-danger">
@@ -234,7 +252,8 @@
                 </h6>
                 <h6
                   *ngIf="
-                    request.status == (parseT('status_in_Process') | translate)
+                    request.status ==
+                    (parseT('status_in_Process') | translate)
                   "
                 >
                   <span class="badge badge-success">
@@ -243,7 +262,8 @@
                 </h6>
                 <h6
                   *ngIf="
-                    request.status == (parseT('status_pending') | translate)
+                    request.status ==
+                    (parseT('status_pending') | translate)
                   "
                 >
                   <span class="badge badge-dark">
@@ -258,28 +278,35 @@
                 <p
                   class="titleColor"
                   *ngIf="
-                    request.next_approver_to_json.approver_employee != undefined
+                    request.next_approver_to_json.approver_employee !=
+                    undefined
                   "
                 >
                   {{
-                    request.next_approver_to_json.approver_employee.short_name
+                    request.next_approver_to_json.approver_employee
+                      .short_name
                   }}
                 </p>
                 <p
                   class=""
                   *ngIf="
-                    request.next_approver_to_json.approver_employee != undefined
+                    request.next_approver_to_json.approver_employee !=
+                    undefined
                   "
                 >
-                  {{ request.next_approver_to_json.approver_employee.posicion }}
+                  {{
+                    request.next_approver_to_json.approver_employee
+                      .posicion
+                  }}
                 </p>
                 <p
                   class=""
                   *ngIf="
-                    request.next_approver_to_json.approver_employee != undefined
+                    request.next_approver_to_json.approver_employee !=
+                    undefined
                   "
                 >
-                  {{ parseT("approver") | translate }}
+                  {{ parseT('approver') | translate }}
                   {{ request.next_approver_to_json.level }}
                 </p>
               </div>
@@ -293,11 +320,12 @@
                   <div
                     class="col-6 number-size text-success"
                     [attr.title]="
-                      request.action_employee_requets_index_view[0].title
+                      request.action_employee_requets_index_view[0]
+                        .title
                     "
                     [attr.disabled]="
-                      request.action_employee_requets_index_view[0].is_active ==
-                      true
+                      request.action_employee_requets_index_view[0]
+                        .is_active == true
                         ? null
                         : true
                     "
@@ -309,8 +337,8 @@
                     class="col-6 number-size text-danger"
                     id="hideTrash"
                     *ngIf="
-                      request.action_employee_requets_index_view[1].is_active ==
-                      true
+                      request.action_employee_requets_index_view[1]
+                        .is_active == true
                     "
                     style="cursor: pointer"
                     (click)="deleteRequest(request.ticket)"
@@ -321,34 +349,34 @@
                     class="col-6 number-size"
                     id="hideTrash"
                     *ngIf="
-                      request.action_employee_requets_index_view[1].is_active ==
-                      false
+                      request.action_employee_requets_index_view[1]
+                        .is_active == false
                     "
                     style="cursor: no-drop"
                   >
                     <i class="fa fa-trash" aria-hidden="false"></i>
                   </div>
                   <div class="col-6" (click)="modalAprovers(request)">
-                    {{ parseT("see") | translate }}
+                    {{ parseT('see') | translate }}
                   </div>
                   <div
                     class="col-6"
                     *ngIf="
-                      request.action_employee_requets_index_view[1].is_active ==
-                      true
+                      request.action_employee_requets_index_view[1]
+                        .is_active == true
                     "
                     (click)="deleteRequest(request.ticket)"
                   >
-                    {{ parseT("erase") | translate }}
+                    {{ parseT('erase') | translate }}
                   </div>
                   <div
                     class="col-6"
                     *ngIf="
-                      request.action_employee_requets_index_view[1].is_active ==
-                      false
+                      request.action_employee_requets_index_view[1]
+                        .is_active == false
                     "
                   >
-                    {{ parseT("erase") | translate }}
+                    {{ parseT('erase') | translate }}
                   </div>
                 </div>
               </div>

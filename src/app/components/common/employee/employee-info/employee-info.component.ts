@@ -12,13 +12,13 @@ import { TranslateService } from '../../../../services/common/translate/translat
 export class EmployeeInfoComponent implements OnInit {
   @Input('nameModal') nameModal: any;
 
-  public target: string = '';
-  public button: string = '';
-  public id: string = '';
+  public target = '';
+  public button = '';
+  public id = '';
   public translate: Translate = null;
   public employeeInfo: Employee = null;
-  public flagShowModal: boolean = false;
-  public isBoss: boolean = false;
+  public flagShowModal = false;
+  public isBoss = false;
   public validateRol: boolean;
   public dateAddCompany: string;
   public datebirth: string;
@@ -30,10 +30,10 @@ export class EmployeeInfoComponent implements OnInit {
       this.employeeInfo = null;
       this.employeeInfo = data;
 
-      let dateIn = data.fecha_ingreso.split('-');
+      const dateIn = data.fecha_ingreso.split('-');
       this.dateAddCompany = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
 
-      let dateBorn = data.fecha_nac.split('-');
+      const dateBorn = data.fecha_nac.split('-');
       this.datebirth = dateBorn[2] + '/' + dateBorn[1] + '/' + dateBorn[0];
 
       if (this.employeeInfo !== null) {
@@ -41,28 +41,27 @@ export class EmployeeInfoComponent implements OnInit {
       } else {
         this.flagShowModal = false;
       }
-      if (document.getElementById("modal-" + this.employeeInfo.modal).className !== 'modal show') {
+      if (document.getElementById('modal-' + this.employeeInfo.modal).className !== 'modal show') {
         document.getElementById('btn-' + this.employeeInfo.modal).click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
         setTimeout(() => {
           this.stylesExplorerService.addStylesCommon();
         }, 500);
       }
-    })
+    });
   }
 
   ngOnInit() {
     this.nameModal.subscribe((data: any) => {
       this.target = '#modal-' + data;
       this.button = 'btn-' + data;
-      this.id = "modal-" + data;
-    })
+      this.id = 'modal-' + data;
+    });
   }
   validateRolInfoEmployee() {
     if (this.isBoss == true) {
       this.validateRol == true;
-    }
-    else {
+    } else {
       this.validateRol == false;
     }
   }

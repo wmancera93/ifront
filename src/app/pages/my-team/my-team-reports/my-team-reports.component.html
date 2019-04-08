@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -9,17 +11,22 @@
         <div class="row justify-content-center">
           <div class="col-xl-10 col-md-8 col-7 title">
             <i class="fa fa-file"></i>
-            {{ parseT("text_information_employee") | translate }}
+            {{ parseT('text_information_employee') | translate }}
           </div>
           <div
             class="col-xl-2 col-md-4 col-5 text-center cursor-general"
             style="padding-right: 0px"
           >
-            <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div
+              class="buttonBack img-zoom"
+              (click)="returnBackPage()"
+            >
               <div class="padding-back">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                  {{ parseT("btn_back") | translate }}
+                  {{ parseT('btn_back') | translate }}
                 </span>
               </div>
             </div>
@@ -67,7 +74,9 @@
                   let report of reportsMyTeamInfo.work_team_reports;
                   let i = index
                 "
-                (click)="validateReport(i, reportsMyTeamInfo.id, report)"
+                (click)="
+                  validateReport(i, reportsMyTeamInfo.id, report)
+                "
               >
                 <i class="{{ report.icon }}"></i> {{ report.title }}
               </div>

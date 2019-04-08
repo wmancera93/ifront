@@ -12,23 +12,23 @@ import { User } from '../../../models/general/user';
   styleUrls: ['./requests-approvers-logs.component.css']
 })
 export class RequestsApproversLogsComponent implements OnInit, OnDestroy {
-  token
+  token;
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string = 'Logs de aprobaciones';
-  public personal_number: string = '';
-  public type_selected: string = "Seleccione";
-  public type_requests: string = "-1";
+  public nameReport = 'Logs de aprobaciones';
+  public personal_number = '';
+  public type_selected = 'Seleccione';
+  public type_requests = '-1';
   public newtype_requests: any[] = [];
 
-  public request_number: string = '';
-  public personal_request_number: string = '';
-  public personal_approver_number: string = '';
-  public date_begin: string = '';
-  public date_end: string = '';
+  public request_number = '';
+  public personal_request_number = '';
+  public personal_approver_number = '';
+  public date_begin = '';
+  public date_end = '';
 
-  public btnConsult: boolean = true;
-  public showExcel: boolean = true;
-  public countAfter: number = 0;
+  public btnConsult = true;
+  public showExcel = true;
+  public countAfter = 0;
 
   public userId: User = null;
 
@@ -61,8 +61,8 @@ export class RequestsApproversLogsComponent implements OnInit, OnDestroy {
   }
 
   getReport() {
-    this.objectReport.emit({succes: true, data: []})
-    let objectParamsSend = {
+    this.objectReport.emit({succes: true, data: []});
+    const objectParamsSend = {
       request_number: this.request_number === '' ? '-1' : this.request_number,
       type_requests: this.type_requests === '' ? '-1' : this.type_requests,
       personal_request_number: this.personal_request_number === '' ? '-1' : this.personal_request_number,
@@ -74,11 +74,11 @@ export class RequestsApproversLogsComponent implements OnInit, OnDestroy {
     this.reportsHrService.getRequestsLogsApprovers(objectParamsSend.request_number, objectParamsSend.type_requests, objectParamsSend.personal_request_number, objectParamsSend.personal_approver_number, objectParamsSend.date_begin, objectParamsSend.date_end).subscribe(
       (data: any) => {
         this.objectReport.emit(data);
-      })
+      });
   }
 
   getReportExcel() {
-    let objectParamsSend = {
+    const objectParamsSend = {
       request_number: this.request_number === '' ? '-1' : this.request_number,
       type_requests: this.type_requests === '' ? '-1' : this.type_requests,
       personal_request_number: this.personal_request_number === '' ? '-1' : this.personal_request_number,
@@ -93,12 +93,12 @@ export class RequestsApproversLogsComponent implements OnInit, OnDestroy {
       });
   }
 
-  getObjectPrint(){
+  getObjectPrint() {
     this.getReport();
   }
 
   validateNumber(name: string, value: any) {
-    let proof = /^[0-9]+$/.test(value);
+    const proof = /^[0-9]+$/.test(value);
     switch (name) {
       case 'request_number':
         if (!proof) {
@@ -129,9 +129,9 @@ export class RequestsApproversLogsComponent implements OnInit, OnDestroy {
     } else {
       if ((this.date_begin !== '') && (this.date_end !== '')) {
         this.btnConsult = true;
-        let dayBegin = new Date(this.date_begin).getTime();
-        let dayEnd = new Date(this.date_end).getTime();
-        let calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
+        const dayBegin = new Date(this.date_begin).getTime();
+        const dayEnd = new Date(this.date_end).getTime();
+        const calculate = ((dayEnd - dayBegin) / (1000 * 60 * 60 * 24));
         if (calculate < 0) {
           const alertWarning: Alerts[] = [{ type: 'danger', title: 'Error', message: 'La fecha inicial no puede ser mayor a la fecha final', confirmation: false }];
           this.alert.setAlert(alertWarning[0]);

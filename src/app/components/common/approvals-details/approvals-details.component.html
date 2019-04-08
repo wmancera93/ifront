@@ -1,12 +1,28 @@
-<button id="btn_approvals_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#approvals_requests"
-  style="display:none;">
-</button>
-<div class="modal" id="approvals_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<button
+  id="btn_approvals_requests"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#approvals_requests"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  id="approvals_requests"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="approvals.length > 0">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{approvals[0].type_request_to_json.description}}</h4>
+          <h4 class="modal-title titleColor text-shadow">
+            {{ approvals[0].type_request_to_json.description }}
+          </h4>
         </div>
       </div>
       <div class="modal-body font-controls-login">
@@ -16,33 +32,56 @@
               <div class="widget bg-white">
                 <div class="row">
                   <div class="col-12">
-                    <h3 class="font-color-default tops"  *ngIf="translate !== null">
+                    <h3
+                      class="font-color-default tops"
+                      *ngIf="translate !== null"
+                    >
                       <i class="fa fa-user text-primary-hr"></i>
-                      {{translate.app.frontEnd.components.common.approvals_details.apply_for}}
+                      {{
+                        translate.app.frontEnd.components.common
+                          .approvals_details.apply_for
+                      }}
                     </h3>
                   </div>
                   <div class="col-12 center-img-employee tops">
                     <div class="menu-img-employee">
-                      <img src="{{approvals[0].employee_applicant_to_json.image.url}}" class="roundPhoto-employee">
-                      <br>
+                      <img
+                        src="{{
+                          approvals[0].employee_applicant_to_json
+                            .image.url
+                        }}"
+                        class="roundPhoto-employee"
+                      />
+                      <br />
                     </div>
                   </div>
                   <div class="col-12">
                     <div class="row">
                       <div class="col-12">
                         <h3 class="font-color-default tops">
-                          {{approvals[0].employee_applicant_to_json.short_name}}
+                          {{
+                            approvals[0].employee_applicant_to_json
+                              .short_name
+                          }}
                         </h3>
                       </div>
                       <div class="col-12">
                         <p class="font-title-general tops">
-                          {{approvals[0].employee_applicant_to_json.position}}
+                          {{
+                            approvals[0].employee_applicant_to_json
+                              .position
+                          }}
                         </p>
                       </div>
                       <div class="col-12">
                         <p class="font-title-general tops">
-                          <i class="fa fa-map-marker text-primary-hr"></i>
-                          {{approvals[0].employee_applicant_to_json.subdivision_per}}
+                          <i
+                            class="fa fa-map-marker text-primary-hr"
+                          ></i>
+                          {{
+                            approvals[0].employee_applicant_to_json
+                              .subdivision_per
+                          }}
                         </p>
                       </div>
                     </div>
@@ -55,111 +94,251 @@
                 <div class="row">
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left">
-                      <h3 class="font-color-default col-md-2 col-4"  *ngIf="translate !== null">
-                        {{translate.app.frontEnd.components.common.approvals_details.status}}:
+                      <h3
+                        class="font-color-default col-md-2 col-4"
+                        *ngIf="translate !== null"
+                      >
+                        {{
+                          translate.app.frontEnd.components.common
+                            .approvals_details.status
+                        }}:
                       </h3>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'approver'">
-                        <span class="badge badge-primary" style="margin-top: 5px;">
-                          {{approvals[0].status}}
+                      <h6
+                        class="col-4"
+                        *ngIf="approvals[0].status == 'approver'"
+                      >
+                        <span
+                          class="badge badge-primary"
+                          style="margin-top: 5px;"
+                        >
+                          {{ approvals[0].status }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'cancelled'">
-                        <span class="badge badge-danger" style="margin-top: 5px;">
-                          {{approvals[0].status}}
+                      <h6
+                        class="col-4"
+                        *ngIf="approvals[0].status == 'cancelled'"
+                      >
+                        <span
+                          class="badge badge-danger"
+                          style="margin-top: 5px;"
+                        >
+                          {{ approvals[0].status }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'inProcess'">
-                        <span class="badge badge-success" style="margin-top: 5px;">
-                          {{approvals[0].status}}
+                      <h6
+                        class="col-4"
+                        *ngIf="approvals[0].status == 'inProcess'"
+                      >
+                        <span
+                          class="badge badge-success"
+                          style="margin-top: 5px;"
+                        >
+                          {{ approvals[0].status }}
                         </span>
                       </h6>
-                      <h6 class="col-4" *ngIf="approvals[0].status == 'pending'">
-                        <span class="badge badge-default" style="margin-top: 5px;">
-                          {{approvals[0].status}}
+                      <h6
+                        class="col-4"
+                        *ngIf="approvals[0].status == 'pending'"
+                      >
+                        <span
+                          class="badge badge-default"
+                          style="margin-top: 5px;"
+                        >
+                          {{ approvals[0].status }}
                         </span>
                       </h6>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-12 text-md-left text-left"  *ngIf="translate !== null">
+                  <div
+                    class="col-lg-6 col-12 text-md-left text-left"
+                    *ngIf="translate !== null"
+                  >
                     <div class="row">
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_begin_format != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="approvals[0].date_begin_format != null"
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.since}}:
-                          <span style="font-weight: 100 !important">{{dateSince}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.since
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            dateSince
+                          }}</span>
                         </p>
                       </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="approvals[0].date_end_format != null"
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.until}}:
-                          <span style="font-weight: 100 !important">{{dateUntil}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.until
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            dateUntil
+                          }}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
-                          <i class="fa fa-fw fa-clock-o font-color-default"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.requested_days}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].days_request}}</span>
+                          <i
+                            class="fa fa-fw fa-clock-o font-color-default"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.requested_days
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].days_request
+                          }}</span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 col-12 text-md-left text-left"  *ngIf="translate !== null">
+                  <div
+                    class="col-lg-6 col-12 text-md-left text-left"
+                    *ngIf="translate !== null"
+                  >
                     <div class="row">
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].updated_date != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="approvals[0].updated_date != null"
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.last_update}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].updated_date}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.last_update
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].updated_date
+                          }}</span>
                         </p>
                       </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].created_date != null">
+                      <div
+                        class="col-12 text-md-left text-left"
+                        *ngIf="approvals[0].created_date != null"
+                      >
                         <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.creation}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].created_date}}</span>
+                          <i
+                            class=" font-color-default fa fa-fw fa-calendar"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.creation
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].created_date
+                          }}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left">
                         <p class="font-title-general">
-                          <i class="fa fa-fw fa-users font-color-default"></i>
-                          {{translate.app.frontEnd.components.common.approvals_details.approver}}:
-                          <span style="font-weight: 100 !important">{{approvals[0].approvers_to_json.length}}</span>
+                          <i
+                            class="fa fa-fw fa-users font-color-default"
+                          ></i>
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.approver
+                          }}:
+                          <span style="font-weight: 100 !important">{{
+                            approvals[0].approvers_to_json.length
+                          }}</span>
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-12 text-left" *ngIf="approvals[0].observation_request != null">
-                    <p class="font-title-general"  *ngIf="translate !== null">
-                      <i class="fa fa-fw fa-comment font-color-default"></i>
-                      {{translate.app.frontEnd.components.common.approvals_details.observations}}:
-                      <span style="font-weight: 100 !important">{{approvals[0].observation_request}}</span>
+                  <div
+                    class="col-12 text-left"
+                    *ngIf="approvals[0].observation_request != null"
+                  >
+                    <p
+                      class="font-title-general"
+                      *ngIf="translate !== null"
+                    >
+                      <i
+                        class="fa fa-fw fa-comment font-color-default"
+                      ></i>
+                      {{
+                        translate.app.frontEnd.components.common
+                          .approvals_details.observations
+                      }}:
+                      <span style="font-weight: 100 !important">{{
+                        approvals[0].observation_request
+                      }}</span>
                     </p>
                   </div>
 
-                  <div class="col-12 text-left" *ngIf="approvals[0].image?.url">
-                    <p class="font-title-general"  *ngIf="translate !== null">
-                      <i class="fa fa-fw fa-paperclip font-color-default"></i>
-                      {{translate.app.frontEnd.components.common.approvals_details.attached}}:
-                      <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">Ver</span>
+                  <div
+                    class="col-12 text-left"
+                    *ngIf="approvals[0].image?.url"
+                  >
+                    <p
+                      class="font-title-general"
+                      *ngIf="translate !== null"
+                    >
+                      <i
+                        class="fa fa-fw fa-paperclip font-color-default"
+                      ></i>
+                      {{
+                        translate.app.frontEnd.components.common
+                          .approvals_details.attached
+                      }}:
+                      <span
+                        style=" color: rgb(60, 211, 211); cursor: pointer;"
+                        (click)="viewSupport()"
+                        >Ver</span
+                      >
                     </p>
                   </div>
 
                   <div class="col-12 text-md-left">
-                    <div class="row justify-content-left tops"  *ngIf="translate !== null">
+                    <div
+                      class="row justify-content-left tops"
+                      *ngIf="translate !== null"
+                    >
                       <h3 class="font-color-default col-2">
-                        {{translate.app.frontEnd.components.common.approvals_details.approver}}:
+                        {{
+                          translate.app.frontEnd.components.common
+                            .approvals_details.approver
+                        }}:
                       </h3>
                     </div>
                     <div class="row justify-content-between">
-                      <div class="col-md-3 col-6 center-img-aprovers tops" *ngFor="let approvers of approvals[0].approvers_to_json">
-                        <div class="img-approvers" *ngIf="approvers.image != null">
-                          <img src="{{approvers.image.url}}" class="img-employee">
-                          <br>
+                      <div
+                        class="col-md-3 col-6 center-img-aprovers tops"
+                        *ngFor="
+                          let approvers of approvals[0]
+                            .approvers_to_json
+                        "
+                      >
+                        <div
+                          class="img-approvers"
+                          *ngIf="approvers.image != null"
+                        >
+                          <img
+                            src="{{ approvers.image.url }}"
+                            class="img-employee"
+                          />
+                          <br />
                         </div>
-                        <p *ngIf="approvers.short_name != null" class="paddingInfo text-left text-md-center" style="font-weight: 100 !important">
-                          {{approvers.short_name}}
+                        <p
+                          *ngIf="approvers.short_name != null"
+                          class="paddingInfo text-left text-md-center"
+                          style="font-weight: 100 !important"
+                        >
+                          {{ approvers.short_name }}
                         </p>
                       </div>
                     </div>
@@ -167,111 +346,293 @@
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'I'">
-                      <li id="litab1" class="nav-item" style="width: 50%" *ngIf="edit">
-                        <a id="atab1" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': edit}" data-toggle="tab"
-                          href="#Approval"  *ngIf="translate !== null">
-                          {{translate.app.frontEnd.components.common.approvals_details.manage_request}}
+                    <ul
+                      class="nav nav-tabs"
+                      *ngIf="approvals[0].approver_platform == 'I'"
+                    >
+                      <li
+                        id="litab1"
+                        class="nav-item"
+                        style="width: 50%"
+                        *ngIf="edit"
+                      >
+                        <a
+                          id="atab1"
+                          class="nav-link a-contacts bg-tabs"
+                          [ngClass]="{ active: edit }"
+                          data-toggle="tab"
+                          href="#Approval"
+                          *ngIf="translate !== null"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.manage_request
+                          }}
                         </a>
                       </li>
-                      <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" [ngClass]="{'active': !edit}" data-toggle="tab"
-                          href="#Detail"  *ngIf="translate !== null">
-                          {{translate.app.frontEnd.components.common.approvals_details.see_details}}
+                      <li
+                        id="litab2"
+                        class="nav-item"
+                        style="width: 50%"
+                      >
+                        <a
+                          id="atab2"
+                          class="nav-link a-contacts bg-tabs"
+                          [ngClass]="{ active: !edit }"
+                          data-toggle="tab"
+                          href="#Detail"
+                          *ngIf="translate !== null"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.see_details
+                          }}
                         </a>
                       </li>
                     </ul>
-                    <ul class="nav nav-tabs" *ngIf="approvals[0].approver_platform == 'S'">
-                      <li id="litab2" class="nav-item" style="width: 50%">
-                        <a id="atab2" class="nav-link a-contacts bg-tabs" class="active" data-toggle="tab" href="#Detail"  *ngIf="translate !== null">
-                          {{translate.app.frontEnd.components.common.approvals_details.see_details}}
+                    <ul
+                      class="nav nav-tabs"
+                      *ngIf="approvals[0].approver_platform == 'S'"
+                    >
+                      <li
+                        id="litab2"
+                        class="nav-item"
+                        style="width: 50%"
+                      >
+                        <a
+                          id="atab2"
+                          class="nav-link a-contacts bg-tabs"
+                          class="active"
+                          data-toggle="tab"
+                          href="#Detail"
+                          *ngIf="translate !== null"
+                        >
+                          {{
+                            translate.app.frontEnd.components.common
+                              .approvals_details.see_details
+                          }}
                         </a>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div class="row top-general">
-                  <div  *ngIf="approvals[0].approver_platform == 'I'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
-                    <div id="Approval" class="tab-pane text-muted" [ngClass]="{'active': edit}" style="background-color: transparent !important">
+                  <div
+                    *ngIf="approvals[0].approver_platform == 'I'"
+                    class="tab-content"
+                    style="margin-left: 5% !important; width: 90% !important"
+                  >
+                    <div
+                      id="Approval"
+                      class="tab-pane text-muted"
+                      [ngClass]="{ active: edit }"
+                      style="background-color: transparent !important"
+                    >
                       <div class="row">
-                        <div class="col-12" *ngIf="prerequisit" style="text-align: justify !important">
+                        <div
+                          class="col-12"
+                          *ngIf="prerequisit"
+                          style="text-align: justify !important"
+                        >
                           <div class="row justify-content-center">
-                            <div class="col-12" [innerHTML]="approvals[0].type_request_to_json.prerequisites">
-                            </div>
-                            <div class="col-md-4 col-12"  *ngIf="translate !== null">
-                              <div class="btn btn-success top-general-p cursor-general btn-block" (click)="aceptPrerequisit()">
+                            <div
+                              class="col-12"
+                              [innerHTML]="
+                                approvals[0].type_request_to_json
+                                  .prerequisites
+                              "
+                            ></div>
+                            <div
+                              class="col-md-4 col-12"
+                              *ngIf="translate !== null"
+                            >
+                              <div
+                                class="btn btn-success top-general-p cursor-general btn-block"
+                                (click)="aceptPrerequisit()"
+                              >
                                 <i class="fa fa-fw fa-check"></i>
-                                {{translate.app.frontEnd.components.common.approvals_details.accept}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details.accept
+                                }}
                               </div>
                             </div>
                           </div>
                         </div>
                         <div class="col-12 tops" *ngIf="!prerequisit">
                           <div class="row justify-content-center">
-                            <div class="col-lg-6 col-md-6 col-8"  *ngIf="translate !== null">                         
+                            <div
+                              class="col-lg-6 col-md-6 col-8"
+                              *ngIf="translate !== null"
+                            >
                               <span *ngIf="switch == 'off'">
-                                {{translate.app.frontEnd.components.common.approvals_details.rejected}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details.rejected
+                                }}
                               </span>
                               <span *ngIf="switch == 'on'">
-                                {{translate.app.frontEnd.components.common.approvals_details.approved}}
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details.approved
+                                }}
                               </span>
                             </div>
                             <div class="col-4">
                               <div class="top-interruptor">
-                                <input type="radio" name="interruptor" id="prendido" checked>
-                                <input type="radio" name="interruptor" id="apagado">
+                                <input
+                                  type="radio"
+                                  name="interruptor"
+                                  id="prendido"
+                                  checked
+                                />
+                                <input
+                                  type="radio"
+                                  name="interruptor"
+                                  id="apagado"
+                                />
                                 <div class="interruptor-cuerpo">
                                   <div class="interruptor-tecla">
-                                    <label for="prendido" (click)="onAprovlas()"></label>
-                                    <label for="apagado" (click)="offAprovlas()"></label>
+                                    <label
+                                      for="prendido"
+                                      (click)="onAprovlas()"
+                                    ></label>
+                                    <label
+                                      for="apagado"
+                                      (click)="offAprovlas()"
+                                    ></label>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="col-12 text-left"  *ngIf="translate !== null">
-                              {{translate.app.frontEnd.components.common.approvals_details.description}}
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="translate !== null"
+                            >
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.approvals_details
+                                  .description
+                              }}
                             </div>
                             <div class="col-12">
-                              <textarea class="form-control" [(ngModel)]="description" rows="3" style="height: auto !important;"></textarea>
+                              <textarea
+                                class="form-control"
+                                [(ngModel)]="description"
+                                rows="3"
+                                style="height: auto !important;"
+                              ></textarea>
                             </div>
-                            <div class="col-md-4 col-12"  *ngIf="translate !== null">
-                              <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
-                                <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.components.common.approvals_details.save}}</button>
-                              <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                                <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.components.common.approvals_details.loading}}</button>
+                            <div
+                              class="col-md-4 col-12"
+                              *ngIf="translate !== null"
+                            >
+                              <button
+                                type="button"
+                                *ngIf="showSubmit"
+                                class="btn btn-success btn-block"
+                                (click)="saveApproval()"
+                              >
+                                <i class="fa fa-fw fa-floppy-o"></i
+                                >{{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details.save
+                                }}
+                              </button>
+                              <button
+                                type="button"
+                                *ngIf="!showSubmit"
+                                class="btn btn-warning btn-block"
+                              >
+                                <i
+                                  class="fa fa-fw fa-spinner fa-spin"
+                                ></i
+                                >{{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details.loading
+                                }}
+                              </button>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div id="Detail" class="tab-pane text-muted" [ngClass]="{'active': !edit}" style="background-color: transparent !important">
+                    <div
+                      id="Detail"
+                      class="tab-pane text-muted"
+                      [ngClass]="{ active: !edit }"
+                      style="background-color: transparent !important"
+                    >
                       <div class="col-12 tab-pane">
-                        <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
-                          <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
-                            <div class="col-12 text-left"  *ngIf="translate !== null">
-                              <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                              {{translate.app.frontEnd.components.common.approvals_details.level_approver}} {{details.approver_to_json.level}}
+                        <div
+                          *ngIf="
+                            approvals[0].answers_to_json.length > 0
+                          "
+                          class=""
+                        >
+                          <div
+                            class="row justify-content-center border-botton-general"
+                            *ngFor="
+                              let details of approvals[0]
+                                .answers_to_json
+                            "
+                          >
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="translate !== null"
+                            >
+                              <i
+                                class="fa fa-fw fa-spin fa-spinner"
+                                aria-hidden="true"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.approvals_details
+                                  .level_approver
+                              }}
+                              {{ details.approver_to_json.level }}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
-                                {{details.status}} por {{details.approver_to_json.name}}
+                                {{ details.status }} por
+                                {{ details.approver_to_json.name }}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
-                              <h3 class="font-color-default"  *ngIf="translate !== null">
-                                {{translate.app.frontEnd.components.common.approvals_details.description}}:
+                              <h3
+                                class="font-color-default"
+                                *ngIf="translate !== null"
+                              >
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details
+                                    .description
+                                }}:
                               </h3>
                             </div>
                             <div class="col-12 text-left">
-                              {{details.description}}
+                              {{ details.description }}
                             </div>
                           </div>
                         </div>
-                        <div *ngIf="approvals[0].answers_to_json.length == 0">
+                        <div
+                          *ngIf="
+                            approvals[0].answers_to_json.length == 0
+                          "
+                        >
                           <div class="row justify-content-center">
-                            <div class="col-12 text-center top-general">
-                              <h3 class="font-color-default"  *ngIf="translate !== null">
-                                {{translate.app.frontEnd.components.common.approvals_details.lack_details}}
+                            <div
+                              class="col-12 text-center top-general"
+                            >
+                              <h3
+                                class="font-color-default"
+                                *ngIf="translate !== null"
+                              >
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details
+                                    .lack_details
+                                }}
                               </h3>
                             </div>
                           </div>
@@ -279,42 +640,93 @@
                       </div>
                     </div>
                   </div>
-                  <div  *ngIf="approvals[0].approver_platform == 'S'" class="tab-content" style="margin-left: 5% !important; width: 90% !important">
-                      <div id="Detail" class="tab-pane text-muted active" style="background-color: transparent !important">
-                        <div class="col-12 tab-pane">
-                          <div *ngIf="approvals[0].answers_to_json.length > 0" class="">
-                            <div class="row justify-content-center border-botton-general" *ngFor="let details of approvals[0].answers_to_json">
-                              <div class="col-12 text-left"  *ngIf="translate !== null">
-                                <i class="fa fa-fw fa-spin fa-spinner" aria-hidden="true"></i>
-                                {{translate.app.frontEnd.components.common.approvals_details.level_approver}} {{details.approver_to_json.level}}
-                              </div>
-                              <div class="col-12 text-left">
-                                <h3 class="font-color-default">
-                                  {{details.status}} por {{details.approver_to_json.name}}
-                                </h3>
-                              </div>
-                              <div class="col-12 text-left">
-                                <h3 class="font-color-default"  *ngIf="translate !== null">
-                                  {{translate.app.frontEnd.components.common.approvals_details.description}}:
-                                </h3>
-                              </div>
-                              <div class="col-12 text-left">
-                                {{details.description}}
-                              </div>
+                  <div
+                    *ngIf="approvals[0].approver_platform == 'S'"
+                    class="tab-content"
+                    style="margin-left: 5% !important; width: 90% !important"
+                  >
+                    <div
+                      id="Detail"
+                      class="tab-pane text-muted active"
+                      style="background-color: transparent !important"
+                    >
+                      <div class="col-12 tab-pane">
+                        <div
+                          *ngIf="
+                            approvals[0].answers_to_json.length > 0
+                          "
+                          class=""
+                        >
+                          <div
+                            class="row justify-content-center border-botton-general"
+                            *ngFor="
+                              let details of approvals[0]
+                                .answers_to_json
+                            "
+                          >
+                            <div
+                              class="col-12 text-left"
+                              *ngIf="translate !== null"
+                            >
+                              <i
+                                class="fa fa-fw fa-spin fa-spinner"
+                                aria-hidden="true"
+                              ></i>
+                              {{
+                                translate.app.frontEnd.components
+                                  .common.approvals_details
+                                  .level_approver
+                              }}
+                              {{ details.approver_to_json.level }}
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3 class="font-color-default">
+                                {{ details.status }} por
+                                {{ details.approver_to_json.name }}
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              <h3
+                                class="font-color-default"
+                                *ngIf="translate !== null"
+                              >
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details
+                                    .description
+                                }}:
+                              </h3>
+                            </div>
+                            <div class="col-12 text-left">
+                              {{ details.description }}
                             </div>
                           </div>
-                          <div *ngIf="approvals[0].answers_to_json.length == 0">
-                            <div class="row justify-content-center">
-                              <div class="col-12 text-center top-general">
-                                <h3 class="font-color-default"  *ngIf="translate !== null">
-                                  {{translate.app.frontEnd.components.common.approvals_details.lack_details}}
-                                </h3>
-                              </div>
+                        </div>
+                        <div
+                          *ngIf="
+                            approvals[0].answers_to_json.length == 0
+                          "
+                        >
+                          <div class="row justify-content-center">
+                            <div
+                              class="col-12 text-center top-general"
+                            >
+                              <h3
+                                class="font-color-default"
+                                *ngIf="translate !== null"
+                              >
+                                {{
+                                  translate.app.frontEnd.components
+                                    .common.approvals_details
+                                    .lack_details
+                                }}
+                              </h3>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -322,8 +734,17 @@
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonApprovalsRequests buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal"  *ngIf="translate !== null">
-          <h6> {{translate.app.frontEnd.components.common.approvals_details.button_close}} </h6>
+        <div
+          class="buttonApprovalsRequests buttonCloseEmployee btn-close-modals text-center"
+          data-dismiss="modal"
+          *ngIf="translate !== null"
+        >
+          <h6>
+            {{
+              translate.app.frontEnd.components.common
+                .approvals_details.button_close
+            }}
+          </h6>
         </div>
       </div>
     </div>

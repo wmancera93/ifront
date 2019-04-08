@@ -19,12 +19,12 @@ import { TranslateService } from '../../../services/common/translate/translate.s
 })
 export class SpendComponent implements OnInit {
 
-  token
+  token;
   public spedsData: Spends[] = [];
   public idSpenRequestsIndex: string;
   public userAuthenticated: User = null;
-  public third: string = '';
-  public checkThird: boolean = true;
+  public third = '';
+  public checkThird = true;
   public translate: Translate = null;
 
   constructor(public router: Router,
@@ -34,7 +34,7 @@ export class SpendComponent implements OnInit {
     public filtersGeneralsService: FiltersGeneralsService, public translateService: TranslateService) {
 
     this.translate = this.translateService.getTranslate();
-    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
+    this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
 
     this.spendSharedService.getRefreshSpend().subscribe((data: any) => {
       if (data.success) {
@@ -85,13 +85,13 @@ export class SpendComponent implements OnInit {
               break;
           }
           this.spendSharedService.setDeleteSpend('deleteSpendRequest');
-        })
+        });
       }
 
-    })
+    });
 
     this.spendsService.getSpendsRequest().subscribe((list: any) => {
-      let url = window.location.href;
+      const url = window.location.href;
       url.split('/')[url.split('/').length - 1];
       if (url.split('/')[url.split('/').length - 1] !== 'spend' && url.split('/')[url.split('/').length - 1] !== 'travel') {
         this.spendSharedService.setNewSpend(url.split('/')[url.split('/').length - 1]);
@@ -109,14 +109,14 @@ export class SpendComponent implements OnInit {
 
   //begin filters
 
-  public codIHR: string = '';
-  public codSAP: string = '';
-  public datesBegin: string = '';
-  public datesEnd: string = '';
-  public status: string = '';
-  public statusLiquid: string = '';
-  public codEmployee: string = '';
-  public page: string = '';
+  public codIHR = '';
+  public codSAP = '';
+  public datesBegin = '';
+  public datesEnd = '';
+  public status = '';
+  public statusLiquid = '';
+  public codEmployee = '';
+  public page = '';
   public is_collapse: boolean;
 
   filter(filter) {
@@ -410,7 +410,7 @@ export class SpendComponent implements OnInit {
   }
   deleteSpend(deleteSpend) {
     this.idSpenRequestsIndex = deleteSpend.id;
-    let alertWarning = [{
+    const alertWarning = [{
       type: 'warning',
       title: 'Confirmación',
       message: '¿Desea eliminar la solicitud de gastos #' + deleteSpend.id.toString() + '?',

@@ -1,13 +1,28 @@
-<button [attr.id]="btnModal" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="targetModal" style="display:none;">
-</button>
-<div class="modal" [attr.id]="nameThisModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-  style="display:none;">
+<button
+  [attr.id]="btnModal"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  [attr.data-target]="targetModal"
+  style="display:none;"
+></button>
+<div
+  class="modal"
+  [attr.id]="nameThisModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+  style="display:none;"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="dataManagerial != undefined">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
         <div class="col-12 col-lg-10 text-center ">
           <h4 class="modal-title titleColor text-shadow">
-            {{titleDataManagerial}}
+            {{ titleDataManagerial }}
           </h4>
         </div>
       </div>
@@ -17,25 +32,50 @@
             <div class="col-12 " *ngIf="!flagNoData">
               <div class="row justify-content-center">
                 <div class="col-12 top-general-p">
-                  <app-data-table [records]="objectDatatable" [title]="nameManagerial"></app-data-table>
+                  <app-data-table
+                    [records]="objectDatatable"
+                    [title]="nameManagerial"
+                  ></app-data-table>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center top-containter" *ngIf="flagNoData">
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div
+            class="row justify-content-center top-containter"
+            *ngIf="flagNoData"
+          >
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{translate.app.frontEnd.components.common.gerencial_modal.without_reports}}
-                <strong>{{nameManagerial}}</strong>&nbsp;{{translate.app.frontEnd.components.common.gerencial_modal.employee}}
+                {{
+                  translate.app.frontEnd.components.common
+                    .gerencial_modal.without_reports
+                }}
+                <strong>{{ nameManagerial }}</strong
+                >&nbsp;{{
+                  translate.app.frontEnd.components.common
+                    .gerencial_modal.employee
+                }}
               </div>
             </div>
           </div>
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="buttonCloseComment btn-close-modals text-center" data-dismiss="modal">
-          <h6> {{translate.app.frontEnd.components.common.gerencial_modal.button_close}} </h6>
+        <div
+          class="buttonCloseComment btn-close-modals text-center"
+          data-dismiss="modal"
+        >
+          <h6>
+            {{
+              translate.app.frontEnd.components.common.gerencial_modal
+                .button_close
+            }}
+          </h6>
         </div>
       </div>
     </div>
   </div>
+</div>

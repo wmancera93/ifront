@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-bullhorn"></i>
-          {{ parseT("title_my_publications") | translate }}
+          {{ parseT('title_my_publications') | translate }}
         </div>
       </div>
     </div>
@@ -21,7 +23,7 @@
           (click)="goToForm()"
         >
           <i class="fa fa-plus"></i> &nbsp;&nbsp;
-          {{ parseT("btn_create_news") | translate }}
+          {{ parseT('btn_create_news') | translate }}
         </div>
       </div>
       <div class="row">
@@ -29,10 +31,12 @@
           <div class="border-botton-general">
             <div class="row top-containter">
               <div class="col-12 col-xl-9 text-left">
-                <strong> {{ parseT("text_my_news") | translate }}</strong>
+                <strong>
+                  {{ parseT('text_my_news') | translate }}</strong
+                >
               </div>
               <div class="col-12 col-xl-3">
-                {{ parseT("text_total_news") | translate }}
+                {{ parseT('text_total_news') | translate }}
                 {{ myPublications.length }}
               </div>
             </div>
@@ -63,7 +67,7 @@
                         </div>
                       </div>
                       <div class="col-12">
-                        {{ parseT("text_hide_post") | translate }}
+                        {{ parseT('text_hide_post') | translate }}
                       </div>
                     </div>
                   </div>
@@ -73,7 +77,9 @@
                         class="col-12 font-color-default text-lg-left title-size hoverTitle"
                         (click)="viewDetailArticle(publication)"
                       >
-                        <strong>{{ publication.title | uppercase }} </strong>
+                        <strong
+                          >{{ publication.title | uppercase }}
+                        </strong>
                       </div>
                       <div class="col-12 text-lg-left">
                         {{ publication.summary }}
@@ -86,7 +92,7 @@
                         {{ publication.total_views }}
                       </div>
                       <div class="col-12 ">
-                        {{ parseT("text_visits") | translate }}
+                        {{ parseT('text_visits') | translate }}
                       </div>
                     </div>
                   </div>
@@ -96,7 +102,7 @@
                         {{ publication.total_comments }}
                       </div>
                       <div class="col-12">
-                        {{ parseT("text_comments") | translate }}
+                        {{ parseT('text_comments') | translate }}
                       </div>
                     </div>
                   </div>
@@ -109,7 +115,7 @@
                         <i class="fa fa-pencil"></i>
                       </div>
                       <div class="col-12">
-                        {{ parseT("text_edit") | translate }}
+                        {{ parseT('text_edit') | translate }}
                       </div>
                     </div>
                   </div>
@@ -133,7 +139,7 @@
                         <i class="fa fa-ban"></i>
                       </div>
                       <div class="col-12">
-                        {{ parseT("text_remove") | translate }}
+                        {{ parseT('text_remove') | translate }}
                       </div>
                     </div>
                   </div>

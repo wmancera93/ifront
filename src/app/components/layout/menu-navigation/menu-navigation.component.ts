@@ -29,7 +29,7 @@ export class MenuNavigationComponent implements OnInit {
 
       setTimeout(() => {
         this.translate = this.translateService.getTranslate();
-        console.log(this.translate)
+        console.log(this.translate);
       }, 500);
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;

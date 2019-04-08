@@ -14,14 +14,14 @@ export class GerencialModalComponent implements OnInit {
   @Input('nameModal') nameModal: any;
 
 
-  public targetModal: string = '';
-  public btnModal: string = '';
-  public nameThisModal: string = '';
+  public targetModal = '';
+  public btnModal = '';
+  public nameThisModal = '';
   public dataManagerial: any;
   public objectDatatable: EventEmitter<any> = new EventEmitter();
   public nameManagerial: string;
   public titleDataManagerial: string;
-  public flagNoData: boolean = false;
+  public flagNoData = false;
   public translate: Translate = null;
 
   constructor(public mangerialDataShared: ManagerialDataService, public translateService: TranslateService) {
@@ -35,8 +35,7 @@ export class GerencialModalComponent implements OnInit {
           this.nameManagerial = this.dataManagerial.data[0].title;
 
           this.objectDatatable.emit(this.dataManagerial);
-        }
-        else {
+        } else {
           this.flagNoData = true;
           this.nameManagerial = this.dataManagerial.data[0].title;
           this.objectDatatable.emit(this.dataManagerial);
@@ -44,7 +43,7 @@ export class GerencialModalComponent implements OnInit {
       }, 500);
 
 
-    })
+    });
   }
 
   ngOnInit() {
@@ -52,12 +51,12 @@ export class GerencialModalComponent implements OnInit {
       this.targetModal = '#' + data;
       this.btnModal = 'btn-' + data;
       this.nameThisModal = data;
-    })
+    });
   }
   getShowInfo(modal?: any) {
     if (document.getElementById(modal).className !== 'modal show') {
       document.getElementById('btn-' + modal).click();
-      document.getElementById("bodyGeneral").removeAttribute('style');
+      document.getElementById('bodyGeneral').removeAttribute('style');
     }
 
   }

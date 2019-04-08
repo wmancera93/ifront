@@ -4,15 +4,15 @@ import { Employee } from '../../../../models/general/user';
 
 @Injectable()
 export class EmployeeInfoService {
-  exportEmployeeInfo: Subject<Employee> = new Subject<Employee>();  
+  exportEmployeeInfo: Subject<Employee> = new Subject<Employee>();
 
   constructor() { }
 
-  getInfoEmployee(){
+  getInfoEmployee() {
     return this.exportEmployeeInfo;
   }
 
-  setInfoEmployee(objectModalEmployee:Employee){
+  setInfoEmployee(objectModalEmployee: Employee) {
     return this.exportEmployeeInfo.next(objectModalEmployee);
   }
 

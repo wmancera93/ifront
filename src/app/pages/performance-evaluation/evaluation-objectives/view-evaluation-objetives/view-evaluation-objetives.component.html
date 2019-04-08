@@ -19,7 +19,10 @@
   >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
           {{ parseT('tittle') | translate }}
         </h5>
         <button
@@ -43,13 +46,18 @@
               <h4>{{ parseT('sub_tittle') | translate }}</h4>
             </div>
             <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 30px">
+              <div
+                class="col-12 top-containter"
+                style="margin-top: 30px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-file-text text-primary-hr"></i>
                       <strong
-                        >{{ parseT('type_evaluation') | translate }}:</strong
+                        >{{
+                          parseT('type_evaluation') | translate
+                        }}:</strong
                       >
                     </label>
                   </div>
@@ -62,13 +70,20 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-12 top-containter" style="margin-top: 15px">
+              <div
+                class="col-12 top-containter"
+                style="margin-top: 15px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-6 col-12">
                     <label for="nomEvaluation" class="titleColor">
-                      <i class="fa fa-calendar-minus-o text-primary-hr"></i>
+                      <i
+                        class="fa fa-calendar-minus-o text-primary-hr"
+                      ></i>
                       <strong
-                        >{{ parseT('time_evaluation') | translate }}:</strong
+                        >{{
+                          parseT('time_evaluation') | translate
+                        }}:</strong
                       >
                     </label>
                   </div>
@@ -76,13 +91,21 @@
                     <div class="row">
                       <div class="col-lg-5 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-start text-primary-hr"></i>
-                          <strong>{{ parseT('start') | translate }}:</strong>
+                          <i
+                            class="fa fa-hourglass-start text-primary-hr"
+                          ></i>
+                          <strong
+                            >{{
+                              parseT('start') | translate
+                            }}:</strong
+                          >
                         </label>
                       </div>
                       <div class="col-lg-7 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          {{ EvaluacionPerView.start_evaluation_date }}
+                          {{
+                            EvaluacionPerView.start_evaluation_date
+                          }}
                         </label>
                       </div>
                     </div>
@@ -91,8 +114,14 @@
                     <div class="row">
                       <div class="col-lg-6 col-md-6 col-6">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-hourglass-end text-primary-hr"></i>
-                          <strong>{{ parseT('ended') | translate }}:</strong>
+                          <i
+                            class="fa fa-hourglass-end text-primary-hr"
+                          ></i>
+                          <strong
+                            >{{
+                              parseT('ended') | translate
+                            }}:</strong
+                          >
                         </label>
                       </div>
                       <div class="col-lg-6 col-md-6 col-6">
@@ -106,12 +135,17 @@
               </div>
             </div>
             <div class="row">
-              <div class=" col-12 top-containter" style="margin-top: 15px">
+              <div
+                class=" col-12 top-containter"
+                style="margin-top: 15px"
+              >
                 <div class="row">
                   <div class="col-lg-4 col-md-4 col-12">
                     <label for="nomEvaluation" class="titleColor">
                       <i class="fa fa-user-o text-primary-hr"></i>
-                      <strong>{{ parseT('evaluator') | translate }}</strong>
+                      <strong>{{
+                        parseT('evaluator') | translate
+                      }}</strong>
                     </label>
                   </div>
                   <div class="col-lg-8 col-md-8 col-12">
@@ -124,7 +158,9 @@
                       </div>
                       <div class="col-lg-8 col-md-8 col-12">
                         <label for="nomEvaluation" class="titleColor">
-                          <i class="fa fa-graduation-cap text-primary-hr"></i>
+                          <i
+                            class="fa fa-graduation-cap text-primary-hr"
+                          ></i>
                           {{ qualifierDataView.name_complete }}
                         </label>
                         <label for="nomEvaluation" class="titleColor">
@@ -148,25 +184,39 @@
           >
             <div class="row border" style="margin-left: 2px">
               <div class="col-12">
-                <h4>{{ parseT('evaluation_objetives') | translate }}</h4>
+                <h4>
+                  {{ parseT('evaluation_objetives') | translate }}
+                </h4>
               </div>
             </div>
             <div class="row" style="margin-top: 30px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-check-circle-o text-primary-hr"></i>
-                  <strong>{{ parseT('number_objetives') | translate }}:</strong>
+                  <i
+                    class="fa fa-fw fa-check-circle-o text-primary-hr"
+                  ></i>
+                  <strong
+                    >{{
+                      parseT('number_objetives') | translate
+                    }}:</strong
+                  >
                 </label>
                 <label class="col-lg-4 col-md-6 col-12">
-                  <a>{{ EvaluacionPerView.count_evaluation_objetives }}</a>
+                  <a>{{
+                    EvaluacionPerView.count_evaluation_objetives
+                  }}</a>
                 </label>
               </div>
             </div>
             <div class="row">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-thermometer-full text-primary-hr"></i>
-                  <strong>{{ parseT('percentage_full') | translate }}</strong>
+                  <i
+                    class="fa fa-fw fa-thermometer-full text-primary-hr"
+                  ></i>
+                  <strong>{{
+                    parseT('percentage_full') | translate
+                  }}</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -176,7 +226,9 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i class="fa fa-fw fa-thermometer-half text-primary-hr"></i>
+                  <i
+                    class="fa fa-fw fa-thermometer-half text-primary-hr"
+                  ></i>
                   <strong>{{
                     parseT('percentage_missing') | translate
                   }}</strong>
