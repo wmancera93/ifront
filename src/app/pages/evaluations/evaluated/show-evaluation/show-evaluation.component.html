@@ -38,11 +38,7 @@
               <div class="col-6">
                 <div class="alert alert-success" role="alert">
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.evaluations
-                        .evaluated.show_evaluation
-                        .text_total_questions
-                    }}
+                    >{{ parseT('text_total_questions') | translate }}
                   </strong>
                   {{ dataEvaluation[0].total_questions }}
                 </div>
@@ -53,8 +49,7 @@
               >
                 <div class="alert alert-success" role="alert">
                   <strong>{{
-                    translate.app.frontEnd.pages.evaluations.evaluated
-                      .show_evaluation.text_totalcorrect_questions
+                    parseT('text_totalcorrect_questions') | translate
                   }}</strong>
                   {{ dataEvaluation[0].total_correct_answers }}
                 </div>
@@ -65,13 +60,10 @@
               >
                 <div class="alert alert-success" role="alert">
                   <strong>{{
-                    translate.app.frontEnd.pages.evaluations.evaluated
-                      .show_evaluation.text_totalcorrect_questions_one
+                    parseT('text_totalcorrect_questions_one')
+                      | translate
                   }}</strong>
-                  {{
-                    translate.app.frontEnd.pages.evaluations.evaluated
-                      .show_evaluation.text_not_apply
-                  }}
+                  {{ parseT('text_not_apply') | translate }}
                 </div>
               </div>
             </div>
@@ -123,9 +115,8 @@
                                   </div>
                                   <div class="col-6">
                                     <label>{{
-                                      translate.app.frontEnd.pages
-                                        .evaluations.evaluated
-                                        .show_evaluation.text_correct
+                                      parseT('text_correct')
+                                        | translate
                                     }}</label>
                                   </div>
                                 </div>
@@ -169,10 +160,8 @@
                                   </div>
                                   <div class="col-6">
                                     <label>{{
-                                      translate.app.frontEnd.pages
-                                        .evaluations.evaluated
-                                        .show_evaluation
-                                        .text_incorrect
+                                      parseT('text_incorrect')
+                                        | translate
                                     }}</label>
                                   </div>
                                 </div>
@@ -258,10 +247,7 @@
           data-dismiss="modal"
         >
           <h6>
-            {{
-              translate.app.frontEnd.pages.evaluations.evaluated
-                .show_evaluation.btn_close
-            }}
+            {{ parseT('btn_close') | translate }}
           </h6>
         </div>
       </div>

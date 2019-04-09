@@ -10,10 +10,7 @@
         <div class="form-group row" *ngIf="sizeTable">
           <label
             class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center"
-            >{{
-              translate.app.frontEnd.components.common.data_table
-                .records_show
-            }}:</label
+            >{{ parseT('records_show') | translate }}:</label
           >
           <div class="col-xl-5 col-md-3 col-lg-3 col-6">
             <select class="form-control" [(ngModel)]="size_table">
@@ -76,14 +73,9 @@
     >
       <div class="col-lg-8 col-12 text-center" [attr.style]="heigth">
         <div class="alert alert-warning" role="alert">
-          {{
-            translate.app.frontEnd.components.common.data_table
-              .without_reports
-          }}&nbsp; <strong>{{ title }}</strong
-          >&nbsp;{{
-            translate.app.frontEnd.components.common.data_table
-              .employee
-          }}
+          {{ parseT('without_reports') | translate }}&nbsp;
+          <strong>{{ title }}</strong
+          >&nbsp;{{ parseT('employee') | translate }}
         </div>
       </div>
     </div>
@@ -125,7 +117,7 @@
                       [attr.id]="i + label.label"
                       type="text"
                       class="form-control input-filter"
-                      placeholder="{{ filter }}"
+                      placeholder="{{ parseT('filter') | translate }}"
                       (keyup)="filterByCell(i, label)"
                     />
                   </div>

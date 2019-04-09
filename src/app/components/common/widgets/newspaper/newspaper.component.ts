@@ -1,14 +1,18 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Newspaper } from '../../../../models/common/widgets/widgets';
 import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
 import { Router } from '@angular/router';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-newspaper',
   templateUrl: './newspaper.component.html',
-  styleUrls: ['./newspaper.component.css']
+  styleUrls: ['./newspaper.component.css'],
 })
 export class NewspaperComponent implements OnInit {
   @Input('newspaper') newspaper: any;
@@ -16,12 +20,15 @@ export class NewspaperComponent implements OnInit {
   @Output() newspaperModal: EventEmitter<string> = new EventEmitter();
 
   public objectWidget: Newspaper[] = [];
-  public translate: Translate = null;
-  constructor(public billboardSharedService: BillboardService,
-    public router: Router, public translateService: TranslateService) {
 
-    this.translate = this.translateService.getTranslate();
+  parseT(key) {
+    return `components.common.widgets.newspaper.${key}`;
   }
+
+  constructor(
+    public billboardSharedService: BillboardService,
+    public router: Router,
+  ) {}
 
   ngOnInit() {
     this.newspaper.subscribe((data: Newspaper[]) => {
@@ -34,7 +41,10 @@ export class NewspaperComponent implements OnInit {
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.newspaperModal.emit('newspaperModal');
     setTimeout(() => {
-      this.billboardSharedService.setShowCommentNew({ objectPublication: objectArticle, modal: 'newspaperModal' });
+      this.billboardSharedService.setShowCommentNew({
+        objectPublication: objectArticle,
+        modal: 'newspaperModal',
+      });
     }, 500);
 
     // setTimeout(() => {
@@ -42,7 +52,4 @@ export class NewspaperComponent implements OnInit {
     //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
     // }, 1000)
   }
-
-
-
 }

@@ -19,10 +19,7 @@
           class="modal-title titleColor1 justify-content-center"
           id="exampleModalCenterTitle"
         >
-          {{
-            translate.app.frontEnd.components.common.calendar_detail
-              .details
-          }}
+          {{ parseT('details') | translate }}
         </h5>
         <button
           type="button"
@@ -40,16 +37,14 @@
             <i class="fa fa-calendar-minus-o paddingInfo"></i>
             <strong
               >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.activity_descrption
+                parseT('activity_descrption') | translate
               }}:</strong
             >&nbsp;{{ detail_calendar[0].descript }}
             <br />
             <i class="fa fa-info-circle paddingInfo"></i>
             <strong
               >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.theoretical_hours
+                parseT('theoretical_hours') | translate
               }}:</strong
             >&nbsp;{{ detail_calendar[0].description_calendar }}
             <br />
@@ -57,18 +52,12 @@
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-clock-o paddingInfo"></i>
             <strong
-              >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.hour_begin
-              }}:</strong
+              >&nbsp;{{ parseT('hour_begin') | translate }}:</strong
             >&nbsp;{{ detail_calendar[0].hour_begin }}
             <br />
             <i class="fa fa-hourglass paddingInfo"></i>
             <strong
-              >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.hour_end
-              }}:</strong
+              >&nbsp;{{ parseT('hour_end') | translate }}:</strong
             >&nbsp;{{ detail_calendar[0].hour_end }}
             <br />
           </div>
@@ -76,8 +65,7 @@
             <i class="fa fa-commenting-o paddingInfo"></i>
             <strong
               >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.calendar_text
+                parseT('calendar_text') | translate
               }}:</strong
             >&nbsp;{{ detail_calendar[0].calendar_text }}
             <br />
@@ -86,8 +74,7 @@
             <i class="fa fa-book paddingInfo"></i>
             <strong
               >&nbsp;{{
-                translate.app.frontEnd.components.common
-                  .calendar_detail.description_work
+                parseT('description_work') | translate
               }}:</strong
             >&nbsp;{{ detail_calendar[0].description_work }}
             <br />

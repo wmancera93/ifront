@@ -1,24 +1,22 @@
-import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Employee } from '../../../models/general/user';
 import { EmployeeService } from '../../../services/common/employee/employee.service';
 import { EmployeeInfoService } from '../../../services/shared/common/employee/employee-info.service';
-import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
-
-
 
 @Component({
   selector: 'app-contacts-list',
   templateUrl: './contacts-list.component.html',
-  styleUrls: ['./contacts-list.component.css']
+  styleUrls: ['./contacts-list.component.css'],
 })
-
 export class ContactsListComponent implements OnInit {
   @Output() name: EventEmitter<string> = new EventEmitter();
-
 
   public contacts: Employee[] = [];
   public searchListContacts: Employee[] = [];
@@ -37,21 +35,22 @@ export class ContactsListComponent implements OnInit {
   public hideCollapse = '';
   public showContactsList = true;
   public infoEmployee: Employee;
-  public translate: Translate = null;
   public search_partner: string;
 
-  constructor(public employeeService: EmployeeService,
+  parseT(key) {
+    return `components.layout.contacts_list.${key}`;
+  }
+
+  constructor(
+    public employeeService: EmployeeService,
     public router: Router,
     public employeeSharedService: EmployeeInfoService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService
-  ) {
-
-    this.translate = this.translateService.getTranslate();
-    this.search_partner = this.translate.app.frontEnd.components.layout.contacts_list.search_partner;
-  }
+    public stylesExplorerService: StylesExplorerService,
+  ) {}
   ngOnInit() {
     this.numberPage = 1;
-    this.employeeService.getAllEmployees(this.numberPage.toString())
+    this.employeeService
+      .getAllEmployees(this.numberPage.toString())
       .subscribe((result: any) => {
         if (result.success === true) {
           this.contacts = result.data;
@@ -74,99 +73,101 @@ export class ContactsListComponent implements OnInit {
       this.numberPage = 1;
     }
     this.numberLengthLetter = this.nameEmployee.length;
-
-
   }
   searchByName() {
-    const numberContacts = 0;
-    const filterContacts = 0;
     this.contacts = [];
 
     if (this.nameEmployee == '') {
-      this.employeeService.getAllEmployees(this.numberPage.toString())
+      this.employeeService
+        .getAllEmployees(this.numberPage.toString())
         .subscribe((result: any) => {
           if (result.success === true) {
             this.contacts = result.data;
           }
         });
     } else {
-      this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (1).toString())
+      this.employeeService
+        .getEmployeeByNameByPage(this.nameEmployee, (1).toString())
         .subscribe((result: any) => {
-
           this.contacts = result.data;
         });
     }
-
-
   }
   searchByNameIntro(key: any) {
     if (key == 13) {
       this.searchByName();
     }
-
   }
   detectScrollAction() {
-
     this.scrollbarAction = document.getElementById('scrollbarAction');
 
-    if (this.scrollbarAction.scrollHeight - this.scrollbarAction.scrollTop === this.scrollbarAction.clientHeight) {
-
+    if (
+      this.scrollbarAction.scrollHeight -
+        this.scrollbarAction.scrollTop ===
+      this.scrollbarAction.clientHeight
+    ) {
       this.scrollState = true;
     } else {
       this.scrollState = false;
     }
     if (this.scrollState == undefined) {
+    } else if (this.scrollState == true) {
+      if (this.nameEmployee !== '') {
+        let numberContacts = 0;
+        this.contacts = this.contacts.filter(
+          (prod: any) =>
+            prod.name_complete
+              .toLowerCase()
+              .indexOf(this.nameEmployee) >= 0,
+        );
 
-    } else
-      if (this.scrollState == true) {
-        if (this.nameEmployee !== '') {
-          let numberContacts = 0;
-          this.contacts = this.contacts.filter(
-            (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
-
-          //  if (this.contacts.length === 0 || this.contacts.length < 10) {
-          this.employeeService.getEmployeeByNameByPage(this.nameEmployee, (this.numberPage).toString())
-            .subscribe((result: any) => {
+        //  if (this.contacts.length === 0 || this.contacts.length < 10) {
+        this.employeeService
+          .getEmployeeByNameByPage(
+            this.nameEmployee,
+            this.numberPage.toString(),
+          )
+          .subscribe(
+            (result: any) => {
               if (result.success === true) {
                 numberContacts += result.data.length;
                 for (let i = 0; i < result.data.length; i++) {
                   this.searchListContacts.push(result.data[i]);
                   this.contacts = this.searchListContacts;
                   this.contacts = this.contacts.filter(
-                    (prod: any) => prod.name_complete.toLowerCase().indexOf(this.nameEmployee) >= 0);
+                    (prod: any) =>
+                      prod.name_complete
+                        .toLowerCase()
+                        .indexOf(this.nameEmployee) >= 0,
+                  );
                 }
               }
               this.numberPage++;
             },
-              (error) => {
+            error => {
+              this.error = error.error.errors[0];
+              this.validateError = error.error.success;
+            },
+          );
 
-                this.error = error.error.errors[0];
-                this.validateError = error.error.success;
-
+        // }
+      } else {
+        let numberContacts = 0;
+        this.employeeService
+          .getAllEmployees(this.numberPageScroll.toString())
+          .subscribe((result: any) => {
+            if (result.success === true) {
+              numberContacts += result.data.length;
+              for (let i = 0; i < result.data.length; i++) {
+                this.searchListContacts.push(result.data[i]);
+                this.contacts = this.searchListContacts;
               }
-            );
-
-          // }
-
-
-        } else {
-          let numberContacts = 0;
-          this.employeeService.getAllEmployees(this.numberPageScroll.toString())
-            .subscribe((result: any) => {
-              if (result.success === true) {
-                numberContacts += result.data.length;
-                for (let i = 0; i < result.data.length; i++) {
-                  this.searchListContacts.push(result.data[i]);
-                  this.contacts = this.searchListContacts;
-                }
-                this.scrollState = false;
-              }
-            });
-          this.numberPageScroll++;
-        }
-
+              this.scrollState = false;
+            }
+          });
+        this.numberPageScroll++;
       }
-
+    }
   }
 
   clickPartnersIconHide() {
@@ -175,16 +176,18 @@ export class ContactsListComponent implements OnInit {
 
   openInfoEmployee(idEmployee: string) {
     this.name.emit('contactList');
-    this.employeeService.getEmployeeById(idEmployee).subscribe(
-      (data: any) => {
+    this.employeeService
+      .getEmployeeById(idEmployee)
+      .subscribe((data: any) => {
         if (data.success === true) {
           this.infoEmployee = data.data;
           this.infoEmployee.modal = 'contactList';
           setTimeout(() => {
-            this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+            this.employeeSharedService.setInfoEmployee(
+              this.infoEmployee,
+            );
           }, 500);
         }
-      }
-    );
+      });
   }
 }

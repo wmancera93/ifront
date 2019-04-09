@@ -31,7 +31,9 @@
                   type="text"
                   [(ngModel)]="title"
                   id="title"
-                  placeholder="{{ parseTplaceholder_tittle }}"
+                  placeholder="{{
+                    parseT('placeholder_tittle') | translate
+                  }}"
                   style="width:100% !important;"
                   required
                 />
@@ -49,7 +51,9 @@
                   [(ngModel)]="summary"
                   rows="2"
                   cols="50"
-                  placeholder="{{ parseTplaceholder_message }}"
+                  placeholder="{{
+                    parseT('placeholder_message') | translate
+                  }}"
                   style="width:100% !important;"
                   required
                 ></textarea>

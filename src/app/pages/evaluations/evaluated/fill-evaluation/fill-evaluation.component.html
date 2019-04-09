@@ -131,7 +131,10 @@
                           name="response"
                           rows="2"
                           cols="50"
-                          placeholder="{{ writeAnswer }}"
+                          placeholder="{{
+                            parseT('placeholder_commentary')
+                              | translate
+                          }}"
                           (blur)="
                             detectResponse(
                               question.id,
@@ -156,7 +159,9 @@
                       rows="2"
                       cols="50"
                       (blur)="detectComment(question.id)"
-                      placeholder="{{ addCommentary }}"
+                      placeholder="{{
+                        parseT('placeholder_answer') | translate
+                      }}"
                       style="width: 100%;"
                     ></textarea>
                   </div>
@@ -263,7 +268,9 @@
               rows="2"
               cols="50"
               (blur)="detectComment(question.id)"
-              placeholder="{{ addCommentary }}"
+              placeholder="{{
+                parseT('placeholder_answer') | translate
+              }}"
               style="width: 70%;"
             ></textarea>
           </div>
@@ -283,10 +290,7 @@
                   (click)="onSubmitSendEval()"
                 >
                   <i class="fa fa-fw fa-floppy-o"></i
-                  >{{
-                    translate.app.frontEnd.pages.evaluations.evaluated
-                      .fill_evalaution.btn_save
-                  }}
+                  >{{ parseT('btn_save') | translate }}
                 </button>
                 <button
                   type="button"
@@ -294,10 +298,7 @@
                   class="btn btn-warning btn-block"
                 >
                   <i class="fa fa-fw fa-spinner fa-spin"></i
-                  >{{
-                    translate.app.frontEnd.pages.evaluations.evaluated
-                      .fill_evalaution.text_loading
-                  }}
+                  >{{ parseT('text_loading') | translate }}
                 </button>
               </div>
             </div>
@@ -310,12 +311,7 @@
           style="width:100% !important;"
           data-dismiss="modal"
         >
-          <h6>
-            {{
-              translate.app.frontEnd.pages.evaluations.evaluated
-                .fill_evalaution.btn_close
-            }}
-          </h6>
+          <h6>{{ parseT('btn_close') }}|translate</h6>
         </div>
       </div>
     </div>

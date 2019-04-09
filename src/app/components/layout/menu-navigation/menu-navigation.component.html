@@ -2,7 +2,6 @@
   id="navMenu"
   class="navbar-default scrollbar-success-nav navbar-static-side"
   role="navigation"
-  *ngIf="translate !== null"
 >
   <div class="sidebar-collapse">
     <ul class="nav in flex-column" id="side-menu">
@@ -50,8 +49,7 @@
         >
           <i class="fa fa-th-large"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .start
+            parseT('start') | translate
           }}</span>
         </a>
       </li>
@@ -77,8 +75,7 @@
         >
           <i class="fa fa-sitemap"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .org_chart
+            parseT('org_chart') | translate
           }}</span>
         </a>
       </li>
@@ -91,8 +88,7 @@
         >
           <i class="fa fa-user"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .my_data
+            parseT('my_data') | translate
           }}</span>
         </a>
       </li>
@@ -120,8 +116,7 @@
         >
           <i class="fa fa-file"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .self_service
+            parseT('self_service') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -142,10 +137,7 @@
                     'selfService'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.certificate_work
-                }}</a
+                >{{ parseT('certificate_work') | translate }}</a
               >
             </li>
             <li
@@ -163,10 +155,7 @@
                     'selfService'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.receipts
-                }}</a
+                >{{ parseT('receipts') | translate }}</a
               >
             </li>
             <li
@@ -184,10 +173,7 @@
                     'selfService'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.certificate_ing_ret
-                }}</a
+                >{{ parseT('certificate_ing_ret') | translate }}</a
               >
             </li>
             <li
@@ -205,10 +191,7 @@
                     'selfService'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.letter_vacations
-                }}</a
+                >{{ parseT('letter_vacations') | translate }}</a
               >
             </li>
           </ul>
@@ -225,8 +208,7 @@
         >
           <i class="fa fa-paste"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .queries
+            parseT('queries') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -248,10 +230,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.ing_ret
-                }}</a
+                >{{ parseT('ing_ret') | translate }}</a
               >
             </li>
             <li
@@ -270,10 +249,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.pay_deduc
-                }}</a
+                >{{ parseT('pay_deduc') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_severances">
@@ -289,10 +265,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.historical_cesa
-                }}</a
+                >{{ parseT('historical_cesa') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_embargoes">
@@ -304,10 +277,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aEmbargos', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.distress
-                }}</a
+                >{{ parseT('distress') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_loans">
@@ -319,10 +289,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aPaydayLoans', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.payday
-                }}</a
+                >{{ parseT('payday') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations">
@@ -338,10 +305,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.enjoyed_vacation
-                }}</a
+                >{{ parseT('enjoyed_vacation') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations_c">
@@ -357,10 +321,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.compensated_vacation
-                }}</a
+                >{{ parseT('compensated_vacation') | translate }}</a
               >
             </li>
             <li
@@ -379,10 +340,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.balance_vacation
-                }}</a
+                >{{ parseT('balance_vacation') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_licenses">
@@ -394,10 +352,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aPermits', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.pass
-                }}</a
+                >{{ parseT('pass') | translate }}</a
               >
             </li>
             <li
@@ -412,10 +367,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aDisabilities', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.inability
-                }}</a
+                >{{ parseT('inability') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_hoex">
@@ -427,10 +379,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aExtraHours', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.extra_hour
-                }}</a
+                >{{ parseT('extra_hour') | translate }}</a
               >
             </li>
             <li
@@ -445,10 +394,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aAniversary', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.anniversary
-                }}</a
+                >{{ parseT('anniversary') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_h_positions">
@@ -464,10 +410,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.historical_posts
-                }}</a
+                >{{ parseT('historical_posts') | translate }}</a
               >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_m_iva">
@@ -479,10 +422,7 @@
                 (click)="
                   clickOptionMenu('liQuery', 'aIvaEmployee', 'query')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.iva_movements
-                }}</a
+                >{{ parseT('iva_movements') | translate }}</a
               >
             </li>
             <li
@@ -501,10 +441,7 @@
                     'query'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.time_evaluations
-                }}</a
+                >{{ parseT('time_evaluations') | translate }}</a
               >
             </li>
             <!-- <li class="bg-li" *ngIf="'true'">
@@ -535,8 +472,7 @@
         >
           <i class="fa fa-table"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .reports_rh
+            parseT('reports_rh') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -558,10 +494,7 @@
                     'reportsRH'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.request_report
-                }}</a
+                >{{ parseT('request_report') | translate }}</a
               >
             </li>
             <li class="bg-li">
@@ -577,10 +510,7 @@
                     'reportsRH'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.user_permits
-                }}</a
+                >{{ parseT('user_permits') | translate }}</a
               >
             </li>
             <li
@@ -599,10 +529,7 @@
                     'reportsRH'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.approver_Request
-                }}</a
+                >{{ parseT('approver_Request') | translate }}</a
               >
             </li>
             <li
@@ -645,8 +572,7 @@
         >
           <i class="fa fa-bullhorn"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .billboards
+            parseT('billboards') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -663,10 +589,7 @@
                 (click)="
                   clickOptionMenu('liBillboard', 'aNews', 'billboard')
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.news
-                }}</a
+                >{{ parseT('news') | translate }}</a
               >
             </li>
             <li
@@ -684,10 +607,7 @@
                     'billboard'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.own_puplication
-                }}</a
+                >{{ parseT('own_puplication') | translate }}</a
               >
             </li>
           </ul>
@@ -702,8 +622,7 @@
         >
           <i class="fa fa-edit"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .requests
+            parseT('requests') | translate
           }}</span>
         </a>
       </li>
@@ -728,8 +647,7 @@
         >
           <i class="fa fa-circle-o-notch"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .approvers
+            parseT('approvers') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -750,10 +668,7 @@
                     'approvals'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.pending
-                }}</a
+                >{{ parseT('pending') | translate }}</a
               >
             </li>
             <li class="bg-li">
@@ -768,10 +683,7 @@
                     'approvals'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.managed
-                }}</a
+                >{{ parseT('managed') | translate }}</a
               >
             </li>
             <!-- <li class="bg-li">
@@ -794,8 +706,7 @@
         >
           <i class="fa fa-slideshare"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .banners
+            parseT('banners') | translate
           }}</span>
         </a>
       </li>
@@ -813,8 +724,7 @@
         >
           <i class="fa fa-list"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .evaluations
+            parseT('evaluations') | translate
           }}</span>
         </a>
       </li>
@@ -834,8 +744,7 @@
         >
           <i class="fa fa-line-chart"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .performance_evaluation
+            parseT('performance_evaluation') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -856,10 +765,7 @@
                     'performanceEval'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.query_evaluation
-                }}</a
+                >{{ parseT('query_evaluation') | translate }}</a
               >
             </li>
             <li class="bg-li">
@@ -874,10 +780,7 @@
                     'performanceEval'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.query_objetive
-                }}</a
+                >{{ parseT('query_objetive') | translate }}</a
               >
             </li>
           </ul>
@@ -892,8 +795,7 @@
         >
           <i class="fa fa-plane"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .manage_travel
+            parseT('manage_travel') | translate
           }}</span>
         </a>
       </li>
@@ -913,8 +815,7 @@
         >
           <i class="fa fa-flag"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .manage_training
+            parseT('manage_training') | translate
           }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
@@ -935,10 +836,7 @@
                     'eventsManagement'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.agreements_training
-                }}</a
+                >{{ parseT('agreements_training') | translate }}</a
               >
             </li>
             <li class="bg-li">
@@ -953,10 +851,7 @@
                     'eventsManagement'
                   )
                 "
-                >{{
-                  translate.app.frontEnd.components.layout
-                    .menu_navigation.report_training
-                }}</a
+                >{{ parseT('report_training') | translate }}</a
               >
             </li>
           </ul>
@@ -980,8 +875,7 @@
         >
           <i class="fa fa-folder-open-o"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .docs_org
+            parseT('docs_org') | translate
           }}</span>
         </a>
       </li>
@@ -994,8 +888,7 @@
         >
           <i class="fa fa-question-circle"></i>
           <span class="nav-label">{{
-            translate.app.frontEnd.components.layout.menu_navigation
-              .help
+            parseT('help') | translate
           }}</span>
         </a>
       </li>

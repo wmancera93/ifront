@@ -13,9 +13,9 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
-import { Translate } from '../../../models/common/translate/translate';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-lenses-auxilium',
@@ -26,13 +26,13 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Input() formRequests: any;
-  @Input() translate: Translate = null;
   @Input() showSubmit: boolean;
 
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions =
+    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public arrayConcept: any[] = [];
@@ -63,27 +63,40 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `.${key}`;
+  }
+
   constructor(
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
+    public translate: TranslateService,
   ) {
     this.formState.bind(this);
-    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(
-          this.objectImg.findIndex(
-            filter => filter.file.name === this.deleteDocumenFile,
-          ),
-          1,
-        );
-        this.file.splice(
-          this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
-          1,
-        );
-      }
-      this.setModalState.emit(true);
-    });
+    this.subscription = this.alert
+      .getActionConfirm()
+      .subscribe((data: any) => {
+        if (data === 'deleteNewDocumentSaved') {
+          this.objectImg.splice(
+            this.objectImg.findIndex(
+              filter => filter.file.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+          this.file.splice(
+            this.file.findIndex(
+              filter => filter.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+        }
+        this.setModalState.emit(true);
+      });
   }
 
   ngOnInit() {
@@ -158,11 +171,13 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.travel
-        .new_travel.type_alert_ts,
+      title: this.translate.instant(
+        'pages.travel_management.travel.new_travel.type_alert_ts',
+      ),
       message:
-        this.translate.app.frontEnd.pages.travel_management.travel.new_travel
-          .message_alert_ts +
+        this.translate.instant(
+          'pages.travel_management.travel.new_travel.message_alert_ts',
+        ) +
         param.file.name.toString() +
         '?',
       confirmation: true,

@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EvaluationsSharedService } from '../../../../services/shared/common/evaluations/evaluations-shared.service';
 import { Evaluations } from '../../../../models/common/evaluations/evaluations';
 import { EvaluationsService } from '../../../../services/evaluations/evaluations.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-show-evaluation',
@@ -15,14 +13,15 @@ export class ShowEvaluationComponent implements OnInit, OnDestroy {
   public dataEvaluation: Evaluations = null;
   public receiveData: any = null;
   public countAfter = 0;
-  public translate: Translate = null;
+
+  parseT(key) {
+    return `pages.evaluations.evaluated.show_evaluation.${key}`;
+  }
 
   constructor(
     public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
-    public translateService: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
     this.evaluationSharedService
       .getInfoViewEvaluation()
       .subscribe((info: any) => {
@@ -35,7 +34,9 @@ export class ShowEvaluationComponent implements OnInit, OnDestroy {
             });
 
           document.getElementById('btn_showEvaluation').click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
+          document
+            .getElementById('bodyGeneral')
+            .removeAttribute('style');
         }
       });
   }

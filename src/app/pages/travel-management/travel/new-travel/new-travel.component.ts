@@ -558,7 +558,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       });
   }
   enterOrder(form) {
-    debugger;
+      
     this.travelManagementService
       .getFilterTravelOrders(form.name_travel_order)
       .subscribe((orders: any) => {
@@ -598,7 +598,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.searchOperationsGrahp(graph.code, 'edit');
   }
   returnOrderSearch(order) {
-    debugger;
+      
     this.formTravelManagement.controls['id_order'].setValue(order.id);
     this.formTravelManagement.controls['name_travel_order'].setValue(
       order.code + ' - ' + order.name,

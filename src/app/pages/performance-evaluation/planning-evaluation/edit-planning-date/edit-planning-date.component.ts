@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { PerformanceEvalSharedService } from '../../../../services/shared/common/performance-evaluation/performance-eval-shared.service';
-import { truncate } from 'fs';
 import {
   FormBuilder,
   FormGroup,
@@ -8,8 +7,7 @@ import {
 import { PerformanceEvaluationService } from '../../../../services/performance-evaluation/performance-evaluation.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-planning-date',
@@ -26,17 +24,22 @@ export class EditPlanningDateComponent implements OnInit {
   public startDate: any;
   public endDate: any;
   public countAfter = 0;
-  public translate: Translate = null;
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.performance_evaluation.planning_evaluation.edit_planning_date.${key}`;
+  }
 
   constructor(
     public performanceEvaluationService: PerformanceEvaluationService,
     public performanceEvalSharedService: PerformanceEvalSharedService,
-    private fb: FormBuilder,
+    fb: FormBuilder,
     public alert: AlertsService,
-    public translateService: TranslateService,
+    public translate: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
-
     this.formDate = new FormGroup({});
     this.formDate = fb.group({
       start_planning: '',
@@ -55,8 +58,12 @@ export class EditPlanningDateComponent implements OnInit {
               // this.startPlanning = data.data.start_planning_date;
               // this.endPlanning = data.data.end_planning_date;
 
-              this.startPlanning = data.data.start_planning_date.split('-');
-              this.endPlanning = data.data.end_planning_date.split('-');
+              this.startPlanning = data.data.start_planning_date.split(
+                '-',
+              );
+              this.endPlanning = data.data.end_planning_date.split(
+                '-',
+              );
               this.startDate = (
                 this.startPlanning[2] +
                 '-' +
@@ -91,7 +98,9 @@ export class EditPlanningDateComponent implements OnInit {
             });
 
           document.getElementById('btn-planningEvaluation').click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
+          document
+            .getElementById('bodyGeneral')
+            .removeAttribute('style');
         }
       });
   }
@@ -108,8 +117,7 @@ export class EditPlanningDateComponent implements OnInit {
           const alertWarning: Alerts[] = [
             {
               type: 'success',
-              title: this.translate.app.frontEnd.pages.performance_evaluation
-                .planning_evaluation.edit_planning_date.type_alert_ts,
+              title: this.t('type_alert_ts'),
               message: response.message,
               confirmation: false,
               typeConfirmation: '',
@@ -118,14 +126,12 @@ export class EditPlanningDateComponent implements OnInit {
           document.getElementById('closeModalPlanning').click();
           this.alert.setAlert(alertWarning[0]);
         },
-        (error: any) => {
+        () => {
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
-              title: this.translate.app.frontEnd.pages.performance_evaluation
-                .planning_evaluation.edit_planning_date.type_alert_ts,
-              message: this.translate.app.frontEnd.pages.performance_evaluation
-                .planning_evaluation.edit_planning_date.msg_alert_ts,
+              title: this.t('type_alert_ts'),
+              message: this.t('msg_alert_ts'),
               confirmation: false,
               typeConfirmation: '',
             },

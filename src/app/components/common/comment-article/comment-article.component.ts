@@ -1,27 +1,22 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
-import { FormGroup } from '@angular/forms';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
-import { debug } from 'util';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-comment-article',
   templateUrl: './comment-article.component.html',
-  styleUrls: ['./comment-article.component.css']
+  styleUrls: ['./comment-article.component.css'],
 })
 export class CommentArticleComponent implements OnInit {
   @Input('nameModal') nameModal: any;
   public targetModal = '';
   public btnModal = '';
   public nameThisModal = '';
-  public translate: Translate = null;
   public infoArticle: PublicArticle = null;
 
   public commentsList: PublicArticle;
@@ -39,14 +34,15 @@ export class CommentArticleComponent implements OnInit {
   public modalName = '';
   public flagRefreshPublication = false;
 
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
 
-  constructor(public billboardSharedService: BillboardService,
-    public alert: AlertsService,
-    public myPublicationService: MyPublicationsService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+  parseT(key) {
+    return `components.common.comment_article.${key}`;
+  }
 
-    this.translate = this.translateService.getTranslate();
-
+  constructor(public billboardSharedService: BillboardService, public alert: AlertsService, public myPublicationService: MyPublicationsService, public stylesExplorerService: StylesExplorerService, public translate: TranslateService) {
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'continueExit') {
         this.getDetailArticle();
@@ -62,18 +58,14 @@ export class CommentArticleComponent implements OnInit {
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data == 'deleteComment') {
-
-        this.myPublicationService.deleteComment(this.idArticle, this.idComment)
-          .subscribe((data: any) => {
-            if (data.success == true) {
-            }
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            this.getDetailArticle();
-
-          });
+        this.myPublicationService.deleteComment(this.idArticle, this.idComment).subscribe((data: any) => {
+          if (data.success == true) {
+          }
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+          this.getDetailArticle();
+        });
       }
     });
-
   }
 
   ngOnInit() {
@@ -88,13 +80,10 @@ export class CommentArticleComponent implements OnInit {
     }, 1000);
   }
 
-
   getDetailArticle(modal?: string) {
-
     if (modal !== undefined) {
       this.infoArticle = null;
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
-        debugger;
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
         if (document.getElementById(modal).className !== 'modal show') {
@@ -113,70 +102,70 @@ export class CommentArticleComponent implements OnInit {
         }
       });
     }
-
   }
 
   sendComment() {
-    debugger;
     this.showSubmit = false;
     if (this.flagEditComment == true) {
-      this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe(
-        (data: any) => {
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-          this.showSubmit = true;
-          this.numberComments = data.total_comments;
-          this.comment = '';
-          this.getDetailArticle();
-
-        });
+      this.myPublicationService.editComment(this.idArticle, this.idComment, this.commentEdit).subscribe((data: any) => {
+        (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+        this.showSubmit = true;
+        this.numberComments = data.total_comments;
+        this.comment = '';
+        this.getDetailArticle();
+      });
       this.flagEditComment = false;
     } else {
-      this.myPublicationService.postComment(this.idArticle, this.comment)
-        .subscribe(
-          (data: any) => {
-            this.showSubmit = true;
-            this.comment = '';
-            this.numberComments = data.total_comments;
-            debugger;
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{
+      this.myPublicationService.postComment(this.idArticle, this.comment).subscribe(
+        (data: any) => {
+          this.showSubmit = true;
+          this.comment = '';
+          this.numberComments = data.total_comments;
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+          const alertWarning: Alerts[] = [
+            {
               type: 'success',
-              title: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
-              message:  this.translate.app.frontEnd.components.common.comment_article.msg_alert_save_ts,
+              title: this.t('type_alert_confirmation_ts'),
+              message: this.t('msg_alert_save_ts'),
               confirmation: true,
-              typeConfirmation: 'continueExit'
-            }];
-            this.showSubmit = true;
-            this.flagRefreshPublication = true;
-            this.alert.setAlert(alertWarning[0]);
-            this.billboardSharedService.setRefreshEditNew(this.flagRefreshPublication);
-          },
-          (error: any) => {
-            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
-            const alertWarning: Alerts[] = [{
+              typeConfirmation: 'continueExit',
+            },
+          ];
+          this.showSubmit = true;
+          this.flagRefreshPublication = true;
+          this.alert.setAlert(alertWarning[0]);
+          this.billboardSharedService.setRefreshEditNew(this.flagRefreshPublication);
+        },
+        (error: any) => {
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+          const alertWarning: Alerts[] = [
+            {
               type: 'danger',
-              title: this.translate.app.frontEnd.components.common.comment_article.type_alert_denied_ts,
+              title: this.t('type_alert_denied_ts'),
               message: error.error.errors.toString(),
               confirmation: true,
-              typeConfirmation: 'continueError'
-            }];
-            this.showSubmit = true;
-            this.alert.setAlert(alertWarning[0]);
-          }
-        );
+              typeConfirmation: 'continueError',
+            },
+          ];
+          this.showSubmit = true;
+          this.alert.setAlert(alertWarning[0]);
+        },
+      );
     }
   }
 
   deleteComment(commentObject: any) {
     this.idArticle = commentObject.article_id;
     this.idComment = commentObject.id;
-    this.alertWarning = [{
-      type: 'warning',
-      title: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
-      message: this.translate.app.frontEnd.components.common.comment_article.type_alert_confirmation_ts,
-      confirmation: true,
-      typeConfirmation: 'deleteComment'
-    }];
+    this.alertWarning = [
+      {
+        type: 'warning',
+        title: this.t('type_alert_confirmation_ts'),
+        message: this.t('type_alert_confirmation_ts'),
+        confirmation: true,
+        typeConfirmation: 'deleteComment',
+      },
+    ];
     this.alert.setAlert(this.alertWarning[0]);
   }
 
@@ -189,6 +178,4 @@ export class CommentArticleComponent implements OnInit {
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
   }
-
-
 }

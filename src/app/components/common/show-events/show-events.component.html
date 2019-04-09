@@ -73,13 +73,10 @@
         <div
           class="buttonCloseComment btn-close-modals text-center"
           data-dismiss="modal"
-          *ngIf="translate !== null"
+           
         >
           <h6>
-            {{
-              translate.app.frontEnd.components.common.show_events
-                .button_close
-            }}
+            {{ parseT('button_close') | translate }}
           </h6>
         </div>
       </div>

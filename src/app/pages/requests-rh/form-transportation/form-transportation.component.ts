@@ -13,26 +13,27 @@ import {
   AbstractControl,
 } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
-import { Translate } from '../../../models/common/translate/translate';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-transportation',
   templateUrl: './form-transportation.component.html',
   styleUrls: ['./form-transportation.component.css'],
 })
-export class FormTransportationComponent implements OnInit, OnDestroy {
+export class FormTransportationComponent
+  implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Input() formRequests: any;
-  @Input() translate: Translate = null;
   @Input() showSubmit: boolean;
 
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions =
+    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public origins_list: any[] = [];
@@ -90,27 +91,40 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.requests_rh.forms_requests.${key}`;
+  }
+
   constructor(
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
+    public translate: TranslateService,
   ) {
     this.formState.bind(this);
-    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(
-          this.objectImg.findIndex(
-            filter => filter.file.name === this.deleteDocumenFile,
-          ),
-          1,
-        );
-        this.file.splice(
-          this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
-          1,
-        );
-      }
-      this.setModalState.emit(true);
-    });
+    this.subscription = this.alert
+      .getActionConfirm()
+      .subscribe((data: any) => {
+        if (data === 'deleteNewDocumentSaved') {
+          this.objectImg.splice(
+            this.objectImg.findIndex(
+              filter => filter.file.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+          this.file.splice(
+            this.file.findIndex(
+              filter => filter.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+        }
+        this.setModalState.emit(true);
+      });
 
     this.origins_list = [
       { id: 1, name: 'Preescolar' },
@@ -174,7 +188,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         ({ value }: AbstractControl) => {
           if (value) {
             // tslint:disable-next-line: triple-equals
-            const benefist = this.benefists_list.find(({ id }) => id == value);
+            const benefist = this.benefists_list.find(
+              ({ id }) => id == value,
+            );
             if (benefist) {
               if (benefist.isHigher) {
                 this.isHigherBenefist = true;
@@ -193,7 +209,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       academic_level: [
         '',
         (control: AbstractControl) => {
-          return this.formState('academic_level') ? required(control) : null;
+          return this.formState('academic_level')
+            ? required(control)
+            : null;
         },
       ],
       file: [],
@@ -274,7 +292,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
 
   removeConcept(idConcept) {
     this.arrayConcept.splice(
-      this.arrayConcept.findIndex(filter => filter.concept.id === idConcept),
+      this.arrayConcept.findIndex(
+        filter => filter.concept.id === idConcept,
+      ),
       1,
     );
   }
@@ -294,13 +314,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.travel
-        .new_travel.type_alert_ts,
+      title: this.t('type_alert_ts'),
       message:
-        this.translate.app.frontEnd.pages.travel_management.travel.new_travel
-          .message_alert_ts +
-        param.file.name.toString() +
-        '?',
+        this.t('message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });

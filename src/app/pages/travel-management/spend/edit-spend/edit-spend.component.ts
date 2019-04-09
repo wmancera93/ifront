@@ -193,7 +193,7 @@ export class EditSpendComponent implements OnInit {
     });
 
     this.spendSharedService.getEditSpend().subscribe((idEdit: any) => {
-      debugger;
+        
       // this.spendsService.getSpendListTravel(this.idEmployee).subscribe((travel: any) => {
       //   this.listTravelsFromSpend = travel.data;
       // });
@@ -838,7 +838,7 @@ export class EditSpendComponent implements OnInit {
     ]);
   }
   onlyNumberSpend(param, name) {
-    debugger;
+      
     let out = '';
     const filtro = '0123456789.,';
     switch (name) {

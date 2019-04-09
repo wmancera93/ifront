@@ -263,7 +263,7 @@ export class DistSpendComponent implements OnInit {
     this.searchOperationsGrahp(graph.code, 'edit');
   }
   returnOrderSearchOrder(order: any) {
-    debugger;
+      
     this.typeCenterOrder = order.code + '-' + order.name;
     this.order_travels = [];
     this.typeCenterOrder_id = order.id;

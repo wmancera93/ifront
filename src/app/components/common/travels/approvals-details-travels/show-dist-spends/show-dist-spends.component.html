@@ -26,11 +26,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.components.common.travels
-              .approvals_details_travels.show_dist_spends
-              .distribution_cost
-          }}
+          {{ parseT('distribution_cost') | translate }}
         </h5>
         <button
           id="closeDistSpendApproval"
@@ -55,10 +51,7 @@
                   class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
                 ></i>
                 <span>
-                  {{
-                    translate.app.frontEnd.components.common.travels
-                      .approvals_details_travels.show_dist_spends.back
-                  }}
+                  {{ parseT('back') | translate }}
                 </span>
               </div>
             </div>
@@ -73,9 +66,7 @@
                 <label class="titleColor">
                   <strong
                     >{{
-                      translate.app.frontEnd.components.common.travels
-                        .approvals_details_travels.show_dist_spends
-                        .code_spending
+                      parseT('code_spending') | translate
                     }}:</strong
                   >
                 </label>
@@ -88,11 +79,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <strong
-                    >{{
-                      translate.app.frontEnd.components.common.travels
-                        .approvals_details_travels.show_dist_spends
-                        .type_expense
-                    }}:</strong
+                    >{{ parseT('type_expense') | translate }}:</strong
                   >
                 </label>
               </div>
@@ -108,13 +95,7 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong
-                    >{{
-                      translate.app.frontEnd.components.common.travels
-                        .approvals_details_travels.show_dist_spends
-                        .amount
-                    }}:</strong
-                  >
+                  <strong>{{ parseT('amount') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
@@ -122,13 +103,7 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong
-                    >{{
-                      translate.app.frontEnd.components.common.travels
-                        .approvals_details_travels.show_dist_spends
-                        .date
-                    }}:</strong
-                  >
+                  <strong>{{ parseT('date') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -151,53 +126,25 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.imputation_element
-                      }}
+                      {{ parseT('imputation_element') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.cost_center
-                      }}
+                      {{ parseT('cost_center') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.graph
-                      }}
+                      {{ parseT('graph') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.operation
-                      }}
+                      {{ parseT('operation') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.order
-                      }}
+                      {{ parseT('order') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.account_contable
-                      }}
+                      {{ parseT('account_contable') | translate }}
                     </th>
                     <th class="text-center">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .show_dist_spends.distribution
-                      }}
+                      {{ parseT('distribution') | translate }}
                     </th>
                   </tr>
                 </thead>
@@ -251,11 +198,7 @@
             >
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                  {{
-                    translate.app.frontEnd.components.common.travels
-                      .approvals_details_travels.show_dist_spends
-                      .negative_distribution
-                  }}.
+                  {{ parseT('negative_distribution') | translate }}.
                 </div>
               </div>
             </div>

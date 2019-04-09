@@ -8,11 +8,9 @@ import {
   Sections,
   MultipleAnswer,
 } from '../../../../models/common/evaluations/evaluations';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-fill-evaluation',
@@ -39,26 +37,28 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
   public totalQuestionsBySection = 0;
   public totalQuestions = 0;
   public countAfter = 0;
-  public translate: Translate = null;
-  public addCommentary: string;
-  public writeAnswer: string;
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.evaluations.evaluated.fill_evalaution.${key}`;
+  }
 
   constructor(
     public evaluationSharedService: EvaluationsSharedService,
     public evaluationService: EvaluationsService,
-    private formBuilder: FormBuilder,
     public alert: AlertsService,
-    public translateService: TranslateService,
+    public translate: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
-    this.addCommentary = this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_answer;
-    this.writeAnswer = this.translate.app.frontEnd.pages.evaluations.evaluated.fill_evalaution.placeholder_commentary;
-
     document.getElementById('bodyGeneral').removeAttribute('style');
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'errorSendEvaluation') {
         document.getElementById('btn_fillEvaluation').click();
-        document.getElementById('bodyGeneral').removeAttribute('style');
+        document
+          .getElementById('bodyGeneral')
+          .removeAttribute('style');
       }
     });
     this.evaluationSharedService
@@ -75,7 +75,9 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
               this.questions = list.data.questions_to_json;
             });
           document.getElementById('btn_fillEvaluation').click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
+          document
+            .getElementById('bodyGeneral')
+            .removeAttribute('style');
         }
       });
   }
@@ -108,14 +110,15 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
             const alertConfirmation: Alerts[] = [
               {
                 type: 'success',
-                title: this.translate.app.frontEnd.pages.evaluations.evaluated
-                  .fill_evalaution.ts_warning_text,
+                title: this.t('ts_warning_text'),
                 message: data.message,
                 confirmation: false,
               },
             ];
             (<HTMLInputElement>(
-              document.getElementsByClassName('buttonCloseEvaluation')[0]
+              document.getElementsByClassName(
+                'buttonCloseEvaluation',
+              )[0]
             )).click();
             this.alert.setAlert(alertConfirmation[0]);
             this.showSubmit = true;
@@ -130,18 +133,18 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
-              title: this.translate.app.frontEnd.pages.evaluations.evaluated
-                .fill_evalaution.msg_denied_request_ts,
+              title: this.t('msg_denied_request_ts'),
               message:
                 error.json().errors.toString() +
-                this.translate.app.frontEnd.pages.evaluations.evaluated
-                  .fill_evalaution.msg_continue_ts,
+                this.t('msg_continue_ts'),
               confirmation: true,
               typeConfirmation: 'errorSendEvaluation',
             },
           ];
           (<HTMLInputElement>(
-            document.getElementsByClassName('buttonCloseEvaluation')[0]
+            document.getElementsByClassName(
+              'buttonCloseEvaluation',
+            )[0]
           )).click();
           this.alert.setAlert(alertWarning[0]);
         },
@@ -158,10 +161,13 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     switch (type_question) {
       case 'unique':
         if (
-          this.object.filter(data => data.question_id === idQuestion).length > 0
+          this.object.filter(data => data.question_id === idQuestion)
+            .length > 0
         ) {
           this.object.splice(
-            this.object.findIndex(obj => obj.question_id === idQuestion),
+            this.object.findIndex(
+              obj => obj.question_id === idQuestion,
+            ),
             1,
           );
         }
@@ -190,12 +196,16 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
 
           if (_answer.length > 0) {
             _question[0].answers.splice(
-              _question[0].answers.findIndex(obj => obj.answer_id === idAnswer),
+              _question[0].answers.findIndex(
+                obj => obj.answer_id === idAnswer,
+              ),
               1,
             );
             if (_question[0].answers.length === 0) {
               this.object.splice(
-                this.object.findIndex(obj => obj.question_id === idQuestion),
+                this.object.findIndex(
+                  obj => obj.question_id === idQuestion,
+                ),
                 1,
               );
             }
@@ -223,9 +233,14 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     }
   }
 
-  detectComment(question_id: any, parent_section: number, section?: Sections) {
+  detectComment(
+    question_id: any,
+    parent_section: number,
+    section?: Sections,
+  ) {
     if (
-      this.object.filter(data => data.question_id === question_id).length > 0
+      this.object.filter(data => data.question_id === question_id)
+        .length > 0
     ) {
       this.object.filter(
         data => data.question_id === question_id,
@@ -245,9 +260,14 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
       });
     }
   }
-  detectResponse(question_id: any, parent_section: number, section?: Sections) {
+  detectResponse(
+    question_id: any,
+    parent_section: number,
+    section?: Sections,
+  ) {
     if (
-      this.object.filter(data => data.question_id === question_id).length > 0
+      this.object.filter(data => data.question_id === question_id)
+        .length > 0
     ) {
       this.object.filter(
         data => data.question_id === question_id,

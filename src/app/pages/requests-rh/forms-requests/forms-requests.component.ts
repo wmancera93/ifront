@@ -17,8 +17,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { FormDataService } from '../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
@@ -33,11 +32,11 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   public formRequests: TypesRequests = null;
   public showSubmit = true;
-  public translate: Translate = null;
   public file: any;
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
-  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions =
+    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public formVaca: any;
   public formVacaComp: any;
@@ -59,6 +58,14 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   private subscription: ISubscription;
 
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.requests_rh.forms_requests.${key}`;
+  }
+
   constructor(
     private requestsRhService: RequestsRhService,
     private modalService: NgbModal,
@@ -68,10 +75,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     public fileUploadService: FileUploadService,
     public formDataService: FormDataService,
     public stylesExplorerService: StylesExplorerService,
-    public translateService: TranslateService,
+    public translate: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
-
     this.fileUploadService.getObjetFile().subscribe(object => {
       this.file = object;
     });
@@ -168,7 +173,9 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         this.modalActions.close = () => {
           modal.close();
         };
-        document.getElementById('bodyGeneral').removeAttribute('style');
+        document
+          .getElementById('bodyGeneral')
+          .removeAttribute('style');
         /* if (document.getElementById('form_requests').className !== 'modal show') {
         document.getElementById('btn_form_requests').click();
       } */
@@ -195,7 +202,10 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       modelFromdata.append('date_begin', model.date_begin);
       modelFromdata.append('date_end', model.date_end);
       modelFromdata.append('file_support', this.file);
-      modelFromdata.append('observation_request', model.observation_request);
+      modelFromdata.append(
+        'observation_request',
+        model.observation_request,
+      );
       model = modelFromdata;
 
       this.formDataService.postRequestsFormData(model).subscribe(
@@ -204,11 +214,10 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           const alertWarning: Alerts[] = [
             {
               type: 'success',
-              title: this.translate.app.frontEnd.pages.requests_rh
-                .forms_requests.type_alert_ts,
+              title: this.t('type_alert_ts'),
               message:
-                this.translate.app.frontEnd.pages.requests_rh.forms_requests
-                  .message_alert_ts + data.data[0].id.toString(),
+                this.t('message_alert_ts') +
+                data.data[0].id.toString(),
               confirmation: false,
             },
           ];
@@ -226,8 +235,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
-              title: this.translate.app.frontEnd.pages.requests_rh
-                .forms_requests.type_alert_one_ts,
+              title: this.t('type_alert_one_ts'),
               message: error.json().errors.toString(),
               confirmation: false,
             },
@@ -248,11 +256,10 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           const alertWarning: Alerts[] = [
             {
               type: 'success',
-              title: this.translate.app.frontEnd.pages.requests_rh
-                .forms_requests.type_alert_ts,
+              title: this.t('type_alert_ts'),
               message:
-                this.translate.app.frontEnd.pages.requests_rh.forms_requests
-                  .message_alert_ts + data.json().data[0].id.toString(),
+                this.t('message_alert_ts') +
+                data.json().data[0].id.toString(),
               confirmation: false,
             },
           ];
@@ -270,8 +277,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
-              title: this.translate.app.frontEnd.pages.requests_rh
-                .forms_requests.type_alert_one_ts,
+              title: this.t('type_alert_one_ts'),
               message: error.json().errors.toString(),
               confirmation: false,
             },
@@ -307,7 +313,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
     let dateBegin =
       date_begin.value === ' ' ? null : new Date(date_begin.value);
-    let dateEnd = date_end.value === ' ' ? null : new Date(date_end.value);
+    let dateEnd =
+      date_end.value === ' ' ? null : new Date(date_end.value);
 
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
@@ -318,8 +325,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         {
           type: 'danger',
           title: 'Error',
-          message: this.translate.app.frontEnd.pages.requests_rh.forms_requests
-            .message_alert_two_ts,
+          message: this.t('message_alert_two_ts'),
           confirmation: false,
         },
       ];

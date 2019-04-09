@@ -22,12 +22,8 @@
         <h5
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
-          *ngIf="translate !== null"
         >
-          {{
-            translate.app.frontEnd.pages.events_management.training
-              .view_training.title_training_agreements
-          }}
+          {{ parseT('title_training_agreements') | translate }}
         </h5>
         <button
           id="closeModalTraining"
@@ -54,14 +50,10 @@
               {{ trainingDetailInfo.name | uppercase }}
             </strong>
             <div class="row margin-row">
-              <div
-                class="col-lg-6 col-12 titleColor"
-                *ngIf="translate !== null"
-              >
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-calendar text-primary-hr"></i>
                 <strong>{{
-                  translate.app.frontEnd.pages.events_management
-                    .training.view_training.text_start
+                  parseT('text_start') | translate
                 }}</strong>
               </div>
               <div class="col-lg-6 col-12">
@@ -69,66 +61,49 @@
               </div>
             </div>
             <div class="row margin-row">
-              <div
-                class="col-lg-6 col-12 titleColor"
-                *ngIf="translate !== null"
-              >
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-calendar text-primary-hr"></i>
-                <strong>{{
-                  translate.app.frontEnd.pages.events_management
-                    .training.view_training.text_end
-                }}</strong>
+                <strong>{{ parseT('text_end') | translate }}</strong>
               </div>
               <div class="col-lg-6 col-12">
                 {{ trainingDetailInfo.end_date_trainnig }}
               </div>
             </div>
-            <div class="row margin-row" *ngIf="translate !== null">
+            <div class="row margin-row">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-history text-primary-hr"></i>
                 <strong
                   >{{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.text_duration_days
+                    parseT('text_duration_days') | translate
                   }}:</strong
                 >
               </div>
               <div class="col-lg-6 col-12">
                 {{ trainingDetailInfo.ndays }}
-                {{
-                  translate.app.frontEnd.pages.events_management
-                    .training.view_training.text_days
-                }}
+                {{ parseT('text_days') | translate }}
               </div>
             </div>
-            <div class="row margin-row" *ngIf="translate !== null">
+            <div class="row margin-row">
               <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa-clock-o text-primary-hr"></i>
                 <strong
                   >{{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.text_duration_hours
+                    parseT('text_duration_hours') | translate
                   }}:</strong
                 >
               </div>
               <div class="col-lg-6 col-12">
                 {{ trainingDetailInfo.nhours_for_days }}
-                {{
-                  translate.app.frontEnd.pages.events_management
-                    .training.view_training.text_hours_day
-                }}
+                {{ parseT('text_hours_day') | translate }}
               </div>
             </div>
-            <div class="row margin-row" *ngIf="translate !== null">
+            <div class="row margin-row">
               <div class="col-12 titleColor" *ngIf="flagPDF">
                 <i class="fa  text-primary-hr fa-file-pdf-o"></i>
                 <strong
                   style=" color: rgb(60, 211, 211); cursor: pointer;"
                   (click)="viewPDF()"
-                  >{{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.text_view_pdf
-                  }}</strong
+                  >{{ parseT('text_view_pdf') | translate }}</strong
                 >
               </div>
             </div>
@@ -136,15 +111,11 @@
               class="row margin-row"
               *ngIf="trainingDetailInfo.status_id == 0"
             >
-              <div
-                class="col-lg-6 col-12 titleColor"
-                *ngIf="translate !== null"
-              >
+              <div class="col-lg-6 col-12 titleColor">
                 <i class="fa fa fa-history text-primary-hr"></i>
                 <strong
                   >{{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.text_observations
+                    parseT('text_observations') | translate
                   }}:</strong
                 >
               </div>
@@ -159,7 +130,9 @@
                   [(ngModel)]="observations"
                   rows="2"
                   cols="50"
-                  placeholder="{{ placeholder_observations }}"
+                  placeholder="{{
+                    parseT('placeholder_observations') | translate
+                  }}"
                   style="width:100% !important;"
                   required
                 >
@@ -170,28 +143,22 @@
               class="row margin-row"
               *ngIf="trainingDetailInfo.status_id == 0"
             >
-              <div class="col-6" *ngIf="translate !== null">
+              <div class="col-6">
                 <button
                   class="btn btn-block btn-primary text-center"
                   (click)="acceptTraining(true)"
                 >
                   <i class="fa fa-check"></i>
-                  {{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.btn_accept
-                  }}
+                  {{ parseT('btn_accept') | translate }}
                 </button>
               </div>
-              <div class="col-6" *ngIf="translate !== null">
+              <div class="col-6">
                 <button
                   class="btn btn-block btn-primary text-center"
                   (click)="acceptTraining(false)"
                 >
                   <i class="fa fa-times"></i>
-                  {{
-                    translate.app.frontEnd.pages.events_management
-                      .training.view_training.btn_decline
-                  }}
+                  {{ parseT('btn_decline') | translate }}
                 </button>
               </div>
             </div>

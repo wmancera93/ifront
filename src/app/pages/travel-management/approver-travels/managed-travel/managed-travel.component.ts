@@ -1,4 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { Router } from '@angular/router';
 import { AproversRequestsService } from '../../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
@@ -101,7 +106,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberIHR(this.page, this.codIHR)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -124,7 +131,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberSAP(this.page, this.codSAP)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -144,9 +153,15 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .getSearchTravelByDate(
+              this.page,
+              this.datesBegin,
+              this.datesEnd,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -169,7 +184,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByStatus(this.page, this.status)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -190,9 +207,14 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .getSearchTravelByStatusLiquid(
+              this.page,
+              this.statusLiquid,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -215,7 +237,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByEmployee(this.page, this.codEmployee)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -248,7 +272,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberIHR(this.page, this.codIHR)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -271,7 +297,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberSAP(this.page, this.codSAP)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -291,9 +319,15 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .getSearchTravelByDate(
+              this.page,
+              this.datesBegin,
+              this.datesEnd,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -316,7 +350,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByStatus(this.page, this.status)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -337,9 +373,14 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .getSearchTravelByStatusLiquid(
+              this.page,
+              this.statusLiquid,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -362,7 +403,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByEmployee(this.page, this.codEmployee)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -395,7 +438,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberIHR(this.page, this.codIHR)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -418,7 +463,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchByTravelNumberSAP(this.page, this.codSAP)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -438,9 +485,15 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.datesBegin !== '' && this.datesEnd !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByDate(this.page, this.datesBegin, this.datesEnd)
+            .getSearchTravelByDate(
+              this.page,
+              this.datesBegin,
+              this.datesEnd,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -463,7 +516,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByStatus(this.page, this.status)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -484,9 +539,14 @@ export class ManagedTravelComponent implements OnInit {
         this.codEmployee = '';
         if (this.statusLiquid !== '') {
           this.filtersGeneralsService
-            .getSearchTravelByStatusLiquid(this.page, this.statusLiquid)
+            .getSearchTravelByStatusLiquid(
+              this.page,
+              this.statusLiquid,
+            )
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -509,7 +569,9 @@ export class ManagedTravelComponent implements OnInit {
           this.filtersGeneralsService
             .getSearchTravelByEmployee(this.page, this.codEmployee)
             .subscribe((data: any) => {
-              this.managedRequestTravel = this.sortByNumber(data.data);
+              this.managedRequestTravel = this.sortByNumber(
+                data.data,
+              );
             });
         } else {
           this.approverTravelsService
@@ -539,7 +601,9 @@ export class ManagedTravelComponent implements OnInit {
       .subscribe((data: any) => {
         if (data) {
           this.travelsRequestsManagedType = 'travels';
-          this.managedRequestTravel = this.sortByNumber(data.data[0].requests);
+          this.managedRequestTravel = this.sortByNumber(
+            data.data[0].requests,
+          );
         }
       });
   }

@@ -43,14 +43,11 @@
         </div>
       </div>
       <!-- test  -->
-      <select
-        #langSelect
-        (change)="translatePage.use(langSelect.value)"
-      >
+      <select #langSelect (change)="translate.use(langSelect.value)">
         <option
-          *ngFor="let lang of translatePage.getLangs()"
+          *ngFor="let lang of translate.getLangs()"
           [value]="lang"
-          [selected]="lang === translatePage.currentLang"
+          [selected]="lang === translate.currentLang"
           >{{ lang }}</option
         >
       </select>
@@ -73,14 +70,9 @@
             (click)="clickPartnersIcon()"
           >
             <i class="fa fa-fw fa-users fa-lg"></i>
-            <span
-              class="hideText font-size-responsive "
-              *ngIf="translate !== null"
-              >{{
-                translate.app.frontEnd.components.layout.header
-                  .partner
-              }}</span
-            >
+            <span class="hideText font-size-responsive ">
+              {{ parseT('partner') | translate }}
+            </span>
           </div>
           <div
             *ngIf="!showContactsList"
@@ -89,28 +81,18 @@
             (click)="clickPartnersIconHide()"
           >
             <i class="fa fa-fw fa-users fa-lg"></i>
-            <span
-              class="hideText font-size-responsive "
-              *ngIf="translate !== null"
-              >{{
-                translate.app.frontEnd.components.layout.header
-                  .partner
-              }}</span
-            >
+            <span class="hideText font-size-responsive ">
+              {{ parseT('partner') | translate }}
+            </span>
           </div>
           <div
             class="col-md-4 col-lg-6 col-xl-5  col-6 text-center cursor-general img-zoom"
             (click)="LogOut()"
           >
             <i class="fa fa-fw fa-sign-out fa-lg"></i>
-            <span
-              class="hideText font-size-responsive"
-              *ngIf="translate !== null"
-              >{{
-                translate.app.frontEnd.components.layout.header
-                  .out_door
-              }}</span
-            >
+            <span class="hideText font-size-responsive">{{
+              parseT('out_door') | translate
+            }}</span>
           </div>
         </div>
       </div>

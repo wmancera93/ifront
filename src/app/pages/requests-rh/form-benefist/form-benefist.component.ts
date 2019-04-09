@@ -1,21 +1,9 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
-import { Translate } from '../../../models/common/translate/translate';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-benefist',
@@ -26,7 +14,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Input() formRequests: any;
-  @Input() translate: Translate = null;
   @Input() showSubmit: boolean;
 
   public JSON = JSON;
@@ -102,55 +89,29 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     return this.form.valid;
   }
 
-  constructor(
-    private fb: FormBuilder,
-    public fileUploadService: FileUploadService,
-    public alert: AlertsService,
-  ) {
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.requests_rh.forms_requests.${key}`;
+  }
+
+  constructor(private fb: FormBuilder, public fileUploadService: FileUploadService, public alert: AlertsService, public translate: TranslateService) {
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(
-          this.objectImg.findIndex(
-            filter => filter.file.name === this.deleteDocumenFile,
-          ),
-          1,
-        );
-        this.file.splice(
-          this.file.findIndex(filter => filter.name === this.deleteDocumenFile),
-          1,
-        );
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
       }
       this.setModalState.emit(true);
     });
 
-    this.academic_level_types = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-      { id: 3, name: 'Bachiderato' },
-      { id: 4, name: 'Tecnico' },
-      { id: 5, name: 'Tecnologo' },
-      { id: 6, name: 'Universitario' },
-    ];
-    this.employee_family_id_types = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-    ];
-    this.document_types_list = [
-      { id: 1, name: 'Cedula' },
-      { id: 2, name: 'Tarjeta de identidad' },
-    ];
-    this.concept_types_list = [
-      { id: 'enrollment', name: 'Monto de Matricula' },
-      { id: 'transport', name: 'monto de transporte' },
-      { id: 'pension', name: 'Monto de pension' },
-      { id: 'feeding', name: 'Monto de alimentacion' },
-    ];
-    this.institution_types_list = [
-      { id: 1, name: 'Wall Strere Englis Institute' },
-      { id: 2, name: 'Brith Council' },
-      { id: 3, name: 'Centro Colombo Americano Institute' },
-    ];
+    this.academic_level_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }, { id: 3, name: 'Bachiderato' }, { id: 4, name: 'Tecnico' }, { id: 5, name: 'Tecnologo' }, { id: 6, name: 'Universitario' }];
+    this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
+    this.document_types_list = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
+    this.concept_types_list = [{ id: 'enrollment', name: 'Monto de Matricula' }, { id: 'transport', name: 'monto de transporte' }, { id: 'pension', name: 'Monto de pension' }, { id: 'feeding', name: 'Monto de alimentacion' }];
+    this.institution_types_list = [{ id: 1, name: 'Wall Strere Englis Institute' }, { id: 2, name: 'Brith Council' }, { id: 3, name: 'Centro Colombo Americano Institute' }];
   }
 
   ngOnInit() {
@@ -178,25 +139,19 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       employee_family_id: [
         '',
         (control: AbstractControl) => {
-          return this.formState('employee_family_id')
-            ? required(control)
-            : null;
+          return this.formState('employee_family_id') ? required(control) : null;
         },
       ],
       number_identification: [
         '',
         (control: AbstractControl) => {
-          return this.formState('number_identification')
-            ? required(control)
-            : null;
+          return this.formState('number_identification') ? required(control) : null;
         },
       ],
       type_identification: [
         '',
         (control: AbstractControl) => {
-          return this.formState('type_identification')
-            ? required(control)
-            : null;
+          return this.formState('type_identification') ? required(control) : null;
         },
       ],
       institution: [
@@ -223,9 +178,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       observation_request: [
         '',
         (control: AbstractControl) => {
-          return this.formState('observation_request')
-            ? required(control)
-            : null;
+          return this.formState('observation_request') ? required(control) : null;
         },
       ],
     });
@@ -304,10 +257,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   removeConcept(idConcept) {
-    this.arrayConcept.splice(
-      this.arrayConcept.findIndex(filter => filter.concept.id === idConcept),
-      1,
-    );
+    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
   }
 
   addConcept() {
@@ -325,13 +275,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.travel
-        .new_travel.type_alert_ts,
-      message:
-        this.translate.app.frontEnd.pages.travel_management.travel.new_travel
-          .message_alert_ts +
-        param.file.name.toString() +
-        '?',
+      title: this.t('type_alert_ts'),
+      message: this.t('message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });

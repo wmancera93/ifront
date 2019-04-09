@@ -1,7 +1,6 @@
 <div
   id="right-sidebar"
   class="sidebar-open sidebar-top container-contacts"
-  *ngIf="translate !== null"
 >
   <div
     class="sidebar-container"
@@ -15,10 +14,7 @@
           data-toggle="tab"
           href="#tab-1"
         >
-          {{
-            translate.app.frontEnd.components.layout.contacts_list
-              .partner
-          }}
+          {{ parseT('partner') | translate }}
         </a>
       </li>
       <!-- <li id="litab2" class="nav-item" style="width: 50%">
@@ -39,7 +35,7 @@
               [(ngModel)]="searchByLetter"
               type="text"
               class="form-control"
-              placeholder="{{ search_partner }}"
+              placeholder="{{ parseT('search_partner') | translate }}"
               (keyup.enter)="searchByName()"
               maxlength="25"
               (keyup)="enterNameEmployee()"
@@ -137,10 +133,7 @@
             </div>
           </div>
           <div class="bg-white">
-            {{
-              translate.app.frontEnd.components.layout.contacts_list
-                .negative_message
-            }}
+            {{ parseT('negative_message') | translate }}
           </div>
         </div>
       </div>

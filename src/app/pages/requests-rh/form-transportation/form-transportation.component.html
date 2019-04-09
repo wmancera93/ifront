@@ -245,74 +245,6 @@
           </div>
         </div>
       </div>
-      <!-- <div class="col-12 top-containter">
-        <div class="container">
-          <div class="row">
-            <div
-              class="col-12"
-              *ngFor="let imgsaved of objectImg; let index = index"
-            >
-              <div
-                class="alert pr-0"
-                style="background-color:rgba(0,0,0,.2) "
-                role="alert"
-              >
-                <div class="row cursor-general w-100">
-                  <div class="col-auto px-2">{{ index + 1 }}.</div>
-                  <div class="col-auto">
-                    <i
-                      aria-hidden="true"
-                      style="font-size: 1.5em; color: white"
-                      class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
-                    ></i>
-                  </div>
-                  <div class="col text-truncate">
-                    {{ imgsaved.file.name }}
-                  </div>
-                  <div
-                    (click)="deleteUpload(imgsaved)"
-                    class="col-auto text-center d-flex align-items-center pl-3"
-                  >
-                    <h6 class="text-primary-hr cursor-general my-auto">x</h6>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 text-left mb-3">
-        <div class="container-fluid">
-          <label *ngIf="objectImg.length == 0" class="titleColor">
-            <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-            <strong>{{
-              translate.app.frontEnd.pages.travel_management.travel.new_travel
-                .attach
-            }}</strong>
-          </label>
-          <app-file-upload
-            [drageable]="true"
-            [nameFile]="filequotation"
-            [extensions]="extensions"
-          ></app-file-upload>
-        </div>
-      </div>
-      <div class="col-12">
-        <label for="celulaInput" class="titleColor">
-          <i class="fa fa-fw fa-comment text-primary-hr"></i>
-          {{
-            translate.app.frontEnd.pages.requests_rh.forms_requests.observation
-          }}
-        </label>
-        <textarea
-          type="text"
-          rows="3"
-          style="height: auto !important;"
-          class="form-control"
-          [formControl]="forms.observation_request"
-        >
-        </textarea>
-      </div> -->
       <div class="col-md-12 mt-2">
         <div class="row justify-content-end">
           <div class="col-lg-3 col-md-6 col-lg-4 col-12">
@@ -324,10 +256,7 @@
               [attr.disabled]="validateForms ? null : true"
             >
               <i class="fa fa-fw fa-floppy-o"></i
-              >{{
-                translate.app.frontEnd.pages.requests_rh
-                  .forms_requests.save
-              }}
+              >{{ parseT('save') | translate }}
             </button>
             <button
               type="button"
@@ -335,10 +264,7 @@
               class="btn btn-warning btn-block"
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
-              >{{
-                translate.app.frontEnd.pages.requests_rh
-                  .forms_requests.loading
-              }}
+              >{{ parseT('loading') | translate }}
             </button>
           </div>
         </div>

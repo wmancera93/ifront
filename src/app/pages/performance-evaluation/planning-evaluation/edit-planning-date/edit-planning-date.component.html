@@ -23,10 +23,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.performance_evaluation
-              .planning_evaluation.edit_planning_date.tittle
-          }}
+          {{ parseT('tittle') | translate }}
         </h5>
         <button
           id="closeModalPlanning"
@@ -46,10 +43,7 @@
           >
             <div class="row border" style="margin-left: 2px">
               <h4>
-                {{
-                  translate.app.frontEnd.pages.performance_evaluation
-                    .planning_evaluation.edit_planning_date.sub_tittle
-                }}
+                {{ parseT('sub_tittle') | translate }}
               </h4>
             </div>
           </div>
@@ -64,10 +58,7 @@
           <div class="col-md-4 col-12 top-containter">
             <label for="dateBegin" class="font-title-general">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.performance_evaluation
-                  .planning_evaluation.edit_planning_date.date_begin
-              }}*
+              {{ parseT('date_begin') | translate }}*
             </label>
             <input
               type="date"
@@ -81,10 +72,7 @@
           <div class="col-md-4 col-12 top-containter">
             <label for="dateEnd" class="font-title-general">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              {{
-                translate.app.frontEnd.pages.performance_evaluation
-                  .planning_evaluation.edit_planning_date.date_end
-              }}*
+              {{ parseT('date_end') | translate }}*
             </label>
             <input
               type="date"
@@ -103,11 +91,7 @@
                   class="btn btn-success btn-block cursor-general"
                 >
                   <i class="fa fa-fw fa-floppy-o"></i
-                  >{{
-                    translate.app.frontEnd.pages
-                      .performance_evaluation.planning_evaluation
-                      .edit_planning_date.save
-                  }}
+                  >{{ parseT('save') | translate }}
                 </button>
                 <button
                   type="button"
@@ -115,11 +99,7 @@
                   class="btn btn-warning btn-block"
                 >
                   <i class="fa fa-fw fa-spinner fa-spin"></i
-                  >{{
-                    translate.app.frontEnd.pages
-                      .performance_evaluation.planning_evaluation
-                      .edit_planning_date.loading
-                  }}
+                  >{{ parseT('loading') | translate }}
                 </button>
               </div>
               <div class="col-lg-3 col-md-4 col-12">
@@ -129,11 +109,7 @@
                   aria-label="Close"
                 >
                   <i class="fa fa-fw fa-window-close"></i
-                  >{{
-                    translate.app.frontEnd.pages
-                      .performance_evaluation.planning_evaluation
-                      .edit_planning_date.button_cancel
-                  }}
+                  >{{ parseT('button_cancel') | translate }}
                 </button>
               </div>
             </div>

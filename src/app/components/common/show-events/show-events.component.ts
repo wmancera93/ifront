@@ -1,16 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { EventsEmployeeService } from '../../../services/shared/common/events-employee/events-employee.service';
-import { EventsEmployess } from '../../../models/common/widgets/widgets';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-show-events',
   templateUrl: './show-events.component.html',
-  styleUrls: ['./show-events.component.css']
+  styleUrls: ['./show-events.component.css'],
 })
 export class ShowEventsComponent implements OnInit {
-
   @Input('nameModal') nameModal: any;
 
   public targetModal = '';
@@ -20,24 +17,32 @@ export class ShowEventsComponent implements OnInit {
   public titleEvent: string;
   public eventIcon: string;
   public flagTypeOfEvent: boolean;
-  public translate: Translate = null;
-  public birthday: string;
 
-  constructor(public infoEventEmployee: EventsEmployeeService, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
-    this.birthday = this.translate.app.frontEnd.components.common.show_events.birthday;
-    this.infoEventEmployee.getInfoEventEmployee().subscribe((data: any) => {
-      this.objectInfoEvents = data.objectInfo;
-      this.titleEvent = this.objectInfoEvents[0].event;
-      this.eventIcon = this.objectInfoEvents[0].icon;
-      if (this.titleEvent === this.birthday) {
-        this.flagTypeOfEvent = true;
-      } else {
-        this.flagTypeOfEvent = false;
-      }
-      this.getShowInfo(data.modal);
-    });
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
 
+  parseT(key) {
+    return `components.common.show_events.${key}`;
+  }
+
+  constructor(
+    public infoEventEmployee: EventsEmployeeService,
+    public translate: TranslateService,
+  ) {
+    this.infoEventEmployee
+      .getInfoEventEmployee()
+      .subscribe((data: any) => {
+        this.objectInfoEvents = data.objectInfo;
+        this.titleEvent = this.objectInfoEvents[0].event;
+        this.eventIcon = this.objectInfoEvents[0].icon;
+        if (this.titleEvent === this.t('birthday')) {
+          this.flagTypeOfEvent = true;
+        } else {
+          this.flagTypeOfEvent = false;
+        }
+        this.getShowInfo(data.modal);
+      });
   }
 
   ngOnInit() {
@@ -46,7 +51,6 @@ export class ShowEventsComponent implements OnInit {
       this.btnModal = 'btn-' + data;
       this.nameThisModal = data;
     });
-
   }
 
   getShowInfo(modal?: any) {
@@ -54,7 +58,5 @@ export class ShowEventsComponent implements OnInit {
       document.getElementById('btn-' + modal).click();
       document.getElementById('bodyGeneral').removeAttribute('style');
     }
-
   }
-
 }

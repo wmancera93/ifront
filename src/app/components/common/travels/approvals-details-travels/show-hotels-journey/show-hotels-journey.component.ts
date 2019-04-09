@@ -1,63 +1,77 @@
 import { Component, OnInit } from '@angular/core';
 import { TravelService } from '../../../../../services/travel-management/travels/travel.service';
 import { TravelsService } from '../../../../../services/shared/travels/travels.service';
-import { Translate } from '../../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-show-hotels-journey',
   templateUrl: './show-hotels-journey.component.html',
-  styleUrls: ['./show-hotels-journey.component.css']
+  styleUrls: ['./show-hotels-journey.component.css'],
 })
 export class ShowHotelsJourneyComponent implements OnInit {
   public objectHotelJourney: any = null;
   public arrayHotel: any[] = [];
-  public translate: Translate = null;
 
-  constructor(public travelService: TravelService,
-    public travelsSharedService: TravelsService, public translateService: TranslateService) {
-      this.translate = this.translateService.getTranslate();
-      this.travelsSharedService.getHotelsByJourney().subscribe(
-        (data: any) => {
-          this.objectHotelJourney = data;
+  parseT(key) {
+    return `components.common.travels.approvals_details_travels.show_hotels_journey.${key}`;
+  }
 
-          document.getElementById('btn_close_aprovalstravels').click();
+  constructor(
+    public travelService: TravelService,
+    public travelsSharedService: TravelsService,
+  ) {
+    this.travelsSharedService
+      .getHotelsByJourney()
+      .subscribe((data: any) => {
+        this.objectHotelJourney = data;
 
-          setTimeout(() => {
-            if (document.getElementById('approvalHoteljourney_edit').className !== 'modal show') {
-              document.getElementById('btn_approvalHoteljourney_edit').click();
-              document.getElementById('bodyGeneral').removeAttribute('style');
-            }
+        document.getElementById('btn_close_aprovalstravels').click();
 
-            this.travelService.getHotelsByJourney(data.id_journey, data.id_travel).subscribe(
+        setTimeout(() => {
+          if (
+            document.getElementById('approvalHoteljourney_edit')
+              .className !== 'modal show'
+          ) {
+            document
+              .getElementById('btn_approvalHoteljourney_edit')
+              .click();
+            document
+              .getElementById('bodyGeneral')
+              .removeAttribute('style');
+          }
+
+          this.travelService
+            .getHotelsByJourney(data.id_journey, data.id_travel)
+            .subscribe(
               (show: any) => {
                 this.arrayHotel = show.data.hotels;
-
-              }, (error: any) => {
+              },
+              (error: any) => {
                 console.log(error);
-              }
+              },
             );
-          }, 100);
-
-
-        });
-    }
-
-  ngOnInit() {
+        }, 100);
+      });
   }
+
+  ngOnInit() {}
 
   returnTravel() {
-    if (document.getElementById('approvals_requests_travels').className !== 'modal show') {
-        document.getElementById('close_approvalHotel_journey').click();
-        setTimeout(() => {
-          document.getElementById('btn_approvals_requests_travels').click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
-        }, 100);
+    if (
+      document.getElementById('approvals_requests_travels')
+        .className !== 'modal show'
+    ) {
+      document.getElementById('close_approvalHotel_journey').click();
+      setTimeout(() => {
+        document
+          .getElementById('btn_approvals_requests_travels')
+          .click();
+        document
+          .getElementById('bodyGeneral')
+          .removeAttribute('style');
+      }, 100);
 
-        this.objectHotelJourney = null;
-        this.arrayHotel = [];
-      }
+      this.objectHotelJourney = null;
+      this.arrayHotel = [];
+    }
   }
-
-
 }

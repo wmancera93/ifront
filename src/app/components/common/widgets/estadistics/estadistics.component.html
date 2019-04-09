@@ -82,21 +82,14 @@
             (chartClick)="chartClicked($event)"
           ></canvas>
         </div>
-        <div
-          class="row"
-          style="margin-top: 20px"
-          *ngIf="translate !== null"
-        >
+        <div class="row" style="margin-top: 20px">
           <div class="col-6 text-left">
             <i
               class="fa fa-square"
               aria-hidden="true"
               style="color: #070B19"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_night_festive
-            }}
+            {{ parseT('hour_night_festive') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -104,10 +97,7 @@
               aria-hidden="true"
               style="color: #0A0A2A"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_diurnal
-            }}
+            {{ parseT('hour_diurnal') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -115,10 +105,7 @@
               aria-hidden="true"
               style="color: #0B0B3B"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_night_continue
-            }}
+            {{ parseT('hour_night_continue') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -126,10 +113,7 @@
               aria-hidden="true"
               style="color: #0B0B61"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_ordinary
-            }}
+            {{ parseT('hour_ordinary') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -137,10 +121,7 @@
               aria-hidden="true"
               style="color: #08088A"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_diurnal_festive
-            }}
+            {{ parseT('hour_diurnal_festive') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -148,10 +129,7 @@
               aria-hidden="true"
               style="color: #0404B4"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_night_ordinary
-            }}
+            {{ parseT('hour_night_ordinary') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -159,10 +137,7 @@
               aria-hidden="true"
               style="color: #0101DF"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_night
-            }}
+            {{ parseT('hour_night') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -170,10 +145,7 @@
               aria-hidden="true"
               style="color: #0000FF"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_field
-            }}
+            {{ parseT('hour_field') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -181,10 +153,7 @@
               aria-hidden="true"
               style="color: #2E2EFE"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_night_field
-            }}
+            {{ parseT('hour_night_field') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -192,10 +161,7 @@
               aria-hidden="true"
               style="color: #5858FA"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_continue_festive
-            }}
+            {{ parseT('hour_continue_festive') | translate }}
           </div>
           <div class="col-6 text-left">
             <i
@@ -203,10 +169,7 @@
               aria-hidden="true"
               style="color: #8181F7"
             ></i>
-            {{
-              translate.app.frontEnd.components.common.widgets
-                .estadistics.hour_planned
-            }}
+            {{ parseT('hour_planned') | translate }}
           </div>
         </div>
       </div>

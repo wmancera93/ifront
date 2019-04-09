@@ -13,10 +13,7 @@
     >
       <div class="col-12 col-lg-10 text-center text-lg-left">
         <h4 class="modal-title titleColor text-shadow">
-          {{
-            translate.app.frontEnd.pages.requests_rh.forms_requests
-              .tittle
-          }}
+          {{ parseT('tittle') | translate }}
           {{ formRequests.name | lowercase }}
         </h4>
       </div>
@@ -53,20 +50,14 @@
                 class="font-bold m-l-n top-form text-blue"
                 style="margin-right: -20px"
               >
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.days_available
-                }}
+                {{ parseT('days_available') | translate }}
               </h3>
               <h3
                 *ngIf="formRequests.available_days == 1"
                 class="font-bold m-l-n top-form text-blue"
                 style="margin-right: -20px"
               >
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.day_available
-                }}
+                {{ parseT('day_available') | translate }}
               </h3>
             </div>
           </div>
@@ -82,10 +73,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateBegin" class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{
-                    translate.app.frontEnd.pages.requests_rh
-                      .forms_requests.date_begin
-                  }}
+                  {{ parseT('date_begin') | translate }}
                   *
                 </label>
                 <input
@@ -99,10 +87,7 @@
               <div class="col-md-6 col-12 top-containter">
                 <label for="dateEnd" class="titleColor">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{
-                    translate.app.frontEnd.pages.requests_rh
-                      .forms_requests.date_end
-                  }}
+                  {{ parseT('date_end') | translate }}
                   *
                 </label>
                 <input
@@ -116,10 +101,7 @@
               <div class="col-md-12 col-12 top-containter">
                 <label for="celulaInput" class="titleColor">
                   <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                  {{
-                    translate.app.frontEnd.pages.requests_rh
-                      .forms_requests.observation
-                  }}
+                  {{ parseT('observation') | translate }}
                 </label>
                 <textarea
                   type="text"
@@ -141,10 +123,7 @@
                       class="btn btn-success btn-block"
                     >
                       <i class="fa fa-fw fa-floppy-o"></i
-                      >{{
-                        translate.app.frontEnd.pages.requests_rh
-                          .forms_requests.save
-                      }}
+                      >{{ parseT('save') | translate }}
                     </button>
                     <button
                       type="button"
@@ -152,10 +131,7 @@
                       class="btn btn-warning btn-block"
                     >
                       <i class="fa fa-fw fa-spinner fa-spin"></i
-                      >{{
-                        translate.app.frontEnd.pages.requests_rh
-                          .forms_requests.loading
-                      }}
+                      >{{ parseT('loading') | translate }}
                     </button>
                   </div>
                 </div>
@@ -194,20 +170,14 @@
                 class="font-bold m-l-n top-form text-blue"
                 style="margin-right: -20px"
               >
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.days_available
-                }}
+                {{ parseT('days_available') | translate }}
               </h3>
               <h3
                 *ngIf="formRequests.available_days == 1"
                 class="font-bold m-l-n top-form text-blue"
                 style="margin-right: -20px"
               >
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.day_available
-                }}
+                {{ parseT('day_available') | translate }}
               </h3>
             </div>
           </div>
@@ -224,10 +194,7 @@
             <div class="col-md-6 col-12 top-containter">
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.day_required
-                }}
+                {{ parseT('day_required') | translate }}
                 *
               </label>
               <input
@@ -243,10 +210,7 @@
             <div class="col-md-12 col-12 top-containter">
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.observation
-                }}
+                {{ parseT('observation') | translate }}
                 *
               </label>
               <textarea
@@ -269,10 +233,7 @@
                     class="btn btn-success btn-block"
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.save
-                    }}
+                    >{{ parseT('save') | translate }}
                   </button>
                   <button
                     type="button"
@@ -280,10 +241,7 @@
                     class="btn btn-warning btn-block"
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.loading
-                    }}
+                    >{{ parseT('loading') | translate }}
                   </button>
                 </div>
               </div>
@@ -302,7 +260,6 @@
           "
           [formRequests]="formRequests"
           (submit)="newRequest($event)"
-          [translate]="translate"
           [showSubmit]="showSubmit"
           (setModalState)="setModalState($event)"
         >
@@ -319,7 +276,6 @@
           "
           [formRequests]="formRequests"
           (submit)="newRequest($event)"
-          [translate]="translate"
           [showSubmit]="showSubmit"
           (setModalState)="setModalState($event)"
         >
@@ -332,7 +288,6 @@
           "
           [formRequests]="formRequests"
           (submit)="newRequest($event)"
-          [translate]="translate"
           [showSubmit]="showSubmit"
           (setModalState)="setModalState($event)"
         >
@@ -351,10 +306,7 @@
             <div class="col-md-6 col-12 top-containter">
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.date_begin
-                }}
+                {{ parseT('date_begin') | translate }}
                 *
               </label>
               <input
@@ -368,10 +320,7 @@
             <div class="col-md-6 col-12 top-containter">
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.date_end
-                }}
+                {{ parseT('date_end') | translate }}
                 *
               </label>
               <input
@@ -385,10 +334,7 @@
             <div class="col-md-12 col-12 top-containter">
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.message_attach
-                }}*
+                {{ parseT('message_attach') | translate }}*
               </label>
               <app-file-upload
                 [nameFile]="filePermisionMarriage"
@@ -398,10 +344,7 @@
             <div class="col-md-12 col-12 top-containter">
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.observation
-                }}
+                {{ parseT('observation') | translate }}
               </label>
               <textarea
                 type="text"
@@ -423,10 +366,7 @@
                     class="btn btn-success btn-block"
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.save
-                    }}
+                    >{{ parseT('save') | translate }}
                   </button>
                   <button
                     type="button"
@@ -434,10 +374,7 @@
                     class="btn btn-warning btn-block"
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.loading
-                    }}
+                    >{{ parseT('loading') | translate }}
                   </button>
                 </div>
               </div>
@@ -463,10 +400,7 @@
                     <i
                       class="fa fa-fw fa-calendar text-primary-hr"
                     ></i>
-                    {{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.date_begin
-                    }}
+                    {{ parseT('date_begin') | translate }}
                     *
                   </label>
                   <input
@@ -487,10 +421,7 @@
                     <i
                       class="fa fa-fw fa-calendar text-primary-hr"
                     ></i>
-                    {{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.date_end
-                    }}*
+                    {{ parseT('date_end') | translate }}*
                   </label>
                   <input
                     type="date"
@@ -511,10 +442,7 @@
                     <i
                       class="fa fa-fw fa-hourglass-start text-primary-hr"
                     ></i>
-                    {{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.hour_begin
-                    }}
+                    {{ parseT('hour_begin') | translate }}
                     *
                   </label>
                   <input
@@ -534,10 +462,7 @@
                     <i
                       class="fa fa-fw fa-hourglass-end text-primary-hr"
                     ></i>
-                    {{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.hour_end
-                    }}*
+                    {{ parseT('hour_end') | translate }}*
                   </label>
                   <input
                     type="time"
@@ -554,10 +479,7 @@
                     <i
                       class="fa fa-fw fa-comment text-primary-hr"
                     ></i>
-                    {{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.observation
-                    }}
+                    {{ parseT('observation') | translate }}
                   </label>
                   <textarea
                     type="text"
@@ -581,10 +503,7 @@
                         class="btn btn-success btn-block"
                       >
                         <i class="fa fa-fw fa-floppy-o"></i
-                        >{{
-                          translate.app.frontEnd.pages.requests_rh
-                            .forms_requests.save
-                        }}
+                        >{{ parseT('save') | translate }}
                       </button>
                       <button
                         type="button"
@@ -592,10 +511,7 @@
                         class="btn btn-warning btn-block"
                       >
                         <i class="fa fa-fw fa-spinner fa-spin"></i
-                        >{{
-                          translate.app.frontEnd.pages.requests_rh
-                            .forms_requests.loading
-                        }}
+                        >{{ parseT('loading') | translate }}
                       </button>
                     </div>
                   </div>
@@ -618,10 +534,7 @@
             <div class="col-md-6 col-12 top-containter">
               <label for="dateBegin" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.hour_begin
-                }}*
+                {{ parseT('hour_begin') | translate }}*
               </label>
               <input
                 type="date"
@@ -634,10 +547,7 @@
             <div class="col-md-6 col-12 top-containter">
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.date_end
-                }}
+                {{ parseT('date_end') | translate }}
                 *
               </label>
               <input
@@ -651,10 +561,7 @@
             <div class="col-md-12 col-12 top-containter">
               <label for="dateEnd" class="titleColor">
                 <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.message_attach
-                }}*
+                {{ parseT('message_attach') | translate }}*
               </label>
               <app-file-upload
                 [nameFile]="fileInability"
@@ -664,10 +571,7 @@
             <div class="col-md-12 col-12 top-containter">
               <label for="celulaInput" class="titleColor">
                 <i class="fa fa-fw fa-comment text-primary-hr"></i>
-                {{
-                  translate.app.frontEnd.pages.requests_rh
-                    .forms_requests.observation
-                }}
+                {{ parseT('observation') | translate }}
               </label>
               <textarea
                 type="text"
@@ -689,10 +593,7 @@
                     class="btn btn-success btn-block"
                   >
                     <i class="fa fa-fw fa-floppy-o"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.save
-                    }}
+                    >{{ parseT('save') | translate }}
                   </button>
                   <button
                     type="button"
@@ -700,10 +601,7 @@
                     class="btn btn-warning btn-block"
                   >
                     <i class="fa fa-fw fa-spinner fa-spin"></i
-                    >{{
-                      translate.app.frontEnd.pages.requests_rh
-                        .forms_requests.loading
-                    }}
+                    >{{ parseT('loading') | translate }}
                   </button>
                 </div>
               </div>
@@ -719,10 +617,7 @@
         (click)="modalActions.close()"
       >
         <h6>
-          {{
-            translate.app.frontEnd.pages.requests_rh.forms_requests
-              .button_close
-          }}
+          {{ parseT('button_close') | translate }}
         </h6>
       </div>
     </div>

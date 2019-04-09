@@ -309,7 +309,7 @@ export class NewAdvancesComponent implements OnInit {
   }
 
   aditionAdvance(dataAgree) {
-    debugger;
+      
     const dayPayment = dataAgree.date.split('-');
     const dayFinally =
       dayPayment[2] + '/' + dayPayment[1] + '/' + dayPayment[0];

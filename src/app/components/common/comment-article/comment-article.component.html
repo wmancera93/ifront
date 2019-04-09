@@ -48,10 +48,7 @@
             <div class="col-12">
               <div class="row">
                 <div class=" col-3 font-title-general">
-                  {{
-                    translate.app.frontEnd.components.common
-                      .comment_article.themes
-                  }}:
+                  {{ parseT('themes') | translate }}:
                 </div>
                 &nbsp;&nbsp; &nbsp;&nbsp;
                 <div
@@ -107,16 +104,10 @@
                   </div>
                   <div>
                     <div *ngIf="!is_collapse" style="color:white;">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .comment_article.see_comments
-                      }}
+                      {{ parseT('see_comments') | translate }}
                     </div>
                     <div *ngIf="is_collapse" style="color:white;">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .comment_article.hide_comments
-                      }}
+                      {{ parseT('hide_comments') | translate }}
                     </div>
                   </div>
                 </div>
@@ -128,16 +119,10 @@
               >
                 <i class="fa fa-eye"></i>
                 {{ infoArticle.total_views }}
-                {{
-                  translate.app.frontEnd.components.common
-                    .comment_article.views
-                }}
+                {{ parseT('views') | translate }}
                 <i class="fa fa-comments-o"></i>
                 {{ infoArticle.total_comments }}
-                {{
-                  translate.app.frontEnd.components.common
-                    .comment_article.comment
-                }}
+                {{ parseT('comment') | translate }}
               </div>
             </div>
           </div>
@@ -161,10 +146,7 @@
                       comment.created_by.short_name
                     }}</strong>
                     {{ infoArticle.total_comments }}
-                    {{
-                      translate.app.frontEnd.components.common
-                        .comment_article.the_day
-                    }}
+                    {{ parseT('the_day') | translate }}
                     {{
                       comment.created_at | date: 'dd/MM/yyyy HH:mm:ss'
                     }}
@@ -226,10 +208,7 @@
                 (click)="sendComment()"
               >
                 <i class="fa fa-fw fa-floppy-o"></i
-                >{{
-                  translate.app.frontEnd.components.common
-                    .comment_article.save
-                }}
+                >{{ parseT('save') | translate }}
               </button>
               <button
                 type="button"
@@ -237,10 +216,7 @@
                 class="btn btn-warning btn-block"
               >
                 <i class="fa fa-fw fa-spinner fa-spin"></i
-                >{{
-                  translate.app.frontEnd.components.common
-                    .comment_article.loading
-                }}
+                >{{ parseT('loading') | translate }}
               </button>
             </div>
           </div>
@@ -252,10 +228,7 @@
           data-dismiss="modal"
         >
           <h6>
-            {{
-              translate.app.frontEnd.components.common.comment_article
-                .btn_close
-            }}
+            {{ parseT('btn_close') | translate }}
           </h6>
         </div>
       </div>

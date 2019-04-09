@@ -26,10 +26,7 @@
           class="modal-title titleColor text-shadow"
           id="exampleModalLabel"
         >
-          {{
-            translate.app.frontEnd.pages.travel_management.travel
-              .edit_travel.tittle
-          }}
+          {{ parseT('tittle') | translate }}
           # {{ ticket }}
         </h5>
         <button
@@ -59,8 +56,7 @@
           >
             <label class="titleColor">
               <strong class="text-primary-hr">{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.ticket_sap
+                parseT('ticket_sap') | translate
               }}</strong>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               <strong>{{
@@ -74,10 +70,7 @@
             *ngIf="eployee_selected_current !== null"
           >
             <label class="titleColor">
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.travel_third
-              }}:
+              {{ parseT('travel_third') | translate }}:
               <i class="fa fa-fw fa fa-user text-primary-hr"></i>
               <strong>{{
                 eployee_selected_current.name_complete
@@ -95,8 +88,7 @@
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong
                     >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.message_third
+                      parseT('message_third') | translate
                     }}:</strong
                   >
                 </label>
@@ -142,10 +134,7 @@
                   class="titleColor"
                   *ngIf="eployee_selected !== null"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.travel_for_third
-                  }}:
+                  {{ parseT('travel_for_third') | translate }}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
                   <strong>{{
                     eployee_selected.name_complete
@@ -158,10 +147,7 @@
                   style="text-decoration: underline  rgb(185, 190, 206)!important"
                   (click)="deleteEmployeeThird()"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.erase_third
-                  }}
+                  {{ parseT('erase_third') | translate }}
                 </span>
               </div>
             </div>
@@ -173,10 +159,7 @@
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.type_travel
-                    }}:</strong
+                    >{{ parseT('type_travel') | translate }}:</strong
                   >
                 </label>
                 <select
@@ -188,8 +171,7 @@
                   paceholder="Seleccione"
                 >
                   <option value="">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.option_select
+                    parseT('option_select') | translate
                   }}</option>
                   <option
                     *ngFor="let nameTravel of travel_types"
@@ -204,10 +186,7 @@
                     class="fa fa-fw fa-calendar-check-o text-primary-hr"
                   ></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.date_begin
-                    }}:*</strong
+                    >{{ parseT('date_begin') | translate }}:*</strong
                   >
                 </label>
                 <input
@@ -230,10 +209,7 @@
                     class="fa fa-fw fa-calendar-minus-o text-primary-hr"
                   ></i>
                   <strong
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.date_end
-                    }}:*</strong
+                    >{{ parseT('date_end') | translate }}:*</strong
                   >
                 </label>
                 <input
@@ -254,11 +230,7 @@
             <label for="celulaInput" class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
               <strong
-                >{{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.edit_travel.reason_travel
-                }}
-                *</strong
+                >{{ parseT('reason_travel') | translate }} *</strong
               >
             </label>
             <textarea
@@ -292,8 +264,7 @@
               for="manutencionCheck"
             >
               <strong>{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.check_maintenance
+                parseT('check_maintenance') | translate
               }}</strong>
             </label>
           </div>
@@ -303,12 +274,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-rocket text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.type_legal
-                    }}:*</a
-                  >
+                  <a>{{ parseT('type_legal') | translate }}:*</a>
                 </label>
                 <select
                   *ngIf="legal_travels.length > 0"
@@ -328,12 +294,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-ship text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.type_especific
-                    }}:*</a
-                  >
+                  <a>{{ parseT('type_especific') | translate }}:*</a>
                 </label>
                 <select
                   *ngIf="trips_specific.length > 0"
@@ -345,8 +306,7 @@
                   "
                 >
                   <option value="-1">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.option_select
+                    parseT('option_select') | translate
                   }}</option>
                   <option
                     *ngFor="let specificTravel of trips_specific"
@@ -358,12 +318,7 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-sitemap text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.type_activity
-                    }}:*</a
-                  >
+                  <a>{{ parseT('type_activity') | translate }}:*</a>
                 </label>
                 <select
                   *ngIf="trips_activities.length > 0"
@@ -375,8 +330,7 @@
                   "
                 >
                   <option value="-1">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.option_select
+                    parseT('option_select') | translate
                   }}</option>
                   <option
                     *ngFor="let activitiesTravel of trips_activities"
@@ -397,8 +351,7 @@
                   ></i>
                   <a
                     >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.imputation_element
+                      parseT('imputation_element') | translate
                     }}:*</a
                   >
                 </label>
@@ -430,12 +383,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.cost_center
-                    }}:*</a
-                  >
+                  <a>{{ parseT('cost_center') | translate }}:*</a>
                 </label>
                 <form name="searchAutoCompleteCost">
                   <p>
@@ -480,12 +428,7 @@
                   <i
                     class="fa fa-fw fa-usd text-primary-hr detectLetter"
                   ></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.order
-                    }}:*</a
-                  >
+                  <a>{{ parseT('order') | translate }}:*</a>
                 </label>
                 <form name="searchAutoCompleteOrden">
                   <p>
@@ -522,12 +465,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.graph
-                    }}:*</a
-                  >
+                  <a>{{ parseT('graph') | translate }}:*</a>
                 </label>
                 <form name="searchAutoCompleteGraph">
                   <p>
@@ -570,12 +508,7 @@
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                  <a
-                    >{{
-                      translate.app.frontEnd.pages.travel_management
-                        .travel.edit_travel.operation
-                    }}:*</a
-                  >
+                  <a>{{ parseT('operation') | translate }}:*</a>
                 </label>
                 <select
                   [attr.disabled]="
@@ -587,8 +520,7 @@
                   "
                 >
                   <option value="-1">{{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.option_select
+                    parseT('option_select') | translate
                   }}</option>
                   <option
                     *ngFor="let operationsTravels of operations"
@@ -608,10 +540,7 @@
           >
             <div class="row border" style="margin-left: 15px">
               <h4>
-                {{
-                  translate.app.frontEnd.pages.travel_management
-                    .travel.edit_travel.trayect
-                }}
+                {{ parseT('trayect') | translate }}
               </h4>
             </div>
           </div>
@@ -659,31 +588,19 @@
                         >
                       </h6>
                       <h6 *ngIf="imgsaved.name === null">
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .no_name
-                        }}
+                        {{ parseT('no_name') | translate }}
                       </h6>
                       <p
                         class="badge badge-light wg-hover-general"
                         (click)="viewCotization(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .see_attach
-                        }}
+                        {{ parseT('see_attach') | translate }}
                       </p>
                       <p
                         class="badge badge-light wg-hover-general"
                         (click)="downloadCotization(imgsaved)"
                       >
-                        {{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .download_attach
-                        }}
+                        {{ parseT('download_attach') | translate }}
                       </p>
                     </div>
                     <div class="col-1 text-center">
@@ -711,8 +628,7 @@
                         class="fa fa-fw fa-check text-primary-hr"
                       ></i>
                       <strong>{{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.edit_travel.attach_saved
+                        parseT('attach_saved') | translate
                       }}</strong>
                     </label>
                   </div>
@@ -822,8 +738,7 @@
                         class="fa fa-fw fa-paperclip text-primary-hr"
                       ></i>
                       <strong>{{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.edit_travel.attach
+                        parseT('attach') | translate
                       }}</strong>
                     </label>
                     <app-file-upload
@@ -838,26 +753,17 @@
             <div class="row justify-content-end">
               <div class="col-lg-3 col-md-4 col-12">
                 <h5 *ngIf="bedit">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.label_edit
-                  }}
+                  {{ parseT('label_edit') | translate }}
                 </h5>
                 <h5 class="titleColor" *ngIf="bnew">
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.label_create
-                  }}
+                  {{ parseT('label_create') | translate }}
                 </h5>
                 <button
                   *ngIf="!bedit && !bnew"
                   class="btn btn-block btn-primary text-center"
                   (click)="colapseEdit()"
                 >
-                  {{
-                    translate.app.frontEnd.pages.travel_management
-                      .travel.edit_travel.label_create
-                  }}
+                  {{ parseT('label_create') | translate }}
                 </button>
                 <button
                   id="edit_funtionTravel"
@@ -880,10 +786,7 @@
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-bus text-primary-hr"></i>
                     <strong
-                      >{{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.edit_travel.transport
-                      }}:</strong
+                      >{{ parseT('transport') | translate }}:</strong
                     >
                   </label>
                 </div>
@@ -915,10 +818,7 @@
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-car text-primary-hr"></i>
                     <strong
-                      >{{
-                        translate.app.frontEnd.pages.travel_management
-                          .travel.edit_travel.mileage
-                      }}:</strong
+                      >{{ parseT('mileage') | translate }}:</strong
                     >
                   </label>
                 </div>
@@ -943,9 +843,7 @@
                     <div class="col-12">
                       <div class="border">
                         <strong class="text-primary-hr">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .origin_place
+                          parseT('origin_place') | translate
                         }}</strong>
                       </div>
                     </div>
@@ -961,13 +859,7 @@
                         <i
                           class="fa fa-fw fa fa-font-awesome text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .country
-                          }}:</a
-                        >
+                        <a>{{ parseT('country') | translate }}:</a>
                       </label>
                       <select
                         [attr.disabled]="
@@ -985,9 +877,7 @@
                         "
                       >
                         <option value="-1">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="let nameCountry of countries"
@@ -1004,13 +894,7 @@
                         <i
                           class="fa fa-fw fa fa-dot-circle-o text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .region
-                          }}:</a
-                        >
+                        <a>{{ parseT('region') | translate }}:</a>
                       </label>
                       <select
                         [attr.disabled]="
@@ -1022,9 +906,7 @@
                         "
                       >
                         <option value="-1">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="let nameState of stateLocations"
@@ -1041,13 +923,7 @@
                         <i
                           class="fa fa-fw fa-paper-plane text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .place
-                          }}:</a
-                        >
+                        <a>{{ parseT('place') | translate }}:</a>
                       </label>
                       <input
                         type="text"
@@ -1074,9 +950,7 @@
                         ></i>
                         <a
                           >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .origin_terminal
+                            parseT('origin_terminal') | translate
                           }}:</a
                         >
                       </label>
@@ -1090,9 +964,7 @@
                         "
                       >
                         <option value="-1">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="
@@ -1113,9 +985,7 @@
                         ></i>
                         <a>
                           {{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .date_begin_trayect
+                            parseT('date_begin_trayect') | translate
                           }}
                           *</a
                         >
@@ -1145,11 +1015,7 @@
                           class="fa fa-fw fa fa-clock-o text-primary-hr"
                         ></i>
                         <a>
-                          {{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .hour_begin
-                          }}
+                          {{ parseT('hour_begin') | translate }}
                           *</a
                         >
                       </label>
@@ -1179,9 +1045,7 @@
                     <div class="col-12">
                       <div class="border">
                         <strong class="text-primary-hr">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .destination_place
+                          parseT('destination_place') | translate
                         }}</strong>
                       </div>
                     </div>
@@ -1197,13 +1061,7 @@
                         <i
                           class="fa fa-fw fa fa-font-awesome text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .country
-                          }}:</a
-                        >
+                        <a>{{ parseT('country') | translate }}:</a>
                       </label>
                       <select
                         [attr.disabled]="
@@ -1238,13 +1096,7 @@
                         <i
                           class="fa fa-fw fa fa-dot-circle-o text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .region
-                          }}:</a
-                        >
+                        <a>{{ parseT('region') | translate }}:</a>
                       </label>
                       <select
                         [attr.disabled]="
@@ -1271,13 +1123,7 @@
                         <i
                           class="fa fa-fw fa-paper-plane text-primary-hr"
                         ></i>
-                        <a
-                          >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .place
-                          }}:</a
-                        >
+                        <a>{{ parseT('place') | translate }}:</a>
                       </label>
                       <input
                         type="text"
@@ -1304,9 +1150,7 @@
                         ></i>
                         <a
                           >{{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .origin_terminal
+                            parseT('origin_terminal') | translate
                           }}:</a
                         >
                       </label>
@@ -1324,9 +1168,7 @@
                         "
                       >
                         <option value="-1">{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .option_select
+                          parseT('option_select') | translate
                         }}</option>
                         <option
                           *ngFor="
@@ -1346,11 +1188,7 @@
                           class="fa fa-fw fa-calendar text-primary-hr"
                         ></i>
                         <a>
-                          {{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .date_end_trayect
-                          }}
+                          {{ parseT('date_end_trayect') | translate }}
                           *</a
                         >
                       </label>
@@ -1379,11 +1217,7 @@
                           class="fa-fw fa fa-clock-o text-primary-hr"
                         ></i>
                         <a>
-                          {{
-                            translate.app.frontEnd.pages
-                              .travel_management.travel.edit_travel
-                              .hour_end
-                          }}
+                          {{ parseT('hour_end') | translate }}
                           *</a
                         >
                       </label>
@@ -1491,9 +1325,7 @@
                         data-target="#collapseTravel"
                       >
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .btn_add_trayect
+                          parseT('btn_add_trayect') | translate
                         }}
                       </button>
                     </div>
@@ -1511,9 +1343,7 @@
                         data-target="#collapseTravel"
                       >
                         <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .btn_add_changes
+                          parseT('btn_add_changes') | translate
                         }}
                       </button>
                     </div>
@@ -1526,9 +1356,7 @@
                       >
                         <i class="fa fa-fw fa-fw fa-window-close"></i
                         >&nbsp;&nbsp;{{
-                          translate.app.frontEnd.pages
-                            .travel_management.travel.edit_travel
-                            .button_cancel
+                          parseT('button_cancel') | translate
                         }}
                       </button>
                     </div>
@@ -1539,10 +1367,7 @@
           </div>
           <div class="col-12" style="margin-top: 15px">
             <h6>
-              {{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.comments
-              }}
+              {{ parseT('comments') | translate }}
             </h6>
             <ckeditor
               debounce="100"
@@ -1567,8 +1392,7 @@
               (click)="newEditTravel(formTravelManagement.value)"
             >
               <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.save
+                parseT('save') | translate
               }}
             </button>
             <button
@@ -1577,10 +1401,7 @@
               class="btn btn-warning btn-block"
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
-              >&nbsp;&nbsp;{{
-                translate.app.frontEnd.pages.travel_management.travel
-                  .edit_travel.loading
-              }}
+              >&nbsp;&nbsp;{{ parseT('loading') | translate }}
             </button>
           </div>
         </div>

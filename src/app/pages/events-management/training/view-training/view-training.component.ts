@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TrainingSharedService } from '../../../../services/shared/common/training-events/training-shared.service';
 import { TrainingService } from '../../../../services/training/training.service';
 import { TrainingDetail } from '../../../../models/common/events_management/training/training';
-import { State } from '../../../../../../node_modules/ngx-chips/core/providers/drag-provider';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { DomSanitizer } from '../../../../../../node_modules/@angular/platform-browser';
 import { EventsEmployeeService } from '../../../../services/shared/common/events-employee/events-employee.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-training',
@@ -23,8 +21,15 @@ export class ViewTrainingComponent implements OnInit {
   public urlPrevisualize: string;
   public flagPDF = false;
   public countAfterEval = 0;
-  public translate: Translate = null;
   public placeholder_observations: string;
+
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
+
+  parseT(key) {
+    return `pages.events_management.training.view_training.${key}`;
+  }
 
   constructor(
     public trainingSharedService: TrainingSharedService,
@@ -32,21 +37,20 @@ export class ViewTrainingComponent implements OnInit {
     public alert: AlertsService,
     public sanitizer: DomSanitizer,
     public eventsEmployeeService: EventsEmployeeService,
-    public translateService: TranslateService,
+    public translate: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
-    this.placeholder_observations = this.translate.app.frontEnd.pages.events_management.training.view_training.placeholder_observations;
-
     this.trainingSharedService
       .getDataTraining()
       .subscribe((activeModal: any) => {
         if (this.countAfterEval === 0) {
           if (
-            document.getElementById('modal_viewTraining').className !==
-            'modal show'
+            document.getElementById('modal_viewTraining')
+              .className !== 'modal show'
           ) {
             document.getElementById('btn-viewTraining').click();
-            document.getElementById('bodyGeneral').removeAttribute('style');
+            document
+              .getElementById('bodyGeneral')
+              .removeAttribute('style');
             this.idTraining = activeModal;
             this.trainingService
               .getTrainingEventsByID(activeModal)
@@ -83,10 +87,8 @@ export class ViewTrainingComponent implements OnInit {
             const alertWarning: Alerts[] = [
               {
                 type: 'success',
-                title: this.translate.app.frontEnd.pages.events_management
-                  .training.view_training.title_confirmation_ts,
-                message: this.translate.app.frontEnd.pages.events_management
-                  .training.view_training.text_status_training,
+                title: this.t('title_confirmation_ts'),
+                message: this.t('text_status_training'),
                 confirmation: false,
                 typeConfirmation: '',
               },
@@ -100,8 +102,7 @@ export class ViewTrainingComponent implements OnInit {
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
-              title: this.translate.app.frontEnd.pages.events_management
-                .training.view_training.title_warning_ts,
+              title: this.t('title_warning_ts'),
               message: error.json().errors.toString(),
               confirmation: false,
               typeConfirmation: '',

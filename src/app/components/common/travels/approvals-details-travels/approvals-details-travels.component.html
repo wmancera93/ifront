@@ -37,11 +37,7 @@
                 <div class="row">
                   <div class="col-12">
                     <p class="font-title-general tops">
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .travel_requests
-                      }}
+                      {{ parseT('travel_requests') | translate }}
                       <i class="fa fa-hashtag text-primary-hr"></i>
                       {{ approvals[0].travel_request.ticket }}
                     </p>
@@ -49,11 +45,7 @@
                   <div class="col-12">
                     <h3 class="font-color-default tops">
                       <i class="fa fa-user text-primary-hr"></i>
-                      {{
-                        translate.app.frontEnd.components.common
-                          .travels.approvals_details_travels
-                          .applicants
-                      }}
+                      {{ parseT('applicants') | translate }}
                     </h3>
                   </div>
                   <div class="col-12 center-img-employee tops">
@@ -109,10 +101,7 @@
                   <div class="col-12 text-md-left">
                     <div class="row justify-content-left">
                       <h3 class="font-color-default col-md-2 col-4">
-                        {{
-                          translate.app.frontEnd.components.common
-                            .travels.approvals_details_travels.status
-                        }}:
+                        {{ parseT('status') | translate }}:
                       </h3>
                       <h6
                         class="col-4"
@@ -193,11 +182,7 @@
                           <i
                             class=" font-color-default fa fa-fw fa-calendar"
                           ></i>
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .date_begin
-                          }}:
+                          {{ parseT('date_begin') | translate }}:
                           <span style="font-weight: 100 !important">{{
                             approvals[0].travel_request
                               .date_begin_format
@@ -215,11 +200,7 @@
                           <i
                             class=" font-color-default fa fa-fw fa-calendar"
                           ></i>
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .date_end
-                          }}:
+                          {{ parseT('date_end') | translate }}:
                           <span style="font-weight: 100 !important">{{
                             approvals[0].travel_request
                               .date_end_format
@@ -248,11 +229,7 @@
                           <i
                             class=" font-color-default fa fa-fw fa-calendar"
                           ></i>
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .upgrade
-                          }}:
+                          {{ parseT('upgrade') | translate }}:
                           <span style="font-weight: 100 !important">{{
                             approvals[0].travel_request.updated_date
                           }}</span>
@@ -269,11 +246,7 @@
                           <i
                             class=" font-color-default fa fa-fw fa-calendar"
                           ></i>
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .create
-                          }}:
+                          {{ parseT('create') | translate }}:
                           <span style="font-weight: 100 !important">{{
                             approvals[0].travel_request.created_date
                           }}</span>
@@ -284,11 +257,7 @@
                           <i
                             class="fa fa-fw fa-users font-color-default"
                           ></i>
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .approvers
-                          }}:
+                          {{ parseT('approvers') | translate }}:
                           <span style="font-weight: 100 !important">{{
                             objectApproval[0].approvers_to_json.length
                           }}</span>
@@ -312,11 +281,7 @@
                           aria-expanded="false"
                           aria-controls="collapseOne"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .see_travels
-                          }}
+                          {{ parseT('see_travels') | translate }}
                         </p>
                       </div>
                       <div
@@ -343,12 +308,7 @@
                               <i
                                 class="fa fa-fw fa-paperclip font-color-default"
                               ></i>
-                              {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .see_attach
-                              }}:
+                              {{ parseT('see_attach') | translate }}:
                             </p>
                             <div class="row text-left">
                               <div
@@ -406,11 +366,7 @@
                           aria-expanded="false"
                           aria-controls="collapseTwo"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .see_advance
-                          }}
+                          {{ parseT('see_advance') | translate }}
                         </p>
                       </div>
                       <div
@@ -442,11 +398,7 @@
                           aria-expanded="false"
                           aria-controls="collapseThree"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .see_spend
-                          }}
+                          {{ parseT('see_spend') | translate }}
                         </p>
                       </div>
                       <div
@@ -481,10 +433,8 @@
                                 class="fa fa-fw fa-paperclip font-color-default"
                               ></i>
                               {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .see_attach_spend
+                                parseT('see_attach_spend')
+                                  | translate
                               }}:
                             </p>
                             <div class="row text-left">
@@ -537,11 +487,7 @@
                   >
                     <div class="row justify-content-left tops">
                       <h3 class="font-color-default col-2">
-                        {{
-                          translate.app.frontEnd.components.common
-                            .travels.approvals_details_travels
-                            .approver
-                        }}:
+                        {{ parseT('approver') | translate }}:
                       </h3>
                     </div>
                     <div class="row justify-content-between">
@@ -595,11 +541,7 @@
                           data-toggle="tab"
                           href="#Approval"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .request_manage
-                          }}
+                          {{ parseT('request_manage') | translate }}
                         </a>
                       </li>
                       <li
@@ -614,11 +556,7 @@
                           data-toggle="tab"
                           href="#Detail"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .see_details
-                          }}
+                          {{ parseT('see_details') | translate }}
                         </a>
                       </li>
                     </ul>
@@ -640,11 +578,7 @@
                           data-toggle="tab"
                           href="#Detail"
                         >
-                          {{
-                            translate.app.frontEnd.components.common
-                              .travels.approvals_details_travels
-                              .see_details
-                          }}
+                          {{ parseT('see_details') | translate }}
                           {{ approvals[0].approver_platform }}
                         </a>
                       </li>
@@ -686,11 +620,7 @@
                                 (click)="aceptPrerequisit()"
                               >
                                 <i class="fa fa-fw fa-check"></i>
-                                {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels.accept
-                                }}
+                                {{ parseT('accept') | translate }}
                               </div>
                             </div>
                           </div>
@@ -699,20 +629,10 @@
                           <div class="row justify-content-center">
                             <div class="col-lg-6 col-md-6 col-8">
                               <span *ngIf="switchTravels == 'off'">
-                                {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .rejected
-                                }}
+                                {{ parseT('rejected') | translate }}
                               </span>
                               <span *ngIf="switchTravels == 'on'">
-                                {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .approved
-                                }}
+                                {{ parseT('approved') | translate }}
                               </span>
                             </div>
                             <div class="col-4">
@@ -743,12 +663,7 @@
                               </div>
                             </div>
                             <div class="col-12 text-left">
-                              {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .description
-                              }}
+                              {{ parseT('description') | translate }}
                             </div>
                             <div class="col-12">
                               <textarea
@@ -768,11 +683,7 @@
                                 "
                               >
                                 <i class="fa fa-fw fa-floppy-o"></i
-                                >{{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels.save
-                                }}
+                                >{{ parseT('save') | translate }}
                               </button>
                               <button
                                 type="button"
@@ -782,11 +693,7 @@
                                 <i
                                   class="fa fa-fw fa-spinner fa-spin"
                                 ></i
-                                >{{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels.loading
-                                }}
+                                >{{ parseT('loading') | translate }}
                               </button>
                             </div>
                           </div>
@@ -820,31 +727,21 @@
                                 aria-hidden="true"
                               ></i>
                               {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .approver_level
+                                parseT('approver_level') | translate
                               }}
                               {{ details.approver_to_json.level }}
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
                                 {{ details.status }}
-                                {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels.for
-                                }}
+                                {{ parseT('for') | translate }}
                                 {{ details.approver_to_json.name }}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
                                 {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .description
+                                  parseT('description') | translate
                                 }}:
                               </h3>
                             </div>
@@ -859,10 +756,8 @@
                               *ngIf="details.observation == ''"
                             >
                               {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .negative_observation
+                                parseT('negative_observation')
+                                  | translate
                               }}
                             </div>
                           </div>
@@ -879,10 +774,8 @@
                             >
                               <h3 class="font-color-default">
                                 {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .negative_detail
+                                  parseT('negative_detail')
+                                    | translate
                                 }}
                               </h3>
                             </div>
@@ -922,10 +815,7 @@
                                 aria-hidden="true"
                               ></i>
                               {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .approver_level
+                                parseT('approver_level') | translate
                               }}
                               {{ details.approver_to_json.level }}
                             </div>
@@ -933,21 +823,14 @@
                               <h3 class="font-color-default">
                                 {{ details.status }}
                                 {{ details.status }}
-                                {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels.for
-                                }}
+                                {{ parseT('for') | translate }}
                                 {{ details.approver_to_json.name }}
                               </h3>
                             </div>
                             <div class="col-12 text-left">
                               <h3 class="font-color-default">
                                 {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .description
+                                  parseT('description') | translate
                                 }}:
                               </h3>
                             </div>
@@ -962,10 +845,8 @@
                               *ngIf="details.observation == ''"
                             >
                               {{
-                                translate.app.frontEnd.components
-                                  .common.travels
-                                  .approvals_details_travels
-                                  .negative_observation
+                                parseT('negative_observation')
+                                  | translate
                               }}
                             </div>
                           </div>
@@ -982,10 +863,8 @@
                             >
                               <h3 class="font-color-default">
                                 {{
-                                  translate.app.frontEnd.components
-                                    .common.travels
-                                    .approvals_details_travels
-                                    .negative_detail
+                                  parseT('negative_detail')
+                                    | translate
                                 }}
                               </h3>
                             </div>
