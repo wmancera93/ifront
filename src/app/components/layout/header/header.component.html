@@ -43,21 +43,20 @@
         </div>
       </div>
       <!-- test  -->
-      <select #langSelect (change)="translate.use(langSelect.value)">
-        <option
-          *ngFor="let lang of translate.getLangs()"
-          [value]="lang"
-          [selected]="lang === translate.currentLang"
-          >{{ lang }}</option
+      <div class="col">
+        <select
+          #langSelect
+          (change)="translate.use(langSelect.value)"
         >
-      </select>
-      <!-- end test  -->
-      <div
-        class="hideText col-md-6 col-lg-6 col-xl-9 col-6 align-self-center title"
-        *ngIf="!showMenu"
-      >
-        <div class="hideText font-size-responsive"></div>
+          <option
+            *ngFor="let lang of translate.getLangs()"
+            [value]="lang"
+            [selected]="lang === translate.currentLang"
+            >{{ lang }}</option
+          >
+        </select>
       </div>
+      <!-- end test  -->
       <div
         class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center"
         *ngIf="!showMenu"

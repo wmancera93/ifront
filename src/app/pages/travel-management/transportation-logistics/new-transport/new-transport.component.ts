@@ -14,8 +14,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -31,7 +29,6 @@ export class NewTransportComponent implements OnInit, OnDestroy {
 
   public formRequests: TypesRequests = null;
   public showSubmit = true;
-  public translate: Translate = null;
   public form: any;
   public stepActive = 0;
 
@@ -57,10 +54,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public formDataService: FormDataService,
     public stylesExplorerService: StylesExplorerService,
-    public translateService: TranslateService,
   ) {
-    this.translate = this.translateService.getTranslate();
-
     this.servicesList = [
       { id: 1, name: 'Preescolar' },
       { id: 2, name: 'Primaria' },
@@ -150,7 +144,9 @@ export class NewTransportComponent implements OnInit, OnDestroy {
 
   removeTrayect(keyTrayect) {
     this.arrayTrayects.splice(
-      this.arrayTrayects.findIndex(filter => filter.key === keyTrayect),
+      this.arrayTrayects.findIndex(
+        filter => filter.key === keyTrayect,
+      ),
       1,
     );
   }
