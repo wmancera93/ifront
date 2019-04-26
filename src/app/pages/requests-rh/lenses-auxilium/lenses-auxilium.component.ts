@@ -119,6 +119,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
       file: [],
+      total_ammount: '',
       observation_request: [
         '',
         (control: AbstractControl) => {
