@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { EditArticleService } from '../../../../services/shared/common/edit-article/edit-article.service';
 import { MyPublicationsService } from '../../../../services/billboard/my-publications/my-publications.service';
 import { FileUploader } from 'ng2-file-upload';
@@ -10,13 +10,14 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { BillboardService } from '../../../../services/shared/common/billboard/billboard.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-edit-publication',
   templateUrl: './edit-publication.component.html',
   styleUrls: ['./edit-publication.component.css'],
 })
-export class EditPublicationComponent implements OnInit {
+export class EditPublicationComponent implements OnInit, OnDestroy {
   public idEdit: number;
   public infoMyPublication: any;
   public showSubmit = true;
@@ -34,6 +35,7 @@ export class EditPublicationComponent implements OnInit {
   public labelTags = '';
   public newImage: any;
   public flagRefresh = false;
+  private subscriptions: ISubscription[] = [];
   items;
   public placeholder_tittle: string;
   public placeholder_message: string;
@@ -61,31 +63,38 @@ export class EditPublicationComponent implements OnInit {
     this.placeholder_tittle = this.t('placeholder_tittle');
     this.placeholder_message = this.t('placeholder_view');
 
-    this.fileUploadService.getObjetFile().subscribe((data: any) => {
-      this.newImage = data;
-    });
+    this.subscriptions.push(
+      this.fileUploadService.getObjetFile().subscribe((data: any) => {
+        this.newImage = data;
+      }),
+    );
 
-    this.EditSharedService.getEditNew().subscribe((data: any) => {
-      this.infoMyPublication = data;
-      this.tags = this.infoMyPublication.themes;
-      this.idEdit = this.infoMyPublication.id;
-      this.title = this.infoMyPublication.title;
-      this.summary = this.infoMyPublication.summary;
-      this.body = this.infoMyPublication.body;
-      this.image = this.infoMyPublication.image;
+    this.subscriptions.push(
+      this.EditSharedService.getEditNew().subscribe((data: any) => {
+        this.infoMyPublication = data;
+        this.tags = this.infoMyPublication.themes;
+        this.idEdit = this.infoMyPublication.id;
+        this.title = this.infoMyPublication.title;
+        this.summary = this.infoMyPublication.summary;
+        this.body = this.infoMyPublication.body;
+        this.image = this.infoMyPublication.image;
 
-      this.showLabelTheme = this.infoMyPublication.themes;
-      this.showLabelImage = this.infoMyPublication.image.url;
-      this.showLabelImage =
-        this.showLabelImage == null
-          ? ''
-          : this.showLabelImage.substring(0, this.showLabelImage.indexOf('?'));
-      this.nameImage = this.showLabelImage.split('/')[
-        this.showLabelImage.split('/').length - 1
-      ];
+        this.showLabelTheme = this.infoMyPublication.themes;
+        this.showLabelImage = this.infoMyPublication.image.url;
+        this.showLabelImage =
+          this.showLabelImage == null
+            ? ''
+            : this.showLabelImage.substring(
+                0,
+                this.showLabelImage.indexOf('?'),
+              );
+        this.nameImage = this.showLabelImage.split('/')[
+          this.showLabelImage.split('/').length - 1
+        ];
 
-      this.showEditArticle();
-    });
+        this.showEditArticle();
+      }),
+    );
   }
 
   ngOnInit() {}
@@ -122,42 +131,52 @@ export class EditPublicationComponent implements OnInit {
     editArticleForm.append('tags', this.labelTags);
     editArticleForm.append('image', this.newImage);
 
-    this.formDataService
-      .putEditArticlesFormData(this.idEdit, editArticleForm)
-      .subscribe(
-        (response: any) => {
-          if (response.success == true) {
+    this.subscriptions.push(
+      this.formDataService
+        .putEditArticlesFormData(this.idEdit, editArticleForm)
+        .subscribe(
+          (response: any) => {
+            if (response.success == true) {
+              this.showSubmit = true;
+              (<HTMLInputElement>(
+                document.getElementsByClassName('buttonCloseForm')[0]
+              )).click();
+              const alertConfirmation: Alerts[] = [
+                {
+                  type: 'success',
+                  title: this.t('title_status_news_ts'),
+                  message: this.t('msg_edited_news_ts'),
+                },
+              ];
+              this.alert.setAlert(alertConfirmation[0]);
+              this.flagRefresh = true;
+              this.billboardService.setRefreshEditNew(
+                this.flagRefresh,
+              );
+            }
+          },
+          (error: any) => {
             this.showSubmit = true;
             (<HTMLInputElement>(
               document.getElementsByClassName('buttonCloseForm')[0]
             )).click();
-            const alertConfirmation: Alerts[] = [
+            const alertWarning: Alerts[] = [
               {
-                type: 'success',
+                type: 'danger',
                 title: this.t('title_status_news_ts'),
-                message: this.t('msg_edited_news_ts'),
+                message: error.json().errors.toString(),
+                confirmation: false,
               },
             ];
-            this.alert.setAlert(alertConfirmation[0]);
-            this.flagRefresh = true;
-            this.billboardService.setRefreshEditNew(this.flagRefresh);
-          }
-        },
-        (error: any) => {
-          this.showSubmit = true;
-          (<HTMLInputElement>(
-            document.getElementsByClassName('buttonCloseForm')[0]
-          )).click();
-          const alertWarning: Alerts[] = [
-            {
-              type: 'danger',
-              title: this.t('title_status_news_ts'),
-              message: error.json().errors.toString(),
-              confirmation: false,
-            },
-          ];
-          this.alert.setAlert(alertWarning[0]);
-        },
-      );
+            this.alert.setAlert(alertWarning[0]);
+          },
+        ),
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription =>
+      subscription.unsubscribe(),
+    );
   }
 }
