@@ -84,6 +84,7 @@ export class LoginComponent implements OnInit {
 
   changeLanguaje(param: string) {
     this.translate.use(param);
+    this.initApp();
   }
 
   ngOnInit() {
