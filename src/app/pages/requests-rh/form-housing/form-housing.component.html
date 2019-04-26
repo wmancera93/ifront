@@ -1,0 +1,185 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-12">
+    <form
+      [formGroup]="form"
+      class="row align-content-center justify-content-center text-white"
+    >
+      <div class="col-12">
+        <div class="row">
+          <div
+            class="col-12 top-containter"
+            *ngIf="formState('housing')"
+          >
+            <label>
+              <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+              Alojamiento *
+            </label>
+            <select
+              class="form-control"
+              [formControl]="forms.housing"
+            >
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let housing of housings_list"
+                [value]="housing.id"
+              >
+                {{ housing.name }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('arrival_date')"
+          >
+            <label>
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Fecha de llegada *
+            </label>
+            <input
+              type="date"
+              class="form-control"
+              [formControl]="forms.arrival_date"
+            />
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('date_departure')"
+          >
+            <label>
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              Fecha de Salida *
+            </label>
+            <input
+              type="date"
+              class="form-control"
+              [formControl]="forms.date_departure"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="form-check text-center">
+          <div class="d-block">
+            ¿Quieres elegir una cama manualmente?
+          </div>
+          <div
+            class="custom-control custom-radio custom-control-inline"
+          >
+            <input
+              type="radio"
+              name="radio-choose-room"
+              id="radio-yes"
+              class="custom-control-input"
+              [checked]="true === choose_room"
+            />
+            <label
+              class="custom-control-label"
+              for="radio-yes"
+              (click)="handleChooseRoom(true)"
+            >
+              Si
+            </label>
+          </div>
+          <div
+            class="custom-control custom-radio custom-control-inline"
+          >
+            <input
+              type="radio"
+              name="radio-choose-room"
+              id="radio-no"
+              class="custom-control-input"
+              [checked]="false === choose_room"
+            />
+            <label
+              class="custom-control-label"
+              for="radio-no"
+              (click)="handleChooseRoom(false)"
+            >
+              No
+            </label>
+          </div>
+        </div>
+      </div>
+      <ng-container *ngIf="choose_room">
+        <div class="col-12 m-2">
+          <div
+            class="container-fluid"
+            style="border: solid  1px var(--primary);"
+          >
+            <div class="row justify-content-center p-2">
+              <div
+                *ngFor="let bedRom of beds"
+                class="col-4 col-sm-3 col-md-2 col-lg-2 cursor-general"
+                (click)="selectBeedRom(bedRom)"
+              >
+                <div
+                  class="square mx-auto my-2 d-flex align-items-center justify-content-center"
+                  [ngClass]="{
+                    'bg-danger': !bedRom.state,
+                    'bg-success':
+                      bedRom.id === forms.bedRom?.value &&
+                      bedRom.state
+                  }"
+                >
+                  <i
+                    class="fa fa-bed fa-2"
+                    aria-hidden="true"
+                    [ngClass]="{
+                      'fa-bed text-dark':
+                        bedRom.id !== forms.bedRom?.value,
+                      'fa-check': bedRom.id === forms.bedRom?.value
+                    }"
+                  ></i>
+                </div>
+                <div class="text-center">{{ bedRom.label }}</div>
+              </div>
+              <div
+                *ngIf="!beds.length && !loadingRoms"
+                class="col-12"
+              >
+                <div
+                  class="alert alert-warning text-center"
+                  role="alert"
+                >
+                  No tienes habitaciones registradas.
+                </div>
+              </div>
+              <div *ngIf="loadingRoms" class="col-12 text-center">
+                <div
+                  class="spinner-border text-primary-hr"
+                  role="status"
+                >
+                  <span class="sr-only">Loading...</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="col-md-12 mt-2">
+        <div class="row justify-content-end">
+          <div class="col-lg-3 col-md-6 col-lg-4 col-12">
+            <button
+              type="button"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block"
+              (click)="submitSend()"
+              [attr.disabled]="validateForms ? null : true"
+            >
+              <i class="fa fa-fw fa-floppy-o"></i
+              >{{ parseT('save') | translate }}
+            </button>
+            <button
+              type="button"
+              *ngIf="!showSubmit"
+              class="btn btn-warning btn-block"
+            >
+              <i class="fa fa-fw fa-spinner fa-spin"></i
+              >{{ parseT('loading') | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
