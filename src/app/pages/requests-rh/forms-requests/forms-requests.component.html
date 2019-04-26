@@ -409,7 +409,10 @@
           >
             <div class="col-12">
               <div class="row">
-                <div class="col-md-6 col-12 top-containter">
+                <div
+                  class="col-12 top-containter"
+                  [ngClass]="{ 'col-md-6': showDate }"
+                >
                   <label for="dateBegin" class="titleColor">
                     <i
                       class="fa fa-fw fa-calendar text-primary-hr"
@@ -426,7 +429,6 @@
                     (blur)="calculateDay()"
                   />
                 </div>
-
                 <div
                   *ngIf="showDate"
                   class="col-md-6 col-12 top-containter"

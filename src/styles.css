@@ -150,7 +150,7 @@
   background: var(--btn-primary-hover) none repeat scroll 0 0;
 }
 
-input[type="file"] {
+input[type='file'] {
   display: none;
 }
 
@@ -251,8 +251,8 @@ thead {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont,
+    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   background-color: #2f4050 !important;
   font-size: 13px !important;
   color: #676a6c !important;
@@ -319,7 +319,8 @@ a {
 
 .dropdown-menu {
   /* padding: 0 0 !important; */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12) !important;
   border-radius: 2px !important;
 }
@@ -352,7 +353,8 @@ a {
 
 .search-results {
   padding: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   border-radius: 2px;
@@ -744,7 +746,8 @@ header {
 .widget-travel {
   border-radius: 2px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
@@ -1489,7 +1492,8 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
@@ -1774,7 +1778,8 @@ nav {
   border-radius: 2px;
   padding: 14px 20px;
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   background-color: #eee;
   color: gray;
@@ -1789,7 +1794,8 @@ nav {
   color: #ffffff !important;
   border-radius: 2px;
   padding: 14px 20px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   color: var(--btn-primary-hover);
@@ -1809,7 +1815,8 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
     0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
@@ -1966,7 +1973,7 @@ nav {
 }
 
 .glyphicon.fa {
-  font-family: "FontAwesome";
+  font-family: 'FontAwesome';
 }
 
 /*WORK TEAM*/
@@ -4315,7 +4322,16 @@ a.close-canvas-menu:hover {
 }
 
 .badge-warning {
+  background-color: #f0ad4e;
   color: #fff;
+}
+
+.badge {
+  color: #fff;
+}
+
+.badge-default {
+  background-color: #636c72;
 }
 
 .modal-content {

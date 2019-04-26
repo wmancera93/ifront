@@ -95,6 +95,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
         switch (this.formRequests.id_activity) {
           case 'VACA':
+          case 'VITD':
             this.formVaca = fb.group({
               request_type_id: this.formRequests.id,
               date_begin: '',
