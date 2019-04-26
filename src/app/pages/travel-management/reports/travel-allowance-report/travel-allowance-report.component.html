@@ -42,7 +42,7 @@
           <ul class="navbar-nav mr-auto">
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle cursor-general tabDate"
+                class="nav-link dropdown-toggle cursor-general tabDate btn-block"
                 id="navbarDropdown"
                 role="button"
                 data-toggle="dropdown"
@@ -64,9 +64,9 @@
                   "
                 >
                   <a
-                    class="dropdown-item color-font-gree text-capitalize cursor-general"
+                    class="dropdown-item color-font-gree text-capitalize cursor-general btn-block"
                     (click)="selectTypeReport(listAllowances)"
-                    >{{ listAllowances.name | lowercase }}</a
+                    >{{ listAllowances.name | translate | lowercase }}</a
                   >
                   <div
                     *ngIf="reports_list_allowances.length !== i + 1"

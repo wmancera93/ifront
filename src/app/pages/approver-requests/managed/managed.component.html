@@ -51,27 +51,27 @@
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
                   {{ parseT('text_created_on') | translate }}
-                  {{ parseT('created_date') | translate }}
+                  {{ managed.created_date }}
                 </p>
               </div>
               <div
                 class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p"
               >
                 <h3 class="font-color-default">
-                  {{ parseT('level_answer_description') | translate }}
+                  {{ managed.level_answer_description }}
                 </h3>
               </div>
               <div
                 class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  {{ parseT('level_answer_description') | translate }}
+                  {{ managed.level_answer_description }}
                 </p>
                 <p class="">
                   <i
                     class="fa fa-user fa-check-square-o text-primary-hr"
                   ></i>
-                  {{ parseT('level_answer') | translate }}
+                  {{ managed.level_answer }}
                 </p>
               </div>
               <div
@@ -82,10 +82,7 @@
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
-                  {{
-                    parseT('employee_applicant_to_json.short_name')
-                      | translate
-                  }}
+                  {{ managed.employee_applicant_to_json.short_name }}
                 </p>
               </div>
               <div

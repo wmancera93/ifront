@@ -105,6 +105,7 @@ import { NewHousingComponent } from './travel-management/housing/new-housing/new
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 import { FormBenefistComponent } from './requests-rh/form-benefist/form-benefist.component';
 import { FormTransportationComponent } from './requests-rh/form-transportation/form-transportation.component';
+import { FormHousingComponent } from './requests-rh/form-housing/form-housing.component';
 import { LensesAuxiliumComponent } from './requests-rh/lenses-auxilium/lenses-auxilium.component';
 import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
@@ -214,6 +215,7 @@ import { NewTransportComponent } from './travel-management/transportation-logist
     RequestsApproversLogsComponent,
     FormBenefistComponent,
     FormTransportationComponent,
+    FormHousingComponent,
     LensesAuxiliumComponent,
     TransportationLogisticsComponent,
     TrasnportationReportComponent,

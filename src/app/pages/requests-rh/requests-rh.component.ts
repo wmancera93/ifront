@@ -83,41 +83,45 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
           this.token = true;
         },
       ),
-      this.formsRequestsService.getRestartObject().subscribe(restart => {
-        if (restart) {
-          this.getObjectRequests();
-        }
-      }),
+      this.formsRequestsService
+        .getRestartObject()
+        .subscribe(restart => {
+          if (restart) {
+            this.getObjectRequests();
+          }
+        }),
 
       this.alert.getActionConfirm().subscribe((data: any) => {
         if (data === 'deletRequest') {
-          this.requestsRhService.deleteRequests(this.idDelete).subscribe(
-            () => {
-              this.getObjectRequests();
-              // tslint:disable-next-line:max-line-length
-              const alertWarning: Alerts[] = [
-                {
-                  type: 'success',
-                  title: this.t('type_alert_ts'),
-                  message: this.t('message_alert_ts'),
-                  confirmation: false,
-                },
-              ];
-              this.alert.setAlert(alertWarning[0]);
-            },
-            (error: any) => {
-              // tslint:disable-next-line:max-line-length
-              const alertWarning: Alerts[] = [
-                {
-                  type: 'danger',
-                  title: this.t('type_alert_one_ts'),
-                  message: error.json().errors.toString(),
-                  confirmation: false,
-                },
-              ];
-              this.alert.setAlert(alertWarning[0]);
-            },
-          );
+          this.requestsRhService
+            .deleteRequests(this.idDelete)
+            .subscribe(
+              () => {
+                this.getObjectRequests();
+                // tslint:disable-next-line:max-line-length
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'success',
+                    title: this.t('type_alert_ts'),
+                    message: this.t('message_alert_ts'),
+                    confirmation: false,
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              },
+              (error: any) => {
+                // tslint:disable-next-line:max-line-length
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'danger',
+                    title: this.t('type_alert_one_ts'),
+                    message: error.json().errors.toString(),
+                    confirmation: false,
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              },
+            );
         }
       }),
     ];
@@ -140,58 +144,76 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   getObjectRequests() {
     this.subscriptions = [
       ...this.subscriptions,
-      this.requestsRhService.getAllRequests().subscribe((data: any) => {
-        if (data.success) {
-          const { request_types, ...rest } = data.data[0];
-          this.requests = {
-            ...rest,
-            request_types: [
-              ...request_types,
-              {
-                id: 189,
-                id_activity: 'TRANS',
-                is_payment: true,
-                maximum_days: null,
-                minimum_days: null,
-                name: 'Solicitud de transporte',
-              },
-              {
-                id: 188,
-                id_activity: 'TRANS_BEN',
-                is_payment: true,
-                maximum_days: null,
-                minimum_days: null,
-                name: 'Solicitud de transporte benefeciario',
-              },
-              {
-                id: 187,
-                id_activity: 'TRANS_TER',
-                is_payment: true,
-                maximum_days: null,
-                minimum_days: null,
-                name: 'Solicitud de transporte para un tercero',
-              },
-            ],
-          };
-          this.requestStatic = this.requests.my_requests_list;
-          this.viewContainer = true;
-          this.requests.list_requets_types.forEach(element => {
-            this.listTypesFilters.push({
-              id: element.id,
-              id_activity: element.id_activity,
-              name: element.name,
-              active: false,
+      this.requestsRhService
+        .getAllRequests()
+        .subscribe((data: any) => {
+          if (data.success) {
+            const { request_types, ...rest } = data.data[0];
+            this.requests = {
+              ...rest,
+              request_types: [
+                ...request_types,
+                {
+                  id: 189,
+                  id_activity: 'TRANS',
+                  is_payment: true,
+                  maximum_days: null,
+                  minimum_days: null,
+                  name: ' transporte',
+                },
+                {
+                  id: 188,
+                  id_activity: 'TRANS_BEN',
+                  is_payment: true,
+                  maximum_days: null,
+                  minimum_days: null,
+                  name: ' transporte benefeciario',
+                },
+                {
+                  id: 187,
+                  id_activity: 'TRANS_TER',
+                  is_payment: true,
+                  maximum_days: null,
+                  minimum_days: null,
+                  name: ' transporte para un tercero',
+                },
+                {
+                  id: 194,
+                  id_activity: 'HOUS',
+                  is_payment: true,
+                  maximum_days: null,
+                  minimum_days: null,
+                  name: ' alojamiento',
+                },
+                {
+                  id: 195,
+                  id_activity: 'HOUS_TER',
+                  is_payment: true,
+                  maximum_days: null,
+                  minimum_days: null,
+                  name: ' alojamiento tercero',
+                },
+              ],
+            };
+            this.requestStatic = this.requests.my_requests_list;
+            this.viewContainer = true;
+            this.requests.list_requets_types.forEach(element => {
+              this.listTypesFilters.push({
+                id: element.id,
+                id_activity: element.id_activity,
+                name: element.name,
+                active: false,
+              });
             });
-          });
-        } else {
-          this.viewContainer = false;
-        }
+          } else {
+            this.viewContainer = false;
+          }
 
-        // setTimeout(() => {
-        //   document.getElementById("loginId").style.display = 'none'
-        //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-        // }, 1000)
-      }),
+          // setTimeout(() => {
+          //   document.getElementById("loginId").style.display = 'none'
+          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+          // }, 1000)
+        }),
     ];
   }
 
@@ -251,7 +273,8 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     });
 
     if (
-      this.listTypesFilters.filter(data => data.active === true).length === 0
+      this.listTypesFilters.filter(data => data.active === true)
+        .length === 0
     ) {
       this.requests.my_requests_list = this.requestStatic;
     }

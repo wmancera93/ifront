@@ -206,6 +206,8 @@ export class FormTransportationComponent
       accompanying_beneficiary: '',
       type_identification_accompanying: '',
       number_identification_accompanying: '',
+      type_identification: '',
+      number_identification: '',
       academic_level: [
         '',
         (control: AbstractControl) => {

@@ -282,6 +282,18 @@
         </app-form-transportation>
       </div>
       <div>
+        <app-form-housing
+          *ngIf="
+            ['HOUS','HOUS_TER'].includes(formRequests.id_activity) ? true : false
+          "
+          [formRequests]="formRequests"
+          (submit)="newRequest($event)"
+          [showSubmit]="showSubmit"
+          (setModalState)="setModalState($event)"
+        >
+        </app-form-housing>
+      </div>
+      <div>
         <app-lenses-auxilium
           *ngIf="
             ['AUXL'].includes(formRequests.id_activity) ? true : false
