@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,24 +10,35 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          {{translate.app.frontEnd.pages.auto_services.holiday_letter.title_letter_vacation}}
+          {{ parseT('title_letter_vacation') | translate }}
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
-        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+      <div
+        class="row justify-content-center top-containter"
+        *ngIf="flagEmpty"
+      >
+        <div
+          class="col-lg-8 col-12 text-center"
+          style="min-height: 370px;"
+        >
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.auto_services.holiday_letter.text_vacation_letter_not_found}}
-            <strong>{{translate.app.frontEnd.pages.auto_services.holiday_letter.text_vacation}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.holiday_letter.text_for_the_employee}}
+            {{ parseT('text_vacation_letter_not_found') | translate }}
+            <strong>{{ parseT('text_vacation') | translate }}</strong
+            >&nbsp;{{ parseT('text_for_the_employee') | translate }}
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-12"  *ngIf="!flagEmpty" >
-          <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:1000px;"></iframe>
+        <div class="col-12" *ngIf="!flagEmpty">
+          <iframe
+            id="frameAutoService"
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(urlPDF)"
+            style="width:100% !important;height:1000px;"
+          ></iframe>
         </div>
       </div>
     </div>

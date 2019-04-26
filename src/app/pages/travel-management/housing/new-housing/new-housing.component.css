@@ -1,0 +1,17 @@
+::ng-deep.modal-second {
+  z-index: 2052 !important;
+}
+::ng-deep.backdrop-modal-second {
+  z-index: 2051 !important;
+}
+
+.square {
+  /* border: 1px solid var(--primary); */
+  background-color: #ffffff;
+  height: 40px;
+  width: 40px;
+}
+
+.bg-card {
+  background-color: rgba(57, 81, 104, 0.9) !important;
+}

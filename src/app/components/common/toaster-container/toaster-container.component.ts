@@ -8,7 +8,7 @@ import { ToasterService, ToasterConfig, Toast } from 'angular2-toaster';
   styleUrls: ['./toaster-container.component.css']
 })
 export class ToasterContainerComponent implements OnInit {
-  @Input('toast') toast: any
+  @Input('toast') toast: any;
   public objectToast: Toast;
 
   private toasterService: ToasterService;
@@ -30,7 +30,7 @@ export class ToasterContainerComponent implements OnInit {
     this.toast.subscribe((data: Toast) => {
       this.objectToast = data;
       this.toasterService.pop(this.objectToast);
-    })
+    });
   }
 
 }

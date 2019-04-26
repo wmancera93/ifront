@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../../environments/environment';
 
 // services
 import { Angular2TokenService } from 'angular2-token';
@@ -14,81 +13,43 @@ import { User } from '../../../models/general/user';
 import { Enterprise } from '../../../models/general/enterprise';
 import { GoogleAnalyticsEventsService } from '../../../services/google-analytics-events.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
+import { baseUrl } from '../../../../environments/environment';
 
 declare const ga: any;
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  public txtEmail: string = '';
-  public txtPassword: string = '';
+  public txtEmail = '';
+  public txtPassword = '';
   public dataEnterprise: Enterprise[] = [];
-  public heightContenGeneral: number = 0;
-  public translate: Translate = null;
-  public languaje: string = 'es';
+  public heightContenGeneral = 0;
   public passwordLogin: string;
   public checkedLocal: string;
 
-  public baseUrl: string;
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
 
-  constructor(private tokenService: Angular2TokenService,
+  parseT(key) {
+    return `pages.authentication.login.${key}`;
+  }
+
+  constructor(
+    private tokenService: Angular2TokenService,
     public router: Router,
     public route: ActivatedRoute,
     public alert: AlertsService,
     public userSharedService: UserSharedService,
     private mainService: MainService,
     public googleAnalyticsEventsService: GoogleAnalyticsEventsService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
-
-    let url = window.location.href;
-    let ambient;
-
-    if (url.split("localhost").length === 1) {
-      if (url.split("-").length > 1) {
-        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
-      }
-    } else {
-      ambient = 'development';
-    }
-
-    switch (ambient) {
-      case 'development':
-        this.baseUrl = environment.apiBaseHr_development;
-        break;
-      case 'dev':
-        this.baseUrl = environment.apiBaseHr_development;
-        break;
-      case 'staging':
-        this.baseUrl = environment.apiBaseHr_staging;
-        break;
-      case 'demo':
-        this.baseUrl = environment.apiBaseHr_staging;
-        break;
-
-
-      default:
-        this.baseUrl = environment.apiBaseHr_production;
-        break;
-    }
-
-    this.translate = this.translateService.getTranslate();
-
-    if (this.translate === null) {
-      this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
-        this.translate = JSON.parse(data.data[0].data[0].language_json_file);
-        this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
-      });
-    } else {
-      this.checkedLocal = JSON.parse(localStorage.getItem("treeLanguaje")).data[0].data[0].code_language.toLowerCase();
-      this.languaje = this.checkedLocal;
-      this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
-    }
-
+    public stylesExplorerService: StylesExplorerService,
+    public translate: TranslateService,
+  ) {
     this.initApp();
 
     this.router.events.subscribe(event => {
@@ -97,117 +58,122 @@ export class LoginComponent implements OnInit {
         ga('send', 'pageview');
       }
     });
-
-
   }
 
   initApp() {
-    this.tokenService.init(
-      {
-        apiBase: this.baseUrl,
-        apiPath: 'api/v2/' + this.languaje,
-        signInPath: 'auth/sign_in',
-        signOutPath: 'auth/sign_out',
-        validateTokenPath: 'auth/validate_token',
-        signOutFailedValidate: false,
-        registerAccountPath: 'auth/password/new',
-        updatePasswordPath: 'auth/password',
-        resetPasswordPath: 'auth/password',
-        globalOptions: {
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          }
-        }
-      }
-    );
-  }
-
-  changeLanguaje(param: string) {
-    this.languaje = param;
-    this.translateService.changeLanguajeFirst(this.languaje).subscribe((data: any) => {
-      this.translate = JSON.parse(data.data[0].data[0].language_json_file);
-      this.passwordLogin = this.translate.app.frontEnd.pages.authentication.login.password;
-      this.initApp();
+    const laguaje =
+      localStorage.getItem('lang') || this.translate.getBrowserLang();
+    this.tokenService.init({
+      apiBase: baseUrl(),
+      apiPath: `api/v2/${laguaje.match(/es|en/) ? laguaje : 'es'}`,
+      signInPath: 'auth/sign_in',
+      signOutPath: 'auth/sign_out',
+      validateTokenPath: 'auth/validate_token',
+      signOutFailedValidate: false,
+      registerAccountPath: 'auth/password/new',
+      updatePasswordPath: 'auth/password',
+      resetPasswordPath: 'auth/password',
+      globalOptions: {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      },
     });
   }
 
+  changeLanguaje(param: string) {
+    this.translate.use(param);
+    this.initApp();
+  }
 
   ngOnInit() {
-    let rememeberObject = JSON.parse(localStorage.getItem("remember"));
+    const rememeberObject = JSON.parse(localStorage.getItem('remember'));
 
     this.txtEmail = rememeberObject == null ? '' : rememeberObject[0].email;
-    this.txtPassword = rememeberObject == null ? '' : rememeberObject[0].password;
+    this.txtPassword =
+      rememeberObject == null ? '' : rememeberObject[0].password;
 
     if (this.txtEmail !== '' && this.txtPassword !== '') {
       setTimeout(() => {
-        (<HTMLInputElement>document.getElementById('chk_remember')).checked = true;
+        (<HTMLInputElement>(
+          document.getElementById('chk_remember')
+        )).checked = true;
       }, 200);
     }
 
-    let url = window.location.href;
+    const url = window.location.href;
     let ambient;
 
-    if (url.split("localhost").length === 1) {
-      if (url.split("-").length > 1) {
-        ambient = url.split("-")[0].split("/")[url.split("-")[0].split("/").length - 1];
+    if (url.split('localhost').length === 1) {
+      if (url.split('-').length > 1) {
+        ambient = url.split('-')[0].split('/')[
+          url.split('-')[0].split('/').length - 1
+        ];
       }
     } else {
       ambient = 'development';
     }
 
-    this.mainService.getDataEnterprise(ambient)
-      .subscribe((result: any) => {
-        this.dataEnterprise[0] = result.data;
-        const {
-          background_login,
-          primary_color,
-          body_text,
-        } = this.dataEnterprise[0]
-        if (!this.stylesExplorerService.validateBrowser()) {
-          const setProp = (a, b) => {
-            document.documentElement.style.setProperty(a, b)
-          }
-          setProp(`--img-header-login`, `url(${background_login.url})`);
-          setProp(`--btn-primary`, primary_color);
-          setProp(`--btn-primary-hover`, body_text);
-          setProp(`--primary`, primary_color);
-        } else {
-          document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
-          setTimeout(() => {
-            this.stylesExplorerService.stylesInExplorerOrEdge(
-              background_login.url,
-              primary_color,
-              primary_color,
-              body_text, '', '',
-              '0 0 0 0', '0px', 'none', '-1px', '-12px', '', ''
-            )
-          }, 200);
-        }
+    this.mainService.getDataEnterprise(ambient).subscribe((result: any) => {
+      this.dataEnterprise[0] = result.data;
+      const {
+        background_login,
+        primary_color,
+        body_text,
+      } = this.dataEnterprise[0];
+      if (!this.stylesExplorerService.validateBrowser()) {
+        const setProp = (a, b) => {
+          document.documentElement.style.setProperty(a, b);
+        };
+        setProp(`--img-header-login`, `url(${background_login.url})`);
+        setProp(`--btn-primary`, primary_color);
+        setProp(`--btn-primary-hover`, body_text);
+        setProp(`--primary`, primary_color);
+      } else {
+        document.getElementsByClassName('gray-bg')[0].removeAttribute('style');
+        setTimeout(() => {
+          this.stylesExplorerService.stylesInExplorerOrEdge(
+            background_login.url,
+            primary_color,
+            primary_color,
+            body_text,
+            '',
+            '',
+            '0 0 0 0',
+            '0px',
+            'none',
+            '-1px',
+            '-12px',
+            '',
+            '',
+          );
+        }, 200);
+      }
 
-        var link = document.createElement('link'),
-          oldLink = document.getElementById('fa_icon');
-        link.id = 'fa_icon';
-        link.rel = 'shortcut icon';
-        link.href = this.dataEnterprise[0].logo_inside.url.toString();
-        if (oldLink) {
-          document.head.removeChild(oldLink);
-        }
-        document.head.appendChild(link)
+      const link = document.createElement('link'),
+        oldLink = document.getElementById('fa_icon');
+      link.id = 'fa_icon';
+      link.rel = 'shortcut icon';
+      link.href = this.dataEnterprise[0].logo_inside.url.toString();
+      if (oldLink) {
+        document.head.removeChild(oldLink);
+      }
+      document.head.appendChild(link);
 
-        localStorage.setItem("enterprise", JSON.stringify(result.data));
-      })
+      localStorage.setItem('enterprise', JSON.stringify(result.data));
+    });
     if (this.dataEnterprise.length > 0) {
-      this.heightContenGeneral = document.getElementById("headerLogin").clientHeight - this.heightContenGeneral;
+      this.heightContenGeneral =
+        document.getElementById('headerLogin').clientHeight -
+        this.heightContenGeneral;
     }
   }
 
   singInSession() {
-    this.changeLanguaje(this.languaje);
-
     if (this.txtEmail.length !== 0 && this.txtPassword.length !== 0) {
-      let expressionRegular
-      let validatePasword
+      let expressionRegular;
+      let validatePasword;
       if (this.dataEnterprise[0].login_ldap) {
         expressionRegular = true;
         validatePasword = expressionRegular;
@@ -217,51 +183,72 @@ export class LoginComponent implements OnInit {
       }
 
       if (validatePasword) {
-        this.tokenService.signIn({
-          email: this.txtEmail,
-          password: this.txtPassword
-        }).subscribe(
-          res => {
-            let result: User;
-            if (res.status === 200) {
-              result = res.json().data;
-              this.userSharedService.setUser(result);
-              localStorage.setItem("user", JSON.stringify(result));
-              this.router.navigate(['/ihr/index']);
-              this.googleAnalyticsEventsService.emitEvent("authentication", "singInSession", "Sing in session", 1);
-            }
-          },
-          error => {
-            let resultError: any;
-            let typeAlert: string = 'danger';
-            if (error.status === 401) {
-              typeAlert = 'warning';
-            }
-            localStorage.setItem("user", JSON.stringify(''));
-            resultError = error.json();
-            const alertWarning: Alerts[] = [{ type: typeAlert, title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one, message: resultError.errors[0] }];
-            this.alert.setAlert(alertWarning[0]);
-            this.googleAnalyticsEventsService.emitEvent("login", "errorSingInSession", "Error sing in session", 1);
-          }
-        )
+        this.tokenService
+          .signIn({
+            email: this.txtEmail,
+            password: this.txtPassword,
+          })
+          .subscribe(
+            res => {
+              let result: User;
+              if (res.status === 200) {
+                result = res.json().data;
+                this.userSharedService.setUser(result);
+                localStorage.setItem('user', JSON.stringify(result));
+                this.router.navigate(['/ihr/index']);
+                this.googleAnalyticsEventsService.emitEvent(
+                  'authentication',
+                  'singInSession',
+                  'Sing in session',
+                  1,
+                );
+              }
+            },
+            error => {
+              let resultError: any;
+              let typeAlert = 'danger';
+              if (error.status === 401) {
+                typeAlert = 'warning';
+              }
+              localStorage.setItem('user', JSON.stringify(''));
+              resultError = error.json();
+              const alertWarning: Alerts[] = [
+                {
+                  type: typeAlert,
+                  title: this.t('title_warning_ts_one'),
+                  message: resultError.errors[0],
+                },
+              ];
+              this.alert.setAlert(alertWarning[0]);
+              this.googleAnalyticsEventsService.emitEvent(
+                'login',
+                'errorSingInSession',
+                'Error sing in session',
+                1,
+              );
+            },
+          );
       } else {
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
-          message: this.translate.app.frontEnd.pages.authentication.login.msg_characters_minimum_ts,
-        }];
+        const alertWarning: Alerts[] = [
+          {
+            type: 'danger',
+            title: this.t('title_warning_ts_one'),
+            message: this.t('msg_characters_minimum_ts'),
+          },
+        ];
         this.alert.setAlert(alertWarning[0]);
       }
     } else {
-      const alertWarning: Alerts[] = [{
-        type: 'warning',
-        title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
-        message: this.translate.app.frontEnd.pages.authentication.login.msg_email_is_required_ts,
-      }];
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: this.t('title_warning_ts_one'),
+          message: this.t('msg_email_is_required_ts'),
+        },
+      ];
       this.alert.setAlert(alertWarning[0]);
     }
   }
-
 
   // events
   overEyePassword() {
@@ -277,14 +264,16 @@ export class LoginComponent implements OnInit {
   }
 
   blurEmail() {
-    let expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
+    const expressionRegular = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/;
     if (this.txtEmail !== '') {
       if (!expressionRegular.test(this.txtEmail)) {
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
-          message: this.translate.app.frontEnd.pages.authentication.login.msg_tincorrect_format_ts,
-        }];
+        const alertWarning: Alerts[] = [
+          {
+            type: 'danger',
+            title: this.t('title_warning_ts_one'),
+            message: this.t('msg_tincorrect_format_ts'),
+          },
+        ];
         this.alert.setAlert(alertWarning[0]);
         this.txtEmail = '';
       }
@@ -293,23 +282,29 @@ export class LoginComponent implements OnInit {
 
   rememberMe() {
     if (this.txtEmail !== '' && this.txtPassword !== '') {
-      let objectRemember: any[] = []
+      const objectRemember: any[] = [];
       if ((<HTMLInputElement>document.getElementById('chk_remember')).checked) {
-        objectRemember.push({ email: this.txtEmail, password: this.txtPassword })
+        objectRemember.push({
+          email: this.txtEmail,
+          password: this.txtPassword,
+        });
       } else {
-        objectRemember.push({ email: '', password: '' })
+        objectRemember.push({ email: '', password: '' });
       }
 
-      localStorage.setItem("remember", JSON.stringify(objectRemember));
+      localStorage.setItem('remember', JSON.stringify(objectRemember));
     } else {
-      const alertWarning: Alerts[] = [{
-        type: 'warning',
-        title: this.translate.app.frontEnd.pages.authentication.login.title_warning_ts_one,
-        message: this.translate.app.frontEnd.pages.authentication.login.msg_enter_your_data_ts,
-      }];
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: this.t('title_warning_ts_one'),
+          message: this.t('msg_enter_your_data_ts'),
+        },
+      ];
       this.alert.setAlert(alertWarning[0]);
-      (<HTMLInputElement>document.getElementById('chk_remember')).checked = false;
+      (<HTMLInputElement>(
+        document.getElementById('chk_remember')
+      )).checked = false;
     }
   }
-
 }

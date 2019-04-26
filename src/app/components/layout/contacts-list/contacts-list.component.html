@@ -1,9 +1,20 @@
-<div id="right-sidebar" class="sidebar-open sidebar-top container-contacts" *ngIf="translate !== null">
-  <div class="sidebar-container" style=" overflow: hidden;width: auto;  height: 100%;">
+<div
+  id="right-sidebar"
+  class="sidebar-open sidebar-top container-contacts"
+>
+  <div
+    class="sidebar-container"
+    style=" overflow: hidden;width: auto;  height: 100%;"
+  >
     <ul class="nav nav-tabs">
       <li id="litab1" class="nav-item" style="width: 50%">
-        <a id="atab1" class="nav-link a-contacts bg-tabs active" data-toggle="tab" href="#tab-1">
-          {{translate.app.frontEnd.components.layout.contacts_list.partner}}
+        <a
+          id="atab1"
+          class="nav-link a-contacts bg-tabs active"
+          data-toggle="tab"
+          href="#tab-1"
+        >
+          {{ parseT('partner') | translate }}
         </a>
       </li>
       <!-- <li id="litab2" class="nav-item" style="width: 50%">
@@ -12,27 +23,54 @@
         </a>
       </li> -->
     </ul>
-    <div id="scrollbarAction" class="scrollbar scrollbar-success force-overflow " (scroll)="detectScrollAction()">
-
+    <div
+      id="scrollbarAction"
+      class="scrollbar scrollbar-success force-overflow "
+      (scroll)="detectScrollAction()"
+    >
       <div class="tab-content">
         <div id="tab-1" class="tab-pane active">
           <div class="Search-bar">
-            <input [(ngModel)]="searchByLetter" type="text" class="form-control" placeholder="{{search_partner}}"
-              (keyup.enter)="searchByName()" maxlength="25" (keyup)="enterNameEmployee()">
-            <i class="search-input-icon fa fa-search icon-search  detectLetter cursor general" (click)='searchByName()'
-              [ngClass]="{detectLetter : searchIconActive == true}"></i>
+            <input
+              [(ngModel)]="searchByLetter"
+              type="text"
+              class="form-control"
+              placeholder="{{ parseT('search_partner') | translate }}"
+              (keyup.enter)="searchByName()"
+              maxlength="25"
+              (keyup)="enterNameEmployee()"
+            />
+            <i
+              class="search-input-icon fa fa-search icon-search  detectLetter cursor general"
+              (click)="searchByName()"
+              [ngClass]="{ detectLetter: searchIconActive == true }"
+            ></i>
           </div>
-          <div (click)="openInfoEmployee(contact.id)" *ngFor="let contact of contacts; let index=index; let colorContactPrimary = odd; let colorContactSecundary = even;"
-            [ngClass]="{  colorContactPrimary:  colorContactPrimary, colorContactSecundary: colorContactSecundary}">
+          <div
+            (click)="openInfoEmployee(contact.id)"
+            *ngFor="
+              let contact of contacts;
+              let index = index;
+              let colorContactPrimary = odd;
+              let colorContactSecundary = even
+            "
+            [ngClass]="{
+              colorContactPrimary: colorContactPrimary,
+              colorContactSecundary: colorContactSecundary
+            }"
+          >
             <div class="row justify-content-center">
               <div class="col-3">
-                <img src="{{contact.image.url}}" class="roundPhoto">
-                <br>
+                <img
+                  src="{{ contact.image.url }}"
+                  class="roundPhoto"
+                />
+                <br />
               </div>
               <div class="col-9">
-                {{contact.name_complete}}
-                <br>{{contact.posicion}}
-                <br> {{contact.phone}}
+                {{ contact.name_complete }}
+                <br />{{ contact.posicion }} <br />
+                {{ contact.phone }}
                 <div class="starIcon">
                   <span>
                     <i class="fa fa-star-o text-warning"></i>
@@ -44,41 +82,67 @@
         </div>
         <div *ngIf="!validateError" class="text-primary-hover">
           <i class="fa fa-fw fa-user-times"></i>
-          {{error}}
+          {{ error }}
         </div>
         <div id="tab-2" class="tab-pane">
-          <div *ngFor="let item of chats; let index=index; let colorContactPrimary=odd; let colorContactSecundary=even;"
-            [ngClass]="{ colorContactPrimary: colorContactPrimary, colorContactSecundary: colorContactSecundary }">
+          <div
+            *ngFor="
+              let item of chats;
+              let index = index;
+              let colorContactPrimary = odd;
+              let colorContactSecundary = even
+            "
+            [ngClass]="{
+              colorContactPrimary: colorContactPrimary,
+              colorContactSecundary: colorContactSecundary
+            }"
+          >
             <div class="row">
               <div class="col-3">
-                <img src="{{item.photo}}" class="roundPhoto">
-                <br>
+                <img src="{{ item.photo }}" class="roundPhoto" />
+                <br />
               </div>
               <div class="col-6">
-                {{item.name}}
-                <br>{{item.conver}}
+                {{ item.name }}
+                <br />{{ item.conver }}
               </div>
               <div class="col-3 ">
                 <div>
-                  <button id="closeChat" type="button" class="close" aria-label="Close">
+                  <button
+                    id="closeChat"
+                    type="button"
+                    class="close"
+                    aria-label="Close"
+                  >
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
                 <div>
-                  <i class="fa fa-circle icon-active" *ngIf="item.status" aria-hidden="true"></i>
-                  <i class="fa fa-circle icon-disabled" *ngIf="!item.status" aria-hidden="true"></i>
+                  <i
+                    class="fa fa-circle icon-active"
+                    *ngIf="item.status"
+                    aria-hidden="true"
+                  ></i>
+                  <i
+                    class="fa fa-circle icon-disabled"
+                    *ngIf="!item.status"
+                    aria-hidden="true"
+                  ></i>
                 </div>
               </div>
             </div>
           </div>
           <div class="bg-white">
-            {{translate.app.frontEnd.components.layout.contacts_list.negative_message}}
+            {{ parseT('negative_message') | translate }}
           </div>
         </div>
       </div>
-
     </div>
-    <div id="CloseWindowContacts" class="hide-contactsList" (click)="clickPartnersIconHide()">
+    <div
+      id="CloseWindowContacts"
+      class="hide-contactsList"
+      (click)="clickPartnersIconHide()"
+    >
       <i class="fa fa-angle-up"></i>
     </div>
   </div>

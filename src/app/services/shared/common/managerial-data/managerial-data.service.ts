@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 export class ManagerialDataService {
 
-  dataWidgetManagerial: Subject<any> = new Subject<any>();  
+  dataWidgetManagerial: Subject<any> = new Subject<any>();
 
   constructor() { }
   getDataManagerial() {

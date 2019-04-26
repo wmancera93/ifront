@@ -1,3 +1,404 @@
-<p>
-  new-housing works!
-</p>
+<ng-template #stepOne>
+  <div class="col-12">
+    <div class="row pb-4">
+      <div class="col-12 col-md-6 text-truncate">
+        <label>
+          <i class="fa fa-fw fa-bus text-primary-hr"></i>
+          Nombre *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="forms.name"
+          [ngStyle]="{ property: expression }"
+        />
+      </div>
+      <div class="col-12 col-md-6 top-containter">
+        <label>
+          <i class="fa fa-fw fa-users text-primary-hr"></i>
+          Ciudad *
+        </label>
+        <select class="form-control" [formControl]="forms.city">
+          <option value="">Seleccione</option>
+          <option *ngFor="let city of cities" [value]="city.id">
+            {{ city.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #stepTwo>
+  <div class="col-12">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 col-lg-10 col-xl-11">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-sm-6 text-truncate">
+                <label>
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Cantidad de habitaciones *
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [formControl]="forms.bedrooms"
+                />
+              </div>
+              <div class="col-12 col-sm-6 text-truncate">
+                <label>
+                  <i
+                    class="fa fa-fw hourglass-start text-primary-hr"
+                  ></i>
+                  Cantidad de camas *
+                </label>
+                <input
+                  type="number"
+                  class="form-control"
+                  [formControl]="forms.beds"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+          <div class="w-100 my-auto">
+            <button
+              type="button"
+              class="btn btn-success btn-block cursor-general mt-4 w-100"
+              (click)="addHousig()"
+              [attr.disabled]="
+                forms.bedrooms.value == '' || forms.beds.value == ''
+                  ? true
+                  : null
+              "
+            >
+              <i class=" fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="table-responsive mt-3">
+            <ng-container
+              *ngIf="arrayBedrooms.length > 0; else elseTemplate"
+            >
+              <table
+                class="table table-sm table-striped table-bordered"
+              >
+                <thead>
+                  <tr>
+                    <th class="text-center">
+                      Cantidad de habitaciones
+                    </th>
+                    <th class="text-center">
+                      Cantidad de camas
+                    </th>
+                    <th class="text-center">
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="color: #fff;">
+                  <tr
+                    *ngFor="let bed of arrayBedrooms; let i = index"
+                  >
+                    <td style="vertical-align: middle;">
+                      {{ bed.bedrooms.length }} Dormitorios
+                    </td>
+                    <td style="vertical-align: middle;">
+                      {{ bed.count.beds }} Camas
+                    </td>
+                    <td width="160px" style="vertical-align: middle;">
+                      <div class="container">
+                        <div class="row">
+                          <div
+                            class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
+                          >
+                            <button
+                              type="button"
+                              class="btn btn-warning text-white btn-block btn-sm cursor-general"
+                              (click)="
+                                editHousig({
+                                  bed: i,
+                                  modal: modalEditBedRoom
+                                })
+                              "
+                            >
+                              <div class="position-relative">
+                                <i
+                                  class="fa fa-pencil position-absolute"
+                                  style="top: -4px;left: 69%;"
+                                ></i>
+                                <i class="fa fa-bed my-1"></i>
+                              </div>
+                            </button>
+                          </div>
+                          <div
+                            class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
+                          >
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="removeHousig(bed.key)"
+                            >
+                              <i class="fa fa-minus my-1"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div
+                class="alert alert-warning text-center"
+                role="alert"
+              >
+                No tienes habitaciones agregadas.
+              </div>
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template
+  #modalForms
+  let-modal
+  ng-init="typeCase = formRequests.id_activity"
+>
+  <div class="modal-content bodyColorInfo">
+    <div
+      class="modal-header borderLine-title row-hr justify-content-center"
+    >
+      <div class="col-12 col-lg-10 text-center">
+        <h4 class="modal-title titleColor text-shadow">
+          Creación de alojamiento
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login text-white">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <app-stepper-components
+            [steps]="[
+              {
+                label: 'Registro de alojamiento',
+                component: stepOne
+              },
+              {
+                label: 'Registro agrupado de habitaciones',
+                component: stepTwo
+              }
+            ]"
+            [stepActive]="stepActive"
+          ></app-stepper-components>
+        </div>
+      </div>
+    </div>
+    <app-alerts></app-alerts>
+    <div class="modal-footerInfo justify-content-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div
+              class="btn text-center btn-secondary btn-block"
+              (click)="handleStep({ back: true })"
+            >
+              <h6>Atras</h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn text-center btn-success btn-block"
+              (click)="handleStep({ next: true })"
+            >
+              <ng-container *ngIf="stepActive === 0">
+                <h6>Siguiente</h6>
+              </ng-container>
+              <ng-container *ngIf="stepActive === 1">
+                <h6>Guardar</h6>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn btn-primary text-center btn-block"
+              (click)="modalActions.close(modalForms)"
+            >
+              <h6>Close</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #modalEditBedRoom let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit beds Roms</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modalBedRoomActions.close()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="accordion" id="accordionBedRoms">
+        <div
+          *ngFor="let bedRom of getBedRooms; let i = index"
+          class="card my-2 bg-card"
+        >
+          <div
+            class="card-header cursor-general bg-white-b"
+            id="heading-{{ i }}"
+            [attr.data-toggle]="
+              bedRoomSelect !== i ? 'collapse' : null
+            "
+            [attr.data-target]="'#collapse-' + i"
+            [attr.aria-expanded]="'false'"
+            [attr.aria-controls]="'collapse-' + i"
+          >
+            <ng-container
+              *ngIf="bedRoomSelect !== i; else elseTemplate"
+            >
+              <h6 class="mb-0 text-dark text-left">
+                Habitacion
+                {{ bedRom.label === '' ? '----' : bedRom.label }}
+              </h6>
+            </ng-container>
+            <ng-template #elseTemplate
+              ><div class="form-inline">
+                <input
+                  type="text"
+                  class="flex-fill form-control"
+                  value="{{ bedRom.label }}"
+                  #input
+                  autofocus
+                />
+                <button
+                  class="btn btn-success ml-3"
+                  (click)="changeLabelBedRom(input.value)"
+                >
+                  <i
+                    class="fa fa-2 fa-save text-light"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+            </ng-template>
+          </div>
+          <ng-container *ngIf="bedRoomSelect !== i">
+            <div
+              class="position-absolute p-2"
+              style="width: 130px;top: 0px;right: 0px;"
+            >
+              <div class="d-flex justify-content-end">
+                <button
+                  type="button"
+                  class="btn"
+                  (click)="bedRoomSelect = i"
+                >
+                  <i
+                    class="fa fa-pencil fa-2 text-dark"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+                <button
+                  type="button"
+                  class="btn"
+                  (click)="removeBedRom(i)"
+                >
+                  <i
+                    class="fa fa-trash fa-2 text-danger"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </div>
+            </div>
+          </ng-container>
+          <div
+            id="collapse-{{ i }}"
+            class="collapse border-botton-general"
+            [ngClass]="{ show: i === 0 }"
+            [attr.aria-labelledby]="'heading-' + i"
+            [attr.data-parent]="'#accordionBedRoms'"
+          >
+            <div class="card-body">
+              <div
+                class="row align-items-center justify-content-center"
+              >
+                <div
+                  class="col-6 col-sm-2 col-md-2 col-lg-2"
+                  *ngFor="let bed of bedRom.beds; let j = index"
+                >
+                  <div
+                    class="square mx-auto my-2 d-flex align-items-center justify-content-center"
+                  >
+                    <i
+                      class="fa fa-bed fa-2 text-dark"
+                      aria-hidden="true"
+                    ></i>
+                  </div>
+                  <div
+                    class="cursor-general d-flex justify-content-center align-items-center"
+                    (click)="bedSelect = j"
+                    style="height: 34px !important;"
+                  >
+                    <ng-container
+                      *ngIf="bedSelect !== j; else elseTemplate"
+                    >
+                      <div class="text-center">
+                        {{ bed.label === '' ? '----' : bed.label }}
+                      </div>
+                    </ng-container>
+                    <ng-template #elseTemplate>
+                      <input
+                        name="bedField"
+                        type="text"
+                        class="form-control"
+                        value="{{ bed.label }}"
+                        #bedField
+                        (blur)="bedSelect = -1"
+                        (change)="
+                          bed.label = bedField.value;
+                          bedField.value = ''
+                        "
+                      />
+                      {{ bedField.focus() }}
+                    </ng-template>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <button
+        class="bg-black bg-success btn btn-block"
+        type="button"
+        (click)="addMoreBedRom()"
+      >
+        <i aria-hidden="true" class="fa fa-2x fa-plus-circle"></i>
+      </button>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-primary text-center col-12"
+      (click)="modalBedRoomActions.close()"
+    >
+      Cerrar
+    </button>
+  </div>
+</ng-template>

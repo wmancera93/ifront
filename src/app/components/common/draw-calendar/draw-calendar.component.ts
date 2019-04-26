@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CalendarService } from '../../../services/calendar/calendar.service';
 import { CalendarData } from '../../../models/common/calendar/calendar';
 import { CalendarDetailService } from '../../../services/shared/common/calendar-detail/calendar-detail.service';
-import { TranslateService } from '../../../services/common/translate/translate.service';
-import { Translate } from '../../../models/common/translate/translate';
-
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-draw-calendar',
@@ -24,7 +22,7 @@ export class DrawCalendarComponent implements OnInit {
   public objectDateToday: CalendarData[] = [];
   public objectDataPosition: any[] = [];
   public numberDay: any;
-  public changeMonth: number = 0;
+  public changeMonth = 0;
 
   public saturday: string;
   public sunday: string;
@@ -33,41 +31,47 @@ export class DrawCalendarComponent implements OnInit {
   public wednesday: string;
   public thursday: string;
   public friday: string;
-  public translate: Translate = null;
   public rest: string;
-  public responsive: boolean = false;
+  public responsive = false;
 
-
-  constructor(public calendarService: CalendarService, public calendarDetailService: CalendarDetailService, public translateService: TranslateService) {
-    this.translate = this.translateService.getTranslate();
-
-    this.saturday = this.translate.app.frontEnd.components.common.draw_calendar.saturday;
-    this.sunday = this.translate.app.frontEnd.components.common.draw_calendar.sunday;
-    this.monday = this.translate.app.frontEnd.components.common.draw_calendar.monday;
-    this.tuesday = this.translate.app.frontEnd.components.common.draw_calendar.tuesday;
-    this.wednesday = this.translate.app.frontEnd.components.common.draw_calendar.wednesday;
-    this.thursday = this.translate.app.frontEnd.components.common.draw_calendar.thursday;
-    this.friday = this.translate.app.frontEnd.components.common.draw_calendar.friday;
-    this.rest = this.translate.app.frontEnd.components.common.draw_calendar.rest;
+  t(key) {
+    return this.translate.instant(this.parseT(key));
   }
-  //ngOnInit() {}
+
+  parseT(key) {
+    return `components.common.draw_calendar.${key}`;
+  }
+
+  constructor(
+    public calendarService: CalendarService,
+    public calendarDetailService: CalendarDetailService,
+    public translate: TranslateService
+  ) {
+    this.saturday = 'saturday';
+    this.sunday = 'sunday';
+    this.monday = 'monday';
+    this.tuesday = 'tuesday';
+    this.wednesday = 'wednesday';
+    this.thursday = 'thursday';
+    this.friday = 'friday';
+    this.rest = 'rest';
+  }
+
   ngOnInit() {
     this.calendarService.getDataCalendar().subscribe((data: any) => {
       this.objectDateCurrent = data.data;
       let count = 0;
       if (screen.width <= 1000) {
         if (screen.width <= 500) {
-
           this.responsive = true;
         }
-
-        this.saturday = this.translate.app.frontEnd.components.common.draw_calendar.saturday_abr;
-        this.sunday = this.translate.app.frontEnd.components.common.draw_calendar.sunday_abr;
-        this.monday = this.translate.app.frontEnd.components.common.draw_calendar.monday_abr;
-        this.tuesday = this.translate.app.frontEnd.components.common.draw_calendar.tuesday_abr;
-        this.wednesday = this.translate.app.frontEnd.components.common.draw_calendar.wednesday_abr;
-        this.thursday = this.translate.app.frontEnd.components.common.draw_calendar.thursday_abr;
-        this.friday = this.translate.app.frontEnd.components.common.draw_calendar.friday_abr;
+        this.saturday = 'saturday_abr';
+        this.sunday = 'sunday_abr';
+        this.monday = 'monday_abr';
+        this.tuesday = 'tuesday_abr';
+        this.wednesday = 'wednesday_abr';
+        this.thursday = 'thursday_abr';
+        this.friday = 'friday_abr';
       }
       this.objectDateCurrent.forEach(element => {
         if (element.date !== null) {
@@ -88,15 +92,11 @@ export class DrawCalendarComponent implements OnInit {
               default:
                 break;
             }
-          }
-          else if (count === 1) {
+          } else if (count === 1) {
             this.objectDateLast.push(element);
-
-          }
-          else if (count === 2) {
+          } else if (count === 2) {
             this.objectDateToday.push(element);
-          }
-          else if (count === 3) {
+          } else if (count === 3) {
             this.objectDateNextMonth.push(element);
           }
         }
@@ -105,8 +105,6 @@ export class DrawCalendarComponent implements OnInit {
 
       this.showDataCalendar();
     });
-
-
   }
 
   pushLastObjectDate() {
@@ -117,794 +115,358 @@ export class DrawCalendarComponent implements OnInit {
         is_now: element.is_now,
         weekday: element.weekday,
         work_schedule_plan: element.work_schedule_plan
-
       });
     });
   }
 
+  renderDate({ weekday, description }) {
+    return {
+      date: '',
+      id: '',
+      is_now: '',
+      weekday: this.t(weekday),
+      work_schedule_plan: [
+        {
+          calendar_text: ' ',
+          holiday_calendar: '',
+          hour_begin: '',
+          hour_finish: '',
+          schedule_plan_for_periods: '',
+          theorist_hours: '',
+          type_schedule_plan_description: this.t(description),
+          work_schedule_plan_text: ''
+        }
+      ]
+    };
+  }
+
+  renderDates(dates) {
+    return dates.map(({ weekday, description = 'rest' }) =>
+      this.renderDate({ weekday, description })
+    );
+  }
+
   showDataCalendar() {
+    this.newObjectDate = [];
     switch (this.objectPerMonthData[0].weekday) {
-
-      case this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser:
+      case this.t('sunday_ser'):
         this.newObjectDate = this.objectPerMonthData;
-
         break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.monday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [
+      case this.t('monday_ser'):
+        this.newObjectDate.push(
+          this.renderDate({
+            weekday: 'sunday_ser',
+            description: 'saturday_ser'
+          })
+        );
+        this.pushLastObjectDate();
+        break;
+      case this.t('tuesday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
             {
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-              work_schedule_plan_text: ""
-            }
-          ]
-        });
-        this.pushLastObjectDate();
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [
+              weekday: 'sunday_ser',
+              description: 'saturday_ser'
+            },
             {
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-              work_schedule_plan_text: ""
+              weekday: 'monday_ser',
+              description: 'rest'
             }
-          ]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [
-              {
-                calendar_text: " ",
-                holiday_calendar: "",
-                hour_begin: "",
-                hour_finish: "",
-                schedule_plan_for_periods: "",
-                theorist_hours: "",
-                type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-                work_schedule_plan_text: ""
-              }
-            ]
-          });
+          ])
+        );
         this.pushLastObjectDate();
-
         break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [
+      case this.t('wednesday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
             {
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
+              weekday: 'sunday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'tuesday_ser',
+              description: 'rest'
             }
-          ]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [
-              {
-                calendar_text: " ",
-                holiday_calendar: "",
-                hour_begin: "",
-                hour_finish: "",
-                schedule_plan_for_periods: "",
-                theorist_hours: "",
-                type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-                work_schedule_plan_text: ""
-              }
-            ]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
+          ])
+        );
         this.pushLastObjectDate();
-
         break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
+      case this.t('thursday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'sunday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'tuesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            }
+          ])
+        );
         this.pushLastObjectDate();
         break;
 
-      case this.translate.app.frontEnd.components.common.draw_calendar.friday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
+      case this.t('friday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'sunday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'tuesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            }
+          ])
+        );
         this.pushLastObjectDate();
         break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser:
-        this.newObjectDate = [];
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
+      case this.t('saturday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'sunday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            }
+          ])
+        );
         this.pushLastObjectDate();
-        break;
-
-    }
-
-    switch (this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday) {
-      case this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser:
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.sunday_ser:
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.monday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.monday_ser:
-
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        },
-          {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
-
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.tuesday_ser:
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
-
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.wednesday_ser:
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.thursday_ser:
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.friday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        }, {
-            date: "",
-            id: "",
-            is_now: "",
-            weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-            work_schedule_plan: [{
-              calendar_text: " ",
-              holiday_calendar: "",
-              hour_begin: "",
-              hour_finish: "",
-              schedule_plan_for_periods: "",
-              theorist_hours: "",
-              type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-              work_schedule_plan_text: ""
-            }]
-          });
-        break;
-      case this.translate.app.frontEnd.components.common.draw_calendar.friday_ser:
-        this.newObjectDate.push({
-          date: "",
-          id: "",
-          is_now: "",
-          weekday: this.translate.app.frontEnd.components.common.draw_calendar.saturday_ser,
-          work_schedule_plan: [{
-            calendar_text: " ",
-            holiday_calendar: "",
-            hour_begin: "",
-            hour_finish: "",
-            schedule_plan_for_periods: "",
-            theorist_hours: "",
-            type_schedule_plan_description: this.translate.app.frontEnd.components.common.draw_calendar.rest,
-            work_schedule_plan_text: ""
-          }]
-        });
         break;
     }
 
-    this.month = this.objectPerMonthData[0].date.split("-");
+    switch (
+      this.objectPerMonthData[this.objectPerMonthData.length - 1].weekday
+    ) {
+      case this.t('saturday_ser'):
+        break;
+      case this.t('sunday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'monday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'tuesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'saturday_ser',
+              description: 'rest'
+            }
+          ])
+        );
+        break;
+      case this.t('monday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'tuesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'saturday_ser',
+              description: 'rest'
+            }
+          ])
+        );
+        break;
+      case this.t('tuesday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'wednesday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'saturday_ser',
+              description: 'rest'
+            }
+          ])
+        );
+        break;
+      case this.t('wednesday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'thursday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'saturday_ser',
+              description: 'rest'
+            }
+          ])
+        );
+        break;
+      case this.t('thursday_ser'):
+        this.newObjectDate.push(
+          this.renderDates([
+            {
+              weekday: 'friday_ser',
+              description: 'rest'
+            },
+            {
+              weekday: 'saturday_ser',
+              description: 'rest'
+            }
+          ])
+        );
+        break;
+      case this.t('friday_ser'):
+        this.newObjectDate.push(
+          this.renderDate({
+            weekday: 'saturday_ser',
+            description: 'rest'
+          })
+        );
+        break;
+    }
+
+    this.month = this.objectPerMonthData[0].date.split('-');
     // this.objectPerMonthData.forEach(today => {
-    //   this.month = today.date.split("-");      
+    //   this.month = today.date.split("-");
     // });
 
     switch (this.month[1]) {
-      case "01":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.january
+      case '01':
+        this.nameMonth = this.t('january');
         return;
-      case "02":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.february
+      case '02':
+        this.nameMonth = this.t('february');
         return;
-      case "03":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.march
+      case '03':
+        this.nameMonth = this.t('march');
         return;
-      case "04":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.april
+      case '04':
+        this.nameMonth = this.t('april');
         return;
-      case "05":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.may
+      case '05':
+        this.nameMonth = this.t('may');
         return;
-      case "06":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.june
+      case '06':
+        this.nameMonth = this.t('june');
         return;
-      case "07":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.july
+      case '07':
+        this.nameMonth = this.t('july');
         return;
-      case "08":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.august
+      case '08':
+        this.nameMonth = this.t('august');
         return;
-      case "09":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.september
+      case '09':
+        this.nameMonth = this.t('september');
         return;
-      case "10":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.october
+      case '10':
+        this.nameMonth = this.t('october');
         return;
-      case "11":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.november
+      case '11':
+        this.nameMonth = this.t('november');
         return;
-      case "12":
-        this.nameMonth = this.translate.app.frontEnd.components.common.draw_calendar.december
+      case '12':
+        this.nameMonth = this.t('december');
         return;
     }
-
   }
 
   nextMonth() {
+    this.objectDataPosition = [
+      this.objectDateLast,
+      this.objectDateToday,
+      this.objectDateNextMonth
+    ];
 
-    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
-
-    if (this.objectDataPosition[this.objectDataPosition.length - 3] === this.objectPerMonthData) {
+    if (
+      this.objectDataPosition[this.objectDataPosition.length - 3] ===
+      this.objectPerMonthData
+    ) {
       this.objectPerMonthData = this.objectDataPosition[1];
 
       this.showDataCalendar();
-    }
-    else if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+    } else if (
+      this.objectDataPosition[this.objectDataPosition.length - 2] ===
+      this.objectPerMonthData
+    ) {
       this.objectPerMonthData = this.objectDataPosition[2];
 
       this.showDataCalendar();
@@ -912,31 +474,41 @@ export class DrawCalendarComponent implements OnInit {
   }
 
   lastMonth() {
-    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+    this.objectDataPosition = [
+      this.objectDateLast,
+      this.objectDateToday,
+      this.objectDateNextMonth
+    ];
 
-    if (this.objectDataPosition[this.objectDataPosition.length - 2] === this.objectPerMonthData) {
+    if (
+      this.objectDataPosition[this.objectDataPosition.length - 2] ===
+      this.objectPerMonthData
+    ) {
       this.objectPerMonthData = this.objectDataPosition[0];
 
       this.showDataCalendar();
-    }
-    else if (this.objectDataPosition[this.objectDataPosition.length - 1] === this.objectPerMonthData) {
+    } else if (
+      this.objectDataPosition[this.objectDataPosition.length - 1] ===
+      this.objectPerMonthData
+    ) {
       this.objectPerMonthData = this.objectDataPosition[1];
 
       this.showDataCalendar();
     }
-
   }
 
   actualMonth() {
-    this.objectDataPosition = [this.objectDateLast, this.objectDateToday, this.objectDateNextMonth];
+    this.objectDataPosition = [
+      this.objectDateLast,
+      this.objectDateToday,
+      this.objectDateNextMonth
+    ];
     this.objectPerMonthData = this.objectDataPosition[1];
     this.showDataCalendar();
-
   }
 
   openModal(event: any, day: any) {
-
-    let object_calendar = {
+    const object_calendar = {
       effect: 'open',
       date_info: '',
       pointx: event.clientX,
@@ -947,10 +519,9 @@ export class DrawCalendarComponent implements OnInit {
         hour_begin: day.hour_begin,
         hour_end: day.hour_finish,
         description_calendar: day.theorist_hours,
-        description_work: day.work_schedule_plan_text,
+        description_work: day.work_schedule_plan_text
       }
-
-    }
+    };
 
     this.calendarDetailService.setDetailCalendar(object_calendar);
   }
@@ -959,7 +530,5 @@ export class DrawCalendarComponent implements OnInit {
     this.calendarDetailService.setDetailCalendar({ effect: 'close' });
   }
 
-  desingPosition() {
-
-  }
+  desingPosition() {}
 }

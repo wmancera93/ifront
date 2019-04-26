@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
@@ -12,7 +14,10 @@
       </div>
     </div>
   </div>
-  <div id="data_table" class="row-hr-container justify-content-center">
+  <div
+    id="data_table"
+    class="row-hr-container justify-content-center"
+  >
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
         <div class="row top-containter">
@@ -20,44 +25,123 @@
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseExample" aria-expanded="false" (click)="collapse(true)"></i>
-            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-              data-target="#collapseExample" aria-expanded="false" (click)="collapse(false)"></i>
+            <i
+              *ngIf="!is_collapse"
+              class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              (click)="collapse(true)"
+            ></i>
+            <i
+              *ngIf="is_collapse"
+              class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseExample"
+              aria-expanded="false"
+              (click)="collapse(false)"
+            ></i>
           </div>
         </div>
       </div>
-      <div class="collapse top-general-p border-botton-general" id="collapseExample">
+      <div
+        class="collapse top-general-p border-botton-general"
+        id="collapseExample"
+      >
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Id de solicitud</label>
-            <input type="text" [(ngModel)]="request_number" class="form-control" (keyup)="validateNumber('request_number', request_number)">
+            <input
+              type="text"
+              [(ngModel)]="request_number"
+              class="form-control"
+              (keyup)="
+                validateNumber('request_number', request_number)
+              "
+            />
           </div>
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Número de solicitante</label>
-            <input type="text" [(ngModel)]="personal_request_number" class="form-control" (keyup)="validateNumber('personal_request_number',personal_request_number)">
+            <input
+              type="text"
+              [(ngModel)]="personal_request_number"
+              class="form-control"
+              (keyup)="
+                validateNumber(
+                  'personal_request_number',
+                  personal_request_number
+                )
+              "
+            />
           </div>
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Número de aprobador</label>
-            <input type="text" [(ngModel)]="personal_approver_number" class="form-control" (keyup)="validateNumber('personal_approver_number', personal_approver_number)">
+            <input
+              type="text"
+              [(ngModel)]="personal_approver_number"
+              class="form-control"
+              (keyup)="
+                validateNumber(
+                  'personal_approver_number',
+                  personal_approver_number
+                )
+              "
+            />
           </div>
           <div class="col-lg-4 col-12">
             <label>Tipo de solicitud</label>
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle cursor-general tabDate" id="navbarDropdown" role="button"
-                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a
+                  class="nav-link dropdown-toggle cursor-general tabDate"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
                   <i class="fa fa-chevron-circle-down"></i>
-                  {{type_selected}}
+                  {{ type_selected }}
                 </a>
-                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
+                <div
+                  class="dropdown-menu col-12"
+                  aria-labelledby="navbarDropdown"
+                >
                   <div>
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests('-1', 'Seleccione')">Seleccione</a>
-                    <div *ngIf="newtype_requests.length !== (i + 1)" class="dropdown-divider"></div>
+                    <a
+                      class="dropdown-item color-font-gree text-capitalize cursor-general"
+                      (click)="filterRequests('-1', 'Seleccione')"
+                      >Seleccione</a
+                    >
+                    <div
+                      *ngIf="newtype_requests.length !== i + 1"
+                      class="dropdown-divider"
+                    ></div>
                   </div>
-                  <div *ngFor="let type of newtype_requests; let i = index">
-                    <a class="dropdown-item color-font-gree text-capitalize cursor-general" (click)="filterRequests(type.value, type.name)">{{type.name}}</a>
-                    <div *ngIf="newtype_requests.length !== (i + 1)" class="dropdown-divider"></div>
+                  <div
+                    *ngFor="
+                      let type of newtype_requests;
+                      let i = index
+                    "
+                  >
+                    <a
+                      class="dropdown-item color-font-gree text-capitalize cursor-general"
+                      (click)="filterRequests(type.value, type.name)"
+                      >{{ type.name }}</a
+                    >
+                    <div
+                      *ngIf="newtype_requests.length !== i + 1"
+                      class="dropdown-divider"
+                    ></div>
                   </div>
                 </div>
               </li>
@@ -65,22 +149,48 @@
           </div>
           <div class="col-lg-4 col-md-4 col-12">
             <label>fecha de Inicio</label>
-            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" (change)="validateDate()" />
+            <input
+              tabindex="-1"
+              type="date"
+              name="date_begin"
+              class="form-control"
+              [(ngModel)]="date_begin"
+              (change)="validateDate()"
+            />
           </div>
           <div class="col-lg-4 col-md-4 col-12">
             <label>Fecha final</label>
-            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" (change)="validateDate()" />
+            <input
+              tabindex="-1"
+              type="date"
+              name="date_end"
+              class="form-control"
+              [(ngModel)]="date_end"
+              (change)="validateDate()"
+            />
           </div>
         </div>
         <div class="row justify-content-end">
-          <div class="col-lg-4 col-md-4 col-12 align-self-end" *ngIf="btnConsult">
-            <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint()">
+          <div
+            class="col-lg-4 col-md-4 col-12 align-self-end"
+            *ngIf="btnConsult"
+          >
+            <div
+              class="btn btn-block btn-primary-second fontDate"
+              (click)="getObjectPrint()"
+            >
               <i class="fa fa-search-plus"></i>
               Consulta
             </div>
           </div>
-          <div class="col-lg-4 col-md-4 col-12 align-self-end" *ngIf="!btnConsult">
-            <div class="btn btn-block btn-primary-second fontDate"  style="cursor: no-drop">
+          <div
+            class="col-lg-4 col-md-4 col-12 align-self-end"
+            *ngIf="!btnConsult"
+          >
+            <div
+              class="btn btn-block btn-primary-second fontDate"
+              style="cursor: no-drop"
+            >
               <i class="fa fa-search-plus"></i>
               Consulta
             </div>
@@ -89,7 +199,11 @@
       </div>
       <div class="row">
         <div class="col-12 top-general-p">
-          <app-data-table [records]="objectReport" [title]="nameReport" [excel]="showExcel"></app-data-table>
+          <app-data-table
+            [records]="objectReport"
+            [title]="nameReport"
+            [excel]="showExcel"
+          ></app-data-table>
         </div>
       </div>
     </div>

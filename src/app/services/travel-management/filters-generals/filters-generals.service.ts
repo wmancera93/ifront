@@ -20,13 +20,13 @@ export class FiltersGeneralsService {
     return this.tokenService.get('travel_request_filters/filters_by_state/' + current_view + '/' + status)
       .map((data: any) => data.json());
   }
- 
+
   getSearchTravelByStatusLiquid(current_view: string, status: string) {
     return this.tokenService.get('travel_request_filters/filters_by_liquid/' + current_view + '/' + status)
       .map((data: any) => data.json());
   }
 
-  getSearchTravelByDate(current_view: string, date_begin: string, date_end:string) {
+  getSearchTravelByDate(current_view: string, date_begin: string, date_end: string) {
     return this.tokenService.get('travel_request_filters/search_by_date/' + current_view + '/' + date_begin + '/' + date_end)
       .map((data: any) => data.json());
   }

@@ -1,33 +1,42 @@
 <header class="errorImg">
-    <div class="errorMessage-container" style="overflow-y:hidden;overflow-x:hidden;">
-        <div class="row justify-content-center">
-            <div class="col-md-1  col-8 justify-content-center">
-                <div class="company-logo-error">
-                    <img *ngIf="dataEnterprise" src="{{dataEnterprise.logo_inside.url}}" alt="LogoEnterprise">
-                </div>
-            </div>
+  <div
+    class="errorMessage-container"
+    style="overflow-y:hidden;overflow-x:hidden;"
+  >
+    <div class="row justify-content-center">
+      <div class="col-md-1  col-8 justify-content-center">
+        <div class="company-logo-error">
+          <img
+            *ngIf="dataEnterprise"
+            src="{{ dataEnterprise.logo_inside.url }}"
+            alt="LogoEnterprise"
+          />
         </div>
-        <div class="errorMessage row ">
-            <div class="col-12 ">
-                <div class="row justify-content-center fontTitle-error">
-                    <div class="col-6">
-                        {{translate.app.frontEnd.pages.error_page.title_not_found}}
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="fontMessage-error col-8">
-                        {{translate.app.frontEnd.pages.error_page.text_not_found}}
-                    </div>
-                </div>
-                <div class="row justify-content-center" style="margin-bottom:15px;">
-                    <div class="col-lg-2 col-6">
-                        <div class="buttonError" (click)="RedirectInit()">
-                            <h6> {{translate.app.frontEnd.pages.error_page.text_go_to_home}} </h6>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="errorMessage row ">
+      <div class="col-12 ">
+        <div class="row justify-content-center fontTitle-error">
+          <div class="col-6">
+            {{ parseT('title_not_found') | translate }}
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <div class="fontMessage-error col-8">
+            {{ parseT('text_not_found') | translate }}
+          </div>
+        </div>
+        <div
+          class="row justify-content-center"
+          style="margin-bottom:15px;"
+        >
+          <div class="col-lg-2 col-6">
+            <div class="buttonError" (click)="RedirectInit()">
+              <h6>{{ parseT('text_go_to_home') | translate }}</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>

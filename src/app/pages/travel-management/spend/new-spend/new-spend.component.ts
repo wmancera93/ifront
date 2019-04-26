@@ -1,5 +1,4 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
-import { TravelsService } from '../../../../services/shared/travels/travels.service';
 import { FileUploadService } from '../../../../services/shared/common/file-upload/file-upload.service';
 import { SpendSharedService } from '../../../../services/shared/spend-shared/spend-shared.service';
 import { SpendsService } from '../../../../services/travel-management/spends/spends.service';
@@ -12,23 +11,21 @@ import { FormDataService } from '../../../../services/common/form-data/form-data
 import { User } from '../../../../models/general/user';
 import { EmployeeService } from '../../../../services/common/employee/employee.service';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
-import { Translate } from '../../../../models/common/translate/translate';
-import { TranslateService } from '../../../../services/common/translate/translate.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-new-spend',
   templateUrl: './new-spend.component.html',
-  styleUrls: ['./new-spend.component.css']
+  styleUrls: ['./new-spend.component.css'],
 })
 export class NewSpendComponent implements OnInit {
-
-  public showSubmit: boolean = true;
+  public showSubmit = true;
   public filequotation = 'fileSpend';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public imgSpend: any[] = [];
   public icon: any[] = [];
-  public iconDocument: string = '';
-  public is_upload: boolean = false;
+  public iconDocument = '';
+  public is_upload = false;
   public formSpendTravel: any;
   public file: any[] = [];
   public listTravelsFromSpend: any[] = [];
@@ -37,26 +34,25 @@ export class NewSpendComponent implements OnInit {
   public infoTableSpends: any[] = [];
   public listTypeDocument: any[] = [];
   public spedsData: any[] = [];
-  public idSpend: number = 0;
+  public idSpend = 0;
   public objectSpends: SpendsCreate;
   public objectAllowances: ObjectSpends[] = [];
-  showPdf
-  showSizeTable
+  showPdf;
+  showSizeTable;
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string;
-  public spendEdit: boolean = false;
-  public spendNew: boolean = false;
-  public activate_submit_spend: boolean = true;
-  public continue: boolean = false;
-  public collapse_is: boolean = false;
+  public spendEdit = false;
+  public spendNew = false;
+  public activate_submit_spend = true;
+  public continue = false;
+  public collapse_is = false;
   public objectProof: any[] = [];
   public spend_delete_local: string;
   public center_costs_travels: any[] = [];
   public grahp: any[] = [];
   public costs_travels: any[] = [];
-  public showListAutoCost: boolean = false;
-  public showListAutoGraph: boolean = false;
-  public showListAutoOrder: boolean = false;
+  public showListAutoCost = false;
+  public showListAutoGraph = false;
+  public showListAutoOrder = false;
   public operations: any[] = [];
   public order_travels: any[] = [];
   public accountContable: any[] = [];
@@ -64,62 +60,69 @@ export class NewSpendComponent implements OnInit {
 
   public userAuthenticated: User = null;
   public searchByLetter: string;
-  public nameEmployee: string = '';
+  public nameEmployee = '';
   public searchEmployee: any[] = [];
-  public showListAutoC: boolean = false;
+  public showListAutoC = false;
   public eployee_selected: any = null;
   public ticket_allowance_request: string;
   public ticket_travel_request: string;
-  public edit: boolean = false;
+  public edit = false;
   public objetcThird: any;
-  public elementImputation: string = '';
-  public typeCenterCost: string = '';
-  public typeCenterCost_id: string = '';
-  public typeCenterOrder: string = '';
-  public typeCenterOrder_id: string = '';
-  public grahpSpend: string = '';
-  public grahpSpend_id: string = '';
-  public distribution: string = '';
-  public accountContableVariable: string = '';
-  public operationsSpend: string = '';
-  public kostl: boolean = true;
-  public nplnr: boolean = false;
-  public aufnr: boolean = false;
-  public translate: Translate = null;
+  public elementImputation = '';
+  public typeCenterCost = '';
+  public typeCenterCost_id = '';
+  public typeCenterOrder = '';
+  public typeCenterOrder_id = '';
+  public grahpSpend = '';
+  public grahpSpend_id = '';
+  public distribution = '';
+  public accountContableVariable = '';
+  public operationsSpend = '';
+  public kostl = true;
+  public nplnr = false;
+  public aufnr = false;
   public typeSpend: string;
 
+  t(key) {
+    return this.translate.instant(this.parseT(key));
+  }
 
-  constructor(public spendSharedService: SpendSharedService,
+  parseT(key) {
+    return `pages.travel_management.spend.new_spend.${key}`;
+  }
+
+  constructor(
+    public spendSharedService: SpendSharedService,
     public fileUploadService: FileUploadService,
     public spendsService: SpendsService,
     private accionDataTableService: DataDableSharedService,
     public fb: FormBuilder,
     public alert: AlertsService,
-    public formDataService: FormDataService, public employeeService: EmployeeService,
-    public travelManagementService: TravelService, public translateService: TranslateService) {
-
-    this.translate = this.translateService.getTranslate();
-    this.nameReport = this.translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle_ts;
-    this.userAuthenticated = JSON.parse(localStorage.getItem("user"));
-    this.infoTableSpends = [{
-      success: true,
-      data: [{ data: [] }]
-    }];
+    public formDataService: FormDataService,
+    public employeeService: EmployeeService,
+    public travelManagementService: TravelService,
+    public translate: TranslateService,
+  ) {
+    this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+    this.infoTableSpends = [
+      {
+        success: true,
+        data: [{ data: [] }],
+      },
+    ];
 
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'ConfirmTravelSpendID' || data === 'ValidationNewSpend' || data === 'closeAlertConfirmTravelSpendID' || data === 'closeAlertValidationNewSpend' || data === 'closeAlertdeleteSpendNew') {
-        document.getElementById("btn_spend_new").click();
+        document.getElementById('btn_spend_new').click();
         this.activate_submit_spend = true;
         this.showSubmit = true;
       }
       if (data === 'deleteSpendNew') {
         this.infoTableSpends[0].data[0].data.splice(this.infoTableSpends[0].data[0].data.findIndex(filter => filter.field_0 === this.spend_delete_local), 1);
         this.objectReport.emit(this.infoTableSpends[0]);
-        document.getElementById("btn_spend_new").click();
+        document.getElementById('btn_spend_new').click();
       }
-
-    })
-
+    });
 
     this.spendSharedService.getNewSpend().subscribe((data: any) => {
       this.eployee_selected = null;
@@ -133,16 +136,16 @@ export class NewSpendComponent implements OnInit {
           if (third.data[0].travel_request.employee_applicant_to_json.personal_code != JSON.parse(localStorage.getItem('user')).employee.pernr) {
             this.objetcThird = {
               id: third.data[0].travel_request.employee_applicant_to_json.id,
-              name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name
-            }
-            this.returnObjectSearch(this.objetcThird)
+              name_complete: third.data[0].travel_request.employee_applicant_to_json.short_name,
+            };
+            this.returnObjectSearch(this.objetcThird);
           } else {
-            this.objetcThird = {}
+            this.objetcThird = {};
             this.spendsService.getSpendListTravel(JSON.parse(localStorage.getItem('user')).employee_id.toString()).subscribe((travel: any) => {
               this.listTravelsFromSpend = this.sortByNumber(travel.data);
             });
           }
-        })
+        });
         this.travelManagementService.getTravelsAllDetail(data).subscribe((detail: any) => {
           if (detail.data[0].travel_request.travel_costs_type_code === 'KOSTL') {
             this.nplnr = false;
@@ -156,7 +159,7 @@ export class NewSpendComponent implements OnInit {
             this.typeCenterOrder = '';
             this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
             this.grahpSpend_id = '';
-            this.typeCenterOrder_id = ''
+            this.typeCenterOrder_id = '';
           }
           if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
             this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
@@ -174,7 +177,7 @@ export class NewSpendComponent implements OnInit {
             this.grahpSpend_id = detail.data[0].travel_request.travel_graph_id;
           }
           if (detail.data[0].travel_request.travel_costs_type_code === 'AUFNR') {
-            debugger
+              
             this.nplnr = false;
             this.kostl = false;
             this.aufnr = true;
@@ -195,26 +198,24 @@ export class NewSpendComponent implements OnInit {
         });
       }
 
-
-
       this.refreshTableSpends();
       this.formSpendTravel = new FormGroup({});
       this.formSpendTravel = fb.group({
         travel_request_id: data !== true ? data : '',
-        travel_allowance_type_id: "",
-        currency_id: "",
-        value: "",
-        date: "",
-        observation: "",
-        bill_number: "",
-        control_number: "",
-        nit: "",
-        bussines_name: "",
-        cod_provider: "",
-        authorization_number: "",
-        populated: "",
-        formA: "",
-        document: ""
+        travel_allowance_type_id: '',
+        currency_id: '',
+        value: '',
+        date: '',
+        observation: '',
+        bill_number: '',
+        control_number: '',
+        nit: '',
+        bussines_name: '',
+        cod_provider: '',
+        authorization_number: '',
+        populated: '',
+        formA: '',
+        document: '',
       });
 
       if (this.formSpendTravel.value.travel_request_id !== '') {
@@ -226,34 +227,30 @@ export class NewSpendComponent implements OnInit {
 
       if (document.getElementById('spend_new').className !== 'modal show') {
         document.getElementById('btn_spend_new').click();
-        document.getElementById("bodyGeneral").removeAttribute('style');
+        document.getElementById('bodyGeneral').removeAttribute('style');
       }
-
     });
 
-    this.spendSharedService.getDeleteSpend().subscribe((data) => {
+    this.spendSharedService.getDeleteSpend().subscribe(data => {
       if (data === 'deleteSpend') {
         this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
           this.listTravelsFromSpend = this.sortByNumber(travel.data);
         });
       }
-    })
+    });
 
     this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-      if (data.action_method === "deleteSpend") {
+      if (data.action_method === 'deleteSpend') {
         this.deleteSpend(data);
       }
-      if (data.action_method === "editNewSpend") {
-
+      if (data.action_method === 'editNewSpend') {
         this.spendEdit = true;
         this.spendNew = false;
         this.collapse_is = false;
         this.activate_submit_spend = false;
 
-
-        if ((this.spendEdit === true)) {
-
-          let objectSpend: any = this.objectProof.filter((result) => result.id_spend.toString() === data.id.toString());
+        if (this.spendEdit === true) {
+          const objectSpend: any = this.objectProof.filter(result => result.id_spend.toString() === data.id.toString());
 
           this.formSpendTravel = new FormGroup({});
           this.formSpendTravel = fb.group({
@@ -277,33 +274,33 @@ export class NewSpendComponent implements OnInit {
 
           this.distributionAccount = this.objectAllowances.filter(result => result.id_temp.toString() === data.id.toString())[0].cost_dist;
         }
-        document.getElementById("funtionSpendTravel").click();
+        document.getElementById('funtionSpendTravel').click();
         setTimeout(() => {
           document.getElementById('spend_new').scrollTo(0, 1200);
         }, 200);
       }
-    })
+    });
 
     this.formSpendTravel = new FormGroup({});
     this.formSpendTravel = fb.group({
       travel_request_id: '',
-      travel_allowance_type_id: "",
-      currency_id: "",
-      value: "",
-      date: "",
-      observation: "",
-      bill_number: "",
-      control_number: "",
-      nit: "",
-      bussines_name: "",
-      cod_provider: "",
-      authorization_number: "",
-      populated: "",
-      formA: "",
-      document: ""
+      travel_allowance_type_id: '',
+      currency_id: '',
+      value: '',
+      date: '',
+      observation: '',
+      bill_number: '',
+      control_number: '',
+      nit: '',
+      bussines_name: '',
+      cod_provider: '',
+      authorization_number: '',
+      populated: '',
+      formA: '',
+      document: '',
     });
 
-    this.fileUploadService.getObjetFile().subscribe((data) => {
+    this.fileUploadService.getObjetFile().subscribe(data => {
       setTimeout(() => {
         this.fileUploadService.setCleanUpload(true);
         setTimeout(() => {
@@ -311,20 +308,22 @@ export class NewSpendComponent implements OnInit {
           this.iconDocument = this.icon[this.icon.length - 1];
           this.is_upload = true;
           this.file.push(data);
-          this.imgSpend.push({ file: data, extension: this.iconDocument });
-
+          this.imgSpend.push({
+            file: data,
+            extension: this.iconDocument,
+          });
         }, 200);
       }, 1000);
     });
   }
 
-  public disabledCode: boolean = false;
+  public disabledCode = false;
 
   maskCode(param) {
     this.disabledCode = true;
     let word = '';
     let wordView = '';
-    let filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
+    const filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890-';
 
     for (let i = 0; i < param.control_number.length; i++) {
       if (filtro.indexOf(param.control_number.charAt(i)) != -1) {
@@ -355,7 +354,6 @@ export class NewSpendComponent implements OnInit {
   }
 
   ngOnInit() {
-
     this.spendsService.getSpendMoneyList().subscribe((money: any) => {
       this.listMoneyType = money.data;
     });
@@ -367,18 +365,16 @@ export class NewSpendComponent implements OnInit {
     this.spendsService.getTypesDocument().subscribe((document: any) => {
       this.listTypeDocument = this.sortByAphabet(document.data);
     });
-    this.travelManagementService.getplanningTravelRequests().
-      subscribe((data: any) => {
-        this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
-      });
-    this.spendsService.getAccountContable().
-      subscribe((account: any) => {
-        this.accountContable = this.sortByAphabet(account.data);
-      });
+    this.travelManagementService.getplanningTravelRequests().subscribe((data: any) => {
+      this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
+    });
+    this.spendsService.getAccountContable().subscribe((account: any) => {
+      this.accountContable = this.sortByAphabet(account.data);
+    });
   }
 
   sortByAphabet(dataBySort: any) {
-    dataBySort.sort(function (a, b) {
+    dataBySort.sort(function(a, b) {
       const nameA: String = a.name.toLowerCase();
       const nameB: String = b.name.toLowerCase();
 
@@ -393,7 +389,7 @@ export class NewSpendComponent implements OnInit {
     return dataBySort;
   }
   sortByNumber(dataBySort: any) {
-    dataBySort.sort(function (a, b) {
+    dataBySort.sort(function(a, b) {
       return b.id - a.id;
     });
     return dataBySort;
@@ -401,18 +397,16 @@ export class NewSpendComponent implements OnInit {
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
     if (this.nameEmployee !== null) {
-      this.employeeService.getEmployeeTravelsById(this.nameEmployee)
-        .subscribe((data: any) => {
-          if (data.data.length > 0) {
-            this.searchEmployee = data.data;
-            this.showListAutoC = true;
-          } else {
-            this.searchEmployee = [];
-            this.showListAutoC = true;
-          }
-        })
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee).subscribe((data: any) => {
+        if (data.data.length > 0) {
+          this.searchEmployee = data.data;
+          this.showListAutoC = true;
+        } else {
+          this.searchEmployee = [];
+          this.showListAutoC = true;
+        }
+      });
     }
-
   }
 
   returnObjectSearch(ObjectSearch: any) {
@@ -447,28 +441,26 @@ export class NewSpendComponent implements OnInit {
   }
 
   validateTravel(travel: any) {
-
     if (travel.travel_request_id.toString() !== '') {
       this.continue = true;
       this.activate_submit_spend = false;
       this.spendEdit = false;
       this.spendNew = true;
 
-
       this.spedsData.forEach(element => {
-        debugger
+          
         if (travel.travel_request_id.toString() === element.ticket_travel.toString()) {
-          document.getElementById("closeSpends").click();
-          const alertWarning: Alerts[] = [{
-            type: 'danger',
-            title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_one_ts,
-            message: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_tree_ts,
-            confirmation: true,
-            typeConfirmation: 'ConfirmTravelSpendID'
-
-          }];
+          document.getElementById('closeSpends').click();
+          const alertWarning: Alerts[] = [
+            {
+              type: 'danger',
+              title: this.t('type_alert_one_ts'),
+              message: this.t('message_alert_tree_ts'),
+              confirmation: true,
+              typeConfirmation: 'ConfirmTravelSpendID',
+            },
+          ];
           this.alert.setAlert(alertWarning[0]);
-
         }
       });
       this.ticket_travel_request = travel.travel_request_id;
@@ -489,7 +481,7 @@ export class NewSpendComponent implements OnInit {
           this.typeCenterOrder = '';
           this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
           this.grahpSpend_id = '';
-          this.typeCenterOrder_id = ''
+          this.typeCenterOrder_id = '';
         }
         if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
           this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
@@ -521,44 +513,42 @@ export class NewSpendComponent implements OnInit {
           this.grahpSpend_id = '';
         }
       });
-
     } else {
       this.continue = false;
       this.refreshPartialSpend();
     }
     setTimeout(() => {
-      document.getElementById('collapseNewSpend').className = "show";
+      document.getElementById('collapseNewSpend').className = 'show';
     }, 200);
-
-
   }
 
   deleteSpend(params) {
+    document.getElementById('btn_spend_new').click();
 
-    document.getElementById("btn_spend_new").click();
-
-    let alertWarning = [{
-      type: 'warning',
-      title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_two_ts,
-      message: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_four_ts,
-      confirmation: true,
-      typeConfirmation: 'deleteSpendNew'
-    }];
+    const alertWarning = [
+      {
+        type: 'warning',
+        title: this.t('type_alert_two_ts'),
+        message: this.t('message_alert_four_ts'),
+        confirmation: true,
+        typeConfirmation: 'deleteSpendNew',
+      },
+    ];
     this.alert.setAlert(alertWarning[0]);
     this.spend_delete_local = params.id;
   }
 
   aditionSpend(objectSpend) {
     objectSpend.id_spend = this.idSpend + 1;
-    this.objectProof.push(objectSpend)
-    let date = objectSpend.date.split('-');
-    let dateSpend = date[2] + '/' + date[1] + '/' + date[0];
+    this.objectProof.push(objectSpend);
+    const date = objectSpend.date.split('-');
+    const dateSpend = date[2] + '/' + date[1] + '/' + date[0];
     this.infoTableSpends[0].data[0].data.push({
       field_0: this.idSpend + 1,
-      field_1: this.listTravelsFromSpend.filter((data) => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
-      field_2: this.listSpendType.filter((data) => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
+      field_1: this.listTravelsFromSpend.filter(data => data.id.toString() === objectSpend.travel_request_id.toString())[0].name_travel,
+      field_2: this.listSpendType.filter(data => data.id.toString() === objectSpend.travel_allowance_type_id.toString())[0].name,
       field_3: objectSpend.value,
-      field_4: this.listMoneyType.filter((data) => data.id.toString() === objectSpend.currency_id.toString())[0].name,
+      field_4: this.listMoneyType.filter(data => data.id.toString() === objectSpend.currency_id.toString())[0].name,
       field_5: objectSpend.date !== '' ? dateSpend : '',
       field_6: objectSpend.observation.toUpperCase(),
       field_7: objectSpend.bill_number,
@@ -569,26 +559,25 @@ export class NewSpendComponent implements OnInit {
       field_12: objectSpend.authorization_number,
       field_13: objectSpend.populated.toUpperCase(),
       field_14: objectSpend.formA === true ? 'Si' : 'No',
-      field_15: this.listTypeDocument.filter((data) => data.id.toString() === objectSpend.document.toString())[0].name,
+      field_15: this.listTypeDocument.filter(data => data.id.toString() === objectSpend.document.toString())[0].name,
       field_16: {
-        type_method: "UPDATE",
-        type_element: "button",
-        icon: "fa-pencil",
+        type_method: 'UPDATE',
+        type_element: 'button',
+        icon: 'fa-pencil',
         id: this.idSpend + 1,
-        title: "Editar",
-        action_method: "editNewSpend",
-        disable: false
+        title: 'Editar',
+        action_method: 'editNewSpend',
+        disable: false,
       },
       field_17: {
-        type_method: "DELETE",
-        type_element: "button",
-        icon: "fa-trash",
+        type_method: 'DELETE',
+        type_element: 'button',
+        icon: 'fa-trash',
         id: this.idSpend + 1,
-        title: "Eliminar",
-        action_method: "deleteSpend",
-        disable: false
-      }
-
+        title: 'Eliminar',
+        action_method: 'deleteSpend',
+        disable: false,
+      },
     });
 
     this.objectAllowances.push({
@@ -608,14 +597,14 @@ export class NewSpendComponent implements OnInit {
       population: objectSpend.populated,
       have_format: objectSpend.formA == false ? 'false' : 'true',
       type_of_expense_document: objectSpend.document,
-      cost_dist: this.distributionAccount
+      cost_dist: this.distributionAccount,
     });
 
     setTimeout(() => {
       this.objectReport.emit(this.infoTableSpends[0]);
     }, 500);
 
-    this.idSpend += 1
+    this.idSpend += 1;
     this.refreshPartialSpend();
     this.spendNew = false;
     this.spendEdit = false;
@@ -659,7 +648,7 @@ export class NewSpendComponent implements OnInit {
         this.typeCenterOrder = '';
         this.typeCenterCost_id = detail.data[0].travel_request.travel_cost_id;
         this.grahpSpend_id = '';
-        this.typeCenterOrder_id = ''
+        this.typeCenterOrder_id = '';
       }
       if (detail.data[0].travel_request.travel_costs_type_code === 'NPLNR') {
         this.searchOperationsGrahp(detail.data[0].travel_request.travel_graph_code, '');
@@ -691,7 +680,6 @@ export class NewSpendComponent implements OnInit {
         this.grahpSpend_id = '';
       }
     });
-
   }
   closeSpend() {
     this.showSubmit = true;
@@ -699,7 +687,7 @@ export class NewSpendComponent implements OnInit {
     this.spendEdit = false;
     this.collapse_is = true;
     this.activate_submit_spend = true;
-    document.getElementById("funtionSpendTravel").click();
+    document.getElementById('funtionSpendTravel').click();
     this.refreshPartialSpend();
   }
 
@@ -712,7 +700,6 @@ export class NewSpendComponent implements OnInit {
     //     this.formSpendTravel.controls['value'].setValue('');
     //   }
     // }
-
   }
 
   selectTypeCenterImputations() {
@@ -725,17 +712,15 @@ export class NewSpendComponent implements OnInit {
       this.formSpendTravel.controls['grahpSpend_id'].setValue('');
       this.formSpendTravel.controls['operationsSpend'].setValue('');
 
-      let employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
+      const employee_center_coast = this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
 
       //let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
 
       if (employee_center_coast !== null) {
-        this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter((data) => data.code === this.elementImputation)[0].id, employee_center_coast).
-          subscribe((data: any) => {
-            this.returnCostSearchSpend(data.data[0])
-          });
+        this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, employee_center_coast).subscribe((data: any) => {
+          this.returnCostSearchSpend(data.data[0]);
+        });
       }
-
     } else {
       if (this.elementImputation === 'NPLNR') {
         this.kostl = false;
@@ -757,36 +742,31 @@ export class NewSpendComponent implements OnInit {
     }
   }
 
-
   enterCostSpend() {
-
-    this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.typeCenterCost).
-      subscribe((data: any) => {
-        this.costs_travels = this.sortByAphabet(data.data);
-        this.showListAutoCost = true;
-        this.showListAutoGraph = false;
-        this.showListAutoOrder = false;
-      });
+    this.travelManagementService.getFilterTravelCost(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.typeCenterCost).subscribe((data: any) => {
+      this.costs_travels = this.sortByAphabet(data.data);
+      this.showListAutoCost = true;
+      this.showListAutoGraph = false;
+      this.showListAutoOrder = false;
+    });
   }
 
   enterGraphSpend() {
-    this.travelManagementService.getFilterGraphs(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.grahpSpend).
-      subscribe((data: any) => {
-        this.grahp = this.sortByAphabet(data.data);
-        this.showListAutoCost = false;
-        this.showListAutoGraph = true;
-        this.showListAutoOrder = false;
-      });
+    this.travelManagementService.getFilterGraphs(this.center_costs_travels.filter(data => data.code === this.elementImputation)[0].id, this.grahpSpend).subscribe((data: any) => {
+      this.grahp = this.sortByAphabet(data.data);
+      this.showListAutoCost = false;
+      this.showListAutoGraph = true;
+      this.showListAutoOrder = false;
+    });
   }
 
   enterOrderSpend() {
-    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder.toUpperCase()).
-      subscribe((data: any) => {
-        this.order_travels = this.sortByAphabet(data.data);
-        this.showListAutoCost = false;
-        this.showListAutoGraph = false;
-        this.showListAutoOrder = true;
-      });
+    this.travelManagementService.getFilterTravelOrders(this.typeCenterOrder.toUpperCase()).subscribe((data: any) => {
+      this.order_travels = this.sortByAphabet(data.data);
+      this.showListAutoCost = false;
+      this.showListAutoGraph = false;
+      this.showListAutoOrder = true;
+    });
   }
   returnCostSearchSpend(cost: any) {
     this.typeCenterCost = cost.code + '-' + cost.name;
@@ -798,7 +778,7 @@ export class NewSpendComponent implements OnInit {
     this.grahpSpend = graph.code + '-' + graph.name;
     this.grahp = [];
     this.grahpSpend_id = graph.id;
-    this.searchOperationsGrahp(graph.code, 'edit')
+    this.searchOperationsGrahp(graph.code, 'edit');
   }
   returnOrderSearchOrder(order: any) {
     this.typeCenterOrder = order.code + '-' + order.name;
@@ -807,21 +787,19 @@ export class NewSpendComponent implements OnInit {
   }
 
   searchOperationsGrahp(graphCode: any, acction: any) {
-
-    this.travelManagementService.getTravelsOperations(graphCode).
-      subscribe((data: any) => {
-        this.operations = this.sortByAphabet(data.data);
-        if (this.operations.length > 0) {
-          if (acction === 'new') {
-            this.operationsSpend = '-1';
-          }
-        } else {
-          this.operationsSpend = '';
+    this.travelManagementService.getTravelsOperations(graphCode).subscribe((data: any) => {
+      this.operations = this.sortByAphabet(data.data);
+      if (this.operations.length > 0) {
+        if (acction === 'new') {
+          this.operationsSpend = '-1';
         }
-      })
+      } else {
+        this.operationsSpend = '';
+      }
+    });
   }
 
-  countSaveAccount: number = 0;
+  countSaveAccount = 0;
   saveAccount() {
     this.distributionAccount.push({
       id: this.countSaveAccount += 1,
@@ -839,7 +817,7 @@ export class NewSpendComponent implements OnInit {
       // account_contable: this.accountContableVariable + '- prueb'
       account_contable: this.accountContable.filter(data => data.id.toString() === this.accountContableVariable)[0].name,
       order_name: this.typeCenterOrder === '' ? 'N/A' : this.typeCenterOrder,
-    })
+    });
 
     this.elementImputation = '';
     this.grahpSpend_id = '';
@@ -858,151 +836,159 @@ export class NewSpendComponent implements OnInit {
   }
 
   newSpend(param) {
-    debugger
+      
     this.showSubmit = false;
 
     const spendsFormData = new FormData();
     spendsFormData.append('travel_request_id', param.travel_request_id.toString());
     spendsFormData.append('allowances', JSON.stringify(this.objectAllowances));
-    spendsFormData.append('files_length', this.imgSpend.length.toString())
+    spendsFormData.append('files_length', this.imgSpend.length.toString());
     spendsFormData.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     for (let index = 0; index < this.imgSpend.length; index++) {
       spendsFormData.append('files_' + (index + 1).toString(), this.file[index]);
-    };
+    }
 
     param = spendsFormData;
     this.formDataService.postSpendsFormData(spendsFormData).subscribe(
       (data: any) => {
-        this.ticket_allowance_request = data.data.travel_allowance_request_a.id
-        document.getElementById("closeSpends").click();
+        this.ticket_allowance_request = data.data.travel_allowance_request_a.id;
+        document.getElementById('closeSpends').click();
         this.spendsService.getSpendListTravel(this.eployee_selected).subscribe((travel: any) => {
           this.listTravelsFromSpend = travel.data;
         });
-        const alertSuccess: Alerts[] = [{
-          type: 'success',
-          title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_ts,
-          message: data.message,
-          confirmation: false
-        }];
+        const alertSuccess: Alerts[] = [
+          {
+            type: 'success',
+            title: this.t('type_alert_ts'),
+            message: data.message,
+            confirmation: false,
+          },
+        ];
         this.showSubmit = true;
         this.collapse_is = false;
         this.alert.setAlert(alertSuccess[0]);
-        this.spendSharedService.setRefreshSpend({ success: true, third: this.eployee_selected == null ? false : true });
+        this.spendSharedService.setRefreshSpend({
+          success: true,
+          third: this.eployee_selected == null ? false : true,
+        });
       },
       (error: any) => {
-        document.getElementById("closeSpends").click();
-        const alertWarning: Alerts[] = [{
-          type: 'danger',
-          title: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.type_alert_one_ts,
-          message: error.json().errors.toString() + this.translate.app.frontEnd.pages.travel_management.spend.new_spend.message_alert_five_ts,
-          confirmation: true,
-          typeConfirmation: 'ValidationNewSpend'
-        }];
+        document.getElementById('closeSpends').click();
+        const alertWarning: Alerts[] = [
+          {
+            type: 'danger',
+            title: this.t('type_alert_one_ts'),
+            message: error.json().errors.toString() + this.t('message_alert_five_ts'),
+            confirmation: true,
+            typeConfirmation: 'ValidationNewSpend',
+          },
+        ];
         this.showSubmit = true;
         this.collapse_is = false;
         this.alert.setAlert(alertWarning[0]);
-      })
+      },
+    );
   }
 
   refreshTableSpends() {
     this.infoTableSpends = [];
     this.infoTableSpends.push({
       success: true,
-      data: [{
-        title: "Gastos",
-        title_table: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.tittle_table_ts,
-        labels: {
-          // field_1: {
-          //   value: "Viaje",
-          //   type: "string",
-          //   sortable: false,
-          // },
-          field_2: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_cero,
-            type: "string",
-            sortable: false,
-          },
+      data: [
+        {
+          title: 'Gastos',
+          title_table: this.t('tittle_table_ts'),
+          labels: {
+            // field_1: {
+            //   value: "Viaje",
+            //   type: "string",
+            //   sortable: false,
+            // },
+            field_2: {
+              value: this.t('field_cero'),
+              type: 'string',
+              sortable: false,
+            },
 
-          field_3: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_one,
-            type: "string",
-            sortable: false,
+            field_3: {
+              value: this.t('field_one'),
+              type: 'string',
+              sortable: false,
+            },
+            field_4: {
+              value: this.t('field_two'),
+              type: 'string',
+              sortable: false,
+            },
+            field_5: {
+              value: this.t('field_three'),
+              type: 'string',
+              sortable: false,
+            },
+            field_6: {
+              value: this.t('field_four'),
+              type: 'string',
+              sortable: false,
+            },
+            field_7: {
+              value: this.t('field_five'),
+              type: 'string',
+              sortable: false,
+            },
+            field_8: {
+              value: this.t('field_six'),
+              type: 'string',
+              sortable: false,
+            },
+            field_9: {
+              value: this.t('field_seven'),
+              type: 'string',
+              sortable: false,
+            },
+            field_10: {
+              value: this.t('field_eight'),
+              type: 'string',
+              sortable: false,
+            },
+            // field_11: {
+            //   value: "Código de proveedor ",
+            //   type: "string",
+            //   sortable: false,
+            // },
+            field_12: {
+              value: this.t('field_nine'),
+              type: 'string',
+              sortable: false,
+            },
+            field_13: {
+              value: this.t('field_onecero'),
+              type: 'string',
+              sortable: false,
+            },
+            field_14: {
+              value: this.t('field_oneone'),
+              type: 'string',
+              sortable: false,
+            },
+            field_15: {
+              value: this.t('field_onetwo'),
+              type: 'string',
+              sortable: false,
+            },
+            field_16: {
+              value: this.t('field_onethree'),
+              type: 'string',
+              sortable: false,
+            },
+            field_17: {
+              value: this.t('field_onefour'),
+              type: 'string',
+              sortable: false,
+            },
           },
-          field_4: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_two,
-            type: "string",
-            sortable: false,
-          },
-          field_5: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_three,
-            type: "string",
-            sortable: false,
-          },
-          field_6: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_four,
-            type: "string",
-            sortable: false,
-          },
-          field_7: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_five,
-            type: "string",
-            sortable: false,
-          },
-          field_8: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_six,
-            type: "string",
-            sortable: false,
-          },
-          field_9: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_seven,
-            type: "string",
-            sortable: false,
-          },
-          field_10: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_eight,
-            type: "string",
-            sortable: false,
-          },
-          // field_11: {
-          //   value: "Código de proveedor ",
-          //   type: "string",
-          //   sortable: false,
-          // },
-          field_12: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_nine,
-            type: "string",
-            sortable: false,
-          },
-          field_13: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onecero,
-            type: "string",
-            sortable: false,
-          },
-          field_14: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_oneone,
-            type: "string",
-            sortable: false,
-          },
-          field_15: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onetwo,
-            type: "string",
-            sortable: false,
-          },
-          field_16: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onethree,
-            type: "string",
-            sortable: false,
-          },
-          field_17: {
-            value: this.translate.app.frontEnd.pages.travel_management.spend.new_spend.field_onefour,
-            type: "string",
-            sortable: false,
-          }
+          data: [],
         },
-        data: [
-        ]
-      }]
-
+      ],
     });
     setTimeout(() => {
       this.objectReport.emit(this.infoTableSpends[0]);
@@ -1040,9 +1026,9 @@ export class NewSpendComponent implements OnInit {
   }
 
   onluNumberSpend(param, name) {
-    debugger
+      
     let out = '';
-    let filtro = '0123456789.,';
+    const filtro = '0123456789.,';
     switch (name) {
       case 'nit':
         for (let i = 0; i < param.nit.length; i++) {
@@ -1077,7 +1063,5 @@ export class NewSpendComponent implements OnInit {
         this.formSpendTravel.controls['value'].setValue(out);
         break;
     }
-
-
   }
 }

@@ -4,24 +4,31 @@
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
           <i class="fa fa-paste"></i>
-          {{nameReport}}
+          {{ parseT('name_table_ts') | translate }}
         </div>
-        <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
-            <div class="buttonBack img-zoom" (click)="returnBackPage()">
-              <div class="padding-back">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
-                <span>
-                  {{translate.app.frontEnd.pages.queries.vacation_balance.back}}
-                </span>
-              </div>
+        <div
+          class="col-xl-2 col-md-4 col-5  text-center cursor-general"
+          style="padding-right: 0px"
+        >
+          <div class="buttonBack img-zoom" (click)="returnBackPage()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                {{ parseT('back') | translate }}
+              </span>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12 widget bg-white">
-      <app-data-table [records]="objectReport" [title]="nameReport" [excel]="showExcel"></app-data-table>
+      <app-data-table
+        [records]="objectReport"
+        [title]="parseT('name_table_ts') | translate"
+        [excel]="showExcel"
+      ></app-data-table>
     </div>
   </div>
 </div>

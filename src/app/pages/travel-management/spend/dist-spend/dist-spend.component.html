@@ -1,46 +1,84 @@
-<button id="btn_detail_distSpend" type="button" class="btn btn-primary" data-toggle="modal" data-target="#dist_spend" style="display:none;">
-</button>
-<div data-backdrop="static" class="modal" id="dist_spend" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-  aria-hidden="true">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+<button
+  id="btn_detail_distSpend"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#dist_spend"
+  style="display:none;"
+></button>
+<div
+  data-backdrop="static"
+  class="modal"
+  id="dist_spend"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.tittle}}</h5>
-        <button id="closeDistSpend" type="button" class="close " data-dismiss="modal" aria-label="Close" (click)="closeCollapse()">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{ parseT('tittle') | translate }}
+        </h5>
+        <button
+          id="closeDistSpend"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="closeCollapse()"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
-          <div class="col-9">
-          </div>
+          <div class="col-9"></div>
           <div class="col-3">
             <div class="buttonBack img-zoom" (click)="returnSpend()">
               <div style="margin-left: 15px;">
-                <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+                <i
+                  class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"
+                ></i>
                 <span>
-                  {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.back}}
+                  {{ parseT('back') | translate }}
                 </span>
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 20px" *ngIf="printSpend !== null">
+          <div
+            class="col-12"
+            style="margin-top: 20px"
+            *ngIf="printSpend !== null"
+          >
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.code_spend}}:</strong>
+                  <strong
+                    >{{ parseT('code_spend') | translate }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpend.allowance_type_code}}</label>
+                <label>{{ printSpend.allowance_type_code }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.type_spend}}:</strong>
+                  <strong
+                    >{{ parseT('type_spend') | translate }}:</strong
+                  >
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpend.allowance_type_name}}</label>
+                <label>{{ printSpend.allowance_type_name }}</label>
               </div>
             </div>
           </div>
@@ -49,79 +87,104 @@
             <div class="row">
               <div class="col-lg-2 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.import}}:</strong>
+                  <strong>{{ parseT('import') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-2 col-md-6 col-12">
-                <label>{{printSpend.value}}</label>
+                <label>{{ printSpend.value }}</label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.date}}:</strong>
+                  <strong>{{ parseT('date') | translate }}:</strong>
                 </label>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
-                <label>{{printSpend.date_time_format}}</label>
+                <label>{{ printSpend.date_time_format }}</label>
               </div>
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px" *ngIf="detailDistCost.length > 0">
+          <div
+            class="col-12"
+            style="margin-top: 15px"
+            *ngIf="detailDistCost.length > 0"
+          >
             <div class="table-responsive">
-              <table class="table table-sm table-striped table-bordered table-hover">
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
                 <thead>
                   <tr>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_cero}}
+                      {{ parseT('column_cero') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_one}}
+                      {{ parseT('column_one') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_two}}
+                      {{ parseT('column_two') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_three}}
+                      {{ parseT('column_three') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_four}}
+                      {{ parseT('column_four') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_five}}
+                      {{ parseT('column_five') | translate }}
                     </th>
                     <th class="text-center">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_six}}
+                      {{ parseT('column_six') | translate }}
                     </th>
                     <th class="text-center" *ngIf="isEdit">
-                      {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_seven}}
+                      {{ parseT('column_seven') | translate }}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let pinterDistributions of detailDistCost">
+                  <tr
+                    *ngFor="let pinterDistributions of detailDistCost"
+                  >
                     <td>
-                      {{pinterDistributions.travel_costs_type_name}}
+                      {{ pinterDistributions.travel_costs_type_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_cost_code}} {{pinterDistributions.travel_cost_name}}
+                      {{ pinterDistributions.travel_cost_code }}
+                      {{ pinterDistributions.travel_cost_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_graph_code}} {{pinterDistributions.travel_graph_name}}
+                      {{ pinterDistributions.travel_graph_code }}
+                      {{ pinterDistributions.travel_graph_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_operation_code}} {{pinterDistributions.travel_operation_name}}
+                      {{ pinterDistributions.travel_operation_code }}
+                      {{ pinterDistributions.travel_operation_name }}
                     </td>
                     <td>
-                      {{pinterDistributions.travel_maintenance_order_code}} {{pinterDistributions.travel_maintenance_order_name}}
+                      {{
+                        pinterDistributions.travel_maintenance_order_code
+                      }}
+                      {{
+                        pinterDistributions.travel_maintenance_order_name
+                      }}
                     </td>
                     <td>
-                      {{pinterDistributions.accounting_account_code}} {{pinterDistributions.accounting_account_name}}
+                      {{
+                        pinterDistributions.accounting_account_code
+                      }}
+                      {{
+                        pinterDistributions.accounting_account_name
+                      }}
                     </td>
-                    <td>
-                      {{pinterDistributions.distribution}} %
-                    </td>
+                    <td>{{ pinterDistributions.distribution }} %</td>
                     <td *ngIf="isEdit">
-                      <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="deletesSavedDist(pinterDistributions)">
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-block btn-sm cursor-general"
+                        (click)="
+                          deletesSavedDist(pinterDistributions)
+                        "
+                      >
                         <i class="fa fa-fw fa-minus"></i>
                       </button>
                     </td>
@@ -131,89 +194,222 @@
             </div>
           </div>
           <div class="col-12" style="margin-top: 15px">
-            <div class="row justify-content-center top-containter" *ngIf="detailDistCost.length == 0">
+            <div
+              class="row justify-content-center top-containter"
+              *ngIf="detailDistCost.length == 0"
+            >
               <div class="col-lg-8 col-12 text-center">
                 <div class="alert alert-warning" role="alert">
-                  {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.negative_message}}
+                  {{ parseT('negative_message') | translate }}
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="col-12" style="margin-top: 15px; padding-bottom: 30px" *ngIf="is_collapse && isEdit">
+          <div
+            class="col-12"
+            style="margin-top: 15px; padding-bottom: 30px"
+            *ngIf="is_collapse && isEdit"
+          >
             <div class="row justify-content-end">
               <div class="col-3" style="margin-top: 15px">
-                <button type="button" class="btn btn-block btn-primary text-center" (click)="newDistributions()">
-                  {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.add_dist}}
+                <button
+                  type="button"
+                  class="btn btn-block btn-primary text-center"
+                  (click)="newDistributions()"
+                >
+                  {{ parseT('add_dist') | translate }}
                 </button>
-                <button type="button" id="funtionNewSpend" data-toggle="collapse" data-target="#collapseNewDistribution" style="display: none">
-                </button>
+                <button
+                  type="button"
+                  id="funtionNewSpend"
+                  data-toggle="collapse"
+                  data-target="#collapseNewDistribution"
+                  style="display: none"
+                ></button>
               </div>
             </div>
           </div>
 
-          <div class="collapse top-general-p" id="collapseNewDistribution">
+          <div
+            class="collapse top-general-p"
+            id="collapseNewDistribution"
+          >
             <div class="col-12">
               <div class="row">
                 <div class="col-12" style="margin-top: 15px">
                   <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_cero}}:*</a>
+                        <i
+                          class="fa fa-fw fa-pie-chart text-primary-hr"
+                        ></i>
+                        <a
+                          >{{
+                            parseT('column_cero') | translate
+                          }}:*</a
+                        >
                       </label>
-                      <select class="form-control" [(ngModel)]="elementImputation" [ngModelOptions]="{standalone: true}" placeholder="Seleccione"
-                        (change)="selectTypeCenterImputations()">
-                        <option *ngFor="let costsTravelCenter of center_costs_travels " [value]="costsTravelCenter.code">{{costsTravelCenter.name}}</option>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="elementImputation"
+                        [ngModelOptions]="{ standalone: true }"
+                        placeholder="Seleccione"
+                        (change)="selectTypeCenterImputations()"
+                      >
+                        <option
+                          *ngFor="
+                            let costsTravelCenter of center_costs_travels
+                          "
+                          [value]="costsTravelCenter.code"
+                          >{{ costsTravelCenter.name }}</option
+                        >
                       </select>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
+                    <div
+                      class="col-lg-4 col-md-6 col-12"
+                      *ngIf="kostl"
+                    >
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_one}}:*</a>
+                        <i
+                          class="fa fa-fw fa-usd text-primary-hr detectLetter"
+                        ></i>
+                        <a
+                          >{{ parseT('column_one') | translate }}:*</a
+                        >
                       </label>
-                      <input class="form-control" id="searchByAutoCompleteCostSpend" autocomplete="off" type="text" name="costList" [(ngModel)]="typeCenterCost" [ngModelOptions]="{standalone: true}"
-                        (keyup)="enterCostSpend()">
-                      <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
-                        <div (click)="returnCostSearchSpend(costsTrip)" class="search-results borderLineEmployee" *ngFor="let costsTrip of costs_travels">
-                          {{costsTrip.code}} - {{costsTrip.name}}
+                      <input
+                        class="form-control"
+                        id="searchByAutoCompleteCostSpend"
+                        autocomplete="off"
+                        type="text"
+                        name="costList"
+                        [(ngModel)]="typeCenterCost"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="enterCostSpend()"
+                      />
+                      <div
+                        *ngIf="showListAutoCost"
+                        class="list-search-autocomplete "
+                        style="overflow-x: hidden;"
+                      >
+                        <div
+                          (click)="returnCostSearchSpend(costsTrip)"
+                          class="search-results borderLineEmployee"
+                          *ngFor="let costsTrip of costs_travels"
+                        >
+                          {{ costsTrip.code }} - {{ costsTrip.name }}
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
+                    <div
+                      class="col-lg-4 col-md-6 col-12"
+                      *ngIf="aufnr"
+                    >
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_four}}:*</a>
+                        <i
+                          class="fa fa-fw fa-usd text-primary-hr detectLetter"
+                        ></i>
+                        <a
+                          >{{
+                            parseT('column_four') | translate
+                          }}:*</a
+                        >
                       </label>
-                      <input class="form-control uppercase" id="searchByAutoCompleteOrderSpend" autocomplete="off" type="text" name="orderList"
-                        [(ngModel)]="typeCenterOrder" [ngModelOptions]="{standalone: true}" (keyup)="enterOrderSpend()">
-                      <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
-                        <div (click)="returnOrderSearchOrder(orderTrip)" class="search-results borderLineEmployee" *ngFor="let orderTrip of order_travels">
-                          {{orderTrip.code}} - {{orderTrip.name}}
+                      <input
+                        class="form-control uppercase"
+                        id="searchByAutoCompleteOrderSpend"
+                        autocomplete="off"
+                        type="text"
+                        name="orderList"
+                        [(ngModel)]="typeCenterOrder"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="enterOrderSpend()"
+                      />
+                      <div
+                        *ngIf="showListAutoOrder"
+                        class="list-search-autocomplete "
+                        style="overflow-x: hidden;"
+                      >
+                        <div
+                          (click)="returnOrderSearchOrder(orderTrip)"
+                          class="search-results borderLineEmployee"
+                          *ngFor="let orderTrip of order_travels"
+                        >
+                          {{ orderTrip.code }} - {{ orderTrip.name }}
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
+                    <div
+                      class="col-lg-4 col-md-6 col-12"
+                      *ngIf="nplnr"
+                    >
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-usd text-primary-hr"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_two}}:*</a>
+                        <i
+                          class="fa fa-fw fa-usd text-primary-hr"
+                        ></i>
+                        <a
+                          >{{ parseT('column_two') | translate }}:*</a
+                        >
                       </label>
-                      <input class="form-control" id="searchByAutoCompleteGraph" autocomplete="off" type="text" name="graphList" [(ngModel)]="grahpSpend" [ngModelOptions]="{standalone: true}"
-                        (keyup)="enterGraphSpend()">
-                      <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
-                        <div (click)="returnGraphSearchSpend(grahpTravels)" class="search-results borderLineEmployee" *ngFor="let grahpTravels of grahp">
-                          {{grahpTravels.code}} - {{grahpTravels.name}}
+                      <input
+                        class="form-control"
+                        id="searchByAutoCompleteGraph"
+                        autocomplete="off"
+                        type="text"
+                        name="graphList"
+                        [(ngModel)]="grahpSpend"
+                        [ngModelOptions]="{ standalone: true }"
+                        (keyup)="enterGraphSpend()"
+                      />
+                      <div
+                        *ngIf="showListAutoGraph"
+                        class="list-search-autocomplete "
+                        style="overflow-x: hidden;"
+                      >
+                        <div
+                          (click)="
+                            returnGraphSearchSpend(grahpTravels)
+                          "
+                          class="search-results borderLineEmployee"
+                          *ngFor="let grahpTravels of grahp"
+                        >
+                          {{ grahpTravels.code }} -
+                          {{ grahpTravels.name }}
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
+                    <div
+                      class="col-lg-4 col-md-6 col-12"
+                      *ngIf="nplnr"
+                    >
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_tree}}:*</a>
+                        <i
+                          class="fa fa-fw fa-object-ungroup text-primary-hr"
+                        ></i>
+                        <a
+                          >{{
+                            parseT('column_tree') | translate
+                          }}:*</a
+                        >
                       </label>
-                      <select class="form-control" [attr.disabled]="operations.length == 0 ? true : null" [(ngModel)]="operationsSpend" [ngModelOptions]="{standalone: true}">
-                        <option value="-1">{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.option_select}}</option>
-                        <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id">{{operationsTravels.code}} - {{operationsTravels.name}}</option>
+                      <select
+                        class="form-control"
+                        [attr.disabled]="
+                          operations.length == 0 ? true : null
+                        "
+                        [(ngModel)]="operationsSpend"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option value="-1">{{
+                          parseT('option_select') | translate
+                        }}</option>
+                        <option
+                          *ngFor="let operationsTravels of operations"
+                          [value]="operationsTravels.id"
+                          >{{ operationsTravels.code }} -
+                          {{ operationsTravels.name }}</option
+                        >
                       </select>
                     </div>
                   </div>
@@ -223,42 +419,90 @@
                   <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                       <label class="titleColor">
-                        <i class="fa fa-fw fa-calculator text-primary-hr"></i>
-                        <a>{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.account}}:*</a>
+                        <i
+                          class="fa fa-fw fa-calculator text-primary-hr"
+                        ></i>
+                        <a>{{ parseT('account') | translate }}:*</a>
                       </label>
-                      <select class="form-control" [(ngModel)]="accountContableVariable" [ngModelOptions]="{standalone: true}">
-                        <option value="">{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.option_select}}</option>
-                        <option *ngFor="let accounting of accountContable" [value]="accounting.id">{{accounting.code}} - {{accounting.name}}</option>
+                      <select
+                        class="form-control"
+                        [(ngModel)]="accountContableVariable"
+                        [ngModelOptions]="{ standalone: true }"
+                      >
+                        <option value="">{{
+                          parseT('option_select') | translate
+                        }}</option>
+                        <option
+                          *ngFor="let accounting of accountContable"
+                          [value]="accounting.id"
+                          >{{ accounting.code }} -
+                          {{ accounting.name }}</option
+                        >
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                       <label for="dateEnd" class="titleColor">
-                        <i class="fa fa-fw fa-percent text-primary-hr"></i>
-                        {{translate.app.frontEnd.pages.travel_management.spend.dist_spend.column_six}}*
+                        <i
+                          class="fa fa-fw fa-percent text-primary-hr"
+                        ></i>
+                        {{ parseT('column_six') | translate }}*
                       </label>
-                      <input class="form-control" type="number" [(ngModel)]="distribution" [ngModelOptions]="{standalone: true}" />
+                      <input
+                        class="form-control"
+                        type="number"
+                        [(ngModel)]="distribution"
+                        [ngModelOptions]="{ standalone: true }"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-12" style="margin-top: 30px; padding-bottom: 30px">
+            <div
+              class="col-12"
+              style="margin-top: 30px; padding-bottom: 30px"
+            >
               <div class="row justify-content-end">
-                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                  <button type="button" [attr.disabled]="
-                    ( elementImputation == ''
-                    || accountContableVariable == ''
-                    || distribution == '') ? true : null" class="btn btn-primary btn-block cursor-general" (click)="saveAccountEdit()">
-                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.add_dist}}</button>
+                <div
+                  class="col-lg-3 col-md-4 col-12"
+                  style="margin-top: 10px"
+                >
+                  <button
+                    type="button"
+                    [attr.disabled]="
+                      elementImputation == '' ||
+                      accountContableVariable == '' ||
+                      distribution == ''
+                        ? true
+                        : null
+                    "
+                    class="btn btn-primary btn-block cursor-general"
+                    (click)="saveAccountEdit()"
+                  >
+                    <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
+                      parseT('add_dist') | translate
+                    }}
+                  </button>
                 </div>
-                <div class="col-lg-3 col-md-4 col-12" style="margin-top: 10px">
-                  <button type="button" class="btn btn-warning btn-block cursor-general" data-toggle="collapse" data-target="#collapseNewDistribution"
-                    (click)="closeCollapse()">
-                    <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.dist_spend.btn_cancel}}</button>
+                <div
+                  class="col-lg-3 col-md-4 col-12"
+                  style="margin-top: 10px"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-warning btn-block cursor-general"
+                    data-toggle="collapse"
+                    data-target="#collapseNewDistribution"
+                    (click)="closeCollapse()"
+                  >
+                    <i class="fa fa-fw fa-fw fa-window-close"></i
+                    >&nbsp;&nbsp;{{
+                      parseT('btn_cancel') | translate
+                    }}
+                  </button>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

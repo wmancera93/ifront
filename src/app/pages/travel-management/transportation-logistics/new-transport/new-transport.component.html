@@ -1,3 +1,302 @@
-<p>
-  new-transport works!
-</p>
+<ng-template #stepOne>
+  <div class="col-12">
+    <div class="row">
+      <div class="col-12 col-md-6 text-truncate">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-bus text-primary-hr"></i>
+          Placa del vehiculo *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="forms.vehicle_plate"
+        />
+      </div>
+      <div class="col-12 col-md-6 text-truncate">
+        <label class="font-title-general">
+          <i class="fa fa-fw  fa-user-o text-primary-hr"></i>
+          Conductor *
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          [formControl]="forms.driver"
+        />
+      </div>
+      <div class="col-12 col-md-6 top-containter">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-users text-primary-hr"></i>
+          Empresa *
+        </label>
+        <select class="form-control" [formControl]="forms.company">
+          <option value="">Seleccione</option>
+          <option
+            *ngFor="let companyList of companiesList"
+            [value]="companyList.id"
+          >
+            {{ companyList.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-12 col-md-6 text-truncate">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-braille text-primary-hr"></i>
+          Cantidad de puestos *
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          [formControl]="forms.number_positions"
+        />
+      </div>
+      <div class="col-12 col-md-6 top-containter">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-lightbulb-o text-primary-hr"></i>
+          Tipo de servicio *
+        </label>
+        <select
+          class="form-control"
+          [formControl]="forms.type_service"
+        >
+          <option value="">Seleccione</option>
+          <option
+            *ngFor="let service of servicesList"
+            [value]="service.id"
+          >
+            {{ service.name }}
+          </option>
+        </select>
+      </div>
+      <div class="col-12 col-md-6 top-containter">
+        <label class="font-title-general">
+          <i class="fa fa-fw fa-phone-square text-primary-hr"></i>
+          Telefono del conductor *
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          [formControl]="forms.phone_driver"
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #stepTwo>
+  <div class="col-12">
+    <div class="container-fluid py-3">
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive mt-3">
+            <ng-container
+              *ngIf="arrayTrayects.length > 0; else elseTemplate"
+            >
+              <table
+                class="table table-sm table-striped table-bordered table-hover"
+              >
+                <thead>
+                  <tr>
+                    <th class="text-center">
+                      Origen
+                    </th>
+                    <th class="text-center">
+                      Destino
+                    </th>
+                    <th class="text-center">
+                      Fecha y hora de salida
+                    </th>
+                    <th class="text-center">
+                      Duración
+                    </th>
+                    <th class="text-center">
+                      Eliminar
+                    </th>
+                  </tr>
+                </thead>
+                <tbody style="color: #fff;">
+                  <tr *ngFor="let trayects of arrayTrayects">
+                    <td>
+                      {{ trayects.origin }}
+                    </td>
+                    <td>
+                      {{ trayects.destiny }}
+                    </td>
+                    <td>
+                      {{ trayects.date_time_departure }}
+                    </td>
+                    <td>
+                      {{ trayects.durationTrayect }}
+                    </td>
+                    <td width="10px">
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-block btn-sm cursor-general"
+                        (click)="removeTrayect(trayects.key)"
+                      >
+                        <i class="fa fa-minus"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </ng-container>
+            <ng-template #elseTemplate>
+              <div
+                class="alert alert-warning text-center"
+                role="alert"
+              >
+                No tienes trayectos agregados.
+              </div>
+            </ng-template>
+          </div>
+        </div>
+        <div class="col-12 col-lg-10 col-xl-11">
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                  Origen *
+                </label>
+                <select
+                  class="form-control"
+                  [formControl]="forms.origin"
+                >
+                  <option value="">Seleccione</option>
+                  <option value="233">dsfdssf</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                  Destino *
+                </label>
+                <select
+                  class="form-control"
+                  [formControl]="forms.destiny"
+                >
+                  <option value="">Seleccione</option>
+                  <option value="3443">dfsdfdsf</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  Fecha y hora de salida *
+                </label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  [formControl]="forms.date_time_departure"
+                />
+              </div>
+              <div class="col-12 col-sm-6 text-truncate">
+                <label class="font-title-general">
+                  <i
+                    class="fa fa-fw hourglass-start text-primary-hr"
+                  ></i>
+                  Duración del trayecto *
+                </label>
+                <input
+                  type="time"
+                  class="form-control"
+                  [formControl]="forms.durationTrayect"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+          <div class="w-100 my-auto">
+            <button
+              type="button"
+              class="btn btn-success btn-block cursor-general mt-4 w-100"
+              (click)="addTrayect()"
+              [attr.disabled]="
+                forms.origin.value == '' ||
+                forms.destiny.value == '' ||
+                forms.date_time_departure.value == '' ||
+                forms.durationTrayect.value == ''
+                  ? true
+                  : null
+              "
+            >
+              <i class=" fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template
+  #modalForms
+  let-modal
+  ng-init="typeCase = formRequests.id_activity"
+>
+  <div class="modal-content">
+    <div
+      class="modal-header borderLine-title row-hr justify-content-center"
+    >
+      <div class="col-12 col-lg-10 text-center">
+        <h4 class="modal-title titleColor text-shadow">
+          Solicitud de transporte
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <app-stepper-components
+            [steps]="[
+              {
+                label: 'Registro del vehiculo',
+                component: stepOne
+              },
+              {
+                label: 'Registro de trayectos',
+                component: stepTwo
+              }
+            ]"
+            [stepActive]="stepActive"
+          ></app-stepper-components>
+        </div>
+      </div>
+    </div>
+    <app-alerts></app-alerts>
+    <div class="modal-footerInfo justify-content-center">
+      <div class="container">
+        <div class="row">
+          <div class="col-4">
+            <div
+              class="btn text-center btn-secondary btn-block"
+              (click)="handleStep({ back: true })"
+            >
+              <h6>Atras</h6>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn text-center btn-success btn-block"
+              (click)="handleStep({ next: true })"
+            >
+              <ng-container *ngIf="stepActive === 0">
+                <h6>Siguiente</h6>
+              </ng-container>
+              <ng-container *ngIf="stepActive === 1">
+                <h6>Guardar</h6>
+              </ng-container>
+            </div>
+          </div>
+          <div class="col-4">
+            <div
+              class="btn btn-primary text-center btn-block"
+              (click)="modalActions.close()"
+            >
+              <h6>Close</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

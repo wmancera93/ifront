@@ -9,25 +9,25 @@ import { Enterprise } from '../../../models/general/enterprise';
   styleUrls: ['./footer.component.css']
 })
 export class FooterComponent implements OnInit {
-  public nameEnterprise : string;
+  public nameEnterprise: string;
   public dataEnterprise: Enterprise;
   private dataUser: User = null;
-  constructor(private userSharedService: UserSharedService) { 
+  constructor(private userSharedService: UserSharedService) {
     this.userSharedService.getUser().subscribe((data) => {
       this.dataUser = data;
     });
   }
 
-  ngOnInit() {;
+  ngOnInit() {
     this.getDataLocalStorage();
-    this.dataEnterprise = JSON.parse(localStorage.getItem("enterprise"));
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
     this.nameEnterprise = this.dataEnterprise.name;
-    
+
   }
-  
+
   getDataLocalStorage() {
     if (this.dataUser === null || this.dataUser === undefined) {
-      this.dataUser = JSON.parse(localStorage.getItem("user"));
+      this.dataUser = JSON.parse(localStorage.getItem('user'));
     }
   }
 }

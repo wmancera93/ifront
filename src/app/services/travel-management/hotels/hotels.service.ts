@@ -23,7 +23,7 @@ export class HotelsService {
   }
 
   deleteHotelsByCompany(id_hotel: any) {
-    return this.tokenService.delete('hotels/'+ id_hotel)
+    return this.tokenService.delete('hotels/' + id_hotel)
       .map((data: any) => data.json());
   }
 }

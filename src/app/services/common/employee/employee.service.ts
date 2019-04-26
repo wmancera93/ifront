@@ -12,7 +12,7 @@ export class EmployeeService {
     private tokenService: Angular2TokenService) { }
 
   getEmployeeByNameByPage(termSearch: string, numberPage: string): Observable<any> {
-    termSearch = termSearch.replace(' ', '_')
+    termSearch = termSearch.replace(' ', '_');
     return this.tokenService.get('coworkers_list/search/' + termSearch + '/' + numberPage)
       .map((data: any) => data.json());
 
@@ -33,6 +33,6 @@ export class EmployeeService {
       .map((data: any) => data.json());
   }
 
-  
+
 
 }

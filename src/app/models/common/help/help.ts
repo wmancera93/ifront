@@ -1,9 +1,8 @@
-import { Url } from "../url/url";
+import { Url } from '../url/url';
 
-export interface Help 
-{
-    title: string,
-    image: string,
-    description: string
+export interface Help {
+    title: string;
+    image: string;
+    description: string;
 
 }

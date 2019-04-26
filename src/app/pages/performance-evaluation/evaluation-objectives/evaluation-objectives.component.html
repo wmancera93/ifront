@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-line-chart"></i>
-          {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.tittle}}
+          {{ parseT('tittle') | translate }}
         </div>
       </div>
     </div>
@@ -19,109 +21,179 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.sub_tittle}}
+              {{ parseT('sub_tittle') | translate }}
             </b>
           </div>
         </div>
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="evaluationPerformanceList">
-          <div class="row justify-content-center top-containter" *ngIf="evaluationPerformanceList.length === 0">
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div
+            class="row justify-content-center top-containter"
+            *ngIf="evaluationPerformanceList.length === 0"
+          >
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_begin}}
-                <strong>{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_continue}}</strong>&nbsp;{{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.message_end}}
+                {{ parseT('message_begin') | translate }}
+                <strong>{{
+                  parseT('message_continue') | translate
+                }}</strong
+                >&nbsp;{{ parseT('message_end') | translate }}
               </div>
             </div>
           </div>
           <div *ngIf="evaluationPerformanceList.length !== undefined">
-            <div class="widget bg-white-1x" *ngFor="let evaluation of evaluationPerformanceList">
+            <div
+              class="widget bg-white-1x"
+              *ngFor="let evaluation of evaluationPerformanceList"
+            >
               <div class="row align-items-center">
-                <div class="col-lg-4 col-md-6 col-12 text-lg-left text-center top-p">
+                <div
+                  class="col-lg-4 col-md-6 col-12 text-lg-left text-center top-p"
+                >
                   <h3 class="font-color-default">
-                    {{evaluation.name}}
+                    {{ evaluation.name }}
                   </h3>
                   <p>
                     <i class="fa fa-clock-o"></i>
-                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.date_create}} {{evaluation.created_date}}
+                    {{ parseT('date_create') | translate }}
+                    {{ evaluation.created_date }}
                   </p>
                 </div>
-                <div class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                <div
+                  class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
+                >
                   <p class="font-title-general">
-                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.status}}:
+                    {{ parseT('status') | translate }}:
                   </p>
                   <h6 *ngIf="evaluation.status_code == '3'">
                     <span class="badge badge-warning">
-                      {{evaluation.status_name}}
+                      {{ evaluation.status_name }}
                     </span>
                   </h6>
                   <h6 *ngIf="evaluation.status_code == '4'">
                     <span class="badge badge-danger">
-                      {{evaluation.status_name}}
+                      {{ evaluation.status_name }}
                     </span>
                   </h6>
                   <h6 *ngIf="evaluation.status_code == '5'">
                     <span class="badge badge-success">
-                      {{evaluation.status_name}}
+                      {{ evaluation.status_name }}
                     </span>
                   </h6>
                   <h6 *ngIf="evaluation.status_code == '2'">
                     <span class="badge badge-default">
-                      {{evaluation.status_name}} 
+                      {{ evaluation.status_name }}
                     </span>
                   </h6>
                 </div>
-                <div *ngIf="evaluation.qualifier !== null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <div
+                  *ngIf="evaluation.qualifier !== null"
+                  class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
+                >
                   <p class="font-title-general">
-                    {{evaluation.qualifier.short_name}}
+                    {{ evaluation.qualifier.short_name }}
                   </p>
                   <p class="">
-                    {{evaluation.qualifier.unidad_org}}
+                    {{ evaluation.qualifier.unidad_org }}
                   </p>
                   <p class="">
-                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.evaluator}}
+                    {{ parseT('evaluator') | translate }}
                   </p>
                 </div>
-                <div *ngIf="evaluation.qualifier === null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+                <div
+                  *ngIf="evaluation.qualifier === null"
+                  class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
+                >
                   <p class="">
-                    {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.negative_message}}
+                    {{ parseT('negative_message') | translate }}
                   </p>
                 </div>
-                <div class="col-lg-3 col-md-3 col-12 text-center top-p">
+                <div
+                  class="col-lg-3 col-md-3 col-12 text-center top-p"
+                >
                   <div class="row">
-                    <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code ==='2'">
-                      <i class="fa fa-eye" aria-hidden="true" style="color:#23c831"></i>
+                    <div
+                      class="col-4 number-size"
+                      (click)="goToModalEvalView(evaluation)"
+                      *ngIf="evaluation.status_code === '2'"
+                    >
+                      <i
+                        class="fa fa-eye"
+                        aria-hidden="true"
+                        style="color:#23c831"
+                      ></i>
                     </div>
-                    <div class="col-4 number-size" (click)="goToModalEvalView(evaluation)" *ngIf="evaluation.status_code !=='2'" style="cursor: no-drop">
+                    <div
+                      class="col-4 number-size"
+                      (click)="goToModalEvalView(evaluation)"
+                      *ngIf="evaluation.status_code !== '2'"
+                      style="cursor: no-drop"
+                    >
                       <i class="fa fa-eye" aria-hidden="true"></i>
                     </div>
-                    <div class="col-4 number-size" (click)="goToModalEval(evaluation)" *ngIf="evaluation.status_complete === false && evaluation.status_code ==='2'">
-                      <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8"></i>
+                    <div
+                      class="col-4 number-size"
+                      (click)="goToModalEval(evaluation)"
+                      *ngIf="
+                        evaluation.status_complete === false &&
+                        evaluation.status_code === '2'
+                      "
+                    >
+                      <i
+                        class="fa fa-pencil"
+                        aria-hidden="true"
+                        style="color:#23c6c8"
+                      ></i>
                     </div>
-                    <div class="col-4 number-size" *ngIf="evaluation.status_complete === true || evaluation.status_code !=='2'" style="cursor: no-drop">
+                    <div
+                      class="col-4 number-size"
+                      *ngIf="
+                        evaluation.status_complete === true ||
+                        evaluation.status_code !== '2'
+                      "
+                      style="cursor: no-drop"
+                    >
                       <i class="fa fa-pencil" aria-hidden="false"></i>
                     </div>
-                    <div class="col-4 number-size text-danger" (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code !=='2'">
-                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    <div
+                      class="col-4 number-size text-danger"
+                      (click)="goToViewEval(evaluation)"
+                      *ngIf="evaluation.status_code !== '2'"
+                    >
+                      <i
+                        class="fa fa-file-pdf-o"
+                        aria-hidden="true"
+                      ></i>
                     </div>
-                    <div class="col-4 number-size " (click)="goToViewEval(evaluation)" *ngIf="evaluation.status_code ==='2'" style="cursor: no-drop">
-                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
+                    <div
+                      class="col-4 number-size "
+                      (click)="goToViewEval(evaluation)"
+                      *ngIf="evaluation.status_code === '2'"
+                      style="cursor: no-drop"
+                    >
+                      <i
+                        class="fa fa-file-pdf-o"
+                        aria-hidden="true"
+                      ></i>
                     </div>
                     <div class="col-4">
-                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.see}}
+                      {{ parseT('see') | translate }}
                     </div>
                     <div class="col-4">
-                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.edit}}
+                      {{ parseT('edit') | translate }}
                     </div>
                     <div class="col-4">
-                      {{translate.app.frontEnd.pages.performance_evaluation.evaluation_objetives.download_evaluation}}
+                      {{ parseT('download_evaluation') | translate }}
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

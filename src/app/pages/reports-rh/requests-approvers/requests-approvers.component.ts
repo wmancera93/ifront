@@ -4,76 +4,75 @@ import { ReportsHrService } from '../../../services/reports-rh/reports-hr.servic
 import { Router } from '@angular/router';
 import { RequestsRh } from '../../../models/common/requests-rh/requests-rh';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
 
 @Component({
   selector: 'app-requests-approvers',
   templateUrl: './requests-approvers.component.html',
-  styleUrls: ['./requests-approvers.component.css']
+  styleUrls: ['./requests-approvers.component.css'],
 })
 export class RequestsApproversComponent implements OnInit {
-
   public objectReport: EventEmitter<any> = new EventEmitter();
-  public nameReport: string;
   public token: boolean;
-  public type_requests: string = "VACA";
+  public type_requests = 'VACA';
   public newtype_requests: any[] = [];
-  public approver: string = "0";
-  public platform: string = "I";
+  public approver = '0';
+  public platform = 'I';
   public requests: RequestsRh;
-  public viewContainer: boolean = false;
-  public is_collapse: boolean = false;
+  public viewContainer = false;
+  public is_collapse = false;
   public approver_selected: string;
-  public platform_selected: string = "IHR";
-  public type_selected: string = "VACA";
-  public translate: Translate = null;
+  public platform_selected = 'IHR';
+  public type_selected = 'VACA';
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public reportsHrService: ReportsHrService,
+  parseT(key) {
+    return `pages.reports_rh.requests_approvers.${key}`;
+  }
+
+  constructor(
+    public reportsHrService: ReportsHrService,
     public router: Router,
     private tokenService: Angular2TokenService,
-    public requestsRhService: RequestsRhService, public translateService: TranslateService) {
-
-    this.translate = this.translateService.getTranslate();
-    this.nameReport = this.translate.app.frontEnd.pages.reports_rh.requests_approvers.name_table_ts;
-
-    this.approver_selected = this.translate.app.frontEnd.pages.reports_rh.requests_approvers.approver_with;
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
-          this.token = true;
-        })
+    public requestsRhService: RequestsRhService,
+  ) {
+    this.approver_selected = this.parseT('approver_with');
+    this.tokenService.validateToken().subscribe(
+      () => {
+        this.token = false;
+      },
+      error => {
+        this.objectToken.emit({
+          title: error.status.toString(),
+          message: error.json().errors[0].toString(),
+        });
+        document
+          .getElementsByTagName('body')[0]
+          .setAttribute('style', 'overflow-y:hidden');
+        this.token = true;
+      },
+    );
   }
 
   ngOnInit() {
     window.scroll({
       top: 1,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
 
-    this.reportsHrService.getSelectRequestsByType()
-      .subscribe((data: any) => {
-        this.newtype_requests = data.data;
-      });
+    this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {
+      this.newtype_requests = data.data;
+    });
 
-    this.getObjectRequests()
+    this.getObjectRequests();
   }
   returnBackPage() {
     this.router.navigate(['ihr/index']);
   }
   getObjectRequests() {
-    this.reportsHrService.getRequestsApprovers(this.type_requests, this.approver, this.platform)
+    this.reportsHrService
+      .getRequestsApprovers(this.type_requests, this.approver, this.platform)
       .subscribe((data: any) => {
         this.objectReport.emit(data);
       });
@@ -84,21 +83,19 @@ export class RequestsApproversComponent implements OnInit {
 
   filterRequests(param: string, value: string, name: string) {
     switch (param) {
-      case "approver":
+      case 'approver':
         this.approver_selected = name;
         this.approver = value;
         break;
-      case "platform":
+      case 'platform':
         this.platform = value;
         this.platform_selected = name;
         break;
-      case "selectType":
+      case 'selectType':
         this.type_requests = value;
         this.type_selected = name;
         break;
     }
-    this.getObjectRequests()
-
+    this.getObjectRequests();
   }
-
 }

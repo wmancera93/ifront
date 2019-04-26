@@ -3,18 +3,16 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class EditArticleService {
-  editNew: Subject<any> = new Subject<any>();  
+  editNew: Subject<any> = new Subject<any>();
 
   constructor() { }
 
-  getEditNew()
-  {    
+  getEditNew() {
     return this.editNew;
   }
 
-  setEditNew(editPublish:any)
-  {    
-    return this.editNew.next(editPublish);    
+  setEditNew(editPublish: any) {
+    return this.editNew.next(editPublish);
   }
 
 }

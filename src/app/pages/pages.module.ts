@@ -3,20 +3,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ComponentsModule } from '../components/components.module';
-import { ServicesModule } from '../services/services.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormlyModule } from '@ngx-formly/core';
 import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
-// import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
-// components
-import { HeaderComponent } from '../components/layout/header/header.component';
-
-// services
-import { Angular2TokenService } from 'angular2-token';
 import { LoginComponent } from './authentication/login/login.component';
 import { ResetAccountComponent } from './authentication/reset-account/reset-account.component';
 import { LockedScreenComponent } from './authentication/locked-screen/locked-screen.component';
@@ -106,14 +100,16 @@ import { TravelAllowanceReportComponent } from './travel-management/reports/trav
 import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 import { ReportTrainingComponent } from './events-management/training/report-training/report-training.component';
 import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
-import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
-import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
-import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 import { HousingComponent } from './travel-management/housing/housing.component';
 import { NewHousingComponent } from './travel-management/housing/new-housing/new-housing.component';
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
-
-
+import { FormBenefistComponent } from './requests-rh/form-benefist/form-benefist.component';
+import { FormTransportationComponent } from './requests-rh/form-transportation/form-transportation.component';
+import { FormHousingComponent } from './requests-rh/form-housing/form-housing.component';
+import { LensesAuxiliumComponent } from './requests-rh/lenses-auxilium/lenses-auxilium.component';
+import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
+import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
+import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 
 @NgModule({
   imports: [
@@ -129,8 +125,7 @@ import { HousingReportComponent } from './travel-management/housing/housing-repo
     CKEditorModule,
     TagInputModule,
     FileUploadModule,
-    // PdfViewerModule
-
+    PdfViewerModule
   ],
   declarations: [
     LoginComponent,
@@ -218,15 +213,17 @@ import { HousingReportComponent } from './travel-management/housing/housing-repo
     TravelApproverReportComponent,
     ReportTrainingComponent,
     RequestsApproversLogsComponent,
+    FormBenefistComponent,
+    FormTransportationComponent,
+    FormHousingComponent,
+    LensesAuxiliumComponent,
     TransportationLogisticsComponent,
     TrasnportationReportComponent,
     NewTransportComponent,
     HousingComponent,
     NewHousingComponent,
-    HousingReportComponent,
+    HousingReportComponent
   ],
-  providers: [
-    ReportTravelsService
-  ]
+  providers: [ReportTravelsService]
 })
-export class PagesModule { }
+export class PagesModule {}

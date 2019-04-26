@@ -6,8 +6,8 @@ export class TravelService {
 
   constructor(private tokenService: Angular2TokenService) { }
 
-  validateDatesTravelRequests(dateBegin: string, dateEnd: string, idEmploee: string ,idTravelExcelpt: string) {
-    return this.tokenService.get('travel_requests/is_date_cross/' + dateBegin + '/' + dateEnd + '/' + idEmploee + '/' +idTravelExcelpt)
+  validateDatesTravelRequests(dateBegin: string, dateEnd: string, idEmploee: string , idTravelExcelpt: string) {
+    return this.tokenService.get('travel_requests/is_date_cross/' + dateBegin + '/' + dateEnd + '/' + idEmploee + '/' + idTravelExcelpt)
       .map((data: any) => data.json());
   }
   getplanningTravelRequests() {
@@ -103,16 +103,16 @@ export class TravelService {
       .map((data: any) => data.json());
   }
 
-  postHotelNyJourney(object:any, travel_management_id: string, travel_request_id: string){
+  postHotelNyJourney(object: any, travel_management_id: string, travel_request_id: string) {
     return this.tokenService.post('travel_requests/create_hotel/' + travel_management_id + '/' + travel_request_id, object)
     .map((data: any) => data.json());
   }
   getFilterTravelOrders(filter: string) {
-    return this.tokenService.get('travel_costs_types/filter_travel_maintenance_orders/'+ filter)
+    return this.tokenService.get('travel_costs_types/filter_travel_maintenance_orders/' + filter)
       .map((data: any) => data.json());
   }
   getMessageErrorSAP(id: string) {
-    return this.tokenService.get('travel_request_synch_servers/index_travel_synch_server/'+ id)
+    return this.tokenService.get('travel_request_synch_servers/index_travel_synch_server/' + id)
       .map((data: any) => data.json());
   }
 }

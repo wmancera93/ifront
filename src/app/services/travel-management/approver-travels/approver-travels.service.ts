@@ -30,15 +30,15 @@ export class ApproverTravelsService {
     return this.tokenService.get('approvals_employee_travel_advance_requests/managed')
       .map((data: any) => data.json());
   }
-  getApprovalsRequestsById(idRequestsTravelsAproval : string) {
+  getApprovalsRequestsById(idRequestsTravelsAproval: string) {
     return this.tokenService.get('approvals_employee_travel_requests/' + idRequestsTravelsAproval)
       .map((data: any) => data.json());
   }
-  getApprovalsRequestsSpendById(idRequestsSpendAproval : string) {
+  getApprovalsRequestsSpendById(idRequestsSpendAproval: string) {
     return this.tokenService.get('approvals_employee_allowance_requests/' + idRequestsSpendAproval)
       .map((data: any) => data.json());
   }
-  getApprovalsRequestsAdnvanceById(idRequestsAdvancedAproval : string) {
+  getApprovalsRequestsAdnvanceById(idRequestsAdvancedAproval: string) {
     return this.tokenService.get('approvals_employee_travel_advance_requests/' + idRequestsAdvancedAproval)
       .map((data: any) => data.json());
   }

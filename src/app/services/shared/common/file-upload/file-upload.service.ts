@@ -5,9 +5,9 @@ import { Subject } from 'rxjs/Subject';
 export class FileUploadService {
   public objectFile: Subject<any> = new Subject<any>();
   public cleanFile: Subject<any> = new Subject<any>();
-  
+
   constructor() { }
-  
+
 
   getObjetFile() {
     return this.objectFile;
@@ -21,6 +21,6 @@ export class FileUploadService {
   }
 
   setCleanUpload(clean: any) {
-    return this.cleanFile.next(clean)
+    return this.cleanFile.next(clean);
   }
 }

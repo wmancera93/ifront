@@ -37,9 +37,9 @@ export class AdvancesService {
       .map((data: any) => data.json());
   }
 
-  deleteRequestAdvance(id){
+  deleteRequestAdvance(id) {
     return this.tokenService.delete('travel_advance_payments/destroy_request/' + id)
-    .map((data: any) => data.json());     
+    .map((data: any) => data.json());
   }
   getMessageSynchAdvance(id) {
     return this.tokenService.get('travel_advance_synch_servers/index_advance_synch_server/' + id)

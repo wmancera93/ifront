@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,87 +10,139 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-circle-o-notch"></i>
-          {{translate.app.frontEnd.pages.approver_request.managed.title_ppprovals_managed}}
+          {{ parseT('title_ppprovals_managed') | translate }}
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row justify-content-center top-general-p" *ngIf="managed.length == 0">
-        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+      <div
+        class="row justify-content-center top-general-p"
+        *ngIf="managed.length == 0"
+      >
+        <div
+          class="col-lg-8 col-12 text-center"
+          style="min-height: 370px;"
+        >
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.approver_request.managed.message_approvals}}
+            {{ parseT('message_approvals') | translate }}
           </div>
         </div>
       </div>
-      <div class="row justify-content-center top-containter" *ngIf="managed.length > 0">
+      <div
+        class="row justify-content-center top-containter"
+        *ngIf="managed.length > 0"
+      >
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let managed of managed">
+          <div
+            class="widget bg-white-1x"
+            *ngFor="let managed of managed"
+          >
             <div class="row align-items-center">
               <div class="col-xl-2 col-lg-2 col-md-3 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    {{translate.app.frontEnd.pages.approver_request.managed.text_ticket}} #{{managed.ticket}}
+                    {{ parseT('text_ticket') | translate }} #{{
+                      managed.ticket
+                    }}
                   </span>
                 </h5>
                 <p>
                   <i class="fa fa-calendar fa-fw text-primary-hr"></i>
-                  {{translate.app.frontEnd.pages.approver_request.managed.text_created_on}} {{managed.created_date}}
+                  {{ parseT('text_created_on') | translate }}
+                  {{ managed.created_date }}
                 </p>
               </div>
-              <div class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+              <div
+                class="col-xl-3 col-lg-2 col-md-9 col-12 text-xl-left text-lg-center text-center top-p"
+              >
                 <h3 class="font-color-default">
-                  {{managed.level_answer_description}}
+                  {{ managed.level_answer_description }}
                 </h3>
               </div>
-              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+              <div
+                class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
+              >
                 <p class="font-title-general">
-                  {{managed.level_answer_description}}
+                  {{ managed.level_answer_description }}
                 </p>
                 <p class="">
-                  <i class="fa fa-user fa-check-square-o text-primary-hr"></i>
-                  {{managed.level_answer}}
+                  <i
+                    class="fa fa-user fa-check-square-o text-primary-hr"
+                  ></i>
+                  {{ managed.level_answer }}
                 </p>
               </div>
-              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+              <div
+                class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
+              >
                 <p class="font-title-general">
-                  {{translate.app.frontEnd.pages.approver_request.managed.text_Applicant}}
+                  {{ parseT('text_Applicant') | translate }}
                 </p>
                 <p class="">
                   <i class="fa fa-user fa-fw text-primary-hr"></i>
-                  {{managed.employee_applicant_to_json.short_name}}
+                  {{ managed.employee_applicant_to_json.short_name }}
                 </p>
               </div>
-              <div class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+              <div
+                class="col-xl-2 col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
+              >
                 <p class="font-title-general">
-                  {{translate.app.frontEnd.pages.approver_request.managed.text_status}}
+                  {{ parseT('text_status') | translate }}
                 </p>
-                <h6 *ngIf="managed.status == statusApprover">
+                <h6
+                  *ngIf="
+                    managed.status ==
+                    (parseT('status_approver') | translate)
+                  "
+                >
                   <span class="badge badge-primary">
-                    {{managed.status}}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == statusCancelled">
+                <h6
+                  *ngIf="
+                    managed.status ==
+                    (parseT('status_cancelled') | translate)
+                  "
+                >
                   <span class="badge badge-danger">
-                    {{managed.status}}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == statusInProcess">
+                <h6
+                  *ngIf="
+                    managed.status ==
+                    (parseT('status_in_Process') | translate)
+                  "
+                >
                   <span class="badge badge-success">
-                    {{managed.status}}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="managed.status == statusPending">
+                <h6
+                  *ngIf="
+                    managed.status ==
+                    (parseT('status_pending') | translate)
+                  "
+                >
                   <span class="badge badge-default">
-                    {{managed.status}}
+                    {{ parseT('status') | translate }}
                   </span>
                 </h6>
               </div>
-              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p" (click)="modalAprovers(managed)">
-                <i class="fa fa-eye" aria-hidden="true" style="font-size: 2em; color:#23c6c8 "></i>
+              <div
+                class="col-xl-1 col-lg-2 col-md-3 col-12 text-center top-p"
+                (click)="modalAprovers(managed)"
+              >
+                <i
+                  class="fa fa-eye"
+                  aria-hidden="true"
+                  style="font-size: 2em; color:#23c6c8 "
+                ></i>
                 <div class="col-12">
-                  {{translate.app.frontEnd.pages.approver_request.managed.icon_watch}}
+                  {{ parseT('icon_watch') | translate }}
                 </div>
               </div>
             </div>

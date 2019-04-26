@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -10,8 +12,14 @@
           <i class="fa fa-home"></i>
           Gestión de Alojamientos
         </div>
-        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
-          <div class="buttonBack img-zoom" (click)="returnBackHousing()">
+        <div
+          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
+          style="padding-right: 0px"
+        >
+          <div
+            class="buttonBack img-zoom"
+            (click)="returnBackHousing()"
+          >
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
@@ -29,8 +37,14 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button id="btn-newFleets" type="button" class="btn tabDate btn-block">
-                <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
+              <button
+                (click)="openModal()"
+                type="button"
+                class="btn tabDate btn-block"
+              >
+                <i class="fa fa-plus"
+                  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
+                >
                 Crear nuevo alojamiento
               </button>
             </div>
@@ -45,26 +59,50 @@
             <b>
               Filtros de consulta
             </b>
-            <i *ngIf="!is_collapse" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
-              aria-expanded="false" (click)="collapse(true)"></i>
-            <i *ngIf="is_collapse" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilter"
-              aria-expanded="false" (click)="collapse(false)"></i>
+            <i
+              *ngIf="!is_collapse"
+              class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseFilter"
+              aria-expanded="false"
+              (click)="collapse(true)"
+            ></i>
+            <i
+              *ngIf="is_collapse"
+              class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
+              data-toggle="collapse"
+              data-target="#collapseFilter"
+              aria-expanded="false"
+              (click)="collapse(false)"
+            ></i>
           </div>
         </div>
       </div>
 
-      <div class="collapse top-general-p border-botton-general" id="collapseFilter">
+      <div
+        class="collapse top-general-p border-botton-general"
+        id="collapseFilter"
+      >
         <div class="row align-items-center">
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Nombre</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" />
           </div>
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
             <label>Ticket</label>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" />
           </div>
           <div class="col-lg-4 col-md-4 col-12">
-            <div class="btn btn-block btn-primary-second fontDate" style="cursor: no-drop">
+            <div
+              class="btn btn-block btn-primary-second fontDate"
+              style="cursor: no-drop"
+            >
               <i class="fa fa-search-plus"></i>
               Consultar
             </div>
@@ -75,38 +113,45 @@
 
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="housing.length > 0">
-          <div class="widget bg-white-1x" *ngFor="let generalHousing of housing;">
+          <div
+            class="widget bg-white-1x"
+            *ngFor="let generalHousing of housing"
+          >
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-1 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket # {{generalHousing.id}}
+                    Ticket # {{ generalHousing.id }}
                   </span>
                 </h5>
               </div>
-              <div class="col-lg-2 col-md-2 col-12 text-xl-left text-lg-center text-center top-p">
+              <div
+                class="col-lg-2 col-md-2 col-12 text-xl-left text-lg-center text-center top-p"
+              >
                 <h3 class="font-color-default">
                   <div class="display-block">
-                    {{generalHousing.name}}
+                    {{ generalHousing.name }}
                   </div>
                 </h3>
               </div>
-              <div class="col-lg-5 col-md-4 col-12 text-md-left text-center">
+              <div
+                class="col-lg-5 col-md-4 col-12 text-md-left text-center"
+              >
                 <div class="row tex">
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
                     <h5>
-                      <p class="text-center"> Total espacios</p>
+                      <p class="text-center">Total espacios</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{generalHousing.total_bed}}
+                      {{ generalHousing.total_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
                     <h5>
-                      <p class="text-center"> Espacios asignados</p>
+                      <p class="text-center">Espacios asignados</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{generalHousing.assigned_bed}}
+                      {{ generalHousing.assigned_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -114,7 +159,7 @@
                       <p class="text-center">Espacios ocupados</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{generalHousing.busy_bed}}
+                      {{ generalHousing.busy_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -122,68 +167,153 @@
                       <p class="text-center">Espacios disponibles</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{generalHousing.available_bed}}
+                      {{ generalHousing.available_bed }}
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-5 col-12 text-md-left text-center top-p">
+              <div
+                class="col-lg-3 col-md-5 col-12 text-md-left text-center top-p"
+              >
                 <div class="row">
-                  <div class="col-4 number-size text-center top-p" *ngIf="generalHousing.action_housing_index_view[0].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      generalHousing.action_housing_index_view[0]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 text-success number-size" id="hideTrash" style="cursor: pointer">
-                        <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 text-success number-size"
+                        id="hideTrash"
+                        style="cursor: pointer"
+                      >
+                        <i
+                          class="fa fa-eye"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Ver
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 number-size text-center top-p" *ngIf="!generalHousing.action_housing_index_view[0].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      !generalHousing.action_housing_index_view[0]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
-                        <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size"
+                        id="hideTrash"
+                        style="cursor: no-drop"
+                      >
+                        <i
+                          class="fa fa-eye"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Ver
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 number-size text-center top-p" *ngIf="generalHousing.action_housing_index_view[2].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      generalHousing.action_housing_index_view[2]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size text-info" id="hideTrash" style="cursor: pointer">
-                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size text-info"
+                        id="hideTrash"
+                        style="cursor: pointer"
+                      >
+                        <i
+                          class="fa fa-pencil"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Editar
                       </div>
                     </div>
-
                   </div>
-                  <div class="col-4 number-size text-center top-p" *ngIf="!generalHousing.action_housing_index_view[2].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      !generalHousing.action_housing_index_view[2]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size " id="hideTrash" style="cursor: no-drop">
-                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size "
+                        id="hideTrash"
+                        style="cursor: no-drop"
+                      >
+                        <i
+                          class="fa fa-pencil"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Editar
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 number-size text-center top-p" *ngIf="generalHousing.action_housing_index_view[1].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      generalHousing.action_housing_index_view[1]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer">
-                        <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size text-danger"
+                        id="hideTrash"
+                        style="cursor: pointer"
+                      >
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Borrar
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 number-size text-center top-p" *ngIf="!generalHousing.action_housing_index_view[1].is_active">
+                  <div
+                    class="col-4 number-size text-center top-p"
+                    *ngIf="
+                      !generalHousing.action_housing_index_view[1]
+                        .is_active
+                    "
+                  >
                     <div class="row justify-content-center">
-                      <div class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
-                        <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                      <div
+                        class="col-12 number-size"
+                        id="hideTrash"
+                        style="cursor: no-drop"
+                      >
+                        <i
+                          class="fa fa-trash"
+                          aria-hidden="true"
+                          style="font-size:2em"
+                        ></i>
                       </div>
                       <div class="col-12">
                         Borrar
@@ -196,7 +326,10 @@
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
+<app-new-housing
+  [modalForm]="modalForm.asObservable()"
+  *ngIf="!token"
+></app-new-housing>

@@ -1,23 +1,23 @@
-export class QuestionBase<T>{
+export class QuestionBase<T> {
     value: T;
-    key:string;
-    text:string;
-    required:boolean;
-    order:number;
-    controlType:string;
+    key: string;
+    text: string;
+    required: boolean;
+    order: number;
+    controlType: string;
 }
 
-export class DropDownQuestion extends QuestionBase<string>{
+export class DropDownQuestion extends QuestionBase<string> {
     options = [];
     controlType = 'dropdown';
-    constructor(){
+    constructor() {
         super();
     }
 }
-export class TextboxQuestion extends QuestionBase<string>{
-    type:string;
+export class TextboxQuestion extends QuestionBase<string> {
+    type: string;
     controlType = 'textbox';
-    constructor(){
+    constructor() {
         super();
     }
 }

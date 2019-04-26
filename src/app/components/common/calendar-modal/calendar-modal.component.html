@@ -1,11 +1,31 @@
-<button id="btn-calendar" type="button" class="btn btn-primary" data-toggle="modal" data-target="#calendarModal" style="display:none;">
-</button>
+<button
+  id="btn-calendar"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#calendarModal"
+  style="display:none;"
+></button>
 <div class="modal" tabindex="-1" role="dialog" id="calendarModal">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel"  *ngIf="translate !== null">{{translate.app.frontEnd.components.common.calendar_modal.schedule}}</h5>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{ parseT('schedule') | translate }}
+        </h5>
+        <button
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>

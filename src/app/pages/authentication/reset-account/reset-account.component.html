@@ -1,33 +1,61 @@
 <header>
   <div class="row-hr justify-content-center">
-    <div class="col-10 col-lg-6 col-md-8 bg-login transition-bg-reset">
+    <div
+      class="col-10 col-lg-6 col-md-8 bg-login transition-bg-reset"
+    >
       <div class="row">
         <div class="col-12">
           <div class="company-logo">
-            <img *ngIf="dataEnterprise" src="{{dataEnterprise.logo_dashboard.url}}"
-              alt="Smiley face" style="width: 100%; height: 100%">
+            <img
+              *ngIf="dataEnterprise"
+              src="{{ dataEnterprise.logo_dashboard.url }}"
+              alt="Smiley face"
+              style="width: 100%; height: 100%"
+            />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12 text-center">
-          <h3>{{translate.app.frontEnd.pages.authentication.reset_account.title_welcome}}</h3>
-          <p class="top">{{translate.app.frontEnd.pages.authentication.reset_account.text_restore_password}}</p>
+          <h3>{{ parseT('title_welcome') | translate }}</h3>
+          <p class="top">
+            {{ parseT('text_restore password') | translate }}
+          </p>
         </div>
       </div>
       <div class="row align-self-end">
         <div class="col-12 top-form">
           <div class="form-group float-general-login">
-            <input [(ngModel)]="txtEmail" type="email" class="form-control font-controls-login" placeholder="Email"  (keyup)='lowercasePassword()' maxlength="50" (blur)="blurEmail()">
+            <input
+              [(ngModel)]="txtEmail"
+              type="email"
+              class="form-control font-controls-login"
+              placeholder="Email"
+              (keyup)="lowercasePassword()"
+              maxlength="50"
+              (blur)="blurEmail()"
+            />
           </div>
           <div class="text-center">
-            <p>{{translate.app.frontEnd.pages.authentication.reset_account.text_mail_reset_password}}</p>
+            <p>
+              {{ parseT('text_mail_reset_password') | translate }}
+            </p>
           </div>
           <div class="float-general-login top">
-            <div class="btn btn-primary btn-block font-controls-login" (click)='restartSession()'>{{translate.app.frontEnd.pages.authentication.reset_account.text_restore}}</div>
+            <div
+              class="btn btn-primary btn-block font-controls-login"
+              (click)="restartSession()"
+            >
+              {{ parseT('text_restore') | translate }}
+            </div>
           </div>
           <div class="text-center top">
-            <small class="reestablish" routerLink="/ihr/login" routerLinkActive="active">{{translate.app.frontEnd.pages.authentication.reset_account.text_login}}</small>
+            <small
+              class="reestablish"
+              routerLink="/ihr/login"
+              routerLinkActive="active"
+              >{{ parseT('text_login') | translate }}</small
+            >
           </div>
           <div class="fooder-login">
             <p class="text-center">

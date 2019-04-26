@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,33 +10,53 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-file"></i>
-          {{translate.app.frontEnd.pages.auto_services.payroll_receipts.tittle}}
+          {{ parseT('tittle') | translate }}
         </div>
       </div>
     </div>
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
-        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+      <div
+        class="row justify-content-center top-containter"
+        *ngIf="flagEmpty"
+      >
+        <div
+          class="col-lg-8 col-12 text-center"
+          style="min-height: 370px;"
+        >
           <div class="alert alert-warning" role="alert">
-            {{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_one}}
-            <strong>{{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.auto_services.payroll_receipts.message_tree}}
+            {{ parseT('message_one') | translate }}
+            <strong>{{ parseT('message_two') | translate }}</strong
+            >&nbsp;{{ parseT('message_tree') | translate }}
           </div>
         </div>
       </div>
       <div class="row" *ngIf="!flagEmpty">
         <div class="col-3">
-          <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
-            <div id="{{i}}certificate" class="nav-item navReport tabReport" [ngClass]="{'active-report': i=='0'}"
-              *ngFor="let certificate of listPayRoll; let i = index" (click)="selectedObject(i, certificate)">
+          <div
+            id="listCertificates"
+            class="nav nav-tabs navtab-vertical navtab-left cursor-general"
+            role="navigation"
+          >
+            <div
+              id="{{ i }}certificate"
+              class="nav-item navReport tabReport"
+              [ngClass]="{ 'active-report': i == '0' }"
+              *ngFor="let certificate of listPayRoll; let i = index"
+              (click)="selectedObject(i, certificate)"
+            >
               <i class="fa fa-file-pdf-o"></i>
-              {{certificate.pdf_name2}} {{certificate.pdf_name}}
+              {{ certificate.pdf_name2 }} {{ certificate.pdf_name }}
             </div>
           </div>
         </div>
         <div class="col-9">
-          <iframe id="frameAutoService" [src]='sanitizer.bypassSecurityTrustResourceUrl(urlPDF)' style="width:100% !important;height:610px;"></iframe>
+          <iframe
+            id="frameAutoService"
+            [src]="sanitizer.bypassSecurityTrustResourceUrl(urlPDF)"
+            style="width:100% !important;height:610px;"
+          ></iframe>
         </div>
       </div>
     </div>

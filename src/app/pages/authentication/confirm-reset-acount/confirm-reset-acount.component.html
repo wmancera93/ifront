@@ -1,36 +1,80 @@
 <header>
   <div class="row-hr justify-content-center">
-    <div class="col-10 col-lg-6 col-md-8 bg-login transition-bg-login">
+    <div
+      class="col-10 col-lg-6 col-md-8 bg-login transition-bg-login"
+    >
       <div class="row">
         <div class="col-12">
           <div class="company-logo">
-            <img *ngIf="dataEnterprise" src="{{dataEnterprise.logo_dashboard.url}}" alt="Smiley face" style="width: 100%; height: 100%">
+            <img
+              *ngIf="dataEnterprise"
+              src="{{ dataEnterprise.logo_dashboard.url }}"
+              alt="Smiley face"
+              style="width: 100%; height: 100%"
+            />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12 text-center">
-          <h3>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.title_welcome}}</h3>
-          <p class="top">{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_system_hr}}</p>
-          <p>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_reset_account}}</p>
+          <h3>{{ parseT('title_welcome') | translate }}</h3>
+          <p class="top">
+            {{ parseT('text_system_hr') | translate }}
+          </p>
+          <p>{{ parseT('text_reset account') | translate }}</p>
         </div>
       </div>
       <div class="row align-self-end">
         <div class="col-12 top-form">
-          <div class="form-group float-general-login width-input-login">
-            <input id="password" [(ngModel)]="txtPassword" type="password" class="form-control font-controls-login" placeholder="{{newPassword}}"
-              maxlength="20" (keyup)='keyupPassword()' (blur)="blurPasword()">
-            <i *ngIf="txtPassword.length > 0 && eyePasswordVisible" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover="overEyePassword('password')"
-              on-mouseleave="leaveEyePassword('password')"></i>
+          <div
+            class="form-group float-general-login width-input-login"
+          >
+            <input
+              id="password"
+              [(ngModel)]="txtPassword"
+              type="password"
+              class="form-control font-controls-login"
+              placeholder="{{ parseT('new_password') | translate }}"
+              maxlength="20"
+              (keyup)="keyupPassword()"
+              (blur)="blurPasword()"
+            />
+            <i
+              *ngIf="txtPassword.length > 0 && eyePasswordVisible"
+              class="pasword-input-icon fa fa-eye icon-eye"
+              on-mouseover="overEyePassword('password')"
+              on-mouseleave="leaveEyePassword('password')"
+            ></i>
           </div>
-          <div class="form-group float-general-login width-input-login">
-            <input id="passwordConfirm" [(ngModel)]="txtConfirmPassword" type="password" class="form-control font-controls-login" placeholder="{{confirmationPassword}}"
-              maxlength="20" (keyup)='keyupConfirmPassword()' (blur)="blurConfirmPasword()">
-            <i *ngIf="txtConfirmPassword.length > 0" class="pasword-input-icon fa fa-eye icon-eye" on-mouseover="overEyePassword('passwordConfirm')"
-              on-mouseleave="leaveEyePassword('passwordConfirm')"></i>
+          <div
+            class="form-group float-general-login width-input-login"
+          >
+            <input
+              id="passwordConfirm"
+              [(ngModel)]="txtConfirmPassword"
+              type="password"
+              class="form-control font-controls-login"
+              placeholder="{{
+                parseT('confirmation_password') | translate
+              }}"
+              maxlength="20"
+              (keyup)="keyupConfirmPassword()"
+              (blur)="blurConfirmPasword()"
+            />
+            <i
+              *ngIf="txtConfirmPassword.length > 0"
+              class="pasword-input-icon fa fa-eye icon-eye"
+              on-mouseover="overEyePassword('passwordConfirm')"
+              on-mouseleave="leaveEyePassword('passwordConfirm')"
+            ></i>
           </div>
           <div class="float-general-login">
-            <div class="btn btn-primary btn-block font-controls-login" (click)='restartPasword()'>{{translate.app.frontEnd.pages.authentication.confirm_reset_account.text_reset}}</div>
+            <div
+              class="btn btn-primary btn-block font-controls-login"
+              (click)="restartPasword()"
+            >
+              {{ parseT('text_reset') | translate }}
+            </div>
           </div>
           <div class="fooder-login float-general-login">
             <p class="text-center">

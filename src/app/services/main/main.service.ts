@@ -12,7 +12,7 @@ export class MainService {
 
   getDataEnterprise(ambient) {
     let baseUrl: string;
-   
+
 
     switch (ambient) {
       case 'development':

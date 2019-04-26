@@ -49,23 +49,20 @@ export class DashboardManagerialService {
       .map((data: any) => data.json());
   }
 
-  getDataVacationsSubordinates()
-  {
+  getDataVacationsSubordinates() {
     return this.tokenService.get('consultations/vacations_subordinates')
     .map((data: any) => data.json());
   }
 
-  getDataConsultationsSubordinates()
-  {
+  getDataConsultationsSubordinates() {
     return this.tokenService.get('consultations/permissions_subordinates')
-    .map((data: any) => data.json());    
+    .map((data: any) => data.json());
   }
 
-  getDataIncapacitiesSubordinates()
-  {
+  getDataIncapacitiesSubordinates() {
     return this.tokenService.get('consultations/incapacities_subordinates')
-    .map((data: any) => data.json());  
-    
+    .map((data: any) => data.json());
+
   }
 }
 

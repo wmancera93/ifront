@@ -1,39 +1,83 @@
-
-<div  class="fade modal1 show" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="calendar-detail">
-  <div id="calendar_detail" class="modal-dinamic-calendar modal-dialog modal-dialog-centered" role="document">
+<div
+  class="fade modal1 show"
+  data-backdrop="false"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="calendar-detail"
+>
+  <div
+    id="calendar_detail"
+    class="modal-dinamic-calendar modal-dialog modal-dialog-centered"
+    role="document"
+  >
     <div *ngIf="state_modal" class="modal-content">
-      <div class="modal-header borderLine-title row-hr justify-content-center" style="height:100px">
-        <h5 class="modal-title titleColor1 justify-content-center" id="exampleModalCenterTitle">{{translate.app.frontEnd.components.common.calendar_detail.details}}</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        </button>
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+        style="height:100px"
+      >
+        <h5
+          class="modal-title titleColor1 justify-content-center"
+          id="exampleModalCenterTitle"
+        >
+          {{ parseT('details') | translate }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        ></button>
       </div>
       <div class="modal-body" style="background: white">
-        <div  *ngIf="detail_calendar.length > 0" class="row bodyColorInfo">
+        <div
+          *ngIf="detail_calendar.length > 0"
+          class="row bodyColorInfo"
+        >
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-calendar-minus-o paddingInfo"></i>
-            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.activity_descrption}}:</strong>&nbsp;{{detail_calendar[0].descript}}
-            <br>
+            <strong
+              >&nbsp;{{
+                parseT('activity_descrption') | translate
+              }}:</strong
+            >&nbsp;{{ detail_calendar[0].descript }}
+            <br />
             <i class="fa fa-info-circle paddingInfo"></i>
-            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.theoretical_hours}}:</strong>&nbsp;{{detail_calendar[0].description_calendar}}
-            <br>
+            <strong
+              >&nbsp;{{
+                parseT('theoretical_hours') | translate
+              }}:</strong
+            >&nbsp;{{ detail_calendar[0].description_calendar }}
+            <br />
           </div>
           <div class="col-12 col-lg-6 col-md-4">
-              <i class="fa fa-clock-o paddingInfo"></i>
-              <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.hour_begin}}:</strong>&nbsp;{{detail_calendar[0].hour_begin}}
-              <br>
+            <i class="fa fa-clock-o paddingInfo"></i>
+            <strong
+              >&nbsp;{{ parseT('hour_begin') | translate }}:</strong
+            >&nbsp;{{ detail_calendar[0].hour_begin }}
+            <br />
             <i class="fa fa-hourglass paddingInfo"></i>
-            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.hour_end}}:</strong>&nbsp;{{detail_calendar[0].hour_end}}
-            <br>           
+            <strong
+              >&nbsp;{{ parseT('hour_end') | translate }}:</strong
+            >&nbsp;{{ detail_calendar[0].hour_end }}
+            <br />
           </div>
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-commenting-o paddingInfo"></i>
-            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.calendar_text}}:</strong>&nbsp;{{detail_calendar[0].calendar_text}}
-            <br>
+            <strong
+              >&nbsp;{{
+                parseT('calendar_text') | translate
+              }}:</strong
+            >&nbsp;{{ detail_calendar[0].calendar_text }}
+            <br />
           </div>
           <div class="col-12 col-lg-6 col-md-4">
             <i class="fa fa-book paddingInfo"></i>
-            <strong>&nbsp;{{translate.app.frontEnd.components.common.calendar_detail.description_work}}:</strong>&nbsp;{{detail_calendar[0].description_work}}
-            <br>
+            <strong
+              >&nbsp;{{
+                parseT('description_work') | translate
+              }}:</strong
+            >&nbsp;{{ detail_calendar[0].description_work }}
+            <br />
           </div>
         </div>
       </div>

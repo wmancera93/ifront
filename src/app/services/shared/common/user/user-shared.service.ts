@@ -7,12 +7,12 @@ export class UserSharedService {
   exportDataUser: Subject<any> = new Subject<any>();
   constructor() { }
 
-  getUser() {            
+  getUser() {
     return this.exportDataUser;
   }
 
   setUser(UserAuthenticated: User) {
-    return this.exportDataUser.next(UserAuthenticated);    
+    return this.exportDataUser.next(UserAuthenticated);
   }
 
 }

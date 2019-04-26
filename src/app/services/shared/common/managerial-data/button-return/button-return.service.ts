@@ -3,7 +3,7 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class ButtonReturnService {
-  dataButtonReturn: Subject<any> = new Subject<any>();  
+  dataButtonReturn: Subject<any> = new Subject<any>();
 
   constructor() { }
   getButtonReturn() {

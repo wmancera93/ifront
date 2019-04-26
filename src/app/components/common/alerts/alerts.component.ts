@@ -5,63 +5,63 @@ import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Translate } from '../../../models/common/translate/translate';
-import { TranslateService } from '../../../services/common/translate/translate.service';
-
-
 
 @Component({
   selector: 'app-alerts',
   templateUrl: './alerts.component.html',
-  styleUrls: ['./alerts.component.css']
+  styleUrls: ['./alerts.component.css'],
 })
 export class AlertsComponent implements OnInit, OnDestroy {
-  public bodyAlert: Alerts = { type: 'primary', title: '', message: '' };
+  public bodyAlert: Alerts = {
+    type: 'primary',
+    title: '',
+    message: '',
+  };
   public icon: string;
   public confirmationShow = false;
   public cancelation: string;
-  public count: number = 0;
-  public translate: Translate = null;
+  public count = 0;
 
-  constructor(public alert: AlertsService, public route: Router,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+  parseT(key) {
+    return `components.common.alerts.${key}`;
+  }
 
-    this.translate = this.translateService.getTranslate();
+  constructor(
+    public alert: AlertsService,
+    public route: Router,
+    public stylesExplorerService: StylesExplorerService,
+  ) {
+    this.alert.getAlert().subscribe(data => {
+      if (this.count === 0) {
+        document.getElementById('closeModal').click();
+        this.bodyAlert = data;
 
-    this.alert.getAlert().subscribe(
-      (data) => {
-        if (this.count === 0) {
-          document.getElementById('closeModal').click();
-          this.bodyAlert = data;
+        document.getElementById('btnModal').click();
+        document
+          .getElementById('bodyGeneral')
+          .removeAttribute('style');
 
-          document.getElementById('btnModal').click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
-
-
-          if (this.bodyAlert.type === 'primary') {
-            this.icon = 'fa-check';
-          }
-          if (this.bodyAlert.type === 'success') {
-            this.icon = 'fa-check';
-          }
-          if (this.bodyAlert.type === 'danger') {
-            this.icon = 'fa-exclamation-triangle';
-          }
-          if (this.bodyAlert.type === 'warning') {
-            this.icon = 'fa-exclamation-triangle';
-          }
-
-          if (this.bodyAlert.confirmation !== null) {
-            this.confirmationShow = this.bodyAlert.confirmation;
-          }
-
+        if (this.bodyAlert.type === 'primary') {
+          this.icon = 'fa-check';
         }
-      });
+        if (this.bodyAlert.type === 'success') {
+          this.icon = 'fa-check';
+        }
+        if (this.bodyAlert.type === 'danger') {
+          this.icon = 'fa-exclamation-triangle';
+        }
+        if (this.bodyAlert.type === 'warning') {
+          this.icon = 'fa-exclamation-triangle';
+        }
+
+        if (this.bodyAlert.confirmation !== null) {
+          this.confirmationShow = this.bodyAlert.confirmation;
+        }
+      }
+    });
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngOnDestroy() {
     this.count += 1;

@@ -1,79 +1,156 @@
-<button id="btn-newArt" type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="display:none;">
-</button>
+<button
+  id="btn-newArt"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#myModal"
+  style="display:none;"
+></button>
 <div class="modal" tabindex="-1" role="dialog" id="myModal">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header borderLine-title row-hr justify-content-center">
-        <h4 class="modal-title titleColor text-shadow">{{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.title_form_news}}</h4>
+      <div
+        class="modal-header borderLine-title row-hr justify-content-center"
+      >
+        <h4 class="modal-title titleColor text-shadow">
+          {{ parseT('title_form_news') | translate }}
+        </h4>
       </div>
       <div class="modal-body bodyColorInfo">
         <div class="row">
           <div class="col-12">
-            <form #f='ngForm' (ngSubmit)="onSubmitNewArticle(f.value)">
+            <form
+              #f="ngForm"
+              (ngSubmit)="onSubmitNewArticle(f.value)"
+            >
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="title" class="font-title-general">
-                    <i class="fa fa-fw fa-minus text-primary-hr"></i>{{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_title}}
+                    <i class="fa fa-fw fa-minus text-primary-hr"></i
+                    >{{ parseT('text_title') | translate }}
                   </label>
                 </div>
                 <div class="col-9">
-                  <input type="text" [(ngModel)]='title_form' placeholder="{{placeholder_tittle}}" name="title" style="width:100% !important;" ngModel
-                    required/>
+                  <input
+                    type="text"
+                    [(ngModel)]="title_form"
+                    placeholder="{{
+                      parseT('placeholder_tittle') | translate
+                    }}"
+                    name="title"
+                    style="width:100% !important;"
+                    ngModel
+                    required
+                  />
                 </div>
               </div>
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
                     <i class="fa fa-fw fa-bars text-primary-hr"></i>
-                    {{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_summary}}
+                    {{ parseT('text_summary') | translate }}
                   </label>
                 </div>
                 <div class="col-9">
-                  <textarea name="summary" [(ngModel)]='summary' rows="2" cols="50" placeholder="{{placeholder_visualization}}" style="width:100% !important;" ngModel
-                  required></textarea>
+                  <textarea
+                    name="summary"
+                    [(ngModel)]="summary"
+                    rows="2"
+                    cols="50"
+                    placeholder="{{
+                      parseT('placeholder_visualization') | translate
+                    }}"
+                    style="width:100% !important;"
+                    ngModel
+                    required
+                  ></textarea>
                 </div>
               </div>
               <div class="row">
                 <div class="col-3 text-left">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-cubes text-primary-hr"></i>{{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_topic}}
+                    <i class="fa fa-fw fa-cubes text-primary-hr"></i
+                    >{{ parseT('text_topic') | translate }}
                   </label>
                 </div>
                 <div class="col-9">
-                  <tag-input name="tags" [(ngModel)]='tags' theme='dark' secondaryPlaceholder="{{secondary_placeholder}}" placeholder="{{secondary_placeholder}}" ngModel required></tag-input>
+                  <tag-input
+                    name="tags"
+                    [(ngModel)]="tags"
+                    theme="dark"
+                    secondaryPlaceholder="{{
+                      parseT('secondary_placeholder') | translate
+                    }}"
+                    placeholder="{{
+                      parseT('secondary_placeholder') | translate
+                    }}"
+                    ngModel
+                    required
+                  ></tag-input>
                 </div>
               </div>
               <div class="row">
                 <div class="col-3 text-left ">
                   <label for="resume" class="font-title-general">
-                    <i class="fa fa-fw fa-paperclip text-primary-hr"></i> {{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_upload_image}}
+                    <i
+                      class="fa fa-fw fa-paperclip text-primary-hr"
+                    ></i>
+                    {{ parseT('text_upload_image') | translate }}
                   </label>
                 </div>
                 <div class="col-9 " style="font-size:1rem !important">
-                  <app-file-upload [nameFile]="fileImageNew" [extensions]="extensions"></app-file-upload>
+                  <app-file-upload
+                    [nameFile]="fileImageNew"
+                    [extensions]="extensions"
+                  ></app-file-upload>
                 </div>
               </div>
               <div class="row">
                 <div class="col-12" style="padding-top: 20px">
-                  <ckeditor [(ngModel)]="text_form" debounce="500" name="body" ngModel required>
+                  <ckeditor
+                    [(ngModel)]="text_form"
+                    debounce="500"
+                    name="body"
+                    ngModel
+                    required
+                  >
                   </ckeditor>
                 </div>
               </div>
-              <div class="row justify-content-center" style="margin-top:10px;">
+              <div
+                class="row justify-content-center"
+                style="margin-top:10px;"
+              >
                 <div class="col-md-12 top-containter">
                   <div class="row justify-content-end">
                     <div class="col-lg-3 col-md-4 col-12">
-                      <button type="submit" *ngIf="showSubmit" class="btn btn-success btn-block">
-                        <i class="fa fa-fw fa-floppy-o"></i>{{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.btn_save}}</button>
-                      <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
-                        <i class="fa fa-fw fa-spinner fa-spin"></i>{{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.text_loading}}</button>
+                      <button
+                        type="submit"
+                        *ngIf="showSubmit"
+                        class="btn btn-success btn-block"
+                      >
+                        <i class="fa fa-fw fa-floppy-o"></i
+                        >{{ parseT('btn_save') | translate }}
+                      </button>
+                      <button
+                        type="button"
+                        *ngIf="!showSubmit"
+                        class="btn btn-warning btn-block"
+                      >
+                        <i class="fa fa-fw fa-spinner fa-spin"></i
+                        >{{ parseT('text_loading') | translate }}
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
               <div class=" modal-footerInfo justify-content-center">
-                <div class="col-6 col-lg-3 buttonCloseNewForm btn-close-modals text-center" style="width:100% !important;" data-dismiss="modal">
-                  <h6> {{translate.app.frontEnd.pages.billboard.my_publication.new_article_form.btn_cerrar}} </h6>
+                <div
+                  class="col-6 col-lg-3 buttonCloseNewForm btn-close-modals text-center"
+                  style="width:100% !important;"
+                  data-dismiss="modal"
+                >
+                  <h6>{{ parseT('btn_cerrar') | translate }}</h6>
                 </div>
               </div>
             </form>

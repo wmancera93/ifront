@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-list"></i>
-          {{translate.app.frontEnd.pages.evaluations.evaluated.title_valuation_status}}
+          {{ parseT('title_valuation_status') | translate }}
         </div>
       </div>
     </div>
@@ -19,36 +21,74 @@
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              {{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_one}}
+              {{ parseT('text_pending_evaluations_one') | translate }}
             </b>
           </div>
         </div>
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="evaluationsListPendind">
-          <div class="row justify-content-center top-containter" *ngIf="evaluationsListPendind.length === 0" style="margin-top:25px;">
-            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
+          <div
+            class="row justify-content-center top-containter"
+            *ngIf="evaluationsListPendind.length === 0"
+            style="margin-top:25px;"
+          >
+            <div
+              class="col-lg-8 col-12 text-center"
+              style="min-height: 370px;"
+            >
               <div class="alert alert-warning" role="alert">
-                {{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_four}}
-                <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.evaluations.evaluated.text_pending_evaluations_three}}
+                {{
+                  parseT('text_pending_evaluations_four') | translate
+                }}
+                <strong>{{
+                  parseT('text_pending_evaluations_two') | translate
+                }}</strong
+                >&nbsp;{{
+                  parseT('text_pending_evaluations_three') | translate
+                }}
               </div>
             </div>
           </div>
           <div *ngIf="evaluationsListPendind.length !== 0">
-            <section *ngFor="let evaluation of evaluationsListPendind; let index = index">
+            <section
+              *ngFor="
+                let evaluation of evaluationsListPendind;
+                let index = index
+              "
+            >
               <section *ngIf="index == 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                >
                   <div class="col-12 text-left">
-                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                    {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
+                    <i
+                      class="fa fa-circle-o-notch fa-spin"
+                      aria-hidden="true"
+                    ></i>
+                    {{ evaluation.evaluation_type_id }}.
+                    {{ evaluation.evaluation_type_name }}
                   </div>
                 </div>
               </section>
               <section *ngIf="index > 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListPendind[index - 1].evaluation_type_id !== evaluation.evaluation_type_id">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                  *ngIf="
+                    evaluationsListPendind[index - 1]
+                      .evaluation_type_id !==
+                    evaluation.evaluation_type_id
+                  "
+                >
                   <div class="col-12 text-left">
-                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                    {{evaluation.evaluation_type_id}}. {{evaluation.evaluation_type_name}}
+                    <i
+                      class="fa fa-circle-o-notch fa-spin"
+                      aria-hidden="true"
+                    ></i>
+                    {{ evaluation.evaluation_type_id }}.
+                    {{ evaluation.evaluation_type_name }}
                   </div>
                 </div>
               </section>
@@ -56,21 +96,32 @@
                 <div class="row justify-content-center">
                   <div class="col-12 col-xl-10  text-center top-p">
                     <div class="row justify-content-center">
-                      <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="fillEvaluation(evaluation)">
-                        <strong>{{evaluation.title |uppercase}} </strong>
+                      <div
+                        class="col-12 font-color-default text-lg-left title-size hoverTitle"
+                        (click)="fillEvaluation(evaluation)"
+                      >
+                        <strong
+                          >{{ evaluation.title | uppercase }}
+                        </strong>
                       </div>
                       <div class=" col-12 text-lg-left ">
-                        {{evaluation.subtitle}}
+                        {{ evaluation.subtitle }}
                       </div>
                     </div>
                   </div>
                   <div class="col-xl-2 col-12 ">
                     <div class="row ">
-                      <div class="col-12 number-size text-info " (click)="fillEvaluation(evaluation) ">
+                      <div
+                        class="col-12 number-size text-info "
+                        (click)="fillEvaluation(evaluation)"
+                      >
                         <i class="fa fa-pencil "></i>
                       </div>
-                      <div class="col-12" (click)="fillEvaluation(evaluation) ">
-                        {{translate.app.frontEnd.pages.evaluations.evaluated.text_present}}
+                      <div
+                        class="col-12"
+                        (click)="fillEvaluation(evaluation)"
+                      >
+                        {{ parseT('text_present') | translate }}
                       </div>
                     </div>
                   </div>
@@ -84,36 +135,74 @@
         <div class="row top-containter ">
           <div class="col-xl-2 col-lg-4 col-12 text-left ">
             <b>
-              {{translate.app.frontEnd.pages.evaluations.evaluated.text_managed}}
+              {{ parseT('text_managed') | translate }}
             </b>
           </div>
         </div>
       </div>
       <div class="row justify-content-center top-containter ">
         <div class="col-12 ">
-          <div class="row justify-content-center top-containter " *ngIf="evaluationsListSubmitted.length===0 " style="margin-top:25px; ">
-            <div class="col-lg-8 col-12 text-center " style="min-height: 200px; ">
+          <div
+            class="row justify-content-center top-containter "
+            *ngIf="evaluationsListSubmitted.length === 0"
+            style="margin-top:25px; "
+          >
+            <div
+              class="col-lg-8 col-12 text-center "
+              style="min-height: 200px; "
+            >
               <div class="alert alert-warning " role="alert ">
-                {{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_one}}
-                <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_two}}</strong>&nbsp;{{translate.app.frontEnd.pages.evaluations.evaluated.text_managed_evaluations_three}}
+                {{
+                  parseT('text_managed_evaluations_one') | translate
+                }}
+                <strong>{{
+                  parseT('text_managed_evaluations_two') | translate
+                }}</strong
+                >&nbsp;{{
+                  parseT('text_managed_evaluations_three') | translate
+                }}
               </div>
             </div>
           </div>
-          <div *ngIf="evaluationsListSubmitted.length !==0 ">
-            <section *ngFor="let evaluationSub of evaluationsListSubmitted; let index = index">
+          <div *ngIf="evaluationsListSubmitted.length !== 0">
+            <section
+              *ngFor="
+                let evaluationSub of evaluationsListSubmitted;
+                let index = index
+              "
+            >
               <section *ngIf="index == 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                >
                   <div class="col-12 text-left">
-                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                    {{evaluationSub.evaluation_type_id}}. {{evaluationSub.evaluation_type_name}}
+                    <i
+                      class="fa fa-circle-o-notch fa-spin"
+                      aria-hidden="true"
+                    ></i>
+                    {{ evaluationSub.evaluation_type_id }}.
+                    {{ evaluationSub.evaluation_type_name }}
                   </div>
                 </div>
               </section>
               <section *ngIf="index > 0">
-                <div class="row" style="padding-top: 5px; padding-bottom: 5px" *ngIf="evaluationsListSubmitted[index - 1].evaluation_type_id !== evaluationSub.evaluation_type_id">
+                <div
+                  class="row"
+                  style="padding-top: 5px; padding-bottom: 5px"
+                  *ngIf="
+                    evaluationsListSubmitted[index - 1]
+                      .evaluation_type_id !==
+                    evaluationSub.evaluation_type_id
+                  "
+                >
                   <div class="col-12 text-left">
-                    <i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>
-                    {{evaluationSub.evaluation_type_id}}. {{evaluationSub.evaluation_type_name}}
+                    <i
+                      class="fa fa-circle-o-notch fa-spin"
+                      aria-hidden="true"
+                    ></i>
+                    {{ evaluationSub.evaluation_type_id }}.
+                    {{ evaluationSub.evaluation_type_name }}
                   </div>
                 </div>
               </section>
@@ -122,21 +211,33 @@
                 <div class="row justify-content-center ">
                   <div class="col-12 col-xl-10 text-center top-p ">
                     <div class="row justify-content-center ">
-                      <div class="col-12 font-color-default text-lg-left title-size hoverTitle" (click)="seeEvaluation(evaluationSub) ">
-                        <strong>{{evaluationSub.title |uppercase}} </strong>
+                      <div
+                        class="col-12 font-color-default text-lg-left title-size hoverTitle"
+                        (click)="seeEvaluation(evaluationSub)"
+                      >
+                        <strong
+                          >{{ evaluationSub.title | uppercase }}
+                        </strong>
                       </div>
                       <div class="col-12 text-lg-left ">
-                        {{evaluationSub.subtitle}}
+                        {{ evaluationSub.subtitle }}
                       </div>
                     </div>
                   </div>
                   <div class="col-xl-2 col-12 ">
                     <div class="row ">
-                      <div id="seeEval " class="col-12 number-size text-navy " (click)="seeEvaluation(evaluationSub) ">
+                      <div
+                        id="seeEval "
+                        class="col-12 number-size text-navy "
+                        (click)="seeEvaluation(evaluationSub)"
+                      >
                         <i class="fa fa-eye "></i>
                       </div>
-                      <div class="col-12 " (click)="seeEvaluation(evaluationSub) ">
-                        {{translate.app.frontEnd.pages.evaluations.evaluated.icon_watch}}
+                      <div
+                        class="col-12 "
+                        (click)="seeEvaluation(evaluationSub)"
+                      >
+                        {{ parseT('icon_watch') | translate }}
                       </div>
                     </div>
                   </div>

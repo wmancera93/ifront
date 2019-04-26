@@ -1,51 +1,106 @@
-<button id="btn_showEvaluation" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_showEvaluation"
-  style="display:none;">
-</button>
-<div data-backdrop="static" class="modal" tabindex="-1" role="dialog" id="modal_showEvaluation">
+<button
+  id="btn_showEvaluation"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#modal_showEvaluation"
+  style="display:none;"
+></button>
+<div
+  data-backdrop="static"
+  class="modal"
+  tabindex="-1"
+  role="dialog"
+  id="modal_showEvaluation"
+>
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="receiveData !== null">
       <div class="modal-header borderLine-title">
-        <h4 class="modal-title titleColor text-shadow">{{receiveData.title}}</h4>
-        <button type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h4 class="modal-title titleColor text-shadow">
+          {{ receiveData.title }}
+        </h4>
+        <button
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
       <div class="modal-body bodyColorInfo">
-        <div class="row justify-content-center" *ngIf="dataEvaluation !== null">
+        <div
+          class="row justify-content-center"
+          *ngIf="dataEvaluation !== null"
+        >
           <div class="col-12">
             <div class="row" style="margin-top: 15px;">
               <div class="col-6">
                 <div class="alert alert-success" role="alert">
-                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_total_questions}} </strong> {{dataEvaluation[0].total_questions}}
+                  <strong
+                    >{{ parseT('text_total_questions') | translate }}
+                  </strong>
+                  {{ dataEvaluation[0].total_questions }}
                 </div>
               </div>
-              <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers > 0 ">
+              <div
+                class="col-6"
+                *ngIf="dataEvaluation[0].total_correct_answers > 0"
+              >
                 <div class="alert alert-success" role="alert">
-                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_totalcorrect_questions}}</strong> {{dataEvaluation[0].total_correct_answers}}
+                  <strong>{{
+                    parseT('text_totalcorrect_questions') | translate
+                  }}</strong>
+                  {{ dataEvaluation[0].total_correct_answers }}
                 </div>
               </div>
-              <div class="col-6" *ngIf="dataEvaluation[0].total_correct_answers == -1 ">
+              <div
+                class="col-6"
+                *ngIf="dataEvaluation[0].total_correct_answers == -1"
+              >
                 <div class="alert alert-success" role="alert">
-                  <strong>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_totalcorrect_questions_one}}</strong> {{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_not_apply}}
+                  <strong>{{
+                    parseT('text_totalcorrect_questions_one')
+                      | translate
+                  }}</strong>
+                  {{ parseT('text_not_apply') | translate }}
                 </div>
               </div>
             </div>
           </div>
         </div>
         <div *ngIf="dataEvaluation !== null">
-          <div class="row top-containter border-botton-general " *ngFor="let question of dataEvaluation[0].evaluation_answers;"
-            style="margin-top: 15px;">
+          <div
+            class="row top-containter border-botton-general "
+            *ngFor="
+              let question of dataEvaluation[0].evaluation_answers
+            "
+            style="margin-top: 15px;"
+          >
             <div class="col-12" *ngIf="question.open_answer == null">
               <div class="row">
-                <div class="col-12" *ngIf="question.answer_option.is_right !== null">
+                <div
+                  class="col-12"
+                  *ngIf="question.answer_option.is_right !== null"
+                >
                   <div class="row">
-                    <div class="col-12" *ngIf="question.answer_option.is_right">
+                    <div
+                      class="col-12"
+                      *ngIf="question.answer_option.is_right"
+                    >
                       <div class="row">
                         <div class="col-12">
-                          <div class="alert alert-success" role="alert">
+                          <div
+                            class="alert alert-success"
+                            role="alert"
+                          >
                             <div class="row">
                               <div class="col-12">
-                                <label> {{question.answer_option.question.description}}
+                                <label>
+                                  {{
+                                    question.answer_option.question
+                                      .description
+                                  }}
                                 </label>
                               </div>
                             </div>
@@ -53,44 +108,70 @@
                               <div class="col-12">
                                 <div class="row">
                                   <div class="col-6 align-self-start">
-                                    <strong>{{question.answer_option.description}}</strong>
+                                    <strong>{{
+                                      question.answer_option
+                                        .description
+                                    }}</strong>
                                   </div>
                                   <div class="col-6">
-                                    <label>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_correct}}</label>
+                                    <label>{{
+                                      parseT('text_correct')
+                                        | translate
+                                    }}</label>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="row container justify-content-center">
+                            <div
+                              class="row container justify-content-center"
+                            >
                               <div class="col-12">
-                                {{question.comments}}
+                                {{ question.comments }}
                               </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-12" *ngIf="!question.answer_option.is_right">
+                    <div
+                      class="col-12"
+                      *ngIf="!question.answer_option.is_right"
+                    >
                       <div class="row">
                         <div class="col-12">
-                          <div class="alert alert-danger" role="alert">
-                            <label> {{question.answer_option.question.description}}
+                          <div
+                            class="alert alert-danger"
+                            role="alert"
+                          >
+                            <label>
+                              {{
+                                question.answer_option.question
+                                  .description
+                              }}
                             </label>
                             <div class="row ">
                               <div class="col-12">
                                 <div class="row">
                                   <div class="col-6 align-self-start">
-                                    <strong>{{question.answer_option.description}}</strong>
+                                    <strong>{{
+                                      question.answer_option
+                                        .description
+                                    }}</strong>
                                   </div>
                                   <div class="col-6">
-                                    <label>{{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.text_incorrect}}</label>
+                                    <label>{{
+                                      parseT('text_incorrect')
+                                        | translate
+                                    }}</label>
                                   </div>
                                 </div>
                               </div>
                             </div>
-                            <div class="row container justify-content-center">
+                            <div
+                              class="row container justify-content-center"
+                            >
                               <div class="col-12">
-                                {{question.comments}}
+                                {{ question.comments }}
                               </div>
                             </div>
                           </div>
@@ -99,24 +180,35 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12" *ngIf="question.answer_option.is_right === null">
+                <div
+                  class="col-12"
+                  *ngIf="question.answer_option.is_right === null"
+                >
                   <div class="row">
                     <div class="col-12">
                       <div class="alert alert-success" role="alert">
-                        <label> {{question.answer_option.question.description}}
+                        <label>
+                          {{
+                            question.answer_option.question
+                              .description
+                          }}
                         </label>
                         <div class="row">
                           <div class="col-12">
                             <div class="row">
                               <div class="col-6 align-self-start">
-                                <strong>{{question.answer_option.description}}</strong>
+                                <strong>{{
+                                  question.answer_option.description
+                                }}</strong>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div class="row container justify-content-center">
+                        <div
+                          class="row container justify-content-center"
+                        >
                           <div class="col-12">
-                            {{question.comments}}
+                            {{ question.comments }}
                           </div>
                         </div>
                       </div>
@@ -129,13 +221,14 @@
               <div class="row">
                 <div class="col-12">
                   <div class="alert alert-success" role="alert">
-                    <label> {{question.open_answer.description}}
+                    <label>
+                      {{ question.open_answer.description }}
                     </label>
                     <div class="row">
                       <div class="col-12">
                         <div class="row">
                           <div class="col-6 align-self-start">
-                            <strong>{{question.comments}}</strong>
+                            <strong>{{ question.comments }}</strong>
                           </div>
                         </div>
                       </div>
@@ -148,9 +241,14 @@
         </div>
       </div>
       <div class="modal-footerInfo justify-content-center">
-        <div class="col-12 col-lg-3 buttonCloseShowEvaluation btn-close-modals text-center" style="width:100% !important;"
-          data-dismiss="modal">
-          <h6> {{translate.app.frontEnd.pages.evaluations.evaluated.show_evaluation.btn_close}} </h6>
+        <div
+          class="col-12 col-lg-3 buttonCloseShowEvaluation btn-close-modals text-center"
+          style="width:100% !important;"
+          data-dismiss="modal"
+        >
+          <h6>
+            {{ parseT('btn_close') | translate }}
+          </h6>
         </div>
       </div>
     </div>

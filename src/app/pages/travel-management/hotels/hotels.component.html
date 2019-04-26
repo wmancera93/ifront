@@ -3,14 +3,17 @@
     <div class="row justify-content-center">
       <div class="col-xl-10 col-md-8 col-7 text-left title">
         <i class="fa fa-hotel"></i>
-        {{translate.app.frontEnd.pages.travel_management.hotels.tittle}}
+        {{ parseT('tittle') | translate }}
       </div>
-      <div class="col-xl-2 col-md-4 col-5  text-center cursor-general" style="padding-right: 0px">
+      <div
+        class="col-xl-2 col-md-4 col-5  text-center cursor-general"
+        style="padding-right: 0px"
+      >
         <div class="buttonBack img-zoom" (click)="returnBackPage()">
           <div class="padding-back">
             <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
             <span>
-              {{translate.app.frontEnd.pages.travel_management.hotels.back}}
+              {{ parseT('back') | translate }}
             </span>
           </div>
         </div>
@@ -26,9 +29,16 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button id="btn-travelManagement" type="button" class="btn tabDate btn-block cursor-general" (click)="newHotel()">
-                <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
-                {{translate.app.frontEnd.pages.travel_management.hotels.btn_new}}
+              <button
+                id="btn-travelManagement"
+                type="button"
+                class="btn tabDate btn-block cursor-general"
+                (click)="newHotel()"
+              >
+                <i class="fa fa-plus"
+                  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
+                >
+                {{ parseT('btn_new') | translate }}
               </button>
             </div>
           </div>
@@ -37,12 +47,16 @@
     </div>
     <div class="row justify-content-center top-containter">
       <div class="col-12">
-        <div class="widget bg-white-1x"  *ngFor="let hotel of objectHotels">
+        <div
+          class="widget bg-white-1x"
+          *ngFor="let hotel of objectHotels"
+        >
           <div class="row align-items-center">
             <div class="col-lg-2 col-md-3 col-12">
               <h5>
                 <span class="badge badge-warning">
-                  {{translate.app.frontEnd.pages.travel_management.hotels.hotel_cod}} # {{hotel.id}}
+                  {{ parseT('hotel_cod') | translate }}
+                  # {{ hotel.id }}
                 </span>
               </h5>
               <!-- <p>
@@ -50,12 +64,16 @@
                 Creada el 01/01/2018
               </p> -->
             </div>
-            <div class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p">
+            <div
+              class="col-lg-3 col-md-9 col-12 text-xl-left text-lg-center text-center top-p"
+            >
               <h3 class="font-color-default">
-                {{hotel.name}}
+                {{ hotel.name }}
               </h3>
             </div>
-            <div class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p">
+            <div
+              class="col-lg-2 col-md-9 col-12 text-md-left text-center top-p"
+            >
               <!-- <p class="font-title-general">
                 Pais
               </p>
@@ -64,7 +82,9 @@
                 Colombia
               </p> -->
             </div>
-            <div class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
+            <div
+              class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
+            >
               <!-- <p class="font-title-general">
                 Estado y/o Ciudad
               </p>
@@ -76,17 +96,41 @@
 
             <div class="col-lg-2 col-md-3 col-12 text-center top-p">
               <div class="row justify-content-center">
-                <div *ngIf="hotel.is_delete"  class="col-12 number-size text-danger" id="hideTrash" style="cursor: pointer" (click)="deleteHotels(hotel)">
-                  <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                <div
+                  *ngIf="hotel.is_delete"
+                  class="col-12 number-size text-danger"
+                  id="hideTrash"
+                  style="cursor: pointer"
+                  (click)="deleteHotels(hotel)"
+                >
+                  <i
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                    style="font-size:2em"
+                  ></i>
                 </div>
-                <div *ngIf="!hotel.is_delete" disabled="disabled" class="col-12 number-size" id="hideTrash" style="cursor: no-drop">
-                  <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                <div
+                  *ngIf="!hotel.is_delete"
+                  disabled="disabled"
+                  class="col-12 number-size"
+                  id="hideTrash"
+                  style="cursor: no-drop"
+                >
+                  <i
+                    class="fa fa-trash"
+                    aria-hidden="true"
+                    style="font-size:2em"
+                  ></i>
                 </div>
-                <div class="col-12" *ngIf="hotel.is_delete" (click)="deleteHotels(hotel)">
-                  {{translate.app.frontEnd.pages.travel_management.hotels.erase_hotel}}
+                <div
+                  class="col-12"
+                  *ngIf="hotel.is_delete"
+                  (click)="deleteHotels(hotel)"
+                >
+                  {{ parseT('erase_hotel') | translate }}
                 </div>
                 <div class="col-12" *ngIf="!hotel.is_delete">
-                  {{translate.app.frontEnd.pages.travel_management.hotels.erase_hotel}}
+                  {{ parseT('erase_hotel') | translate }}
                 </div>
               </div>
             </div>

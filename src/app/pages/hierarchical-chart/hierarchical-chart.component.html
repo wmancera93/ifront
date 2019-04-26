@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -7,8 +9,8 @@
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
-          <i class="fa fa-sitemap" *ngIf="translate !== null"></i>
-          {{translate.app.frontEnd.pages.hierarchical_chart.title_organization_chart}}
+          <i class="fa fa-sitemap"  ></i>
+          {{ parseT('title_organization_chart') | translate }}
         </div>
       </div>
     </div>
@@ -21,28 +23,56 @@
             <div class="col-12 col-xl-6">
               <div class="row">
                 <div class=" col-xl-2 col-2" style="margin-top:10px;">
-                  <div id="buttonSearchHierarchical" class="bg-button-search" (click)="clickSearchIcon()">
+                  <div
+                    id="buttonSearchHierarchical"
+                    class="bg-button-search"
+                    (click)="clickSearchIcon()"
+                  >
                     <div class="text-center cursor-general img-zoom">
                       <i class="fa fa-fw fa-search fa-lg"></i>
                     </div>
                   </div>
                 </div>
-                <div class="col-xl-10 col-10 align-items-left searchInput" *ngIf="activateSearch">
-                  <div class="workTeam-search animate-bounce  bounceInLeft">
+                <div
+                  class="col-xl-10 col-10 align-items-left searchInput"
+                  *ngIf="activateSearch"
+                >
+                  <div
+                    class="workTeam-search animate-bounce  bounceInLeft"
+                  >
                     <form name="searchAutoComplete">
                       <p>
-                        <input id="searchByAutoComplete" type="text" name="employeeList" [(ngModel)]="searchByLetter" ngModel (keyup)="enterNameEmployee()"
-                          (keyup.enter)="goToStorageEmployee()">
+                        <input
+                          id="searchByAutoComplete"
+                          type="text"
+                          name="employeeList"
+                          [(ngModel)]="searchByLetter"
+                          ngModel
+                          (keyup)="enterNameEmployee()"
+                          (keyup.enter)="goToStorageEmployee()"
+                        />
                       </p>
                     </form>
-                    <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
-                      <div (click)="returnObjectSearch(employee)" class="search-results borderLineEmployee" *ngFor="let employee of searchEmployee">
+                    <div
+                      *ngIf="showListAutoC"
+                      class="list-search-autocomplete "
+                      style="overflow-x: hidden;"
+                    >
+                      <div
+                        (click)="returnObjectSearch(employee)"
+                        class="search-results borderLineEmployee"
+                        *ngFor="let employee of searchEmployee"
+                      >
                         <div class="row align-items-center">
                           <div class="col-4">
-                            <img src="{{employee.image.url}}" class="roundPhotoChart">
+                            <img
+                              src="{{ employee.image.url }}"
+                              class="roundPhotoChart"
+                            />
                           </div>
                           <div class="col-8 text-left">
-                            <i class="fa fa-user-o"></i> {{employee.short_name}}
+                            <i class="fa fa-user-o"></i>
+                            {{ employee.short_name }}
                           </div>
                         </div>
                       </div>
@@ -51,18 +81,28 @@
                 </div>
               </div>
             </div>
-            <div class="col-12 col-xl-6  align-items-center" style="padding-top:15px;" *ngIf="translate !== null">
+            <div
+              class="col-12 col-xl-6  align-items-center"
+              style="padding-top:15px;"
+               
+            >
               <div class="row justify-content-center">
-                <div class="col-xl-10 col-12  align-items-center" style="text-align:left;">
+                <div
+                  class="col-xl-10 col-12  align-items-center"
+                  style="text-align:left;"
+                >
                   <div class="row">
                     <div class="col-4">
-                      <i class="fa fa-square iconFirstLevel"> </i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_superior}}
+                      <i class="fa fa-square iconFirstLevel"> </i>
+                      {{ parseT('text_superior') | translate }}
                     </div>
                     <div class="col-4">
-                      <i class="fa fa-square iconSecondLevel"></i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_my_position}}
+                      <i class="fa fa-square iconSecondLevel"></i>
+                      {{ parseT('text_my_position') | translate }}
                     </div>
                     <div class="col-4">
-                      <i class="fa fa-square iconThirdLevel"></i>  {{translate.app.frontEnd.pages.hierarchical_chart.text_subordinates}}
+                      <i class="fa fa-square iconThirdLevel"></i>
+                      {{ parseT('text_subordinates') | translate }}
                     </div>
                   </div>
                 </div>
@@ -73,154 +113,239 @@
       </div>
       <!-- first level -->
       <div class="row justify-content-center">
-        <div class="col-10 col-xl-2 cardEmployee btn-widget position" *ngIf="topEmployee" (click)="showInfoEmployee(topEmployee)">
+        <div
+          class="col-10 col-xl-2 cardEmployee btn-widget position"
+          *ngIf="topEmployee"
+          (click)="showInfoEmployee(topEmployee)"
+        >
           <div class="row">
-            <div class=" col-12 firstLevel">
-            </div>
+            <div class=" col-12 firstLevel"></div>
           </div>
           <div class="row align-items-center">
             <div class="col-4" style="padding-top: 10px;">
               <div style="width:60px; height:60px;">
-                <img src="{{topEmployee.image.url}}" class="roundPhotoChart">
+                <img
+                  src="{{ topEmployee.image.url }}"
+                  class="roundPhotoChart"
+                />
               </div>
             </div>
             <div class="col-8 text-left">
-              {{topEmployee.posicion|slice: 0:30}}
+              {{ topEmployee.posicion | slice: 0:30 }}
               <span [hidden]="topEmployee.posicion > 30">...</span>
             </div>
           </div>
           <div class="row">
             <div class=" col-12 divisionTop">
               <div class="fontSize-chart" style="color:#ffff;">
-                <strong class="color-strong">{{topEmployee.short_name}}</strong>
+                <strong class="color-strong">{{
+                  topEmployee.short_name
+                }}</strong>
               </div>
-              {{topEmployee.email|slice: 0:20}}
+              {{ topEmployee.email | slice: 0:20 }}
               <span [hidden]="topEmployee.email > 30">...</span>
-
             </div>
           </div>
         </div>
       </div>
       <!-- second level -->
       <div class="row justify-content-center" *ngIf="topEmployee">
-        <div class="col-10 col-xl-2 cardEmployee  btn-widget position" *ngFor="let employee of topEmployee.work_team">
+        <div
+          class="col-10 col-xl-2 cardEmployee  btn-widget position"
+          *ngFor="let employee of topEmployee.work_team"
+        >
           <div class="row">
-            <div class="col-12" (click)='showInfoEmployee(employee)'>
+            <div class="col-12" (click)="showInfoEmployee(employee)">
               <div class="row">
-                <div class="col-12 secondLevel">
-                </div>
+                <div class="col-12 secondLevel"></div>
               </div>
               <div class="row align-items-center">
                 <div class="col-4" style="padding-top: 10px;">
                   <div style="width:60px; height:60px;">
-                    <img src="{{employee.image.url}}" class="roundPhotoChart">
+                    <img
+                      src="{{ employee.image.url }}"
+                      class="roundPhotoChart"
+                    />
                   </div>
                 </div>
                 <div class="col-8 align-items-center">
-                  {{employee.posicion|slice: 0:20}}
+                  {{ employee.posicion | slice: 0:20 }}
                   <span [hidden]="employee.posicion > 30">...</span>
                 </div>
               </div>
               <div class="row">
                 <div class=" col-12 divisionTop">
                   <div class="fontSize-chart" style="color:#ffff;">
-                    <strong class="color-strong">{{employee.short_name}}</strong>
+                    <strong class="color-strong">{{
+                      employee.short_name
+                    }}</strong>
                   </div>
-                  {{employee.email|slice: 0:20}}
+                  {{ employee.email | slice: 0:20 }}
                   <span [hidden]="employee.email > 30">...</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-center" *ngIf="activeArrowDown && employee.relationship == 111">
-            <div class="navigateButton animated infinite flash font-icon m-t-h" (click)="downLevelTeam(employee)">
+          <div
+            class="row justify-content-center"
+            *ngIf="activeArrowDown && employee.relationship == 111"
+          >
+            <div
+              class="navigateButton animated infinite flash font-icon m-t-h"
+              (click)="downLevelTeam(employee)"
+            >
               <i class="fa fa-chevron-down " aria-hidden="true"></i>
             </div>
           </div>
-          <div class="row justify-content-center" *ngIf="activeArrowUp && flagActivatethirdLevel">
+          <div
+            class="row justify-content-center"
+            *ngIf="activeArrowUp && flagActivatethirdLevel"
+          >
             <div class="col-2">
-              <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="upLevelTeam()">
+              <div
+                class="navigateButton animated infinite flash font-icon"
+                style="margin-top:0px !important;"
+                (click)="upLevelTeam()"
+              >
                 <i class="fa fa-chevron-up"></i>
               </div>
             </div>
           </div>
-
         </div>
       </div>
       <!-- third level -->
       <div *ngIf="topEmployee">
-        <div class="row justify-content-center" *ngIf="!flagActivatethirdLevel">
-          <div class="row justify-content-center" *ngIf="activeArrowLeft">
+        <div
+          class="row justify-content-center"
+          *ngIf="!flagActivatethirdLevel"
+        >
+          <div
+            class="row justify-content-center"
+            *ngIf="activeArrowLeft"
+          >
             <div class="col-1">
-              <div class="navigateButton animated infinite flash font-icon" (click)="goToPreviousPage()">
-                <i class="fa fa-chevron-left AjustArrowLeft" aria-hidden="true"></i>
+              <div
+                class="navigateButton animated infinite flash font-icon"
+                (click)="goToPreviousPage()"
+              >
+                <i
+                  class="fa fa-chevron-left AjustArrowLeft"
+                  aria-hidden="true"
+                ></i>
               </div>
             </div>
           </div>
-          <div class="col-10 col-xl-2 cardEmployee btn-widget position" *ngFor="let employee of topEmployee.work_team[0].work_team">
+          <div
+            class="col-10 col-xl-2 cardEmployee btn-widget position"
+            *ngFor="
+              let employee of topEmployee.work_team[0].work_team
+            "
+          >
             <div class="row">
-              <div class="col-12" (click)='showInfoEmployee(employee)'>
+              <div
+                class="col-12"
+                (click)="showInfoEmployee(employee)"
+              >
                 <div class="row">
-                  <div class="col-12 thirdLevel">
-                  </div>
+                  <div class="col-12 thirdLevel"></div>
                 </div>
                 <div class="row  align-items-center">
                   <div class="col-4" style="padding-top: 10px;">
                     <div style="width:60px; height:60px;">
-                      <img src="{{employee.image.url}}" class="roundPhotoChart">
+                      <img
+                        src="{{ employee.image.url }}"
+                        class="roundPhotoChart"
+                      />
                     </div>
                   </div>
                   <div class="col-8">
-                    {{employee.posicion | slice: 0:20}}
+                    {{ employee.posicion | slice: 0:20 }}
                     <span [hidden]="employee.posicion > 30">...</span>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12 divisionTop">
                     <div class="fontSize-chart" style="color:#ffff;">
-                      <strong class="color-strong">{{employee.short_name}}</strong>
+                      <strong class="color-strong">{{
+                        employee.short_name
+                      }}</strong>
                     </div>
-                    {{employee.email |slice: 0:20}}
+                    {{ employee.email | slice: 0:20 }}
                     <span [hidden]="employee.email > 30">...</span>
-
                   </div>
                 </div>
               </div>
             </div>
-            <div class="row justify-content-center" *ngIf="employee.relationship == 111">
+            <div
+              class="row justify-content-center"
+              *ngIf="employee.relationship == 111"
+            >
               <div class="col-2 AjustArrowDown">
-                <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="downLevelTeam(employee)">
+                <div
+                  class="navigateButton animated infinite flash font-icon"
+                  style="margin-top:0px !important;"
+                  (click)="downLevelTeam(employee)"
+                >
                   <i class="fa fa-chevron-down"></i>
                 </div>
               </div>
             </div>
           </div>
-          <div class="row justify-content-start" *ngIf="activeArrowRight">
+          <div
+            class="row justify-content-start"
+            *ngIf="activeArrowRight"
+          >
             <div class="col-1 ajustArrow">
-              <div class="navigateButton animated infinite flash font-icon" (click)="goToNextPage(page)">
-                <i class="fa fa-chevron-right " aria-hidden="true"></i>
+              <div
+                class="navigateButton animated infinite flash font-icon"
+                (click)="goToNextPage(page)"
+              >
+                <i
+                  class="fa fa-chevron-right "
+                  aria-hidden="true"
+                ></i>
               </div>
             </div>
           </div>
-          <div class="col-12" style="margin-top: 30px;" *ngIf="translate !== null">
-            <div class="row justify-content-center" *ngIf="topEmployee.work_team[0].relationship !== '001' && topEmployee.work_team[0].relationship !== '011' && topEmployee.work_team[0].relationship !== '010'">
+          <div
+            class="col-12"
+            style="margin-top: 30px;"
+             
+          >
+            <div
+              class="row justify-content-center"
+              *ngIf="
+                topEmployee.work_team[0].relationship !== '001' &&
+                topEmployee.work_team[0].relationship !== '011' &&
+                topEmployee.work_team[0].relationship !== '010'
+              "
+            >
               <div class="col-2">
-                <div class="navigateButton animated infinite flash font-icon" style="margin-top:0px !important;" (click)="upLevelTeam()">
-                  <i class="fa fa-chevron-up"></i>                 
+                <div
+                  class="navigateButton animated infinite flash font-icon"
+                  style="margin-top:0px !important;"
+                  (click)="upLevelTeam()"
+                >
+                  <i class="fa fa-chevron-up"></i>
                 </div>
-                <div class="animated infinite flash" style="margin-top:5px !important; cursor: pointer;" (click)="upLevelTeam()">
+                <div
+                  class="animated infinite flash"
+                  style="margin-top:5px !important; cursor: pointer;"
+                  (click)="upLevelTeam()"
+                >
                   <strong>
-                    {{translate.app.frontEnd.pages.hierarchical_chart.text_up_position}}
+                    {{ parseT('text_up_position') | translate }}
                   </strong>
                 </div>
-                
               </div>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>
-<app-employee-info *ngIf="!token" [nameModal]='name'></app-employee-info>
+<app-employee-info
+  *ngIf="!token"
+  [nameModal]="name"
+></app-employee-info>

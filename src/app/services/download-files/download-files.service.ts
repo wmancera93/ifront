@@ -11,7 +11,7 @@ export class DownloadFilesService {
   constructor(private http: HttpClient,
     private tokenService: Angular2TokenService) { }
 
-  getFile(){
+  getFile() {
     this.tokenService.get('https://s3.amazonaws.com/hrsolutions/document_management/company/hrsolutions/Presentacion+Corporativa+2016.pdf');
   }
 

@@ -19,8 +19,8 @@ export class PerformanceEvaluationService {
     return this.tokenService.get('perfomance_evaluations/' + IdEvaluation)
       .map((data: any) => data.json());
   }
-  getEvaluationObjetive(id: string, status:boolean) {
-    return this.tokenService.get('evaluation_objetive/show_edit/'+ id + '/' + status)
+  getEvaluationObjetive(id: string, status: boolean) {
+    return this.tokenService.get('evaluation_objetive/show_edit/' + id + '/' + status)
       .map((data: any) => data.json());
   }
   getEvaluationObjetiveByID(IdObjective) {
@@ -63,7 +63,7 @@ export class PerformanceEvaluationService {
       .map((data: any) => data.json());
   }
   getExcelEvaluationObjectives(idEmployee) {
-    return this.tokenService.get('perfomance_evaluations/table_planning_export/'+ idEmployee + '.xlsx')
+    return this.tokenService.get('perfomance_evaluations/table_planning_export/' + idEmployee + '.xlsx')
       .map((data: any) => data);
   }
 

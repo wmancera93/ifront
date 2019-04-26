@@ -1,5 +1,7 @@
 <div *ngIf="token">
-  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
+  <app-error-page-http
+    [objectPage]="objectToken"
+  ></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -8,7 +10,7 @@
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
           <i class="fa fa-flag"></i>
-          {{translate.app.frontEnd.pages.events_management.training.text_trainings}}
+          {{ parseT('text_trainings') | translate }}
         </div>
       </div>
     </div>
@@ -19,7 +21,13 @@
         <div class="col-12">
           <div class="row">
             <div class="col-12 top-general-p">
-              <app-data-table [records]="objectReport" id="tableEvaluation" [title]="nameReport" [pdf]="showPdf" [sizeTable]="showSizeTable"></app-data-table>
+              <app-data-table
+                [records]="objectReport"
+                id="tableEvaluation"
+                [title]="parseT('tittle_table_ts') | translate"
+                [pdf]="showPdf"
+                [sizeTable]="showSizeTable"
+              ></app-data-table>
             </div>
           </div>
         </div>

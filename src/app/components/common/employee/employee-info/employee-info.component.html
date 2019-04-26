@@ -1,53 +1,56 @@
-<button [attr.id]="button" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="target" style="display:none;"
-  (click)="validateRolInfoEmployee()">
-</button>
+<button [attr.id]="button" type="button" class="btn btn-primary" data-toggle="modal" [attr.data-target]="target" style="display:none;" (click)="validateRolInfoEmployee()"></button>
 <div class="modal" [attr.id]="id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" *ngIf='flagShowModal'>
+    <div class="modal-content" *ngIf="flagShowModal">
       <div class="modal-header borderLine-title justify-content-center">
         <div class="col-4 col-lg-2" style="margin-bottom: -5.6rem">
           <div class="menu-img-employee mb-4">
-            <img src="{{employeeInfo.image.url}}" class="roundPhoto-employee">
-            <br>
+            <img src="{{ employeeInfo.image.url }}" class="roundPhoto-employee" />
+            <br />
           </div>
         </div>
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">{{employeeInfo.short_name}}</h4>
+          <h4 class="modal-title titleColor text-shadow">
+            {{ employeeInfo.short_name }}
+          </h4>
         </div>
       </div>
-      <div class="modal-body font-controls-login mt-3"> 
+      <div class="modal-body font-controls-login mt-3">
         <div>
-          <h5 class="titleColor text-shadow mt-3">{{translate.app.frontEnd.components.common.employee.employee_info.working_information}}</h5>
+          <h5 class="titleColor text-shadow mt-3">
+            {{ parseT('working_information') | translate }}
+          </h5>
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
               <div class="container-fluid mr-3">
                 <div *ngIf="employeeInfo.email">
                   <i class="fa fa-at paddingInfo"></i>
-                  <strong> {{translate.app.frontEnd.components.common.employee.employee_info.email}}:</strong> {{employeeInfo.email}}
+                  <strong> {{ parseT('email') | translate }}:</strong>
+                  {{ employeeInfo.email }}
                 </div>
                 <div *ngIf="employeeInfo.phone">
                   <i class="fa fa-phone paddingInfo"></i>
-                  <strong>{{translate.app.frontEnd.components.common.employee.employee_info.phone}}:</strong>&nbsp;{{employeeInfo.phone}}
+                  <strong>{{ parseT('phone') | translate }}:</strong>&nbsp;{{ employeeInfo.phone }}
                 </div>
                 <div *ngIf="employeeInfo.posicion">
                   <i class="fa fa-users paddingInfo"></i>
-                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.position}}:</strong>&nbsp;
+                  <strong>&nbsp;{{ parseT('position') | translate }}:</strong>&nbsp;
                   <span class="text-capitalize">
-                    {{employeeInfo.posicion | lowercase}}
+                    {{ employeeInfo.posicion | lowercase }}
                   </span>
                 </div>
                 <div *ngIf="employeeInfo.unidad_org">
                   <i class="fa fa-building paddingInfo"></i>
-                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.unit_org}}:</strong>&nbsp;
+                  <strong>&nbsp;{{ parseT('unit_org') | translate }}:</strong>&nbsp;
                   <span class="text-capitalize">
-                    {{employeeInfo.unidad_org | lowercase}}
+                    {{ employeeInfo.unidad_org | lowercase }}
                   </span>
                 </div>
                 <div *ngIf="employeeInfo.area">
                   <i class="fa fa-puzzle-piece paddingInfo"></i>
-                  <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.area}}:</strong>&nbsp;
+                  <strong>&nbsp;{{ parseT('area') | translate }}:</strong>&nbsp;
                   <span class="text-capitalize">
-                    {{employeeInfo.area| lowercase}}
+                    {{ employeeInfo.area | lowercase }}
                   </span>
                 </div>
               </div>
@@ -55,59 +58,61 @@
             <div class="col-12 col-lg-6">
               <div *ngIf="employeeInfo.my_boss_employee !== null">
                 <i class="fa fa-male paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.boss}}:</strong>
+                <strong>&nbsp;{{ parseT('boss') | translate }}:</strong>
                 <span class="text-capitalize">
-                  {{employeeInfo.my_boss_employee.name | lowercase}} {{employeeInfo.my_boss_employee.lastname |
-                  lowercase}}
+                  {{ employeeInfo.my_boss_employee.name | lowercase }}
+                  {{ employeeInfo.my_boss_employee.lastname | lowercase }}
                 </span>
               </div>
               <div *ngIf="employeeInfo.division_per">
                 <i class="fa fa-id-badge paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.division}}:</strong>&nbsp;
+                <strong>&nbsp;{{ parseT('division') | translate }}:</strong>&nbsp;
                 <span class="text-capitalize">
-                  {{employeeInfo.division_per| lowercase}}
+                  {{ employeeInfo.division_per | lowercase }}
                 </span>
               </div>
               <div *ngIf="employeeInfo.subdivision_per">
                 <i class="fa fa-bars paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.sub_division}}:</strong>&nbsp;
+                <strong>&nbsp;{{ parseT('sub_division') | translate }}:</strong>&nbsp;
                 <span class="text-capitalize">
-                  {{employeeInfo.subdivision_per| lowercase}}
+                  {{ employeeInfo.subdivision_per | lowercase }}
                 </span>
               </div>
               <div *ngIf="employeeInfo.fecha_ingreso">
                 <i class="fa fa-calendar paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.date_admission}}:</strong>&nbsp;{{dateAddCompany}}
+                <strong>&nbsp;{{ parseT('date_admission') | translate }}:</strong>&nbsp;{{ dateAddCompany }}
               </div>
               <div *ngIf="validateRol">
                 <i class="fa fa-file paddingInfo"></i>
-                <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.contract}}:</strong>&nbsp;{{employeeInfo.contract_type}}
+                <strong>&nbsp;{{ parseT('contract') | translate }}:</strong>&nbsp;{{ employeeInfo.contract_type }}
               </div>
-              <br>
+              <br />
             </div>
           </div>
         </div>
-        <br>
+        <br />
         <div class="end-line" *ngIf="validateRol"></div>
-        <br>
+        <br />
         <div id="personalInformationEmployee" *ngIf="validateRol">
-          <h5 class="titleColor text-shadow">{{translate.app.frontEnd.components.common.employee.employee_info.personal_information}}</h5>
+          <h5 class="titleColor text-shadow">
+            {{ parseT('personal_information') | translate }}
+          </h5>
           <div class="row bodyColorInfo">
             <div class="col-12 col-lg-6">
               <i class="fa fa-birthday-cake paddingInfo"></i>
-              <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.birth_date}}:</strong>&nbsp;{{datebirth}}
-              <br>
+              <strong>&nbsp;{{ parseT('birth_date') | translate }}:</strong>&nbsp;{{ datebirth }}
+              <br />
               <i class="fa fa-address-card paddingInfo"></i>
-              <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.identification}}:</strong>&nbsp;{{employeeInfo.number_document}}
-              <br>
+              <strong>&nbsp;{{ parseT('identification') | translate }}:</strong>&nbsp;{{ employeeInfo.number_document }}
+              <br />
             </div>
             <div class="col-12 col-lg-6">
               <i class="fa fa-mobile paddingInfo"></i>
-              <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.personal_phone}}:</strong>&nbsp;{{employeeInfo.personal_phone}}
-              <br>
+              <strong>&nbsp;{{ parseT('personal_phone') | translate }}:</strong>&nbsp;{{ employeeInfo.personal_phone }}
+              <br />
               <i class="fa fa-location-arrow paddingInfo"></i>
-              <strong>&nbsp;{{translate.app.frontEnd.components.common.employee.employee_info.address}}:</strong>&nbsp;{{employeeInfo.address}}
-              <br>
+              <strong>&nbsp;{{ parseT('address') | translate }}:</strong>&nbsp;{{ employeeInfo.address }}
+              <br />
             </div>
           </div>
         </div>
@@ -115,9 +120,12 @@
       <!-- Modal footer -->
       <div class="modal-footerInfo justify-content-center">
         <div class="buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-          <h6> {{translate.app.frontEnd.components.common.employee.employee_info.button_close}} </h6>
+          <h6>
+            {{ parseT('button_close') | translate }}
+          </h6>
         </div>
         <!-- <button id="btn-closeInfoEmployee" type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
       </div>
     </div>
   </div>
+</div>

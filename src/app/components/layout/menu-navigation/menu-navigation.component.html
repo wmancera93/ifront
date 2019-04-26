@@ -1,121 +1,448 @@
-<nav id="navMenu" class="navbar-default scrollbar-success-nav navbar-static-side" role="navigation" *ngIf="translate !== null">
+<nav
+  id="navMenu"
+  class="navbar-default scrollbar-success-nav navbar-static-side"
+  role="navigation"
+>
   <div class="sidebar-collapse">
     <ul class="nav in flex-column" id="side-menu">
       <li class="nav-header-menu">
         <div class="profile-element bg-person-menu" dropdown>
-          <div class="row justify-content-center" style="padding-bottom: 10px;">
+          <div
+            class="row justify-content-center"
+            style="padding-bottom: 10px;"
+          >
             <div class="col-8 text-center">
               <div class="menu-img-user">
-                <img alt="image" class="rounded-circle menu-img-responsive" src="{{dataUser.employee.image.url}}">
+                <img
+                  alt="image"
+                  class="rounded-circle menu-img-responsive"
+                  src="{{ dataUser.employee.image.url }}"
+                />
               </div>
             </div>
           </div>
           <div class="row justify-content-center">
             <div class="col-12 text-center">
               <a>
-                <strong class="font-bold text-shadow">{{dataUser.employee.short_name}}</strong>
+                <strong class="font-bold text-shadow">{{
+                  dataUser.employee.short_name
+                }}</strong>
               </a>
             </div>
-            <div id="position_logged" class="col-12 text-center text-muted">
-              {{dataUser.employee.posicion}}
+            <div
+              id="position_logged"
+              class="col-12 text-center text-muted"
+            >
+              {{ dataUser.employee.posicion }}
             </div>
           </div>
         </div>
       </li>
       <li id="liIndex">
-        <a id="aIndex" routerLink="/ihr/index" routerLinkActive="active" class="nav-link bg-menu" data-toggle="collapse" (click)="clickOptionMenu('liIndex','aIndex', '')">
+        <a
+          id="aIndex"
+          routerLink="/ihr/index"
+          routerLinkActive="active"
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          (click)="clickOptionMenu('liIndex', 'aIndex', '')"
+        >
           <i class="fa fa-th-large"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.start}}</span>
+          <span class="nav-label">{{
+            parseT('start') | translate
+          }}</span>
         </a>
       </li>
-      <li id="liOrganizationChart" *ngIf="dataEnterprise.show_organizate_chart && dataUser.employee.see_organ == 'true'">
-        <a id="aOrganizationChart" routerLink="/ihr/hierarchical_chart" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liOrganizationChart','aOrganizationChart', '')">
+      <li
+        id="liOrganizationChart"
+        *ngIf="
+          dataEnterprise.show_organizate_chart &&
+          dataUser.employee.see_organ == 'true'
+        "
+      >
+        <a
+          id="aOrganizationChart"
+          routerLink="/ihr/hierarchical_chart"
+          routerLinkActive="active"
+          class="nav-link bg-menu"
+          (click)="
+            clickOptionMenu(
+              'liOrganizationChart',
+              'aOrganizationChart',
+              ''
+            )
+          "
+        >
           <i class="fa fa-sitemap"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.org_chart}}</span>
+          <span class="nav-label">{{
+            parseT('org_chart') | translate
+          }}</span>
         </a>
       </li>
       <li id="liMyData" *ngIf="dataEnterprise.show_my_data">
-        <a id="aMyData" class="nav-link bg-menu" routerLink="/ihr/master_data" (click)="clickOptionMenu('liMyData','aMyData', '')">
+        <a
+          id="aMyData"
+          class="nav-link bg-menu"
+          routerLink="/ihr/master_data"
+          (click)="clickOptionMenu('liMyData', 'aMyData', '')"
+        >
           <i class="fa fa-user"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.my_data}}</span>
+          <span class="nav-label">{{
+            parseT('my_data') | translate
+          }}</span>
         </a>
       </li>
-      <li id="liAutoService" *ngIf="dataEnterprise.show_certificates_labor || dataEnterprise.show_certificates_vacations || dataEnterprise.show_certificates_payroll || dataEnterprise.show_certificates_income">
-        <a id='toggleAutoService' class="nav-link bg-menu" data-toggle="collapse" href="#selfService" (click)="clickOptionMenu('liAutoService','toggle-AutoService', 'selfService')">
+      <li
+        id="liAutoService"
+        *ngIf="
+          dataEnterprise.show_certificates_labor ||
+          dataEnterprise.show_certificates_vacations ||
+          dataEnterprise.show_certificates_payroll ||
+          dataEnterprise.show_certificates_income
+        "
+      >
+        <a
+          id="toggleAutoService"
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#selfService"
+          (click)="
+            clickOptionMenu(
+              'liAutoService',
+              'toggle-AutoService',
+              'selfService'
+            )
+          "
+        >
           <i class="fa fa-file"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.self_service}}</span>
+          <span class="nav-label">{{
+            parseT('self_service') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="selfService" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li *ngIf="dataEnterprise.show_certificates_labor">
-              <a id="aWorkCertificate" class="nav-link bg-menu" routerLink="/ihr/work_certificate" (click)="clickOptionMenu('liAutoService','aWorkCertificate', 'selfService')">{{translate.app.frontEnd.components.layout.menu_navigation.certificate_work}}</a>
+              <a
+                id="aWorkCertificate"
+                class="nav-link bg-menu"
+                routerLink="/ihr/work_certificate"
+                (click)="
+                  clickOptionMenu(
+                    'liAutoService',
+                    'aWorkCertificate',
+                    'selfService'
+                  )
+                "
+                >{{ parseT('certificate_work') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_payroll">
-              <a id="aPayrollReceipts" class="nav-link bg-menu" routerLink="/ihr/payroll_receipts" (click)="clickOptionMenu('liAutoService','aPayrollReceipts', 'selfService')">{{translate.app.frontEnd.components.layout.menu_navigation.receipts}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_certificates_payroll"
+            >
+              <a
+                id="aPayrollReceipts"
+                class="nav-link bg-menu"
+                routerLink="/ihr/payroll_receipts"
+                (click)="
+                  clickOptionMenu(
+                    'liAutoService',
+                    'aPayrollReceipts',
+                    'selfService'
+                  )
+                "
+                >{{ parseT('receipts') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_income">
-              <a id="aCertificateIncomeWithholdings" class="nav-link bg-menu" routerLink="/ihr/certificate_income_withholding" (click)="clickOptionMenu('liAutoService','aCertificateIncomeWithholdings', 'selfService')">{{translate.app.frontEnd.components.layout.menu_navigation.certificate_ing_ret}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_certificates_income"
+            >
+              <a
+                id="aCertificateIncomeWithholdings"
+                class="nav-link bg-menu"
+                routerLink="/ihr/certificate_income_withholding"
+                (click)="
+                  clickOptionMenu(
+                    'liAutoService',
+                    'aCertificateIncomeWithholdings',
+                    'selfService'
+                  )
+                "
+                >{{ parseT('certificate_ing_ret') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_certificates_vacations">
-              <a id="aHolidayLetter" class="nav-link bg-menu" routerLink="/ihr/holiday_letter" (click)="clickOptionMenu('liAutoService','aHolidayLetter', 'selfService')">{{translate.app.frontEnd.components.layout.menu_navigation.letter_vacations}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_certificates_vacations"
+            >
+              <a
+                id="aHolidayLetter"
+                class="nav-link bg-menu"
+                routerLink="/ihr/holiday_letter"
+                (click)="
+                  clickOptionMenu(
+                    'liAutoService',
+                    'aHolidayLetter',
+                    'selfService'
+                  )
+                "
+                >{{ parseT('letter_vacations') | translate }}</a
+              >
             </li>
           </ul>
         </div>
       </li>
       <li id="liQuery">
-        <a class="nav-link bg-menu" data-toggle="collapse" href="#query" (click)="clickOptionMenu('liQuery','toggle-Quiery', 'query')">
+        <a
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#query"
+          (click)="
+            clickOptionMenu('liQuery', 'toggle-Quiery', 'query')
+          "
+        >
           <i class="fa fa-paste"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.queries}}</span>
+          <span class="nav-label">{{
+            parseT('queries') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="query" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li *ngIf="dataEnterprise.show_income_and_withholdings">
-              <a id="aIncomeWithholdings" routerLink="/ihr/income_withholdings" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIncomeWithholdings', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.ing_ret}}</a>
+              <a
+                id="aIncomeWithholdings"
+                routerLink="/ihr/income_withholdings"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aIncomeWithholdings',
+                    'query'
+                  )
+                "
+                >{{ parseT('ing_ret') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_payments_and_deductions">
-              <a id="aPaymentsDeductions" routerLink="/ihr/payments_deductions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaymentsDeductions', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.pay_deduc}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_payments_and_deductions"
+            >
+              <a
+                id="aPaymentsDeductions"
+                routerLink="/ihr/payments_deductions"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aPaymentsDeductions',
+                    'query'
+                  )
+                "
+                >{{ parseT('pay_deduc') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_severances">
-              <a id="aHistoricalSeverances" routerLink="/ihr/severances" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalSeverances', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.historical_cesa}}</a>
+              <a
+                id="aHistoricalSeverances"
+                routerLink="/ihr/severances"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aHistoricalSeverances',
+                    'query'
+                  )
+                "
+                >{{ parseT('historical_cesa') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_embargoes">
-              <a id="aEmbargos" routerLink="/ihr/embargoes" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aEmbargos', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.distress}}</a>
+              <a
+                id="aEmbargos"
+                routerLink="/ihr/embargoes"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aEmbargos', 'query')
+                "
+                >{{ parseT('distress') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_loans">
-              <a id="aPaydayLoans" routerLink="/ihr/loans" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPaydayLoans', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.payday}}</a>
+              <a
+                id="aPaydayLoans"
+                routerLink="/ihr/loans"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aPaydayLoans', 'query')
+                "
+                >{{ parseT('payday') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations">
-              <a id="aVacationEnjoyed" routerLink="/ihr/vacation_enjoyed" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationEnjoyed', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.enjoyed_vacation}}</a>
+              <a
+                id="aVacationEnjoyed"
+                routerLink="/ihr/vacation_enjoyed"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aVacationEnjoyed',
+                    'query'
+                  )
+                "
+                >{{ parseT('enjoyed_vacation') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_vacations_c">
-              <a id="aCompensatedVacations" routerLink="/ihr/compensated_vacations" routerLinkActive="active" class="nav-link bg-menu"
-                (click)="clickOptionMenu('liQuery','aCompensatedVacations', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.compensated_vacation}}</a>
+              <a
+                id="aCompensatedVacations"
+                routerLink="/ihr/compensated_vacations"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aCompensatedVacations',
+                    'query'
+                  )
+                "
+                >{{ parseT('compensated_vacation') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_vacation_balance">
-              <a id="aVacationBalance" routerLink="/ihr/vacation_balance" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aVacationBalance', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.balance_vacation}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_vacation_balance"
+            >
+              <a
+                id="aVacationBalance"
+                routerLink="/ihr/vacation_balance"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aVacationBalance',
+                    'query'
+                  )
+                "
+                >{{ parseT('balance_vacation') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_licenses">
-              <a id="aPermits" routerLink="/ihr/permissions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aPermits', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.pass}}</a>
+              <a
+                id="aPermits"
+                routerLink="/ihr/permissions"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aPermits', 'query')
+                "
+                >{{ parseT('pass') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_inhabilities">
-              <a id="aDisabilities" routerLink="/ihr/disabilities" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aDisabilities', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.inability}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_inhabilities"
+            >
+              <a
+                id="aDisabilities"
+                routerLink="/ihr/disabilities"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aDisabilities', 'query')
+                "
+                >{{ parseT('inability') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_hoex">
-              <a id="aExtraHours" routerLink="/ihr/extra_hours" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aExtraHours', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.extra_hour}}</a>
+              <a
+                id="aExtraHours"
+                routerLink="/ihr/extra_hours"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aExtraHours', 'query')
+                "
+                >{{ parseT('extra_hour') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataUser.employee.is_admin == 'true'">
-              <a id="aAniversary" routerLink="/ihr/aniversary" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aAniversary', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.anniversary}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataUser.employee.is_admin == 'true'"
+            >
+              <a
+                id="aAniversary"
+                routerLink="/ihr/aniversary"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aAniversary', 'query')
+                "
+                >{{ parseT('anniversary') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_h_positions">
-              <a id="aHistoricalPosts" routerLink="/ihr/historical_posts" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aHistoricalPosts', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.historical_posts}}</a>
+              <a
+                id="aHistoricalPosts"
+                routerLink="/ihr/historical_posts"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aHistoricalPosts',
+                    'query'
+                  )
+                "
+                >{{ parseT('historical_posts') | translate }}</a
+              >
             </li>
             <li class="bg-li" *ngIf="dataEnterprise.show_m_iva">
-              <a id="aIvaEmployee" routerLink="/ihr/iva_employee" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aIvaEmployee', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.iva_movements}}</a>
+              <a
+                id="aIvaEmployee"
+                routerLink="/ihr/iva_employee"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liQuery', 'aIvaEmployee', 'query')
+                "
+                >{{ parseT('iva_movements') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_evaluation_times">
-              <a id="aTimeEvaluation" routerLink="/ihr/time_evaluation" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aTimeEvaluation', 'query')">{{translate.app.frontEnd.components.layout.menu_navigation.time_evaluations}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_evaluation_times"
+            >
+              <a
+                id="aTimeEvaluation"
+                routerLink="/ihr/time_evaluation"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liQuery',
+                    'aTimeEvaluation',
+                    'query'
+                  )
+                "
+                >{{ parseT('time_evaluations') | translate }}</a
+              >
             </li>
             <!-- <li class="bg-li" *ngIf="'true'">
               <a id="aMyHourExtra" routerLink="/ihr/my_hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liQuery','aMyHourExtra', 'query')">Mis horas Extras</a>
@@ -123,25 +450,106 @@
           </ul>
         </div>
       </li>
-      <li id="liReportsRH" *ngIf="dataEnterprise.show_reports_rh && (this.dataUser.employee.is_admin  == 'true'  || this.dataUser.employee.see_rpgen  == 'true' )">
-        <a class="nav-link bg-menu" data-toggle="collapse" href="#reportsRH" (click)="clickOptionMenu('liReportsRH','toggle-reportsRH', 'reportsRH')">
+      <li
+        id="liReportsRH"
+        *ngIf="
+          dataEnterprise.show_reports_rh &&
+          (this.dataUser.employee.is_admin == 'true' ||
+            this.dataUser.employee.see_rpgen == 'true')
+        "
+      >
+        <a
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#reportsRH"
+          (click)="
+            clickOptionMenu(
+              'liReportsRH',
+              'toggle-reportsRH',
+              'reportsRH'
+            )
+          "
+        >
           <i class="fa fa-table"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.reports_rh}}</span>
+          <span class="nav-label">{{
+            parseT('reports_rh') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="reportsRH" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li>
-              <a id="aReportsQueries" routerLink="/ihr/reports_requests" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aReportsQueries', 'reportsRH')">{{translate.app.frontEnd.components.layout.menu_navigation.request_report}}</a>
+              <a
+                id="aReportsQueries"
+                routerLink="/ihr/reports_requests"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liReportsRH',
+                    'aReportsQueries',
+                    'reportsRH'
+                  )
+                "
+                >{{ parseT('request_report') | translate }}</a
+              >
             </li>
             <li class="bg-li">
-              <a id="aUsersPermisions" routerLink="/ihr/users_permisions" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aUsersPermisions', 'reportsRH')">{{translate.app.frontEnd.components.layout.menu_navigation.user_permits}}</a>
+              <a
+                id="aUsersPermisions"
+                routerLink="/ihr/users_permisions"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liReportsRH',
+                    'aUsersPermisions',
+                    'reportsRH'
+                  )
+                "
+                >{{ parseT('user_permits') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
-              <a id="aRequestsApprovers" routerLink="/ihr/requests-type" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApprovers', 'reportsRH')">{{translate.app.frontEnd.components.layout.menu_navigation.approver_Request}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_approver_report"
+            >
+              <a
+                id="aRequestsApprovers"
+                routerLink="/ihr/requests-type"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liReportsRH',
+                    'aRequestsApprovers',
+                    'reportsRH'
+                  )
+                "
+                >{{ parseT('approver_Request') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
-              <a id="aRequestsApproversLogs" routerLink="/ihr/requests_approvers_logs" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aRequestsApproversLogs', 'reportsRH')">Logs de Aprobadores de Solicitudes</a>
+            <li
+              class="bg-li"
+              *ngIf="dataEnterprise.show_approver_report"
+            >
+              <a
+                id="aRequestsApproversLogs"
+                routerLink="/ihr/requests_approvers_logs"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liReportsRH',
+                    'aRequestsApproversLogs',
+                    'reportsRH'
+                  )
+                "
+                >Logs de Aprobadores de Solicitudes</a
+              >
             </li>
             <!-- <li class="bg-li" *ngIf="'true'">
               <a id="aHourExtra" routerLink="/ihr/hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReportsRH','aHourExtra', 'reportsRH')">Horas Extras</a>
@@ -150,41 +558,133 @@
         </div>
       </li>
       <li id="liBillboard" *ngIf="dataEnterprise.show_articles">
-        <a class="nav-link bg-menu" data-toggle="collapse" href="#billboard" (click)="clickOptionMenu('liBillboard','toggle-Billboard', 'billboard')">
+        <a
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#billboard"
+          (click)="
+            clickOptionMenu(
+              'liBillboard',
+              'toggle-Billboard',
+              'billboard'
+            )
+          "
+        >
           <i class="fa fa-bullhorn"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.billboards}}</span>
+          <span class="nav-label">{{
+            parseT('billboards') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="billboard" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li>
-              <a id="aNews" routerLink="/ihr/news" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aNews', 'billboard')">{{translate.app.frontEnd.components.layout.menu_navigation.news}}</a>
+              <a
+                id="aNews"
+                routerLink="/ihr/news"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu('liBillboard', 'aNews', 'billboard')
+                "
+                >{{ parseT('news') | translate }}</a
+              >
             </li>
-            <li class="bg-li" *ngIf="dataUser.employee.new_cont  == 'true'">
-              <a id="aMyPublications" routerLink="/ihr/my_publications" class="nav-link bg-menu" (click)="clickOptionMenu('liBillboard','aMyPublications', 'billboard')">{{translate.app.frontEnd.components.layout.menu_navigation.own_puplication}}</a>
+            <li
+              class="bg-li"
+              *ngIf="dataUser.employee.new_cont == 'true'"
+            >
+              <a
+                id="aMyPublications"
+                routerLink="/ihr/my_publications"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liBillboard',
+                    'aMyPublications',
+                    'billboard'
+                  )
+                "
+                >{{ parseT('own_puplication') | translate }}</a
+              >
             </li>
           </ul>
         </div>
       </li>
-      <li id="LiRequested" *ngIf="dataEnterprise.make_request ">
-        <a id="aRequested" routerLink="/ihr/requests_rh" class="nav-link bg-menu" (click)="clickOptionMenu('LiRequested','aRequested', '')">
+      <li id="LiRequested" *ngIf="dataEnterprise.make_request">
+        <a
+          id="aRequested"
+          routerLink="/ihr/requests_rh"
+          class="nav-link bg-menu"
+          (click)="clickOptionMenu('LiRequested', 'aRequested', '')"
+        >
           <i class="fa fa-edit"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.requests}}</span>
+          <span class="nav-label">{{
+            parseT('requests') | translate
+          }}</span>
         </a>
       </li>
-      <li id="liApprovals" *ngIf="dataEnterprise.make_approvals && dataUser.employee.is_approver">
-        <a class="nav-link bg-menu" data-toggle="collapse" href="#approvals" (click)="clickOptionMenu('liApprovals','toggle-Approvals', 'approvals')">
+      <li
+        id="liApprovals"
+        *ngIf="
+          dataEnterprise.make_approvals &&
+          dataUser.employee.is_approver
+        "
+      >
+        <a
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#approvals"
+          (click)="
+            clickOptionMenu(
+              'liApprovals',
+              'toggle-Approvals',
+              'approvals'
+            )
+          "
+        >
           <i class="fa fa-circle-o-notch"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.approvers}}</span>
+          <span class="nav-label">{{
+            parseT('approvers') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="approvals" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li>
-              <a id="aAprovals" routerLink="/ihr/pending_approvers" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aAprovals', 'approvals')">{{translate.app.frontEnd.components.layout.menu_navigation.pending}}</a>
+              <a
+                id="aAprovals"
+                routerLink="/ihr/pending_approvers"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liApprovals',
+                    'aAprovals',
+                    'approvals'
+                  )
+                "
+                >{{ parseT('pending') | translate }}</a
+              >
             </li>
             <li class="bg-li">
-              <a id="aManaged" routerLink="/ihr/managed_approvers" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aManaged', 'approvals')">{{translate.app.frontEnd.components.layout.menu_navigation.managed}}</a>
+              <a
+                id="aManaged"
+                routerLink="/ihr/managed_approvers"
+                class="nav-link bg-menu"
+                (click)="
+                  clickOptionMenu(
+                    'liApprovals',
+                    'aManaged',
+                    'approvals'
+                  )
+                "
+                >{{ parseT('managed') | translate }}</a
+              >
             </li>
             <!-- <li class="bg-li">
               <a id="aConsultationsApprovals" routerLink="/ihr/consultations_approvals" class="nav-link bg-menu" (click)="clickOptionMenu('liApprovals','aConsultationsApprovals', 'approvals')">Consultas y aprobaciones</a>
@@ -192,73 +692,173 @@
           </ul>
         </div>
       </li>
-      <li id="liBanners" *ngIf="dataEnterprise.show_banners  && dataUser.employee.is_admin == 'true'">
-        <a id="aBanners" class="nav-link bg-menu" (click)="clickOptionMenu('liBanners','aBanners', '')">
+      <li
+        id="liBanners"
+        *ngIf="
+          dataEnterprise.show_banners &&
+          dataUser.employee.is_admin == 'true'
+        "
+      >
+        <a
+          id="aBanners"
+          class="nav-link bg-menu"
+          (click)="clickOptionMenu('liBanners', 'aBanners', '')"
+        >
           <i class="fa fa-slideshare"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.banners}}</span>
+          <span class="nav-label">{{
+            parseT('banners') | translate
+          }}</span>
         </a>
       </li>
       <li id="liEvaluations" *ngIf="dataEnterprise.show_evaluations">
         <a class="nav-link bg-menu" routerLink="/ihr/evaluated" (click)="clickOptionMenu('liEvaluations','toggle-Evaluations', 'evaluations')">
           <i class="fa fa-list"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.evaluations}}</span>
+          <span class="nav-label">{{
+            parseT('evaluations') | translate
+          }}</span>
         </a>
       </li>
       <li id="liPerformanceEvaluation"  *ngIf="dataEnterprise.show_performance_evaluacion">
         <a id="aPerformanceEvaluation" class="nav-link bg-menu" data-toggle="collapse" href="#performanceEval" (click)="clickOptionMenu('liPerformanceEvaluation','toggle-PerformanceEval', 'performanceEval')">
           <i class="fa fa-line-chart"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.performance_evaluation}}</span>
+          <span class="nav-label">{{
+            parseT('performance_evaluation') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="performanceEval" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li>
-              <a id="aGenerateEval" class="nav-link bg-menu" routerLink="evaluation_objectives" (click)="clickOptionMenu('liPerformanceEvaluation','aGenerateEval', 'performanceEval')">{{translate.app.frontEnd.components.layout.menu_navigation.query_evaluation}}</a>
+              <a
+                id="aGenerateEval"
+                class="nav-link bg-menu"
+                routerLink="evaluation_objectives"
+                (click)="
+                  clickOptionMenu(
+                    'liPerformanceEvaluation',
+                    'aGenerateEval',
+                    'performanceEval'
+                  )
+                "
+                >{{ parseT('query_evaluation') | translate }}</a
+              >
             </li>
             <li class="bg-li">
-              <a id="aReviewEval" class="nav-link bg-menu" routerLink="planning_evaluation" (click)="clickOptionMenu('liPerformanceEvaluation','aReviewEval', 'performanceEval')">{{translate.app.frontEnd.components.layout.menu_navigation.query_objetive}}</a>
+              <a
+                id="aReviewEval"
+                class="nav-link bg-menu"
+                routerLink="planning_evaluation"
+                (click)="
+                  clickOptionMenu(
+                    'liPerformanceEvaluation',
+                    'aReviewEval',
+                    'performanceEval'
+                  )
+                "
+                >{{ parseT('query_objetive') | translate }}</a
+              >
             </li>
           </ul>
         </div>
       </li>
       <li id="liTravel" *ngIf="dataEnterprise.show_travel_request">
-        <a id="aTravel" class="nav-link bg-menu" routerLink="/ihr/travel_management" (click)="clickOptionMenu('liTravel','aTravel', '')">
+        <a
+          id="aTravel"
+          class="nav-link bg-menu"
+          routerLink="/ihr/travel_management"
+          (click)="clickOptionMenu('liTravel', 'aTravel', '')"
+        >
           <i class="fa fa-plane"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.manage_travel}}</span>
+          <span class="nav-label">{{
+            parseT('manage_travel') | translate
+          }}</span>
         </a>
       </li>
       <li id="liEventsManagement" *ngIf="dataEnterprise.show_event_management">
         <a id="aEventsManagement" class="nav-link bg-menu" data-toggle="collapse" href="#eventsManagement" (click)="clickOptionMenu('liEventsManagement','toggle-eventsManagement', 'eventsManagement')">
           <i class="fa fa-flag"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.manage_training}}</span>
+          <span class="nav-label">{{
+            parseT('manage_training') | translate
+          }}</span>
           <span class="fa fa-angle-down"></span>
         </a>
         <div id="eventsManagement" class="collapse">
-          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+          <ul
+            class="nav nav-second-level flex-column"
+            aria-expanded="false"
+          >
             <li>
-              <a id="aTraining" class="nav-link bg-menu" routerLink="training" (click)="clickOptionMenu('liEventsManagement','aTraining', 'eventsManagement')">{{translate.app.frontEnd.components.layout.menu_navigation.agreements_training}}</a>
+              <a
+                id="aTraining"
+                class="nav-link bg-menu"
+                routerLink="training"
+                (click)="
+                  clickOptionMenu(
+                    'liEventsManagement',
+                    'aTraining',
+                    'eventsManagement'
+                  )
+                "
+                >{{ parseT('agreements_training') | translate }}</a
+              >
             </li>
-            <li class="bg-li" >
-              <a id="cTraining" class="nav-link bg-menu" routerLink="report_training" (click)="clickOptionMenu('liEventsManagement','cTraining', 'eventsManagement')">{{translate.app.frontEnd.components.layout.menu_navigation.report_training}}</a>
+            <li class="bg-li">
+              <a
+                id="cTraining"
+                class="nav-link bg-menu"
+                routerLink="report_training"
+                (click)="
+                  clickOptionMenu(
+                    'liEventsManagement',
+                    'cTraining',
+                    'eventsManagement'
+                  )
+                "
+                >{{ parseT('report_training') | translate }}</a
+              >
             </li>
           </ul>
         </div>
       </li>
-      <li id="liCorporateDocuments" *ngIf="dataEnterprise.show_document_management">
-        <a id="aCorporateDocuments" class="nav-link bg-menu" routerLink="/ihr/corporate_documents" (click)="clickOptionMenu('liCorporateDocuments','aCorporateDocuments', '')">
+      <li
+        id="liCorporateDocuments"
+        *ngIf="dataEnterprise.show_document_management"
+      >
+        <a
+          id="aCorporateDocuments"
+          class="nav-link bg-menu"
+          routerLink="/ihr/corporate_documents"
+          (click)="
+            clickOptionMenu(
+              'liCorporateDocuments',
+              'aCorporateDocuments',
+              ''
+            )
+          "
+        >
           <i class="fa fa-folder-open-o"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.docs_org}}</span>
+          <span class="nav-label">{{
+            parseT('docs_org') | translate
+          }}</span>
         </a>
       </li>
       <li id="liHelp" *ngIf="dataEnterprise.show_help">
-        <a id="aHelp" class="nav-link bg-menu" routerLink="/ihr/help" (click)="clickOptionMenu('liHelp','aHelp', '')">
+        <a
+          id="aHelp"
+          class="nav-link bg-menu"
+          routerLink="/ihr/help"
+          (click)="clickOptionMenu('liHelp', 'aHelp', '')"
+        >
           <i class="fa fa-question-circle"></i>
-          <span class="nav-label">{{translate.app.frontEnd.components.layout.menu_navigation.help}}</span>
+          <span class="nav-label">{{
+            parseT('help') | translate
+          }}</span>
         </a>
       </li>
-      <li style="height: 20px !important;">
-
-      </li>
+      <li style="height: 20px !important;"></li>
     </ul>
   </div>
 </nav>

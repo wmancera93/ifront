@@ -1,0 +1,29 @@
+.border-dotted-2 {
+    border: 2px dotted #dee2e6 !important;
+}
+
+.border-dotted-2:hover,
+.is-active {
+    border: 3px dotted #585858 !important;
+}
+
+.bg-drag {
+    transition: all 0.3s ease;
+    background: #ffffee3b;
+    color: #fff;
+}
+
+.bg-drag:hover,
+.is-active {
+    background: rgba(255, 255, 255, 0.84);
+    color: #000 !important;
+}
+
+.fa-cloud-upload {
+    color: #fff;
+}
+
+.bg-drag:hover div div .fa-cloud-upload,
+.bg-drag.is-active div div .fa-cloud-upload {
+    color: #000;
+}

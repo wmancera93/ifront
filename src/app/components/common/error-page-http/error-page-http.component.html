@@ -1,25 +1,31 @@
-<div class="errorMessage-container postion-error-page" style="overflow-y:hidden;overflow-x:hidden;">
-    <div class="row justify-content-center">
-    </div>
-    <div class="errorMessage row ">
-        <div class="col-12">
-            <div class="row justify-content-center fontTitle-error">
-                <div class="col-12 text-center">
-                    {{statusCode}}
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="fontMessage-error col-12 text-center">
-                    {{messageError}}
-                </div>
-            </div>
-            <div class="row justify-content-center" style="margin-bottom:15px;">
-                <div class="col-lg-2 col-12">
-                    <div class="buttonError" (click)="RedirectInit()">
-                        <h6> {{translate.app.frontEnd.components.common.error_page_http.start}} </h6>
-                    </div>
-                </div>
-            </div>
+<div
+  class="errorMessage-container postion-error-page"
+  style="overflow-y:hidden;overflow-x:hidden;"
+>
+  <div class="row justify-content-center"></div>
+  <div class="errorMessage row ">
+    <div class="col-12">
+      <div class="row justify-content-center fontTitle-error">
+        <div class="col-12 text-center">
+          {{ statusCode }}
         </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="fontMessage-error col-12 text-center">
+          {{ messageError }}
+        </div>
+      </div>
+      <div
+        class="row justify-content-center"
+        style="margin-bottom:15px;"
+      >
+        <div class="col-lg-2 col-12">
+          <div class="buttonError" (click)="RedirectInit()">
+            <h6></h6>
+            {{ parseT('start') | translate }}
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
 </div>

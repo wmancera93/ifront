@@ -1,93 +1,88 @@
 <div class="heigth-content-general">
-    <div class="row-hr-container">
-      <div class="col-12">
-        <div class="row justify-content-left">
-          <div class="col-xl-10 col-md-8 col-7 text-left title">
-            <i class="fa fa-flag"></i>
-            {{translate.app.frontEnd.pages.events_management.training.report_training.title_report_training}}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row-hr-container justify-content-center">
-      <div class="col-12  widget bg-white minHeight">
-          <div class="row top-containter">
-            <div class="col-12 text-left">
-              <h3 class="font-color-default">
-                {{title}}
-              </h3>
-            </div>
-          </div>
-
-        <!-- begin filters -->
-        <div class="border-botton-general">
-          <div class="row top-containter">
-            <div class="col-xl-4 col-lg-4 col-12 text-left">
-              <b>
-                {{translate.app.frontEnd.pages.events_management.training.report_training.text_query_filters}}
-              </b>
-              <i *ngIf="!collapseFilterTraining" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse"
-                data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(true)"></i>
-              <i *ngIf="collapseFilterTraining" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse"
-                data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(false)"></i>
-            </div>
-          </div>
-        </div>
-
-        <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
-          <div class="row align-items-center">
-            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_employee_code}}</label>
-              <input type="text" [(ngModel)]="personal_number" class="form-control">
-            </div>
-            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_training_code}}</label>
-              <input type="text" [(ngModel)]="code_training" class="form-control">
-            </div>
-            <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-                <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_training_status}}</label>
-                <select class="form-control" [(ngModel)]="status_id">
-                    <option [value]="-1">{{translate.app.frontEnd.pages.events_management.training.report_training.text_select}}</option>
-                    <option value="1">{{translate.app.frontEnd.pages.events_management.training.report_training.text_accepted}}</option>
-                    <option value="0">{{translate.app.frontEnd.pages.events_management.training.report_training.text_pending}}</option>
-                  </select>
-              </div>
-          </div>
-          <div class="row align-items-center mb-3">
-            <div class="col-lg-4 col-md-4 col-12">
-              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_start_date}}</label>
-              <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
-            </div>
-            <div class="col-lg-4 col-md-4 col-12">
-              <label>{{translate.app.frontEnd.pages.events_management.training.report_training.text_end_date}}</label>
-              <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
-            </div>
-            <div class="col-lg-4 col-md-4 col-12 align-self-end">
-              <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
-                <i class="fa fa-search-plus"></i>
-                {{translate.app.frontEnd.pages.events_management.training.report_training.text_query}}
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-
-        <div class="row justify-content-center top-general-p" *ngIf="!showDataTableTraining">
-        <!-- <div class="row justify-content-center top-general-p" > -->
-          <div class="col-lg-8 col-12 text-center">
-            <div class="alert alert-warning" role="alert">
-              {{translate.app.frontEnd.pages.events_management.training.report_training.text_no_records_found}}
-            </div>
-          </div>
-        </div>
-
-
-        <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableTraining">
-          <div class="col-12">
-            <app-data-table class="mt-3" [records]="objectReportTraining" id="tableReportTravels" [excel]="showExcel" [pdf]="showPdf" [title]="nameReport"></app-data-table>
-          </div>
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row justify-content-left">
+        <div class="col-xl-10 col-md-8 col-7 text-left title">
+          <i class="fa fa-flag"></i>
+          {{ parseT('title_report_training') | translate }}
         </div>
       </div>
     </div>
   </div>
+  <div class="row-hr-container justify-content-center">
+    <div class="col-12  widget bg-white minHeight">
+      <div class="row top-containter">
+        <div class="col-12 text-left">
+          <h3 class="font-color-default">
+            {{ title }}
+          </h3>
+        </div>
+      </div>
+
+      <!-- begin filters -->
+      <div class="border-botton-general">
+        <div class="row top-containter">
+          <div class="col-xl-4 col-lg-4 col-12 text-left">
+            <b>
+              {{ parseT('text_query_filters') | translate }}
+            </b>
+            <i *ngIf="!collapseFilterTraining" class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(true)"></i>
+            <i *ngIf="collapseFilterTraining" class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general" data-toggle="collapse" data-target="#collapseFilterTravel" aria-expanded="false" (click)="collapseReportTraining(false)"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="collapse top-general-p border-botton-general" id="collapseFilterTravel">
+        <div class="row align-items-center">
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+            <label>{{ parseT('text_employee_code') | translate }}</label>
+            <input type="text" [(ngModel)]="personal_number" class="form-control" />
+          </div>
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+            <label>{{ parseT('text_training_code') | translate }}</label>
+            <input type="text" [(ngModel)]="code_training" class="form-control" />
+          </div>
+          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
+            <label>{{ parseT('text_training_status') | translate }}</label>
+            <select class="form-control" [(ngModel)]="status_id">
+              <option [value]="-1">{{ parseT('text_select') | translate }}</option>
+              <option value="1">{{ parseT('text_accepted') | translate }}</option>
+              <option value="0">{{ parseT('text_pending') | translate }}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row align-items-center mb-3">
+          <div class="col-lg-4 col-md-4 col-12">
+            <label>{{ parseT('text_start_date') | translate }}</label>
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
+          </div>
+          <div class="col-lg-4 col-md-4 col-12">
+            <label>{{ parseT('text_end_date') | translate }}</label>
+            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_end" />
+          </div>
+          <div class="col-lg-4 col-md-4 col-12 align-self-end">
+            <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint('general')">
+              <i class="fa fa-search-plus"></i>
+              {{ parseT('text_query') | translate }}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center top-general-p" *ngIf="!showDataTableTraining">
+        <!-- <div class="row justify-content-center top-general-p" > -->
+        <div class="col-lg-8 col-12 text-center">
+          <div class="alert alert-warning" role="alert">
+            {{ parseT('text_no_records_found') | translate }}
+          </div>
+        </div>
+      </div>
+
+      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableTraining">
+        <div class="col-12">
+          <app-data-table class="mt-3" [records]="objectReportTraining" id="tableReportTravels" [excel]="showExcel" [pdf]="showPdf" [title]="parseT('tittle_table_ts') | translate"></app-data-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

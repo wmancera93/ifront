@@ -1,25 +1,53 @@
-<button id="btn-viewSpends" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_viewSpends"
-  style="display:none;">
-</button>
+<button
+  id="btn-viewSpends"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#modal_viewSpends"
+  style="display:none;"
+></button>
 <div class="modal" tabindex="-1" role="dialog" id="modal_viewSpends">
-  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
+  <div
+    style="margin-top: 10px !important"
+    class="modal-dialog modal-lg"
+    role="document"
+  >
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.tittle}}</h5>
-        <button id="closeModalViewSpend" type="button" class="close " data-dismiss="modal" aria-label="Close">
+        <h5
+          class="modal-title titleColor text-shadow"
+          id="exampleModalLabel"
+        >
+          {{ parseT('tittle') | translate }}
+        </h5>
+        <button
+          id="closeModalViewSpend"
+          type="button"
+          class="close "
+          data-dismiss="modal"
+          aria-label="Close"
+        >
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
-      <div class="modal-body bodyColorInfo" *ngIf="showSpendDetail !== null">
+      <div
+        class="modal-body bodyColorInfo"
+        *ngIf="showSpendDetail !== null"
+      >
         <div class="row">
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.name_travel}}:</strong>
+              <strong
+                >{{ parseT('name_travel') | translate }}:</strong
+              >
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
-            <label>{{showTravelDetail.ticket}} {{showTravelDetail.name_travel}}</label>
+            <label
+              >{{ showTravelDetail.ticket }}
+              {{ showTravelDetail.name_travel }}</label
+            >
           </div>
         </div>
         <div class="row" style="margin-top:20px">
@@ -28,11 +56,13 @@
               <div class="col-lg-6 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa-globe text-primary-hr"></i>
-                  <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.type_travel}}</strong>
+                  <strong>{{
+                    parseT('type_travel') | translate
+                  }}</strong>
                 </label>
               </div>
               <div class="col-lg-6 col-md-6 col-12">
-                <label>{{showTravelDetail.travel_type_name}}</label>
+                <label>{{ showTravelDetail.travel_type_name }}</label>
               </div>
             </div>
           </div>
@@ -40,34 +70,64 @@
         <div class="row" style="margin-top:20px">
           <div class="col-lg-3 col-md-6 col-12">
             <label class="titleColor">
-              <i class="fa fa-fw fa-check-square-o text-primary-hr"></i>
-              <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.status}}:</strong>
+              <i
+                class="fa fa-fw fa-check-square-o text-primary-hr"
+              ></i>
+              <strong>{{ parseT('status') | translate }}:</strong>
             </label>
           </div>
           <div class="col-lg-6 col-md-6 col-12">
             <label>
-              {{showTravelDetail.travel_requests_type_name}}
+              {{ showTravelDetail.travel_requests_type_name }}
             </label>
           </div>
         </div>
-        <div class="row justify-content-center" style="margin-top:40px">
+        <div
+          class="row justify-content-center"
+          style="margin-top:40px"
+        >
           <div class="col-12" style="min-height: 80px !important">
-            <app-data-table [records]="objectReport" id="tableViewSpends" [pdf]="showPdf" [sizeTable]="showSizeTable"
-              [title]="nameReport"></app-data-table>
+            <app-data-table
+              [records]="objectReport"
+              id="tableViewSpends"
+              [pdf]="showPdf"
+              [sizeTable]="showSizeTable"
+              [title]="parseT('tittle_ts') | translate"
+            ></app-data-table>
           </div>
         </div>
         <div class="row" style="margin-top: 50px">
           <div class="col-12 top-containter">
             <div class="row">
-              <div class="col-lg-8 col-12" *ngFor="let imgsaved of anexes; let index = index">
-                <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
+              <div
+                class="col-lg-8 col-12"
+                *ngFor="let imgsaved of anexes; let index = index"
+              >
+                <div
+                  class="alert"
+                  style="background-color:rgba(0,0,0,.2) "
+                  role="alert"
+                >
                   <div class="row">
                     <div class="col-11">
-                      <h6>{{imgsaved.name |slice: 0:40}}
-                        <span [hidden]="imgsaved.name.length < 20">...</span>
+                      <h6>
+                        {{ imgsaved.name | slice: 0:40 }}
+                        <span [hidden]="imgsaved.name.length < 20"
+                          >...</span
+                        >
                       </h6>
-                      <p class="badge badge-light wg-hover-general" (click)="viewAnnex(imgsaved)">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.see_attach}}</p>
-                      <p class="badge badge-light wg-hover-general" (click)="downloadAnnex(imgsaved)">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.download_attach}}</p>
+                      <p
+                        class="badge badge-light wg-hover-general"
+                        (click)="viewAnnex(imgsaved)"
+                      >
+                        {{ parseT('see_attach') | translate }}
+                      </p>
+                      <p
+                        class="badge badge-light wg-hover-general"
+                        (click)="downloadAnnex(imgsaved)"
+                      >
+                        {{ parseT('download_attach') | translate }}
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -80,48 +140,103 @@
           <div id="accordion" class="col-12" style="margin-top: 15px">
             <div class="row">
               <div class="col-12 text-left" id="headingOne">
-                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
-                  data-toggle="collapse" data-target="#collapseTravels" aria-expanded="false" aria-controls="collapseTravels">
-                  {{translate.app.frontEnd.pages.travel_management.spend.view_spend.view_trayect}}</p>
+                <p
+                  class="titleColor  collapsed cursor-general"
+                  style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse"
+                  data-target="#collapseTravels"
+                  aria-expanded="false"
+                  aria-controls="collapseTravels"
+                >
+                  {{ parseT('view_trayect') | translate }}
+                </p>
               </div>
-              <div id="collapseTravels" class="collapse col-12" aria-labelledby="headingOne" data-parent="#accordion"
-                style="margin-top: 25px">
+              <div
+                id="collapseTravels"
+                class="collapse col-12"
+                aria-labelledby="headingOne"
+                data-parent="#accordion"
+                style="margin-top: 25px"
+              >
                 <div class="row">
                   <div class="col-lg-3 col-md-6 col-12">
                     <label class="titleColor">
-                      <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.date_requests_travel}}:</strong>
+                      <strong
+                        >{{
+                          parseT('date_requests_travel') | translate
+                        }}:</strong
+                      >
                     </label>
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
-                    <label>{{allRequestsInSpend[0].travel_request.date_begin_format}}</label>
+                    <label>{{
+                      allRequestsInSpend[0].travel_request
+                        .date_begin_format
+                    }}</label>
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
                     <label class="titleColor">
-                      <strong>{{translate.app.frontEnd.pages.travel_management.spend.view_spend.date_requests_travel_end}}:</strong>
+                      <strong
+                        >{{
+                          parseT('date_requests_travel_end')
+                            | translate
+                        }}:</strong
+                      >
                     </label>
                   </div>
                   <div class="col-lg-3 col-md-6 col-12">
-                    <label>{{allRequestsInSpend[0].travel_request.date_end_format}}</label>
+                    <label>{{
+                      allRequestsInSpend[0].travel_request
+                        .date_end_format
+                    }}</label>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-12">
-                    <app-data-table [records]="objectPrintTravelView" [pdf]="showPdf" id="tableTravelsSaved"
-                      [sizeTable]="showSizeTable" [title]="nameReportTravels"></app-data-table>
+                    <app-data-table
+                      [records]="objectPrintTravelView"
+                      [pdf]="showPdf"
+                      id="tableTravelsSaved"
+                      [sizeTable]="showSizeTable"
+                      [title]="
+                        parseT('tittle_trayect_ts') | translate
+                      "
+                    ></app-data-table>
                   </div>
                 </div>
               </div>
             </div>
             <div class="row">
-              <div class="text-primary col-12 text-left" id="headingTwo">
-                <p class="titleColor  collapsed cursor-general" style="text-decoration: underline  rgb(229, 232, 241)!important"
-                  data-toggle="collapse" data-target="#collapseAdvance" aria-expanded="false" aria-controls="collapseAdvance">{{translate.app.frontEnd.pages.travel_management.spend.view_spend.see_attach}}
-                  {{translate.app.frontEnd.pages.travel_management.spend.view_spend.view_advances}}</p>
+              <div
+                class="text-primary col-12 text-left"
+                id="headingTwo"
+              >
+                <p
+                  class="titleColor  collapsed cursor-general"
+                  style="text-decoration: underline  rgb(229, 232, 241)!important"
+                  data-toggle="collapse"
+                  data-target="#collapseAdvance"
+                  aria-expanded="false"
+                  aria-controls="collapseAdvance"
+                >
+                  {{ parseT('see_attach') | translate }}
+                  {{ parseT('view_advances') | translate }}
+                </p>
               </div>
-              <div id="collapseAdvance" class="collapse col-12" aria-labelledby="headingTwo" data-parent="#accordion"
-                style="margin-top: 25px">
-                <app-data-table [records]="objectPrintAdvancesView" [pdf]="showPdf" id="tableAdvanceSaved" [sizeTable]="showSizeTable"
-                  [title]="nameReportAdvance"></app-data-table>
+              <div
+                id="collapseAdvance"
+                class="collapse col-12"
+                aria-labelledby="headingTwo"
+                data-parent="#accordion"
+                style="margin-top: 25px"
+              >
+                <app-data-table
+                  [records]="objectPrintAdvancesView"
+                  [pdf]="showPdf"
+                  id="tableAdvanceSaved"
+                  [sizeTable]="showSizeTable"
+                  [title]="parseT('tittle_advances_ts') | translate"
+                ></app-data-table>
               </div>
             </div>
           </div>
@@ -133,21 +248,50 @@
           </div>
         </div> -->
 
-        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="is_sender_approval">
+        <div
+          class="row justify-content-end"
+          style="padding-bottom: 25px"
+          *ngIf="is_sender_approval"
+        >
           <div class="col-lg-4 col-md-6 col-12">
-            <button *ngIf="allRequestsInSpend[0].travel_managements.data.length > 0" class="btn btn-success btn-block cursor-general" (click)="sedRequestsSpend()">
-              <i class="fa fa-fw fa-save"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_send}}</button>
+            <button
+              *ngIf="
+                allRequestsInSpend[0]?.travel_managements.data
+                  .length > 0
+              "
+              class="btn btn-success btn-block cursor-general"
+              (click)="sedRequestsSpend()"
+            >
+              <i class="fa fa-fw fa-save"></i>&nbsp;{{
+                parseT('btn_send') | translate
+              }}
+            </button>
           </div>
         </div>
-        <div class="row justify-content-end" style="padding-bottom: 25px" *ngIf="allRequestsInSpend.length > 0">
+        <div
+          class="row justify-content-end"
+          style="padding-bottom: 25px"
+          *ngIf="allRequestsInSpend.length > 0"
+        >
           <div class="col-lg-4 col-md-6 col-12">
-            <button class="btn btn-warning btn-block cursor-general" (click)="exportExcel()">
-              <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;{{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_export}}</button>
+            <button
+              class="btn btn-warning btn-block cursor-general"
+              (click)="exportExcel()"
+            >
+              <i class="fa fa-fw fa-file-excel-o"></i>&nbsp;{{
+                parseT('btn_export') | translate
+              }}
+            </button>
           </div>
         </div>
         <div class="modal-footerInfo justify-content-center">
-          <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" data-dismiss="modal">
-            <h6> {{translate.app.frontEnd.pages.travel_management.spend.view_spend.btn_close}} </h6>
+          <div
+            class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center"
+            data-dismiss="modal"
+          >
+            <h6>
+              {{ parseT('btn_close') | translate }}
+            </h6>
           </div>
         </div>
       </div>

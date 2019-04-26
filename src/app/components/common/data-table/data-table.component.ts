@@ -1,15 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { element } from 'protractor';
 import { Enterprise } from '../../../models/general/enterprise';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
-import { TranslateService } from '../../../services/common/translate/translate.service';
-import { Translate } from '../../../models/common/translate/translate';
 
 declare var jsPDF: any;
 
@@ -24,7 +21,6 @@ export interface ColumnSetting {
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.css'],
-
 })
 export class DataTableComponent implements OnInit {
   public show = true;
@@ -36,56 +32,49 @@ export class DataTableComponent implements OnInit {
   @Input() sizeTable?: any = true;
   @Input() minHeight?: any = true;
 
-  public height = "min-height: 370px;";
+  public height = 'min-height: 370px;';
 
   public keys: any[] = [];
   public labels: any[] = [];
   public p = 1;
-  public size_table: number = 10;
+  public size_table = 10;
 
   public labelsCell: any[] = [];
 
   public columnsPdf: any[] = [];
   public rowsColsPdf: any[] = [];
-  public translate: Translate = null;
   public recordsStatic: any[] = [];
   public filter: string;
   public objectTable: any[] = [];
 
-
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-  constructor(public printDataTableService: PrintDataTableService,
-    public excelService: ExcelService,
-    public router: Router,
-    private tokenService: Angular2TokenService,
-    private accionDataTableService: DataDableSharedService,
-    public stylesExplorerService: StylesExplorerService, public translateService: TranslateService) {
+  parseT(key) {
+    return `components.common.data_table.${key}`;
+  }
 
-    this.translate = this.translateService.getTranslate();
-    this.filter = this.translate.app.frontEnd.components.common.data_table.filter;
-    this.tokenService.validateToken()
-      .subscribe(
-        (res) => {
-          this.token = false;
-        },
-        (error) => {
-          this.objectToken.emit({
-            title: error.status.toString(),
-            message: error.json().errors[0].toString()
-          });
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
-          this.token = true;
+  constructor(public printDataTableService: PrintDataTableService, public excelService: ExcelService, public router: Router, private tokenService: Angular2TokenService, private accionDataTableService: DataDableSharedService, public stylesExplorerService: StylesExplorerService) {
+    this.tokenService.validateToken().subscribe(
+      () => {
+        this.token = false;
+      },
+      error => {
+        this.objectToken.emit({
+          title: error.status.toString(),
+          message: error.json().errors[0].toString(),
         });
-
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
+        this.token = true;
+      },
+    );
 
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
-    this.records.subscribe((data) => {
+    this.records.subscribe(data => {
       if (data.data.length > 0) {
         if (data.data[0].data.length > 0) {
           this.labels = [];
@@ -101,7 +90,7 @@ export class DataTableComponent implements OnInit {
           this.keys = Object.keys(this.labelsCell);
           this.recordsPrint = data.data[0].data;
           this.recordsStatic = this.recordsPrint;
-          this.keys.forEach((element) => {
+          this.keys.forEach(element => {
             let label: any;
             if (data.data[0].labels[0] === undefined) {
               label = data.data[0].labels[element];
@@ -109,9 +98,18 @@ export class DataTableComponent implements OnInit {
               label = data.data[0].labels[0][element];
             }
 
-            this.labels.push({ value: label.value, type: label.type, sort: label.sortable, label: element, id: 'sort_' + element });
-            this.columnsPdf.push({ title: label.value, dataKey: element });
-          })
+            this.labels.push({
+              value: label.value,
+              type: label.type,
+              sort: label.sortable,
+              label: element,
+              id: 'sort_' + element,
+            });
+            this.columnsPdf.push({
+              title: label.value,
+              dataKey: element,
+            });
+          });
         } else {
           this.show = false;
         }
@@ -126,18 +124,17 @@ export class DataTableComponent implements OnInit {
       }
     });
 
-
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 4000);
   }
 
   pdfExport() {
-    let title: string = this.title;
-    var today = new Date();
-    let dd: number = today.getDate();
-    let mm: number = today.getMonth() + 1;
-    let yyyy: number = today.getFullYear();
+    const title: string = this.title;
+    const today = new Date();
+    const dd: number = today.getDate();
+    const mm: number = today.getMonth() + 1;
+    const yyyy: number = today.getFullYear();
     let ddNew: string = dd.toString();
     let mmNew: string = mm.toString();
 
@@ -151,8 +148,7 @@ export class DataTableComponent implements OnInit {
       mmNew = '0' + mm.toString();
     }
 
-    let dateNow = ddNew + '/' + mmNew + '/' + yyyy;
-    let dataEnterprise: Enterprise = JSON.parse(localStorage.getItem("enterprise"))
+    const dateNow = ddNew + '/' + mmNew + '/' + yyyy;
     if (this.columnsPdf.length > 5) {
       alineation = 'l';
       positionPage = 740;
@@ -161,7 +157,7 @@ export class DataTableComponent implements OnInit {
       positionPage = 500;
     }
 
-    var doc = new jsPDF(alineation, 'pt');
+    const doc = new jsPDF(alineation, 'pt');
     doc.page = 1;
 
     doc.autoTable(this.columnsPdf, this.recordsPrint, {
@@ -169,7 +165,7 @@ export class DataTableComponent implements OnInit {
       styles: {
         cellPadding: 5,
         fontSize: 10,
-        font: "helvetica",
+        font: 'helvetica',
         fontStyle: 'normal',
         overflow: 'hidden',
         textColor: 20,
@@ -184,17 +180,17 @@ export class DataTableComponent implements OnInit {
         textColor: 250,
       },
       margin: { top: 110 },
-      addPageContent: function (data) {
-        doc.setFontSize(16)
-        doc.text(40, 60, title)
-        doc.setFontSize(12)
-        doc.text(40, 95, 'Generado el ' + dateNow)
-        doc.setFontSize(10)
+      addPageContent: function() {
+        doc.setFontSize(16);
+        doc.text(40, 60, title);
+        doc.setFontSize(12);
+        doc.text(40, 95, 'Generado el ' + dateNow);
+        doc.setFontSize(10);
         doc.text(positionPage, 60, 'pagina ' + doc.page);
         doc.page++;
-      }
+      },
     });
-    doc.save(title + '.pdf')
+    doc.save(title + '.pdf');
   }
 
   excelExport() {
@@ -206,16 +202,20 @@ export class DataTableComponent implements OnInit {
   }
 
   printTable() {
-    this.objectTable.push({ title: this.title, labels: this.labelsCell, cells: this.recordsPrint })
+    this.objectTable.push({
+      title: this.title,
+      labels: this.labelsCell,
+      cells: this.recordsPrint,
+    });
     this.printDataTableService.setObjectForPrint(this.objectTable);
     this.objectTable = [];
   }
 
   sortable(label: any) {
-    let descending: boolean = true;
-    let idPrevius: string = '';
+    let descending = true;
+    let idPrevius = '';
     if (document.getElementsByClassName('fa-chevron-up').length > 0) {
-      idPrevius = (<HTMLInputElement>document.getElementsByClassName('fa-chevron-up')[0]).id
+      idPrevius = (<HTMLInputElement>document.getElementsByClassName('fa-chevron-up')[0]).id;
       if (idPrevius !== label.id) {
         document.getElementById(idPrevius).classList.remove('fa');
         document.getElementById(idPrevius).classList.remove('fa-chevron-up');
@@ -241,7 +241,7 @@ export class DataTableComponent implements OnInit {
 
     switch (label.type) {
       case 'string': {
-        this.recordsPrint = this.recordsPrint.sort(function (a, b) {
+        this.recordsPrint = this.recordsPrint.sort(function(a, b) {
           const nameA: String = a[label.label];
           const nameB: String = b[label.label];
 
@@ -265,7 +265,7 @@ export class DataTableComponent implements OnInit {
         break;
       }
       case 'int': {
-        this.recordsPrint = this.recordsPrint.sort(function (a, b) {
+        this.recordsPrint = this.recordsPrint.sort(function(a, b) {
           if (!descending) {
             return parseFloat(a[label.label]) - parseFloat(b[label.label]);
           } else {
@@ -275,9 +275,9 @@ export class DataTableComponent implements OnInit {
         break;
       }
       case 'date': {
-        this.recordsPrint = this.recordsPrint.sort(function (a, b) {
-          let dateA: any = new Date(a[label.label]);
-          let dateB: any = new Date(b[label.label]);
+        this.recordsPrint = this.recordsPrint.sort(function(a, b) {
+          const dateA: any = new Date(a[label.label]);
+          const dateB: any = new Date(b[label.label]);
           if (!descending) {
             return dateA - dateB;
           } else {
@@ -299,10 +299,15 @@ export class DataTableComponent implements OnInit {
       }
     }
 
-    let input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
-    let parameter = label.label;
-    this.recordsPrint = this.recordsStatic.filter((prod: any) => prod[parameter].toString().toUpperCase().indexOf(input.toUpperCase()) >= 0);
-
+    const input = (<HTMLInputElement>document.getElementById(value + label.label)).value;
+    const parameter = label.label;
+    this.recordsPrint = this.recordsStatic.filter(
+      (prod: any) =>
+        prod[parameter]
+          .toString()
+          .toUpperCase()
+          .indexOf(input.toUpperCase()) >= 0,
+    );
   }
 
   excelDownload(type) {
@@ -311,5 +316,4 @@ export class DataTableComponent implements OnInit {
   accionTable(fieldSelected: any) {
     this.accionDataTableService.setActionDataTable(fieldSelected);
   }
-
 }

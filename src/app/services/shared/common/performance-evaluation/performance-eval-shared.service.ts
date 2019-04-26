@@ -3,51 +3,43 @@ import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class PerformanceEvalSharedService {
-  exportEvaluationData: Subject<any> = new Subject<any>(); 
-  exportEditEvaluationData: Subject<any> = new Subject<any>();   
+  exportEvaluationData: Subject<any> = new Subject<any>();
+  exportEditEvaluationData: Subject<any> = new Subject<any>();
   editPlanningEvaluation: Subject<any> = new Subject<any>();
   refreshEvalConve:  Subject<any> = new Subject<any>();
 
   constructor() { }
 
-  getEvaluationPerformanceData()
-  {    
+  getEvaluationPerformanceData() {
     return this.exportEvaluationData;
   }
 
-  setEvaluationPerformanceData(object:any)
-  {    
-    return this.exportEvaluationData.next(object);    
+  setEvaluationPerformanceData(object: any) {
+    return this.exportEvaluationData.next(object);
   }
 
-  getViewEvaluationPerformanceData()
-  {    
+  getViewEvaluationPerformanceData() {
     return this.exportEditEvaluationData;
   }
 
-  setViewEvaluationPerformanceData(object:any)
-  {    
-    return this.exportEditEvaluationData.next(object);    
+  setViewEvaluationPerformanceData(object: any) {
+    return this.exportEditEvaluationData.next(object);
   }
 
-  getPlanningEvaluationData()
-  {    
+  getPlanningEvaluationData() {
     return this.editPlanningEvaluation;
   }
 
-  setPlanningEvaluationData(data:any)
-  {    
-    return this.editPlanningEvaluation.next(data);    
+  setPlanningEvaluationData(data: any) {
+    return this.editPlanningEvaluation.next(data);
   }
 
-  getRefrehsEval()
-  {    
+  getRefrehsEval() {
     return this.refreshEvalConve;
   }
 
-  setRefrehsEval(data:any)
-  {    
-    return this.refreshEvalConve.next(data);    
+  setRefrehsEval(data: any) {
+    return this.refreshEvalConve.next(data);
   }
 
 

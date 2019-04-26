@@ -1,5 +1,4 @@
 // modules
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
@@ -8,22 +7,37 @@ import 'chart.piecelabel.js';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
-
-
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpModule, Http } from '@angular/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 
 // components
 import { AppComponent } from './app.component';
 import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
-import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { baseUrl } from '../environments/environment';
+import { Observable } from 'rxjs';
+
+export class CustomLoader implements TranslateLoader {
+  constructor(private http: Http) {}
+
+  public getTranslation(lang: String): Observable<any> {
+    return this.http
+      .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
+      .map((res: any) => {
+        console.log(
+          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd
+        );
+        return JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
+      });
+  }
+}
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     // BrowserModule,
@@ -35,11 +49,18 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
     ServicesModule,
     FormsModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    NgbModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        /* useFactory: HttpLoaderFactory, */
+        useClass: CustomLoader,
+        deps: [HttpClient]
+      }
+    })
   ],
-  providers: [
-    Angular2TokenService
-  ],
+  providers: [Angular2TokenService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
