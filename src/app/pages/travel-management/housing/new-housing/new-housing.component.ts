@@ -122,7 +122,13 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
-          console.log({ name, city, bedrooms: this.arrayBedrooms });
+          let allBedrooms = [];
+          this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+          console.log({
+            name,
+            city,
+            bedrooms: allBedrooms,
+          });
           break;
 
         default:

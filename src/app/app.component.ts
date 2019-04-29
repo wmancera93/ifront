@@ -32,15 +32,23 @@ export class AppComponent {
     public tokenService: Angular2TokenService,
     public translate: TranslateService
   ) {
-    const laguaje = localStorage.getItem('lang') || translate.getBrowserLang();
+    const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');
 
     translate.onLangChange.subscribe(({ lang }: LangChangeEvent) => {
       localStorage.setItem('lang', lang);
+      this.tokenServiceInit(lang);
+      this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+
+      this.router.navigateByUrl(this.router.url + '?')
+        .then(() => {
+          this.router.navigated = false;
+          this.router.navigate([this.router.url]);
+        });
     });
 
-    translate.use(laguaje.match(/es|en/) ? laguaje : 'es');
+    translate.use(languaje.match(/es|en/) ? languaje : 'es');
 
     const url = window.location.href;
     let ambient;
@@ -74,23 +82,7 @@ export class AppComponent {
         break;
     }
 
-    this.tokenService.init({
-      apiBase: this.baseUrl,
-      apiPath: 'api/v2/' + laguaje,
-      signInPath: 'auth/sign_in',
-      signOutPath: 'auth/sign_out',
-      validateTokenPath: 'auth/validate_token',
-      signOutFailedValidate: false,
-      registerAccountPath: 'auth/password/new',
-      updatePasswordPath: 'auth/password',
-      resetPasswordPath: 'auth/password',
-      globalOptions: {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json'
-        }
-      }
-    });
+    this.tokenServiceInit(languaje);
 
     this.userSharedService.getUser().subscribe(data => {
       this.dataUser = data;
@@ -117,6 +109,26 @@ export class AppComponent {
               this.router.navigate(['/ihr/error']);
             }
           }
+        }
+      }
+    });
+  }
+
+  tokenServiceInit(languaje){
+    this.tokenService.init({
+      apiBase: this.baseUrl,
+      apiPath: 'api/v2/' + languaje,
+      signInPath: 'auth/sign_in',
+      signOutPath: 'auth/sign_out',
+      validateTokenPath: 'auth/validate_token',
+      signOutFailedValidate: false,
+      registerAccountPath: 'auth/password/new',
+      updatePasswordPath: 'auth/password',
+      resetPasswordPath: 'auth/password',
+      globalOptions: {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
         }
       }
     });
