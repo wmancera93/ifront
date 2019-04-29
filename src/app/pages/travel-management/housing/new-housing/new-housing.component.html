@@ -9,8 +9,8 @@
         <input
           type="text"
           class="form-control"
+          [readonly]="readOnly"
           [formControl]="forms.name"
-          [ngStyle]="{ property: expression }"
         />
       </div>
       <div class="col-12 col-md-6 top-containter">
@@ -18,7 +18,11 @@
           <i class="fa fa-fw fa-users text-primary-hr"></i>
           Ciudad *
         </label>
-        <select class="form-control" [formControl]="forms.city">
+        <select
+          class="form-control"
+          [attr.disabled]="readOnly"
+          [formControl]="forms.city"
+        >
           <option value="">Seleccione</option>
           <option *ngFor="let city of cities" [value]="city.id">
             {{ city.name }}
@@ -31,7 +35,7 @@
 <ng-template #stepTwo>
   <div class="col-12">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row" *ngIf="!readOnly">
         <div class="col-12 col-lg-10 col-xl-11">
           <div class="container">
             <div class="row">
@@ -78,91 +82,84 @@
             </button>
           </div>
         </div>
-        <div class="col-12">
-          <div class="table-responsive mt-3">
-            <ng-container
-              *ngIf="arrayBedrooms.length > 0; else elseTemplate"
-            >
-              <table
-                class="table table-sm table-striped table-bordered"
-              >
-                <thead>
-                  <tr>
-                    <th class="text-center">
-                      Cantidad de habitaciones
-                    </th>
-                    <th class="text-center">
-                      Cantidad de camas
-                    </th>
-                    <th class="text-center">
-                      Acciones
-                    </th>
-                  </tr>
-                </thead>
-                <tbody style="color: #fff;">
-                  <tr
-                    *ngFor="let bed of arrayBedrooms; let i = index"
-                  >
-                    <td style="vertical-align: middle;">
-                      {{ bed.bedrooms.length }} Dormitorios
-                    </td>
-                    <td style="vertical-align: middle;">
-                      {{ bed.count.beds }} Camas
-                    </td>
-                    <td width="160px" style="vertical-align: middle;">
-                      <div class="container">
-                        <div class="row">
-                          <div
-                            class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
-                          >
-                            <button
-                              type="button"
-                              class="btn btn-warning text-white btn-block btn-sm cursor-general"
-                              (click)="
-                                editHousig({
-                                  bed: i,
-                                  modal: modalEditBedRoom
-                                })
-                              "
-                            >
-                              <div class="position-relative">
-                                <i
-                                  class="fa fa-pencil position-absolute"
-                                  style="top: -4px;left: 69%;"
-                                ></i>
-                                <i class="fa fa-bed my-1"></i>
-                              </div>
-                            </button>
-                          </div>
-                          <div
-                            class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
-                          >
-                            <button
-                              type="button"
-                              class="btn btn-danger btn-block btn-sm cursor-general"
-                              (click)="removeHousig(bed.key)"
-                            >
-                              <i class="fa fa-minus my-1"></i>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </ng-container>
-            <ng-template #elseTemplate>
-              <div
-                class="alert alert-warning text-center"
-                role="alert"
-              >
-                No tienes habitaciones agregadas.
-              </div>
-            </ng-template>
-          </div>
-        </div>
       </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="table-responsive mt-3">
+      <ng-container
+        *ngIf="arrayBedrooms.length > 0; else elseTemplate"
+      >
+        <table class="table table-sm table-striped table-bordered">
+          <thead>
+            <tr>
+              <th class="text-center">
+                Cantidad de habitaciones
+              </th>
+              <th class="text-center">
+                Cantidad de camas
+              </th>
+              <th class="text-center">
+                Acciones
+              </th>
+            </tr>
+          </thead>
+          <tbody style="color: #fff;">
+            <tr *ngFor="let bed of arrayBedrooms; let i = index">
+              <td style="vertical-align: middle;">
+                {{ bed.bedrooms.length }} Dormitorios
+              </td>
+              <td style="vertical-align: middle;">
+                {{ bed.count.beds }} Camas
+              </td>
+              <td width="160px" style="vertical-align: middle;">
+                <div class="container">
+                  <div class="row">
+                    <div
+                      class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-warning text-white btn-block btn-sm cursor-general"
+                        (click)="
+                          editHousig({
+                            bed: i,
+                            modal: modalEditBedRoom
+                          })
+                        "
+                      >
+                        <div class="position-relative">
+                          <i
+                            class="fa fa-pencil position-absolute"
+                            style="top: -4px;left: 69%;"
+                          ></i>
+                          <i class="fa fa-bed my-1"></i>
+                        </div>
+                      </button>
+                    </div>
+                    <div
+                      class="col-12 col-sm-6 justify-content-stretch d-flex my-1"
+                    >
+                      <button
+                        type="button"
+                        class="btn btn-danger btn-block btn-sm cursor-general"
+                        (click)="removeHousig(bed.key)"
+                      >
+                        <i class="fa fa-minus my-1"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-container>
+      <ng-template #elseTemplate>
+        <div class="alert alert-warning text-center" role="alert">
+          No tienes habitaciones agregadas.
+        </div>
+      </ng-template>
     </div>
   </div>
 </ng-template>
@@ -366,6 +363,7 @@
                         name="bedField"
                         type="text"
                         class="form-control"
+                        [readonly]="readOnly"
                         value="{{ bed.label }}"
                         #bedField
                         (blur)="bedSelect = -1"

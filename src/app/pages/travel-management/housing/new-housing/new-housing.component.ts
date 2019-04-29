@@ -50,6 +50,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public model = {};
 
   public modalState = true;
+  public readOnly = false;
 
   public arrayBedrooms: any[] = [];
   public servicesList: any[] = [];
@@ -75,26 +76,42 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     ];
 
     this.form = new FormGroup({});
-    this.form = this.fb.group({
-      name: [''],
-      city: [''],
-      bedrooms: [''],
-      beds: [''],
-    });
   }
 
   ngOnInit() {
-    this.modalFormSubscription = this.modalForm.subscribe(() => {
-      const modal = this.modalService.open(this.modalTemplate, {
-        size: 'lg',
-        windowClass: 'modal-md-personalized modal-dialog-scroll',
-        centered: true,
-      });
-      document.getElementById('bodyGeneral').removeAttribute('style');
-      this.modalActions.close = () => {
-        modal.close();
-      };
-    });
+    this.modalFormSubscription = this.modalForm.subscribe(
+      ({
+        open,
+        form = {
+          name: '',
+          city: '',
+        },
+        readOnly = false,
+      }) => {
+        this.readOnly = readOnly;
+        if (open) {
+          console.log(form);
+          const { name, city } = form;
+          this.form = this.fb.group({
+            name,
+            city,
+            bedrooms: '',
+            beds: '',
+          });
+          const modal = this.modalService.open(this.modalTemplate, {
+            size: 'lg',
+            windowClass: 'modal-md-personalized modal-dialog-scroll',
+            centered: true,
+          });
+          document
+            .getElementById('bodyGeneral')
+            .removeAttribute('style');
+          this.modalActions.close = () => {
+            modal.close();
+          };
+        }
+      },
+    );
   }
 
   ngOnDestroy(): void {
@@ -123,7 +140,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           break;
         case 1:
           let allBedrooms = [];
-          this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+          this.arrayBedrooms.forEach(({ bedrooms }) =>
+            allBedrooms.push(...bedrooms),
+          );
           console.log({
             name,
             city,

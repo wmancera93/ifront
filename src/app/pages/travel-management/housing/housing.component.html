@@ -32,7 +32,7 @@
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
               <button
-                (click)="openModal()"
+                (click)="modalForm.next({ open: true, isNew: true })"
                 type="button"
                 class="btn tabDate btn-block"
               >
@@ -106,16 +106,16 @@
       <!-- end filters -->
 
       <div class="row justify-content-center top-containter">
-        <div class="col-12" *ngIf="housing.length > 0">
+        <div class="col-12" *ngIf="housings.length > 0">
           <div
             class="widget bg-white-1x"
-            *ngFor="let generalHousing of housing"
+            *ngFor="let housing of housings"
           >
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-1 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket # {{ generalHousing.id }}
+                    Ticket # {{ housing.id }}
                   </span>
                 </h5>
               </div>
@@ -124,7 +124,7 @@
               >
                 <h3 class="font-color-default">
                   <div class="display-block">
-                    {{ generalHousing.name }}
+                    {{ housing.name }}
                   </div>
                 </h3>
               </div>
@@ -137,7 +137,7 @@
                       <p class="text-center">Total espacios</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ generalHousing.total_bed }}
+                      {{ housing.total_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -145,7 +145,7 @@
                       <p class="text-center">Espacios asignados</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ generalHousing.assigned_bed }}
+                      {{ housing.assigned_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -153,7 +153,7 @@
                       <p class="text-center">Espacios ocupados</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ generalHousing.busy_bed }}
+                      {{ housing.busy_bed }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -161,7 +161,7 @@
                       <p class="text-center">Espacios disponibles</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ generalHousing.available_bed }}
+                      {{ housing.available_bed }}
                     </p>
                   </div>
                 </div>
@@ -170,18 +170,38 @@
                 class="col-lg-3 col-md-5 col-12 text-md-left text-center top-p"
               >
                 <div class="row">
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      generalHousing.action_housing_index_view[0]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="
+                        activeState(housing, 'watch')
+                          ? modalForm.next({
+                              open: true,
+                              isNew: false,
+                              readOnly: true
+                            })
+                          : undefined
+                      "
+                    >
                       <div
                         class="col-12 text-success number-size"
                         id="hideTrash"
-                        style="cursor: pointer"
+                        [ngClass]="{
+                          'text-success': activeState(
+                            housing,
+                            'watch'
+                          )
+                        }"
+                        [ngStyle]="{
+                          'cursor: pointer': activeState(
+                            housing,
+                            'watch'
+                          ),
+                          'cursor: no-drop': !activeState(
+                            housing,
+                            'watch'
+                          )
+                        }"
                       >
                         <i
                           class="fa fa-eye"
@@ -194,42 +214,34 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      !generalHousing.action_housing_index_view[0]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="
+                        activeState(housing, 'edit')
+                          ? modalForm.next({
+                              open: true,
+                              isNew: false
+                            })
+                          : undefined
+                      "
+                    >
                       <div
                         class="col-12 number-size"
                         id="hideTrash"
-                        style="cursor: no-drop"
-                      >
-                        <i
-                          class="fa fa-eye"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Ver
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      generalHousing.action_housing_index_view[2]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size text-info"
-                        id="hideTrash"
-                        style="cursor: pointer"
+                        [ngClass]="{
+                          'text-info': activeState(housing, 'edit')
+                        }"
+                        [ngStyle]="{
+                          'cursor: pointer': activeState(
+                            housing,
+                            'edit'
+                          ),
+                          'cursor: no-drop': !activeState(
+                            housing,
+                            'edit'
+                          )
+                        }"
                       >
                         <i
                           class="fa fa-pencil"
@@ -242,66 +254,34 @@
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      !generalHousing.action_housing_index_view[2]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size "
-                        id="hideTrash"
-                        style="cursor: no-drop"
-                      >
-                        <i
-                          class="fa fa-pencil"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Editar
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      generalHousing.action_housing_index_view[1]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size text-danger"
-                        id="hideTrash"
-                        style="cursor: pointer"
-                      >
-                        <i
-                          class="fa fa-trash"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Borrar
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      !generalHousing.action_housing_index_view[1]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="
+                        activeState(housing, 'delete')
+                          ? deleteHousing(housing.id)
+                          : undefined
+                      "
+                    >
                       <div
                         class="col-12 number-size"
                         id="hideTrash"
-                        style="cursor: no-drop"
+                        [ngClass]="{
+                          'text-danger': activeState(
+                            housing,
+                            'delete'
+                          )
+                        }"
+                        [ngStyle]="{
+                          'cursor: pointer': activeState(
+                            housing,
+                            'delete'
+                          ),
+                          'cursor: no-drop': !activeState(
+                            housing,
+                            'delete'
+                          )
+                        }"
                       >
                         <i
                           class="fa fa-trash"

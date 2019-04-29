@@ -45,6 +45,7 @@ import { PerformanceEvaluationService } from './performance-evaluation/performan
 import { DataDableSharedService } from './shared/common/data-table/data-dable-shared.service';
 import { TravelService } from './travel-management/travels/travel.service';
 import { HotelsService } from './travel-management/hotels/hotels.service';
+import { HousingService } from './travel-management/housing/housing.service';
 import { TravelsService } from './shared/travels/travels.service';
 import { TooltipSharedService } from './shared/common/tooltip/tooltip-shared.service';
 import { PerformanceEvalSharedService } from './shared/common/performance-evaluation/performance-eval-shared.service';
@@ -109,6 +110,7 @@ import { TranslateService } from './common/translate/translate.service';
     DataDableSharedService,
     TravelService,
     HotelsService,
+    HousingService,
     TravelsService,
     TooltipSharedService,
     PerformanceEvalSharedService,
