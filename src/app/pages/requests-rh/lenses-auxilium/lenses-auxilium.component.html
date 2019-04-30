@@ -1,21 +1,56 @@
 <div class="row justify-content-center">
   <div class="col-12 col-lg-12">
-    <form [formGroup]="form" class="row align-content-center justify-content-center">
+    <form
+      [formGroup]="form"
+      class="row align-content-center justify-content-center"
+    >
+      <div class="col-12">
+        <label for="celulaInput" class="titleColor">
+          <i class="fa fa-usd fa-comment text-primary-hr"></i>
+          {{
+            'pages.requests_rh.forms_requests.total_ammount'
+              | translate
+          }}
+        </label>
+        <input
+          type="number"
+          class="form-control"
+          [formControl]="forms.total_ammount"
+        />
+      </div>
       <div class="col-12 top-containter">
         <div class="container">
           <div class="row">
-            <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
-              <div class="alert pr-0" style="background-color:rgba(0,0,0,.2) " role="alert">
+            <div
+              class="col-12"
+              *ngFor="let imgsaved of objectImg; let index = index"
+            >
+              <div
+                class="alert pr-0"
+                style="background-color:rgba(0,0,0,.2) "
+                role="alert"
+              >
                 <div class="row cursor-general w-100">
                   <div class="col-auto px-2">{{ index + 1 }}.</div>
                   <div class="col-auto">
-                    <i aria-hidden="true" style="font-size: 1.5em; color: white" class="fa fa-fw {{ iconClass(imgsaved.extension) }}"></i>
+                    <i
+                      aria-hidden="true"
+                      style="font-size: 1.5em; color: white"
+                      class="fa fa-fw {{
+                        iconClass(imgsaved.extension)
+                      }}"
+                    ></i>
                   </div>
                   <div class="col text-truncate">
                     {{ imgsaved.file.name }}
                   </div>
-                  <div (click)="deleteUpload(imgsaved)" class="col-auto text-center d-flex align-items-center pl-3">
-                    <h6 class="text-primary-hr cursor-general my-auto">
+                  <div
+                    (click)="deleteUpload(imgsaved)"
+                    class="col-auto text-center d-flex align-items-center pl-3"
+                  >
+                    <h6
+                      class="text-primary-hr cursor-general my-auto"
+                    >
                       x
                     </h6>
                   </div>
@@ -29,23 +64,59 @@
         <div class="container-fluid">
           <label *ngIf="objectImg.length == 0" class="titleColor">
             <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-            <strong>{{ 'pages.travel_management.travel.new_travel.attach' | translate }}</strong>
+            <strong>{{
+              'pages.travel_management.travel.new_travel.attach'
+                | translate
+            }}</strong>
           </label>
-          <app-file-upload [drageable]="true" [nameFile]="filequotation" [extensions]="extensions"></app-file-upload>
+          <app-file-upload
+            [drageable]="true"
+            [nameFile]="filequotation"
+            [extensions]="extensions"
+          ></app-file-upload>
         </div>
       </div>
       <div class="col-12">
         <label for="celulaInput" class="titleColor">
           <i class="fa fa-fw fa-comment text-primary-hr"></i>
-          {{ 'pages.requests_rh.forms_requests.observation' | translate }}
+          {{
+            'pages.requests_rh.forms_requests.observation' | translate
+          }}
         </label>
-        <textarea type="text" rows="3" style="height: auto !important;" class="form-control" [formControl]="forms.observation_request"> </textarea>
+        <textarea
+          type="text"
+          rows="3"
+          style="height: auto !important;"
+          class="form-control"
+          [formControl]="forms.observation_request"
+        >
+        </textarea>
       </div>
       <div class="col-md-12 mt-2">
         <div class="row justify-content-end">
           <div class="col-lg-3 col-md-6 col-lg-4 col-12">
-            <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="submitSend()" [attr.disabled]="validateForms ? null : true"><i class="fa fa-fw fa-floppy-o"></i>{{ 'pages.requests_rh.forms_requests.save' | translate }}</button>
-            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block"><i class="fa fa-fw fa-spinner fa-spin"></i>{{ 'pages.requests_rh.forms_requests.loading' | translate }}</button>
+            <button
+              type="button"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block"
+              (click)="submitSend()"
+              [attr.disabled]="validateForms ? null : true"
+            >
+              <i class="fa fa-fw fa-floppy-o"></i
+              >{{
+                'pages.requests_rh.forms_requests.save' | translate
+              }}
+            </button>
+            <button
+              type="button"
+              *ngIf="!showSubmit"
+              class="btn btn-warning btn-block"
+            >
+              <i class="fa fa-fw fa-spinner fa-spin"></i
+              >{{
+                'pages.requests_rh.forms_requests.loading' | translate
+              }}
+            </button>
           </div>
         </div>
       </div>
