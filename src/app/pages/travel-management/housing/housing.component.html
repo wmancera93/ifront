@@ -175,11 +175,7 @@
                       class="row justify-content-center"
                       (click)="
                         activeState(housing, 'watch')
-                          ? modalForm.next({
-                              open: true,
-                              isNew: false,
-                              readOnly: true
-                            })
+                          ? watchHousing(housing)
                           : undefined
                       "
                     >
@@ -219,10 +215,7 @@
                       class="row justify-content-center"
                       (click)="
                         activeState(housing, 'edit')
-                          ? modalForm.next({
-                              open: true,
-                              isNew: false
-                            })
+                          ? editHousing(housing)
                           : undefined
                       "
                     >

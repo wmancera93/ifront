@@ -37,6 +37,25 @@ export class HousingComponent implements OnInit {
     this.router.navigate(['ihr/travel_management']);
   }
 
+  watchHousing(housing) {
+    const { name, city_id, id } = housing;
+    this.modalForm.next({
+      open: true,
+      isNew: false,
+      readOnly: true,
+      form: { name, city: city_id, id },
+    });
+  }
+
+  editHousing(housing) {
+    const { name, city_id, id } = housing;
+    this.modalForm.next({
+      open: true,
+      isNew: false,
+      form: { name, city: city_id, id },
+    });
+  }
+
   deleteHousing(id) {
     const alertWarning = [
       {
@@ -49,6 +68,7 @@ export class HousingComponent implements OnInit {
     ];
     this.alert.setAlert(alertWarning[0]);
   }
+
   collapse(collapse: boolean) {
     this.is_collapse = collapse;
   }
