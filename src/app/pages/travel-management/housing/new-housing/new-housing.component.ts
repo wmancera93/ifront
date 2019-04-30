@@ -16,6 +16,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { Observable } from 'rxjs';
+import { HousingService } from '../../../../services/travel-management/housing/housing.service';
+import { HousingForm } from '../../../../models/common/travels_management/housing/housing';
 
 @Component({
   selector: 'app-new-housing',
@@ -65,6 +67,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   constructor(
     private modalService: NgbModal,
     public formsRequestsService: FormsRequestsService,
+    public housingService: HousingService,
     public alert: AlertsService,
     private fb: FormBuilder,
     public formDataService: FormDataService,
@@ -80,24 +83,51 @@ export class NewHousingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.modalFormSubscription = this.modalForm.subscribe(
-      ({
-        open,
-        form = {
-          name: '',
-          city: '',
-        },
-        readOnly = false,
-      }) => {
+      (options: HousingForm) => {
+        const {
+          open,
+          form = {
+            name: '',
+            city: '',
+          },
+          readOnly = false,
+          isNew = true,
+        } = options;
+
+        this.stepActive = 0;
         this.readOnly = readOnly;
+
         if (open) {
-          console.log(form);
-          const { name, city } = form;
+          const { name, city, id } = form;
           this.form = this.fb.group({
             name,
             city,
             bedrooms: '',
             beds: '',
           });
+          if (!isNew) {
+            const housings = this.housingService.getbedroomsByHousing(
+              id,
+            );
+            let bedrooms = {};
+            housings.forEach(housing => {
+              const length = housing.beds.length;
+              const temp = bedrooms[length] || {
+                bedrooms: [],
+                count: {
+                  beds: length,
+                },
+                key: uuid.v4(),
+              };
+
+              temp.bedrooms.push(housing);
+              bedrooms = {
+                ...bedrooms,
+                [length]: temp,
+              };
+            });
+            this.arrayBedrooms = Object.values(bedrooms);
+          }
           const modal = this.modalService.open(this.modalTemplate, {
             size: 'lg',
             windowClass: 'modal-md-personalized modal-dialog-scroll',

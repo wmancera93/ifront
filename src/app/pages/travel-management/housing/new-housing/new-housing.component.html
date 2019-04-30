@@ -20,7 +20,7 @@
         </label>
         <select
           class="form-control"
-          [attr.disabled]="readOnly"
+          [attr.disabled]="readOnly ? true : null"
           [formControl]="forms.city"
         >
           <option value="">Seleccione</option>

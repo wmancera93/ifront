@@ -49,10 +49,111 @@ export class HousingService {
       available_bed: 3,
     },
   ];
+
+  bedrooms = {
+    bedroom_1: [
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+    ],
+    bedroom_2: [
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+    ],
+    bedroom_3: [
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [{ label: '' }, { label: '' }, { label: '' }],
+      },
+      {
+        label: '',
+        beds: [
+          { label: '' },
+          { label: '' },
+          { label: '' },
+          { label: '' },
+          { label: '' },
+        ],
+      },
+      {
+        label: '',
+        beds: [
+          { label: '' },
+          { label: '' },
+          { label: '' },
+          { label: '' },
+          { label: '' },
+        ],
+      },
+    ],
+  };
   constructor() {}
 
   getHousingByCompany() {
     return this.housing;
+  }
+
+  getbedroomsByHousing(housing_id) {
+    return this.bedrooms[`bedroom_${housing_id}`];
   }
 
   deleteHousingByCompany(housing_id: any) {
