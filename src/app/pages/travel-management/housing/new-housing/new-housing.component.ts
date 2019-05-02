@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  OnDestroy,
-  Input,
-  ElementRef,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, ElementRef } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
@@ -73,75 +65,66 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public formDataService: FormDataService,
     public stylesExplorerService: StylesExplorerService,
   ) {
-    this.cities = [
-      { id: 1, name: 'Bogota' },
-      { id: 2, name: 'Medellin' },
-    ];
+    this.cities = [{ id: 1, name: 'Bogota' }, { id: 2, name: 'Medellin' }];
 
     this.form = new FormGroup({});
   }
 
   ngOnInit() {
-    this.modalFormSubscription = this.modalForm.subscribe(
-      (options: HousingForm) => {
-        const {
-          open,
-          form = {
-            name: '',
-            city: '',
-          },
-          readOnly = false,
-          isNew = true,
-        } = options;
+    this.modalFormSubscription = this.modalForm.subscribe((options: HousingForm) => {
+      const {
+        open,
+        form = {
+          name: '',
+          city: '',
+        },
+        readOnly = false,
+        isNew = true,
+      } = options;
+      this.arrayBedrooms = [];
+      this.stepActive = 0;
+      this.readOnly = readOnly;
 
-        this.stepActive = 0;
-        this.readOnly = readOnly;
+      if (open) {
+        const { name, city, id } = form;
+        this.form = this.fb.group({
+          name,
+          city,
+          bedrooms: '',
+          beds: '',
+        });
+        if (!isNew) {
+          const housings = this.housingService.getbedroomsByHousing(id);
+          let bedrooms = {};
+          housings.forEach(housing => {
+            const length = housing.beds.length;
+            const temp = bedrooms[length] || {
+              bedrooms: [],
+              count: {
+                beds: length,
+              },
+              key: uuid.v4(),
+            };
 
-        if (open) {
-          const { name, city, id } = form;
-          this.form = this.fb.group({
-            name,
-            city,
-            bedrooms: '',
-            beds: '',
+            temp.bedrooms.push(housing);
+            bedrooms = {
+              ...bedrooms,
+              [length]: temp,
+            };
           });
-          if (!isNew) {
-            const housings = this.housingService.getbedroomsByHousing(
-              id,
-            );
-            let bedrooms = {};
-            housings.forEach(housing => {
-              const length = housing.beds.length;
-              const temp = bedrooms[length] || {
-                bedrooms: [],
-                count: {
-                  beds: length,
-                },
-                key: uuid.v4(),
-              };
-
-              temp.bedrooms.push(housing);
-              bedrooms = {
-                ...bedrooms,
-                [length]: temp,
-              };
-            });
-            this.arrayBedrooms = Object.values(bedrooms);
-          }
-          const modal = this.modalService.open(this.modalTemplate, {
-            size: 'lg',
-            windowClass: 'modal-md-personalized modal-dialog-scroll',
-            centered: true,
-          });
-          document
-            .getElementById('bodyGeneral')
-            .removeAttribute('style');
-          this.modalActions.close = () => {
-            modal.close();
-          };
+          this.arrayBedrooms = Object.values(bedrooms);
         }
-      },
-    );
+        const modal = this.modalService.open(this.modalTemplate, {
+          size: 'lg',
+          windowClass: 'modal-md-personalized modal-dialog-scroll',
+          centered: true,
+        });
+        document.getElementById('bodyGeneral').removeAttribute('style');
+        this.modalActions.close = () => {
+          modal.close();
+        };
+      }
+    });
   }
 
   ngOnDestroy(): void {
@@ -170,9 +153,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           break;
         case 1:
           let allBedrooms = [];
-          this.arrayBedrooms.forEach(({ bedrooms }) =>
-            allBedrooms.push(...bedrooms),
-          );
+          this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
           console.log({
             name,
             city,
@@ -212,16 +193,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
 
   editHousig({ bed, modal }) {
     this.bedGroupSelect = bed;
-    const modalBedRoom = this.modalService.open(modal, {
-      /* size: 'lg', */
-      windowClass:
-        'modal-md-personalized modal-dialog-scroll modal-second',
-      backdropClass: 'backdrop-modal-second',
-      centered: true,
-    });
-    this.modalBedRoomActions.close = () => {
-      modalBedRoom.close();
-    };
   }
 
   get getBedRooms() {
@@ -229,10 +200,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   removeHousig(bed) {
-    this.arrayBedrooms.splice(
-      this.arrayBedrooms.findIndex(filter => filter.key === bed),
-      1,
-    );
+    this.arrayBedrooms.splice(this.arrayBedrooms.findIndex(filter => filter.key === bed), 1);
   }
 
   removeBedRom(bedroom) {

@@ -43,6 +43,7 @@ export class HousingComponent implements OnInit {
       open: true,
       isNew: false,
       readOnly: true,
+      
       form: { name, city: city_id, id },
     });
   }
