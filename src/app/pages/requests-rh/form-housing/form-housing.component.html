@@ -7,12 +7,49 @@
       <div class="col-12">
         <div class="row">
           <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('document_type')"
+          >
+            <label class="titleColor">
+              <i
+                class="fa fa-fw fa-address-card-o text-primary-hr"
+              ></i>
+              {{ parseT('document_type') | translate }} *
+            </label>
+            <select
+              class="form-control"
+              [formControl]="forms.document_type"
+            >
+              <option value="">Seleccione</option>
+              <option
+                *ngFor="let identificationType of identificationTypes"
+                [value]="identificationType.id"
+              >
+                {{ identificationType.name }}
+              </option>
+            </select>
+          </div>
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('document_number')"
+          >
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              {{ parseT('document_number') | translate }} *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.document_number"
+            />
+          </div>
+          <div
             class="col-12 top-containter"
             *ngIf="formState('housing')"
           >
             <label>
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
-              Alojamiento *
+              {{ parseT('housing_form') | translate }} *
             </label>
             <select
               class="form-control"
@@ -33,7 +70,7 @@
           >
             <label>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Fecha de llegada *
+              {{ parseT('arrival_date') | translate }} *
             </label>
             <input
               type="date"
@@ -47,7 +84,7 @@
           >
             <label>
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Fecha de Salida *
+              {{ parseT('out_date') | translate }} *
             </label>
             <input
               type="date"
@@ -60,7 +97,7 @@
       <div class="col-12">
         <div class="form-check text-center">
           <div class="d-block">
-            ¿Quieres elegir una cama manualmente?
+            {{ parseT('option_bed') | translate }}
           </div>
           <div
             class="custom-control custom-radio custom-control-inline"
@@ -77,7 +114,7 @@
               for="radio-yes"
               (click)="handleChooseRoom(true)"
             >
-              Si
+              {{ parseT('yes') | translate }}
             </label>
           </div>
           <div
@@ -95,7 +132,7 @@
               for="radio-no"
               (click)="handleChooseRoom(false)"
             >
-              No
+              {{ parseT('no') | translate }}
             </label>
           </div>
         </div>
@@ -141,7 +178,7 @@
                   class="alert alert-warning text-center"
                   role="alert"
                 >
-                  No tienes habitaciones registradas.
+                  {{ parseT('rooms_registrer') | translate }}.
                 </div>
               </div>
               <div *ngIf="loadingRoms" class="col-12 text-center">
@@ -167,7 +204,9 @@
               [attr.disabled]="validateForms ? null : true"
             >
               <i class="fa fa-fw fa-floppy-o"></i
-              >{{ parseT('save') | translate }}
+              >{{
+                'pages.requests_rh.forms_requests.save' | translate
+              }}
             </button>
             <button
               type="button"
@@ -175,7 +214,9 @@
               class="btn btn-warning btn-block"
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
-              >{{ parseT('loading') | translate }}
+              >{{
+                'pages.requests_rh.forms_requests.loading' | translate
+              }}
             </button>
           </div>
         </div>

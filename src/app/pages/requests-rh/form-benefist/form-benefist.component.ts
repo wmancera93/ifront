@@ -1,9 +1,26 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
-import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  FormGroup,
+  Validators,
+  FormBuilder,
+  AbstractControl,
+} from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
+import {
+  TypesRequest,
+  formsRequest,
+} from '../../../models/common/requests-rh/requests-rh';
 
 @Component({
   selector: 'app-form-benefist',
@@ -19,12 +36,13 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions =
+    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public academic_level_types: any[] = [];
   public employee_family_id_types: any[] = [];
-  public document_types_list: any[] = [];
+  public identificationTypes: any[] = [];
   public concept_types_list: any[] = [];
   public institution_types_list: any[] = [];
   public arrayConcept: any[] = [];
@@ -32,15 +50,14 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   public iconDocument = '';
   public is_upload = false;
   public deleteDocumenFile: string;
-  public formCases = {
+
+  private allForms = new FormState({
     cases: {
       EDUB: {
         academic_level: true,
         employee_family_id: true,
         type_identification: true,
         number_identification: true,
-        career: false,
-        semester: false,
       },
       EDUU: {
         academic_level: true,
@@ -50,22 +67,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         career: true,
         semester: true,
       },
-      EDUS: {
-        academic_level: false,
-        employee_family_id: false,
-        type_identification: false,
-        number_identification: false,
-        career: false,
-        semester: false,
-      },
-      EDUI: {
-        academic_level: false,
-        employee_family_id: false,
-        type_identification: false,
-        number_identification: false,
-        career: false,
-        semester: false,
-      },
+      EDUS: {},
+      EDUI: {},
     },
     allCases: {
       institution: true,
@@ -73,7 +76,11 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       value: true,
       observation_request: true,
     },
-  };
+  });
+
+  formState(formState) {
+    return this.allForms.run(formState);
+  }
 
   private subscription: ISubscription;
 
@@ -94,24 +101,62 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   parseT(key) {
-    return `pages.requests_rh.forms_requests.${key}`;
+    return `pages.requests_rh.forms_benefist.${key}`;
   }
 
-  constructor(private fb: FormBuilder, public fileUploadService: FileUploadService, public alert: AlertsService, public translate: TranslateService) {
-    this.formState.bind(this);
-    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'deleteNewDocumentSaved') {
-        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
-        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
-      }
-      this.setModalState.emit(true);
-    });
+  constructor(
+    private fb: FormBuilder,
+    public fileUploadService: FileUploadService,
+    public alert: AlertsService,
+    public translate: TranslateService,
+  ) {
+    this.subscription = this.alert
+      .getActionConfirm()
+      .subscribe((data: any) => {
+        if (data === 'deleteNewDocumentSaved') {
+          this.objectImg.splice(
+            this.objectImg.findIndex(
+              filter => filter.file.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+          this.file.splice(
+            this.file.findIndex(
+              filter => filter.name === this.deleteDocumenFile,
+            ),
+            1,
+          );
+        }
+        this.setModalState.emit(true);
+      });
 
-    this.academic_level_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }, { id: 3, name: 'Bachiderato' }, { id: 4, name: 'Tecnico' }, { id: 5, name: 'Tecnologo' }, { id: 6, name: 'Universitario' }];
-    this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
-    this.document_types_list = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
-    this.concept_types_list = [{ id: 'enrollment', name: 'Monto de Matricula' }, { id: 'transport', name: 'monto de transporte' }, { id: 'pension', name: 'Monto de pension' }, { id: 'feeding', name: 'Monto de alimentacion' }];
-    this.institution_types_list = [{ id: 1, name: 'Wall Strere Englis Institute' }, { id: 2, name: 'Brith Council' }, { id: 3, name: 'Centro Colombo Americano Institute' }];
+    this.academic_level_types = [
+      { id: 1, name: 'Preescolar' },
+      { id: 2, name: 'Primaria' },
+      { id: 3, name: 'Bachiderato' },
+      { id: 4, name: 'Tecnico' },
+      { id: 5, name: 'Tecnologo' },
+      { id: 6, name: 'Universitario' },
+    ];
+    this.employee_family_id_types = [
+      { id: 1, name: 'Preescolar' },
+      { id: 2, name: 'Primaria' },
+    ];
+    this.identificationTypes = [
+      { id: 1, name: 'Cedula' },
+      { id: 2, name: 'Tarjeta de identidad' },
+    ];
+    this.concept_types_list = [
+      { id: 'enrollment', name: 'Monto de Matricula' },
+      { id: 'transport', name: 'monto de transporte' },
+      { id: 'pension', name: 'Monto de pension' },
+      { id: 'feeding', name: 'Monto de alimentacion' },
+    ];
+    this.institution_types_list = [
+      { id: 1, name: 'Wall Strere Englis Institute' },
+      { id: 2, name: 'Brith Council' },
+      { id: 3, name: 'Centro Colombo Americano Institute' },
+    ];
   }
 
   ngOnInit() {
@@ -126,75 +171,52 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       });
     });
 
+    this.allForms.setCaseForm(this.idActivity);
+
     this.form = new FormGroup({});
     const { required } = Validators;
+    const formBuild = (
+      forms: string[],
+      formsDefault: Object = {},
+    ): Object => {
+      forms.forEach(form => {
+        formsDefault = {
+          ...formsDefault,
+          [form]: [
+            '',
+            (control: AbstractControl) => {
+              return this.formState(form) ? required(control) : null;
+            },
+          ],
+        };
+      });
+      return formsDefault;
+    };
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
-      academic_level: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('academic_level') ? required(control) : null;
-        },
-      ],
-      employee_family_id: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('employee_family_id') ? required(control) : null;
-        },
-      ],
-      number_identification: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('number_identification') ? required(control) : null;
-        },
-      ],
-      type_identification: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('type_identification') ? required(control) : null;
-        },
-      ],
+      ...formBuild([
+        'academic_level',
+        'employee_family_id',
+        'number_identification',
+        'type_identification',
+        'career',
+        'semester',
+        'observation_request',
+      ]),
       institution: [
         '',
         (control: AbstractControl) => {
           return required(control);
         },
       ],
-      career: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('career') ? required(control) : null;
-        },
-      ],
-      semester: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('semester') ? required(control) : null;
-        },
-      ],
       concept: '',
       value: '',
       file: [],
-      observation_request: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('observation_request') ? required(control) : null;
-        },
-      ],
     });
   }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
-  }
-
-  formState(form: string): boolean {
-    const { cases, allCases } = this.formCases;
-    try {
-      return { ...allCases, ...cases[this.idActivity] }[form];
-    } catch (e) {
-      return false;
-    }
   }
 
   iconClass(extension: string) {
@@ -257,11 +279,17 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   removeConcept(idConcept) {
-    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
+    this.arrayConcept.splice(
+      this.arrayConcept.findIndex(
+        filter => filter.concept.id === idConcept,
+      ),
+      1,
+    );
   }
 
   addConcept() {
     const { concept, value } = this.form.controls;
+    console.log(concept);
     this.arrayConcept.push({
       concept: JSON.parse(concept.value),
       value: value.value,
@@ -276,7 +304,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     this.alert.setAlert({
       type: 'warning',
       title: this.t('type_alert_ts'),
-      message: this.t('message_alert_ts') + param.file.name.toString() + '?',
+      message:
+        this.t('message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });
