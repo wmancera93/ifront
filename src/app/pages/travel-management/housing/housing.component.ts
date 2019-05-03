@@ -15,15 +15,19 @@ export class HousingComponent implements OnInit {
   public is_collapse: boolean;
   public isNew: boolean;
 
+  styleCursor(housing, cursor): string {
+    return this.activeState(housing, cursor) ? 'pointer' : 'no-drop';
+  }
+
   activeState(housing, action) {
     return housing.action_housing_index_view[action].state;
   }
 
-  constructor(
-    public housingService: HousingService,
-    public router: Router,
-    public alert: AlertsService,
-  ) {}
+  parseT(key) {
+    return `pages.travel_management.housing.${key}`;
+  }
+
+  constructor(public housingService: HousingService, public router: Router, public alert: AlertsService) {}
 
   ngOnInit() {
     this.chargeHousing();
@@ -43,7 +47,7 @@ export class HousingComponent implements OnInit {
       open: true,
       isNew: false,
       readOnly: true,
-      
+
       form: { name, city: city_id, id },
     });
   }

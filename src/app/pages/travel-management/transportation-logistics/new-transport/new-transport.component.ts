@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  OnDestroy,
-  Input,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
@@ -15,6 +8,8 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { Observable } from 'rxjs';
+import { TrasportationForm } from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
+import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
 
 @Component({
   selector: 'app-new-transport',
@@ -31,20 +26,24 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public showSubmit = true;
   public form: any;
   public stepActive = 0;
-
+  public readOnlyFleet = false;
   public model = {};
 
   public modalState = true;
 
-  public arrayTrayects: any[] = [];
+  public journeys: any[] = [];
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
-
+  public generalVehicle: any;
   private modalFormSubscription: any;
 
   get forms() {
     return this.form.controls;
+  }
+
+  parseT(key) {
+    return `pages.travel_management.transportation_logistics.transportation_management.${key}`;
   }
 
   constructor(
@@ -54,21 +53,11 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public formDataService: FormDataService,
     public stylesExplorerService: StylesExplorerService,
+    public transportationLogisticsService: TransportationLogisticsService,
   ) {
-    this.servicesList = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-      { id: 3, name: 'Bachiderato' },
-      { id: 4, name: 'Tecnico' },
-      { id: 5, name: 'Tecnologo' },
-      { id: 6, name: 'Universitario' },
-    ];
-    this.companiesList = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-    ];
+    this.companiesList = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Chimuelos logistics' }];
+    this.servicesList = [{ id: 1, name: 'General' }, { id: 2, name: 'Especial' }];
 
-    this.form = new FormGroup({});
     this.form = this.fb.group({
       vehicle_plate: [''],
       driver: [''],
@@ -76,8 +65,6 @@ export class NewTransportComponent implements OnInit, OnDestroy {
       number_positions: [''],
       type_service: [''],
       phone_driver: [''],
-      concept: [''],
-      value: [''],
       origin: [''],
       destiny: [''],
       date_time_departure: [''],
@@ -86,16 +73,54 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.modalFormSubscription = this.modalForm.subscribe(() => {
-      const modal = this.modalService.open(this.modalTemplate, {
-        size: 'lg',
-        windowClass: 'modal-md-personalized modal-dialog-scroll',
-        centered: true,
-      });
-      this.modalActions.close = () => {
-        modal.close();
-      };
-      document.getElementById('bodyGeneral').removeAttribute('style');
+    this.modalFormSubscription = this.modalForm.subscribe((options: TrasportationForm) => {
+      const {
+        open,
+        form = {
+          plate: '',
+          city: '',
+        },
+        readOnly = false,
+        isNew = true,
+      } = options;
+      this.stepActive = 0;
+      this.readOnlyFleet = readOnly;
+
+      if (open) {
+        this.journeys = [];
+        this.generalVehicle = [];
+        const { plate, id } = form;
+        this.generalVehicle = this.transportationLogisticsService.getVehicle(id);
+        const { driver, company, number_positions, phone_driver, type_service } = isNew
+          ? { driver: '', company: '', number_positions: '', phone_driver: '', type_service: '' }
+          : this.generalVehicle;
+        this.form = this.fb.group({
+          vehicle_plate: plate,
+          driver,
+          company,
+          number_positions,
+          type_service,
+          phone_driver,
+          origin: [''],
+          destiny: [''],
+          date_time_departure: [''],
+          durationTrayect: [''],
+        });
+        if (!isNew) {
+          this.generalVehicle.journey.forEach(element => {
+            this.journeys.push(element);
+          });
+        }
+        const modal = this.modalService.open(this.modalTemplate, {
+          size: 'lg',
+          windowClass: 'modal-md-personalized modal-dialog-scroll',
+          centered: true,
+        });
+        document.getElementById('bodyGeneral').removeAttribute('style');
+        this.modalActions.close = () => {
+          modal.close();
+        };
+      }
     });
   }
 
@@ -115,21 +140,26 @@ export class NewTransportComponent implements OnInit, OnDestroy {
 
   handleStep({ next, back }) {
     if (next) {
-      this.stepActive++;
+      switch (this.stepActive) {
+        case 0:
+          this.stepActive++;
+          break;
+        case 1:
+   
+          break;
+
+        default:
+          break;
+      }
     }
-    if (back) {
+    if (back && this.stepActive > 0) {
       this.stepActive--;
     }
   }
 
   addTrayect() {
-    const {
-      origin,
-      destiny,
-      date_time_departure,
-      durationTrayect,
-    } = this.form.controls;
-    this.arrayTrayects.push({
+    const { origin, destiny, date_time_departure, durationTrayect } = this.form.controls;
+    this.journeys.push({
       origin: origin.value,
       destiny: destiny.value,
       date_time_departure: date_time_departure.value,
@@ -143,11 +173,6 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   }
 
   removeTrayect(keyTrayect) {
-    this.arrayTrayects.splice(
-      this.arrayTrayects.findIndex(
-        filter => filter.key === keyTrayect,
-      ),
-      1,
-    );
+    this.journeys.splice(this.journeys.findIndex(filter => filter.key === keyTrayect), 1);
   }
 }

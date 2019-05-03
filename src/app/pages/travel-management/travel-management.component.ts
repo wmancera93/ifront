@@ -170,7 +170,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-bus',
               tooltipText: 'Aqui puede ver los cupos de viaje',
-              route: '/ihr/logistics_transportations',
+              route: '/ihr/logistics_reports',
             },
           ];
         }
@@ -201,7 +201,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-bus',
               tooltipText: 'Aqui puede ver los cupos de viaje',
-              route: '/ihr/logistics_transportations',
+              route: '/ihr/logistics_reports',
             },
           ];
         }

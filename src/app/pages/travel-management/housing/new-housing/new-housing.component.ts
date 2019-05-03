@@ -6,10 +6,9 @@ import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
-import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
-import { Observable } from 'rxjs';
 import { HousingService } from '../../../../services/travel-management/housing/housing.service';
 import { HousingForm } from '../../../../models/common/travels_management/housing/housing';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-new-housing',
@@ -33,7 +32,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   };
   @Input() modalForm: Observable<any>;
 
-  public formRequests: TypesRequests = null;
   public showSubmit = true;
   public form: any;
   public stepActive = 0;
@@ -56,6 +54,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
+  parseT(key) {
+    return `pages.travel_management.housing.management_housing.${key}`;
+  }
+
   constructor(
     private modalService: NgbModal,
     public formsRequestsService: FormsRequestsService,
@@ -63,11 +65,8 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     private fb: FormBuilder,
     public formDataService: FormDataService,
-    public stylesExplorerService: StylesExplorerService,
   ) {
     this.cities = [{ id: 1, name: 'Bogota' }, { id: 2, name: 'Medellin' }];
-
-    this.form = new FormGroup({});
   }
 
   ngOnInit() {
@@ -112,7 +111,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
               [length]: temp,
             };
           });
-          this.arrayBedrooms = Object.values(bedrooms);
         }
         const modal = this.modalService.open(this.modalTemplate, {
           size: 'lg',

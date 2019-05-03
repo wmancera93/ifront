@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-bus"></i>
-          Gestión de flotas vehiculares
+          {{ parseT('transportation_management') | translate }}
         </div>
         <div
           class="col-xl-2 col-md-4 col-5 text-center cursor-general"
@@ -14,7 +14,7 @@
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
-                Atras
+                {{ parseT('back') | translate }}
               </span>
             </div>
           </div>
@@ -29,14 +29,14 @@
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
               <button
-                (click)="openModal()"
+              (click)="modalForm.next({ open: true, isNew: true })"
                 type="button"
                 class="btn tabDate btn-block"
               >
                 <i class="fa fa-plus"
                   >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
                 >
-                Crear nueva flota vehicular
+                {{ parseT('new_transport') | translate }}
               </button>
             </div>
           </div>
@@ -48,7 +48,7 @@
         <div class="row top-containter">
           <div class="col-xl-4 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
               *ngIf="!is_collapse"
@@ -79,31 +79,31 @@
             class="col-lg-3 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>Destino</label>
+            <label>{{ parseT('destiny') | translate }}</label>
+            <input type="text" class="form-control"/>
+          </div>
+          <div
+            class="col-lg-2 col-md-4 col-12"
+            style="padding-bottom: 15px"
+          >
+            <label>{{ parseT('ticket') | translate }}</label>
             <input type="text" class="form-control" />
           </div>
           <div
             class="col-lg-2 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>Ticket</label>
+            <label>{{ parseT('plate') | translate }}</label>
             <input type="text" class="form-control" />
           </div>
           <div
             class="col-lg-2 col-md-4 col-12"
             style="padding-bottom: 15px"
           >
-            <label>Placa</label>
-            <input type="text" class="form-control" />
-          </div>
-          <div
-            class="col-lg-2 col-md-4 col-12"
-            style="padding-bottom: 15px"
-          >
-            <label>Estado</label>
+            <label>{{ parseT('state') | translate }}</label>
             <select class="form-control">
-              <option>Disponible</option>
-              <option>Cerrado</option>
+              <option>{{ parseT('available') | translate }}</option>
+              <option>{{ parseT('close') | translate }}</option>
             </select>
           </div>
           <div class="col-lg-3 col-md-12 col-12">
@@ -112,7 +112,7 @@
               style="cursor: no-drop"
             >
               <i class="fa fa-search-plus"></i>
-              Consultar
+              {{ parseT('consult') | translate }}
             </div>
           </div>
         </div>
@@ -123,13 +123,13 @@
         <div class="col-12" *ngIf="fleets.length > 0">
           <div
             class="widget bg-white-1x"
-            *ngFor="let logistics of fleets"
+            *ngFor="let fleet of fleets"
           >
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-4 col-12">
                 <h5>
                   <span class="badge badge-warning">
-                    Ticket # {{ logistics.id }}
+                    {{ parseT('ticket') | translate }} # {{ fleet.id }}
                   </span>
                 </h5>
               </div>
@@ -138,10 +138,10 @@
               >
                 <h3 class="font-color-default">
                   <div class="display-block">
-                    {{ logistics.destiny }}
+                    {{ fleet.destiny }}
                   </div>
                   <div class="display-block">
-                    {{ logistics.plate }}
+                    {{ fleet.plate }}
                   </div>
                 </h3>
               </div>
@@ -149,16 +149,16 @@
                 class="col-lg-1 col-md-4 col-12 text-md-left text-center top-p"
               >
                 <p class="font-title-general">
-                  Estado:
+                  {{ parseT('state') | translate }}:
                 </p>
-                <h6 *ngIf="logistics.is_avalable">
+                <h6 *ngIf="fleet.is_avalable">
                   <span class="badge badge-primary">
-                    Disponible
+                    {{ parseT('available') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="!logistics.is_avalable">
+                <h6 *ngIf="!fleet.is_avalable">
                   <span class="badge badge-danger">
-                    Cerrado
+                    {{ parseT('close') | translate }}
                   </span>
                 </h6>
               </div>
@@ -168,26 +168,26 @@
                 <div class="row tex">
                   <div class="col-lg-4 col-md-4 col-12 text-md-left">
                     <h5>
-                      <p class="text-center">Total asientos</p>
+                      <p class="text-center">{{ parseT('total_seats') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ logistics.total_chairs }}
+                      {{ fleet.total_chairs }}
                     </p>
                   </div>
                   <div class="col-lg-4 col-md-4 col-12 text-md-left">
                     <h5>
-                      <p class="text-center">Asientos asignados</p>
+                      <p class="text-center">{{ parseT('busy_seats') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ logistics.assigned_spaces }}
+                      {{ fleet.assigned_spaces }}
                     </p>
                   </div>
                   <div class="col-lg-4 col-md-4 col-12 text-md-left">
                     <h5>
-                      <p class="text-center">Asientos disponibles</p>
+                      <p class="text-center">{{ parseT('available_seats') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ logistics.available_spaces }}
+                      {{ fleet.available_spaces }}
                     </p>
                   </div>
                 </div>
@@ -197,17 +197,17 @@
               >
                 <div class="row">
                   <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      logistics.action_tranportation_index_view[0]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                    class="col-4 number-size text-center top-p">
+                    <div class="row justify-content-center"
+                    (click)="activeState(fleet, 0) ? seeFleets(fleet) : undefined"
+                    [style.cursor]="styleCursorT(fleet, 0)"
+                    >
                       <div
                         class="col-12 text-success number-size"
-                        id="hideTrash"
-                        style="cursor: pointer"
+                        id="see"
+                        [ngClass]="{
+                          'text-success': activeState(fleet, 0)
+                        }"
                       >
                         <i
                           class="fa fa-eye"
@@ -216,46 +216,23 @@
                         ></i>
                       </div>
                       <div class="col-12">
-                        Ver
+                        {{ parseT('btn_see') | translate }}
                       </div>
                     </div>
                   </div>
                   <div
                     class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      !logistics.action_tranportation_index_view[0]
-                        .is_active
-                    "
                   >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size"
-                        id="hideTrash"
-                        style="cursor: no-drop"
-                      >
-                        <i
-                          class="fa fa-eye"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Ver
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      logistics.action_tranportation_index_view[2]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center"
+                    (click)="activeState(fleet, 2) ? editFleets(fleet) : undefined"
+                    [style.cursor]="styleCursorT(fleet, 2)"
+                    >
                       <div
                         class="col-12 number-size text-info"
-                        id="hideTrash"
-                        style="cursor: pointer"
+                        id="editPencil"
+                        [ngClass]="{
+                          'text-info': activeState(fleet, 2)
+                        }"
                       >
                         <i
                           class="fa fa-pencil"
@@ -264,46 +241,27 @@
                         ></i>
                       </div>
                       <div class="col-12">
-                        Editar
+                        {{ parseT('btn_edit') | translate }}
                       </div>
                     </div>
                   </div>
                   <div
                     class="col-4 number-size text-center top-p"
                     *ngIf="
-                      !logistics.action_tranportation_index_view[2]
+                      fleet.action_tranportation_index_view[1]
                         .is_active
                     "
                   >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size "
-                        id="hideTrash"
-                        style="cursor: no-drop"
-                      >
-                        <i
-                          class="fa fa-pencil"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Editar
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      logistics.action_tranportation_index_view[1]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
+                    <div class="row justify-content-center"
+                    (click)="activeState(fleet, 1) ? deleteFleets(fleet.id) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 1)"
+                    >
                       <div
                         class="col-12 number-size text-danger"
-                        id="hideTrash"
-                        style="cursor: pointer"
+                        id="erase"
+                        [ngClass]="{
+                          'text-danger': activeState(fleet, 1)
+                        }"
                       >
                         <i
                           class="fa fa-trash"
@@ -312,31 +270,7 @@
                         ></i>
                       </div>
                       <div class="col-12">
-                        Borrar
-                      </div>
-                    </div>
-                  </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      !logistics.action_tranportation_index_view[1]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center">
-                      <div
-                        class="col-12 number-size"
-                        id="hideTrash"
-                        style="cursor: no-drop"
-                      >
-                        <i
-                          class="fa fa-trash"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
-                      </div>
-                      <div class="col-12">
-                        Borrar
+                        {{ parseT('btn_erase') | translate }}
                       </div>
                     </div>
                   </div>

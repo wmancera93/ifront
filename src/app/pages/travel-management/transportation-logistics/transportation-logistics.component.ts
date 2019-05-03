@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
+import { FormDataService } from '../../../services/common/form-data/form-data.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TransportationLogisticsService } from '../../../services/travel-management/transportation-logistics/transportation-logistics.service';
 
 @Component({
   selector: 'app-transportation-logistics',
@@ -13,15 +16,27 @@ export class TransportationLogisticsComponent implements OnInit {
   public fleets: any[] = [];
   public idFleets: number;
   public is_collapse: boolean;
+  public form: any;
+  public generalvehicle: any;
 
-  constructor(public router: Router, public alert: AlertsService) {}
+  private FormSubscription: any;
+
+  styleCursorT(transport, cursor): string {
+    return this.activeState(transport, cursor) ? 'pointer' : 'no-drop';
+  }
+
+  activeState(transport, position: number) {
+    return transport.action_tranportation_index_view[position].is_active;
+  }
+
+  parseT(key) {
+    return `pages.travel_management.transportation_logistics.${key}`;
+  }
+
+  constructor(public router: Router, public alert: AlertsService, public formDataService: FormDataService) {}
 
   ngOnInit() {
     this.chargeData();
-  }
-
-  openModal() {
-    this.modalForm.next({ open: true });
   }
 
   chargeData() {
@@ -34,7 +49,7 @@ export class TransportationLogisticsComponent implements OnInit {
         ],
         created_date: '03/10/2018',
         is_avalable: false,
-        id: 13,
+        id: 1,
         destiny: 'Paloquemado',
         plate: 'XML 152',
         total_chairs: 25,
@@ -49,7 +64,7 @@ export class TransportationLogisticsComponent implements OnInit {
         ],
         created_date: '03/10/2018',
         is_avalable: false,
-        id: 15,
+        id: 1,
         destiny: 'BBQ',
         plate: 'JCG 152',
         total_chairs: 80,
@@ -61,19 +76,29 @@ export class TransportationLogisticsComponent implements OnInit {
   returnBack() {
     this.router.navigate(['ihr/travel_management']);
   }
-  deleteSpend(fleets) {
-    this.idFleets = fleets.id;
-    const alertWarning = [
-      {
-        type: 'warning',
-        title: 'Confirmación',
-        message: '¿Desea eliminar la flota vehicular?',
-        confirmation: true,
-        typeConfirmation: 'deleteFleets',
-      },
-    ];
-    this.alert.setAlert(alertWarning[0]);
+
+  seeFleets(logistic) {
+    debugger
+    const { plate, id } = logistic;
+    this.modalForm.next({
+      open: true,
+      isNew: false,
+      readOnly: true,
+      form: { plate, id, ...this.generalvehicle },
+    });
   }
+
+  editFleets(logistic) {
+    debugger
+    const { plate, id } = logistic;
+    this.modalForm.next({
+      open: true,
+      isNew: false,
+      form: { plate, id, ...this.generalvehicle },
+    });
+  }
+  deleteFleets(logistic) {}
+
   collapse(collapse: boolean) {
     this.is_collapse = collapse;
   }

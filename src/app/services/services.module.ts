@@ -61,6 +61,7 @@ import { TravelApproverService } from './shared/travel-approver/travel-approver.
 import { ReportTravelsService } from './travel-management/report/report-travels.service';
 import { FiltersGeneralsService } from './travel-management/filters-generals/filters-generals.service';
 import { TranslateService } from './common/translate/translate.service';
+import { TransportationLogisticsService } from './travel-management/transportation-logistics/transportation-logistics.service';
 
 
 @NgModule({
@@ -125,7 +126,8 @@ import { TranslateService } from './common/translate/translate.service';
     TravelApproverService,
     ReportTravelsService,
     FiltersGeneralsService,
-    TranslateService
+    TranslateService,
+    TransportationLogisticsService
   ]
 })
 export class ServicesModule { }

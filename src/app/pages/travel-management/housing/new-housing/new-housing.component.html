@@ -4,14 +4,14 @@
       <div class="col-12 col-md-6 text-truncate">
         <label>
           <i class="fa fa-fw fa-bus text-primary-hr"></i>
-          Nombre *
+          {{ parseT('name') | translate }}*
         </label>
         <input type="text" class="form-control" [readonly]="readOnly" [formControl]="forms.name" />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label>
           <i class="fa fa-fw fa-users text-primary-hr"></i>
-          Ciudad *
+          {{ parseT('city') | translate }}*
         </label>
         <select class="form-control" [attr.disabled]="readOnly ? true : null" [formControl]="forms.city">
           <option value="">Seleccione</option>
@@ -33,14 +33,14 @@
               <div class="col-12 col-sm-6 text-truncate">
                 <label>
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Cantidad de habitaciones *
+                  {{ parseT('number_room') | translate }}*
                 </label>
                 <input type="number" class="form-control" [formControl]="forms.bedrooms" />
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label>
                   <i class="fa fa-fw hourglass-start text-primary-hr"></i>
-                  Cantidad de camas *
+                  {{ parseT('number_bed') | translate }}*
                 </label>
                 <input type="number" class="form-control" [formControl]="forms.beds" />
               </div>
@@ -69,21 +69,21 @@
           <thead>
             <tr>
               <th class="text-center">
-                Cantidad de habitaciones
+                {{ parseT('number_room') | translate }}
               </th>
               <th class="text-center">
-                Cantidad de camas
+                {{ parseT('number_bed') | translate }}
               </th>
               <th class="text-center">
-                Acciones
+                {{ parseT('actions') | translate }}
               </th>
             </tr>
           </thead>
           <tbody style="color: #fff;">
             <ng-container *ngFor="let bed of arrayBedrooms; let i = index">
               <tr>
-                <td style="vertical-align: middle;">{{ bed.bedrooms.length }} Dormitorios</td>
-                <td style="vertical-align: middle;">{{ bed.count.beds }} Camas</td>
+                <td style="vertical-align: middle;">{{ bed.bedrooms.length }} {{ parseT('bedrooms') | translate }}</td>
+                <td style="vertical-align: middle;">{{ bed.count.beds }} {{ parseT('beds') | translate }}</td>
                 <td width="160px" style="vertical-align: middle;">
                   <div class="container">
                     <div class="row">
@@ -121,7 +121,7 @@
                       >
                         <ng-container *ngIf="bedRoomSelect !== i; else elseTemplate">
                           <h6 class="mb-0 text-dark text-left">
-                            Habitacion
+                            {{ parseT('rooms') | translate }}
                             {{ bedRom.label === '' ? '----' : bedRom.label }}
                           </h6>
                         </ng-container>
@@ -202,7 +202,7 @@
       </ng-container>
       <ng-template #elseTemplate>
         <div class="alert alert-warning text-center" role="alert">
-          No tienes habitaciones agregadas.
+          {{ parseT('negative_housing_created') | translate }}
         </div>
       </ng-template>
     </div>
@@ -213,7 +213,7 @@
     <div class="modal-header borderLine-title row-hr justify-content-center">
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
-          Creación de alojamiento
+          {{ parseT('housig_created') | translate }}
         </h4>
       </div>
     </div>
@@ -242,22 +242,26 @@
         <div class="row">
           <div class="col-4">
             <div class="btn text-center btn-secondary btn-block" (click)="handleStep({ back: true })">
-              <h6>Atras</h6>
+              <h6>{{ parseT('back') | translate }}</h6>
             </div>
           </div>
           <div class="col-4">
-            <div class="btn text-center btn-success btn-block" (click)="handleStep({ next: true })">
+            <div
+              class="btn text-center btn-success btn-block"
+              (click)="handleStep({ next: true })"
+              [style.cursor]="readOnly && stepActive === 1 ? 'no-drop':'pointer'"
+            >
               <ng-container *ngIf="stepActive === 0">
-                <h6>Siguiente</h6>
+                <h6>{{ parseT('next') | translate }}</h6>
               </ng-container>
               <ng-container *ngIf="stepActive === 1">
-                <h6>Guardar</h6>
+                <h6>{{ parseT('btn_save') | translate }}</h6>
               </ng-container>
             </div>
           </div>
           <div class="col-4">
             <div class="btn btn-primary text-center btn-block" (click)="modalActions.close()">
-              <h6>Close</h6>
+              <h6>{{ parseT('btn_close') | translate }}</h6>
             </div>
           </div>
         </div>

@@ -4,32 +4,32 @@
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
           <i class="fa fa-fw fa-bus text-primary-hr"></i>
-          Placa del vehiculo *
+          {{ parseT('car_identify') | translate }} *
         </label>
         <input
           type="text"
           class="form-control"
-          [formControl]="forms.vehicle_plate"
+          [readonly]="readOnlyFleet" [formControl]="forms.vehicle_plate"
         />
       </div>
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
           <i class="fa fa-fw  fa-user-o text-primary-hr"></i>
-          Conductor *
+          {{ parseT('driver') | translate }} *
         </label>
         <input
           type="text"
           class="form-control"
-          [formControl]="forms.driver"
+          [readonly]="readOnlyFleet" [formControl]="forms.driver"
         />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
           <i class="fa fa-fw fa-users text-primary-hr"></i>
-          Empresa *
+          {{ parseT('company') | translate }} *
         </label>
-        <select class="form-control" [formControl]="forms.company">
-          <option value="">Seleccione</option>
+        <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.company">
+          <option value="">{{ parseT('select') | translate }}</option>
           <option
             *ngFor="let companyList of companiesList"
             [value]="companyList.id"
@@ -41,24 +41,25 @@
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
           <i class="fa fa-fw fa-braille text-primary-hr"></i>
-          Cantidad de puestos *
+          {{ parseT('positions') | translate }} *
         </label>
         <input
           type="number"
           class="form-control"
-          [formControl]="forms.number_positions"
+          [readonly]="readOnlyFleet" [formControl]="forms.number_positions"
         />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
           <i class="fa fa-fw fa-lightbulb-o text-primary-hr"></i>
-          Tipo de servicio *
+          {{ parseT('service') | translate }} *
         </label>
         <select
           class="form-control"
+          [attr.disabled]="readOnlyFleet ? true : null"
           [formControl]="forms.type_service"
         >
-          <option value="">Seleccione</option>
+          <option value="">{{ parseT('select') | translate }}</option>
           <option
             *ngFor="let service of servicesList"
             [value]="service.id"
@@ -70,11 +71,12 @@
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
           <i class="fa fa-fw fa-phone-square text-primary-hr"></i>
-          Telefono del conductor *
+          {{ parseT('phone_driver') | translate }} *
         </label>
         <input
           type="number"
           class="form-control"
+          [readonly]="readOnlyFleet"
           [formControl]="forms.phone_driver"
         />
       </div>
@@ -88,7 +90,7 @@
         <div class="col-12">
           <div class="table-responsive mt-3">
             <ng-container
-              *ngIf="arrayTrayects.length > 0; else elseTemplate"
+              *ngIf="journeys.length > 0; else elseTemplate"
             >
               <table
                 class="table table-sm table-striped table-bordered table-hover"
@@ -96,24 +98,24 @@
                 <thead>
                   <tr>
                     <th class="text-center">
-                      Origen
+                      {{ parseT('origin') | translate }}
                     </th>
                     <th class="text-center">
-                      Destino
+                      {{ parseT('destiny') | translate }}
                     </th>
                     <th class="text-center">
-                      Fecha y hora de salida
+                      {{ parseT('begin_date') | translate }}
                     </th>
                     <th class="text-center">
-                      Duración
+                      {{ parseT('time') | translate }}
                     </th>
-                    <th class="text-center">
-                      Eliminar
+                    <th class="text-center" *ngIf=!readOnlyFleet>
+                      {{ parseT('erase') | translate }}
                     </th>
                   </tr>
                 </thead>
                 <tbody style="color: #fff;">
-                  <tr *ngFor="let trayects of arrayTrayects">
+                  <tr *ngFor="let trayects of journeys">
                     <td>
                       {{ trayects.origin }}
                     </td>
@@ -126,11 +128,12 @@
                     <td>
                       {{ trayects.durationTrayect }}
                     </td>
-                    <td width="10px">
+                    <td width="10px" *ngIf=!readOnlyFleet>
                       <button
                         type="button"
                         class="btn btn-danger btn-block btn-sm cursor-general"
                         (click)="removeTrayect(trayects.key)"
+                        
                       >
                         <i class="fa fa-minus"></i>
                       </button>
@@ -144,48 +147,51 @@
                 class="alert alert-warning text-center"
                 role="alert"
               >
-                No tienes trayectos agregados.
+              {{ parseT('negative_journey') | translate }}
               </div>
             </ng-template>
           </div>
         </div>
-        <div class="col-12 col-lg-10 col-xl-11">
+        <div class="col-12 col-lg-10 col-xl-11" *ngIf="!readOnlyFleet">
           <div class="container">
             <div class="row">
               <div class="col-12 col-sm-6 text-truncate">
                 <label class="font-title-general">
                   <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                  Origen *
+                  {{ parseT('origin') | translate }} *
                 </label>
                 <select
                   class="form-control"
+                  [attr.disabled]="readOnlyFleet ? true : null"
                   [formControl]="forms.origin"
                 >
-                  <option value="">Seleccione</option>
+                  <option value="">{{ parseT('select') | translate }}</option>
                   <option value="233">dsfdssf</option>
                 </select>
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label class="font-title-general">
                   <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                  Destino *
+                  {{ parseT('destiny') | translate }} *
                 </label>
                 <select
                   class="form-control"
+                  [attr.disabled]="readOnlyFleet ? true : null"
                   [formControl]="forms.destiny"
                 >
-                  <option value="">Seleccione</option>
+                  <option value="">{{ parseT('select') | translate }}</option>
                   <option value="3443">dfsdfdsf</option>
                 </select>
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label class="font-title-general">
                   <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  Fecha y hora de salida *
+                  {{ parseT('begin_date') | translate }} *
                 </label>
                 <input
                   type="datetime-local"
                   class="form-control"
+                  [readonly]="readOnlyFleet"
                   [formControl]="forms.date_time_departure"
                 />
               </div>
@@ -194,18 +200,19 @@
                   <i
                     class="fa fa-fw hourglass-start text-primary-hr"
                   ></i>
-                  Duración del trayecto *
+                  {{ parseT('time') | translate }} *
                 </label>
                 <input
                   type="time"
                   class="form-control"
+                  [readonly]="readOnlyFleet"
                   [formControl]="forms.durationTrayect"
                 />
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf=!readOnlyFleet>
           <div class="w-100 my-auto">
             <button
               type="button"
@@ -239,7 +246,7 @@
     >
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
-          Solicitud de transporte
+          {{ parseT('journey') | translate }}
         </h4>
       </div>
     </div>
@@ -271,19 +278,20 @@
               class="btn text-center btn-secondary btn-block"
               (click)="handleStep({ back: true })"
             >
-              <h6>Atras</h6>
+              <h6>{{ parseT('back') | translate }}</h6>
             </div>
           </div>
           <div class="col-4">
             <div
               class="btn text-center btn-success btn-block"
               (click)="handleStep({ next: true })"
+              [style.cursor]="readOnlyFleet && stepActive === 1 ? 'no-drop':'pointer'"
             >
               <ng-container *ngIf="stepActive === 0">
-                <h6>Siguiente</h6>
+                <h6>{{ parseT('next') | translate }}</h6>
               </ng-container>
               <ng-container *ngIf="stepActive === 1">
-                <h6>Guardar</h6>
+                <h6>{{ parseT('btn_save') | translate }}</h6>
               </ng-container>
             </div>
           </div>
@@ -292,7 +300,7 @@
               class="btn btn-primary text-center btn-block"
               (click)="modalActions.close()"
             >
-              <h6>Close</h6>
+              <h6>{{ parseT('btn_close') | translate }}</h6>
             </div>
           </div>
         </div>
