@@ -214,8 +214,8 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.getBedRooms.push({ label: '', beds });
   }
 
-  changeLabelBedRom(value) {
-    this.getBedRooms[this.bedRoomSelect].label = value;
+  changeLabelBedRom(value, save: boolean) {
+    if (save) this.getBedRooms[this.bedRoomSelect].label = value;
     this.bedRoomSelect = -1;
   }
 }
