@@ -12,7 +12,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Nombre *
+              {{ parseT('first_name') | translate }} *
             </label>
             <input
               type="text"
@@ -28,7 +28,7 @@
               <i
                 class="fa fa-fw fa-address-card-o text-primary-hr"
               ></i>
-              Tipo de documento *
+              {{ parseT('document_type') | translate }} *
             </label>
             <select
               class="form-control"
@@ -49,7 +49,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Numero de documento *
+              {{ parseT('document_number') | translate }} *
             </label>
             <input
               type="text"
@@ -63,7 +63,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
-              Beneficiario *
+              {{ parseT('beneficiary') | translate }} *
             </label>
             <select
               class="form-control"
@@ -87,7 +87,7 @@
                       <i
                         class="fa fa-fw fa-mortar-board text-primary-hr"
                       ></i>
-                      Nombre del Acompañante *
+                      {{ parseT('escort_name') | translate }} *
                     </label>
                     <input
                       type="text"
@@ -100,7 +100,11 @@
                       <i
                         class="fa fa-fw fa-address-card-o text-primary-hr"
                       ></i>
-                      Tipo de documento del Acompañante *
+                      {{
+                        parseT('type_of_companion_document')
+                          | translate
+                      }}
+                      *
                     </label>
                     <select
                       class="form-control"
@@ -124,7 +128,11 @@
                       <i
                         class="fa fa-fw fa-hashtag text-primary-hr"
                       ></i>
-                      Numero de documento del Acompañante *
+                      {{
+                        parseT('document_number_of_the_companion')
+                          | translate
+                      }}
+                      *
                     </label>
                     <input
                       type="number"
@@ -144,7 +152,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Fecha de Salida *
+              {{ parseT('departure_date') | translate }} *
             </label>
             <input
               type="date"
@@ -158,7 +166,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
-              Origen *
+              {{ parseT('origin') | translate }} *
             </label>
             <select class="form-control" [formControl]="forms.origin">
               <option value="">Seleccione</option>
@@ -176,7 +184,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-user-o text-primary-hr"></i>
-              Destino *
+              {{ parseT('destination') | translate }} *
             </label>
             <select
               class="form-control"
@@ -197,7 +205,7 @@
           >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Centro de costo *
+              {{ parseT('cost_center') | translate }} *
             </label>
             <input
               type="text"
@@ -214,13 +222,13 @@
               class="border-title h5"
               style="color: rgba(255, 255, 255, 0.81);"
             >
-              Lugar de recogida
+              {{ parseT('pick-up_location') | translate }} *
             </div>
           </div>
           <div class="col-12 col-md-6" *ngIf="formState('city')">
             <label class="titleColor">
               <i class="fa fa-fw fa-university text-primary-hr"></i>
-              Ciudad *
+              {{ parseT('city') | translate }} *
             </label>
             <select class="form-control" [formControl]="forms.city">
               <option value="">Seleccione</option>
@@ -235,7 +243,7 @@
           <div class="col-12 col-md-6" *ngIf="formState('address')">
             <label class="titleColor">
               <i class="fa fa-fw fa-university text-primary-hr"></i>
-              Dirreccion *
+              {{ parseT('address') | translate }} *
             </label>
             <input
               type="text"
@@ -256,7 +264,7 @@
               [attr.disabled]="validateForms ? null : true"
             >
               <i class="fa fa-fw fa-floppy-o"></i
-              >{{ parseT('save') | translate }}
+              >{{ parseT('btn_save') | translate }}
             </button>
             <button
               type="button"
@@ -264,7 +272,7 @@
               class="btn btn-warning btn-block"
             >
               <i class="fa fa-fw fa-spinner fa-spin"></i
-              >{{ parseT('loading') | translate }}
+              >{{ parseT('btn_loading') | translate }}
             </button>
           </div>
         </div>

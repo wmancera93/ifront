@@ -1,107 +1,194 @@
 <div class="row justify-content-center">
   <div class="col-12 col-lg-12">
-    <form [formGroup]="form" class="row align-content-center justify-content-center">
+    <form
+      [formGroup]="form"
+      class="row align-content-center justify-content-center"
+    >
       <div class="col-12">
         <div class="row">
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('academic_level')">
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('academic_level')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
-              Escolaridad *
+              {{ parseT('scholarship') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.academic_level">
+            <select
+              class="form-control"
+              [formControl]="forms.academic_level"
+            >
               <option value="">Seleccione</option>
-              <option *ngFor="let academic_levelList of academic_level_types" [value]="academic_levelList.id">
+              <option
+                *ngFor="
+                  let academic_levelList of academic_level_types
+                "
+                [value]="academic_levelList.id"
+              >
                 {{ academic_levelList.name }}
               </option>
             </select>
           </div>
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('employee_family_id')">
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('employee_family_id')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-user-o text-primary-hr"></i>
-              Beneficiado *
+              {{ parseT('benefited') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.employee_family_id">
+            <select
+              class="form-control"
+              [formControl]="forms.employee_family_id"
+            >
               <option value="">Seleccione</option>
-              <option *ngFor="let employee_family_idList of employee_family_id_types" [value]="employee_family_idList.id">
+              <option
+                *ngFor="
+                  let employee_family_idList of employee_family_id_types
+                "
+                [value]="employee_family_idList.id"
+              >
                 {{ employee_family_idList.name }}
               </option>
             </select>
           </div>
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('type_identification')">
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('type_identification')"
+          >
             <label class="titleColor">
-              <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-              Tipo de documento *
+              <i
+                class="fa fa-fw fa-address-card-o text-primary-hr"
+              ></i>
+              {{ parseT('document_type') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.type_identification">
+            <select
+              class="form-control"
+              [formControl]="forms.type_identification"
+            >
               <option value="">Seleccione</option>
-              <option *ngFor="let identificationList of document_types_list" [value]="identificationList.id">
-                {{ identificationList.name }}
+              <option
+                *ngFor="let identificationType of identificationTypes"
+                [value]="identificationType.id"
+              >
+                {{ identificationType.name }}
               </option>
             </select>
           </div>
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('number_identification')">
+          <div
+            class="col-12 col-md-6 top-containter"
+            *ngIf="formState('number_identification')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              Numero de documento *
+              {{ parseT('document_number') | translate }} *
             </label>
-            <input type="text" class="form-control" [formControl]="forms.number_identification" />
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.number_identification"
+            />
           </div>
         </div>
       </div>
       <div class="col-12">
         <div class="row justify-content-center">
           <div class="col-12">
-            <div class="border-title h5" style="color: rgba(255, 255, 255, 0.81);">
-              Detalles de solicitud de educacion
+            <div
+              class="border-title h5"
+              style="color: rgba(255, 255, 255, 0.81);"
+            >
+              {{ parseT('education_request_details') | translate }} *
             </div>
           </div>
           <div class="col-12">
             <label class="titleColor">
               <i class="fa fa-fw fa-university text-primary-hr"></i>
-              Institución *
+              {{ parseT('institution') | translate }} *
             </label>
             <ng-container *ngIf="'EDUI' === idActivity">
-              <select class="form-control" [formControl]="forms.institution">
+              <select
+                class="form-control"
+                [formControl]="forms.institution"
+              >
                 <option value="">Seleccione</option>
-                <option *ngFor="let institutionList of institution_types_list" [value]="JSON.stringify(institutionList)">
+                <option
+                  *ngFor="
+                    let institutionList of institution_types_list
+                  "
+                  [value]="JSON.stringify(institutionList)"
+                >
                   {{ institutionList.name }}
                 </option>
               </select>
             </ng-container>
-            <ng-container *ngIf="['EDUB', 'EDUS', 'EDUU'].includes(idActivity) ? true : false">
-              <input type="text" class="form-control" [formControl]="forms.institution" />
+            <ng-container
+              *ngIf="
+                ['EDUB', 'EDUS', 'EDUU'].includes(idActivity)
+                  ? true
+                  : false
+              "
+            >
+              <input
+                type="text"
+                class="form-control"
+                [formControl]="forms.institution"
+              />
             </ng-container>
           </div>
-          <div class="col-12 col-md-6 text-truncate" *ngIf="formState('career')">
+          <div
+            class="col-12 col-md-6 text-truncate"
+            *ngIf="formState('career')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-book text-primary-hr"></i>
-              Carrera *
+              {{ parseT('career') | translate }} *
             </label>
-            <input type="text" class="form-control" [formControl]="forms.career" />
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.career"
+            />
           </div>
-          <div class="col-12 col-md-6 text-truncate" *ngIf="formState('semester')">
+          <div
+            class="col-12 col-md-6 text-truncate"
+            *ngIf="formState('semester')"
+          >
             <label class="titleColor">
               <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-              Semestre *
+              {{ parseT('semester') | translate }} *
             </label>
-            <input type="text" class="form-control" [formControl]="forms.semester" />
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.semester"
+            />
           </div>
           <div class="col-12">
-            <div class="container-fluid widget">
-              <div class="row">
+            <div
+              class="container-fluid mt-2"
+              style="border: solid  1px var(--primary);"
+            >
+              <div class="row p-2">
                 <div class="col-12" *ngIf="arrayConcept.length > 0">
                   <div class="table-responsive mt-3">
-                    <table class="table table-sm table-striped table-bordered table-hover">
+                    <table
+                      class="table table-sm table-striped table-bordered table-hover"
+                    >
                       <thead>
                         <tr>
                           <th class="text-center">
-                            Concepto
+                            {{ parseT('concept') | translate }} *
                           </th>
                           <th class="text-center">
-                            Valor
+                            {{ parseT('value') | translate }} *
                           </th>
                           <th class="text-center">
-                            Eliminar
+                            {{
+                              parseT('pages.requests_rh.erase')
+                                | translate
+                            }}
+                            *
                           </th>
                         </tr>
                       </thead>
@@ -114,7 +201,13 @@
                             {{ concept.value }}
                           </td>
                           <td width="10px">
-                            <button type="button" class="btn btn-danger btn-block btn-sm cursor-general" (click)="removeConcept(concept.concept.id)">
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="
+                                removeConcept(concept.concept.id)
+                              "
+                            >
                               <i class="fa fa-minus"></i>
                             </button>
                           </td>
@@ -128,13 +221,27 @@
                     <div class="row">
                       <div class="col-12 col-sm-6 text-truncate">
                         <label class="titleColor">
-                          <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                          Concepto *
+                          <i
+                            class="fa fa-fw fa-list-ol text-primary-hr"
+                          ></i>
+                          {{ parseT('concept') | translate }} *
                         </label>
-                        <select class="form-control" [formControl]="forms.concept">
+                        <select
+                          class="form-control"
+                          [formControl]="forms.concept"
+                        >
                           <option value="">Seleccione</option>
-                          <ng-container *ngFor="let conceptList of concept_types_list">
-                            <option [value]="JSON.stringify(conceptList)" *ngIf="conceptValidation(conceptList.id)">
+                          <ng-container
+                            *ngFor="
+                              let conceptList of concept_types_list
+                            "
+                          >
+                            <option
+                              [value]="JSON.stringify(conceptList)"
+                              *ngIf="
+                                conceptValidation(conceptList.id)
+                              "
+                            >
                               {{ conceptList.name }}
                             </option>
                           </ng-container>
@@ -142,17 +249,33 @@
                       </div>
                       <div class="col-12 col-sm-6 text-truncate">
                         <label class="titleColor">
-                          <i class="fa fa-fw fa-money text-primary-hr"></i>
-                          Valor *
+                          <i
+                            class="fa fa-fw fa-money text-primary-hr"
+                          ></i>
+                          {{ parseT('value') | translate }} *
                         </label>
-                        <input type="text" class="form-control" [formControl]="forms.value" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          [formControl]="forms.value"
+                        />
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
                   <div class="w-100 my-auto">
-                    <button type="button" class="btn btn-success btn-block cursor-general mt-4 w-100" (click)="addConcept()" [attr.disabled]="forms.value.value == '' || forms.concept.value == '' ? true : null">
+                    <button
+                      type="button"
+                      class="btn btn-success btn-block cursor-general mt-4 w-100"
+                      (click)="addConcept()"
+                      [attr.disabled]="
+                        forms.value.value == '' ||
+                        forms.concept.value == ''
+                          ? true
+                          : null
+                      "
+                    >
                       <i class=" fa fa-plus"></i>
                     </button>
                   </div>
@@ -165,18 +288,36 @@
       <div class="col-12 top-containter">
         <div class="container">
           <div class="row">
-            <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
-              <div class="alert pr-0" style="background-color:rgba(0,0,0,.2) " role="alert">
+            <div
+              class="col-12"
+              *ngFor="let imgsaved of objectImg; let index = index"
+            >
+              <div
+                class="alert pr-0"
+                style="background-color:rgba(0,0,0,.2) "
+                role="alert"
+              >
                 <div class="row cursor-general w-100">
                   <div class="col-auto px-2">{{ index + 1 }}.</div>
                   <div class="col-auto">
-                    <i aria-hidden="true" style="font-size: 1.5em; color: white" class="fa fa-fw {{ iconClass(imgsaved.extension) }}"></i>
+                    <i
+                      aria-hidden="true"
+                      style="font-size: 1.5em; color: white"
+                      class="fa fa-fw {{
+                        iconClass(imgsaved.extension)
+                      }}"
+                    ></i>
                   </div>
                   <div class="col text-truncate">
                     {{ imgsaved.file.name }}
                   </div>
-                  <div (click)="deleteUpload(imgsaved)" class="col-auto text-center d-flex align-items-center pl-3">
-                    <h6 class="text-primary-hr cursor-general my-auto">
+                  <div
+                    (click)="deleteUpload(imgsaved)"
+                    class="col-auto text-center d-flex align-items-center pl-3"
+                  >
+                    <h6
+                      class="text-primary-hr cursor-general my-auto"
+                    >
                       x
                     </h6>
                   </div>
@@ -190,9 +331,16 @@
         <div class="container-fluid">
           <label *ngIf="objectImg.length == 0" class="titleColor">
             <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
-            <strong>{{ 'pages.travel_management.travel.new_travel.attach' | translate }}</strong>
+            <strong>{{
+              'pages.travel_management.travel.new_travel.attach'
+                | translate
+            }}</strong>
           </label>
-          <app-file-upload [drageable]="true" [nameFile]="filequotation" [extensions]="extensions"></app-file-upload>
+          <app-file-upload
+            [drageable]="true"
+            [nameFile]="filequotation"
+            [extensions]="extensions"
+          ></app-file-upload>
         </div>
       </div>
       <div class="col-12">
@@ -200,13 +348,36 @@
           <i class="fa fa-fw fa-comment text-primary-hr"></i>
           {{ parseT('observation') | translate }}
         </label>
-        <textarea type="text" rows="3" style="height: auto !important;" class="form-control" [formControl]="forms.observation_request"> </textarea>
+        <textarea
+          type="text"
+          rows="3"
+          style="height: auto !important;"
+          class="form-control"
+          [formControl]="forms.observation_request"
+        >
+        </textarea>
       </div>
       <div class="col-md-12 mt-2">
         <div class="row justify-content-end">
           <div class="col-lg-3 col-md-6 col-lg-4 col-12">
-            <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="submitSend()" [attr.disabled]="validateForms ? null : true"><i class="fa fa-fw fa-floppy-o"></i>{{ parseT('save') | translate }}</button>
-            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block"><i class="fa fa-fw fa-spinner fa-spin"></i>{{ parseT('loading') | translate }}</button>
+            <button
+              type="button"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block"
+              (click)="submitSend()"
+              [attr.disabled]="validateForms ? null : true"
+            >
+              <i class="fa fa-fw fa-floppy-o"></i
+              >{{ parseT('btn_save') | translate }}
+            </button>
+            <button
+              type="button"
+              *ngIf="!showSubmit"
+              class="btn btn-warning btn-block"
+            >
+              <i class="fa fa-fw fa-spinner fa-spin"></i
+              >{{ parseT('btn_loading') | translate }}
+            </button>
           </div>
         </div>
       </div>

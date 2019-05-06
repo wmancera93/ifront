@@ -96,7 +96,7 @@ export class FormTransportationComponent
   }
 
   parseT(key) {
-    return `pages.requests_rh.forms_requests.${key}`;
+    return `pages.requests_rh.forms_transportation.${key}`;
   }
 
   constructor(

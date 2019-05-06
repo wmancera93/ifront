@@ -8,8 +8,16 @@ import {
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsRequestsService } from '../../../services/shared/forms-requests/forms-requests.service';
-import { TypesRequests } from '../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import {
+  TypesRequests,
+  TypesRequest,
+} from '../../../models/common/requests-rh/requests-rh';
+import {
+  FormGroup,
+  FormBuilder,
+  AbstractControl,
+  Validators,
+} from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -19,6 +27,7 @@ import { FormDataService } from '../../../services/common/form-data/form-data.se
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
 
 @Component({
   selector: 'app-forms-requests',
@@ -38,16 +47,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public extensions =
     '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
-  public formVaca: any;
-  public formVacaComp: any;
-  public formPerm: any;
-  public formPres: any;
-  public formInca: any;
-
+  public forms: any;
   public detectLetter = ' ';
-
-  public model = {};
-  public fields: FormlyFieldConfig[] = [];
 
   public showTime = true;
   public showDate = false;
@@ -56,13 +57,50 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   diffDays: number;
   lowerDate: boolean;
 
-  private subscription: ISubscription;
+  public allForms = new FormState({
+    cases: {
+      VITD: {
+        days_available: true,
+      },
+      PRSC: { start_time: true, end_time: true },
+      INCA: { file_sopport: true },
+      PERM: {},
+      VCCP: {
+        date_begin: false,
+        date_end: false,
+        days_available: true,
+        days_request: true,
+      },
+      VACA: {
+        days_available: true,
+      },
+    } as TypesRequest,
+    allCases: {
+      observation_request: true,
+      date_begin: true,
+      date_end: true,
+    },
+  });
 
-  t(key) {
+  formState(formState: string) {
+    return this.allForms.run(formState);
+  }
+
+  get validateForms(): boolean {
+    return this.forms.valid;
+  }
+
+  get case(): string {
+    return this.formRequests.id_activity;
+  }
+
+  private subscriptions: ISubscription[] = [];
+
+  t(key): string {
     return this.translate.instant(this.parseT(key));
   }
 
-  parseT(key) {
+  parseT(key): string {
     return `pages.requests_rh.forms_requests.${key}`;
   }
 
@@ -77,116 +115,107 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
   ) {
-    this.fileUploadService.getObjetFile().subscribe(object => {
-      this.file = object;
-    });
-    this.subscription = this.formsRequestsService
-      .getFormRequests()
-      .subscribe((data: TypesRequests) => {
-        this.formVaca = new FormGroup({});
-        this.formVacaComp = new FormGroup({});
-        this.formPerm = new FormGroup({});
-        this.formPres = new FormGroup({});
-        this.formInca = new FormGroup({});
+    this.subscriptions.push(
+      this.fileUploadService.getObjetFile().subscribe(object => {
+        this.file = object;
+      }),
+    );
 
-        this.formRequests = data;
-        this.model = {};
-        this.fields = [];
+    this.subscriptions.push(
+      this.formsRequestsService
+        .getFormRequests()
+        .subscribe((data: TypesRequests) => {
+          this.formRequests = data;
 
-        switch (this.formRequests.id_activity) {
-          case 'VACA':
-          case 'VITD':
-            this.formVaca = fb.group({
-              request_type_id: this.formRequests.id,
-              date_begin: '',
-              date_end: '',
-              observation_request: '',
+          const { id_activity, minimum_days, maximum_days } = data;
+          this.allForms.setCaseForm(id_activity);
+          const formBuild = (
+            forms: string[],
+            formsDefault: Object = {},
+          ): Object => {
+            forms.forEach(form => {
+              formsDefault = {
+                ...formsDefault,
+                [form]: [
+                  '',
+                  (control: AbstractControl) =>
+                    this.formState(form)
+                      ? Validators.required(control)
+                      : null,
+                ],
+              };
             });
+            return formsDefault;
+          };
+          this.forms = fb.group({
+            request_type_id: this.formRequests.id,
+            ...formBuild([
+              'date_begin',
+              'days_request',
+              'file_support',
+              'start_time',
+              'end_time',
+            ]),
+            date_end: [
+              '',
+              (control: AbstractControl) => {
+                const date_end: boolean = this.formState('date_end');
+                if (date_end) {
+                  if (this.case !== 'PRSC')
+                    return Validators.required(control);
+                  else {
+                    if (this.showDate && this.case === 'PRSC') {
+                      return Validators.required(control);
+                    }
+                  }
+                }
+                return null;
+              },
+            ],
+            observation_request: '',
+          });
 
-            break;
-          case 'VCCP':
-            this.formVacaComp = fb.group({
-              request_type_id: this.formRequests.id,
-              days_request: '',
-              observation_request: '',
-            });
-
-            break;
-          case 'PERM':
-            this.fileUploadService.setCleanUpload(true);
-            this.formPerm = fb.group({
-              request_type_id: this.formRequests.id,
-              date_begin: '',
-              date_end: '',
-              file_support: '',
-              observation_request: '',
-            });
-            break;
-          case 'PRSC':
-            this.formPres = fb.group({
-              request_type_id: this.formRequests.id,
-              date_begin: '',
-              date_end: '',
-              start_time: '',
-              end_time: '',
-              observation_request: '',
-            });
-            if (
-              this.formRequests.minimum_days === 1 &&
-              this.formRequests.maximum_days === 1
-            ) {
-              this.showDate = false;
-            } else {
-              this.showDate = true;
-            }
-            if (
-              this.formRequests.minimum_days === 1 &&
-              this.formRequests.maximum_days === 1
-            ) {
-              this.showTime = true;
-            } else {
-              this.showTime = false;
-            }
-            break;
-          case 'CESA':
-            break;
-          case 'INCA':
-            this.fileUploadService.setCleanUpload(true);
-            this.formInca = fb.group({
-              request_type_id: this.formRequests.id,
-              date_begin: '',
-              date_end: '',
-              file_sopport: '',
-              observation_request: '',
-            });
-            break;
-          default:
-            break;
-        }
-        setTimeout(() => {
-          this.stylesExplorerService.addStylesCommon();
-        }, 300);
-        const modal = this.modalService.open(this.modalTemplate, {
-          size: 'lg',
-          windowClass: 'modal-md-personalized modal-dialog-scroll',
-          centered: true,
-        });
-        this.modalActions.close = () => {
-          modal.close();
-        };
-        document
-          .getElementById('bodyGeneral')
-          .removeAttribute('style');
-        /* if (document.getElementById('form_requests').className !== 'modal show') {
-        document.getElementById('btn_form_requests').click();
-      } */
-      });
+          switch (id_activity) {
+            case 'PERM':
+              this.fileUploadService.setCleanUpload(true);
+              break;
+            case 'PRSC':
+              if (minimum_days === 1 && maximum_days === 1) {
+                this.showTime = true;
+                this.showDate = false;
+              } else {
+                this.showTime = false;
+                this.showDate = true;
+              }
+              break;
+            case 'INCA':
+              this.fileUploadService.setCleanUpload(true);
+              break;
+            default:
+              break;
+          }
+          setTimeout(() => {
+            this.stylesExplorerService.addStylesCommon();
+          }, 300);
+          const modal = this.modalService.open(this.modalTemplate, {
+            size: 'lg',
+            windowClass: 'modal-md-personalized modal-dialog-scroll',
+            centered: true,
+          });
+          this.modalActions.close = () => {
+            modal.close();
+          };
+          document.body.removeAttribute('style');
+        }),
+    );
   }
 
   ngOnInit() {}
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach(subscription =>
+      subscription.unsubscribe(),
+    );
   }
 
   newRequest(model) {
@@ -301,16 +330,14 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   noAcceptMinus() {
     if (this.detectLetter == null) {
-      this.formVacaComp = this.fb.group({
-        request_type_id: this.formRequests.id,
-        days_request: '',
-        observation_request: '',
+      ['days_request', 'observation_request'].forEach(form => {
+        this.forms.controls[form].setValue('');
       });
     }
   }
 
   calculateDay() {
-    const { date_begin, date_end } = this.formPres.controls;
+    const { date_begin, date_end } = this.forms.controls;
 
     let dateBegin =
       date_begin.value === ' ' ? null : new Date(date_begin.value);
@@ -331,15 +358,15 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         },
       ];
       this.alert.setAlert(alertDataWrong[0]);
-      this.formPres = this.fb.group({
-        request_type_id: this.formRequests.id,
-        date_begin: '',
-        date_end: '',
-        start_time: '',
-        end_time: '',
-        observation_request: '',
+      [
+        'date_begin',
+        'date_end',
+        'start_time',
+        'end_time',
+        'observation_request',
+      ].forEach(form => {
+        this.forms.controls[form].setValue('');
       });
-
       dateBegin = null;
       dateEnd = null;
     }

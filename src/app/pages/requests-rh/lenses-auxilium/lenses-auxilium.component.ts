@@ -16,7 +16,6 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
-
 @Component({
   selector: 'app-lenses-auxilium',
   templateUrl: './lenses-auxilium.component.html',
@@ -27,7 +26,6 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Input() formRequests: any;
   @Input() showSubmit: boolean;
-
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
@@ -41,36 +39,25 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   public is_upload = false;
   public deleteDocumenFile: string;
   public formCases = {
-    cases: {
-      AUXL: {},
-    },
-    allCases: {
-      observation_request: true,
-    },
+    cases: { AUXL: {} },
+    allCases: { observation_request: true },
   };
-
   private subscription: ISubscription;
-
   get forms() {
     return this.form.controls;
   }
-
   get idActivity() {
     return this.formRequests.id_activity;
   }
-
   get validateForms() {
     return this.form.valid;
   }
-
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
   parseT(key) {
     return `.${key}`;
   }
-
   constructor(
     private fb: FormBuilder,
     public fileUploadService: FileUploadService,
@@ -98,7 +85,6 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
         this.setModalState.emit(true);
       });
   }
-
   ngOnInit() {
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
@@ -113,7 +99,6 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
         this.fileUploadService.setCleanUpload(true);
       }, 500);
     });
-
     this.form = new FormGroup({});
     const { required } = Validators;
     this.form = this.fb.group({
@@ -130,11 +115,9 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
       ],
     });
   }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
-
   formState(form: string): boolean {
     const { cases, allCases } = this.formCases;
     try {
@@ -143,7 +126,6 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
       return false;
     }
   }
-
   iconClass(extension: string) {
     const file = 'fa-file';
     switch (extension) {
@@ -159,14 +141,12 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
         return file;
     }
   }
-
   submitSend() {
     this.forms.file.setValue(this.objectImg);
     if (this.validateForms) {
       this.submit.emit({ ...this.form.value });
     }
   }
-
   deleteUpload(param: any) {
     this.deleteDocumenFile = param.file.name;
     this.setModalState.emit(false);

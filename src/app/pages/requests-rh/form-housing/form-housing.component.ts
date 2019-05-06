@@ -15,6 +15,7 @@ import {
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
 
 @Component({
   selector: 'app-form-housing',
@@ -34,34 +35,30 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   public form: FormGroup;
   public file: any = [];
   public housings_list: any[] = [];
+  public identificationTypes: any[] = [];
   public arrayConcept: any[] = [];
   public choose_room = true;
   public beds = [];
   public loadingRoms = false;
   public deleteDocumenFile: string;
-  public formCases = {
+  private allForms = new FormState({
     cases: {
-      HOUS: {
-        housing: true,
-        type_identification: false,
-        number_identification: false,
-      },
+      HOUS: {},
       HOUS_TER: {
-        housing: true,
-        type_identification: false,
-        number_identification: false,
+        document_type: true,
+        document_number: true,
       },
     },
     allCases: {
-      date_departure: true,
+      housing: true,
       arrival_date: true,
-      origin: true,
-      destiny: true,
-      cost_center: true,
-      city: true,
-      address: true,
+      date_departure: true,
     },
-  };
+  });
+
+  formState(formState) {
+    return this.allForms.run(formState);
+  }
 
   private subscription: ISubscription;
 
@@ -82,7 +79,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   }
 
   parseT(key) {
-    return `pages.requests_rh.forms_requests.${key}`;
+    return `pages.requests_rh.forms_housing.${key}`;
   }
 
   constructor(
@@ -90,7 +87,6 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
   ) {
-    this.formState.bind(this);
     this.housings_list = [
       {
         id: 1,
@@ -171,21 +167,35 @@ export class FormHousingComponent implements OnInit, OnDestroy {
         },
       },
     ];
+    this.identificationTypes = [
+      { id: 1, name: 'Cedula' },
+      { id: 2, name: 'Tarjeta de identidad' },
+    ];
   }
 
   ngOnInit() {
     this.form = new FormGroup({});
     const { required } = Validators;
+    this.allForms.setCaseForm(this.idActivity);
+    const formBuild = (
+      forms: string[],
+      formsDefault: Object = {},
+    ): Object => {
+      forms.forEach(form => {
+        formsDefault = {
+          ...formsDefault,
+          [form]: [
+            '',
+            (control: AbstractControl) => {
+              return this.formState(form) ? required(control) : null;
+            },
+          ],
+        };
+      });
+      return formsDefault;
+    };
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
-      name: '',
-      date_departure: '',
-      arrival_date: '',
-      origin: '',
-      destiny: '',
-      cost_center: '',
-      city: '',
-      address: '',
       housing: [
         '',
         ({ value }: AbstractControl) => {
@@ -198,21 +208,31 @@ export class FormHousingComponent implements OnInit, OnDestroy {
           return null;
         },
       ],
+      ...formBuild(['arrival_date', 'date_departure']),
+      document_type: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('document_type') &&
+            this.idActivity === 'HOUS_TER'
+            ? required(control)
+            : null;
+        },
+      ],
+      document_number: [
+        '',
+        (control: AbstractControl) => {
+          return this.formState('document_number') &&
+            this.idActivity === 'HOUS_TER'
+            ? required(control)
+            : null;
+        },
+      ],
       bedRom: '',
     });
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
-
-  formState(form: string): boolean {
-    const { cases, allCases } = this.formCases;
-    try {
-      return { ...allCases, ...cases[this.idActivity] }[form];
-    } catch (e) {
-      return false;
-    }
+    /* this.subscription.unsubscribe(); */
   }
 
   getBeedRoms() {
