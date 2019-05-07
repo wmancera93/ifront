@@ -239,7 +239,7 @@
                             <option
                               [value]="JSON.stringify(conceptList)"
                               *ngIf="
-                                conceptValidation(conceptList.id)
+                                !conceptExist(conceptList.id)
                               "
                             >
                               {{ conceptList.name }}

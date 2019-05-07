@@ -1,26 +1,12 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
-import {
-  TypesRequest,
-  formsRequest,
-} from '../../../models/common/requests-rh/requests-rh';
+import { TypesRequest, formsRequest } from '../../../models/common/requests-rh/requests-rh';
+import { Alerts } from '../../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-form-benefist',
@@ -36,8 +22,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions =
-    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public academic_level_types: any[] = [];
@@ -93,7 +78,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   get validateForms() {
-    return this.form.valid;
+    return this.form.valid && this.conceptsValidation();
   }
 
   t(key) {
@@ -110,25 +95,19 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
   ) {
-    this.subscription = this.alert
-      .getActionConfirm()
-      .subscribe((data: any) => {
-        if (data === 'deleteNewDocumentSaved') {
-          this.objectImg.splice(
-            this.objectImg.findIndex(
-              filter => filter.file.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-          this.file.splice(
-            this.file.findIndex(
-              filter => filter.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-        }
+    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
+      debugger;
+      if (data === 'deleteNewDocumentSaved') {
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+      }
+      if (data === 'continueAux') {
         this.setModalState.emit(true);
-      });
+      }
+      if (data === 'continueFull') {
+      }
+      this.setModalState.emit(true);
+    });
 
     this.academic_level_types = [
       { id: 1, name: 'Preescolar' },
@@ -138,14 +117,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       { id: 5, name: 'Tecnologo' },
       { id: 6, name: 'Universitario' },
     ];
-    this.employee_family_id_types = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-    ];
-    this.identificationTypes = [
-      { id: 1, name: 'Cedula' },
-      { id: 2, name: 'Tarjeta de identidad' },
-    ];
+    this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
+    this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
     this.concept_types_list = [
       { id: 'enrollment', name: 'Monto de Matricula' },
       { id: 'transport', name: 'monto de transporte' },
@@ -175,10 +148,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
     this.form = new FormGroup({});
     const { required } = Validators;
-    const formBuild = (
-      forms: string[],
-      formsDefault: Object = {},
-    ): Object => {
+    const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
       forms.forEach(form => {
         formsDefault = {
           ...formsDefault,
@@ -235,16 +205,31 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     }
   }
 
-  conceptValidation(id: any) {
-    let state = true;
-    this.arrayConcept.filter(value => {
+  conceptExist(id: any) {
+    let state = false;
+    this.arrayConcept.forEach(value => {
       if (value.concept.id === id) {
-        state = false;
+        state = true;
       }
     });
     if (this.idActivity !== 'EDUB' && id !== 'enrollment') {
-      state = false;
+      state = true;
     }
+    return state;
+  }
+
+  conceptValidation(id: any) {
+    let state = this.conceptExist(id);
+    return state;
+  }
+
+  conceptsValidation(): boolean {
+    let state = true;
+    this.concept_types_list.forEach(({ id }) => {
+      if (state) {
+        state = this.conceptValidation(id);
+      }
+    });
     return state;
   }
 
@@ -253,49 +238,67 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
      * @param Array
      * Se realizan valiaciones de los conceptos segun el tipo de solicitud.
      */
-    ['enrollment', 'feeding', 'pension', 'transport'].map(concept => {
-      if (this.conceptValidation(concept)) {
-        alert('Tiene que llenar ' + concept);
+    if (!this.conceptsValidation()) {
+      this.setModalState.emit(false);
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: 'Advertencia',
+          message: 'Por favor llene todos los conceptos y el valor correspondiente ',
+          confirmation: true,
+          typeConfirmation: 'continueFull',
+        },
+      ];
+      this.alert.setAlert(alertWarning[0]);
+    } else {
+      debugger;
+      this.forms.file.setValue(this.objectImg);
+      if (this.validateForms) {
+        let request_educations: {
+          enrollment?: number;
+          feeding?: number;
+          pension?: number;
+          transport?: number;
+        } = {};
+        this.arrayConcept.map(obj => {
+          request_educations = {
+            ...request_educations,
+            [obj.concept.id]: obj.value,
+          };
+        });
+        this.submit.emit({ ...this.form.value, request_educations });
       }
-    });
-
-    this.forms.file.setValue(this.objectImg);
-
-    if (this.validateForms) {
-      let request_educations: {
-        enrollment?: number;
-        feeding?: number;
-        pension?: number;
-        transport?: number;
-      } = {};
-      this.arrayConcept.map(obj => {
-        request_educations = {
-          ...request_educations,
-          [obj.concept.id]: obj.value,
-        };
-      });
-      this.submit.emit({ ...this.form.value, request_educations });
     }
   }
 
   removeConcept(idConcept) {
-    this.arrayConcept.splice(
-      this.arrayConcept.findIndex(
-        filter => filter.concept.id === idConcept,
-      ),
-      1,
-    );
+    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
   }
 
   addConcept() {
     const { concept, value } = this.form.controls;
-    console.log(concept);
-    this.arrayConcept.push({
-      concept: JSON.parse(concept.value),
-      value: value.value,
-    });
-    concept.setValue('');
-    value.setValue('');
+    let onlyNumber = /^[0-9]+$/.test(value.value);
+    if (onlyNumber) {
+      this.arrayConcept.push({
+        concept: JSON.parse(concept.value),
+        value: value.value,
+      });
+      concept.setValue('');
+      value.setValue('');
+    } else {
+      this.setModalState.emit(false);
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: 'Advertencia',
+          message: 'Los valores de los conceptos solo admiten caracteres numericos ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueAux',
+        },
+      ];
+      this.alert.setAlert(alertWarning[0]);
+      value.setValue('');
+    }
   }
 
   deleteUpload(param: any) {
@@ -304,8 +307,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     this.alert.setAlert({
       type: 'warning',
       title: this.t('type_alert_ts'),
-      message:
-        this.t('message_alert_ts') + param.file.name.toString() + '?',
+      message: this.t('message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });
