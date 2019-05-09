@@ -277,28 +277,34 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   addConcept() {
     const { concept, value } = this.form.controls;
-    let onlyNumber = /^[0-9]+$/.test(value.value);
-    if (onlyNumber) {
+    this.onlyNumber(value, value.value)
+    if (value.value) {
       this.arrayConcept.push({
         concept: JSON.parse(concept.value),
         value: value.value,
       });
       concept.setValue('');
       value.setValue('');
-    } else {
+    } 
+  }
+  onlyNumber(param, value){
+    debugger
+    let onlyNumber = /^[0-9]+$/.test(value);
+    if(!onlyNumber){
       this.setModalState.emit(false);
       const alertWarning: Alerts[] = [
         {
           type: 'warning',
           title: 'Advertencia',
-          message: 'Los valores de los conceptos solo admiten caracteres numericos ¿Desea continuar con la solicitud?',
+          message: 'Este campo solo admite caracteres númericos ¿Desea continuar con la solicitud?',
           confirmation: true,
           typeConfirmation: 'continueAux',
         },
       ];
       this.alert.setAlert(alertWarning[0]);
-      value.setValue('');
+      param.setValue('');
     }
+    return(onlyNumber)
   }
 
   deleteUpload(param: any) {

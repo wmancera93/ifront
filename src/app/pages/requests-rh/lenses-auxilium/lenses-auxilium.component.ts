@@ -39,7 +39,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   public is_upload = false;
   public deleteDocumenFile: string;
   public formCases = {
-    cases: { AUXL: {} },
+    cases: { AUX1: {} },
     allCases: { observation_request: true },
   };
   private subscription: ISubscription;

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class HousingService {
@@ -146,7 +147,7 @@ export class HousingService {
       },
     ],
   };
-  constructor() {}
+  constructor(private tokenService: Angular2TokenService) {}
 
   getHousingByCompany() {
     return this.housing;
@@ -158,5 +159,9 @@ export class HousingService {
 
   deleteHousingByCompany(housing_id: any) {
     return;
+  }
+  postNewHousing(object: any) {
+    return this.tokenService.post('housing/', object)
+    .map((data: any) => data.json());
   }
 }

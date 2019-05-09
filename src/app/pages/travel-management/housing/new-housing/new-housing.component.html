@@ -3,22 +3,17 @@
     <div class="row pb-4">
       <div class="col-12 col-md-6 text-truncate">
         <label>
-          <i class="fa fa-fw fa-bus text-primary-hr"></i>
+          <i class="fa fa-fw fa-home text-primary-hr"></i>
           {{ parseT('name') | translate }}*
         </label>
         <input type="text" class="form-control" [readonly]="readOnly" [formControl]="forms.name" />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label>
-          <i class="fa fa-fw fa-users text-primary-hr"></i>
+          <i class="fa fa-fw fa-map-marker text-primary-hr"></i>
           {{ parseT('city') | translate }}*
         </label>
-        <select class="form-control" [attr.disabled]="readOnly ? true : null" [formControl]="forms.city">
-          <option value="-1">Seleccione</option>
-          <option *ngFor="let city of cities" [value]="city.id">
-            {{ city.name }}
-          </option>
-        </select>
+        <input type="text" class="form-control" [readonly]="readOnly" [formControl]="forms.city" />
       </div>
     </div>
   </div>
@@ -32,14 +27,14 @@
             <div class="row">
               <div class="col-12 col-sm-6 text-truncate">
                 <label>
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  <i class="fa fa-fw fa-bell text-primary-hr"></i>
                   {{ parseT('number_room') | translate }}*
                 </label>
                 <input type="number" class="form-control" [formControl]="forms.bedrooms" />
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label>
-                  <i class="fa fa-fw hourglass-start text-primary-hr"></i>
+                  <i class="fa fa-fw fa-bed text-primary-hr"></i>
                   {{ parseT('number_bed') | translate }}*
                 </label>
                 <input type="number" class="form-control" [formControl]="forms.beds" />
@@ -114,7 +109,7 @@
                       <div
                         class="card-header cursor-general bg-white-b"
                         id="heading-{{ i }}"
-                        [attr.data-toggle]="bedRoomSelect !== i? 'collapse' : null"
+                        [attr.data-toggle]="bedRoomSelect !== i ? 'collapse' : null"
                         [attr.data-target]="'#collapse-' + i"
                         [attr.aria-expanded]="'false'"
                         [attr.aria-controls]="'collapse-' + i"
@@ -127,18 +122,11 @@
                         </ng-container>
                         <ng-template #elseTemplate>
                           <div class="form-inline">
-                            <input
-                              type="text"
-                              class="flex-fill form-control"
-                              value="{{ bedRom.label }}"
-                              #input
-                              autofocus
-                            />
+                            <input type="text" class="flex-fill form-control" value="{{ bedRom.label }}" #input autofocus />
                             <button class="btn btn-success ml-3" (click)="changeLabelBedRom(input.value, true)">
                               <i class="fa fa-2 fa-save text-light" aria-hidden="true"></i>
                             </button>
-                            <button type="button"
-                            class="btn btn-danger ml-3" (click)="changeLabelBedRom(input.value, false)">
+                            <button type="button" class="btn btn-danger ml-3" (click)="changeLabelBedRom(input.value, false)">
                               <i class="fa fa-2 fa-arrow-left text-light" aria-hidden="true"></i>
                             </button>
                           </div>
@@ -256,17 +244,19 @@
             </div>
           </div>
           <div class="col-4">
-            <div
+            <button
               class="btn text-center btn-success btn-block"
               (click)="handleStep({ next: true })"
-              [style.cursor]="readOnly && stepActive === 1 ? 'no-drop' : 'pointer'">
+              [style.cursor]="readOnly && stepActive === 1 ? 'no-drop' : 'pointer'"
+              [attr.disabled]="!validateForms && stepActive === 1? true : null"
+            >
               <ng-container *ngIf="stepActive === 0">
                 <h6>{{ parseT('next') | translate }}</h6>
               </ng-container>
               <ng-container *ngIf="stepActive === 1">
                 <h6>{{ parseT('btn_save') | translate }}</h6>
               </ng-container>
-            </div>
+            </button>
           </div>
           <div class="col-4">
             <div class="btn btn-primary text-center btn-block" (click)="modalActions.close()">

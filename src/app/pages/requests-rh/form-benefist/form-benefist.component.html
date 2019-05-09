@@ -87,6 +87,7 @@
               type="text"
               class="form-control"
               [formControl]="forms.number_identification"
+              (keyup)='onlyNumber(forms.number_identification)'
             />
           </div>
         </div>
