@@ -20,7 +20,7 @@ export class HousingComponent implements OnInit {
   }
 
   activeState(housing, action) {
-    return housing.action_housing_index_view[action].state;
+    return housing.action_housing_index_view[action];
   }
 
   parseT(key) {
