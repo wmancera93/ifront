@@ -9,6 +9,7 @@ import { HousingService } from '../../../../services/travel-management/housing/h
 import { HousingForm } from '../../../../models/common/travels_management/housing/housing';
 import { Observable } from 'rxjs';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { T } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-new-housing',
@@ -83,7 +84,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
         form = {
           name: '',
           city: '',
-          id: '',
         },
         readOnly = false,
         isNew = true,
@@ -199,7 +199,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
                 this.alert.setAlert(alertWarning[0]);
               };
           } else {
-            this.housingService.putEditHousing(this.id_housing,this.forms).subscribe((result: any) => {
+            this.housingService.putEditHousing(this.id_housing, this.forms).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);
                 this.modalActions.close();
@@ -207,7 +207,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
                   {
                     type: 'success',
                     title: 'Transacción Exitosa',
-                    message: 'El alojamiento fue creado de manera exitosa',
+                    message: 'La actualizacion del alojamiento fue exitosa',
                     confirmation: false,
                     typeConfirmation: '',
                   },
@@ -273,6 +273,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   removeBedRom(bedroom) {
+    const tempBebdroom = this.getBedRooms;
+
+    if (tempBebdroom.length > 0) {
+    }
     this.getBedRooms.splice(bedroom, 1);
   }
 
@@ -285,8 +289,47 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.getBedRooms.push({ label: '', beds });
   }
 
-  changeLabelBedRom(value, save: boolean) {
-    if (save) this.getBedRooms[this.bedRoomSelect].label = value;
+  changeLabelBedRom(value, save: boolean, idBedroom: string) {
+    if (this.is_New) {
+      if (save) this.getBedRooms[this.bedRoomSelect].label = value;
+
+      this.bedRoomSelect = -1;
+    } else {
+      this.housingService.putEditBedrooms(idBedroom, value).subscribe((resultBedroom: any) => {
+        if (resultBedroom.success) {
+          this.formServiceChild.emit(resultBedroom);
+          this.modalActions.close();
+          this.alert.setAlert({
+            type: 'success',
+            title: 'Transacción Exitosa',
+            message: 'La actualizacion de la habitacion fue exitosa, ¿Desea regresar a la edición de alojamientos?',
+            confirmation: true,
+            typeConfirmation: 'returnEditHousing',
+          } as Alerts);
+        }
+      }),
+        (error: any) => {
+          this.modalActions.close();
+          this.alert.setAlert({
+            type: 'danger',
+            title: 'Error',
+            message: error.json().errors.toString(),
+            confirmation: true,
+            typeConfirmation: 'returnHousing',
+          } as Alerts);
+        };
+    }
+  }
+
+  deleteBedroom(id: string, index: string) {
+    if (id) {
+      this.housingService.deleteBedrooms(id).subscribe((data: any) => {});
+    } else {
+      this.getBedRooms.splice(index, 1);
+      if (!this.getBedRooms.length) {
+        this.arrayBedrooms.splice(this.bedGroupSelect);
+      }
+    }
     this.bedRoomSelect = -1;
   }
 }

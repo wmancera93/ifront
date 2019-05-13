@@ -4,91 +4,6 @@ import { Angular2TokenService } from 'angular2-token';
 @Injectable()
 export class HousingService {
   public reportLogistics: any;
-
-  bedrooms = {
-    bedroom_1: [
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-    ],
-    bedroom_2: [
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-    ],
-    bedroom_3: [
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }, { label: '' }],
-      },
-      {
-        label: '',
-        beds: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }, { label: '' }],
-      },
-    ],
-  };
   constructor(private tokenService: Angular2TokenService) {
     this.reportLogistics = [
       {
@@ -108,10 +23,6 @@ export class HousingService {
     return this.reportLogistics;
   }
 
-  getbedroomsByHousing(housing_id) {
-    return this.bedrooms[`bedroom_${housing_id}`];
-  }
-
   deleteHousingByCompany(housing_id: any) {
     return;
   }
@@ -126,5 +37,17 @@ export class HousingService {
   }
   putEditHousing(id: string, object: any) {
     return this.tokenService.put('housing/', +id, object).map((data: any) => data.json());
+  }
+  putEditBedrooms(idBedrooms: string, label: any) {
+    return this.tokenService.put('housing/', +idBedrooms, label).map((data: any) => data.json());
+  }
+  deleteBedrooms(idBedrooms: string) {
+    return this.tokenService.put('housing/', +idBedrooms).map((data: any) => data.json());
+  }
+  putEditBed(idBed: string) {
+    return this.tokenService.put('housing/', +idBed).map((data: any) => data.json());
+  }
+  deleteBed(idBed: string) {
+    return this.tokenService.put('housing/', +idBed).map((data: any) => data.json());
   }
 }

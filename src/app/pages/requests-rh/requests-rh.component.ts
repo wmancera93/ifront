@@ -187,7 +187,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
                 },
                 {
                   id: 195,
-                  id_activity: 'HOUS_TER',
+                  id_activity: 'HOUSING_THIRD',
                   is_payment: true,
                   maximum_days: null,
                   minimum_days: null,

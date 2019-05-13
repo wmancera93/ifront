@@ -190,7 +190,7 @@
         <div>
           <app-form-housing
             *ngIf="
-              ['HOUS', 'HOUS_TER'].includes(formRequests.id_activity)
+              ['HOUS', 'HOUSING_THIRD'].includes(formRequests.id_activity)
                 ? true
                 : false
             "
@@ -375,7 +375,7 @@
               'TRANS_BEN',
               'TRANS_TER',
               'HOUS',
-              'HOUS_TER',
+              'HOUSING_THIRD',
               'AUX1'
             ].includes(formRequests.id_activity)
               ? false

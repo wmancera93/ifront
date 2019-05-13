@@ -43,10 +43,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         employee_family_id: true,
         type_identification: true,
         number_identification: true,
-        date_begin:true,
-        date_end:true,
-        calendar:true,
-        grade:true
+        calendar: true,
+        grade: true,
       },
       EDUU: {
         academic_level: true,
@@ -64,6 +62,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       concept: true,
       value: true,
       observation_request: true,
+      date_begin: true,
+      date_end: true,
     },
   });
 
@@ -285,7 +285,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   addConcept() {
     const { concept, value } = this.form.controls;
-    this.onlyNumber(value, value.value)
+    this.onlyNumber(value, value.value);
     if (value.value) {
       this.arrayConcept.push({
         concept: JSON.parse(concept.value),
@@ -293,12 +293,12 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       });
       concept.setValue('');
       value.setValue('');
-    } 
+    }
   }
-  onlyNumber(param, value){
-    debugger
+  onlyNumber(param, value) {
+    debugger;
     let onlyNumber = /^[0-9]+$/.test(value);
-    if(!onlyNumber){
+    if (!onlyNumber) {
       this.setModalState.emit(false);
       const alertWarning: Alerts[] = [
         {
@@ -312,7 +312,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       this.alert.setAlert(alertWarning[0]);
       param.setValue('');
     }
-    return(onlyNumber)
+    return onlyNumber;
   }
 
   deleteUpload(param: any) {
