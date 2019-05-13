@@ -158,8 +158,8 @@
         <div>
           <app-form-benefist
             *ngIf="
-              ['EDUB', 'EDUS', 'EDUU', 'EDUI'].includes(
-                formRequests.id_activity
+              ['AUX2_1', 'AUX1_2', 'AUX2_2', 'AUX1_3'].includes(
+                formRequests.form
               )
                 ? true
                 : false
@@ -204,7 +204,7 @@
         <div>
           <app-lenses-auxilium
             *ngIf="
-              ['AUX1'].includes(formRequests.id_activity)
+              ['AUX1_1'].includes(formRequests.form)
                 ? true
                 : false
             "
@@ -367,17 +367,17 @@
           class="row"
           *ngIf="
             [
-              'EDUB',
-              'EDUS',
-              'EDUU',
-              'EDUI',
+              'AUX2_1',
+              'AUX1_2',
+              'AUX2_2',
+              'AUX1_3',
               'TRANS',
               'TRANS_BEN',
               'TRANS_TER',
               'HOUS',
               'HOUSING_THIRD',
-              'AUX1'
-            ].includes(formRequests.id_activity)
+              'AUX1_1'
+            ].includes(formRequests.form)
               ? false
               : true
           "

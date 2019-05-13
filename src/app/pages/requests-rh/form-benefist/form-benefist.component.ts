@@ -38,7 +38,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   private allForms = new FormState({
     cases: {
-      EDUB: {
+      AUX2_1: {
         academic_level: true,
         employee_family_id: true,
         type_identification: true,
@@ -46,7 +46,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         calendar: true,
         grade: true,
       },
-      EDUU: {
+      AUX2_2: {
         academic_level: true,
         employee_family_id: true,
         type_identification: true,
@@ -54,8 +54,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         career: true,
         semester: true,
       },
-      EDUS: {},
-      EDUI: {},
+      AUX1_2: {},
+      AUX1_3: {},
     },
     allCases: {
       institution: true,
