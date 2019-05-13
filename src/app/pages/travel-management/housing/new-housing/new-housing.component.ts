@@ -83,6 +83,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
         form = {
           name: '',
           city: '',
+          id: '',
         },
         readOnly = false,
         isNew = true,
@@ -91,6 +92,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       this.stepActive = 0;
       this.readOnly = readOnly;
       this.is_New = isNew;
+      this.id_housing = form.id;
       const { required } = Validators;
       const { name, city, id } = form;
       this.form = this.fb.group({
@@ -197,7 +199,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
                 this.alert.setAlert(alertWarning[0]);
               };
           } else {
-            this.housingService.putEditHousing(this.forms).subscribe((result: any) => {
+            this.housingService.putEditHousing(this.id_housing,this.forms).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);
                 this.modalActions.close();
