@@ -3,53 +3,7 @@ import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class HousingService {
-  housing = [
-    {
-      action_housing_index_view: {
-        watch: { state: true },
-        delete: { state: true },
-        edit: { state: false },
-      },
-      created_date: '03/10/2018',
-      id: 1,
-      name: 'Paloquemado',
-      total_bed: 25,
-      city_id: 1,
-      assigned_bed: 18,
-      busy_bed: 4,
-      available_bed: 3,
-    },
-    {
-      action_housing_index_view: {
-        watch: { state: false },
-        delete: { state: true },
-        edit: { state: true },
-      },
-      created_date: '03/10/2018',
-      id: 2,
-      name: 'Paloquemado',
-      total_bed: 23,
-      city_id: 2,
-      assigned_bed: 18,
-      busy_bed: 4,
-      available_bed: 3,
-    },
-    {
-      action_housing_index_view: {
-        watch: { state: true },
-        delete: { state: false },
-        edit: { state: true },
-      },
-      created_date: '03/10/2018',
-      id: 3,
-      name: 'Paloquemado',
-      total_bed: 33,
-      city_id: 3,
-      assigned_bed: 18,
-      busy_bed: 4,
-      available_bed: 3,
-    },
-  ];
+  public reportLogistics: any;
 
   bedrooms = {
     bedroom_1: [
@@ -127,30 +81,31 @@ export class HousingService {
       },
       {
         label: '',
-        beds: [
-          { label: '' },
-          { label: '' },
-          { label: '' },
-          { label: '' },
-          { label: '' },
-        ],
+        beds: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }, { label: '' }],
       },
       {
         label: '',
-        beds: [
-          { label: '' },
-          { label: '' },
-          { label: '' },
-          { label: '' },
-          { label: '' },
-        ],
+        beds: [{ label: '' }, { label: '' }, { label: '' }, { label: '' }, { label: '' }],
       },
     ],
   };
-  constructor(private tokenService: Angular2TokenService) {}
+  constructor(private tokenService: Angular2TokenService) {
+    this.reportLogistics = [
+      {
+        id: 1,
+        name: 'Alojamientos',
+        code: 'housing_reports',
+      },
+      {
+        id: 2,
+        name: 'Transporte',
+        code: 'fleet_reports',
+      },
+    ];
+  }
 
-  getHousingByCompany() {
-    return this.housing;
+  getReportLogistics() {
+    return this.reportLogistics;
   }
 
   getbedroomsByHousing(housing_id) {
@@ -161,7 +116,15 @@ export class HousingService {
     return;
   }
   postNewHousing(object: any) {
-    return this.tokenService.post('housing/', object)
-    .map((data: any) => data.json());
+    return this.tokenService.post('housing/', object).map((data: any) => data.json());
+  }
+  getIndexHousing() {
+    return this.tokenService.get('housing').map((data: any) => data.json());
+  }
+  getShowHousingById(id) {
+    return this.tokenService.get('housing/' + id).map((data: any) => data.json());
+  }
+  putEditHousing(id: string, object: any) {
+    return this.tokenService.put('housing/', +id, object).map((data: any) => data.json());
   }
 }

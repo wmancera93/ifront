@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { HousingService } from '../../../services/travel-management/housing/housing.service';
@@ -27,16 +27,33 @@ export class HousingComponent implements OnInit {
     return `pages.travel_management.housing.${key}`;
   }
 
-  constructor(public housingService: HousingService, public router: Router, public alert: AlertsService) {}
+  constructor(public housingService: HousingService, public router: Router, public alert: AlertsService) {
+  
+  }
+
+  formServicePather(res) {
+    if (res.success) {
+      this.getHousing();
+      // switch (res.type) {
+      //   case 'create':
+      //       this.housings.push(res.data)
+      //     break;
+
+      //   default:
+      //     break;
+      // }
+    }
+  }
 
   ngOnInit() {
-    this.chargeHousing();
+    this.getHousing();
   }
 
-  chargeHousing() {
-    this.housings = this.housingService.getHousingByCompany();
+  getHousing() {
+    this.housingService.getIndexHousing().subscribe(({ data }) => {
+      this.housings = this.sortByNumber(data) || [];
+    });
   }
-
   returnBackHousing() {
     this.router.navigate(['ihr/travel_management']);
   }
@@ -76,5 +93,11 @@ export class HousingComponent implements OnInit {
 
   collapse(collapse: boolean) {
     this.is_collapse = collapse;
+  }
+  sortByNumber(dataBySort: any) {
+    dataBySort.sort(function(a, b) {
+      return b.id - a.id;
+    });
+    return dataBySort;
   }
 }

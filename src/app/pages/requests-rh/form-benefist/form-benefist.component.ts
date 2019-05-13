@@ -43,6 +43,10 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         employee_family_id: true,
         type_identification: true,
         number_identification: true,
+        date_begin:true,
+        date_end:true,
+        calendar:true,
+        grade:true
       },
       EDUU: {
         academic_level: true,
@@ -169,8 +173,12 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         'employee_family_id',
         'number_identification',
         'type_identification',
+        'date_begin',
+        'date_end',
         'career',
         'semester',
+        'calendar',
+        'grade',
         'observation_request',
       ]),
       institution: [

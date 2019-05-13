@@ -104,7 +104,7 @@
                       <p class="text-center">{{ parseT('total_spaces') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ housing.total_bed }}
+                      {{ housing.total_beds }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -112,7 +112,7 @@
                       <p class="text-center">{{ parseT('occupied_spaces') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ housing.busy_bed }}
+                      {{ housing.busy_beds }}
                     </p>
                   </div>
                   <div class="col-lg-3 col-md-3 col-12 text-md-left">
@@ -120,12 +120,12 @@
                       <p class="text-center">{{ parseT('available_spaces') | translate }}</p>
                     </h5>
                     <p class="font-title-general text-center">
-                      {{ housing.available_bed }}
+                      {{ housing.available_beds }}
                     </p>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-5 col-12 text-md-left text-center top-p">
+              <!-- <div class="col-lg-3 col-md-5 col-12 text-md-left text-center top-p">
                 <div class="row">
                   <div class="col-4 number-size text-center top-p">
                     <div
@@ -188,12 +188,17 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
+        </div>
+      </div>
+      <div class="row justify-content-center top-containter" *ngIf="housings.length == 0">
+        <div class="alert alert-warning text-center col-10" role="alert">
+          No existen alojamientos creados
         </div>
       </div>
     </div>
   </div>
 </div>
-<app-new-housing [modalForm]="modalForm.asObservable()"></app-new-housing>
+<app-new-housing [modalForm]="modalForm.asObservable()" (formServiceChild)="formServicePather($event)"></app-new-housing>

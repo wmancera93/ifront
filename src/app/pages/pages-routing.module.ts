@@ -335,9 +335,14 @@ const routes: Routes = [
     component: TransportationLogisticsComponent
   },
   {
-    path: 'logistics_reports',
+    path: 'housing_reports',
     component: HousingReportComponent
+  },
+  {
+    path: 'fleet_reports',
+    component: TrasnportationReportComponent
   }
+  
 ];
 
 @NgModule({

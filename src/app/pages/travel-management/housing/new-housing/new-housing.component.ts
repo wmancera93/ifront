@@ -1,8 +1,8 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, ElementRef, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { HousingService } from '../../../../services/travel-management/housing/housing.service';
@@ -30,7 +30,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     close: () => {},
     save: () => {},
   };
+
   @Input() modalForm: Observable<any>;
+
+  @Output() formServiceChild: EventEmitter<any> = new EventEmitter();
 
   public showSubmit = true;
   public form: any;
@@ -42,10 +45,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public model = {};
   public modalState = true;
   public readOnly = false;
-
+  public is_New: boolean;
   public arrayBedrooms: any[] = [];
   public servicesList: any[] = [];
   public cities: any[] = [];
+  public id_housing: string;
   private modalFormSubscription: any;
 
   get forms() {
@@ -65,7 +69,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     private fb: FormBuilder,
     public formDataService: FormDataService,
-  ) {}
+  ) {
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'returnHousing') {
+      }
+    });
+  }
 
   ngOnInit() {
     this.modalFormSubscription = this.modalForm.subscribe((options: HousingForm) => {
@@ -81,7 +90,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       this.arrayBedrooms = [];
       this.stepActive = 0;
       this.readOnly = readOnly;
-
+      this.is_New = isNew;
       const { required } = Validators;
       const { name, city, id } = form;
       this.form = this.fb.group({
@@ -92,7 +101,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       });
       if (open) {
         if (!isNew) {
-          const housings = this.housingService.getbedroomsByHousing(id);
+          const housings = this.housingService.getShowHousingById(id);
           let bedrooms = {};
           housings.forEach(housing => {
             const length = housing.beds.length;
@@ -149,42 +158,76 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
-          let allBedrooms = [];
-          this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
-          this.generalHousing = {
-            name,
-            city,
-            bedrooms: allBedrooms,
-          };
-
-          this.housingService.postNewHousing(this.generalHousing).subscribe((data: any) => {
-            if (data.success) {
-              this.modalActions.close();
-              const alertWarning: Alerts[] = [
-                {
-                  type: 'Succes',
-                  title: 'Transacción Exitosa',
-                  message: 'El alojamiento fue creado de manera exitosa',
-                  confirmation: true,
-                  typeConfirmation: 'returnHousing',
-                },
-              ];
-              this.alert.setAlert(alertWarning[0]);
-            }
-          }),
-            (error: any) => {
-              this.modalActions.close();
-              const alertWarning: Alerts[] = [
-                {
-                  type: 'danger',
-                  title: 'Error',
-                  message: error.json().errors.toString(),
-                  confirmation: true,
-                  typeConfirmation: 'returnHousing',
-                },
-              ];
-              this.alert.setAlert(alertWarning[0]);
+          if (this.is_New) {
+            let allBedrooms = [];
+            this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+            this.generalHousing = {
+              name,
+              city,
+              bedrooms: allBedrooms,
             };
+
+            this.housingService.postNewHousing(this.generalHousing).subscribe((data: any) => {
+              if (data.success) {
+                this.formServiceChild.emit(data);
+                this.modalActions.close();
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'success',
+                    title: 'Transacción Exitosa',
+                    message: 'El alojamiento fue creado de manera exitosa',
+                    confirmation: false,
+                    typeConfirmation: '',
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              }
+            }),
+              (error: any) => {
+                this.modalActions.close();
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'danger',
+                    title: 'Error',
+                    message: error.json().errors.toString(),
+                    confirmation: true,
+                    typeConfirmation: 'returnHousing',
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              };
+          } else {
+            this.housingService.putEditHousing(this.forms).subscribe((result: any) => {
+              if (result.success) {
+                this.formServiceChild.emit(result);
+                this.modalActions.close();
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'success',
+                    title: 'Transacción Exitosa',
+                    message: 'El alojamiento fue creado de manera exitosa',
+                    confirmation: false,
+                    typeConfirmation: '',
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              }
+            }),
+              (error: any) => {
+                this.modalActions.close();
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'danger',
+                    title: 'Error',
+                    message: error.json().errors.toString(),
+                    confirmation: true,
+                    typeConfirmation: 'returnHousing',
+                  },
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              };
+          }
+
         default:
           break;
       }
@@ -215,7 +258,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     bedsCount.setValue('');
   }
 
-  editHousig({ bed, modal }) {
+  editHousig({ bed }) {
     this.bedGroupSelect = bed;
   }
 

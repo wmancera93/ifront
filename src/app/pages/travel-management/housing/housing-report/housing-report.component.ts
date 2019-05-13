@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HousingService } from '../../../../services/travel-management/housing/housing.service';
 
 @Component({
   selector: 'app-housing-report',
@@ -12,15 +13,24 @@ export class HousingReportComponent implements OnInit {
   }
   public is_collapse = false;
   public btnConsult = true;
-  constructor(public router: Router) {}
+  public arraySelect: any[] = [];
+  constructor(public router: Router, public housingService: HousingService) {}
 
-  ngOnInit() {}
-
+  ngOnInit() {
+    this.arraySelect = this.housingService.getReportLogistics();
+  }
+  
+  log(param) {
+    console.log(param);
+  }
   returnBack() {
     this.router.navigate(['ihr/travel_management']);
   }
 
   collapse(param: boolean) {
     this.is_collapse = param;
+  }
+  selectTypeReport(array: any) {
+    this.router.navigate(['ihr/' + array.code]);
   }
 }

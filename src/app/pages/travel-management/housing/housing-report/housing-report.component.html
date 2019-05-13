@@ -46,21 +46,19 @@
                 <i class="fa fa-plus"></i>
                 {{ parseT('filter_report') | translate }}
               </a>
-              <div
-                class="dropdown-menu col-12"
-                aria-labelledby="navbarDropdown"
-                style="overflow-y: auto !important; max-height: 400px !important"
-              >
-                <div>
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general btn-block">{{
-                    parseT('housing') | translate
-                  }}</a>
-                  <div class="dropdown-divider"></div>
+                <div
+                  class="dropdown-menu col-12"
+                  aria-labelledby="navbarDropdown"
+                  style="overflow-y: auto !important; max-height: 400px !important"
+                >
+                  <div *ngFor="let arraysSelect of arraySelect; let i = index">
+                    <a
+                      class="dropdown-item color-font-gree text-capitalize cursor-general btn-block"
+                      (click)="selectTypeReport(arraysSelect)"
+                      >{{ arraysSelect.name }}</a>
+                    <div *ngIf="arraySelect.length !== i + 1" class="dropdown-divider"></div>
+                  </div>
                 </div>
-                <div>
-                  <a class="dropdown-item color-font-gree text-capitalize cursor-general btn-block">Transporte</a>
-                </div>
-              </div>
             </li>
           </ul>
         </div>
@@ -129,9 +127,7 @@
         </div>
       </div>
 
-      <div
-        class="row justify-content-center top-general-p"
-      >
+      <div class="row justify-content-center top-general-p">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             {{ parseT('message_negative') | translate }}

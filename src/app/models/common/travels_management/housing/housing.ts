@@ -1,7 +1,7 @@
 export interface Housing {
-  id?: Number | String;
-  name: String;
-  city: Number | String;
+  id?: string;
+  name: string;
+  city: string;
 }
 
 export interface HousingForm {

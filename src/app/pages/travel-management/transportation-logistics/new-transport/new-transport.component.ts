@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder,Validators  } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
@@ -42,6 +42,9 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
 
+  get validateForms() {
+    return this.form.valid && this.journeys.length;
+  }
   parseT(key) {
     return `pages.travel_management.transportation_logistics.transportation_management.${key}`;
   }
@@ -90,17 +93,18 @@ export class NewTransportComponent implements OnInit, OnDestroy {
         this.journeys = [];
         this.generalVehicle = [];
         const { plate, id } = form;
+        const { required } = Validators;
         this.generalVehicle = this.transportationLogisticsService.getVehicle(id);
         const { driver, company, number_positions, phone_driver, type_service } = isNew
           ? { driver: '', company: '', number_positions: '', phone_driver: '', type_service: '' }
           : this.generalVehicle;
         this.form = this.fb.group({
           vehicle_plate: plate,
-          driver,
-          company,
-          number_positions,
-          type_service,
-          phone_driver,
+          driver:[driver, required],
+          company:[company, required],
+          number_positions:[number_positions, required],
+          type_service:[type_service, required],
+          phone_driver:[phone_driver, required],
           origin: [''],
           destiny: [''],
           date_time_departure: [''],

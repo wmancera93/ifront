@@ -6,22 +6,14 @@
           <i class="fa fa-fw fa-bus text-primary-hr"></i>
           {{ parseT('car_identify') | translate }} *
         </label>
-        <input
-          type="text"
-          class="form-control"
-          [readonly]="readOnlyFleet" [formControl]="forms.vehicle_plate"
-        />
+        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.vehicle_plate" />
       </div>
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
           <i class="fa fa-fw  fa-user-o text-primary-hr"></i>
           {{ parseT('driver') | translate }} *
         </label>
-        <input
-          type="text"
-          class="form-control"
-          [readonly]="readOnlyFleet" [formControl]="forms.driver"
-        />
+        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.driver" />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
@@ -30,10 +22,7 @@
         </label>
         <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.company">
           <option value="">{{ parseT('select') | translate }}</option>
-          <option
-            *ngFor="let companyList of companiesList"
-            [value]="companyList.id"
-          >
+          <option *ngFor="let companyList of companiesList" [value]="companyList.id">
             {{ companyList.name }}
           </option>
         </select>
@@ -43,27 +32,16 @@
           <i class="fa fa-fw fa-braille text-primary-hr"></i>
           {{ parseT('positions') | translate }} *
         </label>
-        <input
-          type="number"
-          class="form-control"
-          [readonly]="readOnlyFleet" [formControl]="forms.number_positions"
-        />
+        <input type="number" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.number_positions" />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
           <i class="fa fa-fw fa-lightbulb-o text-primary-hr"></i>
           {{ parseT('service') | translate }} *
         </label>
-        <select
-          class="form-control"
-          [attr.disabled]="readOnlyFleet ? true : null"
-          [formControl]="forms.type_service"
-        >
+        <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.type_service">
           <option value="">{{ parseT('select') | translate }}</option>
-          <option
-            *ngFor="let service of servicesList"
-            [value]="service.id"
-          >
+          <option *ngFor="let service of servicesList" [value]="service.id">
             {{ service.name }}
           </option>
         </select>
@@ -73,12 +51,7 @@
           <i class="fa fa-fw fa-phone-square text-primary-hr"></i>
           {{ parseT('phone_driver') | translate }} *
         </label>
-        <input
-          type="number"
-          class="form-control"
-          [readonly]="readOnlyFleet"
-          [formControl]="forms.phone_driver"
-        />
+        <input type="number" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.phone_driver" />
       </div>
     </div>
   </div>
@@ -89,12 +62,8 @@
       <div class="row">
         <div class="col-12">
           <div class="table-responsive mt-3">
-            <ng-container
-              *ngIf="journeys.length > 0; else elseTemplate"
-            >
-              <table
-                class="table table-sm table-striped table-bordered table-hover"
-              >
+            <ng-container *ngIf="journeys.length > 0; else elseTemplate">
+              <table class="table table-sm table-striped table-bordered table-hover">
                 <thead>
                   <tr>
                     <th class="text-center">
@@ -109,7 +78,7 @@
                     <th class="text-center">
                       {{ parseT('time') | translate }}
                     </th>
-                    <th class="text-center" *ngIf=!readOnlyFleet>
+                    <th class="text-center" *ngIf="!readOnlyFleet">
                       {{ parseT('erase') | translate }}
                     </th>
                   </tr>
@@ -128,12 +97,11 @@
                     <td>
                       {{ trayects.durationTrayect }}
                     </td>
-                    <td width="10px" *ngIf=!readOnlyFleet>
+                    <td width="10px" *ngIf="!readOnlyFleet">
                       <button
                         type="button"
                         class="btn btn-danger btn-block btn-sm cursor-general"
                         (click)="removeTrayect(trayects.key)"
-                        
                       >
                         <i class="fa fa-minus"></i>
                       </button>
@@ -143,11 +111,8 @@
               </table>
             </ng-container>
             <ng-template #elseTemplate>
-              <div
-                class="alert alert-warning text-center"
-                role="alert"
-              >
-              {{ parseT('negative_journey') | translate }}
+              <div class="alert alert-warning text-center" role="alert">
+                {{ parseT('negative_journey') | translate }}
               </div>
             </ng-template>
           </div>
@@ -160,11 +125,7 @@
                   <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                   {{ parseT('origin') | translate }} *
                 </label>
-                <select
-                  class="form-control"
-                  [attr.disabled]="readOnlyFleet ? true : null"
-                  [formControl]="forms.origin"
-                >
+                <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.origin">
                   <option value="">{{ parseT('select') | translate }}</option>
                   <option value="233">dsfdssf</option>
                 </select>
@@ -174,11 +135,7 @@
                   <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                   {{ parseT('destiny') | translate }} *
                 </label>
-                <select
-                  class="form-control"
-                  [attr.disabled]="readOnlyFleet ? true : null"
-                  [formControl]="forms.destiny"
-                >
+                <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.destiny">
                   <option value="">{{ parseT('select') | translate }}</option>
                   <option value="3443">dfsdfdsf</option>
                 </select>
@@ -197,22 +154,15 @@
               </div>
               <div class="col-12 col-sm-6 text-truncate">
                 <label class="font-title-general">
-                  <i
-                    class="fa fa-fw hourglass-start text-primary-hr"
-                  ></i>
+                  <i class="fa fa-fw hourglass-start text-primary-hr"></i>
                   {{ parseT('time') | translate }} *
                 </label>
-                <input
-                  type="time"
-                  class="form-control"
-                  [readonly]="readOnlyFleet"
-                  [formControl]="forms.durationTrayect"
-                />
+                <input type="time" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.durationTrayect" />
               </div>
             </div>
           </div>
         </div>
-        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf=!readOnlyFleet>
+        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf="!readOnlyFleet">
           <div class="w-100 my-auto">
             <button
               type="button"
@@ -235,15 +185,9 @@
     </div>
   </div>
 </ng-template>
-<ng-template
-  #modalForms
-  let-modal
-  ng-init="typeCase = formRequests.id_activity"
->
+<ng-template #modalForms let-modal ng-init="typeCase = formRequests.id_activity">
   <div class="modal-content">
-    <div
-      class="modal-header borderLine-title row-hr justify-content-center"
-    >
+    <div class="modal-header borderLine-title row-hr justify-content-center">
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
           {{ parseT('journey') | translate }}
@@ -274,18 +218,16 @@
       <div class="container">
         <div class="row">
           <div class="col-4">
-            <div
-              class="btn text-center btn-secondary btn-block"
-              (click)="handleStep({ back: true })"
-            >
+            <div class="btn text-center btn-secondary btn-block" (click)="handleStep({ back: true })">
               <h6>{{ parseT('back') | translate }}</h6>
             </div>
           </div>
           <div class="col-4">
-            <div
+            <button
               class="btn text-center btn-success btn-block"
               (click)="handleStep({ next: true })"
-              [style.cursor]="readOnlyFleet && stepActive === 1 ? 'no-drop':'pointer'"
+              [style.cursor]="readOnlyFleet && stepActive === 1 ? 'no-drop' : 'pointer'"
+              [attr.disabled]="!validateForms && stepActive === 1 ? true : null"
             >
               <ng-container *ngIf="stepActive === 0">
                 <h6>{{ parseT('next') | translate }}</h6>
@@ -293,13 +235,10 @@
               <ng-container *ngIf="stepActive === 1">
                 <h6>{{ parseT('btn_save') | translate }}</h6>
               </ng-container>
-            </div>
+            </button>
           </div>
           <div class="col-4">
-            <div
-              class="btn btn-primary text-center btn-block"
-              (click)="modalActions.close()"
-            >
+            <div class="btn btn-primary text-center btn-block" (click)="modalActions.close()">
               <h6>{{ parseT('btn_close') | translate }}</h6>
             </div>
           </div>
