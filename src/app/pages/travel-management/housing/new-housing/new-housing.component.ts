@@ -23,9 +23,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   @ViewChild('bedField')
   public bedField: ElementRef;
 
-  modalActions: { close: Function; save: Function } = {
+  modalActions: { close: Function; save: Function; open: Function } = {
     close: () => {},
     save: () => {},
+    open: () => {},
   };
   modalBedRoomActions: { close: Function; save: Function } = {
     close: () => {},
@@ -51,6 +52,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public servicesList: any[] = [];
   public cities: any[] = [];
   public id_housing: string;
+  public id_bedroom: string;
   private modalFormSubscription: any;
 
   get forms() {
@@ -73,6 +75,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   ) {
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'returnHousing') {
+        this.modalActions.open();
+      }
+      if (data === 'continueEdit') {
+        this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {});
       }
     });
   }
@@ -122,15 +128,19 @@ export class NewHousingComponent implements OnInit, OnDestroy {
             };
           });
         }
-        const modal = this.modalService.open(this.modalTemplate, {
-          size: 'lg',
-          windowClass: 'modal-md-personalized modal-dialog-scroll',
-          centered: true,
-        });
+
+        const open = () =>
+          this.modalService.open(this.modalTemplate, {
+            size: 'lg',
+            windowClass: 'modal-md-personalized modal-dialog-scroll',
+            centered: true,
+          });
+        const modal = open();
         document.getElementById('bodyGeneral').removeAttribute('style');
         this.modalActions.close = () => {
           modal.close();
         };
+        this.modalActions.open = open;
       }
     });
   }
@@ -203,30 +213,24 @@ export class NewHousingComponent implements OnInit, OnDestroy {
               if (result.success) {
                 this.formServiceChild.emit(result);
                 this.modalActions.close();
-                const alertWarning: Alerts[] = [
-                  {
-                    type: 'success',
-                    title: 'Transacción Exitosa',
-                    message: 'La actualizacion del alojamiento fue exitosa',
-                    confirmation: false,
-                    typeConfirmation: '',
-                  },
-                ];
-                this.alert.setAlert(alertWarning[0]);
+                this.alert.setAlert({
+                  type: 'success',
+                  title: 'Transacción Exitosa',
+                  message: 'La actualizacion del alojamiento fue exitosa',
+                  confirmation: false,
+                  typeConfirmation: '',
+                } as Alerts);
               }
             }),
               (error: any) => {
                 this.modalActions.close();
-                const alertWarning: Alerts[] = [
-                  {
-                    type: 'danger',
-                    title: 'Error',
-                    message: error.json().errors.toString(),
-                    confirmation: true,
-                    typeConfirmation: 'returnHousing',
-                  },
-                ];
-                this.alert.setAlert(alertWarning[0]);
+                this.alert.setAlert({
+                  type: 'danger',
+                  title: 'Error',
+                  message: error.json().errors.toString(),
+                  confirmation: true,
+                  typeConfirmation: 'returnHousing',
+                } as Alerts);
               };
           }
 
@@ -280,6 +284,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.getBedRooms.splice(bedroom, 1);
   }
 
+  deleteBed(objectBed,indexBed,objectBedroom,indexBedroom){
+
+  }
+
   addMoreBedRom() {
     const count = this.arrayBedrooms[this.bedGroupSelect].count.beds;
     const beds = [];
@@ -322,8 +330,16 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   deleteBedroom(id: string, index: string) {
-    if (id) {
-      this.housingService.deleteBedrooms(id).subscribe((data: any) => {});
+    this.id_bedroom = id;
+    if (this.id_bedroom) {
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'warning',
+        title: 'Advertencia',
+        message: '¿Esta seguro de eliminar la habitación, se eliminaran las camas asociadas?',
+        confirmation: true,
+        typeConfirmation: 'continueEdit',
+      } as Alerts);
     } else {
       this.getBedRooms.splice(index, 1);
       if (!this.getBedRooms.length) {
