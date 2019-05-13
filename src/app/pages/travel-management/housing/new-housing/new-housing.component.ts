@@ -109,23 +109,25 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       });
       if (open) {
         if (!isNew) {
-          const housings = this.housingService.getShowHousingById(id);
-          let bedrooms = {};
-          housings.forEach(housing => {
-            const length = housing.beds.length;
-            const temp = bedrooms[length] || {
-              bedrooms: [],
-              count: {
-                beds: length,
-              },
-              key: uuid.v4(),
-            };
+          this.housingService.getShowHousingById(id).subscribe(data => {
+            const housings = data.data;
+            let bedrooms = {};
+            housings.forEach(housing => {
+              const length = housing.beds.length;
+              const temp = bedrooms[length] || {
+                bedrooms: [],
+                count: {
+                  beds: length,
+                },
+                key: uuid.v4(),
+              };
 
-            temp.bedrooms.push(housing);
-            bedrooms = {
-              ...bedrooms,
-              [length]: temp,
-            };
+              temp.bedrooms.push(housing);
+              bedrooms = {
+                ...bedrooms,
+                [length]: temp,
+              };
+            });
           });
         }
 
@@ -284,9 +286,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.getBedRooms.splice(bedroom, 1);
   }
 
-  deleteBed(objectBed,indexBed,objectBedroom,indexBedroom){
-
-  }
+  deleteBed(objectBed, indexBed, objectBedroom, indexBedroom) {}
 
   addMoreBedRom() {
     const count = this.arrayBedrooms[this.bedGroupSelect].count.beds;
