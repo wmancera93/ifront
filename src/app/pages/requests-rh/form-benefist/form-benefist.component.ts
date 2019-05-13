@@ -38,7 +38,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   private allForms = new FormState({
     cases: {
-      AUX2_1: {
+      EDUB: {
         academic_level: true,
         employee_family_id: true,
         type_identification: true,
@@ -46,7 +46,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         calendar: true,
         grade: true,
       },
-      AUX2_2: {
+      EDUU: {
         academic_level: true,
         employee_family_id: true,
         type_identification: true,
@@ -54,8 +54,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         career: true,
         semester: true,
       },
-      AUX1_2: {},
-      AUX1_3: {},
+      EDUS: {},
+      EDUI: {},
     },
     allCases: {
       institution: true,
@@ -78,7 +78,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   get idActivity() {
-    return this.formRequests.id_activity;
+    return this.formRequests.alias;
   }
 
   get validateForms() {
@@ -99,8 +99,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
   ) {
+    debugger;
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
-      debugger;
       if (data === 'deleteNewDocumentSaved') {
         this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
         this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);

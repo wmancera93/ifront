@@ -67,7 +67,8 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   }
 
   get idActivity() {
-    return this.formRequests.id_activity;
+    return this.formRequests.alias;
+
   }
 
   get validateForms() {

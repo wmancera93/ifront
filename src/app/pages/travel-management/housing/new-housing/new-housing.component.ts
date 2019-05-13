@@ -11,6 +11,48 @@ import { Observable } from 'rxjs';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { T } from '@angular/core/src/render3';
 
+class HousingsRender {
+  public housings: any[] = [];
+  constructor(housings) {
+    this.housings = housings;
+  }
+
+  setHousings(housings) {
+    this.housings = housings;
+  }
+
+  gethousings() {
+    return this.housings;
+  }
+
+  group() {
+    let bedroomsTemp = {};
+    this.housings.forEach(bedRom => {
+      const length = bedRom.beds.length;
+      const temp = bedroomsTemp[length] || {
+        bedrooms: [],
+        count: {
+          beds: length,
+        },
+        key: uuid.v4(),
+      };
+
+      temp.bedrooms.push(bedRom as { id: number; label: string; beds: any });
+      bedroomsTemp = {
+        ...bedroomsTemp,
+        [length]: temp,
+      };
+    });
+    return Object.values(bedroomsTemp);
+  }
+
+  ungroup() {
+    let allBedrooms = [];
+    this.housings.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+    return allBedrooms;
+  }
+}
+
 @Component({
   selector: 'app-new-housing',
   templateUrl: './new-housing.component.html',
@@ -53,6 +95,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public cities: any[] = [];
   public id_housing: string;
   public id_bedroom: string;
+  public housings = new HousingsRender([]);
   private modalFormSubscription: any;
 
   get forms() {
@@ -109,25 +152,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       });
       if (open) {
         if (!isNew) {
-          this.housingService.getShowHousingById(id).subscribe(data => {
-            const housings = data.data;
-            let bedrooms = {};
-            housings.forEach(housing => {
-              const length = housing.beds.length;
-              const temp = bedrooms[length] || {
-                bedrooms: [],
-                count: {
-                  beds: length,
-                },
-                key: uuid.v4(),
-              };
-
-              temp.bedrooms.push(housing);
-              bedrooms = {
-                ...bedrooms,
-                [length]: temp,
-              };
-            });
+          this.housingService.getShowHousingById(id).subscribe((data: any) => {
+            const bedRooms = data.data;
+            this.housings.setHousings(bedRooms);
+            this.arrayBedrooms = this.housings.group();
           });
         }
 
@@ -173,12 +201,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           break;
         case 1:
           if (this.is_New) {
-            let allBedrooms = [];
-            this.arrayBedrooms.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+            this.housings.setHousings(this.arrayBedrooms);
             this.generalHousing = {
               name,
               city,
-              bedrooms: allBedrooms,
+              bedrooms: this.housings.ungroup(),
             };
 
             this.housingService.postNewHousing(this.generalHousing).subscribe((data: any) => {
@@ -286,13 +313,15 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.getBedRooms.splice(bedroom, 1);
   }
 
-  deleteBed(objectBed, indexBed, objectBedroom, indexBedroom) {}
+  deleteBed(objectBed, indexBed, objectBedroom, indexBedroom) {
+    console.log(objectBed, indexBed, objectBedroom, indexBedroom, this.arrayBedrooms);
+  }
 
   addMoreBedRom() {
     const count = this.arrayBedrooms[this.bedGroupSelect].count.beds;
     const beds = [];
     for (let j = 0; j < count; j++) {
-      beds.push({ label: '' });
+      beds.push({ id: uuid(), label: '' });
     }
     this.getBedRooms.push({ label: '', beds });
   }

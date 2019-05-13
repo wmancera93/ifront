@@ -39,7 +39,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   public is_upload = false;
   public deleteDocumenFile: string;
   public formCases = {
-    cases: { AUX1: {} },
+    cases: { AUX1_1: {} },
     allCases: { observation_request: true },
   };
   private subscription: ISubscription;
@@ -47,7 +47,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
   get idActivity() {
-    return this.formRequests.id_activity;
+    return this.formRequests.alias;
   }
   get validateForms() {
     return this.form.valid;

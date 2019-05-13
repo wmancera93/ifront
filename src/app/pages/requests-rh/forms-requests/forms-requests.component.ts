@@ -91,7 +91,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   }
 
   get case(): string {
-    return this.formRequests.id_activity;
+    return this.formRequests.alias;
+
   }
 
   private subscriptions: ISubscription[] = [];
@@ -127,8 +128,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         .subscribe((data: TypesRequests) => {
           this.formRequests = data;
 
-          const { id_activity, minimum_days, maximum_days } = data;
-          this.allForms.setCaseForm(id_activity);
+          const { alias, minimum_days, maximum_days } = data;
+          this.allForms.setCaseForm(alias);
           const formBuild = (
             forms: string[],
             formsDefault: Object = {},
@@ -175,7 +176,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
             observation_request: '',
           });
 
-          switch (id_activity) {
+          switch (alias) {
             case 'PERM':
               this.fileUploadService.setCleanUpload(true);
               break;
@@ -224,8 +225,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
     if (
-      this.formRequests.id_activity === 'PERM' ||
-      this.formRequests.id_activity === 'INCA'
+      this.formRequests.alias === 'PERM' ||
+      this.formRequests.alias === 'INCA'
     ) {
       const modelFromdata = new FormData();
       modelFromdata.append('request_type_id', model.request_type_id);

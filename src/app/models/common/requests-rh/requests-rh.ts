@@ -11,6 +11,7 @@ export interface TypesRequests {
   id: number;
   id_activity: string;
   name: string;
+  alias:string;
   available_days: number;
   maximum_days: number;
   minimum_days: number;
@@ -31,6 +32,7 @@ export interface ListRequests {
 
 export interface ListRequetsTypes {
   id: number;
+  alias: string;
   id_activity: string;
   name: string;
   active?: boolean;

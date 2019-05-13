@@ -201,6 +201,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
               this.listTypesFilters.push({
                 id: element.id,
                 id_activity: element.id_activity,
+                alias:element.alias,
                 name: element.name,
                 active: false,
               });
