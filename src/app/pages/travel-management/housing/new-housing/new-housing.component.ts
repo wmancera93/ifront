@@ -17,17 +17,9 @@ class HousingsRender {
     this.housings = housings;
   }
 
-  setHousings(housings) {
-    this.housings = housings;
-  }
-
-  gethousings() {
-    return this.housings;
-  }
-
-  group() {
+  group(housings) {
     let bedroomsTemp = {};
-    this.housings.forEach(bedRom => {
+    housings.forEach(bedRom => {
       const length = bedRom.beds.length;
       const temp = bedroomsTemp[length] || {
         bedrooms: [],
@@ -46,10 +38,14 @@ class HousingsRender {
     return Object.values(bedroomsTemp);
   }
 
-  ungroup() {
+  ungroup(housings) {
     let allBedrooms = [];
-    this.housings.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
+    housings.forEach(({ bedrooms }) => allBedrooms.push(...bedrooms));
     return allBedrooms;
+  }
+
+  reload(housings) {
+    return this.group(this.ungroup(housings));
   }
 }
 
@@ -89,12 +85,13 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public model = {};
   public modalState = true;
   public readOnly = false;
-  public is_New: boolean;
+  public isNew: boolean;
   public arrayBedrooms: any[] = [];
   public servicesList: any[] = [];
   public cities: any[] = [];
   public id_housing: string;
   public id_bedroom: string;
+  public id_bed: string;
   public housings = new HousingsRender([]);
   private modalFormSubscription: any;
 
@@ -119,9 +116,29 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'returnHousing') {
         this.modalActions.open();
+        this.bedRoomSelect = -1;
       }
       if (data === 'continueEdit') {
         this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {});
+      }
+      if (data === 'continueDeleteBed') {
+        this.housingService.deleteBed(this.id_bed).subscribe((result: any) => {
+          (error: any) => {
+            this.modalActions.close();
+            this.alert.setAlert({
+              type: 'danger',
+              title: 'Error',
+              message: error.json().errors.toString(),
+              confirmation: true,
+              typeConfirmation: 'returnHousing',
+            } as Alerts);
+          };
+          this.housingService.getShowHousingById(this.id_housing).subscribe((data: any) => {
+            const bedRooms = data.data;
+            this.arrayBedrooms = this.housings.group(bedRooms);
+          });
+        });
+        this.modalActions.open();
       }
     });
   }
@@ -140,7 +157,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       this.arrayBedrooms = [];
       this.stepActive = 0;
       this.readOnly = readOnly;
-      this.is_New = isNew;
+      this.isNew = isNew;
       this.id_housing = form.id;
       const { required } = Validators;
       const { name, city, id } = form;
@@ -152,10 +169,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       });
       if (open) {
         if (!isNew) {
-          this.housingService.getShowHousingById(id).subscribe((data: any) => {
+          this.housingService.getShowHousingById(this.id_housing).subscribe((data: any) => {
             const bedRooms = data.data;
-            this.housings.setHousings(bedRooms);
-            this.arrayBedrooms = this.housings.group();
+            this.arrayBedrooms = this.housings.group(bedRooms);
           });
         }
 
@@ -200,12 +216,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
-          if (this.is_New) {
-            this.housings.setHousings(this.arrayBedrooms);
+          if (this.isNew) {
             this.generalHousing = {
               name,
               city,
-              bedrooms: this.housings.ungroup(),
+              bedrooms: this.housings.ungroup(this.arrayBedrooms),
             };
 
             this.housingService.postNewHousing(this.generalHousing).subscribe((data: any) => {
@@ -273,6 +288,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   addHousig() {
+    debugger;
     const { bedrooms, beds: bedsCount } = this.forms;
     const arrayBedrooms = [];
     for (let i = 0; i < bedrooms.value; i++) {
@@ -314,7 +330,21 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   deleteBed(objectBed, indexBed, objectBedroom, indexBedroom) {
-    console.log(objectBed, indexBed, objectBedroom, indexBedroom, this.arrayBedrooms);
+    console.log(objectBed, indexBed, objectBedroom, indexBedroom);
+    this.id_bed = objectBed.id;
+    if (this.isNew) {
+      objectBedroom.beds.splice(indexBed, 1);
+      this.arrayBedrooms = this.housings.reload(this.arrayBedrooms);
+    } else {
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'warning',
+        title: 'Advertencia',
+        message: 'Esta seguro que desea eliminar el espacio',
+        confirmation: true,
+        typeConfirmation: 'continueDeleteBed',
+      } as Alerts);
+    }
   }
 
   addMoreBedRom() {
@@ -327,12 +357,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   changeLabelBedRom(value, save: boolean, idBedroom: string) {
-    if (this.is_New) {
+    debugger;
+    if (this.isNew) {
       if (save) this.getBedRooms[this.bedRoomSelect].label = value;
-
       this.bedRoomSelect = -1;
     } else {
-      this.housingService.putEditBedrooms(idBedroom, value).subscribe((resultBedroom: any) => {
+      this.housingService.putEditBedrooms(idBedroom, { label: value }).subscribe((resultBedroom: any) => {
         if (resultBedroom.success) {
           this.formServiceChild.emit(resultBedroom);
           this.modalActions.close();
@@ -352,9 +382,18 @@ export class NewHousingComponent implements OnInit, OnDestroy {
             title: 'Error',
             message: error.json().errors.toString(),
             confirmation: true,
-            typeConfirmation: 'returnHousing',
+            typeConfirmation: 'returnEditHousing',
           } as Alerts);
         };
+    }
+  }
+
+  changeLabelBed(bed, bedField) {
+    if (this.isNew) {
+      bed.label = bedField.value;
+      bedField.value = '';
+    } else {
+      this.housingService.putEditBed(bed.id, { label: bedField.value }).subscribe((data: any) => {});
     }
   }
 

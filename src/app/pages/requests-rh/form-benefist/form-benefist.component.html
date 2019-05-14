@@ -36,7 +36,7 @@
               type="text"
               class="form-control"
               [formControl]="forms.number_identification"
-              (keyup)="onlyNumber(forms.number_identification)"
+              (keyup)="onlyNumber('identifier',forms.number_identification)"
             />
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_begin')">

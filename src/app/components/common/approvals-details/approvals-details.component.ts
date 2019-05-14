@@ -17,13 +17,16 @@ export class ApprovalsDetailsComponent implements OnInit {
   public edit = false;
 
   public showSubmit = true;
-
+  public last_approver: boolean = false;
   public prerequisit = true;
   public switch = 'on';
   public description = '';
   public dateSince: string;
   public dateUntil: string;
   public close: string;
+  public validity_begin:string;
+  public validity_end:string;
+  public date_pay:string;
 
   t(key) {
     return this.translate.instant(this.parseT(key));
@@ -40,54 +43,38 @@ export class ApprovalsDetailsComponent implements OnInit {
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
   ) {
-    this.aproversRequestsService
-      .getAprovalsRequests()
-      .subscribe((data: any) => {
-        this.switch = 'on';
-        this.description = '';
-        this.approvals = [];
-        this.edit = data.edit;
-        this.approverRequestsService
-          .getDetailApprovalsRequests(data.id)
-          .subscribe((request: any) => {
-            this.approvals[0] = request.data[0].request;
-            const dateBegin = request.data[0].request.date_begin_format.split(
-              '/',
-            );
-            this.dateSince =
-              dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
-            const dateEnd = request.data[0].request.date_end_format.split(
-              '/',
-            );
-            this.dateUntil =
-              dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
-
-            if (
-              this.approvals[0].type_request_to_json.prerequisites !=
-                '' &&
-              this.approvals[0].type_request_to_json.prerequisites !=
-                null
-            ) {
-              this.prerequisit = true;
-            } else {
-              this.prerequisit = false;
-            }
-          });
+    this.aproversRequestsService.getAprovalsRequests().subscribe((data: any) => {
+      this.switch = 'on';
+      this.description = '';
+      this.approvals = [];
+      this.edit = data.edit;
+      this.approverRequestsService.getDetailApprovalsRequests(data.id).subscribe((request: any) => {
+        debugger
+        this.approvals[0] = request.data[0].request;
+        const dateBegin = request.data[0].request.date_begin_format.split('/');
+        this.dateSince = dateBegin[1] + '/' + dateBegin[0] + '/' + dateBegin[2];
+        const dateEnd = request.data[0].request.date_end_format.split('/');
+        this.dateUntil = dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2];
 
         if (
-          document.getElementById('approvals_requests').className !==
-          'modal show'
+          this.approvals[0].type_request_to_json.prerequisites != '' &&
+          this.approvals[0].type_request_to_json.prerequisites != null
         ) {
-          document.getElementById('btn_approvals_requests').click();
-          document
-            .getElementById('bodyGeneral')
-            .removeAttribute('style');
+          this.prerequisit = true;
+        } else {
+          this.prerequisit = false;
         }
-
-        setTimeout(() => {
-          this.stylesExplorerService.addStylesCommon();
-        }, 1000);
       });
+
+      if (document.getElementById('approvals_requests').className !== 'modal show') {
+        document.getElementById('btn_approvals_requests').click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+      }
+
+      setTimeout(() => {
+        this.stylesExplorerService.addStylesCommon();
+      }, 1000);
+    });
   }
 
   ngOnInit() {}
@@ -113,6 +100,9 @@ export class ApprovalsDetailsComponent implements OnInit {
         request_id: this.approvals[0].ticket,
         answer: this.switch,
         description: this.description,
+        date_begin:this.validity_begin,
+        date_end:this.validity_end,
+        payment_day:this.date_pay,
       })
       .subscribe(
         (data: any) => {
@@ -120,11 +110,7 @@ export class ApprovalsDetailsComponent implements OnInit {
           this.showSubmit = true;
         },
         (error: any) => {
-          (<HTMLInputElement>(
-            document.getElementsByClassName(
-              'buttonApprovalsRequests',
-            )[0]
-          )).click();
+          (<HTMLInputElement>document.getElementsByClassName('buttonApprovalsRequests')[0]).click();
           const alertWarning: Alerts[] = [
             {
               type: 'danger',

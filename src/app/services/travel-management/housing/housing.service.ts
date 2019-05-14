@@ -22,12 +22,8 @@ export class HousingService {
   getReportLogistics() {
     return this.reportLogistics;
   }
-
-  deleteHousingByCompany(housing_id: any) {
-    return;
-  }
   postNewHousing(object: any) {
-    return this.tokenService.post('housing/', object).map((data: any) => data.json());
+    return this.tokenService.post('housing', object).map((data: any) => data.json());
   }
   getIndexHousing() {
     return this.tokenService.get('housing').map((data: any) => data.json());
@@ -36,18 +32,21 @@ export class HousingService {
     return this.tokenService.get('housing/' + id).map((data: any) => data.json());
   }
   putEditHousing(id: string, object: any) {
-    return this.tokenService.put('housing/', +id, object).map((data: any) => data.json());
+    return this.tokenService.put('housing/' + id, object).map((data: any) => data.json());
+  }
+  deleteHousing(id_housing) {
+    return this.tokenService.delete('housing/' + id_housing).map((data: any) => data.json());
   }
   putEditBedrooms(idBedrooms: string, label: any) {
-    return this.tokenService.put('housing/', +idBedrooms, label).map((data: any) => data.json());
+    return this.tokenService.put('bedrooms/' + idBedrooms, label).map((data: any) => data.json());
   }
   deleteBedrooms(idBedrooms: string) {
-    return this.tokenService.put('housing/', +idBedrooms).map((data: any) => data.json());
+    return this.tokenService.delete('bedrooms/' + idBedrooms).map((data: any) => data.json());
   }
-  putEditBed(idBed: string) {
-    return this.tokenService.put('housing/', +idBed).map((data: any) => data.json());
+  putEditBed(idBed: string, param:any) {
+    return this.tokenService.put('bed/'+ idBed, param).map((data: any) => data.json());
   }
   deleteBed(idBed: string) {
-    return this.tokenService.put('housing/', +idBed).map((data: any) => data.json());
+    return this.tokenService.delete('bed/' + idBed).map((data: any) => data.json());
   }
 }

@@ -62,8 +62,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       concept: true,
       value: true,
       observation_request: true,
-      date_begin: true,
-      date_end: true,
+      date_begin: false,
+      date_end: false,
     },
   });
 
@@ -99,7 +99,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
   ) {
-    debugger;
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
         this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
@@ -285,7 +284,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   addConcept() {
     const { concept, value } = this.form.controls;
-    this.onlyNumber(value, value.value);
+    this.onlyNumber(value, value);
     if (value.value) {
       this.arrayConcept.push({
         concept: JSON.parse(concept.value),
@@ -296,8 +295,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     }
   }
   onlyNumber(param, value) {
-    debugger;
-    let onlyNumber = /^[0-9]+$/.test(value);
+    let onlyNumber = /^[0-9]+$/.test(value.value);
     if (!onlyNumber) {
       this.setModalState.emit(false);
       const alertWarning: Alerts[] = [

@@ -14,13 +14,15 @@ export class HousingComponent implements OnInit {
   public housings: any[] = [];
   public is_collapse: boolean;
   public isNew: boolean;
+  public id_housing: string;
 
   styleCursor(housing, cursor): string {
     return this.activeState(housing, cursor) ? 'pointer' : 'no-drop';
   }
 
   activeState(housing, action) {
-    return housing.action_housing_index_view[action];
+    // return housing.action_housing_index_view[action];
+    return true;
   }
 
   parseT(key) {
@@ -28,7 +30,13 @@ export class HousingComponent implements OnInit {
   }
 
   constructor(public housingService: HousingService, public router: Router, public alert: AlertsService) {
-  
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'deleteHousing') {
+        this.housingService.deleteHousing(this.id_housing).subscribe((data: any) => {
+          this.getHousing();
+        });
+      }
+    });
   }
 
   formServicePather(res) {
@@ -79,6 +87,7 @@ export class HousingComponent implements OnInit {
   }
 
   deleteHousing(id) {
+    this.id_housing = id;
     const alertWarning = [
       {
         type: 'warning',
