@@ -99,7 +99,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
   get validateForms() {
-    console.log(this.form);
     return this.form.valid && this.arrayBedrooms.length;
   }
   parseT(key) {
@@ -193,7 +192,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           });
         const modal = open();
         document.getElementById('bodyGeneral').removeAttribute('style');
-        this.modalActions.close = modal.close;
+        this.modalActions.close = () => {
+          modal.close();
+        };
         this.modalActions.open = open;
       }
     });
@@ -204,7 +205,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   newRequest(model) {
-    console.log(model);
+
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -297,10 +298,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     }
   }
 
-  log(...param) {
-    console.log(param);
-  }
-
   addHousig() {
     debugger;
     const { bedrooms, beds: bedsCount } = this.forms;
@@ -344,7 +341,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   deleteBed(objectBed, indexBed, objectBedroom, indexBedroom) {
-    console.log(objectBed, indexBed, objectBedroom, indexBedroom);
     this.id_bed = objectBed.id;
     if (this.isNew) {
       objectBedroom.beds.splice(indexBed, 1);
@@ -429,5 +425,13 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       }
     }
     this.bedRoomSelect = -1;
+  }
+  closeAll() {
+    debugger
+    const modal = open();
+    document.getElementById('bodyGeneral').removeAttribute('style');
+    this.modalActions.close = () => {
+      modal.close();
+    };
   }
 }
