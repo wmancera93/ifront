@@ -229,7 +229,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   conceptExist(id: any) {
     let state = false;
     this.arrayConcept.forEach(value => {
-      if (value.concept.id === id) {
+      if (value.concept.concept === id) {
         state = true;
       }
     });
@@ -299,7 +299,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   removeConcept(idConcept) {
-    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
+    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.concept === idConcept), 1);
   }
 
   addConcept() {
@@ -307,7 +307,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     this.onlyNumber(value, value);
     if (value.value) {
       this.arrayConcept.push({
-        concept: JSON.parse(concept.value),
+        concept: concept.value,
         value: value.value,
       });
       concept.setValue('');

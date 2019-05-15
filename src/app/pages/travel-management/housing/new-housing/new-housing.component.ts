@@ -363,7 +363,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       beds.push({ id: uuid(), label: '' });
     }
     this.getBedRooms.push({ label: '', beds });
-    const newGetBetdrooms = { bedrooms: this.getBedRooms };
+    const newGetBetdrooms = { bedrooms: this.getBedRooms[this.getBedRooms.length - 1] };
     this.housingService.postNewBedrooms(this.id_housing, newGetBetdrooms).subscribe((data: any) => {
       this.modalActions.close();
       this.alert.setAlert({
@@ -377,12 +377,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   changeLabelBedRom(value, save: boolean, idBedroom: string) {
-    debugger;
     if (this.isNew) {
       if (save) this.getBedRooms[this.bedRoomSelect].label = value;
       this.bedRoomSelect = -1;
     } else {
-      if(save){
+      if (save) {
         this.housingService.putEditBedrooms(idBedroom, { label: value }).subscribe((resultBedroom: any) => {
           if (resultBedroom.success) {
             this.formServiceChild.emit(resultBedroom);

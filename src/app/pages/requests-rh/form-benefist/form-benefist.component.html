@@ -167,7 +167,7 @@
                       <tbody style="color: #fff;">
                         <tr *ngFor="let concept of arrayConcept">
                           <td>
-                            {{ concept.concept.name }}
+                            {{ concept.concept }}
                           </td>
                           <td>
                             {{ concept.value }}
@@ -176,7 +176,7 @@
                             <button
                               type="button"
                               class="btn btn-danger btn-block btn-sm cursor-general"
-                              (click)="removeConcept(concept.concept.id)"
+                              (click)="removeConcept(concept.concept)"
                             >
                               <i class="fa fa-minus"></i>
                             </button>
@@ -197,7 +197,7 @@
                         <select class="form-control" [formControl]="forms.concept">
                           <option value="">Seleccione</option>
                           <ng-container *ngFor="let conceptList of concept_types_list">
-                            <option [value]="conceptList.description" *ngIf="!conceptExist(conceptList.id)">
+                            <option [value]="conceptList.description" *ngIf="!conceptExist(conceptList.description)">
                               {{ conceptList.description }}
                             </option>
                           </ng-container>
