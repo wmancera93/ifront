@@ -233,13 +233,11 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         state = true;
       }
     });
-    if (this.idActivity !== 'EDUB' && id !== 'entollment') {
-      state = true;
-    }
     return state;
   }
 
   conceptValidation(id: any) {
+    debugger;
     let state = this.conceptExist(id);
     return state;
   }
@@ -247,6 +245,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   conceptsValidation(): boolean {
     let state = true;
     this.concept_types_list.forEach(({ atribute }) => {
+      debugger;
       if (state) {
         state = this.conceptValidation(atribute);
       }
@@ -279,6 +278,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
           feeding?: number;
           pension?: number;
           transport?: number;
+          total?: number;
         } = {};
         this.arrayConcept.map(obj => {
           request_educations = {
