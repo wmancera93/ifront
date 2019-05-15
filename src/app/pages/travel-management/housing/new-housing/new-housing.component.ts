@@ -99,6 +99,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     return this.form.controls;
   }
   get validateForms() {
+    console.log(this.form);
     return this.form.valid && this.arrayBedrooms.length;
   }
   parseT(key) {
@@ -114,12 +115,24 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     public formDataService: FormDataService,
   ) {
     this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'returnHousing') {
-        this.modalActions.open();
-        this.bedRoomSelect = -1;
+      const recharge = () => {
+        this.housingService.getShowHousingById(this.id_housing).subscribe((data: any) => {
+          const bedRooms = data.data;
+          this.arrayBedrooms = this.housings.group(bedRooms);
+        });
+        this.formServiceChild.emit({ success: true });
+      };
+      switch (data) {
+        case 'returnHousing':
+        case 'continueEdit':
+          this.modalActions.open();
+          this.bedRoomSelect = -1;
+          break;
       }
       if (data === 'continueEdit') {
-        this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {});
+        this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {
+          recharge();
+        });
       }
       if (data === 'continueDeleteBed') {
         this.housingService.deleteBed(this.id_bed).subscribe((result: any) => {
@@ -133,10 +146,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
               typeConfirmation: 'returnHousing',
             } as Alerts);
           };
-          this.housingService.getShowHousingById(this.id_housing).subscribe((data: any) => {
-            const bedRooms = data.data;
-            this.arrayBedrooms = this.housings.group(bedRooms);
-          });
+          recharge();
         });
         this.modalActions.open();
       }
@@ -183,9 +193,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           });
         const modal = open();
         document.getElementById('bodyGeneral').removeAttribute('style');
-        this.modalActions.close = () => {
-          modal.close();
-        };
+        this.modalActions.close = modal.close;
         this.modalActions.open = open;
       }
     });
@@ -216,6 +224,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
+          if (this.readOnly) return;
           if (this.isNew) {
             this.generalHousing = {
               name,
@@ -253,7 +262,8 @@ export class NewHousingComponent implements OnInit, OnDestroy {
                 this.alert.setAlert(alertWarning[0]);
               };
           } else {
-            this.housingService.putEditHousing(this.id_housing, this.forms).subscribe((result: any) => {
+            debugger;
+            this.housingService.putEditHousing(this.id_housing, { label: name, city: city }).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);
                 this.modalActions.close();
@@ -285,6 +295,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     if (back && this.stepActive > 0) {
       this.stepActive--;
     }
+  }
+
+  log(...param) {
+    console.log(param);
   }
 
   addHousig() {

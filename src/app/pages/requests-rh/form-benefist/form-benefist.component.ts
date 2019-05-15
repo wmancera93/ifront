@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
 import { TypesRequest, formsRequest } from '../../../models/common/requests-rh/requests-rh';
 import { Alerts } from '../../../models/common/alerts/alerts';
+import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-form-benefist',
@@ -30,11 +32,14 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   public identificationTypes: any[] = [];
   public concept_types_list: any[] = [];
   public institution_types_list: any[] = [];
+  public institution_grades: any[] = [];
+  public gradesShow: any[] = [];
   public arrayConcept: any[] = [];
   public iconUpload: any[] = [];
   public iconDocument = '';
   public is_upload = false;
   public deleteDocumenFile: string;
+  public userAuthenticated: User = null;
 
   private allForms = new FormState({
     cases: {
@@ -98,6 +103,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
     public translate: TranslateService,
+    private requestsRhService: RequestsRhService,
   ) {
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
@@ -112,27 +118,27 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       this.setModalState.emit(true);
     });
 
-    this.academic_level_types = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-      { id: 3, name: 'Bachiderato' },
-      { id: 4, name: 'Tecnico' },
-      { id: 5, name: 'Tecnologo' },
-      { id: 6, name: 'Universitario' },
-    ];
-    this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
+    // this.academic_level_types = [
+    //   { id: 1, name: 'Preescolar' },
+    //   { id: 2, name: 'Primaria' },
+    //   { id: 3, name: 'Bachiderato' },
+    //   { id: 4, name: 'Tecnico' },
+    //   { id: 5, name: 'Tecnologo' },
+    //   { id: 6, name: 'Universitario' },
+    // ];
+    // this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
     this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
-    this.concept_types_list = [
-      { id: 'enrollment', name: 'Monto de Matricula' },
-      { id: 'transport', name: 'monto de transporte' },
-      { id: 'pension', name: 'Monto de pension' },
-      { id: 'feeding', name: 'Monto de alimentacion' },
-    ];
-    this.institution_types_list = [
-      { id: 1, name: 'Wall Strere Englis Institute' },
-      { id: 2, name: 'Brith Council' },
-      { id: 3, name: 'Centro Colombo Americano Institute' },
-    ];
+    // this.concept_types_list = [
+    //   { id: 'enrollment', name: 'Monto de Matricula' },
+    //   { id: 'transport', name: 'monto de transporte' },
+    //   { id: 'pension', name: 'Monto de pension' },
+    //   { id: 'feeding', name: 'Monto de alimentacion' },
+    // ];
+    // this.institution_types_list = [
+    //   { id: 1, name: 'Wall Strere Englis Institute' },
+    //   { id: 2, name: 'Brith Council' },
+    //   { id: 3, name: 'Centro Colombo Americano Institute' },
+    // ];
   }
 
   ngOnInit() {
@@ -148,6 +154,14 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     });
 
     this.allForms.setCaseForm(this.idActivity);
+    this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
+    this.requestsRhService.getAllSelectRequest(this.userAuthenticated.employee.pernr, this.idActivity).subscribe((data: any) => {
+      this.academic_level_types = data.data.scholarships;
+      this.employee_family_id_types = data.data.beneficiarios;
+      this.concept_types_list = data.data.request_concepts;
+      this.institution_types_list = data.data.institutes;
+      this.institution_grades = data.data.scholarships_grades;
+    });
 
     this.form = new FormGroup({});
     const { required } = Validators;
@@ -273,7 +287,13 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
             [obj.concept.id]: obj.value,
           };
         });
-        this.submit.emit({ ...this.form.value, request_educations });
+        this.form.value;
+
+        this.submit.emit({
+          ...this.form.value,
+          academic_level: this.academic_level_types.find(result => result.id == this.form.value.academic_level),
+          request_educations,
+        });
       }
     }
   }
@@ -323,5 +343,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });
+  }
+  selectGrades(idScholarship) {
+    this.gradesShow = this.institution_grades.filter(result => result.scholarship_id.toString() === idScholarship.academic_level);
   }
 }

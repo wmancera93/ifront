@@ -26,59 +26,33 @@ export class TransportationLogisticsComponent implements OnInit {
   }
 
   activeState(transport, position: number) {
-    return transport.action_tranportation_index_view[position].is_active;
+    return true;
+    // return transport.action_tranportation_index_view[position].is_active;
   }
 
   parseT(key) {
     return `pages.travel_management.transportation_logistics.${key}`;
   }
 
-  constructor(public router: Router, public alert: AlertsService, public formDataService: FormDataService) {}
+  constructor(
+    public router: Router,
+    public alert: AlertsService,
+    public formDataService: FormDataService,
+    public transportationLogisticsService: TransportationLogisticsService,
+  ) {}
 
   ngOnInit() {
-    this.chargeData();
+    this.transportationLogisticsService.getIndexTransportation().subscribe((data: any) => {
+      this.fleets = data.data[0];
+    });
   }
 
-  chargeData() {
-    this.fleets = [
-      {
-        action_tranportation_index_view: [
-          { title: 'Ver', is_active: true },
-          { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: true },
-        ],
-        created_date: '03/10/2018',
-        is_avalable: false,
-        id: 1,
-        destiny: 'Paloquemado',
-        plate: 'XML 152',
-        total_chairs: 25,
-        assigned_spaces: 18,
-        available_spaces: 7,
-      },
-      {
-        action_tranportation_index_view: [
-          { title: 'Ver', is_active: true },
-          { title: 'Borrar', is_active: true },
-          { title: 'Editar', is_active: false },
-        ],
-        created_date: '03/10/2018',
-        is_avalable: false,
-        id: 1,
-        destiny: 'BBQ',
-        plate: 'JCG 152',
-        total_chairs: 80,
-        assigned_spaces: 65,
-        available_spaces: 25,
-      },
-    ];
-  }
   returnBack() {
     this.router.navigate(['ihr/travel_management']);
   }
 
   seeFleets(logistic) {
-    debugger
+    debugger;
     const { plate, id } = logistic;
     this.modalForm.next({
       open: true,
@@ -89,7 +63,7 @@ export class TransportationLogisticsComponent implements OnInit {
   }
 
   editFleets(logistic) {
-    debugger
+    debugger;
     const { plate, id } = logistic;
     this.modalForm.next({
       open: true,

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Angular2TokenService } from 'angular2-token';
 
 @Injectable()
 export class TransportationLogisticsService {
@@ -20,9 +21,13 @@ export class TransportationLogisticsService {
     },
   ];
 
-  constructor() {}
+  constructor(private tokenService: Angular2TokenService) {}
 
   getVehicle(param) {
     return this.vehicle.find(({ id }) => id === param);
   }
+  getIndexTransportation() {
+    return this.tokenService.get('vehicle').map((data: any) => data.json());
+  }
+
 }

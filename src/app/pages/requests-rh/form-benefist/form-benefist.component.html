@@ -58,10 +58,10 @@
               <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
               {{ parseT('scholarship') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.academic_level">
+            <select class="form-control" [formControl]="forms.academic_level" (change)="selectGrades(form.value)">
               <option value="">Seleccione</option>
               <option *ngFor="let academic_levelList of academic_level_types" [value]="academic_levelList.id">
-                {{ academic_levelList.name }}
+                {{ academic_levelList.description }}
               </option>
             </select>
           </div>
@@ -70,12 +70,12 @@
               <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
               Grado escolar*
             </label>
-            <select class="form-control" [formControl]="forms.grade">
+            <select class="form-control" [formControl]="forms.grade" [attr.disabled]="gradesShow.length == 0 ? true : null">
               <option value="">Seleccione</option>
-              <option *ngFor="let academic_levelList of academic_level_types" [value]="academic_levelList.id">
-                {{ academic_levelList.name }}
+              <option *ngFor="let grades of gradesShow" [value]="grades.grade">
+                {{ grades.grade }}
               </option>
-            </select>
+            </select> 
           </div>
           <div class="col-4 col-md-4 top-containter mt-3" *ngIf="formState('calendar')">
             <div class="form-check">

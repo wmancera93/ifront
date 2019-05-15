@@ -163,7 +163,11 @@
                           <div class="row align-items-center justify-content-center">
                             <div class="col-6 col-sm-2 col-md-2 col-lg-2" *ngFor="let bed of bedRom.beds; let j = index">
                               <div class="square mx-auto my-2 d-flex align-items-center justify-content-center">
-                                <h6 class="text-primary-hr cursor-general position-absolute" style="right: 40px;top: 4px" (click)="deleteBed(bed,j,bedRom,i)">
+                                <h6
+                                  class="text-primary-hr cursor-general position-absolute"
+                                  style="right: 40px;top: 4px"
+                                  (click)="deleteBed(bed, j, bedRom, i)"
+                                >
                                   x
                                 </h6>
                                 <i class="fa fa-bed fa-2 text-dark" aria-hidden="true"></i>
@@ -187,7 +191,7 @@
                                     value="{{ bed.label }}"
                                     #bedField
                                     (blur)="bedSelect = -1"
-                                    (change)="changeLabelBed(bed,bedField)"
+                                    (change)="changeLabelBed(bed, bedField)"
                                   />
                                   {{ bedField.focus() }}
                                 </ng-template>
@@ -259,7 +263,7 @@
               class="btn text-center btn-success btn-block"
               (click)="handleStep({ next: true })"
               [style.cursor]="readOnly && stepActive === 1 ? 'no-drop' : 'pointer'"
-              [attr.disabled]="!validateForms && stepActive === 1 ? true : null"
+              [attr.disabled]="!validateForms && stepActive === 1 && readOnly ? true : null"
             >
               <ng-container *ngIf="stepActive === 0">
                 <h6>{{ parseT('next') | translate }}</h6>
