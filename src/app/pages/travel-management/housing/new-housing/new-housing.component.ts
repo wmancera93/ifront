@@ -99,7 +99,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public housings = new HousingsRender([]);
   private modalFormSubscription: any;
   public actuallyModalState = true;
-  public modal: NgbModalRef;
+  public ngbModalRef: NgbModalRef;
 
   get forms() {
     return this.form.controls;
@@ -183,15 +183,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           });
         }
 
-        this.modal = this.modalService.open(this.modalTemplate, {
+        this.ngbModalRef = this.modalService.open(this.modalTemplate, {
           size: 'lg',
           windowClass: 'modal-md-personalized modal-dialog-scroll',
           centered: true,
           backdrop: 'static',
         });
-
-        this.modal.result.then(result => {}, reason => {});
-
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     });
