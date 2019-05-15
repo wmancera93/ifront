@@ -202,7 +202,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       ],
       concept: '',
       value: '',
-      file: [],
+      file_support: '',
     });
   }
 
@@ -229,11 +229,11 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   conceptExist(id: any) {
     let state = false;
     this.arrayConcept.forEach(value => {
-      if (value.concept.concept === id) {
+      if (value.concept.atribute === id) {
         state = true;
       }
     });
-    if (this.idActivity !== 'EDUB' && id !== 'enrollment') {
+    if (this.idActivity !== 'EDUB' && id !== 'entollment') {
       state = true;
     }
     return state;
@@ -246,9 +246,9 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   conceptsValidation(): boolean {
     let state = true;
-    this.concept_types_list.forEach(({ id }) => {
+    this.concept_types_list.forEach(({ atribute }) => {
       if (state) {
-        state = this.conceptValidation(id);
+        state = this.conceptValidation(atribute);
       }
     });
     return state;
@@ -272,8 +272,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       ];
       this.alert.setAlert(alertWarning[0]);
     } else {
-      debugger;
-      this.forms.file.setValue(this.objectImg);
+      this.forms.file_support.setValue((this.objectImg[0] || { file: undefined }).file);
       if (this.validateForms) {
         let request_educations: {
           enrollment?: number;
@@ -284,15 +283,15 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         this.arrayConcept.map(obj => {
           request_educations = {
             ...request_educations,
-            [obj.concept.id]: obj.value,
+            [obj.concept.atribute]: obj.value,
           };
         });
         this.form.value;
 
         this.submit.emit({
           ...this.form.value,
-          academic_level: this.academic_level_types.find(result => result.id == this.form.value.academic_level),
-          request_educations,
+          academic_level: JSON.stringify(this.academic_level_types.find(result => result.id == this.form.value.academic_level)),
+          request_educations: JSON.stringify(request_educations),
         });
       }
     }
@@ -307,7 +306,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     this.onlyNumber(value, value);
     if (value.value) {
       this.arrayConcept.push({
-        concept: concept.value,
+        concept: this.concept_types_list.find(({ atribute }) => atribute === concept.value),
         value: value.value,
       });
       concept.setValue('');

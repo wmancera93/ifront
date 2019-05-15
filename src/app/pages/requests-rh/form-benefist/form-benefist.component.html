@@ -36,7 +36,7 @@
               type="text"
               class="form-control"
               [formControl]="forms.number_identification"
-              (keyup)="onlyNumber('identifier',forms.number_identification)"
+              (keyup)="onlyNumber('number_identification', forms.number_identification)"
             />
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_begin')">
@@ -75,7 +75,7 @@
               <option *ngFor="let grades of gradesShow" [value]="grades.grade">
                 {{ grades.grade }}
               </option>
-            </select> 
+            </select>
           </div>
           <div class="col-4 col-md-4 top-containter mt-3" *ngIf="formState('calendar')">
             <div class="form-check">
@@ -167,7 +167,7 @@
                       <tbody style="color: #fff;">
                         <tr *ngFor="let concept of arrayConcept">
                           <td>
-                            {{ concept.concept }}
+                            {{ concept.concept.description }}
                           </td>
                           <td>
                             {{ concept.value }}
@@ -186,45 +186,47 @@
                     </table>
                   </div>
                 </div>
-                <div class="col-12 col-lg-10 col-xl-11">
-                  <div class="container mb-3">
-                    <div class="row">
-                      <div class="col-12 col-sm-6 text-truncate">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                          {{ parseT('concept') | translate }} *
-                        </label>
-                        <select class="form-control" [formControl]="forms.concept">
-                          <option value="">Seleccione</option>
-                          <ng-container *ngFor="let conceptList of concept_types_list">
-                            <option [value]="conceptList.description" *ngIf="!conceptExist(conceptList.description)">
-                              {{ conceptList.description }}
-                            </option>
-                          </ng-container>
-                        </select>
-                      </div>
-                      <div class="col-12 col-sm-6 text-truncate">
-                        <label class="titleColor">
-                          <i class="fa fa-fw fa-money text-primary-hr"></i>
-                          {{ parseT('value') | translate }} *
-                        </label>
-                        <input type="text" class="form-control" [formControl]="forms.value" />
+                <ng-container *ngIf="!conceptsValidation()">
+                  <div class="col-12 col-lg-10 col-xl-11">
+                    <div class="container mb-3">
+                      <div class="row">
+                        <div class="col-12 col-sm-6 text-truncate">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                            {{ parseT('concept') | translate }} *
+                          </label>
+                          <select class="form-control" [formControl]="forms.concept">
+                            <option value="">Seleccione</option>
+                            <ng-container *ngFor="let conceptList of concept_types_list">
+                              <option [value]="conceptList.atribute" *ngIf="!conceptExist(conceptList.atribute)">
+                                {{ conceptList.description }}
+                              </option>
+                            </ng-container>
+                          </select>
+                        </div>
+                        <div class="col-12 col-sm-6 text-truncate">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-money text-primary-hr"></i>
+                            {{ parseT('value') | translate }} *
+                          </label>
+                          <input type="text" class="form-control" [formControl]="forms.value" />
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
-                  <div class="w-100 my-auto">
-                    <button
-                      type="button"
-                      class="btn btn-success btn-block cursor-general mt-4 w-100"
-                      (click)="addConcept()"
-                      [attr.disabled]="forms.value.value == '' || forms.concept.value == '' ? true : null"
-                    >
-                      <i class=" fa fa-plus"></i>
-                    </button>
+                  <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+                    <div class="w-100 my-auto">
+                      <button
+                        type="button"
+                        class="btn btn-success btn-block cursor-general mt-4 w-100"
+                        (click)="addConcept()"
+                        [attr.disabled]="forms.value.value == '' || forms.concept.value == '' ? true : null"
+                      >
+                        <i class=" fa fa-plus"></i>
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </ng-container>
               </div>
             </div>
           </div>

@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { TravelService } from '../../../../services/travel-management/travels/travel.service';
@@ -60,8 +54,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   public is_collapse = false;
   public nameReport: string;
   public filequotation = 'fileQuotationTravel';
-  public extensions =
-    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public objectImg: any[] = [];
   public iconUpload: any[] = [];
   public iconDocument = '';
@@ -143,10 +136,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
         if (data === 'continueTravelAdvances') {
           document.getElementById('closeTravels').click();
-          this.router.navigate([
-            '/ihr/advances',
-            this.ticket_advance,
-          ]);
+          this.router.navigate(['/ihr/advances', this.ticket_advance]);
         }
 
         if (
@@ -167,32 +157,18 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           document.getElementById('btn_travel_new').click();
         }
         if (data === 'deleteNewDocumentSaved') {
-          this.objectImg.splice(
-            this.objectImg.findIndex(
-              filter => filter.file.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-          this.file.splice(
-            this.file.findIndex(
-              filter => filter.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
+          this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+          this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
           document.getElementById('btn_travel_new').click();
         }
         if (data === 'deleteNewDestinations') {
           document.getElementById('btn_travel_new').click();
           this.travelProof[0].data[0].data.splice(
-            this.travelProof[0].data[0].data.findIndex(
-              filter => filter.field_0 === this.deleteDestination,
-            ),
+            this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === this.deleteDestination),
             1,
           );
           this.traverlsDestination.splice(
-            this.traverlsDestination.findIndex(
-              filter => filter.travel_id === this.deleteDestination,
-            ),
+            this.traverlsDestination.findIndex(filter => filter.travel_id === this.deleteDestination),
             1,
           );
           setTimeout(() => {
@@ -201,25 +177,19 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           this.activate_submit = true;
         }
 
-        if (
-          data === 'closeAlertdeleteNewDocument' ||
-          data === 'closeAlertdeleteNewDestinations'
-        ) {
+        if (data === 'closeAlertdeleteNewDocument' || data === 'closeAlertdeleteNewDestinations') {
           document.getElementById('btn_travel_new').click();
           this.activate_submit = true;
         }
         if (
-          data ===
-            'closeAlertcontinueDestinationRequestsValidateDates' ||
+          data === 'closeAlertcontinueDestinationRequestsValidateDates' ||
           data === 'closeAlertcontinueTravelRequests' ||
           data === 'closeAlertcontinueDestinationRequests' ||
           data === 'closeAlertcontinueTravelAdvances' ||
           data === 'closeAlertdeleteNewDocumentSaved'
         ) {
           document.getElementById('btn_travel_new').click();
-          document
-            .getElementsByTagName('body')[0]
-            .setAttribute('style', 'overflow-y:auto');
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
         }
       }
     });
@@ -264,9 +234,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.fileUploadService.setCleanUpload(true);
         setTimeout(() => {
           this.iconUpload = data.name.split('.');
-          this.iconDocument = this.iconUpload[
-            this.iconUpload.length - 1
-          ];
+          this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
           this.is_upload = true;
           this.file.push(data);
           this.objectImg.push({
@@ -277,130 +245,95 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.accionDataTableService
-      .getActionDataTable()
-      .subscribe((res: any) => {
-        if (res.action_method === 'deleteNewTravels') {
-          this.deleteDestinations(res);
-        }
-        if (res.action_method === 'editNewTravel') {
-          this.activate_submit = false;
-          if (!this.bedit) {
-            if (!this.bnew) {
-              document.getElementById('funtionTravel').click();
+    this.accionDataTableService.getActionDataTable().subscribe((res: any) => {
+      if (res.action_method === 'deleteNewTravels') {
+        this.deleteDestinations(res);
+      }
+      if (res.action_method === 'editNewTravel') {
+        this.activate_submit = false;
+        if (!this.bedit) {
+          if (!this.bnew) {
+            document.getElementById('funtionTravel').click();
 
-              setTimeout(() => {
-                document
-                  .getElementById('travel_new')
-                  .scrollTo(0, 1300);
-              }, 300);
+            setTimeout(() => {
+              document.getElementById('travel_new').scrollTo(0, 1300);
+            }, 300);
 
-              this.bedit = true;
-            } else {
-              this.bnew = false;
-              this.bedit = true;
-            }
-          }
-
-          if (this.bedit === true) {
-            const object: any = this.editTrip.filter(
-              result =>
-                result.id_travel.toString() === res.id.toString(),
-            );
-
-            this.formTravelManagement = new FormGroup({});
-            this.formTravelManagement = this.fb.group({
-              id_travel: object[0].id_travel,
-              type_travel: object[0].type_travel,
-              date_requests_begin: object[0].date_requests_begin,
-              date_requests_end: object[0].date_requests_end,
-              trip_text: object[0].trip_text,
-              maintenance: object[0].maintenance,
-              id_element_imputation: object[0].id_element_imputation,
-              name_travel_graph: object[0].name_travel_graph,
-              name_travel_costs: object[0].name_travel_costs,
-              id_travel_costs: object[0].id_travel_costs,
-              id_grahp: object[0].id_grahp,
-              id_operations: object[0].id_operations,
-              id_travel_legal: object[0].id_travel_legal,
-              id_travel_specific: object[0].id_travel_specific,
-              id_travel_activities: object[0].id_travel_activities,
-              id_transport: object[0].id_transport,
-              id_city: object[0].id_city,
-              id_country: object[0].id_country,
-              id_state: object[0].id_state,
-              id_terminal: object[0].id_terminal,
-              date_begin: object[0].date_begin,
-              hour_begin: object[0].hour_begin,
-              hour_end: object[0].hour_end,
-              date_end: object[0].date_end,
-              id_terminalto: object[0].id_terminalto,
-              id_cityto: object[0].id_cityto,
-              id_stateto: object[0].id_stateto,
-              id_countryto: object[0].id_countryto,
-              id_hotels: object[0].id_hotels,
-              date_hotel_in: object[0].date_hotel_in,
-              date_hotel_out: object[0].date_hotel_out,
-              travel_mileage:
-                this.transport_types.filter(
-                  data =>
-                    data.id.toString() ===
-                    object[0].id_transport.toString(),
-                )[0].cttype === 'T'
-                  ? object[0].travel_mileage
-                  : '',
-              name_travel_order: object[0].name_travel_order,
-              id_order: object[0].id_order,
-            });
-
-            if (
-              this.transport_types.filter(
-                data =>
-                  data.id.toString() ===
-                  object[0].id_transport.toString(),
-              )[0].cttype === 'T'
-            ) {
-              this.showMilenage = true;
-            } else {
-              this.showMilenage = false;
-            }
-
-            this.searchState(this.formTravelManagement.value, 'edit');
-            this.searchStateto(
-              this.formTravelManagement.value,
-              'edit',
-            );
-            this.searchTerminal(
-              this.formTravelManagement.value,
-              'edit',
-            );
-            this.searchTerminalto(
-              this.formTravelManagement.value,
-              'edit',
-            );
-            this.searchHotel(this.formTravelManagement.value, 'edit');
-            this.searchCostsCenterAndGrahp(
-              this.formTravelManagement.value,
-            );
-            this.searchOperationsGrahp(
-              this.formTravelManagement.value,
-              'edit',
-            );
-
-            this.arrayHotel = this.traverlsDestination.filter(
-              result =>
-                result.travel_id.toString() === res.id.toString(),
-            )[0].hotels;
+            this.bedit = true;
+          } else {
+            this.bnew = false;
+            this.bedit = true;
           }
         }
-      });
+
+        if (this.bedit === true) {
+          const object: any = this.editTrip.filter(result => result.id_travel.toString() === res.id.toString());
+
+          this.formTravelManagement = new FormGroup({});
+          this.formTravelManagement = this.fb.group({
+            id_travel: object[0].id_travel,
+            type_travel: object[0].type_travel,
+            date_requests_begin: object[0].date_requests_begin,
+            date_requests_end: object[0].date_requests_end,
+            trip_text: object[0].trip_text,
+            maintenance: object[0].maintenance,
+            id_element_imputation: object[0].id_element_imputation,
+            name_travel_graph: object[0].name_travel_graph,
+            name_travel_costs: object[0].name_travel_costs,
+            id_travel_costs: object[0].id_travel_costs,
+            id_grahp: object[0].id_grahp,
+            id_operations: object[0].id_operations,
+            id_travel_legal: object[0].id_travel_legal,
+            id_travel_specific: object[0].id_travel_specific,
+            id_travel_activities: object[0].id_travel_activities,
+            id_transport: object[0].id_transport,
+            id_city: object[0].id_city,
+            id_country: object[0].id_country,
+            id_state: object[0].id_state,
+            id_terminal: object[0].id_terminal,
+            date_begin: object[0].date_begin,
+            hour_begin: object[0].hour_begin,
+            hour_end: object[0].hour_end,
+            date_end: object[0].date_end,
+            id_terminalto: object[0].id_terminalto,
+            id_cityto: object[0].id_cityto,
+            id_stateto: object[0].id_stateto,
+            id_countryto: object[0].id_countryto,
+            id_hotels: object[0].id_hotels,
+            date_hotel_in: object[0].date_hotel_in,
+            date_hotel_out: object[0].date_hotel_out,
+            travel_mileage:
+              this.transport_types.filter(data => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T'
+                ? object[0].travel_mileage
+                : '',
+            name_travel_order: object[0].name_travel_order,
+            id_order: object[0].id_order,
+          });
+
+          if (this.transport_types.filter(data => data.id.toString() === object[0].id_transport.toString())[0].cttype === 'T') {
+            this.showMilenage = true;
+          } else {
+            this.showMilenage = false;
+          }
+
+          this.searchState(this.formTravelManagement.value, 'edit');
+          this.searchStateto(this.formTravelManagement.value, 'edit');
+          this.searchTerminal(this.formTravelManagement.value, 'edit');
+          this.searchTerminalto(this.formTravelManagement.value, 'edit');
+          this.searchHotel(this.formTravelManagement.value, 'edit');
+          this.searchCostsCenterAndGrahp(this.formTravelManagement.value);
+          this.searchOperationsGrahp(this.formTravelManagement.value, 'edit');
+
+          this.arrayHotel = this.traverlsDestination.filter(
+            result => result.travel_id.toString() === res.id.toString(),
+          )[0].hotels;
+        }
+      }
+    });
 
     this.travelsService.getNewTravels().subscribe((data: any) => {
       if (this.countAfter === 0) {
-        if (
-          document.getElementById('travel_new').className !==
-          'modal show'
-        ) {
+        if (document.getElementById('travel_new').className !== 'modal show') {
           this.travelProof = [
             {
               success: true,
@@ -417,9 +350,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
               this.bedit = false;
             }
           }
-          document
-            .getElementById('bodyGeneral')
-            .removeAttribute('style');
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
       }
     });
@@ -431,94 +362,71 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       left: 0,
       behavior: 'smooth',
     });
-    this.travelManagementService
-      .getplanningTravelRequests()
-      .subscribe((data: any) => {
-        this.planningTravel = data;
-        this.travel_types = this.sortByAphabet(
-          data.data.travel_types,
-        );
-        this.transport_types = this.sortByAphabet(
-          data.data.transport_types,
-        );
-        this.countries = this.sortByAphabet(data.data.countries);
-        this.countriesto = this.sortByAphabet(data.data.countries);
-        this.legal_travels = this.sortByAphabet(
-          data.data.legal_travels_types,
-        );
-        this.trips_specific = this.sortByAphabet(
-          data.data.specific_types_trips,
-        );
-        this.trips_activities = this.sortByAphabet(
-          data.data.travel_activities,
-        );
-        this.center_costs_travels = this.sortByAphabet(
-          data.data.travel_costs_types,
-        );
-        this.costs_travels = [];
+    this.travelManagementService.getplanningTravelRequests().subscribe((data: any) => {
+      this.planningTravel = data;
+      this.travel_types = this.sortByAphabet(data.data.travel_types);
+      this.transport_types = this.sortByAphabet(data.data.transport_types);
+      this.countries = this.sortByAphabet(data.data.countries);
+      this.countriesto = this.sortByAphabet(data.data.countries);
+      this.legal_travels = this.sortByAphabet(data.data.legal_travels_types);
+      this.trips_specific = this.sortByAphabet(data.data.specific_types_trips);
+      this.trips_activities = this.sortByAphabet(data.data.travel_activities);
+      this.center_costs_travels = this.sortByAphabet(data.data.travel_costs_types);
+      this.costs_travels = [];
 
-        setTimeout(() => {
-          this.formTravelManagement = new FormGroup({});
-          this.formTravelManagement = this.fb.group({
-            type_travel: '',
-            date_requests_begin: '',
-            date_requests_end: '',
-            trip_text: '',
-            maintenance: '',
-            id_element_imputation: '',
-            name_travel_graph: '',
-            name_travel_costs: '',
-            id_travel_costs: '',
-            id_grahp: '',
-            id_operations: '',
-            id_travel_legal: '',
-            id_travel_specific: '3',
-            id_travel_activities: '7',
-            id_transport: '',
-            id_city: '',
-            id_country: '28',
-            id_state: '',
-            id_terminal: '',
-            date_begin: '',
-            hour_begin: '00:00',
-            hour_end: '00:01',
-            date_end: '',
-            id_terminalto: '',
-            id_cityto: '',
-            id_stateto: '',
-            id_countryto: '28',
-            id_hotels: '',
-            travel_mileage: '1',
-            name_travel_order: '',
-            id_order: '',
-          });
-          this.searchState(this.formTravelManagement.value, 'edit');
-          this.searchStateto(this.formTravelManagement.value, 'edit');
-        }, 100);
-      });
+      setTimeout(() => {
+        this.formTravelManagement = new FormGroup({});
+        this.formTravelManagement = this.fb.group({
+          type_travel: '',
+          date_requests_begin: '',
+          date_requests_end: '',
+          trip_text: '',
+          maintenance: '',
+          id_element_imputation: '',
+          name_travel_graph: '',
+          name_travel_costs: '',
+          id_travel_costs: '',
+          id_grahp: '',
+          id_operations: '',
+          id_travel_legal: '',
+          id_travel_specific: '3',
+          id_travel_activities: '7',
+          id_transport: '',
+          id_city: '',
+          id_country: '28',
+          id_state: '',
+          id_terminal: '',
+          date_begin: '',
+          hour_begin: '00:00',
+          hour_end: '00:01',
+          date_end: '',
+          id_terminalto: '',
+          id_cityto: '',
+          id_stateto: '',
+          id_countryto: '28',
+          id_hotels: '',
+          travel_mileage: '1',
+          name_travel_order: '',
+          id_order: '',
+        });
+        this.searchState(this.formTravelManagement.value, 'edit');
+        this.searchStateto(this.formTravelManagement.value, 'edit');
+      }, 100);
+    });
 
     const fecha = new Date();
     this.today =
       fecha.getFullYear().toString() +
       '/' +
-      (fecha.getMonth().toString().length == 1
-        ? '0' + (fecha.getMonth() + 1).toString()
-        : (fecha.getMonth() + 1).toString()) +
+      (fecha.getMonth().toString().length == 1 ? '0' + (fecha.getMonth() + 1).toString() : (fecha.getMonth() + 1).toString()) +
       '/' +
-      (fecha.getDate().toString().length == 1
-        ? '0' + fecha.getDate().toString()
-        : fecha.getDate().toString());
+      (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
   }
 
   addHourEnd(value) {
     const begin = parseFloat(value.hour_begin.split(':')[0]);
     const end = parseFloat(value.hour_begin.split(':')[1]) + 1;
-    const calculate_minutes =
-      end.toString().length === 1
-        ? '0' + end.toString()
-        : end > 59
-        ? '00'
-        : end.toString();
+    const calculate_minutes = end.toString().length === 1 ? '0' + end.toString() : end > 59 ? '00' : end.toString();
     const calculate_hour =
       calculate_minutes === '00'
         ? (begin + 1).toString().length === 1
@@ -529,9 +437,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         : begin.toString().length === 1
         ? '0' + begin.toString()
         : begin;
-    this.formTravelManagement.controls['hour_end'].setValue(
-      calculate_hour + ':' + calculate_minutes,
-    );
+    this.formTravelManagement.controls['hour_end'].setValue(calculate_hour + ':' + calculate_minutes);
   }
 
   countSaveAccount = 0;
@@ -539,9 +445,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.arrayHotel.push({
       id_save_hotel: this.countSaveAccount += 1,
       hotel_id: form.id_hotels,
-      name: this.hotels.filter(
-        data => data.id.toString() === form.id_hotels,
-      )[0].name,
+      name: this.hotels.filter(data => data.id.toString() === form.id_hotels)[0].name,
       date_begin: form.date_hotel_in,
       date_end: form.date_hotel_out,
     });
@@ -552,12 +456,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   removeHotel(hotel) {
-    this.arrayHotel.splice(
-      this.arrayHotel.findIndex(
-        filter => filter.id_save_hotel === hotel.id_save_hotel,
-      ),
-      1,
-    );
+    this.arrayHotel.splice(this.arrayHotel.findIndex(filter => filter.id_save_hotel === hotel.id_save_hotel), 1);
   }
 
   ngOnDestroy() {
@@ -568,26 +467,21 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   enterNameEmployee() {
     this.nameEmployee = this.searchByLetter;
     if (this.nameEmployee !== null) {
-      this.employeeService
-        .getEmployeeTravelsById(this.nameEmployee)
-        .subscribe((data: any) => {
-          if (data.data.length > 0) {
-            this.searchEmployee = data.data;
-            this.showListAutoC = true;
-          } else {
-            this.searchEmployee = [];
-            this.showListAutoC = true;
-          }
-        });
+      this.employeeService.getEmployeeTravelsById(this.nameEmployee).subscribe((data: any) => {
+        if (data.data.length > 0) {
+          this.searchEmployee = data.data;
+          this.showListAutoC = true;
+        } else {
+          this.searchEmployee = [];
+          this.showListAutoC = true;
+        }
+      });
     }
   }
 
   enterCost(form) {
     this.travelManagementService
-      .getFilterTravelCost(
-        form.id_element_imputation,
-        form.name_travel_costs,
-      )
+      .getFilterTravelCost(form.id_element_imputation, form.name_travel_costs)
       .subscribe((data: any) => {
         this.costs_travels = this.sortByAphabet(data.data);
         this.showListAutoCost = true;
@@ -595,42 +489,29 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   enterGraph(form) {
-    this.travelManagementService
-      .getFilterGraphs(
-        form.id_element_imputation,
-        form.name_travel_graph,
-      )
-      .subscribe((data: any) => {
-        this.grahp = this.sortByAphabet(data.data);
-        this.showListAutoCost = false;
-        this.showListAutoOrder = false;
-        this.showListAutoGraph = true;
-      });
+    this.travelManagementService.getFilterGraphs(form.id_element_imputation, form.name_travel_graph).subscribe((data: any) => {
+      this.grahp = this.sortByAphabet(data.data);
+      this.showListAutoCost = false;
+      this.showListAutoOrder = false;
+      this.showListAutoGraph = true;
+    });
   }
   enterOrder(form) {
-    this.travelManagementService
-      .getFilterTravelOrders(form.name_travel_order)
-      .subscribe((orders: any) => {
-        this.order_travels = this.sortByAphabet(orders.data);
-        this.showListAutoCost = false;
-        this.showListAutoGraph = false;
-        this.showListAutoOrder = true;
-      });
+    this.travelManagementService.getFilterTravelOrders(form.name_travel_order).subscribe((orders: any) => {
+      this.order_travels = this.sortByAphabet(orders.data);
+      this.showListAutoCost = false;
+      this.showListAutoGraph = false;
+      this.showListAutoOrder = true;
+    });
   }
   returnObjectSearch(ObjectSearch: any) {
     this.eployee_selected = ObjectSearch;
     this.searchByLetter = null;
     this.searchEmployee = [];
 
-    this.formTravelManagement.controls[
-      'id_element_imputation'
-    ].setValue('');
-    this.formTravelManagement.controls['id_travel_costs'].setValue(
-      '',
-    );
-    this.formTravelManagement.controls['name_travel_costs'].setValue(
-      '',
-    );
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
     this.kostl = false;
     this.nplnr = false;
     this.aufnr = false;
@@ -638,42 +519,26 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   returnCostSearch(cost: any) {
-    this.formTravelManagement.controls['id_travel_costs'].setValue(
-      cost.id,
-    );
-    this.formTravelManagement.controls['name_travel_costs'].setValue(
-      cost.code + ' - ' + cost.name,
-    );
+    this.formTravelManagement.controls['id_travel_costs'].setValue(cost.id);
+    this.formTravelManagement.controls['name_travel_costs'].setValue(cost.code + ' - ' + cost.name);
     this.costs_travels = [];
   }
   returnGraphSearch(graph) {
-    this.formTravelManagement.controls['id_grahp'].setValue(
-      graph.code,
-    );
-    this.formTravelManagement.controls['name_travel_graph'].setValue(
-      graph.code + ' - ' + graph.name,
-    );
+    this.formTravelManagement.controls['id_grahp'].setValue(graph.code);
+    this.formTravelManagement.controls['name_travel_graph'].setValue(graph.code + ' - ' + graph.name);
     this.grahp = [];
     this.searchOperationsGrahp(graph.code, 'edit');
   }
   returnOrderSearch(order) {
     this.formTravelManagement.controls['id_order'].setValue(order.id);
-    this.formTravelManagement.controls['name_travel_order'].setValue(
-      order.code + ' - ' + order.name,
-    );
+    this.formTravelManagement.controls['name_travel_order'].setValue(order.code + ' - ' + order.name);
     this.order_travels = [];
   }
   deleteEmployeeThird() {
     this.eployee_selected = null;
-    this.formTravelManagement.controls[
-      'id_element_imputation'
-    ].setValue('');
-    this.formTravelManagement.controls['id_travel_costs'].setValue(
-      '',
-    );
-    this.formTravelManagement.controls['name_travel_costs'].setValue(
-      '',
-    );
+    this.formTravelManagement.controls['id_element_imputation'].setValue('');
+    this.formTravelManagement.controls['id_travel_costs'].setValue('');
+    this.formTravelManagement.controls['name_travel_costs'].setValue('');
     this.kostl = false;
     this.nplnr = false;
     this.aufnr = false;
@@ -682,14 +547,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   delete(date_param) {
     switch (date_param) {
       case 'date_begin_header':
-        this.formTravelManagement.controls[
-          'date_requests_begin'
-        ].setValue('');
+        this.formTravelManagement.controls['date_requests_begin'].setValue('');
         break;
       case 'date_end_header':
-        this.formTravelManagement.controls[
-          'date_requests_end'
-        ].setValue('');
+        this.formTravelManagement.controls['date_requests_end'].setValue('');
         break;
       case 'date_begin_body':
         this.formTravelManagement.controls['date_begin'].setValue('');
@@ -704,14 +565,10 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.formTravelManagement.controls['hour_end'].setValue('');
         break;
       case 'date_begin_hotel':
-        this.formTravelManagement.controls[
-          'date_begin_hotel'
-        ].setValue('');
+        this.formTravelManagement.controls['date_begin_hotel'].setValue('');
         break;
       case 'date_end_hotel':
-        this.formTravelManagement.controls['date_end_hotel'].setValue(
-          '',
-        );
+        this.formTravelManagement.controls['date_end_hotel'].setValue('');
         break;
       default:
         break;
@@ -741,10 +598,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       {
         type: 'warning',
         title: this.t('type_alert_ts'),
-        message:
-          this.t('message_alert_ts') +
-          param.file.name.toString() +
-          '?',
+        message: this.t('message_alert_ts') + param.file.name.toString() + '?',
         confirmation: true,
         typeConfirmation: 'deleteNewDocumentSaved',
       },
@@ -758,11 +612,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       {
         type: 'warning',
         title: this.t('type_alert_ts'),
-        message:
-          '¿' +
-          this.t('message_alert_one_ts') +
-          this.deleteDestination.toString() +
-          '?',
+        message: '¿' + this.t('message_alert_one_ts') + this.deleteDestination.toString() + '?',
         confirmation: true,
         typeConfirmation: 'deleteNewDestinations',
       },
@@ -776,55 +626,23 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
     const modelFromdata = new FormData();
     modelFromdata.append('travel_types', model.type_travel);
-    modelFromdata.append(
-      'is_maintenance',
-      model.maintenance == '' ? 'false' : 'true',
-    );
-    modelFromdata.append(
-      'legal_travels_type_id',
-      model.id_travel_legal,
-    );
-    modelFromdata.append(
-      'specific_types_trip_id',
-      model.id_travel_specific,
-    );
-    modelFromdata.append(
-      'travel_activity_id',
-      model.id_travel_activities,
-    );
+    modelFromdata.append('is_maintenance', model.maintenance == '' ? 'false' : 'true');
+    modelFromdata.append('legal_travels_type_id', model.id_travel_legal);
+    modelFromdata.append('specific_types_trip_id', model.id_travel_specific);
+    modelFromdata.append('travel_activity_id', model.id_travel_activities);
     modelFromdata.append('travel_cost_id', model.id_travel_costs);
     modelFromdata.append('date_begin', model.date_requests_begin);
     modelFromdata.append('date_end', model.date_requests_end);
-    modelFromdata.append(
-      'observation',
-      model.trip_text.toUpperCase(),
-    );
+    modelFromdata.append('observation', model.trip_text.toUpperCase());
     modelFromdata.append('travel_graph_id', model.id_grahp);
     modelFromdata.append('travel_operation_id', model.id_operations);
-    modelFromdata.append(
-      'employee_id',
-      this.eployee_selected == null
-        ? ''
-        : this.eployee_selected.id.toString(),
-    );
+    modelFromdata.append('employee_id', this.eployee_selected == null ? '' : this.eployee_selected.id.toString());
     modelFromdata.append('commentary', this.comentaryPlus);
-    modelFromdata.append(
-      'travel_maintenance_order_id',
-      model.id_order,
-    );
-    modelFromdata.append(
-      'travels',
-      JSON.stringify(this.traverlsDestination),
-    );
-    modelFromdata.append(
-      'files_length',
-      this.objectImg.length.toString(),
-    );
+    modelFromdata.append('travel_maintenance_order_id', model.id_order);
+    modelFromdata.append('travels', JSON.stringify(this.traverlsDestination));
+    modelFromdata.append('files_length', this.objectImg.length.toString());
     for (let index = 0; index < this.objectImg.length; index++) {
-      modelFromdata.append(
-        'files_' + (index + 1).toString(),
-        this.file[index],
-      );
+      modelFromdata.append('files_' + (index + 1).toString(), this.file[index]);
     }
     model = modelFromdata;
 
@@ -832,9 +650,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       (data: any) => {
         this.ticket_advance = 0;
         const dayone = new Date(this.today).getTime();
-        const dayTwo = new Date(
-          data.data[0].travel_request.date_end,
-        ).getTime();
+        const dayTwo = new Date(data.data[0].travel_request.date_end).getTime();
         const validate = (dayTwo - dayone) / (1000 * 60 * 60 * 24);
         this.ticket_advance = data.data[0].travel_request.ticket;
         if (validate > -1) {
@@ -844,10 +660,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
               {
                 type: 'success',
                 title: this.t('type_alert_one_ts'),
-                message:
-                  this.t('message_alert_two_ts') +
-                  this.ticket_advance +
-                  ' ?',
+                message: this.t('message_alert_two_ts') + this.ticket_advance + ' ?',
                 confirmation: true,
                 typeConfirmation: 'continueTravelAdvances',
               },
@@ -862,18 +675,14 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           }
         } else {
           if (data.success) {
-            const tirthyDays =
-              (dayone - dayTwo) / (1000 * 60 * 60 * 24);
+            const tirthyDays = (dayone - dayTwo) / (1000 * 60 * 60 * 24);
             if (tirthyDays < 30 && tirthyDays > -30) {
               document.getElementById('closeTravels').click();
               const alertWarning: Alerts[] = [
                 {
                   type: 'success',
                   title: this.t('type_alert_one_ts'),
-                  message:
-                    this.t('message_alert_tree_ts') +
-                    this.ticket_advance +
-                    ' ?',
+                  message: this.t('message_alert_tree_ts') + this.ticket_advance + ' ?',
                   confirmation: true,
                   typeConfirmation: 'continueTravelAlowances',
                 },
@@ -891,10 +700,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
                 {
                   type: 'warning',
                   title: this.t('type_alert_two_ts'),
-                  message:
-                    this.t('message_alert_nineteen_ts') +
-                    this.ticket_advance +
-                    ' ?',
+                  message: this.t('message_alert_nineteen_ts') + this.ticket_advance + ' ?',
                   confirmation: true,
                   typeConfirmation: 'continueTravelRequests',
                 },
@@ -916,10 +722,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           {
             type: 'danger',
             title: this.t('type_alert_tree_ts'),
-            message:
-              error.json().errors.toString() +
-              ' - ' +
-              this.t('message_alert_four_ts'),
+            message: error.json().errors.toString() + ' - ' + this.t('message_alert_four_ts'),
             confirmation: true,
             typeConfirmation: 'continueTravelRequests',
           },
@@ -935,8 +738,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     const dateIn = modelPartial.date_begin.split('-');
     const dateBeginIn = dateIn[2] + '/' + dateIn[1] + '/' + dateIn[0];
     const dateOut = modelPartial.date_end.split('-');
-    const dateEndOut =
-      dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
+    const dateEndOut = dateOut[2] + '/' + dateOut[1] + '/' + dateOut[0];
     const dateInHotel = modelPartial.date_hotel_in.split('-');
     const dateOutHotel = modelPartial.date_hotel_out.split('-');
     this.editTrip.push(modelPartial);
@@ -945,24 +747,13 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       field_0: modelPartial.id_travel,
       field_1:
         modelPartial.id_transport.toString() !== ''
-          ? this.transport_types.filter(
-              data =>
-                data.id.toString() ===
-                modelPartial.id_transport.toString(),
-            )[0].name
+          ? this.transport_types.filter(data => data.id.toString() === modelPartial.id_transport.toString())[0].name
           : '',
       field_2: modelPartial.id_city.toUpperCase(),
-      field_3: this.terminalLocations.filter(
-        data =>
-          data.id.toString() === modelPartial.id_terminal.toString(),
-      )[0].name,
+      field_3: this.terminalLocations.filter(data => data.id.toString() === modelPartial.id_terminal.toString())[0].name,
       field_4: dateBeginIn + ' ' + modelPartial.hour_begin,
       field_5: modelPartial.id_cityto.toUpperCase(),
-      field_6: this.terminalLocationsto.filter(
-        data =>
-          data.id.toString() ===
-          modelPartial.id_terminalto.toString(),
-      )[0].name,
+      field_6: this.terminalLocationsto.filter(data => data.id.toString() === modelPartial.id_terminalto.toString())[0].name,
       field_7: dateEndOut + ' ' + modelPartial.hour_end,
       // field_8: hotell,
       // field_9: modelPartial.date_hotel_in !== '' ? dateBeginHotel : '',
@@ -999,10 +790,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       destination_location_id: modelPartial.id_stateto,
       destination_location_text: modelPartial.id_cityto,
       destination_terminal_id: modelPartial.id_terminalto,
-      origin_datetime:
-        modelPartial.date_begin + ' ' + modelPartial.hour_begin,
-      destination_datetime:
-        modelPartial.date_end + ' ' + modelPartial.hour_end,
+      origin_datetime: modelPartial.date_begin + ' ' + modelPartial.hour_begin,
+      destination_datetime: modelPartial.date_end + ' ' + modelPartial.hour_end,
     });
 
     this.count += 1;
@@ -1015,15 +804,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   addDestinationEdit(modelEditPartial) {
     this.travelProof[0].data[0].data.splice(
-      this.travelProof[0].data[0].data.findIndex(
-        filter => filter.field_0 === modelEditPartial.id_travel,
-      ),
+      this.travelProof[0].data[0].data.findIndex(filter => filter.field_0 === modelEditPartial.id_travel),
       1,
     );
     this.traverlsDestination.splice(
-      this.traverlsDestination.findIndex(
-        filter => filter.travel_id === modelEditPartial.id_travel,
-      ),
+      this.traverlsDestination.findIndex(filter => filter.travel_id === modelEditPartial.id_travel),
       1,
     );
     setTimeout(() => {
@@ -1059,168 +844,115 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.clearFormPartial();
   }
   mileageTravel(param) {
-    if (
-      this.transport_types.filter(
-        data => data.id.toString() === param.id_transport.toString(),
-      )[0].cttype == 'T'
-    ) {
+    if (this.transport_types.filter(data => data.id.toString() === param.id_transport.toString())[0].cttype == 'T') {
       this.showMilenage = true;
-      this.formTravelManagement.controls['travel_mileage'].setValue(
-        '1',
-      );
+      this.formTravelManagement.controls['travel_mileage'].setValue('1');
     } else {
       this.showMilenage = false;
-      this.formTravelManagement.controls['travel_mileage'].setValue(
-        '',
-      );
+      this.formTravelManagement.controls['travel_mileage'].setValue('');
     }
   }
   searchState(form: any, acction: any) {
     this.stateLocations = [];
-    this.travelManagementService
-      .getgeographicLocations(form.id_country)
-      .subscribe((data: any) => {
-        this.stateLocations = data.data;
-        if (this.stateLocations.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_state'].setValue(
-              '-1',
-            );
-          }
-        } else {
-          this.formTravelManagement.controls['id_state'].setValue('');
+    this.travelManagementService.getgeographicLocations(form.id_country).subscribe((data: any) => {
+      this.stateLocations = data.data;
+      if (this.stateLocations.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_state'].setValue('-1');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_state'].setValue('');
+      }
+    });
     this.searchTerminal(form, 'edit');
   }
   searchStateto(form: any, acction: any) {
     this.stateLocationsto = [];
-    this.travelManagementService
-      .getgeographicLocations(form.id_countryto)
-      .subscribe((data: any) => {
-        this.stateLocationsto = data.data;
-        if (this.stateLocationsto.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_stateto'].setValue(
-              '-1',
-            );
-          }
-        } else {
-          this.formTravelManagement.controls['id_stateto'].setValue(
-            '',
-          );
+    this.travelManagementService.getgeographicLocations(form.id_countryto).subscribe((data: any) => {
+      this.stateLocationsto = data.data;
+      if (this.stateLocationsto.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_stateto'].setValue('-1');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_stateto'].setValue('');
+      }
+    });
     this.searchTerminalto(form, 'edit');
     this.searchHotel(form, 'edit');
   }
   searchTerminal(form: any, acction: any) {
     this.terminalLocations = [];
-    this.travelManagementService
-      .gettransportTerminals(form.id_country)
-      .subscribe((data: any) => {
-        this.terminalLocations = this.sortByAphabet(data.data);
-        if (this.terminalLocations.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls[
-              'id_terminal'
-            ].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls['id_terminal'].setValue(
-            '',
-          );
+    this.travelManagementService.gettransportTerminals(form.id_country).subscribe((data: any) => {
+      this.terminalLocations = this.sortByAphabet(data.data);
+      if (this.terminalLocations.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_terminal'].setValue('-1');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_terminal'].setValue('');
+      }
+    });
   }
   searchTerminalto(form: any, acction: any) {
     this.terminalLocationsto = [];
-    this.travelManagementService
-      .gettransportTerminals(form.id_countryto)
-      .subscribe((data: any) => {
-        this.terminalLocationsto = this.sortByAphabet(data.data);
-        if (this.terminalLocationsto.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls[
-              'id_terminalto'
-            ].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls[
-            'id_terminalto'
-          ].setValue('');
+    this.travelManagementService.gettransportTerminals(form.id_countryto).subscribe((data: any) => {
+      this.terminalLocationsto = this.sortByAphabet(data.data);
+      if (this.terminalLocationsto.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_terminalto'].setValue('-1');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_terminalto'].setValue('');
+      }
+    });
   }
   searchHotel(form: any, acction: any) {
     this.hotels = [];
-    this.hotelsService
-      .getshowHotels(form.id_countryto)
-      .subscribe((data: any) => {
-        this.hotels = data.data;
-        if (this.hotels.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls['id_hotels'].setValue(
-              '',
-            );
-          }
-        } else {
-          this.formTravelManagement.controls['id_hotels'].setValue(
-            '',
-          );
+    this.hotelsService.getshowHotels(form.id_countryto).subscribe((data: any) => {
+      this.hotels = data.data;
+      if (this.hotels.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_hotels'].setValue('');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_hotels'].setValue('');
+      }
+    });
   }
   searchCostsCenterAndGrahp(form: any) {
     if (
-      this.center_costs_travels.filter(
-        data =>
-          data.id.toString() ===
-          form.id_element_imputation.toString(),
-      )[0].code === 'KOSTL'
+      this.center_costs_travels.filter(data => data.id.toString() === form.id_element_imputation.toString())[0].code === 'KOSTL'
     ) {
       this.kostl = true;
       this.nplnr = false;
       this.aufnr = false;
 
       this.formTravelManagement.controls['id_grahp'].setValue('');
-      this.formTravelManagement.controls['id_operations'].setValue(
-        '',
-      );
+      this.formTravelManagement.controls['id_operations'].setValue('');
       this.formTravelManagement.controls['id_order'].setValue('');
 
       const employee_center_coast =
-        this.eployee_selected === null
-          ? this.userAuthenticated.employee.cost_center
-          : this.eployee_selected.cost_center;
+        this.eployee_selected === null ? this.userAuthenticated.employee.cost_center : this.eployee_selected.cost_center;
 
       // let employee_center_coast = this.eployee_selected === null ? 'GACM00000N' : 'SSAD0GR00N';
 
       if (employee_center_coast !== null) {
         this.travelManagementService
-          .getFilterTravelCost(
-            form.id_element_imputation,
-            employee_center_coast,
-          )
+          .getFilterTravelCost(form.id_element_imputation, employee_center_coast)
           .subscribe((data: any) => {
             this.returnCostSearch(data.data[0]);
           });
       }
     }
     if (
-      this.center_costs_travels.filter(
-        data =>
-          data.id.toString() ===
-          form.id_element_imputation.toString(),
-      )[0].code === 'NPLNR'
+      this.center_costs_travels.filter(data => data.id.toString() === form.id_element_imputation.toString())[0].code === 'NPLNR'
     ) {
       this.kostl = false;
       this.nplnr = true;
       this.aufnr = false;
 
-      this.formTravelManagement.controls['id_travel_costs'].setValue(
-        '',
-      );
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
       this.formTravelManagement.controls['id_order'].setValue('');
 
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
@@ -1236,23 +968,15 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       //   })
     }
     if (
-      this.center_costs_travels.filter(
-        data =>
-          data.id.toString() ===
-          form.id_element_imputation.toString(),
-      )[0].code === 'AUFNR'
+      this.center_costs_travels.filter(data => data.id.toString() === form.id_element_imputation.toString())[0].code === 'AUFNR'
     ) {
       this.kostl = false;
       this.nplnr = false;
       this.aufnr = true;
 
       this.formTravelManagement.controls['id_grahp'].setValue('');
-      this.formTravelManagement.controls['id_operations'].setValue(
-        '',
-      );
-      this.formTravelManagement.controls['id_travel_costs'].setValue(
-        '',
-      );
+      this.formTravelManagement.controls['id_operations'].setValue('');
+      this.formTravelManagement.controls['id_travel_costs'].setValue('');
 
       // this.travelManagementService.getTravelsGrahp(form.id_element_imputation).
       //   subscribe((data: any) => {
@@ -1269,22 +993,16 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   searchOperationsGrahp(form: any, acction: any) {
-    this.travelManagementService
-      .getTravelsOperations(form)
-      .subscribe((data: any) => {
-        this.operations = this.sortByAphabet(data.data);
-        if (this.operations.length > 0) {
-          if (acction === 'new') {
-            this.formTravelManagement.controls[
-              'id_operations'
-            ].setValue('-1');
-          }
-        } else {
-          this.formTravelManagement.controls[
-            'id_operations'
-          ].setValue('');
+    this.travelManagementService.getTravelsOperations(form).subscribe((data: any) => {
+      this.operations = this.sortByAphabet(data.data);
+      if (this.operations.length > 0) {
+        if (acction === 'new') {
+          this.formTravelManagement.controls['id_operations'].setValue('-1');
         }
-      });
+      } else {
+        this.formTravelManagement.controls['id_operations'].setValue('');
+      }
+    });
   }
   changeTypeTravel() {
     // if (param.type_travel === '3' || param.type_travel === '16') {
@@ -1306,32 +1024,20 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
   changeTravelLegal(travelLegal: any) {
     if (travelLegal === 'P') {
-      this.formTravelManagement.controls[
-        'id_element_imputation'
-      ].setValue(
-        this.center_costs_travels
-          .filter(data => data.code === 'NPLNR')[0]
-          .id.toString(),
+      this.formTravelManagement.controls['id_element_imputation'].setValue(
+        this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString(),
       );
       this.kostl = false;
       this.nplnr = true;
       this.aufnr = false;
       this.travelManagementService
-        .getTravelsGrahp(
-          this.center_costs_travels
-            .filter(data => data.code === 'NPLNR')[0]
-            .id.toString(),
-        )
+        .getTravelsGrahp(this.center_costs_travels.filter(data => data.code === 'NPLNR')[0].id.toString())
         .subscribe((data: any) => {
           this.grahp = this.sortByAphabet(data.data);
         });
     } else {
-      this.formTravelManagement.controls[
-        'id_element_imputation'
-      ].setValue(
-        this.center_costs_travels
-          .filter(data => data.code === 'KOSTL')[0]
-          .id.toString(),
+      this.formTravelManagement.controls['id_element_imputation'].setValue(
+        this.center_costs_travels.filter(data => data.code === 'KOSTL')[0].id.toString(),
       );
       this.kostl = true;
       this.nplnr = false;
@@ -1481,14 +1187,9 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.searchStateto(this.formTravelManagement.value, 'edit');
   }
   dateComplete(days) {
-    if (
-      days.date_requests_begin !== '' &&
-      days.date_requests_end !== ''
-    ) {
+    if (days.date_requests_begin !== '' && days.date_requests_end !== '') {
       if (this.travelProof[0].data[0].data.length === 0) {
-        this.formTravelManagement.controls['date_begin'].setValue(
-          days.date_requests_begin,
-        );
+        this.formTravelManagement.controls['date_begin'].setValue(days.date_requests_begin);
       }
 
       const dateBeginCalculate = days.date_requests_begin
@@ -1504,9 +1205,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         .validateDatesTravelRequests(
           dateBeginCalculate,
           dateEndCalculate,
-          this.eployee_selected == null
-            ? '0'
-            : this.eployee_selected.id.toString(),
+          this.eployee_selected == null ? '0' : this.eployee_selected.id.toString(),
           '0',
         )
         .subscribe(
@@ -1653,27 +1352,19 @@ export class NewTravelComponent implements OnInit, OnDestroy {
               this.objectReport.emit(this.travelProof[0]);
             }, 100);
             setTimeout(() => {
-              document
-                .getElementsByClassName('cke_top cke_reset_all')[0]
-                .remove();
+              document.getElementsByClassName('cke_top cke_reset_all')[0].remove();
             }, 2000);
           },
           error => {
             this.activate = false;
-            this.formTravelManagement.controls[
-              'date_requests_begin'
-            ].setValue('');
-            this.formTravelManagement.controls[
-              'date_requests_end'
-            ].setValue('');
+            this.formTravelManagement.controls['date_requests_begin'].setValue('');
+            this.formTravelManagement.controls['date_requests_end'].setValue('');
             document.getElementById('btn_travel_new').click();
             const alertDataWrong: Alerts[] = [
               {
                 type: 'danger',
                 title: 'Error',
-                message:
-                  error.json().errors.toString() +
-                  this.t('message_alert_five_ts'),
+                message: error.json().errors.toString() + this.t('message_alert_five_ts'),
                 confirmation: true,
                 typeConfirmation: 'continueDestinationRequests1',
               },
@@ -1698,10 +1389,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       .replace('-', '')
       .replace('-', '');
 
-    if (
-      dateTrayect.date_begin !== '' &&
-      dateTrayect.date_end !== ''
-    ) {
+    if (dateTrayect.date_begin !== '' && dateTrayect.date_end !== '') {
       const dateBeginCalculate = dateTrayect.date_begin
         .toString()
         .replace('-', '')
@@ -1731,13 +1419,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             .toString()
             .replace('-', '')
             .replace('-', '');
-          if (
-            date < dateBeginRequestCalculate ||
-            date > dateEndRequestCalculate
-          ) {
-            this.formTravelManagement.controls['date_begin'].setValue(
-              '',
-            );
+          if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+            this.formTravelManagement.controls['date_begin'].setValue('');
             document.getElementById('btn_travel_new').click();
             const alertDataWrong: Alerts[] = [
               {
@@ -1757,13 +1440,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
             .toString()
             .replace('-', '')
             .replace('-', '');
-          if (
-            date < dateBeginRequestCalculate ||
-            date > dateEndRequestCalculate
-          ) {
-            this.formTravelManagement.controls['date_end'].setValue(
-              '',
-            );
+          if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+            this.formTravelManagement.controls['date_end'].setValue('');
 
             document.getElementById('btn_travel_new').click();
             const alertDataWrong: Alerts[] = [
@@ -1785,13 +1463,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           .toString()
           .replace('-', '')
           .replace('-', '');
-        if (
-          date < dateBeginRequestCalculate ||
-          date > dateEndRequestCalculate
-        ) {
-          this.formTravelManagement.controls['date_begin'].setValue(
-            '',
-          );
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
+          this.formTravelManagement.controls['date_begin'].setValue('');
           document.getElementById('btn_travel_new').click();
           const alertDataWrong: Alerts[] = [
             {
@@ -1811,10 +1484,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           .toString()
           .replace('-', '')
           .replace('-', '');
-        if (
-          date < dateBeginRequestCalculate ||
-          date > dateEndRequestCalculate
-        ) {
+        if (date < dateBeginRequestCalculate || date > dateEndRequestCalculate) {
           this.formTravelManagement.controls['date_end'].setValue('');
           document.getElementById('btn_travel_new').click();
           const alertDataWrong: Alerts[] = [
@@ -1833,12 +1503,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
   hourvalidations(hourTrayect) {
     if (hourTrayect.date_begin === hourTrayect.date_end) {
-      const hourBeginTrayect = hourTrayect.hour_begin
-        .toString()
-        .replace(':', '');
-      const hourEndTrayect = hourTrayect.hour_end
-        .toString()
-        .replace(':', '');
+      const hourBeginTrayect = hourTrayect.hour_begin.toString().replace(':', '');
+      const hourEndTrayect = hourTrayect.hour_end.toString().replace(':', '');
 
       if (hourEndTrayect - hourBeginTrayect <= 0) {
         this.formTravelManagement.controls['hour_begin'].setValue('');
@@ -1876,13 +1542,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       .replace('-', '');
 
     if (dateEndTrayectCalculate !== '') {
-      if (
-        dateInHotelCalculate !== '' &&
-        dateInHotelCalculate < dateEndTrayectCalculate
-      ) {
-        this.formTravelManagement.controls['date_hotel_in'].setValue(
-          '',
-        );
+      if (dateInHotelCalculate !== '' && dateInHotelCalculate < dateEndTrayectCalculate) {
+        this.formTravelManagement.controls['date_hotel_in'].setValue('');
         document.getElementById('btn_travel_new').click();
         const alertDataWrong: Alerts[] = [
           {
@@ -1895,13 +1556,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         ];
         this.alert.setAlert(alertDataWrong[0]);
       }
-      if (
-        dateInHotelCalculate !== '' &&
-        dateInHotelCalculate > dateEndRequestCalculate
-      ) {
-        this.formTravelManagement.controls['date_hotel_in'].setValue(
-          '',
-        );
+      if (dateInHotelCalculate !== '' && dateInHotelCalculate > dateEndRequestCalculate) {
+        this.formTravelManagement.controls['date_hotel_in'].setValue('');
         document.getElementById('btn_travel_new').click();
         const alertDataWrong: Alerts[] = [
           {
@@ -1916,9 +1572,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       }
       if (dateOutHotelCalculate !== '') {
         if (dateInHotelCalculate > dateOutHotelCalculate) {
-          this.formTravelManagement.controls[
-            'date_hotel_in'
-          ].setValue('');
+          this.formTravelManagement.controls['date_hotel_in'].setValue('');
           document.getElementById('btn_travel_new').click();
           const alertDataWrong: Alerts[] = [
             {
@@ -1936,9 +1590,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
 
     if (dateOutHotelCalculate !== '') {
       if (dateOutHotelCalculate < dateEndTrayectCalculate) {
-        this.formTravelManagement.controls['date_hotel_out'].setValue(
-          '',
-        );
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById('btn_travel_new').click();
         const alertDataWrong: Alerts[] = [
           {
@@ -1952,9 +1604,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         this.alert.setAlert(alertDataWrong[0]);
       }
       if (dateOutHotelCalculate > dateEndRequestCalculate) {
-        this.formTravelManagement.controls['date_hotel_out'].setValue(
-          '',
-        );
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById('btn_travel_new').click();
         const alertDataWrong: Alerts[] = [
           {
@@ -1967,13 +1617,8 @@ export class NewTravelComponent implements OnInit, OnDestroy {
         ];
         this.alert.setAlert(alertDataWrong[0]);
       }
-      if (
-        dateInHotelCalculate !== '' &&
-        dateOutHotelCalculate < dateInHotelCalculate
-      ) {
-        this.formTravelManagement.controls['date_hotel_out'].setValue(
-          '',
-        );
+      if (dateInHotelCalculate !== '' && dateOutHotelCalculate < dateInHotelCalculate) {
+        this.formTravelManagement.controls['date_hotel_out'].setValue('');
         document.getElementById('btn_travel_new').click();
         const alertDataWrong: Alerts[] = [
           {
@@ -2004,9 +1649,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     this.formTravelManagement.controls['id_state'].setValue('249');
     this.formTravelManagement.controls['id_terminal'].setValue('');
     this.formTravelManagement.controls['date_begin'].setValue('');
-    this.formTravelManagement.controls['hour_begin'].setValue(
-      '00:00',
-    );
+    this.formTravelManagement.controls['hour_begin'].setValue('00:00');
     this.formTravelManagement.controls['hour_end'].setValue('');
     this.formTravelManagement.controls['date_end'].setValue('');
     this.formTravelManagement.controls['id_terminalto'].setValue('');
@@ -2016,9 +1659,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     // this.formTravelManagement.controls['id_hotels'].setValue('');
     // this.formTravelManagement.controls['date_hotel_in'].setValue('');
     // this.formTravelManagement.controls['date_hotel_out'].setValue('');
-    this.formTravelManagement.controls['travel_mileage'].setValue(
-      '1',
-    );
+    this.formTravelManagement.controls['travel_mileage'].setValue('1');
     this.arrayHotel = [];
 
     this.searchState(this.formTravelManagement.value, 'edit');

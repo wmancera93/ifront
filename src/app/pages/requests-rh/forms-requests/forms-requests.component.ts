@@ -1,23 +1,9 @@
-import {
-  Component,
-  OnInit,
-  TemplateRef,
-  ViewChild,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { FormsRequestsService } from '../../../services/shared/forms-requests/forms-requests.service';
-import {
-  TypesRequests,
-  TypesRequest,
-} from '../../../models/common/requests-rh/requests-rh';
-import {
-  FormGroup,
-  FormBuilder,
-  AbstractControl,
-  Validators,
-} from '@angular/forms';
+import { TypesRequests, TypesRequest } from '../../../models/common/requests-rh/requests-rh';
+import { FormGroup, FormBuilder, AbstractControl, Validators } from '@angular/forms';
 import { FormlyFieldConfig } from '@ngx-formly/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -44,8 +30,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public file: any;
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
-  public extensions =
-    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
 
   public forms: any;
   public detectLetter = ' ';
@@ -92,7 +77,6 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   get case(): string {
     return this.formRequests.alias;
-
   }
 
   private subscriptions: ISubscription[] = [];
@@ -123,100 +107,80 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     );
 
     this.subscriptions.push(
-      this.formsRequestsService
-        .getFormRequests()
-        .subscribe((data: TypesRequests) => {
-          this.formRequests = data;
+      this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
+        this.formRequests = data;
 
-          const { alias, minimum_days, maximum_days } = data;
-          this.allForms.setCaseForm(alias);
-          const formBuild = (
-            forms: string[],
-            formsDefault: Object = {},
-          ): Object => {
-            forms.forEach(form => {
-              formsDefault = {
-                ...formsDefault,
-                [form]: [
-                  '',
-                  (control: AbstractControl) =>
-                    this.formState(form)
-                      ? Validators.required(control)
-                      : null,
-                ],
-              };
-            });
-            return formsDefault;
-          };
-          this.forms = fb.group({
-            request_type_id: this.formRequests.id,
-            ...formBuild([
-              'date_begin',
-              'days_request',
-              'file_support',
-              'start_time',
-              'end_time',
-            ]),
-            date_end: [
-              '',
-              (control: AbstractControl) => {
-                const date_end: boolean = this.formState('date_end');
-                if (date_end) {
-                  if (this.case !== 'PRSC')
+        const { alias, minimum_days, maximum_days } = data;
+        this.allForms.setCaseForm(alias);
+        const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
+          forms.forEach(form => {
+            formsDefault = {
+              ...formsDefault,
+              [form]: ['', (control: AbstractControl) => (this.formState(form) ? Validators.required(control) : null)],
+            };
+          });
+          return formsDefault;
+        };
+        this.forms = fb.group({
+          request_type_id: this.formRequests.id,
+          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time']),
+          date_end: [
+            '',
+            (control: AbstractControl) => {
+              const date_end: boolean = this.formState('date_end');
+              if (date_end) {
+                if (this.case !== 'PRSC') return Validators.required(control);
+                else {
+                  if (this.showDate && this.case === 'PRSC') {
                     return Validators.required(control);
-                  else {
-                    if (this.showDate && this.case === 'PRSC') {
-                      return Validators.required(control);
-                    }
                   }
                 }
-                return null;
-              },
-            ],
-            observation_request: '',
-          });
-
-          switch (alias) {
-            case 'PERM':
-              this.fileUploadService.setCleanUpload(true);
-              break;
-            case 'PRSC':
-              if (minimum_days === 1 && maximum_days === 1) {
-                this.showTime = true;
-                this.showDate = false;
-              } else {
-                this.showTime = false;
-                this.showDate = true;
               }
-              break;
-            case 'INCA':
-              this.fileUploadService.setCleanUpload(true);
-              break;
-            default:
-              break;
-          }
-          setTimeout(() => {
-            this.stylesExplorerService.addStylesCommon();
-          }, 300);
-          const modal = this.modalService.open(this.modalTemplate, {
-            size: 'lg',
-            windowClass: 'modal-md-personalized modal-dialog-scroll',
-            centered: true,
-          });
-          this.modalActions.close = () => {
-            modal.close();
-          };
-          document.body.removeAttribute('style');
-        }),
+              return null;
+            },
+          ],
+          observation_request: '',
+        });
+
+        switch (alias) {
+          case 'PERM':
+            this.fileUploadService.setCleanUpload(true);
+            break;
+          case 'PRSC':
+            if (minimum_days === 1 && maximum_days === 1) {
+              this.showTime = true;
+              this.showDate = false;
+            } else {
+              this.showTime = false;
+              this.showDate = true;
+            }
+            break;
+          case 'INCA':
+            this.fileUploadService.setCleanUpload(true);
+            break;
+          default:
+            break;
+        }
+        setTimeout(() => {
+          this.stylesExplorerService.addStylesCommon();
+        }, 300);
+        const modal = this.modalService.open(this.modalTemplate, {
+          size: 'lg',
+          windowClass: 'modal-md-personalized modal-dialog-scroll',
+          centered: true,
+        });
+        this.modalActions.close = () => {
+          modal.close();
+        };
+        document.body.removeAttribute('style');
+      }),
     );
   }
 
   ngOnInit() {}
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription =>
-      subscription.unsubscribe(),
-    );
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   newRequest(model) {
@@ -224,104 +188,103 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
-    if (
-      this.formRequests.alias === 'PERM' ||
-      this.formRequests.alias === 'INCA'
-    ) {
-      const modelFromdata = new FormData();
-      modelFromdata.append('request_type_id', model.request_type_id);
-      modelFromdata.append('date_begin', model.date_begin);
-      modelFromdata.append('date_end', model.date_end);
-      modelFromdata.append('file_support', this.file);
-      modelFromdata.append(
-        'observation_request',
-        model.observation_request,
-      );
-      model = modelFromdata;
+    switch (this.formRequests.alias.toUpperCase()) {
+      case 'EDUB':
+      case 'EDUU':
+      case 'EDUI':
+      case 'EDUS':
+      case 'AUXL':
+      case 'PERM':
+      case 'INCA':
+        const modelFromdata = new FormData();
+        Object.keys(model).forEach(field => {
+          modelFromdata.append(field, model[field]);
+        });
+        modelFromdata.append('file_support', this.file);
 
-      this.formDataService.postRequestsFormData(model).subscribe(
-        (data: any) => {
-          this.modalActions.close();
-          const alertWarning: Alerts[] = [
-            {
-              type: 'success',
-              title: this.t('type_alert_ts'),
-              message:
-                this.t('message_alert_ts') +
-                data.data[0].id.toString(),
-              confirmation: false,
-            },
-          ];
-          this.alert.setAlert(alertWarning[0]);
-          this.showSubmit = true;
-          this.formsRequestsService.setRestartObject(true);
+        this.formDataService.postRequestsFormData(modelFromdata).subscribe(
+          (data: any) => {
+            this.modalActions.close();
+            const alertWarning: Alerts[] = [
+              {
+                type: 'success',
+                title: this.t('type_alert_ts'),
+                message: this.t('message_alert_ts') + data.data[0].id.toString(),
+                confirmation: false,
+              },
+            ];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.formsRequestsService.setRestartObject(true);
 
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 2000)
-        },
-        (error: any) => {
-          this.modalActions.close();
-          const alertWarning: Alerts[] = [
-            {
-              type: 'danger',
-              title: this.t('type_alert_one_ts'),
-              message: error.json().errors.toString(),
-              confirmation: false,
-            },
-          ];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 2000)
+          },
+          (error: any) => {
+            this.modalActions.close();
+            const alertWarning: Alerts[] = [
+              {
+                type: 'danger',
+                title: this.t('type_alert_one_ts'),
+                message: error.json().errors.toString(),
+                confirmation: false,
+              },
+            ];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
 
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 1000)
-        },
-      );
-    } else {
-      this.requestsRhService.postRequests(model).subscribe(
-        (data: any) => {
-          this.modalActions.close();
-          const alertWarning: Alerts[] = [
-            {
-              type: 'success',
-              title: this.t('type_alert_ts'),
-              message:
-                this.t('message_alert_ts') +
-                data.json().data[0].id.toString(),
-              confirmation: false,
-            },
-          ];
-          this.alert.setAlert(alertWarning[0]);
-          this.showSubmit = true;
-          this.formsRequestsService.setRestartObject(true);
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 1000)
+          },
+        );
 
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 2000)
-        },
-        (error: any) => {
-          this.modalActions.close();
-          const alertWarning: Alerts[] = [
-            {
-              type: 'danger',
-              title: this.t('type_alert_one_ts'),
-              message: error.json().errors.toString(),
-              confirmation: false,
-            },
-          ];
-          this.showSubmit = true;
-          this.alert.setAlert(alertWarning[0]);
+        break;
 
-          // setTimeout(() => {
-          //   document.getElementById("loginId").style.display = 'none'
-          //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
-          // }, 1000)
-        },
-      );
+      default:
+        this.requestsRhService.postRequests(model).subscribe(
+          (data: any) => {
+            this.modalActions.close();
+            const alertWarning: Alerts[] = [
+              {
+                type: 'success',
+                title: this.t('type_alert_ts'),
+                message: this.t('message_alert_ts') + data.json().data[0].id.toString(),
+                confirmation: false,
+              },
+            ];
+            this.alert.setAlert(alertWarning[0]);
+            this.showSubmit = true;
+            this.formsRequestsService.setRestartObject(true);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 2000)
+          },
+          (error: any) => {
+            this.modalActions.close();
+            const alertWarning: Alerts[] = [
+              {
+                type: 'danger',
+                title: this.t('type_alert_one_ts'),
+                message: error.json().errors.toString(),
+                confirmation: false,
+              },
+            ];
+            this.showSubmit = true;
+            this.alert.setAlert(alertWarning[0]);
+
+            // setTimeout(() => {
+            //   document.getElementById("loginId").style.display = 'none'
+            //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
+            // }, 1000)
+          },
+        );
+        break;
     }
   }
 
@@ -340,10 +303,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   calculateDay() {
     const { date_begin, date_end } = this.forms.controls;
 
-    let dateBegin =
-      date_begin.value === ' ' ? null : new Date(date_begin.value);
-    let dateEnd =
-      date_end.value === ' ' ? null : new Date(date_end.value);
+    let dateBegin = date_begin.value === ' ' ? null : new Date(date_begin.value);
+    let dateEnd = date_end.value === ' ' ? null : new Date(date_end.value);
 
     if ((dateBegin || dateEnd) !== null) {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
@@ -359,13 +320,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         },
       ];
       this.alert.setAlert(alertDataWrong[0]);
-      [
-        'date_begin',
-        'date_end',
-        'start_time',
-        'end_time',
-        'observation_request',
-      ].forEach(form => {
+      ['date_begin', 'date_end', 'start_time', 'end_time', 'observation_request'].forEach(form => {
         this.forms.controls[form].setValue('');
       });
       dateBegin = null;
