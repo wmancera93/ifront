@@ -125,8 +125,8 @@
             <ng-container *ngIf="'EDUI' === idActivity">
               <select class="form-control" [formControl]="forms.institution">
                 <option value="">Seleccione</option>
-                <option *ngFor="let institutionList of institution_types_list" [value]="JSON.stringify(institutionList)">
-                  {{ institutionList.name }}
+                <option *ngFor="let institutionList of institution_types_list" [value]="institutionList.description">
+                  {{ institutionList.description }}
                 </option>
               </select>
             </ng-container>
@@ -197,8 +197,8 @@
                         <select class="form-control" [formControl]="forms.concept">
                           <option value="">Seleccione</option>
                           <ng-container *ngFor="let conceptList of concept_types_list">
-                            <option [value]="JSON.stringify(conceptList)" *ngIf="!conceptExist(conceptList.id)">
-                              {{ conceptList.name }}
+                            <option [value]="conceptList.description" *ngIf="!conceptExist(conceptList.id)">
+                              {{ conceptList.description }}
                             </option>
                           </ng-container>
                         </select>

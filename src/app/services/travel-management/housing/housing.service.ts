@@ -40,6 +40,9 @@ export class HousingService {
   putEditBedrooms(idBedrooms: string, label: any) {
     return this.tokenService.put('bedrooms/' + idBedrooms, label).map((data: any) => data.json());
   }
+  postNewBedrooms(idHousing:string, object: any) {
+    return this.tokenService.post('housing/'+idHousing+'/create_more_bedrooms', object).map((data: any) => data.json());
+  }
   deleteBedrooms(idBedrooms: string) {
     return this.tokenService.delete('bedrooms/' + idBedrooms).map((data: any) => data.json());
   }

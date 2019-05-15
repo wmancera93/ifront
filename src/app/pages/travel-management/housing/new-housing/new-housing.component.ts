@@ -62,7 +62,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public bedField: ElementRef;
 
   modalActions: { close: Function; save: Function; open: Function } = {
-    close: () => {},
+    close: () => {
+      this.accionOpen.close();
+    },
     save: () => {},
     open: () => {},
   };
@@ -93,6 +95,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public id_bedroom: string;
   public id_bed: string;
   public housings = new HousingsRender([]);
+  public accionOpen: any = null;
   private modalFormSubscription: any;
 
   get forms() {
@@ -135,23 +138,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       }
       if (data === 'continueDeleteBed') {
         this.housingService.deleteBed(this.id_bed).subscribe((result: any) => {
-          (error: any) => {
-            this.modalActions.close();
-            this.alert.setAlert({
-              type: 'danger',
-              title: 'Error',
-              message: error.json().errors.toString(),
-              confirmation: true,
-              typeConfirmation: 'returnHousing',
-            } as Alerts);
-          };
           recharge();
         });
         this.modalActions.open();
       }
     });
   }
-
   ngOnInit() {
     this.modalFormSubscription = this.modalForm.subscribe((options: HousingForm) => {
       const {
@@ -184,18 +176,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           });
         }
 
-        const open = () =>
-          this.modalService.open(this.modalTemplate, {
-            size: 'lg',
-            windowClass: 'modal-md-personalized modal-dialog-scroll',
-            centered: true,
-          });
-        const modal = open();
+        this.accionOpen = this.modalService.open(this.modalTemplate, {
+          size: 'lg',
+          windowClass: 'modal-md-personalized modal-dialog-scroll',
+          centered: true,
+        });
         document.getElementById('bodyGeneral').removeAttribute('style');
-        this.modalActions.close = () => {
-          modal.close();
-        };
-        this.modalActions.open = open;
       }
     });
   }
@@ -205,7 +191,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   newRequest(model) {
-
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -318,6 +303,19 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     });
     bedrooms.setValue('');
     bedsCount.setValue('');
+    if (!this.isNew) {
+      const newBedroomObject = { bedrooms: this.arrayBedrooms[this.arrayBedrooms.length - 1].bedrooms };
+      this.housingService.postNewBedrooms(this.id_housing, newBedroomObject).subscribe((data: any) => {
+        this.modalActions.close();
+        this.alert.setAlert({
+          type: 'success',
+          title: 'Transaccion Exitosa',
+          message: 'La habitación se creo exitosamente ¿Desea volver a la edición?',
+          confirmation: true,
+          typeConfirmation: 'continueEdit',
+        } as Alerts);
+      });
+    }
   }
 
   editHousig({ bed }) {
@@ -358,12 +356,24 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   addMoreBedRom() {
+    debugger;
     const count = this.arrayBedrooms[this.bedGroupSelect].count.beds;
     const beds = [];
     for (let j = 0; j < count; j++) {
       beds.push({ id: uuid(), label: '' });
     }
     this.getBedRooms.push({ label: '', beds });
+    const newGetBetdrooms = { bedrooms: this.getBedRooms };
+    this.housingService.postNewBedrooms(this.id_housing, newGetBetdrooms).subscribe((data: any) => {
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'success',
+        title: 'Transaccion Exitosa',
+        message: 'La habitación se creo exitosamente ¿Desea volver a la edición?',
+        confirmation: true,
+        typeConfirmation: 'continueEdit',
+      } as Alerts);
+    });
   }
 
   changeLabelBedRom(value, save: boolean, idBedroom: string) {
@@ -372,30 +382,33 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       if (save) this.getBedRooms[this.bedRoomSelect].label = value;
       this.bedRoomSelect = -1;
     } else {
-      this.housingService.putEditBedrooms(idBedroom, { label: value }).subscribe((resultBedroom: any) => {
-        if (resultBedroom.success) {
-          this.formServiceChild.emit(resultBedroom);
-          this.modalActions.close();
-          this.alert.setAlert({
-            type: 'success',
-            title: 'Transacción Exitosa',
-            message: 'La actualizacion de la habitacion fue exitosa, ¿Desea regresar a la edición de alojamientos?',
-            confirmation: true,
-            typeConfirmation: 'returnEditHousing',
-          } as Alerts);
-        }
-      }),
-        (error: any) => {
-          this.modalActions.close();
-          this.alert.setAlert({
-            type: 'danger',
-            title: 'Error',
-            message: error.json().errors.toString(),
-            confirmation: true,
-            typeConfirmation: 'returnEditHousing',
-          } as Alerts);
-        };
+      if(save){
+        this.housingService.putEditBedrooms(idBedroom, { label: value }).subscribe((resultBedroom: any) => {
+          if (resultBedroom.success) {
+            this.formServiceChild.emit(resultBedroom);
+            this.modalActions.close();
+            this.alert.setAlert({
+              type: 'success',
+              title: 'Transacción Exitosa',
+              message: 'La actualizacion de la habitacion fue exitosa, ¿Desea regresar a la edición de alojamientos?',
+              confirmation: true,
+              typeConfirmation: 'returnEditHousing',
+            } as Alerts);
+          }
+        }),
+          (error: any) => {
+            this.modalActions.close();
+            this.alert.setAlert({
+              type: 'danger',
+              title: 'Error',
+              message: error.json().errors.toString(),
+              confirmation: true,
+              typeConfirmation: 'returnEditHousing',
+            } as Alerts);
+          };
+      }
     }
+    this.bedRoomSelect = -1;
   }
 
   changeLabelBed(bed, bedField) {
@@ -427,7 +440,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.bedRoomSelect = -1;
   }
   closeAll() {
-    debugger
+    debugger;
     const modal = open();
     document.getElementById('bodyGeneral').removeAttribute('style');
     this.modalActions.close = () => {
