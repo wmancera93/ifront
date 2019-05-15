@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, ElementRef, Output, EventEmitter } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalRef, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -63,10 +63,12 @@ export class NewHousingComponent implements OnInit, OnDestroy {
 
   modalActions: { close: Function; save: Function; open: Function } = {
     close: () => {
-      this.accionOpen.close();
+      this.actuallyModalState = false;
     },
     save: () => {},
-    open: () => {},
+    open: () => {
+      this.actuallyModalState = true;
+    },
   };
   modalBedRoomActions: { close: Function; save: Function } = {
     close: () => {},
@@ -95,8 +97,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   public id_bedroom: string;
   public id_bed: string;
   public housings = new HousingsRender([]);
-  public accionOpen: any = null;
   private modalFormSubscription: any;
+  public actuallyModalState = true;
+  public modal: NgbModalRef;
 
   get forms() {
     return this.form.controls;
@@ -127,6 +130,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       switch (data) {
         case 'returnHousing':
         case 'continueEdit':
+        case 'continueEditBedroom':
           this.modalActions.open();
           this.bedRoomSelect = -1;
           break;
@@ -145,6 +149,9 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     });
   }
   ngOnInit() {
+    setTimeout(() => {
+      this.formServiceChild.emit({ success: true });
+    }, 5000);
     this.modalFormSubscription = this.modalForm.subscribe((options: HousingForm) => {
       const {
         open,
@@ -176,11 +183,15 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           });
         }
 
-        this.accionOpen = this.modalService.open(this.modalTemplate, {
+        this.modal = this.modalService.open(this.modalTemplate, {
           size: 'lg',
           windowClass: 'modal-md-personalized modal-dialog-scroll',
           centered: true,
+          backdrop: 'static',
         });
+
+        this.modal.result.then(result => {}, reason => {});
+
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     });
@@ -249,7 +260,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
               };
           } else {
             debugger;
-            this.housingService.putEditHousing(this.id_housing, { label: name, city: city }).subscribe((result: any) => {
+            this.housingService.putEditHousing(this.id_housing, { name, city: city }).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);
                 this.modalActions.close();
@@ -363,7 +374,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       beds.push({ id: uuid(), label: '' });
     }
     this.getBedRooms.push({ label: '', beds });
-    const newGetBetdrooms = { bedrooms: this.getBedRooms[this.getBedRooms.length - 1] };
+    const newGetBetdrooms = { bedrooms: [this.getBedRooms[this.getBedRooms.length - 1]] };
     this.housingService.postNewBedrooms(this.id_housing, newGetBetdrooms).subscribe((data: any) => {
       this.modalActions.close();
       this.alert.setAlert({
@@ -371,7 +382,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
         title: 'Transaccion Exitosa',
         message: 'La habitación se creo exitosamente ¿Desea volver a la edición?',
         confirmation: true,
-        typeConfirmation: 'continueEdit',
+        typeConfirmation: 'continueEditBedroom',
       } as Alerts);
     });
   }

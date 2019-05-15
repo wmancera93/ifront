@@ -222,7 +222,7 @@
   </div>
 </ng-template>
 <ng-template #modalForms let-modal>
-  <div class="modal-content bodyColorInfo">
+  <div class="modal-content bodyColorInfo" [ngClass]="{'d-none': !actuallyModalState}">
     <div class="modal-header borderLine-title row-hr justify-content-center">
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
@@ -274,7 +274,7 @@
             </button>
           </div>
           <div class="col-4">
-            <div class="btn btn-primary text-center btn-block" (click)="modalActions.close()">
+            <div class="btn btn-primary text-center btn-block" (click)="modal.close()">
               <h6>{{ parseT('btn_close') | translate }}</h6>
             </div>
           </div>
