@@ -19,23 +19,23 @@ import { TransportationLogisticsService } from '../../../../services/travel-mana
 export class NewTransportComponent implements OnInit, OnDestroy {
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
-  modalActions: { close: Function } = { close: () => {} };
   @Input() modalForm: Observable<any>;
 
   public formRequests: TypesRequests = null;
-  public showSubmit = true;
+  public showSubmit = false;
   public form: any;
   public stepActive = 0;
   public readOnlyFleet = false;
   public model = {};
-  public is_new: boolean;
+  public modal;
+  public isNew: boolean;
+  public idVehicle: Number | String;
   public modalState = true;
 
   public journeys: any[] = [];
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
-  public generalVehicle: any;
   private modalFormSubscription: any;
 
   get forms() {
@@ -75,32 +75,39 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     });
   }
 
+  getTrayects(id) {
+    this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
+      this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
+        const dateTimeStart = new Date(date_time_start);
+        const durationTrayect = new Date(date_time_end || date_time_start).getHours();
+        return {
+          id,
+          origin: origin_place,
+          destiny: destination_place,
+          date_time_departure: dateTimeStart.toLocaleString(),
+          durationTrayect: dateTimeStart.getHours() - durationTrayect,
+        };
+      });
+    });
+  }
+
   ngOnInit() {
     this.modalFormSubscription = this.modalForm.subscribe((options: TrasportationForm) => {
-      const {
-        open,
-        form = {
-          plate: '',
-          city: '',
-        },
-        readOnly = false,
-        isNew = true,
-      } = options;
+      const { open, form, readOnly = false, isNew = true } = options;
       this.stepActive = 0;
       this.readOnlyFleet = readOnly;
-      this.is_new = isNew;
+      this.isNew = isNew;
       if (open) {
         this.journeys = [];
-        this.generalVehicle = [];
-        const { plate, id } = form;
+        const { plate, total_seats: number_positions, id, phone_driver, driver_name: driver } = isNew
+          ? { plate: '', total_seats: '', phone_driver: '', driver_name: '', id: '' }
+          : (form as any);
         const { required } = Validators;
-        this.transportationLogisticsService.getDetailFleets(id).subscribe((data: any) => {
-          this.generalVehicle = data.data.trips_journeys;
-        });
-        const { driver, company, number_positions, phone_driver, type_service } = isNew
-          ? { driver: '', company: '', number_positions: '', phone_driver: '', type_service: '' }
-          : this.generalVehicle;
-
+        if (!isNew) {
+          this.idVehicle = id;
+          this.getTrayects(this.idVehicle);
+        }
+        const { company, type_service } = isNew ? { company: '', type_service: '' } : (form as any);
         this.form = this.fb.group({
           vehicle_plate: [plate, required],
           driver: [driver, required],
@@ -113,20 +120,12 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           date_time_departure: [''],
           durationTrayect: [''],
         });
-        if (!isNew) {
-          this.generalVehicle.journey.forEach(element => {
-            this.journeys.push(element);
-          });
-        }
-        const modal = this.modalService.open(this.modalTemplate, {
+        this.modal = this.modalService.open(this.modalTemplate, {
           size: 'lg',
           windowClass: 'modal-md-personalized modal-dialog-scroll',
           centered: true,
         });
         document.getElementById('bodyGeneral').removeAttribute('style');
-        this.modalActions.close = () => {
-          modal.close();
-        };
       }
     });
   }
@@ -152,14 +151,27 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
-          if (this.is_new) {
-            const prueba = this.journeys;
-            const travel = this.form.value;
-            const generalObject = Object.assign({}, travel, { trayect: prueba });
-            console.log(generalObject);
-            this.transportationLogisticsService.postNewFleet(generalObject).subscribe(data => {
-              console.log(data);
-            });
+          this.showSubmit = true;
+          if (this.isNew) {
+            this.transportationLogisticsService
+              .postNewFleet({
+                ...this.form.value,
+                trayects: this.journeys,
+              })
+              .subscribe(data => {
+                this.showSubmit = false;
+                this.modal.close();
+              });
+          } else {
+            this.transportationLogisticsService
+              .editFleet(this.idVehicle, {
+                ...this.form.value,
+                trayects: this.journeys,
+              })
+              .subscribe(data => {
+                this.showSubmit = false;
+                this.modal.close();
+              });
           }
           break;
 
@@ -174,20 +186,41 @@ export class NewTransportComponent implements OnInit, OnDestroy {
 
   addTrayect() {
     const { origin, destiny, date_time_departure, durationTrayect } = this.form.controls;
-    this.journeys.push({
-      origin: origin.value,
-      destiny: destiny.value,
-      date_time_departure: date_time_departure.value,
-      durationTrayect: durationTrayect.value,
-      key: uuid.v4(),
-    });
-    origin.setValue('');
-    destiny.setValue('');
-    date_time_departure.setValue('');
-    durationTrayect.setValue('');
+    const id = uuid.v4();
+    if (this.isNew) {
+      this.journeys.push({
+        origin: origin.value,
+        destiny: destiny.value,
+        date_time_departure: date_time_departure.value,
+        durationTrayect: durationTrayect.value,
+        id,
+      });
+      origin.setValue('');
+      destiny.setValue('');
+      date_time_departure.setValue('');
+      durationTrayect.setValue('');
+    } else {
+      this.transportationLogisticsService
+        .createMoreTrayects(this.idVehicle, {
+          trayects: [
+            {
+              origin: origin.value,
+              destiny: destiny.value,
+              date_time_departure: date_time_departure.value,
+              durationTrayect: durationTrayect.value,
+            },
+          ],
+        })
+        .subscribe(res => {
+          this.getTrayects(this.idVehicle);
+        });
+    }
   }
 
-  removeTrayect(keyTrayect) {
-    this.journeys.splice(this.journeys.findIndex(filter => filter.key === keyTrayect), 1);
+  removeTrayect(id) {
+    this.journeys.splice(this.journeys.findIndex(filter => filter.id === id), 1);
+    if (!this.isNew) {
+      this.transportationLogisticsService.deleteJourney(id);
+    }
   }
 }

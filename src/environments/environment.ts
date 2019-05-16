@@ -7,7 +7,7 @@ export const environment = {
   production: false,
   apiBaseHr_staging: 'http://apihr-staging.hrinteractive.co',
   apiBaseHr_production: 'https://apihr.hrinteractive.co',
-  apiBaseHr_development: 'http://apihr-development.hrinteractive.co'
+  apiBaseHr_development: 'http://localhost:3000'
 };
 
 export const baseUrl = () => {

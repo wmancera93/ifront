@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ISubscription } from 'rxjs/Subscription';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -12,7 +13,7 @@ import { Alerts } from '../../../models/common/alerts/alerts';
   templateUrl: './transportation-logistics.component.html',
   styleUrls: ['./transportation-logistics.component.css'],
 })
-export class TransportationLogisticsComponent implements OnInit {
+export class TransportationLogisticsComponent implements OnInit, OnDestroy {
   public modalForm: Subject<any> = new Subject<any>();
   public fleets: any[] = [];
   public idFleets: number;
@@ -20,16 +21,14 @@ export class TransportationLogisticsComponent implements OnInit {
   public form: any;
   public generalvehicle: any;
   public id_fleets: string;
-
-  private FormSubscription: any;
+  private subscriptions: ISubscription[] = [];
 
   styleCursorT(transport, cursor): string {
     return this.activeState(transport, cursor) ? 'pointer' : 'no-drop';
   }
 
   activeState(transport, position: number) {
-    return true;
-    // return transport.action_tranportation_index_view[position].is_active;
+    return transport.action_tranportation_index_view[position].is_active;
   }
 
   parseT(key) {
@@ -42,27 +41,30 @@ export class TransportationLogisticsComponent implements OnInit {
     public formDataService: FormDataService,
     public transportationLogisticsService: TransportationLogisticsService,
   ) {
-    this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueDelete') {
-        debugger
-        this.transportationLogisticsService.deleteFleet(this.id_fleets).subscribe((data:any)=>{
-        });
-        this.transportationLogisticsService.getIndexTransportation().subscribe((data: any) => {
-          this.fleets = this.sortByNumber(data.data[0]);
-        });
-      }
+    this.subscriptions.push(
+      this.alert.getActionConfirm().subscribe((data: any) => {
+        if (data === 'continueDelete') {
+          this.transportationLogisticsService.deleteFleet(this.id_fleets).subscribe((data: any) => {});
+          this.getData();
+        }
+      }),
+    );
+  }
+
+  getData() {
+    this.transportationLogisticsService.getIndexTransportation().subscribe((data: any) => {
+      this.fleets = this.sortByNumber(data.data);
     });
   }
 
   ngOnInit() {
-    this.transportationLogisticsService.getIndexTransportation().subscribe((data: any) => {
-      this.fleets = this.sortByNumber(data.data[0]);
-    });
+    this.getData();
   }
 
   returnBack() {
     this.router.navigate(['ihr/travel_management']);
   }
+
   sortByNumber(dataBySort: any) {
     dataBySort.sort(function(a, b) {
       return b.id - a.id;
@@ -71,30 +73,26 @@ export class TransportationLogisticsComponent implements OnInit {
   }
 
   seeFleets(logistic) {
-    debugger;
-    const { plate, id } = logistic;
-    this.id_fleets = logistic;
+    const { id } = logistic;
+    this.id_fleets = id;
     this.modalForm.next({
       open: true,
       isNew: false,
       readOnly: true,
-      form: { plate, id, ...this.generalvehicle },
+      form: { ...logistic },
     });
   }
 
   editFleets(logistic) {
-    debugger;
-    const { plate, id } = logistic;
     this.modalForm.next({
       open: true,
       isNew: false,
-      form: { plate, id, ...this.generalvehicle },
+      form: { ...logistic },
     });
   }
-  deleteFleets(logistic) {
-    debugger
-    const { plate, id } = logistic;
-    this.id_fleets = logistic;
+
+  deleteFleets(id) {
+    this.id_fleets = id;
     this.alert.setAlert({
       type: 'warning',
       title: 'Advertencia',
@@ -106,5 +104,11 @@ export class TransportationLogisticsComponent implements OnInit {
 
   collapse(collapse: boolean) {
     this.is_collapse = collapse;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => {
+      subscription.unsubscribe();
+    });
   }
 }
