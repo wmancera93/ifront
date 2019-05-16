@@ -6,10 +6,7 @@
           <i class="fa fa-bus"></i>
           {{ parseT('transportation_management') | translate }}
         </div>
-        <div
-          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
-          style="padding-right: 0px"
-        >
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBack()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
@@ -28,14 +25,8 @@
         <div class="col-lg-4 col-12">
           <div class="row" style="margin-top: 10px">
             <div class="col-12">
-              <button
-              (click)="modalForm.next({ open: true, isNew: true })"
-                type="button"
-                class="btn tabDate btn-block"
-              >
-                <i class="fa fa-plus"
-                  >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i
-                >
+              <button (click)="modalForm.next({ open: true, isNew: true })" type="button" class="btn tabDate btn-block">
+                <i class="fa fa-plus">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</i>
                 {{ parseT('new_transport') | translate }}
               </button>
             </div>
@@ -70,36 +61,21 @@
         </div>
       </div>
 
-      <div
-        class="collapse top-general-p border-botton-general"
-        id="collapseFilter"
-      >
+      <div class="collapse top-general-p border-botton-general" id="collapseFilter">
         <div class="row align-items-center">
-          <div
-            class="col-lg-3 col-md-4 col-12"
-            style="padding-bottom: 15px"
-          >
+          <div class="col-lg-3 col-md-4 col-12" style="padding-bottom: 15px">
             <label>{{ parseT('destiny') | translate }}</label>
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" />
           </div>
-          <div
-            class="col-lg-2 col-md-4 col-12"
-            style="padding-bottom: 15px"
-          >
+          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
             <label>{{ parseT('ticket') | translate }}</label>
             <input type="text" class="form-control" />
           </div>
-          <div
-            class="col-lg-2 col-md-4 col-12"
-            style="padding-bottom: 15px"
-          >
+          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
             <label>{{ parseT('plate') | translate }}</label>
             <input type="text" class="form-control" />
           </div>
-          <div
-            class="col-lg-2 col-md-4 col-12"
-            style="padding-bottom: 15px"
-          >
+          <div class="col-lg-2 col-md-4 col-12" style="padding-bottom: 15px">
             <label>{{ parseT('state') | translate }}</label>
             <select class="form-control">
               <option>{{ parseT('available') | translate }}</option>
@@ -107,10 +83,7 @@
             </select>
           </div>
           <div class="col-lg-3 col-md-12 col-12">
-            <div
-              class="btn btn-block btn-primary-second fontDate"
-              style="cursor: no-drop"
-            >
+            <div class="btn btn-block btn-primary-second fontDate" style="cursor: no-drop">
               <i class="fa fa-search-plus"></i>
               {{ parseT('consult') | translate }}
             </div>
@@ -121,21 +94,14 @@
 
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="fleets.length > 0">
-          <div
-            class="widget bg-white-1x"
-            *ngFor="let fleet of fleets"
-          >
+          <div class="widget bg-white-1x" *ngFor="let fleet of fleets">
             <div class="row align-items-center">
               <div class="col-lg-2 col-md-4 col-12">
                 <h5>
-                  <span class="badge badge-warning">
-                    {{ parseT('ticket') | translate }} # {{ fleet.id }}
-                  </span>
+                  <span class="badge badge-warning"> {{ parseT('ticket') | translate }} # {{ fleet.id }} </span>
                 </h5>
               </div>
-              <div
-                class="col-lg-2 col-md-4 col-12 text-xl-left text-lg-center text-center top-p"
-              >
+              <div class="col-lg-2 col-md-4 col-12 text-xl-left text-lg-center text-center top-p">
                 <h3 class="font-color-default">
                   <div class="display-block">
                     {{ fleet.destiny }}
@@ -145,12 +111,8 @@
                   </div>
                 </h3>
               </div>
-              <div
-                class="col-lg-1 col-md-4 col-12 text-md-left text-center top-p"
-              >
-                <p class="font-title-general">
-                  {{ parseT('state') | translate }}:
-                </p>
+              <div class="col-lg-1 col-md-4 col-12 text-md-left text-center top-p">
+                <p class="font-title-general">{{ parseT('state') | translate }}:</p>
                 <h6 *ngIf="fleet.is_avalable">
                   <span class="badge badge-primary">
                     {{ parseT('available') | translate }}
@@ -162,9 +124,7 @@
                   </span>
                 </h6>
               </div>
-              <div
-                class="col-lg-4 col-md-6 col-12 text-md-left text-center"
-              >
+              <div class="col-lg-4 col-md-6 col-12 text-md-left text-center">
                 <div class="row tex">
                   <div class="col-lg-4 col-md-4 col-12 text-md-left">
                     <h5>
@@ -192,15 +152,13 @@
                   </div>
                 </div>
               </div>
-              <div
-                class="col-lg-3 col-md-6 col-12 text-md-left text-center top-p"
-              >
+              <div class="col-lg-3 col-md-6 col-12 text-md-left text-center top-p">
                 <div class="row">
-                  <div
-                    class="col-4 number-size text-center top-p">
-                    <div class="row justify-content-center"
-                    (click)="activeState(fleet, 0) ? seeFleets(fleet) : undefined"
-                    [style.cursor]="styleCursorT(fleet, 0)"
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="activeState(fleet, 0) ? seeFleets(fleet) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 0)"
                     >
                       <div
                         class="col-12 text-success number-size"
@@ -209,23 +167,18 @@
                           'text-success': activeState(fleet, 0)
                         }"
                       >
-                        <i
-                          class="fa fa-eye"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
                         {{ parseT('btn_see') | translate }}
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                  >
-                    <div class="row justify-content-center"
-                    (click)="activeState(fleet, 2) ? editFleets(fleet) : undefined"
-                    [style.cursor]="styleCursorT(fleet, 2)"
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="activeState(fleet, 2) ? editFleets(fleet) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 2)"
                     >
                       <div
                         class="col-12 number-size text-info"
@@ -234,26 +187,17 @@
                           'text-info': activeState(fleet, 2)
                         }"
                       >
-                        <i
-                          class="fa fa-pencil"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
+                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
                         {{ parseT('btn_edit') | translate }}
                       </div>
                     </div>
                   </div>
-                  <div
-                    class="col-4 number-size text-center top-p"
-                    *ngIf="
-                      fleet.action_tranportation_index_view[1]
-                        .is_active
-                    "
-                  >
-                    <div class="row justify-content-center"
-                    (click)="activeState(fleet, 1) ? deleteFleets(fleet.id) : undefined"
+                  <div class="col-4 number-size text-center top-p">
+                    <div
+                      class="row justify-content-center"
+                      (click)="activeState(fleet, 1) ? deleteFleets(fleet.id) : undefined"
                       [style.cursor]="styleCursorT(fleet, 1)"
                     >
                       <div
@@ -263,11 +207,7 @@
                           'text-danger': activeState(fleet, 1)
                         }"
                       >
-                        <i
-                          class="fa fa-trash"
-                          aria-hidden="true"
-                          style="font-size:2em"
-                        ></i>
+                        <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
                       </div>
                       <div class="col-12">
                         {{ parseT('btn_erase') | translate }}
@@ -281,13 +221,11 @@
         </div>
       </div>
       <div class="row justify-content-center top-containter" *ngIf="fleets.length == 0">
-          <div class="alert alert-warning text-center col-10" role="alert">
-            No existen flotas creadas
-          </div>
+        <div class="alert alert-warning text-center col-10" role="alert">
+          No existen flotas creadas
         </div>
+      </div>
     </div>
   </div>
 </div>
-<app-new-transport
-  [modalForm]="modalForm.asObservable()"
-></app-new-transport>
+<app-new-transport [modalForm]="modalForm.asObservable()"></app-new-transport>

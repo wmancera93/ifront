@@ -202,7 +202,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       ],
       concept: '',
       value: '',
-      file_support: '',
+      file: '',
     });
   }
 
@@ -237,7 +237,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   conceptValidation(id: any) {
-    debugger;
     let state = this.conceptExist(id);
     return state;
   }
@@ -245,7 +244,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   conceptsValidation(): boolean {
     let state = true;
     this.concept_types_list.forEach(({ atribute }) => {
-      debugger;
       if (state) {
         state = this.conceptValidation(atribute);
       }
@@ -271,7 +269,8 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       ];
       this.alert.setAlert(alertWarning[0]);
     } else {
-      this.forms.file_support.setValue((this.objectImg[0] || { file: undefined }).file);
+      this.forms.file.setValue(this.objectImg.map(({ file }) => file));
+      debugger
       if (this.validateForms) {
         let request_educations: {
           enrollment?: number;

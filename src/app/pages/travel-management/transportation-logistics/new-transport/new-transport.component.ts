@@ -3,7 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder,Validators  } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
@@ -28,7 +28,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public stepActive = 0;
   public readOnlyFleet = false;
   public model = {};
-
+  public is_new: boolean;
   public modalState = true;
 
   public journeys: any[] = [];
@@ -88,23 +88,26 @@ export class NewTransportComponent implements OnInit, OnDestroy {
       } = options;
       this.stepActive = 0;
       this.readOnlyFleet = readOnly;
-
+      this.is_new = isNew;
       if (open) {
         this.journeys = [];
         this.generalVehicle = [];
         const { plate, id } = form;
         const { required } = Validators;
-        this.generalVehicle = this.transportationLogisticsService.getVehicle(id);
+        this.transportationLogisticsService.getDetailFleets(id).subscribe((data: any) => {
+          this.generalVehicle = data.data.trips_journeys;
+        });
         const { driver, company, number_positions, phone_driver, type_service } = isNew
           ? { driver: '', company: '', number_positions: '', phone_driver: '', type_service: '' }
           : this.generalVehicle;
+
         this.form = this.fb.group({
-          vehicle_plate: plate,
-          driver:[driver, required],
-          company:[company, required],
-          number_positions:[number_positions, required],
-          type_service:[type_service, required],
-          phone_driver:[phone_driver, required],
+          vehicle_plate: [plate, required],
+          driver: [driver, required],
+          company: [company, required],
+          number_positions: [number_positions, required],
+          type_service: [type_service, required],
+          phone_driver: [phone_driver, required],
           origin: [''],
           destiny: [''],
           date_time_departure: [''],
@@ -149,7 +152,15 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           this.stepActive++;
           break;
         case 1:
-   
+          if (this.is_new) {
+            const prueba = this.journeys;
+            const travel = this.form.value;
+            const generalObject = Object.assign({}, travel, { trayect: prueba });
+            console.log(generalObject);
+            this.transportationLogisticsService.postNewFleet(generalObject).subscribe(data => {
+              console.log(data);
+            });
+          }
           break;
 
         default:

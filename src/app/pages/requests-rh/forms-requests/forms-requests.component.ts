@@ -102,7 +102,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   ) {
     this.subscriptions.push(
       this.fileUploadService.getObjetFile().subscribe(object => {
-        this.file = object;
+        this.file = object.file;
       }),
     );
 
@@ -198,7 +198,13 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       case 'INCA':
         const modelFromdata = new FormData();
         Object.keys(model).forEach(field => {
-          modelFromdata.append(field, model[field]);
+          if (field === 'file') {
+            model[field].forEach(file => {
+              modelFromdata.append(`${field}[]`, file);
+            });
+          } else {
+            modelFromdata.append(field, model[field]);
+          }
         });
         modelFromdata.append('file_support', this.file);
 

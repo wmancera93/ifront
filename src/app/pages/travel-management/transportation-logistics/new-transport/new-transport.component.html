@@ -20,12 +20,7 @@
           <i class="fa fa-fw fa-users text-primary-hr"></i>
           {{ parseT('company') | translate }} *
         </label>
-        <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.company">
-          <option value="">{{ parseT('select') | translate }}</option>
-          <option *ngFor="let companyList of companiesList" [value]="companyList.id">
-            {{ companyList.name }}
-          </option>
-        </select>
+        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.company" />
       </div>
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
