@@ -157,14 +157,14 @@
                   <div class="col-4 number-size text-center top-p">
                     <div
                       class="row justify-content-center"
-                      (click)="activeState(fleet, 0) ? seeFleets(fleet) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 0)"
+                      (click)="activeState(fleet, 'watch') ? seeFleets(fleet) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 'watch')"
                     >
                       <div
                         class="col-12 text-success number-size"
                         id="see"
                         [ngClass]="{
-                          'text-success': activeState(fleet, 0)
+                          'text-success': activeState(fleet, 'watch')
                         }"
                       >
                         <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
@@ -177,14 +177,14 @@
                   <div class="col-4 number-size text-center top-p">
                     <div
                       class="row justify-content-center"
-                      (click)="activeState(fleet, 2) ? editFleets(fleet) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 2)"
+                      (click)="activeState(fleet, 'edit') ? editFleets(fleet) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 'edit')"
                     >
                       <div
                         class="col-12 number-size text-info"
                         id="editPencil"
                         [ngClass]="{
-                          'text-info': activeState(fleet, 2)
+                          'text-info': activeState(fleet, 'edit')
                         }"
                       >
                         <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
@@ -197,14 +197,14 @@
                   <div class="col-4 number-size text-center top-p">
                     <div
                       class="row justify-content-center"
-                      (click)="activeState(fleet, 1) ? deleteFleets(fleet.id) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 1)"
+                      (click)="activeState(fleet, 'delete') ? deleteFleets(fleet.id) : undefined"
+                      [style.cursor]="styleCursorT(fleet, 'delete')"
                     >
                       <div
                         class="col-12 number-size text-danger"
                         id="erase"
                         [ngClass]="{
-                          'text-danger': activeState(fleet, 1)
+                          'text-danger': activeState(fleet, 'delete')
                         }"
                       >
                         <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>

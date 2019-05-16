@@ -27,8 +27,8 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
     return this.activeState(transport, cursor) ? 'pointer' : 'no-drop';
   }
 
-  activeState(transport, position: number) {
-    return transport.action_tranportation_index_view[position].is_active;
+  activeState(transport, position) {
+    return (transport.actions || {})[position];
   }
 
   parseT(key) {
