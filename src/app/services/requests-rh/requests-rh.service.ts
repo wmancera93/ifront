@@ -28,4 +28,7 @@ export class RequestsRhService {
       .get('employees/index_for_education/' + id_employee + '/' + form)
       .map((data: any) => data.json());
   }
+  getListHousingList(){
+    return this.tokenService.get('housing/list').map((data: any) => data.json());
+  }
 }
