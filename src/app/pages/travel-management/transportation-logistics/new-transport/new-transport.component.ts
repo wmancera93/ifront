@@ -20,7 +20,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
   @Input() modalForm: Observable<any>;
-
+  modalActions: { close: Function } = { close: () => {} };
   public formRequests: TypesRequests = null;
   public showSubmit = false;
   public form: any;
@@ -120,11 +120,15 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           date_time_departure: [''],
           durationTrayect: [''],
         });
-        this.modal = this.modalService.open(this.modalTemplate, {
+
+        const modal = this.modalService.open(this.modalTemplate, {
           size: 'lg',
           windowClass: 'modal-md-personalized modal-dialog-scroll',
           centered: true,
         });
+        this.modalActions.close = () => {
+          modal.close();
+        };
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     });
@@ -160,7 +164,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               })
               .subscribe(data => {
                 this.showSubmit = false;
-                this.modal.close();
+                this.modalActions.close();
               });
           } else {
             this.transportationLogisticsService
@@ -170,7 +174,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               })
               .subscribe(data => {
                 this.showSubmit = false;
-                this.modal.close();
+                this.modalActions.close();
               });
           }
           break;
