@@ -1,17 +1,5 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
@@ -22,8 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './form-transportation.component.html',
   styleUrls: ['./form-transportation.component.css'],
 })
-export class FormTransportationComponent
-  implements OnInit, OnDestroy {
+export class FormTransportationComponent implements OnInit, OnDestroy {
   @Output() setModalState: EventEmitter<any> = new EventEmitter();
   @Output() submit: EventEmitter<any> = new EventEmitter();
   @Input() formRequests: any;
@@ -32,8 +19,7 @@ export class FormTransportationComponent
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions =
-    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public origins_list: any[] = [];
@@ -84,8 +70,8 @@ export class FormTransportationComponent
   }
 
   get idActivity() {
+    console.log(this.formRequests.alias);
     return this.formRequests.alias;
-
   }
 
   get validateForms() {
@@ -107,25 +93,13 @@ export class FormTransportationComponent
     public translate: TranslateService,
   ) {
     this.formState.bind(this);
-    this.subscription = this.alert
-      .getActionConfirm()
-      .subscribe((data: any) => {
-        if (data === 'deleteNewDocumentSaved') {
-          this.objectImg.splice(
-            this.objectImg.findIndex(
-              filter => filter.file.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-          this.file.splice(
-            this.file.findIndex(
-              filter => filter.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-        }
-        this.setModalState.emit(true);
-      });
+    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'deleteNewDocumentSaved') {
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+      }
+      this.setModalState.emit(true);
+    });
 
     this.origins_list = [
       { id: 1, name: 'Preescolar' },
@@ -141,14 +115,8 @@ export class FormTransportationComponent
       { id: 3, name: 'Carlos', isHigher: true },
       { id: 4, name: 'Julio', isHigher: false },
     ];
-    this.destinations_list = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-    ];
-    this.document_types_list = [
-      { id: 1, name: 'Cedula' },
-      { id: 2, name: 'Tarjeta de identidad' },
-    ];
+    this.destinations_list = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
+    this.document_types_list = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
     this.concept_types_list = [
       { id: 'enrollment', name: 'Monto de Matricula' },
       { id: 'transport', name: 'monto de transporte' },
@@ -189,9 +157,7 @@ export class FormTransportationComponent
         ({ value }: AbstractControl) => {
           if (value) {
             // tslint:disable-next-line: triple-equals
-            const benefist = this.benefists_list.find(
-              ({ id }) => id == value,
-            );
+            const benefist = this.benefists_list.find(({ id }) => id == value);
             if (benefist) {
               if (benefist.isHigher) {
                 this.isHigherBenefist = true;
@@ -212,9 +178,7 @@ export class FormTransportationComponent
       academic_level: [
         '',
         (control: AbstractControl) => {
-          return this.formState('academic_level')
-            ? required(control)
-            : null;
+          return this.formState('academic_level') ? required(control) : null;
         },
       ],
       file: [],
@@ -294,12 +258,7 @@ export class FormTransportationComponent
   }
 
   removeConcept(idConcept) {
-    this.arrayConcept.splice(
-      this.arrayConcept.findIndex(
-        filter => filter.concept.id === idConcept,
-      ),
-      1,
-    );
+    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
   }
 
   addConcept() {
@@ -318,8 +277,7 @@ export class FormTransportationComponent
     this.alert.setAlert({
       type: 'warning',
       title: this.t('type_alert_ts'),
-      message:
-        this.t('message_alert_ts') + param.file.name.toString() + '?',
+      message: this.t('message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });

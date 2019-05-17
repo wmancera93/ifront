@@ -76,86 +76,6 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     public requestsRhService: RequestsRhService,
   ) {
-    // this.housings_list = [
-    //   {
-    //     id: 1,
-    //     name: 'El parque',
-    //     data: {
-    //       beds: [
-    //         { id: 161, label: 'bed-161', state: true },
-    //         { id: 164, label: 'bed-164', state: true },
-    //         { id: 165, label: 'bed-165', state: true },
-    //         { id: 166, label: 'bed-166', state: false },
-    //         { id: 167, label: 'bed-167', state: true },
-    //       ],
-    //       bedrooms: [
-    //         {
-    //           id: 11,
-    //           label: 'bedRom-11',
-    //           state: true,
-    //           beds: [
-    //             { id: 161, label: 'bed-161', state: true },
-    //             { id: 164, label: 'bed-164', state: true },
-    //             { id: 165, label: 'bed-165', state: true },
-    //             { id: 166, label: 'bed-166', state: false },
-    //             { id: 167, label: 'bed-167', state: true },
-    //           ],
-    //         },
-    //         {
-    //           id: 12,
-    //           label: 'bedRom-12',
-    //           state: true,
-    //           beds: [
-    //             { id: 161, label: 'bed-161', state: true },
-    //             { id: 164, label: 'bed-164', state: true },
-    //             { id: 165, label: 'bed-165', state: true },
-    //             { id: 166, label: 'bed-166', state: false },
-    //             { id: 167, label: 'bed-167', state: true },
-    //           ],
-    //         },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Tequendama',
-    //     data: {
-    //       beds: [
-    //         { id: 262, label: 'bed-262', state: true },
-    //         { id: 264, label: 'bed-264', state: true },
-    //         { id: 265, label: 'bed-265', state: true },
-    //         { id: 266, label: 'bed-266', state: false },
-    //         { id: 267, label: 'bed-267', state: true },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Tower low',
-    //     data: {
-    //       beds: [
-    //         { id: 363, label: 'bed-363', state: true },
-    //         { id: 364, label: 'bed-364', state: true },
-    //         { id: 365, label: 'bed-365', state: true },
-    //         { id: 366, label: 'bed-366', state: false },
-    //         { id: 367, label: 'bed-367', state: true },
-    //       ],
-    //     },
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Arry Blue',
-    //     data: {
-    //       beds: [
-    //         { id: 464, label: 'bed-464', state: true },
-    //         { id: 464, label: 'bed-464', state: true },
-    //         { id: 465, label: 'bed-465', state: true },
-    //         { id: 466, label: 'bed-466', state: false },
-    //         { id: 467, label: 'bed-467', state: true },
-    //       ],
-    //     },
-    //   },
-    // ];
     this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
   }
 
@@ -219,15 +139,8 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   getBeedRoms() {
     this.beds = [];
     this.loadingRoms = true;
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          ((this.housings_list.find(housing => housing.id.toString() === this.forms.housing.value.toString()) || []).data || {})
-            .beds || [],
-        );
-      }, 500);
-    }).then((res: Array<{ id: Number; label: String; beds: Array<any> }>) => {
-      this.beds = res;
+    this.requestsRhService.getListBedsHousing(this.forms.housing.value).subscribe(res => {
+      this.beds = res.data;
       this.loadingRoms = false;
     });
   }

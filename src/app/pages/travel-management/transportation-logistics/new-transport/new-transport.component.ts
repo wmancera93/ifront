@@ -1,4 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input } from '@angular/core';
+import { Alerts } from './../../../../models/common/alerts/alerts';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
@@ -10,6 +11,7 @@ import { StylesExplorerService } from '../../../../services/common/styles-explor
 import { Observable } from 'rxjs';
 import { TrasportationForm } from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
 import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
+import { ISubscription, Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-new-transport',
@@ -17,6 +19,7 @@ import { TransportationLogisticsService } from '../../../../services/travel-mana
   styleUrls: ['./new-transport.component.css'],
 })
 export class NewTransportComponent implements OnInit, OnDestroy {
+  @Output() submit: EventEmitter<any> = new EventEmitter();
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
   @Input() modalForm: Observable<any>;
@@ -36,7 +39,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
-  private modalFormSubscription: any;
+  public subscriptions: ISubscription[] = [];
 
   get forms() {
     return this.form.controls;
@@ -60,82 +63,74 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   ) {
     this.companiesList = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Chimuelos logistics' }];
     this.servicesList = [{ id: 1, name: 'General' }, { id: 2, name: 'Especial' }];
-
-    this.form = this.fb.group({
-      vehicle_plate: [''],
-      driver: [''],
-      company: [''],
-      number_positions: [''],
-      type_service: [''],
-      phone_driver: [''],
-      origin: [''],
-      destiny: [''],
-      date_time_departure: [''],
-      durationTrayect: [''],
-    });
   }
 
   getTrayects(id) {
-    this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
-      this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
-        const dateTimeStart = new Date(date_time_start);
-        const durationTrayect = new Date(date_time_end || date_time_start).getHours();
-        return {
-          id,
-          origin: origin_place,
-          destiny: destination_place,
-          date_time_departure: dateTimeStart.toLocaleString(),
-          durationTrayect: dateTimeStart.getHours() - durationTrayect,
-        };
-      });
-    });
+    this.subscriptions.push(
+      this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
+        this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
+          const dateTimeStart = new Date(date_time_start);
+          const durationTrayect = new Date(date_time_end || date_time_start).getHours();
+          return {
+            id,
+            origin: origin_place,
+            destiny: destination_place,
+            date_time_departure: dateTimeStart.toLocaleString(),
+            durationTrayect: dateTimeStart.getHours() - durationTrayect,
+          };
+        });
+      }),
+    );
   }
 
   ngOnInit() {
-    this.modalFormSubscription = this.modalForm.subscribe((options: TrasportationForm) => {
-      const { open, form, readOnly = false, isNew = true } = options;
-      this.stepActive = 0;
-      this.readOnlyFleet = readOnly;
-      this.isNew = isNew;
-      if (open) {
-        this.journeys = [];
-        const { plate, total_seats: number_positions, id, phone_driver, driver_name: driver } = isNew
-          ? { plate: '', total_seats: '', phone_driver: '', driver_name: '', id: '' }
-          : (form as any);
-        const { required } = Validators;
-        if (!isNew) {
-          this.idVehicle = id;
-          this.getTrayects(this.idVehicle);
-        }
-        const { company, type_service } = isNew ? { company: '', type_service: '' } : (form as any);
-        this.form = this.fb.group({
-          vehicle_plate: [plate, required],
-          driver: [driver, required],
-          company: [company, required],
-          number_positions: [number_positions, required],
-          type_service: [type_service, required],
-          phone_driver: [phone_driver, required],
-          origin: [''],
-          destiny: [''],
-          date_time_departure: [''],
-          durationTrayect: [''],
-        });
+    this.subscriptions.push(
+      this.modalForm.subscribe((options: TrasportationForm) => {
+        const { open, form, readOnly = false, isNew = true } = options;
+        this.stepActive = 0;
+        this.readOnlyFleet = readOnly;
+        this.isNew = isNew;
+        if (open) {
+          this.journeys = [];
+          const { plate, total_seats: number_positions, id, phone_driver, driver_name: driver } = isNew
+            ? { plate: '', total_seats: '', phone_driver: '', driver_name: '', id: '' }
+            : (form as any);
+          const { required } = Validators;
+          if (!isNew) {
+            this.idVehicle = id;
+            this.getTrayects(this.idVehicle);
+          }
 
-        const modal = this.modalService.open(this.modalTemplate, {
-          size: 'lg',
-          windowClass: 'modal-md-personalized modal-dialog-scroll',
-          centered: true,
-        });
-        this.modalActions.close = () => {
-          modal.close();
-        };
-        document.getElementById('bodyGeneral').removeAttribute('style');
-      }
-    });
+          const { transporter, service_type } = isNew ? { transporter: '', service_type: '' } : (form as any);
+          this.form = this.fb.group({
+            vehicle_plate: [plate, required],
+            driver: [driver, required],
+            transporter: [transporter, required],
+            number_positions: [number_positions, required],
+            service_type: [service_type, required],
+            phone_driver: [phone_driver, required],
+            origin: [''],
+            destiny: [''],
+            date_time_departure: [''],
+            durationTrayect: [''],
+          });
+
+          const modal = this.modalService.open(this.modalTemplate, {
+            size: 'lg',
+            windowClass: 'modal-md-personalized modal-dialog-scroll',
+            centered: true,
+          });
+          this.modalActions.close = () => {
+            modal.close();
+          };
+          document.getElementById('bodyGeneral').removeAttribute('style');
+        }
+      }),
+    );
   }
 
   ngOnDestroy(): void {
-    this.modalFormSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   newRequest(model) {
@@ -164,6 +159,13 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               })
               .subscribe(data => {
                 this.showSubmit = false;
+                this.submit.emit({ success: true });
+                this.alert.setAlert({
+                  type: 'success',
+                  title: 'Perfecto',
+                  message: 'Se ha creado con exito',
+                  confirmation: false,
+                } as Alerts);
                 this.modalActions.close();
               });
           } else {
@@ -174,6 +176,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               })
               .subscribe(data => {
                 this.showSubmit = false;
+                this.submit.emit({ success: true });
                 this.modalActions.close();
               });
           }

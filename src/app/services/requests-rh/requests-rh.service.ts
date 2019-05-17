@@ -24,11 +24,13 @@ export class RequestsRhService {
     return this.tokenService.delete('employee_requets/' + id).map((data: any) => data.json());
   }
   getAllSelectRequest(id_employee: any, form: string) {
-    return this.tokenService
-      .get('employees/index_for_education/' + id_employee + '/' + form)
-      .map((data: any) => data.json());
+    return this.tokenService.get('employees/index_for_education/' + id_employee + '/' + form).map((data: any) => data.json());
   }
-  getListHousingList(){
+  getListHousingList() {
     return this.tokenService.get('housing/list').map((data: any) => data.json());
+  }
+
+  getListBedsHousing(id) {
+    return this.tokenService.get(`housing/${id}/list_beds`).map((data: any) => data.json());
   }
 }
