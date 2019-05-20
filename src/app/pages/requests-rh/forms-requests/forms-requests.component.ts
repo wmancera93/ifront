@@ -34,7 +34,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   public forms: any;
   public detectLetter = ' ';
-
+  public today: any;
   public showTime = true;
   public showDate = false;
   public modalState = true;
@@ -307,6 +307,15 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   }
 
   calculateDay() {
+    debugger
+    const fecha = new Date();
+    this.today =
+      fecha.getFullYear().toString() +
+      '/' +
+      (fecha.getMonth().toString().length == 1 ? '0' + (fecha.getMonth() + 1).toString() : (fecha.getMonth() + 1).toString()) +
+      '/' +
+      (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
+
     const { date_begin, date_end } = this.forms.controls;
 
     let dateBegin = date_begin.value === ' ' ? null : new Date(date_begin.value);
@@ -316,12 +325,13 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
     if (this.diffDays < 0) {
+      this.modalActions.close();
       this.lowerDate = true;
       const alertDataWrong: Alerts[] = [
         {
           type: 'danger',
           title: 'Error',
-          message: this.t('message_alert_two_ts'),
+          message: this.t('message_alert_one_ts'),
           confirmation: false,
         },
       ];
@@ -331,6 +341,16 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       });
       dateBegin = null;
       dateEnd = null;
+    }
+    if(this.diffDays == 0){
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'warning',
+        title: 'Advertencia',
+        message: 'No es posible solicitar un dia de vacaciones',
+        confirmation: false,
+        typeConfirmation: '',
+      } as Alerts);
     }
     if (dateBegin !== null && this.formRequests.maximum_days === 1) {
       date_end.value = date_begin.value;

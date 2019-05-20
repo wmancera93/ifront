@@ -58,7 +58,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public transportationLogisticsService: TransportationLogisticsService,
   ) {
-    this.companiesList = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Chimuelos logistics' }];
+
     this.servicesList = [{ id: 1, name: 'General' }, { id: 2, name: 'Especial' }];
 
     this.form = this.fb.group({

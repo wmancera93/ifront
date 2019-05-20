@@ -15,26 +15,13 @@
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
 >
-  <div
-    style="margin-top: 10px !important"
-    class="modal-dialog modal-lg"
-    role="document"
-  >
+  <div style="margin-top: 10px !important" class="modal-dialog modal-lg" role="document">
     <div class="modal-content ">
       <div class="modal-header borderLine-title">
-        <h5
-          class="modal-title titleColor text-shadow"
-          id="exampleModalLabel"
-        >
+        <h5 class="modal-title titleColor text-shadow" id="exampleModalLabel">
           {{ parseT('tittle') | translate }}
         </h5>
-        <button
-          id="closeTravels"
-          type="button"
-          class="close "
-          data-dismiss="modal"
-          aria-label="Close"
-        >
+        <button id="closeTravels" type="button" class="close " data-dismiss="modal" aria-label="Close">
           <h4 class="text-primary-hr">X</h4>
         </button>
       </div>
@@ -44,17 +31,12 @@
           class="row justify-content-left"
           (ngSubmit)="newTravel(formTravelManagement.value)"
         >
-          <div
-            class="col-12"
-            *ngIf="userAuthenticated.employee.trip_by_third"
-          >
+          <div class="col-12" *ngIf="userAuthenticated.employee.trip_by_third">
             <div class="row">
               <div class="col-4 align-items-left">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>{{
-                    parseT('message_third') | translate
-                  }}</strong>
+                  <strong>{{ parseT('message_third') | translate }}</strong>
                 </label>
                 <form name="searchAutoComplete">
                   <p>
@@ -68,11 +50,7 @@
                     />
                   </p>
                 </form>
-                <div
-                  *ngIf="showListAutoC"
-                  class="list-search-autocomplete "
-                  style="overflow-x: hidden;"
-                >
+                <div *ngIf="showListAutoC" class="list-search-autocomplete " style="overflow-x: hidden;">
                   <div
                     (click)="returnObjectSearch(employee)"
                     class="search-results borderLineEmployee"
@@ -80,10 +58,7 @@
                   >
                     <div class="row align-items-center">
                       <div class="col-4">
-                        <img
-                          src="{{ employee.image.url }}"
-                          class="roundPhotoChart"
-                        />
+                        <img src="{{ employee.image.url }}" class="roundPhotoChart" />
                       </div>
                       <div class="col-8 text-left">
                         <i class="fa fa-user-o"></i>
@@ -94,15 +69,10 @@
                 </div>
               </div>
               <div class="col-8 align-self-center">
-                <label
-                  class="titleColor"
-                  *ngIf="eployee_selected !== null"
-                >
+                <label class="titleColor" *ngIf="eployee_selected !== null">
                   {{ parseT('travel_for_third') | translate }}:
                   <i class="fa fa-fw fa fa-user text-primary-hr"></i>
-                  <strong>{{
-                    eployee_selected.name_complete
-                  }}</strong>
+                  <strong>{{ eployee_selected.name_complete }}</strong>
                 </label>
                 <br />
                 <span
@@ -122,70 +92,44 @@
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
                   <i class="fa fa-fw fa fa-plane text-primary-hr"></i>
-                  <strong
-                    >{{ parseT('type_travel') | translate }}*:</strong
-                  >
+                  <strong>{{ parseT('type_travel') | translate }}*:</strong>
                 </label>
                 <select
                   *ngIf="travel_types.length > 0"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls['type_travel']
-                  "
-                  (change)="
-                    changeTypeTravel(formTravelManagement.value)
-                  "
+                  [formControl]="formTravelManagement.controls['type_travel']"
+                  (change)="changeTypeTravel(formTravelManagement.value)"
                 >
-                  <option value="">{{
-                    parseT('option_select') | translate
-                  }}</option>
-                  <option
-                    *ngFor="let nameTravel of travel_types"
-                    [value]="nameTravel.id"
-                    >{{ nameTravel.name }}</option
-                  >
+                  <option value="">{{ parseT('option_select') | translate }}</option>
+                  <option *ngFor="let nameTravel of travel_types" [value]="nameTravel.id">{{ nameTravel.name }}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-calendar-check-o text-primary-hr"
-                  ></i>
-                  <strong
-                    >{{ parseT('date_begin') | translate }}:*</strong
-                  >
+                  <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+                  <strong>{{ parseT('date_begin') | translate }}:*</strong>
                 </label>
                 <input
                   tabindex="-1"
                   type="date"
                   name="date_requests_begin"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls[
-                      'date_requests_begin'
-                    ]
-                  "
+                  [formControl]="formTravelManagement.controls['date_requests_begin']"
                   (change)="dateComplete(formTravelManagement.value)"
                   (keyup)="delete('date_begin_header')"
                 />
               </div>
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-calendar-minus-o text-primary-hr"
-                  ></i>
-                  <strong
-                    >{{ parseT('date_end') | translate }}:*</strong
-                  >
+                  <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+                  <strong>{{ parseT('date_end') | translate }}:*</strong>
                 </label>
                 <input
                   tabindex="-1"
                   type="date"
                   name="date_requests_end"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls['date_requests_end']
-                  "
+                  [formControl]="formTravelManagement.controls['date_requests_end']"
                   (change)="dateComplete(formTravelManagement.value)"
                   (keyup)="delete('date_end_header')"
                 />
@@ -193,16 +137,10 @@
             </div>
           </div>
 
-          <div
-            class="col-12 top-containter"
-            *ngIf="activate"
-            style="margin-top: 20px"
-          >
+          <div class="col-12 top-containter" *ngIf="activate" style="margin-top: 20px">
             <label for="celulaInput" class="titleColor">
               <i class="fa fa-fw fa-comment text-primary-hr"></i>
-              <strong
-                >{{ parseT('reason_travel') | translate }} *</strong
-              >
+              <strong>{{ parseT('reason_travel') | translate }} *</strong>
             </label>
             <textarea
               maxlength="59"
@@ -212,34 +150,21 @@
               style="height: auto !important;"
               name="reason_trip"
               class="form-control uppercase"
-              [formControl]="
-                formTravelManagement.controls['trip_text']
-              "
+              [formControl]="formTravelManagement.controls['trip_text']"
             ></textarea>
           </div>
 
-          <div
-            class="col-lg-3 col-md-6 col-12 form-check"
-            *ngIf="activate"
-            style="margin-top: 20px"
-          >
+          <div class="col-lg-3 col-md-6 col-12 form-check" *ngIf="activate" style="margin-top: 20px">
             <input
               class="form-check-input"
               style="margin-top: 4px !important"
               type="checkbox"
               value="true"
               id="manutencionCheck"
-              [formControl]="
-                formTravelManagement.controls['maintenance']
-              "
+              [formControl]="formTravelManagement.controls['maintenance']"
             />
-            <label
-              class="form-check-label titleColor"
-              for="manutencionCheck"
-            >
-              <strong>{{
-                parseT('check_maintenance') | translate
-              }}</strong>
+            <label class="form-check-label titleColor" for="manutencionCheck">
+              <strong>{{ parseT('check_maintenance') | translate }}</strong>
             </label>
           </div>
 
@@ -253,16 +178,10 @@
                 <select
                   *ngIf="legal_travels.length > 0"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls['id_travel_legal']
-                  "
+                  [formControl]="formTravelManagement.controls['id_travel_legal']"
                   (change)="changeTravelLegal()"
                 >
-                  <option
-                    *ngFor="let legalTravel of legal_travels"
-                    [value]="legalTravel.id"
-                    >{{ legalTravel.name }}</option
-                  >
+                  <option *ngFor="let legalTravel of legal_travels" [value]="legalTravel.id">{{ legalTravel.name }}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -273,17 +192,11 @@
                 <select
                   *ngIf="trips_specific.length > 0"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls[
-                      'id_travel_specific'
-                    ]
-                  "
+                  [formControl]="formTravelManagement.controls['id_travel_specific']"
                 >
-                  <option
-                    *ngFor="let specificTravel of trips_specific"
-                    [value]="specificTravel.id"
-                    >{{ specificTravel.name }}</option
-                  >
+                  <option *ngFor="let specificTravel of trips_specific" [value]="specificTravel.id">{{
+                    specificTravel.name
+                  }}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12">
@@ -294,17 +207,11 @@
                 <select
                   *ngIf="trips_activities.length > 0"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls[
-                      'id_travel_activities'
-                    ]
-                  "
+                  [formControl]="formTravelManagement.controls['id_travel_activities']"
                 >
-                  <option
-                    *ngFor="let activitiesTravel of trips_activities"
-                    [value]="activitiesTravel.id"
-                    >{{ activitiesTravel.name }}</option
-                  >
+                  <option *ngFor="let activitiesTravel of trips_activities" [value]="activitiesTravel.id">{{
+                    activitiesTravel.name
+                  }}</option>
                 </select>
               </div>
             </div>
@@ -314,45 +221,24 @@
             <div class="row" style="margin-top: 10px">
               <div class="col-lg-4 col-md-6 col-12">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-pie-chart text-primary-hr"
-                  ></i>
-                  <a
-                    >{{
-                      parseT('imputation_element') | translate
-                    }}:*</a
-                  >
+                  <i class="fa fa-fw fa-pie-chart text-primary-hr"></i>
+                  <a>{{ parseT('imputation_element') | translate }}:*</a>
                 </label>
                 <select
                   *ngIf="center_costs_travels.length > 0"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls[
-                      'id_element_imputation'
-                    ]
-                  "
-                  (change)="
-                    searchCostsCenterAndGrahp(
-                      formTravelManagement.value,
-                      'new'
-                    )
-                  "
+                  [formControl]="formTravelManagement.controls['id_element_imputation']"
+                  (change)="searchCostsCenterAndGrahp(formTravelManagement.value, 'new')"
                   placeholder="Seleccione"
                 >
-                  <option
-                    *ngFor="
-                      let costsTravelCenter of center_costs_travels
-                    "
-                    [value]="costsTravelCenter.id"
-                    >{{ costsTravelCenter.name }}</option
-                  >
+                  <option *ngFor="let costsTravelCenter of center_costs_travels" [value]="costsTravelCenter.id">{{
+                    costsTravelCenter.name
+                  }}</option>
                 </select>
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="kostl">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-usd text-primary-hr detectLetter"
-                  ></i>
+                  <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                   <a>{{ parseT('cost_center') | translate }}:*</a>
                 </label>
                 <form name="searchAutoCompleteCost">
@@ -364,20 +250,12 @@
                       name="costList"
                       class="form-control"
                       class="form-control"
-                      [formControl]="
-                        formTravelManagement.controls[
-                          'name_travel_costs'
-                        ]
-                      "
+                      [formControl]="formTravelManagement.controls['name_travel_costs']"
                       (keyup)="enterCost(formTravelManagement.value)"
                     />
                   </p>
                 </form>
-                <div
-                  *ngIf="showListAutoCost"
-                  class="list-search-autocomplete "
-                  style="overflow-x: hidden;"
-                >
+                <div *ngIf="showListAutoCost" class="list-search-autocomplete " style="overflow-x: hidden;">
                   <div
                     (click)="returnCostSearch(costsTrip)"
                     class="search-results borderLineEmployee"
@@ -394,9 +272,7 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="aufnr">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-usd text-primary-hr detectLetter"
-                  ></i>
+                  <i class="fa fa-fw fa-usd text-primary-hr detectLetter"></i>
                   <a>{{ parseT('order') | translate }}:*</a>
                 </label>
                 <form name="searchAutoCompleteOrden">
@@ -408,20 +284,12 @@
                       name="costList"
                       class="form-control"
                       class="form-control"
-                      [formControl]="
-                        formTravelManagement.controls[
-                          'name_travel_order'
-                        ]
-                      "
+                      [formControl]="formTravelManagement.controls['name_travel_order']"
                       (keyup)="enterOrder(formTravelManagement.value)"
                     />
                   </p>
                 </form>
-                <div
-                  *ngIf="showListAutoOrder"
-                  class="list-search-autocomplete "
-                  style="overflow-x: hidden;"
-                >
+                <div *ngIf="showListAutoOrder" class="list-search-autocomplete " style="overflow-x: hidden;">
                   <div
                     (click)="returnOrderSearch(orderTrip)"
                     class="search-results borderLineEmployee"
@@ -445,20 +313,12 @@
                       name="graphList"
                       class="form-control"
                       class="form-control"
-                      [formControl]="
-                        formTravelManagement.controls[
-                          'name_travel_graph'
-                        ]
-                      "
+                      [formControl]="formTravelManagement.controls['name_travel_graph']"
                       (keyup)="enterGraph(formTravelManagement.value)"
                     />
                   </p>
                 </form>
-                <div
-                  *ngIf="showListAutoGraph"
-                  class="list-search-autocomplete "
-                  style="overflow-x: hidden;"
-                >
+                <div *ngIf="showListAutoGraph" class="list-search-autocomplete " style="overflow-x: hidden;">
                   <div
                     (click)="returnGraphSearch(grahpTravels)"
                     class="search-results borderLineEmployee"
@@ -475,49 +335,31 @@
               </div>
               <div class="col-lg-4 col-md-6 col-12" *ngIf="nplnr">
                 <label class="titleColor">
-                  <i
-                    class="fa fa-fw fa-object-ungroup text-primary-hr"
-                  ></i>
+                  <i class="fa fa-fw fa-object-ungroup text-primary-hr"></i>
                   <a>{{ parseT('operation') | translate }}:*</a>
                 </label>
                 <select
-                  [attr.disabled]="
-                    operations.length == 0 ? true : null
-                  "
+                  [attr.disabled]="operations.length == 0 ? true : null"
                   class="form-control"
-                  [formControl]="
-                    formTravelManagement.controls['id_operations']
-                  "
+                  [formControl]="formTravelManagement.controls['id_operations']"
                 >
-                  <option value="-1">{{
-                    parseT('option_select') | translate
-                  }}</option>
-                  <option
-                    *ngFor="let operationsTravels of operations"
-                    [value]="operationsTravels.id"
-                    >{{ operationsTravels.code }} -
-                    {{ operationsTravels.name }}</option
+                  <option value="-1">{{ parseT('option_select') | translate }}</option>
+                  <option *ngFor="let operationsTravels of operations" [value]="operationsTravels.id"
+                    >{{ operationsTravels.code }} - {{ operationsTravels.name }}</option
                   >
                 </select>
               </div>
             </div>
           </div>
 
-          <div
-            class="col-12"
-            *ngIf="activate"
-            style="margin-top: 15px"
-          >
+          <div class="col-12" *ngIf="activate" style="margin-top: 15px">
             <div class="row border" style="margin-left: 15px">
               <h4>
                 {{ parseT('trayect') | translate }}
               </h4>
             </div>
             <div class="row" style="margin-top: 15px">
-              <div
-                class="col-12 top-general-p"
-                style="min-height: 200px !important"
-              >
+              <div class="col-12 top-general-p" style="min-height: 200px !important">
                 <app-data-table
                   [records]="objectReport"
                   id="tableTravels"
@@ -533,89 +375,45 @@
               <div class="col-12 top-containter">
                 <div class="row">
                   <div class="col-12">
-                    <label
-                      *ngIf="objectImg.length > 0"
-                      class="titleColor"
-                    >
-                      <i
-                        class="fa fa-fw fa-check text-primary-hr"
-                      ></i>
-                      <strong>{{
-                        parseT('attach_saved') | translate
-                      }}</strong>
+                    <label *ngIf="objectImg.length > 0" class="titleColor">
+                      <i class="fa fa-fw fa-check text-primary-hr"></i>
+                      <strong>{{ parseT('attach_saved') | translate }}</strong>
                     </label>
                   </div>
                 </div>
                 <div class="row">
-                  <div
-                    class="col-8"
-                    *ngFor="
-                      let imgsaved of objectImg;
-                      let index = index
-                    "
-                  >
-                    <div
-                      class="alert"
-                      style="background-color:rgba(0,0,0,.2) "
-                      role="alert"
-                    >
+                  <div class="col-8" *ngFor="let imgsaved of objectImg; let index = index">
+                    <div class="alert" style="background-color:rgba(0,0,0,.2) " role="alert">
                       <div class="row">
                         <div class="col-11">
-                          <div
-                            *ngIf="imgsaved.extension == 'pdf'"
-                            class="cursor-general "
-                            theme="dark"
-                          >
+                          <div *ngIf="imgsaved.extension == 'pdf'" class="cursor-general " theme="dark">
                             <h6>
                               {{ index + 1 }}.
-                              <i
-                                class="fa fa-fw fa-file-pdf-o"
-                                aria-hidden="true"
-                                style="font-size: 1.5em; color: white"
-                              ></i>
+                              <i class="fa fa-fw fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em; color: white"></i>
+                              {{ imgsaved.file.name }}
+                            </h6>
+                          </div>
+                          <div *ngIf="imgsaved.extension == 'docx'" class="cursor-general " theme="dark">
+                            <h6>
+                              {{ index + 1 }}.
+                              <i class="fa fa-fw fa-file-word-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                               {{ imgsaved.file.name }}
                             </h6>
                           </div>
                           <div
-                            *ngIf="imgsaved.extension == 'docx'"
+                            *ngIf="imgsaved.extension == 'jpeg' || imgsaved.extension == 'png' || imgsaved.extension == 'jpg'"
                             class="cursor-general "
                             theme="dark"
                           >
                             <h6>
                               {{ index + 1 }}.
-                              <i
-                                class="fa fa-fw fa-file-word-o"
-                                aria-hidden="true"
-                                style="font-size: 1.5em; color:white"
-                              ></i>
-                              {{ imgsaved.file.name }}
-                            </h6>
-                          </div>
-                          <div
-                            *ngIf="
-                              imgsaved.extension == 'jpeg' ||
-                              imgsaved.extension == 'png' ||
-                              imgsaved.extension == 'jpg'
-                            "
-                            class="cursor-general "
-                            theme="dark"
-                          >
-                            <h6>
-                              {{ index + 1 }}.
-                              <i
-                                class="fa fa-fw fa-file-image-o"
-                                aria-hidden="true"
-                                style="font-size: 1.5em; color:white"
-                              ></i>
+                              <i class="fa fa-fw fa-file-image-o" aria-hidden="true" style="font-size: 1.5em; color:white"></i>
                               {{ imgsaved.file.name }}
                             </h6>
                           </div>
                         </div>
                         <div class="col-1 text-center">
-                          <h6
-                            (click)="deleteUpload(imgsaved)"
-                            class="text-primary-hr cursor-general"
-                          >
+                          <h6 (click)="deleteUpload(imgsaved)" class="text-primary-hr cursor-general">
                             x
                           </h6>
                         </div>
@@ -625,21 +423,11 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-3 col-md-6 col-12">
-                    <label
-                      *ngIf="objectImg.length == 0"
-                      class="titleColor"
-                    >
-                      <i
-                        class="fa fa-fw fa-paperclip text-primary-hr"
-                      ></i>
-                      <strong>{{
-                        parseT('attach') | translate
-                      }}</strong>
+                    <label *ngIf="objectImg.length == 0" class="titleColor">
+                      <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                      <strong>{{ parseT('attach') | translate }}</strong>
                     </label>
-                    <app-file-upload
-                      [nameFile]="filequotation"
-                      [extensions]="extensions"
-                    ></app-file-upload>
+                    <app-file-upload [nameFile]="filequotation" [extensions]="extensions"></app-file-upload>
                   </div>
                 </div>
               </div>
@@ -673,61 +461,31 @@
 
             <div class="collapse top-general-p" id="collapseTravel">
               <div class="row" style="margin-top: 15px">
-                <div
-                  class="col-lg-2 col-md-6 col-12"
-                  style="margin-top: 30px"
-                >
+                <div class="col-lg-2 col-md-6 col-12" style="margin-top: 30px">
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-bus text-primary-hr"></i>
-                    <strong
-                      >{{ parseT('transport') | translate }}:</strong
-                    >
+                    <strong>{{ parseT('transport') | translate }}:</strong>
                   </label>
                 </div>
-                <div
-                  class="col-lg-3 col-md-6 col-12"
-                  style="margin-top: 30px"
-                >
+                <div class="col-lg-3 col-md-6 col-12" style="margin-top: 30px">
                   <select
                     class="form-control"
-                    [formControl]="
-                      formTravelManagement.controls['id_transport']
-                    "
-                    (change)="
-                      mileageTravel(formTravelManagement.value, 'new')
-                    "
+                    [formControl]="formTravelManagement.controls['id_transport']"
+                    (change)="mileageTravel(formTravelManagement.value, 'new')"
                   >
-                    <option
-                      *ngFor="let nameTransport of transport_types"
-                      [value]="nameTransport.id"
-                      >{{ nameTransport.name }}</option
-                    >
+                    <option *ngFor="let nameTransport of transport_types" [value]="nameTransport.id">{{
+                      nameTransport.name
+                    }}</option>
                   </select>
                 </div>
-                <div
-                  class="col-lg-2 col-md-6 col-12"
-                  *ngIf="showMilenage"
-                  style="margin-top: 30px"
-                >
+                <div class="col-lg-2 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
                   <label class="titleColor">
                     <i class="fa fa-fw fa fa-car text-primary-hr"></i>
-                    <strong
-                      >{{ parseT('mileage') | translate }}:</strong
-                    >
+                    <strong>{{ parseT('mileage') | translate }}:</strong>
                   </label>
                 </div>
-                <div
-                  class="col-lg-3 col-md-6 col-12"
-                  *ngIf="showMilenage"
-                  style="margin-top: 30px"
-                >
-                  <input
-                    type="number"
-                    class="form-control"
-                    [formControl]="
-                      formTravelManagement.controls['travel_mileage']
-                    "
-                  />
+                <div class="col-lg-3 col-md-6 col-12" *ngIf="showMilenage" style="margin-top: 30px">
+                  <input type="number" class="form-control" [formControl]="formTravelManagement.controls['travel_mileage']" />
                 </div>
               </div>
 
@@ -736,96 +494,52 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="border">
-                        <strong class="text-primary-hr">{{
-                          parseT('origin_place') | translate
-                        }}</strong>
+                        <strong class="text-primary-hr">{{ parseT('origin_place') | translate }}</strong>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="row">
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-font-awesome text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>{{ parseT('country') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          countries.length == 0 ? true : null
-                        "
+                        [attr.disabled]="countries.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['id_country']
-                        "
-                        (change)="
-                          searchState(
-                            formTravelManagement.value,
-                            'new'
-                          )
-                        "
+                        [formControl]="formTravelManagement.controls['id_country']"
+                        (change)="searchState(formTravelManagement.value, 'new')"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
-                        }}</option>
-                        <option
-                          *ngFor="let nameCountry of countries"
-                          [value]="nameCountry.id"
-                          >{{ nameCountry.name }}</option
-                        >
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameCountry of countries" [value]="nameCountry.id">{{ nameCountry.name }}</option>
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-dot-circle-o text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>{{ parseT('region') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          stateLocations.length == 0 ? true : null
-                        "
+                        [attr.disabled]="stateLocations.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['id_state']
-                        "
+                        [formControl]="formTravelManagement.controls['id_state']"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
-                        }}</option>
-                        <option
-                          *ngFor="let nameState of stateLocations"
-                          [value]="nameState.id"
-                          >{{ nameState.name }}</option
-                        >
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameState of stateLocations" [value]="nameState.id">{{ nameState.name }}</option>
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-paper-plane text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>{{ parseT('place') | translate }}:</a>
                       </label>
                       <input
                         type="text"
                         class="form-control uppercase"
                         name="id_city"
-                        [formControl]="
-                          formTravelManagement.controls['id_city']
-                        "
+                        [formControl]="formTravelManagement.controls['id_city']"
                       />
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_city']">
                         <option value="-1">Seleccione</option>
@@ -834,53 +548,27 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-map-marker text-primary-hr"
-                        ></i>
-                        <a
-                          >{{
-                            parseT('origin_terminal') | translate
-                          }}:</a
-                        >
+                        <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
+                        <a>{{ parseT('origin_terminal') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          terminalLocations.length == 0 ? true : null
-                        "
+                        [attr.disabled]="terminalLocations.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['id_terminal']
-                        "
+                        [formControl]="formTravelManagement.controls['id_terminal']"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameTerminal of terminalLocations" [value]="nameTerminal.id">{{
+                          nameTerminal.name
                         }}</option>
-                        <option
-                          *ngFor="
-                            let nameTerminal of terminalLocations
-                          "
-                          [value]="nameTerminal.id"
-                          >{{ nameTerminal.name }}</option
-                        >
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12 top-containter"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-calendar text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a>
-                          {{
-                            parseT('date_begin_trayect') | translate
-                          }}
+                          {{ parseT('date_begin_trayect') | translate }}
                           *</a
                         >
                       </label>
@@ -889,25 +577,14 @@
                         type="date"
                         name="date_begin"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['date_begin']
-                        "
-                        (change)="
-                          dateValidateTrayect(
-                            formTravelManagement.value
-                          )
-                        "
+                        [formControl]="formTravelManagement.controls['date_begin']"
+                        (change)="dateValidateTrayect(formTravelManagement.value)"
                         (keyup)="delete('date_begin_body')"
                       />
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12 top-containter"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-clock-o text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a>
                           {{ parseT('hour_begin') | translate }}
                           *</a
@@ -919,15 +596,9 @@
                         min="00:00:01"
                         max="23:59:59"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['hour_begin']
-                        "
-                        (change)="
-                          addHourEnd(formTravelManagement.value)
-                        "
-                        (click)="
-                          addHourEnd(formTravelManagement.value)
-                        "
+                        [formControl]="formTravelManagement.controls['hour_begin']"
+                        (change)="addHourEnd(formTravelManagement.value)"
+                        (click)="addHourEnd(formTravelManagement.value)"
                       />
                     </div>
                   </div>
@@ -938,98 +609,56 @@
                   <div class="row">
                     <div class="col-12">
                       <div class="border">
-                        <strong class="text-primary-hr">{{
-                          parseT('destination_place') | translate
-                        }}</strong>
+                        <strong class="text-primary-hr">{{ parseT('destination_place') | translate }}</strong>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="col-12">
                   <div class="row">
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-font-awesome text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa fa-font-awesome text-primary-hr"></i>
                         <a>{{ parseT('country') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          countriesto.length == 0 ? true : null
-                        "
+                        [attr.disabled]="countriesto.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls[
-                            'id_countryto'
-                          ]
-                        "
-                        (change)="
-                          searchStateto(
-                            formTravelManagement.value,
-                            'new'
-                          )
-                        "
+                        [formControl]="formTravelManagement.controls['id_countryto']"
+                        (change)="searchStateto(formTravelManagement.value, 'new')"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameCountryto of countriesto" [value]="nameCountryto.id">{{
+                          nameCountryto.name
                         }}</option>
-                        <option
-                          *ngFor="let nameCountryto of countriesto"
-                          [value]="nameCountryto.id"
-                          >{{ nameCountryto.name }}</option
-                        >
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-dot-circle-o text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa fa-dot-circle-o text-primary-hr"></i>
                         <a>{{ parseT('region') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          stateLocationsto.length == 0 ? true : null
-                        "
+                        [attr.disabled]="stateLocationsto.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['id_stateto']
-                        "
+                        [formControl]="formTravelManagement.controls['id_stateto']"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameStateto of stateLocationsto" [value]="nameStateto.id">{{
+                          nameStateto.name
                         }}</option>
-                        <option
-                          *ngFor="let nameStateto of stateLocationsto"
-                          [value]="nameStateto.id"
-                          >{{ nameStateto.name }}</option
-                        >
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-paper-plane text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-paper-plane text-primary-hr"></i>
                         <a>{{ parseT('place') | translate }}:</a>
                       </label>
                       <input
                         type="text"
                         class="form-control uppercase"
                         name="id_cityto"
-                        [formControl]="
-                          formTravelManagement.controls['id_cityto']
-                        "
+                        [formControl]="formTravelManagement.controls['id_cityto']"
                       />
 
                       <!-- <select class="form-control" [formControl]="formTravelManagement.controls['id_cityto']">
@@ -1039,54 +668,25 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div
-                      class="col-lg-4 col-md-6 col-12"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-map-marker text-primary-hr"
-                        ></i>
-                        <a
-                          >{{
-                            parseT('destination_terminal')
-                              | translate
-                          }}:</a
-                        >
+                        <i class="fa fa-fw fa fa-map-marker text-primary-hr"></i>
+                        <a>{{ parseT('destination_terminal') | translate }}:</a>
                       </label>
                       <select
-                        [attr.disabled]="
-                          terminalLocationsto.length == 0
-                            ? true
-                            : null
-                        "
+                        [attr.disabled]="terminalLocationsto.length == 0 ? true : null"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls[
-                            'id_terminalto'
-                          ]
-                        "
+                        [formControl]="formTravelManagement.controls['id_terminalto']"
                       >
-                        <option value="-1">{{
-                          parseT('option_select') | translate
+                        <option value="-1">{{ parseT('option_select') | translate }}</option>
+                        <option *ngFor="let nameTerminalto of terminalLocationsto" [value]="nameTerminalto.id">{{
+                          nameTerminalto.name
                         }}</option>
-                        <option
-                          *ngFor="
-                            let nameTerminalto of terminalLocationsto
-                          "
-                          [value]="nameTerminalto.id"
-                          >{{ nameTerminalto.name }}</option
-                        >
                       </select>
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12 top-containter"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-calendar text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-calendar text-primary-hr"></i>
                         <a>
                           {{ parseT('date_end_trayect') | translate }}
                           *</a
@@ -1097,25 +697,14 @@
                         type="date"
                         name="date_end"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['date_end']
-                        "
-                        (change)="
-                          dateValidateTrayect(
-                            formTravelManagement.value
-                          )
-                        "
+                        [formControl]="formTravelManagement.controls['date_end']"
+                        (change)="dateValidateTrayect(formTravelManagement.value)"
                         (keyup)="delete('date_end_body')"
                       />
                     </div>
-                    <div
-                      class="col-lg-4 col-md-6 col-12 top-containter"
-                      style="margin-top: 10px"
-                    >
+                    <div class="col-lg-4 col-md-6 col-12 top-containter" style="margin-top: 10px">
                       <label class="titleColor">
-                        <i
-                          class="fa-fw fa fa-clock-o text-primary-hr"
-                        ></i>
+                        <i class="fa-fw fa fa-clock-o text-primary-hr"></i>
                         <a>
                           {{ parseT('hour_end') | translate }}
                           *</a
@@ -1127,12 +716,8 @@
                         min="00:00:01"
                         max="23:59:59"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['hour_end']
-                        "
-                        (change)="
-                          hourvalidations(formTravelManagement.value)
-                        "
+                        [formControl]="formTravelManagement.controls['hour_end']"
+                        (change)="hourvalidations(formTravelManagement.value)"
                         readonly="readonly"
                       />
                     </div>
@@ -1142,20 +727,12 @@
               <div class="row" style="margin-top: 10px">
                 <div class="col-12" *ngIf="arrayHotel.length > 0">
                   <div class="border">
-                    <strong class="text-primary-hr"
-                      >{{ parseT('hotel_assigned') | translate }}
-                    </strong>
+                    <strong class="text-primary-hr">{{ parseT('hotel_assigned') | translate }} </strong>
                   </div>
                 </div>
-                <div
-                  class="col-12"
-                  style="margin-top: 10px"
-                  *ngIf="arrayHotel.length > 0"
-                >
+                <div class="col-12" style="margin-top: 10px" *ngIf="arrayHotel.length > 0">
                   <div class="table-responsive">
-                    <table
-                      class="table table-sm table-striped table-bordered table-hover"
-                    >
+                    <table class="table table-sm table-striped table-bordered table-hover">
                       <thead>
                         <tr>
                           <th class="text-center">
@@ -1203,36 +780,19 @@
                   <div class="row">
                     <div class="col-lg-4 col-md-6 col-12">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa fa-bed text-primary-hr"
-                        ></i>
-                        <a
-                          >{{ parseT('column_cero') | translate }}:</a
-                        >
+                        <i class="fa fa-fw fa fa-bed text-primary-hr"></i>
+                        <a>{{ parseT('column_cero') | translate }}:</a>
                       </label>
-                      <select
-                        class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls['id_hotels']
-                        "
-                      >
-                        <option
-                          *ngFor="let nameHotels of hotels"
-                          [value]="nameHotels.id"
-                          >{{ nameHotels.name }}</option
-                        >
+                      <select class="form-control" [formControl]="formTravelManagement.controls['id_hotels']">
+                        <option *ngFor="let nameHotels of hotels" [value]="nameHotels.id">{{ nameHotels.name }}</option>
                         <option value="">
-                          {{
-                            parseT('option_select') | translate
-                          }}
-                      </option>
+                          {{ parseT('option_select') | translate }}
+                        </option>
                       </select>
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-calendar-check-o text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
                         <a>{{ parseT('column_one') | translate }}:</a>
                       </label>
                       <input
@@ -1240,19 +800,13 @@
                         type="date"
                         name="date_begin_hotel"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls[
-                            'date_hotel_in'
-                          ]
-                        "
+                        [formControl]="formTravelManagement.controls['date_hotel_in']"
                         (keyup)="delete('date_begin_hotel')"
                       />
                     </div>
                     <div class="col-lg-4 col-md-6 col-12">
                       <label class="titleColor">
-                        <i
-                          class="fa fa-fw fa-calendar-minus-o text-primary-hr"
-                        ></i>
+                        <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
                         <a>{{ parseT('column_two') | translate }}:</a>
                       </label>
                       <input
@@ -1260,11 +814,7 @@
                         type="date"
                         name="date_end_hotel"
                         class="form-control"
-                        [formControl]="
-                          formTravelManagement.controls[
-                            'date_hotel_out'
-                          ]
-                        "
+                        [formControl]="formTravelManagement.controls['date_hotel_out']"
                         (keyup)="delete('date_end_hotel')"
                       />
                     </div>
@@ -1277,8 +827,7 @@
                     (click)="addHotel(formTravelManagement.value)"
                     [attr.disabled]="
                       formTravelManagement.value.id_hotels == '' ||
-                      formTravelManagement.value.date_hotel_in ==
-                        '' ||
+                      formTravelManagement.value.date_hotel_in == '' ||
                       formTravelManagement.value.date_hotel_out == ''
                         ? true
                         : null
@@ -1289,40 +838,24 @@
                 </div>
               </div>
               <div class="row" style="margin-top: 15px">
-                <div
-                  class="col-12 top-containter"
-                  style="margin-top: 30px"
-                >
-                  <div
-                    class="row justify-content-end"
-                    *ngIf="!showMilenage"
-                  >
+                <div class="col-12 top-containter" style="margin-top: 30px">
+                  <div class="row justify-content-end" *ngIf="!showMilenage">
                     <div class="col-lg-3 col-md-4 col-12">
                       <button
                         type="button"
                         [attr.disabled]="
-                          formTravelManagement.value.id_country ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            '' ||
-                          formTravelManagement.value.id_country ==
-                            '' ||
+                          formTravelManagement.value.id_country == -1 ||
+                          formTravelManagement.value.id_transport == -1 ||
+                          formTravelManagement.value.id_transport == '' ||
+                          formTravelManagement.value.id_country == '' ||
                           formTravelManagement.value.id_state == -1 ||
                           formTravelManagement.value.id_state == '' ||
-                          formTravelManagement.value.date_begin ==
-                            '' ||
-                          formTravelManagement.value.hour_begin ==
-                            '' ||
-                          formTravelManagement.value.id_countryto ==
-                            -1 ||
-                          formTravelManagement.value.id_countryto ==
-                            '' ||
-                          formTravelManagement.value.id_stateto ==
-                            -1 ||
-                          formTravelManagement.value.id_stateto ==
-                            '' ||
+                          formTravelManagement.value.date_begin == '' ||
+                          formTravelManagement.value.hour_begin == '' ||
+                          formTravelManagement.value.id_countryto == -1 ||
+                          formTravelManagement.value.id_countryto == '' ||
+                          formTravelManagement.value.id_stateto == -1 ||
+                          formTravelManagement.value.id_stateto == '' ||
                           formTravelManagement.value.date_end == '' ||
                           formTravelManagement.value.hour_end == ''
                             ? true
@@ -1330,48 +863,30 @@
                         "
                         *ngIf="bnew"
                         class="btn btn-primary btn-block cursor-general"
-                        (click)="
-                          addDestination(formTravelManagement.value)
-                        "
+                        (click)="addDestination(formTravelManagement.value)"
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          parseT('btn_add_trayect') | translate
-                        }}
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{ parseT('btn_add_trayect') | translate }}
                       </button>
                       <button
                         [attr.disabled]="
-                          formTravelManagement.value.id_country ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            '' ||
-                          formTravelManagement.value.id_country ==
-                            '' ||
+                          formTravelManagement.value.id_country == -1 ||
+                          formTravelManagement.value.id_transport == -1 ||
+                          formTravelManagement.value.id_transport == '' ||
+                          formTravelManagement.value.id_country == '' ||
                           formTravelManagement.value.id_state == -1 ||
                           formTravelManagement.value.id_state == '' ||
-                          formTravelManagement.value.id_terminal ==
-                            -1 ||
-                          formTravelManagement.value.id_terminal ==
-                            '' ||
-                          formTravelManagement.value.date_begin ==
-                            '' ||
-                          formTravelManagement.value.hour_begin ==
-                            '' ||
-                          formTravelManagement.value.id_countryto ==
-                            -1 ||
-                          formTravelManagement.value.id_countryto ==
-                            '' ||
-                          formTravelManagement.value.id_stateto ==
-                            -1 ||
-                          formTravelManagement.value.id_stateto ==
-                            '' ||
-                          formTravelManagement.value.id_terminalto ==
-                            -1 ||
-                          formTravelManagement.value.id_terminalto ==
-                            '' ||
+                          formTravelManagement.value.id_terminal == -1 ||
+                          formTravelManagement.value.id_terminal == '' ||
+                          formTravelManagement.value.date_begin == '' ||
+                          formTravelManagement.value.hour_begin == '' ||
+                          formTravelManagement.value.id_countryto == -1 ||
+                          formTravelManagement.value.id_countryto == '' ||
+                          formTravelManagement.value.id_stateto == -1 ||
+                          formTravelManagement.value.id_stateto == '' ||
+                          formTravelManagement.value.id_terminalto == -1 ||
+                          formTravelManagement.value.id_terminalto == '' ||
                           formTravelManagement.value.date_end == '' ||
                           formTravelManagement.value.hour_end == ''
                             ? true
@@ -1379,17 +894,11 @@
                         "
                         *ngIf="bedit"
                         class="btn btn-primary btn-block cursor-general"
-                        (click)="
-                          addDestinationEdit(
-                            formTravelManagement.value
-                          )
-                        "
+                        (click)="addDestinationEdit(formTravelManagement.value)"
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          parseT('btn_add_changes') | translate
-                        }}
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{ parseT('btn_add_changes') | translate }}
                       </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
@@ -1400,43 +909,27 @@
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-fw fa-window-close"></i
-                        >&nbsp;&nbsp;{{
-                          parseT('button_cancel') | translate
-                        }}
+                        <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{ parseT('button_cancel') | translate }}
                       </button>
                     </div>
                   </div>
-                  <div
-                    class="row justify-content-end"
-                    *ngIf="showMilenage"
-                  >
+                  <div class="row justify-content-end" *ngIf="showMilenage">
                     <div class="col-lg-3 col-md-4 col-12">
                       <button
                         type="button"
                         [attr.disabled]="
-                          formTravelManagement.value.id_country ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            '' ||
-                          formTravelManagement.value.id_country ==
-                            '' ||
+                          formTravelManagement.value.id_country == -1 ||
+                          formTravelManagement.value.id_transport == -1 ||
+                          formTravelManagement.value.id_transport == '' ||
+                          formTravelManagement.value.id_country == '' ||
                           formTravelManagement.value.id_state == -1 ||
                           formTravelManagement.value.id_state == '' ||
-                          formTravelManagement.value.date_begin ==
-                            '' ||
-                          formTravelManagement.value.hour_begin ==
-                            '' ||
-                          formTravelManagement.value.id_countryto ==
-                            -1 ||
-                          formTravelManagement.value.id_countryto ==
-                            '' ||
-                          formTravelManagement.value.id_stateto ==
-                            -1 ||
-                          formTravelManagement.value.id_stateto ==
-                            '' ||
+                          formTravelManagement.value.date_begin == '' ||
+                          formTravelManagement.value.hour_begin == '' ||
+                          formTravelManagement.value.id_countryto == -1 ||
+                          formTravelManagement.value.id_countryto == '' ||
+                          formTravelManagement.value.id_stateto == -1 ||
+                          formTravelManagement.value.id_stateto == '' ||
                           formTravelManagement.value.date_end == '' ||
                           formTravelManagement.value.hour_end == '' ||
                           formTravelManagement.value.id_city == '' ||
@@ -1446,71 +939,45 @@
                         "
                         *ngIf="bnew"
                         class="btn btn-primary btn-block cursor-general"
-                        (click)="
-                          addDestination(formTravelManagement.value)
-                        "
+                        (click)="addDestination(formTravelManagement.value)"
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          parseT('btn_add_trayect') | translate
-                        }}
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{ parseT('btn_add_trayect') | translate }}
                       </button>
                       <button
                         [attr.disabled]="
-                          formTravelManagement.value.id_country ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            -1 ||
-                          formTravelManagement.value.id_transport ==
-                            '' ||
-                          formTravelManagement.value.id_country ==
-                            '' ||
+                          formTravelManagement.value.id_country == -1 ||
+                          formTravelManagement.value.id_transport == -1 ||
+                          formTravelManagement.value.id_transport == '' ||
+                          formTravelManagement.value.id_country == '' ||
                           formTravelManagement.value.id_state == -1 ||
                           formTravelManagement.value.id_state == '' ||
-                          formTravelManagement.value.id_terminal ==
-                            -1 ||
-                          formTravelManagement.value.id_terminal ==
-                            '' ||
-                          formTravelManagement.value.date_begin ==
-                            '' ||
-                          formTravelManagement.value.hour_begin ==
-                            '' ||
-                          formTravelManagement.value.id_countryto ==
-                            -1 ||
-                          formTravelManagement.value.id_countryto ==
-                            '' ||
-                          formTravelManagement.value.id_stateto ==
-                            -1 ||
-                          formTravelManagement.value.id_stateto ==
-                            '' ||
-                          formTravelManagement.value.id_terminalto ==
-                            -1 ||
-                          formTravelManagement.value.id_terminalto ==
-                            '' ||
+                          formTravelManagement.value.id_terminal == -1 ||
+                          formTravelManagement.value.id_terminal == '' ||
+                          formTravelManagement.value.date_begin == '' ||
+                          formTravelManagement.value.hour_begin == '' ||
+                          formTravelManagement.value.id_countryto == -1 ||
+                          formTravelManagement.value.id_countryto == '' ||
+                          formTravelManagement.value.id_stateto == -1 ||
+                          formTravelManagement.value.id_stateto == '' ||
+                          formTravelManagement.value.id_terminalto == -1 ||
+                          formTravelManagement.value.id_terminalto == '' ||
                           formTravelManagement.value.date_end == '' ||
                           formTravelManagement.value.hour_end == '' ||
                           formTravelManagement.value.id_city == '' ||
-                          formTravelManagement.value.id_cityto ==
-                            '' ||
-                          formTravelManagement.value.travel_mileage ==
-                            ''
+                          formTravelManagement.value.id_cityto == '' ||
+                          formTravelManagement.value.travel_mileage == ''
                             ? true
                             : null
                         "
                         *ngIf="bedit"
                         class="btn btn-primary btn-block cursor-general"
-                        (click)="
-                          addDestinationEdit(
-                            formTravelManagement.value
-                          )
-                        "
+                        (click)="addDestinationEdit(formTravelManagement.value)"
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{
-                          parseT('btn_add_changes') | translate
-                        }}
+                        <i class="fa fa-fw fa-plus"></i>&nbsp;&nbsp;{{ parseT('btn_add_changes') | translate }}
                       </button>
                     </div>
                     <div class="col-lg-3 col-md-4 col-12">
@@ -1521,10 +988,7 @@
                         data-toggle="collapse"
                         data-target="#collapseTravel"
                       >
-                        <i class="fa fa-fw fa-fw fa-window-close"></i
-                        >&nbsp;&nbsp;{{
-                          parseT('button_cancel') | translate
-                        }}
+                        <i class="fa fa-fw fa-fw fa-window-close"></i>&nbsp;&nbsp;{{ parseT('button_cancel') | translate }}
                       </button>
                     </div>
                   </div>
@@ -1533,30 +997,18 @@
             </div>
           </div>
 
-          <div
-            class="col-12"
-            *ngIf="activate"
-            style="margin-top: 15px"
-          >
+          <div class="col-12" *ngIf="activate" style="margin-top: 15px">
             <h6>
               {{ parseT('comments') | translate }}
             </h6>
-            <ckeditor
-              debounce="100"
-              name="body"
-              [(ngModel)]="comentaryPlus"
-              [ngModelOptions]="{ standalone: true }"
-            >
-            </ckeditor>
+            <ckeditor debounce="100" name="body" [(ngModel)]="comentaryPlus" [ngModelOptions]="{ standalone: true }"> </ckeditor>
           </div>
         </form>
 
         <div
           class="row justify-content-end"
           style="margin-top: 30px"
-          *ngIf="
-            activate_submit && travelProof[0].data[0].data.length > 0
-          "
+          *ngIf="activate_submit && travelProof[0].data[0].data.length > 0"
         >
           <div class="col-lg-3 col-md-4 col-12">
             <button
@@ -1565,17 +1017,10 @@
               class="btn btn-success btn-block cursor-general"
               (click)="newTravel(formTravelManagement.value)"
             >
-              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{
-                parseT('save') | translate
-              }}
+              <i class="fa fa-fw fa-save"></i>&nbsp;&nbsp;{{ parseT('save') | translate }}
             </button>
-            <button
-              type="button"
-              *ngIf="!showSubmit"
-              class="btn btn-warning btn-block"
-            >
-              <i class="fa fa-fw fa-spinner fa-spin"></i
-              >&nbsp;&nbsp;{{ parseT('loading') | translate }}
+            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+              <i class="fa fa-fw fa-spinner fa-spin"></i>&nbsp;&nbsp;{{ parseT('loading') | translate }}
             </button>
           </div>
         </div>

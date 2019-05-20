@@ -39,6 +39,7 @@
     class="form-control"
     [formControl]="forms.controls['date_begin']"
     placeholder="dd/mm/yyyy"
+    (change)="calculateDay()"
   />
 </ng-template>
 <ng-template #date_end>
@@ -47,7 +48,7 @@
     {{ parseT('date_end') | translate }}
     *
   </label>
-  <input type="date" name="date_end" class="form-control" [formControl]="forms.controls['date_end']" placeholder="dd/mm/yyyy" />
+  <input type="date" name="date_end" class="form-control" [formControl]="forms.controls['date_end']" placeholder="dd/mm/yyyy" (change)="calculateDay()"/>
 </ng-template>
 
 <ng-template #modalForms let-modal ng-init="typeCase = formRequests.alias">
