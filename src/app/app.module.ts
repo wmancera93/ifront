@@ -10,7 +10,12 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import {
+  TranslateModule,
+  TranslateLoader,
+  MissingTranslationHandler,
+  MissingTranslationHandlerParams,
+} from '@ngx-translate/core';
 
 // components
 import { AppComponent } from './app.component';
@@ -21,18 +26,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { baseUrl } from '../environments/environment';
 import { Observable } from 'rxjs';
 
+export class MyMissingTranslationHandler implements MissingTranslationHandler {
+  handle({ key }: MissingTranslationHandlerParams) {
+    console.warn('No se encontro la posicion ' + key);
+    return key
+      .replace(/.*\./, '')
+      .replace(/_|-/g, ' ')
+      .replace(/./, x => x.toUpperCase());
+  }
+}
+
 export class CustomLoader implements TranslateLoader {
   constructor(private http: Http) {}
 
   public getTranslation(lang: String): Observable<any> {
-    return this.http
-      .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
-      .map((res: any) => {
-        console.log(
-          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd
-        );
-        return JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
-      });
+    return this.http.get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`).map((res: any) => {
+      console.log(JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd);
+      return JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
+    });
   }
 }
 
@@ -52,15 +63,16 @@ export class CustomLoader implements TranslateLoader {
     HttpModule,
     NgbModule.forRoot(),
     TranslateModule.forRoot({
+      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MyMissingTranslationHandler },
       loader: {
         provide: TranslateLoader,
         /* useFactory: HttpLoaderFactory, */
         useClass: CustomLoader,
-        deps: [HttpClient]
-      }
-    })
+        deps: [HttpClient],
+      },
+    }),
   ],
   providers: [Angular2TokenService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}
