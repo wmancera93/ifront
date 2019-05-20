@@ -14,7 +14,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   public showComponents = false;
@@ -23,6 +23,7 @@ export class AppComponent {
   public heightContenGeneral = 0;
   public dataUser: User = null;
   public isExplorer: boolean;
+  public changesLang: number = 0;
 
   public baseUrl: string;
 
@@ -31,22 +32,28 @@ export class AppComponent {
     public mainService: MainService,
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService,
-    public translate: TranslateService
+    public translate: TranslateService,
   ) {
     const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');
 
     translate.onLangChange.subscribe(({ lang }: LangChangeEvent) => {
-      localStorage.setItem('lang', lang);
-      this.tokenServiceInit(lang);
-      this.router.routeReuseStrategy.shouldReuseRoute = function(){return false;};
+      console.log(lang);
+      if (this.changesLang !== 0) {
+        localStorage.setItem('lang', lang);
+        this.tokenServiceInit(lang);
+        this.router.routeReuseStrategy.shouldReuseRoute = function() {
+          return false;
+        };
 
-      this.router.navigateByUrl(this.router.url + '?')
-        .then(() => {
+        this.router.navigateByUrl(this.router.url + '?').then(() => {
           this.router.navigated = false;
           this.router.navigate([this.router.url]);
         });
+      } else {
+        this.changesLang++;
+      }
     });
 
     translate.use(languaje.match(/es|en/) ? languaje : 'es');
@@ -56,9 +63,7 @@ export class AppComponent {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[
-          url.split('-')[0].split('/').length - 1
-        ];
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       }
     } else {
       ambient = 'development';
@@ -94,8 +99,7 @@ export class AppComponent {
           event.urlAfterRedirects === '/ihr/login' ||
           event.urlAfterRedirects === '/ihr/reset_account' ||
           event.urlAfterRedirects === '/ihr/locked_screen' ||
-          event.urlAfterRedirects.split('?')[0] ===
-            '/ihr/confirm_reset_account' ||
+          event.urlAfterRedirects.split('?')[0] === '/ihr/confirm_reset_account' ||
           event.urlAfterRedirects === '/ihr/error'
         ) {
           this.showComponents = false;
@@ -115,7 +119,7 @@ export class AppComponent {
     });
   }
 
-  tokenServiceInit(languaje){
+  tokenServiceInit(languaje) {
     this.tokenService.init({
       apiBase: this.baseUrl,
       apiPath: 'api/v2/' + languaje,
@@ -129,31 +133,19 @@ export class AppComponent {
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json'
-        }
-      }
+          Accept: 'application/json',
+        },
+      },
     });
   }
 
   ngOnInit() {
     if (localStorage.getItem('enterprise') !== null) {
       this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-      document.documentElement.style.setProperty(
-        `--img-header-login`,
-        `url(` + this.dataEnterprise.background_login.url + `)`
-      );
-      document.documentElement.style.setProperty(
-        `--btn-primary`,
-        this.dataEnterprise.primary_color
-      );
-      document.documentElement.style.setProperty(
-        `--btn-primary-hover`,
-        this.dataEnterprise.body_text
-      );
-      document.documentElement.style.setProperty(
-        `--primary`,
-        this.dataEnterprise.primary_color
-      );
+      document.documentElement.style.setProperty(`--img-header-login`, `url(` + this.dataEnterprise.background_login.url + `)`);
+      document.documentElement.style.setProperty(`--btn-primary`, this.dataEnterprise.primary_color);
+      document.documentElement.style.setProperty(`--btn-primary-hover`, this.dataEnterprise.body_text);
+      document.documentElement.style.setProperty(`--primary`, this.dataEnterprise.primary_color);
 
       const link = document.createElement('link'),
         oldLink = document.getElementById('fa_icon');
@@ -170,8 +162,10 @@ export class AppComponent {
 
   validateBrowser() {
     this.isExplorer = /msie\s|trident\/|edge\//i.test(window.navigator.userAgent);
-    if (this.isExplorer){
-      alert("Recuerde que para una mejor funcionalidad del portal se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari")
+    if (this.isExplorer) {
+      alert(
+        'Recuerde que para una mejor funcionalidad del portal se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari',
+      );
     }
   }
 }
