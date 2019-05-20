@@ -7,10 +7,13 @@
   role="dialog"
   aria-labelledby="exampleModalLabel"
   aria-hidden="true"
-  class="position-absolute"
+  class="position-absolute popover fade bs-popover-right"
+  [ngClass]="{ show: infoTooltip != '' }"
+  style="pointer-events: none;"
+  *ngIf="infoTooltip != ''"
 >
-  <div class="modal-dialog bgn-tooltip" role="document">
-    <div class="modal-content-tooltip" *ngIf="infoTooltip != ''">
+  <div class="bgn-tooltip" role="document">
+    <div class="modal-content-tooltip">
       <h5 class="font-controls-login" id="exampleModalLabel">
         {{ infoTooltip }}
       </h5>
