@@ -5,6 +5,7 @@ import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-form-housing',
@@ -186,7 +187,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
             this.choose_room = false;
           }
           if (this.choose_room) {
-            this.getBeedRoms();
+            this.getBeedRoms(value);
           }
           return null;
         },
@@ -216,9 +217,22 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     /* this.subscription.unsubscribe(); */
   }
 
-  getBeedRoms() {
+  getBeedRoms(id) {
     this.beds = [];
     this.loadingRoms = true;
+    this.requestsRhService.getHousingListBeds(id).subscribe((res: any) => {
+      this.loadingRoms = false;
+      this.beds = res.data;
+    });(error: any) => {
+      this.setModalState.emit(false);
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: error.json().errors.toString(),
+        confirmation: true,
+        typeConfirmation: 'returnEditHousing',
+      } as Alerts);
+    };
     new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(
@@ -235,7 +249,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   handleChooseRoom(value) {
     this.choose_room = value;
     if (value) {
-      this.getBeedRoms();
+      this.getBeedRoms(this.forms.housing.value);
     } else {
       this.forms.bedRom.setValue('');
     }

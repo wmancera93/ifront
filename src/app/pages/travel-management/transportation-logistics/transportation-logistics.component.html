@@ -228,4 +228,4 @@
     </div>
   </div>
 </div>
-<app-new-transport [modalForm]="modalForm.asObservable()"></app-new-transport>
+<app-new-transport [modalForm]="modalForm.asObservable()" (formServiceChildTransport)="formServicePatherTransportation($event)"></app-new-transport>

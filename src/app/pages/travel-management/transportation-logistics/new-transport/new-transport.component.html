@@ -112,76 +112,79 @@
             </ng-template>
           </div>
         </div>
-        <div class="col-12 col-lg-10 col-xl-11" *ngIf="!readOnlyFleet">
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-sm-6 text-truncate">
-                <label class="font-title-general">
-                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                  {{ parseT('origin') | translate }} *
-                </label>
-                <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.origin" />
-              </div>
-              <div class="col-12 col-sm-6 text-truncate">
-                <label class="font-title-general">
-                  <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
-                  {{ parseT('destiny') | translate }} *
-                </label>
-                <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.destiny" />
-              </div>
-              <div class="col-12 col-sm-6 text-truncate">
-                <label class="font-title-general">
-                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
-                  {{ parseT('begin_date') | translate }} *
-                </label>
-                <input
-                  type="datetime-local"
-                  class="form-control"
-                  [readonly]="readOnlyFleet"
-                  [formControl]="forms.date_time_departure"
-                />
-              </div>
-              <div class="col-12 col-sm-6 text-truncate">
-                <label class="font-title-general">
-                  <i class="fa fa-fw fa-clock-o text-primary-hr"></i>
-                  {{ parseT('time') | translate }} *
-                </label>
-                <input
-                  type="number"
-                  class="form-control"
-                  [readonly]="readOnlyFleet"
-                  [formControl]="forms.durationTrayect"
-                  placeholder="Ingresa la duracion trayectos"
-                />
+        <ng-container *ngIf="journeys.length < 2">
+          <div class="col-12 col-lg-10 col-xl-11" *ngIf="!readOnlyFleet">
+            <div class="container">
+              <div class="row">
+                <div class="col-12 col-sm-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    {{ parseT('origin') | translate }} *
+                  </label>
+                  <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.origin" />
+                </div>
+                <div class="col-12 col-sm-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                    {{ parseT('destiny') | translate }} *
+                  </label>
+                  <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.destiny" />
+                </div>
+                <div class="col-12 col-sm-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                    {{ parseT('begin_date') | translate }} *
+                  </label>
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    [readonly]="readOnlyFleet"
+                    [formControl]="forms.date_time_departure"
+                    (change)="validateDayTrayect(forms.date_time_departure)"
+                  />
+                </div>
+                <div class="col-12 col-sm-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-clock-o text-primary-hr"></i>
+                    {{ parseT('time') | translate }} *
+                  </label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    [readonly]="readOnlyFleet"
+                    [formControl]="forms.durationTrayect"
+                    placeholder="Ingresa la duracion trayectos"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf="!readOnlyFleet">
-          <div class="w-100 my-auto">
-            <button
-              type="button"
-              class="btn btn-success btn-block cursor-general mt-4 w-100"
-              (click)="addTrayect()"
-              [attr.disabled]="
-                forms.origin.value == '' ||
-                forms.destiny.value == '' ||
-                forms.date_time_departure.value == '' ||
-                forms.durationTrayect.value == ''
-                  ? true
-                  : null
-              "
-            >
-              <i class=" fa fa-plus"></i>
-            </button>
+          <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf="!readOnlyFleet">
+            <div class="w-100 my-auto">
+              <button
+                type="button"
+                class="btn btn-success btn-block cursor-general mt-4 w-100"
+                (click)="addTrayect()"
+                [attr.disabled]="
+                  forms.origin.value == '' ||
+                  forms.destiny.value == '' ||
+                  forms.date_time_departure.value == '' ||
+                  forms.durationTrayect.value == ''
+                    ? true
+                    : null
+                "
+              >
+                <i class=" fa fa-plus"></i>
+              </button>
+            </div>
           </div>
-        </div>
+        </ng-container>
       </div>
     </div>
   </div>
 </ng-template>
 <ng-template #modalForms let-modal ng-init="typeCase = formRequests.id_activity">
-  <div class="modal-content">
+  <div class="modal-content" [ngClass]="{ 'd-none': !actuallyModalState }">
     <div class="modal-header borderLine-title row-hr justify-content-center">
       <div class="col-12 col-lg-10 text-center">
         <h4 class="modal-title titleColor text-shadow">
@@ -234,7 +237,7 @@
             </button>
           </div>
           <div class="col-4">
-            <div class="btn btn-primary text-center btn-block" (click)="modalActions.close()">
+            <div class="btn btn-primary text-center btn-block" (click)="ngbModalRefTrans.close()">
               <h6>{{ parseT('btn_close') | translate }}</h6>
             </div>
           </div>

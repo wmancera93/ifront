@@ -44,8 +44,9 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.alert.getActionConfirm().subscribe((data: any) => {
         if (data === 'continueDelete') {
-          this.transportationLogisticsService.deleteFleet(this.id_fleets).subscribe((data: any) => {});
-          this.getData();
+          this.transportationLogisticsService.deleteFleet(this.id_fleets).subscribe((result: any) => {
+            this.getData();
+          });
         }
       }),
     );
@@ -59,6 +60,12 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getData();
+  }
+
+  formServicePatherTransportation(res) {
+    if (res.success) {
+      this.getData();
+    }
   }
 
   returnBack() {

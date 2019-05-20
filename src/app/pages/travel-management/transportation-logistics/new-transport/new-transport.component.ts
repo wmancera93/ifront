@@ -1,15 +1,16 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { Observable } from 'rxjs';
 import { TrasportationForm } from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
 import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
+import { Alerts } from '../../../../models/common/alerts/alerts';
 
 @Component({
   selector: 'app-new-transport',
@@ -19,8 +20,21 @@ import { TransportationLogisticsService } from '../../../../services/travel-mana
 export class NewTransportComponent implements OnInit, OnDestroy {
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
+
+  modalActions: { close: Function; open: Function } = {
+    close: () => {
+      this.actuallyModalState = false;
+    },
+    open: () => {
+      this.actuallyModalState = true;
+      document.body.style.overflow = 'hidden';
+    },
+  };
+
+  @Output() formServiceChildTransport: EventEmitter<any> = new EventEmitter();
+
   @Input() modalForm: Observable<any>;
-  modalActions: { close: Function } = { close: () => {} };
+
   public formRequests: TypesRequests = null;
   public showSubmit = false;
   public form: any;
@@ -30,13 +44,17 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public modal;
   public isNew: boolean;
   public idVehicle: Number | String;
+  public id_journey: string;
   public modalState = true;
-
+  public actuallyModalState = true;
   public journeys: any[] = [];
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
   private modalFormSubscription: any;
+  public today: any;
+  public diffDays: number;
+  public ngbModalRefTrans: NgbModalRef;
 
   get forms() {
     return this.form.controls;
@@ -58,6 +76,15 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public transportationLogisticsService: TransportationLogisticsService,
   ) {
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'returnCreateFleet' || data === 'continueCreateTrayect') {
+        this.modalActions.open();
+      }
+      if (data === 'continueEdit') {
+        this.transportationLogisticsService.deleteJourney(this.id_journey);
+        this.modalActions.open();
+      }
+    });
 
     this.servicesList = [{ id: 1, name: 'General' }, { id: 2, name: 'Especial' }];
 
@@ -107,6 +134,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           this.idVehicle = id;
           this.getTrayects(this.idVehicle);
         }
+
         const { company, type_service } = isNew ? { company: '', type_service: '' } : (form as any);
         this.form = this.fb.group({
           vehicle_plate: [plate, required],
@@ -121,14 +149,12 @@ export class NewTransportComponent implements OnInit, OnDestroy {
           durationTrayect: [''],
         });
 
-        const modal = this.modalService.open(this.modalTemplate, {
+        this.ngbModalRefTrans = this.modalService.open(this.modalTemplate, {
           size: 'lg',
           windowClass: 'modal-md-personalized modal-dialog-scroll',
           centered: true,
+          backdrop: 'static',
         });
-        this.modalActions.close = () => {
-          modal.close();
-        };
         document.getElementById('bodyGeneral').removeAttribute('style');
       }
     });
@@ -164,8 +190,28 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               })
               .subscribe(data => {
                 this.showSubmit = false;
-                this.modalActions.close();
+                if (data.success) {
+                  this.modalActions.close();
+                  this.alert.setAlert({
+                    type: 'success',
+                    title: 'Transacción Exitosa',
+                    message: 'La flota fue creada con exito',
+                    confirmation: false,
+                    typeConfirmation: '',
+                  } as Alerts);
+                }
+                this.formServiceChildTransport.emit({ success: true });
               });
+            (error: any) => {
+              this.modalActions.close();
+              this.alert.setAlert({
+                type: 'danger',
+                title: 'Error',
+                message: error.json().errors.toString(),
+                confirmation: true,
+                typeConfirmation: 'returnCreateFleet',
+              } as Alerts);
+            };
           } else {
             this.transportationLogisticsService
               .editFleet(this.idVehicle, {
@@ -222,9 +268,31 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   }
 
   removeTrayect(id) {
+    this.id_journey = id;
     this.journeys.splice(this.journeys.findIndex(filter => filter.id === id), 1);
     if (!this.isNew) {
-      this.transportationLogisticsService.deleteJourney(id);
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'warning',
+        title: 'Advertencia',
+        message: '¿Desea eliminar el trayecto?',
+        confirmation: true,
+        typeConfirmation: 'continueEdit',
+      } as Alerts);
+    }
+  }
+
+  validateDayTrayect(form: AbstractControl) {
+    if (new Date() > new Date(form.value)) {
+      this.modalActions.close();
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: 'Solo es posible realizar trayectos a fechas futuras',
+        confirmation: true,
+        typeConfirmation: 'continueCreateTrayect',
+      } as Alerts);
+      form.setValue('');
     }
   }
 }
