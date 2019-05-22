@@ -48,7 +48,14 @@
     {{ parseT('date_end') | translate }}
     *
   </label>
-  <input type="date" name="date_end" class="form-control" [formControl]="forms.controls['date_end']" placeholder="dd/mm/yyyy" (change)="calculateDay()"/>
+  <input
+    type="date"
+    name="date_end"
+    class="form-control"
+    [formControl]="forms.controls['date_end']"
+    placeholder="dd/mm/yyyy"
+    (change)="calculateDay()"
+  />
 </ng-template>
 
 <ng-template #modalForms let-modal ng-init="typeCase = formRequests.alias">
@@ -79,6 +86,39 @@
             </div>
             <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_end')">
               <ng-template [ngTemplateOutlet]="date_end"></ng-template>
+            </div>
+            <div class="col-12">
+              <div class="form-check text-center">
+                <div class="d-block">
+                  ¿El pago es por nomina?
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    type="radio"
+                    name="radio-choose-room"
+                    id="radio-yes"
+                    class="custom-control-input"
+                    [checked]="forms.controls.prepayment.value"
+                    (click)="forms.controls.prepayment.setValue(true)"
+                  />
+                  <label class="custom-control-label" for="radio-yes">
+                    Si
+                  </label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    type="radio"
+                    name="radio-choose-room"
+                    id="radio-no"
+                    class="custom-control-input"
+                    [checked]="!forms.controls.prepayment.value"
+                    (click)="forms.controls.prepayment.setValue(false)"
+                  />
+                  <label class="custom-control-label" for="radio-no">
+                    No
+                  </label>
+                </div>
+              </div>
             </div>
           </ng-container>
         </div>
@@ -114,7 +154,7 @@
         </div>
         <div>
           <app-form-transportation
-            *ngIf="['TRANS', 'TRANS_BEN', 'TRANS_TER'].includes(formRequests.alias) ? true : false"
+            *ngIf="['TRAN', 'TRNB', 'TRNT'].includes(formRequests.alias) ? true : false"
             [formRequests]="formRequests"
             (submit)="newRequest($event)"
             [showSubmit]="showSubmit"
@@ -124,7 +164,7 @@
         </div>
         <div>
           <app-form-housing
-            *ngIf="['HOUS', 'HOUSING_THIRD'].includes(formRequests.alias) ? true : false"
+            *ngIf="['HOUS', 'HOUT'].includes(formRequests.alias) ? true : false"
             [formRequests]="formRequests"
             (submit)="newRequest($event)"
             [showSubmit]="showSubmit"

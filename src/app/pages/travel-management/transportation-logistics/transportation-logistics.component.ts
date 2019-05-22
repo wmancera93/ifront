@@ -52,6 +52,12 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
     );
   }
 
+  listenChild({ success }) {
+    if (success) {
+      this.getData();
+    }
+  }
+
   getData() {
     this.transportationLogisticsService.getIndexTransportation().subscribe((data: any) => {
       this.fleets = this.sortByNumber(data.data);

@@ -20,7 +20,7 @@
           <i class="fa fa-fw fa-users text-primary-hr"></i>
           {{ parseT('company') | translate }} *
         </label>
-        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.company" />
+        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.transporter" />
       </div>
       <div class="col-12 col-md-6 text-truncate">
         <label class="font-title-general">
@@ -34,12 +34,7 @@
           <i class="fa fa-fw fa-lightbulb-o text-primary-hr"></i>
           {{ parseT('service') | translate }} *
         </label>
-        <select class="form-control" [attr.disabled]="readOnlyFleet ? true : null" [formControl]="forms.type_service">
-          <option value="">{{ parseT('select') | translate }}</option>
-          <option *ngFor="let service of servicesList" [value]="service.id">
-            {{ service.name }}
-          </option>
-        </select>
+        <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.service_type" />
       </div>
       <div class="col-12 col-md-6 top-containter">
         <label class="font-title-general">
@@ -73,6 +68,9 @@
                     <th class="text-center">
                       {{ parseT('time') | translate }}
                     </th>
+                    <th class="text-center">
+                      Sillas reservadas
+                    </th>
                     <th class="text-center" *ngIf="!readOnlyFleet">
                       {{ parseT('erase') | translate }}
                     </th>
@@ -91,6 +89,9 @@
                     </td>
                     <td>
                       {{ journey.durationTrayect }}
+                    </td>
+                    <td>
+                      {{ journey.reserved_chairs }}
                     </td>
                     <td width="10px" *ngIf="!readOnlyFleet">
                       <button
@@ -156,6 +157,13 @@
                     placeholder="Ingresa la duracion trayectos"
                   />
                 </div>
+                <div class="col-12 col-sm-6 text-truncate">
+                  <label class="font-title-general">
+                    <i class="fa fa-fw fa-flag-checkered text-primary-hr"></i>
+                    Puestos reservados
+                  </label>
+                  <input type="number" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.reserved_chairs" />
+                </div>
               </div>
             </div>
           </div>
@@ -169,7 +177,8 @@
                   forms.origin.value == '' ||
                   forms.destiny.value == '' ||
                   forms.date_time_departure.value == '' ||
-                  forms.durationTrayect.value == ''
+                  forms.durationTrayect.value == '' ||
+                  forms.reserved_chairs.value == ''
                     ? true
                     : null
                 "

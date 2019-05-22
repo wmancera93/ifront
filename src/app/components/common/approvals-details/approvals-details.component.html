@@ -267,7 +267,7 @@
                                 style="height: auto !important;"
                               ></textarea>
                             </div>
-                            <ng-container *ngIf="approvals[0].approvers_to_json.is_last">
+                            <!-- <ng-container *ngIf="approvals[0].approvers_to_json.is_last">
                               <div class="col-6">
                                 Inicio validez*
                                 <input type="date" class="form-control" [(ngModel)]="validity_begin" />
@@ -280,7 +280,7 @@
                                 Fecha de pago*
                                 <input type="date" class="form-control" [(ngModel)]="date_pay" />
                               </div>
-                            </ng-container>
+                            </ng-container> -->
                             <div class="col-md-6 col-12 mt-4">
                               <button type="button" *ngIf="showSubmit" class="btn btn-success btn-block" (click)="saveApproval()">
                                 <i class="fa fa-fw fa-floppy-o"></i>{{ parseT('save') | translate }}

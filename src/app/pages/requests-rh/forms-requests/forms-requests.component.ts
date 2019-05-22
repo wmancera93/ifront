@@ -31,7 +31,6 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
-
   public forms: any;
   public detectLetter = ' ';
   public today: any;
@@ -57,6 +56,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         days_request: true,
       },
       VACA: {
+        prepayment: true,
         days_available: true,
       },
     } as TypesRequest,
@@ -123,7 +123,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         };
         this.forms = fb.group({
           request_type_id: this.formRequests.id,
-          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time']),
+          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time', 'prepayment']),
           date_end: [
             '',
             (control: AbstractControl) => {
@@ -307,15 +307,6 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   }
 
   calculateDay() {
-    debugger
-    const fecha = new Date();
-    this.today =
-      fecha.getFullYear().toString() +
-      '/' +
-      (fecha.getMonth().toString().length == 1 ? '0' + (fecha.getMonth() + 1).toString() : (fecha.getMonth() + 1).toString()) +
-      '/' +
-      (fecha.getDate().toString().length == 1 ? '0' + fecha.getDate().toString() : fecha.getDate().toString());
-
     const { date_begin, date_end } = this.forms.controls;
 
     let dateBegin = date_begin.value === ' ' ? null : new Date(date_begin.value);
@@ -342,16 +333,16 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       dateBegin = null;
       dateEnd = null;
     }
-    if(this.diffDays == 0){
-      this.modalActions.close();
-      this.alert.setAlert({
-        type: 'warning',
-        title: 'Advertencia',
-        message: 'No es posible solicitar un dia de vacaciones',
-        confirmation: false,
-        typeConfirmation: '',
-      } as Alerts);
-    }
+    // if (this.diffDays < 6) {
+    //   this.modalActions.close();
+    //   this.alert.setAlert({
+    //     type: 'warning',
+    //     title: 'Advertencia',
+    //     message: 'No es posible solicitar menos de seis (6) dias de vacaciones',
+    //     confirmation: false,
+    //     typeConfirmation: '',
+    //   } as Alerts);
+    // }
     if (dateBegin !== null && this.formRequests.maximum_days === 1) {
       date_end.value = date_begin.value;
     }

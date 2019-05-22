@@ -100,9 +100,6 @@ export class ApprovalsDetailsComponent implements OnInit {
         request_id: this.approvals[0].ticket,
         answer: this.switch,
         description: this.description,
-        date_begin:this.validity_begin,
-        date_end:this.validity_end,
-        payment_day:this.date_pay,
       })
       .subscribe(
         (data: any) => {

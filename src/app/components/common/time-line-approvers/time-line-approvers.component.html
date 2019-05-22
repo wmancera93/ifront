@@ -75,6 +75,20 @@
                                   <span style="font-weight: 100 !important">{{ detailRequets[0].request.days_request }}</span>
                                 </p>
                               </div>
+                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.work_days !== null">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa-address-card"></i>
+                                  Dias habiles solicitados:
+                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.work_days }}</span>
+                                </p>
+                              </div>
+                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.non_work_days !== null">
+                                <p class="font-title-general">
+                                  <i class="font-color-default fa fa-fw fa-gamepad"></i>
+                                  Dias no habiles solicitados:
+                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.non_work_days }}</span>
+                                </p>
+                              </div>
                               <div class="col-12 text-md-left text-center" *ngIf="fileSupport !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-paperclip"></i>

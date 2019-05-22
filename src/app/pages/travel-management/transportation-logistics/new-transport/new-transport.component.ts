@@ -1,9 +1,9 @@
-import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, OnDestroy, Input, EventEmitter, Output } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import uuid from 'uuid';
 import { FormsRequestsService } from '../../../../services/shared/forms-requests/forms-requests.service';
 import { TypesRequests } from '../../../../models/common/requests-rh/requests-rh';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { TrasportationForm } from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
 import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-new-transport',
@@ -18,6 +19,8 @@ import { Alerts } from '../../../../models/common/alerts/alerts';
   styleUrls: ['./new-transport.component.css'],
 })
 export class NewTransportComponent implements OnInit, OnDestroy {
+  @Output() submit: EventEmitter<any> = new EventEmitter();
+
   @ViewChild('modalForms')
   public modalTemplate: TemplateRef<any>;
 
@@ -51,10 +54,10 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
-  private modalFormSubscription: any;
   public today: any;
   public diffDays: number;
   public ngbModalRefTrans: NgbModalRef;
+  public subscriptions: ISubscription[] = [];
 
   get forms() {
     return this.form.controls;
@@ -87,81 +90,77 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     });
 
     this.servicesList = [{ id: 1, name: 'General' }, { id: 2, name: 'Especial' }];
-
-    this.form = this.fb.group({
-      vehicle_plate: [''],
-      driver: [''],
-      company: [''],
-      number_positions: [''],
-      type_service: [''],
-      phone_driver: [''],
-      origin: [''],
-      destiny: [''],
-      date_time_departure: [''],
-      durationTrayect: [''],
-    });
   }
 
   getTrayects(id) {
-    this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
-      this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
-        const dateTimeStart = new Date(date_time_start);
-        const durationTrayect = new Date(date_time_end || date_time_start).getHours();
-        return {
-          id,
-          origin: origin_place,
-          destiny: destination_place,
-          date_time_departure: dateTimeStart.toLocaleString(),
-          durationTrayect: dateTimeStart.getHours() - durationTrayect,
-        };
-      });
-    });
+    this.subscriptions.push(
+      this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
+        this.journeys = res.data.trips_journeys.map(
+          ({ id, origin_place, destination_place, date_time_end, date_time_start, reserved_chairs }) => {
+            const dateTimeStart = new Date(date_time_start);
+            const durationTrayect = new Date(date_time_end || date_time_start).getHours();
+            return {
+              id,
+              origin: origin_place,
+              destiny: destination_place,
+              date_time_departure: dateTimeStart.toLocaleString(),
+              durationTrayect: dateTimeStart.getHours() - durationTrayect,
+              reserved_chairs: reserved_chairs,
+            };
+          },
+        );
+      }),
+    );
   }
 
   ngOnInit() {
-    this.modalFormSubscription = this.modalForm.subscribe((options: TrasportationForm) => {
-      const { open, form, readOnly = false, isNew = true } = options;
-      this.stepActive = 0;
-      this.readOnlyFleet = readOnly;
-      this.isNew = isNew;
-      if (open) {
-        this.journeys = [];
-        const { plate, total_seats: number_positions, id, phone_driver, driver_name: driver } = isNew
-          ? { plate: '', total_seats: '', phone_driver: '', driver_name: '', id: '' }
-          : (form as any);
-        const { required } = Validators;
-        if (!isNew) {
-          this.idVehicle = id;
-          this.getTrayects(this.idVehicle);
+    this.subscriptions.push(
+      this.modalForm.subscribe((options: TrasportationForm) => {
+        const { open, form, readOnly = false, isNew = true } = options;
+        this.stepActive = 0;
+        this.readOnlyFleet = readOnly;
+        this.isNew = isNew;
+        if (open) {
+          this.journeys = [];
+          const { plate, total_seats: number_positions, id, phone_driver, driver_name: driver } = isNew
+            ? { plate: '', total_seats: '', phone_driver: '', driver_name: '', id: '' }
+            : (form as any);
+          const { required } = Validators;
+          if (!isNew) {
+            this.idVehicle = id;
+            this.getTrayects(this.idVehicle);
+          }
+
+          const { transporter, service_type } = isNew ? { transporter: '', service_type: '' } : (form as any);
+          this.form = this.fb.group({
+            vehicle_plate: [plate, required],
+            driver: [driver, required],
+            transporter: [transporter, required],
+            number_positions: [number_positions, required],
+            service_type: [service_type, required],
+            phone_driver: [phone_driver, required],
+            origin: [''],
+            destiny: [''],
+            date_time_departure: [''],
+            durationTrayect: [''],
+            reserved_chairs: [''],
+          });
+
+          this.ngbModalRefTrans = this.modalService.open(this.modalTemplate, {
+            size: 'lg',
+            windowClass: 'modal-md-personalized modal-dialog-scroll',
+            centered: true,
+            backdrop: 'static',
+          });
+          this.actuallyModalState = true;
+          document.getElementById('bodyGeneral').removeAttribute('style');
         }
-
-        const { company, type_service } = isNew ? { company: '', type_service: '' } : (form as any);
-        this.form = this.fb.group({
-          vehicle_plate: [plate, required],
-          driver: [driver, required],
-          company: [company, required],
-          number_positions: [number_positions, required],
-          type_service: [type_service, required],
-          phone_driver: [phone_driver, required],
-          origin: [''],
-          destiny: [''],
-          date_time_departure: [''],
-          durationTrayect: [''],
-        });
-
-        this.ngbModalRefTrans = this.modalService.open(this.modalTemplate, {
-          size: 'lg',
-          windowClass: 'modal-md-personalized modal-dialog-scroll',
-          centered: true,
-          backdrop: 'static',
-        });
-        document.getElementById('bodyGeneral').removeAttribute('style');
-      }
-    });
+      }),
+    );
   }
 
   ngOnDestroy(): void {
-    this.modalFormSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   newRequest(model) {
@@ -192,6 +191,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
                 this.showSubmit = false;
                 if (data.success) {
                   this.modalActions.close();
+                  this.ngbModalRefTrans.close();
                   this.alert.setAlert({
                     type: 'success',
                     title: 'Transacción Exitosa',
@@ -218,8 +218,9 @@ export class NewTransportComponent implements OnInit, OnDestroy {
                 ...this.form.value,
                 trayects: this.journeys,
               })
-              .subscribe(data => {
+              .subscribe(() => {
                 this.showSubmit = false;
+                this.submit.emit({ success: true });
                 this.modalActions.close();
               });
           }
@@ -235,7 +236,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   }
 
   addTrayect() {
-    const { origin, destiny, date_time_departure, durationTrayect } = this.form.controls;
+    const { origin, destiny, date_time_departure, durationTrayect, reserved_chairs } = this.form.controls;
     const id = uuid.v4();
     if (this.isNew) {
       this.journeys.push({
@@ -243,12 +244,14 @@ export class NewTransportComponent implements OnInit, OnDestroy {
         destiny: destiny.value,
         date_time_departure: date_time_departure.value,
         durationTrayect: durationTrayect.value,
+        reserved_chairs: reserved_chairs.value,
         id,
       });
       origin.setValue('');
       destiny.setValue('');
       date_time_departure.setValue('');
       durationTrayect.setValue('');
+      reserved_chairs.setValue('');
     } else {
       this.transportationLogisticsService
         .createMoreTrayects(this.idVehicle, {
@@ -258,10 +261,11 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               destiny: destiny.value,
               date_time_departure: date_time_departure.value,
               durationTrayect: durationTrayect.value,
+              reserved_chairs: reserved_chairs.value,
             },
           ],
         })
-        .subscribe(res => {
+        .subscribe(() => {
           this.getTrayects(this.idVehicle);
         });
     }
