@@ -70,13 +70,13 @@ export class NewTransportComponent implements OnInit, OnDestroy {
       this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
         this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
           const dateTimeStart = new Date(date_time_start);
-          const durationTrayect = new Date(date_time_end || date_time_start).getHours();
+          const durationTrayect = new Date(date_time_end || date_time_start);
           return {
             id,
             origin: origin_place,
             destiny: destination_place,
             date_time_departure: dateTimeStart.toLocaleString(),
-            durationTrayect: dateTimeStart.getHours() - durationTrayect,
+            durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
           };
         });
       }),
