@@ -31,10 +31,9 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
-
   public forms: any;
   public detectLetter = ' ';
-
+  public today: any;
   public showTime = true;
   public showDate = false;
   public modalState = true;
@@ -57,6 +56,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         days_request: true,
       },
       VACA: {
+        prepayment: true,
         days_available: true,
       },
     } as TypesRequest,
@@ -123,7 +123,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         };
         this.forms = fb.group({
           request_type_id: this.formRequests.id,
-          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time']),
+          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time', 'prepayment']),
           date_end: [
             '',
             (control: AbstractControl) => {
@@ -316,12 +316,13 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       this.diffDays = dateEnd.getDate() - dateBegin.getDate();
     }
     if (this.diffDays < 0) {
+      this.modalActions.close();
       this.lowerDate = true;
       const alertDataWrong: Alerts[] = [
         {
           type: 'danger',
           title: 'Error',
-          message: this.t('message_alert_two_ts'),
+          message: this.t('message_alert_one_ts'),
           confirmation: false,
         },
       ];
@@ -332,6 +333,16 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       dateBegin = null;
       dateEnd = null;
     }
+    // if (this.diffDays < 6) {
+    //   this.modalActions.close();
+    //   this.alert.setAlert({
+    //     type: 'warning',
+    //     title: 'Advertencia',
+    //     message: 'No es posible solicitar menos de seis (6) dias de vacaciones',
+    //     confirmation: false,
+    //     typeConfirmation: '',
+    //   } as Alerts);
+    // }
     if (dateBegin !== null && this.formRequests.maximum_days === 1) {
       date_end.value = date_begin.value;
     }

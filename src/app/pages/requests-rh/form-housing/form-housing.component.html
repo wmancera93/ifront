@@ -3,23 +3,18 @@
     <form [formGroup]="form" class="row align-content-center justify-content-center text-white">
       <div class="col-12">
         <div class="row">
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_type')">
+          <div class="col-12 top-containter" *ngIf="formState('name_thrid')">
             <label class="titleColor">
-              <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-              {{ parseT('document_type') | translate }} *
+              <i class="fa fa-fw fa-user-o text-primary-hr"></i>
+              Nombre*
             </label>
-            <select class="form-control" [formControl]="forms.document_type">
-              <option value="">Seleccione</option>
-              <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
-                {{ identificationType.name }}
-              </option>
-            </select>
+            <input type="text" class="form-control" [formControl]="forms.nameThird" />
           </div>
 
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_type')">
             <label class="titleColor">
               <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-              {{ parseT('document_type') | translate }} *
+              Tipo de identificación*
             </label>
             <select class="form-control" [formControl]="forms.document_type">
               <option value="">Seleccione</option>
@@ -31,40 +26,13 @@
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_number')">
             <label class="titleColor">
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-              {{ parseT('document_number') | translate }} *
+              Número de identificación*
             </label>
-            <input type="text" class="form-control" [formControl]="forms.document_number" />
+            <input type="number" class="form-control" [formControl]="forms.numberIdThrid" />
           </div>
-          <ng-container>
-            <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_type')">
-              <label class="titleColor">
-                <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-                {{ parseT('document_type') | translate }} *
-              </label>
-              <select class="form-control" [formControl]="forms.document_type">
-                <option value="">Seleccione</option>
-                <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
-                  {{ identificationType.name }}
-                </option>
-              </select>
-            </div>
-            <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_type')">
-              <label class="titleColor">
-                <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-                {{ parseT('document_type') | translate }} *
-              </label>
-              <select class="form-control" [formControl]="forms.document_type">
-                <option value="">Seleccione</option>
-                <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
-                  {{ identificationType.name }}
-                </option>
-              </select>
-            </div>
-          </ng-container>
-
           <div class="col-12 top-containter" *ngIf="formState('housing')">
             <label>
-              <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+              <i class="fa fa-fw fa-home text-primary-hr"></i>
               {{ parseT('housing_form') | translate }} *
             </label>
             <select class="form-control" [formControl]="forms.housing" (change)="choose_room ? getBeedRoms() : null">
@@ -76,14 +44,14 @@
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('arrival_date')">
             <label>
-              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              <i class="fa fa-fw fa-calendar-plus-o text-primary-hr"></i>
               {{ parseT('arrival_date') | translate }} *
             </label>
             <input type="date" class="form-control" [formControl]="forms.arrival_date" />
           </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_departure')">
             <label>
-              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
               {{ parseT('out_date') | translate }} *
             </label>
             <input type="date" class="form-control" [formControl]="forms.date_departure" />
@@ -157,6 +125,45 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="formRequests.alias == 'HOUT'">
+        <div class="col-12 top-containter mt-4">
+          <div class="container">
+            <div class="row">
+              <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
+                <div class="alert pr-0" style="background-color:rgba(0,0,0,.2) " role="alert">
+                  <div class="row cursor-general w-100">
+                    <div class="col-auto px-2">{{ index + 1 }}.</div>
+                    <div class="col-auto">
+                      <i
+                        aria-hidden="true"
+                        style="font-size: 1.5em; color: white"
+                        class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
+                      ></i>
+                    </div>
+                    <div class="col text-truncate">
+                      {{ imgsaved.file.name }}
+                    </div>
+                    <div (click)="deleteUpload(imgsaved)" class="col-auto text-center d-flex align-items-center pl-3">
+                      <h6 class="text-primary-hr cursor-general my-auto">
+                        x
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-left mb-3 mt-4">
+          <div class="container-fluid">
+            <label *ngIf="objectImg.length == 0" class="titleColor">
+              <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+              <strong>{{ 'pages.travel_management.travel.new_travel.attach' | translate }}</strong>
+            </label>
+            <app-file-upload [drageable]="true" [nameFile]="filequotation" [extensions]="extensions"></app-file-upload>
           </div>
         </div>
       </ng-container>

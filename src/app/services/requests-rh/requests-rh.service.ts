@@ -33,4 +33,7 @@ export class RequestsRhService {
   getListBedsHousing(id) {
     return this.tokenService.get(`housing/${id}/list_beds`).map((data: any) => data.json());
   }
+  getListTypeDocument() {
+    return this.tokenService.get('document_types').map((data: any) => data.json());
+  }
 }

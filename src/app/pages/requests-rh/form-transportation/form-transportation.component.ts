@@ -4,6 +4,7 @@ import { FileUploadService } from '../../../services/shared/common/file-upload/f
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 
 @Component({
   selector: 'app-form-transportation',
@@ -34,28 +35,31 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   public is_upload = false;
   public isHigherBenefist = true;
   public deleteDocumenFile: string;
+  public userAuthenticatedRequests: any = null;
   public formCases = {
     cases: {
-      TRANS: {
+      TRAN: {
         benefist: false,
         type_identification: false,
         number_identification: false,
       },
-      TRANS_BEN: {
+      TRNB: {
         benefist: true,
         type_identification: false,
         number_identification: false,
+        accompanying_beneficiary: true,
+        type_identification_accompanying: true,
+        number_identification_accompanying: true,
       },
-      TRANS_TER: {
+      TRNT: {
         name: true,
         benefist: false,
         type_identification: true,
         number_identification: true,
+        phone:true,
       },
     },
     allCases: {
-      date_departure: true,
-      origin: true,
       destiny: true,
       cost_center: true,
       city: true,
@@ -91,7 +95,10 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     public fileUploadService: FileUploadService,
     public alert: AlertsService,
     public translate: TranslateService,
+    private requestsRhService: RequestsRhService,
   ) {
+    this.userAuthenticatedRequests = JSON.parse(localStorage.getItem('user'));
+
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
@@ -101,42 +108,31 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       this.setModalState.emit(true);
     });
 
-    this.origins_list = [
-      { id: 1, name: 'Preescolar' },
-      { id: 2, name: 'Primaria' },
-      { id: 3, name: 'Bachiderato' },
-      { id: 4, name: 'Tecnico' },
-      { id: 5, name: 'Tecnologo' },
-      { id: 6, name: 'Universitario' },
-    ];
-    this.benefists_list = [
-      { id: 1, name: 'Maria', isHigher: true },
-      { id: 2, name: 'Andres', isHigher: false },
-      { id: 3, name: 'Carlos', isHigher: true },
-      { id: 4, name: 'Julio', isHigher: false },
-    ];
-    this.destinations_list = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
-    this.document_types_list = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
-    this.concept_types_list = [
-      { id: 'enrollment', name: 'Monto de Matricula' },
-      { id: 'transport', name: 'monto de transporte' },
-      { id: 'pension', name: 'Monto de pension' },
-      { id: 'feeding', name: 'Monto de alimentacion' },
-    ];
-    this.institution_types_list = [
-      { id: 1, name: 'Wall Strere Englis Institute' },
-      { id: 2, name: 'Brith Council' },
-      { id: 3, name: 'Centro Colombo Americano Institute' },
-    ];
+    // this.benefists_list = [
+    //   { id: 1, name: 'Maria', isHigher: true },
+    //   { id: 2, name: 'Andres', isHigher: false },
+    //   { id: 3, name: 'Carlos', isHigher: true },
+    //   { id: 4, name: 'Julio', isHigher: false },
+    // ];
+    // this.document_types_list = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
   }
 
   ngOnInit() {
+
+    this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
+      this.document_types_list = data.data;
+    });
+
+    this.requestsRhService.getAllSelectRequest(this.userAuthenticatedRequests.employee.pernr, this.idActivity).subscribe((data: any) => {
+      this.benefists_list = data.data.beneficiarios;
+    });
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
       this.file.push(data);
       this.objectImg.push({
+
         file: data,
         extension: this.iconDocument,
       });
@@ -146,12 +142,12 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     const { required } = Validators;
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
-      date_departure: '',
-      origin: '',
       destiny: '',
-      cost_center: '',
+      cost_center:
+        this.userAuthenticatedRequests.employee.cost_center !== null ? this.userAuthenticatedRequests.employee.cost_center : '',
       city: '',
-      address: '',
+      address: this.userAuthenticatedRequests.employee.address !== null ? this.userAuthenticatedRequests.employee.address : '',
+      phone: this.userAuthenticatedRequests.employee.phone !== null ? this.userAuthenticatedRequests.employee.phone : '',
       benefist: [
         '',
         ({ value }: AbstractControl) => {
@@ -175,12 +171,6 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       number_identification_accompanying: '',
       type_identification: '',
       number_identification: '',
-      academic_level: [
-        '',
-        (control: AbstractControl) => {
-          return this.formState('academic_level') ? required(control) : null;
-        },
-      ],
       file: [],
     });
   }
@@ -221,9 +211,6 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         state = false;
       }
     });
-    if (this.idActivity !== 'EDUB' && id !== 'enrollment') {
-      state = false;
-    }
     return state;
   }
 
@@ -237,38 +224,16 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         alert('Tiene que llenar ' + concept);
       }
     });
-
+    if(this.formRequests.alias ==='HOUT'){
+      this.forms.file.setValue(this.objectImg.map(({ file }) => file));
+    }else{
+      this.forms.file.setValue([])
+    }
     this.forms.file.setValue(this.objectImg);
 
     if (this.validateForms) {
-      let request_educations: {
-        enrollment?: number;
-        feeding?: number;
-        pension?: number;
-        transport?: number;
-      } = {};
-      this.arrayConcept.map(obj => {
-        request_educations = {
-          ...request_educations,
-          [obj.concept.id]: obj.value,
-        };
-      });
-      this.submit.emit({ ...this.form.value, request_educations });
+      this.submit.emit({ ...this.form.value });
     }
-  }
-
-  removeConcept(idConcept) {
-    this.arrayConcept.splice(this.arrayConcept.findIndex(filter => filter.concept.id === idConcept), 1);
-  }
-
-  addConcept() {
-    const { concept, value } = this.form.controls;
-    this.arrayConcept.push({
-      concept: JSON.parse(concept.value),
-      value: value.value,
-    });
-    concept.setValue('');
-    value.setValue('');
   }
 
   deleteUpload(param: any) {

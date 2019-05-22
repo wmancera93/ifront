@@ -68,6 +68,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     save: () => {},
     open: () => {
       this.actuallyModalState = true;
+      document.body.style.overflow = 'hidden';
     },
   };
   modalBedRoomActions: { close: Function; save: Function } = {
@@ -131,8 +132,10 @@ export class NewHousingComponent implements OnInit, OnDestroy {
         case 'returnHousing':
         case 'continueEdit':
         case 'continueEditBedroom':
+        case 'returnEditHousing':
           this.modalActions.open();
           this.bedRoomSelect = -1;
+          recharge();
           break;
       }
       if (data === 'continueEdit') {
@@ -392,7 +395,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       if (save) {
         this.housingService.putEditBedrooms(idBedroom, { label: value }).subscribe((resultBedroom: any) => {
           if (resultBedroom.success) {
-            this.formServiceChild.emit(resultBedroom);
             this.modalActions.close();
             this.alert.setAlert({
               type: 'success',
@@ -423,7 +425,28 @@ export class NewHousingComponent implements OnInit, OnDestroy {
       bed.label = bedField.value;
       bedField.value = '';
     } else {
-      this.housingService.putEditBed(bed.id, { label: bedField.value }).subscribe((data: any) => {});
+      this.housingService.putEditBed(bed.id, { label: bedField.value }).subscribe((data: any) => {
+        if (data.success) {
+          this.modalActions.close();
+          this.alert.setAlert({
+            type: 'success',
+            title: 'Transacción Exitosa',
+            message: 'La actualizacion de la cama fue exitosa, ¿Desea regresar a la edición de alojamientos?',
+            confirmation: true,
+            typeConfirmation: 'returnEditHousing',
+          } as Alerts);
+        }
+      }); 
+      (error: any) => {
+        this.modalActions.close();
+        this.alert.setAlert({
+          type: 'danger',
+          title: 'Error',
+          message: error.json().errors.toString(),
+          confirmation: true,
+          typeConfirmation: 'returnEditHousing',
+        } as Alerts);
+      };
     }
   }
 

@@ -5,6 +5,8 @@ import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { FormState } from '../../../components/common/dynamic-form/utils/form.state';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { Alerts } from '../../../models/common/alerts/alerts';
+import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 
 @Component({
   selector: 'app-form-housing',
@@ -18,6 +20,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   @Input() showSubmit: boolean;
 
   public JSON = JSON;
+  public objectImg: any[] = [];
   public filequotation = 'file_soport';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
@@ -29,10 +32,14 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   public beds = [];
   public loadingRoms = false;
   public deleteDocumenFile: string;
+  public iconUpload: any[] = [];
+  public iconDocument = '';
+  public is_upload = false;
   private allForms = new FormState({
     cases: {
       HOUS: {},
-      HOUS_TER: {
+      HOUT: {
+        name_thrid : true,
         document_type: true,
         document_number: true,
       },
@@ -75,11 +82,35 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
     public requestsRhService: RequestsRhService,
+    public fileUploadService: FileUploadService,
   ) {
     this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'deleteNewDocumentSaved') {
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+      }
+      this.setModalState.emit(true);
+    });
   }
 
   ngOnInit() {
+    
+    this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
+      this.identificationTypes = data.data;
+    });
+
+    this.fileUploadService.getObjetFile().subscribe(data => {
+      this.iconUpload = data.name.split('.');
+      this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
+      this.is_upload = true;
+      this.file.push(data);
+      this.objectImg.push({
+        file: data,
+        extension: this.iconDocument,
+      });
+    });
+
     this.form = new FormGroup({});
     const { required } = Validators;
     this.allForms.setCaseForm(this.idActivity);
@@ -106,7 +137,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
             this.choose_room = false;
           }
           if (this.choose_room) {
-            this.getBeedRoms();
+            this.getBeedRoms(value);
           }
           return null;
         },
@@ -136,11 +167,48 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     /* this.subscription.unsubscribe(); */
   }
 
-  getBeedRoms() {
+  iconClass(extension: string) {
+    const file = 'fa-file';
+    switch (extension) {
+      case 'pdf':
+        return `${file}-pdf-o`;
+      case 'docx':
+        return `${file}-word-o`;
+      case 'jpeg':
+      case 'png':
+      case 'jpg':
+        return `${file}-image-o`;
+      default:
+        return file;
+    }
+  }
+
+  getBeedRoms(id) {
     this.beds = [];
     this.loadingRoms = true;
-    this.requestsRhService.getListBedsHousing(this.forms.housing.value).subscribe(res => {
+    this.requestsRhService.getListBedsHousing(id).subscribe((res: any) => {
+      this.loadingRoms = false;
       this.beds = res.data;
+    });
+    (error: any) => {
+      this.setModalState.emit(false);
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: error.json().errors.toString(),
+        confirmation: true,
+        typeConfirmation: 'returnEditHousing',
+      } as Alerts);
+    };
+    new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(
+          ((this.housings_list.find(housing => housing.id.toString() === this.forms.housing.value.toString()) || []).data || {})
+            .beds || [],
+        );
+      }, 500);
+    }).then((res: Array<{ id: Number; label: String; beds: Array<any> }>) => {
+      this.beds = res;
       this.loadingRoms = false;
     });
   }
@@ -148,7 +216,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   handleChooseRoom(value) {
     this.choose_room = value;
     if (value) {
-      this.getBeedRoms();
+      this.getBeedRoms(this.forms.housing.value);
     } else {
       this.forms.bedRom.setValue('');
     }
@@ -187,21 +255,14 @@ export class FormHousingComponent implements OnInit, OnDestroy {
         alert('Tiene que llenar ' + concept);
       }
     });
+    if (this.formRequests.alias === 'HOUT') {
+      this.forms.file.setValue(this.objectImg.map(({ file }) => file));
+    } else {
+      this.forms.file.setValue([]);
+    }
 
     if (this.validateForms) {
-      let request_educations: {
-        enrollment?: number;
-        feeding?: number;
-        pension?: number;
-        transport?: number;
-      } = {};
-      this.arrayConcept.map(obj => {
-        request_educations = {
-          ...request_educations,
-          [obj.concept.id]: obj.value,
-        };
-      });
-      this.submit.emit({ ...this.form.value, request_educations });
+      this.submit.emit({ ...this.form.value });
     }
   }
 

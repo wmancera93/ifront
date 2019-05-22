@@ -127,7 +127,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     //   { id: 6, name: 'Universitario' },
     // ];
     // this.employee_family_id_types = [{ id: 1, name: 'Preescolar' }, { id: 2, name: 'Primaria' }];
-    this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
+    // this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
     // this.concept_types_list = [
     //   { id: 'enrollment', name: 'Monto de Matricula' },
     //   { id: 'transport', name: 'monto de transporte' },
@@ -151,6 +151,10 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         file: data,
         extension: this.iconDocument,
       });
+    });
+
+    this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
+      this.identificationTypes = data.data;
     });
 
     this.allForms.setCaseForm(this.idActivity);
@@ -270,7 +274,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       this.alert.setAlert(alertWarning[0]);
     } else {
       this.forms.file.setValue(this.objectImg.map(({ file }) => file));
-      debugger
+      debugger;
       if (this.validateForms) {
         let request_educations: {
           enrollment?: number;
