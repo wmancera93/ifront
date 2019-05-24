@@ -32,4 +32,35 @@ export class TransportationLogisticsService {
   deleteJourney(id) {
     return this.tokenService.delete('trips_journey/' + id).map((data: any) => data.json());
   }
+  getReportFleets(
+    driver: string,
+    plate: string,
+    destiny: string,
+    dateTravel: string,
+    availability: string,
+    ocupation: string,
+    typeTransport: string,
+  ) {
+    return this.tokenService
+      .get(
+        'transport_report/report_vehicle/' +
+          driver +
+          '/' +
+          plate +
+          '/' +
+          destiny +
+          '/' +
+          dateTravel +
+          '/' +
+          availability +
+          '/' +
+          ocupation +
+          '/' +
+          typeTransport,
+      )
+      .map((data: any) => data.json());
+  }
+  getDestinyFleets() {
+    return this.tokenService.get('transportation_destinations').map((data: any) => data.json());
+  }
 }

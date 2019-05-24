@@ -98,38 +98,28 @@
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('destiny') | translate }}</label>
-            <input type="text" [(ngModel)]="plate" class="form-control" />
+            <input type="text" [(ngModel)]="destiny" class="form-control" />
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <label>{{ parseT('plate') | translate }}</label>
-            <input type="text" [(ngModel)]="plate" class="form-control" />
+            <label>Tipo de transporte</label>
+            <input type="text" [(ngModel)]="typeTransport" class="form-control" />
           </div>
         </div>
         <div class="row align-items-center" style="padding-bottom: 15px">
           <div class="col-lg-4 col-md-6 col-12">
-            <label>{{ parseT('date_begin') | translate }}</label>
-            <input
-              tabindex="-1"
-              type="date"
-              name="date_begin"
-              class="form-control"
-              [(ngModel)]="date_begin"
-              (change)="validateDateAllowance()"
-            />
+            <label>Conductor</label>
+            <input type="text" [(ngModel)]="driver" class="form-control" />
           </div>
           <div class="col-lg-4 col-md-6 col-12">
-            <label>{{ parseT('date_end') | translate }}</label>
-            <input
-              tabindex="-1"
-              type="date"
-              name="date_end"
-              class="form-control "
-              [(ngModel)]="date_end"
-              (change)="validateDateAllowance()"
-            />
+            <label>{{ parseT('date_begin') | translate }}</label>
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="dateTravel" />
           </div>
           <div class="col-lg-4 col-md-12 col-12 align-self-end">
-            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="!btnConsult ? 'pointer' : 'no-drop'">
+            <div
+              class="btn btn-block btn-primary-second fontDate "
+              [style.cursor]="!btnConsult ? 'pointer' : 'no-drop'"
+              (click)="getReport()"
+            >
               <i class="fa fa-search-plus"></i>
               {{ parseT('consult') | translate }}
             </div>
@@ -145,20 +135,17 @@
         </div>
       </div>
 
-      <div
-          class="row justify-content-center top-containter mt-3"
-          *ngIf="showDataTableAllowance"
-        >
-          <div class="col-12">
-            <app-data-table
-              [records]="objectReportAllowances"
-              id="tableReportAllowances"
-              [pdf]="showPdf"
-              [excel]="showExcel"
-              [title]="parseT('name_table_ts') | translate"
-            ></app-data-table>
-          </div>
+      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableAllowance">
+        <div class="col-12">
+          <app-data-table
+            [records]="objectReportFleets"
+            id="tableReportFleest"
+            [pdf]="showPdf"
+            [excel]="showExcel"
+            [title]="parseT('name_table_ts') | translate"
+          ></app-data-table>
         </div>
+      </div>
     </div>
   </div>
 </div>

@@ -5,6 +5,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { TransportationLogisticsService } from '../../../services/travel-management/transportation-logistics/transportation-logistics.service';
 
 @Component({
   selector: 'app-form-transportation',
@@ -26,6 +27,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   public origins_list: any[] = [];
   public benefists_list: any[] = [];
   public destinations_list: any[] = [];
+  public trip: any[] = [];
   public document_types_list: any[] = [];
   public concept_types_list: any[] = [];
   public institution_types_list: any[] = [];
@@ -56,7 +58,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         benefist: false,
         type_identification: true,
         number_identification: true,
-        phone:true,
+        phone: true,
       },
     },
     allCases: {
@@ -74,7 +76,6 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   }
 
   get idActivity() {
-    console.log(this.formRequests.alias);
     return this.formRequests.alias;
   }
 
@@ -96,6 +97,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public translate: TranslateService,
     private requestsRhService: RequestsRhService,
+    public transportationLogisticsService: TransportationLogisticsService,
   ) {
     this.userAuthenticatedRequests = JSON.parse(localStorage.getItem('user'));
 
@@ -119,20 +121,29 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-    this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
-      this.document_types_list = data.data;
+    if (this.formState('type_identification')) {
+      this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
+        this.document_types_list = data.data;
+      });
+    }
+
+    // this.transportationLogisticsService.getTrip(this.form.destiny.value)
+
+    this.transportationLogisticsService.getDestinyFleets().subscribe((data: any) => {
+      this.destinations_list = data.data;
     });
 
-    this.requestsRhService.getAllSelectRequest(this.userAuthenticatedRequests.employee.pernr, this.idActivity).subscribe((data: any) => {
-      this.benefists_list = data.data.beneficiarios;
-    });
+    this.requestsRhService
+      .getAllSelectRequest(this.userAuthenticatedRequests.employee.pernr, this.idActivity)
+      .subscribe((data: any) => {
+        this.benefists_list = data.data.beneficiarios;
+      });
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
       this.file.push(data);
       this.objectImg.push({
-
         file: data,
         extension: this.iconDocument,
       });
@@ -143,11 +154,10 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
       destiny: '',
-      cost_center:
-        this.userAuthenticatedRequests.employee.cost_center !== null ? this.userAuthenticatedRequests.employee.cost_center : '',
-      city: '',
-      address: this.userAuthenticatedRequests.employee.address !== null ? this.userAuthenticatedRequests.employee.address : '',
-      phone: this.userAuthenticatedRequests.employee.phone !== null ? this.userAuthenticatedRequests.employee.phone : '',
+      cost_center: this.userAuthenticatedRequests.employee.cost_center || '',
+      city: ['', required],
+      address: this.userAuthenticatedRequests.employee.address || '',
+      phone: this.userAuthenticatedRequests.employee.phone || '',
       benefist: [
         '',
         ({ value }: AbstractControl) => {
@@ -155,7 +165,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
             // tslint:disable-next-line: triple-equals
             const benefist = this.benefists_list.find(({ id }) => id == value);
             if (benefist) {
-              if (benefist.isHigher) {
+              if (benefist.benef_age > 18) {
                 this.isHigherBenefist = true;
               } else {
                 this.isHigherBenefist = false;
@@ -171,8 +181,10 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       number_identification_accompanying: '',
       type_identification: '',
       number_identification: '',
-      file: [],
+      file: '',
     });
+
+    
   }
 
   ngOnDestroy(): void {
@@ -187,6 +199,21 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       return false;
     }
   }
+
+selectedTrip(){
+  this.transportationLogisticsService.getDetailFleets(this.form.controls.destiny.value).subscribe((res: any) => {
+    this.trip = res.data.trips_journeys.map(({ id, plate, date_time_end, date_time_start }) => {
+      const dateTimeStart = new Date(date_time_start);
+      const durationTrayect = new Date(date_time_end || date_time_start);
+      return {
+        id,
+        plate,
+        date_time_departure: dateTimeStart.toLocaleString(),
+        durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
+      };
+    });
+  });
+}
 
   iconClass(extension: string) {
     const file = 'fa-file';
@@ -219,18 +246,9 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
      * @param Array
      * Se realizan valiaciones de los conceptos segun el tipo de solicitud.
      */
-    ['enrollment', 'feeding', 'pension', 'transport'].map(concept => {
-      if (this.conceptValidation(concept)) {
-        alert('Tiene que llenar ' + concept);
-      }
-    });
-    if(this.formRequests.alias ==='HOUT'){
+    if (this.formRequests.alias === 'TRNT') {
       this.forms.file.setValue(this.objectImg.map(({ file }) => file));
-    }else{
-      this.forms.file.setValue([])
     }
-    this.forms.file.setValue(this.objectImg);
-
     if (this.validateForms) {
       this.submit.emit({ ...this.form.value });
     }

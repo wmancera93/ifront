@@ -196,6 +196,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       case 'AUXL':
       case 'PERM':
       case 'INCA':
+      case 'HOUT':
+      case 'TRNT':
         const modelFromdata = new FormData();
         Object.keys(model).forEach(field => {
           if (field === 'file') {

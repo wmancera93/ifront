@@ -80,7 +80,7 @@
               <i class="fa fa-fw fa-map-marker  text-primary-hr"></i>
               {{ parseT('destination') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.destiny">
+            <select class="form-control" [formControl]="forms.destiny" (change)="selectedTrip(form)">
               <option value="">Seleccione</option>
               <option *ngFor="let destiny of destinations_list" [value]="destiny.id">
                 {{ destiny.name }}
@@ -93,6 +93,66 @@
               {{ parseT('cost_center') | translate }} *
             </label>
             <input type="text" class="form-control" [formControl]="forms.cost_center" />
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="container-fluid py-3">
+            <div class="row">
+              <div class="col-12">
+                <div class="table-responsive mt-3">
+                  <ng-container *ngIf="trip.length > 0">
+                    <table class="table table-sm table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="text-center">
+                            Vehiculo
+                          </th>
+                          <th class="text-center">
+                            Fecha y hora de salida
+                          </th>
+                          <th class="text-center">
+                            Duracion de trayecto
+                          </th>
+                          <th class="text-center">
+                            Selección
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody style="color: #fff;">
+                        <tr *ngFor="let trips of trip">
+                          <td>
+                            {{ trips.plate }}
+                          </td>
+                          <td>
+                            {{ trips.durationTrayect }}
+                          </td>
+                          <td>
+                            {{ trips.date_time_departure }}
+                          </td>
+                          <td>
+                            <div
+                              *ngIf="!active.Select"
+                              class="text-warning cursor-general number-size"
+                              (click)="selectedTrip(trips.id)"
+                            >
+                              <i class="fa fa-square-o"></i>
+                            </div>
+                            <div
+                              *ngIf="active.active"
+                              class="text-success cursor-general number-size"
+                              (click)="selectedTrip(trips.id)"
+                            >
+                              <i class="fa fa-check-square-o"></i>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

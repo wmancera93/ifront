@@ -3,12 +3,12 @@
     <form [formGroup]="form" class="row align-content-center justify-content-center text-white">
       <div class="col-12">
         <div class="row">
-          <div class="col-12 top-containter" *ngIf="formState('name_thrid')">
+          <div class="col-12 top-containter" *ngIf="formState('name')">
             <label class="titleColor">
               <i class="fa fa-fw fa-user-o text-primary-hr"></i>
               Nombre*
             </label>
-            <input type="text" class="form-control" [formControl]="forms.nameThird" />
+            <input type="text" class="form-control" [formControl]="forms.name" />
           </div>
 
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('document_type')">
@@ -19,7 +19,7 @@
             <select class="form-control" [formControl]="forms.document_type">
               <option value="">Seleccione</option>
               <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
-                {{ identificationType.name }}
+                {{ identificationType.document_type + '-' + identificationType.label }}
               </option>
             </select>
           </div>
@@ -28,33 +28,40 @@
               <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
               Número de identificación*
             </label>
-            <input type="number" class="form-control" [formControl]="forms.numberIdThrid" />
+            <input type="number" class="form-control" [formControl]="forms.document_number" />
           </div>
-          <div class="col-12 top-containter" *ngIf="formState('housing')">
+          <div class="col-12 top-containter" *ngIf="formState('housing')" [ngClass]="{ 'col-md-6': formState('phone') }">
             <label>
               <i class="fa fa-fw fa-home text-primary-hr"></i>
               {{ parseT('housing_form') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.housing" (change)="choose_room ? getBeedRoms() : null">
+            <select class="form-control" [formControl]="forms.housing" (change)="choose_room ? handleChooseRoom(true) : null">
               <option value="">Seleccione</option>
               <option *ngFor="let housing of housings_list" [value]="housing.id">
                 {{ housing.label }}
               </option>
             </select>
           </div>
+          <div class="col-6 top-containter" *ngIf="formState('phone')">
+            <label>
+              <i class="fa fa-fw fa-home text-primary-hr"></i>
+              Telefono*
+            </label>
+            <input type="number" class="form-control" [formControl]="forms.phone" />
+          </div>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('arrival_date')">
             <label>
               <i class="fa fa-fw fa-calendar-plus-o text-primary-hr"></i>
               {{ parseT('arrival_date') | translate }} *
             </label>
-            <input type="date" class="form-control" [formControl]="forms.arrival_date" />
+            <input type="date" class="form-control" [formControl]="forms.arrival_date" (change)="validateDayHousing(forms)" />
           </div>
-          <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_departure')">
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('departure_date')">
             <label>
               <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
               {{ parseT('out_date') | translate }} *
             </label>
-            <input type="date" class="form-control" [formControl]="forms.date_departure" />
+            <input type="date" class="form-control" [formControl]="forms.departure_date" (change)="validateDayHousing(forms)" />
           </div>
         </div>
       </div>
@@ -93,28 +100,24 @@
         <div class="col-12 m-2">
           <div class="container-fluid" style="border: solid  1px var(--primary);">
             <div class="row justify-content-center p-2">
-              <div
-                *ngFor="let bedRom of beds"
-                class="col-4 col-sm-3 col-md-2 col-lg-2 cursor-general"
-                (click)="selectBeedRom(bedRom)"
-              >
+              <div *ngFor="let bed of beds" class="col-4 col-sm-3 col-md-2 col-lg-2 cursor-general" (click)="selectBeedRom(bed)">
                 <div
                   class="square mx-auto my-2 d-flex align-items-center justify-content-center"
                   [ngClass]="{
-                    'bg-danger': !bedRom.state,
-                    'bg-success': bedRom.id === forms.bedRom?.value && bedRom.state
+                    'bg-danger': !bed.state,
+                    'bg-success': bed.id === forms.bed?.value && bed.state
                   }"
                 >
                   <i
                     class="fa fa-bed fa-2"
                     aria-hidden="true"
                     [ngClass]="{
-                      'fa-bed text-dark': bedRom.id !== forms.bedRom?.value,
-                      'fa-check': bedRom.id === forms.bedRom?.value
+                      'fa-bed text-dark': bed.id !== forms.bed?.value,
+                      'fa-check': bed.id === forms.bed?.value
                     }"
                   ></i>
                 </div>
-                <div class="text-center">{{ bedRom.label }}</div>
+                <div class="text-center">{{ bed.label }}</div>
               </div>
               <div *ngIf="!beds.length && !loadingRoms" class="col-12">
                 <div class="alert alert-warning text-center" role="alert">{{ parseT('rooms_registrer') | translate }}.</div>

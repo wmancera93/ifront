@@ -137,6 +137,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
           this.bedRoomSelect = -1;
           recharge();
           break;
+        case 'closeAlertreturnHousing':
+        case 'closeAlertcontinueEdit':
+        case 'closeAlertcontinueEditBedroom':
+        case 'closeAlertreturnEditHousing':
+          this.ngbModalRef.close();
       }
       if (data === 'continueEdit') {
         this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {
@@ -232,7 +237,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
             this.housingService.postNewHousing(this.generalHousing).subscribe((data: any) => {
               if (data.success) {
                 this.formServiceChild.emit(data);
-                this.modalActions.close();
+                this.ngbModalRef.close();
                 const alertWarning: Alerts[] = [
                   {
                     type: 'success',
@@ -436,7 +441,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
             typeConfirmation: 'returnEditHousing',
           } as Alerts);
         }
-      }); 
+      });
       (error: any) => {
         this.modalActions.close();
         this.alert.setAlert({

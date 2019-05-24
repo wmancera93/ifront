@@ -39,15 +39,16 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     cases: {
       HOUS: {},
       HOUT: {
-        name_thrid : true,
+        name: true,
         document_type: true,
         document_number: true,
+        phone:true,
       },
     },
     allCases: {
       housing: true,
       arrival_date: true,
-      date_departure: true,
+      departure_date: true,
     },
   });
 
@@ -84,18 +85,19 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     public requestsRhService: RequestsRhService,
     public fileUploadService: FileUploadService,
   ) {
-    this.identificationTypes = [{ id: 1, name: 'Cedula' }, { id: 2, name: 'Tarjeta de identidad' }];
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
         this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
         this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+        this.setModalState.emit(true);
       }
-      this.setModalState.emit(true);
+      if (data === 'continueCreateRequestsHousing') {
+        this.setModalState.emit(true);
+      }
     });
   }
 
   ngOnInit() {
-    
     this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
       this.identificationTypes = data.data;
     });
@@ -110,8 +112,6 @@ export class FormHousingComponent implements OnInit, OnDestroy {
         extension: this.iconDocument,
       });
     });
-
-    this.form = new FormGroup({});
     const { required } = Validators;
     this.allForms.setCaseForm(this.idActivity);
     const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
@@ -142,20 +142,23 @@ export class FormHousingComponent implements OnInit, OnDestroy {
           return null;
         },
       ],
-      ...formBuild(['arrival_date', 'date_departure']),
+      ...formBuild(['arrival_date', 'departure_date']),
       document_type: [
         '',
         (control: AbstractControl) => {
-          return this.formState('document_type') && this.idActivity === 'HOUS_TER' ? required(control) : null;
+          return this.formState('document_type') && this.idActivity === 'HOUT' ? required(control) : null;
         },
       ],
       document_number: [
         '',
         (control: AbstractControl) => {
-          return this.formState('document_number') && this.idActivity === 'HOUS_TER' ? required(control) : null;
+          return this.formState('document_number') && this.idActivity === 'HOUT' ? required(control) : null;
         },
       ],
-      bedRom: '',
+      bed: '',
+      file: '',
+      name:'',
+      phone:'',
     });
 
     this.requestsRhService.getListHousingList().subscribe((data: any) => {
@@ -184,6 +187,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   }
 
   getBeedRoms(id) {
+    debugger
     this.beds = [];
     this.loadingRoms = true;
     this.requestsRhService.getListBedsHousing(id).subscribe((res: any) => {
@@ -200,49 +204,26 @@ export class FormHousingComponent implements OnInit, OnDestroy {
         typeConfirmation: 'returnEditHousing',
       } as Alerts);
     };
-    new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve(
-          ((this.housings_list.find(housing => housing.id.toString() === this.forms.housing.value.toString()) || []).data || {})
-            .beds || [],
-        );
-      }, 500);
-    }).then((res: Array<{ id: Number; label: String; beds: Array<any> }>) => {
-      this.beds = res;
-      this.loadingRoms = false;
-    });
   }
 
   handleChooseRoom(value) {
+    debugger
     this.choose_room = value;
     if (value) {
       this.getBeedRoms(this.forms.housing.value);
     } else {
-      this.forms.bedRom.setValue('');
+      this.forms.bed.setValue('');
     }
   }
 
   selectBeedRom({ id, state }) {
     if (state) {
-      if (this.forms.bedRom.value === id) {
-        this.forms.bedRom.setValue('');
+      if (this.forms.bed.value === id) {
+        this.forms.bed.setValue('');
       } else {
-        this.forms.bedRom.setValue(id);
+        this.forms.bed.setValue(id);
       }
     }
-  }
-
-  conceptValidation(id: any) {
-    let state = true;
-    this.arrayConcept.filter(value => {
-      if (value.concept.id === id) {
-        state = false;
-      }
-    });
-    if (this.idActivity !== 'EDUB' && id !== 'enrollment') {
-      state = false;
-    }
-    return state;
   }
 
   submitSend() {
@@ -250,17 +231,9 @@ export class FormHousingComponent implements OnInit, OnDestroy {
      * @param Array
      * Se realizan valiaciones de los conceptos segun el tipo de solicitud.
      */
-    ['enrollment', 'feeding', 'pension', 'transport'].map(concept => {
-      if (this.conceptValidation(concept)) {
-        alert('Tiene que llenar ' + concept);
-      }
-    });
     if (this.formRequests.alias === 'HOUT') {
       this.forms.file.setValue(this.objectImg.map(({ file }) => file));
-    } else {
-      this.forms.file.setValue([]);
     }
-
     if (this.validateForms) {
       this.submit.emit({ ...this.form.value });
     }
@@ -278,5 +251,31 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     });
     concept.setValue('');
     value.setValue('');
+  }
+  validateDayHousing(form) {
+    if (new Date() > new Date(form.arrival_date.value)|| (new Date() > new Date(form.departure_date.value))){
+      this.setModalState.emit(false);
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: 'La fecha de llegada no puede ser antes de la actual ¿Desea regresar a la solicitud?',
+        confirmation: true,
+        typeConfirmation: 'continueCreateRequestsHousing',
+      } as Alerts);
+      form.arrival_date.setValue('');
+      form.departure_date.setValue('');
+    }
+      if (new Date(form.arrival_date.value) > new Date(form.departure_date.value)) {
+        this.setModalState.emit(false);
+        this.alert.setAlert({
+          type: 'danger',
+          title: 'Error',
+          message: 'La fecha de llegada al alojamiento no puede ser mayor que la salida ¿Desea regresar a la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueCreateRequestsHousing',
+        } as Alerts);
+        form.arrival_date.setValue('');
+        form.departure_date.setValue('');
+      }
   }
 }
