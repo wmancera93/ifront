@@ -127,3 +127,15 @@ export declare interface TypesRequest {
   VCCP: formsRequest;
   VACA: formsRequest;
 }
+
+export declare interface DetailRequestLogistics{
+  date_in:string,
+  date_out:string,
+  benefist:string,
+  thrid:string,
+  companion:string,
+  destiny:string,
+  number_bed:number|string,
+  label_bed: string,
+  plate:string
+} 

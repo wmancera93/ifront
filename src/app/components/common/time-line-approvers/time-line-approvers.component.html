@@ -1,4 +1,11 @@
-<button id="btn_aprovers_requests" type="button" class="btn btn-primary" data-toggle="modal" data-target="#aprovers_requests" style="display:none;"></button>
+<button
+  id="btn_aprovers_requests"
+  type="button"
+  class="btn btn-primary"
+  data-toggle="modal"
+  data-target="#aprovers_requests"
+  style="display:none;"
+></button>
 <div class="modal" id="aprovers_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content" *ngIf="viewModal">
@@ -36,7 +43,10 @@
                     <div class="row">
                       <div class="col-12 col-md-4 col-lg-2 center-img-employee">
                         <div class="menu-img-employee">
-                          <img src="{{ detailRequets[0].request.employee_applicant_to_json.image.url }}" class="roundPhoto-employee" />
+                          <img
+                            src="{{ detailRequets[0].request.employee_applicant_to_json.image.url }}"
+                            class="roundPhoto-employee"
+                          />
                           <br />
                         </div>
                       </div>
@@ -54,18 +64,24 @@
                           </div>
                           <div class="col-12 text-left">
                             <div class="row">
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_begin_format != null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="detailRequets[0].request.date_begin_format !== null"
+                              >
                                 <p class="font-title-general">
                                   <i class=" font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_begin') | translate }}:
-                                  <span style="font-weight: 100 !important">{{ dateFirts }}</span>
+                                  <span style="font-weight: 100 !important">{{ dateFirts | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.date_end_format != null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="detailRequets[0].request.date_end_format !== null"
+                              >
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_end') | translate }}:
-                                  <span style="font-weight: 100 !important"> {{ dateFinally }}</span>
+                                  <span style="font-weight: 100 !important"> {{ dateFinally | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.days_request !== null">
@@ -82,25 +98,99 @@
                                   <span style="font-weight: 100 !important">{{ detailRequets[0].request.work_days }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.non_work_days !== null">
+                              <div
+                                class="col-12 text-md-left text-center"
+                                *ngIf="detailRequets[0].request.non_work_days !== null"
+                              >
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-gamepad"></i>
                                   Dias no habiles solicitados:
                                   <span style="font-weight: 100 !important">{{ detailRequets[0].request.non_work_days }}</span>
                                 </p>
                               </div>
+                              <ng-container *ngIf="is_edu">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.name_family">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-graduation-cap"></i>
+                                    Beneficiario:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.name_institute">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-university"></i>
+                                    Institución:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_institute }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.total_ammount">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-money"></i>
+                                    Monto solicitado:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.total_ammount }}</span>
+                                  </p>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="is_logistic">
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-user-circle"></i>
+                                    Beneficiario:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-user-o"></i>
+                                    Nombre Personal externo:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-users"></i>
+                                    Nombre Acompañante:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-map-marker"></i>
+                                    Destino:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-home"></i>
+                                    Alojamiento seleccionado:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-car"></i>
+                                    Vehiculo de viaje:
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                  </p>
+                                </div>
+                              </ng-container>
                               <div class="col-12 text-md-left text-center" *ngIf="fileSupport !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-paperclip"></i>
                                   {{ parseT('attached') | translate }}:
-                                  <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">{{ parseT('see_attached') | translate }}</span>
+                                  <span style=" color: rgb(60, 211, 211); cursor: pointer;" (click)="viewSupport()">{{
+                                    parseT('see_attached') | translate
+                                  }}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-md-left text-center">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa fa-comment"></i>
                                   {{ parseT('observations') | translate }}:
-                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.observation_request }}</span>
+                                  <span style="font-weight: 100 !important">{{
+                                    detailRequets[0].request.observation_request
+                                  }}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-center">
@@ -161,28 +251,31 @@
                                     </p>
                                   </div>
                                   <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                    <h6 class="col-4" *ngIf="(answer.status == parseT('status_Approver') | translate)">
+                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_Approver') | translate">
                                       <span class="badge badge-primary" style="margin-top: 5px;">
                                         {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="(answer.status == parseT('status_cancelled') | translate)">
+                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_cancelled') | translate">
                                       <span class="badge badge-danger" style="margin-top: 5px;">
                                         {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="(answer.status == parseT('status_in_Process') | translate)">
+                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_in_Process') | translate">
                                       <span class="badge badge-success" style="margin-top: 5px;">
                                         {{ answer.status }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="(answer.status == parseT('status_pending') | translate)">
+                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_pending') | translate">
                                       <span class="badge badge-default" style="margin-top: 5px;">
                                         {{ answer.status }}
                                       </span>
                                     </h6>
                                   </div>
-                                  <div class="col-12 text-md-left text-center" *ngIf="answer.description !== null && answer.description !== undefined">
+                                  <div
+                                    class="col-12 text-md-left text-center"
+                                    *ngIf="answer.description !== null && answer.description !== undefined"
+                                  >
                                     <p class="font-title-general text-center">
                                       <i class="font-color-default fa fa-fw fa fa-comment"></i>
                                       {{ parseT('observations') | translate }}:
@@ -233,7 +326,10 @@
                       <div class="row">
                         <div class="col-12 col-md-4 col-lg-2 center-img-employee">
                           <div class="menu-img-employee">
-                            <img src="{{ detailRequets[0].pending_level_approver.approver_employee.image.url }}" class="roundPhoto-employee" />
+                            <img
+                              src="{{ detailRequets[0].pending_level_approver.approver_employee.image.url }}"
+                              class="roundPhoto-employee"
+                            />
                             <br />
                           </div>
                         </div>

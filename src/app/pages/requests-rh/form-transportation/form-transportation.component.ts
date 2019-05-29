@@ -6,6 +6,7 @@ import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { TransportationLogisticsService } from '../../../services/travel-management/transportation-logistics/transportation-logistics.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-form-transportation',
@@ -23,11 +24,12 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   public filequotation = 'file_soport';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
+  public formCompanion: FormGroup;
   public file: any = [];
   public origins_list: any[] = [];
   public benefists_list: any[] = [];
   public destinations_list: any[] = [];
-  public trip: any[] = [];
+  public trips: any[] = [];
   public document_types_list: any[] = [];
   public concept_types_list: any[] = [];
   public institution_types_list: any[] = [];
@@ -35,9 +37,8 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   public iconUpload: any[] = [];
   public iconDocument = '';
   public is_upload = false;
-  public isHigherBenefist = true;
+  public requiredCompanion = false;
   public deleteDocumenFile: string;
-  public userAuthenticatedRequests: any = null;
   public formCases = {
     cases: {
       TRAN: {
@@ -48,10 +49,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       TRNB: {
         benefist: true,
         type_identification: false,
-        number_identification: false,
-        accompanying_beneficiary: true,
-        type_identification_accompanying: true,
-        number_identification_accompanying: true,
+        third_information: true,
       },
       TRNT: {
         name: true,
@@ -99,8 +97,6 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     private requestsRhService: RequestsRhService,
     public transportationLogisticsService: TransportationLogisticsService,
   ) {
-    this.userAuthenticatedRequests = JSON.parse(localStorage.getItem('user'));
-
     this.formState.bind(this);
     this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'deleteNewDocumentSaved') {
@@ -120,24 +116,19 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     if (this.formState('type_identification')) {
-      this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
-        this.document_types_list = data.data;
-      });
+      this.getTypeDocument();
     }
-
-    // this.transportationLogisticsService.getTrip(this.form.destiny.value)
 
     this.transportationLogisticsService.getDestinyFleets().subscribe((data: any) => {
       this.destinations_list = data.data;
     });
 
-    this.requestsRhService
-      .getAllSelectRequest(this.userAuthenticatedRequests.employee.pernr, this.idActivity)
-      .subscribe((data: any) => {
-        this.benefists_list = data.data.beneficiarios;
-      });
+    const { employee }: User = JSON.parse(localStorage.getItem('user'));
+
+    this.requestsRhService.getAllSelectRequest(employee.pernr, this.idActivity).subscribe((data: any) => {
+      this.benefists_list = data.data.beneficiarios;
+    });
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
@@ -149,15 +140,20 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       });
     });
 
-    this.form = new FormGroup({});
     const { required } = Validators;
+    this.formCompanion = this.fb.group({
+      name: '',
+      document_number: '',
+      document_type: '',
+      phone: '',
+    });
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
       destiny: '',
-      cost_center: this.userAuthenticatedRequests.employee.cost_center || '',
+      cost_center: employee.cost_center || '',
       city: ['', required],
-      address: this.userAuthenticatedRequests.employee.address || '',
-      phone: this.userAuthenticatedRequests.employee.phone || '',
+      address: employee.address || '',
+      phone: '',
       benefist: [
         '',
         ({ value }: AbstractControl) => {
@@ -165,10 +161,11 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
             // tslint:disable-next-line: triple-equals
             const benefist = this.benefists_list.find(({ id }) => id == value);
             if (benefist) {
-              if (benefist.benef_age > 18) {
-                this.isHigherBenefist = true;
+              if (benefist.benef_age < 20) {
+                this.getTypeDocument();
+                this.requiredCompanion = true;
               } else {
-                this.isHigherBenefist = false;
+                this.requiredCompanion = false;
               }
             }
           }
@@ -176,17 +173,19 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
         },
       ],
       name: '',
-      accompanying_beneficiary: '',
-      type_identification_accompanying: '',
-      number_identification_accompanying: '',
+      third_information: this.formCompanion,
       type_identification: '',
       number_identification: '',
+      trips_journey: ['', required],
       file: '',
     });
-
-    
   }
 
+  getTypeDocument() {
+    this.requestsRhService.getListTypeDocument().subscribe((data: any) => {
+      this.document_types_list = data.data;
+    });
+  }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
@@ -200,20 +199,29 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     }
   }
 
-selectedTrip(){
-  this.transportationLogisticsService.getDetailFleets(this.form.controls.destiny.value).subscribe((res: any) => {
-    this.trip = res.data.trips_journeys.map(({ id, plate, date_time_end, date_time_start }) => {
-      const dateTimeStart = new Date(date_time_start);
-      const durationTrayect = new Date(date_time_end || date_time_start);
-      return {
-        id,
-        plate,
-        date_time_departure: dateTimeStart.toLocaleString(),
-        durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
-      };
+  getTrayects() {
+    this.transportationLogisticsService.getTrayectRequestsFleet(this.form.controls.destiny.value).subscribe((trayect: any) => {
+      this.trips = trayect.data.map(({ id, plate, date_time_end, date_time_start }) => {
+        const dateTimeStart = new Date(date_time_start);
+        const durationTrayect = new Date(date_time_end || date_time_start);
+        return {
+          id,
+          plate,
+          date_time_departure: dateTimeStart.toLocaleString(),
+          durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
+        };
+      });
     });
-  });
-}
+  }
+
+  selectTrip(id: number) {
+    const { trips_journey } = this.forms;
+    if (id == trips_journey.value) {
+      trips_journey.setValue(-1);
+    } else {
+      trips_journey.setValue(id);
+    }
+  }
 
   iconClass(extension: string) {
     const file = 'fa-file';

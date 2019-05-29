@@ -4,7 +4,7 @@
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-bus"></i>
-          {{ parseT('transportation_management') | translate }}
+          Gestion de flotas
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBack()">
@@ -96,121 +96,134 @@
         <div class="col-12" *ngIf="fleets.length > 0">
           <div class="widget bg-white-1x" *ngFor="let fleet of fleets">
             <div class="row align-items-center">
-              <div class="col-lg-2 col-md-4 col-12">
-                <h5>
-                  <span class="badge badge-warning"> {{ parseT('ticket') | translate }} # {{ fleet.id }} </span>
-                </h5>
-              </div>
-              <div class="col-lg-2 col-md-4 col-12 text-xl-left text-lg-center text-center top-p">
-                <h3 class="font-color-default">
-                  <div class="display-block">
-                    {{ fleet.destiny }}
-                  </div>
-                  <div class="display-block">
-                    {{ fleet.plate }}
-                  </div>
-                </h3>
-              </div>
-              <div class="col-lg-1 col-md-4 col-12 text-md-left text-center top-p">
-                <p class="font-title-general">{{ parseT('state') | translate }}:</p>
-                <h6 *ngIf="fleet.is_avalable">
-                  <span class="badge badge-primary">
-                    {{ parseT('available') | translate }}
-                  </span>
-                </h6>
-                <h6 *ngIf="!fleet.is_avalable">
-                  <span class="badge badge-danger">
-                    {{ parseT('close') | translate }}
-                  </span>
-                </h6>
-              </div>
-              <div class="col-lg-4 col-md-6 col-12 text-md-left text-center">
-                <div class="row tex">
-                  <div class="col-lg-4 col-md-4 col-12 text-md-left">
+              <div class="col-lg-3">
+                <div class="row">
+                  <div class="col-12 col-md-4 col-lg-6">
                     <h5>
-                      <p class="text-center">{{ parseT('total_seats') | translate }}</p>
+                      <span class="badge badge-warning"> {{ parseT('ticket') | translate }} # {{ fleet.id }} </span>
                     </h5>
-                    <p class="font-title-general text-center">
-                      {{ fleet.total_seats }}
-                    </p>
                   </div>
-                  <div class="col-lg-4 col-md-4 col-12 text-md-left">
-                    <h5>
-                      <p class="text-center">{{ parseT('busy_seats') | translate }}</p>
-                    </h5>
-                    <p class="font-title-general text-center">
-                      {{ fleet.assigned_seats }}
-                    </p>
-                  </div>
-                  <div class="col-lg-4 col-md-4 col-12 text-md-left">
-                    <h5>
-                      <p class="text-center">{{ parseT('available_seats') | translate }}</p>
-                    </h5>
-                    <p class="font-title-general text-center">
-                      {{ fleet.available_seats }}
-                    </p>
+                  <div class="col-12 col-md-4 col-lg-6 text-xl-left text-lg-center text-center top-p">
+                    <h3 class="font-color-default">
+                      <div class="display-block">
+                        {{ fleet.plate }}
+                      </div>
+                    </h3>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-6 col-12 text-md-left text-center top-p">
+              <div class="col-lg-9">
                 <div class="row">
-                  <div class="col-4 number-size text-center top-p">
-                    <div
-                      class="row justify-content-center"
-                      (click)="activeState(fleet, 'watch') ? seeFleets(fleet) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 'watch')"
-                    >
-                      <div
-                        class="col-12 text-success number-size"
-                        id="see"
-                        [ngClass]="{
-                          'text-success': activeState(fleet, 'watch')
-                        }"
-                      >
-                        <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                  <div class="col-12 col-md-6 col-lg-1  text-md-left text-center top-p">
+                    <p class="font-title-general">{{ parseT('state') | translate }}:</p>
+                    <h6 *ngIf="fleet.trips_journeys">
+                      <span class="badge badge-primary">
+                        {{ parseT('available') | translate }}
+                      </span>
+                    </h6>
+                    <h6 *ngIf="!fleet.trips_journeys">
+                      <span class="badge badge-danger">
+                        {{ parseT('close') | translate }}
+                      </span>
+                    </h6>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6  text-md-left text-center">
+                    <div class="row tex">
+                      <div class="col-lg-3 col-md-6 col-12 text-md-left">
+                        <h5>
+                          <p class="text-center">{{ parseT('total_seats') | translate }}</p>
+                        </h5>
+                        <p class="font-title-general text-center">
+                          {{ fleet.total_seats }}
+                        </p>
                       </div>
-                      <div class="col-12">
-                        {{ parseT('btn_see') | translate }}
+                      <div class="col-lg-3 col-md-6 col-12 text-md-left">
+                        <h5>
+                          <p class="text-center">{{ parseT('busy_seats') | translate }}</p>
+                        </h5>
+                        <p class="font-title-general text-center">
+                          {{ fleet.assigned_chairs }}
+                        </p>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-12 text-md-left">
+                        <h5>
+                          <p class="text-center">Sillas reservadas</p>
+                        </h5>
+                        <p class="font-title-general text-center">
+                          {{ fleet.seats_taken }}
+                        </p>
+                      </div>
+                      <div class="col-lg-3 col-md-6 col-12 text-md-left">
+                        <h5>
+                          <p class="text-center">{{ parseT('available_seats') | translate }}</p>
+                        </h5>
+                        <p class="font-title-general text-center">
+                          {{ fleet.available_chairs }}
+                        </p>
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 number-size text-center top-p">
-                    <div
-                      class="row justify-content-center"
-                      (click)="activeState(fleet, 'edit') ? editFleets(fleet) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 'edit')"
-                    >
-                      <div
-                        class="col-12 number-size text-info"
-                        id="editPencil"
-                        [ngClass]="{
-                          'text-info': activeState(fleet, 'edit')
-                        }"
-                      >
-                        <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                  <div class="col-12 col-md-6 col-lg-5 text-md-left text-center top-p">
+                    <div class="row">
+                      <div class="col-4 number-size text-center top-p">
+                        <div
+                          class="row justify-content-center"
+                          (click)="activeState(fleet, 'watch') ? seeFleets(fleet) : undefined"
+                          [style.cursor]="styleCursorT(fleet, 'watch')"
+                        >
+                          <div
+                            class="col-12 text-success number-size"
+                            id="see"
+                            [ngClass]="{
+                              'text-success': activeState(fleet, 'watch')
+                            }"
+                          >
+                            <i class="fa fa-eye" aria-hidden="true" style="font-size:2em"></i>
+                          </div>
+                          <div class="col-12">
+                            {{ parseT('btn_see') | translate }}
+                          </div>
+                        </div>
                       </div>
-                      <div class="col-12">
-                        {{ parseT('btn_edit') | translate }}
+                      <div class="col-4 number-size text-center top-p">
+                        <div
+                          class="row justify-content-center"
+                          (click)="activeState(fleet, 'edit') ? editFleets(fleet) : undefined"
+                          [style.cursor]="styleCursorT(fleet, 'edit')"
+                        >
+                          <div
+                            class="col-12 number-size text-info"
+                            id="editPencil"
+                            [ngClass]="{
+                              'text-info': activeState(fleet, 'edit')
+                            }"
+                          >
+                            <i class="fa fa-pencil" aria-hidden="true" style="font-size:2em"></i>
+                          </div>
+                          <div class="col-12">
+                            {{ parseT('btn_edit') | translate }}
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <div class="col-4 number-size text-center top-p">
-                    <div
-                      class="row justify-content-center"
-                      (click)="activeState(fleet, 'delete') ? deleteFleets(fleet.id) : undefined"
-                      [style.cursor]="styleCursorT(fleet, 'delete')"
-                    >
-                      <div
-                        class="col-12 number-size text-danger"
-                        id="erase"
-                        [ngClass]="{
-                          'text-danger': activeState(fleet, 'delete')
-                        }"
-                      >
-                        <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
-                      </div>
-                      <div class="col-12">
-                        {{ parseT('btn_erase') | translate }}
+                      <div class="col-4 number-size text-center top-p">
+                        <div
+                          class="row justify-content-center"
+                          (click)="activeState(fleet, 'delete') ? deleteFleets(fleet.id) : undefined"
+                          [style.cursor]="styleCursorT(fleet, 'delete')"
+                        >
+                          <div
+                            class="col-12 number-size text-danger"
+                            id="erase"
+                            [ngClass]="{
+                              'text-danger': activeState(fleet, 'delete')
+                            }"
+                          >
+                            <i class="fa fa-trash" aria-hidden="true" style="font-size:2em"></i>
+                          </div>
+                          <div class="col-12">
+                            {{ parseT('btn_erase') | translate }}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -228,4 +241,7 @@
     </div>
   </div>
 </div>
-<app-new-transport [modalForm]="modalForm.asObservable()" (formServiceChildTransport)="formServicePatherTransportation($event)"></app-new-transport>
+<app-new-transport
+  [modalForm]="modalForm.asObservable()"
+  (formServiceChildTransport)="formServicePatherTransportation($event)"
+></app-new-transport>

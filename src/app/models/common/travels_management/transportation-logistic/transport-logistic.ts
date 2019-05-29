@@ -10,3 +10,16 @@ export interface TrasportationForm {
   isNew: boolean;
   form: Transportation;
 }
+
+export interface TrayectBase {
+  id?: string | number;
+  origin: string | number;
+  destiny: string;
+  date_time_departure: string;
+  durationTrayect: string | number;
+  assigned_chairs: string;
+}
+
+export interface Trayect extends TrayectBase {
+  destiny_name: string;
+}

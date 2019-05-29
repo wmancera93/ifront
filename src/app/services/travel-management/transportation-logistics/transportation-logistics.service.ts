@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
+import { TrayectBase } from '../../../models/common/travels_management/transportation-logistic/transport-logistic';
 
 @Injectable()
 export class TransportationLogisticsService {
@@ -17,7 +18,7 @@ export class TransportationLogisticsService {
     return this.tokenService.post('vehicle', object).map((data: any) => data.json());
   }
 
-  createMoreTrayects(id, object: any) {
+  createMoreTrayects(id, object: { trayects: TrayectBase[] }) {
     return this.tokenService.post(`vehicle/${id}/create_more_journeys`, object).map((data: any) => data.json());
   }
 
@@ -62,5 +63,8 @@ export class TransportationLogisticsService {
   }
   getDestinyFleets() {
     return this.tokenService.get('transportation_destinations').map((data: any) => data.json());
+  }
+  getTrayectRequestsFleet(idDestiny: string) {
+    return this.tokenService.get('transportation_destinations/' + idDestiny + '/journeys').map((data: any) => data.json());
   }
 }

@@ -82,16 +82,16 @@
                       {{ journey.origin }}
                     </td>
                     <td>
-                      {{ journey.destiny }}
+                      {{ journey.destiny_name }}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{ journey.date_time_departure }}
                     </td>
-                    <td>
+                    <td class="text-center">
                       {{ journey.durationTrayect }}
                     </td>
                     <td>
-                      {{ journey.reserved_chairs }}
+                      {{ journey.assigned_chairs }}
                     </td>
                     <td width="10px" *ngIf="!readOnlyFleet">
                       <button
@@ -129,7 +129,12 @@
                     <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
                     {{ parseT('destiny') | translate }} *
                   </label>
-                  <input type="text" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.destiny" />
+                  <select class="form-control" [formControl]="forms.destiny">
+                    <option value="">Seleccione</option>
+                    <option *ngFor="let destiny of destinySelect" [value]="destiny.id">
+                      {{ destiny.name }}
+                    </option>
+                  </select>
                 </div>
                 <div class="col-12 text-truncate">
                   <label class="font-title-general">
@@ -162,7 +167,7 @@
                     <i class="fa fa-fw fa-flag-checkered text-primary-hr"></i>
                     Puestos reservados
                   </label>
-                  <input type="number" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.reserved_chairs" />
+                  <input type="number" class="form-control" [readonly]="readOnlyFleet" [formControl]="forms.assigned_chairs" />
                 </div>
               </div>
             </div>
@@ -178,7 +183,7 @@
                   forms.destiny.value == '' ||
                   forms.date_time_departure.value == '' ||
                   forms.durationTrayect.value == '' ||
-                  forms.reserved_chairs.value == ''
+                  forms.assigned_chairs.value == ''
                     ? true
                     : null
                 "

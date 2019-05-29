@@ -17,8 +17,8 @@
             </label>
             <select class="form-control" [formControl]="forms.type_identification">
               <option value="">Seleccione</option>
-              <option *ngFor="let identificationList of document_types_list" [value]="identificationList.id">
-                {{ identificationList.name }}
+              <option *ngFor="let document_type of document_types_list" [value]="document_type.id">
+                {{ document_type.label }}
               </option>
             </select>
           </div>
@@ -41,46 +41,55 @@
               </option>
             </select>
           </div>
-          <ng-container *ngIf="!isHigherBenefist">
-            <div class="col-12">
-              <div class="container-fluid widget">
-                <div class="row">
-                  <div class="col-12 top-containter">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa-user-o text-primary-hr"></i>
-                      {{ parseT('escort_name') | translate }} *
-                    </label>
-                    <input type="text" class="form-control" [formControl]="forms.accompanying_beneficiary" />
-                  </div>
-                  <div class="col-12 col-md-6 top-containter">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
-                      {{ parseT('type_of_companion_document') | translate }}*
-                    </label>
-                    <select class="form-control" [formControl]="forms.type_identification_accompanying">
-                      <option value="">Seleccione</option>
-                      <option *ngFor="let identificationList of document_types_list" [value]="identificationList.id">
-                        {{ identificationList.name }}
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-12 col-md-6 top-containter">
-                    <label class="titleColor">
-                      <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
-                      {{ parseT('document_number_of_the_companion') | translate }}*
-                    </label>
-                    <input type="number" class="form-control" [formControl]="forms.number_identification_accompanying" />
+          <form [formGroup]="formCompanion">
+            <ng-container *ngIf="requiredCompanion">
+              <div class="col-12">
+                <div class="container-fluid widget">
+                  <div class="row">
+                    <div class="col-12 top-containter">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa-user-o text-primary-hr"></i>
+                        {{ parseT('escort_name') | translate }} *
+                      </label>
+                      <input type="text" class="form-control" [formControl]="formCompanion.controls.name" />
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+                        {{ parseT('type_of_companion_document') | translate }}*
+                      </label>
+                      <select class="form-control" [formControl]="formCompanion.controls.document_type">
+                        <option value="">Seleccione</option>
+                        <option *ngFor="let document_type of document_types_list" [value]="document_type.id">
+                          {{ document_type.label }}
+                        </option>
+                      </select>
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                        {{ parseT('document_number_of_the_companion') | translate }}*
+                      </label>
+                      <input type="number" class="form-control" [formControl]="formCompanion.controls.document_number" />
+                    </div>
+                    <div class="col-12 col-md-6 top-containter">
+                      <label class="titleColor">
+                        <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                        Telefono de contacto*
+                      </label>
+                      <input type="number" class="form-control" [formControl]="formCompanion.controls.phone" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </form>
           <div class="col-12 col-md-6 top-containter" *ngIf="formState('destiny')">
             <label class="titleColor">
               <i class="fa fa-fw fa-map-marker  text-primary-hr"></i>
               {{ parseT('destination') | translate }} *
             </label>
-            <select class="form-control" [formControl]="forms.destiny" (change)="selectedTrip(form)">
+            <select class="form-control" [formControl]="forms.destiny" (change)="getTrayects()">
               <option value="">Seleccione</option>
               <option *ngFor="let destiny of destinations_list" [value]="destiny.id">
                 {{ destiny.name }}
@@ -95,13 +104,12 @@
             <input type="text" class="form-control" [formControl]="forms.cost_center" />
           </div>
         </div>
-
         <div class="col-12">
-          <div class="container-fluid py-3">
+          <div class="container-fluid">
             <div class="row">
               <div class="col-12">
-                <div class="table-responsive mt-3">
-                  <ng-container *ngIf="trip.length > 0">
+                <div class="table-responsive">
+                  <ng-container *ngIf="trips.length > 0">
                     <table class="table table-sm table-striped table-bordered">
                       <thead>
                         <tr>
@@ -120,30 +128,19 @@
                         </tr>
                       </thead>
                       <tbody style="color: #fff;">
-                        <tr *ngFor="let trips of trip">
+                        <tr *ngFor="let trip of trips">
                           <td>
-                            {{ trips.plate }}
+                            {{ trip.plate }}
                           </td>
                           <td>
-                            {{ trips.durationTrayect }}
+                            {{ trip.date_time_departure }}
+                          </td>
+                          <td class="text-center">
+                            {{ trip.durationTrayect }}
                           </td>
                           <td>
-                            {{ trips.date_time_departure }}
-                          </td>
-                          <td>
-                            <div
-                              *ngIf="!active.Select"
-                              class="text-warning cursor-general number-size"
-                              (click)="selectedTrip(trips.id)"
-                            >
-                              <i class="fa fa-square-o"></i>
-                            </div>
-                            <div
-                              *ngIf="active.active"
-                              class="text-success cursor-general number-size"
-                              (click)="selectedTrip(trips.id)"
-                            >
-                              <i class="fa fa-check-square-o"></i>
+                            <div class="text-warning cursor-general number-size text-center" (click)="selectTrip(trip.id)">
+                              <i class="fa {{ forms.trips_journey.value === trip.id ? 'fa-check-square-o' : 'fa-square-o' }}"></i>
                             </div>
                           </td>
                         </tr>

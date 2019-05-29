@@ -8,7 +8,10 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
 import { Observable } from 'rxjs';
-import { TrasportationForm } from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
+import {
+  TrasportationForm,
+  Trayect,
+} from '../../../../models/common/travels_management/transportation-logistic/transport-logistic';
 import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { ISubscription } from 'rxjs/Subscription';
@@ -50,7 +53,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public id_journey: string;
   public modalState = true;
   public actuallyModalState = true;
-  public journeys: any[] = [];
+  public journeys: Trayect[] = [];
   public servicesList: any[] = [];
   public companiesList: any[] = [];
   public steps: any[] = [];
@@ -58,6 +61,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   public diffDays: number;
   public ngbModalRefTrans: NgbModalRef;
   public subscriptions: ISubscription[] = [];
+  public destinySelect: any[] = [];
 
   get forms() {
     return this.form.controls;
@@ -95,17 +99,21 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   getTrayects(id) {
     this.subscriptions.push(
       this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
-        this.journeys = res.data.trips_journeys.map(({ id, origin_place, destination_place, date_time_end, date_time_start }) => {
-          const dateTimeStart = new Date(date_time_start);
-          const durationTrayect = new Date(date_time_end || date_time_start);
-          return {
-            id,
-            origin: origin_place,
-            destiny: destination_place,
-            date_time_departure: dateTimeStart.toLocaleString(),
-            durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
-          };
-        });
+        this.journeys = res.data.trips_journeys.map(
+          ({ id, origin, destination_place, date_time_end, date_time_start, assigned_chairs, destiny }): Trayect => {
+            const dateTimeStart = new Date(date_time_start);
+            const durationTrayect = new Date(date_time_end || date_time_start);
+            return {
+              id,
+              origin: origin,
+              destiny: destination_place,
+              destiny_name: destiny,
+              assigned_chairs: assigned_chairs,
+              date_time_departure: dateTimeStart.toLocaleString(),
+              durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
+            };
+          },
+        );
       }),
     );
   }
@@ -140,7 +148,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
             destiny: [''],
             date_time_departure: [''],
             durationTrayect: [''],
-            reserved_chairs: [''],
+            assigned_chairs: [''],
           });
 
           this.ngbModalRefTrans = this.modalService.open(this.modalTemplate, {
@@ -154,6 +162,10 @@ export class NewTransportComponent implements OnInit, OnDestroy {
         }
       }),
     );
+
+    this.transportationLogisticsService.getDestinyFleets().subscribe((data: any) => {
+      this.destinySelect = data.data;
+    });
   }
 
   ngOnDestroy(): void {
@@ -233,22 +245,23 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   }
 
   addTrayect() {
-    const { origin, destiny, date_time_departure, durationTrayect, reserved_chairs } = this.form.controls;
+    const { origin, destiny, date_time_departure, durationTrayect, assigned_chairs } = this.form.controls;
     const id = uuid.v4();
     if (this.isNew) {
       this.journeys.push({
         origin: origin.value,
         destiny: destiny.value,
+        destiny_name: this.destinySelect.find(data => data.id == destiny.value).name,
         date_time_departure: date_time_departure.value,
         durationTrayect: durationTrayect.value,
-        reserved_chairs: reserved_chairs.value,
+        assigned_chairs: assigned_chairs.value,
         id,
       });
       origin.setValue('');
       destiny.setValue('');
       date_time_departure.setValue('');
       durationTrayect.setValue('');
-      reserved_chairs.setValue('');
+      assigned_chairs.setValue('');
     } else {
       this.transportationLogisticsService
         .createMoreTrayects(this.idVehicle, {
@@ -258,7 +271,7 @@ export class NewTransportComponent implements OnInit, OnDestroy {
               destiny: destiny.value,
               date_time_departure: date_time_departure.value,
               durationTrayect: durationTrayect.value,
-              reserved_chairs: reserved_chairs.value,
+              assigned_chairs: assigned_chairs.value,
             },
           ],
         })
