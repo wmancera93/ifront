@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   public showMenu = true;
   public showCollapse = '';
   public heightContenGeneral: number;
-  public showContactsList = true;
+  public showContactsList = false;
   private alertWarning: Alerts[];
 
   t(key) {
@@ -61,34 +61,17 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.getDataLocalStorage();
-      this.dataEnterprise = JSON.parse(
-        localStorage.getItem('enterprise'),
-      );
+      this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
       this.logoHeader = this.dataEnterprise.logo_inside.url;
 
-      if (
-        window
-          .getComputedStyle(
-            document.getElementById('btnMobile'),
-            null,
-          )
-          .getPropertyValue('display') === 'none'
-      ) {
+      if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'none') {
         this.showMenu = false;
-        (<HTMLInputElement>(
-          document.getElementsByClassName('heigth-content-general')[1]
-        )).style.display = 'block';
-        document.getElementById('footer_general').style.display =
-          'block';
+        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+        document.getElementById('footer_general').style.display = 'block';
       } else {
         if (this.showMenu === true) {
-          (<HTMLInputElement>(
-            document.getElementsByClassName(
-              'heigth-content-general',
-            )[1]
-          )).style.display = 'none';
-          document.getElementById('footer_general').style.display =
-            'none';
+          (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
+          document.getElementById('footer_general').style.display = 'none';
         }
       }
     }, 100);
@@ -109,82 +92,43 @@ export class HeaderComponent implements OnInit {
   }
 
   clickPartnersIcon() {
-    if (
-      window
-        .getComputedStyle(document.getElementById('btnMobile'), null)
-        .getPropertyValue('display') !== 'none'
-    ) {
+    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') !== 'none') {
       this.clickHideMenuMobile();
     }
 
-    if (document.getElementById('contactList').className === 'hide') {
-      document.getElementById('contactList').className = 'show';
+    if (this.showContactsList) {
       this.showContactsList = false;
     } else {
-      document.getElementById('contactList').className = 'show';
-      this.showContactsList = false;
+      this.showContactsList = true;
     }
   }
 
   clickPartnersIconHide() {
-    document.getElementById('contactList').classList.remove('show');
-    document.getElementById('contactList').className = 'hide';
-    this.showContactsList = true;
+    this.showContactsList = false;
   }
 
   clickHideMenuMobile() {
-    document.documentElement.style.setProperty(
-      `--margin-left-mobile`,
-      `-310px`,
-    );
-    document.documentElement.style.setProperty(
-      `--left-hide-menu`,
-      `-310px`,
-    );
-    document.documentElement.style.setProperty(
-      `--left-hide-menu-hover`,
-      `-310px`,
-    );
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = false;
     setTimeout(() => {
-      (<HTMLInputElement>(
-        document.getElementsByClassName('heigth-content-general')[1]
-      )).style.display = 'block';
-      document.getElementById('footer_general').style.display =
-        'block';
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+      document.getElementById('footer_general').style.display = 'block';
     }, 300);
   }
 
   clickShowMenuMobile() {
-    document.documentElement.style.setProperty(
-      `--margin-left-mobile`,
-      `0px`,
-    );
-    document.documentElement.style.setProperty(
-      `--left-hide-menu`,
-      `-310px`,
-    );
-    document.documentElement.style.setProperty(
-      `--left-hide-menu-hover`,
-      `-310px`,
-    );
+    document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
+    document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
+    document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = true;
-    (<HTMLInputElement>(
-      document.getElementsByClassName('heigth-content-general')[1]
-    )).style.display = 'none';
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.getElementById('footer_general').style.display = 'none';
 
-    if (
-      window
-        .getComputedStyle(document.getElementById('btnMobile'), null)
-        .getPropertyValue('display') === 'block'
-    ) {
-      if (
-        document.getElementById('contactList').classList[1] === 'show'
-      ) {
-        document
-          .getElementById('contactList')
-          .classList.remove('show');
+    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
+      if (this.showContactsList) {
+        this.showContactsList = false;
       }
     }
   }

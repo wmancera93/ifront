@@ -1,49 +1,24 @@
-<nav
-  id="mainNav"
-  class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3"
->
+<nav id="mainNav" class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3">
   <div class="col-12">
     <div class="row justify-content-between">
-      <div
-        id="btnMobile"
-        class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center"
-      >
+      <div id="btnMobile" class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
         <div class="row">
           <div
             id="btnHideMenu"
             *ngIf="showMenu"
-            class="nav-mobile-hide"
-            (click)="clickHideMenuMobile()"
-          >
-            <i class="fa fa-bars"></i>
-          </div>
-          <div
-            id="btnShowMenu"
-            *ngIf="!showMenu"
-            class="nav-mobile-show"
-            (click)="clickShowMenuMobile()"
+            class="{{ showMenu ? 'nav-mobile-hide' : 'nav-mobile-show' }}"
+            (click)="showMenu ? clickHideMenuMobile() : clickShowMenuMobile()"
           >
             <i class="fa fa-bars"></i>
           </div>
         </div>
       </div>
-      <div
-        *ngIf="!showMenu"
-        class="company-logo-header cursor-general img-zoom"
-      >
-        <img
-          src="{{ logoHeader }}"
-          style="width: 100%; height: 100%;"
-        />
+      <div *ngIf="!showMenu" class="company-logo-header cursor-general img-zoom">
+        <img src="{{ logoHeader }}" style="width: 100%; height: 100%;" />
       </div>
       <div class="col" *ngIf="!showMenu">
         <div class="row justify-content-end">
-          <div
-            *ngIf="showContactsList"
-            id="togglePartners"
-            class="cursor-general ng-star-inserted px-3 text-center"
-            (click)="clickPartnersIcon()"
-          >
+          <div id="togglePartners" class="cursor-general ng-star-inserted px-3 text-center" (click)="clickPartnersIcon()">
             <i class="fa fa-fw fa-users fa-lg"></i>
             <span class="hideText font-size-responsive ">
               {{ parseT('partner') | translate }}
@@ -63,11 +38,7 @@
                   {{ 'languaje' | translate }}
                 </span>
               </div>
-              <div
-                class="dropdown-menu"
-                style="min-width: 4rem;"
-                aria-labelledby="langujae"
-              >
+              <div class="dropdown-menu" style="min-width: 4rem;" aria-labelledby="langujae">
                 <button
                   class="dropdown-item"
                   type="button"
@@ -82,10 +53,7 @@
               </div>
             </div>
           </div>
-          <div
-            class="cursor-general px-3 text-center"
-            (click)="LogOut()"
-          >
+          <div class="cursor-general px-3 text-center" (click)="LogOut()">
             <i class="fa fa-fw fa-sign-out fa-lg"></i>
             <span class="hideText font-size-responsive">
               {{ parseT('out_door') | translate }}
@@ -93,78 +61,10 @@
           </div>
         </div>
       </div>
-      <!-- <div
-        class="col-md-4 col-lg-4 col-xl-2 col-3 align-self-center"
-        *ngIf="!showMenu"
-      >
-        <div class="row justify-content-end">
-          <div
-            *ngIf="showContactsList"
-            id="togglePartners"
-            class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom"
-            (click)="clickPartnersIcon()"
-          >
-            <i class="fa fa-fw fa-users fa-lg"></i>
-            <span class="hideText font-size-responsive ">
-              {{ parseT('partner') | translate }}
-            </span>
-          </div>
-          <div
-            *ngIf="!showContactsList"
-            id="togglePartnersHide"
-            class="col-md-8 col-lg-6 col-xl-7  col-6 text-center cursor-general img-zoom"
-            (click)="clickPartnersIconHide()"
-          >
-            <i class="fa fa-fw fa-users fa-lg"></i>
-            <span class="hideText font-size-responsive ">
-              {{ parseT('partner') | translate }}
-            </span>
-          </div>
-          <div class="col">
-            <div class="dropdown">
-              <button
-                class="btn btn-secondary dropdown-toggle"
-                type="button"
-                id="dropdownMenu2"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-              >
-                Dropdown
-              </button>
-              <div
-                class="dropdown-menu"
-                aria-labelledby="dropdownMenu2"
-              >
-                <button
-                  class="dropdown-item"
-                  type="button"
-                  *ngFor="let lang of translate.getLangs()"
-                  (change)="translate.use(lang)"
-                  [ngClass]="{
-                    active: lang === translate.currentLang
-                  }"
-                >
-                  {{ lang }}
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            class="col-md-4 col-lg-6 col-xl-5  col-6 text-center cursor-general img-zoom"
-            (click)="LogOut()"
-          >
-            <i class="fa fa-fw fa-sign-out fa-lg"></i>
-            <span class="hideText font-size-responsive">
-              {{ parseT('out_door') | translate }}
-            </span>
-          </div>
-        </div>
-      </div> -->
     </div>
   </div>
 </nav>
 <app-alerts></app-alerts>
-<div id="contactList" class="hide">
+<div [ngClass]="{ hide: !showContactsList }">
   <app-contacts-list></app-contacts-list>
 </div>
