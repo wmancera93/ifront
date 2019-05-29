@@ -23,7 +23,7 @@
             <select class="form-control" [formControl]="forms.type_identification">
               <option value="">Seleccione</option>
               <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
-                {{ identificationType.name }}
+                {{ identificationType.label }}
               </option>
             </select>
           </div>
