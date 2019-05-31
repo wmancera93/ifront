@@ -19,6 +19,8 @@ export class HousingReportComponent implements OnInit {
   public date_end: string = '';
   public name: string = '';
   public show: boolean = true;
+  public showPdf = false;
+  public showExcel = true;
   public objectReportHousing: EventEmitter<any> = new EventEmitter();
 
   constructor(public router: Router, public housingService: HousingService) {}

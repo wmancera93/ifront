@@ -27,6 +27,8 @@ export class TrasnportationReportComponent implements OnInit {
   public date_endTravel: string = '';
   public driver: string = '';
   public dateEndTravel: string;
+  public showPdf = false;
+  public showExcel = true;
   public show_message: boolean = true;
   public userAuthenticated: User = null;
   private subscriptions: ISubscription[] = [];
