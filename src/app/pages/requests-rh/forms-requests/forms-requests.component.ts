@@ -37,6 +37,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public showTime = true;
   public showDate = false;
   public modalState = true;
+  public is_payment = false;
 
   diffDays: number;
   lowerDate: boolean;
@@ -112,6 +113,9 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
         const { alias, minimum_days, maximum_days } = data;
         this.allForms.setCaseForm(alias);
+        if (alias === 'VITD') {
+          this.is_payment = true;
+        }
         const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
           forms.forEach(form => {
             formsDefault = {
@@ -175,6 +179,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         document.body.removeAttribute('style');
       }),
     );
+    this.is_payment = false;
   }
 
   ngOnInit() {}

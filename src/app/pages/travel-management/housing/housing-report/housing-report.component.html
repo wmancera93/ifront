@@ -1,4 +1,4 @@
-<!-- <div class="heigth-content-general">
+<div class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
@@ -46,19 +46,20 @@
                 <i class="fa fa-plus"></i>
                 {{ parseT('filter_report') | translate }}
               </a>
-                <div
-                  class="dropdown-menu col-12"
-                  aria-labelledby="navbarDropdown"
-                  style="overflow-y: auto !important; max-height: 400px !important"
-                >
-                  <div *ngFor="let arraysSelect of arraySelect; let i = index">
-                    <a
-                      class="dropdown-item color-font-gree text-capitalize cursor-general btn-block"
-                      (click)="selectTypeReport(arraysSelect)"
-                      >{{ arraysSelect.name }}</a>
-                    <div *ngIf="arraySelect.length !== i + 1" class="dropdown-divider"></div>
-                  </div>
+              <div
+                class="dropdown-menu col-12"
+                aria-labelledby="navbarDropdown"
+                style="overflow-y: auto !important; max-height: 400px !important"
+              >
+                <div *ngFor="let arraysSelect of arraySelect; let i = index">
+                  <a
+                    class="dropdown-item color-font-gree text-capitalize cursor-general btn-block"
+                    (click)="selectTypeReport(arraysSelect)"
+                    >{{ arraysSelect.name }}</a
+                  >
+                  <div *ngIf="arraySelect.length !== i + 1" class="dropdown-divider"></div>
                 </div>
+              </div>
             </li>
           </ul>
         </div>
@@ -91,11 +92,7 @@
       </div>
       <div class="collapse top-general-p border-botton-general" id="collapseFilter">
         <div class="row align-items-center" style="padding-bottom: 15px">
-          <div class="col-lg-3 col-md-6 col-12">
-            <label>{{ parseT('name_housing') | translate }}</label>
-            <input type="text" [(ngModel)]="personal_number" class="form-control" />
-          </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('date_begin') | translate }}</label>
             <input
               tabindex="-1"
@@ -106,7 +103,7 @@
               (change)="validateDateAllowance()"
             />
           </div>
-          <div class="col-lg-3 col-md-6 col-12">
+          <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('date_end') | translate }}</label>
             <input
               tabindex="-1"
@@ -117,8 +114,16 @@
               (change)="validateDateAllowance()"
             />
           </div>
-          <div class="col-lg-3 col-md-12 col-12 align-self-end">
-            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="!btnConsult ? 'pointer' : 'no-drop'">
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>Nombre empleado</label>
+            <input type="text" [(ngModel)]="name" class="form-control" />
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>{{ parseT('name_housing') | translate }}</label>
+            <input type="text" [(ngModel)]="housing_id" class="form-control" />
+          </div>
+          <div class="col-lg-4 col-md-12 col-12 align-self-end">
+            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="btnConsult ? 'pointer' : 'no-drop'">
               <i class="fa fa-search-plus"></i>
               {{ parseT('consult') | translate }}
             </div>
@@ -126,7 +131,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-center top-general-p">
+      <div class="row justify-content-center top-general-p" *ngIf="!show">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             {{ parseT('message_negative') | translate }}
@@ -134,14 +139,11 @@
         </div>
       </div>
 
-      <div
-        class="row justify-content-center top-containter mt-3"
-        *ngIf="showDataTableAllowance"
-      >
+      <div class="row justify-content-center top-containter mt-3">
         <div class="col-12">
           <app-data-table
-            [records]="objectReportAllowances"
-            id="tableReportAllowances"
+            [records]="objectReportHousing"
+            id="tableReportHousing"
             [pdf]="showPdf"
             [excel]="showExcel"
             [title]="parseT('name_table_ts') | translate"
@@ -150,4 +152,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>

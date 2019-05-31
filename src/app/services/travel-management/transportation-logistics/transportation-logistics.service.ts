@@ -38,8 +38,7 @@ export class TransportationLogisticsService {
     plate: string,
     destiny: string,
     dateTravel: string,
-    availability: string,
-    ocupation: string,
+    dateEndTravel: string,
     typeTransport: string,
   ) {
     return this.tokenService
@@ -53,9 +52,7 @@ export class TransportationLogisticsService {
           '/' +
           dateTravel +
           '/' +
-          availability +
-          '/' +
-          ocupation +
+          dateEndTravel +
           '/' +
           typeTransport,
       )
@@ -66,5 +63,9 @@ export class TransportationLogisticsService {
   }
   getTrayectRequestsFleet(idDestiny: string) {
     return this.tokenService.get('transportation_destinations/' + idDestiny + '/journeys').map((data: any) => data.json());
+  }
+  getTrayecReportExcel(pernr: number, id: string){
+    return this.tokenService.get('transport_report/transport_export_employee/' + pernr + '/' + id)
+      .map(data => data);
   }
 }
