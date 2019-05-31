@@ -68,9 +68,6 @@
                     <th class="text-center">
                       {{ parseT('time') | translate }}
                     </th>
-                    <th class="text-center">
-                      Sillas reservadas
-                    </th>
                     <th class="text-center" *ngIf="readOnlyFleet">
                       Sillas tomadas
                     </th>
@@ -95,9 +92,6 @@
                     </td>
                     <td class="text-center">
                       {{ journey.durationTrayect }}
-                    </td>
-                    <td class="text-center">
-                      {{ journey.assigned_chairs || 0 }}
                     </td>
                     <td class="text-center" *ngIf="readOnlyFleet">
                       {{ journey.assigned_seats_approved || 0}}
