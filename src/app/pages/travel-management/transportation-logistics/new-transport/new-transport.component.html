@@ -75,7 +75,7 @@
                       Sillas tomadas
                     </th>
                     <th class="text-center" *ngIf="readOnlyFleet">
-                      Sillas disponibles
+                      Sillas asignadas
                     </th>
                     <th class="text-center" *ngIf="!readOnlyFleet">
                       {{ parseT('erase') | translate }}
@@ -97,13 +97,13 @@
                       {{ journey.durationTrayect }}
                     </td>
                     <td class="text-center">
-                      {{ journey.assigned_seats_pending || 0 }}
-                    </td>
-                    <td class="text-center" *ngIf="readOnlyFleet">
-                      {{ journey.taken_chairs || 0}}
+                      {{ journey.assigned_chairs || 0 }}
                     </td>
                     <td class="text-center" *ngIf="readOnlyFleet">
                       {{ journey.assigned_seats_approved || 0}}
+                    </td>
+                    <td class="text-center" *ngIf="readOnlyFleet">
+                      {{ journey.assigned_seats_pending || 0}}
                     </td>
                     <td width="10px" *ngIf="!readOnlyFleet">
                       <button
