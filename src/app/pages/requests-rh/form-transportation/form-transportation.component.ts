@@ -201,12 +201,13 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
 
   getTrayects() {
     this.transportationLogisticsService.getTrayectRequestsFleet(this.form.controls.destiny.value).subscribe((trayect: any) => {
-      this.trips = trayect.data.map(({ id, plate, date_time_end, date_time_start }) => {
+      this.trips = trayect.data.map(({ id, plate, date_time_end, date_time_start, origin }) => {
         const dateTimeStart = new Date(date_time_start);
         const durationTrayect = new Date(date_time_end || date_time_start);
         return {
           id,
           plate,
+          origin,
           date_time_departure: dateTimeStart.toLocaleString(),
           durationTrayect: Math.round((durationTrayect.getTime() - dateTimeStart.getTime()) / (1000 * 60 * 60)),
         };
