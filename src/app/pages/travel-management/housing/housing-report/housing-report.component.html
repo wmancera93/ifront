@@ -121,7 +121,7 @@
             <input type="text" [(ngModel)]="housing_id" class="form-control" />
           </div>
           <div class="col-lg-4 col-md-12 col-12 align-self-end">
-            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="btnConsult ? 'pointer' : 'no-drop'">
+            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="btnConsult ? 'pointer' : 'no-drop'" (click)="getTable()">
               <i class="fa fa-search-plus"></i>
               {{ parseT('consult') | translate }}
             </div>

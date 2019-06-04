@@ -29,6 +29,7 @@ export class HousingReportComponent implements OnInit {
     this.getTable();
     this.arraySelect = this.housingService.getReportLogistics();
   }
+
   getTable() {
     this.housingService.getHousingReport(this.date_begin, this.date_end, this.name, this.housing_id).subscribe((data: any) => {
       if (data) {
@@ -37,6 +38,7 @@ export class HousingReportComponent implements OnInit {
       this.objectReportHousing.emit(data);
     });
   }
+
   log(param) {
     console.log(param);
   }
