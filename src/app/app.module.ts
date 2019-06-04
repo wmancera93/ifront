@@ -24,7 +24,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { baseUrl } from '../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 export class MyMissingTranslationHandler implements MissingTranslationHandler {
   handle({ key }: MissingTranslationHandlerParams) {
@@ -40,10 +40,25 @@ export class CustomLoader implements TranslateLoader {
   constructor(private http: Http) {}
 
   public getTranslation(lang: String): Observable<any> {
-    return this.http.get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`).map((res: any) => {
-      console.log(JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd);
-      return JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
-    });
+    const event = new Subject();
+    this.http
+      .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
+      .map((res: any) => {
+        const languaje = JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
+        console.log(languaje);
+        localStorage.setItem(`languaje-${lang}`, JSON.stringify(languaje));
+        return languaje;
+      })
+      .subscribe(
+        data => {
+          event.next(data);
+        },
+        error => {
+          event.next(JSON.parse(localStorage.getItem(`languaje-${lang}`) || ''));
+          return error;
+        },
+      );
+    return event;
   }
 }
 
