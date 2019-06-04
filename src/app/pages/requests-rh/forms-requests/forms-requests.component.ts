@@ -37,6 +37,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public showTime = true;
   public showDate = false;
   public modalState = true;
+  public is_payment = true;
 
   diffDays: number;
   lowerDate: boolean;
@@ -112,6 +113,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
         const { alias, minimum_days, maximum_days } = data;
         this.allForms.setCaseForm(alias);
+        this.is_payment = alias !== 'VITD';
         const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
           forms.forEach(form => {
             formsDefault = {

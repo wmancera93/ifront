@@ -80,8 +80,8 @@ export class TravelManagementComponent implements OnInit {
         translate: false,
         icon_primary: 'fa fa-table',
         icon_secundary: 'fa fa-bus',
-        tooltipText: 'Aqui puede ver los cupos de viaje',
-        route: '/ihr/logistics_reports',
+        tooltipText: 'Aqui puede ver los repotes de campamentos',
+        route: '/ihr/housing_reports',
       },
     ];
 

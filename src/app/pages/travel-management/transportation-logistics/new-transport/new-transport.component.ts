@@ -100,10 +100,11 @@ export class NewTransportComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.transportationLogisticsService.getDetailFleets(id).subscribe((res: any) => {
         this.journeys = res.data.trips_journeys.map(
-          ({ id, origin, destination_place, date_time_end, date_time_start, assigned_chairs, destiny }): Trayect => {
+          ({ id, origin, destination_place, date_time_end, date_time_start, assigned_chairs, destiny, ...rest }): Trayect => {
             const dateTimeStart = new Date(date_time_start);
             const durationTrayect = new Date(date_time_end || date_time_start);
             return {
+              ...rest,
               id,
               origin: origin,
               destiny: destination_place,

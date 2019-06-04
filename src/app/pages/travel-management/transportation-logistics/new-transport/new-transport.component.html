@@ -68,8 +68,11 @@
                     <th class="text-center">
                       {{ parseT('time') | translate }}
                     </th>
-                    <th class="text-center">
-                      Sillas reservadas
+                    <th class="text-center" *ngIf="readOnlyFleet">
+                      Sillas tomadas
+                    </th>
+                    <th class="text-center" *ngIf="readOnlyFleet">
+                      Sillas asignadas
                     </th>
                     <th class="text-center" *ngIf="!readOnlyFleet">
                       {{ parseT('erase') | translate }}
@@ -90,8 +93,11 @@
                     <td class="text-center">
                       {{ journey.durationTrayect }}
                     </td>
-                    <td>
-                      {{ journey.assigned_chairs }}
+                    <td class="text-center" *ngIf="readOnlyFleet">
+                      {{ journey.assigned_seats_approved || 0}}
+                    </td>
+                    <td class="text-center" *ngIf="readOnlyFleet">
+                      {{ journey.assigned_seats_pending || 0}}
                     </td>
                     <td width="10px" *ngIf="!readOnlyFleet">
                       <button

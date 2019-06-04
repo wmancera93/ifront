@@ -58,6 +58,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
                   case 'TRNB':
                   case 'TRAN':
                   case 'TRNT':
+                  case 'AUXL':
                     this.is_logistic = true;
                     break;
                   default:

@@ -1,4 +1,4 @@
-<!-- <div class="heigth-content-general">
+<div class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
@@ -93,6 +93,11 @@
       <div class="collapse top-general-p border-botton-general" id="collapseFilter">
         <div class="row align-items-center" style="padding-bottom: 15px">
           <div class="col-lg-4 col-md-6 col-12">
+            <label>Conductor</label>
+            <input type="text" [(ngModel)]="driver" class="form-control" />
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('plate') | translate }}</label>
             <input type="text" [(ngModel)]="plate" class="form-control" />
           </div>
@@ -100,24 +105,24 @@
             <label>{{ parseT('destiny') | translate }}</label>
             <input type="text" [(ngModel)]="destiny" class="form-control" />
           </div>
+        </div>
+        <div class="row align-items-center" style="padding-bottom: 15px">
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>{{ parseT('date_begin') | translate }}</label>
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_beginTravel" />
+          </div>
+          <div class="col-lg-4 col-md-6 col-12">
+            <label>Fecha final</label>
+            <input tabindex="-1" type="date" name="date_end" class="form-control" [(ngModel)]="date_endTravel" />
+          </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label>Tipo de transporte</label>
             <input type="text" [(ngModel)]="typeTransport" class="form-control" />
           </div>
-        </div>
-        <div class="row align-items-center" style="padding-bottom: 15px">
-          <div class="col-lg-4 col-md-6 col-12">
-            <label>Conductor</label>
-            <input type="text" [(ngModel)]="driver" class="form-control" />
-          </div>
-          <div class="col-lg-4 col-md-6 col-12">
-            <label>{{ parseT('date_begin') | translate }}</label>
-            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="dateTravel" />
-          </div>
-          <div class="col-lg-4 col-md-12 col-12 align-self-end">
+          <div class="col-lg-4 col-md-12 col-12 align-self-end mt-3">
             <div
               class="btn btn-block btn-primary-second fontDate "
-              [style.cursor]="!btnConsult ? 'pointer' : 'no-drop'"
+              [style.cursor]="btnConsult ? 'pointer' : 'no-drop'"
               (click)="getReport()"
             >
               <i class="fa fa-search-plus"></i>
@@ -127,7 +132,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-center top-general-p">
+      <div class="row justify-content-center top-general-p" *ngIf="show_message">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             {{ parseT('message_negative') | translate }}
@@ -135,7 +140,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-center top-containter mt-3" *ngIf="showDataTableAllowance">
+      <div class="row justify-content-center top-containter mt-3">
         <div class="col-12">
           <app-data-table
             [records]="objectReportFleets"
@@ -148,4 +153,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
