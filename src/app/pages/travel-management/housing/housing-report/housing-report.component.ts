@@ -29,7 +29,15 @@ export class HousingReportComponent implements OnInit {
     this.getTable();
     this.arraySelect = this.housingService.getReportLogistics();
   }
-  getTable() {
+  getTable(){
+    this.housingService.getHousingReportFirst().subscribe((data: any) => {
+      if (data) {
+        this.show = false;
+      }
+      this.objectReportHousing.emit(data);
+    });
+  }
+  getTableFirts() {
     this.housingService.getHousingReport(this.date_begin, this.date_end, this.name, this.housing_id).subscribe((data: any) => {
       if (data) {
         this.show = false;

@@ -160,11 +160,11 @@
                                     <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].details_request.housing !== null">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-home"></i>
                                     Alojamiento seleccionado:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span style="font-weight: 100 !important">{{ detailRequets[0].details_request.housing }}</span>
                                   </p>
                                 </div>
                                 <div class="col-12 text-md-left text-center">
