@@ -24,10 +24,7 @@ export class TravelManagementComponent implements OnInit {
     return `pages.travel_management.${key}`;
   }
 
-  constructor(
-    public tooltipSharedService: TooltipSharedService,
-    public translate: TranslateService,
-  ) {}
+  constructor(public tooltipSharedService: TooltipSharedService, public translate: TranslateService) {}
 
   ngOnInit() {
     this.getDataUserPermissions();
@@ -249,8 +246,8 @@ export class TravelManagementComponent implements OnInit {
       },
       show: this.flagShowTooltip,
       position: {
-        positionX: event.clientX - event.target.clientWidth / 2,
-        positionY: event.clientY,
+        positionX: event.pageX - event.target.clientWidth / 2,
+        positionY: event.pageY,
       },
     });
   }

@@ -45,6 +45,7 @@ export class HousingReportComponent implements OnInit {
       this.objectReportHousing.emit(data);
     });
   }
+
   log(param) {
     console.log(param);
   }
