@@ -131,7 +131,6 @@
           </div>
         </div>
       </div>
-
       <div class="row justify-content-center top-general-p" *ngIf="show_message">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
@@ -139,7 +138,6 @@
           </div>
         </div>
       </div>
-
       <div class="row justify-content-center top-containter mt-3">
         <div class="col-12">
           <app-data-table
@@ -147,7 +145,7 @@
             id="tableReportFleest"
             [pdf]="showPdf"
             [excel]="showExcel"
-            [title]="parseT('name_table_ts') | translate"
+            [title]="title_table || (parseT('name_table_ts') | translate)"
           ></app-data-table>
         </div>
       </div>

@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./time-line-approvers.component.css'],
 })
 export class TimeLineApproversComponent implements OnInit, OnDestroy {
-  public detailRequets: any = {};
+  public dataRequets: any = {};
   public fileSupport = '';
   public viewModal = false;
   public dateFirts: string;
@@ -20,6 +20,11 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public is_edu: boolean = false;
   public is_logistic: boolean = false;
   public subscriptions: Subscription[] = [];
+
+  get detailRequest() {
+    return this.dataRequets.details_request;
+  }
+
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
@@ -40,12 +45,11 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
           this.requests_print = data.type_request;
           this.subscriptions.push(
             this.requestsRhService.getRequestDetailById(data.request.ticket).subscribe((detail: any) => {
-              debugger;
-              this.detailRequets = [];
+              this.dataRequets = [];
               if (detail.success) {
-                this.detailRequets = detail.data;
-                this.fileSupport = this.detailRequets[0].request.image.url;
-                const { date_begin_format, date_end_format, show_alias } = this.detailRequets[0].request;
+                this.dataRequets = detail.data[0];
+                this.fileSupport = this.dataRequets.request.image.url;
+                const { date_begin_format, date_end_format, show_alias } = this.dataRequets.request;
                 switch (show_alias) {
                   case 'EDUS':
                   case 'EDUI':
@@ -90,10 +94,10 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
             travel_requests_type_name,
             ticket,
           } = data.request;
-          this.detailRequets = [];
+          this.dataRequets = [];
           this.requests_print = data.type_request;
 
-          this.detailRequets.push({
+          this.dataRequets.push({
             message_pending_level_approver: null,
             pending_level_approver: pending_level_approver,
             request: {
@@ -137,6 +141,6 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe);
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

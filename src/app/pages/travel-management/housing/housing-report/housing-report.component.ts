@@ -18,7 +18,8 @@ export class HousingReportComponent implements OnInit {
   public date_begin: string = '';
   public date_end: string = '';
   public name: string = '';
-  public show: boolean = true;
+  public titleTable: string = '';
+  public show_error: boolean = true;
   public showPdf = false;
   public showExcel = true;
   public objectReportHousing: EventEmitter<any> = new EventEmitter();
@@ -31,11 +32,12 @@ export class HousingReportComponent implements OnInit {
   }
 
   getTable() {
-    this.housingService.getHousingReport(this.date_begin, this.date_end, this.name, this.housing_id).subscribe((data: any) => {
-      if (data) {
-        this.show = false;
+    this.housingService.getHousingReport(this.date_begin, this.date_end, this.name, this.housing_id).subscribe((res: any) => {
+      if (res) {
+        this.show_error = false;
       }
-      this.objectReportHousing.emit(data);
+      this.titleTable = res.data[0].title_table;
+      this.objectReportHousing.emit(res);
     });
   }
 

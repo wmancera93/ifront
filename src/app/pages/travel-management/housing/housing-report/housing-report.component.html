@@ -94,23 +94,11 @@
         <div class="row align-items-center" style="padding-bottom: 15px">
           <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('date_begin') | translate }}</label>
-            <input
-              tabindex="-1"
-              type="date"
-              name="date_begin"
-              class="form-control"
-              [(ngModel)]="date_begin"
-            />
+            <input tabindex="-1" type="date" name="date_begin" class="form-control" [(ngModel)]="date_begin" />
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label>{{ parseT('date_end') | translate }}</label>
-            <input
-              tabindex="-1"
-              type="date"
-              name="date_end"
-              class="form-control "
-              [(ngModel)]="date_end"
-            />
+            <input tabindex="-1" type="date" name="date_end" class="form-control " [(ngModel)]="date_end" />
           </div>
           <div class="col-lg-4 col-md-6 col-12">
             <label>Nombre empleado</label>
@@ -121,7 +109,11 @@
             <input type="text" [(ngModel)]="housing_id" class="form-control" />
           </div>
           <div class="col-lg-4 col-md-12 col-12 align-self-end">
-            <div class="btn btn-block btn-primary-second fontDate " [style.cursor]="btnConsult ? 'pointer' : 'no-drop'" (click)="getTable()">
+            <div
+              class="btn btn-block btn-primary-second fontDate "
+              [style.cursor]="btnConsult ? 'pointer' : 'no-drop'"
+              (click)="getTable()"
+            >
               <i class="fa fa-search-plus"></i>
               {{ parseT('consult') | translate }}
             </div>
@@ -129,7 +121,7 @@
         </div>
       </div>
 
-      <div class="row justify-content-center top-general-p" *ngIf="!show">
+      <div class="row justify-content-center top-general-p" *ngIf="show_error">
         <div class="col-lg-8 col-12 text-center">
           <div class="alert alert-warning" role="alert">
             {{ parseT('message_negative') | translate }}
@@ -144,7 +136,7 @@
             id="tableReportHousing"
             [pdf]="showPdf"
             [excel]="showExcel"
-            [title]="parseT('name_table_ts') | translate"
+            [title]="titleTable || (parseT('name_table_ts') | translate)"
           ></app-data-table>
         </div>
       </div>

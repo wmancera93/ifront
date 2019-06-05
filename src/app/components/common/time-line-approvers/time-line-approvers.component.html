@@ -12,7 +12,7 @@
       <div class="modal-header borderLine-title row-hr justify-content-center">
         <div class="col-12 col-lg-10 text-center text-lg-left">
           <h4 class="modal-title titleColor text-shadow">
-            {{ detailRequets[0].title }}
+            {{ dataRequets.title }}
           </h4>
         </div>
       </div>
@@ -29,12 +29,12 @@
               <div class="panel-heading" *ngIf="requests_print == 'requestsOnly'">
                 <h2 class="panel-title text-capitalize">
                   {{ parseT('request') | translate }}
-                  {{ detailRequets[0].request.type_requests_name | lowercase }}
+                  {{ dataRequets.request.type_requests_name | lowercase }}
                 </h2>
               </div>
               <div class="panel-heading" *ngIf="requests_print != 'requestsOnly'">
                 <h2 class="panel-title text-capitalize">
-                  {{ detailRequets[0].request.type_requests_name | lowercase }}
+                  {{ dataRequets.request.type_requests_name | lowercase }}
                 </h2>
               </div>
               <div class="row">
@@ -43,10 +43,7 @@
                     <div class="row">
                       <div class="col-12 col-md-4 col-lg-2 center-img-employee">
                         <div class="menu-img-employee">
-                          <img
-                            src="{{ detailRequets[0].request.employee_applicant_to_json.image.url }}"
-                            class="roundPhoto-employee"
-                          />
+                          <img src="{{ dataRequets.request.employee_applicant_to_json.image.url }}" class="roundPhoto-employee" />
                           <br />
                         </div>
                       </div>
@@ -54,80 +51,71 @@
                         <div class="row">
                           <div class="col-12">
                             <h3 class="font-color-default">
-                              {{ detailRequets[0].request.employee_applicant_to_json.short_name }}
+                              {{ dataRequets.request.employee_applicant_to_json.short_name }}
                             </h3>
                           </div>
                           <div class="col-12">
                             <p class="font-title-general">
-                              {{ detailRequets[0].request.employee_applicant_to_json.posicion }}
+                              {{ dataRequets.request.employee_applicant_to_json.posicion }}
                             </p>
                           </div>
                           <div class="col-12 text-left">
                             <div class="row">
-                              <div
-                                class="col-12 text-md-left text-center"
-                                *ngIf="detailRequets[0].request.date_begin_format !== null"
-                              >
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.date_begin_format !== null">
                                 <p class="font-title-general">
                                   <i class=" font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_begin') | translate }}:
                                   <span style="font-weight: 100 !important">{{ dateFirts | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
-                              <div
-                                class="col-12 text-md-left text-center"
-                                *ngIf="detailRequets[0].request.date_end_format !== null"
-                              >
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.date_end_format !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_end') | translate }}:
                                   <span style="font-weight: 100 !important"> {{ dateFinally | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.days_request !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.days_request !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-sun-o"></i>
                                   {{ parseT('requested_days') | translate }}:
-                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.days_request }}</span>
+                                  <span style="font-weight: 100 !important">{{ dataRequets.request.days_request }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.work_days !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.work_days !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-address-card"></i>
                                   Dias habiles solicitados:
-                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.work_days }}</span>
+                                  <span style="font-weight: 100 !important">{{ dataRequets.request.work_days }}</span>
                                 </p>
                               </div>
-                              <div
-                                class="col-12 text-md-left text-center"
-                                *ngIf="detailRequets[0].request.non_work_days !== null"
-                              >
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.non_work_days !== null">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-gamepad"></i>
                                   Dias no habiles solicitados:
-                                  <span style="font-weight: 100 !important">{{ detailRequets[0].request.non_work_days }}</span>
+                                  <span style="font-weight: 100 !important">{{ dataRequets.request.non_work_days }}</span>
                                 </p>
                               </div>
                               <ng-container *ngIf="is_edu">
-                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.name_family">
+                                <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.name_family">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-graduation-cap"></i>
                                     Beneficiario:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span style="font-weight: 100 !important">{{ dataRequets.request.name_family }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.name_institute">
+                                <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.name_institute">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-university"></i>
                                     Institución:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_institute }}</span>
+                                    <span style="font-weight: 100 !important">{{ dataRequets.request.name_institute }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center" *ngIf="detailRequets[0].request.total_ammount">
+                                <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.total_ammount">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-money"></i>
                                     Monto solicitado:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.total_ammount }}</span>
+                                    <span style="font-weight: 100 !important">{{ dataRequets.request.total_ammount }}</span>
                                   </p>
                                 </div>
                               </ng-container>
@@ -136,42 +124,74 @@
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-user-circle"></i>
                                     Beneficiario:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span style="font-weight: 100 !important">{{ dataRequets.request.name_family }}</span>
                                   </p>
                                 </div>
                                 <div class="col-12 text-md-left text-center">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-user-o"></i>
                                     Nombre Personal externo:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
                                   </p>
                                 </div>
                                 <div class="col-12 text-md-left text-center">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-users"></i>
                                     Nombre Acompañante:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.city">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-map-marker"></i>
                                     Destino:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ detailRequest.city }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.third_name">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-user-secret"></i>
+                                    Nombre de la persona externa:
+                                    <span class="font-weight-normal">{{ detailRequest.third_name }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.third_phone">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-phone-square"></i>
+                                    Telefono de la persona externa:
+                                    <span class="font-weight-normal">{{ detailRequest.third_phone }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.housing">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-home"></i>
                                     Alojamiento seleccionado:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ detailRequest.housing }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.arrival_date">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-calendar-plus-o"></i>
+                                    Fecha de llegada:
+                                    <span class="font-weight-normal">
+                                      {{ detailRequest.arrival_date | date: 'dd/MM/yyyy' }}
+                                    </span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.departure_date">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-calendar-minus-o"></i>
+                                    Fecha de salida:
+                                    <span class="font-weight-normal">
+                                      {{ detailRequest.departure_date | date: 'dd/MM/yyyy' }}
+                                    </span>
                                   </p>
                                 </div>
                                 <div class="col-12 text-md-left text-center">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-car"></i>
                                     Vehiculo de viaje:
-                                    <span style="font-weight: 100 !important">{{ detailRequets[0].request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
                                   </p>
                                 </div>
                               </ng-container>
@@ -188,15 +208,13 @@
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa fa-comment"></i>
                                   {{ parseT('observations') | translate }}:
-                                  <span style="font-weight: 100 !important">{{
-                                    detailRequets[0].request.observation_request
-                                  }}</span>
+                                  <span style="font-weight: 100 !important">{{ dataRequets.request.observation_request }}</span>
                                 </p>
                               </div>
                               <div class="col-12 text-center">
                                 <p class="font-title-general">
                                   {{ parseT('created') | translate }}:
-                                  <time class="font-color-default">{{ detailRequets[0].request.created_date }}</time>
+                                  <time class="font-color-default">{{ dataRequets.request.created_date }}</time>
                                 </p>
                               </div>
                             </div>
@@ -209,8 +227,8 @@
               </div>
             </article>
 
-            <div *ngIf="detailRequets[0].request.answers_to_json">
-              <div *ngFor="let answer of detailRequets[0].request.answers_to_json">
+            <div *ngIf="dataRequets.request.answers_to_json">
+              <div *ngFor="let answer of dataRequets.request.answers_to_json">
                 <div class="separator text-muted"></div>
 
                 <article class="panel panel-success">
@@ -307,7 +325,7 @@
               </div>
             </div>
 
-            <div *ngIf="detailRequets[0].pending_level_approver?.level">
+            <div *ngIf="dataRequets.pending_level_approver?.level">
               <div class="separator text-muted"></div>
 
               <article class="panel panel-danger">
@@ -317,7 +335,7 @@
                 <div class="panel-heading">
                   <h2 class="panel-title">
                     {{ parseT('approver') | translate }}
-                    {{ detailRequets[0].pending_level_approver.level }}
+                    {{ dataRequets.pending_level_approver.level }}
                   </h2>
                 </div>
                 <div class="row">
@@ -327,7 +345,7 @@
                         <div class="col-12 col-md-4 col-lg-2 center-img-employee">
                           <div class="menu-img-employee">
                             <img
-                              src="{{ detailRequets[0].pending_level_approver.approver_employee.image.url }}"
+                              src="{{ dataRequets.pending_level_approver.approver_employee.image.url }}"
                               class="roundPhoto-employee"
                             />
                             <br />
@@ -337,12 +355,12 @@
                           <div class="row">
                             <div class="col-12">
                               <h3 class="font-color-default">
-                                {{ detailRequets[0].pending_level_approver.approver_employee.name_complete }}
+                                {{ dataRequets.pending_level_approver.approver_employee.name_complete }}
                               </h3>
                             </div>
                             <div class="col-12">
                               <p class="font-title-general">
-                                {{ detailRequets[0].pending_level_approver.approver_employee.position }}
+                                {{ dataRequets.pending_level_approver.approver_employee.position }}
                               </p>
                             </div>
                             <div class="col-12 text-left">
@@ -371,7 +389,7 @@
               </article>
             </div>
 
-            <div *ngIf="detailRequets[0].message_pending_level_approver !== null">
+            <div *ngIf="dataRequets.message_pending_level_approver !== null">
               <div class="separator text-muted"></div>
 
               <article class="panel panel-danger">
@@ -389,7 +407,7 @@
                             </div>
                             <div class="col-12">
                               <p class="font-title-general">
-                                {{ detailRequets[0].message_pending_level_approver }}
+                                {{ dataRequets.message_pending_level_approver }}
                               </p>
                             </div>
                           </div>

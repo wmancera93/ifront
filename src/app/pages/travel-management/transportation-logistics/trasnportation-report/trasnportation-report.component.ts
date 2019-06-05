@@ -22,6 +22,7 @@ export class TrasnportationReportComponent implements OnInit {
   public selectReport: any[] = [];
   public plate: string = '';
   public destiny: string = '';
+  public title_table: string = '';
   public typeTransport: string = '';
   public date_beginTravel: string = '';
   public date_endTravel: string = '';
@@ -42,7 +43,7 @@ export class TrasnportationReportComponent implements OnInit {
 
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-        debugger
+        debugger;
         if (data.action_method === 'showEmployeeTrip') {
           this.printExcel(data.id);
         }
@@ -70,6 +71,7 @@ export class TrasnportationReportComponent implements OnInit {
         if (data) {
           this.show_message = false;
         }
+        this.title_table = data.data[0].title;
         this.objectReportFleets.emit(data);
       });
   }
