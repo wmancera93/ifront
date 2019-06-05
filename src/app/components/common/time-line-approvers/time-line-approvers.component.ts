@@ -54,6 +54,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
                   case 'EDUS':
                   case 'EDUI':
                   case 'EDUB':
+                  case 'AUXL':
                     this.is_edu = true;
                     break;
                   case 'HOUS':
@@ -62,7 +63,6 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
                   case 'TRNB':
                   case 'TRAN':
                   case 'TRNT':
-                  case 'AUXL':
                     this.is_logistic = true;
                     break;
                   default:

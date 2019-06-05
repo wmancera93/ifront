@@ -66,6 +66,7 @@ export class HousingService {
       )
       .map(data => data.json());
   }
+
   getHousingReportExcel(pernr: number, date_in: string, date_end: string, name: string, housing: string) {
     return this.tokenService
       .get(
