@@ -169,24 +169,24 @@
               </div>
               <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
                 <p class="font-title-general">{{ parseT('status') | translate }}:</p>
-                <h6 *ngIf="request.status == (parseT('status_approved') | translate)">
+                <h6 *ngIf="request.status_id == 'ReqApp'">
                   <span class="badge badge-primary">
-                    {{ request.status }}
+                    {{ parseT('status_approved') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == (parseT('status_cancelled') | translate)">
+                <h6 *ngIf="request.status_id == 'ReqCan'">
                   <span class="badge badge-danger">
-                    {{ request.status }}
+                    {{ parseT('status_cancelled') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == (parseT('status_in_Process') | translate)">
+                <h6 *ngIf="request.status_id == 'ReqPro'">
                   <span class="badge badge-success">
-                    {{ request.status }}
+                    {{ parseT('status_in_Process') | translate }}
                   </span>
                 </h6>
-                <h6 *ngIf="request.status == (parseT('status_pending') | translate)">
+                <h6 *ngIf="request.status_id == 'ReqPen'">
                   <span class="badge badge-dark">
-                    {{ request.status }}
+                    {{ parseT('status_pending') | translate }}
                   </span>
                 </h6>
               </div>

@@ -94,11 +94,11 @@
                 <h6
                   *ngIf="
                     managed.status ==
-                    (parseT('status_approver') | translate)
+                    (parseT('status_Approver') | translate)
                   "
                 >
                   <span class="badge badge-primary">
-                    {{ parseT('status') | translate }}
+                    {{ parseT('status_Approver') | translate }}
                   </span>
                 </h6>
                 <h6
@@ -108,17 +108,17 @@
                   "
                 >
                   <span class="badge badge-danger">
-                    {{ parseT('status') | translate }}
+                    {{ parseT('status_cancelled') | translate }}
                   </span>
                 </h6>
                 <h6
                   *ngIf="
                     managed.status ==
-                    (parseT('status_in_Process') | translate)
+                    (parseT('status_inProcess') | translate)
                   "
                 >
                   <span class="badge badge-success">
-                    {{ parseT('status') | translate }}
+                    {{ parseT('status_inProcess') | translate }}
                   </span>
                 </h6>
                 <h6
@@ -128,7 +128,7 @@
                   "
                 >
                   <span class="badge badge-default">
-                    {{ parseT('status') | translate }}
+                    {{ parseT('status_pending') | translate }}
                   </span>
                 </h6>
               </div>

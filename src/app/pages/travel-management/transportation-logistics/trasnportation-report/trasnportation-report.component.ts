@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit, EventEmitter, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { HousingService } from '../../../../services/travel-management/housing/housing.service';
 import { TransportationLogisticsService } from '../../../../services/travel-management/transportation-logistics/transportation-logistics.service';
@@ -11,7 +11,7 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
   templateUrl: './trasnportation-report.component.html',
   styleUrls: ['./trasnportation-report.component.css'],
 })
-export class TrasnportationReportComponent implements OnInit {
+export class TrasnportationReportComponent implements OnInit, OnDestroy {
   parseT(key) {
     return `pages.travel_management.transportation_logistics.transportation_report.${key}`;
   }
@@ -29,10 +29,10 @@ export class TrasnportationReportComponent implements OnInit {
   public driver: string = '';
   public dateEndTravel: string;
   public showPdf = false;
-  public showExcel = true;
+  public showExcel = false;
   public show_message: boolean = true;
   public userAuthenticated: User = null;
-  private subscriptions: ISubscription[] = [];
+  private LogisticsSubscriptions: ISubscription[] = [];
   constructor(
     public router: Router,
     public housingService: HousingService,
@@ -41,9 +41,8 @@ export class TrasnportationReportComponent implements OnInit {
   ) {
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
 
-    this.subscriptions = [
+    this.LogisticsSubscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe((data: any) => {
-        debugger;
         if (data.action_method === 'showEmployeeTrip') {
           this.printExcel(data.id);
         }
@@ -58,22 +57,24 @@ export class TrasnportationReportComponent implements OnInit {
   }
 
   getReport() {
-    this.transportationLogisticsService
-      .getReportFleets(
-        this.driver === '' ? '-1' : this.driver,
-        this.plate === '' ? '-1' : this.plate,
-        this.destiny === '' ? '-1' : this.destiny,
-        this.date_beginTravel === '' ? '-1' : this.date_beginTravel,
-        this.date_endTravel === '' ? '-1' : this.date_endTravel,
-        this.typeTransport === '' ? '-1' : this.typeTransport,
-      )
-      .subscribe((data: any) => {
-        if (data) {
-          this.show_message = false;
-        }
-        this.title_table = data.data[0].title;
-        this.objectReportFleets.emit(data);
-      });
+    this.LogisticsSubscriptions.push(
+      this.transportationLogisticsService
+        .getReportFleets(
+          this.driver === '' ? '-1' : this.driver,
+          this.plate === '' ? '-1' : this.plate,
+          this.destiny === '' ? '-1' : this.destiny,
+          this.date_beginTravel === '' ? '-1' : this.date_beginTravel,
+          this.date_endTravel === '' ? '-1' : this.date_endTravel,
+          this.typeTransport === '' ? '-1' : this.typeTransport,
+        )
+        .subscribe((data: any) => {
+          if (data) {
+            this.show_message = false;
+          }
+          this.title_table = data.data[0].title;
+          this.objectReportFleets.emit(data);
+        }),
+    );
   }
 
   returnBack() {
@@ -82,17 +83,26 @@ export class TrasnportationReportComponent implements OnInit {
 
   collapse(param: boolean) {
     this.is_collapse = param;
+    this.driver = '';
+    this.plate = '';
+    this.destiny = '';
+    this.date_beginTravel = '';
+    this.date_endTravel = '';
+    this.typeTransport = '';
   }
   selectTypeReport(array: any) {
     this.router.navigate(['ihr/' + array.code]);
   }
   printExcel(id_trayect) {
-    this.subscriptions.push(
+    this.LogisticsSubscriptions.push(
       this.transportationLogisticsService
         .getTrayecReportExcel(this.userAuthenticated.employee_id, id_trayect)
         .subscribe((data: any) => {
           window.open(data.url);
         }),
     );
+  }
+  ngOnDestroy() {
+    this.LogisticsSubscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

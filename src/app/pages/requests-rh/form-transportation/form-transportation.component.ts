@@ -151,7 +151,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
       request_type_id: this.formRequests.id,
       destiny: '',
       cost_center: employee.cost_center || '',
-      city: ['', required],
+      city: employee.city || '',
       address: employee.address || '',
       phone: '',
       benefist: [
@@ -161,7 +161,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
             // tslint:disable-next-line: triple-equals
             const benefist = this.benefists_list.find(({ id }) => id == value);
             if (benefist) {
-              if (benefist.benef_age < 20) {
+              if (benefist.benef_age < 18) {
                 this.getTypeDocument();
                 this.requiredCompanion = true;
               } else {

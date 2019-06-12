@@ -7,6 +7,7 @@ import { FormState } from '../../../components/common/dynamic-form/utils/form.st
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
+import { User } from '../../../models/general/user';
 
 @Component({
   selector: 'app-form-housing',
@@ -49,6 +50,8 @@ export class FormHousingComponent implements OnInit, OnDestroy {
       housing: true,
       arrival_date: true,
       departure_date: true,
+      cost_center:true,
+
     },
   });
 
@@ -102,6 +105,8 @@ export class FormHousingComponent implements OnInit, OnDestroy {
       this.identificationTypes = data.data;
     });
 
+    const { employee }: User = JSON.parse(localStorage.getItem('user'));
+    
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
@@ -155,6 +160,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
           return this.formState('document_number') && this.idActivity === 'HOUT' ? required(control) : null;
         },
       ],
+      cost_center: employee.cost_center || '',
       bed: '',
       file: '',
       name:'',
@@ -187,7 +193,6 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   }
 
   getBeedRoms(id) {
-    debugger
     this.beds = [];
     this.loadingRoms = true;
     this.requestsRhService.getListBedsHousing(id).subscribe((res: any) => {
@@ -207,7 +212,6 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   }
 
   handleChooseRoom(value) {
-    debugger
     this.choose_room = value;
     if (value) {
       this.getBeedRoms(this.forms.housing.value);

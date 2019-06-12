@@ -99,7 +99,7 @@
                               <ng-container *ngIf="is_edu">
                                 <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.name_family">
                                   <p class="font-title-general">
-                                    <i class="font-color-default fa fa-fw fa-graduation-cap"></i>
+                                    <i class="font-color-default fa fa-fw fa-user-circle"></i>
                                     Beneficiario:
                                     <span style="font-weight: 100 !important">{{ dataRequets.request.name_family }}</span>
                                   </p>
@@ -120,32 +120,18 @@
                                 </div>
                               </ng-container>
                               <ng-container *ngIf="is_logistic">
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.name_family">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-user-circle"></i>
                                     Beneficiario:
-                                    <span style="font-weight: 100 !important">{{ dataRequets.request.name_family }}</span>
+                                    <span style="font-weight: 100 !important">{{ detailRequest.name_family }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center">
-                                  <p class="font-title-general">
-                                    <i class="font-color-default fa fa-fw fa-user-o"></i>
-                                    Nombre Personal externo:
-                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
-                                  </p>
-                                </div>
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.companion_beneficiary_name">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-users"></i>
                                     Nombre Acompañante:
-                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
-                                  </p>
-                                </div>
-                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.city">
-                                  <p class="font-title-general">
-                                    <i class="font-color-default fa fa-fw fa-map-marker"></i>
-                                    Destino:
-                                    <span class="font-weight-normal">{{ detailRequest.city }}</span>
+                                    <span class="font-weight-normal">{{ detailRequest.companion_beneficiary_name }}</span>
                                   </p>
                                 </div>
                                 <div class="col-12 text-md-left text-center" *ngIf="detailRequest.third_name">
@@ -169,15 +155,7 @@
                                     <span class="font-weight-normal">{{ detailRequest.housing }}</span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.arrival_date">
-                                  <p class="font-title-general">
-                                    <i class="font-color-default fa fa-fw fa-calendar-plus-o"></i>
-                                    Fecha de llegada:
-                                    <span class="font-weight-normal">
-                                      {{ detailRequest.arrival_date | date: 'dd/MM/yyyy' }}
-                                    </span>
-                                  </p>
-                                </div>
+                                
                                 <div class="col-12 text-md-left text-center" *ngIf="detailRequest.departure_date">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-calendar-minus-o"></i>
@@ -187,11 +165,34 @@
                                     </span>
                                   </p>
                                 </div>
-                                <div class="col-12 text-md-left text-center">
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.arrival_date">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-calendar-plus-o"></i>
+                                    Fecha de llegada:
+                                    <span class="font-weight-normal">
+                                      {{ detailRequest.arrival_date | date: 'dd/MM/yyyy' }}
+                                    </span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.cost_center">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-money"></i>
+                                    Centro de costo:
+                                    <span class="font-weight-normal">{{ detailRequest.cost_center }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.vehicle">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-car"></i>
                                     Vehiculo de viaje:
-                                    <span class="font-weight-normal">{{ dataRequets.request.name_family }}</span>
+                                    <span class="font-weight-normal">{{ detailRequest.vehicle }}</span>
+                                  </p>
+                                </div>
+                                <div class="col-12 text-md-left text-center" *ngIf="detailRequest.destiny">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-hospital-o"></i>
+                                    Campamento destino:
+                                    <span class="font-weight-normal">{{ detailRequest.destiny }}</span>
                                   </p>
                                 </div>
                               </ng-container>

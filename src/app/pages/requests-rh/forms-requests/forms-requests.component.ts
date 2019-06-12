@@ -316,10 +316,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     let dateBegin = date_begin.value === ' ' ? null : new Date(date_begin.value);
     let dateEnd = date_end.value === ' ' ? null : new Date(date_end.value);
 
-    if ((dateBegin || dateEnd) !== null) {
-      this.diffDays = dateEnd.getDate() - dateBegin.getDate();
-    }
-    if (this.diffDays < 0) {
+    if (new Date(date_begin.value) > new Date(date_end.value)) {
       this.modalActions.close();
       this.lowerDate = true;
       const alertDataWrong: Alerts[] = [
