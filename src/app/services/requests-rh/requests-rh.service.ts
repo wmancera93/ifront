@@ -36,4 +36,7 @@ export class RequestsRhService {
   getListTypeDocument() {
     return this.tokenService.get('document_types').map((data: any) => data.json());
   }
+  getListVitalDays() {
+    return this.tokenService.get('workdays_type').map((data: any) => data.json());
+  }
 }

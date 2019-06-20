@@ -31,14 +31,16 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public filePermisionMarriage = 'fileMarriage';
   public fileInability = 'fileInability';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
-  public forms: any;
+  public forms: FormGroup;
   public detectLetter = ' ';
   public today: any;
   public showTime = true;
   public showDate = false;
   public modalState = true;
   public is_payment = true;
-
+  public temporal: any = null;
+  public sumatoria: number = 0;
+  public isfull: boolean = false;
   diffDays: number;
   lowerDate: boolean;
 
@@ -46,6 +48,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     cases: {
       VITD: {
         days_available: true,
+        date_begin: false,
+        date_end: false,
       },
       PRSC: { start_time: true, end_time: true },
       INCA: { file_sopport: true },
@@ -80,6 +84,11 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     return this.formRequests.alias;
   }
 
+  get taken_vital_days(): any {
+    if (this.forms) return this.forms!.controls!.taken_vital_days;
+    return null;
+  }
+
   private subscriptions: ISubscription[] = [];
 
   t(key): string {
@@ -106,11 +115,18 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         this.file = object.file;
       }),
     );
+    this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'continueVtd') {
+        this.modalState = true;
+        this.forms.controls.vitalDate.setValue('');
+      }
+    });
 
     this.subscriptions.push(
       this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
         this.formRequests = data;
-
+        this.sumatoria = 0;
+        this.isfull = false;
         const { alias, minimum_days, maximum_days } = data;
         this.allForms.setCaseForm(alias);
         this.is_payment = alias !== 'VITD';
@@ -125,7 +141,17 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         };
         this.forms = fb.group({
           request_type_id: this.formRequests.id,
-          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time', 'prepayment']),
+          ...formBuild([
+            'date_begin',
+            'days_request',
+            'file_support',
+            'start_time',
+            'end_time',
+            'prepayment',
+            'vitalDay',
+            'vitalJourney',
+          ]),
+          taken_vital_days: [],
           date_end: [
             '',
             (control: AbstractControl) => {
@@ -137,6 +163,24 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
                     return Validators.required(control);
                   }
                 }
+              }
+              return null;
+            },
+          ],
+          vitalDate: [
+            '',
+            ({ value }: AbstractControl) => {
+              let exist = false;
+              try {
+                exist = this.taken_vital_days!.value!.find(taken_vital_day => taken_vital_day.day_taken == value);
+              } catch (error) {
+                exist = false;
+              }
+              if ((new Date(value).getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24) < 0) {
+                return { isInvalid: true };
+              }
+              if (exist) {
+                return { existed: true };
               }
               return null;
             },
@@ -179,14 +223,68 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.requestsRhService.getListVitalDays().subscribe((data: any) => {
+      this.temporal = data.data;
+    });
+  }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
+  addVtd() {
+    const { vitalDay, vitalDate, vitalJourney, taken_vital_days } = this.forms.controls;
+    taken_vital_days.setValue([
+      {
+        day_taken: vitalDate.value,
+        workdays_type: vitalJourney.value,
+        extra: {
+          vitalDay: vitalDay.value,
+          day_taken: vitalDate.value,
+          workdays_type: this.temporal.find(result => result.id == vitalJourney.value).label,
+        },
+      },
+      ...(taken_vital_days.value || []),
+    ]);
+
+    this.sumatoria = parseFloat(this.temporal.find(result => result.id == vitalJourney.value).quantity) + (this.sumatoria! ? this.sumatoria : 0);
+    if (this.sumatoria >= 2) {
+      this.isfull = true;
+    } else {
+      this.isfull = false;
+    }
+    if (this.sumatoria > 2) {
+      this.modalState = false;
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: 'Excede el numero de dias vitales',
+        confirmation: true,
+        typeConfirmation: 'continueVtd',
+      } as Alerts);
+
+      this.deleteVitalDay(taken_vital_days[length - 1], taken_vital_days.value[0]);
+    }
+    vitalDay.setValue('');
+    vitalDate.setValue('');
+    vitalJourney.setValue('');
+  }
+
+  setJourney(param) {
+    if (param == 'Día') {
+      this.forms.controls.vitalJourney.setValue('3');
+    }
+  }
+
+  deleteVitalDay(i: number, object: any) {
+    const array: any[] = this.taken_vital_days.value;
+    array.splice(i, 1);
+    this.isfull = false;
+    this.sumatoria = this.sumatoria - parseFloat(this.temporal.find(result => result.label == object.extra.workdays_type).quantity);
+  }
   newRequest(model) {
-    console.log(model);
+    this.sumatoria = 0;
     // document.getElementById("loginId").style.display = 'block';
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
     this.showSubmit = false;
@@ -345,7 +443,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     //   } as Alerts);
     // }
     if (dateBegin !== null && this.formRequests.maximum_days === 1) {
-      date_end.value = date_begin.value;
+      date_end.setValue(date_begin.value);
     }
     if (dateBegin !== null || dateEnd !== null) {
       if (date_begin.value === date_end.value) {
@@ -353,6 +451,27 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       } else {
         this.showTime = false;
       }
+    }
+  }
+
+  vitalValidate() {
+    if (this.forms.controls.vitalDate.invalid) {
+      this.modalState = false;
+      const { existed, isInvalid } = this.forms.controls.vitalDate.errors;
+      let message;
+      if (existed) {
+        message = 'No es posible solicitar el mismo día';
+      }
+      if (isInvalid) {
+        message = 'La fecha del dia vital no puede ser igual o menor que la actual';
+      }
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message,
+        confirmation: true,
+        typeConfirmation: 'continueVtd',
+      } as Alerts);
     }
   }
 }

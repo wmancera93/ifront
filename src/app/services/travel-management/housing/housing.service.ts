@@ -70,7 +70,7 @@ export class HousingService {
   getHousingReportExcel(pernr: number, date_in: string, date_end: string, name: string, housing: string) {
     return this.tokenService
       .get(
-        'housing_report/transport_export_employee/' +
+        'housing_report/employee_export_employee/' +
           pernr +
           '?departure_date=' +
           date_in +

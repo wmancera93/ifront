@@ -155,7 +155,7 @@
                                     <span class="font-weight-normal">{{ detailRequest.housing }}</span>
                                   </p>
                                 </div>
-                                
+
                                 <div class="col-12 text-md-left text-center" *ngIf="detailRequest.departure_date">
                                   <p class="font-title-general">
                                     <i class="font-color-default fa fa-fw fa-calendar-minus-o"></i>
@@ -193,6 +193,18 @@
                                     <i class="font-color-default fa fa-fw fa-hospital-o"></i>
                                     Campamento destino:
                                     <span class="font-weight-normal">{{ detailRequest.destiny }}</span>
+                                  </p>
+                                </div>
+                              </ng-container>
+                              <ng-container *ngIf="is_vtd">
+                                <div class="col-12 text-md-left text-center" *ngFor="let dayTaken of detailVitalDay">
+                                  <p class="font-title-general">
+                                    <i class="font-color-default fa fa-fw fa-calendar"></i>
+                                    Día Seleccionado:
+                                    <span class="font-weight-normal">{{ dayTaken.day_taken }}</span>
+                                    <i class="font-color-default fa fa-fw fa-sun-o"></i>
+                                    Jornada:
+                                    <span class="font-weight-normal">{{ dayTaken.workday_type }}</span>
                                   </p>
                                 </div>
                               </ng-container>

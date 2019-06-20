@@ -115,7 +115,6 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
   offAprovlas() {
     this.switch = 'off';
   }
-
   saveApproval() {
     this.showSubmit = false;
     // document.getElementById("loginId").style.display = 'block'

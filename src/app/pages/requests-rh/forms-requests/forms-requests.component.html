@@ -79,7 +79,105 @@
             </div>
           </div>
         </div>
-        <div *ngIf="formRequests.alias == 'VACA' || formRequests.alias == 'VITD'" class="row justify-content-center">
+        <div *ngIf="formRequests.alias == 'VITD'" class="row justify-content-center">
+          <div class="col-12 mt-4">
+            <div class="container-fluid mt-2" style="border: solid  1px var(--primary);">
+              <div class="row p-2">
+                <div class="col-12 mt-4" *ngIf="taken_vital_days.value?.length">
+                  <div class="table-responsive mt-3">
+                    <table class="table table-sm table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Tiempo requerido</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Jornada</th>
+                          <th class="text-center">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody style="color: #fff;">
+                        <tr *ngFor="let requiredTime of taken_vital_days.value; let i = index">
+                          <td class="text-center">
+                            {{ requiredTime.extra.vitalDay }}
+                          </td>
+                          <td class="text-center">
+                            {{ requiredTime.extra.day_taken }}
+                          </td>
+                          <td class="text-center">
+                            {{ requiredTime.extra.workdays_type }}
+                          </td>
+                          <td width="10px">
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="deleteVitalDay(i, requiredTime)"
+                            >
+                              <i class="fa fa-minus"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-10 col-xl-11 mt-3" *ngIf="!isfull">
+                  <div class="container mb-3">
+                    <div class="row">
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-star-half-o text-primary-hr"></i>
+                          Tiempo solicitado*
+                        </label>
+                        <select
+                          class="form-control"
+                          [formControl]="forms.controls.vitalDay"
+                          (change)="setJourney(forms.controls.vitalDay.value)"
+                        >
+                          <option value="">Seleccione</option>
+                          <option value="Día">Día</option>
+                          <option value="Medio día">Medio día</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                          Fecha*
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          [formControl]="forms.controls.vitalDate"
+                          (change)="vitalValidate()"
+                        />
+                      </div>
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-sun-o text-primary-hr"></i>
+                          Jornada*
+                        </label>
+                        <select class="form-control" [formControl]="forms.controls.vitalJourney">
+                          <option value="">Seleccione</option>
+                          <ng-container *ngFor="let temporales of temporal">
+                            <option [value]="temporales.id">
+                              {{ temporales.label }}
+                            </option>
+                          </ng-container>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf="!isfull">
+                  <div class="w-100 my-auto">
+                    <button type="button" class="btn btn-success btn-block cursor-general w-100" (click)="addVtd()">
+                      <i class=" fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'VACA'" class="row justify-content-center">
           <ng-container *ngIf="formRequests.available_days !== 0">
             <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_begin')">
               <ng-template [ngTemplateOutlet]="date_begin"></ng-template>

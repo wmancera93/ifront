@@ -19,12 +19,15 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public requests_print: string;
   public is_edu: boolean = false;
   public is_logistic: boolean = false;
+  public is_vtd: boolean = false;
   public subscriptions: Subscription[] = [];
 
   get detailRequest() {
     return this.dataRequets.details_request;
   }
-
+  get detailVitalDay() {
+    return this.dataRequets.request.days_request_details;
+  }
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
@@ -65,6 +68,9 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
                   case 'TRNT':
                     this.is_logistic = true;
                     break;
+                  case 'VITD':
+                    this.is_vtd = true;
+                    break;
                   default:
                 }
 
@@ -81,6 +87,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
           );
           this.is_edu = false;
           this.is_logistic = false;
+          this.is_vtd = false;
         }
         if (data.type_request == 'requestsTravels') {
           const {

@@ -109,7 +109,9 @@
                         </p>
                       </div>
                     </div>
+                    <div class="row">
                     <ng-container *ngIf="isEdu">
+                     
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].name_family">
                         <p class="font-title-general">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
@@ -133,7 +135,7 @@
                       </div>
                     </ng-container>
                     <ng-container *ngIf="isLogistics">
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.name_family">
+                      <div class="col-12  text-md-left text-center" *ngIf="approvals[0].details_request.name_family">
                         <p class="font-title-general">
                           <i class="font-color-default fa fa-fw fa-user-circle"></i>
                           Beneficiario:
@@ -212,6 +214,7 @@
                         </p>
                       </div>
                     </ng-container>
+                    </div>
                   </div>
                   <div class="col-lg-6 col-12 text-md-left text-left">
                     <div class="row">

@@ -161,7 +161,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
             // tslint:disable-next-line: triple-equals
             const benefist = this.benefists_list.find(({ id }) => id == value);
             if (benefist) {
-              if (benefist.benef_age < 18) {
+              if (benefist.benef_age < 20) {
                 this.getTypeDocument();
                 this.requiredCompanion = true;
               } else {

@@ -55,31 +55,7 @@ export class TravelManagementComponent implements OnInit {
         icon_secundary: 'fa fa-usd',
         tooltipText: 'message_wiget_allowance_ts',
         route: '/ihr/spend',
-      },
-      {
-        title: 'Gestión de alojamientos',
-        translate: false,
-        icon_primary: 'fa fa-circle-thin',
-        icon_secundary: 'fa fa-bed',
-        tooltipText: 'Aqui puede crear campamentos',
-        route: '/ihr/housing',
-      },
-      {
-        title: 'Gestión de Transporte',
-        translate: false,
-        icon_primary: 'fa fa-bus',
-        icon_secundary: 'fa fa-users',
-        tooltipText: 'Aqui puede organizar flotas',
-        route: '/ihr/logistics_transportations',
-      },
-      {
-        title: 'Reporte de Flotas',
-        translate: false,
-        icon_primary: 'fa fa-table',
-        icon_secundary: 'fa fa-bus',
-        tooltipText: 'Aqui puede ver los repotes de campamentos',
-        route: '/ihr/housing_reports',
-      },
+      }
     ];
 
     const { employee } = this.dataUserTravels;
@@ -165,72 +141,72 @@ export class TravelManagementComponent implements OnInit {
         }
       }
     }
-    // switch (this.dataUserTravels.company_id) {
-    //   case 12:
-    //     if (employee.is_travel_manager) {
-    //       this.buttonInfo = [
-    //         {
-    //           title: 'Gestión de alojamientos',
-    //           translate: false,
-    //           icon_primary: 'fa fa-circle-thin',
-    //           icon_secundary: 'fa fa-bed',
-    //           tooltipText: 'Aqui puede crear campamentos',
-    //           route: '/ihr/housing',
-    //         },
-    //         {
-    //           title: 'Gestión de Transporte',
-    //           translate: false,
-    //           icon_primary: 'fa fa-bus',
-    //           icon_secundary: 'fa fa-users',
-    //           tooltipText: 'Aqui puede organizar flotas',
-    //           route: '/ihr/logistics_transportations',
-    //         },
-    //         {
-    //           title: 'Reporte de Flotas',
-    //           translate: false,
-    //           icon_primary: 'fa fa-table',
-    //           icon_secundary: 'fa fa-bus',
-    //           tooltipText: 'Aqui puede ver los cupos de viaje',
-    //           route: '/ihr/logistics_reports',
-    //         },
-    //       ];
-    //     }
-    //     break;
-    //   case 4:
-    //     if (!employee.is_travel_manager) {
-    //       this.buttonInfo = [
-    //         ...this.buttonInfo,
-    //         {
-    //           title: 'Gestión de alojamientos',
-    //           translate: false,
-    //           icon_primary: 'fa fa-circle-thin',
-    //           icon_secundary: 'fa fa-bed',
-    //           tooltipText: 'Aqui puede crear campamentos',
-    //           route: '/ihr/housing',
-    //         },
-    //         {
-    //           title: 'Gestión de Transporte',
-    //           translate: false,
-    //           icon_primary: 'fa fa-bus z-index-10',
-    //           icon_secundary: 'fa fa-users z-index-1',
-    //           tooltipText: 'Aqui puede organizar flotas',
-    //           route: '/ihr/logistics_transportations',
-    //         },
-    //         {
-    //           title: 'Reporte de Flotas',
-    //           translate: false,
-    //           icon_primary: 'fa fa-table',
-    //           icon_secundary: 'fa fa-bus',
-    //           tooltipText: 'Aqui puede ver los cupos de viaje',
-    //           route: '/ihr/housing_reports',
-    //         },
-    //       ];
-    //     }
-    //     break;
+    switch (this.dataUserTravels.company_id) {
+      case 12:
+        if (employee.is_travel_manager) {
+          this.buttonInfo = [
+            {
+              title: 'Gestión de alojamientos',
+              translate: false,
+              icon_primary: 'fa fa-circle-thin',
+              icon_secundary: 'fa fa-bed',
+              tooltipText: 'Aqui puede crear campamentos',
+              route: '/ihr/housing',
+            },
+            {
+              title: 'Gestión de Transporte',
+              translate: false,
+              icon_primary: 'fa fa-bus',
+              icon_secundary: 'fa fa-users',
+              tooltipText: 'Aqui puede organizar flotas',
+              route: '/ihr/logistics_transportations',
+            },
+            {
+              title: 'Reporte de Flotas',
+              translate: false,
+              icon_primary: 'fa fa-table',
+              icon_secundary: 'fa fa-bus',
+              tooltipText: 'Aqui puede ver los cupos de viaje',
+              route: '/ihr/logistics_reports',
+            },
+          ];
+        }
+        break;
+      case 4:
+        if (!employee.is_travel_manager) {
+          this.buttonInfo = [
+            ...this.buttonInfo,
+            {
+              title: 'Gestión de alojamientos',
+              translate: false,
+              icon_primary: 'fa fa-circle-thin',
+              icon_secundary: 'fa fa-bed',
+              tooltipText: 'Aqui puede crear campamentos',
+              route: '/ihr/housing',
+            },
+            {
+              title: 'Gestión de Transporte',
+              translate: false,
+              icon_primary: 'fa fa-bus z-index-10',
+              icon_secundary: 'fa fa-users z-index-1',
+              tooltipText: 'Aqui puede organizar flotas',
+              route: '/ihr/logistics_transportations',
+            },
+            {
+              title: 'Reporte de Flotas',
+              translate: false,
+              icon_primary: 'fa fa-table',
+              icon_secundary: 'fa fa-bus',
+              tooltipText: 'Aqui puede ver los cupos de viaje',
+              route: '/ihr/housing_reports',
+            },
+          ];
+        }
+        break;
 
-    //   default:
-    //     break;
-    // }
+      default:
+        break;
+     }
   }
 
   getDataUserPermissions() {
