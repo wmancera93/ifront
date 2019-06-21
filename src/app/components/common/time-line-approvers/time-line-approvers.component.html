@@ -61,35 +61,35 @@
                           </div>
                           <div class="col-12 text-left">
                             <div class="row">
-                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.date_begin_format !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dateFirts">
                                 <p class="font-title-general">
                                   <i class=" font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_begin') | translate }}:
                                   <span style="font-weight: 100 !important">{{ dateFirts | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.date_end_format !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dateFinally">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-calendar"></i>
                                   {{ parseT('date_end') | translate }}:
                                   <span style="font-weight: 100 !important"> {{ dateFinally | date: 'dd/MM/yyyy' }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.days_request !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.days_request">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-sun-o"></i>
                                   {{ parseT('requested_days') | translate }}:
                                   <span style="font-weight: 100 !important">{{ dataRequets.request.days_request }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.work_days !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.work_days">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-address-card"></i>
                                   Dias habiles solicitados:
                                   <span style="font-weight: 100 !important">{{ dataRequets.request.work_days }}</span>
                                 </p>
                               </div>
-                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.non_work_days !== null">
+                              <div class="col-12 text-md-left text-center" *ngIf="dataRequets.request.non_work_days">
                                 <p class="font-title-general">
                                   <i class="font-color-default fa fa-fw fa-gamepad"></i>
                                   Dias no habiles solicitados:

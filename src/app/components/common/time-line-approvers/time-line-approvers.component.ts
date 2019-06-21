@@ -101,10 +101,8 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
             travel_requests_type_name,
             ticket,
           } = data.request;
-          this.dataRequets = [];
           this.requests_print = data.type_request;
-
-          this.dataRequets.push({
+          this.dataRequets = {
             message_pending_level_approver: null,
             pending_level_approver: pending_level_approver,
             request: {
@@ -121,7 +119,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
               type_requests_name: travel_requests_type_name,
             },
             title: this.t('detail_requests') + ticket,
-          });
+          };
 
           this.dateFirts = date_begin;
           this.dateFinally = date_end;
