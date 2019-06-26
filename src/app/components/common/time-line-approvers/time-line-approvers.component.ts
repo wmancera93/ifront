@@ -57,6 +57,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
                   case 'EDUS':
                   case 'EDUI':
                   case 'EDUB':
+                  case 'EDUU':
                   case 'AUXL':
                     this.is_edu = true;
                     break;

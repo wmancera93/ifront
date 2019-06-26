@@ -125,8 +125,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   }
 
   getObjectRequests() {
-    this.subscriptions = [
-      ...this.subscriptions,
+    this.subscriptions.push(
       this.requestsRhService.getAllRequests().subscribe((res: any) => {
         if (res.success) {
           const { request_types, ...rest } = res.data[0];
@@ -154,7 +153,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
         //   document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:auto");
         // }, 1000)
       }),
-    ];
+    );
   }
 
   returnBackPage() {

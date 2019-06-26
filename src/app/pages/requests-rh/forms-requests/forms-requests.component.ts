@@ -37,10 +37,11 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public showTime = true;
   public showDate = false;
   public modalState = true;
-  public is_payment = true;
+  public is_payment = false;
   public temporal: any = null;
   public sumatoria: number = 0;
   public isfull: boolean = false;
+  public ambiente: string;
   diffDays: number;
   lowerDate: boolean;
 
@@ -129,7 +130,38 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         this.isfull = false;
         const { alias, minimum_days, maximum_days } = data;
         this.allForms.setCaseForm(alias);
-        this.is_payment = alias !== 'VITD';
+
+        const url = window.location.href;
+        debugger;
+        if (url.split('localhost').length === 1) {
+          if (url.split('-').length > 1) {
+            this.ambiente = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
+          }
+        } else {
+          this.ambiente = 'development';
+        }
+
+        switch (this.ambiente) {
+          case 'development':
+          case 'dev':
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 11) {
+              this.is_payment = true;
+            }
+
+            break;
+          case 'staging':
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 12) {
+              this.is_payment = true;
+            }
+            break;
+
+          default:
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 32) {
+              this.is_payment = true;
+            }
+            break;
+        }
+
         const formBuild = (forms: string[], formsDefault: Object = {}): Object => {
           forms.forEach(form => {
             formsDefault = {
@@ -248,7 +280,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       ...(taken_vital_days.value || []),
     ]);
 
-    this.sumatoria = parseFloat(this.temporal.find(result => result.id == vitalJourney.value).quantity) + (this.sumatoria! ? this.sumatoria : 0);
+    this.sumatoria =
+      parseFloat(this.temporal.find(result => result.id == vitalJourney.value).quantity) + (this.sumatoria! ? this.sumatoria : 0);
     if (this.sumatoria >= 2) {
       this.isfull = true;
     } else {
@@ -281,7 +314,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     const array: any[] = this.taken_vital_days.value;
     array.splice(i, 1);
     this.isfull = false;
-    this.sumatoria = this.sumatoria - parseFloat(this.temporal.find(result => result.label == object.extra.workdays_type).quantity);
+    this.sumatoria =
+      this.sumatoria - parseFloat(this.temporal.find(result => result.label == object.extra.workdays_type).quantity);
   }
   newRequest(model) {
     this.sumatoria = 0;
