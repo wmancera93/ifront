@@ -173,17 +173,9 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         };
         this.forms = fb.group({
           request_type_id: this.formRequests.id,
-          ...formBuild([
-            'date_begin',
-            'days_request',
-            'file_support',
-            'start_time',
-            'end_time',
-            'prepayment',
-            'vitalDay',
-            'vitalJourney',
-          ]),
+          ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time', 'vitalDay', 'vitalJourney']),
           taken_vital_days: [],
+          prepayment: '',
           date_end: [
             '',
             (control: AbstractControl) => {
