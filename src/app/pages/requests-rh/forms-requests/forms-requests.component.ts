@@ -144,7 +144,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         switch (this.ambiente) {
           case 'development':
           case 'dev':
-            if (JSON.parse(localStorage.getItem('enterprise')).id === 11) {
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 11 || JSON.parse(localStorage.getItem('enterprise')).id === 4) {
               this.is_payment = true;
             }
 
@@ -175,7 +175,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           request_type_id: this.formRequests.id,
           ...formBuild(['date_begin', 'days_request', 'file_support', 'start_time', 'end_time', 'vitalDay', 'vitalJourney']),
           taken_vital_days: [],
-          prepayment: '',
+          prepayment: false,
           date_end: [
             '',
             (control: AbstractControl) => {

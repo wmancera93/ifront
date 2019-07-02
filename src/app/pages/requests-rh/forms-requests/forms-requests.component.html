@@ -196,7 +196,6 @@
                     name="radio-choose-room"
                     id="radio-yes"
                     class="custom-control-input"
-                    [checked]="forms.controls.prepayment.value"
                     (click)="forms.controls.prepayment.setValue(true)"
                   />
                   <label class="custom-control-label" for="radio-yes">
@@ -209,7 +208,6 @@
                     name="radio-choose-room"
                     id="radio-no"
                     class="custom-control-input"
-                    [checked]="!forms.controls.prepayment.value"
                     (click)="forms.controls.prepayment.setValue(false)"
                   />
                   <label class="custom-control-label" for="radio-no">
