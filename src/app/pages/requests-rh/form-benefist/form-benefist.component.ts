@@ -276,7 +276,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       this.alert.setAlert(alertWarning[0]);
     } else {
       this.forms.file.setValue(this.objectImg.map(({ file }) => file));
-      debugger;
       if (this.validateForms) {
         let request_educations: {
           enrollment?: number;
@@ -308,7 +307,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   addConcept() {
     const { concept, value } = this.form.controls;
-    this.onlyNumber(value, value);
     if (value.value) {
       this.arrayConcept.push({
         concept: this.concept_types_list.find(({ atribute }) => atribute === concept.value),
@@ -318,6 +316,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
       value.setValue('');
     }
   }
+
   onlyNumber(param, value) {
     let onlyNumber = /^[0-9]+$/.test(value.value);
     if (!onlyNumber) {
@@ -332,7 +331,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         },
       ];
       this.alert.setAlert(alertWarning[0]);
-      param.setValue('');
+      this.forms[param].setValue('');
     }
     return onlyNumber;
   }

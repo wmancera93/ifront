@@ -13,9 +13,10 @@
           }}
         </label>
         <input
-          type="number"
+          type="text"
           class="form-control"
           [formControl]="forms.total_ammount"
+          (keyup)="onlyNumber('total_ammount', forms.total_ammount)"
         />
       </div>
       <div class="col-12 top-containter">

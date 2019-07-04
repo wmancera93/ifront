@@ -1,21 +1,10 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnDestroy,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  FormGroup,
-  Validators,
-  FormBuilder,
-  AbstractControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { FormGroup, Validators, FormBuilder, AbstractControl } from '@angular/forms';
 import { FileUploadService } from '../../../services/shared/common/file-upload/file-upload.service';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { ISubscription } from 'rxjs/Subscription';
 import { TranslateService } from '@ngx-translate/core';
+import { Alerts } from '../../../models/common/alerts/alerts';
 @Component({
   selector: 'app-lenses-auxilium',
   templateUrl: './lenses-auxilium.component.html',
@@ -29,8 +18,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   public JSON = JSON;
   public objectImg: any[] = [];
   public filequotation = 'file_soport';
-  public extensions =
-    '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
+  public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public form: FormGroup;
   public file: any = [];
   public arrayConcept: any[] = [];
@@ -65,25 +53,13 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
   ) {
     this.formState.bind(this);
-    this.subscription = this.alert
-      .getActionConfirm()
-      .subscribe((data: any) => {
-        if (data === 'deleteNewDocumentSaved') {
-          this.objectImg.splice(
-            this.objectImg.findIndex(
-              filter => filter.file.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-          this.file.splice(
-            this.file.findIndex(
-              filter => filter.name === this.deleteDocumenFile,
-            ),
-            1,
-          );
-        }
-        this.setModalState.emit(true);
-      });
+    this.subscription = this.alert.getActionConfirm().subscribe((data: any) => {
+      if (data === 'deleteNewDocumentSaved') {
+        this.objectImg.splice(this.objectImg.findIndex(filter => filter.file.name === this.deleteDocumenFile), 1);
+        this.file.splice(this.file.findIndex(filter => filter.name === this.deleteDocumenFile), 1);
+      }
+      this.setModalState.emit(true);
+    });
   }
   ngOnInit() {
     this.fileUploadService.getObjetFile().subscribe(data => {
@@ -108,9 +84,7 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
       observation_request: [
         '',
         (control: AbstractControl) => {
-          return this.formState('observation_request')
-            ? required(control)
-            : null;
+          return this.formState('observation_request') ? required(control) : null;
         },
       ],
     });
@@ -147,20 +121,34 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
       this.submit.emit({ ...this.form.value });
     }
   }
+
+  onlyNumber(param, value) {
+    let onlyNumber = /^[0-9]+$/.test(value.value);
+    if (!onlyNumber) {
+      this.setModalState.emit(false);
+      const alertWarning: Alerts[] = [
+        {
+          type: 'warning',
+          title: 'Advertencia',
+          message: 'Este campo solo admite caracteres númericos ¿Desea continuar con la solicitud?',
+          confirmation: true,
+          typeConfirmation: 'continueAux',
+        },
+      ];
+      this.alert.setAlert(alertWarning[0]);
+      this.forms[param].setValue('');
+    }
+    return onlyNumber;
+  }
+
   deleteUpload(param: any) {
     this.deleteDocumenFile = param.file.name;
     this.setModalState.emit(false);
     this.alert.setAlert({
       type: 'warning',
-      title: this.translate.instant(
-        'pages.travel_management.travel.new_travel.type_alert_ts',
-      ),
+      title: this.translate.instant('pages.travel_management.travel.new_travel.type_alert_ts'),
       message:
-        this.translate.instant(
-          'pages.travel_management.travel.new_travel.message_alert_ts',
-        ) +
-        param.file.name.toString() +
-        '?',
+        this.translate.instant('pages.travel_management.travel.new_travel.message_alert_ts') + param.file.name.toString() + '?',
       confirmation: true,
       typeConfirmation: 'deleteNewDocumentSaved',
     });

@@ -209,7 +209,7 @@
                             <i class="fa fa-fw fa-money text-primary-hr"></i>
                             {{ parseT('value') | translate }} *
                           </label>
-                          <input type="text" class="form-control" [formControl]="forms.value" />
+                          <input type="text" class="form-control" [formControl]="forms.value" (keyup)="onlyNumber('value', forms.value)"/>
                         </div>
                       </div>
                     </div>
