@@ -282,24 +282,24 @@
                                     </p>
                                   </div>
                                   <div class="col-lg-2 col-md-6 col-12 text-md-left text-center">
-                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_Approver') | translate">
+                                    <h6 class="col-4" *ngIf="answer.status_id == 'ReqApp'">
                                       <span class="badge badge-primary" style="margin-top: 5px;">
-                                        {{ answer.status }}
+                                        {{ parseT('status_Approver') | translate }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_cancelled') | translate">
+                                    <h6 class="col-4" *ngIf="answer.status_id == 'ReqCan'">
                                       <span class="badge badge-danger" style="margin-top: 5px;">
-                                        {{ answer.status }}
+                                        {{ parseT('status_cancelled') | translate }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_in_Process') | translate">
+                                    <h6 class="col-4" *ngIf="answer.status_id == 'ReqPro'">
                                       <span class="badge badge-success" style="margin-top: 5px;">
-                                        {{ answer.status }}
+                                        {{ parseT('status_in_Process') | translate }}
                                       </span>
                                     </h6>
-                                    <h6 class="col-4" *ngIf="answer.status == parseT('status_pending') | translate">
+                                    <h6 class="col-4" *ngIf="answer.status_id == 'ReqPen'">
                                       <span class="badge badge-default" style="margin-top: 5px;">
-                                        {{ answer.status }}
+                                        {{ parseT('status_pending') | translate }}
                                       </span>
                                     </h6>
                                   </div>
