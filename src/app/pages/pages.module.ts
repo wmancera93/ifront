@@ -110,6 +110,7 @@ import { LensesAuxiliumComponent } from './requests-rh/lenses-auxilium/lenses-au
 import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
+import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 
 @NgModule({
   imports: [
@@ -222,7 +223,8 @@ import { NewTransportComponent } from './travel-management/transportation-logist
     NewTransportComponent,
     HousingComponent,
     NewHousingComponent,
-    HousingReportComponent
+    HousingReportComponent,
+    DemographicChartComponent
   ],
   providers: [ReportTravelsService]
 })
