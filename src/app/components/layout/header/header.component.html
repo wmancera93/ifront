@@ -17,13 +17,13 @@
       </div>
       <div class="col" *ngIf="!showMenu">
         <div class="row justify-content-end">
-          <div id="togglePartners" class="cursor-general ng-star-inserted px-3 text-center" (click)="clickPartnersIcon()">
+          <div id="togglePartners" class="cursor-general ng-star-inserted px-1 text-center" (click)="clickPartnersIcon()">
             <i class="fa fa-fw fa-users fa-lg"></i>
             <span class="hideText font-size-responsive ">
               {{ parseT('partner') | translate }}
             </span>
           </div>
-          <div >
+          <div class="px-1">
             <div class="dropdown">
               <div
                 class="cursor-general ng-star-inserted px-3 text-center"
@@ -52,7 +52,7 @@
               </div>
             </div>
           </div>
-          <div class="cursor-general px-3 text-center" (click)="LogOut()">
+          <div class="cursor-general px-1 text-center" (click)="LogOut()">
             <i class="fa fa-fw fa-sign-out fa-lg"></i>
             <span class="hideText font-size-responsive">
               {{ parseT('out_door') | translate }}
