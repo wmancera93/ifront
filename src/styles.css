@@ -251,8 +251,7 @@ thead {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   background-color: #2f4050 !important;
   font-size: 13px !important;
   color: #676a6c !important;
@@ -319,9 +318,7 @@ a {
 
 .dropdown-menu {
   /* padding: 0 0 !important; */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12) !important;
   border-radius: 2px !important;
 }
 
@@ -353,9 +350,7 @@ a {
 
 .search-results {
   padding: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   border-radius: 2px;
 }
@@ -573,11 +568,7 @@ header {
 }
 
 .errorImg {
-  background-image: linear-gradient(
-      rgba(28, 27, 31, 0.9),
-      rgba(53, 48, 48, 0.9)
-    ),
-    var(--img-header-login) !important;
+  background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -746,9 +737,7 @@ header {
 .widget-travel {
   border-radius: 2px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -1160,6 +1149,10 @@ header {
   position: fixed;
 }
 
+.nav-hide,
+.nav-show {
+  z-index: 100000;
+}
 .nav-hide:hover {
   margin-left: var(--left-hide-menu-hover);
   background-color: #19242e !important;
@@ -1492,9 +1485,7 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -1778,9 +1769,7 @@ nav {
   border-radius: 2px;
   padding: 14px 20px;
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   background-color: #eee;
   color: gray;
 }
@@ -1794,9 +1783,7 @@ nav {
   color: #ffffff !important;
   border-radius: 2px;
   padding: 14px 20px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   color: var(--btn-primary-hover);
   background-color: var(--btn-primary);
@@ -1815,9 +1802,7 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2),
-    0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -3059,11 +3044,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1024px !important;
@@ -3192,11 +3173,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1366px !important;
@@ -3334,11 +3311,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 768px !important;
@@ -3458,11 +3431,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1035px !important;
@@ -3707,11 +3676,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 415px !important;
@@ -3869,11 +3834,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 900px !important;
@@ -4080,11 +4041,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 750px !important;
@@ -4305,7 +4262,7 @@ a.close-canvas-menu:hover {
 ::-webkit-scrollbar {
   width: 6px;
   /* for vertical scrollbars */
-  height: 12px;
+  height: 4px;
   /* for horizontal scrollbars */
 }
 
@@ -4348,4 +4305,49 @@ a.close-canvas-menu:hover {
   color: #fff;
   border-color: var(--primary);
   background-color: var(--primary);
+}
+@font-face {
+  font-family: 'icomoon';
+  src: url('./assets/demographic/icomoon.eot?s4gef4');
+  src: url('./assets/demographic/icomoon.eot?s4gef4#iefix') format('embedded-opentype'),
+    url('./assets/demographic/icomoon.ttf?s4gef4') format('truetype'),
+    url('./assets/demographic/icomoon.woff?s4gef4') format('woff'),
+    url('./assets/demographic/icomoon.svg?s4gef4#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-children:before {
+  content: '\e900';
+}
+.icon-man:before {
+  content: '\e901';
+}
+.icon-generations:before {
+  content: '\e902';
+}
+.icon-woman:before {
+  content: '\e903';
+}
+.icon-area:before {
+  content: '\e904';
+}
+.icon-enterprise:before {
+  content: '\e905';
 }

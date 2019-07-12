@@ -1,7 +1,9 @@
 <ngx-charts-advanced-pie-chart
-  
+  *ngIf="show"
+  #pieChart
+  (window:resize)="onResize(pieChart)"
+  [view]="view"
   [results]="results"
-
   (select)="onSelect($event)"
 >
 </ngx-charts-advanced-pie-chart>

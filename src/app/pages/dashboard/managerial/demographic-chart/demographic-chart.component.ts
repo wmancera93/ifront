@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-demographic-chart',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DemographicChartComponent implements OnInit {
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
+  }
+  returnDahsboardGerencial() {
+    this.router.navigate(['ihr/index']);
   }
 
 }
