@@ -51,6 +51,9 @@ import { StepperComponentsComponent } from './common/stepper-components/stepper-
 import { PipesModule } from '../pipes/pipes.module';
 import { ChildrenComponent } from './common/widgets/children/children.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CivilStatusComponent } from './common/widgets/civil-status/civil-status.component';
+import { GenerationsComponent } from './common/widgets/generations/generations.component';
+
 
 @NgModule({
   imports: [
@@ -103,7 +106,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ShowDistSpendsComponent,
     ShowHotelsJourneyComponent,
     StepperComponentsComponent,
-    ChildrenComponent
+    ChildrenComponent,
+    CivilStatusComponent,
+    GenerationsComponent,
   ],
   exports: [
     HeaderComponent,
@@ -134,7 +139,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ApprovalsDetailsTravelsComponent,
     PdfTravelComponent,
     StepperComponentsComponent,
-    ChildrenComponent
+    ChildrenComponent,
+    CivilStatusComponent
   ],
   providers: [
     // ToasterService

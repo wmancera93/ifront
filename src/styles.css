@@ -552,7 +552,7 @@ textarea {
   cursor: pointer;
 }
 
-header {
+app-login header {
   background-color: #2f4050 !important;
   background-image: var(--img-header-login);
   background-repeat: no-repeat;
@@ -2966,12 +2966,18 @@ a.close-canvas-menu:hover {
     background-position: center top !important;
     padding: 100px 0 150px;
   }
+  .position-text {
+    text-align: center;
+  }
 }
 
 @media (min-width: 1800px) and (min-height: 800px) {
   header {
     background-position: center top !important;
     padding: 100px 0 150px;
+  }
+  .position-text {
+    text-align: center;
   }
 }
 
@@ -2980,7 +2986,9 @@ a.close-canvas-menu:hover {
     background-position: center top !important;
     padding: 150px 0 150px !important;
   }
-
+  .position-text {
+    text-align: center;
+  }
   .top {
     margin-top: 40px !important;
   }
@@ -3081,7 +3089,9 @@ a.close-canvas-menu:hover {
     background-position: center top !important;
     padding: 300px 0 150px !important;
   }
-
+  .position-text {
+    text-align: center;
+  }
   .top {
     margin-top: 40px !important;
   }
@@ -3266,6 +3276,9 @@ a.close-canvas-menu:hover {
     margin-top: 20px;
   }
 
+  .position-text {
+    text-align: center;
+  }
   header {
     background-position: center top !important;
     padding: 55px 0 150px !important;
@@ -3525,6 +3538,9 @@ a.close-canvas-menu:hover {
     margin-top: 20px;
   }
 
+  .position-text {
+    text-align: center;
+  }
   header {
     background-position: center top !important;
     padding: 30px 0px 40px !important;
@@ -3732,6 +3748,9 @@ a.close-canvas-menu:hover {
   .bg-login {
     max-width: 400px !important;
   }
+  .position-text {
+    text-align: left;
+  }
 
   header {
     background-position: center top !important;
@@ -3936,6 +3955,9 @@ a.close-canvas-menu:hover {
 @media only screen and (max-width: 450px) and (max-height: 800px) {
   .bg-login {
     max-width: 400px !important;
+  }
+  .position-text {
+    text-align: left;
   }
 
   #right-sidebar {
@@ -4260,18 +4282,18 @@ a.close-canvas-menu:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 10px;
   /* for vertical scrollbars */
-  height: 4px;
+  height: 10px;
   /* for horizontal scrollbars */
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
+  background: #f3eeee;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(52, 68, 84);
+  background: var(--primary);
 }
 
 .titleColor {

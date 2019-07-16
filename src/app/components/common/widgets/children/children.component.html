@@ -3,7 +3,11 @@
   #pieChart
   (window:resize)="onResize(pieChart)"
   [view]="view"
+  [label]="label"
   [results]="results"
   (select)="onSelect($event)"
+  [valueFormatting]="valueFormatting"
+  [nameFormatting]="nameFormatting"
 >
 </ngx-charts-advanced-pie-chart>
+ 

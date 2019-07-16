@@ -1,0 +1,6 @@
+::ng-deep .chart-legend .legend-labels {
+    line-height: 85%;
+    list-style: none;
+    text-align: center;
+    border-radius: 3px;
+}

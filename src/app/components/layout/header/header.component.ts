@@ -7,6 +7,7 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Router } from '@angular/router';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
+import { DemographicSharedService } from '../../../services/shared/common/demographic/demographic-shared.service';
 
 @Component({
   selector: 'app-header',
@@ -37,6 +38,7 @@ export class HeaderComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public translate: TranslateService,
     public alert: AlertsService,
+    public demographicSharedService: DemographicSharedService,
   ) {
     this.userSharedService.getUser().subscribe(data => {
       this.dataUser = data;
@@ -116,6 +118,7 @@ export class HeaderComponent implements OnInit {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
       document.getElementById('footer_general').style.display = 'block';
     }, 300);
+    this.demographicSharedService.setEventUploa(true);
   }
 
   clickShowMenuMobile() {
@@ -131,6 +134,7 @@ export class HeaderComponent implements OnInit {
         this.showContactsList = false;
       }
     }
+    this.demographicSharedService.setEventUploa(true);
   }
 
   getDataLocalStorage() {
