@@ -88,14 +88,14 @@
                   <div class="col-lg-6 col-12 text-md-left text-left">
                     <div class="row">
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].days_request != null">
-                        <p class="font-title-general">
+                        <p class="font-title-general" *ngIf="dateSince">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           {{ parseT('since') | translate }}:
                           <span style="font-weight: 100 !important">{{ dateSince }}</span>
                         </p>
                       </div>
                       <div class="col-12 text-md-left text-left" *ngIf="approvals[0].date_end_format != null">
-                        <p class="font-title-general">
+                        <p class="font-title-general" *ngIf="dateUntil">
                           <i class=" font-color-default fa fa-fw fa-calendar"></i>
                           {{ parseT('until') | translate }}:
                           <span style="font-weight: 100 !important">{{ dateUntil }}</span>
@@ -110,110 +110,127 @@
                       </div>
                     </div>
                     <div class="row">
-                    <ng-container *ngIf="isEdu">
-                     
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].name_family">
-                        <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Beneficiario:
-                          <span style="font-weight: 100 !important">{{ approvals[0].name_family }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].name_institute">
-                        <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Instituto:
-                          <span style="font-weight: 100 !important">{{ approvals[0].name_institute }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-left" *ngIf="approvals[0].total_ammount">
-                        <p class="font-title-general">
-                          <i class=" font-color-default fa fa-fw fa-calendar"></i>
-                          Monto total:
-                          <span style="font-weight: 100 !important">{{ approvals[0].total_ammount }}</span>
-                        </p>
-                      </div>
-                    </ng-container>
-                    <ng-container *ngIf="isLogistics">
-                      <div class="col-12  text-md-left text-center" *ngIf="approvals[0].details_request.name_family">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-user-circle"></i>
-                          Beneficiario:
-                          <span style="font-weight: 100 !important">{{ approvals[0].details_request.name_family }}</span>
-                        </p>
-                      </div>
-                      <div
-                        class="col-12 text-md-left text-center"
-                        *ngIf="approvals[0].details_request.companion_beneficiary_name"
-                      >
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-users"></i>
-                          Nombre Acompañante:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.companion_beneficiary_name }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.third_name">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-user-secret"></i>
-                          Nombre de la persona externa:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.third_name }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.third_phone">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-phone-square"></i>
-                          Telefono de la persona externa:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.third_phone }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.housing">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-home"></i>
-                          Alojamiento seleccionado:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.housing }}</span>
-                        </p>
-                      </div>
+                      <ng-container *ngIf="isEdu">
+                        <div class="col-12 text-md-left text-left" *ngIf="approvals[0].name_family">
+                          <p class="font-title-general">
+                            <i class=" font-color-default fa fa-fw fa-calendar"></i>
+                            Beneficiario:
+                            <span style="font-weight: 100 !important">{{ approvals[0].name_family }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-left" *ngIf="approvals[0].name_institute">
+                          <p class="font-title-general">
+                            <i class=" font-color-default fa fa-fw fa-calendar"></i>
+                            Instituto:
+                            <span style="font-weight: 100 !important">{{ approvals[0].name_institute }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-left" *ngIf="approvals[0].total_ammount">
+                          <p class="font-title-general">
+                            <i class=" font-color-default fa fa-fw fa-calendar"></i>
+                            Monto total:
+                            <span style="font-weight: 100 !important">{{ approvals[0].total_ammount }}</span>
+                          </p>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="isLogistics">
+                        <div class="col-12  text-md-left text-center" *ngIf="approvals[0].details_request.name_family">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-user-circle"></i>
+                            Beneficiario:
+                            <span style="font-weight: 100 !important">{{ approvals[0].details_request.name_family }}</span>
+                          </p>
+                        </div>
+                        <div
+                          class="col-12 text-md-left text-center"
+                          *ngIf="approvals[0].details_request.companion_beneficiary_name"
+                        >
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-users"></i>
+                            Nombre Acompañante:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.companion_beneficiary_name }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.third_name">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-user-secret"></i>
+                            Nombre de la persona externa:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.third_name }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.third_phone">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-phone-square"></i>
+                            Telefono de la persona externa:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.third_phone }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.housing">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-home"></i>
+                            Alojamiento seleccionado:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.housing }}</span>
+                          </p>
+                        </div>
 
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.departure_date">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-calendar-minus-o"></i>
-                          Fecha de salida:
-                          <span class="font-weight-normal">
-                            {{ approvals[0].details_request.departure_date | date: 'dd/MM/yyyy' }}
-                          </span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.arrival_date">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-calendar-plus-o"></i>
-                          Fecha de llegada:
-                          <span class="font-weight-normal">
-                            {{ approvals[0].details_request.arrival_date | date: 'dd/MM/yyyy' }}
-                          </span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.cost_center">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-money"></i>
-                          Centro de costo:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.cost_center }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.vehicle">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-car"></i>
-                          Vehiculo de viaje:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.vehicle }}</span>
-                        </p>
-                      </div>
-                      <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.destiny">
-                        <p class="font-title-general">
-                          <i class="font-color-default fa fa-fw fa-hospital-o"></i>
-                          Campamento destino:
-                          <span class="font-weight-normal">{{ approvals[0].details_request.destiny }}</span>
-                        </p>
-                      </div>
-                    </ng-container>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.departure_date">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-calendar-minus-o"></i>
+                            Fecha de salida:
+                            <span class="font-weight-normal">
+                              {{ approvals[0].details_request.departure_date | date: 'dd/MM/yyyy' }}
+                            </span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.arrival_date">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-calendar-plus-o"></i>
+                            Fecha de llegada:
+                            <span class="font-weight-normal">
+                              {{ approvals[0].details_request.arrival_date | date: 'dd/MM/yyyy' }}
+                            </span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.cost_center">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-money"></i>
+                            Centro de costo:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.cost_center }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.vehicle">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-car"></i>
+                            Vehiculo de viaje:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.vehicle }}</span>
+                          </p>
+                        </div>
+                        <div class="col-12 text-md-left text-center" *ngIf="approvals[0].details_request.destiny">
+                          <p class="font-title-general">
+                            <i class="font-color-default fa fa-fw fa-hospital-o"></i>
+                            Campamento destino:
+                            <span class="font-weight-normal">{{ approvals[0].details_request.destiny }}</span>
+                          </p>
+                        </div>
+                      </ng-container>
+                      <ng-container *ngIf="approvals[0].days_request_details && isVitalDay">
+                        <div *ngFor="let vitalDays of approvals[0].days_request_details">
+                          <div class="col-12 text-md-left text-left">
+                            <p class="font-title-general">
+                              <i class=" font-color-default fa fa-fw fa-calendar"></i>
+                              Día solicitado:
+                              <span style="font-weight: 100 !important">{{ vitalDays.day_taken | date: 'dd/MM/yyyy' }}</span>
+                            </p>
+                          </div>
+                          <div class="col-12 text-md-left text-left">
+                            <p class="font-title-general">
+                              <i class=" font-color-default fa fa-fw fa-sun-o"></i>
+                              Jornada:
+                              <span style="font-weight: 100 !important">{{ vitalDays.workday_type }}</span>
+                            </p>
+                          </div>
+                        </div>
+                      </ng-container>
                     </div>
                   </div>
                   <div class="col-lg-6 col-12 text-md-left text-left">

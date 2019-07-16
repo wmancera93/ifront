@@ -30,6 +30,7 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
   public date_pay: string;
   public isLogistics: boolean;
   public isEdu: boolean;
+  public isVitalDay: boolean;
   private subscriptions: ISubscription[] = [];
 
   t(key) {
@@ -75,6 +76,8 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
             case 'HOUS':
             case 'HOUT':
               this.isLogistics = true;
+            case 'VITD':
+              this.isVitalDay = true;
               break;
           }
 
@@ -89,6 +92,7 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
         });
         this.isEdu = false;
         this.isLogistics = false;
+        this.isVitalDay = false;
 
         if (document.getElementById('approvals_requests').className !== 'modal show') {
           document.getElementById('btn_approvals_requests').click();
