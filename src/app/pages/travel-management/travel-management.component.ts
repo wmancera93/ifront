@@ -55,7 +55,7 @@ export class TravelManagementComponent implements OnInit {
         icon_secundary: 'fa fa-usd',
         tooltipText: 'message_wiget_allowance_ts',
         route: '/ihr/spend',
-      }
+      },
     ];
 
     const { employee } = this.dataUserTravels;
@@ -137,7 +137,9 @@ export class TravelManagementComponent implements OnInit {
             },
           ];
         } else {
-          this.buttonInfo = [...commonButtons];
+          if (!(this.dataUserTravels.company_id == 12 || this.dataUserTravels.company_id == 32)) {
+            this.buttonInfo = [...commonButtons];
+          }
         }
       }
     }
@@ -206,7 +208,7 @@ export class TravelManagementComponent implements OnInit {
 
       default:
         break;
-     }
+    }
   }
 
   getDataUserPermissions() {
