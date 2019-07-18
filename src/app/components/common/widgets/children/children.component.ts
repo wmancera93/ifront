@@ -14,48 +14,17 @@ export class ChildrenComponent implements OnInit {
   @Output() maxValue: EventEmitter<any> = new EventEmitter();
 
   public results: any[] = [];
-  public typesIndicators: any[];
-  public typeIndicator = 'severity';
+  
   public show = false;
   public total = 0;
 
-  get typeIndicatorDetails(): any {
-    return this.typesIndicators.find(({ value }) => value === this.typeIndicator);
-  }
-
-  get data_sheet(): any['data_sheet'] {
-    return this.typeIndicatorDetails.data_sheet;
-  }
   // options
-
   view = undefined;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = ColorHelper;
-  yAxisLabel = 'Population';
-  legendPosition = 'below';
   label = 'Total ...';
 
-  lineChartView: any = undefined;
-
-  // options
-  lineChartShowXAxis = true;
-  lineChartShowYAxis = true;
-  lineChartGradient = false;
-  lineChartShowLegend = false;
-  lineChartShowXAxisLabel = true;
-  lineChartXAxisLabel = 'Country';
-  lineChartShowYAxisLabel = true;
-  lineChartYAxisLabel = 'Population';
-
-  lineChartColorScheme = {
-    domain: ['#1CBCD8', '#FF8D60', '#FF586B', '#AAAAAA'],
-  };
 
   // line, area
   lineChartAutoScale = true;
-
-  colorScheme = 'fire';
 
   onSelect(event) {
     console.log(event);
@@ -91,10 +60,6 @@ export class ChildrenComponent implements OnInit {
     this.demographicSharedService.getEventUpload().subscribe((data: any) => {
       this.pieChart.update();
     });
-  }
-
-  onResize(elem: AdvancedPieChartComponent) {
-    elem.update();
   }
 
   valueFormatting = value => {

@@ -3085,6 +3085,13 @@ a.close-canvas-menu:hover {
 }
 
 @media (min-width: 1000px) and (min-height: 1200px) {
+  .generationPosition {
+    min-height: 290px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: absolute;
+  }
   header {
     background-position: center top !important;
     padding: 300px 0 150px !important;
@@ -3259,6 +3266,13 @@ a.close-canvas-menu:hover {
 }
 
 @media (max-width: 1100px) and (max-height: 1400px) {
+  .generationPosition {
+    min-height: 290px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: absolute;
+  }
   .fontDate {
     margin-top: 25px;
   }
@@ -3272,6 +3286,13 @@ a.close-canvas-menu:hover {
 /* ipad horizontal */
 
 @media (max-width: 1100px) and (max-height: 800px) {
+  .generationPosition {
+    min-height: 290px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: absolute;
+  }
   .fontDate {
     margin-top: 20px;
   }
@@ -3368,6 +3389,13 @@ a.close-canvas-menu:hover {
 /* ipad vertical */
 
 @media (max-width: 800px) and (max-height: 1100px) {
+  .generationPosition {
+    min-height: 500px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: relative;
+  }
   .fontDate {
     margin-top: 20px;
   }
@@ -3534,6 +3562,13 @@ a.close-canvas-menu:hover {
 /* mobile horizontal */
 
 @media only screen and (max-width: 830px) and (max-height: 500px) {
+  .generationPosition {
+    min-height: 500px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: relative;
+  }
   .fontDate {
     margin-top: 20px;
   }
@@ -3953,6 +3988,13 @@ a.close-canvas-menu:hover {
 /* mobile vertical */
 
 @media only screen and (max-width: 450px) and (max-height: 800px) {
+  .generationPosition {
+    min-height: 500px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: relative;
+  }
   .bg-login {
     max-width: 400px !important;
   }
@@ -4266,8 +4308,25 @@ a.close-canvas-menu:hover {
 }
 
 @media (min-width: 576px) and (max-width: 991px) {
+  .generationPosition {
+    min-height: 500px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: relative;
+  }
   .modal-md-personalized .modal-dialog {
     max-width: 630px;
+  }
+}
+
+@media (min-width: 1000px){
+  .generationPosition {
+    min-height: 290px;
+    width: 100%;
+  }
+  .positionIcon {
+    position: absolute;
   }
 }
 
@@ -4355,6 +4414,9 @@ a.close-canvas-menu:hover {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-civilStatus:before {
+  content: '\e906';
+}
 .icon-children:before {
   content: '\e900';
 }

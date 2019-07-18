@@ -53,6 +53,7 @@ import { ChildrenComponent } from './common/widgets/children/children.component'
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CivilStatusComponent } from './common/widgets/civil-status/civil-status.component';
 import { GenerationsComponent } from './common/widgets/generations/generations.component';
+import { GenderComponent } from './common/widgets/gender/gender.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { GenerationsComponent } from './common/widgets/generations/generations.c
     ChildrenComponent,
     CivilStatusComponent,
     GenerationsComponent,
+    GenderComponent,
   ],
   exports: [
     HeaderComponent,
@@ -140,7 +142,9 @@ import { GenerationsComponent } from './common/widgets/generations/generations.c
     PdfTravelComponent,
     StepperComponentsComponent,
     ChildrenComponent,
-    CivilStatusComponent
+    CivilStatusComponent,
+    GenerationsComponent,
+    GenderComponent
   ],
   providers: [
     // ToasterService

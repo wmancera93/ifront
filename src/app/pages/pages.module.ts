@@ -111,6 +111,8 @@ import { TransportationLogisticsComponent } from './travel-management/transporta
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 
 @NgModule({
   imports: [
@@ -126,7 +128,8 @@ import { DemographicChartComponent } from './dashboard/managerial/demographic-ch
     CKEditorModule,
     TagInputModule,
     FileUploadModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgxChartsModule
   ],
   declarations: [
     LoginComponent,

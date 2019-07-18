@@ -1,8 +1,9 @@
 <ngx-charts-gauge
   #gauge
-  (window:resize)="onResize()"
+  (window:resize)="gauge.update()"
   [view]="view"
   [results]="results"
+  [max]="max"
   [legend]="legend"
   [legendTitle]="legendTitle"
   [legendPosition]="legendPosition"

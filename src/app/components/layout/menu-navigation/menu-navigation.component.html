@@ -486,7 +486,7 @@
           </ul>
         </div>
       </li>
-      <li id="liTravel" *ngIf="dataEnterprise.show_travel_request">
+      <li id="liTravel" *ngIf="dataEnterprise.show_travel_request && dataUser.employee.is_travel_manager == 'true'">
         <a
           id="aTravel"
           class="nav-link bg-menu"

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { GaugeComponent } from '@swimlane/ngx-charts';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
@@ -11,54 +11,42 @@ import debounce from 'lodash/debounce';
 })
 export class CivilStatusComponent implements OnInit {
   @ViewChild('gauge') public gauge: GaugeComponent;
+  @Output() maxCivilStatus: EventEmitter<any> = new EventEmitter();
 
   update = debounce(() => this.gauge.update(), 500);
 
-  public maxNumber: number;
-  public results: any[] = [];
+  public results: { name: string; value: number }[] = [];
 
   view = undefined;
   legendOptions: any;
   min: number = 0;
-  max: number = this.maxNumber;
+  max: number = 0;
   legend = true;
-  legendTitle = 'Estados civiles';
+  legendTitle = '';
   legendPosition = 'below';
   constructor(
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,
   ) {
-    this.update();
     this.results = [
       {
-        name: 'Germany',
-        value: 40632,
-        extra: {
-          code: 'de',
-        },
+        name: 'Casados',
+        value: 50,
       },
       {
-        name: 'United States',
-        value: 50000,
-        extra: {
-          code: 'us',
-        },
+        name: 'Solteros',
+        value: 4,
       },
       {
-        name: 'France',
-        value: 36745,
-        extra: {
-          code: 'fr',
-        },
+        name: 'Divorciados',
+        value: 1,
       },
       {
-        name: 'United Kingdom',
-        value: 36240,
-        extra: {
-          code: 'uk',
-        },
+        name: 'Viudos',
+        value: 5,
       },
     ];
+    this.max = Math.max(...this.results.map(({ value }) => value));
   }
 
   ngOnInit() {
@@ -66,8 +54,11 @@ export class CivilStatusComponent implements OnInit {
     //   this.results.push(data);
     //   console.log(this.results);
     // });
-  }
-  onResize() {
+    this.demographicSharedService.getEventUpload().subscribe((data: any) => {
+      this.update();
+    });
+    let civilStatus = this.results.find(({ value }) => value === this.max).name;
     this.update();
+    this.maxCivilStatus.emit(civilStatus);
   }
 }

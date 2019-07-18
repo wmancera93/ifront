@@ -1,3 +1,7 @@
-<p>
-  generations works!
-</p>
+<ngx-charts-pie-grid
+  #pieGrid
+  (window:resize)="pieGrid.update()"
+  [view]="view"
+  [results]="results"
+>
+</ngx-charts-pie-grid>

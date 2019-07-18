@@ -1,7 +1,7 @@
 <ngx-charts-advanced-pie-chart
   *ngIf="show"
   #pieChart
-  (window:resize)="onResize(pieChart)"
+  (window:resize)="pieChart.update()"
   [view]="view"
   [label]="label"
   [results]="results"
