@@ -228,8 +228,20 @@ export class NewTransportComponent implements OnInit, OnDestroy {
                 ...this.form.value,
                 trayects: this.journeys,
               })
-              .subscribe(() => {
+              .subscribe((data:any) => {
                 this.showSubmit = false;
+                if (data.success) {
+                  this.modalActions.close();
+                  this.ngbModalRefTrans.close();
+                  this.alert.setAlert({
+                    type: 'success',
+                    title: 'Transacción Exitosa',
+                    message: 'La flota fue actualizada con exito',
+                    confirmation: false,
+                    typeConfirmation: '',
+                  } as Alerts);
+                }
+                this.formServiceChildTransport.emit({ success: true });
                 this.submit.emit({ success: true });
                 this.modalActions.close();
               });

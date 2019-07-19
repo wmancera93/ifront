@@ -264,7 +264,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
                 this.alert.setAlert(alertWarning[0]);
               };
           } else {
-            debugger;
             this.housingService.putEditHousing(this.id_housing, { name, city: city }).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);

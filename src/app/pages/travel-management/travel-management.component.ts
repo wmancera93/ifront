@@ -169,13 +169,13 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-bus',
               tooltipText: 'Aqui puede ver los cupos de viaje',
-              route: '/ihr/logistics_reports',
+              route: '/ihr/housing_reports',
             },
           ];
         }
         break;
       case 4:
-        if (!employee.is_travel_manager) {
+        if (employee.is_travel_manager) {
           this.buttonInfo = [
             ...this.buttonInfo,
             {
