@@ -21,7 +21,7 @@ export class ChildrenComponent implements OnInit {
   // options
   view = undefined;
   label = 'Total ...';
-
+  colorScheme = 'ocean';
 
   // line, area
   lineChartAutoScale = true;

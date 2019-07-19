@@ -20,6 +20,7 @@ export class GenderComponent implements OnInit {
   view = undefined;
   xAxis = true;
   yAxis = true;
+  colorScheme = 'ocean';
 
   constructor(
     public demographicChartsService: DemographicChartsService,

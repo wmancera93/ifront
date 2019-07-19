@@ -24,11 +24,17 @@ export class DemographicChartComponent implements OnInit {
   public result: PieGridComponent['results'] = [];
 
   view = undefined;
+  colorScheme = 'ocean';
+
   constructor(
     public router: Router,
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,
-  ) {}
+  ) {
+    this.demographicSharedService.getEventUpload().subscribe((data: any) => {
+      this.updateEmployee();
+    });
+  }
 
   ngOnInit() {
     this.demographicChartsService.getAreaNumber().subscribe(({ data }) => {

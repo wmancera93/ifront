@@ -17,6 +17,8 @@ export class GenerationsComponent implements OnInit {
   public results: any[] = [];
 
   view = undefined;
+  colorScheme = 'ocean';
+  
   constructor(
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,

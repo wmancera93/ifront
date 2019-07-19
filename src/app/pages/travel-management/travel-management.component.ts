@@ -175,7 +175,7 @@ export class TravelManagementComponent implements OnInit {
         }
         break;
       case 4:
-        if (!employee.is_travel_manager) {
+        if (employee.is_travel_manager) {
           this.buttonInfo = [
             ...this.buttonInfo,
             {

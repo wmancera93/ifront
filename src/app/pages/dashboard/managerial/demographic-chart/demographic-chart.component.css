@@ -2,6 +2,6 @@
   background: #ffffff !important;
   color: #7b7b88;
 }
-/* ::ng-deep foreignObject p {
+::ng-deep foreignObject p {
   font-size: 18px !important;
-} */
+}

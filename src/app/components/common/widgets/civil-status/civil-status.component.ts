@@ -24,6 +24,7 @@ export class CivilStatusComponent implements OnInit {
   legend = true;
   legendTitle = '';
   legendPosition = 'below';
+  colorScheme = 'ocean';
   constructor(
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,

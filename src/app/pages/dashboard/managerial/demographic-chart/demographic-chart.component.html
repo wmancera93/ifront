@@ -24,18 +24,24 @@
       <div class="col-12">
         <div class="position-relative">
           <div class="widget navy-bg bg-white d-flex flex-column">
-              <div class="row text-center align-items-center">
-                  <div class="col-6">
-                    <h6>El {{result[0].extra.percentage}} de fuerza laboral corresponde</h6>
-                    <i class="icon-enterprise color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
-                  </div>
-                  <div class="col-6">
-                    <h6>..Y de esa fuerza laboral somos:</h6>
-                    <i class="icon-area color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
-                  </div>
-                </div>
+            <div class="row text-center align-items-center">
+              <div class="col-6">
+                <h6>El 100% de fuerza laboral corresponde</h6>
+                <i class="icon-enterprise color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+              <div class="col-6">
+                <h6>..Y de esa fuerza laboral somos:</h6>
+                <i class="icon-area color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+            </div>
             <div style="min-height: 50px;width: 100%">
-              <ngx-charts-number-card #pieGridEmployee (window:resize)="pieGridEmployee.update()" [view]="view" [results]="result">
+              <ngx-charts-number-card
+                #pieGridEmployee
+                (window:resize)="pieGridEmployee.update()"
+                [view]="view"
+                [results]="result"
+                [scheme]="colorScheme"
+              >
               </ngx-charts-number-card>
             </div>
           </div>
