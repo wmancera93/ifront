@@ -142,6 +142,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
         case 'closeAlertcontinueEditBedroom':
         case 'closeAlertreturnEditHousing':
           this.ngbModalRef.close();
+          this.modalActions.close();
       }
       if (data === 'continueEdit') {
         this.housingService.deleteBedrooms(this.id_bedroom).subscribe((data: any) => {
@@ -267,7 +268,7 @@ export class NewHousingComponent implements OnInit, OnDestroy {
             this.housingService.putEditHousing(this.id_housing, { name, city: city }).subscribe((result: any) => {
               if (result.success) {
                 this.formServiceChild.emit(result);
-                this.modalActions.close();
+                this.ngbModalRef.close();
                 this.alert.setAlert({
                   type: 'success',
                   title: 'Transacción Exitosa',

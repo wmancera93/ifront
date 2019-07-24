@@ -150,7 +150,7 @@ export class ConfirmResetAcountComponent implements OnInit {
               {
                 type: 'danger',
                 title: this.t('title_warning_ts'),
-                message: resultError.errors[0],
+                message:'Esta sesion ha expirado, por favor vuelva a enviar correo de restablecimiento',
               },
             ];
             this.alert.setAlert(alertWarning[0]);

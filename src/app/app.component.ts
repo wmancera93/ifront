@@ -164,7 +164,7 @@ export class AppComponent {
     this.isExplorer = /msie\s|trident\/|edge\//i.test(window.navigator.userAgent);
     if (this.isExplorer) {
       alert(
-        'Recuerde que para una mejor funcionalidad del portal se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari',
+        'Recuerde no usar internet Explorer ni Explorer Edge para acceder al portal, se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari',
       );
     }
   }
