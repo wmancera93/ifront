@@ -217,6 +217,15 @@
               </div>
             </div>
           </ng-container>
+          <div class="col-12" *ngIf="isGDV">
+            <h3
+              class="cursor-general"
+              style="text-decoration: underline  rgb(245, 236, 236)!important"
+              (click)="downLoadAttach('VACA')"
+            >
+              Anexo Vacaciones
+            </h3>
+          </div>
         </div>
         <div *ngIf="formRequests.alias == 'VCCP'" class="row justify-content-center">
           <ng-container *ngIf="formRequests.available_days != 0">
@@ -291,6 +300,15 @@
               {{ parseT('message_attach') | translate }}*
             </label>
             <app-file-upload [nameFile]="filePermisionMarriage" [extensions]="extensions"></app-file-upload>
+          </div>
+          <div class="col-md-12 col-12" *ngIf="isGDV">
+            <h3
+              class="cursor-general"
+              style="text-decoration: underline  rgb(245, 236, 236)!important"
+              (click)="downLoadAttach('PERM')"
+            >
+              Anexo Permiso
+            </h3>
           </div>
         </div>
         <div *ngIf="formRequests.alias == 'PRSC'" class="row justify-content-center">

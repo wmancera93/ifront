@@ -145,6 +145,7 @@ export class TravelManagementComponent implements OnInit {
     }
     switch (this.dataUserTravels.company_id) {
       case 12:
+      case 32:
         if (employee.is_travel_manager) {
           this.buttonInfo = [
             {

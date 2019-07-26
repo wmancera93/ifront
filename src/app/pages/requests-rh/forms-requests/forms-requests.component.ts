@@ -42,6 +42,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public sumatoria: number = 0;
   public isfull: boolean = false;
   public ambiente: string;
+  public isGDV: boolean = false;
+
   diffDays: number;
   lowerDate: boolean;
 
@@ -132,7 +134,6 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         this.allForms.setCaseForm(alias);
 
         const url = window.location.href;
-        debugger;
         if (url.split('localhost').length === 1) {
           if (url.split('-').length > 1) {
             this.ambiente = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
@@ -140,12 +141,21 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         } else {
           this.ambiente = 'development';
         }
-
+        
         switch (this.ambiente) {
           case 'development':
           case 'dev':
-            if (JSON.parse(localStorage.getItem('enterprise')).id === 11 || JSON.parse(localStorage.getItem('enterprise')).id === 4) {
+            if (
+              JSON.parse(localStorage.getItem('enterprise')).id === 11 ||
+              JSON.parse(localStorage.getItem('enterprise')).id === 4
+            ) {
               this.is_payment = true;
+            }
+            if (
+              JSON.parse(localStorage.getItem('enterprise')).id === 34 ||
+              JSON.parse(localStorage.getItem('enterprise')).id === 4
+            ) {
+              this.isGDV = true;
             }
 
             break;
@@ -158,6 +168,9 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
           default:
             if (JSON.parse(localStorage.getItem('enterprise')).id === 32) {
               this.is_payment = true;
+            }
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 34) {
+              this.isGDV = true;
             }
             break;
         }
@@ -255,6 +268,17 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  downLoadAttach(param: string) {
+    switch (param) {
+      case 'VACA':
+        window.open('https://only-gdv.s3.amazonaws.com/FO-M8-P1-06+V01+Solicitud+de+Vacaciones.doc');
+        break;
+      case 'PERM':
+        window.open('https://only-gdv.s3.amazonaws.com/FO-M8-P1-05+V01+Solicitud+de+Permisos.doc');
+        break;
+    }
   }
 
   addVtd() {
