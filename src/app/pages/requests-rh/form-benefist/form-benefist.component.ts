@@ -61,7 +61,9 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
         semester: true,
         grade: true,
       },
-      EDUS: {},
+      EDUS: {
+        message: true,
+      },
       EDUI: {},
     },
     allCases: {
@@ -214,6 +216,15 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+  }
+
+  validateCalendar(param) {
+    if (param === 'B') {
+      this.arrayConcept.push({
+        concept: this.concept_types_list.find(({ atribute }) => atribute === 'enrollment'),
+        value: 0,
+      });
+    }
   }
 
   iconClass(extension: string) {

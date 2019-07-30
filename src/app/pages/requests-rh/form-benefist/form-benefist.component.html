@@ -87,6 +87,7 @@
                 value="A"
                 checked
                 [formControl]="forms.calendar"
+                (click)="validateCalendar('A')"
               />
               <label class="form-check-label" for="calendarA">
                 Calendario A
@@ -102,6 +103,7 @@
                 id="calendarB"
                 value="B"
                 [formControl]="forms.calendar"
+                (click)="validateCalendar('B')"
               />
               <label class="form-check-label" for="calendarB">
                 Calendario B
@@ -190,6 +192,11 @@
                   <div class="col-12 col-lg-10 col-xl-11">
                     <div class="container mb-3">
                       <div class="row">
+                        <div class="col-12" *ngIf="formState('message')">
+                          <label class="titleColor">
+                            Por favor ingrese el valor que fue aprobado por nomina para este auxilio
+                          </label>
+                        </div>
                         <div class="col-12 col-sm-6 text-truncate">
                           <label class="titleColor">
                             <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
@@ -209,7 +216,12 @@
                             <i class="fa fa-fw fa-money text-primary-hr"></i>
                             {{ parseT('value') | translate }} *
                           </label>
-                          <input type="text" class="form-control" [formControl]="forms.value" (keyup)="onlyNumber('value', forms.value)"/>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [formControl]="forms.value"
+                            (keyup)="onlyNumber('value', forms.value)"
+                          />
                         </div>
                       </div>
                     </div>
