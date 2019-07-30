@@ -115,7 +115,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   ) {
     this.subscriptions.push(
       this.fileUploadService.getObjetFile().subscribe(object => {
-        this.file = object.file;
+        this.file = object;
       }),
     );
     this.alert.getActionConfirm().subscribe((data: any) => {
@@ -141,7 +141,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
         } else {
           this.ambiente = 'development';
         }
-        
+
         switch (this.ambiente) {
           case 'development':
           case 'dev':
