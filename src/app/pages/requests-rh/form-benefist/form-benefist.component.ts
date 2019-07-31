@@ -147,7 +147,7 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fileUploadService.getObjetFile().subscribe(data => {
-      debugger
+      debugger;
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;
@@ -220,11 +220,13 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
   }
 
   validateCalendar(param) {
-    if (param === 'B') {
-      this.arrayConcept.push({
-        concept: this.concept_types_list.find(({ atribute }) => atribute === 'enrollment'),
-        value: 0,
-      });
+    if (this.idActivity === 'EDUB') {
+      if (param === 'B') {
+        this.arrayConcept.push({
+          concept: this.concept_types_list.find(({ atribute }) => atribute === 'enrollment'),
+          value: 0,
+        });
+      }
     }
   }
 
