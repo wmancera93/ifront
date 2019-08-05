@@ -67,6 +67,7 @@ import { TransportationLogisticsComponent } from './travel-management/transporta
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
 import { HousingComponent } from './travel-management/housing/housing.component';
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
+import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 
 const routes: Routes = [
   {
@@ -96,6 +97,10 @@ const routes: Routes = [
   {
     path: 'my_team',
     component: MyTeamComponent
+  },
+  {
+    path: 'demographic_chart',
+    component: DemographicChartComponent,
   },
   {
     path: 'my_team_reports',

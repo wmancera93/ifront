@@ -62,6 +62,8 @@ import { ReportTravelsService } from './travel-management/report/report-travels.
 import { FiltersGeneralsService } from './travel-management/filters-generals/filters-generals.service';
 import { TranslateService } from './common/translate/translate.service';
 import { TransportationLogisticsService } from './travel-management/transportation-logistics/transportation-logistics.service';
+import { DemographicChartsService } from './common/demographic-charts/demographic-charts.service';
+import { DemographicSharedService } from './shared/common/demographic/demographic-shared.service';
 
 
 @NgModule({
@@ -127,7 +129,9 @@ import { TransportationLogisticsService } from './travel-management/transportati
     ReportTravelsService,
     FiltersGeneralsService,
     TranslateService,
-    TransportationLogisticsService
+    TransportationLogisticsService,
+    DemographicChartsService,
+    DemographicSharedService
   ]
 })
 export class ServicesModule { }

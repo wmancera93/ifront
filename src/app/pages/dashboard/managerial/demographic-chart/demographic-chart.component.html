@@ -1,0 +1,136 @@
+<div class="heigth-content-general">
+  <div class="row-hr-container">
+    <div class="col-12">
+      <div class="row justify-content-center">
+        <div class="col-xl-10 col-md-8 col-7 title">
+          <i class="fa fa-bar-chart"></i>
+          Indicadores demograficos
+        </div>
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
+          <div class="buttonBack img-zoom" (click)="returnDahsboardGerencial()">
+            <div class="padding-back">
+              <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
+              <span>
+                Atras
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="position-relative">
+          <div class="widget navy-bg bg-white d-flex flex-column">
+            <div class="row text-center align-items-center">
+              <div class="col-6">
+                <h6>El 100% de fuerza laboral corresponde</h6>
+                <i class="icon-enterprise color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+              <div class="col-6">
+                <h6>..Y de esa fuerza laboral somos:</h6>
+                <i class="icon-area color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+            </div>
+            <div style="min-height: 50px;width: 100%">
+              <ngx-charts-number-card
+                #pieGridEmployee
+                (window:resize)="pieGridEmployee.update()"
+                [view]="view"
+                [results]="result"
+                [scheme]="colorScheme"
+              >
+              </ngx-charts-number-card>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="position-relative">
+          <div class="widget navy-bg bg-white d-flex flex-column">
+            <div class="row text-center">
+              <div class="col-12">
+                <h3>En el area somos:</h3>
+              </div>
+            </div>
+            <div class="row text-center align-items-center m">
+              <div class="col-6">
+                <h6>{{ man }} Colaboradores</h6>
+                <i class="icon-man color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+              <div class="col-6">
+                <h6>{{ woman }} Colaboradoras</h6>
+                <i class="icon-woman color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
+            </div>
+            <app-gender style="min-height: 200px;width: 100%" (object)="objectgender($event)"></app-gender>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="position-relative">
+          <div class="widget navy-bg bg-white-demo d-flex flex-column">
+            <div class="row text-center">
+              <div class="col-12">
+                <h3>Nuestros colaboradores son es su mayoria de la generación:</h3>
+              </div>
+            </div>
+            <app-generations class="generationPosition" (maxGenerations)="setMaxValueGeneration($event)"></app-generations>
+            <div class="row positionIcon" style="right: 25%;bottom: 10%;">
+              <div class="col-8 d-flex align-items-center justify-content-end">
+                <h3>{{ maxValueCivilGenerations }}</h3>
+              </div>
+              <div class="col-4">
+                <i class="icon-generations color-primary mx-2" style="font-size: 4rem; right: 30%"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="position-relative">
+          <div class="widget navy-bg bg-white-demo d-flex flex-column">
+            <div class="row">
+              <div class="col-4">
+                <i class="icon-children color-primary mx-2 position-absolute" style="font-size: 4rem; right: 30%"></i>
+              </div>
+              <div class="col-8 position-text">
+                <h3>Nuestros colaboradores tienen</h3>
+              </div>
+            </div>
+            <app-children style="min-height: 290px;width: 100%" (maxValue)="setMaxValueChildren($event)"></app-children>
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <h5 class="text-center">Son más los que tienen {{ maxValueChildren.name }}</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-lg-6">
+        <div class="widget navy-bg bg-white-demo d-flex flex-column">
+          <div class="row text-center">
+            <div class="col-12">
+              <h3>El estado civil de Nuestros colaboradores es:</h3>
+            </div>
+          </div>
+          <app-civil-status
+            class="w-100 position-relative"
+            style="min-height: 250px;"
+            (maxCivilStatus)="setMaxValueCivilStatus($event)"
+          ></app-civil-status>
+          <div class="row mt-3">
+            <div class="col-8 d-flex align-items-center justify-content-end">
+              <h3>En su mayoria {{ maxValueCivilStatus }}</h3>
+            </div>
+            <div class="col-4">
+              <i class="icon-civilStatus color-primary mx-2" style="font-size: 4rem; right: 30%"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

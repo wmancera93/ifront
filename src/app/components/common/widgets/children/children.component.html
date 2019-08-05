@@ -1,0 +1,13 @@
+<ngx-charts-advanced-pie-chart
+  *ngIf="show"
+  #pieChart
+  (window:resize)="pieChart.update()"
+  [view]="view"
+  [label]="label"
+  [results]="results"
+  (select)="onSelect($event)"
+  [valueFormatting]="valueFormatting"
+  [nameFormatting]="nameFormatting"
+  [scheme]="colorScheme"
+>
+</ngx-charts-advanced-pie-chart>

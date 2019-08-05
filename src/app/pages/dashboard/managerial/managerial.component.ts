@@ -55,6 +55,7 @@ export class ManagerialComponent implements OnInit {
   public dataMyTeam = true;
   public dataManagerial: any;
   public activeButton = true;
+  public dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
   constructor(
     public dasboardManagerialService: DashboardManagerialService,

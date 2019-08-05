@@ -9,11 +9,7 @@ import { AlertsComponent } from './common/alerts/alerts.component';
 import { MenuNavigationComponent } from './layout/menu-navigation/menu-navigation.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { ToasterContainerComponent } from './common/toaster-container/toaster-container.component';
-import { ToasterModule, ToasterService } from 'angular2-toaster';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule
-} from '@angular/platform-browser/animations';
+import { ToasterModule } from 'angular2-toaster';
 import { ContactsListComponent } from './layout/contacts-list/contacts-list.component';
 import { CalendarComponent } from './common/widgets/calendar/calendar.component';
 import { NewspaperComponent } from './common/widgets/newspaper/newspaper.component';
@@ -53,6 +49,12 @@ import { ShowDistSpendsComponent } from './common/travels/approvals-details-trav
 import { ShowHotelsJourneyComponent } from './common/travels/approvals-details-travels/show-hotels-journey/show-hotels-journey.component';
 import { StepperComponentsComponent } from './common/stepper-components/stepper-components.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { ChildrenComponent } from './common/widgets/children/children.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { CivilStatusComponent } from './common/widgets/civil-status/civil-status.component';
+import { GenerationsComponent } from './common/widgets/generations/generations.component';
+import { GenderComponent } from './common/widgets/gender/gender.component';
+
 
 @NgModule({
   imports: [
@@ -66,7 +68,8 @@ import { PipesModule } from '../pipes/pipes.module';
     ToasterModule.forRoot(),
     ReactiveFormsModule,
     FileUploadModule,
-    PipesModule
+    PipesModule,
+    NgxChartsModule,
   ],
   declarations: [
     HeaderComponent,
@@ -103,7 +106,11 @@ import { PipesModule } from '../pipes/pipes.module';
     PdfTravelComponent,
     ShowDistSpendsComponent,
     ShowHotelsJourneyComponent,
-    StepperComponentsComponent
+    StepperComponentsComponent,
+    ChildrenComponent,
+    CivilStatusComponent,
+    GenerationsComponent,
+    GenderComponent,
   ],
   exports: [
     HeaderComponent,
@@ -133,7 +140,11 @@ import { PipesModule } from '../pipes/pipes.module';
     TooltipComponent,
     ApprovalsDetailsTravelsComponent,
     PdfTravelComponent,
-    StepperComponentsComponent
+    StepperComponentsComponent,
+    ChildrenComponent,
+    CivilStatusComponent,
+    GenerationsComponent,
+    GenderComponent
   ],
   providers: [
     // ToasterService
