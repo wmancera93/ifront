@@ -48,7 +48,7 @@
               <app-progress-primary [progressPrimary]="objectExtraHoursBar" routerLink="/ihr/hour_extras" class="col-12"></app-progress-primary>
             </div> -->
         <app-progress-primary [progressPrimary]="objectQueryCompany" class="col-12"></app-progress-primary>
-        <div class="col-12" routerLink="/ihr/demographic_chart">
+        <div class="col-12" routerLink="/ihr/demographic_chart" *ngIf="dataEnterprise.show_demographics_data">
           <div class="employee_event widget white-bg wg-hover-general wg-hoverImg-bg navy-bg">
             <div class="row">
               <div class="col-8 text-center">
