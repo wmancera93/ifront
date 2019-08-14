@@ -150,7 +150,7 @@ export class FormTransportationComponent implements OnInit, OnDestroy {
     this.form = this.fb.group({
       request_type_id: this.formRequests.id,
       destiny: '',
-      cost_center: employee.cost_center || '',
+      cost_center: [employee.cost_center || '', required],
       city: employee.city || '',
       address: employee.address || '',
       phone: '',

@@ -29,7 +29,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
   public housings_list: any[] = [];
   public identificationTypes: any[] = [];
   public arrayConcept: any[] = [];
-  public choose_room = true;
+  public choose_room = false;
   public beds = [];
   public loadingRoms = false;
   public deleteDocumenFile: string;
@@ -43,15 +43,14 @@ export class FormHousingComponent implements OnInit, OnDestroy {
         name: true,
         document_type: true,
         document_number: true,
-        phone:true,
+        phone: true,
       },
     },
     allCases: {
       housing: true,
       arrival_date: true,
       departure_date: true,
-      cost_center:true,
-
+      cost_center: true,
     },
   });
 
@@ -106,7 +105,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     });
 
     const { employee }: User = JSON.parse(localStorage.getItem('user'));
-    
+
     this.fileUploadService.getObjetFile().subscribe(data => {
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
@@ -160,11 +159,11 @@ export class FormHousingComponent implements OnInit, OnDestroy {
           return this.formState('document_number') && this.idActivity === 'HOUT' ? required(control) : null;
         },
       ],
-      cost_center: employee.cost_center || '',
+      cost_center: [employee.cost_center || '', required],
       bed: '',
       file: '',
-      name:'',
-      phone:'',
+      name: '',
+      phone: '',
     });
 
     this.requestsRhService.getListHousingList().subscribe((data: any) => {
@@ -257,7 +256,7 @@ export class FormHousingComponent implements OnInit, OnDestroy {
     value.setValue('');
   }
   validateDayHousing(form) {
-    if (new Date() > new Date(form.arrival_date.value)|| (new Date() > new Date(form.departure_date.value))){
+    if (new Date() > new Date(form.arrival_date.value) || new Date() > new Date(form.departure_date.value)) {
       this.setModalState.emit(false);
       this.alert.setAlert({
         type: 'danger',
@@ -269,17 +268,17 @@ export class FormHousingComponent implements OnInit, OnDestroy {
       form.arrival_date.setValue('');
       form.departure_date.setValue('');
     }
-      if (new Date(form.arrival_date.value) > new Date(form.departure_date.value)) {
-        this.setModalState.emit(false);
-        this.alert.setAlert({
-          type: 'danger',
-          title: 'Error',
-          message: 'La fecha de llegada al alojamiento no puede ser mayor que la salida ¿Desea regresar a la solicitud?',
-          confirmation: true,
-          typeConfirmation: 'continueCreateRequestsHousing',
-        } as Alerts);
-        form.arrival_date.setValue('');
-        form.departure_date.setValue('');
-      }
+    if (new Date(form.arrival_date.value) > new Date(form.departure_date.value)) {
+      this.setModalState.emit(false);
+      this.alert.setAlert({
+        type: 'danger',
+        title: 'Error',
+        message: 'La fecha de llegada al alojamiento no puede ser mayor que la salida ¿Desea regresar a la solicitud?',
+        confirmation: true,
+        typeConfirmation: 'continueCreateRequestsHousing',
+      } as Alerts);
+      form.arrival_date.setValue('');
+      form.departure_date.setValue('');
+    }
   }
 }
