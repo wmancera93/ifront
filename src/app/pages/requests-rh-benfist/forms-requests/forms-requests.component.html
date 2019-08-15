@@ -1,0 +1,432 @@
+<ng-template #observation_request>
+  <label for="celulaInput" class="titleColor">
+    <i class="fa fa-fw fa-comment text-primary-hr"></i>
+    {{ parseT('observation') | translate }}
+  </label>
+  <textarea
+    type="text"
+    rows="3"
+    style="height: auto !important;"
+    name="observation_request"
+    class="form-control"
+    [formControl]="forms.controls['observation_request']"
+  ></textarea>
+</ng-template>
+<ng-template #days_available>
+  <span class="fa-stack " style="height: 53px; font-size: 2.7em;">
+    <i class="fa fa-globe fa-stack-2x text-blue" style="margin-top:-10px"></i>
+    <i class="fa fa-plane fa-stack-1x text-origin"></i>
+  </span>
+  <h1 class="m-xs top-form">
+    {{ formRequests.available_days }}
+  </h1>
+  <h3 *ngIf="formRequests.available_days != 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+    {{ parseT('days_available') | translate }}
+  </h3>
+  <h3 *ngIf="formRequests.available_days == 1" class="font-bold m-l-n top-form text-blue" style="margin-right: -20px">
+    {{ parseT('day_available') | translate }}
+  </h3>
+</ng-template>
+<ng-template #date_begin>
+  <label for="dateBegin" class="titleColor">
+    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+    {{ parseT('date_begin') | translate }}
+    *
+  </label>
+  <input
+    type="date"
+    name="date_begin"
+    class="form-control"
+    [formControl]="forms.controls['date_begin']"
+    placeholder="dd/mm/yyyy"
+    (change)="calculateDay()"
+  />
+</ng-template>
+<ng-template #date_end>
+  <label for="dateEnd" class="titleColor">
+    <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+    {{ parseT('date_end') | translate }}
+    *
+  </label>
+  <input
+    type="date"
+    name="date_end"
+    class="form-control"
+    [formControl]="forms.controls['date_end']"
+    placeholder="dd/mm/yyyy"
+    (change)="calculateDay()"
+  />
+</ng-template>
+
+<ng-template #modalForms let-modal ng-init="typeCase = formRequests.alias">
+  <div class="modal-content" [ngClass]="{ 'd-none': modalState === false }" *ngIf="formRequests != null">
+    <div class="modal-header borderLine-title row-hr justify-content-center">
+      <div class="col-12 col-lg-10 text-center text-lg-left">
+        <h4 class="modal-title titleColor text-shadow">
+          {{ parseT('tittle') | translate }}
+          {{ formRequests.name | lowercase }}
+        </h4>
+      </div>
+    </div>
+    <div class="modal-body font-controls-login">
+      <form [formGroup]="forms" (ngSubmit)="newRequest(forms.value)">
+        <div class="row">
+          <div class="col-12" *ngIf="formState('days_available')">
+            <div class="widget bg-white top-containter" style="margin-top: 0px !important">
+              <div class="col align-self-center">
+                <ng-template [ngTemplateOutlet]="days_available"></ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'VITD'" class="row justify-content-center">
+          <div class="col-12 mt-4">
+            <div class="container-fluid mt-2" style="border: solid  1px var(--primary);">
+              <div class="row p-2">
+                <div class="col-12 mt-4" *ngIf="taken_vital_days.value?.length">
+                  <div class="table-responsive mt-3">
+                    <table class="table table-sm table-striped table-bordered">
+                      <thead>
+                        <tr>
+                          <th class="text-center">Tiempo requerido</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Jornada</th>
+                          <th class="text-center">Acciones</th>
+                        </tr>
+                      </thead>
+                      <tbody style="color: #fff;">
+                        <tr *ngFor="let requiredTime of taken_vital_days.value; let i = index">
+                          <td class="text-center">
+                            {{ requiredTime.extra.vitalDay }}
+                          </td>
+                          <td class="text-center">
+                            {{ requiredTime.extra.day_taken }}
+                          </td>
+                          <td class="text-center">
+                            {{ requiredTime.extra.workdays_type }}
+                          </td>
+                          <td width="10px">
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="deleteVitalDay(i, requiredTime)"
+                            >
+                              <i class="fa fa-minus"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-10 col-xl-11 mt-3" *ngIf="!isfull">
+                  <div class="container mb-3">
+                    <div class="row">
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-star-half-o text-primary-hr"></i>
+                          Tiempo solicitado*
+                        </label>
+                        <select
+                          class="form-control"
+                          [formControl]="forms.controls.vitalDay"
+                          (change)="setJourney(forms.controls.vitalDay.value)"
+                        >
+                          <option value="">Seleccione</option>
+                          <option value="Día">Día</option>
+                          <option value="Medio día">Medio día</option>
+                        </select>
+                      </div>
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                          Fecha*
+                        </label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          [formControl]="forms.controls.vitalDate"
+                          (change)="vitalValidate()"
+                        />
+                      </div>
+                      <div class="col-12 col-sm-4 text-truncate">
+                        <label class="titleColor">
+                          <i class="fa fa-fw fa-sun-o text-primary-hr"></i>
+                          Jornada*
+                        </label>
+                        <select class="form-control" [formControl]="forms.controls.vitalJourney">
+                          <option value="">Seleccione</option>
+                          <ng-container *ngFor="let temporales of temporal">
+                            <option [value]="temporales.id">
+                              {{ temporales.label }}
+                            </option>
+                          </ng-container>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0" *ngIf="!isfull">
+                  <div class="w-100 my-auto">
+                    <button type="button" class="btn btn-success btn-block cursor-general w-100" (click)="addVtd()">
+                      <i class=" fa fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'VACA'" class="row justify-content-center">
+          <ng-container *ngIf="formRequests.available_days !== 0">
+            <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_begin')">
+              <ng-template [ngTemplateOutlet]="date_begin"></ng-template>
+            </div>
+            <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_end')">
+              <ng-template [ngTemplateOutlet]="date_end"></ng-template>
+            </div>
+            <div class="col-12" *ngIf="is_payment">
+              <div class="form-check text-center">
+                <div class="d-block">
+                  ¿El pago es por nomina?
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    type="radio"
+                    name="radio-choose-room"
+                    id="radio-yes"
+                    class="custom-control-input"
+                    (click)="forms.controls.prepayment.setValue(true)"
+                  />
+                  <label class="custom-control-label" for="radio-yes">
+                    Si
+                  </label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input
+                    type="radio"
+                    name="radio-choose-room"
+                    id="radio-no"
+                    class="custom-control-input"
+                    (click)="forms.controls.prepayment.setValue(false)"
+                  />
+                  <label class="custom-control-label" for="radio-no">
+                    No
+                  </label>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="col-12" *ngIf="isGDV">
+            <h3
+              class="cursor-general"
+              style="text-decoration: underline  rgb(245, 236, 236)!important"
+              (click)="downLoadAttach('VACA')"
+            >
+              Anexo Vacaciones
+            </h3>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'VCCP'" class="row justify-content-center">
+          <ng-container *ngIf="formRequests.available_days != 0">
+            <div class="col-12 top-containter" *ngIf="formState('days_request')">
+              <label for="dateBegin" class="titleColor">
+                <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+                {{ parseT('day_required') | translate }}
+                *
+              </label>
+              <input
+                type="number"
+                name="days_request"
+                min="0"
+                class="form-control"
+                [(ngModel)]="detectLetter"
+                (keyup)="noAcceptMinus()"
+                [formControl]="forms.controls['days_request']"
+              />
+            </div>
+          </ng-container>
+        </div>
+        <div>
+          <app-form-benefist
+            *ngIf="['EDUB', 'EDUS', 'EDUU', 'EDUI'].includes(formRequests.alias) ? true : false"
+            [formRequests]="formRequests"
+            (submit)="newRequest($event)"
+            [showSubmit]="showSubmit"
+            (setModalState)="setModalState($event)"
+          >
+          </app-form-benefist>
+        </div>
+        <div>
+          <app-form-transportation
+            *ngIf="['TRAN', 'TRNB', 'TRNT'].includes(formRequests.alias) ? true : false"
+            [formRequests]="formRequests"
+            (submit)="newRequest($event)"
+            [showSubmit]="showSubmit"
+            (setModalState)="setModalState($event)"
+          >
+          </app-form-transportation>
+        </div>
+        <div>
+          <app-form-housing
+            *ngIf="['HOUS', 'HOUT'].includes(formRequests.alias) ? true : false"
+            [formRequests]="formRequests"
+            (submit)="newRequest($event)"
+            [showSubmit]="showSubmit"
+            (setModalState)="setModalState($event)"
+          >
+          </app-form-housing>
+        </div>
+        <div>
+          <app-lenses-auxilium
+            *ngIf="['AUXL'].includes(formRequests.alias) ? true : false"
+            [formRequests]="formRequests"
+            (submit)="newRequest($event)"
+            [showSubmit]="showSubmit"
+            (setModalState)="setModalState($event)"
+          >
+          </app-lenses-auxilium>
+        </div>
+        <div *ngIf="formRequests.alias == 'PERM'" class="row justify-content-left">
+          <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_begin')">
+            <ng-template [ngTemplateOutlet]="date_begin"></ng-template>
+          </div>
+          <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_end')">
+            <ng-template [ngTemplateOutlet]="date_end"></ng-template>
+          </div>
+          <div class="col-md-12 col-12 top-containter">
+            <label for="dateEnd" class="titleColor">
+              <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+              {{ parseT('message_attach') | translate }}*
+            </label>
+            <app-file-upload [nameFile]="filePermisionMarriage" [extensions]="extensions"></app-file-upload>
+          </div>
+          <div class="col-md-12 col-12" *ngIf="isGDV">
+            <h3
+              class="cursor-general"
+              style="text-decoration: underline  rgb(245, 236, 236)!important"
+              (click)="downLoadAttach('PERM')"
+            >
+              Anexo Permiso
+            </h3>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'PRSC'" class="row justify-content-center">
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12 top-containter" [ngClass]="{ 'col-md-6': showDate }" *ngIf="formState('date_begin')">
+                <label for="dateBegin" class="titleColor">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  {{ parseT('date_begin') | translate }}
+                  *
+                </label>
+                <input
+                  type="date"
+                  name="date_begin"
+                  class="form-control"
+                  [formControl]="forms.controls['date_begin']"
+                  placeholder="dd/mm/yyyy"
+                  (blur)="calculateDay()"
+                />
+              </div>
+              <div *ngIf="showDate && formState('date_end')" class="col-md-6 col-12 top-containter">
+                <label for="dateEnd" class="titleColor">
+                  <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+                  {{ parseT('date_end') | translate }}*
+                </label>
+                <input
+                  type="date"
+                  name="date_end"
+                  class="form-control"
+                  [formControl]="forms.controls['date_end']"
+                  placeholder="dd/mm/yyyy"
+                  (blur)="calculateDay()"
+                />
+              </div>
+            </div>
+            <div class="row">
+              <div *ngIf="showTime && formState('start_time')" class="col-md-6 col-12 top-containter">
+                <label for="startTime" class="titleColor">
+                  <i class="fa fa-fw fa-hourglass-start text-primary-hr"></i>
+                  {{ parseT('hour_begin') | translate }}
+                  *
+                </label>
+                <input
+                  type="time"
+                  name="start_time"
+                  class="form-control"
+                  [formControl]="forms.controls['start_time']"
+                  placeholder="HH-MM am/pm"
+                />
+              </div>
+
+              <div *ngIf="showTime && formState('end_time')" class="col-md-6 col-12 top-containter">
+                <label for="endTime" class="titleColor">
+                  <i class="fa fa-fw fa-hourglass-end text-primary-hr"></i>
+                  {{ parseT('hour_end') | translate }}*
+                </label>
+                <input
+                  type="time"
+                  name="end_time"
+                  class="form-control"
+                  [formControl]="forms.controls['end_time']"
+                  placeholder="HH-MM am/pm"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="formRequests.alias == 'INCA'" class="row justify-content-left">
+          <div class="col-12 col-lg-12">
+            <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_begin')">
+              <ng-template [ngTemplateOutlet]="date_begin"></ng-template>
+            </div>
+            <div class="col-md-6 col-12 top-containter" *ngIf="formState('date_end')">
+              <ng-template [ngTemplateOutlet]="date_end"></ng-template>
+            </div>
+            <div class="col-md-12 col-12 top-containter">
+              <label for="dateEnd" class="titleColor">
+                <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+                {{ parseT('message_attach') | translate }}*
+              </label>
+              <app-file-upload [nameFile]="fileInability" [extensions]="extensions"></app-file-upload>
+            </div>
+          </div>
+        </div>
+        <app-alerts></app-alerts>
+        <div
+          class="row"
+          *ngIf="['VCCP', 'PERM', 'PRSC', 'INCA', 'VACA', 'VITD', 'VCCP'].includes(formRequests.alias) ? true : false"
+        >
+          <div class="col-md-12 col-12 top-containter" *ngIf="formState('observation_request')">
+            <ng-template [ngTemplateOutlet]="observation_request"></ng-template>
+          </div>
+          <div class="col-md-12 top-containter">
+            <div class="row justify-content-end">
+              <div class="col-lg-3 col-md-4 col-12">
+                <button
+                  type="submit"
+                  *ngIf="showSubmit"
+                  class="btn btn-success btn-block"
+                  [attr.disabled]="validateForms ? null : true"
+                >
+                  <i class="fa fa-fw fa-floppy-o"></i>{{ parseT('save') | translate }}
+                </button>
+                <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+                  <i class="fa fa-fw fa-spinner fa-spin"></i>{{ parseT('loading') | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footerInfo justify-content-center">
+      <div class="buttonCloseRequest buttonCloseEmployee btn-close-modals text-center" (click)="modalActions.close()">
+        <h6>
+          {{ parseT('button_close') | translate }}
+        </h6>
+      </div>
+    </div>
+  </div>
+</ng-template>

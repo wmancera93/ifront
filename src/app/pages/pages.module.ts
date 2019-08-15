@@ -112,6 +112,7 @@ import { TrasnportationReportComponent } from './travel-management/transportatio
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 
 
 @NgModule({
@@ -227,7 +228,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HousingComponent,
     NewHousingComponent,
     HousingReportComponent,
-    DemographicChartComponent
+    DemographicChartComponent,
+    RequestsRhBenefistComponent
   ],
   providers: [ReportTravelsService]
 })

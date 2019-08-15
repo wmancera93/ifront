@@ -9,7 +9,10 @@ export class RequestsRhService {
   constructor(public http: HttpClient, private tokenService: Angular2TokenService) {}
 
   getAllRequests() {
-    return this.tokenService.get('employee_requets').map((data: any) => data.json());
+    return this.tokenService.get('employee_requets?benefits=false').map((data: any) => data.json());
+  }
+  getAllRequestsBenefist() {
+    return this.tokenService.get('employee_requets?benefits=true').map((data: any) => data.json());
   }
 
   getRequestDetailById(ticket: number) {

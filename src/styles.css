@@ -4320,7 +4320,7 @@ a.close-canvas-menu:hover {
   }
 }
 
-@media (min-width: 1000px){
+@media (min-width: 1000px) {
   .generationPosition {
     min-height: 290px;
     width: 100%;
@@ -4398,8 +4398,8 @@ a.close-canvas-menu:hover {
   font-style: normal;
 }
 
-[class^='icon-'],
-[class*=' icon-'] {
+[class^='rhicon-'],
+[class*=' rhicon-'] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'icomoon' !important;
   speak: none;
@@ -4414,24 +4414,24 @@ a.close-canvas-menu:hover {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-civilStatus:before {
+.rhicon-civilStatus:before {
   content: '\e906';
 }
-.icon-children:before {
+.rhicon-children:before {
   content: '\e900';
 }
-.icon-man:before {
+.rhicon-man:before {
   content: '\e901';
 }
-.icon-generations:before {
+.rhicon-generations:before {
   content: '\e902';
 }
-.icon-woman:before {
+.rhicon-woman:before {
   content: '\e903';
 }
-.icon-area:before {
+.rhicon-area:before {
   content: '\e904';
 }
-.icon-enterprise:before {
+.rhicon-enterprise:before {
   content: '\e905';
 }

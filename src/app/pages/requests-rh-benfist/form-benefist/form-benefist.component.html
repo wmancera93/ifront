@@ -1,0 +1,316 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-12">
+    <form [formGroup]="form" class="row align-content-center justify-content-center">
+      <div class="col-12">
+        <div class="row">
+          <div class="col-12 col-md-12 top-containter" *ngIf="formState('employee_family_id')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-user-o text-primary-hr"></i>
+              {{ parseT('benefited') | translate }} *
+            </label>
+            <select class="form-control" [formControl]="forms.employee_family_id">
+              <option value="">Seleccione</option>
+              <option *ngFor="let employee_family_idList of employee_family_id_types" [value]="employee_family_idList.id">
+                {{ employee_family_idList.name }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('type_identification')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-address-card-o text-primary-hr"></i>
+              {{ parseT('document_type') | translate }} *
+            </label>
+            <select class="form-control" [formControl]="forms.type_identification">
+              <option value="">Seleccione</option>
+              <option *ngFor="let identificationType of identificationTypes" [value]="identificationType.id">
+                {{ identificationType.label }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('number_identification')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-hashtag text-primary-hr"></i>
+              {{ parseT('document_number') | translate }} *
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              [formControl]="forms.number_identification"
+              (keyup)="onlyNumber('number_identification', forms.number_identification)"
+            />
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_begin')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-check-o text-primary-hr"></i>
+              Inicio periodo*
+            </label>
+            <input type="date" class="form-control" [formControl]="forms.date_begin" />
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('date_end')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar-minus-o text-primary-hr"></i>
+              Final periodo*
+            </label>
+            <input type="date" class="form-control" [formControl]="forms.date_end" />
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('academic_level')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-mortar-board text-primary-hr"></i>
+              {{ parseT('scholarship') | translate }} *
+            </label>
+            <select class="form-control" [formControl]="forms.academic_level" (change)="selectGrades(form.value)">
+              <option value="">Seleccione</option>
+              <option *ngFor="let academic_levelList of academic_level_types" [value]="academic_levelList.id">
+                {{ academic_levelList.description }}
+              </option>
+            </select>
+          </div>
+          <div class="col-12 col-md-6 top-containter" *ngIf="formState('grade')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+              Grado escolar*
+            </label>
+            <select class="form-control" [formControl]="forms.grade" [attr.disabled]="gradesShow.length == 0 ? true : null">
+              <option value="">Seleccione</option>
+              <option *ngFor="let grades of gradesShow" [value]="grades.grade">
+                {{ grades.grade }}
+              </option>
+            </select>
+          </div>
+          <div class="col-4 col-md-4 top-containter mt-3" *ngIf="formState('calendar')">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="schoolCalendar"
+                id="calendarA"
+                value="A"
+                checked
+                [formControl]="forms.calendar"
+                (click)="validateCalendar('A')"
+              />
+              <label class="form-check-label" for="calendarA">
+                Calendario A
+              </label>
+            </div>
+          </div>
+          <div class="col-4 col-md-4 top-containter mt-3" *ngIf="formState('calendar')">
+            <div class="form-check">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="schoolCalendar"
+                id="calendarB"
+                value="B"
+                [formControl]="forms.calendar"
+                (click)="validateCalendar('B')"
+              />
+              <label class="form-check-label" for="calendarB">
+                Calendario B
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 mt-4">
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <div class="border-title h5" style="color: rgba(255, 255, 255, 0.81);">
+              {{ parseT('education_request_details') | translate }} *
+            </div>
+          </div>
+          <div class="col-12 mt-4">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-university text-primary-hr"></i>
+              {{ parseT('institution') | translate }} *
+            </label>
+            <ng-container *ngIf="'EDUI' === idActivity">
+              <select class="form-control" [formControl]="forms.institution">
+                <option value="">Seleccione</option>
+                <option *ngFor="let institutionList of institution_types_list" [value]="institutionList.description">
+                  {{ institutionList.description }}
+                </option>
+              </select>
+            </ng-container>
+            <ng-container *ngIf="['EDUB', 'EDUS', 'EDUU'].includes(idActivity) ? true : false">
+              <input type="text" class="form-control" [formControl]="forms.institution" />
+            </ng-container>
+          </div>
+          <div class="col-12 col-md-6 text-truncate" *ngIf="formState('career')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-book text-primary-hr"></i>
+              {{ parseT('career') | translate }} *
+            </label>
+            <input type="text" class="form-control" [formControl]="forms.career" />
+          </div>
+          <div class="col-12 col-md-6 text-truncate" *ngIf="formState('semester')">
+            <label class="titleColor">
+              <i class="fa fa-fw fa-calendar text-primary-hr"></i>
+              {{ parseT('semester') | translate }} *
+            </label>
+            <input type="text" class="form-control" [formControl]="forms.semester" />
+          </div>
+          <div class="col-12 mt-4">
+            <div class="container-fluid mt-2" style="border: solid  1px var(--primary);">
+              <div class="row p-2">
+                <div class="col-12" *ngIf="arrayConcept.length > 0">
+                  <div class="table-responsive mt-3">
+                    <table class="table table-sm table-striped table-bordered table-hover">
+                      <thead>
+                        <tr>
+                          <th class="text-center">{{ parseT('concept') | translate }} *</th>
+                          <th class="text-center">{{ parseT('value') | translate }} *</th>
+                          <th class="text-center">
+                            {{ parseT('pages.requests_rh.erase') | translate }}
+                            *
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody style="color: #fff;">
+                        <tr *ngFor="let concept of arrayConcept">
+                          <td>
+                            {{ concept.concept.description }}
+                          </td>
+                          <td>
+                            {{ concept.value }}
+                          </td>
+                          <td width="10px">
+                            <button
+                              type="button"
+                              class="btn btn-danger btn-block btn-sm cursor-general"
+                              (click)="removeConcept(concept.concept)"
+                            >
+                              <i class="fa fa-minus"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <ng-container *ngIf="!conceptsValidation()">
+                  <div class="col-12 col-lg-10 col-xl-11">
+                    <div class="container mb-3">
+                      <div class="row">
+                        <div class="col-12" *ngIf="formState('message')">
+                          <label class="titleColor"> Por favor ingrese el valor del % aprobado por Recursos Humanos </label>
+                        </div>
+                        <div class="col-12 col-sm-6 text-truncate">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-list-ol text-primary-hr"></i>
+                            {{ parseT('concept') | translate }} *
+                          </label>
+                          <select class="form-control" [formControl]="forms.concept">
+                            <option value="">Seleccione</option>
+                            <ng-container *ngFor="let conceptList of concept_types_list">
+                              <option [value]="conceptList.atribute" *ngIf="!conceptExist(conceptList.atribute)">
+                                {{ conceptList.description }}
+                              </option>
+                            </ng-container>
+                          </select>
+                        </div>
+                        <div class="col-12 col-sm-6 text-truncate">
+                          <label class="titleColor">
+                            <i class="fa fa-fw fa-money text-primary-hr"></i>
+                            {{ parseT('value') | translate }} *
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            [formControl]="forms.value"
+                            (keyup)="onlyNumber('value', forms.value)"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-2 col-xl-1 d-flex pl-lg-0">
+                    <div class="w-100 my-auto">
+                      <button
+                        type="button"
+                        class="btn btn-success btn-block cursor-general mt-4 w-100"
+                        (click)="addConcept()"
+                        [attr.disabled]="forms.value.value == '' || forms.concept.value == '' ? true : null"
+                      >
+                        <i class=" fa fa-plus"></i>
+                      </button>
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 top-containter mt-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-12" *ngFor="let imgsaved of objectImg; let index = index">
+              <div class="alert pr-0" style="background-color:rgba(0,0,0,.2) " role="alert">
+                <div class="row cursor-general w-100">
+                  <div class="col-auto px-2">{{ index + 1 }}.</div>
+                  <div class="col-auto">
+                    <i
+                      aria-hidden="true"
+                      style="font-size: 1.5em; color: white"
+                      class="fa fa-fw {{ iconClass(imgsaved.extension) }}"
+                    ></i>
+                  </div>
+                  <div class="col text-truncate">
+                    {{ imgsaved.file.name }}
+                  </div>
+                  <div (click)="deleteUpload(imgsaved)" class="col-auto text-center d-flex align-items-center pl-3">
+                    <h6 class="text-primary-hr cursor-general my-auto">
+                      x
+                    </h6>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-left mb-3 mt-4">
+        <div class="container-fluid">
+          <label *ngIf="objectImg.length == 0" class="titleColor">
+            <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+            <strong>{{ 'pages.travel_management.travel.new_travel.attach' | translate }}</strong>
+          </label>
+          <app-file-upload [drageable]="true" [nameFile]="filequotation" [extensions]="extensions"></app-file-upload>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="celulaInput" class="titleColor">
+          <i class="fa fa-fw fa-comment text-primary-hr"></i>
+          {{ parseT('observation') | translate }}
+        </label>
+        <textarea
+          type="text"
+          rows="3"
+          style="height: auto !important;"
+          class="form-control"
+          [formControl]="forms.observation_request"
+        >
+        </textarea>
+      </div>
+      <div class="col-md-12 mt-2">
+        <div class="row justify-content-end">
+          <div class="col-lg-3 col-md-6 col-lg-4 col-12">
+            <button
+              type="button"
+              *ngIf="showSubmit"
+              class="btn btn-success btn-block"
+              (click)="submitSend()"
+              [attr.disabled]="validateForms ? null : true"
+            >
+              <i class="fa fa-fw fa-floppy-o"></i>{{ parseT('btn_save') | translate }}
+            </button>
+            <button type="button" *ngIf="!showSubmit" class="btn btn-warning btn-block">
+              <i class="fa fa-fw fa-spinner fa-spin"></i>{{ parseT('btn_loading') | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

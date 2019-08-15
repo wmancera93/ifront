@@ -68,6 +68,7 @@ import { TrasnportationReportComponent } from './travel-management/transportatio
 import { HousingComponent } from './travel-management/housing/housing.component';
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
+import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 
 const routes: Routes = [
   {
@@ -197,6 +198,10 @@ const routes: Routes = [
   {
     path: 'requests_rh',
     component: RequestsRhComponent
+  },
+  {
+    path: 'requests_benefist',
+    component: RequestsRhBenefistComponent
   },
   {
     path: 'corporate_documents',

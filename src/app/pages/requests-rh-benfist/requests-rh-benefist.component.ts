@@ -13,11 +13,11 @@ import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
-  selector: 'app-requests-rh',
-  templateUrl: './requests-rh.component.html',
-  styleUrls: ['./requests-rh.component.css'],
+  selector: 'app-requests-rh-benefist',
+  templateUrl: './requests-rh-benefist.component.html',
+  styleUrls: ['./requests-rh-benefist.component.css'],
 })
-export class RequestsRhComponent implements OnInit, OnDestroy {
+export class RequestsRhBenefistComponent implements OnInit, OnDestroy {
   public requests: RequestsRh;
   public requestStatic: ListRequests[] = [];
   public getListrequest: ListRequests;
@@ -126,7 +126,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
 
   getObjectRequests() {
     this.subscriptions.push(
-      this.requestsRhService.getAllRequests().subscribe((res: any) => {
+      this.requestsRhService.getAllRequestsBenefist().subscribe((res: any) => {
         if (res.success) {
           const { request_types, ...rest } = res.data[0];
           this.requests = {
@@ -137,10 +137,10 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
           this.viewContainer = true;
           this.requests.list_requets_types.forEach(element => {
             if (
-              element.id_activity !== 'AUX1' &&
-              element.id_activity !== 'AUX2' &&
-              element.id_activity !== 'AUX3' &&
-              element.id_activity !== 'VITD'
+              element.id_activity === 'AUX1' ||
+              element.id_activity === 'AUX2' ||
+              element.id_activity === 'AUX3' ||
+              element.id_activity === 'VITD'
             ) {
               this.listTypesFilters.push(element);
             }

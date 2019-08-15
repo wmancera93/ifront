@@ -398,6 +398,17 @@
           <span class="nav-label">{{ parseT('requests') | translate }}</span>
         </a>
       </li>
+      <li id="LiRequestedBenefist">
+        <a
+          id="aRequestedBenefist"
+          routerLink="/ihr/requests_benefist"
+          class="nav-link bg-menu"
+          (click)="clickOptionMenu('LiRequestedBenefist', 'aRequestedBenefist', '')"
+        >
+          <i class="fa fa-book"></i>
+          <span class="nav-label">Beneficios</span>
+        </a>
+      </li>
       <li id="liApprovals" *ngIf="dataEnterprise.make_approvals && dataUser.employee.is_approver">
         <a
           class="nav-link bg-menu"

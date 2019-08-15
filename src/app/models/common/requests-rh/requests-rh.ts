@@ -11,7 +11,7 @@ export interface TypesRequests {
   id: number;
   id_activity: string;
   name: string;
-  alias:string;
+  alias: string;
   available_days: number;
   maximum_days: number;
   minimum_days: number;
@@ -36,6 +36,11 @@ export interface ListRequetsTypes {
   id_activity: string;
   name: string;
   active?: boolean;
+  form?: string;
+  is_payment?: boolean;
+  maximum_days?: number;
+  minimum_days?: number;
+  subtype?: string;
 }
 
 export interface NextApprover {
@@ -128,14 +133,14 @@ export declare interface TypesRequest {
   VACA: formsRequest;
 }
 
-export declare interface DetailRequestLogistics{
-  date_in:string,
-  date_out:string,
-  benefist:string,
-  thrid:string,
-  companion:string,
-  destiny:string,
-  number_bed:number|string,
-  label_bed: string,
-  plate:string
-} 
+export declare interface DetailRequestLogistics {
+  date_in: string;
+  date_out: string;
+  benefist: string;
+  thrid: string;
+  companion: string;
+  destiny: string;
+  number_bed: number | string;
+  label_bed: string;
+  plate: string;
+}
