@@ -129,7 +129,6 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.requestsRhService.getAllRequests().subscribe((res: any) => {
         if (res.success) {
-          debugger;
           const { request_types, ...rest } = res.data[0];
           this.requests = {
             ...rest,

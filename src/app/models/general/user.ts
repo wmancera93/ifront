@@ -45,6 +45,7 @@ export interface Employee {
     is_travel_manager?: boolean;
     cost_center?: string;
     city?: string;
+    permits?:any;
 }
 export interface Boss {
     name_complete?: string;
