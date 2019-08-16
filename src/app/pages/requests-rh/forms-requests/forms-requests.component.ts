@@ -128,6 +128,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.formsRequestsService.getFormRequests().subscribe((data: TypesRequests) => {
         this.formRequests = data;
+        console.log(this.formRequests)
         this.sumatoria = 0;
         this.isfull = false;
         const { alias, minimum_days, maximum_days } = data;

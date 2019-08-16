@@ -31,6 +31,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   public status_inProcess: string;
   public status_pending: string;
   private subscriptions: ISubscription[];
+  typesFilters
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -128,6 +129,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.requestsRhService.getAllRequests().subscribe((res: any) => {
         if (res.success) {
+          debugger;
           const { request_types, ...rest } = res.data[0];
           this.requests = {
             ...rest,
@@ -135,16 +137,15 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
           };
           this.requestStatic = this.requests.my_requests_list;
           this.viewContainer = true;
-          this.requests.list_requets_types.forEach(element => {
-            if (
-              element.id_activity !== 'AUX1' &&
-              element.id_activity !== 'AUX2' &&
-              element.id_activity !== 'AUX3' &&
-              element.id_activity !== 'VITD'
-            ) {
-              this.listTypesFilters.push(element);
-            }
-          });
+          this.listTypesFilters = this.requests.list_requets_types.filter(
+            ({ id_activity }) =>
+              id_activity !== 'AUX1' && id_activity !== 'AUX2' && id_activity !== 'AUX3' && id_activity !== 'VITD',
+          );
+
+          this.typesFilters = this.requests.request_types.filter(
+            ({ id_activity }) =>
+              id_activity !== 'AUX1' && id_activity !== 'AUX2' && id_activity !== 'AUX3' && id_activity !== 'VITD',
+          );
         } else {
           this.viewContainer = false;
         }

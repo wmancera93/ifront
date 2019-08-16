@@ -46,7 +46,7 @@
                 aria-labelledby="navbarDropdown"
                 style="overflow-x: hidden !important; overflow-y: auto !important; max-height: 400px !important"
               >
-                <div *ngFor="let request of listTypesFilters; let i = index" class="row" (click)="newForm(request)">
+                <div *ngFor="let request of typesFilters; let i = index" class="row" (click)="newForm(request)">
                   <div class="constainer dropdown-item cursor-general">
                     <div class="row">
                       <div class="col-9">
@@ -86,7 +86,7 @@
                       </div>
                     </div>
                   </div>
-                  <div *ngIf="listTypesFilters.length !== i + 1" class="dropdown-divider col-12"></div>
+                  <div *ngIf="typesFilters.length !== i + 1" class="dropdown-divider col-12"></div>
                 </div>
               </div>
             </li>
