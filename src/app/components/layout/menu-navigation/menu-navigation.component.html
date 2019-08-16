@@ -398,7 +398,7 @@
           <span class="nav-label">{{ parseT('requests') | translate }}</span>
         </a>
       </li>
-      <li id="LiRequestedBenefist">
+      <li id="LiRequestedBenefist" *ngIf="dataUser.employee.permits?.SHOW_BENEFITS?.state">
         <a
           id="aRequestedBenefist"
           routerLink="/ihr/requests_benefist"
