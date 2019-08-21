@@ -16,8 +16,78 @@
         <img src="{{ logoHeader }}" style="width: 100%; height: 100%;" />
       </div>
       <div class="col" *ngIf="!showMenu">
-        <div class="row justify-content-end">
-          <div *ngIf="dataEnterprise.show_companions" id="togglePartners" class="cursor-general ng-star-inserted px-1 text-center" (click)="clickPartnersIcon()">
+        <div class="align-items-center d-inline-flex d-md-none h-100 justify-content-end w-100">
+          <li class="dropdown dropleft px-3 py-2 btn btn-sm" id="dropdownEllipsis">
+            <i
+              aria-expanded="false"
+              aria-haspopup="true"
+              style="font-size: 1.5em;"
+              class="fa fa-ellipsis-v px-1"
+              data-toggle="dropdown"
+            ></i>
+            <ul class="dropdown-menu" style="margin-right: -1em;">
+              <li class="px-2 py-1">
+                <button
+                  id="dropdown-ignore"
+                  class="btn btn-block d-flex p-0 py-2"
+                  type="button"
+                  style="flex-wrap: wrap;"
+                  data-toggle="collapse"
+                  data-target="#collapseLangs"
+                  aria-expanded="false"
+                  (click)="showMenuLanguaje = !showMenuLanguaje"
+                  aria-controls="collapseLangs"
+                >
+                  <div class="d-flex align-items-center" style="flex-grow: 1;flex-basis: 0px;">
+                    <i class="fa fa-fw fa-language fa-lg"></i>
+                    <span class="hideText font-size-responsive ">
+                      {{ 'languaje' | translate }}
+                    </span>
+                  </div>
+                  <i class="fa fa-caret-{{ !showMenuLanguaje ? 'down' : 'up' }} fa-fw fa-lg" style="flex-basis: auto;"></i>
+                </button>
+                <div class="ml-2 col-12 collapse" id="collapseLangs">
+                  <ng-container *ngFor="let lang of translate.getLangs()">
+                    <button
+                      class="dropdown-item w-100 px-2 py-1"
+                      type="button"
+                      (click)="translate.use(lang)"
+                      [ngClass]="{
+                        active: lang === translate.currentLang
+                      }"
+                    >
+                      {{ lang }}
+                    </button>
+                    <div class="dropdown-divider w-100 m-0"></div>
+                  </ng-container>
+                </div>
+              </li>
+              <li class="px-2 py-1" (click)="startTour()">
+                <div class="d-inline-flex align-items-center w-100">
+                  <i class="fa fa-fw fa-question-circle fa-lg"></i>
+                  <span class="hideText font-size-responsive px-1">
+                    {{ parseT('Ayuda') | translate }}
+                  </span>
+                </div>
+              </li>
+              <li class="px-2 py-1" (click)="LogOut()">
+                <div class="d-inline-flex align-items-center w-100">
+                  <i class="fa fa-fw fa-sign-out fa-lg"></i>
+                  <span class="hideText font-size-responsive">
+                    {{ parseT('out_door') | translate }}
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </li>
+        </div>
+        <div class="d-none d-md-inline-flex justify-content-end" style="min-width: 100%;">
+          <div
+            *ngIf="dataEnterprise.show_companions"
+            id="togglePartners"
+            class="cursor-general ng-star-inserted px-1 text-center"
+            (click)="clickPartnersIcon()"
+          >
             <i class="fa fa-fw fa-users fa-lg"></i>
             <span class="hideText font-size-responsive ">
               {{ parseT('partner') | translate }}
@@ -52,7 +122,13 @@
               </div>
             </div>
           </div>
-          <div class="cursor-general px-1 text-center" (click)="LogOut()">
+          <div class="cursor-general px-3 text-center" (click)="startTour()">
+            <i class="fa fa-fw fa-question-circle fa-lg"></i>
+            <span class="hideText font-size-responsive px-1">
+              {{ parseT('Ayuda') | translate }}
+            </span>
+          </div>
+          <div class="cursor-general px-3 text-center" (click)="LogOut()">
             <i class="fa fa-fw fa-sign-out fa-lg"></i>
             <span class="hideText font-size-responsive">
               {{ parseT('out_door') | translate }}

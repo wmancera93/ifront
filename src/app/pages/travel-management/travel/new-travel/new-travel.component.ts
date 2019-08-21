@@ -189,7 +189,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           data === 'closeAlertdeleteNewDocumentSaved'
         ) {
           document.getElementById('btn_travel_new').click();
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+          document.body.setAttribute('style', 'overflow-y:auto');
         }
       }
     });

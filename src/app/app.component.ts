@@ -2,7 +2,8 @@
 import { Component } from '@angular/core';
 
 // common
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Params, Data } from '@angular/router';
 import { Enterprise } from './models/general/enterprise';
 import { MainService } from './services/main/main.service';
 import { User } from './models/general/user';
@@ -10,6 +11,7 @@ import { UserSharedService } from './services/shared/common/user/user-shared.ser
 import { environment } from '../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-root',
@@ -29,10 +31,12 @@ export class AppComponent {
 
   constructor(
     public router: Router,
+    private route: ActivatedRoute,
     public mainService: MainService,
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService,
     public translate: TranslateService,
+    private readonly joyrideService: JoyrideService,
   ) {
     const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
@@ -117,6 +121,30 @@ export class AppComponent {
         }
       }
     });
+  }
+
+  onStartTour() {
+    let child = this.route.firstChild;
+    let url = '';
+    while (child) {
+      url += `${child.snapshot.url[0].path}`;
+      if (child.firstChild) {
+        url += `/`;
+        child = child.firstChild;
+      } else {
+        const { joyride } = child.snapshot.data;
+        if (joyride) {
+          const { steps } = joyride;
+          this.joyrideService.startTour({
+            steps: steps.map(step => {
+              if (typeof step === 'string' && !/@/g.test(step)) return `${step}@${url}`;
+              return step;
+            }),
+          });
+        }
+        return null;
+      }
+    }
   }
 
   tokenServiceInit(languaje) {

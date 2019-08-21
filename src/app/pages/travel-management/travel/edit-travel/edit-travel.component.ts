@@ -150,7 +150,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         data === 'closeAlertcontinueEditTravelRequests' ||
         data === 'closeAlertcontinueEditDestinationRequests'
       ) {
-        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+        document.body.setAttribute('style', 'overflow-y:auto');
       }
       if (data === 'continueEditDestinationRequestsValidateDates') {
         this.activate = false;

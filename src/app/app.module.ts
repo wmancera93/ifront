@@ -24,9 +24,9 @@ import { AppComponent } from './app.component';
 import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Observable, Subject } from 'rxjs';
 
 import { baseUrl } from '../environments/environment';
-import { Observable, Subject } from 'rxjs';
 
 export class MyMissingTranslationHandler implements MissingTranslationHandler {
   handle({ key }: MissingTranslationHandlerParams) {

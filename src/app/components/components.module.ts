@@ -55,7 +55,6 @@ import { CivilStatusComponent } from './common/widgets/civil-status/civil-status
 import { GenerationsComponent } from './common/widgets/generations/generations.component';
 import { GenderComponent } from './common/widgets/gender/gender.component';
 
-
 @NgModule({
   imports: [
     TagInputModule,
@@ -144,10 +143,10 @@ import { GenderComponent } from './common/widgets/gender/gender.component';
     ChildrenComponent,
     CivilStatusComponent,
     GenerationsComponent,
-    GenderComponent
+    GenderComponent,
   ],
   providers: [
     // ToasterService
-  ]
+  ],
 })
 export class ComponentsModule {}

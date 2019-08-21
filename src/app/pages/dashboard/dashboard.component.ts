@@ -45,15 +45,11 @@ export class DashboardComponent implements OnInit {
     public translate: TranslateService,
   ) {
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
-
     this.router.events
       .pipe(filter(e => e instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
-        if (
-          this.userAuthenticated === null ||
-          this.userAuthenticated === undefined
-        ) {
+        if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
           if (event[0].urlAfterRedirects === '/ihr/login') {
             setTimeout(() => {
               this.toast = {
@@ -116,18 +112,14 @@ export class DashboardComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.body.setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );
   }
 
   getDataLocalStorage() {
-    document
-      .getElementsByTagName('body')[0]
-      .setAttribute('style', 'overflow-y:block');
+    document.body.setAttribute('style', 'overflow-y:block');
     window.scroll({
       top: 1,
       left: 0,
@@ -137,10 +129,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-    if (
-      this.userAuthenticated !== null ||
-      this.userAuthenticated !== undefined
-    ) {
+    if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
 
@@ -149,9 +138,7 @@ export class DashboardComponent implements OnInit {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[
-          url.split('-')[0].split('/').length - 1
-        ];
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       } else {
         ambient = 'production';
       }

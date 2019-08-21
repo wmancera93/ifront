@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TablesPermisions } from '../../../models/common/tables/tables';
 import { ReportsHrService } from '../../../services/reports-rh/reports-hr.service';
@@ -81,9 +75,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document
-            .getElementsByTagName('body')[0]
-            .setAttribute('style', 'overflow-y:hidden');
+          document.body.setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),
@@ -139,12 +131,13 @@ export class RequestsComponent implements OnInit, OnDestroy {
       behavior: 'smooth',
     });
 
+    debugger;
+
     setTimeout(() => {
       if (this.stylesExplorerService.validateBrowser()) {
         let dataEnterprise: Enterprise;
         dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-        document.getElementById('all').style.backgroundColor =
-          dataEnterprise.primary_color;
+        document.getElementById('all').style.backgroundColor = dataEnterprise.primary_color;
       }
     }, 600);
 
@@ -189,27 +182,18 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
         if (this.stylesExplorerService.validateBrowser()) {
           let dataEnterprise: Enterprise;
-          document
-            .getElementById(this.filter_active)
-            .classList.remove('filters-reports-active');
+          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
           dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-          ['all', 'process', 'cancel', 'pending', 'aproved'].forEach(
-            element => {
-              document.getElementById(element).removeAttribute('style');
-            },
-          );
-          document.getElementById(parameter).style.backgroundColor =
-            dataEnterprise.primary_color;
+          ['all', 'process', 'cancel', 'pending', 'aproved'].forEach(element => {
+            document.getElementById(element).removeAttribute('style');
+          });
+          document.getElementById(parameter).style.backgroundColor = dataEnterprise.primary_color;
           document.getElementById(parameter).style.fontSize = '15px';
           document.getElementById(parameter).style.color = '#fff';
         } else {
-          document
-            .getElementById(this.filter_active)
-            .classList.remove('filters-reports-active');
-          document.getElementById(this.filter_active).className =
-            'filters-reports cursor-general';
-          document.getElementById(parameter).className =
-            'filters-reports-active';
+          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+          document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
+          document.getElementById(parameter).className = 'filters-reports-active';
         }
         this.filter_active = parameter;
       }
@@ -320,28 +304,24 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   excelExport() {
     const object: any[] = [];
-    this.reportsHrService
-      .getRequestsExcelByStatus(this.filter_active)
-      .subscribe((data: any) => {
-        if (data.data.length > 0) {
-          data.data.forEach(element => {
-            object.push({
-              Ticket: element.id,
-              TipoSolicitud: element.type_requests_name,
-              NombreSolicitante:
-                '#' + element.pernr + ' - ' + element.name_applicant,
-              Estado: element.status,
-              Plataforma:
-                element.next_platform + ' - #Nivel:' + element.next_level,
-              FechaSolicitud: element.created,
-              FechaInicial: element.date_begin_format,
-              FechaFinal: element.date_end_format,
-            });
+    this.reportsHrService.getRequestsExcelByStatus(this.filter_active).subscribe((data: any) => {
+      if (data.data.length > 0) {
+        data.data.forEach(element => {
+          object.push({
+            Ticket: element.id,
+            TipoSolicitud: element.type_requests_name,
+            NombreSolicitante: '#' + element.pernr + ' - ' + element.name_applicant,
+            Estado: element.status,
+            Plataforma: element.next_platform + ' - #Nivel:' + element.next_level,
+            FechaSolicitud: element.created,
+            FechaInicial: element.date_begin_format,
+            FechaFinal: element.date_end_format,
           });
-        }
+        });
+      }
 
-        this.excelService.exportAsExcelFile(object, this.title, '.xlsx');
-      });
+      this.excelService.exportAsExcelFile(object, this.title, '.xlsx');
+    });
   }
 
   csvExport() {

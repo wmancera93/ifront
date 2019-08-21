@@ -67,7 +67,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
+          document.body.setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),

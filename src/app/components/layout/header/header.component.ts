@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { User } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
@@ -8,17 +8,22 @@ import { Router } from '@angular/router';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
 import { DemographicSharedService } from '../../../services/shared/common/demographic/demographic-shared.service';
+import { JoyrideService } from 'ngx-joyride';
+import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  @Output() onStartTour: EventEmitter<void> = new EventEmitter();
+
   private dataUser: User = null;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
-  public showMenu = true;
+  public showMenu = false;
+  public showMenuLanguaje = false;
   public showCollapse = '';
   public heightContenGeneral: number;
   public showContactsList = false;
@@ -39,6 +44,7 @@ export class HeaderComponent implements OnInit {
     public translate: TranslateService,
     public alert: AlertsService,
     public demographicSharedService: DemographicSharedService,
+    public stylesExplorerService: StylesExplorerService,
   ) {
     this.userSharedService.getUser().subscribe(data => {
       this.dataUser = data;
@@ -61,23 +67,48 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    setTimeout(() => {
+    this.stylesExplorerService.showMenu.subscribe(value => {});
+    document.onreadystatechange = () => {
       this.getDataLocalStorage();
       this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
       this.logoHeader = this.dataEnterprise.logo_inside.url;
-
-      if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'none') {
-        this.showMenu = false;
-        (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
-        document.getElementById('footer_general').style.display = 'block';
-      } else {
-        if (this.showMenu === true) {
-          (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
-          document.getElementById('footer_general').style.display = 'none';
-        }
-      }
-    }, 100);
+      /* this.onResize(); */
+      window.addEventListener('resize', this.onResize);
+      window.$ &&
+        window.$('#dropdownEllipsis').on('hide.bs.dropdown', function(e) {
+          if (!!$('#dropdown-ignore').has(e.clickEvent.target).length) {
+            e.stopPropagation();
+            e.preventDefault();
+          }
+        });
+    };
   }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.onResize);
+  }
+
+  handleMenu(state: boolean) {
+    this.stylesExplorerService.handleMenu(state);
+  }
+
+  onResize = () => {
+    const heigthContentGeneral = document.getElementsByClassName('heigth-content-general')[1] as HTMLInputElement;
+    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'none') {
+      this.handleMenu(false);
+      this.showMenu = false;
+      this.clickHideMenuMobile();
+      heigthContentGeneral.style.display = 'block';
+      document.getElementById('footer_general').style.display = 'block';
+    } else {
+      if (this.showMenu === true) {
+        heigthContentGeneral.style.display = 'none';
+        document.getElementById('footer_general').style.display = 'none';
+      }
+      this.handleMenu(true);
+      this.showMenu = true;
+    }
+  };
 
   LogOut() {
     this.alertWarning = [
@@ -91,6 +122,10 @@ export class HeaderComponent implements OnInit {
     ];
 
     this.alert.setAlert(this.alertWarning[0]);
+  }
+
+  startTour() {
+    this.onStartTour.emit();
   }
 
   clickPartnersIcon() {
@@ -114,6 +149,7 @@ export class HeaderComponent implements OnInit {
     document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = false;
+    this.handleMenu(false);
     setTimeout(() => {
       (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
       document.getElementById('footer_general').style.display = 'block';
@@ -126,6 +162,7 @@ export class HeaderComponent implements OnInit {
     document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = true;
+    this.handleMenu(true);
     (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
     document.getElementById('footer_general').style.display = 'none';
 
