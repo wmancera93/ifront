@@ -29,11 +29,6 @@ export class VacationBalanceComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));

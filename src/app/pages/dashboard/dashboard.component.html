@@ -5,7 +5,7 @@
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
-      <div class="row align-items-center">
+      <div class="row align-items-center" [title]="'dynamicTitle'" quickJoride="'step_1'" text="Main title!">
         <div class="col-xl-8 col-md-6 col-5 title">
           <i class="fa fa-fw fa-th-large fa-x1"></i>
           {{ parseT('tittle') | translate }}

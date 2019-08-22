@@ -48,11 +48,6 @@ export class HolidayLetterComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getHolidayLetter().subscribe((data: any) => {
       this.holidayLetter = data.data;
       if (this.holidayLetter.length === 0) {

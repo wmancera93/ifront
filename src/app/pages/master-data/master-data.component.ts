@@ -132,11 +132,6 @@ export class MasterDataComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 

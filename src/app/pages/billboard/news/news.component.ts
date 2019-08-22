@@ -65,11 +65,6 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.consultAllArticles();
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();

@@ -112,7 +112,7 @@ const routes: Routes = [
     component: DashboardComponent,
     data: {
       joyride: {
-        steps: ['firstStep@ihr/index', 'secondStep@ihr/index'],
+        steps: ['step_1', 'step_2'],
       },
     },
   },

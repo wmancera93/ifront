@@ -23,11 +23,6 @@ export class ErrorPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     if (localStorage.getItem('enterprise') === null) {
       const url = window.location.href;
       let ambient;

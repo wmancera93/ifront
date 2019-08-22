@@ -1,5 +1,5 @@
 <div class="row-hr-container">
-  <div class="row">
+  <div class="row" joyrideStep [title]="'dynamicTitle'" joyrideStep="secondStep">
     <app-notification-primary
       [notificationPrimary]="objectRequest"
       class="col-xl-2 col-6"
@@ -20,73 +20,37 @@
       [notificationSecundary]="objectQinquennialsPayment"
       class="col-xl-2 col-6"
     ></app-notification-secundary>
-    <div
-      class="col-xl-4 col-12"
-      *ngIf="
-        dataEnterprise.show_shart_severance &&
-        dataEnterprise.show_shart_severance_interest
-      "
-    >
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_shart_severance && dataEnterprise.show_shart_severance_interest">
       <div class="row">
-        <app-estadistics
-          [estadistics]="objectMyLayoffs"
-          class="col-12"
-        ></app-estadistics>
-        <app-estadistics
-          [estadistics]="objectMyInterestsLayoffs"
-          class="col-12"
-        ></app-estadistics>
+        <app-estadistics [estadistics]="objectMyLayoffs" class="col-12"></app-estadistics>
+        <app-estadistics [estadistics]="objectMyInterestsLayoffs" class="col-12"></app-estadistics>
       </div>
     </div>
     <div class="col-xl-4 col-12">
       <div class="row">
-        <app-estadistics
-          [estadistics]="objectIncome"
-          class="col-12"
-        ></app-estadistics>
-        <app-estadistics
-          [estadistics]="objectDeductions"
-          class="col-12"
-        ></app-estadistics>
+        <app-estadistics [estadistics]="objectIncome" class="col-12"></app-estadistics>
+        <app-estadistics [estadistics]="objectDeductions" class="col-12"></app-estadistics>
       </div>
     </div>
   </div>
   <div class="row">
-    <app-newspaper
-      [newspaper]="objectNewspaper"
-      class="col-xl-9 col-12"
-    ></app-newspaper>
-    <app-calendar
-      [calendar]="objectCalendar"
-      class="col-xl-3 col-12"
-    ></app-calendar>
+    <app-newspaper [newspaper]="objectNewspaper" class="col-xl-9 col-12"></app-newspaper>
+    <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
   </div>
   <div class="row">
     <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_birthday">
       <div class="row">
-        <app-events-employees
-          [eventsEmployee]="objectBirthDay"
-          class="col-12"
-        ></app-events-employees>
+        <app-events-employees [eventsEmployee]="objectBirthDay" class="col-12"></app-events-employees>
       </div>
     </div>
     <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_labor">
       <div class="row">
-        <app-events-employees
-          [eventsEmployee]="objectAnniversay"
-          class="col-12"
-        ></app-events-employees>
+        <app-events-employees [eventsEmployee]="objectAnniversay" class="col-12"></app-events-employees>
       </div>
     </div>
-    <div
-      class="col-xl-4 col-12"
-      *ngIf="dataEnterprise.show_new_employees"
-    >
+    <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_new_employees">
       <div class="row">
-        <app-events-employees
-          [eventsEmployee]="objectNewEmployee"
-          class="col-12"
-        ></app-events-employees>
+        <app-events-employees [eventsEmployee]="objectNewEmployee" class="col-12"></app-events-employees>
       </div>
     </div>
   </div>

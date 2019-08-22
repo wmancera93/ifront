@@ -98,6 +98,11 @@ export class AppComponent {
       this.dataUser = data;
     });
     this.router.events.subscribe(event => {
+      window.scroll({
+        top: 1,
+        left: 0,
+        behavior: 'smooth',
+      });
       if (event instanceof NavigationEnd) {
         if (
           event.urlAfterRedirects === '/ihr/login' ||

@@ -55,11 +55,6 @@ export class RequestsApproversComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {
       this.newtype_requests = data.data;

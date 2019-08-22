@@ -79,11 +79,6 @@ export class ManagerialComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     const data = {
       background: '#33446e',

@@ -28,11 +28,6 @@ export class TravelManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getDataUserPermissions();
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     const commonButtons = [
       {

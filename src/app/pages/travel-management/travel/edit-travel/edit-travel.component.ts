@@ -550,11 +550,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
   }
 
   addHourEnd(value) {

@@ -56,11 +56,6 @@ export class MyTeamReportsComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();

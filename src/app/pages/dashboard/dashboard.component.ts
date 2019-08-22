@@ -120,11 +120,6 @@ export class DashboardComponent implements OnInit {
 
   getDataLocalStorage() {
     document.body.setAttribute('style', 'overflow-y:block');
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
   }
 
   ngOnInit() {

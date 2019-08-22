@@ -357,11 +357,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.travelManagementService.getplanningTravelRequests().subscribe((data: any) => {
       this.planningTravel = data;
       this.travel_types = this.sortByAphabet(data.data.travel_types);

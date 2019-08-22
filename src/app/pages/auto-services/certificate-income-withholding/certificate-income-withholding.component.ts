@@ -48,11 +48,6 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getIncomeWithHolding().subscribe((data: any) => {
       this.incomingCertificate = data.data;
       if (this.incomingCertificate.length === 0) {

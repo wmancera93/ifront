@@ -220,11 +220,6 @@ export class TravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       ...this.subscriptions,
       this.travelService.getTravelRequests().subscribe((data: any) => {

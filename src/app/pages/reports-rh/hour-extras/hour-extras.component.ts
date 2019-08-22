@@ -16,11 +16,6 @@ export class HourExtrasComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     const dataTemporal = {
       success: true,
       data: [

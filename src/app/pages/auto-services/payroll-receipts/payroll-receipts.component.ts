@@ -45,11 +45,6 @@ export class PayrollReceiptsComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
       this.listPayRoll = data.data;
       if (data.data.length === 0) {
