@@ -20,6 +20,7 @@ export interface Permit {
 export interface Permits {
   PERMISSIONS_SEE_INCOME: Permit;
   PERMISSIONS_SEE_RETENTIONS: Permit;
+  SHOW_BENEFITS: Permit;
 }
 
 export interface Employee {
