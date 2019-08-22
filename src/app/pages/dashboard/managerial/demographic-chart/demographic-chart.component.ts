@@ -2,8 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
-import { PieGridComponent } from '@swimlane/ngx-charts';
+import { PieGridComponent, ColorHelper } from '@swimlane/ngx-charts';
 import debounce from 'lodash/debounce';
+import { colorSets } from '@swimlane/ngx-charts/release/utils/color-sets';
 
 @Component({
   selector: 'app-demographic-chart',
@@ -12,7 +13,6 @@ import debounce from 'lodash/debounce';
 })
 export class DemographicChartComponent implements OnInit {
   @ViewChild('pieGridEmployee') public pieGridEmployee: PieGridComponent;
-  updateEmployee = debounce(() => this.pieGridEmployee.update(), 500);
 
   public maxValueChildren = { name: '', value: 0 };
   public maxValueCivilStatus = { name: '' };
@@ -22,18 +22,18 @@ export class DemographicChartComponent implements OnInit {
   public totalArea: number = 0;
   public totalEmployee: number = 0;
   public result: PieGridComponent['results'] = [];
-
-  view = undefined;
-  colorScheme = 'ocean';
+  public colorChart: string = 'natural';
+  public listColors = colorSets;
+  public color?: typeof colorSets[0];
+  public colorScheme: string = 'natural';
 
   constructor(
     public router: Router,
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,
   ) {
-    this.demographicSharedService.getEventUpload().subscribe((data: any) => {
-      this.updateEmployee();
-    });
+    this.demographicSharedService.getEventUpload().subscribe((data: any) => {});
+    this.color = this.listColors.find(({ name }) => name == this.colorScheme);
   }
 
   ngOnInit() {
@@ -42,13 +42,13 @@ export class DemographicChartComponent implements OnInit {
         this.totalEmployee += element.value;
       });
       this.result.push({
-        name: 'Colaboradores en total',
+        name: 'Colaboradores',
         value: this.totalEmployee,
         extra: { percentage: (this.totalEmployee / this.totalEmployee) * 100 },
       });
       this.result = [...this.result];
     });
-    this.updateEmployee();
+    console.log(this.listColors);
   }
   returnDahsboardGerencial() {
     this.router.navigate(['ihr/index']);
@@ -71,7 +71,7 @@ export class DemographicChartComponent implements OnInit {
         updateObject();
       } else {
         this.result.push({
-          name: 'Colaboradores en el area',
+          name: 'Colaboradores',
           value: this.totalArea,
           extra: { percentage: (this.totalArea / this.totalEmployee) * 100 },
         });
@@ -80,7 +80,9 @@ export class DemographicChartComponent implements OnInit {
     }, 500);
     updateObject();
   }
-  onResize() {
-    this.updateEmployee();
+
+  selectColor({ target: { value } }: { target: HTMLInputElement } & Event) {
+    this.color = this.listColors[value];
+    this.colorScheme = this.color.name;
   }
 }

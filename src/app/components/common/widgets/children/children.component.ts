@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { ColorHelper, AdvancedPieChartComponent } from '@swimlane/ngx-charts';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
@@ -12,16 +12,16 @@ import { element } from 'protractor';
 export class ChildrenComponent implements OnInit {
   @ViewChild('pieChart') public pieChart: AdvancedPieChartComponent;
   @Output() maxValue: EventEmitter<any> = new EventEmitter();
+  @Input() colorScheme = 'picnic';
 
   public results: any[] = [];
-  
+
   public show = false;
   public total = 0;
 
   // options
   view = undefined;
   label = 'Total ...';
-  colorScheme = 'ocean';
 
   // line, area
   lineChartAutoScale = true;

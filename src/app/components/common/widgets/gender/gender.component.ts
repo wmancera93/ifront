@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { BarVerticalComponent } from '@swimlane/ngx-charts';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { PieGridComponent, PieChartComponent } from '@swimlane/ngx-charts';
 import debounce from 'lodash/debounce';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
@@ -10,17 +10,15 @@ import { DemographicSharedService } from '../../../../services/shared/common/dem
   styleUrls: ['./gender.component.css'],
 })
 export class GenderComponent implements OnInit {
-  @ViewChild('barVertical') public barVertical: BarVerticalComponent;
+  @ViewChild('pie') public pie: PieChartComponent;
   @Output() object: EventEmitter<any> = new EventEmitter();
+  @Input() colorScheme = 'natural';
 
-  updateBar = debounce(() => this.barVertical.update(), 500);
+  updateBar = debounce(() => this.pie.update(), 500);
 
   public results: any[] = [];
 
   view = undefined;
-  xAxis = true;
-  yAxis = true;
-  colorScheme = 'ocean';
 
   constructor(
     public demographicChartsService: DemographicChartsService,
