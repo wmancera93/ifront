@@ -22,11 +22,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private dataUser: User = null;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
+  public isMobile = false;
   public showMenu = false;
   public showMenuLanguaje = false;
   public showCollapse = '';
   public heightContenGeneral: number;
   public showContactsList = false;
+  public isInitial = true;
   private alertWarning: Alerts[];
 
   t(key) {
@@ -50,6 +52,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.dataUser = data;
     });
 
+    stylesExplorerService.handleMobile.subscribe(state => {
+      this.isMobile = state;
+      if (state) {
+        this.clickHideMenuMobile(false);
+      }
+    });
     this.alert.getActionConfirm().subscribe((data: any) => {
       if (data === 'logout') {
         this.tokenService.signOut().subscribe(
@@ -67,16 +75,17 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.stylesExplorerService.showMenu.subscribe(value => {});
+    this.getDataLocalStorage();
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+    this.logoHeader = this.dataEnterprise.logo_inside.url;
+    this.isMobile = this.stylesExplorerService.isMobile;
+    if (this.isMobile) {
+      this.clickHideMenuMobile();
+    }
     document.onreadystatechange = () => {
-      this.getDataLocalStorage();
-      this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-      this.logoHeader = this.dataEnterprise.logo_inside.url;
-      /* this.onResize(); */
-      window.addEventListener('resize', this.onResize);
       window.$ &&
         window.$('#dropdownEllipsis').on('hide.bs.dropdown', function(e) {
-          if (!!$('#dropdown-ignore').has(e.clickEvent.target).length) {
+          if (!!$('#dropdown-ignore').has(e.clickEvent && e.clickEvent.target).length) {
             e.stopPropagation();
             e.preventDefault();
           }
@@ -84,31 +93,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     };
   }
 
-  ngOnDestroy() {
-    window.removeEventListener('resize', this.onResize);
-  }
+  ngOnDestroy() {}
 
   handleMenu(state: boolean) {
-    this.stylesExplorerService.handleMenu(state);
+    this.stylesExplorerService.handleMenuNavigation.emit(state);
   }
-
-  onResize = () => {
-    const heigthContentGeneral = document.getElementsByClassName('heigth-content-general')[1] as HTMLInputElement;
-    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'none') {
-      this.handleMenu(false);
-      this.showMenu = false;
-      this.clickHideMenuMobile();
-      heigthContentGeneral.style.display = 'block';
-      document.getElementById('footer_general').style.display = 'block';
-    } else {
-      if (this.showMenu === true) {
-        heigthContentGeneral.style.display = 'none';
-        document.getElementById('footer_general').style.display = 'none';
-      }
-      this.handleMenu(true);
-      this.showMenu = true;
-    }
-  };
 
   LogOut() {
     this.alertWarning = [
@@ -129,7 +118,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   clickPartnersIcon() {
-    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') !== 'none') {
+    if (this.stylesExplorerService.isMobile) {
       this.clickHideMenuMobile();
     }
 
@@ -144,29 +133,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.showContactsList = false;
   }
 
-  clickHideMenuMobile() {
+  clickHideMenuMobile(emit = true) {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `-310px`);
     document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = false;
-    this.handleMenu(false);
-    setTimeout(() => {
-      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
-      document.getElementById('footer_general').style.display = 'block';
-    }, 300);
+    if (emit) this.handleMenu(false);
+    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+    document.getElementById('footer_general').style.display = 'block';
     this.demographicSharedService.setEventUploa(true);
   }
 
-  clickShowMenuMobile() {
+  clickShowMenuMobile(emit = true) {
     document.documentElement.style.setProperty(`--margin-left-mobile`, `0px`);
     document.documentElement.style.setProperty(`--left-hide-menu`, `-310px`);
     document.documentElement.style.setProperty(`--left-hide-menu-hover`, `-310px`);
     this.showMenu = true;
-    this.handleMenu(true);
-    (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'none';
-    document.getElementById('footer_general').style.display = 'none';
+    if (emit) this.handleMenu(true);
+    setTimeout(() => {
+      (<HTMLInputElement>document.getElementsByClassName('heigth-content-general')[1]).style.display = 'block';
+      document.getElementById('footer_general').style.display = 'block';
+    }, 300);
 
-    if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
+    if (this.stylesExplorerService.isMobile) {
       if (this.showContactsList) {
         this.showContactsList = false;
       }

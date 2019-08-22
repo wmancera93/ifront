@@ -1,7 +1,7 @@
 <nav id="mainNav" class="navbar nav-header fixed-top navbar-toggleable-sm navbar-inverse nav mb-3">
   <div class="col-12">
     <div class="row justify-content-between">
-      <div id="btnMobile" class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center">
+      <div class="mobile col-md-2  col-lg-2 col-xl-1 col-2  align-self-center" *ngIf="!(showMenu && !isMobile)">
         <div class="row">
           <div
             id="btnHideMenu"
@@ -12,10 +12,10 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!showMenu" class="company-logo-header cursor-general img-zoom">
+      <div *ngIf="!isMobile" class="company-logo-header cursor-general img-zoom">
         <img src="{{ logoHeader }}" style="width: 100%; height: 100%;" />
       </div>
-      <div class="col" *ngIf="!showMenu">
+      <div class="col" *ngIf="!(showMenu && isMobile)">
         <div class="align-items-center d-inline-flex d-md-none h-100 justify-content-end w-100">
           <li class="dropdown dropleft px-3 py-2 btn btn-sm" id="dropdownEllipsis">
             <i

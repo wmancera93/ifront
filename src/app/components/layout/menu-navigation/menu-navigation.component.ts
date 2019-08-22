@@ -15,7 +15,7 @@ export class MenuNavigationComponent implements OnInit {
   public dataUser: User = null;
   public dataEnterprise: Enterprise = null;
   public showMenu = true;
-  public handleMenuLocal = false;
+  public isMobile = false;
   public liActive = 'liIndex';
   public aActive = 'aIndex';
   public showCollapse = '';
@@ -41,22 +41,33 @@ export class MenuNavigationComponent implements OnInit {
   }
 
   handleMenu(state: boolean) {
-    this.handleMenuLocal = true;
-    this.stylesExplorerService.handleMenu(state);
+    this.stylesExplorerService.handleHeader.emit(state);
   }
 
   ngOnInit() {
     this.getDataLocalStorage();
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+    const commonFunction = (state: boolean) => {
+      if (state) {
+        this.clickHideMenu(false);
+      } else {
+        this.clickShowMenu(false);
+      }
+    };
+    this.isMobile = this.stylesExplorerService.isMobile;
+    commonFunction(this.isMobile);
+    this.stylesExplorerService.handleMenuNavigation.subscribe(state => commonFunction(!state));
+    this.stylesExplorerService.handleMobile.subscribe(state => {
+      this.isMobile = state;
+      if (state) this.clickHideMenu();
+    });
+
     if (!this.stylesExplorerService.validateBrowser()) {
       this.documentStyles.setProperty(`--img-header-menu`, `url(` + this.dataEnterprise.background_header_menu.url + `)`);
       this.documentStyles.setProperty(`--width-nav-menu`, `220px`);
       this.documentStyles.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
       this.documentStyles.setProperty(`--left-hide-menu`, `219px`);
       this.documentStyles.setProperty(`--left-hide-menu-hover`, `218px`);
-      this.documentStyles.setProperty(`--visible-menu`, `block`);
-      this.documentStyles.setProperty(`--left-show-menu-hover`, `-20px`);
-      this.documentStyles.setProperty(`--left-show-menu`, `-20px`);
     } else {
       setTimeout(() => {
         this.stylesExplorerService.stylesInExplorerOrEdge(
@@ -76,17 +87,6 @@ export class MenuNavigationComponent implements OnInit {
         );
       }, 400);
     }
-    this.stylesExplorerService.showMenu.subscribe(value => {
-      if (this.handleMenuLocal) {
-        this.handleMenuLocal = false;
-      } else {
-        if (value) {
-          this.clickShowMenu();
-        } else {
-          this.clickHideMenu();
-        }
-      }
-    });
   }
 
   getDataLocalStorage() {
@@ -95,18 +95,14 @@ export class MenuNavigationComponent implements OnInit {
     }
   }
 
-  clickHideMenu() {
-    this.handleMenu(false);
+  clickHideMenu(emit = true) {
+    if (emit) this.handleMenu(false);
+    this.showMenu = false;
     if (!this.stylesExplorerService.validateBrowser()) {
-      this.documentStyles.setProperty(`--visible-menu`, `none`);
       this.documentStyles.setProperty(`--width-page-wrapper`, `0 0 0 0`);
       this.documentStyles.setProperty(`--width-nav-menu`, `0px`);
       this.documentStyles.setProperty(`--left-hide-menu`, `-12px`);
       this.documentStyles.setProperty(`--left-hide-menu-hover`, `-12px`);
-      setTimeout(() => {
-        this.documentStyles.setProperty(`--left-show-menu`, `-1px`);
-        this.documentStyles.setProperty(`--left-show-menu-hover`, `0px`);
-      }, 400);
     } else {
       this.stylesExplorerService.stylesInExplorerOrEdge(
         '',
@@ -127,19 +123,17 @@ export class MenuNavigationComponent implements OnInit {
     this.demographicSharedService.setEventUploa(true);
   }
 
-  clickShowMenu() {
-    this.handleMenu(true);
+  clickShowMenu(emit = true) {
+    if (emit) this.handleMenu(true);
+    this.showMenu = true;
     this.demographicSharedService.setEventUploa(true);
     if (!this.stylesExplorerService.validateBrowser()) {
       this.documentStyles.setProperty(`--margin-left-mobile`, `0px`);
       this.documentStyles.setProperty(`--left-hide-menu`, `-310px`);
       this.documentStyles.setProperty(`--left-hide-menu-hover`, `-310px`);
-      this.documentStyles.setProperty(`--left-show-menu-hover`, `-20px`);
-      this.documentStyles.setProperty(`--left-show-menu`, `-20px`);
       this.documentStyles.setProperty(`--width-page-wrapper`, `0 0 0 220px`);
       this.documentStyles.setProperty(`--width-nav-menu`, `220px`);
       setTimeout(() => {
-        this.documentStyles.setProperty(`--visible-menu`, `block`);
         this.documentStyles.setProperty(`--left-hide-menu`, `219px`);
         this.documentStyles.setProperty(`--left-hide-menu-hover`, `218px`);
       }, 400);
@@ -179,7 +173,7 @@ export class MenuNavigationComponent implements OnInit {
       }
       document.getElementById(a).className = 'nav-link bg-menu active';
       this.aActive = a;
-      if (window.getComputedStyle(document.getElementById('btnMobile'), null).getPropertyValue('display') === 'block') {
+      if (this.stylesExplorerService.isMobile) {
         document.getElementById('btnHideMenu').click();
       }
     }

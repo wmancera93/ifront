@@ -4,15 +4,21 @@ import { Enterprise } from '../../../models/general/enterprise';
 @Injectable()
 export class StylesExplorerService {
   public isIEOrEdge: boolean;
-  public showMenu = new EventEmitter<boolean>();
+  public handleHeader = new EventEmitter<boolean>();
+  public handleMenuNavigation = new EventEmitter<boolean>();
+  public handleMobile = new EventEmitter<boolean>();
+
+  get isMobile() {
+    return document.body.offsetWidth < 450;
+  }
 
   constructor() {
-    this.showMenu.emit(true);
+    window.addEventListener('resize', this.onResize);
   }
 
-  handleMenu(state: boolean) {
-    this.showMenu.emit(state);
-  }
+  onResize = () => {
+    this.handleMobile.emit(this.isMobile);
+  };
 
   stylesInExplorerOrEdge(
     img_header_login?: string,
@@ -432,28 +438,28 @@ export class StylesExplorerService {
     }
 
     if (left_show_menu !== '' && left_show_menu !== null) {
-      if (document.getElementsByClassName('nav-show').length > 0) {
-        for (let index = 0; index < document.getElementsByClassName('nav-show').length; index++) {
+      if (document.getElementsByClassName('nav-toggle').length > 0) {
+        for (let index = 0; index < document.getElementsByClassName('nav-toggle').length; index++) {
           if (left_show_menu === '-1px') {
             setTimeout(() => {
-              (<HTMLInputElement>document.getElementsByClassName('nav-show')[index]).style.marginLeft = left_show_menu;
+              (<HTMLInputElement>document.getElementsByClassName('nav-toggle')[index]).style.marginLeft = left_show_menu;
             }, 400);
           } else {
-            (<HTMLInputElement>document.getElementsByClassName('nav-show')[index]).style.marginLeft = left_show_menu;
+            (<HTMLInputElement>document.getElementsByClassName('nav-toggle')[index]).style.marginLeft = left_show_menu;
           }
         }
       }
     }
 
     if (left_hide_menu !== '' && left_hide_menu !== null) {
-      if (document.getElementsByClassName('nav-hide').length > 0) {
-        for (let index = 0; index < document.getElementsByClassName('nav-hide').length; index++) {
+      if (document.getElementsByClassName('nav-toggle-show').length > 0) {
+        for (let index = 0; index < document.getElementsByClassName('nav-toggle-show').length; index++) {
           if (left_hide_menu === '219px') {
             setTimeout(() => {
-              (<HTMLInputElement>document.getElementsByClassName('nav-hide')[index]).style.marginLeft = left_hide_menu;
+              (<HTMLInputElement>document.getElementsByClassName('nav-toggle-show')[index]).style.marginLeft = left_hide_menu;
             }, 400);
           } else {
-            (<HTMLInputElement>document.getElementsByClassName('nav-hide')[index]).style.marginLeft = left_hide_menu;
+            (<HTMLInputElement>document.getElementsByClassName('nav-toggle-show')[index]).style.marginLeft = left_hide_menu;
           }
         }
       }

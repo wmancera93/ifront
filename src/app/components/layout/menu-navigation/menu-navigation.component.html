@@ -1,4 +1,9 @@
-<nav id="navMenu" class="navbar-default scrollbar-success-nav navbar-static-side" role="navigation">
+<nav
+  id="navMenu"
+  class="navbar-default scrollbar-success-nav navbar-static-side"
+  role="navigation"
+  [ngStyle]="{ width: isMobile && !showMenu ? '0px' : '' }"
+>
   <div class="sidebar-collapse">
     <ul class="nav in flex-column" id="side-menu">
       <li class="nav-header-menu">
@@ -565,9 +570,6 @@
   </div>
 </nav>
 
-<div class="nav-hide" (click)="clickHideMenu()">
-  <i class="fa fa-angle-left"></i>
-</div>
-<div class="nav-show" (click)="clickShowMenu()">
-  <i class="fa fa-angle-right"></i>
+<div class="nav-toggle" [ngClass]="{ 'nav-toggle-show': showMenu }" (click)="showMenu ? clickHideMenu() : clickShowMenu()">
+  <i class="fa fa-angle-{{ showMenu ? 'left' : 'right' }}"></i>
 </div>
