@@ -80,13 +80,13 @@ export class EmployeesComponent implements OnInit {
     });
 
     this.dashboardEmployeeService.getIncomesData().subscribe((data: any) => {
-      if (!this.dataUser.permits.PERMISSIONS_SEE_INCOME.state) {
+      if (this.dataUser.permits.PERMISSIONS_SEE_INCOME.state) {
         this.objectIncome.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_incomes,
         });
       }
-      if (!this.dataUser.permits.PERMISSIONS_SEE_RETENTIONS.state) {
+      if (this.dataUser.permits.PERMISSIONS_SEE_RETENTIONS.state) {
         this.objectDeductions.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_deductions,

@@ -17,7 +17,10 @@ export interface Permit {
   name: string;
 }
 
-export type Permits = Partial<Record<'PERMISSIONS_SEE_INCOME' | 'PERMISSIONS_SEE_RETENTIONS', Permit>>;
+export interface Permits {
+  PERMISSIONS_SEE_INCOME: Permit;
+  PERMISSIONS_SEE_RETENTIONS: Permit;
+}
 
 export interface Employee {
   modal?: string;
