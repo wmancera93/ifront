@@ -27,6 +27,11 @@ export class ViewAdvanceComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.advances.view_advance.${key}`;
   }

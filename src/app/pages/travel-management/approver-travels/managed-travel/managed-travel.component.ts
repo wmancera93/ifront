@@ -26,6 +26,11 @@ export class ManagedTravelComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.approver_travels.manged_travel.${key}`;
   }

@@ -16,6 +16,11 @@ export class PaymentsDeductionsComponent implements OnInit, OnDestroy {
   public userAuthenticated: User;
   private subscriptions: ISubscription[];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.payments_deductions.${key}`;
   }

@@ -25,6 +25,8 @@ import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable, Subject } from 'rxjs';
+import merge from 'lodash/merge';
+import joyride from './joyride';
 
 import { baseUrl } from '../environments/environment';
 
@@ -46,7 +48,10 @@ export class CustomLoader implements TranslateLoader {
     this.http
       .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
       .map((res: any) => {
-        const languaje = JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
+        const languaje = merge(
+          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd,
+          joyride[lang as keyof typeof joyride],
+        );
         console.log(languaje);
         localStorage.setItem(`languaje-${lang}`, JSON.stringify(languaje));
         return languaje;

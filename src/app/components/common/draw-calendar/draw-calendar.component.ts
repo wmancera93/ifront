@@ -38,6 +38,11 @@ export class DrawCalendarComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.draw_calendar.${key}`;
   }

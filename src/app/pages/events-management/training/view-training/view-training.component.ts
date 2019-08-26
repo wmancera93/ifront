@@ -27,6 +27,11 @@ export class ViewTrainingComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.events_management.training.view_training.${key}`;
   }

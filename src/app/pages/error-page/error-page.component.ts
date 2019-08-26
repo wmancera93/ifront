@@ -12,6 +12,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.error_page.${key}`;
   }

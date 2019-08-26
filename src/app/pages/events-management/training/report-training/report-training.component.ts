@@ -32,6 +32,11 @@ export class ReportTrainingComponent implements OnInit, OnDestroy {
   public objectGeneralTraining: any[] = [];
   public objectReportTraining: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.events_management.training.report_training.${key}`;
   }

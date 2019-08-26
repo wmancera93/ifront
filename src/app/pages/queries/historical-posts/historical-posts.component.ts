@@ -27,6 +27,11 @@ export class HistoricalPostsComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.historical_posts.${key}`;
   }

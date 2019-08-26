@@ -20,6 +20,11 @@ export class PendingTravelComponent implements OnInit {
   public typesRequestFirts: any[] = [];
   public global_ticket: string;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.approver_travels.pending_travel.${key}`;
   }

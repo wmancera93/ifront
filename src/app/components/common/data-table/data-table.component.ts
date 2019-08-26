@@ -50,6 +50,11 @@ export class DataTableComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.data_table.${key}`;
   }

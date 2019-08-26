@@ -39,6 +39,11 @@ export class EstadisticsComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.widgets.estadistics.${key}`;
   }

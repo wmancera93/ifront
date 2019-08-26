@@ -15,6 +15,11 @@ export class ErrorPageHttpComponent implements OnInit {
     setTimeout(() => {}, 500);
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.error_page_http.${key}`;
   }

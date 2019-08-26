@@ -37,6 +37,11 @@ export class ContactsListComponent implements OnInit {
   public infoEmployee: Employee;
   public search_partner: string;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.layout.contacts_list.${key}`;
   }

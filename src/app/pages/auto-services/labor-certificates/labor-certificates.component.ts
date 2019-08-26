@@ -26,6 +26,11 @@ export class LaborCertificatesComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.labor_certificates.${key}`;
   }

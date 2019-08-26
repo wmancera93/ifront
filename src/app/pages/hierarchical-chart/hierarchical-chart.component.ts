@@ -60,6 +60,11 @@ export class HierarchicalChartComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.hierarchical_chart.${key}`;
   }

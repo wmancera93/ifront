@@ -10,6 +10,11 @@ export class SpendHotelJourneyComponent implements OnInit {
   public objectHotelJourney: any = null;
   public arrayHotel: any[] = [];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.spend.spend_hotel_journey.${key}`;
   }

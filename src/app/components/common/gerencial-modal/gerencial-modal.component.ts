@@ -23,6 +23,11 @@ export class GerencialModalComponent implements OnInit {
   public titleDataManagerial: string;
   public flagNoData = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.gerencial_modal.${key}`;
   }

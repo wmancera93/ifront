@@ -14,6 +14,11 @@ export class ShowDistSpendsTravelsComponent implements OnInit {
   public printSpendTravel: any[] = [];
   public is_collapse = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.travel.new_travel.${key}`;
   }

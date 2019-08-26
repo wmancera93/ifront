@@ -21,6 +21,11 @@ export class MyTeamComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.my_team.${key}`;
   }

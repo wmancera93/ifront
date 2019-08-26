@@ -26,6 +26,11 @@ export class RequestsApproversComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.reports_rh.requests_approvers.${key}`;
   }

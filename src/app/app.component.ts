@@ -1,5 +1,5 @@
 // component
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 // common
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
@@ -12,13 +12,14 @@ import { environment } from '../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { JoyrideService } from 'ngx-joyride';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnDestroy {
   public showComponents = false;
   public dataEnterprise: Enterprise;
   public pageWrapper: string;
@@ -26,6 +27,7 @@ export class AppComponent {
   public dataUser: User = null;
   public isExplorer: boolean;
   public changesLang: number = 0;
+  public joyrideSuscriptions: Subscription[] = [];
 
   public baseUrl: string;
 
@@ -41,7 +43,7 @@ export class AppComponent {
     const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');
-
+    console.log(this.joyrideService);
     translate.onLangChange.subscribe(({ lang }: LangChangeEvent) => {
       console.log(lang);
       if (this.changesLang !== 0) {
@@ -130,6 +132,7 @@ export class AppComponent {
 
   onStartTour() {
     let child = this.route.firstChild;
+    this.joyrideSuscriptions.forEach(suscription => suscription.unsubscribe());
     let url = '';
     while (child) {
       url += `${child.snapshot.url[0].path}`;
@@ -140,12 +143,17 @@ export class AppComponent {
         const { joyride } = child.snapshot.data;
         if (joyride) {
           const { steps } = joyride;
-          this.joyrideService.startTour({
-            steps: steps.map(step => {
-              if (typeof step === 'string' && !/@/g.test(step)) return `${step}@${url}`;
-              return step;
+          this.joyrideSuscriptions.push(
+            this.translate.onLangChange.subscribe(() => {
+              this.joyrideService.startTour({
+                steps: steps.map(step => {
+                  if (typeof step === 'string' && !/@/g.test(step)) return `${step}@${url}`;
+                  return step;
+                }),
+              });
             }),
-          });
+          );
+          (this.translate as any).changeLang(this.translate.currentLang);
         }
         return null;
       }
@@ -200,5 +208,9 @@ export class AppComponent {
         'Recuerde no usar internet Explorer ni Explorer Edge para acceder al portal, se deben utilizar navegadores como Google Chrome, Mozilla Firefox y Safari',
       );
     }
+  }
+
+  ngOnDestroy(): void {
+    this.joyrideSuscriptions.forEach(suscription => suscription.unsubscribe());
   }
 }

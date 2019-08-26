@@ -33,6 +33,10 @@ export class DashboardComponent implements OnInit {
 
   @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
 
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.dashboard.${key}`;
   }
@@ -161,5 +165,9 @@ export class DashboardComponent implements OnInit {
   }
   vieweDashboardManager() {
     this.roleEmployee = true;
+  }
+
+  log(a) {
+    this.vieweDashboardEmployee();
   }
 }

@@ -29,6 +29,11 @@ export class LockedScreenComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.authentication.locket_screen.${key}`;
   }

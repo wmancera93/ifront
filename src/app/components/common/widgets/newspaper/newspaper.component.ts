@@ -21,6 +21,11 @@ export class NewspaperComponent implements OnInit {
 
   public objectWidget: Newspaper[] = [];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.widgets.newspaper.${key}`;
   }

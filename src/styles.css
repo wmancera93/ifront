@@ -8,10 +8,6 @@
   --width-page-wrapper: 0 0 0 0px;
   --width-nav-menu: 0px;
   --visible-menu: none;
-  --left-show-menu: -12px;
-  --left-hide-menu: -12px;
-  --left-show-menu-hover: -12px;
-  --left-hide-menu-hover: -12px;
   --top-content-type: 0px;
   --margin-left-mobile: 0px;
 }
@@ -1133,8 +1129,33 @@ app-login header {
   padding-left: 37px !important;
 }
 
-.nav-hide {
-  margin-left: var(--left-hide-menu);
+.nav-toggle {
+  margin-left: 0px;
+  margin-top: 280px;
+  background-color: #293846;
+  color: #a7b1c2;
+  width: 12px;
+  height: 80px;
+  padding-left: 2px;
+  padding-top: 26px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  cursor: pointer;
+  font-size: 17px;
+  position: fixed;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-toggle:hover {
+  margin-left: 0px;
+  background-color: #19242e !important;
+  color: #ffffff !important;
+  width: 17px;
+  padding-left: 5px;
+}
+
+.nav-toggle-show {
+  margin-left: 220px;
   margin-top: 280px;
   background-color: #293846;
   color: #a7b1c2;
@@ -1149,13 +1170,13 @@ app-login header {
   position: fixed;
 }
 
-.nav-hide,
-.nav-show {
-  z-index: 100000;
+.nav-toggle-show,
+.nav-toggle {
+  z-index: 1000;
 }
-.nav-hide:hover {
-  margin-left: var(--left-hide-menu-hover);
-  background-color: #19242e !important;
+.nav-toggle-show:hover {
+  margin-left: 220px;
+  background-color: #26282b !important;
   color: #ffffff !important;
   width: 17px;
   padding-left: 5px;
@@ -1213,36 +1234,8 @@ app-login header {
   padding-right: 14px;
 }
 
-.nav-show {
-  margin-left: var(--left-show-menu);
-  margin-top: 280px;
-  background-color: #293846;
-  color: #a7b1c2;
-  width: 12px;
-  height: 80px;
-  padding-left: 2px;
-  padding-top: 26px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  cursor: pointer;
-  font-size: 17px;
-  position: fixed;
-}
-
-.nav-show-mobile:hover {
-  margin-left: var(--left-show-menu-hover);
-  background-color: #19242e !important;
-  color: #ffffff !important;
-  width: 17px;
-  padding-left: 5px;
-}
-
 .mobile {
   display: none;
-}
-
-.sidebar-collapse {
-  display: var(--visible-menu);
 }
 
 .bg-menu:hover {
@@ -3845,8 +3838,8 @@ a.close-canvas-menu:hover {
     margin-left: 35px;
   }
 
-  .nav-hide,
-  .nav-show {
+  .nav-toggle-show,
+  .nav-toggle {
     display: none;
   }
 
@@ -4145,8 +4138,8 @@ a.close-canvas-menu:hover {
     margin-left: 35px;
   }
 
-  .nav-hide,
-  .nav-show {
+  .nav-toggle-show,
+  .nav-toggle {
     display: none;
   }
 
@@ -4434,4 +4427,8 @@ a.close-canvas-menu:hover {
 }
 .rhicon-enterprise:before {
   content: '\e905';
+}
+
+.joyride-step__holder {
+  z-index: 1100 !important;
 }

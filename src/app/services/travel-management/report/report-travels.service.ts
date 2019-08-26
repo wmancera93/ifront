@@ -6,6 +6,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class ReportTravelsService {
   public report_travels_list: any;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `services.travel_management.report.${key}`;
   }

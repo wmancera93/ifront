@@ -24,6 +24,11 @@ export class EvaluatedComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.evaluations.evaluated.${key}`;
   }

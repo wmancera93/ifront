@@ -11,6 +11,11 @@ import { User } from '../../../../models/general/user';
   styleUrls: ['./housing-report.component.css'],
 })
 export class HousingReportComponent implements OnInit, OnDestroy {
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.housing.housing_report.${key}`;
   }

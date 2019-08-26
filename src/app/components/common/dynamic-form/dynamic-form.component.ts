@@ -24,6 +24,11 @@ export class DynamicFormComponent implements OnInit {
   public countAfter = 0;
   public codeStatic = -1;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.dynamic_form.${key}`;
   }

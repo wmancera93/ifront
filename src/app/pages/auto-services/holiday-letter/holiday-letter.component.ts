@@ -18,6 +18,11 @@ export class HolidayLetterComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.holiday_letter.${key}`;
   }

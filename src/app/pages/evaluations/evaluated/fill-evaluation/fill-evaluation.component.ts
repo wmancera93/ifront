@@ -42,6 +42,11 @@ export class FillEvaluationComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.evaluations.evaluated.fill_evalaution.${key}`;
   }

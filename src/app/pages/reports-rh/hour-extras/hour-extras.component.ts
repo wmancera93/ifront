@@ -11,6 +11,11 @@ export class HourExtrasComponent implements OnInit {
   public nameReport: string;
   constructor(public router: Router) {}
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.reports_rh.hour_extras.${key}`;
   }

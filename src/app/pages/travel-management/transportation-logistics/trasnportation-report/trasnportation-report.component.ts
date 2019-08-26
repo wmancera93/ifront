@@ -12,6 +12,11 @@ import { DataDableSharedService } from '../../../../services/shared/common/data-
   styleUrls: ['./trasnportation-report.component.css'],
 })
 export class TrasnportationReportComponent implements OnInit, OnDestroy {
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.transportation_logistics.transportation_report.${key}`;
   }

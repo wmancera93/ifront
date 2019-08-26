@@ -21,6 +21,11 @@ export class MenuNavigationComponent implements OnInit {
   public showCollapse = '';
   public heightContenGeneral = 0;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.layout.menu_navigation.${key}`;
   }

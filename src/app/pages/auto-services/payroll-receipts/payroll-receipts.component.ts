@@ -17,6 +17,11 @@ export class PayrollReceiptsComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.payroll_receipts.${key}`;
   }

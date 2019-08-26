@@ -65,6 +65,11 @@ export class EditSpendComponent implements OnInit {
   showSizeTable;
   showPdf;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.spend.edit_spend.${key}`;
   }

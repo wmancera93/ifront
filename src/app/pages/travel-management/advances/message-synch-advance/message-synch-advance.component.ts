@@ -13,6 +13,11 @@ export class MessageSynchAdvanceComponent implements OnInit {
   public ticket_advance: string;
   public objectPrintMessageAdvance: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.advances.message_synch_advance.${key}`;
   }

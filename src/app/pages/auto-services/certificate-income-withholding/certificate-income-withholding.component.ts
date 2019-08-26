@@ -18,6 +18,11 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.certificate_income_withholding.${key}`;
   }

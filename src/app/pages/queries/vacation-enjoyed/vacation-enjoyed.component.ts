@@ -17,6 +17,11 @@ export class VacationEnjoyedComponent implements OnInit, OnDestroy {
   public countAfter = 0;
   private subscriptions: ISubscription[];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.vacation_enjoyed.${key}`;
   }

@@ -70,6 +70,11 @@ export class NewTransportComponent implements OnInit, OnDestroy {
   get validateForms() {
     return this.form.valid && this.journeys.length;
   }
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.transportation_logistics.transportation_management.${key}`;
   }

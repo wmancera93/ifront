@@ -25,6 +25,11 @@ export class IvaEmployeeComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.iva_employee.${key}`;
   }

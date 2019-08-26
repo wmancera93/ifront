@@ -25,6 +25,11 @@ export class HousingComponent implements OnInit {
     return true;
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.housing.${key}`;
   }
