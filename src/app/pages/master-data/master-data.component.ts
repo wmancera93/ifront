@@ -18,6 +18,8 @@ import { Alerts } from '../../models/common/alerts/alerts';
 import { Enterprise } from '../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
+import { JoyrideService } from 'ngx-joyride';
 
 @Component({
   selector: 'app-master-data',
@@ -40,12 +42,14 @@ export class MasterDataComponent implements OnInit, OnDestroy {
   public token: boolean;
   public codeGeneral: string;
   private subscriptions: ISubscription[];
+  public joyrideSubscription: ISubscription;
+  private steps = ['step_1', 'step_2'];
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -62,8 +66,13 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     public dataMasterSharedService: DataMasterSharedService,
     public alert: AlertsService,
     public translate: TranslateService,
+    private readonly joyrideAppService: JoyrideAppService,
+    private readonly joyrideService: JoyrideService,
   ) {
     this.titleData = this.t('ts_warningone_text_one');
+    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      joyrideAppService.startTour({ steps: this.steps });
+    });
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
         () => {
@@ -137,7 +146,6 @@ export class MasterDataComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
 
     this.masterDataList();
@@ -158,6 +166,9 @@ export class MasterDataComponent implements OnInit, OnDestroy {
           }
         });
         this.listDataMaster = list.data;
+        if (this.joyrideService.isTourInProgress) {
+          this.joyrideAppService.reloadStep();
+        }
       }),
     ];
   }
@@ -400,5 +411,6 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
+    this.joyrideSubscription.unsubscribe();
   }
 }

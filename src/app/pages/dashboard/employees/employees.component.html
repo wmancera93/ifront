@@ -1,5 +1,5 @@
 <div class="row-hr-container">
-  <div class="row" joyrideStep [title]="'dynamicTitle'" joyrideStep="secondStep">
+  <div class="row" joyrideStep="step_2" [title]="joyride('step_2.title') | translate" [text]="joyride('step_2.text') | translate">
     <app-notification-primary
       [notificationPrimary]="objectRequest"
       class="col-xl-2 col-6"
@@ -34,23 +34,53 @@
     </div>
   </div>
   <div class="row">
-    <app-newspaper [newspaper]="objectNewspaper" class="col-xl-9 col-12"></app-newspaper>
-    <app-calendar [calendar]="objectCalendar" class="col-xl-3 col-12"></app-calendar>
+    <app-newspaper
+      [newspaper]="objectNewspaper"
+      class="col-xl-9 col-12"
+      joyrideStep="step_3"
+      [title]="joyride('step_3.title') | translate"
+      [text]="joyride('step_3.text') | translate"
+    ></app-newspaper>
+    <app-calendar
+      [calendar]="objectCalendar"
+      class="col-xl-3 col-12"
+      joyrideStep="step_4"
+      [title]="joyride('step_4.title') | translate"
+      [text]="joyride('step_4.text') | translate"
+    ></app-calendar>
   </div>
   <div class="row">
     <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_birthday">
       <div class="row">
-        <app-events-employees [eventsEmployee]="objectBirthDay" class="col-12"></app-events-employees>
+        <app-events-employees
+          [eventsEmployee]="objectBirthDay"
+          class="col-12"
+          joyrideStep="step_5"
+          [title]="joyride('step_5.title') | translate"
+          [text]="joyride('step_5.text') | translate"
+        ></app-events-employees>
       </div>
     </div>
     <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_labor">
       <div class="row">
-        <app-events-employees [eventsEmployee]="objectAnniversay" class="col-12"></app-events-employees>
+        <app-events-employees
+          [eventsEmployee]="objectAnniversay"
+          class="col-12"
+          joyrideStep="step_6"
+          [title]="joyride('step_6.title') | translate"
+          [text]="joyride('step_6.text') | translate"
+        ></app-events-employees>
       </div>
     </div>
     <div class="col-xl-4 col-12" *ngIf="dataEnterprise.show_new_employees">
       <div class="row">
-        <app-events-employees [eventsEmployee]="objectNewEmployee" class="col-12"></app-events-employees>
+        <app-events-employees
+          [eventsEmployee]="objectNewEmployee"
+          class="col-12"
+          joyrideStep="step_7"
+          [title]="joyride('step_7.title') | translate"
+          [text]="joyride('step_7.text') | translate"
+        ></app-events-employees>
       </div>
     </div>
   </div>

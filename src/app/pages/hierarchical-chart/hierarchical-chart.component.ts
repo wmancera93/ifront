@@ -5,6 +5,7 @@ import {
   EventEmitter,
   HostListener,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
@@ -15,14 +16,15 @@ import { HttpClient } from '@angular/common/http';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
+import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-hierarchical-chart',
   templateUrl: './hierarchical-chart.component.html',
   styleUrls: ['./hierarchical-chart.component.css'],
 })
-export class HierarchicalChartComponent implements OnInit {
-  // @Output() name: string = 'hierarhical';
+export class HierarchicalChartComponent implements OnInit, OnDestroy {
   @Output() name: EventEmitter<string> = new EventEmitter();
 
   public flagActivatethirdLevel = false;
@@ -54,12 +56,14 @@ export class HierarchicalChartComponent implements OnInit {
   public text: string;
   public token: boolean;
   public pageValue: any = 0;
+  public joyrideSubscription: Subscription;
+  steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5'];
+
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -78,6 +82,7 @@ export class HierarchicalChartComponent implements OnInit {
     private eRef: ElementRef,
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.tokenService.validateToken().subscribe(
       () => {
@@ -94,10 +99,12 @@ export class HierarchicalChartComponent implements OnInit {
         this.token = true;
       },
     );
+    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      joyrideAppService.startTour({ steps: this.steps });
+    });
   }
 
   ngOnInit() {
-
     this.getHierarchical();
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
@@ -278,5 +285,9 @@ export class HierarchicalChartComponent implements OnInit {
           }, 500);
         }
       });
+  }
+
+  ngOnDestroy(): void {
+    this.joyrideSubscription.unsubscribe();
   }
 }

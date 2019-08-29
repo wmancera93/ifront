@@ -1,4 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+} from '@angular/core';
 import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized } from '@angular/router';
@@ -8,6 +14,9 @@ import { filter } from 'rxjs/operators';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '@ngx-translate/core';
+import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
+import { ElementRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +25,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardComponent implements OnInit {
   public userAuthenticated: User = null;
+  @ViewChild('prendido') public prendido: ElementRef;
+  @ViewChild('apagado') public apagado: ElementRef;
   public authdata: any;
   public roleEmployee = true;
   public showServiceManagement: boolean;
@@ -28,6 +39,22 @@ export class DashboardComponent implements OnInit {
   public urlBeforePending = '';
   public urlBeforeReports = '';
   public toast: Toast;
+  public steps = [
+    'step_1',
+    'step_2',
+    'step_3',
+    'step_4',
+    'step_5',
+    'step_6',
+    'step_7',
+    'step_8',
+    'step_9',
+    'step_10',
+    'step_11',
+    'step_12',
+    'step_13',
+  ];
+  public joyrideSubscription: Subscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -47,13 +74,17 @@ export class DashboardComponent implements OnInit {
     public companieService: MainService,
     private tokenService: Angular2TokenService,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
     this.router.events
       .pipe(filter(e => e instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
-        if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
+        if (
+          this.userAuthenticated === null ||
+          this.userAuthenticated === undefined
+        ) {
           if (event[0].urlAfterRedirects === '/ihr/login') {
             setTimeout(() => {
               this.toast = {
@@ -120,6 +151,12 @@ export class DashboardComponent implements OnInit {
         this.token = true;
       },
     );
+    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      joyrideAppService.startTour({ steps: this.steps });
+      this.vieweDashboardManager();
+      this.prendido.nativeElement.checked = false;
+      this.apagado.nativeElement.checked = true;
+    });
   }
 
   getDataLocalStorage() {
@@ -128,7 +165,10 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-    if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
+    if (
+      this.userAuthenticated !== null ||
+      this.userAuthenticated !== undefined
+    ) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
 
@@ -137,7 +177,9 @@ export class DashboardComponent implements OnInit {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
+        ambient = url.split('-')[0].split('/')[
+          url.split('-')[0].split('/').length - 1
+        ];
       } else {
         ambient = 'production';
       }
@@ -167,7 +209,7 @@ export class DashboardComponent implements OnInit {
     this.roleEmployee = true;
   }
 
-  log(a) {
-    this.vieweDashboardEmployee();
+  ngOnDestroy(): void {
+    this.joyrideSubscription.unsubscribe();
   }
 }

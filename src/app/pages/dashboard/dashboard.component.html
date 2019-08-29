@@ -5,7 +5,13 @@
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
-      <div class="row align-items-center" [title]="'dynamicTitle'" quickJoride="'step_1'" text="Main title!">
+      <joyrideStep
+        joyrideStep="step_1"
+        [title]="joyride('step_1.title') | translate"
+        [text]="joyride('step_1.text') | translate"
+        stepPosition="center"
+      ></joyrideStep>
+      <div class="row align-items-center">
         <div class="col-xl-8 col-md-6 col-5 title">
           <i class="fa fa-fw fa-th-large fa-x1"></i>
           {{ parseT('tittle') | translate }}
@@ -17,10 +23,17 @@
                 {{ parseT('text_management_dashboard') | translate }}
               </div>
             </div>
-            <div class="col-xl-2 col-md-3 col-4 text-right">
+            <div
+              class="col-xl-2 col-md-3 col-4 text-right"
+              joyrideStep="step_8"
+              [title]="joyride('step_8.title') | translate"
+              [text]="joyride('step_8.text') | translate"
+              (next)="vieweDashboardEmployee(); prendido.checked = true; apagado.checked = false"
+              (prev)="vieweDashboardManager(); prendido.checked = false; apagado.checked = true"
+            >
               <div class="top-interruptor">
-                <input type="radio" name="interruptor" id="prendido" />
-                <input type="radio" name="interruptor" id="apagado" checked />
+                <input type="radio" name="interruptor" id="prendido" #prendido />
+                <input type="radio" name="interruptor" id="apagado" #apagado checked />
                 <div class="interruptor-cuerpo">
                   <div class="interruptor-tecla">
                     <label id="buttonDashEmployee" for="prendido" (click)="vieweDashboardEmployee()"></label>

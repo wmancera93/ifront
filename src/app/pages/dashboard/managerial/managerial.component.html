@@ -4,22 +4,34 @@
       [notificationSecundary]="objectVacations"
       (click)="detailVacations()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_9"
+      [title]="joyride('step_9.title') | translate"
+      [text]="joyride('step_9.text') | translate"
     ></app-notification-secundary>
     <app-notification-secundary
       [notificationSecundary]="objectPermissions"
       (click)="detailPermitions()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_10"
+      [title]="joyride('step_10.title') | translate"
+      [text]="joyride('step_10.text') | translate"
     ></app-notification-secundary>
     <app-notification-secundary
       [notificationSecundary]="objectIncapacityes"
       (click)="detailIncapacities()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_11"
+      [title]="joyride('step_11.title') | translate"
+      [text]="joyride('step_11.text') | translate"
     ></app-notification-secundary>
     <app-notification-primary
       [notificationPrimary]="objectAbsenteeism"
       (click)="sendDataButton()"
       routerLink="/ihr/pending_approvers"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_12"
+      [title]="joyride('step_12.title') | translate"
+      [text]="joyride('step_12.text') | translate"
     ></app-notification-primary>
     <!-- <app-notification-primary [notificationPrimary]="objectReports" class="col-xl-3 col-md-6 col-6"></app-notification-primary> -->
   </div>
@@ -35,6 +47,9 @@
               [eventsEmployee]="objectMyTeam"
               class="col-12 d-flex"
               style="align-items: stretch;"
+              joyrideStep="step_13"
+              [title]="joyride('step_13.title') | translate"
+              [text]="joyride('step_13.text') | translate"
             ></app-events-employees>
           </div>
         </div>
@@ -57,7 +72,7 @@
                 </h3>
               </div>
               <div class="col-2 text-center color-primary">
-                  <i class="fa fa-bar-chart fa-2x"></i>
+                <i class="fa fa-bar-chart fa-2x"></i>
               </div>
             </div>
           </div>

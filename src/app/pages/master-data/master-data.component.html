@@ -1,14 +1,12 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row justify-content-center">
-        <div class=" col-12 title"  >
+        <div class=" col-12 title">
           <i class="fa fa-user"></i>
           {{ parseT('title_my_data') | translate }}
         </div>
@@ -18,7 +16,12 @@
   <div class="row-hr-container">
     <div class="col-12 text-center widget bg-white minHeight">
       <div class="row">
-        <div class="col-12 col-xl-3">
+        <div
+          class="col-12 col-xl-3"
+          joyrideStep="step_1"
+          [title]="joyride('step_1.title') | translate"
+          [text]="joyride('step_1.text') | translate"
+        >
           <div
             id="listData"
             class="nav nav-tabs navtab-vertical navtab-left cursor-general"
@@ -31,44 +34,32 @@
               *ngFor="let item of listDataMaster; let i = index"
               (click)="showData(i, item.method_name, item.code)"
             >
-              <div *ngIf="item.code == 1">
-                <i class="fa  fa-id-badge"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 2">
-                <i class="fa fa-phone"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 3">
-                <i class="fa fa-users"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 4">
-                <i class="fa fa-file-text-o"></i>
+              <div>
+                <i
+                  class="fa  fa-id-badge"
+                  [ngClass]="{
+                    'fa-id-badge': 1 == item.code,
+                    'fa-phone': 2 == item.code,
+                    'fa-users': 3 == item.code,
+                    'fa-file-text-o': 4 == item.code,
+                    'fa-graduation-cap': 5 == item.code,
+                    'fa-industry': 6 == item.code,
+                    'fa-money': [7, 9, 10, '7', '9', '10'].includes(item.code),
+                    'fa-shield': 8 == item.code
+                  }"
+                ></i>
                 {{ item.description }}
               </div>
-              <div *ngIf="item.code == 5">
-                <i class="fa fa-graduation-cap"></i>
-                {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 6">
-                <i class="fa fa-industry"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 7">
-                <i class="fa fa-money"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 8">
-                <i class="fa fa-shield"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 9">
-                <i class="fa fa-money"></i> {{ item.description }}
-              </div>
-              <div *ngIf="item.code == 10">
-                <i class="fa fa-money"></i> {{ item.description }}
-              </div>
-
               <!-- <i [ngClass]="{'fa fa-id-badge': i=='0','fa fa-phone': i=='1','fa fa-users': i=='2'}"></i> {{item.description}} -->
             </div>
           </div>
         </div>
-        <div class="col-12 col-xl-9 text-left">
+        <div
+          class="col-12 col-xl-9 text-left"
+          joyrideStep="step_2"
+          [title]="joyride('step_2.title') | translate"
+          [text]="joyride('step_2.text') | translate"
+        >
           <b style="margin-left: 28px;">
             {{ parseT('ts_warningone_text_one') | translate }}
           </b>
@@ -84,11 +75,7 @@
                 class="col-lg-8 col-12 text-center"
                 style="min-height: 370px;"
               >
-                <div
-                  class="alert alert-warning"
-                  role="alert"
-                   
-                >
+                <div class="alert alert-warning" role="alert">
                   {{ parseT('text_no_information') | translate }}
                   <strong>
                     {{ parseT('ts_warningone_text_one') | translate }}
@@ -97,26 +84,16 @@
                 </div>
               </div>
             </div>
-            <div
-              class="col-12"
-              *ngIf="lengthArray !== 0 && showButton"
-            >
+            <div class="col-12" *ngIf="lengthArray !== 0 && showButton">
               <div class="row">
-                <div
-                  class="col-xl-10 col-md-9 col-8 text-right"
-                   
-                >
+                <div class="col-xl-10 col-md-9 col-8 text-right">
                   <div class="top-title-dbgerencial">
                     {{ parseT('text_edit') | translate }}
                   </div>
                 </div>
                 <div class="col-xl-2 col-md-3 col-4">
                   <div class="top-interruptor">
-                    <input
-                      type="radio"
-                      name="interruptor"
-                      id="prendido"
-                    />
+                    <input type="radio" name="interruptor" id="prendido" />
                     <input
                       type="radio"
                       name="interruptor"
@@ -143,9 +120,7 @@
             </div>
             <div class="col-12 col-md-12">
               <!-- <app-dynamic-form *ngIf="!canEditData"></app-dynamic-form> -->
-              <app-dynamic-form
-                *ngIf="lengthArray !== 0"
-              ></app-dynamic-form>
+              <app-dynamic-form *ngIf="lengthArray !== 0"></app-dynamic-form>
             </div>
           </div>
         </div>
