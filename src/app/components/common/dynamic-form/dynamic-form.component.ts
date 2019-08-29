@@ -23,99 +23,79 @@ export class DynamicFormComponent implements OnInit {
   public staticGeneralObject: any[] = [];
   public countAfter = 0;
   public codeStatic = -1;
+  public codeObject = 0;
 
   parseT(key) {
     return `components.common.dynamic_form.${key}`;
   }
 
-  constructor(
-    public fb: FormBuilder,
-    public dataMasterSharedService: DataMasterSharedService,
-    public alert: AlertsService,
-  ) {
-    this.dataMasterSharedService
-      .getDataFormDynamic()
-      .subscribe((data: any) => {
-        if (this.countAfter === 0) {
-          if (data.code !== this.codeStatic) {
-            this.codeStatic = data.code;
-            this.staticGeneralObject = [];
-          }
+  constructor(public fb: FormBuilder, public dataMasterSharedService: DataMasterSharedService, public alert: AlertsService) {
+    this.dataMasterSharedService.getDataFormDynamic().subscribe((data: any) => {
+      this.codeObject = data.code;
+      if (this.countAfter === 0) {
+        if (data.code !== this.codeStatic) {
+          this.codeStatic = data.code;
+          this.staticGeneralObject = [];
+        }
 
-          this.generalObject = data.data;
-          if (data.edit) {
-            if (this.staticGeneralObject.length === 0) {
-              if (this.generalObject.length > 0) {
-                data.data.forEach(index => {
-                  index.forEach(element => {
-                    if (
-                      element.type === 'date' &&
-                      element.control === 'input'
-                    ) {
-                      const split = element.value.split('/');
-                      if (split.length > 1) {
-                        element.value =
-                          split[2] + '-' + split[1] + '-' + split[0];
-                      }
+        this.generalObject = data.data;
+        if (data.edit) {
+          if (this.staticGeneralObject.length === 0) {
+            if (this.generalObject.length > 0) {
+              data.data.forEach(index => {
+                index.forEach(element => {
+                  if (element.type === 'date' && element.control === 'input') {
+                    const split = element.value.split('/');
+                    if (split.length > 1) {
+                      element.value = split[2] + '-' + split[1] + '-' + split[0];
                     }
+                  }
 
-                    this.staticGeneralObject.push({
-                      id_static: element.id,
-                      options_static: element.option,
-                      validate_requisite: element.is_prerequisite,
-                      id_requesite: element.prerequisite_id,
-                    });
+                  this.staticGeneralObject.push({
+                    id_static: element.id,
+                    options_static: element.option,
+                    validate_requisite: element.is_prerequisite,
+                    id_requesite: element.prerequisite_id,
                   });
                 });
-              }
-            }
-
-            if (this.staticGeneralObject.length > 0) {
-              this.generalObject.forEach(object => {
-                object
-                  .filter(
-                    data =>
-                      data.is_prerequisite.toString() === 'true',
-                  )
-                  .forEach(change => {
-                    let newOptions;
-                    if (change.prerequisite_id !== null) {
-                      newOptions = this.staticGeneralObject
-                        .filter(
-                          staticObject =>
-                            staticObject.id_static === change.id,
-                        )[0]
-                        .options_static.filter(
-                          select =>
-                            select.filter ===
-                            object.filter(
-                              objectFilter =>
-                                objectFilter.id.toString() ===
-                                change.prerequisite_id.toString(),
-                            )[0].value,
-                        );
-                    } else {
-                      newOptions = [{ code: '', description: '' }];
-                    }
-
-                    change.option = newOptions;
-                  });
               });
             }
           }
 
-          if (
-            this.generalObject !== null &&
-            this.generalObject !== undefined
-          ) {
-            this.edit = data.edit;
-            this.code = data.code;
-            this.form = new FormGroup({});
-            this.form = this.createGroup();
-            this.showForm = true;
+          if (this.staticGeneralObject.length > 0) {
+            this.generalObject.forEach(object => {
+              object
+                .filter(data => data.is_prerequisite.toString() === 'true')
+                .forEach(change => {
+                  let newOptions;
+                  if (change.prerequisite_id !== null) {
+                    newOptions = this.staticGeneralObject
+                      .filter(staticObject => staticObject.id_static === change.id)[0]
+                      .options_static.filter(
+                        select =>
+                          select.filter ===
+                          object.filter(objectFilter => objectFilter.id.toString() === change.prerequisite_id.toString())[0]
+                            .value,
+                      );
+                  } else {
+                    newOptions = [{ code: '', description: '' }];
+                  }
+
+                  change.option = newOptions;
+                });
+            });
           }
         }
-      });
+
+        if (this.generalObject !== null && this.generalObject !== undefined) {
+          this.edit = data.edit;
+          this.code = data.code;
+          this.form = new FormGroup({});
+          this.form = this.createGroup();
+          this.showForm = true;
+        }
+      }
+    });
   }
   ngOnInit() {}
   createGroup() {
@@ -136,9 +116,7 @@ export class DynamicFormComponent implements OnInit {
       this.objectForm.push(element);
       if (this.generalObject.length <= 1) {
         setTimeout(() => {
-          document
-            .getElementById('border-general')
-            .classList.remove('border-array');
+          document.getElementById('border-general').classList.remove('border-array');
         }, 100);
       }
     });
@@ -172,10 +150,7 @@ export class DynamicFormComponent implements OnInit {
     objectForm.forEach(data => {
       this.objectEditBlur.forEach(element => {
         if (data.id.toString() === element.id.toString()) {
-          if (
-            data.value_to_change.toString() !==
-            element.value.toString()
-          ) {
+          if (data.value_to_change.toString() !== element.value.toString()) {
             objectSend.push({
               id: data.id,
               value_to_change: data.value_to_change,
@@ -192,17 +167,8 @@ export class DynamicFormComponent implements OnInit {
     this.code = '';
   }
   detectChange(params: any, form) {
-    if (
-      this.objectEditBlur.filter(
-        categoryFilter => categoryFilter.id === params.id,
-      ).length > 0
-    ) {
-      this.objectEditBlur.splice(
-        this.objectEditBlur.findIndex(
-          categoryFilter => categoryFilter.id === params.id,
-        ),
-        1,
-      );
+    if (this.objectEditBlur.filter(categoryFilter => categoryFilter.id === params.id).length > 0) {
+      this.objectEditBlur.splice(this.objectEditBlur.findIndex(categoryFilter => categoryFilter.id === params.id), 1);
     }
     this.objectEditBlur.push(params);
     this.staticGeneralObject
@@ -234,11 +200,7 @@ export class DynamicFormComponent implements OnInit {
             newOptions = element.options_static.filter(
               option =>
                 option.filter ===
-                objectForm.filter(
-                  objectFilter =>
-                    objectFilter.id.toString() ===
-                    params.id.toString(),
-                )[0].value_to_change,
+                objectForm.filter(objectFilter => objectFilter.id.toString() === params.id.toString())[0].value_to_change,
             );
           } else {
             newOptions = [{ code: '', description: '' }];
@@ -256,8 +218,7 @@ export class DynamicFormComponent implements OnInit {
   }
   kewUptext(value) {
     let out = '';
-    const filtro =
-      'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
+    const filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890 #-.;@';
     for (let i = 0; i < value.currentTarget.value.length; i++) {
       if (filtro.indexOf(value.currentTarget.value.charAt(i)) != -1) {
         out += value.currentTarget.value.charAt(i);
@@ -269,6 +230,7 @@ export class DynamicFormComponent implements OnInit {
     }
     value.currentTarget.value = out;
   }
+
   ngOnDestroy() {
     this.countAfter += 1;
     this.staticGeneralObject = [];

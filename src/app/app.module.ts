@@ -30,6 +30,8 @@ import { Observable, Subject } from 'rxjs';
 
 export class MyMissingTranslationHandler implements MissingTranslationHandler {
   handle({ key }: MissingTranslationHandlerParams) {
+    const exclude = ['pages.master_data.message_direction'];
+    if (exclude.includes(key)) return key;
     console.warn('No se encontro la posicion ' + key);
     return key
       .replace(/.*\./, '')
