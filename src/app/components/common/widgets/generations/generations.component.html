@@ -1,8 +1,10 @@
-<ngx-charts-pie-grid
-  #pieGrid
-  (window:resize)="pieGrid.update()"
+<ngx-charts-bar-vertical
+  #barVertical
+  (window:resize)="barVertical.update()"
   [view]="view"
+  [xAxis]="xAxis"
+  [yAxis]="yAxis"
   [results]="results"
   [scheme]="colorScheme"
 >
-</ngx-charts-pie-grid>
+</ngx-charts-bar-vertical>

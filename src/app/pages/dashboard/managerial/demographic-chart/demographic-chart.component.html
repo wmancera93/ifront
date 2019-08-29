@@ -20,29 +20,53 @@
     </div>
   </div>
   <div class="container-fluid">
+    <div class="row mt-5">
+      <div class="col-xl-2 col-md-6 col-12">
+        <label>
+          <h6>
+            Seleccione color
+          </h6>
+        </label>
+      </div>
+      <div class="col-xl-2 col-md-4 col-6">
+        <select class="form-control" (change)="selectColor($event)">
+          <option *ngFor="let color of listColors; let i = index" [value]="i" class="text-capitalize">{{ color.name }}</option>
+        </select>
+      </div>
+    </div>
     <div class="row">
       <div class="col-12">
         <div class="position-relative">
           <div class="widget navy-bg bg-white d-flex flex-column">
             <div class="row text-center align-items-center">
-              <div class="col-6">
-                <h6>El 100% de fuerza laboral corresponde</h6>
+              <div class="col-lg-3 col-md-6 col-12">
+                <h6>Somos en total</h6>
                 <i class="rhicon-enterprise color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
               </div>
-              <div class="col-6">
-                <h6>..Y de esa fuerza laboral somos:</h6>
+              <div class="col-lg-3 col-md-6 col-12 card" [ngStyle]="{ 'background-color': color.domain[0] }">
+                <div class="card-body {{ !color.selectable ? 'text-light' : 'text-dark' }}">
+                  <h1>
+                    {{ totalEmployee }}
+                  </h1>
+                  <h6>
+                    Colaboradores
+                  </h6>
+                </div>
+              </div>
+              <div class="col-lg-3 col-md-6 col-12">
+                <h6>En el area somos:</h6>
                 <i class="rhicon-area color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
               </div>
-            </div>
-            <div style="min-height: 50px;width: 100%">
-              <ngx-charts-number-card
-                #pieGridEmployee
-                (window:resize)="pieGridEmployee.update()"
-                [view]="view"
-                [results]="result"
-                [scheme]="colorScheme"
-              >
-              </ngx-charts-number-card>
+              <div class="col-lg-3 col-md-6 col-12 card" [ngStyle]="{ 'background-color': color.domain[1] }">
+                <div class="card-body {{ !color.selectable ? 'text-light' : 'text-dark' }}">
+                  <h1>
+                    {{ totalArea }}
+                  </h1>
+                  <h6>
+                    Colaboradores
+                  </h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -57,15 +81,19 @@
             </div>
             <div class="row text-center align-items-center m">
               <div class="col-6">
-                <h6>{{ man }} Colaboradores</h6>
-                <i class="rhicon-man color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
-              </div>
-              <div class="col-6">
-                <h6>{{ woman }} Colaboradoras</h6>
+                <h6>{{ woman }} Mujeres</h6>
                 <i class="rhicon-woman color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
               </div>
+              <div class="col-6">
+                <h6>{{ man }} Hombres</h6>
+                <i class="rhicon-man color-primary mx-1" style="font-size: 3rem; right: 30%"></i>
+              </div>
             </div>
-            <app-gender style="min-height: 200px;width: 100%" (object)="objectgender($event)"></app-gender>
+            <app-gender
+              style="min-height: 250px;width: 100%"
+              [colorScheme]="colorScheme"
+              (object)="objectgender($event)"
+            ></app-gender>
           </div>
         </div>
       </div>
@@ -74,13 +102,17 @@
           <div class="widget navy-bg bg-white-demo d-flex flex-column">
             <div class="row text-center">
               <div class="col-12">
-                <h3>Nuestros colaboradores son es su mayoria de la generación:</h3>
+                <h3>En nuestra empresa somos de las siguientes generaciones:</h3>
               </div>
             </div>
-            <app-generations class="generationPosition" (maxGenerations)="setMaxValueGeneration($event)"></app-generations>
-            <div class="row positionIcon" style="right: 25%;bottom: 10%;">
+            <app-generations
+              class="generationPosition"
+              [colorScheme]="colorScheme"
+              (maxGenerations)="setMaxValueGeneration($event)"
+            ></app-generations>
+            <div class="row" style="right: 25%;bottom: 10%;">
               <div class="col-8 d-flex align-items-center justify-content-end">
-                <h3>{{ maxValueCivilGenerations }}</h3>
+                <h3>En su mayoria {{ maxValueCivilGenerations }}</h3>
               </div>
               <div class="col-4">
                 <i class="rhicon-generations color-primary mx-2" style="font-size: 4rem; right: 30%"></i>
@@ -100,7 +132,11 @@
                 <h3>Nuestros colaboradores tienen</h3>
               </div>
             </div>
-            <app-children style="min-height: 290px;width: 100%" (maxValue)="setMaxValueChildren($event)"></app-children>
+            <app-children
+              style="min-height: 290px;width: 100%"
+              [colorScheme]="colorScheme"
+              (maxValue)="setMaxValueChildren($event)"
+            ></app-children>
             <div class="row justify-content-center">
               <div class="col-10">
                 <h5 class="text-center">Son más los que tienen {{ maxValueChildren.name }}</h5>
@@ -112,21 +148,22 @@
       <div class="col-12 col-lg-6">
         <div class="widget navy-bg bg-white-demo d-flex flex-column">
           <div class="row text-center">
-            <div class="col-12">
+            <div class="col-2">
+              <i class="rhicon-civilStatus color-primary mx-2" style="font-size: 4rem; right: 30%"></i>
+            </div>
+            <div class="col-10">
               <h3>El estado civil de Nuestros colaboradores es:</h3>
             </div>
           </div>
           <app-civil-status
             class="w-100 position-relative"
             style="min-height: 250px;"
+            [colorScheme]="colorScheme"
             (maxCivilStatus)="setMaxValueCivilStatus($event)"
           ></app-civil-status>
           <div class="row mt-3">
-            <div class="col-8 d-flex align-items-center justify-content-end">
+            <div class="col-12 d-flex align-items-center justify-content-center">
               <h3>En su mayoria {{ maxValueCivilStatus }}</h3>
-            </div>
-            <div class="col-4">
-              <i class="rhicon-civilStatus color-primary mx-2" style="font-size: 4rem; right: 30%"></i>
             </div>
           </div>
         </div>

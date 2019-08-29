@@ -11,6 +11,7 @@ import { Enterprise } from '../../../models/general/enterprise';
 import { DashboardEmployeeService } from '../../../services/dashboard/employee/dashboard-employee.service';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { Employee } from '../../../models/general/user';
 
 @Component({
   selector: 'app-employees',
@@ -43,6 +44,8 @@ export class EmployeesComponent implements OnInit {
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter();
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
+  public dataUser: Employee = null;
+
   constructor(
     public dashboardEmployeeService: DashboardEmployeeService,
     public router: Router,
@@ -54,6 +57,12 @@ export class EmployeesComponent implements OnInit {
 
   ngOnInit() {
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+    this.dashboardEmployeeService.getRequest().subscribe((data: any) => {
+      this.objectRequest.emit(data.data);
+    });
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+    this.dataUser = JSON.parse(localStorage.getItem('user')).employee;
 
     this.dashboardEmployeeService.getRequest().subscribe((data: any) => {
       this.objectRequest.emit(data.data);
@@ -79,14 +88,18 @@ export class EmployeesComponent implements OnInit {
     });
 
     this.dashboardEmployeeService.getIncomesData().subscribe((data: any) => {
-      this.objectIncome.emit({
-        graph_type: data.data.graph_type,
-        properties: data.data.total_incomes,
-      });
-      this.objectDeductions.emit({
-        graph_type: data.data.graph_type,
-        properties: data.data.total_deductions,
-      });
+      if (this.dataUser.permits.PERMISSIONS_SEE_INCOME.state) {
+        this.objectIncome.emit({
+          graph_type: data.data.graph_type,
+          properties: data.data.total_incomes,
+        });
+      }
+      if (this.dataUser.permits.PERMISSIONS_SEE_RETENTIONS.state) {
+        this.objectDeductions.emit({
+          graph_type: data.data.graph_type,
+          properties: data.data.total_deductions,
+        });
+      }
     });
 
     this.dashboardEmployeeService.getNewspaper().subscribe((data: any) => {

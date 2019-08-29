@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import { GaugeComponent } from '@swimlane/ngx-charts';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
@@ -12,7 +12,7 @@ import debounce from 'lodash/debounce';
 export class CivilStatusComponent implements OnInit {
   @ViewChild('gauge') public gauge: GaugeComponent;
   @Output() maxCivilStatus: EventEmitter<any> = new EventEmitter();
-
+  @Input() colorScheme = 'picnic';
   update = debounce(() => this.gauge.update(), 500);
 
   public results: { name: string; value: number }[] = [];
@@ -24,7 +24,7 @@ export class CivilStatusComponent implements OnInit {
   legend = true;
   legendTitle = '';
   legendPosition = 'below';
-  colorScheme = 'ocean';
+  
   constructor(
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,
