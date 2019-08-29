@@ -1,9 +1,8 @@
 // component
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, HostListener } from '@angular/core';
 
 // common
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { Params, Data } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Enterprise } from './models/general/enterprise';
 import { MainService } from './services/main/main.service';
 import { User } from './models/general/user';
@@ -11,8 +10,9 @@ import { UserSharedService } from './services/shared/common/user/user-shared.ser
 import { environment } from '../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { JoyrideService } from 'ngx-joyride';
+import { JoyrideService, JoyrideStepService } from 'ngx-joyride';
 import { Subscription } from 'rxjs';
+import { JoyrideAppService } from './services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-root',
@@ -27,23 +27,25 @@ export class AppComponent implements OnDestroy {
   public dataUser: User = null;
   public isExplorer: boolean;
   public changesLang: number = 0;
+  public canUseKeysJoride: boolean = true;
   public joyrideSuscriptions: Subscription[] = [];
+  public tourDone?: Subscription;
 
   public baseUrl: string;
 
   constructor(
     public router: Router,
-    private route: ActivatedRoute,
     public mainService: MainService,
     public userSharedService: UserSharedService,
     public tokenService: Angular2TokenService,
     public translate: TranslateService,
     private readonly joyrideService: JoyrideService,
+    private readonly joyrideStepService: JoyrideStepService,
+    private readonly joyrideAppService: JoyrideAppService,
   ) {
     const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');
-    console.log(this.joyrideService);
     translate.onLangChange.subscribe(({ lang }: LangChangeEvent) => {
       console.log(lang);
       if (this.changesLang !== 0) {
@@ -128,37 +130,31 @@ export class AppComponent implements OnDestroy {
         }
       }
     });
+    this.joyrideAppService.onChangeStep.subscribe(() => {
+      this.canUseKeysJoride = true;
+    });
   }
 
-  onStartTour() {
-    let child = this.route.firstChild;
-    this.joyrideSuscriptions.forEach(suscription => suscription.unsubscribe());
-    let url = '';
-    while (child) {
-      url += `${child.snapshot.url[0].path}`;
-      if (child.firstChild) {
-        url += `/`;
-        child = child.firstChild;
-      } else {
-        const { joyride } = child.snapshot.data;
-        if (joyride) {
-          const { steps } = joyride;
-          this.joyrideSuscriptions.push(
-            this.translate.onLangChange.subscribe(() => {
-              this.joyrideService.startTour({
-                steps: steps.map(step => {
-                  if (typeof step === 'string' && !/@/g.test(step)) return `${step}@${url}`;
-                  return step;
-                }),
-              });
-            }),
+  @HostListener('document:keyup', ['$event.key', '$event.which'])
+  jorideKeys = (key: string) => {
+    if (this.canUseKeysJoride && this.joyrideService.isTourInProgress) {
+      this.canUseKeysJoride = false;
+      this.tourDone && this.tourDone.unsubscribe();
+      if (key === 'ArrowRight') this.joyrideStepService.next();
+      if (key === 'ArrowLeft')
+        this.joyrideStepService.prev(); /* 
+      const { currentStep } = this.joyrideStepService as any;
+      if (currentStep) {
+        this.tourDone = currentStep.tourDone.subscribe(() => {
+          this.canUseKeysJoride = true;
+          this.joyrideService.closeTour();
+          this.joyrideSuscriptions.forEach(suscription =>
+            suscription.unsubscribe(),
           );
-          (this.translate as any).changeLang(this.translate.currentLang);
-        }
-        return null;
-      }
+        });
+      } */
     }
-  }
+  };
 
   tokenServiceInit(languaje) {
     this.tokenService.init({

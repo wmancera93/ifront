@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { User } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
@@ -8,8 +8,8 @@ import { Router } from '@angular/router';
 import { Enterprise } from '../../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
 import { DemographicSharedService } from '../../../services/shared/common/demographic/demographic-shared.service';
-import { JoyrideService } from 'ngx-joyride';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-header',
@@ -17,8 +17,6 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit, OnDestroy {
-  @Output() onStartTour: EventEmitter<void> = new EventEmitter();
-
   private dataUser: User = null;
   public dataEnterprise: Enterprise;
   public logoHeader: string;
@@ -34,7 +32,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -52,6 +49,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     public alert: AlertsService,
     public demographicSharedService: DemographicSharedService,
     public stylesExplorerService: StylesExplorerService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.userSharedService.getUser().subscribe(data => {
       this.dataUser = data;
@@ -119,7 +117,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   startTour() {
-    this.onStartTour.emit();
+    this.joyrideAppService.onStartTour.emit();
   }
 
   clickPartnersIcon() {

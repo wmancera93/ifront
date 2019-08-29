@@ -2,8 +2,12 @@
 <div id="wrapper">
   <app-menu-navigation *ngIf="showComponents"></app-menu-navigation>
   <div id="{{ pageWrapper }}" class="gray-bg">
-    <app-header *ngIf="showComponents" (onStartTour)="onStartTour($event)"></app-header>
-    <div id="contentGeneral" class="heigth-content-general" style="overflow: auto;">
+    <app-header *ngIf="showComponents"></app-header>
+    <div
+      id="contentGeneral"
+      class="heigth-content-general"
+      style="overflow: auto;"
+    >
       <router-outlet></router-outlet>
     </div>
     <app-footer *ngIf="showComponents"></app-footer>

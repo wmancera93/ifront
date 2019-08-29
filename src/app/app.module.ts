@@ -49,8 +49,8 @@ export class CustomLoader implements TranslateLoader {
       .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
       .map((res: any) => {
         const languaje = merge(
-          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd,
           joyride[lang as keyof typeof joyride],
+          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd,
         );
         console.log(languaje);
         localStorage.setItem(`languaje-${lang}`, JSON.stringify(languaje));
@@ -85,7 +85,10 @@ export class CustomLoader implements TranslateLoader {
     HttpModule,
     NgbModule.forRoot(),
     TranslateModule.forRoot({
-      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MyMissingTranslationHandler },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MyMissingTranslationHandler,
+      },
       loader: {
         provide: TranslateLoader,
         /* useFactory: HttpLoaderFactory, */

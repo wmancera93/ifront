@@ -64,12 +64,10 @@ import { TranslateService } from './common/translate/translate.service';
 import { TransportationLogisticsService } from './travel-management/transportation-logistics/transportation-logistics.service';
 import { DemographicChartsService } from './common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from './shared/common/demographic/demographic-shared.service';
-
+import { JoyrideAppService } from './joyride-app/joyride-app.service';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [],
   providers: [
     AlertsService,
@@ -88,6 +86,7 @@ import { DemographicSharedService } from './shared/common/demographic/demographi
     ExcelService,
     ReportsHrService,
     AutoServicesService,
+    JoyrideAppService,
     MyPublicationsService,
     RequestsRhService,
     AproversRequestsService,
@@ -131,7 +130,7 @@ import { DemographicSharedService } from './shared/common/demographic/demographi
     TranslateService,
     TransportationLogisticsService,
     DemographicChartsService,
-    DemographicSharedService
-  ]
+    DemographicSharedService,
+  ],
 })
-export class ServicesModule { }
+export class ServicesModule {}
