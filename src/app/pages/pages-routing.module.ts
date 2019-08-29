@@ -74,290 +74,131 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'reset_account',
     component: ResetAccountComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'locked_screen',
     component: LockedScreenComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'confirm_reset_account',
     component: ConfirmResetAcountComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'index',
     component: DashboardComponent,
-    data: {
-      joyride: {
-        steps: ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7', 'step_8', 'step_9', 'step_10', 'step_11'],
-      },
-    },
   },
   {
     path: 'error',
     component: ErrorPageComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'my_team',
     component: MyTeamComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'demographic_chart',
     component: DemographicChartComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'my_team_reports',
     component: MyTeamReportsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'disabilities',
     component: DisabilitiesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'hierarchical_chart',
     component: HierarchicalChartComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
+    data: {},
   },
   {
     path: 'holiday_letter',
     component: HolidayLetterComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'work_certificate',
     component: LaborCertificatesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'payroll_receipts',
     component: PayrollReceiptsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'certificate_income_withholding',
     component: CertificateIncomeWithholdingComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'income_withholdings',
     component: IncomeWithholdingsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'compensated_vacations',
     component: CompnsatedVacationsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'embargoes',
     component: EmbargoesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'extra_hours',
     component: ExtraHoursComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'loans',
     component: LoansComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'payments_deductions',
     component: PaymentsDeductionsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'permissions',
     component: PermissionsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'vacation_balance',
     component: VacationBalanceComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'vacation_enjoyed',
     component: VacationEnjoyedComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'aniversary',
     component: AniversaryComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'severances',
     component: SeverancesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'reports_requests',
     component: RequestsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'users_permisions',
     component: PermisionsUsersComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'my_publications',
     component: MyPublicationsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'news',
     component: NewsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'requests',
     component: RequestsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'requests_rh',
     component: RequestsRhComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'requests_benefist',
@@ -366,336 +207,152 @@ const routes: Routes = [
   {
     path: 'corporate_documents',
     component: CorporateDocumentsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'pending_approvers',
     component: PendingsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'managed_approvers',
     component: ManagedComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'master_data',
     component: MasterDataComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
+    data: {},
   },
   {
     path: 'help',
     component: HelpComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'evaluated',
     component: EvaluatedComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'historical_posts',
     component: HistoricalPostsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'requests-type',
     component: RequestsApproversComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'iva_employee',
     component: IvaEmployeeComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'calendar_modal',
     component: CalendarModalComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'evaluation_objectives',
     component: EvaluationObjectivesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'planning_evaluation',
     component: PlanningEvaluationComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
 
   {
     path: 'time_evaluation',
     component: TimeEvaluationComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'hour_extras',
     component: HourExtrasComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'my_hour_extras',
     component: MyHourExtrasComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'travel_management',
     component: TravelManagementComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'travels',
     component: TravelComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'travels/:idSpend/:idTravels',
     component: TravelComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'hotels',
     component: HotelsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'training',
     component: TrainingComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'report_training',
     component: ReportTrainingComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'advances/:id',
     component: AdvancesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'advances',
     component: AdvancesComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'spend/:id',
     component: SpendComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'spend/:idTravels/:idSpend/:travel',
     component: SpendComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'spend',
     component: SpendComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'management_travel',
     component: ManagedTravelComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'pending_travel',
     component: PendingTravelComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'travel_report',
     component: TravelRequestsReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'advance_report',
     component: TravelAdvanceReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'allowance_report',
     component: TravelAllowanceReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'approver_report',
     component: TravelApproverReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'requests_approvers_logs',
     component: RequestsApproversLogsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'housing',
     component: HousingComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'logistics_transportations',
     component: TransportationLogisticsComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'housing_reports',
     component: HousingReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
   {
     path: 'fleet_reports',
     component: TrasnportationReportComponent,
-    data: {
-      joyride: {
-        steps: [],
-      },
-    },
   },
 ];
 
