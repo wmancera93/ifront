@@ -11,6 +11,11 @@ export class ShowHotelsJourneyComponent implements OnInit {
   public objectHotelJourney: any = null;
   public arrayHotel: any[] = [];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.travels.approvals_details_travels.show_hotels_journey.${key}`;
   }

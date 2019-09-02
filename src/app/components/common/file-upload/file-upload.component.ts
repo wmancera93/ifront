@@ -16,6 +16,11 @@ export class FileUploadComponent implements OnInit {
   public acceptExtensions =
     '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls, .xlsx';
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.file_upload.${key}`;
   }

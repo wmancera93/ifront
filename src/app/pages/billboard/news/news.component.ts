@@ -32,6 +32,11 @@ export class NewsComponent implements OnInit, OnDestroy {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.billboard.news.${key}`;
   }
@@ -65,11 +70,6 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.consultAllArticles();
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();

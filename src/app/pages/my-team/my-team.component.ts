@@ -21,6 +21,11 @@ export class MyTeamComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.my_team.${key}`;
   }
@@ -53,11 +58,6 @@ export class MyTeamComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.myTeamInfoService.getMyTeamData().subscribe((data: any) => {
       this.employeesInMyTeam = data.data;

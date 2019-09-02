@@ -16,6 +16,11 @@ export class MyHourExtrasComponent implements OnInit, OnDestroy {
   public userAuthenticated: User;
   private subscriptions: ISubscription[];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.my_hour_extras.${key}`;
   }
@@ -26,11 +31,6 @@ export class MyHourExtrasComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {

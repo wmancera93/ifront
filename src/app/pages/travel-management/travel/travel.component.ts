@@ -50,6 +50,11 @@ export class TravelComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.travel.${key}`;
   }
@@ -220,11 +225,6 @@ export class TravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       ...this.subscriptions,
       this.travelService.getTravelRequests().subscribe((data: any) => {

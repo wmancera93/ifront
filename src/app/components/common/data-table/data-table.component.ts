@@ -50,6 +50,11 @@ export class DataTableComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.data_table.${key}`;
   }
@@ -64,7 +69,7 @@ export class DataTableComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
+        document.body.setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );

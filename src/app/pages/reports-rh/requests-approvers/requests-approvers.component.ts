@@ -26,6 +26,11 @@ export class RequestsApproversComponent implements OnInit {
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.reports_rh.requests_approvers.${key}`;
   }
@@ -55,11 +60,6 @@ export class RequestsApproversComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {
       this.newtype_requests = data.data;

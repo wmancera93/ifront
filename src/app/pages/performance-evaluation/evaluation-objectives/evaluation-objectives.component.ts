@@ -12,6 +12,11 @@ export class EvaluationObjectivesComponent implements OnInit {
   public objectReport: EventEmitter<any> = new EventEmitter();
   token = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.performance_evaluation.evaluation_objetives.${key}`;
   }

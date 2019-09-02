@@ -21,6 +21,11 @@ export class EmployeeInfoComponent implements OnInit {
   public dateAddCompany: string;
   public datebirth: string;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.employee.employee_info.${key}`;
   }

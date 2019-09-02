@@ -16,6 +16,11 @@ export class PermissionsComponent implements OnInit, OnDestroy {
   public userAuthenticated: User;
   private subscriptions: ISubscription[];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.permissions.${key}`;
   }
@@ -26,11 +31,6 @@ export class PermissionsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(data => {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));

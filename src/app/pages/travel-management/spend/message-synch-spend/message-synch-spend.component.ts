@@ -14,6 +14,11 @@ export class MessageSynchSpendComponent implements OnInit {
   public objectPrintMessageSpend: EventEmitter<any> = new EventEmitter();
   public nameReportMessageSpend: string;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.spend.message_synch_spend.${key}`;
   }

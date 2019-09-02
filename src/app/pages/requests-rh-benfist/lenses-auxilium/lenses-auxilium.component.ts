@@ -43,6 +43,11 @@ export class LensesAuxiliumComponent implements OnInit, OnDestroy {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `.${key}`;
   }

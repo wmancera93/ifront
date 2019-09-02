@@ -13,6 +13,11 @@ export class ShowDistSpendsComponent implements OnInit {
   public detailDistCostApproval: any[] = [];
   public printSpendApproval: any[] = [];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.travels.approvals_details_travels.show_dist_spends.${key}`;
   }

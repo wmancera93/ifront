@@ -3,7 +3,7 @@ import { ColorHelper, AdvancedPieChartComponent } from '@swimlane/ngx-charts';
 import { DemographicChartsService } from '../../../../services/common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from '../../../../services/shared/common/demographic/demographic-shared.service';
 import { element } from 'protractor';
-
+import debounce from 'lodash/debounce';
 @Component({
   selector: 'app-children',
   templateUrl: './children.component.html',
@@ -13,6 +13,7 @@ export class ChildrenComponent implements OnInit {
   @ViewChild('pieChart') public pieChart: AdvancedPieChartComponent;
   @Output() maxValue: EventEmitter<any> = new EventEmitter();
   @Input() colorScheme = 'picnic';
+  update = debounce(() => this.pieChart.update(), 500);
 
   public results: any[] = [];
 
@@ -58,7 +59,7 @@ export class ChildrenComponent implements OnInit {
       this.maxValue.emit(maxValue);
     });
     this.demographicSharedService.getEventUpload().subscribe((data: any) => {
-      this.pieChart.update();
+      this.update();
     });
   }
 

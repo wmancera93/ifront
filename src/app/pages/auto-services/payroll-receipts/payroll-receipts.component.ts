@@ -17,6 +17,11 @@ export class PayrollReceiptsComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.payroll_receipts.${key}`;
   }
@@ -45,11 +50,6 @@ export class PayrollReceiptsComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getPayRollReceipts().subscribe((data: any) => {
       this.listPayRoll = data.data;
       if (data.data.length === 0) {

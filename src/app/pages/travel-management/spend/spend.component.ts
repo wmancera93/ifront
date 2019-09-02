@@ -30,6 +30,11 @@ export class SpendComponent implements OnInit {
   public page = '';
   public is_collapse: boolean;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.spend.${key}`;
   }

@@ -19,6 +19,11 @@ export class ViewEvaluationObjetivesComponent implements OnInit, OnDestroy {
   public objectReportEval: EventEmitter<any> = new EventEmitter();
   private subscriptions: ISubscription;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.performance_evaluation.evaluation_objetives.view_evaluation_objetives.${key}`;
   }

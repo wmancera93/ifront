@@ -19,6 +19,11 @@ export class PlanningEvaluationComponent implements OnInit, OnDestroy {
   public editDate = false;
   token = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.performance_evaluation.planning_evaluation.${key}`;
   }

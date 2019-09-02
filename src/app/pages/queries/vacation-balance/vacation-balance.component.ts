@@ -18,6 +18,11 @@ export class VacationBalanceComponent implements OnInit, OnDestroy {
   public countAfter = 0;
   private subscriptions: ISubscription[];
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.vacation_balance.${key}`;
   }
@@ -29,11 +34,6 @@ export class VacationBalanceComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       this.accionDataTableService.getActionDataTable().subscribe(() => {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));

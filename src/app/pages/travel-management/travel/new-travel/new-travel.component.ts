@@ -101,6 +101,11 @@ export class NewTravelComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.travel.new_travel.${key}`;
   }
@@ -189,7 +194,7 @@ export class NewTravelComponent implements OnInit, OnDestroy {
           data === 'closeAlertdeleteNewDocumentSaved'
         ) {
           document.getElementById('btn_travel_new').click();
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+          document.body.setAttribute('style', 'overflow-y:auto');
         }
       }
     });
@@ -357,11 +362,6 @@ export class NewTravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.travelManagementService.getplanningTravelRequests().subscribe((data: any) => {
       this.planningTravel = data;
       this.travel_types = this.sortByAphabet(data.data.travel_types);

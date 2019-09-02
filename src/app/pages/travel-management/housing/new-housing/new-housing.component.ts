@@ -108,6 +108,11 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   get validateForms() {
     return this.form.valid && this.arrayBedrooms.length;
   }
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.housing.management_housing.${key}`;
   }

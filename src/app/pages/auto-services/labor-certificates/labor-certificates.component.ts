@@ -26,6 +26,11 @@ export class LaborCertificatesComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.labor_certificates.${key}`;
   }
@@ -59,11 +64,6 @@ export class LaborCertificatesComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getLaboralCertificate().subscribe((data: any) => {
       this.laboralType = data.data;
       if (data.data.length === 0) {

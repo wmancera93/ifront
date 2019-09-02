@@ -37,6 +37,11 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.billboard.my_publication.${key}`;
   }
@@ -109,11 +114,6 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.getDataPublications();
 

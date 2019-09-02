@@ -4,22 +4,34 @@
       [notificationSecundary]="objectVacations"
       (click)="detailVacations()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_9"
+      [title]="joyride('step_9.title') | translate"
+      [text]="joyride('step_9.text') | translate"
     ></app-notification-secundary>
     <app-notification-secundary
       [notificationSecundary]="objectPermissions"
       (click)="detailPermitions()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_10"
+      [title]="joyride('step_10.title') | translate"
+      [text]="joyride('step_10.text') | translate"
     ></app-notification-secundary>
     <app-notification-secundary
       [notificationSecundary]="objectIncapacityes"
       (click)="detailIncapacities()"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_11"
+      [title]="joyride('step_11.title') | translate"
+      [text]="joyride('step_11.text') | translate"
     ></app-notification-secundary>
     <app-notification-primary
       [notificationPrimary]="objectAbsenteeism"
       (click)="sendDataButton()"
       routerLink="/ihr/pending_approvers"
       class="col-xl-3 col-md-6 col-6 widget-height-notification-primary"
+      joyrideStep="step_12"
+      [title]="joyride('step_12.title') | translate"
+      [text]="joyride('step_12.text') | translate"
     ></app-notification-primary>
     <!-- <app-notification-primary [notificationPrimary]="objectReports" class="col-xl-3 col-md-6 col-6"></app-notification-primary> -->
   </div>
@@ -35,11 +47,20 @@
               [eventsEmployee]="objectMyTeam"
               class="col-12"
               style="align-items: stretch;"
+              joyrideStep="step_13"
+              [title]="joyride('step_13.title') | translate"
+              [text]="joyride('step_13.text') | translate"
             ></app-events-employees>
           </div>
         </div>
 
-        <app-progress-primary [progressPrimary]="objectPermissionsUsers" class="col-12"></app-progress-primary>
+        <app-progress-primary
+          joyrideStep="step_15"
+          [title]="joyride('step_15.title') | translate"
+          [text]="joyride('step_15.text') | translate"
+          [progressPrimary]="objectPermissionsUsers"
+          class="col-12"
+        ></app-progress-primary>
       </div>
     </div>
     <div class="col-xl-6 col-md-12 col-12">
@@ -47,8 +68,21 @@
         <!-- <div class=" col-12">
               <app-progress-primary [progressPrimary]="objectExtraHoursBar" routerLink="/ihr/hour_extras" class="col-12"></app-progress-primary>
             </div> -->
-        <app-progress-primary [progressPrimary]="objectQueryCompany" class="col-12"></app-progress-primary>
-        <div class="col-12" routerLink="/ihr/demographic_chart" *ngIf="dataEnterprise.show_demographics_data">
+        <app-progress-primary
+          joyrideStep="step_14"
+          [title]="joyride('step_14.title') | translate"
+          [text]="joyride('step_14.text') | translate"
+          [progressPrimary]="objectQueryCompany"
+          class="col-12"
+        ></app-progress-primary>
+        <div
+          class="col-12"
+          routerLink="/ihr/demographic_chart"
+          *ngIf="dataEnterprise.show_demographics_data"
+          joyrideStep="step_17"
+          [title]="joyride('step_17.title') | translate"
+          [text]="joyride('step_17.text') | translate"
+        >
           <div class="employee_event widget white-bg wg-hover-general wg-hoverImg-bg navy-bg">
             <div class="row">
               <div class="col-8 text-center">
@@ -56,13 +90,16 @@
                   Indicadores Demograficos
                 </h3>
               </div>
-              <div class="col-2 text-center color-primary">
-                  <i class="fa fa-bar-chart fa-2x"></i>
+              <div class="col-2 text-center color-primary" joyrideStep="step_18">
+                <i class="fa fa-bar-chart fa-2x"></i>
               </div>
             </div>
           </div>
         </div>
         <app-notification-primary
+          joyrideStep="step_16"
+          [title]="joyride('step_16.title') | translate"
+          [text]="joyride('step_16.text') | translate"
           [notificationPrimary]="objectMen"
           class="col-xl-6 col-md-6 col-12 widget-height-notification-primary"
         ></app-notification-primary>

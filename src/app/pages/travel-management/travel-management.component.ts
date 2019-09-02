@@ -20,6 +20,11 @@ export class TravelManagementComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.${key}`;
   }
@@ -28,11 +33,6 @@ export class TravelManagementComponent implements OnInit {
 
   ngOnInit() {
     this.getDataUserPermissions();
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     const commonButtons = [
       {

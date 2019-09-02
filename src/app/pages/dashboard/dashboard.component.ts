@@ -1,13 +1,16 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
-import { Router, RoutesRecognized } from '@angular/router';
+import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { Toast } from 'angular2-toaster';
 import { filter } from 'rxjs/operators';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '@ngx-translate/core';
+import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
+import { ElementRef } from '@angular/core';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +19,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class DashboardComponent implements OnInit {
   public userAuthenticated: User = null;
+  @ViewChild('prendido') public prendido: ElementRef;
+  @ViewChild('apagado') public apagado: ElementRef;
   public authdata: any;
   public roleEmployee = true;
   public showServiceManagement: boolean;
@@ -28,10 +33,41 @@ export class DashboardComponent implements OnInit {
   public urlBeforePending = '';
   public urlBeforeReports = '';
   public toast: Toast;
+  public steps = [
+    'step_1',
+    'step_2',
+    'step_3',
+    'step_4',
+    'step_5',
+    'step_6',
+    'step_7',
+    'step_8',
+    'step_9',
+    'step_10',
+    'step_11',
+    'step_12',
+    'step_13',
+    'step_14',
+    'step_15',
+    'step_16',
+    'step_17@ihr/index_managerial',
+    'step_18@ihr/demographic_chart',
+    'step_19',
+    'step_20',
+    'step_21',
+    'step_22',
+    'step_23',
+    'step_24',
+  ];
+  public joyrideSubscription: Subscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
   @Output() objectToast: EventEmitter<Toast> = new EventEmitter();
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
 
   parseT(key) {
     return `pages.dashboard.${key}`;
@@ -43,17 +79,14 @@ export class DashboardComponent implements OnInit {
     public companieService: MainService,
     private tokenService: Angular2TokenService,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
-
     this.router.events
       .pipe(filter(e => e instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
-        if (
-          this.userAuthenticated === null ||
-          this.userAuthenticated === undefined
-        ) {
+        if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
           if (event[0].urlAfterRedirects === '/ihr/login') {
             setTimeout(() => {
               this.toast = {
@@ -116,31 +149,34 @@ export class DashboardComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.body.setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );
+
+    let routerSuscribe: Subscription;
+    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      joyrideAppService.startTour({ steps: this.steps, stepDefaultPosition: 'step_15' }).subscribe(({ name, actionType }) => {
+        /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
+          setTimeout(() => {
+            this.vieweDashboardManager();
+            this.prendido.nativeElement.checked = false;
+            this.apagado.nativeElement.checked = true;
+            this.joyrideAppService.reloadStep();
+            routerSuscribe = undefined;
+          }, 2000);
+        } */
+      });
+    });
   }
 
   getDataLocalStorage() {
-    document
-      .getElementsByTagName('body')[0]
-      .setAttribute('style', 'overflow-y:block');
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
+    document.body.setAttribute('style', 'overflow-y:block');
   }
 
   ngOnInit() {
     this.getDataLocalStorage();
-    if (
-      this.userAuthenticated !== null ||
-      this.userAuthenticated !== undefined
-    ) {
+    if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
 
@@ -149,9 +185,7 @@ export class DashboardComponent implements OnInit {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[
-          url.split('-')[0].split('/').length - 1
-        ];
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       } else {
         ambient = 'production';
       }
@@ -179,5 +213,9 @@ export class DashboardComponent implements OnInit {
   }
   vieweDashboardManager() {
     this.roleEmployee = true;
+  }
+
+  ngOnDestroy(): void {
+    this.joyrideSubscription.unsubscribe();
   }
 }

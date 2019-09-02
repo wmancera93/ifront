@@ -31,6 +31,11 @@ export class ManagedComponent implements OnInit, OnDestroy {
   private subscriptions: ISubscription[];
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.approver_request.managed.${key}`;
   }
@@ -81,11 +86,6 @@ export class ManagedComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
   }
 
   modalAprovers(request: Requests) {

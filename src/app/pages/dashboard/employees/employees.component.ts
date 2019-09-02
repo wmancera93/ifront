@@ -33,6 +33,14 @@ export class EmployeesComponent implements OnInit {
   @Output() objectQinquennials: EventEmitter<EventsEmployess[]> = new EventEmitter();
   @Output() objectQinquennialsPayment: EventEmitter<EventsEmployess[]> = new EventEmitter();
 
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
+  parseT(key) {
+    return `pages.dashboard.${key}`;
+  }
+
   // @Output() InterestChartType: EventEmitter<string> = new EventEmitter();
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
@@ -48,10 +56,10 @@ export class EmployeesComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
+    this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+    this.dashboardEmployeeService.getRequest().subscribe((data: any) => {
+      this.objectRequest.emit(data.data);
     });
     this.dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
     this.dataUser = JSON.parse(localStorage.getItem('user')).employee;

@@ -1,5 +1,11 @@
 <div class="heigth-content-general">
   <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_18"
+      [title]="joyride('step_18.title') | translate"
+      [text]="joyride('step_18.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 title">
@@ -28,7 +34,12 @@
           </h6>
         </label>
       </div>
-      <div class="col-xl-2 col-md-4 col-6">
+      <div
+        class="col-xl-2 col-md-4 col-6"
+        joyrideStep="step_19"
+        [title]="joyride('step_19.title') | translate"
+        [text]="joyride('step_19.text') | translate"
+      >
         <select class="form-control" (change)="selectColor($event)">
           <option *ngFor="let color of listColors; let i = index" [value]="i" class="text-capitalize">{{ color.name }}</option>
         </select>
@@ -37,7 +48,12 @@
     <div class="row">
       <div class="col-12">
         <div class="position-relative">
-          <div class="widget navy-bg bg-white d-flex flex-column">
+          <div
+            class="widget navy-bg bg-white d-flex flex-column"
+            joyrideStep="step_20"
+            [title]="joyride('step_20.title') | translate"
+            [text]="joyride('step_20.text') | translate"
+          >
             <div class="row text-center align-items-center">
               <div class="col-lg-3 col-md-6 col-12">
                 <h6>Somos en total</h6>
@@ -73,7 +89,12 @@
       </div>
       <div class="col-12 col-lg-6">
         <div class="position-relative">
-          <div class="widget navy-bg bg-white d-flex flex-column">
+          <div
+            class="widget navy-bg bg-white d-flex flex-column"
+            joyrideStep="step_21"
+            [title]="joyride('step_21.title') | translate"
+            [text]="joyride('step_21.text') | translate"
+          >
             <div class="row text-center">
               <div class="col-12">
                 <h3>En el area somos:</h3>
@@ -99,7 +120,12 @@
       </div>
       <div class="col-12 col-lg-6">
         <div class="position-relative">
-          <div class="widget navy-bg bg-white-demo d-flex flex-column">
+          <div
+            class="widget navy-bg bg-white-demo d-flex flex-column"
+            joyrideStep="step_22"
+            [title]="joyride('step_22.title') | translate"
+            [text]="joyride('step_22.text') | translate"
+          >
             <div class="row text-center">
               <div class="col-12">
                 <h3>En nuestra empresa somos de las siguientes generaciones:</h3>
@@ -123,7 +149,12 @@
       </div>
       <div class="col-12 col-lg-6">
         <div class="position-relative">
-          <div class="widget navy-bg bg-white-demo d-flex flex-column">
+          <div
+            class="widget navy-bg bg-white-demo d-flex flex-column"
+            joyrideStep="step_23"
+            [title]="joyride('step_23.title') | translate"
+            [text]="joyride('step_23.text') | translate"
+          >
             <div class="row">
               <div class="col-4">
                 <i class="rhicon-children color-primary mx-2 position-absolute" style="font-size: 4rem; right: 30%"></i>
@@ -146,7 +177,12 @@
         </div>
       </div>
       <div class="col-12 col-lg-6">
-        <div class="widget navy-bg bg-white-demo d-flex flex-column">
+        <div
+          class="widget navy-bg bg-white-demo d-flex flex-column"
+          joyrideStep="step_24"
+          [title]="joyride('step_24.title') | translate"
+          [text]="joyride('step_24.text') | translate"
+        >
           <div class="row text-center">
             <div class="col-2">
               <i class="rhicon-civilStatus color-primary mx-2" style="font-size: 4rem; right: 30%"></i>

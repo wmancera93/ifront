@@ -20,42 +20,34 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
   styleUrls: ['./managerial.component.css'],
 })
 export class ManagerialComponent implements OnInit {
-  @Output() objectVacations: EventEmitter<
-    NotificationSecundary
-  > = new EventEmitter();
+  @Output() objectVacations: EventEmitter<NotificationSecundary> = new EventEmitter();
   @Output() objectDataVacations: EventEmitter<any> = new EventEmitter();
-  @Output() objectIncapacityes: EventEmitter<
-    NotificationSecundary
-  > = new EventEmitter();
-  @Output() objectPermissions: EventEmitter<
-    NotificationSecundary
-  > = new EventEmitter();
+  @Output() objectIncapacityes: EventEmitter<NotificationSecundary> = new EventEmitter();
+  @Output() objectPermissions: EventEmitter<NotificationSecundary> = new EventEmitter();
   @Output() objectMyTeam: EventEmitter<EventsEmployess[]> = new EventEmitter();
-  @Output() objectReports: EventEmitter<
-    NotificationPrimary
-  > = new EventEmitter();
+  @Output() objectReports: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectWoman: EventEmitter<NotificationPrimary> = new EventEmitter();
   @Output() objectMen: EventEmitter<NotificationPrimary> = new EventEmitter();
-  @Output() objectAbsenteeism: EventEmitter<
-    NotificationPrimary
-  > = new EventEmitter();
-  @Output() objectQueryCompany: EventEmitter<
-    ProgressPrimary[]
-  > = new EventEmitter();
-  @Output() objectPermissionsUsers: EventEmitter<
-    ProgressPrimary[]
-  > = new EventEmitter();
+  @Output() objectAbsenteeism: EventEmitter<NotificationPrimary> = new EventEmitter();
+  @Output() objectQueryCompany: EventEmitter<ProgressPrimary[]> = new EventEmitter();
+  @Output() objectPermissionsUsers: EventEmitter<ProgressPrimary[]> = new EventEmitter();
   @Output() modalDataManagerial: EventEmitter<string> = new EventEmitter();
   @Output() objectExtraHours: EventEmitter<Estadistics> = new EventEmitter();
-  @Output() objectExtraHoursBar: EventEmitter<
-    ProgressPrimary[]
-  > = new EventEmitter();
+  @Output() objectExtraHoursBar: EventEmitter<ProgressPrimary[]> = new EventEmitter();
 
   public validateMyTeam: string;
   public dataMyTeam = true;
   public dataManagerial: any;
   public activeButton = true;
   public dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
+  parseT(key) {
+    return `pages.dashboard.${key}`;
+  }
 
   constructor(
     public dasboardManagerialService: DashboardManagerialService,
@@ -79,12 +71,6 @@ export class ManagerialComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
-
     const data = {
       background: '#33446e',
       color: '#FFFFFF',
@@ -206,29 +192,21 @@ export class ManagerialComponent implements OnInit {
       this.objectExtraHoursBar.emit(dataBar);
     }, 100);
 
-    this.dasboardManagerialService
-      .getWidgetEmployeeOnVacations()
-      .subscribe((data: any) => {
-        this.objectVacations.emit(data.data);
-      });
+    this.dasboardManagerialService.getWidgetEmployeeOnVacations().subscribe((data: any) => {
+      this.objectVacations.emit(data.data);
+    });
 
-    this.dasboardManagerialService
-      .getWidgetEmployeeOnPermition()
-      .subscribe((data: any) => {
-        this.objectPermissions.emit(data.data);
-      });
+    this.dasboardManagerialService.getWidgetEmployeeOnPermition().subscribe((data: any) => {
+      this.objectPermissions.emit(data.data);
+    });
 
-    this.dasboardManagerialService
-      .getwidgetEmployeeOnAbsences()
-      .subscribe((data: any) => {
-        this.objectAbsenteeism.emit(data.data);
-      });
+    this.dasboardManagerialService.getwidgetEmployeeOnAbsences().subscribe((data: any) => {
+      this.objectAbsenteeism.emit(data.data);
+    });
 
-    this.dasboardManagerialService
-      .getwidgetEmployeeOnIncapacities()
-      .subscribe((data: any) => {
-        this.objectIncapacityes.emit(data.data);
-      });
+    this.dasboardManagerialService.getwidgetEmployeeOnIncapacities().subscribe((data: any) => {
+      this.objectIncapacityes.emit(data.data);
+    });
 
     this.dasboardManagerialService.getWidgetMyteam().subscribe((data: any) => {
       if (data.data.length === 0) {
@@ -239,11 +217,9 @@ export class ManagerialComponent implements OnInit {
       this.objectMyTeam.emit(data.data);
     });
 
-    this.dasboardManagerialService
-      .getWidgetCompanyrequest()
-      .subscribe((data: any) => {
-        this.objectQueryCompany.emit(data.data);
-      });
+    this.dasboardManagerialService.getWidgetCompanyrequest().subscribe((data: any) => {
+      this.objectQueryCompany.emit(data.data);
+    });
 
     this.dasboardManagerialService.getWidgetPermissionsUser().subscribe(
       (data: any) => {
@@ -262,17 +238,13 @@ export class ManagerialComponent implements OnInit {
       },
     );
 
-    this.dasboardManagerialService
-      .getWidgetMalePercent()
-      .subscribe((data: any) => {
-        this.objectMen.emit(data.data);
-      });
+    this.dasboardManagerialService.getWidgetMalePercent().subscribe((data: any) => {
+      this.objectMen.emit(data.data);
+    });
 
-    this.dasboardManagerialService
-      .getWidgetFemalePercent()
-      .subscribe((data: any) => {
-        this.objectWoman.emit(data.data);
-      });
+    this.dasboardManagerialService.getWidgetFemalePercent().subscribe((data: any) => {
+      this.objectWoman.emit(data.data);
+    });
 
     // const incapacityes: NotificationSecundary[] = [];
     // this.objectIncapacityes.emit(incapacityes[0]);
@@ -290,41 +262,35 @@ export class ManagerialComponent implements OnInit {
   }
   detailVacations() {
     this.modalDataManagerial.emit('modalDataVacations');
-    this.dasboardManagerialService
-      .getDataVacationsSubordinates()
-      .subscribe((data: any) => {
-        this.dataManagerial = data;
-        this.managerialDataShared.setDataManagerial({
-          objectInfo: this.dataManagerial,
-          modal: 'modalDataVacations',
-        });
+    this.dasboardManagerialService.getDataVacationsSubordinates().subscribe((data: any) => {
+      this.dataManagerial = data;
+      this.managerialDataShared.setDataManagerial({
+        objectInfo: this.dataManagerial,
+        modal: 'modalDataVacations',
       });
+    });
   }
 
   detailPermitions() {
     this.modalDataManagerial.emit('modalDataPermitions');
-    this.dasboardManagerialService
-      .getDataConsultationsSubordinates()
-      .subscribe((data: any) => {
-        this.dataManagerial = data;
-        this.managerialDataShared.setDataManagerial({
-          objectInfo: this.dataManagerial,
-          modal: 'modalDataPermitions',
-        });
+    this.dasboardManagerialService.getDataConsultationsSubordinates().subscribe((data: any) => {
+      this.dataManagerial = data;
+      this.managerialDataShared.setDataManagerial({
+        objectInfo: this.dataManagerial,
+        modal: 'modalDataPermitions',
       });
+    });
   }
 
   detailIncapacities() {
     this.modalDataManagerial.emit('modalDataIncapacities');
-    this.dasboardManagerialService
-      .getDataIncapacitiesSubordinates()
-      .subscribe((data: any) => {
-        this.dataManagerial = data;
-        this.managerialDataShared.setDataManagerial({
-          objectInfo: this.dataManagerial,
-          modal: 'modalDataIncapacities',
-        });
+    this.dasboardManagerialService.getDataIncapacitiesSubordinates().subscribe((data: any) => {
+      this.dataManagerial = data;
+      this.managerialDataShared.setDataManagerial({
+        objectInfo: this.dataManagerial,
+        modal: 'modalDataIncapacities',
       });
+    });
   }
 
   sendDataButton() {

@@ -110,6 +110,11 @@ export class EditTravelComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.travel.edit_travel.${key}`;
   }
@@ -150,7 +155,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         data === 'closeAlertcontinueEditTravelRequests' ||
         data === 'closeAlertcontinueEditDestinationRequests'
       ) {
-        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:auto');
+        document.body.setAttribute('style', 'overflow-y:auto');
       }
       if (data === 'continueEditDestinationRequestsValidateDates') {
         this.activate = false;
@@ -550,11 +555,6 @@ export class EditTravelComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
   }
 
   addHourEnd(value) {

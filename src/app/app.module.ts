@@ -24,9 +24,11 @@ import { AppComponent } from './app.component';
 import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Observable, Subject } from 'rxjs';
+import merge from 'lodash/merge';
+import joyride from './joyride';
 
 import { baseUrl } from '../environments/environment';
-import { Observable, Subject } from 'rxjs';
 
 export class MyMissingTranslationHandler implements MissingTranslationHandler {
   handle({ key }: MissingTranslationHandlerParams) {
@@ -48,7 +50,10 @@ export class CustomLoader implements TranslateLoader {
     this.http
       .get(`${baseUrl()}/api/v2/${lang}/companies/tree_language`)
       .map((res: any) => {
-        const languaje = JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd;
+        const languaje = merge(
+          joyride[lang as keyof typeof joyride],
+          JSON.parse(res.data[0].data[0].language_json_file).app.frontEnd,
+        );
         console.log(languaje);
         localStorage.setItem(`languaje-${lang}`, JSON.stringify(languaje));
         return languaje;
@@ -82,7 +87,10 @@ export class CustomLoader implements TranslateLoader {
     HttpModule,
     NgbModule.forRoot(),
     TranslateModule.forRoot({
-      missingTranslationHandler: { provide: MissingTranslationHandler, useClass: MyMissingTranslationHandler },
+      missingTranslationHandler: {
+        provide: MissingTranslationHandler,
+        useClass: MyMissingTranslationHandler,
+      },
       loader: {
         provide: TranslateLoader,
         /* useFactory: HttpLoaderFactory, */

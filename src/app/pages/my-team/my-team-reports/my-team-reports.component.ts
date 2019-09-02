@@ -21,6 +21,11 @@ export class MyTeamReportsComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.my_team.my_team_reports.${key}`;
   }
@@ -56,11 +61,6 @@ export class MyTeamReportsComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();

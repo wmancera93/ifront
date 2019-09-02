@@ -22,6 +22,11 @@ export class AlertsComponent implements OnInit, OnDestroy {
   public cancelation: string;
   public count = 0;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.alerts.${key}`;
   }

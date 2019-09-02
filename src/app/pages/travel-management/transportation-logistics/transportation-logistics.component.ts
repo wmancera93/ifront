@@ -31,6 +31,11 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
     return (transport.actions || {})[position];
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.transportation_logistics.${key}`;
   }

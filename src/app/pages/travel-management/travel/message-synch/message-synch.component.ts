@@ -14,6 +14,11 @@ export class MessageSynchComponent implements OnInit {
   public objectPrintMessage: EventEmitter<any> = new EventEmitter();
   public nameReportMessage: string;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.travel_management.travel.message_synch.${key}`;
   }

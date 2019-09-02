@@ -14,6 +14,11 @@ export class ShowEvaluationComponent implements OnInit, OnDestroy {
   public receiveData: any = null;
   public countAfter = 0;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.evaluations.evaluated.show_evaluation.${key}`;
   }

@@ -18,6 +18,11 @@ export class HolidayLetterComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.auto_services.holiday_letter.${key}`;
   }
@@ -48,11 +53,6 @@ export class HolidayLetterComponent implements OnInit {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.autoServiceService.getHolidayLetter().subscribe((data: any) => {
       this.holidayLetter = data.data;
       if (this.holidayLetter.length === 0) {

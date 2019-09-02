@@ -10,6 +10,11 @@ export class CalendarDetailComponent implements OnInit {
   public detail_calendar: any[] = [];
   public state_modal = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.calendar_detail.${key}`;
   }

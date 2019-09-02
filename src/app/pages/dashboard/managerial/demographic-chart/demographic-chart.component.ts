@@ -27,6 +27,15 @@ export class DemographicChartComponent implements OnInit {
   public color?: typeof colorSets[0];
   public colorScheme: string = 'natural';
 
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
+  parseT(key) {
+    return `pages.dashboard.${key}`;
+  }
+
+
   constructor(
     public router: Router,
     public demographicChartsService: DemographicChartsService,

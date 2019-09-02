@@ -113,7 +113,7 @@ import { NewTransportComponent } from './travel-management/transportation-logist
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
-
+import { JoyrideModule } from 'ngx-joyride';
 
 @NgModule({
   imports: [
@@ -130,7 +130,8 @@ import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-b
     TagInputModule,
     FileUploadModule,
     PdfViewerModule,
-    NgxChartsModule
+    NgxChartsModule,
+    JoyrideModule.forChild(),
   ],
   declarations: [
     LoginComponent,
@@ -229,8 +230,8 @@ import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-b
     NewHousingComponent,
     HousingReportComponent,
     DemographicChartComponent,
-    RequestsRhBenefistComponent
+    RequestsRhBenefistComponent,
   ],
-  providers: [ReportTravelsService]
+  providers: [ReportTravelsService],
 })
 export class PagesModule {}

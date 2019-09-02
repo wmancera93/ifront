@@ -27,6 +27,11 @@ export class ConfirmResetAcountComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.authentication.confirm_reset_account.${key}`;
   }

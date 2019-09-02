@@ -15,6 +15,11 @@ export class TrainingComponent implements OnInit {
   public nameReport: string;
   token = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.events_management.training.${key}`;
   }

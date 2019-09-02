@@ -51,6 +51,11 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.reports_rh.permisions_users.${key}`;
   }
@@ -86,11 +91,6 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.subscriptions = [
       ...this.subscriptions,
       this.reportsHrService.getReportEmployeeRoles().subscribe((res: any) => {

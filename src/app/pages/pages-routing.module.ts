@@ -69,35 +69,40 @@ import { HousingComponent } from './travel-management/housing/housing.component'
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
+import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 
 const routes: Routes = [
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'reset_account',
-    component: ResetAccountComponent
+    component: ResetAccountComponent,
   },
   {
     path: 'locked_screen',
-    component: LockedScreenComponent
+    component: LockedScreenComponent,
   },
   {
     path: 'confirm_reset_account',
-    component: ConfirmResetAcountComponent
+    component: ConfirmResetAcountComponent,
   },
   {
     path: 'index',
-    component: DashboardComponent
+    component: DashboardComponent,
+  },
+  {
+    path: 'index_managerial',
+    component: ManagerialComponent,
   },
   {
     path: 'error',
-    component: ErrorPageComponent
+    component: ErrorPageComponent,
   },
   {
     path: 'my_team',
-    component: MyTeamComponent
+    component: MyTeamComponent,
   },
   {
     path: 'demographic_chart',
@@ -105,258 +110,259 @@ const routes: Routes = [
   },
   {
     path: 'my_team_reports',
-    component: MyTeamReportsComponent
+    component: MyTeamReportsComponent,
   },
   {
     path: 'disabilities',
-    component: DisabilitiesComponent
+    component: DisabilitiesComponent,
   },
   {
     path: 'hierarchical_chart',
-    component: HierarchicalChartComponent
+    component: HierarchicalChartComponent,
+    data: {},
   },
   {
     path: 'holiday_letter',
-    component: HolidayLetterComponent
+    component: HolidayLetterComponent,
   },
   {
     path: 'work_certificate',
-    component: LaborCertificatesComponent
+    component: LaborCertificatesComponent,
   },
   {
     path: 'payroll_receipts',
-    component: PayrollReceiptsComponent
+    component: PayrollReceiptsComponent,
   },
   {
     path: 'certificate_income_withholding',
-    component: CertificateIncomeWithholdingComponent
+    component: CertificateIncomeWithholdingComponent,
   },
   {
     path: 'income_withholdings',
-    component: IncomeWithholdingsComponent
+    component: IncomeWithholdingsComponent,
   },
   {
     path: 'compensated_vacations',
-    component: CompnsatedVacationsComponent
+    component: CompnsatedVacationsComponent,
   },
   {
     path: 'embargoes',
-    component: EmbargoesComponent
+    component: EmbargoesComponent,
   },
   {
     path: 'extra_hours',
-    component: ExtraHoursComponent
+    component: ExtraHoursComponent,
   },
   {
     path: 'loans',
-    component: LoansComponent
+    component: LoansComponent,
   },
   {
     path: 'payments_deductions',
-    component: PaymentsDeductionsComponent
+    component: PaymentsDeductionsComponent,
   },
   {
     path: 'permissions',
-    component: PermissionsComponent
+    component: PermissionsComponent,
   },
   {
     path: 'vacation_balance',
-    component: VacationBalanceComponent
+    component: VacationBalanceComponent,
   },
   {
     path: 'vacation_enjoyed',
-    component: VacationEnjoyedComponent
+    component: VacationEnjoyedComponent,
   },
   {
     path: 'aniversary',
-    component: AniversaryComponent
+    component: AniversaryComponent,
   },
   {
     path: 'severances',
-    component: SeverancesComponent
+    component: SeverancesComponent,
   },
   {
     path: 'reports_requests',
-    component: RequestsComponent
+    component: RequestsComponent,
   },
   {
     path: 'users_permisions',
-    component: PermisionsUsersComponent
+    component: PermisionsUsersComponent,
   },
   {
     path: 'my_publications',
-    component: MyPublicationsComponent
+    component: MyPublicationsComponent,
   },
   {
     path: 'news',
-    component: NewsComponent
+    component: NewsComponent,
   },
   {
     path: 'requests',
-    component: RequestsComponent
+    component: RequestsComponent,
   },
   {
     path: 'requests_rh',
-    component: RequestsRhComponent
+    component: RequestsRhComponent,
   },
   {
     path: 'requests_benefist',
-    component: RequestsRhBenefistComponent
+    component: RequestsRhBenefistComponent,
   },
   {
     path: 'corporate_documents',
-    component: CorporateDocumentsComponent
+    component: CorporateDocumentsComponent,
   },
   {
     path: 'pending_approvers',
-    component: PendingsComponent
+    component: PendingsComponent,
   },
   {
     path: 'managed_approvers',
-    component: ManagedComponent
+    component: ManagedComponent,
   },
   {
     path: 'master_data',
-    component: MasterDataComponent
+    component: MasterDataComponent,
+    data: {},
   },
   {
     path: 'help',
-    component: HelpComponent
+    component: HelpComponent,
   },
   {
     path: 'evaluated',
-    component: EvaluatedComponent
+    component: EvaluatedComponent,
   },
   {
     path: 'historical_posts',
-    component: HistoricalPostsComponent
+    component: HistoricalPostsComponent,
   },
   {
     path: 'requests-type',
-    component: RequestsApproversComponent
+    component: RequestsApproversComponent,
   },
   {
     path: 'iva_employee',
-    component: IvaEmployeeComponent
+    component: IvaEmployeeComponent,
   },
   {
     path: 'calendar_modal',
-    component: CalendarModalComponent
+    component: CalendarModalComponent,
   },
   {
     path: 'evaluation_objectives',
-    component: EvaluationObjectivesComponent
+    component: EvaluationObjectivesComponent,
   },
   {
     path: 'planning_evaluation',
-    component: PlanningEvaluationComponent
+    component: PlanningEvaluationComponent,
   },
 
   {
     path: 'time_evaluation',
-    component: TimeEvaluationComponent
+    component: TimeEvaluationComponent,
   },
   {
     path: 'hour_extras',
-    component: HourExtrasComponent
+    component: HourExtrasComponent,
   },
   {
     path: 'my_hour_extras',
-    component: MyHourExtrasComponent
+    component: MyHourExtrasComponent,
   },
   {
     path: 'travel_management',
-    component: TravelManagementComponent
+    component: TravelManagementComponent,
   },
   {
     path: 'travels',
-    component: TravelComponent
+    component: TravelComponent,
   },
   {
     path: 'travels/:idSpend/:idTravels',
-    component: TravelComponent
+    component: TravelComponent,
   },
   {
     path: 'hotels',
-    component: HotelsComponent
+    component: HotelsComponent,
   },
   {
     path: 'training',
-    component: TrainingComponent
+    component: TrainingComponent,
   },
   {
     path: 'report_training',
-    component: ReportTrainingComponent
+    component: ReportTrainingComponent,
   },
   {
     path: 'advances/:id',
-    component: AdvancesComponent
+    component: AdvancesComponent,
   },
   {
     path: 'advances',
-    component: AdvancesComponent
+    component: AdvancesComponent,
   },
   {
     path: 'spend/:id',
-    component: SpendComponent
+    component: SpendComponent,
   },
   {
     path: 'spend/:idTravels/:idSpend/:travel',
-    component: SpendComponent
+    component: SpendComponent,
   },
   {
     path: 'spend',
-    component: SpendComponent
+    component: SpendComponent,
   },
   {
     path: 'management_travel',
-    component: ManagedTravelComponent
+    component: ManagedTravelComponent,
   },
   {
     path: 'pending_travel',
-    component: PendingTravelComponent
+    component: PendingTravelComponent,
   },
   {
     path: 'travel_report',
-    component: TravelRequestsReportComponent
+    component: TravelRequestsReportComponent,
   },
   {
     path: 'advance_report',
-    component: TravelAdvanceReportComponent
+    component: TravelAdvanceReportComponent,
   },
   {
     path: 'allowance_report',
-    component: TravelAllowanceReportComponent
+    component: TravelAllowanceReportComponent,
   },
   {
     path: 'approver_report',
-    component: TravelApproverReportComponent
+    component: TravelApproverReportComponent,
   },
   {
     path: 'requests_approvers_logs',
-    component: RequestsApproversLogsComponent
+    component: RequestsApproversLogsComponent,
   },
   {
     path: 'housing',
-    component: HousingComponent
+    component: HousingComponent,
   },
   {
     path: 'logistics_transportations',
-    component: TransportationLogisticsComponent
+    component: TransportationLogisticsComponent,
   },
   {
     path: 'housing_reports',
-    component: HousingReportComponent
+    component: HousingReportComponent,
   },
   {
     path: 'fleet_reports',
-    component: TrasnportationReportComponent
-  }
-  
+    component: TrasnportationReportComponent,
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PagesRoutingModule {}

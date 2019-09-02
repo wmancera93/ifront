@@ -29,6 +29,11 @@ export class EditPlanningDateComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.performance_evaluation.planning_evaluation.edit_planning_date.${key}`;
   }

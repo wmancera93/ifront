@@ -12,6 +12,11 @@ import { TranslateService } from '@ngx-translate/core';
 export class ErrorPageComponent implements OnInit {
   public dataEnterprise: Enterprise;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.error_page.${key}`;
   }
@@ -23,11 +28,6 @@ export class ErrorPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     if (localStorage.getItem('enterprise') === null) {
       const url = window.location.href;
       let ambient;

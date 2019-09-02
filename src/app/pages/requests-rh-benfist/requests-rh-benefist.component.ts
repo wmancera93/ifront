@@ -42,6 +42,11 @@ export class RequestsRhBenefistComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.requests_rh.${key}`;
   }
@@ -67,7 +72,7 @@ export class RequestsRhBenefistComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
+          document.body.setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),
@@ -112,11 +117,6 @@ export class RequestsRhBenefistComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
 
     this.getObjectRequests();
 

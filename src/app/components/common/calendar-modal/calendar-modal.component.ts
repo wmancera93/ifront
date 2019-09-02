@@ -10,6 +10,11 @@ export class CalendarModalComponent implements OnInit {
   public dataEnterprise: Enterprise = null;
   public activeCalendar = false;
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `components.common.calendar_modal.${key}`;
   }

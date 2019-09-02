@@ -20,6 +20,11 @@ export class DisabilitiesComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
+
+  joyride(step: string) {
+    return `${this.parseT('joyride')}.${step}`;
+  }
+
   parseT(key) {
     return `pages.queries.disabilities.${key}`;
   }
@@ -31,11 +36,6 @@ export class DisabilitiesComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    window.scroll({
-      top: 1,
-      left: 0,
-      behavior: 'smooth',
-    });
     this.accionDataTableService.getActionDataTable().subscribe(data => {
       if (data === this.t('name_table_ts') && this.countAfter === 0) {
         this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
