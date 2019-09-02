@@ -9,7 +9,7 @@ import { FormlyBootstrapModule } from '@ngx-formly/bootstrap';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { TagInputModule } from 'ngx-chips';
 import { FileUploadModule } from 'ng2-file-upload';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { PieChartModule, GaugeModule, BarChartModule } from '@swimlane/ngx-charts';
 
 import { LoginComponent } from './authentication/login/login.component';
 import { ResetAccountComponent } from './authentication/reset-account/reset-account.component';
@@ -21,24 +21,11 @@ import { EmployeesComponent } from './dashboard/employees/employees.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
-import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
-// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
-import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
-import { EmbargoesComponent } from './queries/embargoes/embargoes.component';
-import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
-import { ExtraHoursComponent } from './queries/extra-hours/extra-hours.component';
-import { PaymentsDeductionsComponent } from './queries/payments-deductions/payments-deductions.component';
-import { PermissionsComponent } from './queries/permissions/permissions.component';
-import { LoansComponent } from './queries/loans/loans.component';
-import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-enjoyed.component';
-import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
-import { SeverancesComponent } from './queries/severances/severances.component';
-import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -58,8 +45,6 @@ import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component'
 import { FillEvaluationComponent } from './evaluations/evaluated/fill-evaluation/fill-evaluation.component';
 import { ShowEvaluationComponent } from './evaluations/evaluated/show-evaluation/show-evaluation.component';
 import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
-import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
-import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
 import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
@@ -111,9 +96,9 @@ import { TransportationLogisticsComponent } from './travel-management/transporta
 import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 import { JoyrideModule } from 'ngx-joyride';
+import { QueriesComponent } from './queries/queries/queries.component';
 
 @NgModule({
   imports: [
@@ -129,9 +114,10 @@ import { JoyrideModule } from 'ngx-joyride';
     CKEditorModule,
     TagInputModule,
     FileUploadModule,
-    PdfViewerModule,
-    NgxChartsModule,
     JoyrideModule.forChild(),
+    PieChartModule,
+    GaugeModule,
+    BarChartModule,
   ],
   declarations: [
     LoginComponent,
@@ -144,23 +130,11 @@ import { JoyrideModule } from 'ngx-joyride';
     ManagerialComponent,
     MyTeamComponent,
     MyTeamReportsComponent,
-    DisabilitiesComponent,
     HierarchicalChartComponent,
     LaborCertificatesComponent,
     CertificateIncomeWithholdingComponent,
     PayrollReceiptsComponent,
     HolidayLetterComponent,
-    IncomeWithholdingsComponent,
-    EmbargoesComponent,
-    CompnsatedVacationsComponent,
-    ExtraHoursComponent,
-    PaymentsDeductionsComponent,
-    PermissionsComponent,
-    LoansComponent,
-    VacationEnjoyedComponent,
-    VacationBalanceComponent,
-    SeverancesComponent,
-    AniversaryComponent,
     RequestsComponent,
     PermisionsUsersComponent,
     MyPublicationsComponent,
@@ -177,9 +151,7 @@ import { JoyrideModule } from 'ngx-joyride';
     EvaluatedComponent,
     FillEvaluationComponent,
     ShowEvaluationComponent,
-    HistoricalPostsComponent,
     RequestsApproversComponent,
-    IvaEmployeeComponent,
     TimeEvaluationComponent,
     EvaluationObjectivesComponent,
     MyHourExtrasComponent,
@@ -231,6 +203,7 @@ import { JoyrideModule } from 'ngx-joyride';
     HousingReportComponent,
     DemographicChartComponent,
     RequestsRhBenefistComponent,
+    QueriesComponent,
   ],
   providers: [ReportTravelsService],
 })

@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators';
 import { ISubscription } from 'rxjs/Subscription';
 
-declare var jsPDF: any;
 @Component({
   selector: 'app-requests',
   templateUrl: './requests.component.html',
@@ -50,7 +49,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -130,7 +128,6 @@ export class RequestsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
     debugger;
 
     setTimeout(() => {
@@ -253,53 +250,54 @@ export class RequestsComponent implements OnInit, OnDestroy {
       alineation = 'p';
       positionPage = 500;
     }
+    Promise.all([import('jspdf'), import('jspdf-autotable')]).then(([JsPDF]) => {
+      const doc = new JsPDF(alineation, 'pt') as any;
+      doc.page = 1;
 
-    const doc = new jsPDF(alineation, 'pt');
-    doc.page = 1;
+      const column = [];
 
-    const column = [];
+      this.columnsPdf.forEach((data: any) => {
+        if (data.title !== 'Acción') {
+          column.push(data);
+        }
+      });
 
-    this.columnsPdf.forEach((data: any) => {
-      if (data.title !== 'Acción') {
-        column.push(data);
-      }
+      const self = this;
+
+      doc.autoTable(column, this.recordsPrint, {
+        theme: 'striped',
+        styles: {
+          cellPadding: 5,
+          fontSize: 10,
+          font: 'helvetica',
+          fontStyle: 'normal',
+          overflow: 'hidden',
+          textColor: 20,
+          halign: 'left',
+          valign: 'middle',
+          columnWidth: 'auto',
+        },
+        headerStyles: {
+          fillColor: [91, 105, 110],
+          fontStyle: 'bold',
+          halign: 'center',
+          textColor: 250,
+        },
+        margin: { top: 110 },
+        addPageContent: function() {
+          doc.setFontSize(16);
+          doc.text(40, 60, title);
+          // doc.setFontSize(12)
+          // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
+          doc.setFontSize(12);
+          doc.text(40, 95, self.t('generate_ts') + dateNow);
+          doc.setFontSize(10);
+          doc.text(positionPage, 60, self.t('page') + doc.page);
+          doc.page++;
+        },
+      });
+      doc.save(title + '.pdf');
     });
-
-    const self = this;
-
-    doc.autoTable(column, this.recordsPrint, {
-      theme: 'striped',
-      styles: {
-        cellPadding: 5,
-        fontSize: 10,
-        font: 'helvetica',
-        fontStyle: 'normal',
-        overflow: 'hidden',
-        textColor: 20,
-        halign: 'left',
-        valign: 'middle',
-        columnWidth: 'auto',
-      },
-      headerStyles: {
-        fillColor: [91, 105, 110],
-        fontStyle: 'bold',
-        halign: 'center',
-        textColor: 250,
-      },
-      margin: { top: 110 },
-      addPageContent: function() {
-        doc.setFontSize(16);
-        doc.text(40, 60, title);
-        // doc.setFontSize(12)
-        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
-        doc.setFontSize(12);
-        doc.text(40, 95, self.t('generate_ts') + dateNow);
-        doc.setFontSize(10);
-        doc.text(positionPage, 60, self.t('page') + doc.page);
-        doc.page++;
-      },
-    });
-    doc.save(title + '.pdf');
   }
 
   excelExport() {

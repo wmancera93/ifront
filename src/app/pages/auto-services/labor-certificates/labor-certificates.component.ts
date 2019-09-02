@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-labor-certificates',
@@ -17,15 +19,16 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDFSecure: any;
   public flagEmpty: boolean;
   public idCertificate = 0;
+  private steps = ['step_1', 'step_2'];
 
   public certificated_qr = false;
   public block_certificate: boolean;
+  public joyrideSubscription: ISubscription;
 
   companyAuthenticated: any;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -40,7 +43,11 @@ export class LaborCertificatesComponent implements OnInit {
     public domSanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
+    private readonly joyrideAppService: JoyrideAppService,
   ) {
+    this.joyrideSubscription = this.joyrideAppService.onStartTour.subscribe(() => {
+      this.joyrideAppService.startTour({ steps: this.steps });
+    });
     this.companyAuthenticated = JSON.parse(localStorage.getItem('enterprise'));
     this.block_certificate = this.companyAuthenticated.show_verification_code_pdf;
 
@@ -53,9 +60,7 @@ export class LaborCertificatesComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );
@@ -71,9 +76,7 @@ export class LaborCertificatesComponent implements OnInit {
       } else {
         this.flagEmpty = false;
         this.urlPDF = this.laboralType[0].file.url;
-        this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(
-          this.urlPDF,
-        );
+        this.urlPDFSecure = this.domSanitizer.bypassSecurityTrustHtml(this.urlPDF);
       }
 
       if (data.success) {
@@ -94,8 +97,7 @@ export class LaborCertificatesComponent implements OnInit {
       .getElementById('listCertificates')
       .getElementsByClassName('active-report')[0]
       .classList.remove('active-report');
-    document.getElementById(idTag + 'certificate').className =
-      'nav-item navReport tabReport active-report';
+    document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
 
     if (idTag === 'qr') {
       this.certificated_qr = true;
@@ -107,14 +109,10 @@ export class LaborCertificatesComponent implements OnInit {
   }
 
   acceptCertificateQR() {
-    this.autoServiceService
-      .getLaboralCertificateQR(
-        this.laboralType[this.idCertificate].id.toString(),
-      )
-      .subscribe((data: any) => {
-        this.urlPDF = data.data.file.url;
-        this.certificated_qr = false;
-      });
+    this.autoServiceService.getLaboralCertificateQR(this.laboralType[this.idCertificate].id.toString()).subscribe((data: any) => {
+      this.urlPDF = data.data.file.url;
+      this.certificated_qr = false;
+    });
   }
 
   declineCertificateQR() {

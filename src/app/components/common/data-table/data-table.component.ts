@@ -1,14 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Enterprise } from '../../../models/general/enterprise';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
 import { ExcelService } from '../../../services/common/excel/excel.service';
 import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
-
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
-
-declare var jsPDF: any;
 
 export interface ColumnSetting {
   primaryKey: string;
@@ -50,7 +46,6 @@ export class DataTableComponent implements OnInit {
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -59,7 +54,14 @@ export class DataTableComponent implements OnInit {
     return `components.common.data_table.${key}`;
   }
 
-  constructor(public printDataTableService: PrintDataTableService, public excelService: ExcelService, public router: Router, private tokenService: Angular2TokenService, private accionDataTableService: DataDableSharedService, public stylesExplorerService: StylesExplorerService) {
+  constructor(
+    public printDataTableService: PrintDataTableService,
+    public excelService: ExcelService,
+    public router: Router,
+    private tokenService: Angular2TokenService,
+    private accionDataTableService: DataDableSharedService,
+    public stylesExplorerService: StylesExplorerService,
+  ) {
     this.tokenService.validateToken().subscribe(
       () => {
         this.token = false;
@@ -161,41 +163,42 @@ export class DataTableComponent implements OnInit {
       alineation = 'p';
       positionPage = 500;
     }
+    Promise.all([import('jspdf'), import('jspdf-autotable')]).then(([JsPDF]) => {
+      const doc = new JsPDF(alineation, 'pt') as any;
+      doc.page = 1;
 
-    const doc = new jsPDF(alineation, 'pt');
-    doc.page = 1;
-
-    doc.autoTable(this.columnsPdf, this.recordsPrint, {
-      theme: 'striped',
-      styles: {
-        cellPadding: 5,
-        fontSize: 10,
-        font: 'helvetica',
-        fontStyle: 'normal',
-        overflow: 'hidden',
-        textColor: 20,
-        halign: 'left',
-        valign: 'middle',
-        columnWidth: 'auto',
-      },
-      headerStyles: {
-        fillColor: [91, 105, 110],
-        fontStyle: 'bold',
-        halign: 'center',
-        textColor: 250,
-      },
-      margin: { top: 110 },
-      addPageContent: function() {
-        doc.setFontSize(16);
-        doc.text(40, 60, title);
-        doc.setFontSize(12);
-        doc.text(40, 95, 'Generado el ' + dateNow);
-        doc.setFontSize(10);
-        doc.text(positionPage, 60, 'pagina ' + doc.page);
-        doc.page++;
-      },
+      doc.autoTable(this.columnsPdf, this.recordsPrint, {
+        theme: 'striped',
+        styles: {
+          cellPadding: 5,
+          fontSize: 10,
+          font: 'helvetica',
+          fontStyle: 'normal',
+          overflow: 'hidden',
+          textColor: 20,
+          halign: 'left',
+          valign: 'middle',
+          columnWidth: 'auto',
+        },
+        headerStyles: {
+          fillColor: [91, 105, 110],
+          fontStyle: 'bold',
+          halign: 'center',
+          textColor: 250,
+        },
+        margin: { top: 110 },
+        addPageContent: function() {
+          doc.setFontSize(16);
+          doc.text(40, 60, title);
+          doc.setFontSize(12);
+          doc.text(40, 95, 'Generado el ' + dateNow);
+          doc.setFontSize(10);
+          doc.text(positionPage, 60, 'pagina ' + doc.page);
+          doc.page++;
+        },
+      });
+      doc.save(title + '.pdf');
     });
-    doc.save(title + '.pdf');
   }
 
   excelExport() {
