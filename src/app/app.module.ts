@@ -3,21 +3,19 @@ import { NgModule } from '@angular/core';
 import { PagesModule } from './pages/pages.module';
 import { ComponentsModule } from './components/components.module';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
-import { BrowserModule } from '@angular/platform-browser';
 import 'chart.piecelabel.js';
 import { AppRoutingModule } from './app-routing.module';
 import { ServicesModule } from './services/services.module';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule, Http } from '@angular/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   TranslateModule,
   TranslateLoader,
   MissingTranslationHandler,
   MissingTranslationHandlerParams,
 } from '@ngx-translate/core';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 // components
 import { AppComponent } from './app.component';
@@ -73,7 +71,6 @@ export class CustomLoader implements TranslateLoader {
   declarations: [AppComponent],
   imports: [
     CommonModule,
-    BrowserModule,
     BrowserAnimationsModule,
     PagesModule,
     ChartsModule,
@@ -83,7 +80,7 @@ export class CustomLoader implements TranslateLoader {
     FormsModule,
     HttpClientModule,
     HttpModule,
-    NgbModule.forRoot(),
+    NgbModalModule.forRoot(),
     TranslateModule.forRoot({
       missingTranslationHandler: {
         provide: MissingTranslationHandler,
@@ -96,7 +93,6 @@ export class CustomLoader implements TranslateLoader {
         deps: [HttpClient],
       },
     }),
-    NgxChartsModule,
   ],
   providers: [Angular2TokenService],
   bootstrap: [AppComponent],

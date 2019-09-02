@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ReportsHrService } from '../../../services/reports-rh/reports-hr.service';
 import { TablesPermisions } from '../../../models/common/tables/tables';
 import { PrintDataTableService } from '../../../services/shared/common/print-data-table/print-data-table.service';
@@ -15,8 +9,6 @@ import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
-
-declare var jsPDF: any;
 
 @Component({
   selector: 'app-permisions-users',
@@ -51,7 +43,6 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -79,9 +70,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document
-            .getElementsByTagName('body')[0]
-            .setAttribute('style', 'overflow-y:hidden');
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),
@@ -128,8 +117,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
       if (this.stylesExplorerService.validateBrowser()) {
         let dataEnterprise: Enterprise;
         dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-        document.getElementById('with_permits').style.backgroundColor =
-          dataEnterprise.primary_color;
+        document.getElementById('with_permits').style.backgroundColor = dataEnterprise.primary_color;
       }
     }, 600);
 
@@ -139,69 +127,53 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   }
 
   filter(parameter: string) {
-    this.reportsHrService
-      .getReportEmployeeRolesByStatus(parameter)
-      .subscribe((res: any) => {
-        if (res.success) {
-          const { title_table, labels, data } = res.data[0];
-          this.permisionsUsers = [];
-          this.title = '';
-          this.labelsCell = [];
-          this.recordsPrint = [];
-          this.recordsStatic = [];
-          this.labels = [];
-          this.columnsPdf = [];
-          this.permisionsUsers = data.data;
-          this.title = title_table ? title_table : this.t('tittle');
-          this.labelsCell = labels[0];
-          this.recordsPrint = data;
-          this.recordsStatic = this.recordsPrint;
-          this.keys = Object.keys(this.labelsCell);
-          this.keys.forEach(element => {
-            const label = labels[0][element];
-            this.labels.push({
-              value: label.value,
-              type: label.type,
-              label: element,
-            });
-            this.columnsPdf.push({
-              title: label.value,
-              dataKey: element,
-            });
+    this.reportsHrService.getReportEmployeeRolesByStatus(parameter).subscribe((res: any) => {
+      if (res.success) {
+        const { title_table, labels, data } = res.data[0];
+        this.permisionsUsers = [];
+        this.title = '';
+        this.labelsCell = [];
+        this.recordsPrint = [];
+        this.recordsStatic = [];
+        this.labels = [];
+        this.columnsPdf = [];
+        this.permisionsUsers = data.data;
+        this.title = title_table ? title_table : this.t('tittle');
+        this.labelsCell = labels[0];
+        this.recordsPrint = data;
+        this.recordsStatic = this.recordsPrint;
+        this.keys = Object.keys(this.labelsCell);
+        this.keys.forEach(element => {
+          const label = labels[0][element];
+          this.labels.push({
+            value: label.value,
+            type: label.type,
+            label: element,
           });
-          if (this.stylesExplorerService.validateBrowser()) {
-            let dataEnterprise: Enterprise;
-            document
-              .getElementById(this.filter_active)
-              .classList.remove('filters-reports-active');
-            dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
-            [
-              'with_permits',
-              'new_cont',
-              'see_organ',
-              'without_permits',
-              'see_rpgen',
-              'is_admin',
-            ].forEach(ele => {
-              document.getElementById(ele).removeAttribute('style');
-            });
-            document.getElementById(parameter).style.backgroundColor =
-              dataEnterprise.primary_color;
-            document.getElementById(parameter).style.fontSize = '15px';
-            document.getElementById(parameter).style.color = '#fff';
-          } else {
-            document
-              .getElementById(this.filter_active)
-              .classList.remove('filters-reports-active');
-            document.getElementById(this.filter_active).className =
-              'filters-reports cursor-general';
-            document.getElementById(parameter).className =
-              'filters-reports-active';
-          }
-
-          this.filter_active = parameter;
+          this.columnsPdf.push({
+            title: label.value,
+            dataKey: element,
+          });
+        });
+        if (this.stylesExplorerService.validateBrowser()) {
+          let dataEnterprise: Enterprise;
+          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+          dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+          ['with_permits', 'new_cont', 'see_organ', 'without_permits', 'see_rpgen', 'is_admin'].forEach(ele => {
+            document.getElementById(ele).removeAttribute('style');
+          });
+          document.getElementById(parameter).style.backgroundColor = dataEnterprise.primary_color;
+          document.getElementById(parameter).style.fontSize = '15px';
+          document.getElementById(parameter).style.color = '#fff';
+        } else {
+          document.getElementById(this.filter_active).classList.remove('filters-reports-active');
+          document.getElementById(this.filter_active).className = 'filters-reports cursor-general';
+          document.getElementById(parameter).className = 'filters-reports-active';
         }
-      });
+
+        this.filter_active = parameter;
+      }
+    });
   }
 
   collapse(is_collapse: boolean) {
@@ -245,42 +217,44 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     }
 
     const dateNow = ddNew + '/' + mmNew + '/' + yyyy;
-    const doc = new jsPDF('p', 'pt');
-    doc.page = 1;
-    doc.autoTable(this.columnsPdf, this.recordsPrint, {
-      theme: 'striped',
-      styles: {
-        cellPadding: 5,
-        fontSize: 10,
-        font: 'helvetica',
-        fontStyle: 'normal',
-        overflow: 'hidden',
-        textColor: 20,
-        halign: 'left',
-        valign: 'middle',
-        columnWidth: 'auto',
-      },
-      headerStyles: {
-        fillColor: [91, 105, 110],
-        fontStyle: 'bold',
-        halign: 'center',
-        textColor: 250,
-      },
-      margin: { top: 110 },
-      addPageContent: function() {
-        doc.setFontSize(16);
-        doc.text(40, 60, title);
-        // doc.setFontSize(12)
-        // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
-        doc.setFontSize(12);
-        doc.text(40, 95, 'Generado el ' + dateNow);
-        doc.setFontSize(10);
-        doc.text(500, 60, 'pagina ' + doc.page);
-        doc.page++;
-      },
-    });
+    Promise.all([import('jspdf'), import('jspdf-autotable')]).then(([JsPDF]) => {
+      const doc = new JsPDF('p', 'pt') as any;
+      doc.page = 1;
+      doc.autoTable(this.columnsPdf, this.recordsPrint, {
+        theme: 'striped',
+        styles: {
+          cellPadding: 5,
+          fontSize: 10,
+          font: 'helvetica',
+          fontStyle: 'normal',
+          overflow: 'hidden',
+          textColor: 20,
+          halign: 'left',
+          valign: 'middle',
+          columnWidth: 'auto',
+        },
+        headerStyles: {
+          fillColor: [91, 105, 110],
+          fontStyle: 'bold',
+          halign: 'center',
+          textColor: 250,
+        },
+        margin: { top: 110 },
+        addPageContent: function() {
+          doc.setFontSize(16);
+          doc.text(40, 60, title);
+          // doc.setFontSize(12)
+          // doc.text(40, 80, 'Empleado: Laura Andrea Beltran')
+          doc.setFontSize(12);
+          doc.text(40, 95, 'Generado el ' + dateNow);
+          doc.setFontSize(10);
+          doc.text(500, 60, 'pagina ' + doc.page);
+          doc.page++;
+        },
+      });
 
-    doc.save(title + '.pdf');
+      doc.save(title + '.pdf');
+    });
   }
 
   excelExport() {
