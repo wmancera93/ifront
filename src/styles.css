@@ -247,8 +247,7 @@ thead {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif !important;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
   background-color: #2f4050 !important;
   font-size: 13px !important;
   color: #676a6c !important;
@@ -315,8 +314,7 @@ a {
 
 .dropdown-menu {
   /* padding: 0 0 !important; */
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12) !important;
   border-radius: 2px !important;
 }
 
@@ -348,8 +346,7 @@ a {
 
 .search-results {
   padding: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   border-radius: 2px;
 }
@@ -567,11 +564,7 @@ app-login header {
 }
 
 .errorImg {
-  background-image: linear-gradient(
-      rgba(28, 27, 31, 0.9),
-      rgba(53, 48, 48, 0.9)
-    ),
-    var(--img-header-login) !important;
+  background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -740,8 +733,7 @@ app-login header {
 .widget-travel {
   border-radius: 2px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -1486,8 +1478,7 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -1771,8 +1762,7 @@ nav {
   border-radius: 2px;
   padding: 14px 20px;
   transition: all 0.5s ease-in-out;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   background-color: #eee;
   color: gray;
 }
@@ -1786,8 +1776,7 @@ nav {
   color: #ffffff !important;
   border-radius: 2px;
   padding: 14px 20px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
   color: var(--btn-primary-hover);
   background-color: var(--btn-primary);
@@ -1806,8 +1795,7 @@ nav {
   padding: 14px 20px;
   margin-bottom: 10px;
   margin-top: 10px;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
-    0 2px 1px -1px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12);
   transition: all 0.5s ease-in-out;
 }
 
@@ -3057,11 +3045,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1024px !important;
@@ -3199,11 +3183,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1366px !important;
@@ -3358,11 +3338,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 768px !important;
@@ -3489,11 +3465,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 1035px !important;
@@ -3748,11 +3720,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 415px !important;
@@ -3913,11 +3881,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 900px !important;
@@ -4134,11 +4098,7 @@ a.close-canvas-menu:hover {
   }
 
   .errorImg {
-    background-image: linear-gradient(
-        rgba(28, 27, 31, 0.9),
-        rgba(53, 48, 48, 0.9)
-      ),
-      var(--img-header-login) !important;
+    background-image: linear-gradient(rgba(28, 27, 31, 0.9), rgba(53, 48, 48, 0.9)), var(--img-header-login) !important;
     background-repeat: no-repeat;
     background-position: center !important;
     height: 750px !important;
@@ -4423,8 +4383,7 @@ a.close-canvas-menu:hover {
 @font-face {
   font-family: 'icomoon';
   src: url('./assets/demographic/icomoon.eot?s4gef4');
-  src: url('./assets/demographic/icomoon.eot?s4gef4#iefix')
-      format('embedded-opentype'),
+  src: url('./assets/demographic/icomoon.eot?s4gef4#iefix') format('embedded-opentype'),
     url('./assets/demographic/icomoon.ttf?s4gef4') format('truetype'),
     url('./assets/demographic/icomoon.woff?s4gef4') format('woff'),
     url('./assets/demographic/icomoon.svg?s4gef4#icomoon') format('svg');
@@ -4476,4 +4435,37 @@ a.close-canvas-menu:hover {
 
 .backdrop-container {
   z-index: 1100 !important;
+  pointer-events: none;
+}
+
+.backdrop-target {
+  pointer-events: none;
+}
+
+.backdrop-middle-content {
+  pointer-events: none;
+}
+
+.joyride-backdrop.backdrop-left {
+  pointer-events: all;
+}
+
+.joyride-backdrop.backdrop-right {
+  pointer-events: all;
+}
+
+.backdrop-middle-container {
+  pointer-events: none;
+}
+
+.backdrop-content {
+  pointer-events: none;
+}
+
+.joyride-backdrop.backdrop-top {
+  pointer-events: all;
+}
+
+.joyride-backdrop.backdrop-bottom {
+  pointer-events: all;
 }
