@@ -12,24 +12,11 @@ import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acou
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
-import { DisabilitiesComponent } from './queries/disabilities/disabilities.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
 import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
 import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
 import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
-// tslint:disable-next-line:max-line-length
 import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
-import { IncomeWithholdingsComponent } from './queries/income-withholdings/income-withholdings.component';
-import { CompnsatedVacationsComponent } from './queries/compnsated-vacations/compnsated-vacations.component';
-import { EmbargoesComponent } from './queries/embargoes/embargoes.component';
-import { ExtraHoursComponent } from './queries/extra-hours/extra-hours.component';
-import { LoansComponent } from './queries/loans/loans.component';
-import { PaymentsDeductionsComponent } from './queries/payments-deductions/payments-deductions.component';
-import { PermissionsComponent } from './queries/permissions/permissions.component';
-import { SeverancesComponent } from './queries/severances/severances.component';
-import { VacationBalanceComponent } from './queries/vacation-balance/vacation-balance.component';
-import { VacationEnjoyedComponent } from './queries/vacation-enjoyed/vacation-enjoyed.component';
-import { AniversaryComponent } from './queries/aniversary/aniversary.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
@@ -42,8 +29,6 @@ import { MasterDataComponent } from './master-data/master-data.component';
 import { HelpComponent } from './help/help.component';
 import { EvaluatedComponent } from './evaluations/evaluated/evaluated.component';
 import { RequestsApproversComponent } from './reports-rh/requests-approvers/requests-approvers.component';
-import { HistoricalPostsComponent } from './queries/historical-posts/historical-posts.component';
-import { IvaEmployeeComponent } from './queries/iva-employee/iva-employee.component';
 import { CalendarModalComponent } from '../components/common/calendar-modal/calendar-modal.component';
 import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluation.component';
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
@@ -69,6 +54,7 @@ import { HousingComponent } from './travel-management/housing/housing.component'
 import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
+import { QueriesComponent } from './queries/queries/queries.component';
 
 const routes: Routes = [
   {
@@ -108,13 +94,8 @@ const routes: Routes = [
     component: MyTeamReportsComponent,
   },
   {
-    path: 'disabilities',
-    component: DisabilitiesComponent,
-  },
-  {
     path: 'hierarchical_chart',
     component: HierarchicalChartComponent,
-    data: {},
   },
   {
     path: 'holiday_letter',
@@ -133,48 +114,27 @@ const routes: Routes = [
     component: CertificateIncomeWithholdingComponent,
   },
   {
-    path: 'income_withholdings',
-    component: IncomeWithholdingsComponent,
-  },
-  {
-    path: 'compensated_vacations',
-    component: CompnsatedVacationsComponent,
-  },
-  {
-    path: 'embargoes',
-    component: EmbargoesComponent,
-  },
-  {
-    path: 'extra_hours',
-    component: ExtraHoursComponent,
-  },
-  {
-    path: 'loans',
-    component: LoansComponent,
-  },
-  {
-    path: 'payments_deductions',
-    component: PaymentsDeductionsComponent,
-  },
-  {
-    path: 'permissions',
-    component: PermissionsComponent,
-  },
-  {
-    path: 'vacation_balance',
-    component: VacationBalanceComponent,
-  },
-  {
-    path: 'vacation_enjoyed',
-    component: VacationEnjoyedComponent,
-  },
-  {
-    path: 'aniversary',
-    component: AniversaryComponent,
-  },
-  {
-    path: 'severances',
-    component: SeverancesComponent,
+    path: '',
+    component: QueriesComponent,
+    children: [
+      'income_withholdings',
+      'payments_deductions',
+      'severances',
+      'embargoes',
+      'loans',
+      'vacation_enjoyed',
+      'compensated_vacations',
+      'vacation_balance',
+      'permissions',
+      'disabilities',
+      'extra_hours',
+      'historical_posts',
+      'iva_employee',
+      'aniversary',
+    ].map(path => ({
+      path,
+      component: QueriesComponent,
+    })),
   },
   {
     path: 'reports_requests',
@@ -219,7 +179,6 @@ const routes: Routes = [
   {
     path: 'master_data',
     component: MasterDataComponent,
-    data: {},
   },
   {
     path: 'help',
@@ -230,16 +189,8 @@ const routes: Routes = [
     component: EvaluatedComponent,
   },
   {
-    path: 'historical_posts',
-    component: HistoricalPostsComponent,
-  },
-  {
     path: 'requests-type',
     component: RequestsApproversComponent,
-  },
-  {
-    path: 'iva_employee',
-    component: IvaEmployeeComponent,
   },
   {
     path: 'calendar_modal',
@@ -253,7 +204,6 @@ const routes: Routes = [
     path: 'planning_evaluation',
     component: PlanningEvaluationComponent,
   },
-
   {
     path: 'time_evaluation',
     component: TimeEvaluationComponent,
