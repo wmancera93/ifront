@@ -1,7 +1,5 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -17,14 +15,8 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div
-        class="row justify-content-center top-containter"
-        *ngIf="flagEmpty"
-      >
-        <div
-          class="col-lg-8 col-12 text-center"
-          style="min-height: 370px;"
-        >
+      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
             {{ parseT('message_one') | translate }}
             <strong>{{ parseT('message_two') | translate }}</strong
@@ -33,12 +25,13 @@
         </div>
       </div>
       <div class="row" *ngIf="!flagEmpty">
-        <div class="col-3">
-          <div
-            id="listCertificates"
-            class="nav nav-tabs navtab-vertical navtab-left cursor-general"
-            role="navigation"
-          >
+        <div
+          class="col-3"
+          joyrideStep="step_1"
+          [title]="joyride('step_1.title') | translate"
+          [text]="joyride('step_1.text') | translate"
+        >
+          <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
             <div
               id="{{ i }}certificate"
               class="nav-item navReport tabReport"
@@ -51,7 +44,12 @@
             </div>
           </div>
         </div>
-        <div class="col-9">
+        <div
+          class="col-9"
+          joyrideStep="step_2"
+          [title]="joyride('step_2.title') | translate"
+          [text]="joyride('step_2.text') | translate"
+        >
           <iframe
             id="frameAutoService"
             [src]="sanitizer.bypassSecurityTrustResourceUrl(urlPDF)"

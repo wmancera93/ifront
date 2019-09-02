@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-certificate-income-withholding',
@@ -14,10 +16,11 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   public incomingCertificate: Certificate[] = [];
   public urlPDF = '';
   public flagEmpty: boolean;
+  private steps = ['step_1', 'step_2'];
+  public joyrideSubscription: ISubscription;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -32,7 +35,11 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
     public sanitizer: DomSanitizer,
     public tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
+    public joyrideAppService: JoyrideAppService,
   ) {
+    this.joyrideSubscription = this.joyrideAppService.onStartTour.subscribe(() => {
+      this.joyrideAppService.startTour({ steps: this.steps });
+    });
     this.tokenService.validateToken().subscribe(
       () => {
         this.token = false;
@@ -42,9 +49,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );
@@ -78,8 +83,11 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
       .getElementById('listCertificates')
       .getElementsByClassName('active-report')[0]
       .classList.remove('active-report');
-    document.getElementById(idTag + 'certificate').className =
-      'nav-item navReport tabReport active-report';
+    document.getElementById(idTag + 'certificate').className = 'nav-item navReport tabReport active-report';
     this.urlPDF = select.file.url;
+  }
+
+  ngOnDestroy(): void {
+    this.joyrideSubscription.unsubscribe();
   }
 }
