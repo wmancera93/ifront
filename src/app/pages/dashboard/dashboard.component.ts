@@ -43,7 +43,17 @@ export class DashboardComponent implements OnInit {
     'step_6',
     'step_7',
     'step_8',
+    'step_9',
+    'step_10',
+    'step_11',
+    'step_12',
+    'step_13',
+    'step_14',
+    'step_15',
+    'step_16',
+    'step_17@ihr/index_managerial',
   ];
+
   public joyrideSubscription: ISubscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -141,8 +151,10 @@ export class DashboardComponent implements OnInit {
 
     let routerSuscribe: Subscription;
     this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
-      joyrideAppService.startTour({ steps: this.steps, stepDefaultPosition: 'step_15' }).subscribe(({ name, actionType }) => {
-        /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
+      joyrideAppService
+        .startTour({ steps: this.steps, startWith: 'step_' + this.roleEmployee ? '1' : '9' })
+        .subscribe(({ name, actionType }) => {
+          /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
           setTimeout(() => {
             this.vieweDashboardManager();
             this.prendido.nativeElement.checked = false;
@@ -151,7 +163,7 @@ export class DashboardComponent implements OnInit {
             routerSuscribe = undefined;
           }, 2000);
         } */
-      });
+        });
     });
   }
 
