@@ -40,6 +40,18 @@ export class ManagerialComponent implements OnInit {
   public dataManagerial: any;
   public activeButton = true;
   public dataEnterprise = JSON.parse(localStorage.getItem('enterprise'));
+  public steps = [
+    'step_9',
+    'step_10',
+    'step_11',
+    'step_12',
+    'step_13',
+    'step_14',
+    'step_15',
+    'step_16',
+    'step_17@ihr/index_managerial',
+  ];
+
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;

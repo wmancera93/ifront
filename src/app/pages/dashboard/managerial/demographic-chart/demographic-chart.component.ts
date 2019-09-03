@@ -27,6 +27,7 @@ export class DemographicChartComponent implements OnInit {
   public color?: typeof colorSets[0];
   public colorScheme: string = 'natural';
 
+  public steps = ['step_18@ihr/demographic_chart', 'step_19', 'step_20', 'step_21', 'step_22', 'step_23', 'step_24'];
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -34,7 +35,6 @@ export class DemographicChartComponent implements OnInit {
   parseT(key) {
     return `pages.dashboard.${key}`;
   }
-
 
   constructor(
     public router: Router,
