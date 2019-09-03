@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { JoyrideModule } from 'ngx-joyride';
+import { JoyrideModule } from './utils/joyride/joyride.module';
 
 const appRoutes: Routes = [
   {

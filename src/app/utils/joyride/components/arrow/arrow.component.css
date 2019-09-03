@@ -1,0 +1,20 @@
+.joyride-arrow__top {
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-bottom: 11px solid #fff;
+}
+.joyride-arrow__bottom {
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 11px solid #fff;
+}
+.joyride-arrow__right {
+  border-left: 11px solid #fff;
+  border-bottom: 11px solid transparent;
+  border-top: 11px solid transparent;
+}
+.joyride-arrow__left {
+  border-right: 11px solid #fff;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+}

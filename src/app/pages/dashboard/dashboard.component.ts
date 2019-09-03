@@ -4,13 +4,14 @@ import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { Toast } from 'angular2-toaster';
-import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators/filter';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '@ngx-translate/core';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
 import { ElementRef } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
@@ -43,7 +44,7 @@ export class DashboardComponent implements OnInit {
     'step_7',
     'step_8',
   ];
-  public joyrideSubscription: Subscription;
+  public joyrideSubscription: ISubscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 

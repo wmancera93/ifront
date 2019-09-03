@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Subject } from '../../../../../node_modules/rxjs';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class HotelsSharedService {
   newHotel: Subject<any> = new Subject<any>();
   getHotels: Subject<any> = new Subject<any>();
-
-  constructor() { }
 
   getNewHotel() {
     return this.newHotel;

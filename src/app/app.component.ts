@@ -10,8 +10,8 @@ import { UserSharedService } from './services/shared/common/user/user-shared.ser
 import { environment } from '../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { JoyrideService, JoyrideStepService } from 'ngx-joyride';
-import { Subscription } from 'rxjs';
+import { JoyrideService, JoyrideStepService } from './utils/joyride';
+import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from './services/joyride-app/joyride-app.service';
 
 @Component({
@@ -28,8 +28,8 @@ export class AppComponent implements OnDestroy {
   public isExplorer: boolean;
   public changesLang: number = 0;
   public canUseKeysJoride: boolean = true;
-  public joyrideSuscriptions: Subscription[] = [];
-  public tourDone?: Subscription;
+  public joyrideSuscriptions: ISubscription[] = [];
+  public tourDone?: ISubscription;
 
   public baseUrl: string;
 

@@ -9,7 +9,7 @@ import { Router, RoutesRecognized } from '@angular/router';
 import { AproversRequestsService } from '../../../services/shared/common/aprovers-requestes/aprovers-requests.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
-import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators/filter';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Component({

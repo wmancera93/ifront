@@ -10,7 +10,7 @@ import { Enterprise } from '../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
-import { JoyrideService } from 'ngx-joyride';
+import { JoyrideService } from '../../utils/joyride';
 
 @Component({
   selector: 'app-master-data',
