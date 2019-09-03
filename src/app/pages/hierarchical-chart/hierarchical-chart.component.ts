@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  HostListener,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, HostListener, ElementRef, OnDestroy } from '@angular/core';
 import { MyPosition, Work_team } from '../../models/common/work_team/work_team';
 import { HierarchicalChartService } from '../../services/hierarchical-chart/hierarchical-chart.service';
 import { User, Employee } from '../../models/general/user';
@@ -17,7 +9,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
-import { Subscription } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-hierarchical-chart',
@@ -56,7 +48,7 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
   public text: string;
   public token: boolean;
   public pageValue: any = 0;
-  public joyrideSubscription: Subscription;
+  public joyrideSubscription: ISubscription;
   steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -93,9 +85,7 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
     );
@@ -128,33 +118,28 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
   }
 
   getHierarchical() {
-    this.workTeamService
-      .getMyWorkTeam(this.id_empleado, this.page)
-      .subscribe((data: any) => {
-        this.topEmployee = data.data;
-        this.beforeTopEmployee = this.topEmployee;
-        this.showListAutoC = false;
-        if (
-          this.topEmployee.work_team[0].total_work_team > 5 ||
-          this.topEmployee.work_team.length > 5
-        ) {
-          this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
-          this.roundTotalPages =
-            parseFloat(this.totalPages.toFixed(0)) < this.totalPages
-              ? parseFloat(this.totalPages.toFixed(0)) + 1
-              : parseFloat(this.totalPages.toFixed(0));
+    this.workTeamService.getMyWorkTeam(this.id_empleado, this.page).subscribe((data: any) => {
+      this.topEmployee = data.data;
+      this.beforeTopEmployee = this.topEmployee;
+      this.showListAutoC = false;
+      if (this.topEmployee.work_team[0].total_work_team > 5 || this.topEmployee.work_team.length > 5) {
+        this.totalPages = this.topEmployee.work_team[0].total_work_team / 5;
+        this.roundTotalPages =
+          parseFloat(this.totalPages.toFixed(0)) < this.totalPages
+            ? parseFloat(this.totalPages.toFixed(0)) + 1
+            : parseFloat(this.totalPages.toFixed(0));
 
-          if (this.page >= this.roundTotalPages) {
-            this.activeArrowRight = false;
-          } else {
-            this.activeArrowRight = true;
-          }
-
-          this.beforeTopEmployeeWorkTeam = this.topEmployee.work_team[0].work_team;
-        } else {
+        if (this.page >= this.roundTotalPages) {
           this.activeArrowRight = false;
+        } else {
+          this.activeArrowRight = true;
         }
-      });
+
+        this.beforeTopEmployeeWorkTeam = this.topEmployee.work_team[0].work_team;
+      } else {
+        this.activeArrowRight = false;
+      }
+    });
   }
 
   getDataLocalStorage() {
@@ -186,18 +171,12 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
   goToNextPage() {
     this.activeArrowLeft = true;
     if (this.page < this.roundTotalPages) {
-      this.workTeamService
-        .getMyWorkTeam(this.id_empleado, this.page + 1)
-        .subscribe((result: any) => {
-          if (result.success === true) {
-            this.topEmployee.work_team[0].work_team =
-              result.data.work_team[0].work_team;
-          }
-        });
-      if (
-        this.topEmployee.work_team[0].work_team[0].page + 1 >=
-        this.roundTotalPages
-      ) {
+      this.workTeamService.getMyWorkTeam(this.id_empleado, this.page + 1).subscribe((result: any) => {
+        if (result.success === true) {
+          this.topEmployee.work_team[0].work_team = result.data.work_team[0].work_team;
+        }
+      });
+      if (this.topEmployee.work_team[0].work_team[0].page + 1 >= this.roundTotalPages) {
         this.activeArrowRight = false;
       }
 
@@ -209,14 +188,11 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
 
   goToPreviousPage() {
     if (this.roundTotalPages >= this.page) {
-      this.workTeamService
-        .getMyWorkTeam(this.id_empleado, this.page - 1)
-        .subscribe((result: any) => {
-          if (result.success === true) {
-            this.topEmployee.work_team[0].work_team =
-              result.data.work_team[0].work_team;
-          }
-        });
+      this.workTeamService.getMyWorkTeam(this.id_empleado, this.page - 1).subscribe((result: any) => {
+        if (result.success === true) {
+          this.topEmployee.work_team[0].work_team = result.data.work_team[0].work_team;
+        }
+      });
 
       this.page--;
       if (this.page === 1) {
@@ -224,10 +200,7 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
         this.activateSearch = true;
       }
 
-      if (
-        this.topEmployee.work_team[0].work_team[0].page - 1 <
-        this.roundTotalPages
-      ) {
+      if (this.topEmployee.work_team[0].work_team[0].page - 1 < this.roundTotalPages) {
         this.activeArrowRight = true;
       }
     }
@@ -240,12 +213,10 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
       this.goToStorageEmployee();
     }
     if (this.nameEmployee !== null) {
-      this.workTeamService
-        .getSearchWorkTeam(this.nameEmployee)
-        .subscribe((data: any) => {
-          this.searchEmployee = data.data;
-          this.showListAutoC = true;
-        });
+      this.workTeamService.getSearchWorkTeam(this.nameEmployee).subscribe((data: any) => {
+        this.searchEmployee = data.data;
+        this.showListAutoC = true;
+      });
     }
   }
 
@@ -273,18 +244,16 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
   }
   showInfoEmployee(employeeObject: MyPosition) {
     this.id_shared = employeeObject.id.toString();
-    this.employeeService
-      .getEmployeeById(this.id_shared)
-      .subscribe((data: any) => {
-        if (data.success == true) {
-          this.infoEmployee = data.data;
-          this.infoEmployee.modal = 'hierarchical';
-          this.name.emit('hierarchical');
-          setTimeout(() => {
-            this.employeeSharedService.setInfoEmployee(this.infoEmployee);
-          }, 500);
-        }
-      });
+    this.employeeService.getEmployeeById(this.id_shared).subscribe((data: any) => {
+      if (data.success == true) {
+        this.infoEmployee = data.data;
+        this.infoEmployee.modal = 'hierarchical';
+        this.name.emit('hierarchical');
+        setTimeout(() => {
+          this.employeeSharedService.setInfoEmployee(this.infoEmployee);
+        }, 500);
+      }
+    });
   }
 
   ngOnDestroy(): void {

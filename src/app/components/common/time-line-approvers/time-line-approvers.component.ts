@@ -3,7 +3,7 @@ import { AproversRequestsService } from '../../../services/shared/common/aprover
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
-import { Subscription } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -20,7 +20,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public is_edu: boolean = false;
   public is_logistic: boolean = false;
   public is_vtd: boolean = false;
-  public subscriptions: Subscription[] = [];
+  public subscriptions: ISubscription[] = [];
 
   get detailRequest() {
     return this.dataRequets.details_request;
@@ -31,7 +31,6 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;

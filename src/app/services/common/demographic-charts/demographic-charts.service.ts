@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 interface BaseData {
   name: string;

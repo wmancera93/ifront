@@ -22,7 +22,8 @@ import { AppComponent } from './app.component';
 import { Angular2TokenService } from 'angular2-token';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
 import merge from 'lodash/merge';
 import joyride from './joyride';
 

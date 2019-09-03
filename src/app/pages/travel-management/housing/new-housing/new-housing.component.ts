@@ -7,7 +7,7 @@ import { AlertsService } from '../../../../services/shared/common/alerts/alerts.
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { HousingService } from '../../../../services/travel-management/housing/housing.service';
 import { HousingForm } from '../../../../models/common/travels_management/housing/housing';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Alerts } from '../../../../models/common/alerts/alerts';
 import { T } from '@angular/core/src/render3';
 

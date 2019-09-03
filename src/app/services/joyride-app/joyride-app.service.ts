@@ -3,14 +3,14 @@ import { JoyrideStepService, JoyrideService } from 'ngx-joyride';
 import { TranslateService } from '@ngx-translate/core';
 import { JoyrideOptions } from 'ngx-joyride/src/models/joyride-options.class';
 import { JoyrideStepInfo } from 'ngx-joyride/src/models/joyride-step-info.class';
-import { Subscription } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Injectable()
 export class JoyrideAppService implements OnDestroy {
   public onStartTour: EventEmitter<void> = new EventEmitter();
   public onChangeStep: EventEmitter<JoyrideStepInfo> = new EventEmitter();
-  public joyrideSuscriptions: Subscription[] = [];
-  public tourDone?: Subscription;
+  public joyrideSuscriptions: ISubscription[] = [];
+  public tourDone?: ISubscription;
   public canUseKeysJoride: boolean = true;
   private isFirstTime: boolean = true;
 

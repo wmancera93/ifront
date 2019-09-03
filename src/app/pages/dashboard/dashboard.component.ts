@@ -1,22 +1,16 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Router, RoutesRecognized } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { Toast } from 'angular2-toaster';
-import { filter } from 'rxjs/operators';
+import { filter } from 'rxjs/operators/filter';
 import { MainService } from '../../services/main/main.service';
 import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '@ngx-translate/core';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
 import { ElementRef } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-dashboard',
@@ -54,7 +48,7 @@ export class DashboardComponent implements OnInit {
     'step_12',
     'step_13',
   ];
-  public joyrideSubscription: Subscription;
+  public joyrideSubscription: ISubscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -81,10 +75,7 @@ export class DashboardComponent implements OnInit {
       .pipe(filter(e => e instanceof RoutesRecognized))
       .pairwise()
       .subscribe((event: any[]) => {
-        if (
-          this.userAuthenticated === null ||
-          this.userAuthenticated === undefined
-        ) {
+        if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
           if (event[0].urlAfterRedirects === '/ihr/login') {
             setTimeout(() => {
               this.toast = {
@@ -165,10 +156,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.getDataLocalStorage();
-    if (
-      this.userAuthenticated !== null ||
-      this.userAuthenticated !== undefined
-    ) {
+    if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
 
@@ -177,9 +165,7 @@ export class DashboardComponent implements OnInit {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[
-          url.split('-')[0].split('/').length - 1
-        ];
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       } else {
         ambient = 'production';
       }

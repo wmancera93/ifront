@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
 import { HousingService } from '../../../services/travel-management/housing/housing.service';
@@ -24,7 +24,6 @@ export class HousingComponent implements OnInit {
     // return housing.action_housing_index_view[action];
     return true;
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;

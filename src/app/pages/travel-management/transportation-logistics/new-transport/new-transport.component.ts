@@ -7,7 +7,7 @@ import { FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AlertsService } from '../../../../services/shared/common/alerts/alerts.service';
 import { FormDataService } from '../../../../services/common/form-data/form-data.service';
 import { StylesExplorerService } from '../../../../services/common/styles-explorer/styles-explorer.service';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import {
   TrasportationForm,
   Trayect,
