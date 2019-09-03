@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter, OnDestroy } from '@angular/core';
-import { JoyrideStepService, JoyrideService } from 'ngx-joyride';
+import { JoyrideStepService, JoyrideService } from '../../utils/joyride';
 import { TranslateService } from '@ngx-translate/core';
-import { JoyrideOptions } from 'ngx-joyride/src/models/joyride-options.class';
-import { JoyrideStepInfo } from 'ngx-joyride/src/models/joyride-step-info.class';
+import { JoyrideOptions } from '../../utils/joyride/models/joyride-options.class';
+import { JoyrideStepInfo } from '../../utils/joyride/models/joyride-step-info.class';
 import { ISubscription } from 'rxjs/Subscription';
 
 @Injectable()

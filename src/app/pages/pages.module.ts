@@ -97,7 +97,7 @@ import { TrasnportationReportComponent } from './travel-management/transportatio
 import { NewTransportComponent } from './travel-management/transportation-logistics/new-transport/new-transport.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
-import { JoyrideModule } from 'ngx-joyride';
+import { JoyrideModule } from '../utils/joyride/joyride.module';
 import { QueriesComponent } from './queries/queries/queries.component';
 
 @NgModule({

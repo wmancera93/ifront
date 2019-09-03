@@ -1,15 +1,6 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  Output,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { MasterDataService } from '../../services/master-data/master-data.service';
-import {
-  DataMaster,
-  ListDataMaster,
-} from '../../models/common/data-master/data-master';
+import { DataMaster, ListDataMaster } from '../../models/common/data-master/data-master';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../services/common/styles-explorer/styles-explorer.service';
 import { DataMasterSharedService } from '../../services/shared/common/data-master/data-master-shared.service';
@@ -19,7 +10,7 @@ import { Enterprise } from '../../models/general/enterprise';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
-import { JoyrideService } from 'ngx-joyride';
+import { JoyrideService } from '../../utils/joyride';
 
 @Component({
   selector: 'app-master-data',
@@ -83,65 +74,59 @@ export class MasterDataComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document
-            .getElementsByTagName('body')[0]
-            .setAttribute('style', 'overflow-y:hidden');
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),
-      this.dataMasterSharedService
-        .getReturnDataFormDynamic()
-        .subscribe((object: any) => {
-          if (object[0].count === 0) {
-            object[0].count += 1;
-            const dataMasterEdit = {
-              master_data_type: object[0].master_data_type,
-              employee_master_data: object,
-            };
-            if (dataMasterEdit.employee_master_data.length == 0) {
-              const alertWarning: Alerts[] = [
-                {
-                  type: 'danger',
-                  title: this.t('msg_denied_request_ts'),
-                  message: this.t('msg_no_modification_ts'),
-                  confirmation: false,
-                },
-              ];
-              this.alert.setAlert(alertWarning[0]);
-            } else {
-              this.dataMasterService
-                .putEditDataMaster(dataMasterEdit)
-                .subscribe(
-                  (data: any) => {
-                    const alertWarning: Alerts[] = [
-                      {
-                        type: 'success',
-                        title: this.t('title_confirmation_ts'),
-                        message: data.message,
-                        confirmation: false,
-                        typeConfirmation: '',
-                      },
-                    ];
-                    this.alert.setAlert(alertWarning[0]);
+      this.dataMasterSharedService.getReturnDataFormDynamic().subscribe((object: any) => {
+        if (object[0].count === 0) {
+          object[0].count += 1;
+          const dataMasterEdit = {
+            master_data_type: object[0].master_data_type,
+            employee_master_data: object,
+          };
+          if (dataMasterEdit.employee_master_data.length == 0) {
+            const alertWarning: Alerts[] = [
+              {
+                type: 'danger',
+                title: this.t('msg_denied_request_ts'),
+                message: this.t('msg_no_modification_ts'),
+                confirmation: false,
+              },
+            ];
+            this.alert.setAlert(alertWarning[0]);
+          } else {
+            this.dataMasterService.putEditDataMaster(dataMasterEdit).subscribe(
+              (data: any) => {
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'success',
+                    title: this.t('title_confirmation_ts'),
+                    message: data.message,
+                    confirmation: false,
+                    typeConfirmation: '',
                   },
-                  (error: any) => {
-                    const alertWarning: Alerts[] = [
-                      {
-                        type: 'danger',
-                        title: this.t('msg_denied_request_ts'),
-                        message: error.json().errors.toString(),
-                        confirmation: false,
-                      },
-                    ];
-                    this.alert.setAlert(alertWarning[0]);
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              },
+              (error: any) => {
+                const alertWarning: Alerts[] = [
+                  {
+                    type: 'danger',
+                    title: this.t('msg_denied_request_ts'),
+                    message: error.json().errors.toString(),
+                    confirmation: false,
                   },
-                );
-            }
-            if (document.getElementById('buttonDashManagerial')) {
-              document.getElementById('buttonDashManagerial').click();
-            }
+                ];
+                this.alert.setAlert(alertWarning[0]);
+              },
+            );
           }
-        }),
+          if (document.getElementById('buttonDashManagerial')) {
+            document.getElementById('buttonDashManagerial').click();
+          }
+        }
+      }),
     ];
   }
 
@@ -178,8 +163,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     dataMaster.forEach(element => {
       element.forEach(info => {
         if (info !== undefined) {
-          this.detectCanEdit =
-            info.control !== 'label' ? (countEdit += 1) : (countEdit += 0);
+          this.detectCanEdit = info.control !== 'label' ? (countEdit += 1) : (countEdit += 0);
           if (countEdit > 0 && this.dataEnterprise.show_edit_master_data) {
             this.showButton = true;
           } else {
@@ -242,8 +226,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         .getElementById('listData')
         .getElementsByClassName('active-report')[0]
         .classList.remove('active-report');
-      document.getElementById(i + 'PersonalData').className =
-        'nav-item navReport tabReport active-report text-left';
+      document.getElementById(i + 'PersonalData').className = 'nav-item navReport tabReport active-report text-left';
     }
 
     switch (idTag) {
@@ -310,18 +293,16 @@ export class MasterDataComponent implements OnInit, OnDestroy {
 
         this.subscriptions = [
           ...this.subscriptions,
-          this.dataMasterService
-            .getDataBussiness()
-            .subscribe((enterprise: any) => {
-              this.dataMaster = enterprise.data;
-              this.activeEditButton(this.dataMaster);
-              this.canEditData = false;
-              this.noEdit();
-              if (document.getElementById('buttonDashManagerial')) {
-                document.getElementById('buttonDashManagerial').click();
-              }
-              this.lengthArray = enterprise.data.length;
-            }),
+          this.dataMasterService.getDataBussiness().subscribe((enterprise: any) => {
+            this.dataMaster = enterprise.data;
+            this.activeEditButton(this.dataMaster);
+            this.canEditData = false;
+            this.noEdit();
+            if (document.getElementById('buttonDashManagerial')) {
+              document.getElementById('buttonDashManagerial').click();
+            }
+            this.lengthArray = enterprise.data.length;
+          }),
         ];
         break;
       case 'banking_data':
@@ -348,18 +329,16 @@ export class MasterDataComponent implements OnInit, OnDestroy {
 
         this.subscriptions = [
           ...this.subscriptions,
-          this.dataMasterService
-            .getDataBeneficiaries()
-            .subscribe((beneficiaries: any) => {
-              this.dataMaster = beneficiaries.data;
-              this.activeEditButton(this.dataMaster);
-              this.canEditData = false;
-              this.noEdit();
-              if (document.getElementById('buttonDashManagerial')) {
-                document.getElementById('buttonDashManagerial').click();
-              }
-              this.lengthArray = beneficiaries.data.length;
-            }),
+          this.dataMasterService.getDataBeneficiaries().subscribe((beneficiaries: any) => {
+            this.dataMaster = beneficiaries.data;
+            this.activeEditButton(this.dataMaster);
+            this.canEditData = false;
+            this.noEdit();
+            if (document.getElementById('buttonDashManagerial')) {
+              document.getElementById('buttonDashManagerial').click();
+            }
+            this.lengthArray = beneficiaries.data.length;
+          }),
         ];
         break;
       case 'social_security_data':
@@ -368,18 +347,16 @@ export class MasterDataComponent implements OnInit, OnDestroy {
 
         this.subscriptions = [
           ...this.subscriptions,
-          this.dataMasterService
-            .getDataSocialSecurity()
-            .subscribe((social: any) => {
-              this.dataMaster = social.data;
-              this.activeEditButton(this.dataMaster);
-              this.canEditData = false;
-              this.noEdit();
-              if (document.getElementById('buttonDashManagerial')) {
-                document.getElementById('buttonDashManagerial').click();
-              }
-              this.lengthArray = social.data.length;
-            }),
+          this.dataMasterService.getDataSocialSecurity().subscribe((social: any) => {
+            this.dataMaster = social.data;
+            this.activeEditButton(this.dataMaster);
+            this.canEditData = false;
+            this.noEdit();
+            if (document.getElementById('buttonDashManagerial')) {
+              document.getElementById('buttonDashManagerial').click();
+            }
+            this.lengthArray = social.data.length;
+          }),
         ];
         break;
       case 'retefuente_data':
@@ -388,18 +365,16 @@ export class MasterDataComponent implements OnInit, OnDestroy {
 
         this.subscriptions = [
           ...this.subscriptions,
-          this.dataMasterService
-            .getDataReteFuente()
-            .subscribe((retefuente: any) => {
-              this.dataMaster = retefuente.data;
-              this.activeEditButton(this.dataMaster);
-              this.canEditData = false;
-              this.noEdit();
-              if (document.getElementById('buttonDashManagerial')) {
-                document.getElementById('buttonDashManagerial').click();
-              }
-              this.lengthArray = retefuente.data.length;
-            }),
+          this.dataMasterService.getDataReteFuente().subscribe((retefuente: any) => {
+            this.dataMaster = retefuente.data;
+            this.activeEditButton(this.dataMaster);
+            this.canEditData = false;
+            this.noEdit();
+            if (document.getElementById('buttonDashManagerial')) {
+              document.getElementById('buttonDashManagerial').click();
+            }
+            this.lengthArray = retefuente.data.length;
+          }),
         ];
         break;
 

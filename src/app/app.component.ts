@@ -10,7 +10,7 @@ import { UserSharedService } from './services/shared/common/user/user-shared.ser
 import { environment } from '../environments/environment';
 import { Angular2TokenService } from 'angular2-token';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { JoyrideService, JoyrideStepService } from 'ngx-joyride';
+import { JoyrideService, JoyrideStepService } from './utils/joyride';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from './services/joyride-app/joyride-app.service';
 
