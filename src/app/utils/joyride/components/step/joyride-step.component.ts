@@ -164,16 +164,18 @@ export class JoyrideStepComponent implements OnInit, OnDestroy, AfterViewInit {
     let position = this.step.isElementOrAncestorFixed ? 'fixed' : 'absolute';
     this.renderer.setStyle(this.stepHolder.nativeElement, 'position', position);
     this.renderer.setStyle(this.stepHolder.nativeElement, 'transform', this.step.transformCssStyle);
-    this.targetWidth = this.step.targetViewContainer.element.nativeElement.getBoundingClientRect().width;
-    this.targetHeight = this.step.targetViewContainer.element.nativeElement.getBoundingClientRect().height;
+    const { element } = this.step.targetViewContainer;
+    const { width, height } = element.nativeElement.getBoundingClientRect();
+    this.targetWidth = width;
+    this.targetHeight = height;
     this.targetAbsoluteLeft =
       position === 'fixed'
-        ? this.documentService.getElementFixedLeft(this.step.targetViewContainer.element)
-        : this.documentService.getElementAbsoluteLeft(this.step.targetViewContainer.element);
+        ? this.documentService.getElementFixedLeft(element)
+        : this.documentService.getElementAbsoluteLeft(element);
     this.targetAbsoluteTop =
       position === 'fixed'
-        ? this.documentService.getElementFixedTop(this.step.targetViewContainer.element)
-        : this.documentService.getElementAbsoluteTop(this.step.targetViewContainer.element);
+        ? this.documentService.getElementFixedTop(element)
+        : this.documentService.getElementAbsoluteTop(element);
     this.setStepStyle();
   }
 

@@ -5,6 +5,8 @@ import { JoyrideStep } from '../models/joyride-step.class';
 @Injectable()
 export class StepDrawerService {
   private refMap: { [key: string]: ComponentRef<JoyrideStepComponent> } = {};
+  private pointerEvents: string;
+  private childrens: string[];
 
   constructor(
     private readonly componentFactoryResolver: ComponentFactoryResolver,
@@ -13,7 +15,19 @@ export class StepDrawerService {
   ) {}
 
   draw(step: JoyrideStep) {
-    console.log(step);
+    const { nativeElement } = step.targetViewContainer.element;
+    if (nativeElement instanceof HTMLElement) {
+      this.pointerEvents = nativeElement.style.pointerEvents;
+      nativeElement.style.pointerEvents = 'none';
+      step.childrens.forEach((children, key) => {
+        const { nativeElement } = children.viewContainerRef.element;
+        if (nativeElement instanceof HTMLElement) {
+          this.childrens[key] = nativeElement.style.pointerEvents;
+
+          nativeElement.style.pointerEvents = children.active ? 'all' : 'none';
+        }
+      });
+    }
 
     // 1. Create a component reference from the component
     const ref: ComponentRef<JoyrideStepComponent> = this.componentFactoryResolver
@@ -37,8 +51,19 @@ export class StepDrawerService {
     this.refMap[step.name] = ref;
   }
 
-  remove(step: JoyrideStep) {
-    this.appRef.detachView(this.refMap[step.name].hostView);
-    this.refMap[step.name].destroy();
+  remove({ name, targetViewContainer, childrens }: JoyrideStep) {
+    const { nativeElement } = targetViewContainer.element;
+    this.appRef.detachView(this.refMap[name].hostView);
+    if (nativeElement instanceof HTMLElement) {
+      nativeElement.style.pointerEvents = this.pointerEvents;
+      childrens.forEach((children, key) => {
+        const { nativeElement } = children.viewContainerRef.element;
+        if (nativeElement instanceof HTMLElement) {
+          nativeElement.style.pointerEvents = this.childrens[key];
+        }
+      });
+    }
+    this.childrens = [];
+    this.refMap[name].destroy();
   }
 }

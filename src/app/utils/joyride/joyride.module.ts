@@ -1,6 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { JoyrideDirective } from './directives/joyride.directive';
+import { JoyrideStepChildren } from './directives/joyride-step-children.directive';
 import { JoyrideService } from './services/joyride.service';
 import { JoyrideStepComponent } from './components/step/joyride-step.component';
 import { JoyrideButtonComponent } from './components/button/button.component';
@@ -24,13 +25,14 @@ export const routerModuleForChild: ModuleWithProviders = RouterModule.forChild([
   imports: [CommonModule, routerModuleForChild],
   declarations: [
     JoyrideDirective,
+    JoyrideStepChildren,
     JoyrideStepComponent,
     JoyrideArrowComponent,
     JoyrideButtonComponent,
     JoyrideCloseButtonComponent,
   ],
   entryComponents: [JoyrideStepComponent],
-  exports: [JoyrideDirective],
+  exports: [JoyrideDirective, JoyrideStepChildren],
 })
 export class JoyrideModule {
   static forRoot(): ModuleWithProviders {
