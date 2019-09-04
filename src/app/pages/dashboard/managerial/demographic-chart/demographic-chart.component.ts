@@ -5,6 +5,9 @@ import { DemographicSharedService } from '../../../../services/shared/common/dem
 import { PieGridComponent, ColorHelper } from '@swimlane/ngx-charts';
 import debounce from 'lodash/debounce';
 import { colorSets } from '@swimlane/ngx-charts/release/utils/color-sets';
+import { JoyrideAppService } from '../../../../services/joyride-app/joyride-app.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { steps } from '../../dashboard.component';
 
 @Component({
   selector: 'app-demographic-chart',
@@ -26,8 +29,8 @@ export class DemographicChartComponent implements OnInit {
   public listColors = colorSets;
   public color?: typeof colorSets[0];
   public colorScheme: string = 'natural';
-
-  public steps = ['step_18@ihr/demographic_chart', 'step_19', 'step_20', 'step_21', 'step_22', 'step_23', 'step_24'];
+  public joyrideSubscription: ISubscription;
+  public steps = steps;
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -40,9 +43,31 @@ export class DemographicChartComponent implements OnInit {
     public router: Router,
     public demographicChartsService: DemographicChartsService,
     public demographicSharedService: DemographicSharedService,
+    public joyrideAppService: JoyrideAppService
+    
   ) {
     this.demographicSharedService.getEventUpload().subscribe((data: any) => {});
     this.color = this.listColors.find(({ name }) => name == this.colorScheme);
+
+    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      joyrideAppService
+        .startTour({ steps: this.steps, startWith: 'step_18@ihr/demographic_chart' })
+        .subscribe(({ name, actionType }) => {
+          /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
+          setTimeout(() => {
+            this.vieweDashboardManager();
+            this.prendido.nativeElement.checked = false;
+            this.apagado.nativeElement.checked = true;
+            this.joyrideAppService.reloadStep();
+            routerSuscribe = undefined;
+          }, 2000);
+        } */
+        });
+    });
+
+
+
+
   }
 
   ngOnInit() {
@@ -93,5 +118,8 @@ export class DemographicChartComponent implements OnInit {
   selectColor({ target: { value } }: { target: HTMLInputElement } & Event) {
     this.color = this.listColors[value];
     this.colorScheme = this.color.name;
+  }
+  ngOnDestroy(): void {
+    this.joyrideSubscription.unsubscribe();
   }
 }

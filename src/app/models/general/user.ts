@@ -16,11 +16,18 @@ export interface Permit {
   state: boolean;
   name: string;
 }
+export enum PermitsUser {
+  PERMISSIONS_SEE_INCOME = 'PERMISSIONS_SEE_INCOME',
+  PERMISSIONS_SEE_RETENTIONS = 'PERMISSIONS_SEE_RETENTIONS',
+  SHOW_BENEFITS = 'SHOW_BENEFITS',
+  HELP = 'HELP',
+}
 
 export interface Permits {
   PERMISSIONS_SEE_INCOME: Permit;
   PERMISSIONS_SEE_RETENTIONS: Permit;
   SHOW_BENEFITS: Permit;
+  HELP: Permit;
 }
 
 export interface Employee {

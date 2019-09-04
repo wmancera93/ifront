@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
-import { User } from '../../../models/general/user';
+import { User, PermitsUser } from '../../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { AlertsService } from '../../../services/shared/common/alerts/alerts.service';
@@ -28,6 +28,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   public showContactsList = false;
   public isInitial = true;
   private alertWarning: Alerts[];
+  public PermitsUser = PermitsUser;
 
   t(key) {
     return this.translate.instant(this.parseT(key));

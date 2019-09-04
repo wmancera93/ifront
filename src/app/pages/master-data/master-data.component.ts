@@ -61,7 +61,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
     private readonly joyrideAppService: JoyrideAppService,
     private readonly joyrideService: JoyrideService,
   ) {
-    this.titleData = this.t('ts_warningone_text_one');
+    this.titleData = this.parseT('ts_warningone_text_one');
     this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
       joyrideAppService.startTour({ steps: this.steps });
     });
@@ -90,8 +90,8 @@ export class MasterDataComponent implements OnInit, OnDestroy {
             const alertWarning: Alerts[] = [
               {
                 type: 'danger',
-                title: this.t('msg_denied_request_ts'),
-                message: this.t('msg_no_modification_ts'),
+                title: this.parseT('msg_denied_request_ts'),
+                message: this.parseT('msg_no_modification_ts'),
                 confirmation: false,
               },
             ];
@@ -102,7 +102,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 const alertWarning: Alerts[] = [
                   {
                     type: 'success',
-                    title: this.t('title_confirmation_ts'),
+                    title: this.parseT('title_confirmation_ts'),
                     message: data.message,
                     confirmation: false,
                     typeConfirmation: '',
@@ -114,7 +114,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
                 const alertWarning: Alerts[] = [
                   {
                     type: 'danger',
-                    title: this.t('msg_denied_request_ts'),
+                    title: this.parseT('msg_denied_request_ts'),
                     message: error.json().errors.toString(),
                     confirmation: false,
                   },
@@ -239,7 +239,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         this.subscriptions = [
           ...this.subscriptions,
           this.dataMasterService.getDataContact().subscribe((contact: any) => {
-            this.titleData = this.t('title_contact_information_ts');
+            this.titleData = this.parseT('title_contact_information_ts');
             this.dataMaster = contact.data;
             this.activeEditButton(this.dataMaster);
             this.canEditData = false;
@@ -254,7 +254,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'family_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_family_information_ts');
+        this.titleData = this.parseT('title_family_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -272,7 +272,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'study_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_academic_information_ts');
+        this.titleData = this.parseT('title_academic_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -290,7 +290,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'business_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_business_information_ts');
+        this.titleData = this.parseT('title_business_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -308,7 +308,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'banking_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_Bank_information_ts');
+        this.titleData = this.parseT('title_Bank_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -326,7 +326,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'beneficiary_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_beneficiaries_information_ts');
+        this.titleData = this.parseT('title_beneficiaries_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -344,7 +344,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'social_security_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_social_security_information_ts');
+        this.titleData = this.parseT('title_social_security_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,
@@ -362,7 +362,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
         break;
       case 'retefuente_data':
         this.dataMaster = [];
-        this.titleData = this.t('title_withholding_information_ts');
+        this.titleData = this.parseT('title_withholding_information_ts');
 
         this.subscriptions = [
           ...this.subscriptions,

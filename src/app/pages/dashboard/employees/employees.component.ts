@@ -11,7 +11,7 @@ import { Enterprise } from '../../../models/general/enterprise';
 import { DashboardEmployeeService } from '../../../services/dashboard/employee/dashboard-employee.service';
 import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
-import { Employee } from '../../../models/general/user';
+import { Employee, PermitsUser } from '../../../models/general/user';
 
 @Component({
   selector: 'app-employees',
@@ -45,6 +45,7 @@ export class EmployeesComponent implements OnInit {
   public layoffsChartType: EventEmitter<string> = new EventEmitter();
   public dataEnterprise: Enterprise = null;
   public dataUser: Employee = null;
+  public PermitsUser = PermitsUser;
 
   constructor(
     public dashboardEmployeeService: DashboardEmployeeService,
@@ -88,13 +89,14 @@ export class EmployeesComponent implements OnInit {
     });
 
     this.dashboardEmployeeService.getIncomesData().subscribe((data: any) => {
-      if (this.dataUser.permits.PERMISSIONS_SEE_INCOME.state) {
+      const { permits } = this.dataUser;
+      if (permits[PermitsUser.PERMISSIONS_SEE_INCOME].state) {
         this.objectIncome.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_incomes,
         });
       }
-      if (this.dataUser.permits.PERMISSIONS_SEE_RETENTIONS.state) {
+      if (permits[PermitsUser.PERMISSIONS_SEE_RETENTIONS].state) {
         this.objectDeductions.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_deductions,

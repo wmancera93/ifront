@@ -122,7 +122,11 @@
               </div>
             </div>
           </div>
-          <div class="cursor-general px-3 text-center" (click)="startTour()">
+          <div
+            class="cursor-general px-3 text-center"
+            (click)="startTour()"
+            *ngIf="dataUser.employee.permits && dataUser.employee.permits[PermitsUser.HELP]?.state"
+          >
             <i class="fa fa-fw fa-question-circle fa-lg"></i>
             <span class="hideText font-size-responsive px-1">
               {{ parseT('help') | translate }}

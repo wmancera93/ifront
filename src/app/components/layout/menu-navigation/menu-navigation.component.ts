@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../../models/general/user';
+import { User, PermitsUser } from '../../../models/general/user';
 import { UserSharedService } from '../../../services/shared/common/user/user-shared.service';
 import { Enterprise } from '../../../models/general/enterprise';
 import { MainService } from '../../../services/main/main.service';
@@ -20,7 +20,7 @@ export class MenuNavigationComponent implements OnInit {
   public aActive = 'aIndex';
   public showCollapse = '';
   public heightContenGeneral = 0;
-
+  public PermitsUser = PermitsUser;
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;

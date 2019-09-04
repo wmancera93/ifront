@@ -4,6 +4,7 @@ import { RequestsRhService } from '../../../services/requests-rh/requests-rh.ser
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { EmployeeRequets } from '../../../models/common/requests-rh/timeline-approver';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -11,7 +12,7 @@ import { ISubscription } from 'rxjs/Subscription';
   styleUrls: ['./time-line-approvers.component.css'],
 })
 export class TimeLineApproversComponent implements OnInit, OnDestroy {
-  public dataRequets: any = {};
+  public dataRequets: EmployeeRequets;
   public fileSupport = '';
   public viewModal = false;
   public dateFirts: string;
@@ -51,12 +52,12 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
         if (data.type_request == 'requestsOnly') {
           this.requests_print = data.type_request;
           this.subscriptions.push(
-            this.requestsRhService.getRequestDetailById(data.request.ticket).subscribe((detail: any) => {
-              this.dataRequets = [];
+            this.requestsRhService.getRequestDetailById(data.request.ticket).subscribe(detail => {
               if (detail.success) {
                 this.dataRequets = detail.data[0];
-                this.fileSupport = this.dataRequets.request.image.url;
-                const { date_begin_format, date_end_format, show_alias } = this.dataRequets.request;
+                const { request } = this.dataRequets;
+                this.fileSupport = request.image && request.image.url;
+                const { date_begin_format, date_end_format, show_alias } = request;
                 switch (show_alias) {
                   case 'EDUS':
                   case 'EDUI':

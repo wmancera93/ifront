@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { Angular2TokenService } from 'angular2-token';
+import { EmployeeRequetsData } from '../../models/common/requests-rh/timeline-approver';
+import { Response } from '@angular/http';
 
 @Injectable()
 export class RequestsRhService {
@@ -16,7 +18,9 @@ export class RequestsRhService {
   }
 
   getRequestDetailById(ticket: number) {
-    return this.tokenService.get('employee_requets/show_by_company/' + ticket).map((data: any) => data.json());
+    return this.tokenService
+      .get('employee_requets/show_by_company/' + ticket)
+      .map<Response, EmployeeRequetsData>(data => data.json());
   }
 
   postRequests(object: any) {

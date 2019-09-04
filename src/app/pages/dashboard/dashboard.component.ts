@@ -13,6 +13,34 @@ import { ElementRef } from '@angular/core';
 import { Subscription, Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
 
+export const steps = [
+  'step_1',
+  'step_2',
+  'step_3',
+  'step_4',
+  'step_5',
+  'step_6',
+  'step_7',
+  'step_8',
+  'step_9',
+  'step_10',
+  'step_11',
+  'step_12',
+  'step_13',
+  'step_14',
+  'step_15',
+  'step_16',
+  'step_17@ihr/index_managerial',
+  'step_18@ihr/demographic_chart',
+  'step_19',
+  'step_20',
+  'step_21',
+  'step_22',
+  'step_23',
+  'step_24',
+];
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -34,25 +62,7 @@ export class DashboardComponent implements OnInit {
   public urlBeforePending = '';
   public urlBeforeReports = '';
   public toast: Toast;
-  public steps = [
-    'step_1',
-    'step_2',
-    'step_3',
-    'step_4',
-    'step_5',
-    'step_6',
-    'step_7',
-    'step_8',
-    'step_9',
-    'step_10',
-    'step_11',
-    'step_12',
-    'step_13',
-    'step_14',
-    'step_15',
-    'step_16',
-    'step_17@ihr/index_managerial',
-  ];
+  public steps = steps;
 
   public joyrideSubscription: ISubscription;
 
@@ -151,8 +161,10 @@ export class DashboardComponent implements OnInit {
 
     let routerSuscribe: Subscription;
     this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
+      debugger;
+      let realStep = '1';
       joyrideAppService
-        .startTour({ steps: this.steps, startWith: 'step_' + this.roleEmployee ? '1' : '9' })
+        .startTour({ steps: this.steps, startWith: 'step_' + (this.roleEmployee ? '1' : '9') })
         .subscribe(({ name, actionType }) => {
           /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
           setTimeout(() => {

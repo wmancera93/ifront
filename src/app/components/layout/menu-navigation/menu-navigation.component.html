@@ -403,7 +403,10 @@
           <span class="nav-label">{{ parseT('requests') | translate }}</span>
         </a>
       </li>
-      <li id="LiRequestedBenefist" *ngIf="dataUser.employee.permits?.SHOW_BENEFITS?.state">
+      <li
+        id="LiRequestedBenefist"
+        *ngIf="dataUser.employee.permits && dataUser.employee.permits[PermitsUser.SHOW_BENEFITS]?.state"
+      >
         <a
           id="aRequestedBenefist"
           routerLink="/ihr/requests_benefist"

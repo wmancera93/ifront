@@ -22,11 +22,7 @@
           [title]="joyride('step_1.title') | translate"
           [text]="joyride('step_1.text') | translate"
         >
-          <div
-            id="listData"
-            class="nav nav-tabs navtab-vertical navtab-left cursor-general"
-            role="navigation"
-          >
+          <div id="listData" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
             <div
               id="{{ i }}PersonalData"
               [ngClass]="{ 'active-report': i == '0' }"
@@ -61,20 +57,11 @@
           [text]="joyride('step_2.text') | translate"
         >
           <b style="margin-left: 28px;">
-            {{ parseT('ts_warningone_text_one') | translate }}
+            {{ titleData | translate }}
           </b>
-          <div
-            class="row-hr-container  widget bg-white-1x"
-            style="min-height: calc(70vh)"
-          >
-            <div
-              class="row justify-content-center top-containter"
-              *ngIf="lengthArray == 0"
-            >
-              <div
-                class="col-lg-8 col-12 text-center"
-                style="min-height: 370px;"
-              >
+          <div class="row-hr-container  widget bg-white-1x" style="min-height: calc(70vh)">
+            <div class="row justify-content-center top-containter" *ngIf="lengthArray == 0">
+              <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
                 <div class="alert alert-warning" role="alert">
                   {{ parseT('text_no_information') | translate }}
                   <strong>
@@ -94,12 +81,7 @@
                 <div class="col-xl-2 col-md-3 col-4">
                   <div class="top-interruptor">
                     <input type="radio" name="interruptor" id="prendido" />
-                    <input
-                      type="radio"
-                      name="interruptor"
-                      id="apagado"
-                      checked
-                    />
+                    <input type="radio" name="interruptor" id="apagado" checked />
                     <div class="interruptor-cuerpo">
                       <div class="interruptor-tecla">
                         <label id="buttonDashEmployee" for="prendido" (click)="isEdit()"></label>

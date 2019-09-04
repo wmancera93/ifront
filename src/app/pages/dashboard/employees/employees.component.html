@@ -30,12 +30,12 @@
     <div class="col-xl-4 col-12">
       <div class="row">
         <app-estadistics
-          *ngIf="dataUser.permits.PERMISSIONS_SEE_INCOME.state"
+          *ngIf="dataUser.permits[PermitsUser.PERMISSIONS_SEE_INCOME]?.state"
           [estadistics]="objectIncome"
           class="col-12"
         ></app-estadistics>
         <app-estadistics
-          *ngIf="dataUser.permits.PERMISSIONS_SEE_RETENTIONS.state"
+          *ngIf="dataUser.permits[PermitsUser.PERMISSIONS_SEE_RETENTIONS]?.state"
           [estadistics]="objectDeductions"
           class="col-12"
         ></app-estadistics>
