@@ -110,7 +110,8 @@ export class QueriesComponent implements OnInit, OnDestroy {
       },
     },
     {
-      path: 'vacation_enjoyed',
+      path: 'compensated_vacations',
+      ns: 'compnsated_vacations',
       table: {
         excel: 'getCompensatedVacationExcel',
         service: 'getCompensatedVacations',
@@ -186,18 +187,17 @@ export class QueriesComponent implements OnInit, OnDestroy {
     });
 
     this.subscriptions.push(
-      this.activeRoutedService.firstChild &&
-        this.activeRoutedService.firstChild.url.subscribe(([url]) => {
-          if (url) {
-            this.pages.some(page => {
-              if (page.path === url.path) {
-                this.servicesPage(page);
-                return true;
-              }
-              return false;
-            });
-          }
-        }),
+      this.activeRoutedService.url.subscribe(([url]) => {
+        if (url) {
+          this.pages.some(page => {
+            if (page.path === url.path) {
+              this.servicesPage(page);
+              return true;
+            }
+            return false;
+          });
+        }
+      }),
     );
   }
 
