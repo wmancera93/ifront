@@ -40,10 +40,6 @@ export default {
             title: 'Tipo de Dashboard',
             text: 'Deslizando este boton, es posible redireccionarnos al tablero de informacion gerencial',
           },
-        },
-      },
-      dashboardManage: {
-        joyride: {
           step_9: {
             title: 'Personas en vacaciones',
             text:
@@ -86,11 +82,6 @@ export default {
             title: 'Indicadores demograficos',
             text: 'Al dar click sobre este widget se redirecciona al tablero de indicadores demograficos',
           },
-        },
-      },
-
-      demographicChart: {
-        joyride: {
           step_18: {
             title: 'Indicadores de personal',
             text:

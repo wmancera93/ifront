@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { User } from '../../models/general/user';
 import { Angular2TokenService } from 'angular2-token';
-import { Router, RoutesRecognized, NavigationEnd } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { UserSharedService } from '../../services/shared/common/user/user-shared.service';
 import { Toast } from 'angular2-toaster';
 import { filter } from 'rxjs/operators/filter';
@@ -10,7 +10,6 @@ import 'rxjs/add/operator/pairwise';
 import { TranslateService } from '@ngx-translate/core';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
 import { ElementRef } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
 import { ISubscription } from 'rxjs/Subscription';
 
 export const steps = [
@@ -30,7 +29,7 @@ export const steps = [
   'step_14',
   'step_15',
   'step_16',
-  'step_17@ihr/index_managerial',
+  'step_17@ihr/index',
   'step_18@ihr/demographic_chart',
   'step_19',
   'step_20',
@@ -39,7 +38,6 @@ export const steps = [
   'step_23',
   'step_24',
 ];
-
 
 @Component({
   selector: 'app-dashboard',
@@ -64,7 +62,7 @@ export class DashboardComponent implements OnInit {
   public toast: Toast;
   public steps = steps;
 
-  public joyrideSubscription: ISubscription;
+  public subscriptions: ISubscription[] = [];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -86,6 +84,14 @@ export class DashboardComponent implements OnInit {
     public translate: TranslateService,
     public joyrideAppService: JoyrideAppService,
   ) {
+    const currentStep = joyrideAppService.joyrideStepService.getCurrentStep();
+    if (currentStep) {
+      if (currentStep.name === 'step_17') {
+        this.roleEmployee = false;
+        this.prendido.nativeElement.checked = true;
+        this.apagado.nativeElement.checked = false;
+      }
+    }
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
     this.router.events
       .pipe(filter(e => e instanceof RoutesRecognized))
@@ -159,24 +165,15 @@ export class DashboardComponent implements OnInit {
       },
     );
 
-    let routerSuscribe: Subscription;
-    this.joyrideSubscription = joyrideAppService.onStartTour.subscribe(() => {
-      debugger;
-      let realStep = '1';
-      joyrideAppService
-        .startTour({ steps: this.steps, startWith: 'step_' + (this.roleEmployee ? '1' : '9') })
-        .subscribe(({ name, actionType }) => {
-          /* if (name === 'step_17' && actionType === 'PREV' && !routerSuscribe) {
-          setTimeout(() => {
-            this.vieweDashboardManager();
-            this.prendido.nativeElement.checked = false;
-            this.apagado.nativeElement.checked = true;
-            this.joyrideAppService.reloadStep();
-            routerSuscribe = undefined;
-          }, 2000);
-        } */
-        });
-    });
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(
+          joyrideAppService
+            .startTour({ steps: this.steps, startWith: 'step_' + (this.roleEmployee ? '1' : '9') })
+            .subscribe(() => {}),
+        );
+      }),
+    );
   }
 
   getDataLocalStorage() {
@@ -225,6 +222,8 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.joyrideSubscription.unsubscribe();
+    for (const subscription of this.subscriptions) {
+      subscription.unsubscribe();
+    }
   }
 }
