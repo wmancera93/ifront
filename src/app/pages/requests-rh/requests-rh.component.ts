@@ -11,6 +11,7 @@ import { FileUploadService } from '../../services/shared/common/file-upload/file
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-requests-rh',
@@ -31,7 +32,20 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   public status_inProcess: string;
   public status_pending: string;
   private subscriptions: ISubscription[];
-  typesFilters
+  public steps = [
+    'step_1@ihr/requests_rh',
+    'step_2_1',
+    'step_3',
+    'step_4',
+    'step_5',
+    'step_6',
+    'step_7',
+    'step_8',
+    'step_9',
+    'step_10',
+    'step_11',
+  ];
+  typesFilters;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -41,7 +55,6 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -61,6 +74,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     public fileUploadService: FileUploadService,
     public router: Router,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -114,10 +128,15 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
         }
       }),
     ];
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        debugger;
+        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps }).subscribe(() => {}));
+      }),
+    );
   }
 
   ngOnInit() {
-
     this.getObjectRequests();
 
     setTimeout(() => {

@@ -4,6 +4,12 @@
 
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
@@ -150,9 +156,20 @@
 
       <div class="row justify-content-center top-containter">
         <div class="col-12">
-          <div class="widget bg-white-1x" *ngFor="let request of requests.my_requests_list">
+          <div
+            class="widget bg-white-1x"
+            *ngFor="let request of requests.my_requests_list"
+            joyrideStep="step_2_1"
+            [title]="joyride('step_2_1.title') | translate"
+            [text]="joyride('step_2_1.text') | translate"
+          >
             <div class="row align-items-center">
-              <div class="col-lg-2 col-md-3 col-12">
+              <div
+                class="col-lg-2 col-md-3 col-12"
+                joyrideStep="step_3"
+                [title]="joyride('step_3.title') | translate"
+                [text]="joyride('step_3.text') | translate"
+              >
                 <h5>
                   <span class="badge badge-warning"> {{ parseT('ticket') | translate }} #{{ request.ticket }} </span>
                 </h5>
@@ -162,12 +179,22 @@
                   {{ request.created_date }}
                 </p>
               </div>
-              <div class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p">
+              <div
+                class="col-lg-3 col-md-6 col-12 text-lg-left text-center top-p"
+                joyrideStep="step_4"
+                [title]="joyride('step_4.title') | translate"
+                [text]="joyride('step_4.text') | translate"
+              >
                 <h3 class="font-color-default">
                   {{ request.type_requests_name }}
                 </h3>
               </div>
-              <div class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+              <div
+                class="col-xl-1 col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
+                joyrideStep="step_5"
+                [title]="joyride('step_5.title') | translate"
+                [text]="joyride('step_5.text') | translate"
+              >
                 <p class="font-title-general">{{ parseT('status') | translate }}:</p>
                 <h6 *ngIf="request.status_id == 'ReqApp'">
                   <span class="badge badge-primary">
@@ -214,6 +241,10 @@
                 <div class="row">
                   <div
                     class="col-6 number-size text-success"
+                    joyrideStep="step_6"
+                    [title]="joyride('step_6.title') | translate"
+                    [text]="joyride('step_6.text') | translate"
+                    joyrideStepChildren="test_pointer_events"
                     [attr.title]="request.action_employee_requets_index_view[0].title"
                     [attr.disabled]="request.action_employee_requets_index_view[0].is_active == true ? null : true"
                     (click)="modalAprovers(request)"
@@ -222,6 +253,9 @@
                   </div>
                   <div
                     class="col-6 number-size text-danger"
+                    joyrideStep="step_9"
+                    [title]="joyride('step_9.title') | translate"
+                    [text]="joyride('step_9.text') | translate"
                     id="hideTrash"
                     *ngIf="request.action_employee_requets_index_view[1].is_active == true"
                     style="cursor: pointer"
@@ -231,6 +265,9 @@
                   </div>
                   <div
                     class="col-6 number-size"
+                    joyrideStep="step_9"
+                    [title]="joyride('step_9.title') | translate"
+                    [text]="joyride('step_9.text') | translate"
                     id="hideTrash"
                     *ngIf="request.action_employee_requets_index_view[1].is_active == false"
                     style="cursor: no-drop"

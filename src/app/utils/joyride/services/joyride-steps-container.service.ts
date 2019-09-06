@@ -4,10 +4,9 @@ import { Subject } from 'rxjs';
 import { JoyrideOptionsService } from './joyride-options.service';
 import { LoggerService } from './logger.service';
 import { JoyrideError, JoyrideStepOutOfRange } from '../models/joyride-error.class';
+import { ROUTE_SEPARATOR } from '../constants';
 
-const ROUTE_SEPARATOR = '@';
-
-class Step {
+export class Step {
   id: string;
   step: JoyrideStep;
 }
@@ -58,25 +57,24 @@ export class JoyrideStepsContainerService {
       this.tempSteps[stepIndexToReplace] = stepToAdd;
     }
   }
-  get(action: StepActionType, changeIndex: boolean = true): JoyrideStep {
-    let indexStep = this.currentStepIndex;
+  get(action: StepActionType): JoyrideStep {
     if (action === StepActionType.NEXT) {
-      changeIndex && this.currentStepIndex++;
-      indexStep++;
+      this.currentStepIndex++;
     } else {
-      changeIndex && this.currentStepIndex--;
-      indexStep--;
+      this.currentStepIndex--;
     }
-    if (indexStep < 0 || indexStep >= this.steps.length)
+    if (this.currentStepIndex < 0 || this.currentStepIndex >= this.steps.length)
       throw new JoyrideStepOutOfRange('The first or last step of the tour cannot be found!');
 
-    const stepName = this.getStepName(this.steps[indexStep].id);
+    const stepName = this.getStepName(this.steps[this.currentStepIndex].id);
     const index = this.tempSteps.findIndex(step => step.name === stepName);
     let stepFound = this.tempSteps[index];
-    this.steps[indexStep].step = stepFound;
+    this.steps[this.currentStepIndex].step = stepFound;
 
     if (stepFound == null) {
-      this.logger.warn(`Step ${this.steps[indexStep].id} not found in the DOM. Check if it's hidden by *ngIf directive.`);
+      this.logger.warn(
+        `Step ${this.steps[this.currentStepIndex].id} not found in the DOM. Check if it's hidden by *ngIf directive.`,
+      );
     }
 
     return stepFound;
@@ -85,8 +83,20 @@ export class JoyrideStepsContainerService {
   getCurrenStep(): JoyrideStep {
     const stepName = this.getStepName(this.steps[this.currentStepIndex].id);
     const index = this.tempSteps.findIndex(step => step.name === stepName);
+    return this.getStepByIndex(index);
+  }
+
+  getStep(action: StepActionType): Step {
+    if (action === StepActionType.NEXT) {
+      return this.steps[this.currentStepIndex + 1];
+    } else {
+      return this.steps[this.currentStepIndex - 1];
+    }
+  }
+
+  getStepByIndex(index: number): JoyrideStep {
     let stepFound = this.tempSteps[index];
-    this.steps[this.currentStepIndex].step = stepFound;
+    this.steps[index].step = stepFound;
 
     if (stepFound == null) {
       this.logger.warn(
@@ -98,10 +108,9 @@ export class JoyrideStepsContainerService {
 
   getStepRoute(action: StepActionType) {
     let stepID: string;
-    if (action === StepActionType.NEXT) {
-      stepID = this.steps[this.currentStepIndex + 1] ? this.steps[this.currentStepIndex + 1].id : null;
-    } else {
-      stepID = this.steps[this.currentStepIndex - 1] ? this.steps[this.currentStepIndex - 1].id : null;
+    const step = this.getStep(action);
+    if (step) {
+      stepID = step.id || null;
     }
     let stepRoute = stepID && stepID.includes(ROUTE_SEPARATOR) ? stepID.split(ROUTE_SEPARATOR)[1] : '';
 

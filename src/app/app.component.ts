@@ -43,6 +43,9 @@ export class AppComponent implements OnDestroy {
     private readonly joyrideStepService: JoyrideStepService,
     private readonly joyrideAppService: JoyrideAppService,
   ) {
+    joyrideService.setCallBackChildren(() => {
+      joyrideAppService.onStartTour.emit();
+    });
     const languaje = localStorage.getItem('lang') || translate.getBrowserLang();
     translate.addLangs(['es', 'en']);
     translate.setDefaultLang('es');

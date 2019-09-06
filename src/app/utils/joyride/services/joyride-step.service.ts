@@ -2,17 +2,20 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { JoyrideStep } from '../models/joyride-step.class';
 import { JoyrideBackdropService } from './joyride-backdrop.service';
 import { EventListenerService } from './event-listener.service';
-import { JoyrideStepsContainerService, StepActionType } from './joyride-steps-container.service';
+import { JoyrideStepsContainerService, StepActionType, Step } from './joyride-steps-container.service';
 import { DocumentService } from './document.service';
 import { StepDrawerService } from './step-drawer.service';
 import { DomRefService } from './dom.service';
 import { NO_POSITION } from '../directives/joyride.directive';
 import { JoyrideOptionsService } from './joyride-options.service';
 import { Router } from '@angular/router';
+import * as elementResizeDetector from 'element-resize-detector';
+
 import { ReplaySubject, Observable } from 'rxjs';
 import { JoyrideStepInfo } from '../models/joyride-step-info.class';
 import { JoyrideStepDoesNotExist, JoyrideStepOutOfRange } from '../models/joyride-error.class';
 import { LoggerService } from './logger.service';
+import { JoyrideService } from './joyride.service';
 
 const SCROLLBAR_SIZE = 20;
 
@@ -25,14 +28,19 @@ export interface IJoyrideStepService {
   prev(): any;
   next(): any;
 }
+export interface CurrentStep {
+  name: string;
+  route: string;
+}
 
 @Injectable()
 export class JoyrideStepService implements IJoyrideStepService {
   private currentStep: JoyrideStep;
-  private currentStepLast: JoyrideStep;
+  private currentStepLast: Step;
   private winTopPosition: number = 0;
   private winBottomPosition: number = 0;
   public onStepChange = new EventEmitter<Pick<JoyrideStep, 'name' | 'route'> & { actionType: StepActionType }>();
+  private erd = elementResizeDetector();
   private stepsObserver: ReplaySubject<JoyrideStepInfo> = new ReplaySubject<JoyrideStepInfo>();
 
   constructor(
@@ -93,6 +101,7 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.DOMService.getNativeWindow().scrollTo(0, 0);
     this.eventListener.stopListeningResizeEvents();
     this.backDropService.remove();
+    this.optionsService.resetSubTours();
   }
 
   prev() {
@@ -123,8 +132,8 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private async tryShowStep(actionType: StepActionType) {
+    this.currentStepLast = this.stepsContainerService.getStep(actionType);
     await this.navigateToStepPage(actionType);
-    this.currentStepLast = this.stepsContainerService.get(actionType, false);
     const timeout = this.optionsService.getWaitingTime();
     if (timeout > 100) this.backDropService.remove();
     setTimeout(() => {
@@ -144,6 +153,11 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private showStep(actionType: StepActionType) {
+    const nativeElementOld = this.currentStep && this.currentStep.targetViewContainer.element;
+    if (nativeElementOld instanceof HTMLElement && nativeElementOld.parentElement) {
+      this.erd.removeAllListeners(nativeElementOld.parentElement);
+      nativeElementOld.parentElement.parentElement && this.erd.removeAllListeners(nativeElementOld.parentElement.parentElement);
+    }
     this.currentStep = this.stepsContainerService.get(actionType);
 
     if (this.currentStep == null) throw new JoyrideStepDoesNotExist('');
@@ -155,6 +169,20 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.notifyStepClicked(actionType);
     const { name, route } = this.currentStep;
     this.onStepChange.emit({ name, route, actionType });
+    const { nativeElement } = this.currentStep.targetViewContainer.element;
+    if (nativeElement instanceof HTMLElement && nativeElement.parentElement) {
+      this.erd.listenTo(nativeElement.parentElement, () => {
+        this.scrollIfElementBeyondOtherElements();
+        this.scrollIfStepAndTargetAreNotVisible();
+        this.eventListener.resize();
+      });
+      nativeElement.parentElement.parentElement &&
+        this.erd.listenTo(nativeElement.parentElement.parentElement, () => {
+          this.scrollIfElementBeyondOtherElements();
+          this.scrollIfStepAndTargetAreNotVisible();
+          this.eventListener.resize();
+        });
+    }
   }
 
   private notifyStepClicked(actionType: StepActionType) {
@@ -260,9 +288,9 @@ export class JoyrideStepService implements IJoyrideStepService {
     );
   }
 
-  public getCurrentStep() {
-    if (!this.currentStepLast) return null;
-    const { name, route } = this.currentStepLast;
+  public getCurrentStep(): CurrentStep | null {
+    if (!(this.currentStepLast && this.currentStepLast.step)) return null;
+    const { name, route } = this.currentStepLast.step;
     return { name, route };
   }
 

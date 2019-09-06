@@ -5,6 +5,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { EmployeeRequets } from '../../../models/common/requests-rh/timeline-approver';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -22,6 +23,10 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public is_logistic: boolean = false;
   public is_vtd: boolean = false;
   public subscriptions: ISubscription[] = [];
+  public steps = [
+    'step_7',
+    'step_8',
+  ];
 
   get detailRequest() {
     return this.dataRequets.details_request;
@@ -46,6 +51,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
     private requestsRhService: RequestsRhService,
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.subscriptions.push(
       this.aproversRequestsService.getRequests().subscribe((data: any) => {
@@ -137,6 +143,13 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
           }
           this.viewModal = true;
         }
+      }),
+    );
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(
+          joyrideAppService.startTour({ steps: this.steps, startWith: 'step_7' }).subscribe(() => {}),
+        );
       }),
     );
   }

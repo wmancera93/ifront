@@ -130,6 +130,54 @@ export default {
           },
         },
       },
+      requests_rh: {
+        joyride: {
+          step_1: {
+            title: '',
+            text: 'Esta pagina permite realizar solicitudes',
+          },
+          step_2_1: {
+            title: 'Mis solicitudes',
+            text: 'En esta seccion se encontrara las solicitudes realizadas por el usuario',
+          },
+          step_3: {
+            title: 'Solicitudes - Ticket',
+            text: 'Número de solicitud unico, identificador de la solictud y fecha de creación',
+          },
+          step_4: {
+            title: 'Solicitudes - Tipo de solicitud',
+            text: 'Tipo de solicitud que se solicito',
+          },
+          step_5: {
+            title: 'Solicitudes - Estado de aprobación',
+            text: 'El estado de aprobación se refiere a la aceptacion por parte de las autoridades frente a la soliciyud realizada, estos estados son: Pendiente, En proceso, Aprobado, Cancelado ',
+          },
+          step_6: {
+            title: 'Solicitudes - Ver',
+            text: 'Al dar click sobre este icono Ver se podra visualizar la informacion de la solicitud y el flujo de aprobación',
+          },
+          step_7: {
+            title: 'Solicitudes - Ver Detalles',
+            text: 'En esta sección se encontrara los detalles de la solicitud y la fecha de creación',
+          },
+          step_8: {
+            title: 'Solicitudes - Ver Flujo aprobacion',
+            text: 'En esta sección se podra observar el nivel de aprobación en el que va la solicitud',
+          },
+          step_9: {
+            title: 'Solicitudes - Eliminar',
+            text: 'Activando este icono se puede eliminar la solicitud, esta acción solo podra realizarse cuando la solicitud este en estado En proceso',
+          },
+          step_10: {
+            title: 'Filtro de solicitudes',
+            text: 'Al activar el icono más (+) se despleagara los filtros para consultar las solicitudes, se debe checkear el tipo de la solicitud',
+          },
+          step_11: {
+            title: 'Creación de solicitudes',
+            text: 'Al activar este selector se pueden encontrar los tipos de solicitudes que se pueden realizar, ',
+          },
+        },
+      },
     },
   },
   en: {

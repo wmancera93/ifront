@@ -11,6 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
 import { ElementRef } from '@angular/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideStepsContainerService } from '../../utils/joyride';
 
 export const steps = [
   'step_1',
@@ -83,14 +84,11 @@ export class DashboardComponent implements OnInit {
     private tokenService: Angular2TokenService,
     public translate: TranslateService,
     public joyrideAppService: JoyrideAppService,
+    public stepsContainerService: JoyrideStepsContainerService,
   ) {
     const currentStep = joyrideAppService.joyrideStepService.getCurrentStep();
-    if (currentStep) {
-      if (currentStep.name === 'step_17') {
-        this.roleEmployee = false;
-        this.prendido.nativeElement.checked = true;
-        this.apagado.nativeElement.checked = false;
-      }
+    if (currentStep && currentStep.name === 'step_17') {
+      this.roleEmployee = false;
     }
     this.userAuthenticated = JSON.parse(localStorage.getItem('user'));
     this.router.events
@@ -185,7 +183,6 @@ export class DashboardComponent implements OnInit {
     if (this.userAuthenticated !== null || this.userAuthenticated !== undefined) {
       this.validateRoleManagement = this.userAuthenticated.employee.see_rpgen;
     }
-
     const url = window.location.href;
     let ambient;
 
@@ -212,6 +209,14 @@ export class DashboardComponent implements OnInit {
         this.showButtonDashManagement = false;
       }
     });
+  }
+
+  ngAfterViewInit(): void {
+    const currentStep = this.joyrideAppService.joyrideStepService.getCurrentStep();
+    if (currentStep && currentStep.name === 'step_17') {
+      this.prendido.nativeElement.checked = true;
+      this.apagado.nativeElement.checked = false;
+    }
   }
 
   vieweDashboardEmployee() {
