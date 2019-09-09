@@ -150,7 +150,8 @@ export default {
           },
           step_5: {
             title: 'Solicitudes - Estado de aprobación',
-            text: 'El estado de aprobación se refiere a la aceptacion por parte de las autoridades frente a la soliciyud realizada, estos estados son: Pendiente, En proceso, Aprobado, Cancelado ',
+            text:
+              'El estado de aprobación se refiere a la aceptacion por parte de las autoridades frente a la soliciyud realizada, estos estados son: Pendiente, En proceso, Aprobado, Cancelado ',
           },
           step_6: {
             title: 'Solicitudes - Ver',
@@ -166,15 +167,229 @@ export default {
           },
           step_9: {
             title: 'Solicitudes - Eliminar',
-            text: 'Activando este icono se puede eliminar la solicitud, esta acción solo podra realizarse cuando la solicitud este en estado En proceso',
+            text:
+              'Activando este icono se puede eliminar la solicitud, esta acción solo podra realizarse cuando la solicitud este en estado En proceso',
           },
           step_10: {
             title: 'Filtro de solicitudes',
-            text: 'Al activar el icono más (+) se despleagara los filtros para consultar las solicitudes, se debe checkear el tipo de la solicitud',
+            text:
+              'Al activar el icono más (+) se despleagara los filtros para consultar las solicitudes, se debe checkear el tipo de la solicitud',
           },
           step_11: {
             title: 'Creación de solicitudes',
-            text: 'Al activar este selector se pueden encontrar los tipos de solicitudes que se pueden realizar, ',
+            text:
+              'Al activar este selector se pueden encontrar los tipos de solicitudes que se pueden realizar, se debe seleccionar la solicitud a realizar',
+          },
+          step_12: {
+            title: 'Requisitios de solicitudes',
+            text:
+              'Esta sección requiere el diligenciamiento de los campos requisitos de solicitud, se deben diligenciar hatsa que se active el boton "Guardar", estos campos varian segun el proceso del cliente',
+          },
+          step_13: {
+            title: 'Guardado de solicitud',
+            text: 'Activando este boton podra guardar la solicitud, al mismo tiempo se enviara a los aprobadores asigandos',
+          },
+        },
+      },
+      queries: {
+        joyride: {
+          step_1: {
+            title: '',
+            text: 'En esta sección se encuentra un informe tipo tabla que consulta un historico de los ingresos y retenciones',
+          },
+          step_2: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de los pagos y deducciones de nomina',
+          },
+          step_3: {
+            title: '',
+            text: 'En esta sección se encuentra un informe tipo tabla que consulta un historico del saldo de cesantias ',
+          },
+          step_4: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de Embargos o retenciones judiciales',
+          },
+          step_5: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de los prestamos solicitados por el usuario',
+          },
+          step_6: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla con un informe de los dias de vacaciones que ya han sido tomados o disfrutados',
+          },
+          step_7: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de las vacaciones que se han tomado como compensadas',
+          },
+          step_8: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un informe de las vacaciones que se hn cargado y los dias pendientes, disponibles para solicitud',
+          },
+          step_9: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de los permisos solicitados, indicando fecha de ausentismo y descripción del permiso',
+          },
+          step_10: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta un historico de las incapacidades, con los dias tomados y la descripcion general de la incapacidad',
+          },
+          step_11: {
+            title: '',
+            text: 'En esta sección se encuentra un informe tipo tabla que consulta un historico de las horas extras laboradas',
+          },
+          step_12: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que muestra los cargos asignados al usuario y su periodo de ejecución',
+          },
+          step_13: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta los movimientos de iva realizados en un periodo de tiempo',
+          },
+          step_14: {
+            title: '',
+            text:
+              'En esta sección se encuentra un informe tipo tabla que consulta los mensajes que son enviados en la evaluación de cumplimeinto de horarios',
+          },
+          step_15: {
+            title: '',
+            text: 'En esta sección se encuentra un informe de las fechas de aniversario de los usuarios',
+          },
+          step_16: {
+            title: 'Visualización de registros',
+            text: 'Esta opción permite modificar el número de registros que se listan en el informe tipo tabla',
+          },
+          step_17: {
+            title: 'Descargue de informe',
+            text: 'Estos botones PDF y EXCEL permiten el descargue del informe en dichos formatos',
+          },
+          step_18: {
+            title: 'Informe de consulta',
+            text: 'Este es el informe de la consulta, puede filtrarse por cada columna de información',
+          },
+          step_19: {
+            title: 'Movimiento de registros',
+            text: 'Activando estos botones es posible dirigirse a las siguientes pagínas del informe',
+          },
+        },
+      },
+      comment_article: {
+        joyride: {
+          step_1: {
+            title: 'Contenido del anuncio',
+            text: 'En esta sección se encuentra a detalle el contenido completo del anuncio',
+          },
+          step_2: {
+            title: 'Creación y visualización de comentarios',
+            text: 'en esta seccion es posible realizar comentarios al anuncio y poder ver los comentarios de los demas usuarios',
+          },
+          step_3: {
+            title: 'Eliminación o edición de comentarios',
+            text: 'Activando estos botones, es posibl editar o eliminar los comentarios realizados por el mismo usuario',
+          },
+        },
+      },
+      events_employees: {
+        joyride: {
+          step_1: {
+            title: 'Detalle eventos de empleados',
+            text: 'Fotografia de compañero',
+          },
+          step_2: {
+            title: 'Detalle eventos de empleados',
+            text: 'Nombre y cargo de compañero',
+          },
+          step_3: {
+            title: 'Detalle eventos de empleados',
+            text: 'Fecha de aniversario',
+          },
+        },
+      },
+      pendings: {
+        joyride: {
+          step_1: {
+            title: '',
+            text: 'En esta pagina se encuentran listadas las solicitudes que estan pendientes por aprobación',
+          },
+          step_2: {
+            title: 'Registro de aprobaciones pendientes',
+            text: 'Este es un registro de una solicitud que se encuentra pendiente por aprobar',
+          },
+          step_3: {
+            title: 'Aprobación pendiente - Ticket',
+            text: 'Número único de la solicitud',
+          },
+          step_4: {
+            title: 'Aprobación pendiente - Descripción',
+            text: 'Titulo detalle de solicitud',
+          },
+          step_5: {
+            title: 'Aprobación pendiente - Nivel aprobación',
+            text: 'Nivel actual de aprobación para la solicitud',
+          },
+          step_6: {
+            title: 'Aprobación pendiente - Solicitante',
+            text: 'Nombre de usuario solicitante',
+          },
+          step_7: {
+            title: 'Aprobación pendiente - Fecha creación',
+            text: 'Fecha y antiguedad de la solicitud',
+          },
+          step_8: {
+            title: 'Aprobación pendiente - Aprobación',
+            text:
+              'Ingresando en este icono "Ver", se puede obtener un detalle de la solicitud y realizar la aprobación o cancelación de la solicitud',
+          },
+          step_9: {
+            title: 'Detalle aprobación - Solicitante',
+            text: 'Nombre, cargo y area laboral del solicitante',
+          },
+          step_10: {
+            title: 'Detalle aprobación - Detalle solicitud',
+            text:
+              'En esta seccion se encuentra el detalle de la solictud , fecha de ausencia, dias solicitados entre otra indformación segun el tipo de solicitud',
+          },
+          step_11: {
+            title: 'Detalle aprobación - Aprobadores',
+            text: 'En esta sección se puede observar el flujo de aprobadores para esta solicitud',
+          },
+          step_12: {
+            title: 'Detalle aprobación - Solicitante',
+            text: 'Nombre, cargo y area laboral del solicitante',
+          },
+          step_13: {
+            title: 'Detalle aprobación - Gestionar solicitud',
+            text:
+              'En esta sección se puede aprobar o rechazar la solicitud, al igual que indicar alguña observación, para aprobar la solciitud, confirme que el boton este deslizado a la parte izquierda de lla pantalla y diga "Aprobado", para canlear deslice el boton a la derecha de la pantalla y confirme que el titulo diga "Cancelado"',
+          },
+          step_14: {
+            title: 'Detalle aprobación - Guardar estado',
+            text: 'Oprima el boton "Guardar" para cambiar el estado de aprobación de la solicitud',
+          },
+          step_15: {
+            title: 'Detalle aprobación - Ver detalles',
+            text: 'En esta sección es posible ver observaciones de los aprobadores, solo para información',
+          },
+        },
+      },
+      my_team: {
+        joyride: {
+          step_1: {
+            title: '',
+            text: 'En esta pagina se encuentra el personal a cargo o equipo de trabajo',
+          },
+          step_2: {
+            title: 'Información de personal',
+            text: 'En esta tarjeta se encuentra el nombre del colaborador, el cargo y es posible dirigirse a reportes del colaborador dando click sobre el boton mas (+)',
           },
         },
       },
