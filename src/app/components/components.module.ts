@@ -54,6 +54,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { CivilStatusComponent } from './common/widgets/civil-status/civil-status.component';
 import { GenerationsComponent } from './common/widgets/generations/generations.component';
 import { GenderComponent } from './common/widgets/gender/gender.component';
+import { JoyrideModule } from '../utils/joyride';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { GenderComponent } from './common/widgets/gender/gender.component';
     CKEditorModule,
     NgxPaginationModule,
     ToasterModule.forRoot(),
+    JoyrideModule.forChild(),
     ReactiveFormsModule,
     FileUploadModule,
     PipesModule,

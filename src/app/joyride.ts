@@ -389,7 +389,32 @@ export default {
           },
           step_2: {
             title: 'Información de personal',
-            text: 'En esta tarjeta se encuentra el nombre del colaborador, el cargo y es posible dirigirse a reportes del colaborador dando click sobre el boton mas (+)',
+            text:
+              'En cada tarjeta se encuentra el nombre del colaborador, el cargo, area de trabajo y es posible dirigirse a reportes del colaborador dando click sobre el boton mas (+)',
+          },
+        },
+      },
+      my_team_reports: {
+        joyride: {
+          step_1: {
+            title: '',
+            text: 'En esta pagina se puede encontrar reportes del personal a cargo, absentismos, cargos, salarios y rotación',
+          },
+          step_2: {
+            title: 'Reporte de personal - opciones',
+            text: 'Estas son las opciones de consulta para cada colaborador, al dar click sobre cada una es posible obtener el reporte tipo tabla',
+          },
+          step_3: {
+            title: 'Reporte de personal - Visualización',
+            text: 'Esta opción permite modificar el número de registros por pagina en el reporte tipo tabla',
+          },
+          step_4: {
+            title: 'Reporte de personal - Descarga',
+            text: 'Es posible descargar el reporte en formato PDF accionando este boton',
+          },
+          step_5: {
+            title: 'Reporte de personal - Reporte',
+            text: 'El reporte es tipo tabla, es posible filtrarlo en las opciones de la tercera fila',
           },
         },
       },
