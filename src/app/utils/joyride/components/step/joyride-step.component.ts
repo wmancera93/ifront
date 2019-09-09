@@ -72,7 +72,9 @@ export class JoyrideStepComponent implements OnInit, OnDestroy, AfterViewInit {
   joyrideStepService: IJoyrideStepService;
 
   private positionAlreadyFixed: boolean;
-  private documentHeight: number;
+  private get documentHeight() {
+    return this.documentService.getDocumentHeight();
+  }
 
   prevText: Observable<string>;
   nextText: Observable<string>;
@@ -97,7 +99,6 @@ export class JoyrideStepComponent implements OnInit, OnDestroy, AfterViewInit {
     // Need to Inject here otherwise you will obtain a circular dependency
     this.joyrideStepService = this.injector.get(JoyrideStepService);
 
-    this.documentHeight = this.documentService.getDocumentHeight();
     this.subscriptions.push(this.subscribeToResizeEvents());
     this.title = this.step.title.asObservable();
     this.text = this.step.text.asObservable();

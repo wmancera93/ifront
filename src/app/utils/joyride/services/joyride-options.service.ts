@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { JoyrideOptions, CustomTexts, ICustomTexts } from '../models/joyride-options.class';
 import { of, Observable } from 'rxjs';
+import { CurrentStep } from './joyride-step.service';
+import { ROUTE_SEPARATOR } from '../constants';
+import cloneDeep from 'lodash/cloneDeep';
 
 export const DEFAULT_THEME_COLOR = '#3b5560';
 export const STEP_DEFAULT_POSITION = 'bottom';
@@ -33,6 +36,15 @@ export interface IJoyrideOptionsService {
   getCustomTexts(): ObservableCustomTexts;
 }
 
+export interface SubTour {
+  optionsInject?: (options?: JoyrideOptions) => Partial<JoyrideOptions>;
+  id: string;
+  route: string;
+  name: string;
+  steps: string[];
+  optionsService: JoyrideOptionsService;
+}
+
 @Injectable()
 export class JoyrideOptionsService implements IJoyrideOptionsService {
   private themeColor: string = DEFAULT_THEME_COLOR;
@@ -45,9 +57,7 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
   private waitingTime: number;
   private customTexts: ObservableCustomTexts;
   public isSubTour = false;
-  public subTour: {
-    [index: number]: { optionsInject?: (options?: JoyrideOptions) => Partial<JoyrideOptions>; step: string };
-  } = {};
+  public subTour: SubTour[] = [];
   public subTourIndex: number = 0;
   public callBackChildren?: () => void;
 
@@ -57,12 +67,12 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
     options = { ...options, ...optionsReult };
     this.stepsOrder = options.steps;
     this.stepDefaultPosition = options.stepDefaultPosition ? options.stepDefaultPosition : this.stepDefaultPosition;
-    this.logsEnabled = typeof options.logsEnabled !== 'undefined' ? options.logsEnabled : this.logsEnabled;
-    this.showCounter = typeof options.showCounter !== 'undefined' ? options.showCounter : this.showCounter;
-    this.showPrevButton = typeof options.showPrevButton !== 'undefined' ? options.showPrevButton : this.showPrevButton;
-    this.themeColor = options.themeColor ? options.themeColor : this.themeColor;
+    this.logsEnabled = options.logsEnabled || this.logsEnabled;
+    this.showCounter = options.showCounter || this.showCounter;
+    this.showPrevButton = options.showPrevButton || this.showPrevButton;
+    this.themeColor = options.themeColor || this.themeColor;
     this.firstStep = options.startWith;
-    this.waitingTime = typeof options.waitingTime !== 'undefined' ? options.waitingTime : DEFAULT_TIMEOUT_BETWEEN_STEPS;
+    this.waitingTime = options.waitingTime || DEFAULT_TIMEOUT_BETWEEN_STEPS;
     typeof options.customTexts !== 'undefined' ? this.setCustomText(options.customTexts) : this.setCustomText(DEFAULT_TEXTS);
   }
 
@@ -137,6 +147,56 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
   resetSubTours() {
     this.isSubTour = false;
     this.subTourIndex = 0;
-    this.subTour = {};
+    this.subTour = [];
+  }
+
+  getCurretnSubTour() {
+    return this.subTour[this.subTourIndex];
+  }
+
+  subTourPrev() {
+    const curretnSubTour = this.getCurretnSubTour().optionsService;
+    if (curretnSubTour) {
+      const {
+        stepsOrder,
+        stepDefaultPosition,
+        logsEnabled,
+        showCounter,
+        showPrevButton,
+        themeColor,
+        firstStep,
+        waitingTime,
+      } = curretnSubTour;
+      this.stepsOrder = stepsOrder;
+      this.stepDefaultPosition = stepDefaultPosition;
+      this.logsEnabled = logsEnabled;
+      this.showCounter = showCounter;
+      this.showPrevButton = showPrevButton;
+      this.themeColor = themeColor;
+      this.firstStep = firstStep;
+      this.waitingTime = waitingTime;
+    }
+    this.subTour.splice(this.subTourIndex, 1);
+    this.subTourIndex--;
+  }
+
+  subTourNext(currentStep: CurrentStep) {
+    if (this.isSubTour) {
+      this.subTourIndex++;
+    } else {
+      this.isSubTour = true;
+    }
+    const { name, route } = currentStep;
+    const step = `${name}${ROUTE_SEPARATOR}${route}`;
+    this.subTour.push({
+      optionsInject: ({ steps, startWith }) => {
+        return { steps: [step, ...steps], startWith: startWith || steps[0] };
+      },
+      optionsService: cloneDeep(this),
+      steps: this.getStepsOrder(),
+      id: step,
+      route,
+      name,
+    });
   }
 }
