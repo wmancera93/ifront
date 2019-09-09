@@ -7,7 +7,7 @@ import { DocumentService } from './document.service';
 import { StepDrawerService } from './step-drawer.service';
 import { DomRefService } from './dom.service';
 import { NO_POSITION } from '../directives/joyride.directive';
-import { JoyrideOptionsService } from './joyride-options.service';
+import { JoyrideOptionsService, SubTour } from './joyride-options.service';
 import { Router } from '@angular/router';
 import * as elementResizeDetector from 'element-resize-detector';
 
@@ -15,7 +15,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { JoyrideStepInfo } from '../models/joyride-step-info.class';
 import { JoyrideStepDoesNotExist, JoyrideStepOutOfRange } from '../models/joyride-error.class';
 import { LoggerService } from './logger.service';
-import { JoyrideService } from './joyride.service';
+import { ROUTE_SEPARATOR } from '../constants';
 
 const SCROLLBAR_SIZE = 20;
 
@@ -87,7 +87,6 @@ export class JoyrideStepService implements IJoyrideStepService {
   startTour(): Observable<JoyrideStepInfo> {
     this.stepsObserver = new ReplaySubject<JoyrideStepInfo>();
     this.stepsContainerService.init();
-    this.documentService.setDocumentHeight();
 
     this.tryShowStep(StepActionType.NEXT);
     this.eventListener.startListeningResizeEvents();
@@ -97,11 +96,22 @@ export class JoyrideStepService implements IJoyrideStepService {
 
   close() {
     this.removeCurrentStep();
-    this.notifyTourIsFinished();
-    this.DOMService.getNativeWindow().scrollTo(0, 0);
-    this.eventListener.stopListeningResizeEvents();
-    this.backDropService.remove();
-    this.optionsService.resetSubTours();
+    if (
+      this.optionsService.isSubTour &&
+      this.stepsContainerService.getStepsCount() === this.stepsContainerService.getCurrentStepIndex()
+    ) {
+      const curretnSubTour = this.optionsService.getCurretnSubTour();
+      this.prevSubTour(curretnSubTour).then(() => {
+        this.tryShowStep(StepActionType.PREV);
+      });
+    } else {
+      this.notifyTourIsFinished();
+      this.DOMService.getNativeWindow().scrollTo(0, 0);
+      this.eventListener.stopListeningResizeEvents();
+      this.backDropService.remove();
+      this.stepsContainerService.init();
+      this.optionsService.resetSubTours();
+    }
   }
 
   prev() {
@@ -116,9 +126,25 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.tryShowStep(StepActionType.NEXT);
   }
 
+  private async prevSubTour(subTour: SubTour) {
+    this.optionsService.subTourPrev();
+    this.stepsContainerService.resetSteps();
+    await this.router.navigate([subTour.route]);
+    this.stepsContainerService.setCurrentStepIndex(subTour.name);
+  }
+
   private async navigateToStepPage(action: StepActionType) {
     let stepRoute = this.stepsContainerService.getStepRoute(action);
-    if (stepRoute) {
+
+    let stepID: string;
+    const step = this.currentStepLast;
+    if (step) {
+      stepID = step.id || null;
+    }
+    const curretnSubTour = this.optionsService.getCurretnSubTour();
+    if (curretnSubTour && curretnSubTour.id === stepID) {
+      await this.prevSubTour(curretnSubTour);
+    } else if (stepRoute) {
       await this.router.navigate([stepRoute]);
     }
   }
@@ -153,6 +179,7 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private showStep(actionType: StepActionType) {
+    this.documentService.setDocumentHeight();
     const nativeElementOld = this.currentStep && this.currentStep.targetViewContainer.element;
     if (nativeElementOld instanceof HTMLElement && nativeElementOld.parentElement) {
       this.erd.removeAllListeners(nativeElementOld.parentElement);

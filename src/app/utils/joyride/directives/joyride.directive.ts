@@ -53,6 +53,9 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
   stepContentParams?: Object;
 
   @Input()
+  loading = false;
+
+  @Input()
   prevTemplate?: TemplateRef<any>;
 
   @Input()
@@ -113,13 +116,12 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
     this.step.isElementOrAncestorFixed =
       this.isElementFixed(this.viewContainerRef.element) ||
       this.isAncestorsFixed(this.viewContainerRef.element.nativeElement.parentElement);
-
     this.joyrideStepsContainer.addStep(this.step);
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['title'] || changes['text']) {
-      this.setAsyncFields(this.step);
+      this.setAsyncFields(this.step, changes);
     }
   }
 
@@ -127,7 +129,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
     return this.windowRef.getComputedStyle(element.nativeElement).position === 'fixed';
   }
 
-  private setAsyncFields(step: JoyrideStep) {
+  private setAsyncFields(step: JoyrideStep, changes?: SimpleChanges) {
     if (this.title instanceof Observable) {
       this.subscriptions.push(
         this.title.subscribe(title => {
@@ -135,7 +137,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
         }),
       );
     } else {
-      step.title.next(this.title);
+      step.title.next((changes && changes.title && changes.title.currentValue) || this.title);
     }
     if (this.text instanceof Observable) {
       this.subscriptions.push(
@@ -144,7 +146,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
         }),
       );
     } else {
-      step.text.next(this.text);
+      step.text.next((changes && changes.text && changes.text.currentValue) || this.text);
     }
   }
 
@@ -159,6 +161,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.joyrideStepsContainer.removeStep(this.step.name);
     this.subscriptions.forEach(sub => {
       sub.unsubscribe();
     });

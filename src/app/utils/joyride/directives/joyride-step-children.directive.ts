@@ -3,6 +3,7 @@ import { JoyrideStepService, CurrentStep } from '../services/joyride-step.servic
 import { JoyrideService } from '../services/joyride.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { ISubscription } from 'rxjs/Subscription';
+import cloneDeep from 'lodash/cloneDeep';
 import { ROUTE_SEPARATOR } from '../constants';
 import { JoyrideOptionsService } from '../services/joyride-options.service';
 
@@ -37,29 +38,15 @@ export class JoyrideStepChildren {
     private joyrideStepService: JoyrideStepService,
     private optionsService: JoyrideOptionsService,
     private joyrideService: JoyrideService,
-    router: Router,
-  ) {
-    router.events.forEach(e => {
+    private readonly router: Router,
+  ) {}
+
+  ngAfterViewInit() {
+    this.router.events.forEach(e => {
       if (e instanceof NavigationEnd && e.url === this.routerLink && this.clicked) {
         this.clicked = false;
-        this.joyrideService.closeTour();
-        if (this.optionsService.isSubTour) {
-          this.optionsService.subTourIndex++;
-        } else {
-          this.optionsService.isSubTour = true;
-        }
-        const { name, route } = this.currentStep;
-        const step = `${name}${ROUTE_SEPARATOR}${route}`;
-        this.optionsService.subTour[this.optionsService.subTourIndex] = {
-          optionsInject: ({ steps, startWith }) => {
-            return { steps: [step, ...steps], startWith: startWith || steps[0] };
-          },
-          step,
-        };
-        setTimeout(() => {
-          debugger;
-          this.optionsService.callBackChildren && this.optionsService.callBackChildren();
-        }, 2000);
+        this.optionsService.subTourNext(this.currentStep);
+        this.optionsService.callBackChildren && this.optionsService.callBackChildren();
       }
     });
   }

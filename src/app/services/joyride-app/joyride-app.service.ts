@@ -12,7 +12,6 @@ export class JoyrideAppService implements OnDestroy {
   public joyrideSuscriptions: ISubscription[] = [];
   public tourDone?: ISubscription;
   public canUseKeysJoride: boolean = true;
-  private isFirstTime: boolean = true;
 
   constructor(
     public joyrideStepService: JoyrideStepService,
@@ -45,17 +44,7 @@ export class JoyrideAppService implements OnDestroy {
           observable.emit(...a);
         }),
       );
-    if (this.isFirstTime) {
-      this.isFirstTime = false;
-      this.joyrideSuscriptions.push(
-        this.translate.onLangChange.subscribe(() => {
-          start();
-        }),
-      );
-      (this.translate as any).changeLang(this.translate.currentLang);
-    } else {
-      start();
-    }
+    start();
     return observable;
   }
 

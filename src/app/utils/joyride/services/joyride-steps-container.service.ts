@@ -47,8 +47,15 @@ export class JoyrideStepsContainerService {
     stepIds.forEach(stepId => this.steps.push({ id: stepId, step: null }));
   }
 
+  resetSteps() {
+    this.logger.info('Initializing the steps array.');
+    this.steps = [];
+    const stepIds = this.stepOptions.getStepsOrder();
+    stepIds.forEach(stepId => this.steps.push({ id: stepId, step: null }));
+  }
+
   addStep(stepToAdd: JoyrideStep) {
-    let stepExist = this.tempSteps.filter(step => step.name === stepToAdd.name).length > 0;
+    let stepExist = this.tempSteps.find(step => step.name === stepToAdd.name);
     if (!stepExist) {
       this.logger.info(`Adding step ${stepToAdd.name} to the steps list.`);
       this.tempSteps.push(stepToAdd);
@@ -128,6 +135,17 @@ export class JoyrideStepsContainerService {
       );
     }
   }
+
+  removeStep(name: string) {
+    const stepName = this.getStepName(name);
+    try {
+      const index = this.tempSteps.findIndex(step => step.name === stepName);
+      this.tempSteps.splice(index, 1);
+    } catch (e) {
+      this.logger.warn(`Trying to remove the step ${stepName}`);
+    }
+  }
+
   getStepNumber(stepName: string): number {
     return this.getStepIndex(stepName) + 1;
   }
@@ -148,5 +166,13 @@ export class JoyrideStepsContainerService {
   private getStepName(stepID: string): string {
     let stepName = stepID && stepID.includes(ROUTE_SEPARATOR) ? stepID.split(ROUTE_SEPARATOR)[0] : stepID;
     return stepName;
+  }
+
+  setCurrentStepIndex(stepName: string) {
+    this.currentStepIndex = this.getStepIndex(stepName) + 1;
+  }
+
+  getCurrentStepIndex() {
+    return this.currentStepIndex;
   }
 }
