@@ -36,7 +36,7 @@ export interface CurrentStep {
 @Injectable()
 export class JoyrideStepService implements IJoyrideStepService {
   private currentStep: JoyrideStep;
-  private currentStepLast: Step;
+  private currentStepLast: () => Step;
   private winTopPosition: number = 0;
   private winBottomPosition: number = 0;
   public onStepChange = new EventEmitter<Pick<JoyrideStep, 'name' | 'route'> & { actionType: StepActionType }>();
@@ -137,7 +137,7 @@ export class JoyrideStepService implements IJoyrideStepService {
     let stepRoute = this.stepsContainerService.getStepRoute(action);
 
     let stepID: string;
-    const step = this.currentStepLast;
+    const step = this.currentStepLast && this.currentStepLast();
     if (step) {
       stepID = step.id || null;
     }
@@ -316,8 +316,13 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   public getCurrentStep(): CurrentStep | null {
-    if (!(this.currentStepLast && this.currentStepLast.step)) return null;
-    const { name, route } = this.currentStepLast.step;
+    const currentStepLast = this.currentStepLast && this.currentStepLast();
+    if (!(currentStepLast && currentStepLast.step)) {
+      if (!this.currentStep) return null;
+      const { name, route } = this.currentStep;
+      return { name, route };
+    }
+    const { name, route } = currentStepLast.step;
     return { name, route };
   }
 
