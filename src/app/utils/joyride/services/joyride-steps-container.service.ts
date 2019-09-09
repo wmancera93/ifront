@@ -93,11 +93,12 @@ export class JoyrideStepsContainerService {
     return this.getStepByIndex(index);
   }
 
-  getStep(action: StepActionType): Step {
+  getStep(action: StepActionType): () => Step {
+    const { currentStepIndex } = this;
     if (action === StepActionType.NEXT) {
-      return this.steps[this.currentStepIndex + 1];
+      return () => this.steps[currentStepIndex + 1];
     } else {
-      return this.steps[this.currentStepIndex - 1];
+      return () => this.steps[currentStepIndex - 1];
     }
   }
 
@@ -115,7 +116,7 @@ export class JoyrideStepsContainerService {
 
   getStepRoute(action: StepActionType) {
     let stepID: string;
-    const step = this.getStep(action);
+    const step = this.getStep(action)();
     if (step) {
       stepID = step.id || null;
     }

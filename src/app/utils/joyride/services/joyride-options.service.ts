@@ -58,12 +58,13 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
   private customTexts: ObservableCustomTexts;
   public isSubTour = false;
   public subTour: SubTour[] = [];
-  public subTourIndex: number = 0;
+  public get subTourIndex() {
+    return this.subTour.length - 1;
+  }
   public callBackChildren?: () => void;
 
   setOptions(options: JoyrideOptions) {
-    const optionsReult =
-      this.isSubTour && this.subTour[this.subTourIndex] ? this.subTour[this.subTourIndex].optionsInject({ ...options }) : {};
+    const optionsReult = this.getCurretnSubTour() ? this.getCurretnSubTour().optionsInject({ ...options }) : {};
     options = { ...options, ...optionsReult };
     this.stepsOrder = options.steps;
     this.stepDefaultPosition = options.stepDefaultPosition ? options.stepDefaultPosition : this.stepDefaultPosition;
@@ -146,7 +147,6 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
 
   resetSubTours() {
     this.isSubTour = false;
-    this.subTourIndex = 0;
     this.subTour = [];
   }
 
@@ -155,6 +155,7 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
   }
 
   subTourPrev() {
+    this.isSubTour = true;
     const curretnSubTour = this.getCurretnSubTour().optionsService;
     if (curretnSubTour) {
       const {
@@ -177,15 +178,13 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
       this.waitingTime = waitingTime;
     }
     this.subTour.splice(this.subTourIndex, 1);
-    this.subTourIndex--;
+    if (!this.subTourIndex) {
+      this.isSubTour = false;
+    }
   }
 
   subTourNext(currentStep: CurrentStep) {
-    if (this.isSubTour) {
-      this.subTourIndex++;
-    } else {
-      this.isSubTour = true;
-    }
+    this.isSubTour = true;
     const { name, route } = currentStep;
     const step = `${name}${ROUTE_SEPARATOR}${route}`;
     this.subTour.push({

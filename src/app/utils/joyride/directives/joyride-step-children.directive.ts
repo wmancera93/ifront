@@ -30,7 +30,7 @@ export class JoyrideStepChildren {
   test() {
     this.clicked = true;
     this.currentStep = this.joyrideStepService.getCurrentStep();
-    this.joyrideService.closeTour();
+    if (this.routerLink) this.joyrideService.closeTour();
   }
 
   constructor(
