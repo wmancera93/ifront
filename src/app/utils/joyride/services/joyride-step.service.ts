@@ -162,9 +162,9 @@ export class JoyrideStepService implements IJoyrideStepService {
     await this.navigateToStepPage(actionType);
     const timeout = this.optionsService.getWaitingTime();
     if (timeout > 100) this.backDropService.remove();
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
-        this.showStep(actionType);
+        await this.showStep(actionType);
       } catch (error) {
         if (error instanceof JoyrideStepDoesNotExist) {
           this.tryShowStep(actionType);
@@ -178,7 +178,7 @@ export class JoyrideStepService implements IJoyrideStepService {
     }, timeout);
   }
 
-  private showStep(actionType: StepActionType) {
+  private async showStep(actionType: StepActionType) {
     this.documentService.setDocumentHeight();
     const nativeElementOld = this.currentStep && this.currentStep.targetViewContainer.element;
     if (nativeElementOld instanceof HTMLElement && nativeElementOld.parentElement) {
@@ -188,14 +188,24 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.currentStep = this.stepsContainerService.get(actionType);
 
     if (this.currentStep == null) throw new JoyrideStepDoesNotExist('');
+    const { waitingTime, name, route } = this.currentStep;
     // Scroll the element to get it visible if it's in a scrollable element
     this.scrollIfElementBeyondOtherElements();
+
+    if (waitingTime) {
+      this.onStepChange.emit({ name, route, actionType });
+      await new Promise(resolve => {
+        setTimeout(() => {
+          resolve();
+        }, waitingTime);
+      });
+    }
     this.backDropService.draw(this.currentStep);
     this.drawStep(this.currentStep);
     this.scrollIfStepAndTargetAreNotVisible();
     this.notifyStepClicked(actionType);
-    const { name, route } = this.currentStep;
-    this.onStepChange.emit({ name, route, actionType });
+
+    if (!waitingTime) this.onStepChange.emit({ name, route, actionType });
     const { nativeElement } = this.currentStep.targetViewContainer.element;
     if (nativeElement instanceof HTMLElement && nativeElement.parentElement) {
       this.erd.listenTo(nativeElement.parentElement, () => {

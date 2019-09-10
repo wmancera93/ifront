@@ -157,14 +157,7 @@ export default {
             title: 'Solicitudes - Ver',
             text: 'Al dar click sobre este icono Ver se podra visualizar la informacion de la solicitud y el flujo de aprobación',
           },
-          step_7: {
-            title: 'Solicitudes - Ver Detalles',
-            text: 'En esta sección se encontrara los detalles de la solicitud y la fecha de creación',
-          },
-          step_8: {
-            title: 'Solicitudes - Ver Flujo aprobacion',
-            text: 'En esta sección se podra observar el nivel de aprobación en el que va la solicitud',
-          },
+
           step_9: {
             title: 'Solicitudes - Eliminar',
             text:
@@ -402,7 +395,8 @@ export default {
           },
           step_2: {
             title: 'Reporte de personal - opciones',
-            text: 'Estas son las opciones de consulta para cada colaborador, al dar click sobre cada una es posible obtener el reporte tipo tabla',
+            text:
+              'Estas son las opciones de consulta para cada colaborador, al dar click sobre cada una es posible obtener el reporte tipo tabla',
           },
           step_3: {
             title: 'Reporte de personal - Visualización',
@@ -415,6 +409,22 @@ export default {
           step_5: {
             title: 'Reporte de personal - Reporte',
             text: 'El reporte es tipo tabla, es posible filtrarlo en las opciones de la tercera fila',
+          },
+        },
+      },
+    },
+    components: {
+      common: {
+        time_line_approvers: {
+          joyride: {
+            step_7: {
+              title: 'Solicitudes - Ver Detalles',
+              text: 'En esta sección se encontrara los detalles de la solicitud y la fecha de creación',
+            },
+            step_8: {
+              title: 'Solicitudes - Ver Flujo aprobacion',
+              text: 'En esta sección se podra observar el nivel de aprobación en el que va la solicitud',
+            },
           },
         },
       },

@@ -23,4 +23,5 @@ export class JoyrideStep {
   targetViewContainer: ViewContainerRef;
   stepInstance: JoyrideStepComponent;
   childrens: QueryList<JoyrideStepChildren>;
+  waitingTime?: number;
 }

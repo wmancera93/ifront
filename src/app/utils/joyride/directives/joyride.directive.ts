@@ -24,6 +24,7 @@ import { isPlatformBrowser } from '@angular/common';
 import { TemplatesService } from '../services/templates.service';
 import { Observable, Subscription } from 'rxjs';
 import { JoyrideStepChildren } from './joyride-step-children.directive';
+import { DEFAULT_TIMEOUT_BETWEEN_STEPS } from '..';
 
 export const NO_POSITION = 'NO_POSITION';
 
@@ -45,6 +46,9 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input()
   stepPosition?: string = NO_POSITION;
+
+  @Input()
+  waitingTime?: number = 0;
 
   @Input()
   stepContent?: TemplateRef<any>;
@@ -111,6 +115,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
     if (!this.name) throw new JoyrideError("All the steps should have the 'joyrideStep' property set with a custom name.");
     this.step.name = this.name;
     this.step.childrens = this.childrens;
+    this.step.waitingTime = this.waitingTime;
     this.step.route = this.router.url.substr(0, 1) === '/' ? this.router.url.substr(1) : this.router.url;
     this.step.transformCssStyle = this.windowRef.getComputedStyle(this.viewContainerRef.element.nativeElement).transform;
     this.step.isElementOrAncestorFixed =

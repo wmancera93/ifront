@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { EmployeeRequets } from '../../../models/common/requests-rh/timeline-approver';
 import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
+import { JoyrideService, StepActionType } from '../../../utils/joyride';
 
 @Component({
   selector: 'app-time-line-approvers',
@@ -15,7 +16,6 @@ import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.ser
 export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public dataRequets: EmployeeRequets;
   public fileSupport = '';
-  public viewModal = false;
   public dateFirts: string;
   public dateFinally: string;
   public requests_print: string;
@@ -23,10 +23,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public is_logistic: boolean = false;
   public is_vtd: boolean = false;
   public subscriptions: ISubscription[] = [];
-  public steps = [
-    'step_7',
-    'step_8',
-  ];
+  public steps = ['step_7', 'step_8'];
 
   get detailRequest() {
     return this.dataRequets.details_request;
@@ -52,9 +49,23 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
     public joyrideAppService: JoyrideAppService,
+    public joyrideService: JoyrideService,
   ) {
     this.subscriptions.push(
       this.aproversRequestsService.getRequests().subscribe((data: any) => {
+        $('#aprovers_requests')
+          .on('shown.bs.modal', e => {
+            if (data.handleNext) this.joyrideService.next();
+          })
+          .on('hidden.bs.modal', () => {
+            $('#aprovers_requests').off('shown.bs.modal');
+          });
+        const openModal = () => {
+          if (document.getElementById('aprovers_requests').className !== 'modal show') {
+            document.getElementById('btn_aprovers_requests').click();
+            document.getElementById('bodyGeneral').removeAttribute('style');
+          }
+        };
         if (data.type_request == 'requestsOnly') {
           this.requests_print = data.type_request;
           this.subscriptions.push(
@@ -88,12 +99,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
 
                 this.dateFirts = date_begin_format;
                 this.dateFinally = date_end_format;
-
-                if (document.getElementById('aprovers_requests').className !== 'modal show') {
-                  document.getElementById('btn_aprovers_requests').click();
-                  document.getElementById('bodyGeneral').removeAttribute('style');
-                }
-                this.viewModal = true;
+                openModal();
               }
             }),
           );
@@ -136,20 +142,13 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
           this.dateFirts = date_begin;
           this.dateFinally = date_end;
           this.fileSupport = null;
-
-          if (document.getElementById('aprovers_requests').className !== 'modal show') {
-            document.getElementById('btn_aprovers_requests').click();
-            document.getElementById('bodyGeneral').removeAttribute('style');
-          }
-          this.viewModal = true;
+          openModal();
         }
       }),
     );
     this.subscriptions.push(
       joyrideAppService.onStartTour.subscribe(() => {
-        this.subscriptions.push(
-          joyrideAppService.startTour({ steps: this.steps, startWith: 'step_7' }).subscribe(() => {}),
-        );
+        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps, startWith: 'step_7' }).subscribe(() => {}));
       }),
     );
   }
@@ -158,6 +157,22 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 400);
+    this.subscriptions.push(
+      this.joyrideAppService.joyrideStepService.onStepChange.subscribe(({ name, actionType }) => {
+        if (
+          (actionType === StepActionType.NEXT && name == 'step_9') ||
+          (actionType === StepActionType.PREV && name === 'step_6')
+        ) {
+          $('#aprovers_requests').modal('hide');
+        }
+        if (
+          (actionType === StepActionType.PREV && name == 'step_8') ||
+          (actionType === StepActionType.PREV && name == 'step_7' && !this.dataRequets.request.answers_to_json.length)
+        ) {
+          $('#aprovers_requests').modal('show');
+        }
+      }),
+    );
   }
 
   viewSupport() {

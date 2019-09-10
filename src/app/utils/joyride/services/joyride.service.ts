@@ -44,4 +44,12 @@ export class JoyrideService {
   setCallBackChildren(callBack) {
     this.optionsService.callBackChildren = callBack;
   }
+
+  next() {
+    this.isTourInProgress() && this.stepService.next();
+  }
+
+  prev() {
+    this.isTourInProgress() && this.stepService.prev();
+  }
 }

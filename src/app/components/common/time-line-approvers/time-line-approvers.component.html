@@ -8,27 +8,23 @@
 ></button>
 <div class="modal" id="aprovers_requests" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content" *ngIf="viewModal">
-      <div
-        class="modal-header borderLine-title row-hr justify-content-center"
-        joyrideStep="step_7"
-        [title]="joyride('step_7.title') | translate"
-        [text]="joyride('step_7.text') | translate"
-      >
+    <div class="modal-content">
+      <div class="modal-header borderLine-title row-hr justify-content-center">
         <div class="col-12 col-lg-10 text-center text-lg-left">
-          <h4 class="modal-title titleColor text-shadow">
+          <h4 class="modal-title titleColor text-shadow" *ngIf="dataRequets">
             {{ dataRequets.title }}
           </h4>
         </div>
       </div>
       <div
         class="modal-body font-controls-login"
-        joyrideStep="step_8"
-        [title]="joyride('step_8.title') | translate"
-        [text]="joyride('step_8.text') | translate"
+        joyrideStep="step_7"
+        [title]="joyride('step_7.title') | translate"
+        [text]="joyride('step_7.text') | translate"
+        [waitingTime]="200"
       >
         <div class="container">
-          <div class="timeline">
+          <div class="timeline" *ngIf="dataRequets">
             <div class="line text-muted"></div>
             <div class="separator text-muted"></div>
 
@@ -250,7 +246,12 @@
               </div>
             </article>
 
-            <div *ngIf="dataRequets.request.answers_to_json">
+            <div
+              *ngIf="dataRequets && dataRequets.request.answers_to_json.length"
+              joyrideStep="step_8"
+              [title]="joyride('step_8.title') | translate"
+              [text]="joyride('step_8.text') | translate"
+            >
               <div *ngFor="let answer of dataRequets.request.answers_to_json">
                 <div class="separator text-muted"></div>
 

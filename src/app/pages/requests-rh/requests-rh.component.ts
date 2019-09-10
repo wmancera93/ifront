@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
+import { JoyrideService } from '../../utils/joyride';
 
 @Component({
   selector: 'app-requests-rh',
@@ -75,6 +76,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     public router: Router,
     public translate: TranslateService,
     public joyrideAppService: JoyrideAppService,
+    public joyrideService: JoyrideService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -180,10 +182,11 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     this.router.navigate(['ihr/index']);
   }
 
-  modalAprovers(request: ListRequests) {
+  modalAprovers(request: ListRequests, handleNext: boolean) {
     // request.flag_count = 0;
     this.aproversRequestsService.setRequests({
       request,
+      handleNext,
       type_request: 'requestsOnly',
     });
   }
