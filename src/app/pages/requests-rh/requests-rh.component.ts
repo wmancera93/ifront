@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from '../../services/joyride-app/joyride-app.service';
-import { JoyrideService } from '../../utils/joyride';
+import { JoyrideService, StepActionType } from '../../utils/joyride';
 
 @Component({
   selector: 'app-requests-rh',
@@ -24,10 +24,9 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
   public requestStatic: ListRequests[] = [];
   public getListrequest: ListRequests;
   public listTypesFilters: ListRequetsTypes[] = [];
-  public viewContainer = false;
   private alertWarning: Alerts[];
   public idDelete = 0;
-  public is_collapse: boolean;
+  public is_collapse: boolean = true;
   public status_approved: string;
   public status_cancelled: string;
   public status_inProcess: string;
@@ -47,6 +46,7 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     'step_11',
   ];
   typesFilters;
+  private collapse;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -144,6 +144,30 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 1000);
+
+    this.subscriptions.push(
+      this.joyrideAppService.joyrideStepService.onStepChange.subscribe(({ name, actionType }) => {
+        if (
+          (actionType === StepActionType.NEXT && name == 'step_11') ||
+          (actionType === StepActionType.NEXT && name == 'step_10')
+        ) {
+          this.collapse && this.collapse.collapse('hide');
+        }
+      }),
+    );
+  }
+
+  ngAfterViewInit(): void {
+    //Called after ngAfterContentInit when the component's view has been initialized. Applies to components only.
+    //Add 'implements AfterViewInit' to the class.
+    this.collapse = $('#collapseExample')
+      .on('hide.bs.collapse, hidden.bs.collapse', () => {
+        // do something...
+        this.is_collapse = true;
+      })
+      .on('show.bs.collapse, shown.bs.collapse', () => {
+        this.is_collapse = false;
+      });
   }
 
   getObjectRequests() {
@@ -156,7 +180,6 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
             request_types,
           };
           this.requestStatic = this.requests.my_requests_list;
-          this.viewContainer = true;
           this.listTypesFilters = this.requests.list_requets_types.filter(
             ({ id_activity }) =>
               id_activity !== 'AUX1' && id_activity !== 'AUX2' && id_activity !== 'AUX3' && id_activity !== 'VITD',
@@ -167,7 +190,6 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
               id_activity !== 'AUX1' && id_activity !== 'AUX2' && id_activity !== 'AUX3' && id_activity !== 'VITD',
           );
         } else {
-          this.viewContainer = false;
         }
 
         // setTimeout(() => {
@@ -239,13 +261,10 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     }
   }
 
-  collapse(is_collapse: boolean) {
-    this.is_collapse = is_collapse;
-  }
-
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
+    this.collapse && this.collapse.off();
   }
 }

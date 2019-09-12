@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <div class="row-hr-container justify-content-center" *ngIf="viewContainer">
+  <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
         <div class="col-lg-6 col-12">
@@ -43,6 +43,9 @@
                 data-toggle="dropdown"
                 aria-haspopup="true"
                 aria-expanded="false"
+                joyrideStep="step_11"
+                [title]="joyride('step_11.title') | translate"
+                [text]="joyride('step_11.text') | translate"
               >
                 <i class="fa fa-plus"></i>
                 {{ parseT('btn_new') | translate }}
@@ -102,25 +105,21 @@
 
       <div class="border-botton-general">
         <div class="row top-containter">
-          <div class="col-xl-4 col-lg-4 col-12 text-left">
+          <div
+            class="col-xl-4 col-lg-4 col-12 text-left"
+            joyrideStep="step_10"
+            [title]="joyride('step_10.title') | translate"
+            [text]="joyride('step_10.text') | translate"
+            joyrideStepChildren
+          >
             <b>
               {{ parseT('query_filters') | translate }}
             </b>
             <i
-              *ngIf="!is_collapse"
-              class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
+              class="fa fa-fw icon-collapse {{ is_collapse ? 'fa-plus' : 'fa-minus' }} fa-1x cursor-general"
               data-toggle="collapse"
               data-target="#collapseExample"
               aria-expanded="false"
-              (click)="collapse(true)"
-            ></i>
-            <i
-              *ngIf="is_collapse"
-              class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              (click)="collapse(false)"
             ></i>
           </div>
         </div>
@@ -158,7 +157,7 @@
         <div class="col-12">
           <div
             class="widget bg-white-1x"
-            *ngFor="let request of requests.my_requests_list"
+            *ngFor="let request of requests?.my_requests_list"
             joyrideStep="step_2_1"
             [title]="joyride('step_2_1.title') | translate"
             [text]="joyride('step_2_1.text') | translate"

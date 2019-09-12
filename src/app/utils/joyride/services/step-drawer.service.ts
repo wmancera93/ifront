@@ -6,7 +6,6 @@ import { JoyrideStep } from '../models/joyride-step.class';
 export class StepDrawerService {
   private refMap: { [key: string]: ComponentRef<JoyrideStepComponent> } = {};
   private pointerEvents: string;
-  private childrens: string[];
 
   constructor(
     private readonly componentFactoryResolver: ComponentFactoryResolver,
@@ -19,11 +18,9 @@ export class StepDrawerService {
     if (nativeElement instanceof HTMLElement) {
       this.pointerEvents = nativeElement.style.pointerEvents;
       nativeElement.style.pointerEvents = 'none';
-      step.childrens.forEach((children, key) => {
+      step.childrens.forEach((children) => {
         const { nativeElement } = children.viewContainerRef.element;
         if (nativeElement instanceof HTMLElement) {
-          this.childrens[key] = nativeElement.style.pointerEvents;
-
           nativeElement.style.pointerEvents = children.active ? 'all' : 'none';
         }
       });
@@ -56,14 +53,13 @@ export class StepDrawerService {
     this.appRef.detachView(this.refMap[name].hostView);
     if (nativeElement instanceof HTMLElement) {
       nativeElement.style.pointerEvents = this.pointerEvents;
-      childrens.forEach((children, key) => {
+      childrens.forEach((children) => {
         const { nativeElement } = children.viewContainerRef.element;
         if (nativeElement instanceof HTMLElement) {
-          nativeElement.style.pointerEvents = this.childrens[key];
+          nativeElement.style.pointerEvents = undefined;
         }
       });
     }
-    this.childrens = [];
     this.refMap[name].destroy();
   }
 }
