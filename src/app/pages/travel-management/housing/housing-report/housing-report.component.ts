@@ -71,7 +71,7 @@ export class HousingReportComponent implements OnInit, OnDestroy {
   }
 
   returnBack() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   collapse(param: boolean) {

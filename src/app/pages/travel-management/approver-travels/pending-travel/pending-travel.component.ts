@@ -599,7 +599,7 @@ export class PendingTravelComponent implements OnInit {
   }
 
   returnBackTravelPending() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
   modalAproversTravelPending(request: any, type: string) {
     this.travelApproverServiceShared.setviewDetailRequests({

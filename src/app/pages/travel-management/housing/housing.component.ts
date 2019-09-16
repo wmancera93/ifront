@@ -67,7 +67,7 @@ export class HousingComponent implements OnInit {
     });
   }
   returnBackHousing() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   watchHousing(housing) {

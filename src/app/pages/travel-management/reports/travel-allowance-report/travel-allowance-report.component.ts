@@ -119,7 +119,7 @@ export class TravelAllowanceReportComponent implements OnInit, OnDestroy {
   }
 
   returnBackReportAllowances() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
   getObjectPrint(param) {
     const personal_number_send =

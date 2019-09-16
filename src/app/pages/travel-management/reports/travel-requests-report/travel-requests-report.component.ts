@@ -113,7 +113,7 @@ export class TravelRequestsReportComponent implements OnInit, OnDestroy {
     this.getObjectPrint('general');
   }
   returnBackReportTravel() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   getObjectPrint(param) {

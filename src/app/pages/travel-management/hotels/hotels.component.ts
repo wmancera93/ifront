@@ -66,7 +66,7 @@ export class HotelsComponent implements OnInit {
   }
 
   returnBackPage() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   viewHotels() {}

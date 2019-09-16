@@ -80,7 +80,7 @@ export class TransportationLogisticsComponent implements OnInit, OnDestroy {
   }
 
   returnBack() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   sortByNumber(dataBySort: any) {

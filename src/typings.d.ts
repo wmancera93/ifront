@@ -7,4 +7,5 @@ interface NodeModule {
 
 interface Window {
   $: any;
+  Pace: any;
 }
