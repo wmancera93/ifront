@@ -45,6 +45,9 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
   text?: string | Observable<string>;
 
   @Input()
+  loading: boolean | Observable<boolean> = false;
+
+  @Input()
   stepPosition?: string = NO_POSITION;
 
   @Input()
@@ -55,9 +58,6 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
 
   @Input()
   stepContentParams?: Object;
-
-  @Input()
-  loading = false;
 
   @Input()
   prevTemplate?: TemplateRef<any>;
@@ -125,7 +125,7 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['title'] || changes['text']) {
+    if (changes['title'] || changes['text'] || changes['loading']) {
       this.setAsyncFields(this.step, changes);
     }
   }
@@ -152,6 +152,15 @@ export class JoyrideDirective implements AfterViewInit, OnChanges, OnDestroy {
       );
     } else {
       step.text.next((changes && changes.text && changes.text.currentValue) || this.text);
+    }
+    if (this.loading instanceof Observable) {
+      this.subscriptions.push(
+        this.loading.subscribe(loading => {
+          step.loading.next(loading);
+        }),
+      );
+    } else {
+      step.loading.next((changes && changes.loading && changes.loading.currentValue) || this.loading);
     }
   }
 

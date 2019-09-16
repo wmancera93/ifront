@@ -277,15 +277,15 @@ export default {
       },
       comment_article: {
         joyride: {
-          step_1: {
+          step_1_comment_article: {
             title: 'Contenido del anuncio',
             text: 'En esta sección se encuentra a detalle el contenido completo del anuncio',
           },
-          step_2: {
+          step_2_comment_article: {
             title: 'Creación y visualización de comentarios',
             text: 'en esta seccion es posible realizar comentarios al anuncio y poder ver los comentarios de los demas usuarios',
           },
-          step_3: {
+          step_3_comment_article: {
             title: 'Eliminación o edición de comentarios',
             text: 'Activando estos botones, es posibl editar o eliminar los comentarios realizados por el mismo usuario',
           },
