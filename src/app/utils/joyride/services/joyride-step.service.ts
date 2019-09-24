@@ -102,7 +102,7 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.removeCurrentStep();
     if (
       this.optionsService.isSubTour &&
-      this.stepsContainerService.getStepsCount() === this.stepsContainerService.getCurrentStepIndex()
+      this.stepsContainerService.getStepsCount() === this.stepsContainerService.getCurrentStepIndex() + 1
     ) {
       const curretnSubTour = this.optionsService.getCurretnSubTour();
       this.prevSubTour(curretnSubTour).then(() => {
