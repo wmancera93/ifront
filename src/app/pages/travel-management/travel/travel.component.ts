@@ -570,7 +570,7 @@ export class TravelComponent implements OnInit, OnDestroy {
   }
 
   returnBackPage() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   newFormTravel() {

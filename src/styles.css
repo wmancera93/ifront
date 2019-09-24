@@ -1060,7 +1060,7 @@ app-login header {
 /*Header Style*/
 
 #page-wrapper {
-  position: inherit !important;
+  position: relative !important;
   margin: var(--width-page-wrapper) !important;
   min-height: 100vh !important;
   box-shadow: inset 2px 0px 9px 0px rgba(153, 153, 153, 1) !important;

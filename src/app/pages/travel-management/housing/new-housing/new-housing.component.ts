@@ -305,7 +305,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   addHousig() {
-    debugger;
     const { bedrooms, beds: bedsCount } = this.forms;
     const arrayBedrooms = [];
     for (let i = 0; i < bedrooms.value; i++) {
@@ -377,7 +376,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
   }
 
   addMoreBedRom() {
-    debugger;
     const count = this.arrayBedrooms[this.bedGroupSelect].count.beds;
     const beds = [];
     for (let j = 0; j < count; j++) {
@@ -480,7 +478,6 @@ export class NewHousingComponent implements OnInit, OnDestroy {
     this.bedRoomSelect = -1;
   }
   closeAll() {
-    debugger;
     const modal = open();
     document.getElementById('bodyGeneral').removeAttribute('style');
     this.modalActions.close = () => {

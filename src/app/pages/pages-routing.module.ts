@@ -4,19 +4,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // components
-import { LoginComponent } from './authentication/login/login.component';
-import { ResetAccountComponent } from './authentication/reset-account/reset-account.component';
-import { LockedScreenComponent } from './authentication/locked-screen/locked-screen.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ConfirmResetAcountComponent } from './authentication/confirm-reset-acount/confirm-reset-acount.component';
 import { ErrorPageComponent } from './error-page/error-page.component';
 import { MyTeamComponent } from './my-team/my-team.component';
 import { MyTeamReportsComponent } from './my-team/my-team-reports/my-team-reports.component';
 import { HierarchicalChartComponent } from './hierarchical-chart/hierarchical-chart.component';
-import { HolidayLetterComponent } from './auto-services/holiday-letter/holiday-letter.component';
-import { LaborCertificatesComponent } from './auto-services/labor-certificates/labor-certificates.component';
-import { PayrollReceiptsComponent } from './auto-services/payroll-receipts/payroll-receipts.component';
-import { CertificateIncomeWithholdingComponent } from './auto-services/certificate-income-withholding/certificate-income-withholding.component';
 import { PermisionsUsersComponent } from './reports-rh/permisions-users/permisions-users.component';
 import { RequestsComponent } from './reports-rh/requests/requests.component';
 import { MyPublicationsComponent } from './billboard/my-publications/my-publications.component';
@@ -34,24 +26,9 @@ import { TimeEvaluationComponent } from './queries/time-evaluation/time-evaluati
 import { EvaluationObjectivesComponent } from './performance-evaluation/evaluation-objectives/evaluation-objectives.component';
 import { HourExtrasComponent } from './reports-rh/hour-extras/hour-extras.component';
 import { MyHourExtrasComponent } from './queries/my-hour-extras/my-hour-extras.component';
-import { TravelManagementComponent } from './travel-management/travel-management.component';
-import { TravelComponent } from './travel-management/travel/travel.component';
-import { HotelsComponent } from './travel-management/hotels/hotels.component';
 import { PlanningEvaluationComponent } from './performance-evaluation/planning-evaluation/planning-evaluation.component';
 import { TrainingComponent } from './events-management/training/training.component';
-import { AdvancesComponent } from './travel-management/advances/advances.component';
-import { SpendComponent } from './travel-management/spend/spend.component';
-import { ManagedTravelComponent } from './travel-management/approver-travels/managed-travel/managed-travel.component';
-import { PendingTravelComponent } from './travel-management/approver-travels/pending-travel/pending-travel.component';
-import { TravelRequestsReportComponent } from './travel-management/reports/travel-requests-report/travel-requests-report.component';
-import { TravelAdvanceReportComponent } from './travel-management/reports/travel-advance-report/travel-advance-report.component';
-import { TravelAllowanceReportComponent } from './travel-management/reports/travel-allowance-report/travel-allowance-report.component';
-import { TravelApproverReportComponent } from './travel-management/reports/travel-approver-report/travel-approver-report.component';
 import { RequestsApproversLogsComponent } from './reports-rh/requests-approvers-logs/requests-approvers-logs.component';
-import { TransportationLogisticsComponent } from './travel-management/transportation-logistics/transportation-logistics.component';
-import { TrasnportationReportComponent } from './travel-management/transportation-logistics/trasnportation-report/trasnportation-report.component';
-import { HousingComponent } from './travel-management/housing/housing.component';
-import { HousingReportComponent } from './travel-management/housing/housing-report/housing-report.component';
 import { DemographicChartComponent } from './dashboard/managerial/demographic-chart/demographic-chart.component';
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
@@ -59,20 +36,12 @@ import { QueriesComponent } from './queries/queries/queries.component';
 
 const routes: Routes = [
   {
-    path: 'login',
-    component: LoginComponent,
+    path: 'ihr/authentication',
+    loadChildren: './authentication/authentication.module#AuthenticationModule',
   },
   {
-    path: 'reset_account',
-    component: ResetAccountComponent,
-  },
-  {
-    path: 'locked_screen',
-    component: LockedScreenComponent,
-  },
-  {
-    path: 'confirm_reset_account',
-    component: ConfirmResetAcountComponent,
+    path: 'ihr/travel_management',
+    loadChildren: './travel-management/travel-management.module#TravelManagementModule',
   },
   {
     path: 'index',
@@ -103,20 +72,8 @@ const routes: Routes = [
     component: HierarchicalChartComponent,
   },
   {
-    path: 'holiday_letter',
-    component: HolidayLetterComponent,
-  },
-  {
-    path: 'work_certificate',
-    component: LaborCertificatesComponent,
-  },
-  {
-    path: 'payroll_receipts',
-    component: PayrollReceiptsComponent,
-  },
-  {
-    path: 'certificate_income_withholding',
-    component: CertificateIncomeWithholdingComponent,
+    path: 'ihr/auto_services',
+    loadChildren: './auto-services/auto-services.module#AutoServicesModule',
   },
   { path: 'income_withholdings', component: QueriesComponent },
   { path: 'payments_deductions', component: QueriesComponent },
@@ -213,22 +170,6 @@ const routes: Routes = [
     component: MyHourExtrasComponent,
   },
   {
-    path: 'travel_management',
-    component: TravelManagementComponent,
-  },
-  {
-    path: 'travels',
-    component: TravelComponent,
-  },
-  {
-    path: 'travels/:idSpend/:idTravels',
-    component: TravelComponent,
-  },
-  {
-    path: 'hotels',
-    component: HotelsComponent,
-  },
-  {
     path: 'training',
     component: TrainingComponent,
   },
@@ -237,68 +178,8 @@ const routes: Routes = [
     component: ReportTrainingComponent,
   },
   {
-    path: 'advances/:id',
-    component: AdvancesComponent,
-  },
-  {
-    path: 'advances',
-    component: AdvancesComponent,
-  },
-  {
-    path: 'spend/:id',
-    component: SpendComponent,
-  },
-  {
-    path: 'spend/:idTravels/:idSpend/:travel',
-    component: SpendComponent,
-  },
-  {
-    path: 'spend',
-    component: SpendComponent,
-  },
-  {
-    path: 'management_travel',
-    component: ManagedTravelComponent,
-  },
-  {
-    path: 'pending_travel',
-    component: PendingTravelComponent,
-  },
-  {
-    path: 'travel_report',
-    component: TravelRequestsReportComponent,
-  },
-  {
-    path: 'advance_report',
-    component: TravelAdvanceReportComponent,
-  },
-  {
-    path: 'allowance_report',
-    component: TravelAllowanceReportComponent,
-  },
-  {
-    path: 'approver_report',
-    component: TravelApproverReportComponent,
-  },
-  {
     path: 'requests_approvers_logs',
     component: RequestsApproversLogsComponent,
-  },
-  {
-    path: 'housing',
-    component: HousingComponent,
-  },
-  {
-    path: 'logistics_transportations',
-    component: TransportationLogisticsComponent,
-  },
-  {
-    path: 'housing_reports',
-    component: HousingReportComponent,
-  },
-  {
-    path: 'fleet_reports',
-    component: TrasnportationReportComponent,
   },
 ];
 

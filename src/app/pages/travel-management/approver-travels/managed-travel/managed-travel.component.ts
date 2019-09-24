@@ -608,7 +608,7 @@ export class ManagedTravelComponent implements OnInit {
       });
   }
   returnBackTravel() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
   sortByNumber(dataBySort: any) {
     dataBySort.sort(function(a, b) {

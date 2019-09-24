@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -66,8 +65,7 @@ export class LoginComponent implements OnInit {
   }
 
   initApp() {
-    const laguaje =
-      localStorage.getItem('lang') || this.translate.getBrowserLang();
+    const laguaje = localStorage.getItem('lang') || this.translate.getBrowserLang();
     this.tokenService.init({
       apiBase: baseUrl(),
       apiPath: `api/v2/${laguaje.match(/es|en/) ? laguaje : 'es'}`,
@@ -96,14 +94,11 @@ export class LoginComponent implements OnInit {
     const rememeberObject = JSON.parse(localStorage.getItem('remember'));
 
     this.txtEmail = rememeberObject == null ? '' : rememeberObject[0].email;
-    this.txtPassword =
-      rememeberObject == null ? '' : rememeberObject[0].password;
+    this.txtPassword = rememeberObject == null ? '' : rememeberObject[0].password;
 
     if (this.txtEmail !== '' && this.txtPassword !== '') {
       setTimeout(() => {
-        (<HTMLInputElement>(
-          document.getElementById('chk_remember')
-        )).checked = true;
+        (<HTMLInputElement>document.getElementById('chk_remember')).checked = true;
       }, 200);
     }
 
@@ -112,9 +107,7 @@ export class LoginComponent implements OnInit {
 
     if (url.split('localhost').length === 1) {
       if (url.split('-').length > 1) {
-        ambient = url.split('-')[0].split('/')[
-          url.split('-')[0].split('/').length - 1
-        ];
+        ambient = url.split('-')[0].split('/')[url.split('-')[0].split('/').length - 1];
       }
     } else {
       ambient = 'development';
@@ -122,11 +115,7 @@ export class LoginComponent implements OnInit {
 
     this.mainService.getDataEnterprise(ambient).subscribe((result: any) => {
       this.dataEnterprise[0] = result.data;
-      const {
-        background_login,
-        primary_color,
-        body_text,
-      } = this.dataEnterprise[0];
+      const { background_login, primary_color, body_text } = this.dataEnterprise[0];
       if (!this.stylesExplorerService.validateBrowser()) {
         const setProp = (a, b) => {
           document.documentElement.style.setProperty(a, b);
@@ -169,9 +158,7 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('enterprise', JSON.stringify(result.data));
     });
     if (this.dataEnterprise.length > 0) {
-      this.heightContenGeneral =
-        document.getElementById('headerLogin').clientHeight -
-        this.heightContenGeneral;
+      this.heightContenGeneral = document.getElementById('headerLogin').clientHeight - this.heightContenGeneral;
     }
   }
 
@@ -201,12 +188,7 @@ export class LoginComponent implements OnInit {
                 this.userSharedService.setUser(result);
                 localStorage.setItem('user', JSON.stringify(result));
                 this.router.navigate(['/ihr/index']);
-                this.googleAnalyticsEventsService.emitEvent(
-                  'authentication',
-                  'singInSession',
-                  'Sing in session',
-                  1,
-                );
+                this.googleAnalyticsEventsService.emitEvent('authentication', 'singInSession', 'Sing in session', 1);
               }
             },
             error => {
@@ -225,12 +207,7 @@ export class LoginComponent implements OnInit {
                 },
               ];
               this.alert.setAlert(alertWarning[0]);
-              this.googleAnalyticsEventsService.emitEvent(
-                'login',
-                'errorSingInSession',
-                'Error sing in session',
-                1,
-              );
+              this.googleAnalyticsEventsService.emitEvent('login', 'errorSingInSession', 'Error sing in session', 1);
             },
           );
       } else {
@@ -307,9 +284,7 @@ export class LoginComponent implements OnInit {
         },
       ];
       this.alert.setAlert(alertWarning[0]);
-      (<HTMLInputElement>(
-        document.getElementById('chk_remember')
-      )).checked = false;
+      (<HTMLInputElement>document.getElementById('chk_remember')).checked = false;
     }
   }
 }

@@ -30,7 +30,7 @@ export class JoyrideStepChildren {
   @HostListener('click')
   test() {
     this.clicked = true && this.joyrideService.isTourInProgress();
-    this.currentStep = this.joyrideStepService.getCurrentStep();
+    this.currentStep = { ...this.joyrideStepService.getCurrentStep(), joyrideChildren: this.name };
     if (this.routerLink) this.joyrideService.closeTour();
   }
 

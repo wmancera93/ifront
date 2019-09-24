@@ -4,6 +4,8 @@ import { ReportsHrService } from '../../../services/reports-rh/reports-hr.servic
 import { Router } from '@angular/router';
 import { RequestsRh } from '../../../models/common/requests-rh/requests-rh';
 import { RequestsRhService } from '../../../services/requests-rh/requests-rh.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-requests-approvers',
@@ -23,9 +25,10 @@ export class RequestsApproversComponent implements OnInit {
   public approver_selected: string;
   public platform_selected = 'IHR';
   public type_selected = 'VACA';
+  private subscriptions: ISubscription[] = [];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -40,6 +43,7 @@ export class RequestsApproversComponent implements OnInit {
     public router: Router,
     private tokenService: Angular2TokenService,
     public requestsRhService: RequestsRhService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.approver_selected = this.parseT('approver_with');
     this.tokenService.validateToken().subscribe(
@@ -51,16 +55,18 @@ export class RequestsApproversComponent implements OnInit {
           title: error.status.toString(),
           message: error.json().errors[0].toString(),
         });
-        document
-          .getElementsByTagName('body')[0]
-          .setAttribute('style', 'overflow-y:hidden');
+        document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
         this.token = true;
       },
+    );
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps }));
+      }),
     );
   }
 
   ngOnInit() {
-
     this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {
       this.newtype_requests = data.data;
     });
@@ -71,11 +77,9 @@ export class RequestsApproversComponent implements OnInit {
     this.router.navigate(['ihr/index']);
   }
   getObjectRequests() {
-    this.reportsHrService
-      .getRequestsApprovers(this.type_requests, this.approver, this.platform)
-      .subscribe((data: any) => {
-        this.objectReport.emit(data);
-      });
+    this.reportsHrService.getRequestsApprovers(this.type_requests, this.approver, this.platform).subscribe((data: any) => {
+      this.objectReport.emit(data);
+    });
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
@@ -97,5 +101,9 @@ export class RequestsApproversComponent implements OnInit {
         break;
     }
     this.getObjectRequests();
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

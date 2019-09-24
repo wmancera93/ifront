@@ -837,7 +837,7 @@ export class EditSpendComponent implements OnInit {
   returnTravelsRequest() {
     document.getElementById('closeModalEditSpend').click();
     this.router.navigate([
-      '/ihr/travels',
+      '/ihr/travel_management/travels',
       this.idSpendRequests,
       this.ticketTravel,
     ]);

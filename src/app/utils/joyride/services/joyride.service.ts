@@ -22,13 +22,16 @@ export class JoyrideService {
     if (!isPlatformBrowser(this.platformId)) {
       return of(new JoyrideStepInfo());
     }
+    const { isSubTour, joyrideChildren } = this.optionsService;
     if (!this.tourInProgress) {
-      this.tourInProgress = true;
-      if (options) {
-        this.optionsService.setOptions(options);
+      if (isSubTour ? !options.joyrideChildren || (options && options.joyrideChildren === joyrideChildren) : true) {
+        this.tourInProgress = true;
+        if (options) {
+          this.optionsService.setOptions(options);
+        }
+        this.tour$ = this.stepService.startTour().pipe(finalize(() => (this.tourInProgress = false)));
+        this.tour$.subscribe();
       }
-      this.tour$ = this.stepService.startTour().pipe(finalize(() => (this.tourInProgress = false)));
-      this.tour$.subscribe();
     }
     return this.tour$;
   }

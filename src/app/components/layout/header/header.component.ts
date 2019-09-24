@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           () => {
             localStorage.setItem('user', null);
             this.userSharedService.setUser(null);
-            this.router.navigate(['/ihr/login']);
+            this.router.navigate(['/ihr/authentication/login']);
           },
           error => {
             console.log(error);

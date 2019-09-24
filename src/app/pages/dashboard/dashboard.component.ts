@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
       .pairwise()
       .subscribe((event: any[]) => {
         if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
-          if (event[0].urlAfterRedirects === '/ihr/login') {
+          if (event[0].urlAfterRedirects === '/ihr/authentication/login') {
             setTimeout(() => {
               this.toast = {
                 type: 'success',
