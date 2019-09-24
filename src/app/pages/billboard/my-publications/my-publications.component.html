@@ -1,10 +1,15 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
-<div *ngIf="!token" class="heigth-content-general">
+<div
+  *ngIf="!token"
+  class="heigth-content-general"
+  joyrideStep="step_1"
+  [title]="joyride('step_1.title') | translate"
+  [text]="joyride('step_1.text') | translate"
+  (next)="goToForm()"
+>
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -21,6 +26,9 @@
         <div
           class="col-10 col-xl-3 cursor-general tabDate"
           (click)="goToForm()"
+          joyrideStep="step_2"
+          [title]="joyride('step_2.title') | translate"
+          [text]="joyride('step_2.text') | translate"
         >
           <i class="fa fa-plus"></i> &nbsp;&nbsp;
           {{ parseT('btn_create_news') | translate }}
@@ -31,9 +39,7 @@
           <div class="border-botton-general">
             <div class="row top-containter">
               <div class="col-12 col-xl-9 text-left">
-                <strong>
-                  {{ parseT('text_my_news') | translate }}</strong
-                >
+                <strong> {{ parseT('text_my_news') | translate }}</strong>
               </div>
               <div class="col-12 col-xl-3">
                 {{ parseT('text_total_news') | translate }}
@@ -43,26 +49,15 @@
           </div>
           <div class="row justify-content-center top-containter">
             <div class="col-12">
-              <div
-                class="widget bg-white-1x"
-                *ngFor="let publication of myPublications"
-              >
+              <div class="widget bg-white-1x" *ngFor="let publication of myPublications">
                 <div class="row justify-content-center">
                   <div class="col-lg-2 col-4">
                     <div class="row">
                       <div class="col-12 number-size">
-                        <div
-                          *ngIf="publication.publish"
-                          class="text-warning"
-                          (click)="publishArticle(publication)"
-                        >
+                        <div *ngIf="publication.publish" class="text-warning" (click)="publishArticle(publication)">
                           <i class="fa fa-square-o"></i>
                         </div>
-                        <div
-                          *ngIf="!publication.publish"
-                          class="text-success"
-                          (click)="hideArticle(publication)"
-                        >
+                        <div *ngIf="!publication.publish" class="text-success" (click)="hideArticle(publication)">
                           <i class="fa fa-check-square-o"></i>
                         </div>
                       </div>
@@ -77,9 +72,7 @@
                         class="col-12 font-color-default text-lg-left title-size hoverTitle"
                         (click)="viewDetailArticle(publication)"
                       >
-                        <strong
-                          >{{ publication.title | uppercase }}
-                        </strong>
+                        <strong>{{ publication.title | uppercase }} </strong>
                       </div>
                       <div class="col-12 text-lg-left">
                         {{ publication.summary }}
@@ -108,10 +101,7 @@
                   </div>
                   <div class="col-3 col-xl-1">
                     <div class="row">
-                      <div
-                        class="col-12 number-size text-info"
-                        (click)="editNew(publication)"
-                      >
+                      <div class="col-12 number-size text-info" (click)="editNew(publication)">
                         <i class="fa fa-pencil"></i>
                       </div>
                       <div class="col-12">
@@ -130,12 +120,7 @@
                       >
                         <i class="fa fa-ban"></i>
                       </div>
-                      <div
-                        id="hideDan"
-                        *ngIf="publication.publish"
-                        class="col-12 number-size "
-                        style="cursor: no-drop;"
-                      >
+                      <div id="hideDan" *ngIf="publication.publish" class="col-12 number-size " style="cursor: no-drop;">
                         <i class="fa fa-ban"></i>
                       </div>
                       <div class="col-12">
@@ -153,8 +138,5 @@
   </div>
 </div>
 <app-new-article-form *ngIf="!token"></app-new-article-form>
-<app-comment-article
-  *ngIf="!token"
-  [nameModal]="myPublicationModal"
-></app-comment-article>
+<app-comment-article *ngIf="!token" [nameModal]="myPublicationModal"></app-comment-article>
 <app-edit-publication *ngIf="!token"></app-edit-publication>

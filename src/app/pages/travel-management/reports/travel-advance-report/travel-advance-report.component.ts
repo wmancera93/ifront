@@ -103,7 +103,7 @@ export class TravelAdvanceReportComponent implements OnInit, OnDestroy {
     this.getObjectPrint('general');
   }
   returnBackReportAdvance() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   getObjectPrint(param) {

@@ -16,6 +16,7 @@ import { JoyrideStepInfo } from '../models/joyride-step-info.class';
 import { JoyrideStepDoesNotExist, JoyrideStepOutOfRange } from '../models/joyride-error.class';
 import { LoggerService } from './logger.service';
 import { ROUTE_SEPARATOR } from '../constants';
+import { ISubscription } from 'rxjs/Subscription';
 
 const SCROLLBAR_SIZE = 20;
 
@@ -31,6 +32,7 @@ export interface IJoyrideStepService {
 export interface CurrentStep {
   name: string;
   route: string;
+  joyrideChildren?: string;
 }
 
 @Injectable()
@@ -41,6 +43,8 @@ export class JoyrideStepService implements IJoyrideStepService {
   private winBottomPosition: number = 0;
   public onStepChange = new EventEmitter<Pick<JoyrideStep, 'name' | 'route'> & { actionType: StepActionType }>();
   private erd = elementResizeDetector();
+  private currentStepLoadingSubscription: ISubscription;
+  private currentStepLoading: boolean = false;
   private stepsObserver: ReplaySubject<JoyrideStepInfo> = new ReplaySubject<JoyrideStepInfo>();
 
   constructor(
@@ -121,9 +125,11 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   next() {
-    this.removeCurrentStep();
-    this.currentStep.nextClicked.emit();
-    this.tryShowStep(StepActionType.NEXT);
+    if (!this.currentStepLoading) {
+      this.removeCurrentStep();
+      this.currentStep.nextClicked.emit();
+      this.tryShowStep(StepActionType.NEXT);
+    }
   }
 
   private async prevSubTour(subTour: SubTour) {
@@ -179,9 +185,11 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private async showStep(actionType: StepActionType) {
+    this.currentStepLoadingSubscription && this.currentStepLoadingSubscription.unsubscribe();
     this.documentService.setDocumentHeight();
     const nativeElementOld = this.currentStep && this.currentStep.targetViewContainer.element;
     if (nativeElementOld instanceof HTMLElement && nativeElementOld.parentElement) {
+      this.erd.removeAllListeners(nativeElementOld);
       this.erd.removeAllListeners(nativeElementOld.parentElement);
       nativeElementOld.parentElement.parentElement && this.erd.removeAllListeners(nativeElementOld.parentElement.parentElement);
     }
@@ -191,7 +199,12 @@ export class JoyrideStepService implements IJoyrideStepService {
     const { waitingTime, name, route } = this.currentStep;
     // Scroll the element to get it visible if it's in a scrollable element
     this.scrollIfElementBeyondOtherElements();
-
+    await new Promise(resolve => {
+      this.currentStepLoadingSubscription = this.currentStep.loading.subscribe(a => {
+        this.currentStepLoading = a;
+        if (!a) resolve();
+      });
+    });
     if (waitingTime) {
       this.onStepChange.emit({ name, route, actionType });
       await new Promise(resolve => {
@@ -200,6 +213,7 @@ export class JoyrideStepService implements IJoyrideStepService {
         }, waitingTime);
       });
     }
+
     this.backDropService.draw(this.currentStep);
     this.drawStep(this.currentStep);
     this.scrollIfStepAndTargetAreNotVisible();
@@ -208,6 +222,11 @@ export class JoyrideStepService implements IJoyrideStepService {
     if (!waitingTime) this.onStepChange.emit({ name, route, actionType });
     const { nativeElement } = this.currentStep.targetViewContainer.element;
     if (nativeElement instanceof HTMLElement && nativeElement.parentElement) {
+      this.erd.listenTo(nativeElement, () => {
+        this.scrollIfElementBeyondOtherElements();
+        this.scrollIfStepAndTargetAreNotVisible();
+        this.eventListener.resize();
+      });
       this.erd.listenTo(nativeElement.parentElement, () => {
         this.scrollIfElementBeyondOtherElements();
         this.scrollIfStepAndTargetAreNotVisible();

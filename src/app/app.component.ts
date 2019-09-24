@@ -2,7 +2,7 @@
 import { Component, OnDestroy, HostListener } from '@angular/core';
 
 // common
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouteConfigLoadStart, RouteConfigLoadEnd } from '@angular/router';
 import { Enterprise } from './models/general/enterprise';
 import { MainService } from './services/main/main.service';
 import { User } from './models/general/user';
@@ -13,6 +13,8 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { JoyrideService, JoyrideStepService } from './utils/joyride';
 import { ISubscription } from 'rxjs/Subscription';
 import { JoyrideAppService } from './services/joyride-app/joyride-app.service';
+import { filter } from 'rxjs/operators';
+import { clearInterval } from 'timers';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +30,7 @@ export class AppComponent implements OnDestroy {
   public isExplorer: boolean;
   public changesLang: number = 0;
   public canUseKeysJoride: boolean = true;
+  public isLoadPage: boolean = false;
   public joyrideSuscriptions: ISubscription[] = [];
   public tourDone?: ISubscription;
 
@@ -43,6 +46,16 @@ export class AppComponent implements OnDestroy {
     private readonly joyrideStepService: JoyrideStepService,
     private readonly joyrideAppService: JoyrideAppService,
   ) {
+    router.events
+      .pipe(filter(e => e instanceof RouteConfigLoadStart || e instanceof RouteConfigLoadEnd))
+      .subscribe(async event => {
+        window.Pace.stop();
+        if (event instanceof RouteConfigLoadStart) {
+          this.isLoadPage = true;
+        } else {
+          this.isLoadPage = false;
+        }
+      });
     joyrideService.setCallBackChildren(() => {
       joyrideAppService.onStartTour.emit();
     });
@@ -112,10 +125,10 @@ export class AppComponent implements OnDestroy {
       });
       if (event instanceof NavigationEnd) {
         if (
-          event.urlAfterRedirects === '/ihr/login' ||
-          event.urlAfterRedirects === '/ihr/reset_account' ||
-          event.urlAfterRedirects === '/ihr/locked_screen' ||
-          event.urlAfterRedirects.split('?')[0] === '/ihr/confirm_reset_account' ||
+          event.urlAfterRedirects === '/ihr/authentication/login' ||
+          event.urlAfterRedirects === '/ihr/authentication/reset_account' ||
+          event.urlAfterRedirects === '/ihr/authentication/locked_screen' ||
+          event.urlAfterRedirects.split('?')[0] === '/ihr/authentication/confirm_reset_account' ||
           event.urlAfterRedirects === '/ihr/error'
         ) {
           this.showComponents = false;
