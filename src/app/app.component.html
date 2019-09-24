@@ -1,33 +1,38 @@
 <app-loading></app-loading>
-<div
-  *ngIf="isLoadPage"
-  class="progress-bar-container ng-star-inserted"
-  style="z-index: 2000;position: static;top: 0px;width: 100%;"
->
-  <div
-    aria-valuemax="100"
-    aria-valuemin="0"
-    class="mat-progress-bar mat-warn ng-star-inserted"
-    color="warn"
-    mode="indeterminate"
-    role="progressbar"
-  >
-    <svg class="mat-progress-bar-background mat-progress-bar-element" focusable="false" height="4" width="100%">
-      <defs>
-        <pattern height="4" id="mat-progress-bar-1" patternUnits="userSpaceOnUse" width="8" x="4" y="0">
-          <circle cx="2" cy="2" r="2"></circle>
-        </pattern>
-      </defs>
-      <rect fill="url('/guide/accessibility#mat-progress-bar-1')" height="100%" width="100%"></rect>
-    </svg>
-    <div class="mat-progress-bar-buffer mat-progress-bar-element" style="background: var(--secondary);"></div>
-    <div class="mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element" style="transform: scaleX(0);"></div>
-    <div class="mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element"></div>
-  </div>
-</div>
 <div id="wrapper">
   <app-menu-navigation *ngIf="showComponents"></app-menu-navigation>
   <div id="{{ pageWrapper }}" class="gray-bg">
+    <div
+      *ngIf="isLoadPage"
+      style="position: fixed;left: var(--width-nav-menu);right: 0;bottom: 0;top: 0;display: flex;flex-direction: column;justify-content: center;align-items: center;background: #ffffff8c;z-index: 900;"
+    >
+      <div class="my-4 spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+      <div
+        aria-valuemax="100"
+        aria-valuemin="0"
+        class="example-margin mat-primary mat-progress-bar my-4"
+        mode="query"
+        role="progressbar"
+      >
+        <svg class="mat-progress-bar-background mat-progress-bar-element" focusable="false" height="4" width="100%">
+          <defs>
+            <pattern height="4" id="mat-progress-bar-4" patternUnits="userSpaceOnUse" width="8" x="4" y="0">
+              <circle cx="2" cy="2" r="2"></circle>
+            </pattern>
+          </defs>
+          <rect fill="url('/components/progress-bar/examples#mat-progress-bar-4')" height="100%" width="100%"></rect>
+        </svg>
+        <div class="mat-progress-bar-buffer mat-progress-bar-element" style=""></div>
+        <div
+          class="mat-progress-bar-primary mat-progress-bar-fill mat-progress-bar-element"
+          style="transform: scaleX(0.94);"
+        ></div>
+        <div class="mat-progress-bar-secondary mat-progress-bar-fill mat-progress-bar-element"></div>
+      </div>
+    </div>
     <app-header *ngIf="showComponents"></app-header>
     <div id="contentGeneral" class="heigth-content-general" style="overflow: auto;">
       <router-outlet></router-outlet>

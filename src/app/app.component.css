@@ -88,7 +88,6 @@
   animation: mat-progress-bar-secondary-indeterminate-translate 2s infinite linear;
   left: -54.888891%;
   display: block;
-  background: var(--primary);
 }
 .mat-progress-bar[mode='indeterminate'] .mat-progress-bar-secondary.mat-progress-bar-fill::after,
 .mat-progress-bar[mode='query'] .mat-progress-bar-secondary.mat-progress-bar-fill::after {
@@ -182,5 +181,57 @@
 @keyframes mat-progress-bar-background-scroll {
   to {
     transform: translateX(-8px);
+  }
+}
+
+.mat-progress-bar-fill::after {
+  background-color: var(--primary);
+}
+
+.spinner {
+  width: 70px;
+  height: 70px;
+  position: relative;
+}
+
+.double-bounce1,
+.double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #333;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  -webkit-animation: sk-bounce 2s infinite ease-in-out;
+  animation: sk-bounce 2s infinite ease-in-out;
+}
+
+.double-bounce2 {
+  -webkit-animation-delay: -1s;
+  animation-delay: -1s;
+}
+
+@-webkit-keyframes sk-bounce {
+  0%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+  50% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bounce {
+  0%,
+  100% {
+    transform: scale(0);
+    -webkit-transform: scale(0);
+  }
+  50% {
+    transform: scale(1);
+    -webkit-transform: scale(1);
   }
 }
