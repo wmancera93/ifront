@@ -90,13 +90,14 @@ export class EmployeesComponent implements OnInit {
 
     this.dashboardEmployeeService.getIncomesData().subscribe((data: any) => {
       const { permits } = this.dataUser;
-      if (permits[PermitsUser.PERMISSIONS_SEE_INCOME].state) {
+      const { PERMISSIONS_SEE_INCOME, PERMISSIONS_SEE_RETENTIONS } = PermitsUser;
+      if (permits[PERMISSIONS_SEE_INCOME] && permits[PERMISSIONS_SEE_INCOME].state) {
         this.objectIncome.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_incomes,
         });
       }
-      if (permits[PermitsUser.PERMISSIONS_SEE_RETENTIONS].state) {
+      if (permits[PERMISSIONS_SEE_RETENTIONS] && permits[PERMISSIONS_SEE_RETENTIONS].state) {
         this.objectDeductions.emit({
           graph_type: data.data.graph_type,
           properties: data.data.total_deductions,
