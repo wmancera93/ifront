@@ -21,6 +21,7 @@
         joyrideStep="step_7"
         [title]="joyride('step_7.title') | translate"
         [text]="joyride('step_7.text') | translate"
+        [loading]="!dataRequets && !modalOpen"
         [waitingTime]="200"
       >
         <div class="container">

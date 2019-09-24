@@ -44,7 +44,9 @@
         <div class="joyride-step__next-container joyride-step__button" *ngIf="!isLastStep(); else doneButton" (click)="next()">
           <ng-container *ngTemplateOutlet="customNextButton ? customNextButton : defaulNextButton"></ng-container>
           <ng-template #defaulNextButton>
-            <joyride-button [color]="themeColor">{{ nextText | async }}</joyride-button>
+            <joyride-button [color]="themeColor" class="position-relative" [loading]="loading">
+              {{ nextText | async }}
+            </joyride-button>
           </ng-template>
         </div>
         <ng-template #doneButton>

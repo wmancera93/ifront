@@ -14,3 +14,74 @@
   border: 2px solid #3b5560;
   background-color: white;
 }
+
+.loading-button {
+  background-color: rgb(115, 150, 165) !important;
+}
+
+.hollowLoader {
+  width: 1em;
+  height: 1em;
+  -webkit-animation: loaderAnim 0.5s infinite ease-in-out;
+  animation: loaderAnim 0.5s infinite ease-in-out;
+  outline: 1px solid transparent;
+}
+.hollowLoader .largeBox {
+  height: 1em;
+  width: 1em;
+  background-color: #34495e;
+  outline: 1px solid transparent;
+  position: fixed;
+}
+.hollowLoader .smallBox {
+  height: 1em;
+  width: 1em;
+  background-color: #ececec;
+  position: fixed;
+  z-index: 1;
+  outline: 1px solid transparent;
+  -webkit-animation: smallBoxAnim 0.5s alternate infinite ease-in-out;
+  animation: smallBoxAnim 0.5s alternate infinite ease-in-out;
+}
+
+@-webkit-keyframes smallBoxAnim {
+  0% {
+    -webkit-transform: scale(0.2);
+    transform: scale(0.2);
+  }
+  100% {
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+}
+
+@keyframes smallBoxAnim {
+  0% {
+    -webkit-transform: scale(0.2);
+    transform: scale(0.2);
+  }
+  100% {
+    -webkit-transform: scale(0.75);
+    transform: scale(0.75);
+  }
+}
+@-webkit-keyframes loaderAnim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}
+@keyframes loaderAnim {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+}

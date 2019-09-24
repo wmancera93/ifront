@@ -18,7 +18,7 @@ export const steps = [
   'step_2',
   'step_3',
   'step_4',
-  'step_5',
+  'step_5_employees',
   'step_6',
   'step_7',
   'step_8',

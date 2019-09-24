@@ -24,6 +24,7 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
   public is_vtd: boolean = false;
   public subscriptions: ISubscription[] = [];
   public steps = ['step_7', 'step_8'];
+  public modalOpen: boolean = false;
 
   get detailRequest() {
     return this.dataRequets.details_request;
@@ -55,9 +56,13 @@ export class TimeLineApproversComponent implements OnInit, OnDestroy {
       this.aproversRequestsService.getRequests().subscribe((data: any) => {
         $('#aprovers_requests')
           .on('shown.bs.modal', e => {
-            if (data.handleNext) this.joyrideService.next();
+            if (data.handleNext) {
+              this.joyrideService.next();
+              this.modalOpen = true;
+            }
           })
           .on('hidden.bs.modal', () => {
+            this.modalOpen = false;
             $('#aprovers_requests').off('shown.bs.modal');
           });
         const openModal = () => {
