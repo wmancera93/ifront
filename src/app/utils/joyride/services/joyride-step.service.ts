@@ -32,6 +32,7 @@ export interface IJoyrideStepService {
 export interface CurrentStep {
   name: string;
   route: string;
+  joyrideChildren?: string;
 }
 
 @Injectable()

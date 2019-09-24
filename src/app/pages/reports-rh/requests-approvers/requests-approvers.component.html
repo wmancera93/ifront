@@ -1,9 +1,13 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
-<div *ngIf="!token" class="heigth-content-general">
+<div
+  *ngIf="!token"
+  class="heigth-content-general"
+  joyrideStep="step_1"
+  [title]="joyride('step_1.title') | translate"
+  [text]="joyride('step_1.text') | translate"
+>
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row">
@@ -11,10 +15,7 @@
           <i class="fa fa-table"></i>
           {{ parseT('name_table_ts') | translate }}
         </div>
-        <div
-          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
-          style="padding-right: 0px"
-        >
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
@@ -30,6 +31,9 @@
   <div
     id="data_table"
     class="row-hr-container justify-content-center"
+    joyrideStep="step_2"
+    [title]="joyride('step_2.title') | translate"
+    [text]="joyride('step_2.text') | translate"
   >
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
@@ -57,10 +61,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="collapse top-general-p border-botton-general"
-        id="collapseExample"
-      >
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
         <div class="row">
           <div class="col-lg-4 col-12">
             <ul class="navbar-nav mr-auto">
@@ -76,31 +77,14 @@
                   <i class="fa fa-chevron-circle-down"></i>
                   {{ type_selected }}
                 </a>
-                <div
-                  class="dropdown-menu col-12"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <div
-                    *ngFor="
-                      let type of newtype_requests;
-                      let i = index
-                    "
-                  >
+                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
+                  <div *ngFor="let type of newtype_requests; let i = index">
                     <a
                       class="dropdown-item color-font-gree text-capitalize cursor-general"
-                      (click)="
-                        filterRequests(
-                          'selectType',
-                          type.value,
-                          type.name
-                        )
-                      "
+                      (click)="filterRequests('selectType', type.value, type.name)"
                       >{{ type.name }}</a
                     >
-                    <div
-                      *ngIf="newtype_requests.length !== i + 1"
-                      class="dropdown-divider"
-                    ></div>
+                    <div *ngIf="newtype_requests.length !== i + 1" class="dropdown-divider"></div>
                   </div>
                 </div>
               </li>
@@ -120,23 +104,16 @@
                   <i class="fa fa-chevron-circle-down"></i>
                   {{ approver_selected | translate }}
                 </a>
-                <div
-                  class="dropdown-menu col-12"
-                  aria-labelledby="navbarDropdown"
-                >
+                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
                   <a
                     class="dropdown-item color-font-gree text-capitalize cursor-general"
-                    (click)="
-                      filterRequests('approver', '0', 'Con aprobador')
-                    "
+                    (click)="filterRequests('approver', '0', 'Con aprobador')"
                     >{{ approver_selected | translate }}</a
                   >
                   <div class="dropdown-divider"></div>
                   <a
                     class="dropdown-item color-font-gree text-capitalize cursor-general"
-                    (click)="
-                      filterRequests('approver', '1', 'Sin aprobador')
-                    "
+                    (click)="filterRequests('approver', '1', 'Sin aprobador')"
                     >{{ parseT('approver') | translate }}</a
                   >
                 </div>
@@ -158,10 +135,7 @@
                   {{ platform_selected }}
                 </a>
 
-                <div
-                  class="dropdown-menu col-12"
-                  aria-labelledby="navbarDropdown"
-                >
+                <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
                   <a
                     class="dropdown-item color-font-gree text-capitalize cursor-general"
                     (click)="filterRequests('platform', 'I', 'IHR')"
@@ -180,11 +154,13 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-12 top-general-p">
-          <app-data-table
-            [records]="objectReport"
-            [title]="parseT('name_table_ts') | translate"
-          ></app-data-table>
+        <div
+          class="col-12 top-general-p"
+          joyrideStep="step_3"
+          [title]="joyride('step_3.title') | translate"
+          [text]="joyride('step_3.text') | translate"
+        >
+          <app-data-table [records]="objectReport" [title]="parseT('name_table_ts') | translate"></app-data-table>
         </div>
       </div>
     </div>

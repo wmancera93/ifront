@@ -1,7 +1,5 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
@@ -12,10 +10,7 @@
           <i class="fa fa-table"></i>
           {{ parseT('tittle') | translate }}
         </div>
-        <div
-          class="col-xl-2 col-md-4 col-5 text-center cursor-general"
-          style="padding-right: 0px"
-        >
+        <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
           <div class="buttonBack img-zoom" (click)="returnBackPage()">
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
@@ -31,6 +26,9 @@
   <div
     id="data_table"
     class="row-hr-container justify-content-center"
+    joyrideStep="step_1"
+    [title]="joyride('step_1.title') | translate"
+    [text]="joyride('step_1.text') | translate"
   >
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
@@ -58,10 +56,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="collapse top-general-p border-botton-general"
-        id="collapseExample"
-      >
+      <div class="collapse top-general-p border-botton-general" id="collapseExample">
         <div class="row" *ngIf="permisionsUsers[0]">
           <div class="col-lg-4 col-md-6 col-12 top-containter">
             <div class="row">
@@ -73,10 +68,7 @@
                 >
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-check-circle text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-check-circle text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('permtits_with') | translate }}
@@ -94,17 +86,10 @@
           <div class="col-lg-4 col-md-6 col-12  top-containter">
             <div class="row">
               <div class="col-12">
-                <div
-                  id="new_cont"
-                  class="filters-reports cursor-general"
-                  (click)="filter('new_cont')"
-                >
+                <div id="new_cont" class="filters-reports cursor-general" (click)="filter('new_cont')">
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-bullhorn text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-bullhorn text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('create') | translate }}
@@ -122,17 +107,10 @@
           <div class="col-lg-4 col-md-6 col-12 top-containter">
             <div class="row">
               <div class="col-12">
-                <div
-                  id="see_organ"
-                  class="filters-reports cursor-general"
-                  (click)="filter('see_organ')"
-                >
+                <div id="see_organ" class="filters-reports cursor-general" (click)="filter('see_organ')">
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-sitemap text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-sitemap text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('see_chart') | translate }}
@@ -150,17 +128,10 @@
           <div class="col-lg-4 col-md-6 col-12  top-containter">
             <div class="row">
               <div class="col-12">
-                <div
-                  id="without_permits"
-                  class="filters-reports cursor-general"
-                  (click)="filter('without_permits')"
-                >
+                <div id="without_permits" class="filters-reports cursor-general" (click)="filter('without_permits')">
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-ban text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-ban text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('permtits') | translate }}
@@ -178,17 +149,10 @@
           <div class="col-lg-4 col-md-6 col-12  top-containter">
             <div class="row">
               <div class="col-12">
-                <div
-                  id="see_rpgen"
-                  class="filters-reports cursor-general"
-                  (click)="filter('see_rpgen')"
-                >
+                <div id="see_rpgen" class="filters-reports cursor-general" (click)="filter('see_rpgen')">
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-users text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-users text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('manage_report') | translate }}
@@ -206,17 +170,10 @@
           <div class="col-lg-4 col-md-6 col-12 top-containter">
             <div class="row">
               <div class="col-12">
-                <div
-                  id="is_admin"
-                  class="filters-reports cursor-general"
-                  (click)="filter('is_admin')"
-                >
+                <div id="is_admin" class="filters-reports cursor-general" (click)="filter('is_admin')">
                   <div class="row align-items-center">
                     <div class="col-3">
-                      <p
-                        class="btn btn-primary-second fa fa-user-circle text-white"
-                        type="button"
-                      ></p>
+                      <p class="btn btn-primary-second fa fa-user-circle text-white" type="button"></p>
                     </div>
                     <div class="col-lg-6 col-md-7 col-6">
                       {{ parseT('managed') | translate }}
@@ -233,20 +190,27 @@
           </div>
         </div>
       </div>
-      <div class="border-botton-general">
+      <div
+        class="border-botton-general"
+        joyrideStep="step_2"
+        [title]="joyride('step_2.title') | translate"
+        [text]="joyride('step_2.text') | translate"
+      >
         <div class="row top-general-p" *ngIf="show">
           <div class="col-12">
             <div class="row justify-content-between">
               <div class="col-xl-4 col-12 ">
                 <div class="form-group row">
-                  <label
-                    class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center"
+                  <label class="col-xl-5 col-md-4  col-lg-3 col-6 text-left align-self-center"
                     >{{ parseT('show_records') | translate }}:</label
                   >
                   <div class="col-xl-7 col-md-3 col-lg-3 col-6">
                     <select
                       class="form-control"
                       [(ngModel)]="size_table"
+                      joyrideStep="step_3"
+                      [title]="joyride('step_3.title') | translate"
+                      [text]="joyride('step_3.text') | translate"
                     >
                       <option value="5">5</option>
                       <option value="10">10</option>
@@ -257,10 +221,7 @@
                 </div>
               </div>
               <div class="col-xl-2 col-md-3 col-6 top-containter">
-                <div
-                  class="btn btn-block btn-outline-danger cursor-general"
-                  (click)="pdfExport()"
-                >
+                <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
                   <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   PDF
                 </div>
@@ -286,39 +247,34 @@
             </div>
           </div>
 
-          <div
-            class="col-xl-4 col-12 top-containter align-self-center text-left"
-          >
+          <div class="col-xl-4 col-12 top-containter align-self-center text-left">
             <b>
               {{ title }}
             </b>
           </div>
-          <div
-            class="col-xl-4 col-12 top-containter align-self-center text-rigth"
-          >
+          <div class="col-xl-4 col-12 top-containter align-self-center text-rigth">
             <input
               [(ngModel)]="value_search"
               class="form-control"
-              placeholder="{{
-                parseT('placeholder_search') | translate
-              }}"
+              placeholder="{{ parseT('placeholder_search') | translate }}"
               (keyup)="searcheByName()"
             />
           </div>
         </div>
       </div>
       <div class="row top-general-p">
-        <div class="col-12" style="min-height: 370px;">
+        <div
+          class="col-12"
+          style="min-height: 370px;"
+          joyrideStep="step_4"
+          [title]="joyride('step_4.title') | translate"
+          [text]="joyride('step_4.text') | translate"
+        >
           <div class="table-responsive">
-            <table
-              class="table table-sm table-striped table-bordered table-hover"
-            >
+            <table class="table table-sm table-striped table-bordered table-hover">
               <thead>
                 <tr>
-                  <th
-                    class="text-center"
-                    *ngFor="let label of labels"
-                  >
+                  <th class="text-center" *ngFor="let label of labels">
                     <div style="width: 100%">
                       <div class="name-table">
                         {{ label.value }}
@@ -330,65 +286,39 @@
               <tbody>
                 <tr
                   *ngFor="
-                    let record of (recordsPrint
+                    let record of recordsPrint
                       | paginate
                         : {
                             itemsPerPage: size_table,
                             currentPage: p
-                          })
+                          }
                   "
                 >
                   <td *ngFor="let key of keys">
-                    <div
-                      *ngIf="labelsCell[key].type == 'int'"
-                      style="text-align:left"
-                    >
+                    <div *ngIf="labelsCell[key].type == 'int'" style="text-align:left">
                       {{ record[key] }}
                     </div>
                     <div *ngIf="labelsCell[key].type == 'string'">
-                      <div
-                        style="text-align:center"
-                        *ngIf="record[key] == 'true'"
-                        style="margin-top: 6px;"
-                      >
-                        <i
-                          class="fa fa-lg fa-check-circle text-primary"
-                        >
+                      <div style="text-align:center" *ngIf="record[key] == 'true'" style="margin-top: 6px;">
+                        <i class="fa fa-lg fa-check-circle text-primary">
                           <span class="font-size-07">
-                            {{
-                              'pages.reports_rh.requests.yes'
-                                | translate
-                            }}
+                            {{ 'pages.reports_rh.requests.yes' | translate }}
                           </span>
                         </i>
                       </div>
                       <div
                         style="text-align:center"
-                        *ngIf="
-                          record[key] == 'false' || record[key] == 'f'
-                        "
+                        *ngIf="record[key] == 'false' || record[key] == 'f'"
                         style="margin-top: 6px;"
                       >
                         <i class="fa  fa-lg fa-ban text-danger">
                           <span class="font-size-07">
-                            {{
-                              'pages.reports_rh.requests.not'
-                                | translate
-                            }}
+                            {{ 'pages.reports_rh.requests.not' | translate }}
                           </span>
                         </i>
                       </div>
-                      <div
-                        style="text-align:left"
-                        *ngIf="
-                          record[key] != 'false' &&
-                          record[key] != 'true' &&
-                          record[key] != 'f'
-                        "
-                      >
-                        <div
-                          *ngIf="(record[key] | split: '-':'1') != ''"
-                        >
+                      <div style="text-align:left" *ngIf="record[key] != 'false' && record[key] != 'true' && record[key] != 'f'">
+                        <div *ngIf="(record[key] | split: '-':'1') != ''">
                           <p>
                             <b>{{ record[key] | split: '-':'1' }}</b>
                           </p>
@@ -396,25 +326,17 @@
                             <b>#{{ record[key] | split: '-':'0' }}</b>
                           </p>
                         </div>
-                        <div
-                          *ngIf="(record[key] | split: '-':'1') == ''"
-                        >
+                        <div *ngIf="(record[key] | split: '-':'1') == ''">
                           <p>
                             {{ record[key] | split: '-':'0' }}
                           </p>
                         </div>
                       </div>
                     </div>
-                    <div
-                      *ngIf="labelsCell[key].type == 'money'"
-                      style="text-align:right"
-                    >
+                    <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
                       {{ record[key] | currency }}
                     </div>
-                    <div
-                      *ngIf="labelsCell[key].type == 'date'"
-                      style="text-align:center"
-                    >
+                    <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
                       {{ record[key] }}
                     </div>
                   </td>

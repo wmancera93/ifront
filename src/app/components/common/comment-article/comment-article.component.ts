@@ -207,4 +207,10 @@ export class CommentArticleComponent implements OnInit {
   closeModal() {
     $ && $(this.targetModal).modal('hide');
   }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
 }

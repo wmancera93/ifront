@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-permisions-users',
@@ -36,6 +37,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   public placeholder_search: string;
   public token: boolean;
   private subscriptions: ISubscription[];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -59,6 +61,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
     public router: Router,
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -75,6 +78,11 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
         },
       ),
     ];
+    this.subscriptions.push(
+      this.joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(this.joyrideAppService.startTour({ steps: this.steps }));
+      }),
+    );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
