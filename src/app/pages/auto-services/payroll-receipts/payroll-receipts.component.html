@@ -3,6 +3,12 @@
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
+  <joyrideStep
+    joyrideStep="step_1"
+    [title]="joyride('step_1.title') | translate"
+    [text]="joyride('step_1.text') | translate"
+    stepPosition="center"
+  ></joyrideStep>
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -27,9 +33,9 @@
       <div class="row" *ngIf="!flagEmpty">
         <div
           class="col-3"
-          joyrideStep="step_1"
-          [title]="joyride('step_1.title') | translate"
-          [text]="joyride('step_1.text') | translate"
+          joyrideStep="step_2"
+          [title]="joyride('step_2.title') | translate"
+          [text]="joyride('step_2.text') | translate"
         >
           <div id="listCertificates" class="nav nav-tabs navtab-vertical navtab-left cursor-general" role="navigation">
             <div
@@ -46,9 +52,9 @@
         </div>
         <div
           class="col-9"
-          joyrideStep="step_2"
-          [title]="joyride('step_2.title') | translate"
-          [text]="joyride('step_2.text') | translate"
+          joyrideStep="step_3"
+          [title]="joyride('step_3.title') | translate"
+          [text]="joyride('step_3.text') | translate"
         >
           <iframe
             id="frameAutoService"

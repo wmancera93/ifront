@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { DataDableSharedService } from '../../../services/shared/common/data-table/data-dable-shared.service';
+import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 export interface ColumnSetting {
   primaryKey: string;
@@ -42,6 +44,9 @@ export class DataTableComponent implements OnInit {
   public recordsStatic: any[] = [];
   public filter: string;
   public objectTable: any[] = [];
+  public subscriptions: ISubscription[] = [];
+
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -61,21 +66,29 @@ export class DataTableComponent implements OnInit {
     private tokenService: Angular2TokenService,
     private accionDataTableService: DataDableSharedService,
     public stylesExplorerService: StylesExplorerService,
+    public joyrideAppService: JoyrideAppService,
   ) {
-    this.tokenService.validateToken().subscribe(
-      () => {
-        this.token = false;
-      },
-      error => {
-        this.objectToken.emit({
-          title: error.status.toString(),
-          message: error.json().errors[0].toString(),
-        });
-        document.body.setAttribute('style', 'overflow-y:hidden');
-        this.token = true;
-      },
+    this.subscriptions.push(
+      this.tokenService.validateToken().subscribe(
+        () => {
+          this.token = false;
+        },
+        error => {
+          this.objectToken.emit({
+            title: error.status.toString(),
+            message: error.json().errors[0].toString(),
+          });
+          document.body.setAttribute('style', 'overflow-y:hidden');
+          this.token = true;
+        },
+      ),
     );
 
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        joyrideAppService.startTour({ steps: this.steps,joyrideChildren:'dataTable_component' });
+      }),
+    );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
@@ -323,5 +336,9 @@ export class DataTableComponent implements OnInit {
   }
   accionTable(fieldSelected: any) {
     this.accionDataTableService.setActionDataTable(fieldSelected);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

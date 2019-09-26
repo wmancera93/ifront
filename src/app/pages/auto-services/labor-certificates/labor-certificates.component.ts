@@ -19,7 +19,7 @@ export class LaborCertificatesComponent implements OnInit {
   public urlPDFSecure: any;
   public flagEmpty: boolean;
   public idCertificate = 0;
-  private steps = ['step_1', 'step_2'];
+  private steps = ['step_1', 'step_2', 'step_3'];
 
   public certificated_qr = false;
   public block_certificate: boolean;

@@ -4,6 +4,12 @@
 
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
@@ -17,15 +23,16 @@
     <div class="col-12  widget bg-white minHeight">
       <div class="row ">
         <div class="col-12">
-          <div
-            class="row"
-            joyrideStep="step_1"
-            [title]="joyride('step_1.title') | translate"
-            [text]="joyride('step_1.text') | translate"
-          >
+          <div class="row">
             <div class="col-12 col-xl-6">
               <div class="row">
-                <div class=" col-xl-2 col-2" style="margin-top:10px;">
+                <div
+                  class=" col-xl-2 col-2"
+                  style="margin-top:10px;"
+                  joyrideStep="step_2"
+                  [title]="joyride('step_2.title') | translate"
+                  [text]="joyride('step_2.text') | translate"
+                >
                   <div id="buttonSearchHierarchical" class="bg-button-search" (click)="clickSearchIcon()">
                     <div class="text-center cursor-general img-zoom">
                       <i class="fa fa-fw fa-search fa-lg"></i>
@@ -74,27 +81,27 @@
                   <div class="row">
                     <div
                       class="col-4"
-                      joyrideStep="step_2"
-                      [title]="joyride('step_2.title') | translate"
-                      [text]="joyride('step_2.text') | translate"
+                      joyrideStep="step_3"
+                      [title]="joyride('step_3.title') | translate"
+                      [text]="joyride('step_3.text') | translate"
                     >
                       <i class="fa fa-square iconFirstLevel"> </i>
                       {{ parseT('text_superior') | translate }}
                     </div>
                     <div
                       class="col-4"
-                      joyrideStep="step_3"
-                      [title]="joyride('step_3.title') | translate"
-                      [text]="joyride('step_3.text') | translate"
+                      joyrideStep="step_4"
+                      [title]="joyride('step_4.title') | translate"
+                      [text]="joyride('step_4.text') | translate"
                     >
                       <i class="fa fa-square iconSecondLevel"></i>
                       {{ parseT('text_my_position') | translate }}
                     </div>
                     <div
                       class="col-4"
-                      joyrideStep="step_4"
-                      [title]="joyride('step_4.title') | translate"
-                      [text]="joyride('step_4.text') | translate"
+                      joyrideStep="step_5"
+                      [title]="joyride('step_5.title') | translate"
+                      [text]="joyride('step_5.text') | translate"
                     >
                       <i class="fa fa-square iconThirdLevel"></i>
                       {{ parseT('text_subordinates') | translate }}
@@ -106,7 +113,7 @@
           </div>
         </div>
       </div>
-      <div joyrideStep="step_5" [title]="joyride('step_5.title') | translate" [text]="joyride('step_5.text') | translate">
+      <div joyrideStep="step_6" [title]="joyride('step_6.title') | translate" [text]="joyride('step_6.text') | translate">
         <!-- first level -->
         <div class="row justify-content-center">
           <div
@@ -241,7 +248,12 @@
               </div>
             </div>
             <div class="row justify-content-start" *ngIf="activeArrowRight">
-              <div class="col-1 ajustArrow">
+              <div
+                class="col-1 ajustArrow"
+                joyrideStep="step_8"
+                [title]="joyride('step_8.title') | translate"
+                [text]="joyride('step_8.text') | translate"
+              >
                 <div class="navigateButton animated infinite flash font-icon" (click)="goToNextPage(page)">
                   <i class="fa fa-chevron-right " aria-hidden="true"></i>
                 </div>
@@ -256,7 +268,12 @@
                   topEmployee.work_team[0].relationship !== '010'
                 "
               >
-                <div class="col-2">
+                <div
+                  class="col-2"
+                  joyrideStep="step_7"
+                  [title]="joyride('step_7.title') | translate"
+                  [text]="joyride('step_7.text') | translate"
+                >
                   <div
                     class="navigateButton animated infinite flash font-icon"
                     style="margin-top:0px !important;"

@@ -49,7 +49,7 @@ export class HierarchicalChartComponent implements OnInit, OnDestroy {
   public token: boolean;
   public pageValue: any = 0;
   public joyrideSubscription: ISubscription;
-  steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5'];
+  steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7', 'step_8'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
