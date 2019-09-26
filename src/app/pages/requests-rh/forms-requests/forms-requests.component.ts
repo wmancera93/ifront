@@ -169,7 +169,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
             if (JSON.parse(localStorage.getItem('enterprise')).id === 32) {
               this.is_payment = true;
             }
-            if (JSON.parse(localStorage.getItem('enterprise')).id === 34) {
+            if (JSON.parse(localStorage.getItem('enterprise')).id === 33) {
               this.isGDV = true;
             }
             break;
