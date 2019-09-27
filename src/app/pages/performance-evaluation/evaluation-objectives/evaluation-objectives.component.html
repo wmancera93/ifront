@@ -1,10 +1,14 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
-<div *ngIf="!token" class="heigth-content-general">
+<div
+  *ngIf="!token"
+  class="heigth-content-general"
+  joyrideStep="step_1"
+  [title]="joyride('step_1.title') | translate"
+  [text]="joyride('step_1.text') | translate"
+>
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -28,19 +32,11 @@
       </div>
       <div class="row justify-content-center top-containter">
         <div class="col-12" *ngIf="evaluationPerformanceList">
-          <div
-            class="row justify-content-center top-containter"
-            *ngIf="evaluationPerformanceList.length === 0"
-          >
-            <div
-              class="col-lg-8 col-12 text-center"
-              style="min-height: 370px;"
-            >
+          <div class="row justify-content-center top-containter" *ngIf="evaluationPerformanceList.length === 0">
+            <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
               <div class="alert alert-warning" role="alert">
                 {{ parseT('message_begin') | translate }}
-                <strong>{{
-                  parseT('message_continue') | translate
-                }}</strong
+                <strong>{{ parseT('message_continue') | translate }}</strong
                 >&nbsp;{{ parseT('message_end') | translate }}
               </div>
             </div>
@@ -49,11 +45,12 @@
             <div
               class="widget bg-white-1x"
               *ngFor="let evaluation of evaluationPerformanceList"
+              joyrideStep="step_2"
+              [title]="joyride('step_2.title') | translate"
+              [text]="joyride('step_2.text') | translate"
             >
               <div class="row align-items-center">
-                <div
-                  class="col-lg-4 col-md-6 col-12 text-lg-left text-center top-p"
-                >
+                <div class="col-lg-4 col-md-6 col-12 text-lg-left text-center top-p">
                   <h3 class="font-color-default">
                     {{ evaluation.name }}
                   </h3>
@@ -63,12 +60,8 @@
                     {{ evaluation.created_date }}
                   </p>
                 </div>
-                <div
-                  class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p"
-                >
-                  <p class="font-title-general">
-                    {{ parseT('status') | translate }}:
-                  </p>
+                <div class="col-lg-2 col-md-3 col-12 text-lg-left text-center top-p">
+                  <p class="font-title-general">{{ parseT('status') | translate }}:</p>
                   <h6 *ngIf="evaluation.status_code == '3'">
                     <span class="badge badge-warning">
                       {{ evaluation.status_name }}
@@ -90,10 +83,7 @@
                     </span>
                   </h6>
                 </div>
-                <div
-                  *ngIf="evaluation.qualifier !== null"
-                  class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
-                >
+                <div *ngIf="evaluation.qualifier !== null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
                   <p class="font-title-general">
                     {{ evaluation.qualifier.short_name }}
                   </p>
@@ -104,58 +94,51 @@
                     {{ parseT('evaluator') | translate }}
                   </p>
                 </div>
-                <div
-                  *ngIf="evaluation.qualifier === null"
-                  class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p"
-                >
+                <div *ngIf="evaluation.qualifier === null" class="col-lg-3 col-md-9 col-12 text-md-left text-center top-p">
                   <p class="">
                     {{ parseT('negative_message') | translate }}
                   </p>
                 </div>
-                <div
-                  class="col-lg-3 col-md-3 col-12 text-center top-p"
-                >
+                <div class="col-lg-3 col-md-3 col-12 text-center top-p">
                   <div class="row">
                     <div
                       class="col-4 number-size"
                       (click)="goToModalEvalView(evaluation)"
                       *ngIf="evaluation.status_code === '2'"
+                      joyrideStep="step_3"
+                      [title]="joyride('step_3.title') | translate"
+                      [text]="joyride('step_3.text') | translate"
                     >
-                      <i
-                        class="fa fa-eye"
-                        aria-hidden="true"
-                        style="color:#23c831"
-                      ></i>
+                      <i class="fa fa-eye" aria-hidden="true" style="color:#23c831"></i>
                     </div>
                     <div
                       class="col-4 number-size"
                       (click)="goToModalEvalView(evaluation)"
                       *ngIf="evaluation.status_code !== '2'"
                       style="cursor: no-drop"
+                      joyrideStep="step_3"
+                      [title]="joyride('step_3.title') | translate"
+                      [text]="joyride('step_3.text') | translate"
                     >
                       <i class="fa fa-eye" aria-hidden="true"></i>
                     </div>
                     <div
                       class="col-4 number-size"
                       (click)="goToModalEval(evaluation)"
-                      *ngIf="
-                        evaluation.status_complete === false &&
-                        evaluation.status_code === '2'
-                      "
+                      *ngIf="evaluation.status_complete === false && evaluation.status_code === '2'"
+                      joyrideStep="step_4"
+                      [title]="joyride('step_4.title') | translate"
+                      [text]="joyride('step_4.text') | translate"
                     >
-                      <i
-                        class="fa fa-pencil"
-                        aria-hidden="true"
-                        style="color:#23c6c8"
-                      ></i>
+                      <i class="fa fa-pencil" aria-hidden="true" style="color:#23c6c8"></i>
                     </div>
                     <div
                       class="col-4 number-size"
-                      *ngIf="
-                        evaluation.status_complete === true ||
-                        evaluation.status_code !== '2'
-                      "
+                      *ngIf="evaluation.status_complete === true || evaluation.status_code !== '2'"
                       style="cursor: no-drop"
+                      joyrideStep="step_4"
+                      [title]="joyride('step_4.title') | translate"
+                      [text]="joyride('step_4.text') | translate"
                     >
                       <i class="fa fa-pencil" aria-hidden="false"></i>
                     </div>
@@ -163,22 +146,21 @@
                       class="col-4 number-size text-danger"
                       (click)="goToViewEval(evaluation)"
                       *ngIf="evaluation.status_code !== '2'"
+                      joyrideStep="step_5"
+                      [title]="joyride('step_5.title') | translate"
+                      [text]="joyride('step_5.text') | translate"
                     >
-                      <i
-                        class="fa fa-file-pdf-o"
-                        aria-hidden="true"
-                      ></i>
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>
                     <div
                       class="col-4 number-size "
-                      (click)="goToViewEval(evaluation)"
                       *ngIf="evaluation.status_code === '2'"
                       style="cursor: no-drop"
+                      joyrideStep="step_5"
+                      [title]="joyride('step_5.title') | translate"
+                      [text]="joyride('step_5.text') | translate"
                     >
-                      <i
-                        class="fa fa-file-pdf-o"
-                        aria-hidden="true"
-                      ></i>
+                      <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                     </div>
                     <div class="col-4">
                       {{ parseT('see') | translate }}
