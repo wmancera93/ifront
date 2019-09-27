@@ -207,7 +207,6 @@ export class JoyrideStepService implements IJoyrideStepService {
   private async showStep(actionType: StepActionType) {
     this.currentStepLoadingSubscription && this.currentStepLoadingSubscription.unsubscribe();
     this.stepsContainerService.currentStepLoading.next(false);
-    this.documentService.setDocumentHeight();
     for (const elementListening of this.elementsListening) {
       if (elementListening instanceof HTMLElement) {
         this.erd.removeAllListeners(elementListening);
@@ -220,13 +219,18 @@ export class JoyrideStepService implements IJoyrideStepService {
     const { waitingTime, name, route } = this.currentStep;
     // Scroll the element to get it visible if it's in a scrollable element
     this.scrollIfElementBeyondOtherElements();
+    this.documentService.setDocumentHeight();
     if (waitingTime) {
       this.onStepChange.emit({ name, route, actionType });
+      this.stepsContainerService.currentStepLoading.next(true);
       await new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, waitingTime);
       });
+      this.stepsContainerService.currentStepLoading.next(false);
+      this.scrollIfElementBeyondOtherElements();
+      this.documentService.setDocumentHeight();
     }
 
     this.backDropService.draw(this.currentStep);
