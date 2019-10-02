@@ -3,12 +3,13 @@
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
-  <div
-    class="row-hr-container"
-    joyrideStep="step_1"
-    [title]="joyride('step_1.title') | translate"
-    [text]="joyride('step_1.text') | translate"
-  >
+  <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row justify-content-center">
         <div class="col-xl-10 col-md-8 col-7 text-left title">
@@ -16,7 +17,13 @@
           {{ parseT('tittle') | translate }}
         </div>
         <div class="col-xl-2 col-md-4 col-5 text-center cursor-general" style="padding-right: 0px">
-          <div class="buttonBack img-zoom" (click)="returnBackPage()">
+          <div
+            class="buttonBack img-zoom"
+            (click)="returnBackPage()"
+            joyrideStep="step_2"
+            [title]="joyride('step_2.title') | translate"
+            [text]="joyride('step_2.text') | translate"
+          >
             <div class="padding-back">
               <i class="fa fa-fw fa-sign-in fa-rotate-180 fa-lg"></i>
               <span>
@@ -31,18 +38,14 @@
   <div
     id="data_table"
     class="row-hr-container justify-content-center"
-    joyrideStep="step_2"
-    [title]="joyride('step_2.title') | translate"
-    [text]="joyride('step_2.text') | translate"
     (next)="collapse(true)"
+    joyrideStep="step_3"
+    [title]="joyride('step_3.title') | translate"
+    [text]="joyride('step_3.text') | translate"
+    stepPosition="center"
   >
     <div class="col-12 widget bg-white">
-      <div
-        joyrideStep="step_3"
-        [title]="joyride('step_3.title') | translate"
-        [text]="joyride('step_3.text') | translate"
-        (prev)="collapse(false)"
-      >
+      <div (prev)="collapse(false)">
         <div class="border-botton-general">
           <div class="row top-containter">
             <div class="col-xl-4 col-lg-4 col-12 text-left">
@@ -58,7 +61,12 @@
         </div>
         <div class="collapse top-general-p border-botton-general" id="collapseExample">
           <div class="row" *ngIf="requests[0]">
-            <div class="col-lg-4 col-md-6 col-12 top-containter">
+            <div
+              class="col-lg-4 col-md-6 col-12 top-containter"
+              joyrideStep="step_4"
+              [title]="joyride('step_4.title') | translate"
+              [text]="joyride('step_4.text') | translate"
+            >
               <div class="row">
                 <div class="col-12">
                   <div id="all" class="filters-reports cursor-general filters-reports-active" (click)="filter('all')">
@@ -168,17 +176,16 @@
       </div>
 
       <div class="border-botton-general">
-        <div
-          class="row top-general-p"
-          *ngIf="show"
-          joyrideStep="step_4"
-          [title]="joyride('step_4.title') | translate"
-          [text]="joyride('step_4.text') | translate"
-        >
+        <div class="row top-general-p" *ngIf="show">
           <div class="col-12">
             <div class="row justify-content-end">
               <div class="col-xl-8 col-12 ">
-                <div class="form-group row">
+                <div
+                  class="form-group row"
+                  joyrideStep="step_5"
+                  [title]="joyride('step_5.title') | translate"
+                  [text]="joyride('step_5.text') | translate"
+                >
                   <label class="col-xl-2 col-md-4  col-lg-3 col-6 text-left align-self-center"
                     >{{ parseT('show_records') | translate }}:</label
                   >
@@ -196,9 +203,9 @@
                 <div
                   class="btn btn-block btn-outline-danger cursor-general"
                   (click)="pdfExport()"
-                  joyrideStep="step_5"
-                  [title]="joyride('step_5.title') | translate"
-                  [text]="joyride('step_5.text') | translate"
+                  joyrideStep="step_6"
+                  [title]="joyride('step_6.title') | translate"
+                  [text]="joyride('step_6.text') | translate"
                 >
                   <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
                   PDF
@@ -208,9 +215,9 @@
                 <div
                   class="btn btn-block btn-outline-success cursor-general"
                   (click)="excelExport()"
-                  joyrideStep="step_6"
-                  [title]="joyride('step_6.title') | translate"
-                  [text]="joyride('step_6.text') | translate"
+                  joyrideStep="step_7_report"
+                  [title]="joyride('s_reporttep_7.title') | translate"
+                  [text]="joyride('step_7_report.text') | translate"
                 >
                   <i class="fa fa-file-excel-o" aria-hidden="true"></i>
                   Excel
@@ -238,9 +245,9 @@
           </div>
           <div
             class="col-xl-4 col-12 top-containter align-self-center text-rigth"
-            joyrideStep="step_7_requests"
-            [title]="joyride('step_7.title') | translate"
-            [text]="joyride('step_7.text') | translate"
+            joyrideStep="step_8"
+            [title]="joyride('step_8.title') | translate"
+            [text]="joyride('step_8.text') | translate"
           >
             <input
               [(ngModel)]="value_search"
@@ -253,12 +260,7 @@
       </div>
       <div class="row top-general-p">
         <div class="col-12" style="min-height: 370px;">
-          <div
-            class="table-responsive"
-            joyrideStep="step_8"
-            [title]="joyride('step_8.title') | translate"
-            [text]="joyride('step_8.text') | translate"
-          >
+          <div class="table-responsive">
             <table class="table table-sm table-striped table-bordered table-hover">
               <thead>
                 <tr>
@@ -364,13 +366,14 @@
           </div>
         </div>
       </div>
-      <div class="row" *ngIf="show">
-        <div
-          class="col-12"
-          joyrideStep="step_9"
-          [title]="joyride('step_9.title') | translate"
-          [text]="joyride('step_9.text') | translate"
-        >
+      <div
+        class="row"
+        *ngIf="show"
+        joyrideStep="step_9"
+        [title]="joyride('step_9.title') | translate"
+        [text]="joyride('step_9.text') | translate"
+      >
+        <div class="col-12">
           <pagination-controls
             (pageChange)="p = $event"
             maxSize="9"

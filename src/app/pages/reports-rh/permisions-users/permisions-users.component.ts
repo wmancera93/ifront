@@ -37,7 +37,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   public placeholder_search: string;
   public token: boolean;
   private subscriptions: ISubscription[];
-  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_permisions', 'step_8', 'step_9'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 

@@ -46,7 +46,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public inProcess: string;
   public cancelled: string;
   private subscriptions: ISubscription[];
-  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_requests', 'step_8', 'step_9'];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_report', 'step_8', 'step_9'];
 
   t(key) {
     return this.translate.instant(this.parseT(key));

@@ -295,15 +295,88 @@ export default {
             title: '',
             text: 'En esta sección se encuentra un informe tipo tabla con el historico de la consulta seleccionada',
           },
-          step_2: {
-            title: 'Informe de consulta',
-            text:
-              'En esta sección se encuentra un informe tipo tabla que consulta un historico de los pagos y deducciones de nomina',
+        },
+      },
+      reports_rh: {
+        requests: {
+          joyride: {
+            step_1: {
+              title: '',
+              text: 'En esta sección se encuentra el reporte de las solicitudes del portal, indicando el estado de las solicitudes y el detalle de cada una de ellas',
+            },
+            step_2: {
+              title: 'Regresar al inicio',
+              text: 'Activando este boton es posible regresar al dahsboard principal',
+            },
+            step_3: {
+              title: 'Reporte',
+              text: 'Esta sección muestra el informe tipo tabla, que muestra el estado de las solicitudes realizadas desde el portal. Esta información resume todas las solicitudes de la compañia',
+            },
+            step_4: {
+              title: 'Filtros de busqueda',
+              text: 'Esta opción permite filtrar el reporte segun el estado de las solicitudes, adicional permite tener un conteo general segun el estado de solicitud',
+            },
+            step_5: {
+              title: 'Cantidad de registros',
+              text: 'Modificando la cantidad de registros, el reporte tipo tabla mostrara mas o menos regitros',
+            },
+            step_6: {
+              title: 'Descarga de reporte',
+              text: 'Activando esta opción es posible descargar el reporte en formato PDF',
+            },
+            step_7_report: {
+              title: 'Descarga de reporte',
+              text: 'Activando esta opción es posible descargar el reporte en formato EXCEL',
+            },
+            step_8: {
+              title: 'Busqueda registros',
+              text: 'En esta sección es posible buscar registros con el nombre del solicitante',
+            },
+            step_9: {
+              title: 'Paginador',
+              text: 'Esta sección muestra la cantidad de paginas en las que se muestra el reporte',
+            },
           },
-          step_3: {
-            title: 'Número de registros',
-            text: 'Seleccionando el número de registros, se modifica el informe en tamaño',
-          }
+        },
+        permisions_users: {
+          joyride: {
+            step_1: {
+              title: '',
+              text: 'En esta sección se encuentra el reporte de los permisos que los usuarios tienen para accesos en el portal',
+            },
+            step_2: {
+              title: 'Regresar al inicio',
+              text: 'Activando este boton es posible regresar al dahsboard principal',
+            },
+            step_3: {
+              title: 'Reporte',
+              text: 'Esta sección muestra el informe tipo tabla, que contiene los permisos que cada usuario tienen asignado para acceso y utilizacion ddddel portal',
+            },
+            step_4: {
+              title: 'Filtros de busqueda',
+              text: 'Esta opción permite filtrar el reporte segun el permiso',
+            },
+            step_5: {
+              title: 'Cantidad de registros',
+              text: 'Modificando la cantidad de registros, el reporte tipo tabla mostrara mas o menos regitros',
+            },
+            step_6: {
+              title: 'Descarga de reporte',
+              text: 'Activando esta opción es posible descargar el reporte en formato PDF',
+            },
+            step_7_report: {
+              title: 'Descarga de reporte',
+              text: 'Activando esta opción es posible descargar el reporte en formato EXCEL',
+            },
+            step_8: {
+              title: 'Busqueda registros',
+              text: 'En esta sección es posible buscar registros con el nombre del solicitante',
+            },
+            step_9: {
+              title: 'Paginador',
+              text: 'Esta sección muestra la cantidad de paginas en las que se muestra el reporte',
+            },
+          },
         },
       },
       comment_article: {
@@ -446,6 +519,23 @@ export default {
     },
     components: {
       common: {
+        data_table: {
+          joyride: {
+            step_1: {
+              title: 'Informe de consulta',
+              text:
+                'En esta sección se encuentra un informe tipo tabla que consulta un historico de los pagos y deducciones de nomina',
+            },
+            step_2: {
+              title: 'Número de registros',
+              text: 'Seleccionando el número de registros, se modifica el informe en tamaño',
+            },
+            step_3: {
+              title: 'Decarga de documentos',
+              text: 'Al activar estos botones, se descragara la consulta en formato Excel o PDF',
+            },
+          },
+        },
         time_line_approvers: {
           joyride: {
             step_7: {
