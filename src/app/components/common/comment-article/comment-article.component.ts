@@ -35,7 +35,7 @@ export class CommentArticleComponent implements OnInit {
   public commentEdit: string;
   public modalName = '';
   public flagRefreshPublication = false;
-  private steps = ['step_1', 'step_2', 'step_3'];
+  private steps = ['step_1_comment_article', 'step_2_comment_article', 'sstep_3_comment_article'];
 
   t(key) {
     return this.translate.instant(this.parseT(key));
@@ -94,6 +94,14 @@ export class CommentArticleComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#collapseExample')
+    .on('hidden.bs.collapse', () => {
+      this.is_collapse = true;
+    })
+    .on('shown.bs.collapse', () => {
+      this.is_collapse = false;
+    });
+
     this.nameModal.subscribe((data: any) => {
       this.targetModal = '#' + data;
       this.btnModal = 'btn-' + data;
@@ -202,6 +210,7 @@ export class CommentArticleComponent implements OnInit {
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+    $('#collapseExample').collapse(is_collapse ? 'show' : 'hide');
   }
 
   closeModal() {

@@ -6,8 +6,7 @@ export class FileUploadService {
   public objectFile: Subject<any> = new Subject<any>();
   public cleanFile: Subject<any> = new Subject<any>();
 
-  constructor() { }
-
+  constructor() {}
 
   getObjetFile() {
     return this.objectFile;

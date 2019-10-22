@@ -302,7 +302,8 @@ export default {
           joyride: {
             step_1: {
               title: '',
-              text: 'En esta sección se encuentra el reporte de las solicitudes del portal, indicando el estado de las solicitudes y el detalle de cada una de ellas',
+              text:
+                'En esta sección se encuentra el reporte de las solicitudes del portal, indicando el estado de las solicitudes y el detalle de cada una de ellas',
             },
             step_2: {
               title: 'Regresar al inicio',
@@ -310,11 +311,13 @@ export default {
             },
             step_3: {
               title: 'Reporte',
-              text: 'Esta sección muestra el informe tipo tabla, que muestra el estado de las solicitudes realizadas desde el portal. Esta información resume todas las solicitudes de la compañia',
+              text:
+                'Esta sección muestra el informe tipo tabla, que muestra el estado de las solicitudes realizadas desde el portal. Esta información resume todas las solicitudes de la compañia',
             },
             step_4: {
               title: 'Filtros de busqueda',
-              text: 'Esta opción permite filtrar el reporte segun el estado de las solicitudes, adicional permite tener un conteo general segun el estado de solicitud',
+              text:
+                'Esta opción permite filtrar el reporte segun el estado de las solicitudes, adicional permite tener un conteo general segun el estado de solicitud',
             },
             step_5: {
               title: 'Cantidad de registros',
@@ -350,7 +353,8 @@ export default {
             },
             step_3: {
               title: 'Reporte',
-              text: 'Esta sección muestra el informe tipo tabla, que contiene los permisos que cada usuario tienen asignado para acceso y utilizacion ddddel portal',
+              text:
+                'Esta sección muestra el informe tipo tabla, que contiene los permisos que cada usuario tienen asignado para acceso y utilizacion ddddel portal',
             },
             step_4: {
               title: 'Filtros de busqueda',
@@ -364,37 +368,69 @@ export default {
               title: 'Descarga de reporte',
               text: 'Activando esta opción es posible descargar el reporte en formato PDF',
             },
-            step_7_report: {
-              title: 'Descarga de reporte',
-              text: 'Activando esta opción es posible descargar el reporte en formato EXCEL',
-            },
-            step_8: {
+            step_7_permisions: {
               title: 'Busqueda registros',
               text: 'En esta sección es posible buscar registros con el nombre del solicitante',
             },
-            step_9: {
+            step_8: {
               title: 'Paginador',
               text: 'Esta sección muestra la cantidad de paginas en las que se muestra el reporte',
             },
           },
         },
-      },
-      comment_article: {
-        joyride: {
-          step_1_comment_article: {
-            title: 'Contenido del anuncio',
-            text: 'En esta sección se encuentra a detalle el contenido completo del anuncio',
+        requests_approvers: {
+          joyride: {
+            step_1: {
+              title: '',
+              text: 'En esta sección se encuentra el reporte de los aprobadores de solicitud',
+            },
+            step_2: {
+              title: 'Regresar al inicio',
+              text: 'Activando este boton es posible regresar al dahsboard principal',
+            },
+            step_3: {
+              title: 'Reporte',
+              text:
+                'Esta sección muestra el informe tipo tabla, cada registro indica el personal el aprobador a cargo, el tipo de solicitud que aprueba, la plataforma y el nivel de aprobación',
+            },
+            step_4: {
+              title: 'Filtros de busqueda',
+              text:
+                'Esta opción permite filtrar el reporte segun el tipo de solicitud, la plataforma y los usuarios que no cuentan con aprobador signado',
+            },
+            step_5: {
+              title: 'Cantidad de registros',
+              text: 'Modificando la cantidad de registros, el reporte tipo tabla mostrara mas o menos regitros',
+            },
+            step_6: {
+              title: 'Descarga de reporte',
+              text: 'Activando esta opción es posible descargar el reporte en formato PDF',
+            },
+            step_7_approvers: {
+              title: 'Paginador',
+              text: 'Esta sección muestra la cantidad de paginas en las que se muestra el reporte',
+            },
           },
-          step_2_comment_article: {
-            title: 'Creación y visualización de comentarios',
-            text: 'en esta seccion es posible realizar comentarios al anuncio y poder ver los comentarios de los demas usuarios',
-          },
-          step_3_comment_article: {
-            title: 'Eliminación o edición de comentarios',
-            text: 'Activando estos botones, es posibl editar o eliminar los comentarios realizados por el mismo usuario',
+        },
+        requests_approvers_log: {
+          joyride: {
+            step_1: {
+              title: '',
+              text: 'En esta sección se encuentra el reporte de la trazabilidad de aprobaciones de solicitud',
+            },
+            step_2: {
+              title: 'Reporte',
+              text: 'Esta sección muestra el informe tipo tabla con el historial de solicitudes',
+            },
+            step_3: {
+              title: 'Filtros de busqueda',
+              text:
+                'Esta opción permite filtrar el reporte con el numero de solicitud, código de solicitante , código de aprobador, tipo de solicitud y rangos de fechas',
+            },
           },
         },
       },
+
       events_employees: {
         joyride: {
           step_1: {
@@ -516,6 +552,105 @@ export default {
           },
         },
       },
+      billboard: {
+        news: {
+          joyride: {
+            step_1: {
+              title: '',
+              text: 'En esta pagina se puede encontrar las noticias publicadas en el portal',
+            },
+            step_2: {
+              title: 'Panel',
+              text: 'Aqui se encuentran listadas todas las noticias disponibles publicadas',
+            },
+            step_3: {
+              title: 'Busqueda noticia',
+              text: 'Aqui se puede realizar busqueda de noticias, escribiendo palabras que coincidan',
+            },
+            step_4: {
+              title: 'Busqueda noticia',
+              text:
+                'Este es un registro de la noticia que muestra información relevante, frente a numero de vistas, resumen y temas relacionados',
+            },
+            step_5: {
+              title: 'Contenido de noticias',
+              text:
+                'Este es el titulo de la noticia, al oprimir click sobre este se abrira una ventana auxiliar con el detalle de la noticia',
+            },
+          },
+        },
+        my_publication: {
+          new_article_form: {
+            joyride: {
+              step_1_new_article: {
+                title: 'Formulario noticia',
+                text:'En esta sección se indica el titulo, los temas de la noticia, el cargue de imagenes y el contenido de la noticia',
+              },
+              
+              step_2_new_article: {
+                title: 'Formulario noticia',
+                text:'Activando este boton se guarda la noticia',
+              },
+            },
+          },
+          edit_publication:{
+            joyride: {
+              step_1_edit_article: {
+                title: 'Formulario noticia',
+                text:'Es pósible editar todos los campos de las noticias, incluso la imagen adjunta',
+              },
+              step_2_edit_article: {
+                title: 'Formulario noticia',
+                text:'Para actualizar por favor active el boton guardar',
+              },
+            },
+          },
+          joyride: {
+            step_1: {
+              title: '',
+              text:
+                'En esta pagina se encontrara las publicaciones creadas en el portal, las que soncreadas por el usuario en sesión',
+            },
+            step_2: {
+              title: 'Mis noticias',
+              text: 'Esta sección tiene los registros de cada noticia',
+            },
+            step_3: {
+              title: 'Registro de noticias',
+              text:
+                'Cada registro cuenta con el titulo de noticia, las estadisticas de visitas, comentarios y las opciones de eliminacion y edición',
+            },
+            step_4: {
+              title: 'Creación de noticias',
+              text: 'Al activar esta opción se puede crear nuevas noticas',
+            },
+            step_5: {
+              title: 'Ocultar noticias',
+              text: 'Al tener check en esta opción, la noticia no se muestra para los usuarios',
+            },
+            step_6: {
+              title: 'Detalle de noticia',
+              text: 'Al dar click sobre le titulo es posible visualizar el detalle de la noticia',
+            },
+            step_7: {
+              title: 'Estadisticas',
+              text: 'Estas son estadisticas sobre el número de veces que ven las noticias',
+            },
+            step_8: {
+              title: 'Estadisticas',
+              text: 'Estas son estadisticas sobre el número de veces que las noticias son comentadas',
+            },
+            step_9: {
+              title: 'Edición de noticias',
+              text: 'Activando esta opción es posible editar la noticia',
+            },
+            step_10: {
+              title: 'Eliminación de noticia',
+              text: 'Activando esta opción es posible eliminar la noticia, esta opción estara activa si la noticia esta oculta',
+            },
+          },
+        },
+      },
     },
     components: {
       common: {
@@ -533,6 +668,22 @@ export default {
             step_3: {
               title: 'Decarga de documentos',
               text: 'Al activar estos botones, se descragara la consulta en formato Excel o PDF',
+            },
+          },
+        },
+        comment_article: {
+          joyride: {
+            step_1_comment_article: {
+              title: 'Contenido del anuncio',
+              text: 'En esta sección se encuentra a detalle el contenido completo del anuncio',
+            },
+            step_2_comment_article: {
+              title: 'Creación y visualización de comentarios',
+              text: 'Aqui se comenta el anuncio y se observan los comentarios de los demas usuarios',
+            },
+            step_3_comment_article: {
+              title: 'Eliminación o edición de comentarios',
+              text: 'Activando estos botones, es posibl editar o eliminar los comentarios realizados por el mismo usuario',
             },
           },
         },

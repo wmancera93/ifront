@@ -4,6 +4,12 @@
 
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
+      <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
@@ -15,18 +21,19 @@
   </div>
   <div
     class="row-hr-container justify-content-center"
-    joyrideStep="step_1"
-    [title]="joyride('step_1.title') | translate"
-    [text]="joyride('step_1.text') | translate"
+    joyrideStep="step_2"
+    [title]="joyride('step_2.title') | translate"
+    [text]="joyride('step_2.text') | translate"
+    stepPosition="center"
   >
     <div class="col-12  widget bg-white minHeight">
       <div class="row justify-content-center top-containter">
         <div class="col-10 col-xl-6 cursor-general">
           <div
             class="searchBar-new"
-            joyrideStep="step_2"
-            [title]="joyride('step_2.title') | translate"
-            [text]="joyride('step_2.text') | translate"
+            joyrideStep="step_3"
+            [title]="joyride('step_3.title') | translate"
+            [text]="joyride('step_3.text') | translate"
           >
             <input
               [(ngModel)]="titleNew"
@@ -55,9 +62,9 @@
           <div
             class="widget bg-white-1x-news"
             *ngFor="let new of newList"
-            joyrideStep="step_3"
-            [title]="joyride('step_3.title') | translate"
-            [text]="joyride('step_3.text') | translate"
+            joyrideStep="step_4"
+            [title]="joyride('step_4.title') | translate"
+            [text]="joyride('step_4.text') | translate"
           >
             <div class="row justify-content-center">
               <div class="col-6 col-lg-3">
@@ -67,12 +74,11 @@
                 <div class="row justify-content-center">
                   <div
                     class="col-12 font-color-default text-lg-left hoverTitle"
+                    
+                    joyrideStep="step_5"
+                    [title]="joyride('step_5.title') | translate"
+                    [text]="joyride('step_5.text') | translate"
                     (click)="viewDetailNew(new)"
-                    joyrideStepChildren
-                    joyrideStep="step_4"
-                    [title]="joyride('step_4.title') | translate"
-                    [text]="joyride('step_4.text') | translate"
-                    [step]="'step_4'"
                     (next)="viewDetailNew(new)"
                   >
                     <strong>{{ new.title | uppercase }} </strong>

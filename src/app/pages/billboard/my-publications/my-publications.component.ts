@@ -25,7 +25,29 @@ export class MyPublicationsComponent implements OnInit, OnDestroy {
   private alertWarning: Alerts[];
   public idDelete = 0;
   public token: boolean;
-  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
+  private steps = [
+    'step_1',
+    'step_2',
+    'step_3',
+    'step_4',
+    'step_1_new_article',
+    'step_2_new_article',
+    'step_5',
+    'step_6',
+    'step_1_comment_article',
+    'step_2_comment_article',
+    'step_3_comment_article',
+    'step_7',
+    'step_8',
+    'step_9',
+    'step_1_edit_article',
+    'step_2_edit_article',
+    'step_3_edit_article',
+    'step_4_edit_article',
+    'step_5_edit_article',
+    'step_6_edit_article',
+    'step_10',
+  ];
 
   private subscriptions: ISubscription[];
   private subscriptionArticles: ISubscription;

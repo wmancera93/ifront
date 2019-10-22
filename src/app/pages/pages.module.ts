@@ -58,6 +58,10 @@ import { DemographicChartComponent } from './dashboard/managerial/demographic-ch
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 import { JoyrideModule } from '../utils/joyride/joyride.module';
 import { QueriesComponent } from './queries/queries/queries.component';
+import { BackofficeComponent } from './backoffice/backoffice.component';
+import { UnlockingUsersComponent } from './backoffice/unlocking-users/unlocking-users.component';
+import { UploadImgComponent } from './backoffice/upload-img/upload-img.component';
+import { UploadColorsComponent } from './backoffice/upload-colors/upload-colors.component';
 
 @NgModule({
   imports: [
@@ -122,6 +126,10 @@ import { QueriesComponent } from './queries/queries/queries.component';
     DemographicChartComponent,
     RequestsRhBenefistComponent,
     QueriesComponent,
+    BackofficeComponent,
+    UnlockingUsersComponent,
+    UploadImgComponent,
+    UploadColorsComponent,
   ],
   providers: [ReportTravelsService],
 })

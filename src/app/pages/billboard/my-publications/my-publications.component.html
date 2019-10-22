@@ -2,14 +2,14 @@
   <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
-<div
-  *ngIf="!token"
-  class="heigth-content-general"
-  joyrideStep="step_1"
-  [title]="joyride('step_1.title') | translate"
-  [text]="joyride('step_1.text') | translate"
->
+<div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row align-items-center">
         <div class="col-xl-8 col-md-12 col-12 title">
@@ -25,9 +25,10 @@
         <div
           class="col-10 col-xl-3 cursor-general tabDate"
           (click)="goToForm()"
-          joyrideStep="step_2"
-          [title]="joyride('step_2.title') | translate"
-          [text]="joyride('step_2.text') | translate"
+          (next)="goToForm()"
+          joyrideStep="step_4"
+          [title]="joyride('step_4.title') | translate"
+          [text]="joyride('step_4.text') | translate"
         >
           <i class="fa fa-plus"></i> &nbsp;&nbsp;
           {{ parseT('btn_create_news') | translate }}
@@ -46,12 +47,30 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-center top-containter">
+          <div
+            class="row justify-content-center top-containter"
+            joyrideStep="step_2"
+            [title]="joyride('step_2.title') | translate"
+            [text]="joyride('step_2.text') | translate"
+            stepPosition="center"
+          >
             <div class="col-12">
-              <div class="widget bg-white-1x" *ngFor="let publication of myPublications">
+              <div
+                class="widget bg-white-1x"
+                *ngFor="let publication of myPublications"
+                joyrideStep="step_3"
+                [title]="joyride('step_3.title') | translate"
+                [text]="joyride('step_3.text') | translate"
+              >
                 <div class="row justify-content-center">
                   <div class="col-lg-2 col-4">
-                    <div class="row">
+                    <div
+                      class="row"
+                      (prev)="goToForm()"
+                      joyrideStep="step_5"
+                      [title]="joyride('step_5.title') | translate"
+                      [text]="joyride('step_5.text') | translate"
+                    >
                       <div class="col-12 number-size">
                         <div *ngIf="publication.publish" class="text-warning" (click)="publishArticle(publication)">
                           <i class="fa fa-square-o"></i>
@@ -70,6 +89,10 @@
                       <div
                         class="col-12 font-color-default text-lg-left title-size hoverTitle"
                         (click)="viewDetailArticle(publication)"
+                        joyrideStep="step_6"
+                        [title]="joyride('step_6.title') | translate"
+                        [text]="joyride('step_6.text') | translate"
+                        (next)="viewDetailArticle(publication)"
                       >
                         <strong>{{ publication.title | uppercase }} </strong>
                       </div>
@@ -78,7 +101,13 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-3 col-xl-1 hoverColor">
+                  <div
+                    class="col-3 col-xl-1 hoverColor"
+                    joyrideStep="step_7"
+                    [title]="joyride('step_7.title') | translate"
+                    [text]="joyride('step_7.text') | translate"
+                    (prev)="viewDetailArticle(publication)"
+                  >
                     <div class="row">
                       <div class="col-12 number-size ">
                         {{ publication.total_views }}
@@ -89,7 +118,12 @@
                     </div>
                   </div>
                   <div class="col-3 col-xl-1 hoverColor">
-                    <div class="row">
+                    <div
+                      class="row"
+                      joyrideStep="step_8"
+                      [title]="joyride('step_8.title') | translate"
+                      [text]="joyride('step_8.text') | translate"
+                    >
                       <div class="col-12 number-size">
                         {{ publication.total_comments }}
                       </div>
@@ -99,7 +133,13 @@
                     </div>
                   </div>
                   <div class="col-3 col-xl-1">
-                    <div class="row">
+                    <div
+                      class="row"
+                      joyrideStep="step_9"
+                      [title]="joyride('step_9.title') | translate"
+                      [text]="joyride('step_9.text') | translate"
+                      (next)="editNew(publication)"
+                    >
                       <div class="col-12 number-size text-info" (click)="editNew(publication)">
                         <i class="fa fa-pencil"></i>
                       </div>
@@ -109,7 +149,12 @@
                     </div>
                   </div>
                   <div class="col-3 col-xl-1">
-                    <div class="row">
+                    <div
+                      class="row"
+                      joyrideStep="step_10"
+                      [title]="joyride('step_10.title') | translate"
+                      [text]="joyride('step_10.text') | translate"
+                    >
                       <div
                         id="hideDan"
                         *ngIf="!publication.publish"

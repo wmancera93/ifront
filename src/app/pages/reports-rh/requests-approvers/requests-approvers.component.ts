@@ -26,7 +26,7 @@ export class RequestsApproversComponent implements OnInit {
   public platform_selected = 'IHR';
   public type_selected = 'VACA';
   private subscriptions: ISubscription[] = [];
-  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4','data_table_step_1', 'data_table_step_2', 'data_table_step_3'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -67,6 +67,13 @@ export class RequestsApproversComponent implements OnInit {
   }
 
   ngOnInit() {
+    $('#collapseExample')
+      .on('hidden.bs.collapse', () => {
+        this.is_collapse = true;
+      })
+      .on('shown.bs.collapse', () => {
+        this.is_collapse = false;
+      });
     this.reportsHrService.getSelectRequestsByType().subscribe((data: any) => {
       this.newtype_requests = data.data;
     });
@@ -83,7 +90,10 @@ export class RequestsApproversComponent implements OnInit {
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+    $('#collapseExample').collapse(is_collapse ? 'show' : 'hide');
+  
   }
+
 
   filterRequests(param: string, value: string, name: string) {
     switch (param) {

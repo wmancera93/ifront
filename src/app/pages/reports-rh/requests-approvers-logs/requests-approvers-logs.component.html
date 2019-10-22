@@ -3,46 +3,54 @@
 </div>
 <div *ngIf="!token" class="heigth-content-general">
   <div class="row-hr-container">
+    <joyrideStep
+      joyrideStep="step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    ></joyrideStep>
     <div class="col-12">
       <div class="row">
         <div class="col-xl-10 col-md-8 col-7 title">
           <i class="fa fa-table"></i>
-          Logs de aprobadores de solicitudes
+          {{ parseT('tittle') | translate }}
         </div>
       </div>
     </div>
   </div>
-  <div id="data_table" class="row-hr-container justify-content-center">
+  <div
+    id="data_table"
+    class="row-hr-container justify-content-center"
+    (next)="collapse(true)"
+    joyrideStep="step_2"
+    [title]="joyride('step_2.title') | translate"
+    [text]="joyride('step_2.text') | translate"
+    stepPosition="center"
+  >
     <div class="col-12 widget bg-white">
       <div class="border-botton-general">
         <div class="row top-containter">
           <div class="col-xl-2 col-lg-4 col-12 text-left">
             <b>
-              Filtros de consulta
+              {{ parseT('query_filters') | translate }}
             </b>
             <i
-              *ngIf="!is_collapse"
-              class="fa fa-fw icon-collapse fa-plus fa-1x cursor-general"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              (click)="collapse(true)"
-            ></i>
-            <i
-              *ngIf="is_collapse"
-              class="fa fa-fw icon-collapse fa-minus fa-1x cursor-general"
-              data-toggle="collapse"
-              data-target="#collapseExample"
-              aria-expanded="false"
-              (click)="collapse(false)"
+              class="fa fa-fw icon-collapse {{ is_collapse ? 'fa-minus' : 'fa-plus' }} fa-1x cursor-general"
+              (click)="collapse(!is_collapse)"
             ></i>
           </div>
         </div>
       </div>
       <div class="collapse top-general-p border-botton-general" id="collapseExample">
         <div class="row">
-          <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-            <label>Id de solicitud</label>
+          <div
+            class="col-lg-4 col-md-4 col-12"
+            style="padding-bottom: 15px"
+            joyrideStep="step_3"
+            [title]="joyride('step_3.title') | translate"
+            [text]="joyride('step_3.text') | translate"
+          >
+            <label>{{ parseT('id_query') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="request_number"
@@ -51,7 +59,7 @@
             />
           </div>
           <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-            <label>Número de solicitante</label>
+            <label>{{ parseT('number_requesting') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="personal_request_number"
@@ -60,7 +68,7 @@
             />
           </div>
           <div class="col-lg-4 col-md-4 col-12" style="padding-bottom: 15px">
-            <label>Número de aprobador</label>
+            <label>{{ parseT('number_approver') | translate }}</label>
             <input
               type="text"
               [(ngModel)]="personal_approver_number"
@@ -69,7 +77,7 @@
             />
           </div>
           <div class="col-lg-4 col-12">
-            <label>Tipo de solicitud</label>
+            <label>{{ parseT('type_request') | translate }}</label>
             <ul class="navbar-nav mr-auto">
               <li class="nav-item dropdown">
                 <a
@@ -81,14 +89,14 @@
                   aria-expanded="false"
                 >
                   <i class="fa fa-chevron-circle-down"></i>
-                  {{ type_selected }}
+                  {{ parseT('option_select') | translate }}
                 </a>
                 <div class="dropdown-menu col-12" aria-labelledby="navbarDropdown">
                   <div>
                     <a
                       class="dropdown-item color-font-gree text-capitalize cursor-general"
                       (click)="filterRequests('-1', 'Seleccione')"
-                      >Seleccione</a
+                      >{{ parseT('option_select') | translate }}</a
                     >
                     <div *ngIf="newtype_requests.length !== i + 1" class="dropdown-divider"></div>
                   </div>
@@ -105,7 +113,7 @@
             </ul>
           </div>
           <div class="col-lg-4 col-md-4 col-12">
-            <label>fecha de Inicio</label>
+            <label>{{ parseT('date_begin') | translate }}</label>
             <input
               tabindex="-1"
               type="date"
@@ -116,7 +124,7 @@
             />
           </div>
           <div class="col-lg-4 col-md-4 col-12">
-            <label>Fecha final</label>
+            <label>{{ parseT('date_end') | translate }}</label>
             <input
               tabindex="-1"
               type="date"
@@ -131,13 +139,13 @@
           <div class="col-lg-4 col-md-4 col-12 align-self-end" *ngIf="btnConsult">
             <div class="btn btn-block btn-primary-second fontDate" (click)="getObjectPrint()">
               <i class="fa fa-search-plus"></i>
-              Consulta
+              {{ parseT('search') | translate }}
             </div>
           </div>
           <div class="col-lg-4 col-md-4 col-12 align-self-end" *ngIf="!btnConsult">
             <div class="btn btn-block btn-primary-second fontDate" style="cursor: no-drop">
               <i class="fa fa-search-plus"></i>
-              Consulta
+              {{ parseT('search') | translate }}
             </div>
           </div>
         </div>

@@ -37,7 +37,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   public placeholder_search: string;
   public token: boolean;
   private subscriptions: ISubscription[];
-  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_permisions', 'step_8', 'step_9'];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_permisions', 'step_8'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
@@ -88,6 +88,13 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    $('#collapseExample')
+      .on('hidden.bs.collapse', () => {
+        this.is_collapse = true;
+      })
+      .on('shown.bs.collapse', () => {
+        this.is_collapse = false;
+      });
     this.subscriptions = [
       ...this.subscriptions,
       this.reportsHrService.getReportEmployeeRoles().subscribe((res: any) => {
@@ -186,6 +193,7 @@ export class PermisionsUsersComponent implements OnInit, OnDestroy {
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+    $('#collapseExample').collapse(is_collapse ? 'show' : 'hide');
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 100);

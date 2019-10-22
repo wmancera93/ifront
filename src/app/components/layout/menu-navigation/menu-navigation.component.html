@@ -562,6 +562,12 @@
           <span class="nav-label">{{ parseT('docs_org') | translate }}</span>
         </a>
       </li>
+      <li id="liAdministrator" *ngIf="dataUser.employee.permits[PermitsUser.BFFE]?.state">
+        <a id="aAdministrator" class="nav-link bg-menu"  routerLink="/ihr/administrator" (click)="clickOptionMenu('liAdministrator', 'aAdministrator', '')">
+          <i class="fa fa-cogs"></i>
+          <span class="nav-label">{{ parseT('Administrator') | translate }}</span>
+        </a>
+      </li>
       <li id="liHelp" *ngIf="dataEnterprise.show_help">
         <a id="aHelp" class="nav-link bg-menu" routerLink="/ihr/help" (click)="clickOptionMenu('liHelp', 'aHelp', '')">
           <i class="fa fa-question-circle"></i>

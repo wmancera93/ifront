@@ -1,0 +1,45 @@
+<div class="row-hr-container align-items-center">
+  <div class="col-xl-8 col-md-12 col-12 title">
+    <i class="fa fa-cogs"></i>
+    Administración
+  </div>
+</div>
+
+<div class="row-hr-container widget bg-white minHeight {{ activeClass }}">
+  <div class="col-lg-3 col-md-6 col-12">
+    <div class="row" *ngFor="let optionBackoffice of backOffice">
+      <div class="col-12">
+        <div class="btn-group-vertical btn-block">
+          <button type="button" class="btn btn-primary cursor-general text-left" (click)="acctionBotton(optionBackoffice)">
+            <i class="fa {{ optionBackoffice.icon }}"></i>
+            {{ optionBackoffice.name }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-9 col-md-6 col-12 ">
+    <div class="row">
+      <div class="col-1">
+        <h3><i class="fa {{ icon }}"></i></h3>
+      </div>
+      <div class="col-11 text-left">
+        <h3>{{ name }}</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <ng-container *ngIf="showForm == 1">
+          <app-unlocking-users></app-unlocking-users>
+        </ng-container>
+        <ng-container *ngIf="showForm == 2">
+          <app-upload-img></app-upload-img>
+        </ng-container>
+        <ng-container *ngIf="showForm == 3">
+          <app-upload-colors></app-upload-colors>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

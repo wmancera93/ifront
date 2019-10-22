@@ -33,6 +33,7 @@ import { DemographicChartComponent } from './dashboard/managerial/demographic-ch
 import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-benefist.component';
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { QueriesComponent } from './queries/queries/queries.component';
+import { BackofficeComponent } from './backoffice/backoffice.component';
 
 const routes: Routes = [
   {
@@ -132,6 +133,10 @@ const routes: Routes = [
   {
     path: 'master_data',
     component: MasterDataComponent,
+  },
+  {
+    path: 'administrator',
+    component: BackofficeComponent,
   },
   {
     path: 'help',
