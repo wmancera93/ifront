@@ -1,16 +1,11 @@
-import {
-  Component,
-  OnInit,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-news',
@@ -29,9 +24,18 @@ export class NewsComponent implements OnInit, OnDestroy {
   public seacrhNew: string;
   private subscriptions: ISubscription[];
   private subscriptionArticles: ISubscription;
+  private steps = [
+    'step_1',
+    'step_2',
+    'step_3',
+    'step_4',
+    'step_5',
+    'step_1_comment_article',
+    'step_2_comment_article',
+    'step_3_comment_article',
+  ];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -46,6 +50,7 @@ export class NewsComponent implements OnInit, OnDestroy {
     public billboardSharedService: BillboardService,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
+    public joyrideAppService: JoyrideAppService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -57,9 +62,7 @@ export class NewsComponent implements OnInit, OnDestroy {
             title: error.status.toString(),
             message: error.json().errors[0].toString(),
           });
-          document
-            .getElementsByTagName('body')[0]
-            .setAttribute('style', 'overflow-y:hidden');
+          document.getElementsByTagName('body')[0].setAttribute('style', 'overflow-y:hidden');
           this.token = true;
         },
       ),
@@ -67,6 +70,12 @@ export class NewsComponent implements OnInit, OnDestroy {
         this.consultAllArticles();
       }),
     ];
+
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps }).subscribe(() => {}));
+      }),
+    );
   }
 
   ngOnInit() {
@@ -77,11 +86,9 @@ export class NewsComponent implements OnInit, OnDestroy {
   }
 
   consultAllArticles() {
-    this.subscriptionArticles = this.myPublicationsService
-      .getAllArticles()
-      .subscribe((data: any) => {
-        this.newList = data.data;
-      });
+    this.subscriptionArticles = this.myPublicationsService.getAllArticles().subscribe((data: any) => {
+      this.newList = data.data;
+    });
   }
 
   enterTitleNew() {
@@ -94,9 +101,7 @@ export class NewsComponent implements OnInit, OnDestroy {
       this.validateNoData = false;
       this.consultAllArticles();
     } else {
-      this.newList = this.newList.filter(
-        (pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0,
-      );
+      this.newList = this.newList.filter((pub: any) => pub.title.toLowerCase().indexOf(this.searchNotice) >= 0);
       if (this.newList.length == 0) {
         this.validateNoData = true;
       }

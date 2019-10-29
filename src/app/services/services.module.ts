@@ -65,6 +65,7 @@ import { TransportationLogisticsService } from './travel-management/transportati
 import { DemographicChartsService } from './common/demographic-charts/demographic-charts.service';
 import { DemographicSharedService } from './shared/common/demographic/demographic-shared.service';
 import { JoyrideAppService } from './joyride-app/joyride-app.service';
+import { BackofficeService } from './backOffice/backoffice.service';
 
 @NgModule({
   imports: [CommonModule],
@@ -131,6 +132,7 @@ import { JoyrideAppService } from './joyride-app/joyride-app.service';
     TransportationLogisticsService,
     DemographicChartsService,
     DemographicSharedService,
+    BackofficeService
   ],
 })
 export class ServicesModule {}

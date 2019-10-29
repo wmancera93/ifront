@@ -37,7 +37,6 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -60,7 +59,6 @@ export class ApprovalsDetailsComponent implements OnInit, OnDestroy {
         this.approvals = [];
         this.edit = data.edit;
         this.approverRequestsService.getDetailApprovalsRequests(data.id).subscribe((request: any) => {
-          debugger;
           this.approvals[0] = request.data[0].request;
           if (request.data[0].request.date_begin_format) {
             const dateBegin = request.data[0].request.date_begin_format.split('/');

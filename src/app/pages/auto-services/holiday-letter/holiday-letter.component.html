@@ -1,10 +1,14 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 
 <div *ngIf="!token" class="heigth-content-general">
+  <joyrideStep
+    joyrideStep="step_1"
+    [title]="joyride('step_1.title') | translate"
+    [text]="joyride('step_1.text') | translate"
+    stepPosition="center"
+  ></joyrideStep>
   <div class="row-hr-container">
     <div class="col-12">
       <div class="row align-items-center">
@@ -17,14 +21,8 @@
   </div>
   <div class="row-hr-container justify-content-center">
     <div class="col-12  widget bg-white minHeight">
-      <div
-        class="row justify-content-center top-containter"
-        *ngIf="flagEmpty"
-      >
-        <div
-          class="col-lg-8 col-12 text-center"
-          style="min-height: 370px;"
-        >
+      <div class="row justify-content-center top-containter" *ngIf="flagEmpty">
+        <div class="col-lg-8 col-12 text-center" style="min-height: 370px;">
           <div class="alert alert-warning" role="alert">
             {{ parseT('text_vacation_letter_not_found') | translate }}
             <strong>{{ parseT('text_vacation') | translate }}</strong
@@ -32,8 +30,13 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12" *ngIf="!flagEmpty">
+      <div class="row" *ngIf="!flagEmpty">
+        <div
+          class="col-12"
+          joyrideStep="step_2"
+          [title]="joyride('step_2.title') | translate"
+          [text]="joyride('step_2.text') | translate"
+        >
           <iframe
             id="frameAutoService"
             [src]="sanitizer.bypassSecurityTrustResourceUrl(urlPDF)"

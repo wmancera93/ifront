@@ -217,6 +217,13 @@
               </div>
             </div>
           </ng-container>
+          <div class="col-md-12 col-12 top-containter" *ngIf="isGDV">
+            <label for="dateEnd" class="titleColor">
+              <i class="fa fa-fw fa-paperclip text-primary-hr"></i>
+              {{ parseT('message_attach') | translate }}*
+            </label>
+            <app-file-upload [nameFile]="fileVacation" [extensions]="extensions"></app-file-upload>
+          </div>
           <div class="col-12" *ngIf="isGDV">
             <h3
               class="cursor-general"

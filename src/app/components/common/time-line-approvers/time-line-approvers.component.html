@@ -21,7 +21,8 @@
         joyrideStep="step_7"
         [title]="joyride('step_7.title') | translate"
         [text]="joyride('step_7.text') | translate"
-        [waitingTime]="200"
+        [loading]="!dataRequets && !modalOpen"
+        [waitingTime]="1000"
       >
         <div class="container">
           <div class="timeline" *ngIf="dataRequets">

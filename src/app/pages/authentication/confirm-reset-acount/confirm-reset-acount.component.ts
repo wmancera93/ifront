@@ -139,7 +139,7 @@ export class ConfirmResetAcountComponent implements OnInit {
               this.txtConfirmPassword = '';
               setTimeout(() => {
                 document.getElementById('closeModal').click();
-                this.router.navigate(['/ihr/login']);
+                this.router.navigate(['/ihr/authentication/login']);
               }, 2000);
               this.googleAnalyticsEventsService.emitEvent(
                 'authentication',

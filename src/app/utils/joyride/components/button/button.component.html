@@ -1,13 +1,20 @@
 <button
-  (mouseleave)="hover = false"
-  (mouseover)="hover = true"
+  (mouseleave)="!loading ? (hover = false) : undefined"
+  (mouseover)="!loading ? (hover = true) : undefined"
   [ngStyle]="{
     'background-color': hover ? '#fff' : color,
     color: hover ? color : '#fff',
     'border-color': hover ? color : 'transparent'
   }"
-  class="joyride-button"
+  class="joyride-button position-relative"
+  [ngClass]="{ 'loading-button': loading }"
   (click)="onClick()"
 >
   <ng-content></ng-content>
+  <div *ngIf="loading" style="top: 0;left: 0;right: 0;bottom: 0;" class="position-absolute d-flex">
+    <div class="hollowLoader m-auto">
+      <div class="largeBox"></div>
+      <div class="smallBox"></div>
+    </div>
+  </div>
 </button>

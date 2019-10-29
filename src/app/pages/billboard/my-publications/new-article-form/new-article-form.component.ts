@@ -30,7 +30,10 @@ export class NewArticleFormComponent implements OnInit {
   public showSubmit = true;
   formNewArticle: FormGroup;
   fileToUpload: File = null;
-
+  private steps = [
+    'step_1_new_article',
+    'step_2_new_article',
+  ];
   public tags = [];
   public summary = '';
   public title_form = '';
@@ -39,7 +42,6 @@ export class NewArticleFormComponent implements OnInit {
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -75,9 +77,7 @@ export class NewArticleFormComponent implements OnInit {
   }
   onSubmitNewArticle(value: any): void {
     if (value.title == '' || value.summary == '' || value.body == '') {
-      (<HTMLInputElement>(
-        document.getElementsByClassName('buttonCloseNewForm')[0]
-      )).click();
+      (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
       const alertWarning: Alerts[] = [
         {
           type: 'danger',
@@ -102,9 +102,7 @@ export class NewArticleFormComponent implements OnInit {
           if (data.success == true) {
             this.cleanFormData();
             this.fileUploadService.setCleanUpload(true);
-            (<HTMLInputElement>(
-              document.getElementsByClassName('buttonCloseNewForm')[0]
-            )).click();
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseNewForm')[0]).click();
             const alertConfirmation: Alerts[] = [
               {
                 type: 'success',
@@ -119,9 +117,7 @@ export class NewArticleFormComponent implements OnInit {
           }
         },
         (error: any) => {
-          (<HTMLInputElement>(
-            document.getElementsByClassName('buttonCloseRequest')[0]
-          )).click();
+          (<HTMLInputElement>document.getElementsByClassName('buttonCloseRequest')[0]).click();
           const alertWarning: Alerts[] = [
             {
               type: 'danger',
@@ -135,5 +131,8 @@ export class NewArticleFormComponent implements OnInit {
         },
       );
     }
+  }
+  closeModal(){
+    $('#modalArticleNew').modal('hide')
   }
 }

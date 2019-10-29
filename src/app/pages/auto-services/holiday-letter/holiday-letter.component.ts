@@ -4,6 +4,8 @@ import { Certificate } from '../../../models/common/auto_services/auto_services'
 import { DomSanitizer } from '@angular/platform-browser';
 import { Angular2TokenService } from 'angular2-token';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
+import { ISubscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-holiday-letter',
@@ -14,6 +16,8 @@ export class HolidayLetterComponent implements OnInit {
   public holidayLetter: Certificate[] = [];
   public urlPDF = '';
   public flagEmpty: boolean;
+  private steps = ['step_1', 'step_2'];
+  public joyrideSubscription: ISubscription;
 
   public token: boolean;
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
@@ -32,7 +36,11 @@ export class HolidayLetterComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private tokenService: Angular2TokenService,
     public stylesExplorerService: StylesExplorerService,
+    public joyrideAppService: JoyrideAppService,
   ) {
+    this.joyrideSubscription = this.joyrideAppService.onStartTour.subscribe(() => {
+      this.joyrideAppService.startTour({ steps: this.steps });
+    });
     this.tokenService.validateToken().subscribe(
       () => {
         this.token = false;

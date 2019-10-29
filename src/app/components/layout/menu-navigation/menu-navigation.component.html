@@ -89,7 +89,7 @@
               <a
                 id="aWorkCertificate"
                 class="nav-link bg-menu"
-                routerLink="/ihr/work_certificate"
+                routerLink="/ihr/auto_services/work_certificate"
                 (click)="clickOptionMenu('liAutoService', 'aWorkCertificate', 'selfService')"
                 >{{ parseT('certificate_work') | translate }}</a
               >
@@ -98,7 +98,7 @@
               <a
                 id="aPayrollReceipts"
                 class="nav-link bg-menu"
-                routerLink="/ihr/payroll_receipts"
+                routerLink="/ihr/auto_services/payroll_receipts"
                 (click)="clickOptionMenu('liAutoService', 'aPayrollReceipts', 'selfService')"
                 >{{ parseT('receipts') | translate }}</a
               >
@@ -107,7 +107,7 @@
               <a
                 id="aCertificateIncomeWithholdings"
                 class="nav-link bg-menu"
-                routerLink="/ihr/certificate_income_withholding"
+                routerLink="/ihr/auto_services/certificate_income_withholding"
                 (click)="clickOptionMenu('liAutoService', 'aCertificateIncomeWithholdings', 'selfService')"
                 >{{ parseT('certificate_ing_ret') | translate }}</a
               >
@@ -116,7 +116,7 @@
               <a
                 id="aHolidayLetter"
                 class="nav-link bg-menu"
-                routerLink="/ihr/holiday_letter"
+                routerLink="/ihr/auto_services/holiday_letter"
                 (click)="clickOptionMenu('liAutoService', 'aHolidayLetter', 'selfService')"
                 >{{ parseT('letter_vacations') | translate }}</a
               >
@@ -509,7 +509,7 @@
         <a
           id="aTravel"
           class="nav-link bg-menu"
-          routerLink="/ihr/travel_management"
+          routerLink="/ihr/travel_management/index"
           (click)="clickOptionMenu('liTravel', 'aTravel', '')"
         >
           <i class="fa fa-plane"></i>
@@ -560,6 +560,12 @@
         >
           <i class="fa fa-folder-open-o"></i>
           <span class="nav-label">{{ parseT('docs_org') | translate }}</span>
+        </a>
+      </li>
+      <li id="liAdministrator" *ngIf="dataUser.employee.permits[PermitsUser.BFFE]?.state">
+        <a id="aAdministrator" class="nav-link bg-menu"  routerLink="/ihr/administrator" (click)="clickOptionMenu('liAdministrator', 'aAdministrator', '')">
+          <i class="fa fa-cogs"></i>
+          <span class="nav-label">{{ parseT('Administrator') | translate }}</span>
         </a>
       </li>
       <li id="liHelp" *ngIf="dataEnterprise.show_help">

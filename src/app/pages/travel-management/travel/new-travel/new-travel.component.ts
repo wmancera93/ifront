@@ -136,12 +136,12 @@ export class NewTravelComponent implements OnInit, OnDestroy {
       if (this.countAfterAlert === 0) {
         if (data === 'continueTravelAlowances') {
           document.getElementById('closeTravels').click();
-          this.router.navigate(['/ihr/spend', this.ticket_advance]);
+          this.router.navigate(['/ihr/travel_management/spend', this.ticket_advance]);
         }
 
         if (data === 'continueTravelAdvances') {
           document.getElementById('closeTravels').click();
-          this.router.navigate(['/ihr/advances', this.ticket_advance]);
+          this.router.navigate(['/ihr/travel_management/advances', this.ticket_advance]);
         }
 
         if (

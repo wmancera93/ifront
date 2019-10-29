@@ -11,6 +11,9 @@ export class JoyrideButtonComponent {
   @Input()
   color: string;
 
+  @Input()
+  loading: boolean = false;
+
   @Output()
   clicked: EventEmitter<any> = new EventEmitter();
 

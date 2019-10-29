@@ -9,7 +9,7 @@ const appRoutes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/ihr/login',
+    redirectTo: '/ihr/authentication/login',
     pathMatch: 'full',
   },
 ];

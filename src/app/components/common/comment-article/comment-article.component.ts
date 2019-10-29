@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef } from '@angular/core';
 import { BillboardService } from '../../../services/shared/common/billboard/billboard.service';
 import { PublicArticle } from '../../../models/common/billboard/my_publications';
 import { MyPublicationsService } from '../../../services/billboard/my-publications/my-publications.service';
@@ -6,6 +6,8 @@ import { AlertsService } from '../../../services/shared/common/alerts/alerts.ser
 import { Alerts } from '../../../models/common/alerts/alerts';
 import { StylesExplorerService } from '../../../services/common/styles-explorer/styles-explorer.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-comment-article',
@@ -18,7 +20,7 @@ export class CommentArticleComponent implements OnInit {
   public btnModal = '';
   public nameThisModal = '';
   public infoArticle: PublicArticle = null;
-
+  private subscriptions: ISubscription[] = [];
   public commentsList: PublicArticle;
   public newComment: PublicArticle;
   public viewModal = true;
@@ -33,11 +35,11 @@ export class CommentArticleComponent implements OnInit {
   public commentEdit: string;
   public modalName = '';
   public flagRefreshPublication = false;
+  private steps = ['step_1_comment_article', 'step_2_comment_article', 'sstep_3_comment_article'];
 
   t(key) {
     return this.translate.instant(this.parseT(key));
   }
-
 
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
@@ -47,33 +49,59 @@ export class CommentArticleComponent implements OnInit {
     return `components.common.comment_article.${key}`;
   }
 
-  constructor(public billboardSharedService: BillboardService, public alert: AlertsService, public myPublicationService: MyPublicationsService, public stylesExplorerService: StylesExplorerService, public translate: TranslateService) {
-    this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data === 'continueExit') {
-        this.getDetailArticle();
-      }
-    });
-
-    this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
-      this.idArticle = data.objectPublication.id;
-      this.numberComments = data.objectPublication.total_comments;
-      this.modalName = data.modal;
-      this.getDetailArticle(data.modal);
-    });
-
-    this.alert.getActionConfirm().subscribe((data: any) => {
-      if (data == 'deleteComment') {
-        this.myPublicationService.deleteComment(this.idArticle, this.idComment).subscribe((data: any) => {
-          if (data.success == true) {
-          }
-          (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+  constructor(
+    public billboardSharedService: BillboardService,
+    public alert: AlertsService,
+    public myPublicationService: MyPublicationsService,
+    public stylesExplorerService: StylesExplorerService,
+    public translate: TranslateService,
+    public joyrideAppService: JoyrideAppService,
+  ) {
+    this.subscriptions.push(
+      this.alert.getActionConfirm().subscribe((data: any) => {
+        if (data === 'continueExit') {
           this.getDetailArticle();
-        });
-      }
-    });
+        }
+      }),
+    );
+
+    this.subscriptions.push(
+      this.billboardSharedService.getShowCommentNew().subscribe((data: any) => {
+        this.idArticle = data.objectPublication.id;
+        this.numberComments = data.objectPublication.total_comments;
+        this.modalName = data.modal;
+        this.getDetailArticle(data.modal);
+      }),
+    );
+
+    this.subscriptions.push(
+      this.alert.getActionConfirm().subscribe((data: any) => {
+        if (data == 'deleteComment') {
+          this.myPublicationService.deleteComment(this.idArticle, this.idComment).subscribe((data: any) => {
+            if (data.success == true) {
+            }
+            (<HTMLInputElement>document.getElementsByClassName('buttonCloseComment')[0]).click();
+            this.getDetailArticle();
+          });
+        }
+      }),
+    );
+    this.subscriptions.push(
+      joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps }).subscribe(() => {}));
+      }),
+    );
   }
 
   ngOnInit() {
+    $('#collapseExample')
+    .on('hidden.bs.collapse', () => {
+      this.is_collapse = true;
+    })
+    .on('shown.bs.collapse', () => {
+      this.is_collapse = false;
+    });
+
     this.nameModal.subscribe((data: any) => {
       this.targetModal = '#' + data;
       this.btnModal = 'btn-' + data;
@@ -88,23 +116,23 @@ export class CommentArticleComponent implements OnInit {
   getDetailArticle(modal?: string) {
     if (modal !== undefined) {
       this.infoArticle = null;
+      if (document.getElementById(modal).className !== 'modal show') {
+        document.getElementById('btn-' + modal).click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+      }
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
-        if (document.getElementById(modal).className !== 'modal show') {
-          document.getElementById('btn-' + modal).click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
-        }
       });
     } else {
       this.infoArticle = null;
+      if (document.getElementById(this.modalName).className !== 'modal show') {
+        document.getElementById('btn-' + this.modalName).click();
+        document.getElementById('bodyGeneral').removeAttribute('style');
+      }
       this.myPublicationService.getArticles(this.idArticle).subscribe((res: any) => {
         this.infoArticle = res.data;
         this.commentsList = res.data.comments_articles;
-        if (document.getElementById(this.modalName).className !== 'modal show') {
-          document.getElementById('btn-' + this.modalName).click();
-          document.getElementById('bodyGeneral').removeAttribute('style');
-        }
       });
     }
   }
@@ -182,5 +210,16 @@ export class CommentArticleComponent implements OnInit {
   }
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
+    $('#collapseExample').collapse(is_collapse ? 'show' : 'hide');
+  }
+
+  closeModal() {
+    $ && $(this.targetModal).modal('hide');
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

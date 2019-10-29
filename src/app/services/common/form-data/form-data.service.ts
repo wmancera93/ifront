@@ -189,7 +189,22 @@ export class FormDataService extends Angular2TokenService {
 
       }
 
+      putImgCompany(idEmployee: string, data: FormData) {
+        this.definitionServer();
 
+        const hdrs = this.currentAuthHeaders;
+        hdrs.append('enctype', 'multipart/form-data');
+        const requestOptions = new RequestOptions({
+            method: RequestMethod.Put,
+            headers: hdrs,
+            url: this.baseUrl + '/api/v2/companies/company_makeover/' + idEmployee,
+            body: data
+        });
+        return this.request(requestOptions).map(
+            (response) => response.json()
+        );
+
+      }
 
 
 

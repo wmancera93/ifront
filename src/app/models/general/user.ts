@@ -21,6 +21,7 @@ export enum PermitsUser {
   PERMISSIONS_SEE_RETENTIONS = 'PERMISSIONS_SEE_RETENTIONS',
   SHOW_BENEFITS = 'SHOW_BENEFITS',
   HELP = 'HELP',
+  BFFE = 'BFFE',
 }
 
 export interface Permits {
@@ -28,6 +29,7 @@ export interface Permits {
   PERMISSIONS_SEE_RETENTIONS: Permit;
   SHOW_BENEFITS: Permit;
   HELP: Permit;
+  BFFE: Permit;
 }
 
 export interface Employee {

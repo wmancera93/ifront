@@ -15,7 +15,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 import { JoyrideStepInfo } from '../models/joyride-step-info.class';
 import { JoyrideStepDoesNotExist, JoyrideStepOutOfRange } from '../models/joyride-error.class';
 import { LoggerService } from './logger.service';
-import { ROUTE_SEPARATOR } from '../constants';
+import { ISubscription } from 'rxjs/Subscription';
 
 const SCROLLBAR_SIZE = 20;
 
@@ -31,6 +31,7 @@ export interface IJoyrideStepService {
 export interface CurrentStep {
   name: string;
   route: string;
+  joyrideChildren?: string;
 }
 
 @Injectable()
@@ -41,6 +42,9 @@ export class JoyrideStepService implements IJoyrideStepService {
   private winBottomPosition: number = 0;
   public onStepChange = new EventEmitter<Pick<JoyrideStep, 'name' | 'route'> & { actionType: StepActionType }>();
   private erd = elementResizeDetector();
+  private elementsListening: HTMLElement[] = [];
+  private currentStepLoadingSubscription: ISubscription;
+  private currentStepLoading?: JoyrideStep;
   private stepsObserver: ReplaySubject<JoyrideStepInfo> = new ReplaySubject<JoyrideStepInfo>();
 
   constructor(
@@ -98,7 +102,7 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.removeCurrentStep();
     if (
       this.optionsService.isSubTour &&
-      this.stepsContainerService.getStepsCount() === this.stepsContainerService.getCurrentStepIndex()
+      this.stepsContainerService.getStepsCount() === this.stepsContainerService.getCurrentStepIndex() + 1
     ) {
       const curretnSubTour = this.optionsService.getCurretnSubTour();
       this.prevSubTour(curretnSubTour).then(() => {
@@ -120,10 +124,32 @@ export class JoyrideStepService implements IJoyrideStepService {
     this.tryShowStep(StepActionType.PREV);
   }
 
-  next() {
-    this.removeCurrentStep();
+  async next() {
+    const nextStep = this.stepsContainerService.get(StepActionType.NEXT, false);
+    const { id } = this.stepsContainerService.getStep(StepActionType.NEXT)();
     this.currentStep.nextClicked.emit();
-    this.tryShowStep(StepActionType.NEXT);
+    if (
+      !this.currentStepLoading ||
+      (this.currentStepLoading &&
+        this.stepsContainerService.getStepNumber(this.currentStepLoading.name) > this.stepsContainerService.getStepNumber(id))
+    ) {
+      await new Promise(resolve => {
+        if (nextStep) {
+          this.currentStepLoadingSubscription = nextStep.loading.subscribe(a => {
+            this.stepsContainerService.currentStepLoading.next(a);
+            if (!a) resolve();
+            else {
+              this.currentStepLoading = nextStep;
+            }
+          });
+        } else {
+          resolve();
+        }
+      });
+      this.currentStepLoading = undefined;
+      this.removeCurrentStep();
+      this.tryShowStep(StepActionType.NEXT);
+    }
   }
 
   private async prevSubTour(subTour: SubTour) {
@@ -179,27 +205,34 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private async showStep(actionType: StepActionType) {
-    this.documentService.setDocumentHeight();
-    const nativeElementOld = this.currentStep && this.currentStep.targetViewContainer.element;
-    if (nativeElementOld instanceof HTMLElement && nativeElementOld.parentElement) {
-      this.erd.removeAllListeners(nativeElementOld.parentElement);
-      nativeElementOld.parentElement.parentElement && this.erd.removeAllListeners(nativeElementOld.parentElement.parentElement);
+    this.currentStepLoadingSubscription && this.currentStepLoadingSubscription.unsubscribe();
+    this.stepsContainerService.currentStepLoading.next(false);
+    for (const elementListening of this.elementsListening) {
+      if (elementListening instanceof HTMLElement) {
+        this.erd.removeAllListeners(elementListening);
+      }
     }
+    this.elementsListening = [];
     this.currentStep = this.stepsContainerService.get(actionType);
 
     if (this.currentStep == null) throw new JoyrideStepDoesNotExist('');
     const { waitingTime, name, route } = this.currentStep;
     // Scroll the element to get it visible if it's in a scrollable element
     this.scrollIfElementBeyondOtherElements();
-
+    this.documentService.setDocumentHeight();
     if (waitingTime) {
       this.onStepChange.emit({ name, route, actionType });
+      this.stepsContainerService.currentStepLoading.next(true);
       await new Promise(resolve => {
         setTimeout(() => {
           resolve();
         }, waitingTime);
       });
+      this.stepsContainerService.currentStepLoading.next(false);
+      this.scrollIfElementBeyondOtherElements();
+      this.documentService.setDocumentHeight();
     }
+
     this.backDropService.draw(this.currentStep);
     this.drawStep(this.currentStep);
     this.scrollIfStepAndTargetAreNotVisible();
@@ -207,18 +240,25 @@ export class JoyrideStepService implements IJoyrideStepService {
 
     if (!waitingTime) this.onStepChange.emit({ name, route, actionType });
     const { nativeElement } = this.currentStep.targetViewContainer.element;
-    if (nativeElement instanceof HTMLElement && nativeElement.parentElement) {
-      this.erd.listenTo(nativeElement.parentElement, () => {
-        this.scrollIfElementBeyondOtherElements();
-        this.scrollIfStepAndTargetAreNotVisible();
-        this.eventListener.resize();
-      });
-      nativeElement.parentElement.parentElement &&
-        this.erd.listenTo(nativeElement.parentElement.parentElement, () => {
+    if (nativeElement instanceof HTMLElement) {
+      this.elementsListening.push(
+        nativeElement.parentElement
+          ? nativeElement.parentElement
+            ? nativeElement.parentElement.parentElement
+              ? nativeElement.parentElement.parentElement.parentElement
+              : nativeElement.parentElement.parentElement
+            : nativeElement.parentElement
+          : nativeElement,
+      );
+      const children = nativeElement.children[0];
+      if (children instanceof HTMLElement) this.elementsListening.push(children);
+      this.elementsListening.forEach(element => {
+        this.erd.listenTo(element, () => {
           this.scrollIfElementBeyondOtherElements();
           this.scrollIfStepAndTargetAreNotVisible();
           this.eventListener.resize();
         });
+      });
     }
   }
 
@@ -318,11 +358,15 @@ export class JoyrideStepService implements IJoyrideStepService {
   }
 
   private isElementBeyondOthers() {
-    return this.documentService.isElementBeyondOthers(
-      this.currentStep.targetViewContainer.element,
-      this.currentStep.isElementOrAncestorFixed,
-      'backdrop',
-    );
+    try {
+      return this.documentService.isElementBeyondOthers(
+        this.currentStep.targetViewContainer.element,
+        this.currentStep.isElementOrAncestorFixed,
+        'backdrop',
+      );
+    } catch (error) {
+      return 1;
+    }
   }
 
   public getCurrentStep(): CurrentStep | null {

@@ -11,6 +11,7 @@ import { StylesExplorerService } from '../../../services/common/styles-explorer/
 import { TranslateService } from '@ngx-translate/core';
 import { filter } from 'rxjs/operators/filter';
 import { ISubscription } from 'rxjs/Subscription';
+import { JoyrideAppService } from '../../../services/joyride-app/joyride-app.service';
 
 @Component({
   selector: 'app-requests',
@@ -45,6 +46,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
   public inProcess: string;
   public cancelled: string;
   private subscriptions: ISubscription[];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4', 'step_5', 'step_6', 'step_7_report', 'step_8', 'step_9'];
 
   t(key) {
     return this.translate.instant(this.parseT(key));
@@ -67,6 +69,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
     public aproversRequestsService: AproversRequestsService,
     public stylesExplorerService: StylesExplorerService,
     public translate: TranslateService,
+    private readonly joyrideAppService: JoyrideAppService,
   ) {
     this.subscriptions = [
       this.tokenService.validateToken().subscribe(
@@ -123,12 +126,23 @@ export class RequestsComponent implements OnInit, OnDestroy {
         }
       }),
     ];
+    this.subscriptions.push(
+      this.joyrideAppService.onStartTour.subscribe(() => {
+        this.subscriptions.push(this.joyrideAppService.startTour({ steps: this.steps }));
+      }),
+    );
     // document.getElementById("loginId").style.display = 'block'
     // document.getElementsByTagName("body")[0].setAttribute("style", "overflow-y:hidden");
   }
 
   ngOnInit() {
-    debugger;
+    $('#collapseExample')
+      .on('hidden.bs.collapse', () => {
+        this.is_collapse = true;
+      })
+      .on('shown.bs.collapse', () => {
+        this.is_collapse = false;
+      });
 
     setTimeout(() => {
       if (this.stylesExplorerService.validateBrowser()) {
@@ -201,7 +215,7 @@ export class RequestsComponent implements OnInit, OnDestroy {
 
   collapse(is_collapse: boolean) {
     this.is_collapse = is_collapse;
-
+    $('#collapseExample').collapse(is_collapse ? 'show' : 'hide');
     setTimeout(() => {
       this.stylesExplorerService.addStylesCommon();
     }, 100);
