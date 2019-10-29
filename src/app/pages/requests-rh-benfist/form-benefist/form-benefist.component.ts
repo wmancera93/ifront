@@ -98,7 +98,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
     return this.translate.instant(this.parseT(key));
   }
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -152,7 +151,6 @@ export class FormBenefistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.fileUploadService.getObjetFile().subscribe(data => {
-      debugger;
       this.iconUpload = data.name.split('.');
       this.iconDocument = this.iconUpload[this.iconUpload.length - 1];
       this.is_upload = true;

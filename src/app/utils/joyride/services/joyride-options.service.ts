@@ -57,6 +57,7 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
   private waitingTime: number;
   private customTexts: ObservableCustomTexts;
   public isSubTour = false;
+  public joyrideChildren?: string;
   public subTour: SubTour[] = [];
   public get subTourIndex() {
     return this.subTour.length - 1;
@@ -156,6 +157,7 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
 
   subTourPrev() {
     this.isSubTour = true;
+    this.joyrideChildren = '';
     const curretnSubTour = this.getCurretnSubTour().optionsService;
     if (curretnSubTour) {
       const {
@@ -167,7 +169,9 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
         themeColor,
         firstStep,
         waitingTime,
+        joyrideChildren,
       } = curretnSubTour;
+      this.joyrideChildren = joyrideChildren;
       this.stepsOrder = stepsOrder;
       this.stepDefaultPosition = stepDefaultPosition;
       this.logsEnabled = logsEnabled;
@@ -185,7 +189,8 @@ export class JoyrideOptionsService implements IJoyrideOptionsService {
 
   subTourNext(currentStep: CurrentStep) {
     this.isSubTour = true;
-    const { name, route } = currentStep;
+    const { name, route, joyrideChildren } = currentStep;
+    this.joyrideChildren = joyrideChildren;
     const step = `${name}${ROUTE_SEPARATOR}${route}`;
     this.subTour.push({
       optionsInject: ({ steps, startWith }) => {

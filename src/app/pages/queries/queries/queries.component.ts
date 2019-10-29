@@ -64,7 +64,7 @@ export class QueriesComponent implements OnInit, OnDestroy {
   public userAuthenticated: User;
   private subscriptions: ISubscription[] = [];
   public joyrideSubscription: ISubscription;
-  private steps = ['step_1', 'step_2'];
+  private steps = ['step_1', 'data_table_step_1', 'data_table_step_2', 'data_table_step_3'];
 
   private pages: DataRoute[] = [
     {

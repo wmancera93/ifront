@@ -20,7 +20,6 @@ export class TravelManagementComponent implements OnInit {
     return this.translate.instant(this.parseT(key));
   }
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
@@ -40,21 +39,21 @@ export class TravelManagementComponent implements OnInit {
         icon_primary: 'fa fa-globe',
         icon_secundary: 'fa fa-plane',
         tooltipText: 'message_wiget_travel_ts',
-        route: '/ihr/travels',
+        route: '/ihr/travel_management/travels',
       },
       {
         title: 'titlle_wiget_advance_ts',
         icon_primary: 'fa fa-money',
         icon_secundary: '',
         tooltipText: 'message_wiget_advance_ts',
-        route: '/ihr/advances',
+        route: '/ihr/travel_management/advances',
       },
       {
         title: 'titlle_wiget_allowance_ts',
         icon_primary: 'fa fa-circle-thin',
         icon_secundary: 'fa fa-usd',
         tooltipText: 'message_wiget_allowance_ts',
-        route: '/ihr/spend',
+        route: '/ihr/travel_management/spend',
       },
     ];
 
@@ -67,7 +66,7 @@ export class TravelManagementComponent implements OnInit {
           icon_primary: 'fa fa fa-square-o',
           icon_secundary: 'fa fa-clock-o',
           tooltipText: 'message_wiget_approver_ts',
-          route: '/ihr/pending_travel',
+          route: '/ihr/travel_management/pending_travel',
         },
         {
           title: 'titlle_wiget_pendinga_ts',
@@ -81,14 +80,14 @@ export class TravelManagementComponent implements OnInit {
           icon_primary: 'fa fa-table',
           icon_secundary: 'fa fa-search',
           tooltipText: 'message_wiget_report_ts',
-          route: '/ihr/travel_report',
+          route: '/ihr/travel_management/travel_report',
         },
         {
           title: 'titlle_wiget_hotel_ts',
           icon_primary: 'fa fa-circle-thin',
           icon_secundary: 'fa fa-bed',
           tooltipText: 'message_wiget_hotel_ts',
-          route: '/ihr/hotels',
+          route: '/ihr/travel_management/hotels',
         },
       ];
     } else {
@@ -100,7 +99,7 @@ export class TravelManagementComponent implements OnInit {
             icon_primary: 'fa fa fa-square-o',
             icon_secundary: 'fa fa-clock-o',
             tooltipText: 'message_wiget_approver_ts',
-            route: '/ihr/pending_travel',
+            route: '/ihr/travel_management/pending_travel',
           },
           {
             title: 'titlle_wiget_pendinga_ts',
@@ -114,7 +113,7 @@ export class TravelManagementComponent implements OnInit {
             icon_primary: 'fa fa-table',
             icon_secundary: 'fa fa-search',
             tooltipText: 'message_wiget_report_ts',
-            route: '/ihr/travel_report',
+            route: '/ihr/travel_management/travel_report',
           },
         ];
       } else {
@@ -126,14 +125,14 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-search',
               tooltipText: 'message_wiget_report_ts',
-              route: '/ihr/travel_report',
+              route: '/ihr/travel_management/travel_report',
             },
             {
               title: 'titlle_wiget_hotel_ts',
               icon_primary: 'fa fa-circle-thin',
               icon_secundary: 'fa fa-bed',
               tooltipText: 'message_wiget_hotel_ts',
-              route: '/ihr/hotels',
+              route: '/ihr/travel_management/hotels',
             },
           ];
         } else {
@@ -154,7 +153,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-circle-thin',
               icon_secundary: 'fa fa-bed',
               tooltipText: 'Aqui puede crear campamentos',
-              route: '/ihr/housing',
+              route: '/ihr/travel_management/housing',
             },
             {
               title: 'Gestión de Transporte',
@@ -162,7 +161,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-bus',
               icon_secundary: 'fa fa-users',
               tooltipText: 'Aqui puede organizar flotas',
-              route: '/ihr/logistics_transportations',
+              route: '/ihr/travel_management/logistics_transportations',
             },
             {
               title: 'Reporte de Flotas',
@@ -170,7 +169,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-bus',
               tooltipText: 'Aqui puede ver los cupos de viaje',
-              route: '/ihr/housing_reports',
+              route: '/ihr/travel_management/housing_reports',
             },
           ];
         }
@@ -186,7 +185,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-circle-thin',
               icon_secundary: 'fa fa-bed',
               tooltipText: 'Aqui puede crear campamentos',
-              route: '/ihr/housing',
+              route: '/ihr/travel_management/housing',
             },
             {
               title: 'Gestión de Transporte',
@@ -194,7 +193,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-bus z-index-10',
               icon_secundary: 'fa fa-users z-index-1',
               tooltipText: 'Aqui puede organizar flotas',
-              route: '/ihr/logistics_transportations',
+              route: '/ihr/travel_management/logistics_transportations',
             },
             {
               title: 'Reporte de Flotas',
@@ -202,7 +201,7 @@ export class TravelManagementComponent implements OnInit {
               icon_primary: 'fa fa-table',
               icon_secundary: 'fa fa-bus',
               tooltipText: 'Aqui puede ver los cupos de viaje',
-              route: '/ihr/housing_reports',
+              route: '/ihr/travel_management/housing_reports',
             },
           ];
         }

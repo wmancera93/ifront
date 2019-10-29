@@ -1,0 +1,64 @@
+<div class="row justify-content-start mt-3">
+  <div class="col-12">
+    <div class="form-group">
+      <div class="row">
+        <div class="col-12 text-left">
+          <label for="name">Nombre de usuario</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-8 text-left">
+          <input type="text" class="form-control" id="nameUser" autocomplete="off"  [(ngModel)]="nameEmployee" />
+          <small id="nameUser" class="form-text text-muted">Realice busqueda por el nombre del usuario</small>
+        </div>
+        <div class="col-lg-2 col-md-6 col-10 text-left">
+          <div id="buttonSearch" class="bg-button-search" (click)="searchEmployee()">
+            <div class="text-center cursor-general img-zoom">
+              <i class="fa fa-fw fa-search fa-lg"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12" *ngIf="basicInformations.length == 0">
+        <div class="alert alert-secondary" role="alert">
+          {{ mesagge }}
+        </div>
+      </div>
+      <div class="col-12" *ngIf="basicInformations.length > 0">
+        <div *ngFor="let basicInformation of basicInformations">
+          <div class="alert {{ basicInformation.is_locked ? 'alert-danger' : 'alert-success' }} text-left" role="alert">
+            <div class="row ">
+              <div class="col-lg-6 col-md-6 col-12"><strong>Poisición:</strong> {{ basicInformation.posicion }}</div>
+              <div class="col-lg-6 col-md-6 col-12"><strong>Unidad organizativa: </strong>{{ basicInformation.unidad_org }}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12"><strong>Area:</strong> {{ basicInformation.area }}</div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <strong>División de personal:</strong> {{ basicInformation.division_per }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12">
+                <strong>Subdivisión de personal:</strong> {{ basicInformation.subdivision_per }}
+              </div>
+              <div class="col-lg-6 col-md-6 col-12"><strong>Fecha de ingreso:</strong> {{ basicInformation.fecha_ingreso }}</div>
+            </div>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-12"><strong>Nombre:</strong> {{ basicInformation.short_name }}</div>
+              <div class="col-lg-6 col-md-6 col-12">
+                <strong>Estado:</strong> {{ basicInformation.is_locked === 'false' ? 'Bloqueado' : 'Desbloqueado' }}
+              </div>
+            </div>
+            <div class="row justify-content-center mt-3" *ngIf="basicInformation.is_locked">
+              <div class="col-4 text-center">
+                <button type="submit" class="btn btn-primary" (click)="unlocked(basicInformation.id)">Desbloquear</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

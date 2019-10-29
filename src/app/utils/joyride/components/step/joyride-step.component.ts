@@ -72,6 +72,7 @@ export class JoyrideStepComponent implements OnInit, OnDestroy, AfterViewInit {
   joyrideStepService: IJoyrideStepService;
 
   private positionAlreadyFixed: boolean;
+  public loading: boolean;
   private get documentHeight() {
     return this.documentService.getDocumentHeight();
   }
@@ -113,6 +114,9 @@ export class JoyrideStepComponent implements OnInit, OnDestroy, AfterViewInit {
 
     if (this.text) this.text.subscribe(val => this.checkRedraw(val));
     if (this.title) this.title.subscribe(val => this.checkRedraw(val));
+    this.stepsContainerService.currentStepLoading.subscribe(state => {
+      this.loading = state;
+    });
   }
 
   ngAfterViewInit() {

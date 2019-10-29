@@ -18,7 +18,7 @@ export const steps = [
   'step_2',
   'step_3',
   'step_4',
-  'step_5',
+  'step_5_employees',
   'step_6',
   'step_7',
   'step_8',
@@ -96,7 +96,7 @@ export class DashboardComponent implements OnInit {
       .pairwise()
       .subscribe((event: any[]) => {
         if (this.userAuthenticated === null || this.userAuthenticated === undefined) {
-          if (event[0].urlAfterRedirects === '/ihr/login') {
+          if (event[0].urlAfterRedirects === '/ihr/authentication/login') {
             setTimeout(() => {
               this.toast = {
                 type: 'success',

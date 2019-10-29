@@ -360,7 +360,7 @@ export class AdvancesComponent implements OnInit {
     });
   }
   returnBackPage() {
-    this.router.navigate(['ihr/travel_management']);
+    this.router.navigate(['ihr/travel_management/index']);
   }
 
   newAdvanceTravel() {

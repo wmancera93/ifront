@@ -7,10 +7,12 @@ export class JoyrideStep {
   constructor() {
     this.title = new ReplaySubject<string>();
     this.text = new ReplaySubject<string>();
+    this.loading = new ReplaySubject<boolean>();
   }
   name: string;
   route: string;
   position: string;
+  loading: ReplaySubject<boolean>;
   title: ReplaySubject<string>;
   text: ReplaySubject<string>;
   stepContent: TemplateRef<any>;

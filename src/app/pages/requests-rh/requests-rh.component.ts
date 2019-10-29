@@ -132,8 +132,9 @@ export class RequestsRhComponent implements OnInit, OnDestroy {
     ];
     this.subscriptions.push(
       joyrideAppService.onStartTour.subscribe(() => {
-        debugger;
-        this.subscriptions.push(joyrideAppService.startTour({ steps: this.steps }).subscribe(() => {}));
+        this.subscriptions.push(
+          joyrideAppService.startTour({ steps: this.steps, joyrideChildren: 'request_page' }).subscribe(() => {}),
+        );
       }),
     );
   }

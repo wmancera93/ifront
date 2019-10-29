@@ -139,7 +139,7 @@ export class EditTravelComponent implements OnInit, OnDestroy {
         const url = window.location.href;
         const travel = url.split('/')[url.split('/').length - 1];
         const spend = url.split('/')[url.split('/').length - 2];
-        this.router.navigate(['/ihr/spend', travel, spend, 'travel']);
+        this.router.navigate(['/ihr/travel_management/spend', travel, spend, 'travel']);
       }
       if (
         data === 'continueEditTravelRequests' ||

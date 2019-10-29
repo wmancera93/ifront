@@ -3,8 +3,6 @@ import { JoyrideStepService, CurrentStep } from '../services/joyride-step.servic
 import { JoyrideService } from '../services/joyride.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { ISubscription } from 'rxjs/Subscription';
-import cloneDeep from 'lodash/cloneDeep';
-import { ROUTE_SEPARATOR } from '../constants';
 import { JoyrideOptionsService } from '../services/joyride-options.service';
 
 export const NO_POSITION = 'NO_POSITION';
@@ -20,8 +18,11 @@ export class JoyrideStepChildren {
   @Input('joyrideStepChildren')
   name: string;
 
-  @Input()
+  @Input('active')
   active: boolean = true;
+
+  @Input('step')
+  step: string;
 
   @Input('routerLink')
   routerLink: string;
@@ -29,7 +30,7 @@ export class JoyrideStepChildren {
   @HostListener('click')
   test() {
     this.clicked = true && this.joyrideService.isTourInProgress();
-    this.currentStep = this.joyrideStepService.getCurrentStep();
+    this.currentStep = { ...this.joyrideStepService.getCurrentStep(), joyrideChildren: this.name };
     if (this.routerLink) this.joyrideService.closeTour();
   }
 
@@ -42,6 +43,7 @@ export class JoyrideStepChildren {
   ) {}
 
   ngAfterViewInit() {
+    console.log(this.step);
     this.router.events.forEach(e => {
       if (e instanceof NavigationEnd && e.url === this.routerLink && this.clicked) {
         this.clicked = false;

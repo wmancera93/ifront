@@ -17,7 +17,7 @@ export class PayrollReceiptsComponent implements OnInit {
   public urlPDF = '';
   public flagEmpty: boolean;
   public token: boolean;
-  private steps = ['step_1', 'step_2'];
+  private steps = ['step_1', 'step_2', 'step_3'];
   public joyrideSubscription: ISubscription;
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();

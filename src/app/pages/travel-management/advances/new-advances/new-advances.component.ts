@@ -85,7 +85,7 @@ export class NewAdvancesComponent implements OnInit {
         document.getElementById('btn_advances_new').click();
       }
       if (data === 'returnTravelsRequests') {
-        this.router.navigate(['/ihr/travels']);
+        this.router.navigate(['/ihr/travel_management/travels']);
       }
     });
 

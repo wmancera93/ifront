@@ -60,6 +60,6 @@ export class ErrorPageComponent implements OnInit {
     }
   }
   RedirectInit() {
-    this.router.navigate(['/ihr/login']);
+    this.router.navigate(['/ihr/authentication/login']);
   }
 }

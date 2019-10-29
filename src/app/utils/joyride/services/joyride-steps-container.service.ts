@@ -20,6 +20,7 @@ export enum StepActionType {
 export class JoyrideStepsContainerService {
   private steps: Step[];
   private tempSteps: JoyrideStep[] = [];
+  public currentStepLoading: Subject<boolean> = new Subject<boolean>();
   private currentStepIndex: number = -2;
   stepHasBeenModified: Subject<JoyrideStep> = new Subject<JoyrideStep>();
 
@@ -64,24 +65,25 @@ export class JoyrideStepsContainerService {
       this.tempSteps[stepIndexToReplace] = stepToAdd;
     }
   }
-  get(action: StepActionType): JoyrideStep {
+  get(action: StepActionType, mutate: boolean = true): JoyrideStep | null {
+    let currentStepIndex = this.currentStepIndex;
     if (action === StepActionType.NEXT) {
-      this.currentStepIndex++;
+      mutate && this.currentStepIndex++;
+      currentStepIndex++;
     } else {
-      this.currentStepIndex--;
+      mutate && this.currentStepIndex--;
+      currentStepIndex--;
     }
-    if (this.currentStepIndex < 0 || this.currentStepIndex >= this.steps.length)
+    if (currentStepIndex < 0 || currentStepIndex >= this.steps.length)
       throw new JoyrideStepOutOfRange('The first or last step of the tour cannot be found!');
 
-    const stepName = this.getStepName(this.steps[this.currentStepIndex].id);
+    const stepName = this.getStepName(this.steps[currentStepIndex].id);
     const index = this.tempSteps.findIndex(step => step.name === stepName);
     let stepFound = this.tempSteps[index];
-    this.steps[this.currentStepIndex].step = stepFound;
+    this.steps[currentStepIndex].step = stepFound;
 
     if (stepFound == null) {
-      this.logger.warn(
-        `Step ${this.steps[this.currentStepIndex].id} not found in the DOM. Check if it's hidden by *ngIf directive.`,
-      );
+      this.logger.warn(`Step ${this.steps[currentStepIndex].id} not found in the DOM. Check if it's hidden by *ngIf directive.`);
     }
 
     return stepFound;

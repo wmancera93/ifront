@@ -1,15 +1,17 @@
 <div *ngIf="token">
-  <app-error-page-http
-    [objectPage]="objectToken"
-  ></app-error-page-http>
+  <app-error-page-http [objectPage]="objectToken"></app-error-page-http>
 </div>
 <div id="data_table" *ngIf="!token" class="row">
   <div class="col-12">
     <div class="row justify-content-between" *ngIf="show">
-      <div class="col-xl-3 col-12">
+      <div
+        class="col-xl-3 col-12"
+        joyrideStep="data_table_step_2"
+        [title]="joyride('step_2.title') | translate"
+        [text]="joyride('step_2.text') | translate"
+      >
         <div class="form-group row" *ngIf="sizeTable">
-          <label
-            class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center"
+          <label class="col-xl-7 col-md-4  col-lg-3 col-6 text-left align-self-center"
             >{{ parseT('records_show') | translate }}:</label
           >
           <div class="col-xl-5 col-md-3 col-lg-3 col-6">
@@ -22,25 +24,21 @@
           </div>
         </div>
       </div>
-      <div class="col-xl-6 col-12">
+      <div
+        class="col-xl-6 col-12"
+        joyrideStep="data_table_step_3"
+        [title]="joyride('step_3.title') | translate"
+        [text]="joyride('step_3.text') | translate"
+      >
         <div class="row justify-content-end">
-          <div
-            class="col-xl-5 col-md-3 col-6 top-containter "
-            *ngIf="pdf"
-          >
-            <div
-              class="btn btn-block btn-outline-danger cursor-general"
-              (click)="pdfExport()"
-            >
+          <div class="col-xl-5 col-md-3 col-6 top-containter " *ngIf="pdf">
+            <div class="btn btn-block btn-outline-danger cursor-general" (click)="pdfExport()">
               <i class="fa fa-file-pdf-o" aria-hidden="true"></i>
               PDF
             </div>
           </div>
           <div class="col-xl-5 col-md-3 col-6" *ngIf="excel">
-            <div
-              class="btn btn-block btn-outline-success cursor-general"
-              (click)="excelDownload(title)"
-            >
+            <div class="btn btn-block btn-outline-success cursor-general" (click)="excelDownload(title)">
               <i class="fa fa-file-excel-o" aria-hidden="true"></i>
               Excel
             </div>
@@ -67,24 +65,25 @@
         </div>
       </div> -->
     </div>
-    <div
-      class="row justify-content-center top-containter"
-      *ngIf="!show"
-    >
+    <div class="row justify-content-center top-containter" *ngIf="!show">
       <div class="col-lg-8 col-12 text-center" [attr.style]="heigth">
         <div class="alert alert-warning" role="alert">
-          {{ parseT('without_reports') | translate }}&nbsp;
-          <strong>{{ title }}</strong
+          {{ parseT('without_reports') | translate }}&nbsp; <strong>{{ title }}</strong
           >&nbsp;{{ parseT('employee') | translate }}
         </div>
       </div>
     </div>
-    <div class="row top-containter" *ngIf="show">
+    <div
+      class="row top-containter"
+      *ngIf="show"
+      joyrideStep="data_table_step_1"
+      [title]="joyride('step_1.title') | translate"
+      [text]="joyride('step_1.text') | translate"
+      stepPosition="center"
+    >
       <div class="col-12" style="min-height: 370px;">
         <div class="table-responsive">
-          <table
-            class="table table-sm table-striped table-bordered table-hover"
-          >
+          <table class="table table-sm table-striped table-bordered table-hover">
             <thead>
               <tr *ngIf="title != ''">
                 <th class="text-center" [attr.colspan]="keys.length">
@@ -98,20 +97,13 @@
                       {{ label.value }}
                     </div>
                     <div *ngIf="label.sort" class="sort-by">
-                      <i
-                        id="{{ label.id }}"
-                        class="fa fa-chevron-down cursor-general"
-                        (click)="sortable(label)"
-                      ></i>
+                      <i id="{{ label.id }}" class="fa fa-chevron-down cursor-general" (click)="sortable(label)"></i>
                     </div>
                   </div>
                 </th>
               </tr>
               <tr>
-                <th
-                  class="text-center filter-table"
-                  *ngFor="let label of labels; let i = index"
-                >
+                <th class="text-center filter-table" *ngFor="let label of labels; let i = index">
                   <div *ngIf="label.sort">
                     <input
                       [attr.id]="i + label.label"
@@ -125,71 +117,39 @@
               </tr>
             </thead>
             <tbody>
-              <tr
-                *ngFor="
-                  let record of (recordsPrint
-                    | paginate
-                      : { itemsPerPage: size_table, currentPage: p })
-                "
-              >
+              <tr *ngFor="let record of recordsPrint | paginate: { itemsPerPage: size_table, currentPage: p }">
                 <td *ngFor="let key of keys">
                   <div *ngIf="record[key] != null">
                     <div *ngIf="record[key].type_method == null">
-                      <div
-                        *ngIf="labelsCell[key].type == 'int'"
-                        style="text-align:right"
-                      >
+                      <div *ngIf="labelsCell[key].type == 'int'" style="text-align:right">
                         {{ record[key] }}
                       </div>
-                      <div
-                        *ngIf="labelsCell[key].type == 'string'"
-                        style="text-align:left"
-                      >
+                      <div *ngIf="labelsCell[key].type == 'string'" style="text-align:left">
                         {{ record[key] }}
                       </div>
-                      <div
-                        *ngIf="labelsCell[key].type == 'money'"
-                        style="text-align:right"
-                      >
+                      <div *ngIf="labelsCell[key].type == 'money'" style="text-align:right">
                         {{ record[key] }}
                       </div>
-                      <div
-                        *ngIf="labelsCell[key].type == 'date'"
-                        style="text-align:center"
-                      >
+                      <div *ngIf="labelsCell[key].type == 'date'" style="text-align:center">
                         {{ record[key] }}
                       </div>
                     </div>
-                    <div
-                      *ngIf="record[key].type_method != null"
-                      class="text-center"
-                    >
+                    <div *ngIf="record[key].type_method != null" class="text-center">
                       <div
                         *ngIf="record[key].type_method == 'SHOW'"
                         class="cursor-general  text-success text-center"
                         [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa fa-eye"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa fa-eye" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div
-                        *ngIf="
-                          record[key].type_method == 'UPDATE' ||
-                          record[key].type_method == 'EDIT'
-                        "
+                        *ngIf="record[key].type_method == 'UPDATE' || record[key].type_method == 'EDIT'"
                         class="cursor-general text-info text-center"
                         [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa fa-pencil"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa fa-pencil" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div
                         *ngIf="record[key].type_method == 'PRINT'"
@@ -197,11 +157,7 @@
                         [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa  fa-file-pdf-o"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa  fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div
                         *ngIf="record[key].type_method == 'CONVENIO'"
@@ -209,40 +165,22 @@
                         (click)="accionTable(record[key])"
                       >
                         <div *ngIf="!record[key].disable">
-                          <i
-                            class="fa fa-file-pdf-o"
-                            aria-hidden="true"
-                            style="font-size: 1.5em"
-                          ></i>
+                          <i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size: 1.5em"></i>
                         </div>
                       </div>
                       <div
-                        *ngIf="
-                          record[key].type_method == 'UPDATEHOTELS' ||
-                          record[key].type_method == 'SHOWHOTELS'
-                        "
+                        *ngIf="record[key].type_method == 'UPDATEHOTELS' || record[key].type_method == 'SHOWHOTELS'"
                         class="cursor-general text-success text-center"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa fa-h-square"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa fa-h-square" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                       <div
-                        *ngIf="
-                          record[key].type_method == 'DISTCOSTSHOW' ||
-                          record[key].type_method == 'DISTCOST'
-                        "
+                        *ngIf="record[key].type_method == 'DISTCOSTSHOW' || record[key].type_method == 'DISTCOST'"
                         class="cursor-general  text-success text-center"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa fa-usd"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa fa-usd" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
 
                       <div
@@ -251,11 +189,7 @@
                         [attr.disabled]="record[key].disable"
                         (click)="accionTable(record[key])"
                       >
-                        <i
-                          class="fa fa-trash"
-                          aria-hidden="true"
-                          style="font-size: 1.5em"
-                        ></i>
+                        <i class="fa fa-trash" aria-hidden="true" style="font-size: 1.5em"></i>
                       </div>
                     </div>
                   </div>

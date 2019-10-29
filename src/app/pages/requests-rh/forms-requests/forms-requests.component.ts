@@ -29,6 +29,7 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
   public showSubmit = true;
   public file: any;
   public filePermisionMarriage = 'fileMarriage';
+  public fileVacation = 'fileVacation';
   public fileInability = 'fileInability';
   public extensions = '.gif, .png, .jpeg, .jpg, .doc, .pdf, .docx, .xls';
   public forms: FormGroup;
@@ -348,6 +349,8 @@ export class FormsRequestsComponent implements OnInit, OnDestroy {
       case 'INCA':
       case 'HOUT':
       case 'TRNT':
+      case 'VACA':
+        debugger
         const modelFromdata = new FormData();
         Object.keys(model).forEach(field => {
           if (field === 'file') {

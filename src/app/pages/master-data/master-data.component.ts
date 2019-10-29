@@ -35,7 +35,7 @@ export class MasterDataComponent implements OnInit, OnDestroy {
 
   private subscriptions: ISubscription[];
   public joyrideSubscription: ISubscription;
-  private steps = ['step_1', 'step_2'];
+  private steps = ['step_1', 'step_2', 'step_3', 'step_4'];
 
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 

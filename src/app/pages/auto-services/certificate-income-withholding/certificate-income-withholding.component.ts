@@ -16,7 +16,7 @@ export class CertificateIncomeWithholdingComponent implements OnInit {
   public incomingCertificate: Certificate[] = [];
   public urlPDF = '';
   public flagEmpty: boolean;
-  private steps = ['step_1', 'step_2'];
+  private steps = ['step_1', 'step_2', 'step_3'];
   public joyrideSubscription: ISubscription;
 
   public token: boolean;

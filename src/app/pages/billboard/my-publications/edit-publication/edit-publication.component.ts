@@ -39,6 +39,10 @@ export class EditPublicationComponent implements OnInit, OnDestroy {
   items;
   public placeholder_tittle: string;
   public placeholder_message: string;
+  private steps = [
+    'step_1_edit_article',
+    'step_2_edit_article',
+  ];
 
   ngForm: FormGroup;
   fileToUpload: File = null;
@@ -179,6 +183,9 @@ export class EditPublicationComponent implements OnInit, OnDestroy {
     );
   }
 
+  closeModal(){
+    $('#modal_editNew').modal('hide')
+  }
   ngOnDestroy() {
     this.subscriptions.forEach(subscription =>
       subscription.unsubscribe(),
