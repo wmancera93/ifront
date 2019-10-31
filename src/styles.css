@@ -548,7 +548,7 @@ textarea {
   cursor: pointer;
 }
 
-app-login header {
+app-login header, app-confirm-reset-acount header, app-reset-account header, app-locked-screen header {
   background-color: #2f4050 !important;
   background-image: var(--img-header-login);
   background-repeat: no-repeat;

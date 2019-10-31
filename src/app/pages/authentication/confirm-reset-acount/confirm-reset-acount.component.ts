@@ -22,6 +22,7 @@ export class ConfirmResetAcountComponent implements OnInit {
   public dataEnterprise: Enterprise;
   public eyePasswordVisible = false;
   public urlTokenPassword = '';
+  public heightContenGeneral = 0;
 
   t(key) {
     return this.translate.instant(this.parseT(key));
@@ -95,6 +96,9 @@ export class ConfirmResetAcountComponent implements OnInit {
         primary_color,
         body_text,
       });
+    }
+    if (this.dataEnterprise) {
+      this.heightContenGeneral = document.getElementById('headerLogin').clientHeight - this.heightContenGeneral;
     }
     this.route.queryParams.subscribe(params => {
       this.urlTokenPassword = params.reset_password_token;
