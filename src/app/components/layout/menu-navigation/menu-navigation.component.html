@@ -358,6 +358,55 @@
           </ul>
         </div>
       </li>
+      <li id="liMyReports" *ngIf="this.dataUser.employee.is_approver">
+        <a
+          class="nav-link bg-menu"
+          data-toggle="collapse"
+          href="#reports"
+          (click)="clickOptionMenu('liMyReports', 'toggle-my-reports', 'reports')"
+        >
+          <i class="fa fa-table"></i>
+          <span class="nav-label">Reportes</span>
+          <span class="fa fa-angle-down"></span>
+        </a>
+        <div id="reports" class="collapse">
+          <ul class="nav nav-second-level flex-column" aria-expanded="false">
+            <li>
+              <a
+                id="aMyReportsQueries"
+                routerLink="/ihr/my_reports_requests"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="clickOptionMenu('liMyReports', 'aMyReportsQueries', 'reports')"
+                >Mi reporte de solicitudes</a
+              >
+            </li>
+            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
+              <a
+                id="aMyRequestsApprovers"
+                routerLink="/ihr/my_requests_type"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="clickOptionMenu('liMyReports', 'aMyRequestsApprovers', 'reports')"
+                >Aprobadores de solicitudes</a
+              >
+            </li>
+            <li class="bg-li" *ngIf="dataEnterprise.show_approver_report">
+              <a
+                id="aMyRequestsApproversLogs"
+                routerLink="/ihr/my_requests_approvers_logs"
+                routerLinkActive="active"
+                class="nav-link bg-menu"
+                (click)="clickOptionMenu('liMyReports', 'aMyRequestsApproversLogs', 'reports')"
+                >Logs de Aprobadores de Solicitudes</a
+              >
+            </li>
+            <!-- <li class="bg-li" *ngIf="'true'">
+            <a id="aHourExtra" routerLink="/ihr/hour_extras" routerLinkActive="active" class="nav-link bg-menu" (click)="clickOptionMenu('liReports','aHourExtra', 'reportsRH')">Horas Extras</a>
+          </li> -->
+          </ul>
+        </div>
+      </li>
       <li id="liBillboard" *ngIf="dataEnterprise.show_articles">
         <a
           class="nav-link bg-menu"
@@ -563,7 +612,12 @@
         </a>
       </li>
       <li id="liAdministrator" *ngIf="dataUser.employee.permits[PermitsUser.BFFE]?.state">
-        <a id="aAdministrator" class="nav-link bg-menu"  routerLink="/ihr/administrator" (click)="clickOptionMenu('liAdministrator', 'aAdministrator', '')">
+        <a
+          id="aAdministrator"
+          class="nav-link bg-menu"
+          routerLink="/ihr/administrator"
+          (click)="clickOptionMenu('liAdministrator', 'aAdministrator', '')"
+        >
           <i class="fa fa-cogs"></i>
           <span class="nav-label">{{ parseT('Administrator') | translate }}</span>
         </a>

@@ -62,6 +62,9 @@ import { BackofficeComponent } from './backoffice/backoffice.component';
 import { UnlockingUsersComponent } from './backoffice/unlocking-users/unlocking-users.component';
 import { UploadImgComponent } from './backoffice/upload-img/upload-img.component';
 import { UploadColorsComponent } from './backoffice/upload-colors/upload-colors.component';
+import { MyRequestApproversComponent } from './reports/my-request-approvers/my-request-approvers.component';
+import { MyRequestComponent } from './reports/my-request/my-request.component';
+import { MyRequestApproversLogsComponent } from './reports/my-request-approvers-logs/my-request-approvers-logs.component';
 
 @NgModule({
   imports: [
@@ -130,6 +133,9 @@ import { UploadColorsComponent } from './backoffice/upload-colors/upload-colors.
     UnlockingUsersComponent,
     UploadImgComponent,
     UploadColorsComponent,
+    MyRequestApproversComponent,
+    MyRequestComponent,
+    MyRequestApproversLogsComponent,
   ],
   providers: [ReportTravelsService],
 })

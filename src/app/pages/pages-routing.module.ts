@@ -34,6 +34,9 @@ import { RequestsRhBenefistComponent } from './requests-rh-benfist/requests-rh-b
 import { ManagerialComponent } from './dashboard/managerial/managerial.component';
 import { QueriesComponent } from './queries/queries/queries.component';
 import { BackofficeComponent } from './backoffice/backoffice.component';
+import { MyRequestApproversLogsComponent } from './reports/my-request-approvers-logs/my-request-approvers-logs.component';
+import { MyRequestApproversComponent } from './reports/my-request-approvers/my-request-approvers.component';
+import { MyRequestComponent } from './reports/my-request/my-request.component';
 
 const routes: Routes = [
   {
@@ -95,6 +98,10 @@ const routes: Routes = [
     component: RequestsComponent,
   },
   {
+    path: 'my_reports_requests',
+    component: MyRequestComponent,
+  },
+  {
     path: 'users_permisions',
     component: PermisionsUsersComponent,
   },
@@ -151,6 +158,10 @@ const routes: Routes = [
     component: RequestsApproversComponent,
   },
   {
+    path: 'my_requests_type',
+    component: MyRequestApproversComponent,
+  },
+  {
     path: 'calendar_modal',
     component: CalendarModalComponent,
   },
@@ -185,6 +196,10 @@ const routes: Routes = [
   {
     path: 'requests_approvers_logs',
     component: RequestsApproversLogsComponent,
+  },
+  {
+    path: 'my_requests_approvers_logs',
+    component: MyRequestApproversLogsComponent,
   },
 ];
 
