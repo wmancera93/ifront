@@ -188,7 +188,7 @@
             <div class="col-12" *ngIf="is_payment">
               <div class="form-check text-center">
                 <div class="d-block">
-                  ¿El pago es por nomina?
+                 Tipo de pago
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
                   <input
@@ -199,7 +199,7 @@
                     (click)="forms.controls.prepayment.setValue(true)"
                   />
                   <label class="custom-control-label" for="radio-yes">
-                    Si
+                    Por nomina
                   </label>
                 </div>
                 <div class="custom-control custom-radio custom-control-inline">
@@ -211,7 +211,7 @@
                     (click)="forms.controls.prepayment.setValue(false)"
                   />
                   <label class="custom-control-label" for="radio-no">
-                    No
+                    Anticipado
                   </label>
                 </div>
               </div>
