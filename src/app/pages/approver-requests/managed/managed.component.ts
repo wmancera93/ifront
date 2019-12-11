@@ -31,7 +31,6 @@ export class ManagedComponent implements OnInit, OnDestroy {
   private subscriptions: ISubscription[];
   @Output() objectToken: EventEmitter<any> = new EventEmitter();
 
-
   joyride(step: string) {
     return `${this.parseT('joyride')}.${step}`;
   }
