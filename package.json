@@ -59,7 +59,7 @@
     "rxjs-compat": "6.4.0",
     "tether": "^1.4.5",
     "web-animations-js": "^2.3.1",
-    "xlsx": "^0.12.6",
+    "xlsx": "^0.17.0",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
